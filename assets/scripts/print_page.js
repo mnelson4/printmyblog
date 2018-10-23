@@ -59,17 +59,25 @@ function PmgPrintPage(pmg_instance_vars, translations) {
             () => {
                 this.spinner.hide();
                 this.header.html('All Done!');
-                this.status_span.html('<button onclick="window.print()">Print Now</button>.');
-                jQuery('img').wrap('<div class="pmg-image"></div>');
-                jQuery('h1').wrap('<div class="pmg-header"></div>');
-                jQuery('h2').wrap('<div class="pmg-header"></div>');
-                jQuery('h3').wrap('<div class="pmg-header"></div>');
-                jQuery('h4').wrap('<div class="pmg-header"></div>');
-                jQuery('h5').wrap('<div class="pmg-header"></div>');
+                this.status_span.html('<button onclick="window.print()">Print Now</button><p>Alternatively, in your browser, you can click "File" then "Print Preview" to preview the page before printing.</p>');
+                this.prettyUpPrintedPage();
             },
             5000
         );
+    };
 
+    /**
+     * Takes the page look better on the printed page. Mostly this helps prevent page breaks in awkward places,
+     * like in the middle of images and right after headers.
+     */
+    this.prettyUpPrintedPage = function()
+    {
+        jQuery('img').wrap('<div class="pmg-image"></div>');
+        jQuery('h1').wrap('<div class="pmg-header"></div>');
+        jQuery('h2').wrap('<div class="pmg-header"></div>');
+        jQuery('h3').wrap('<div class="pmg-header"></div>');
+        jQuery('h4').wrap('<div class="pmg-header"></div>');
+        jQuery('h5').wrap('<div class="pmg-header"></div>');
     };
 
     /**
@@ -91,18 +99,19 @@ function PmgPrintPage(pmg_instance_vars, translations) {
 }
 
 jQuery(document).ready(function () {
+    wp.api.loadPromise.done( function() {
+        var pmg = new PmgPrintPage(
+            {
+                header_selector: '.pmg-waiting-h1',
+                status_span_selector: '.pmg-status',
+                posts_div_selector: '.pmg-posts',
+                spinner_selector: '.pmg-spinner',
+            }
+        );
 
-    const pmg = new PmgPrintPage(
-        {
-            header_selector: '.pmg-waiting-h1',
-            status_span_selector: '.pmg-status',
-            posts_div_selector: '.pmg-posts',
-            spinner_selector: '.pmg-spinner',
-        }
-    );
-
-    pmg.initialize();
-    pmg.begin_loading();
+        pmg.initialize();
+        pmg.begin_loading();
+    });
 });
 
 
