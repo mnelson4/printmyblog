@@ -22,7 +22,7 @@ function PmgPrintPage(pmg_instance_vars, translations) {
 
     this.begin_loading = function () {
         var postsCollection = new wp.api.collections.Posts();
-        postsCollection.fetch({data: {per_page: 5, status: 'publish'}}).done((posts) => {
+        postsCollection.fetch({data: {per_page: 5, status: 'publish', _embed:true}}).done((posts) => {
             this.renderAndMaybeFetchMore(posts, postsCollection);
         });
     };
@@ -87,6 +87,7 @@ function PmgPrintPage(pmg_instance_vars, translations) {
         let html_to_add = '<h1 class="entry-title">'
             + post.title.rendered
             + '</h1>'
+            + this.getFeaturedImageHtml(post)
             + '<div class="entry-content">'
             + post.content.rendered
             + '</div>'
@@ -96,6 +97,22 @@ function PmgPrintPage(pmg_instance_vars, translations) {
         // add body
         this.posts_div.append(html_to_add);
     };
+
+    /**
+     * @param object post
+     * @return string HTML for the featured image
+     */
+    this.getFeaturedImageHtml = function(post)
+    {   if( typeof post._embedded['wp:featuredmedia'] == "object"
+            && typeof post._embedded['wp:featuredmedia'][0] == "object"
+            && typeof post._embedded['wp:featuredmedia'][0].media_details == "object"
+            && typeof post._embedded['wp:featuredmedia'][0].media_details.sizes == "object"
+            && typeof post._embedded['wp:featuredmedia'][0].media_details.sizes.full == "object") {
+            let featured_media_url = post._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url
+            return '<div class="single-featured-image-header"><img src="' + featured_media_url + '" class="wp-post-image"/></div>';
+        }
+        return '';
+    }
 }
 
 jQuery(document).ready(function () {
