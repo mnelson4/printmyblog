@@ -10,6 +10,7 @@ function PmgPrintPage(pmg_instance_vars, translations) {
     this.posts_div = null;
     this.spinner_selector = pmg_instance_vars.spinner_selector;
     this.spinner = null;
+    this.locale = pmg_instance_vars.locale;
     /**
      * @function
      */
@@ -84,9 +85,16 @@ function PmgPrintPage(pmg_instance_vars, translations) {
      * @var  wp.api.models.Post post
      */
     this.addPostToPage = function (post) {
+
         let html_to_add = '<h1 class="entry-title">'
             + post.title.rendered
             + '</h1>'
+            + '<div class="entry-meta"><span class="posted-on">'
+            + this.getPublishedDate(post)
+            + '</span><span class="byline">'
+            // + 'By '
+            // + this.getAuthorName(post)
+            + '</span></div>'
             + this.getFeaturedImageHtml(post)
             + '<div class="entry-content">'
             + post.content.rendered
@@ -97,6 +105,25 @@ function PmgPrintPage(pmg_instance_vars, translations) {
         // add body
         this.posts_div.append(html_to_add);
     };
+
+    // this.getAuthorName = function (post)
+    // {
+    //     if( typeof post._embedded['author'] == 'array'
+    //         &&  typeof post._embedded['author'][0] == 'object'
+    //     ) {
+    //         return post._embedded['author'][0].name;
+    //     } else {
+    //         return 'Unknown';
+    //     }
+    // }
+
+    this.getPublishedDate = function(post)
+    {
+        let ld = luxon.DateTime.fromJSDate(new Date(post.date));
+        let format = {month: 'long', day: 'numeric', year: 'numeric'};
+        ld.setLocale(this.locale);
+        return ld.toLocaleString(format);
+    }
 
     /**
      * @param object post
@@ -123,6 +150,7 @@ jQuery(document).ready(function () {
                 status_span_selector: '.pmg-status',
                 posts_div_selector: '.pmg-posts',
                 spinner_selector: '.pmg-spinner',
+                locale: pmg_print_data.data.locale,
             }
         );
 

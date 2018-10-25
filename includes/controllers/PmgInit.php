@@ -48,5 +48,6 @@ class PmgInit extends BaseController
     {
         $plugin_url = plugin_dir_url(PMG_MAIN_FILE);
         define('PMG_ASSETS_URL', $plugin_url . 'assets/');
+        define('PMG_ASSETS_DIR', PMG_DIR . 'assets/');
     }
 }
