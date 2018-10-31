@@ -8,7 +8,7 @@ class PmbFrontend extends BaseController
 {
     public function setHooks()
     {
-        add_filter('template_include', array($this, 'templateRedirect'));
+        add_filter('template_include', array($this, 'templateRedirect'), 12 /* after Elementor */);
     }
 
     /**
@@ -17,6 +17,7 @@ class PmbFrontend extends BaseController
      */
     public function templateRedirect($template)
     {
+
         if (isset($_GET[PMB_PRINTPAGE_SLUG])) {
             wp_register_script(
                 'luxon',
