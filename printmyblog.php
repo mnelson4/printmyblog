@@ -16,15 +16,15 @@ Author URI: https://cmljnelson.wordpress.com
 
 use PrintMyBlog\controllers\PmbInit;
 
-if (!defined('PMG_VERSION')) {
-    define('PMG_VERSION', '1.0.0.rc.001');
-    define('PMG_DIR', wp_normalize_path(__DIR__) . '/');
-    define('PMG_MAIN_FILE', __FILE__);
-    define('PMG_TEMPLATES_DIR', PMG_DIR . 'templates/');
-    define('PMG_INCLUDES_DIR', PMG_DIR . 'includes/');
-    define('PMG_TWINE_DIR', PMG_DIR . 'twine_framework/');
-    define('PMG_TWINE_INCLUDES_DIR', PMG_TWINE_DIR . 'includes/');
-    define('PMG_ADMIN_CAP', 'export');
+if (!defined('PMB_VERSION')) {
+    define('PMB_VERSION', '1.0.0.rc.001');
+    define('PMB_DIR', wp_normalize_path(__DIR__) . '/');
+    define('PMB_MAIN_FILE', __FILE__);
+    define('PMB_TEMPLATES_DIR', PMB_DIR . 'templates/');
+    define('PMB_INCLUDES_DIR', PMB_DIR . 'includes/');
+    define('PMB_TWINE_DIR', PMB_DIR . 'twine_framework/');
+    define('PMB_TWINE_INCLUDES_DIR', PMB_TWINE_DIR . 'includes/');
+    define('PMB_ADMIN_CAP', 'export');
 
     /**
      * adds a wp-option to indicate that PMB has been activated via the WP admin plugins page.
@@ -35,10 +35,10 @@ if (!defined('PMG_VERSION')) {
         update_option('pmb_activation', true);
     }
 
-    register_activation_hook(PMG_MAIN_FILE, 'pmb_plugin_activation');
-    require_once(PMG_INCLUDES_DIR . 'constants.php');
-    require_once(PMG_TWINE_INCLUDES_DIR . 'controllers/BaseController.php');
-    require_once(PMG_INCLUDES_DIR . 'controllers/PmbInit.php');
+    register_activation_hook(PMB_MAIN_FILE, 'pmb_plugin_activation');
+    require_once(PMB_INCLUDES_DIR . 'constants.php');
+    require_once(PMB_TWINE_INCLUDES_DIR . 'controllers/BaseController.php');
+    require_once(PMB_INCLUDES_DIR . 'controllers/PmbInit.php');
     $init_controller = new PmbInit();
     $init_controller->setHooks();
 }

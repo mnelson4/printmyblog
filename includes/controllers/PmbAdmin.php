@@ -33,7 +33,7 @@ class PmbAdmin extends BaseController
             'tools.php',
             esc_html__('Print My Blog', 'event_espresso'),
             esc_html__('Print My Blog', 'event_espresso'),
-            PMG_ADMIN_CAP,
+            PMB_ADMIN_CAP,
             'print-my-blog',
             array(
                 $this,
@@ -44,6 +44,6 @@ class PmbAdmin extends BaseController
 
     public function renderAdminPage()
     {
-        include(PMG_TEMPLATES_DIR . 'settings.template.php');
+        include(PMB_TEMPLATES_DIR . 'settings.template.php');
     }
 }

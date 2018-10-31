@@ -32,7 +32,7 @@ class PmbInit extends BaseController
     }
 
     /**
-     * Initialize PMG if everything is safe.
+     * Initialize PMB if everything is safe.
      * @since $VID:$
      */
     public function init()
@@ -54,8 +54,8 @@ class PmbInit extends BaseController
 
     public function setUrls()
     {
-        $plugin_url = plugin_dir_url(PMG_MAIN_FILE);
-        define('PMG_ASSETS_URL', $plugin_url . 'assets/');
-        define('PMG_ASSETS_DIR', PMG_DIR . 'assets/');
+        $plugin_url = plugin_dir_url(PMB_MAIN_FILE);
+        define('PMB_ASSETS_URL', $plugin_url . 'assets/');
+        define('PMB_ASSETS_DIR', PMB_DIR . 'assets/');
     }
 }

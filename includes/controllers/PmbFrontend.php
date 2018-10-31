@@ -17,24 +17,24 @@ class PmbFrontend extends BaseController
      */
     public function templateRedirect($template)
     {
-        if (isset($_GET[PMG_PRINTPAGE_SLUG])) {
+        if (isset($_GET[PMB_PRINTPAGE_SLUG])) {
             wp_register_script(
                 'luxon',
-                PMG_ASSETS_URL . 'scripts/luxon.min.js',
+                PMB_ASSETS_URL . 'scripts/luxon.min.js',
                 array(),
-                filemtime(PMG_ASSETS_DIR . 'scripts/luxon.min.js')
+                filemtime(PMB_ASSETS_DIR . 'scripts/luxon.min.js')
             );
             wp_enqueue_script(
                 'pmg_print_page',
-                PMG_ASSETS_URL . 'scripts/print_page.js',
+                PMB_ASSETS_URL . 'scripts/print_page.js',
                 array('jquery', 'wp-api', 'luxon'),
-                filemtime(PMG_ASSETS_DIR . 'scripts/print_page.js')
+                filemtime(PMB_ASSETS_DIR . 'scripts/print_page.js')
             );
             wp_enqueue_style(
                 'pmg_print_page',
-                PMG_ASSETS_URL . 'styles/print_page.css',
+                PMB_ASSETS_URL . 'styles/print_page.css',
                 array(),
-                filemtime(PMG_ASSETS_DIR . 'styles/print_page.css')
+                filemtime(PMB_ASSETS_DIR . 'styles/print_page.css')
             );
             wp_localize_script(
                 'pmg_print_page',
@@ -48,7 +48,7 @@ class PmbFrontend extends BaseController
                     ),
                 )
             );
-            return PMG_TEMPLATES_DIR . 'print_page.template.php';
+            return PMB_TEMPLATES_DIR . 'print_page.template.php';
         }
         return $template;
     }

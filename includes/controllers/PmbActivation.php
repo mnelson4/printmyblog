@@ -33,7 +33,7 @@ class PmbActivation extends BaseController
      */
     public function detectActivation()
     {
-        if (get_option('pmb_activation') && current_user_can(PMG_ADMIN_CAP)) {
+        if (get_option('pmb_activation') && current_user_can(PMB_ADMIN_CAP)) {
             update_option('pmb_activation', false);
             wp_redirect(
                 admin_url(
