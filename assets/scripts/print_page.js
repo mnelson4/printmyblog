@@ -1,18 +1,19 @@
 // begin loading posts
 
 // and append them to the page
-function PmbPrintPage(pmg_instance_vars, translations) {
-    this.header_selector = pmg_instance_vars.header_selector;
+function PmbPrintPage(pmb_instance_vars, translations) {
+    this.header_selector = pmb_instance_vars.header_selector;
     this.header = null;
-    this.status_span_selector = pmg_instance_vars.status_span_selector;
+    this.status_span_selector = pmb_instance_vars.status_span_selector;
     this.status_span = null;
-    this.posts_div_selector = pmg_instance_vars.posts_div_selector;
+    this.posts_div_selector = pmb_instance_vars.posts_div_selector;
     this.posts_div = null;
-    this.waiting_area_selector = pmg_instance_vars.waiting_area_selector;
+    this.waiting_area_selector = pmb_instance_vars.waiting_area_selector;
     this.waiting_area = null;
-    this.print_ready_selector = pmg_instance_vars.print_ready_selector;
+    this.print_ready_selector = pmb_instance_vars.print_ready_selector;
     this.print_ready = null;
-    this.locale = pmg_instance_vars.locale;
+    this.locale = pmb_instance_vars.locale;
+    this.translations = translations;
     /**
      * @function
      */
@@ -58,7 +59,7 @@ function PmbPrintPage(pmg_instance_vars, translations) {
     };
 
     this.finish = function () {
-        this.status_span.html('Wrapping Up!');
+        this.status_span.html(this.translations.wrapping_up);
         setTimeout(
             () => {
                 this.waiting_area.hide();
@@ -147,7 +148,7 @@ function PmbPrintPage(pmg_instance_vars, translations) {
 /**
  * Show instrutions on how to get a print preview.
  */
-function pmg_print_preview()
+function pmb_print_preview()
 {
     jQuery('.print-preview-instructions').toggle();
 }
@@ -161,7 +162,10 @@ jQuery(document).ready(function () {
                 posts_div_selector: '.pmb-posts',
                 waiting_area_selector: '.pmb-waiting-area',
                 print_ready_selector: '.pmb-print-ready',
-                locale: pmg_print_data.data.locale,
+                locale: pmb_print_data.data.locale,
+            },
+            {
+                wrapping_up: pmb_print_data.i18n.wrapping_up
             }
         );
 

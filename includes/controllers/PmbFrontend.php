@@ -26,23 +26,23 @@ class PmbFrontend extends BaseController
                 filemtime(PMB_ASSETS_DIR . 'scripts/luxon.min.js')
             );
             wp_enqueue_script(
-                'pmg_print_page',
+                'pmb_print_page',
                 PMB_ASSETS_URL . 'scripts/print_page.js',
                 array('jquery', 'wp-api', 'luxon'),
                 filemtime(PMB_ASSETS_DIR . 'scripts/print_page.js')
             );
             wp_enqueue_style(
-                'pmg_print_page',
+                'pmb_print_page',
                 PMB_ASSETS_URL . 'styles/print_page.css',
                 array(),
                 filemtime(PMB_ASSETS_DIR . 'styles/print_page.css')
             );
             wp_localize_script(
-                'pmg_print_page',
-                'pmg_print_data',
+                'pmb_print_page',
+                'pmb_print_data',
                 array(
-                    'strings' => array(
-
+                    'i18n' => array(
+                        'wrapping_up' => esc_html__('Wrapping Up!', 'event_espresso'),
                     ),
                     'data' => array(
                         'locale' => get_locale(),
