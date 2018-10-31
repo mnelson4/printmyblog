@@ -35,7 +35,7 @@
         <div class="pmb-print-ready">
             <h1 class="pmb-waiting-h1"><?php _e('Ready to Print!','printmyblog' );?></h1>
                 <button onclick="window.print()"><?php esc_html_e('Print Now','printmyblog' );?></button>
-            <button onclick="pmg_print_preview()"><?php esc_html_e('Print Preview','printmyblog' );?></button>
+            <button onclick="pmb_print_preview()"><?php esc_html_e('Print Preview','printmyblog' );?></button>
             <div class="print-preview-instructions">
                 <p><?php esc_html_e('Your browser may support making a print preview by doing the following:','printmyblog' );?></p>
                 <ol>
