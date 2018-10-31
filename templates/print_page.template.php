@@ -47,6 +47,15 @@
         </div>
     </div>
 </div>
-<div class="pmb-posts"></div>
+<div class="pmb-posts">
+    <h1 class="site-title"><?php  echo get_bloginfo('name');?></h1>
+    <p class="site-description"><?php echo get_bloginfo('description');?></p>
+    <p><?php printf(
+            esc_html__('Printout of %1$s, generated on %2$s using "Print My Blog" plugin.','event_espresso' ),
+            get_bloginfo('url'),
+            date_i18n( get_option( 'date_format' ))
+            );?>
+    </p>
+</div>
 
 </body>
