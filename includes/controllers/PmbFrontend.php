@@ -4,7 +4,7 @@ namespace PrintMyBlog\controllers;
 
 use Twine\controllers\BaseController;
 
-class PmgFrontend extends BaseController
+class PmbFrontend extends BaseController
 {
     public function setHooks()
     {

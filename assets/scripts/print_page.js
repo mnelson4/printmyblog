@@ -1,7 +1,7 @@
 // begin loading posts
 
 // and append them to the page
-function PmgPrintPage(pmg_instance_vars, translations) {
+function PmbPrintPage(pmg_instance_vars, translations) {
     this.header_selector = pmg_instance_vars.header_selector;
     this.header = null;
     this.status_span_selector = pmg_instance_vars.status_span_selector;
@@ -144,7 +144,7 @@ function PmgPrintPage(pmg_instance_vars, translations) {
 
 jQuery(document).ready(function () {
     wp.api.loadPromise.done( function() {
-        var pmg = new PmgPrintPage(
+        var pmg = new PmbPrintPage(
             {
                 header_selector: '.pmg-waiting-h1',
                 status_span_selector: '.pmg-status',

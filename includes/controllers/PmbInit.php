@@ -3,7 +3,7 @@
 namespace PrintMyBlog\controllers;
 use Twine\controllers\BaseController;
 /**
- * Class PmgInit
+ * Class PmbInit
  *
  * Initializes the systems required to handle requests and do our logic.
  *
@@ -12,7 +12,7 @@ use Twine\controllers\BaseController;
  * @since         $VID:$
  *
  */
-class PmgInit extends BaseController
+class PmbInit extends BaseController
 {
     /**
      * Sets hooks that trigger this class' logic (which decides what other files to load)
@@ -35,11 +35,11 @@ class PmgInit extends BaseController
         }
         $this->setUrls();
         if (is_admin()) {
-            require_once('PmgAdmin.php');
-            $controller = new PmgAdmin();
+            require_once('PmbAdmin.php');
+            $controller = new PmbAdmin();
         } else {
-            require_once('PmgFrontend.php');
-            $controller = new PmgFrontend();
+            require_once('PmbFrontend.php');
+            $controller = new PmbFrontend();
         }
         $controller->setHooks();
     }

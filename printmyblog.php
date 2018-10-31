@@ -14,7 +14,7 @@ Requires PHP: 5.4
 Author URI: https://cmljnelson.wordpress.com
 */
 
-use PrintMyBlog\controllers\PmgInit;
+use PrintMyBlog\controllers\PmbInit;
 
 if (!defined('PMG_VERSION')) {
     define('PMG_VERSION', '1.0.0.rc.001');
@@ -26,7 +26,7 @@ if (!defined('PMG_VERSION')) {
     define('PMG_TWINE_INCLUDES_DIR', PMG_TWINE_DIR . 'includes/');
     require_once(PMG_INCLUDES_DIR . 'constants.php');
     require_once(PMG_TWINE_INCLUDES_DIR . 'controllers/BaseController.php');
-    require_once(PMG_INCLUDES_DIR . 'controllers/PmgInit.php');
-    $init_controller = new PmgInit();
+    require_once(PMG_INCLUDES_DIR . 'controllers/PmbInit.php');
+    $init_controller = new PmbInit();
     $init_controller->setHooks();
 }

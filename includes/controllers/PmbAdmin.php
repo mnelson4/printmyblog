@@ -2,7 +2,7 @@
 namespace PrintMyBlog\controllers;
 use Twine\controllers\BaseController;
 /**
- * Class PmgAdmin
+ * Class PmbAdmin
  *
  * Hooks needed to add our stuff to the admin.
  * Mostly it's just an admin page.
@@ -12,7 +12,7 @@ use Twine\controllers\BaseController;
  * @since         $VID:$
  *
  */
-class PmgAdmin extends BaseController
+class PmbAdmin extends BaseController
 {
     /**
      * Sets hooks that we'll use in the admin.
