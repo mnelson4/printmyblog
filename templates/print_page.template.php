@@ -23,17 +23,17 @@
 </head>
 
 <body <?php body_class(); ?>>
-<div class="pmg-waiting-message-fullpage">
-    <div class="pmg-waiting-message-outer-container">
-        <div class="pmg-waiting-area">
-            <h1 class="pmg-waiting-h1"><?php _e('We are preparing your blog&#8217;s content for printing. Please wait...','event_espresso' );?></h1>
-            <div class="pmg-spinner-container">
-                <div class="pmg-spinner"></div>
+<div class="pmb-waiting-message-fullpage">
+    <div class="pmb-waiting-message-outer-container">
+        <div class="pmb-waiting-area">
+            <h1 class="pmb-waiting-h1"><?php _e('We are preparing your blog&#8217;s content for printing. Please wait...','event_espresso' );?></h1>
+            <div class="pmb-spinner-container">
+                <div class="pmb-spinner"></div>
             </div>
-            <p class="pmg-status"><?php esc_html_e('Loading posts','event_espresso' );?></p>
+            <p class="pmb-status"><?php esc_html_e('Loading posts','event_espresso' );?></p>
         </div>
-        <div class="pmg-print-ready">
-            <h1 class="pmg-waiting-h1"><?php _e('Ready to Print!','event_espresso' );?></h1>
+        <div class="pmb-print-ready">
+            <h1 class="pmb-waiting-h1"><?php _e('Ready to Print!','event_espresso' );?></h1>
                 <button onclick="window.print()"><?php esc_html_e('Print Now','event_espresso' );?></button>
             <button onclick="pmg_print_preview()"><?php esc_html_e('Print Preview','event_espresso' );?></button>
             <div class="print-preview-instructions">
@@ -47,6 +47,6 @@
         </div>
     </div>
 </div>
-<div class="pmg-posts"></div>
+<div class="pmb-posts"></div>
 
 </body>

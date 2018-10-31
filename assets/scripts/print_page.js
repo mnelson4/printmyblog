@@ -75,12 +75,12 @@ function PmbPrintPage(pmg_instance_vars, translations) {
      */
     this.prettyUpPrintedPage = function()
     {
-        jQuery('img').wrap('<div class="pmg-image"></div>');
-        jQuery('h1').wrap('<div class="pmg-header"></div>');
-        jQuery('h2').wrap('<div class="pmg-header"></div>');
-        jQuery('h3').wrap('<div class="pmg-header"></div>');
-        jQuery('h4').wrap('<div class="pmg-header"></div>');
-        jQuery('h5').wrap('<div class="pmg-header"></div>');
+        jQuery('img').wrap('<div class="pmb-image"></div>');
+        jQuery('h1').wrap('<div class="pmb-header"></div>');
+        jQuery('h2').wrap('<div class="pmb-header"></div>');
+        jQuery('h3').wrap('<div class="pmb-header"></div>');
+        jQuery('h4').wrap('<div class="pmb-header"></div>');
+        jQuery('h5').wrap('<div class="pmb-header"></div>');
     };
 
     /**
@@ -101,7 +101,7 @@ function PmbPrintPage(pmg_instance_vars, translations) {
             + '<div class="entry-content">'
             + post.content.rendered
             + '</div>'
-            + '<br class="pmg-page-break"/>'
+            + '<br class="pmb-page-break"/>'
         ;
         // add header
         // add body
@@ -154,19 +154,19 @@ function pmg_print_preview()
 
 jQuery(document).ready(function () {
     wp.api.loadPromise.done( function() {
-        var pmg = new PmbPrintPage(
+        var pmb = new PmbPrintPage(
             {
-                header_selector: '.pmg-waiting-h1',
-                status_span_selector: '.pmg-status',
-                posts_div_selector: '.pmg-posts',
-                waiting_area_selector: '.pmg-waiting-area',
-                print_ready_selector: '.pmg-print-ready',
+                header_selector: '.pmb-waiting-h1',
+                status_span_selector: '.pmb-status',
+                posts_div_selector: '.pmb-posts',
+                waiting_area_selector: '.pmb-waiting-area',
+                print_ready_selector: '.pmb-print-ready',
                 locale: pmg_print_data.data.locale,
             }
         );
 
-        pmg.initialize();
-        pmg.begin_loading();
+        pmb.initialize();
+        pmb.begin_loading();
     });
 });
 
