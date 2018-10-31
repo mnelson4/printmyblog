@@ -8,8 +8,10 @@ function PmbPrintPage(pmg_instance_vars, translations) {
     this.status_span = null;
     this.posts_div_selector = pmg_instance_vars.posts_div_selector;
     this.posts_div = null;
-    this.spinner_selector = pmg_instance_vars.spinner_selector;
-    this.spinner = null;
+    this.waiting_area_selector = pmg_instance_vars.waiting_area_selector;
+    this.waiting_area = null;
+    this.print_ready_selector = pmg_instance_vars.print_ready_selector;
+    this.print_ready = null;
     this.locale = pmg_instance_vars.locale;
     /**
      * @function
@@ -18,7 +20,8 @@ function PmbPrintPage(pmg_instance_vars, translations) {
         this.header = jQuery(this.header_selector);
         this.status_span = jQuery(this.status_span_selector);
         this.posts_div = jQuery(this.posts_div_selector);
-        this.spinner = jQuery(this.spinner_selector);
+        this.waiting_area = jQuery(this.waiting_area_selector);
+        this.print_ready = jQuery(this.print_ready_selector);
     };
 
     this.begin_loading = function () {
@@ -58,9 +61,8 @@ function PmbPrintPage(pmg_instance_vars, translations) {
         this.status_span.html('Wrapping Up!');
         setTimeout(
             () => {
-                this.spinner.hide();
-                this.header.html('All Done!');
-                this.status_span.html('<button onclick="window.print()">Print Now</button><p>Alternatively, in your browser, you can click "File" then "Print Preview" to preview the page before printing.</p>');
+                this.waiting_area.hide();
+                this.print_ready.show();
                 this.prettyUpPrintedPage();
             },
             5000
@@ -142,6 +144,14 @@ function PmbPrintPage(pmg_instance_vars, translations) {
     }
 }
 
+/**
+ * Show instrutions on how to get a print preview.
+ */
+function pmg_print_preview()
+{
+    jQuery('.print-preview-instructions').toggle();
+}
+
 jQuery(document).ready(function () {
     wp.api.loadPromise.done( function() {
         var pmg = new PmbPrintPage(
@@ -149,7 +159,8 @@ jQuery(document).ready(function () {
                 header_selector: '.pmg-waiting-h1',
                 status_span_selector: '.pmg-status',
                 posts_div_selector: '.pmg-posts',
-                spinner_selector: '.pmg-spinner',
+                waiting_area_selector: '.pmg-waiting-area',
+                print_ready_selector: '.pmg-print-ready',
                 locale: pmg_print_data.data.locale,
             }
         );
