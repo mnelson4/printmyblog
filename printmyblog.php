@@ -24,6 +24,18 @@ if (!defined('PMG_VERSION')) {
     define('PMG_INCLUDES_DIR', PMG_DIR . 'includes/');
     define('PMG_TWINE_DIR', PMG_DIR . 'twine_framework/');
     define('PMG_TWINE_INCLUDES_DIR', PMG_TWINE_DIR . 'includes/');
+    define('PMG_ADMIN_CAP', 'export');
+
+    /**
+     * adds a wp-option to indicate that PMB has been activated via the WP admin plugins page.
+     * This can be used to do initial plugin installation or redirect the user to the setup page.
+     */
+    function pmb_plugin_activation()
+    {
+        update_option('pmb_activation', true);
+    }
+
+    register_activation_hook(PMG_MAIN_FILE, 'pmb_plugin_activation');
     require_once(PMG_INCLUDES_DIR . 'constants.php');
     require_once(PMG_TWINE_INCLUDES_DIR . 'controllers/BaseController.php');
     require_once(PMG_INCLUDES_DIR . 'controllers/PmbInit.php');

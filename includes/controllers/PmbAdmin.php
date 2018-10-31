@@ -33,7 +33,7 @@ class PmbAdmin extends BaseController
             'tools.php',
             esc_html__('Print My Blog', 'event_espresso'),
             esc_html__('Print My Blog', 'event_espresso'),
-        'export',
+            PMG_ADMIN_CAP,
             'print-my-blog',
             array(
                 $this,

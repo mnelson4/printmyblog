@@ -20,7 +20,15 @@ class PmbInit extends BaseController
      */
     public function setHooks()
     {
+        add_action('init', array($this,'earlyInit'), 5);
         add_action('init', array($this, 'init'));
+    }
+
+    public function earlyInit()
+    {
+        require_once('PmbActivation.php');
+        $controller = new PmbActivation();
+        $controller->setHooks();
     }
 
     /**
