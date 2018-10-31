@@ -45,7 +45,7 @@ class PmbAdmin extends BaseController
 
     public function renderAdminPage()
     {
-        include(PMB_TEMPLATES_DIR . 'settings.template.php');
+        include(PMB_TEMPLATES_DIR . 'setup_page.template.php');
     }
 
     /**
