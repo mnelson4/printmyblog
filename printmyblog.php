@@ -25,6 +25,9 @@ if (!defined('PMB_VERSION')) {
     define('PMB_TWINE_DIR', PMB_DIR . 'twine_framework/');
     define('PMB_TWINE_INCLUDES_DIR', PMB_TWINE_DIR . 'includes/');
     define('PMB_ADMIN_CAP', 'export');
+    define('PMB_BASENAME', plugin_basename(PMB_MAIN_FILE));
+    define('PMB_ADMIN_PAGE_SLUG', 'print-my-blog');
+    define('PMB_ADMIN_PAGE_PATH', '/tools.php?page=' . PMB_ADMIN_PAGE_SLUG);
 
     /**
      * adds a wp-option to indicate that PMB has been activated via the WP admin plugins page.

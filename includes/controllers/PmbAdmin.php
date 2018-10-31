@@ -21,6 +21,7 @@ class PmbAdmin extends BaseController
     public function setHooks()
     {
         add_action('admin_menu',array($this,'addToMenu'));
+        add_filter('plugin_action_links_'. PMB_BASENAME, array($this, 'pluginPageLinks'));
     }
 
     /**
@@ -34,7 +35,7 @@ class PmbAdmin extends BaseController
             esc_html__('Print My Blog', 'event_espresso'),
             esc_html__('Print My Blog', 'event_espresso'),
             PMB_ADMIN_CAP,
-            'print-my-blog',
+            PMB_ADMIN_PAGE_SLUG,
             array(
                 $this,
                 'renderAdminPage'
@@ -45,5 +46,20 @@ class PmbAdmin extends BaseController
     public function renderAdminPage()
     {
         include(PMB_TEMPLATES_DIR . 'settings.template.php');
+    }
+
+    /**
+     * Adds links to PMB stuff on the plugins page.
+     * @since $VID:$
+     * @param array $links
+     */
+    public function pluginPageLinks($links)
+    {
+        $links[] = '<a href="'
+            . admin_url(PMB_ADMIN_PAGE_PATH)
+            . '">'
+            . esc_html__('Print Setup Page', 'event_espresso')
+            . '</a>';
+        return $links;
     }
 }

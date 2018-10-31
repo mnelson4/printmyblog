@@ -36,9 +36,7 @@ class PmbActivation extends BaseController
         if (get_option('pmb_activation') && current_user_can(PMB_ADMIN_CAP)) {
             update_option('pmb_activation', false);
             wp_redirect(
-                admin_url(
-                    '/tools.php?page=print-my-blog'
-                )
+                admin_url(PMB_ADMIN_PAGE_PATH)
             );
             exit;
         }
