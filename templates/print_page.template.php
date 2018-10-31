@@ -26,22 +26,22 @@
 <div class="pmb-waiting-message-fullpage">
     <div class="pmb-waiting-message-outer-container">
         <div class="pmb-waiting-area">
-            <h1 class="pmb-waiting-h1"><?php _e('We are preparing your blog&#8217;s content for printing. Please wait...','event_espresso' );?></h1>
+            <h1 class="pmb-waiting-h1"><?php _e('We are preparing your blog&#8217;s content for printing. Please wait...','printmyblog' );?></h1>
             <div class="pmb-spinner-container">
                 <div class="pmb-spinner"></div>
             </div>
-            <p class="pmb-status"><?php esc_html_e('Loading posts','event_espresso' );?></p>
+            <p class="pmb-status"><?php esc_html_e('Loading posts','printmyblog' );?></p>
         </div>
         <div class="pmb-print-ready">
-            <h1 class="pmb-waiting-h1"><?php _e('Ready to Print!','event_espresso' );?></h1>
-                <button onclick="window.print()"><?php esc_html_e('Print Now','event_espresso' );?></button>
-            <button onclick="pmg_print_preview()"><?php esc_html_e('Print Preview','event_espresso' );?></button>
+            <h1 class="pmb-waiting-h1"><?php _e('Ready to Print!','printmyblog' );?></h1>
+                <button onclick="window.print()"><?php esc_html_e('Print Now','printmyblog' );?></button>
+            <button onclick="pmg_print_preview()"><?php esc_html_e('Print Preview','printmyblog' );?></button>
             <div class="print-preview-instructions">
-                <p><?php esc_html_e('Your browser may support making a print preview by doing the following:','event_espresso' );?></p>
+                <p><?php esc_html_e('Your browser may support making a print preview by doing the following:','printmyblog' );?></p>
                 <ol>
-                    <li><?php esc_html_e('Press the "Alt" Key on your Keyboard','event_espresso' );?></li>
-                    <li><?php esc_html_e('Click "File"','event_espresso' );?></li>
-                    <li><?php esc_html_e('Click "Print Preview"','event_espresso' );?></li>
+                    <li><?php esc_html_e('Press the "Alt" Key on your Keyboard','printmyblog' );?></li>
+                    <li><?php esc_html_e('Click "File"','printmyblog' );?></li>
+                    <li><?php esc_html_e('Click "Print Preview"','printmyblog' );?></li>
                 </ol>
             </div>
         </div>
@@ -51,7 +51,7 @@
     <h1 class="site-title"><?php  echo get_bloginfo('name');?></h1>
     <p class="site-description"><?php echo get_bloginfo('description');?></p>
     <p><?php printf(
-            esc_html__('Printout of %1$s, generated on %2$s using "Print My Blog" plugin.','event_espresso' ),
+            esc_html__('Printout of %1$s, generated on %2$s using "Print My Blog" plugin.','printmyblog' ),
             get_bloginfo('url'),
             date_i18n( get_option( 'date_format' ))
             );?>
