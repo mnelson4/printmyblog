@@ -20,12 +20,14 @@ No upsells, no premium version. Entirely supported by donations.
 
 = Why would I want to print my entire blog? =
 Glad you asked:
+
 * backup your memories in a format that will still be readable in 100 years: paper!
 * share it offline
 * create a book from your blog (although [Anthologize](https://wordpress.org/plugins/anthologize/) might be a better option for that)
 
 = How does it work? =
 Watch this 45 second video!
+
 https://www.youtube.com/watch?v=puMi_CLxl3s&feature=youtu.be
 
 It works with hundreds of blog posts, with Gutenberg and page builder posts.
@@ -53,10 +55,6 @@ Your website might not be around forever, nor might WordPress. But by printing i
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
-
 1. Upload the plugin files to the `/wp-content/plugins/plugin-name` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
 1. Go to Tools->Print To Blog
@@ -64,8 +62,8 @@ e.g.
 1. When you see "Print Now" appear, click it.
 
 == Troubleshooting ==
--the WP API (or REST API) needs to not be deactivated
--caching plugins should probably be deactivated before use
+* the WP API (or REST API) needs to not be deactivated
+* caching plugins should probably be deactivated before use
 
 == Screenshots ==
 
