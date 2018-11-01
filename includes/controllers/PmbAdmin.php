@@ -12,14 +12,14 @@ use Twine\controllers\BaseController;
  *
  * @package     Event Espresso
  * @author         Mike Nelson
- * @since         $VID:$
+ * @since         1.0.0
  *
  */
 class PmbAdmin extends BaseController
 {
     /**
      * Sets hooks that we'll use in the admin.
-     * @since $VID:$
+     * @since 1.0.0
      */
     public function setHooks()
     {
@@ -29,7 +29,7 @@ class PmbAdmin extends BaseController
 
     /**
      * Adds our menu page.
-     * @since $VID:$
+     * @since 1.0.0
      */
     public function addToMenu()
     {
@@ -48,7 +48,7 @@ class PmbAdmin extends BaseController
 
     /**
      * Shows the setup page.
-     * @since $VID:$
+     * @since 1.0.0
      */
     public function renderAdminPage()
     {
@@ -57,7 +57,7 @@ class PmbAdmin extends BaseController
 
     /**
      * Adds links to PMB stuff on the plugins page.
-     * @since $VID:$
+     * @since 1.0.0
      * @param array $links
      */
     public function pluginPageLinks($links)

@@ -11,7 +11,7 @@ use Twine\controllers\BaseController;
  *
  * @package     Event Espresso
  * @author         Mike Nelson
- * @since         $VID:$
+ * @since         1.0.0
  *
  */
 class PmbActivation extends BaseController
@@ -20,7 +20,7 @@ class PmbActivation extends BaseController
 
     /**
      * Sets hooks needed for this controller to execute its logic.
-     * @since $VID:$
+     * @since 1.0.0
      */
     public function setHooks()
     {
@@ -30,7 +30,7 @@ class PmbActivation extends BaseController
     /**
      * Redirects the user to the blog printing page if the user just activated the plugin and
      * they have the necessary capability.
-     * @since $VID:$
+     * @since 1.0.0
      */
     public function detectActivation()
     {

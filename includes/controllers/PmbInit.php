@@ -11,14 +11,14 @@ use Twine\controllers\BaseController;
  *
  * @package     Event Espresso
  * @author         Mike Nelson
- * @since         $VID:$
+ * @since         1.0.0
  *
  */
 class PmbInit extends BaseController
 {
     /**
      * Sets hooks that trigger this class' logic (which decides what other files to load)
-     * @since $VID:$
+     * @since 1.0.0
      */
     public function setHooks()
     {
@@ -35,7 +35,7 @@ class PmbInit extends BaseController
 
     /**
      * Initialize PMB if everything is safe.
-     * @since $VID:$
+     * @since 1.0.0
      */
     public function init()
     {

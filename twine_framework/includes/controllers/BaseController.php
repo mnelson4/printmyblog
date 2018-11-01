@@ -9,14 +9,14 @@ namespace Twine\controllers;
  *
  * @package     Event Espresso
  * @author         Mike Nelson
- * @since         $VID:$
+ * @since         1.0.0
  *
  */
 abstract class BaseController
 {
     /**
      * Sets hooks needed for this controller to execute its logic.
-     * @since $VID:$
+     * @since 1.0.0
      */
     public abstract function setHooks();
 

@@ -13,7 +13,7 @@ class PmbFrontend extends BaseController
 
     /**
      * Determines if the request is for our page generator page, and if so, uses our template for it.
-     * @since $VID:$
+     * @since 1.0.0
      */
     public function templateRedirect($template)
     {
