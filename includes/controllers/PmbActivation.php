@@ -1,6 +1,7 @@
 <?php
 
 namespace PrintMyBlog\controllers;
+
 use Twine\controllers\BaseController;
 
 /**
@@ -23,7 +24,7 @@ class PmbActivation extends BaseController
      */
     public function setHooks()
     {
-        add_action('init', array($this,'detectActivation'));
+        add_action('init', array($this, 'detectActivation'));
     }
 
     /**

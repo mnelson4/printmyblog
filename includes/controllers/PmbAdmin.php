@@ -1,6 +1,9 @@
 <?php
+
 namespace PrintMyBlog\controllers;
+
 use Twine\controllers\BaseController;
+
 /**
  * Class PmbAdmin
  *
@@ -20,8 +23,8 @@ class PmbAdmin extends BaseController
      */
     public function setHooks()
     {
-        add_action('admin_menu',array($this,'addToMenu'));
-        add_filter('plugin_action_links_'. PMB_BASENAME, array($this, 'pluginPageLinks'));
+        add_action('admin_menu', array($this, 'addToMenu'));
+        add_filter('plugin_action_links_' . PMB_BASENAME, array($this, 'pluginPageLinks'));
     }
 
     /**

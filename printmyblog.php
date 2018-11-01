@@ -3,6 +3,7 @@
  * @package PrintMyBlog
  * @version 1.0
  */
+
 /*
 Plugin Name: Print My Blog
 Plugin URI: https://github.com/mnelson4/printmyblog

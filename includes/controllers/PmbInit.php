@@ -1,7 +1,9 @@
 <?php
 
 namespace PrintMyBlog\controllers;
+
 use Twine\controllers\BaseController;
+
 /**
  * Class PmbInit
  *
@@ -20,7 +22,7 @@ class PmbInit extends BaseController
      */
     public function setHooks()
     {
-        add_action('init', array($this,'earlyInit'), 5);
+        add_action('init', array($this, 'earlyInit'), 5);
         add_action('init', array($this, 'init'));
     }
 
