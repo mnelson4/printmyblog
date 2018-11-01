@@ -9,7 +9,7 @@ Plugin Name: Print My Blog
 Plugin URI: https://github.com/mnelson4/printmyblog
 Description: Simplifies printing your entire blog. Just go to tools -> Print My Blog,
 Author: Michael Nelson
-Version: 1.0.0.rc.002
+Version: 1.0.0
 Requires at least: 4.4
 Requires PHP: 5.4
 Author URI: https://cmljnelson.wordpress.com
