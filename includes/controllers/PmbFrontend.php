@@ -42,15 +42,68 @@ class PmbFrontend extends BaseController
                 'pmb_print_data',
                 array(
                     'i18n' => array(
-                        'wrapping_up' => esc_html__('Wrapping Up!', 'event_espresso'),
+                        'wrapping_up' => esc_html__('Wrapping Up!', 'print_my_blog'),
                     ),
                     'data' => array(
                         'locale' => get_locale(),
+                        'show_images' => $this->getFromRequest('show_images', 'full') !== 'none'
                     ),
                 )
             );
+            $this->enqueueInlineStyleBasedOnOptions();
+
             return PMB_TEMPLATES_DIR . 'print_page.template.php';
         }
         return $template;
+    }
+
+    /**
+     * Adds the styles that depend on the user's preferences.
+     * @since $VID:$
+     */
+    protected function enqueueInlineStyleBasedOnOptions()
+    {
+        $columns = intval($this->getFromRequest('columns',2));
+        $image_size = sanitize_key($this->getFromRequest('image_size','medium'));
+        $post_page_break = (bool)$this->getFromRequest('post-page-break',false);
+        $font_size = sanitize_key($this->getFromRequest('font-size', 'small'));
+        $css = "
+        .entry-content{
+            column-count: $columns;
+        }
+        ";
+        if($post_page_break){
+            $css .= '.pmb-post-header{page-break-before:always;}';
+        }
+        $image_size_map = array(
+            'small' => '6cm',
+            'medium' => '10cm',
+            'large' => '18cm',
+        );
+        $image_size_css = isset($image_size_map[$image_size]) ? $image_size_map[$image_size] : 'full';
+        $css .= ".pmb-image img{max-height:$image_size_css;}";
+        $font_size_map = array(
+            'tiny' => '0.5em',
+            'small' => '0.8em',
+            'normal' => '1em',
+            'large' => '1.3em',
+        );
+        $font_size_css = isset($font_size_map[$font_size]) ? $font_size_map[$font_size] : '1em';
+        $css .= ".pmb-posts-body{font-size:$font_size_css;}";
+        wp_add_inline_style(
+            'pmb_print_page',
+            $css
+        );
+    }
+
+    /**
+     * Helper for getting a value from the request, or setting a default.
+     * @since $VID:$
+     * @param $query_param_name
+     * @param $default
+     * @return mixed
+     */
+    protected function getFromRequest($query_param_name, $default) {
+        return isset($_GET[$query_param_name]) ? $_GET[$query_param_name] : $default;
     }
 }

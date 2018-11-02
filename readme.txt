@@ -19,6 +19,7 @@ Plugin alternative to [blog2print](https://www.blog2print.com), except you can p
 No upsells, no premium version. Entirely supported by donations.
 
 = Why would I want to print my entire blog? =
+
 Glad you asked:
 
 * backup your memories in a format that will still be readable in 100 years: paper!
@@ -41,6 +42,7 @@ Yes it can be a lot of paper. But your latest package delivery used up about the
 Want this plugin to be even better?
 
 Here’s how you can help:
+
 * give it a good review and tell your friends
 * help test. If you find a bug, please create an issue on [GitHub](https://github.com/mnelson4/printmyblog)
 * help code. A pull request on [GitHub](https://github.com/mnelson4/printmyblog)
@@ -55,13 +57,14 @@ Your website might not be around forever, nor might WordPress. But by printing i
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/plugin-name` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the `/wp-content/plugins/print-my-blog` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
 1. Go to Tools->Print To Blog
 1. Press "Prepare Print Page"
 1. When you see "Print Now" appear, click it.
 
 == Troubleshooting ==
+
 * the WP API (or REST API) needs to not be deactivated
 * caching plugins should probably be deactivated before use
 

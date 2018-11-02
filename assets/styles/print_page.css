@@ -19,7 +19,6 @@
     }
 }
 
-
 .pmb-waiting-message-fullpage{
     position: fixed;
     top: 0;
@@ -35,7 +34,8 @@
     margin-top:10%;
 }
 
-.pmb-waiting-h1{
+div.pmb-post-header{
+    page-break-inside:avoid;
 }
 .pmb-page-break{
     page-break-before: always;
@@ -45,6 +45,7 @@
     page-break-inside:avoid;
 }
 .pmb-header{
+    page-break-inside:avoid;
     page-break-after:avoid;
 }
 button{
@@ -60,6 +61,6 @@ button{
     margin-right:auto;
 }
 .print-preview-instructions ol{
-    text-align:left;
-    padding: 0 2em 0 2em;
-}
+     text-align:left;
+     padding: 0 2em 0 2em;
+ }

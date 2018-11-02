@@ -13,6 +13,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.print_ready_selector = pmb_instance_vars.print_ready_selector;
     this.print_ready = null;
     this.locale = pmb_instance_vars.locale;
+    this.show_images = pmb_instance_vars.show_images;
     this.translations = translations;
     /**
      * @function
@@ -76,7 +77,13 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      */
     this.prettyUpPrintedPage = function()
     {
-        jQuery('img').wrap('<div class="pmb-image"></div>');
+        if(this.show_images){
+            jQuery('img:not(.emoji)').wrap('<div class="pmb-image"></div>');
+        } else {
+            jQuery('img:not(.emoji)').remove();
+        }
+        //jQuery('.pmb-posts-body').css('font-size','0.5em');
+
         jQuery('h1').wrap('<div class="pmb-header"></div>');
         jQuery('h2').wrap('<div class="pmb-header"></div>');
         jQuery('h3').wrap('<div class="pmb-header"></div>');
@@ -89,7 +96,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      */
     this.addPostToPage = function (post) {
 
-        let html_to_add = '<h1 class="entry-title">'
+        let html_to_add = '<div class="pmb-post-header"><h1 class="entry-title">'
             + post.title.rendered
             + '</h1>'
             + '<div class="entry-meta"><span class="posted-on">'
@@ -99,10 +106,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             // + this.getAuthorName(post)
             + '</span></div>'
             + this.getFeaturedImageHtml(post)
-            + '<div class="entry-content">'
+            + '</div><div class="entry-content">'
             + post.content.rendered
-            + '</div>'
-            + '<br class="pmb-page-break"/>'
+            + '</div>';
         ;
         // add header
         // add body
@@ -159,10 +165,11 @@ jQuery(document).ready(function () {
             {
                 header_selector: '.pmb-waiting-h1',
                 status_span_selector: '.pmb-status',
-                posts_div_selector: '.pmb-posts',
+                posts_div_selector: '.pmb-posts-body',
                 waiting_area_selector: '.pmb-waiting-area',
                 print_ready_selector: '.pmb-print-ready',
                 locale: pmb_print_data.data.locale,
+                show_images: pmb_print_data.data.show_images,
             },
             {
                 wrapping_up: pmb_print_data.i18n.wrapping_up
