@@ -8,12 +8,14 @@ Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Print your entire blog in one click!
+Create a paper/PDF copy of your entire blog in one click!
 
 == Description ==
 
-Print your entire blog in one click!
-Don't print your blog posts manually one-by-one. Don't print unnecessary stuff like your sidebar widgets or footer.
+Create a paper/PDF copy of your entire blog in one click!
+A paper copy will be readable in 100 years- long after your website is taken down and your digital backups.
+"Print My Blog" makes this really easy: no need to print your blog posts one-by-one, or print unnecessary stuff like your sidebar widgets or footer.
+One click printing of your entire blog's contents in a format optimized for print.
 Plugin alternative to [blog2print](https://www.blog2print.com), except you can print with your own printer or even your browser's print-to-pdf feature.
 
 No upsells, no premium version. Entirely supported by donations.
@@ -31,11 +33,16 @@ Watch this 45 second video!
 
 https://www.youtube.com/watch?v=puMi_CLxl3s&feature=youtu.be
 
-It works with hundreds of blog posts, with Gutenberg and page builder posts.
+It works with hundreds of blog posts, with Gutenberg, and page builders.
 Only your posts’ content is printed, not your logo, site title, sidebar widgets, footer, etc. Just the stuff you care to read.
 
 = But You’re Destroying Trees! =
-Yes it can be a lot of paper. But your latest package delivery used up about the same amount of tree. Besides, you can recycle the pages if you’re done. Lastly, you don’t need to actually print to paper. Google Chrome and other browsers allow you to instead print to PDF.
+Yes it can be a lot of paper. But
+
+* there are paper-saving options, like using small text, multiple columns, and use smaller images (or removing them altogether)
+* your latest package delivery used up about the same amount of tree
+* you can recycle the pages if you’re done anyways
+* lastly, you don’t need to actually print to paper. Google Chrome and other browsers allow you to instead print to PDF.
 
 == Contribute ==
 
