@@ -59,7 +59,7 @@ class PmbFrontend extends BaseController
 
     /**
      * Adds the styles that depend on the user's preferences.
-     * @since $VID:$
+     * @since 1.1.0
      */
     protected function enqueueInlineStyleBasedOnOptions()
     {
@@ -98,7 +98,7 @@ class PmbFrontend extends BaseController
 
     /**
      * Helper for getting a value from the request, or setting a default.
-     * @since $VID:$
+     * @since 1.1.0
      * @param $query_param_name
      * @param $default
      * @return mixed
