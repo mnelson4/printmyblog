@@ -24,9 +24,10 @@ No upsells, no premium version. Entirely supported by donations.
 
 Glad you asked:
 
-* backup your memories in a format that will still be readable in 100 years: paper!
-* share it offline
+* backup your memories in a format that has no technological dependencies: paper!
+* easily share an entire blog offline
 * create a book from your blog (although [Anthologize](https://wordpress.org/plugins/anthologize/) might be a better option for that)
+* when shutting down a blog, convert its content to an easy-to-read format
 
 = How does it work? =
 Watch this 45 second video!
