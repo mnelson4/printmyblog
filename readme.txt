@@ -84,6 +84,10 @@ Your website might not be around forever, nor might WordPress. But by printing i
 
 == Changelog ==
 
+= 1.1.1 =
+* Fix image sizes
+* Fix translation domains
+
 = 1.1.0 =
 * Added page setup options: columns, text size, page-break on new post, and image size
 
