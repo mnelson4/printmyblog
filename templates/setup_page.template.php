@@ -36,7 +36,7 @@
                         <option value="2" selected="selected"><?php esc_html_e('2', 'print_my_blog'); ?></option>
                         <option value="3"><?php esc_html_e('3', 'print_my_blog'); ?></option>
                     </select>
-                    <p class="description"><?php esc_html_e('The number of columns of text on each page. 2-3 makes it look a bit like a newspaper and the content tends to be more .','print_my_blog' );?></p>
+                    <p class="description"><?php esc_html_e('The number of columns of text on each page. Not supported by some web browsers.','print_my_blog' );?></p>
                 </td>
             </tr>
             <tr>
@@ -48,7 +48,7 @@
                         <option value="tiny"><?php esc_html_e('Tiny (saves ink and paper)','print_my_blog' );?></option>
                         <option value="small" selected="selected"><?php esc_html_e('Small (newspaper size)', 'print_my_blog'); ?></option>
                         <option value="normal"><?php esc_html_e('Normal (matches size on web)', 'print_my_blog'); ?></option>
-                        <option value="big"><?php esc_html_e('Big (for those with difficulty reading)', 'print_my_blog'); ?></option>
+                        <option value="large"><?php esc_html_e('Large (for those with difficulty reading)', 'print_my_blog'); ?></option>
                     </select>
                 </td>
             </tr>

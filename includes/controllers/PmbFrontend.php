@@ -64,7 +64,7 @@ class PmbFrontend extends BaseController
     protected function enqueueInlineStyleBasedOnOptions()
     {
         $columns = intval($this->getFromRequest('columns',2));
-        $image_size = sanitize_key($this->getFromRequest('image_size','medium'));
+        $image_size = sanitize_key($this->getFromRequest('image-size','medium'));
         $post_page_break = (bool)$this->getFromRequest('post-page-break',false);
         $font_size = sanitize_key($this->getFromRequest('font-size', 'small'));
         $css = "
@@ -76,9 +76,9 @@ class PmbFrontend extends BaseController
             $css .= '.pmb-post-header{page-break-before:always;}';
         }
         $image_size_map = array(
-            'small' => '6cm',
-            'medium' => '10cm',
-            'large' => '18cm',
+            'small' => '2cm',
+            'medium' => '4cm',
+            'large' => '10cm',
         );
         $image_size_css = isset($image_size_map[$image_size]) ? $image_size_map[$image_size] : 'full';
         $css .= ".pmb-image img{max-height:$image_size_css;}";
