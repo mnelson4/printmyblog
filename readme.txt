@@ -4,7 +4,7 @@ Tags: print, pdf, backup
 Requires at least: 4.4
 Stable tag: trunk
 Tested up to: 4.9
-Requires PHP: 5.2.4
+Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -83,6 +83,9 @@ Your website might not be around forever, nor might WordPress. But by printing i
 3. The Blog is Ready for Printing!
 
 == Changelog ==
+
+= 1.1.2 = 
+* Update minimum PHP version in readme.txt
 
 = 1.1.1 =
 * Fix image sizes
