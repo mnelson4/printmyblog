@@ -51,10 +51,39 @@ class PmbFrontend extends BaseController
                 )
             );
             $this->enqueueInlineStyleBasedOnOptions();
+            $this->loadThemeCompatibilityScriptsAndStylesheets();
 
             return PMB_TEMPLATES_DIR . 'print_page.template.php';
         }
         return $template;
+    }
+
+    /**
+     * Loads stylesheets that help certain themes look better on the printed page.
+     * @since $VID:$
+     */
+    protected function loadThemeCompatibilityScriptsAndStylesheets()
+    {
+        $theme = wp_get_theme();
+        $slug = $theme->get('TextDomain');
+        $theme_slug_path =  'styles/theme-compatibility/' . $slug . '.css';
+        if(file_exists(PMB_ASSETS_DIR . $theme_slug_path)){
+            wp_enqueue_style(
+                'pmb_print_page_theme_compatibility',
+                PMB_ASSETS_URL . $theme_slug_path,
+                array(),
+                filemtime(PMB_ASSETS_DIR .  $theme_slug_path)
+            );
+        }
+        $script_slug_path = 'scripts/theme-compatibility/' . $slug . '.js';
+        if(file_exists(PMB_ASSETS_DIR . $script_slug_path)){
+            wp_enqueue_script(
+                'pmb_print_page_script_compatibility',
+                PMB_ASSETS_URL . $script_slug_path,
+                array('pmb_print_page'),
+                filemtime(PMB_ASSETS_DIR .  $script_slug_path)
+            );
+        }
     }
 
     /**
@@ -76,12 +105,15 @@ class PmbFrontend extends BaseController
             $css .= '.pmb-post-header{page-break-before:always;}';
         }
         $image_size_map = array(
-            'small' => '2cm',
-            'medium' => '4cm',
-            'large' => '10cm',
+            'small' => array('25%','2cm'),
+            'medium' => array('50%', '4cm'),
+            'large' => array('75%','10cm')
         );
-        $image_size_css = isset($image_size_map[$image_size]) ? $image_size_map[$image_size] : 'full';
-        $css .= ".pmb-image img{max-height:$image_size_css;}";
+        if(isset($image_size_map[$image_size])){
+            $max_width = $image_size_map[$image_size][0];
+            $max_height = $image_size_map[$image_size][1];
+            $css .= ".pmb-image img{max-width:$max_width;max-height:$max_height;margin-left:auto;margin-right:auto;}";
+        }
         $font_size_map = array(
             'tiny' => '0.5em',
             'small' => '0.8em',

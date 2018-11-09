@@ -77,18 +77,19 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      */
     this.prettyUpPrintedPage = function()
     {
+        var non_emojis = jQuery('img:not(.emoji)');
         if(this.show_images){
-            jQuery('img:not(.emoji)').wrap('<div class="pmb-image"></div>');
+            non_emojis.wrap('<div class="pmb-image"></div>');
         } else {
-            jQuery('img:not(.emoji)').remove();
+            non_emojis.remove();
         }
-        //jQuery('.pmb-posts-body').css('font-size','0.5em');
 
         jQuery('h1').wrap('<div class="pmb-header"></div>');
         jQuery('h2').wrap('<div class="pmb-header"></div>');
         jQuery('h3').wrap('<div class="pmb-header"></div>');
         jQuery('h4').wrap('<div class="pmb-header"></div>');
         jQuery('h5').wrap('<div class="pmb-header"></div>');
+        jQuery(document).trigger('pmb_wrap_up');
     };
 
     /**
