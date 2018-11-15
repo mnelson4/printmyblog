@@ -12,7 +12,7 @@
     ?>
     <p><?php esc_html_e('Configure how you\'d like the blog to be printed, or just use our recommended defaults.', 'print_my_blog'); ?></p>
     <form action="<?php echo site_url();?>" method="get">
-        <a href="#" onclick="jQuery('.pmb-page-setup-options-advanced').toggle();"><?php esc_html_e('Show Options', 'print_my_blog'); ?></a><br/><br/>
+        <a href="" onclick="jQuery('.pmb-page-setup-options-advanced').toggle();return false;"><?php esc_html_e('Show Options', 'print_my_blog'); ?></a><br/><br/>
         <div class="pmb-page-setup-options-advanced" style="display:none">
         <h2><?php esc_html_e('Page Layout','print_my_blog' );?></h2>
         <table class="form-table">
@@ -32,8 +32,8 @@
                 </th>
                 <td>
                     <select name="columns" id="columns">
-                        <option value="1"><?php esc_html_e('1','print_my_blog' );?></option>
-                        <option value="2" selected="selected"><?php esc_html_e('2', 'print_my_blog'); ?></option>
+                        <option value="1" selected="selected"><?php esc_html_e('1','print_my_blog' );?></option>
+                        <option value="2"><?php esc_html_e('2', 'print_my_blog'); ?></option>
                         <option value="3"><?php esc_html_e('3', 'print_my_blog'); ?></option>
                     </select>
                     <p class="description"><?php esc_html_e('The number of columns of text on each page. Not supported by some web browsers.','print_my_blog' );?></p>
@@ -46,8 +46,8 @@
                 <td>
                     <select name="font-size" id="font-size">
                         <option value="tiny"><?php esc_html_e('Tiny (saves ink and paper)','print_my_blog' );?></option>
-                        <option value="small" selected="selected"><?php esc_html_e('Small (newspaper size)', 'print_my_blog'); ?></option>
-                        <option value="normal"><?php esc_html_e('Normal (matches size on web)', 'print_my_blog'); ?></option>
+                        <option value="small"><?php esc_html_e('Small (newspaper size)', 'print_my_blog'); ?></option>
+                        <option value="normal" selected="selected"><?php esc_html_e('Normal (matches size on web)', 'print_my_blog'); ?></option>
                         <option value="large"><?php esc_html_e('Large (for those with difficulty reading)', 'print_my_blog'); ?></option>
                     </select>
                 </td>
@@ -63,9 +63,9 @@
                 </th>
                 <td>
                     <select name="image-size" id="image-size">
-                        <option value="full"><?php esc_html_e('Full','print_my_blog' );?></option>
+                        <option value="full" selected="selected"><?php esc_html_e('Full','print_my_blog' );?></option>
                         <option value="large"><?php esc_html_e('Large','print_my_blog' );?></option>
-                        <option value="medium" selected="selected"><?php esc_html_e('Medium', 'print_my_blog'); ?></option>
+                        <option value="medium" ><?php esc_html_e('Medium', 'print_my_blog'); ?></option>
                         <option value="small"><?php esc_html_e('Small', 'print_my_blog'); ?></option>
                         <option value="none"><?php esc_html_e('None (hide images)', 'print_my_blog'); ?></option>
                     </select>
