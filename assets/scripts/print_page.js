@@ -6,6 +6,8 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.header = null;
     this.status_span_selector = pmb_instance_vars.status_span_selector;
     this.status_span = null;
+    this.posts_count_span_selector = pmb_instance_vars.posts_count_span_selector;
+    this.posts_count_span = null;
     this.posts_div_selector = pmb_instance_vars.posts_div_selector;
     this.posts_div = null;
     this.waiting_area_selector = pmb_instance_vars.waiting_area_selector;
@@ -21,6 +23,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.initialize = function () {
         this.header = jQuery(this.header_selector);
         this.status_span = jQuery(this.status_span_selector);
+        this.posts_count_span = jQuery(this.posts_count_span_selector);
         this.posts_div = jQuery(this.posts_div_selector);
         this.waiting_area = jQuery(this.waiting_area_selector);
         this.print_ready = jQuery(this.print_ready_selector);
@@ -36,8 +39,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.renderAndMaybeFetchMore = function (posts, postsCollection) {
         this.renderPostsInPage(posts);
         if (postsCollection.hasMore()) {
+            var page_size = typeof(postsCollection.state.data.per_page) === 'undefined' ? 10 : postsCollection.state.data.per_page;
+            var current_count = Math.min(postsCollection.state.currentPage * page_size, postsCollection.state.totalObjects);
+            this.posts_count_span.html(current_count + '/' + postsCollection.state.totalObjects);
             this.load_more(postsCollection);
-            this.status_span.append('.');
         } else {
             this.finish();
         }
@@ -166,6 +171,7 @@ jQuery(document).ready(function () {
             {
                 header_selector: '.pmb-waiting-h1',
                 status_span_selector: '.pmb-status',
+                posts_count_span_selector: '.pmb-posts-count',
                 posts_div_selector: '.pmb-posts-body',
                 waiting_area_selector: '.pmb-waiting-area',
                 print_ready_selector: '.pmb-print-ready',

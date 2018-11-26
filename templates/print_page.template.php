@@ -30,7 +30,7 @@
             <div class="pmb-spinner-container">
                 <div class="pmb-spinner"></div>
             </div>
-            <p class="pmb-status"><?php esc_html_e('Loading posts','printmyblog' );?></p>
+            <p class="pmb-status"><span class="pmb-posts-count">0</span><?php esc_html_e(' posts loaded','printmyblog' );?></p>
         </div>
         <div class="pmb-print-ready">
             <h1 class="pmb-waiting-h1"><?php _e('Ready to Print!','printmyblog' );?></h1>
