@@ -49,11 +49,11 @@
 </div>
 <div class="pmb-posts">
     <div class="pmb-posts-header">
-        <h1 class="site-title"><?php  echo get_bloginfo('name');?></h1>
-        <p class="site-description"><?php echo get_bloginfo('description');?></p>
+        <h1 class="site-title"><?php echo $pmb_site_name;?></h1>
+        <p class="site-description"><?php echo $pmb_site_description;?></p>
         <p><?php printf(
                 esc_html__('Printout of %1$s, generated on %2$s using "Print My Blog" plugin.','printmyblog' ),
-                get_bloginfo('url'),
+                $pmb_site_url,
                 date_i18n( get_option( 'date_format' ))
             );?>
         </p>

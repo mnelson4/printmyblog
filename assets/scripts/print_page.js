@@ -14,6 +14,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.waiting_area = null;
     this.print_ready_selector = pmb_instance_vars.print_ready_selector;
     this.print_ready = null;
+    this.proxy_for = pmb_instance_vars.proxy_for;
     this.locale = pmb_instance_vars.locale;
     this.show_images = pmb_instance_vars.show_images;
     this.translations = translations;
@@ -31,7 +32,13 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
     this.begin_loading = function () {
         var postsCollection = new wp.api.collections.Posts();
-        postsCollection.fetch({data: {per_page: 5, status: 'publish', _embed:true}}).done((posts) => {
+        postsCollection.fetch({data: {
+                per_page: 5,
+                status: 'publish',
+                _embed:true,
+                proxy_for: this.proxy_for,
+            }
+        }).done((posts) => {
             this.renderAndMaybeFetchMore(posts, postsCollection);
         });
     };
@@ -177,6 +184,7 @@ jQuery(document).ready(function () {
                 print_ready_selector: '.pmb-print-ready',
                 locale: pmb_print_data.data.locale,
                 show_images: pmb_print_data.data.show_images,
+                proxy_for: pmb_print_data.data.proxy_for,
             },
             {
                 wrapping_up: pmb_print_data.i18n.wrapping_up

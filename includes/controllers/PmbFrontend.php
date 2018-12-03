@@ -37,6 +37,11 @@ class PmbFrontend extends BaseController
                 array(),
                 filemtime(PMB_ASSETS_DIR . 'styles/print_page.css')
             );
+            $site_name_description_url = $this->getSiteNameAndDescription();
+            global $pmb_site_name, $pmb_site_description, $pmb_site_url;
+            $pmb_site_name = $site_name_description_url['name'];
+            $pmb_site_description = $site_name_description_url['description'];
+            $pmb_site_url = $site_name_description_url['url'];
             wp_localize_script(
                 'pmb_print_page',
                 'pmb_print_data',
@@ -46,7 +51,8 @@ class PmbFrontend extends BaseController
                     ),
                     'data' => array(
                         'locale' => get_locale(),
-                        'show_images' => $this->getFromRequest('show_images', 'full') !== 'none'
+                        'show_images' => $this->getFromRequest('show_images', 'full') !== 'none',
+                        'proxy_for' => $site_name_description_url['proxy_for']
                     ),
                 )
             );
@@ -126,6 +132,79 @@ class PmbFrontend extends BaseController
             'pmb_print_page',
             $css
         );
+    }
+
+    /**
+     * Gets the site name and URL (works if they provide the "site" query param too,
+     * being the URL, including schema, of a self-hosted or WordPress.com site)
+     * @since $VID:$
+     * @return array|null
+     */
+    protected function getSiteNameAndDescription()
+    {
+        // check for a site request param
+        if(empty($_GET['site'])){
+            return array(
+                'name' => get_bloginfo('name'),
+                'description' => get_bloginfo('description'),
+                'url' => get_bloginfo('url'),
+                'proxy_for' => null
+            );
+        }
+        // if there is one, check if it exists in wordpress.com, eg "retirementreflections.com"
+        $site = sanitize_text_field($_GET['site']);
+        $domain = str_replace(array('http://','https://'),'',$site);
+        $response = wp_remote_get(
+            'https://public-api.wordpress.com/rest/v1.1/sites/' . $domain
+        );
+
+        if (!is_wp_error($response)) {
+            // if so, grab from wordpress.com
+            $response_body = wp_remote_retrieve_body($response);
+            $response_data = json_decode($response_body,true);
+            if(is_array($response_data) && isset($response_data['name'], $response_data['description'])){
+                return array(
+                    'name' => $response_data['name'],
+                    'description' => $response_data['description'],
+                    'proxy_for' => 'https://public-api.wordpress.com/wp/v2/sites/' . $domain,
+                    'url' => $site,
+                );
+            }
+        }
+
+        // if not, send a HEAD request to it to get the JSON API URL
+        $response = wp_remote_get($site);
+        if (!is_wp_error($response)) {
+            $response_body = wp_remote_retrieve_body($response);
+            $wp_api_url = null;
+            $matches = array();
+            if( preg_match(
+                //<link rel='https://api.w.org/' href='http://wpcowichan.org/wp-json/' />
+                '<link rel=\'https\:\/\/api\.w\.org\/\' href=\'(.*)\' \/>',
+                $response_body,
+                $matches
+            )
+            && count($matches) === 2){
+                $wp_api_url = $matches[1];
+            }
+            if($wp_api_url) {
+                // grab from site index
+                $response = wp_remote_get($wp_api_url);
+                if(!is_wp_error($response)){
+                    $response_body = wp_remote_retrieve_body($response);
+                    $response_data = json_decode($response_body,true);
+                    if(is_array($response_data) && isset($response_data['name'], $response_data['description'])){
+                        return array(
+                            'name' => $response_data['name'],
+                            'description' => $response_data['description'],
+                            'proxy_for' => $wp_api_url . 'wp/v2/',
+                            'url' => $site
+                        );
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     /**
