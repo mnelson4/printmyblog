@@ -32,7 +32,6 @@ class PmbInit extends BaseController
         $controller = new PmbActivation();
         $controller->setHooks();
     }
-
     /**
      * Initialize PMB if everything is safe.
      * @since 1.0.0

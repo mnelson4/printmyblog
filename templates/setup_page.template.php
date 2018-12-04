@@ -18,6 +18,13 @@
         <table class="form-table">
             <tbody>
             <tr>
+                <th scope="row"><?php esc_html_e('Site URL (including "https://" or "http://")', 'print_my_blog');?></th>
+                <td>
+                    <input name="site" placeholder="<?php echo site_url();?>">
+                    <p class="description"><?php esc_html_e('URL of the WordPress site (self-hosted on on WordPress.com) you\'d like to print. Leave blank to use this current site.', 'print_my_blog');?></p>
+                </td>
+            </tr>
+            <tr>
                 <th scope="row">
                     <label for="post-page-break"><?php esc_html_e('Each Post Begins on a New Page','print_my_blog' );?></label>
                 </th>

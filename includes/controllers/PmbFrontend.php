@@ -3,6 +3,7 @@
 namespace PrintMyBlog\controllers;
 
 use Twine\controllers\BaseController;
+use WP_Error;
 
 class PmbFrontend extends BaseController
 {
@@ -19,6 +20,16 @@ class PmbFrontend extends BaseController
     {
 
         if (isset($_GET[PMB_PRINTPAGE_SLUG])) {
+            $site_info = $this->getSiteInfo();
+            if(is_wp_error($site_info)){
+                global $pmb_wp_error;
+                $pmb_wp_error = $site_info;
+                return PMB_TEMPLATES_DIR . 'print_page_error.template.php';
+            }
+            global $pmb_site_name, $pmb_site_description, $pmb_site_url;
+            $pmb_site_name = $site_info['name'];
+            $pmb_site_description = $site_info['description'];
+            $pmb_site_url = $site_info['url'];
             wp_register_script(
                 'luxon',
                 PMB_ASSETS_URL . 'scripts/luxon.min.js',
@@ -37,11 +48,6 @@ class PmbFrontend extends BaseController
                 array(),
                 filemtime(PMB_ASSETS_DIR . 'styles/print_page.css')
             );
-            $site_name_description_url = $this->getSiteNameAndDescription();
-            global $pmb_site_name, $pmb_site_description, $pmb_site_url;
-            $pmb_site_name = $site_name_description_url['name'];
-            $pmb_site_description = $site_name_description_url['description'];
-            $pmb_site_url = $site_name_description_url['url'];
             wp_localize_script(
                 'pmb_print_page',
                 'pmb_print_data',
@@ -52,7 +58,7 @@ class PmbFrontend extends BaseController
                     'data' => array(
                         'locale' => get_locale(),
                         'show_images' => $this->getFromRequest('show_images', 'full') !== 'none',
-                        'proxy_for' => $site_name_description_url['proxy_for']
+                        'proxy_for' => $site_info['proxy_for']
                     ),
                 )
             );
@@ -140,7 +146,7 @@ class PmbFrontend extends BaseController
      * @since $VID:$
      * @return array|null
      */
-    protected function getSiteNameAndDescription()
+    protected function getSiteInfo()
     {
         // check for a site request param
         if(empty($_GET['site'])){
@@ -153,58 +159,109 @@ class PmbFrontend extends BaseController
         }
         // if there is one, check if it exists in wordpress.com, eg "retirementreflections.com"
         $site = sanitize_text_field($_GET['site']);
+
+
+        // Let's see if it's self-hosted...
+        $data = $this->getSelfHostedSiteInfo($site);
+        if($data === false){
+            $data = $this->getWordPressComSiteInfo($site);
+        }
+        // Alright, there was no link to the REST API index. But maybe it's a WordPress.com site...
+        return $data;
+    }
+
+    /**
+     * Tries to get the site's name, description, and URL, assuming it's self-hosted.
+     * Returns an array on success, false if the site wasn't a self-hosted WordPress site, or
+     * WP_Error if the site is self-hosted WordPress but had an error.
+     * @since $VID:$
+     * @param $site
+     * @return array|bool|WP_Error
+     */
+    protected function getSelfHostedSiteInfo($site){
+        $response = wp_remote_get($site, array('timeout'     => 30));
+        if (is_wp_error($response)) {
+            return $response;
+        }
+        $response_body = wp_remote_retrieve_body($response);
+        $wp_api_url = null;
+        $matches = array();
+        if( preg_match(
+            //looking for somethign like "<link rel='https://api.w.org/' href='http://wpcowichan.org/wp-json/' />"
+                '<link rel=\'https\:\/\/api\.w\.org\/\' href=\'(.*)\' \/>',
+                $response_body,
+                $matches
+            )
+            && count($matches) === 2) {
+            // grab from site index
+            $wp_api_url = $matches[1];
+            $response = wp_remote_get($wp_api_url, array('timeout'     => 30));
+            if (is_wp_error($response)) {
+                // The WP JSON index existed, but didn't work. Let's tell the user.
+                return $response;
+            }
+            $response_body = wp_remote_retrieve_body($response);
+            $response_data = json_decode($response_body,true);
+            if (! is_array($response_data)) {
+                return new WP_Error('no_json', __('The self-hosted WordPress site has an error in its REST API data.', 'print_my_blog'));
+            }
+            if (isset($response_data['code'], $response_data['message'])) {
+                return new WP_Error($response_data['code'], $response_data['message']);
+            }
+            if(isset($response_data['name'], $response_data['description'])){
+                return array(
+                    'name' => $response_data['name'],
+                    'description' => $response_data['description'],
+                    'proxy_for' => $wp_api_url . 'wp/v2/',
+                    'url' => $site
+                );
+            }
+            // so we didn't get an error or a proper response, but it's JSON? That's really weird.
+            return new WP_Error('unknown_response', __('The self-hosted WordPress site responded with an unexpected response.', 'print_my_blog'));
+        }
+        // ok, let caller know we didn't have an error, but nor did we find the site's data.
+        return false;
+    }
+
+    /**
+     * Tries to get the site name, description and URL from a site on WordPress.com.
+     * Returns an array on success, or a WP_Error. If the site doesn't appear to be on WordPress.com
+     * also has an error.
+     * @since $VID:$
+     * @param $site
+     * @return array|WP_Error
+     */
+    protected function getWordPressComSiteInfo($site){
         $domain = str_replace(array('http://','https://'),'',$site);
         $response = wp_remote_get(
             'https://public-api.wordpress.com/rest/v1.1/sites/' . $domain
         );
 
-        if (!is_wp_error($response)) {
-            // if so, grab from wordpress.com
-            $response_body = wp_remote_retrieve_body($response);
-            $response_data = json_decode($response_body,true);
-            if(is_array($response_data) && isset($response_data['name'], $response_data['description'])){
-                return array(
-                    'name' => $response_data['name'],
-                    'description' => $response_data['description'],
-                    'proxy_for' => 'https://public-api.wordpress.com/wp/v2/sites/' . $domain,
-                    'url' => $site,
-                );
-            }
+        // let's see what WordPress.com has to say about this site...
+        if (is_wp_error($response)) {
+            return $response;
         }
-
-        // if not, send a HEAD request to it to get the JSON API URL
-        $response = wp_remote_get($site);
-        if (!is_wp_error($response)) {
-            $response_body = wp_remote_retrieve_body($response);
-            $wp_api_url = null;
-            $matches = array();
-            if( preg_match(
-                //<link rel='https://api.w.org/' href='http://wpcowichan.org/wp-json/' />
-                '<link rel=\'https\:\/\/api\.w\.org\/\' href=\'(.*)\' \/>',
-                $response_body,
-                $matches
-            )
-            && count($matches) === 2){
-                $wp_api_url = $matches[1];
-            }
-            if($wp_api_url) {
-                // grab from site index
-                $response = wp_remote_get($wp_api_url);
-                if(!is_wp_error($response)){
-                    $response_body = wp_remote_retrieve_body($response);
-                    $response_data = json_decode($response_body,true);
-                    if(is_array($response_data) && isset($response_data['name'], $response_data['description'])){
-                        return array(
-                            'name' => $response_data['name'],
-                            'description' => $response_data['description'],
-                            'proxy_for' => $wp_api_url . 'wp/v2/',
-                            'url' => $site
-                        );
-                    }
-                }
-            }
+        $response_body = wp_remote_retrieve_body($response);
+        $response_data = json_decode($response_body, true);
+        if (! is_array($response_data)) {
+            return new WP_Error('no_json', __('The WordPress.com site has an error in its REST API data.', 'print_my_blog'));
         }
-        return null;
+        if (isset($response_data['name'], $response_data['description'])) {
+            return array(
+                'name' => $response_data['name'],
+                'description' => $response_data['description'],
+                'proxy_for' => 'https://public-api.wordpress.com/wp/v2/sites/' . $domain,
+                'url' => $site,
+            );
+        }
+        if(isset($response_data['error'], $response_data['message'])) {
+            if($response_data['error'] === 'unknown_blog') {
+                return new WP_Error('not_wordpress', esc_html__('The URL you provided does not appear to be a WordPress website', 'print_my_blog'));
+            }
+            return new WP_Error($response_data['error'], $response_data['message']);
+        }
+        // so we didn't get an error or a proper response, but it's JSON? That's really weird.
+        return new WP_Error('unknown_response', __('The WordPress.com site responded with an unexpected response.', 'print_my_blog'));
     }
 
     /**
