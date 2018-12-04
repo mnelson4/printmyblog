@@ -17,22 +17,24 @@
         <h2><?php esc_html_e('Page Layout','print_my_blog' );?></h2>
         <table class="form-table">
             <tbody>
-            <tr>
+            <?php if(PMB_REST_PROXY_EXISTS){?>
+                <tr>
                 <th scope="row"><?php esc_html_e('Site URL (including "https://" or "http://")', 'print_my_blog');?></th>
                 <td>
                     <input name="site" placeholder="<?php echo site_url();?>">
                     <p class="description"><?php esc_html_e('URL of the WordPress site (self-hosted on on WordPress.com) you\'d like to print. Leave blank to use this current site.', 'print_my_blog');?></p>
                 </td>
-            </tr>
-            <tr>
-                <th scope="row">
-                    <label for="post-page-break"><?php esc_html_e('Each Post Begins on a New Page','print_my_blog' );?></label>
-                </th>
-                <td>
-                    <input type="checkbox" name="post-page-break" id="post-page-break" checked="checked">
-                    <p class="description"><?php esc_html_e('Whether to force posts to always start on a new page. Doing so makes the page more legible, but uses more paper.','print_my_blog' );?></p>
-                </td>
-            </tr>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="post-page-break"><?php esc_html_e('Each Post Begins on a New Page','print_my_blog' );?></label>
+                    </th>
+                    <td>
+                        <input type="checkbox" name="post-page-break" id="post-page-break" checked="checked">
+                        <p class="description"><?php esc_html_e('Whether to force posts to always start on a new page. Doing so makes the page more legible, but uses more paper.','print_my_blog' );?></p>
+                    </td>
+                </tr>
+            <?php }?>
             <tr>
                 <th scope="row">
                     <label for="columns"><?php esc_html_e('Columns','print_my_blog' );?></label>
