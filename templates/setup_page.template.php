@@ -22,7 +22,7 @@
                 <th scope="row"><?php esc_html_e('Site URL (including "https://" or "http://")', 'print_my_blog');?></th>
                 <td>
                     <input name="site" placeholder="<?php echo site_url();?>">
-                    <p class="description"><?php esc_html_e('URL of the WordPress site (self-hosted on on WordPress.com) you\'d like to print. Leave blank to use this current site.', 'print_my_blog');?></p>
+                    <p class="description"><?php esc_html_e('URL of the WordPress site (self-hosted or on WordPress.com) you\'d like to print. Leave blank to use this current site.', 'print_my_blog');?></p>
                 </td>
                 </tr>
                 <tr>
@@ -63,7 +63,7 @@
             </tr>
             </tbody>
         </table>
-        <h2><?php esc_html_e('Images','print_my_blog' );?></h2>
+        <h2><?php esc_html_e('Content','print_my_blog' );?></h2>
         <table class="form-table">
             <tbody>
             <tr>
@@ -79,6 +79,16 @@
                         <option value="none"><?php esc_html_e('None (hide images)', 'print_my_blog'); ?></option>
                     </select>
                     <p class="description"><?php esc_html_e('The number of columns of text on each page. 2-3 makes it look a bit like a newspaper and the content tends to be more .','print_my_blog' );?></p>
+                </td>
+
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="image-size"><?php esc_html_e('Include Excerpts','print_my_blog' );?></label>
+                </th>
+                <td>
+                    <input type="checkbox" name="include_excerpts" value="1">
+                    <p class="description"><?php esc_html_e('Whether to include the posts\'s excerpt before the rest of the content. Useful in case you put different content in there.','print_my_blog' );?></p>
                 </td>
 
             </tr>

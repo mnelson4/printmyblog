@@ -67,3 +67,6 @@ button{
 .pmb-error{
     margin:1em;
 }
+.entry-excerpt{
+    font-style:italic;
+}

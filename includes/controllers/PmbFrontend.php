@@ -58,7 +58,8 @@ class PmbFrontend extends BaseController
                     'data' => array(
                         'locale' => get_locale(),
                         'show_images' => $this->getFromRequest('show_images', 'full') !== 'none',
-                        'proxy_for' => $site_info['proxy_for']
+                        'proxy_for' => $site_info['proxy_for'],
+                        'include_excerpts' => (bool)$this->getFromRequest('include_excerpts', false),
                     ),
                 )
             );

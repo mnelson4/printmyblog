@@ -18,6 +18,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.locale = pmb_instance_vars.locale;
     this.show_images = pmb_instance_vars.show_images;
     this.translations = translations;
+    this.include_excerpts = pmb_instance_vars.include_excerpts;
     /**
      * @function
      */
@@ -109,7 +110,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      */
     this.addPostToPage = function (post) {
 
-        let html_to_add = '<div class="pmb-post-header"><h1 class="entry-title">'
+        var html_to_add = '<div class="pmb-post-header"><h1 class="entry-title">'
             + post.title.rendered
             + '</h1>'
             + '<div class="entry-meta"><span class="posted-on">'
@@ -119,10 +120,15 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             // + this.getAuthorName(post)
             + '</span></div>'
             + this.getFeaturedImageHtml(post)
-            + '</div><div class="entry-content">'
+            + '</div>';
+        if(this.include_excerpts) {
+            html_to_add += '<div class="entry-excerpt">'
+            + post.excerpt.rendered
+            + '</div>';
+        }
+        html_to_add += '<div class="entry-content">'
             + post.content.rendered
             + '</div>';
-        ;
         // add header
         // add body
         this.posts_div.append(html_to_add);
@@ -185,6 +191,7 @@ jQuery(document).ready(function () {
                 locale: pmb_print_data.data.locale,
                 show_images: pmb_print_data.data.show_images,
                 proxy_for: pmb_print_data.data.proxy_for,
+                include_excerpts: pmb_print_data.data.include_excerpts
             },
             {
                 wrapping_up: pmb_print_data.i18n.wrapping_up
