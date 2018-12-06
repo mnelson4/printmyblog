@@ -114,7 +114,7 @@ class PmbFrontend extends BaseController
         }
         ";
         if($post_page_break){
-            $css .= '.pmb-post-header{page-break-before:always;}';
+            $css .= '.pmb-post-header:not(:first-child){page-break-before:always;}';
         }
         $image_size_map = array(
             'small' => array('25%','2cm'),
