@@ -175,7 +175,8 @@ function PmbPrintPage(pmb_instance_vars, translations) {
  */
 function pmb_print_preview()
 {
-    jQuery('.print-preview-instructions').toggle();
+    jQuery('.pmb-posts').toggle();
+    jQuery('.pmb-waiting-message-fullpage').toggle();
 }
 
 jQuery(document).ready(function () {

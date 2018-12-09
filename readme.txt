@@ -84,6 +84,12 @@ Your website might not be around forever, nor might WordPress. But by printing i
 
 == Changelog ==
 
+= 1.1.4 =
+* Replaced "Print Preview" with "View Printable Content"
+
+= 1.1.3 =
+* Improved compatibility with themes twentyeleven and twentyfourteen
+
 = 1.1.2 = 
 * Update minimum PHP version in readme.txt
 
