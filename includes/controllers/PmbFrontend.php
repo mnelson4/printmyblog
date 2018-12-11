@@ -57,9 +57,10 @@ class PmbFrontend extends BaseController
                     ),
                     'data' => array(
                         'locale' => get_locale(),
-                        'show_images' => $this->getFromRequest('show_images', 'full') !== 'none',
+                        'image_size' => $this->getImageRelativeSize(),
                         'proxy_for' => $site_info['proxy_for'],
                         'include_excerpts' => (bool)$this->getFromRequest('include_excerpts', false),
+                        'columns' => $this->getFromRequest('columns',1),
                     ),
                 )
             );
@@ -69,6 +70,26 @@ class PmbFrontend extends BaseController
             return PMB_TEMPLATES_DIR . 'print_page.template.php';
         }
         return $template;
+    }
+
+    protected function getImageRelativeSize()
+    {
+        $requested_size = sanitize_key($this->getFromRequest('image-size','full'));
+        $page_width = 8.5;
+        switch($requested_size) {
+            case 'large':
+                return $page_width * 3 / 4;
+                break;
+            case 'medium':
+                return $page_width / 2;
+                break;
+            case 'small':
+                return $page_width / 4;
+                break;
+            case 'none':
+                return 0;
+                break;
+        }
     }
 
     /**
@@ -106,7 +127,6 @@ class PmbFrontend extends BaseController
     protected function enqueueInlineStyleBasedOnOptions()
     {
         $columns = intval($this->getFromRequest('columns',2));
-        $image_size = sanitize_key($this->getFromRequest('image-size','medium'));
         $post_page_break = (bool)$this->getFromRequest('post-page-break',false);
         $font_size = sanitize_key($this->getFromRequest('font-size', 'small'));
         $css = "
@@ -116,16 +136,6 @@ class PmbFrontend extends BaseController
         ";
         if($post_page_break){
             $css .= '.pmb-post-header:not(:first-child){page-break-before:always;}';
-        }
-        $image_size_map = array(
-            'small' => array('25%','2cm'),
-            'medium' => array('50%', '4cm'),
-            'large' => array('75%','10cm')
-        );
-        if(isset($image_size_map[$image_size])){
-            $max_width = $image_size_map[$image_size][0];
-            $max_height = $image_size_map[$image_size][1];
-            $css .= ".pmb-image img{max-width:$max_width;max-height:$max_height;margin-left:auto;margin-right:auto;}";
         }
         $font_size_map = array(
             'tiny' => '0.5em',

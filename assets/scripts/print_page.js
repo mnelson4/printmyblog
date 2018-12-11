@@ -16,9 +16,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.print_ready = null;
     this.proxy_for = pmb_instance_vars.proxy_for;
     this.locale = pmb_instance_vars.locale;
-    this.show_images = pmb_instance_vars.show_images;
+    this.image_size = pmb_instance_vars.image_size;
     this.translations = translations;
     this.include_excerpts = pmb_instance_vars.include_excerpts;
+    this.columns = pmb_instance_vars.columns;
     /**
      * @function
      */
@@ -91,10 +92,17 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.prettyUpPrintedPage = function()
     {
         var non_emojis = jQuery('img:not(.emoji)');
-        if(this.show_images){
-            non_emojis.wrap('<div class="pmb-image"></div>');
-        } else {
+        if(this.image_size == 0){
             non_emojis.remove();
+        } else{
+            non_emojis.wrap('<div class="pmb-image"></div>');
+
+            var pmb = this;
+            non_emojis.each(function() {
+                var obj = jQuery(this);
+                var width = pmb.image_size / pmb.columns;
+                obj.css('width', width + 'in');
+            });
         }
 
         jQuery('h1').wrap('<div class="pmb-header"></div>');
@@ -110,24 +118,24 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      */
     this.addPostToPage = function (post) {
 
-        var html_to_add = '<div class="pmb-post-header"><h1 class="entry-title">'
+        var html_to_add = '<div class="pmb-post-header">'
+            + '<h1 class="entry-title">'
             + post.title.rendered
             + '</h1>'
-            + '<div class="entry-meta"><span class="posted-on">'
-            + this.getPublishedDate(post)
-            + '</span><span class="byline">'
-            // + 'By '
-            // + this.getAuthorName(post)
-            + '</span></div>'
-            + this.getFeaturedImageHtml(post)
+            + '<div class="entry-meta">'
+            +   '<span class="posted-on">'
+            +   this.getPublishedDate(post)
+            +   '</span>'
+            + '</div>'
             + '</div>';
+        html_to_add += '<div class="entry-content">'
+            + this.getFeaturedImageHtml(post);
         if(this.include_excerpts) {
             html_to_add += '<div class="entry-excerpt">'
-            + post.excerpt.rendered
-            + '</div>';
+                + post.excerpt.rendered
+                + '</div>';
         }
-        html_to_add += '<div class="entry-content">'
-            + post.content.rendered
+         html_to_add += post.content.rendered
             + '</div>';
         // add header
         // add body
@@ -190,9 +198,10 @@ jQuery(document).ready(function () {
                 waiting_area_selector: '.pmb-waiting-area',
                 print_ready_selector: '.pmb-print-ready',
                 locale: pmb_print_data.data.locale,
-                show_images: pmb_print_data.data.show_images,
+                image_size: pmb_print_data.data.image_size,
                 proxy_for: pmb_print_data.data.proxy_for,
-                include_excerpts: pmb_print_data.data.include_excerpts
+                include_excerpts: pmb_print_data.data.include_excerpts,
+                columns: pmb_print_data.data.columns,
             },
             {
                 wrapping_up: pmb_print_data.i18n.wrapping_up

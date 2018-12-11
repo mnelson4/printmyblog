@@ -54,12 +54,6 @@ button{
 .pmb-print-ready{
     display:none;
 }
-.print-preview-instructions{
-    display:none;
-    max-width:400px;
-    margin-left:auto;
-    margin-right:auto;
-}
 .print-preview-instructions ol{
      text-align:left;
      padding: 0 2em 0 2em;
