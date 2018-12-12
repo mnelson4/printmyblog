@@ -86,9 +86,9 @@ Your website might not be around forever, nor might WordPress. But by printing i
 
 = 1.1.5 =
 * Move featured image and post excerpts into columns
-* Adjusted image sizes use inline styles instead of stylesheets (in order to better override the theme's styling)
+* Improved image resizing by using inline styles instead of stylesheets
 * Updated translated strings for image and text size option names
-* Better
+* Improved text resizing
 
 = 1.1.4 =
 * Replaced "Print Preview" with "View Printable Content"
