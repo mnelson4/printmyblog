@@ -54,10 +54,10 @@
                 </th>
                 <td>
                     <select name="font-size" id="font-size">
-                        <option value="tiny"><?php esc_html_e('Tiny (saves ink and paper)','print_my_blog' );?></option>
-                        <option value="small"><?php esc_html_e('Small (newspaper size)', 'print_my_blog'); ?></option>
-                        <option value="normal" selected="selected"><?php esc_html_e('Normal (matches size on web)', 'print_my_blog'); ?></option>
-                        <option value="large"><?php esc_html_e('Large (for those with difficulty reading)', 'print_my_blog'); ?></option>
+                        <option value="tiny"><?php esc_html_e('Tiny (1/2 size)','print_my_blog' );?></option>
+                        <option value="small"><?php esc_html_e('Small (3/4 size)', 'print_my_blog'); ?></option>
+                        <option value="normal" selected="selected"><?php esc_html_e('Normal (theme default)', 'print_my_blog'); ?></option>
+                        <option value="large"><?php esc_html_e('Large (slightly larger than normal)', 'print_my_blog'); ?></option>
                     </select>
                 </td>
             </tr>
@@ -72,13 +72,13 @@
                 </th>
                 <td>
                     <select name="image-size" id="image-size">
-                        <option value="full" selected="selected"><?php esc_html_e('Full','print_my_blog' );?></option>
-                        <option value="large"><?php esc_html_e('Large','print_my_blog' );?></option>
-                        <option value="medium" ><?php esc_html_e('Medium', 'print_my_blog'); ?></option>
-                        <option value="small"><?php esc_html_e('Small', 'print_my_blog'); ?></option>
+                        <option value="full" selected="selected"><?php esc_html_e('Full (theme default)','print_my_blog' );?></option>
+                        <option value="large"><?php esc_html_e('Large (3/4 size)','print_my_blog' );?></option>
+                        <option value="medium" ><?php esc_html_e('Medium (1/2 size)', 'print_my_blog'); ?></option>
+                        <option value="small"><?php esc_html_e('Small (1/4 size)', 'print_my_blog'); ?></option>
                         <option value="none"><?php esc_html_e('None (hide images)', 'print_my_blog'); ?></option>
                     </select>
-                    <p class="description"><?php esc_html_e('The number of columns of text on each page. 2-3 makes it look a bit like a newspaper and the content tends to be more .','print_my_blog' );?></p>
+                    <p class="description"><?php esc_html_e('If you want to save paper, choose a smaller image size, or hide images altogether. On the other hand, deafult size images often look the best.','print_my_blog' );?></p>
                 </td>
 
             </tr>

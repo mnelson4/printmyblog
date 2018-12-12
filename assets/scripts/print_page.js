@@ -92,17 +92,18 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.prettyUpPrintedPage = function()
     {
         var non_emojis = jQuery('img:not(.emoji)');
-        if(this.image_size == 0){
+        if(this.image_size === 0){
             non_emojis.remove();
         } else{
             non_emojis.wrap('<div class="pmb-image"></div>');
-
-            var pmb = this;
-            non_emojis.each(function() {
-                var obj = jQuery(this);
-                var width = pmb.image_size / pmb.columns;
-                obj.css('width', width + 'in');
-            });
+            if(this.image_size !== false) {
+                var pmb = this;
+                non_emojis.each(function () {
+                    var obj = jQuery(this);
+                    var width = pmb.image_size / pmb.columns;
+                    obj.css('width', width + 'in');
+                });
+            }
         }
 
         jQuery('h1').wrap('<div class="pmb-header"></div>');

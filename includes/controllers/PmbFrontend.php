@@ -7,6 +7,10 @@ use WP_Error;
 
 class PmbFrontend extends BaseController
 {
+    /**
+     * @var URL of domain we'd like this site to proxy for, so we can print that blog instead.
+     */
+    protected $proxy_for;
     public function setHooks()
     {
         add_filter('template_include', array($this, 'templateRedirect'), 12 /* after Elementor */);
@@ -20,6 +24,7 @@ class PmbFrontend extends BaseController
     {
 
         if (isset($_GET[PMB_PRINTPAGE_SLUG])) {
+
             $site_info = $this->getSiteInfo();
             if(is_wp_error($site_info)){
                 global $pmb_wp_error;
@@ -30,46 +35,58 @@ class PmbFrontend extends BaseController
             $pmb_site_name = $site_info['name'];
             $pmb_site_description = $site_info['description'];
             $pmb_site_url = $site_info['url'];
-            wp_register_script(
-                'luxon',
-                PMB_ASSETS_URL . 'scripts/luxon.min.js',
-                array(),
-                filemtime(PMB_ASSETS_DIR . 'scripts/luxon.min.js')
+            $this->proxy_for = $site_info['proxy_for'];
+            // enqueue our scripts and styles at the right time
+            // specifically, after everybody else, so we can override them.
+            add_action(
+                'wp_enqueue_scripts',
+                array($this,'enqueue_scripts'),
+                100
             );
-            wp_enqueue_script(
-                'pmb_print_page',
-                PMB_ASSETS_URL . 'scripts/print_page.js',
-                array('jquery', 'wp-api', 'luxon'),
-                filemtime(PMB_ASSETS_DIR . 'scripts/print_page.js')
-            );
-            wp_enqueue_style(
-                'pmb_print_page',
-                PMB_ASSETS_URL . 'styles/print_page.css',
-                array(),
-                filemtime(PMB_ASSETS_DIR . 'styles/print_page.css')
-            );
-            wp_localize_script(
-                'pmb_print_page',
-                'pmb_print_data',
-                array(
-                    'i18n' => array(
-                        'wrapping_up' => esc_html__('Wrapping Up!', 'print_my_blog'),
-                    ),
-                    'data' => array(
-                        'locale' => get_locale(),
-                        'image_size' => $this->getImageRelativeSize(),
-                        'proxy_for' => $site_info['proxy_for'],
-                        'include_excerpts' => (bool)$this->getFromRequest('include_excerpts', false),
-                        'columns' => $this->getFromRequest('columns',1),
-                    ),
-                )
-            );
-            $this->enqueueInlineStyleBasedOnOptions();
-            $this->loadThemeCompatibilityScriptsAndStylesheets();
 
             return PMB_TEMPLATES_DIR . 'print_page.template.php';
         }
         return $template;
+    }
+
+    public function enqueue_scripts()
+    {
+        wp_register_script(
+            'luxon',
+            PMB_ASSETS_URL . 'scripts/luxon.min.js',
+            array(),
+            filemtime(PMB_ASSETS_DIR . 'scripts/luxon.min.js')
+        );
+        wp_enqueue_script(
+            'pmb_print_page',
+            PMB_ASSETS_URL . 'scripts/print_page.js',
+            array('jquery', 'wp-api', 'luxon'),
+            filemtime(PMB_ASSETS_DIR . 'scripts/print_page.js')
+        );
+        wp_enqueue_style(
+            'pmb_print_page',
+            PMB_ASSETS_URL . 'styles/print_page.css',
+            array(),
+            filemtime(PMB_ASSETS_DIR . 'styles/print_page.css')
+        );
+        wp_localize_script(
+            'pmb_print_page',
+            'pmb_print_data',
+            array(
+                'i18n' => array(
+                    'wrapping_up' => esc_html__('Wrapping Up!', 'print_my_blog'),
+                ),
+                'data' => array(
+                    'locale' => get_locale(),
+                    'image_size' => $this->getImageRelativeSize(),
+                    'proxy_for' => $this->proxy_for,
+                    'include_excerpts' => (bool)$this->getFromRequest('include_excerpts', false),
+                    'columns' => $this->getFromRequest('columns',1),
+                ),
+            )
+        );
+        $this->enqueueInlineStyleBasedOnOptions();
+        $this->loadThemeCompatibilityScriptsAndStylesheets();
     }
 
     protected function getImageRelativeSize()
@@ -89,6 +106,8 @@ class PmbFrontend extends BaseController
             case 'none':
                 return 0;
                 break;
+            default:
+                return false;
         }
     }
 
@@ -138,13 +157,21 @@ class PmbFrontend extends BaseController
             $css .= '.pmb-post-header:not(:first-child){page-break-before:always;}';
         }
         $font_size_map = array(
-            'tiny' => '0.5em',
-            'small' => '0.8em',
-            'normal' => '1em',
-            'large' => '1.3em',
+            'tiny' => '0.50em',
+            'small' => '0.75em',
+            // Leave out normal, let the theme decide.
+            'large' => '1.25em',
         );
-        $font_size_css = isset($font_size_map[$font_size]) ? $font_size_map[$font_size] : '1em';
-        $css .= ".pmb-posts-body{font-size:$font_size_css;}";
+        if(isset($font_size_map[$font_size])){
+            $font_size_css = $font_size_map[$font_size];
+            $css .= ".pmb-posts
+{font-size:$font_size_css;}
+            h1{font-size:1.3em !important;}
+            h2{font-size:1.2em !important;}
+            h3{font-size:1.1em !important;}
+            ul, ol, p{margin-bottom:0.5em;margin-top:0.5em;}";
+        }
+        // Let's make margin smaller or bigger too, if the text was resized.
         wp_add_inline_style(
             'pmb_print_page',
             $css
