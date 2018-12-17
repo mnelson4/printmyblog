@@ -164,12 +164,12 @@ class PmbFrontend extends BaseController
         );
         if(isset($font_size_map[$font_size])){
             $font_size_css = $font_size_map[$font_size];
-            $css .= ".pmb-posts
-{font-size:$font_size_css;}
+            $css .= ".pmb-posts{font-size:$font_size_css;}
             h1{font-size:1.3em !important;}
             h2{font-size:1.2em !important;}
             h3{font-size:1.1em !important;}
-            ul, ol, p{margin-bottom:0.5em;margin-top:0.5em;}";
+            ul, ol, p{margin-bottom:0.5em;margin-top:0.5em;}
+            blockquote{font-size:1em}";
         }
         // Let's make margin smaller or bigger too, if the text was resized.
         wp_add_inline_style(
