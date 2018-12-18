@@ -84,6 +84,9 @@ Your website might not be around forever, nor might WordPress. But by printing i
 
 == Changelog ==
 
+= 1.1.6 =
+* Improved layout of WP Video and (JetPack) Tiled Gallery shortcodes
+
 = 1.1.5 =
 * Move featured image and post excerpts into columns
 * Improved image resizing by using inline styles instead of stylesheets
