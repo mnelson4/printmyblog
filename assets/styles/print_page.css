@@ -64,3 +64,6 @@ button{
 .entry-excerpt{
     font-style:italic;
 }
+div.tiled-gallery{
+    page-break-inside:avoid;
+}

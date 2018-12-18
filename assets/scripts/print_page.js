@@ -91,7 +91,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      */
     this.prettyUpPrintedPage = function()
     {
-        var non_emojis = jQuery('img:not(.emoji)');
+        // Don't wrap tiled gallery images- we have CSS to avoid page breaks in them
+        // although currently, they don't display well because they need JS that doesn't get enqueued
+        var non_emojis = jQuery('img:not(.emoji, div.tiled-gallery img)');
         if(this.image_size === 0){
             non_emojis.remove();
         } else{
@@ -111,6 +113,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         jQuery('h3').wrap('<div class="pmb-header"></div>');
         jQuery('h4').wrap('<div class="pmb-header"></div>');
         jQuery('h5').wrap('<div class="pmb-header"></div>');
+        // Remove inline styles that dynamically set height and width on WP Videos.
+        // They use some Javascript that doesn't get enqueued, so better to let the browser decide their dimensions.
+        jQuery('div.wp-video').css({'width': '','min-width':'', 'height': '', 'min-height': ''});
         jQuery(document).trigger('pmb_wrap_up');
     };
 
