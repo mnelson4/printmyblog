@@ -37,10 +37,10 @@
                 <?php }?>
                 <tr>
                     <th scope="row">
-                        <label for="image-size"><?php esc_html_e('Include Excerpts','print_my_blog' );?></label>
+                        <label for="include-excerpts"><?php esc_html_e('Include Excerpts','print_my_blog' );?></label>
                     </th>
                     <td>
-                        <input type="checkbox" name="include_excerpts" value="1">
+                        <input type="checkbox" name="include-excerpts" value="1">
                         <p class="description"><?php esc_html_e('Whether to include the posts\'s excerpt before the rest of the content. Useful in case you put different content in there.','print_my_blog' );?></p>
                     </td>
 

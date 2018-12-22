@@ -80,7 +80,7 @@ class PmbFrontend extends BaseController
                     'locale' => get_locale(),
                     'image_size' => $this->getImageRelativeSize(),
                     'proxy_for' => $this->proxy_for,
-                    'include_excerpts' => (bool)$this->getFromRequest('include_excerpts', false),
+                    'include_excerpts' => (bool)$this->getFromRequest('include-excerpts', false),
                     'columns' => $this->getFromRequest('columns',1),
                 ),
             )
