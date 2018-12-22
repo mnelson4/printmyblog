@@ -25,16 +25,29 @@
                             <p class="description"><?php esc_html_e('URL of the WordPress site (self-hosted or on WordPress.com) you\'d like to print. Leave blank to use this current site.', 'print_my_blog');?></p>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row">
-                            <label for="post-page-break"><?php esc_html_e('Each Post Begins on a New Page','print_my_blog' );?></label>
-                        </th>
-                        <td>
-                            <input type="checkbox" name="post-page-break" id="post-page-break" checked="checked">
-                            <p class="description"><?php esc_html_e('Whether to force posts to always start on a new page. Doing so makes the page more legible, but uses more paper.','print_my_blog' );?></p>
-                        </td>
-                    </tr>
                 <?php }?>
+                <tr>
+                    <th scope="row">
+                        <?php esc_html_e('Content to Print','print_my_blog' );?>
+                    </th>
+                    <td>
+                        <label><input type="radio" name="post-type" value="post" checked="checked"><?php esc_html_e('Posts', 'print_my_blog');?></label>
+                        <p class="description"><?php esc_html_e('Oldest posts First.','print_my_blog' );?></p>
+                        <br>
+                        <label><input type="radio" name="post-type" value="page"><?php esc_html_e('Pages', 'print_my_blog');?></label>
+                        <p class="description"><?php esc_html_e('Ordered by "Menu Order"','print_my_blog' );?></p>
+                    </td>
+
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="post-page-break"><?php esc_html_e('Each Post Begins on a New Page','print_my_blog' );?></label>
+                    </th>
+                    <td>
+                        <input type="checkbox" name="post-page-break" id="post-page-break" checked="checked">
+                        <p class="description"><?php esc_html_e('Whether to force posts to always start on a new page. Doing so makes the page more legible, but uses more paper.','print_my_blog' );?></p>
+                    </td>
+                </tr>
                 <tr>
                     <th scope="row">
                         <label for="include-excerpts"><?php esc_html_e('Include Excerpts','print_my_blog' );?></label>

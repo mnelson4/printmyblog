@@ -20,6 +20,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.translations = translations;
     this.include_excerpts = pmb_instance_vars.include_excerpts;
     this.columns = pmb_instance_vars.columns;
+    this.post_type = pmb_instance_vars.post_type;
     /**
      * @function
      */
@@ -33,15 +34,25 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     };
 
     this.begin_loading = function () {
-        var postsCollection = new wp.api.collections.Posts();
-        postsCollection.fetch({data: {
-                per_page: 5,
-                status: 'publish',
-                _embed:true,
-                proxy_for: this.proxy_for,
-            }
+        var collection;
+        var data = {
+            per_page: 5,
+            status: 'publish',
+            _embed:true,
+            proxy_for: this.proxy_for,
+        };
+        if(this.post_type === 'post') {
+            collection = new wp.api.collections.Posts();
+            data.orderby = 'date';
+            data.order = 'asc';
+        } else if(this.post_type === 'page') {
+            collection = new wp.api.collections.Pages();
+            data.orderby = 'menu_order';
+            data.order = 'asc';
+        }
+        collection.fetch({data: data
         }).done((posts) => {
-            this.renderAndMaybeFetchMore(posts, postsCollection);
+            this.renderAndMaybeFetchMore(posts, collection);
         });
     };
 
@@ -128,13 +139,15 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             + '<h1 class="entry-title">'
             + post.title.rendered
             + '</h1>'
-            + '<div class="entry-meta">'
-            +   '<span class="posted-on">'
-            +   this.getPublishedDate(post)
-            +   '</span>'
+            + '<div class="entry-meta">';
+        if(this.post_type === 'post') {
+            html_to_add += '<span class="posted-on">'
+                +   this.getPublishedDate(post)
+                +   '</span>';
+        }
+        html_to_add += '</div>'
             + '</div>'
-            + '</div>';
-        html_to_add += '<div class="entry-content">'
+            + '<div class="entry-content">'
             + this.getFeaturedImageHtml(post);
         if(this.include_excerpts) {
             html_to_add += '<div class="entry-excerpt">'
@@ -208,6 +221,7 @@ jQuery(document).ready(function () {
                 proxy_for: pmb_print_data.data.proxy_for,
                 include_excerpts: pmb_print_data.data.include_excerpts,
                 columns: pmb_print_data.data.columns,
+                post_type: pmb_print_data.data.post_type,
             },
             {
                 wrapping_up: pmb_print_data.i18n.wrapping_up

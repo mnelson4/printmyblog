@@ -82,6 +82,7 @@ class PmbFrontend extends BaseController
                     'proxy_for' => $this->proxy_for,
                     'include_excerpts' => (bool)$this->getFromRequest('include-excerpts', false),
                     'columns' => $this->getFromRequest('columns',1),
+                    'post_type' => $this->getFromRequest('post-type', 'post')
                 ),
             )
         );
