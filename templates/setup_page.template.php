@@ -35,7 +35,14 @@
                         <p class="description"><?php esc_html_e('Oldest posts First.','print_my_blog' );?></p>
                         <br>
                         <label><input type="radio" name="post-type" value="page"><?php esc_html_e('Pages', 'print_my_blog');?></label>
-                        <p class="description"><?php esc_html_e('Ordered by "Menu Order"','print_my_blog' );?></p>
+                        <p class="description"><?php
+                            printf(
+                                    // translators: %1$s is opening tag for a link, %2$s is the closing tag
+                                    esc_html__('Uses %1$sOrder%2$s Page Attribute','print_my_blog' ),
+                            '<a href="https://en.support.wordpress.com/pages/page-options/#order">',
+                                '</a>'
+                            );
+                            ?> <?php echo '(BETA feature, ignores page hierarchy)';?></p>
                     </td>
 
                 </tr>
