@@ -21,6 +21,8 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.include_excerpts = pmb_instance_vars.include_excerpts;
     this.columns = pmb_instance_vars.columns;
     this.post_type = pmb_instance_vars.post_type;
+    this.total_posts = 0;
+    this.posts_so_far = 0;
     /**
      * @function
      */
@@ -31,10 +33,28 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         this.posts_div = jQuery(this.posts_div_selector);
         this.waiting_area = jQuery(this.waiting_area_selector);
         this.print_ready = jQuery(this.print_ready_selector);
+
+        // Get the posts count
+        var collection = this.getCollection();
+        var data = this.getCollectionQueryData();
+        data.per_page = 1;
+        collection.fetch({data: data
+        }).done((posts) => {
+            this.total_posts = collection.state.totalObjects;
+        });
     };
 
-    this.begin_loading = function () {
-        var collection;
+    this.getCollection = function() {
+        if(this.post_type === 'post') {
+            return new wp.api.collections.Posts();
+        } else if(this.post_type === 'page') {
+            return new wp.api.collections.Pages();
+        } else {
+            throw 'Invalid post type.';
+        }
+    };
+
+    this.getCollectionQueryData = function () {
         var data = {
             per_page: 5,
             status: 'publish',
@@ -42,35 +62,37 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             proxy_for: this.proxy_for,
         };
         if(this.post_type === 'post') {
-            collection = new wp.api.collections.Posts();
             data.orderby = 'date';
             data.order = 'asc';
         } else if(this.post_type === 'page') {
-            collection = new wp.api.collections.Pages();
             data.orderby = 'menu_order';
             data.order = 'asc';
         }
-        collection.fetch({data: data
+        return data;
+    };
+
+    this.begin_loading = function () {
+        let collection = this.getCollection();
+        var data = this.getCollectionQueryData();
+        data.parent = 0;
+        collection.fetch({data: data, async: false
         }).done((posts) => {
-            this.renderAndMaybeFetchMore(posts, collection);
+            this.renderAndMaybeFetchMore(posts, collection, true);
         });
     };
 
-    this.renderAndMaybeFetchMore = function (posts, postsCollection) {
+    this.renderAndMaybeFetchMore = function (posts, postsCollection, finish_when_done) {
         this.renderPostsInPage(posts);
         if (postsCollection.hasMore()) {
-            var page_size = typeof(postsCollection.state.data.per_page) === 'undefined' ? 10 : postsCollection.state.data.per_page;
-            var current_count = Math.min(postsCollection.state.currentPage * page_size, postsCollection.state.totalObjects);
-            this.posts_count_span.html(current_count + '/' + postsCollection.state.totalObjects);
-            this.load_more(postsCollection);
-        } else {
+            this.load_more(postsCollection, finish_when_done);
+        } else if(finish_when_done) {
             this.finish();
         }
     };
 
-    this.load_more = function (postsCollection) {
+    this.load_more = function (postsCollection, finish_when_done) {
         postsCollection.more().done((posts) => {
-            this.renderAndMaybeFetchMore(posts, postsCollection);
+            this.renderAndMaybeFetchMore(posts, postsCollection, finish_when_done);
         });
     };
 
@@ -81,8 +103,18 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         for (let post of posts) {
             // add it to the page
             this.addPostToPage(post);
+            if (this.post_type === 'page') {
+                let collection = this.getCollection();
+                var data = this.getCollectionQueryData();
+                data.parent = [post.id];
+                collection.fetch({data: data, async: false
+                }).done((posts) => {
+                    this.renderAndMaybeFetchMore(posts, collection, false);
+                });
+            }
         }
     };
+
 
     this.finish = function () {
         this.status_span.html(this.translations.wrapping_up);
@@ -124,6 +156,13 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         jQuery('h3').wrap('<div class="pmb-header"></div>');
         jQuery('h4').wrap('<div class="pmb-header"></div>');
         jQuery('h5').wrap('<div class="pmb-header"></div>');
+
+        // Ensure headers are visible. Some themes might remove them while printing. See https://github.com/mnelson4/printmyblog/issues/1#issuecomment-449653224
+        jQuery('h1').css('display', 'block');
+        jQuery('h2').css('display', 'block');
+        jQuery('h3').css('display', 'block');
+        jQuery('h4').css('display', 'block');
+        jQuery('h5').css('display', 'block');
         // Remove inline styles that dynamically set height and width on WP Videos.
         // They use some Javascript that doesn't get enqueued, so better to let the browser decide their dimensions.
         jQuery('div.wp-video').css({'width': '','min-width':'', 'height': '', 'min-height': ''});
@@ -159,6 +198,8 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         // add header
         // add body
         this.posts_div.append(html_to_add);
+        this.posts_so_far = this.posts_so_far + 1;
+        this.posts_count_span.html(this.posts_so_far + '/' + this.total_posts);
     };
 
     // this.getAuthorName = function (post)
@@ -206,9 +247,10 @@ function pmb_print_preview()
     jQuery('.pmb-waiting-message-fullpage').toggle();
 }
 
+var pmb = null;
 jQuery(document).ready(function () {
     wp.api.loadPromise.done( function() {
-        var pmb = new PmbPrintPage(
+        pmb = new PmbPrintPage(
             {
                 header_selector: '.pmb-waiting-h1',
                 status_span_selector: '.pmb-status',
