@@ -151,18 +151,12 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             }
         }
 
-        jQuery('h1').wrap('<div class="pmb-header"></div>');
-        jQuery('h2').wrap('<div class="pmb-header"></div>');
-        jQuery('h3').wrap('<div class="pmb-header"></div>');
-        jQuery('h4').wrap('<div class="pmb-header"></div>');
-        jQuery('h5').wrap('<div class="pmb-header"></div>');
+        jQuery('h1').addClass('pmb-header');
+        jQuery('h2').addClass('pmb-header');
+        jQuery('h3').addClass('pmb-header');
+        jQuery('h4').addClass('pmb-header');
+        jQuery('h5').addClass('pmb-header');
 
-        // Ensure headers are visible. Some themes might remove them while printing. See https://github.com/mnelson4/printmyblog/issues/1#issuecomment-449653224
-        jQuery('h1').css('display', 'block');
-        jQuery('h2').css('display', 'block');
-        jQuery('h3').css('display', 'block');
-        jQuery('h4').css('display', 'block');
-        jQuery('h5').css('display', 'block');
         // Remove inline styles that dynamically set height and width on WP Videos.
         // They use some Javascript that doesn't get enqueued, so better to let the browser decide their dimensions.
         jQuery('div.wp-video').css({'width': '','min-width':'', 'height': '', 'min-height': ''});
