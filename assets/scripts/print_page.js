@@ -23,6 +23,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.post_type = pmb_instance_vars.post_type;
     this.total_posts = 0;
     this.posts_so_far = 0;
+    this.taxonomies = {};
     /**
      * @function
      */
@@ -35,12 +36,16 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         this.print_ready = jQuery(this.print_ready_selector);
 
         // Get the posts count
-        var collection = this.getCollection();
-        var data = this.getCollectionQueryData();
-        data.per_page = 1;
-        collection.fetch({data: data
+        var allPostscollection = this.getCollection();
+        var allPostsdata = this.getCollectionQueryData();
+        allPostsdata.per_page = 1;
+        allPostscollection.fetch({data: allPostsdata
         }).done((posts) => {
-            this.total_posts = collection.state.totalObjects;
+            this.total_posts = allPostscollection.state.totalObjects;
+        });
+        var alltaxonomiesCollection = new wp.api.collections.Taxonomies();
+        alltaxonomiesCollection.fetch().done((taxonomies) => {
+            this.taxonomies = taxonomies;
         });
     };
 
@@ -167,7 +172,6 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      * @var  wp.api.models.Post post
      */
     this.addPostToPage = function (post) {
-
         var html_to_add = '<div class="pmb-post-header">'
             + '<h1 class="entry-title">'
             + post.title.rendered
@@ -178,6 +182,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 +   this.getPublishedDate(post)
                 +   '</span>';
         }
+        html_to_add += this.addTaxonomies(post);
         html_to_add += '</div>'
             + '</div>'
             + '<div class="entry-content">'
@@ -194,6 +199,25 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         this.posts_div.append(html_to_add);
         this.posts_so_far = this.posts_so_far + 1;
         this.posts_count_span.html(this.posts_so_far + '/' + this.total_posts);
+    };
+
+    this.addTaxonomies = function(post) {
+        var html = '';
+        if(post._embedded['wp:term']) {
+            for( taxonomy in post._embedded['wp:term']) {
+                var term_names = [];
+                var taxonomy_slug = '';
+                jQuery.each(post._embedded['wp:term'][taxonomy], (key, term) => {
+                    term_names.push(term.name);
+                    taxonomy_slug = term.taxonomy;
+                });
+                if(term_names.length > 0) {
+                    html += ' ' + this.taxonomies[taxonomy_slug].name + ': ';
+                    html += term_names.join(', ');
+                }
+            }
+        }
+        return html;
     };
 
     // this.getAuthorName = function (post)

@@ -86,6 +86,8 @@ Your website might not be around forever, nor might WordPress. But by printing i
 
 = 1.2.0 =
 * Add support for printing pages
+* Fixed a bug where header tags don't appear when printing from Google Chrome
+* Show categories, terms, and other custom taxonomies
 
 = 1.1.6 =
 * Improved layout of WP Video and (JetPack) Tiled Gallery shortcodes
