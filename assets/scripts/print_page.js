@@ -22,7 +22,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.columns = pmb_instance_vars.columns;
     this.post_type = pmb_instance_vars.post_type;
     this.total_posts = 0;
-    this.posts_so_far = 0;
+    this.posts = [];
     this.taxonomies = {};
     /**
      * @function
@@ -35,14 +35,6 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         this.waiting_area = jQuery(this.waiting_area_selector);
         this.print_ready = jQuery(this.print_ready_selector);
 
-        // Get the posts count
-        var allPostscollection = this.getCollection();
-        var allPostsdata = this.getCollectionQueryData();
-        allPostsdata.per_page = 1;
-        allPostscollection.fetch({data: allPostsdata
-        }).done((posts) => {
-            this.total_posts = allPostscollection.state.totalObjects;
-        });
         var alltaxonomiesCollection = new wp.api.collections.Taxonomies();
         alltaxonomiesCollection.fetch().done((taxonomies) => {
             this.taxonomies = taxonomies;
@@ -61,7 +53,6 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
     this.getCollectionQueryData = function () {
         var data = {
-            per_page: 5,
             status: 'publish',
             _embed:true,
             proxy_for: this.proxy_for,
@@ -76,53 +67,87 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         return data;
     };
 
-    this.begin_loading = function () {
+    this.beginLoading = function () {
         let collection = this.getCollection();
         var data = this.getCollectionQueryData();
-        data.parent = 0;
-        collection.fetch({data: data, async: false
+        collection.fetch({data: data,
         }).done((posts) => {
-            this.renderAndMaybeFetchMore(posts, collection, true);
+            this.storePostsAndMaybeFetchMore(posts, collection);
         });
     };
 
-    this.renderAndMaybeFetchMore = function (posts, postsCollection, finish_when_done) {
-        this.renderPostsInPage(posts);
-        if (postsCollection.hasMore()) {
-            this.load_more(postsCollection, finish_when_done);
-        } else if(finish_when_done) {
-            this.finish();
+    this.storePostsAndMaybeFetchMore = function(posts, collection) {
+        this.posts = this.posts.concat(posts);
+        this.total_posts = collection.state.totalObjects;
+        var posts_so_far = this.posts.length;
+        this.posts_count_span.html(posts_so_far + '/' + this.total_posts);
+        if (collection.hasMore()) {
+            collection.more().done((posts) => {
+                this.storePostsAndMaybeFetchMore(posts, collection);
+            });
+        } else {
+            this.wrapUp();
         }
     };
 
-    this.load_more = function (postsCollection, finish_when_done) {
-        postsCollection.more().done((posts) => {
-            this.renderAndMaybeFetchMore(posts, postsCollection, finish_when_done);
-        });
+    this.wrapUp = function() {
+        this.status_span.html(this.translations.wrapping_up);
+        var posts_to_render = this.posts;
+        if(this.post_type === 'page') {
+            // Sort according to order (don't worry about hierarchy yet).
+            this.posts = this.posts.sort(
+                (a, b) => a.menu_order - b.menu_order
+            );
+            posts_to_render = this.getChildrenOf(0);
+        }
+        //render
+        this.renderPostsInPage(posts_to_render);
+        this.finish();
     };
+
 
     /**
      * @var
      */
     this.renderPostsInPage = function (posts) {
-        for (let post of posts) {
+        var post = posts.shift();
+        while(typeof post === 'object' ) {
             // add it to the page
             this.addPostToPage(post);
             if (this.post_type === 'page') {
-                let collection = this.getCollection();
-                var data = this.getCollectionQueryData();
-                data.parent = [post.id];
-                collection.fetch({data: data, async: false
-                }).done((posts) => {
-                    this.renderAndMaybeFetchMore(posts, collection, false);
-                });
+                this.renderChildrenOf(post.id);
             }
+            post = posts.shift();
         }
     };
 
+    this.renderChildrenOf = function(parent_id) {
+        var children = this.getChildrenOf(parent_id);
+        this.renderPostsInPage(children);
+    };
+
+    this.getChildrenOf = function( parent_id ) {
+        var i = 0;
+        var children_posts = [];
+        while(i < this.posts.length) {
+            var post = this.posts[i];
+            if(post.parent === parent_id) {
+                children_posts.push(post);
+                this.posts.splice(i,1);
+                // no need to move index on, because we've removed the item that was previously at this index
+                // so there is a new item at this index now.
+            } else {
+                // move on, this index isn't a child
+                i++;
+            }
+        }
+        return children_posts;
+    };
+
+
+
 
     this.finish = function () {
-        this.status_span.html(this.translations.wrapping_up);
         setTimeout(
             () => {
                 this.waiting_area.hide();
@@ -197,8 +222,6 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         // add header
         // add body
         this.posts_div.append(html_to_add);
-        this.posts_so_far = this.posts_so_far + 1;
-        this.posts_count_span.html(this.posts_so_far + '/' + this.total_posts);
     };
 
     this.addTaxonomies = function(post) {
@@ -289,7 +312,7 @@ jQuery(document).ready(function () {
         );
 
         pmb.initialize();
-        pmb.begin_loading();
+        pmb.beginLoading();
     });
 });
 
