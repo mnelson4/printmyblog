@@ -24,6 +24,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.total_posts = 0;
     this.posts = [];
     this.taxonomies = {};
+    this.original_posts = [];
     /**
      * @function
      */
@@ -60,9 +61,6 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         if(this.post_type === 'post') {
             data.orderby = 'date';
             data.order = 'asc';
-        } else if(this.post_type === 'page') {
-            data.orderby = 'menu_order';
-            data.order = 'asc';
         }
         return data;
     };
@@ -77,7 +75,14 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     };
 
     this.storePostsAndMaybeFetchMore = function(posts, collection) {
+        if(typeof posts === 'object' && 'errors' in posts) {
+            this.posts_count_span.html( 'There was an error fetching posts. It was: ' + posts.errors.pop());
+            return;
+        }
         this.posts = this.posts.concat(posts);
+        // for(var post_index in posts) {
+        //     this.posts_div.append(posts[post_index].content.rendered);
+        // }
         this.total_posts = collection.state.totalObjects;
         var posts_so_far = this.posts.length;
         this.posts_count_span.html(posts_so_far + '/' + this.total_posts);
@@ -92,8 +97,11 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
     this.wrapUp = function() {
         this.status_span.html(this.translations.wrapping_up);
+        // remove all the content that's in the wrong order
+        this.posts_div.html('');
         var posts_to_render = this.posts;
         if(this.post_type === 'page') {
+            this.original_posts = this.posts.slice();
             // Sort according to order (don't worry about hierarchy yet).
             this.posts = this.posts.sort(
                 (a, b) => a.menu_order - b.menu_order
@@ -112,6 +120,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.renderPostsInPage = function (posts) {
         var post = posts.shift();
         while(typeof post === 'object' ) {
+
             // add it to the page
             this.addPostToPage(post);
             if (this.post_type === 'page') {
@@ -190,6 +199,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         // Remove inline styles that dynamically set height and width on WP Videos.
         // They use some Javascript that doesn't get enqueued, so better to let the browser decide their dimensions.
         jQuery('div.wp-video').css({'width': '','min-width':'', 'height': '', 'min-height': ''});
+        // unhide the contents. Google Chrome doesn't print headers properly if they're not displayed. (Mind you, we still
+        // have the full page overlay hiding them.)
+        jQuery('.pmb-posts').toggle();
         jQuery(document).trigger('pmb_wrap_up');
     };
 
@@ -197,19 +209,23 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      * @var  wp.api.models.Post post
      */
     this.addPostToPage = function (post) {
-        var html_to_add = '<div class="pmb-post-header">'
+        var html_to_add = '<article id="post-' + post.id + '" class="post-' + post.id + ' post type-' + this.post_type + ' status-publish hentry">' +
+            '<header class="pmb-post-header entry-header">'
             + '<h1 class="entry-title">'
             + post.title.rendered
             + '</h1>'
+            + '</header>'
             + '<div class="entry-meta">';
         if(this.post_type === 'post') {
             html_to_add += '<span class="posted-on">'
                 +   this.getPublishedDate(post)
                 +   '</span>';
         }
+        if(this.post_type === 'page') {
+            html_to_add += '<!-- id:' + post.id + ' , parent:' + post.parent + ', order:' + post.menu_order + '-->';
+        }
         html_to_add += this.addTaxonomies(post);
         html_to_add += '</div>'
-            + '</div>'
             + '<div class="entry-content">'
             + this.getFeaturedImageHtml(post);
         if(this.include_excerpts) {
@@ -217,8 +233,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 + post.excerpt.rendered
                 + '</div>';
         }
-         html_to_add += post.content.rendered
-            + '</div>';
+         html_to_add += post.content.rendered;
+         html_to_add += '</div>'
+             + '</article>';
         // add header
         // add body
         this.posts_div.append(html_to_add);
@@ -284,7 +301,6 @@ function PmbPrintPage(pmb_instance_vars, translations) {
  */
 function pmb_print_preview()
 {
-    jQuery('.pmb-posts').toggle();
     jQuery('.pmb-waiting-message-fullpage').toggle();
 }
 

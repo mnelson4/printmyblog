@@ -27,6 +27,7 @@
     right: 0;
     background-color:white;
     color:black;
+    z-index:1000;
 }
 
 .pmb-waiting-message-outer-container{
