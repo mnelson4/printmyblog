@@ -233,12 +233,13 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 + post.excerpt.rendered
                 + '</div>';
         }
-         html_to_add += post.content.rendered;
-         html_to_add += '</div>'
-             + '</article>';
+        this.posts_div.append(html_to_add);
+        this.posts_div.append(jQuery.parseHTML(post.content.rendered));
+        this.posts_div.append( '</div>'
+             + '</article>');
         // add header
         // add body
-        this.posts_div.append(html_to_add);
+        // this.posts_div.append(html_to_add);
     };
 
     this.addTaxonomies = function(post) {
