@@ -25,6 +25,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.posts = [];
     this.taxonomies = {};
     this.original_posts = [];
+    this.ordered_posts = [];
     /**
      * @function
      */
@@ -96,9 +97,6 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     };
 
     this.wrapUp = function() {
-        this.status_span.html(this.translations.wrapping_up);
-        // remove all the content that's in the wrong order
-        this.posts_div.html('');
         var posts_to_render = this.posts;
         if(this.post_type === 'page') {
             this.original_posts = this.posts.slice();
@@ -107,32 +105,51 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 (a, b) => a.menu_order - b.menu_order
             );
             posts_to_render = this.getChildrenOf(0);
+
+            this.organizePostsInPage(posts_to_render);
+        } else {
+            this.ordered_posts = this.posts;
         }
         //render
-        this.renderPostsInPage(posts_to_render);
-        this.finish();
+        this.renderPosts();
     };
 
 
     /**
      * @var
      */
-    this.renderPostsInPage = function (posts) {
+    this.organizePostsInPage = function (posts) {
         var post = posts.shift();
         while(typeof post === 'object' ) {
-
             // add it to the page
-            this.addPostToPage(post);
+            this.ordered_posts.push(post);
             if (this.post_type === 'page') {
-                this.renderChildrenOf(post.id);
+                this.organizeChildrenOf(post.id);
             }
             post = posts.shift();
         }
     };
 
-    this.renderChildrenOf = function(parent_id) {
+    this.renderPosts = function() {
+        var post = this.ordered_posts.shift();
+        if(typeof post === 'object') {
+            this.status_span.html('Rendering posts. ' + this.ordered_posts.length + ' left...');
+            this.addPostToPage(post);
+            setTimeout(
+                () => {
+                    this.renderPosts();
+                },
+                500
+            );
+        } else {
+            this.finish();
+        }
+
+    };
+
+    this.organizeChildrenOf = function(parent_id) {
         var children = this.getChildrenOf(parent_id);
-        this.renderPostsInPage(children);
+        this.organizePostsInPage(children);
     };
 
     this.getChildrenOf = function( parent_id ) {
@@ -157,6 +174,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
 
     this.finish = function () {
+        this.status_span.html(this.translations.wrapping_up);
         setTimeout(
             () => {
                 this.waiting_area.hide();
