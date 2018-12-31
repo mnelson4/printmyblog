@@ -102,7 +102,17 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             this.original_posts = this.posts.slice();
             // Sort according to order (don't worry about hierarchy yet).
             this.posts = this.posts.sort(
-                (a, b) => a.menu_order - b.menu_order
+                (a, b) => {
+                    var menu_comparison = a.menu_order - b.menu_order;
+                    if( menu_comparison > 0) {
+                        return 1;
+                    } else if( menu_comparison < 0 ) {
+                        return -1;
+                    } else {
+                        // ok do an alphabetical comparison
+                        return a.title.rendered > b.title.rendered;
+                    }
+                }
             );
             posts_to_render = this.getChildrenOf(0);
 
