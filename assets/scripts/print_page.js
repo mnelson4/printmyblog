@@ -227,7 +227,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      * @var  wp.api.models.Post post
      */
     this.addPostToPage = function (post) {
-        var html_to_add = '<article id="post-' + post.id + '" class="post-' + post.id + ' post type-' + this.post_type + ' status-publish hentry">' +
+        var html_to_add = '<article id="post-' + post.id + '" class="post-' + post.id + ' post type-' + this.post_type + ' status-' + post.status + ' hentry pmb-post-article">' +
             '<header class="pmb-post-header entry-header">'
             + '<h1 class="entry-title">'
             + post.title.rendered
