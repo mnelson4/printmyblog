@@ -84,6 +84,9 @@ Your website might not be around forever, nor might WordPress. But by printing i
 
 == Changelog ==
 
+= 1.2.1 =
+* Add text domain for translators
+
 = 1.2.0 =
 * Add support for printing pages
 * Fixed a bug where header tags don't appear when printing from Google Chrome
