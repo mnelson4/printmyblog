@@ -74,7 +74,11 @@ class PmbFrontend extends BaseController
             'pmb_print_data',
             array(
                 'i18n' => array(
+                    'organizing_posts' => esc_html__('Ordering posts.', 'print_my_blog'),
                     'wrapping_up' => esc_html__('Wrapping Up!', 'print_my_blog'),
+                    'error_fetching_posts' => esc_html__('There was an error fetching posts. It was: ', 'print_my_blog'),
+                    'rendering_posts' => esc_html__('Rendering posts.', 'print_my_blog'),
+                    'left' => esc_html__('left...', 'print_my_blog')
                 ),
                 'data' => array(
                     'locale' => get_locale(),

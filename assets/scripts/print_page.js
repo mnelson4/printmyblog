@@ -81,7 +81,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         if(typeof posts === 'object' && 'errors' in posts) {
             var first_error_key = Object.keys(posts.errors)[0];
             var first_error_message = posts.errors[first_error_key];
-            this.status_span.html( 'There was an error fetching posts. It was: ' + first_error_message + ' (' + first_error_key + ')');
+            this.status_span.html( this.translations.error_fetching_posts + first_error_message + ' (' + first_error_key + ')');
             return;
         }
         this.posts = this.posts.concat(posts);
@@ -103,6 +103,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.wrapUp = function() {
         var posts_to_render = this.posts;
         if(this.post_type === 'page') {
+            this.status_span.html( this.translations.organizing_posts);
             this.original_posts = this.posts.slice();
             // Sort according to order (don't worry about hierarchy yet).
             this.posts = this.posts.sort(
@@ -147,7 +148,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.renderPosts = function() {
         var post = this.ordered_posts.shift();
         if(typeof post === 'object') {
-            this.status_span.html('Rendering posts. ' + this.ordered_posts.length + ' left...');
+            this.status_span.html( this.translations.rendering_posts + ' ' + this.ordered_posts.length + ' ' + this.translations.left);
             this.addPostToPage(post);
             setTimeout(
                 () => {
@@ -361,9 +362,7 @@ jQuery(document).ready(function () {
                 rendering_wait: pmb_print_data.data.rendering_wait,
                 include_inline_js: pmb_print_data.data.include_inline_js
             },
-            {
-                wrapping_up: pmb_print_data.i18n.wrapping_up
-            }
+            pmb_print_data.i18n
         );
 
         pmb.initialize();
