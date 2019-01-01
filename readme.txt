@@ -91,8 +91,8 @@ Your website might not be around forever, nor might WordPress. But by printing i
 * Add support for printing pages
 * Fixed a bug where header tags don't appear when printing from Google Chrome
 * Show categories, terms, and other custom taxonomies
-* Add option to remove inline javascript from posts (defaults to true)
-* Add option to slowdown post rendering (this can cause images to not load)
+* Add option to remove inline javascript from posts (defaults to remove them)
+* Add option to slowdown post rendering (if it's too fast, images might not load)
 
 = 1.1.6 =
 * Improved layout of WP Video and (JetPack) Tiled Gallery shortcodes
