@@ -11,9 +11,10 @@
     }
     ?>
     <p><?php esc_html_e('Configure how you\'d like the blog to be printed, or just use our recommended defaults.', 'print_my_blog'); ?></p>
+    <a href="" onclick="jQuery('.pmb-page-setup-options-advanced').toggle();return false;"><?php esc_html_e('Show Options', 'print_my_blog'); ?></a><br/><br/>
     <form action="<?php echo site_url();?>" method="get">
-        <a href="" onclick="jQuery('.pmb-page-setup-options-advanced').toggle();return false;"><?php esc_html_e('Show Options', 'print_my_blog'); ?></a><br/><br/>
         <div class="pmb-page-setup-options-advanced" style="display:none">
+            <h1><?php esc_html_e('Options','print_my_blog' );?></h1>
             <h2><?php esc_html_e('Content','print_my_blog' );?></h2>
             <table class="form-table">
                 <tbody>
@@ -32,28 +33,10 @@
                     </th>
                     <td>
                         <label><input type="radio" name="post-type" value="post" checked="checked"><?php esc_html_e('Posts', 'print_my_blog');?></label>
-                        <p class="description"><?php esc_html_e('Oldest posts First.','print_my_blog' );?></p>
                         <br>
                         <label><input type="radio" name="post-type" value="page"><?php esc_html_e('Pages', 'print_my_blog');?></label>
-                        <p class="description"><?php
-                            printf(
-                                    // translators: %1$s is opening tag for a link, %2$s is the closing tag
-                                    esc_html__('Uses %1$sOrder%2$s Page Attribute','print_my_blog' ),
-                            '<a href="https://en.support.wordpress.com/pages/page-options/#order">',
-                                '</a>'
-                            );
-                            ?> <?php echo '(BETA feature, ignores page hierarchy)';?></p>
                     </td>
 
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <label for="post-page-break"><?php esc_html_e('Each Post Begins on a New Page','print_my_blog' );?></label>
-                    </th>
-                    <td>
-                        <input type="checkbox" name="post-page-break" id="post-page-break" checked="checked">
-                        <p class="description"><?php esc_html_e('Whether to force posts to always start on a new page. Doing so makes the page more legible, but uses more paper.','print_my_blog' );?></p>
-                    </td>
                 </tr>
                 <tr>
                     <th scope="row">
@@ -71,6 +54,15 @@
             <h2><?php esc_html_e('Page Layout','print_my_blog' );?></h2>
             <table class="form-table">
                 <tbody>
+                <tr>
+                    <th scope="row">
+                        <label for="post-page-break"><?php esc_html_e('Each Post Begins on a New Page','print_my_blog' );?></label>
+                    </th>
+                    <td>
+                        <input type="checkbox" name="post-page-break" id="post-page-break" checked="checked">
+                        <p class="description"><?php esc_html_e('Whether to force posts to always start on a new page. Doing so makes the page more legible, but uses more paper.','print_my_blog' );?></p>
+                    </td>
+                </tr>
                 <tr>
                     <th scope="row">
                         <label for="columns"><?php esc_html_e('Columns','print_my_blog' );?></label>
@@ -114,6 +106,35 @@
                 </tr>
                 </tbody>
             </table>
+
+            <a href="" onclick="jQuery('#pmb-troubleshooting-options').toggle();return false;"><?php esc_html_e('Troubleshooting Options', 'print_my_blog'); ?></a><br/><br/>
+
+            <div id="pmb-troubleshooting-options" style="display:none">
+                <h2><?php esc_html_e('Troubleshooting Options','print_my_blog' );?></h2>
+                <table class="form-table">
+                    <tbody>
+                    <tr>
+                        <th scope="row">
+                            <label for="rendering-wait"><?php esc_html_e('Post Rendering Wait-Time','print_my_blog' );?></label>
+                        </th>
+                        <td>
+                            <input name="rendering-wait" value="500"><?php esc_html_e('ms','print_my_blog' );?>
+                            <p class="description"><?php esc_html_e('Milliseconds to wait between rendering posts. If posts are rendered too quickly on the page, sometimes images won\'t load properly. ','print_my_blog' );?></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <label for="include-inline-js"><?php esc_html_e('Include Inline Javascript','print_my_blog' );?></label>
+                        </th>
+                        <td>
+                            <input type="checkbox" name="include-inline-js" value="1">
+                            <p class="description"><?php esc_html_e('Sometimes posts contain inline javascript which can cause errors and stop the page from rendering.','print_my_blog' );?></p>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <input type="hidden" name="<?php echo PMB_PRINTPAGE_SLUG;?>" value="1">
         </div>
         <button class="button-primary"><?php esc_html_e('Prepare Print Page','printmyblog' );?></button>

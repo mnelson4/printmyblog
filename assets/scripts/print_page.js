@@ -26,6 +26,8 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.taxonomies = {};
     this.original_posts = [];
     this.ordered_posts = [];
+    this.rendering_wait = pmb_instance_vars.rendering_wait;
+    this.include_inline_js = pmb_instance_vars.include_inline_js;
     /**
      * @function
      */
@@ -77,7 +79,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
     this.storePostsAndMaybeFetchMore = function(posts, collection) {
         if(typeof posts === 'object' && 'errors' in posts) {
-            this.posts_count_span.html( 'There was an error fetching posts. It was: ' + posts.errors.pop());
+            var first_error_key = Object.keys(posts.errors)[0];
+            var first_error_message = posts.errors[first_error_key];
+            this.status_span.html( 'There was an error fetching posts. It was: ' + first_error_message + ' (' + first_error_key + ')');
             return;
         }
         this.posts = this.posts.concat(posts);
@@ -149,7 +153,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 () => {
                     this.renderPosts();
                 },
-                500
+                this.rendering_wait
             );
         } else {
             this.finish();
@@ -262,7 +266,11 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 + '</div>';
         }
         this.posts_div.append(html_to_add);
-        this.posts_div.append(jQuery.parseHTML(post.content.rendered));
+        if(this.include_inline_js) {
+            this.posts_div.append(post.content.rendered);
+        } else {
+            this.posts_div.append(jQuery.parseHTML(post.content.rendered));
+        }
         this.posts_div.append( '</div>'
              + '</article>');
         // add header
@@ -350,6 +358,8 @@ jQuery(document).ready(function () {
                 include_excerpts: pmb_print_data.data.include_excerpts,
                 columns: pmb_print_data.data.columns,
                 post_type: pmb_print_data.data.post_type,
+                rendering_wait: pmb_print_data.data.rendering_wait,
+                include_inline_js: pmb_print_data.data.include_inline_js
             },
             {
                 wrapping_up: pmb_print_data.i18n.wrapping_up
