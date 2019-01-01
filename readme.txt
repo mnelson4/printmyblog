@@ -34,7 +34,7 @@ Watch this 45 second video!
 
 https://www.youtube.com/watch?v=puMi_CLxl3s&feature=youtu.be
 
-It works with hundreds of blog posts, with Gutenberg, and page builders.
+It works with hundreds of blog posts (or pages, but not other custom post types yet), with Gutenberg, and page builders.
 Only your posts’ content is printed, not your logo, site title, sidebar widgets, footer, etc. Just the stuff you care to read.
 
 = But You’re Destroying Trees! =
@@ -53,9 +53,9 @@ Here’s how you can help:
 
 * give it a good review and tell your friends
 * help test. If you find a bug, please create an issue on [GitHub](https://github.com/mnelson4/printmyblog)
-* help code. A pull request on [GitHub](https://github.com/mnelson4/printmyblog)
-* help translate. Make this accessible to users everywhere
-* help help. Answer other users’ questions in the support section.
+* help code. Create a pull request on [GitHub](https://github.com/mnelson4/printmyblog)
+* help translate. Make this accessible to users everywhere using [WordPress' Glotpress](https://translate.wordpress.org/projects/wp-plugins/print-my-blog)
+* help help. Answer other users’ questions in the [support section](https://wordpress.org/support/plugin/print-my-blog).
 
 == What's the Big Deal? ==
 
@@ -88,6 +88,8 @@ Your website might not be around forever, nor might WordPress. But by printing i
 * Add support for printing pages
 * Fixed a bug where header tags don't appear when printing from Google Chrome
 * Show categories, terms, and other custom taxonomies
+* Add option to remove inline javascript from posts (defaults to true)
+* Add option to slowdown post rendering (this can cause images to not load)
 
 = 1.1.6 =
 * Improved layout of WP Video and (JetPack) Tiled Gallery shortcodes

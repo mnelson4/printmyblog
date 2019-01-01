@@ -74,11 +74,11 @@ class PmbFrontend extends BaseController
             'pmb_print_data',
             array(
                 'i18n' => array(
-                    'organizing_posts' => esc_html__('Ordering posts.', 'print_my_blog'),
-                    'wrapping_up' => esc_html__('Wrapping Up!', 'print_my_blog'),
-                    'error_fetching_posts' => esc_html__('There was an error fetching posts. It was: ', 'print_my_blog'),
-                    'rendering_posts' => esc_html__('Rendering posts.', 'print_my_blog'),
-                    'left' => esc_html__('left...', 'print_my_blog')
+                    'organizing_posts' => esc_html__('Ordering posts.', 'print-my-blog'),
+                    'wrapping_up' => esc_html__('Wrapping Up!', 'print-my-blog'),
+                    'error_fetching_posts' => esc_html__('There was an error fetching posts. It was: ', 'print-my-blog'),
+                    'rendering_posts' => esc_html__('Rendering posts.', 'print-my-blog'),
+                    'left' => esc_html__('left...', 'print-my-blog')
                 ),
                 'data' => array(
                     'locale' => get_locale(),
@@ -248,7 +248,7 @@ class PmbFrontend extends BaseController
             $response_body = wp_remote_retrieve_body($response);
             $response_data = json_decode($response_body,true);
             if (! is_array($response_data)) {
-                return new WP_Error('no_json', __('The self-hosted WordPress site has an error in its REST API data.', 'print_my_blog'));
+                return new WP_Error('no_json', __('The self-hosted WordPress site has an error in its REST API data.', 'print-my-blog'));
             }
             if (isset($response_data['code'], $response_data['message'])) {
                 return new WP_Error($response_data['code'], $response_data['message']);
@@ -262,7 +262,7 @@ class PmbFrontend extends BaseController
                 );
             }
             // so we didn't get an error or a proper response, but it's JSON? That's really weird.
-            return new WP_Error('unknown_response', __('The self-hosted WordPress site responded with an unexpected response.', 'print_my_blog'));
+            return new WP_Error('unknown_response', __('The self-hosted WordPress site responded with an unexpected response.', 'print-my-blog'));
         }
         // ok, let caller know we didn't have an error, but nor did we find the site's data.
         return false;
@@ -289,7 +289,7 @@ class PmbFrontend extends BaseController
         $response_body = wp_remote_retrieve_body($response);
         $response_data = json_decode($response_body, true);
         if (! is_array($response_data)) {
-            return new WP_Error('no_json', __('The WordPress.com site has an error in its REST API data.', 'print_my_blog'));
+            return new WP_Error('no_json', __('The WordPress.com site has an error in its REST API data.', 'print-my-blog'));
         }
         if (isset($response_data['name'], $response_data['description'])) {
             return array(
@@ -301,12 +301,12 @@ class PmbFrontend extends BaseController
         }
         if(isset($response_data['error'], $response_data['message'])) {
             if($response_data['error'] === 'unknown_blog') {
-                return new WP_Error('not_wordpress', esc_html__('The URL you provided does not appear to be a WordPress website', 'print_my_blog'));
+                return new WP_Error('not_wordpress', esc_html__('The URL you provided does not appear to be a WordPress website', 'print-my-blog'));
             }
             return new WP_Error($response_data['error'], $response_data['message']);
         }
         // so we didn't get an error or a proper response, but it's JSON? That's really weird.
-        return new WP_Error('unknown_response', __('The WordPress.com site responded with an unexpected response.', 'print_my_blog'));
+        return new WP_Error('unknown_response', __('The WordPress.com site responded with an unexpected response.', 'print-my-blog'));
     }
 
     /**
