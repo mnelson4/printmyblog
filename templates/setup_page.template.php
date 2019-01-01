@@ -107,7 +107,7 @@
                 </tbody>
             </table>
 
-            <a href="" onclick="jQuery('#pmb-troubleshooting-options').toggle();return false;"><?php esc_html_e('Troubleshooting Options', 'print_my_blog'); ?></a><br/><br/>
+            <a href="" onclick="jQuery('#pmb-troubleshooting-options').toggle();return false;"><?php esc_html_e('Show Troubleshooting Options', 'print_my_blog'); ?></a><br/><br/>
 
             <div id="pmb-troubleshooting-options" style="display:none">
                 <h2><?php esc_html_e('Troubleshooting Options','print_my_blog' );?></h2>
