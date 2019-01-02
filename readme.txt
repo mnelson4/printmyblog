@@ -1,12 +1,13 @@
 === Print My Blog ===
 Contributors: mnelson4
 Tags: print, pdf, backup
-Requires at least: 4.4
+Requires at least: 4.6
 Stable tag: trunk
 Tested up to: 5.0
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
 
 Create a paper/PDF copy of your entire blog in one click!
 
@@ -83,6 +84,9 @@ Your website might not be around forever, nor might WordPress. But by printing i
 3. The Blog is Ready for Printing!
 
 == Changelog ==
+
+= 1.2.2 =
+* Bump minimum compatible version of WordPress to 4.6 (this will help with translations, and now is probably the easiest time to make the change)
 
 = 1.2.1 =
 * Add text domain for translators
