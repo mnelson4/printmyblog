@@ -14,7 +14,7 @@ Create a paper/PDF copy of your entire blog in one click!
 == Description ==
 
 Create a paper/PDF copy of your entire blog in one click!
-A paper copy will be readable in 100 years- long after your website is taken down and your digital backups.
+A paper copy will be readable in 100 years- long after your website is taken down and your digital backups are corrupted.
 "Print My Blog" makes this really easy: no need to print your blog posts one-by-one, or print unnecessary stuff like your sidebar widgets or footer.
 One click printing of your entire blog's contents in a format optimized for print.
 Plugin alternative to [blog2print](https://www.blog2print.com), except you can print with your own printer or even your browser's print-to-pdf feature.
@@ -52,7 +52,7 @@ Want this plugin to be even better?
 
 Here’s how you can help:
 
-* give it a good review and tell your friends
+* [give it a good review](https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post) and tell your friends
 * help test. If you find a bug, please create an issue on [GitHub](https://github.com/mnelson4/printmyblog)
 * help code. Create a pull request on [GitHub](https://github.com/mnelson4/printmyblog)
 * help translate. Make this accessible to users everywhere using [WordPress' Glotpress](https://translate.wordpress.org/projects/wp-plugins/print-my-blog)
@@ -60,7 +60,7 @@ Here’s how you can help:
 
 == What's the Big Deal? ==
 
-The mission is: preserve our blogs to a low-tech format.
+The mission is: preserve your blog for decades to come in a low-tech format.
 
 Your website might not be around forever, nor might WordPress. But by printing it, there’s hope your blog’s ideas and stories can live on.
 
