@@ -242,8 +242,8 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      * @var  wp.api.models.Post post
      */
     this.addPostToPage = function (post) {
-        var html_to_add = '<article id="post-' + post.id + '" class="post-' + post.id + ' post type-' + this.post_type + ' status-' + post.status + ' hentry pmb-post-article">' +
-            '<header class="pmb-post-header entry-header">'
+        var html_to_add = '<article id="post-' + post.id + '" class="post-' + post.id + ' post type-' + this.post_type + ' status-' + post.status + ' hentry pmb-post-article">'
+            + '<header class="pmb-post-header entry-header">'
             + '<h1 class="entry-title">'
             + post.title.rendered
             + '</h1>'
@@ -266,17 +266,23 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 + post.excerpt.rendered
                 + '</div>';
         }
-        this.posts_div.append(html_to_add);
         if(this.include_inline_js) {
-            this.posts_div.append(post.content.rendered);
+            html_to_add += post.content.rendered;
         } else {
-            this.posts_div.append(jQuery.parseHTML(post.content.rendered));
+            var parsed_nodes = jQuery.parseHTML(post.content.rendered);
+            if(parsed_nodes !== null) {
+                for (var i = 0; i < parsed_nodes.length; i++) {
+                    if (typeof parsed_nodes[i].outerHTML === 'string') {
+                        html_to_add += parsed_nodes[i].outerHTML;
+                    } else if (typeof parsed_nodes[i].wholeText === 'string') {
+                        html_to_add += parsed_nodes[i].wholeText;
+                    }
+                }
+            }
         }
-        this.posts_div.append( '</div>'
-             + '</article>');
-        // add header
-        // add body
-        // this.posts_div.append(html_to_add);
+        html_to_add += '</div>'
+             + '</article>';
+        this.posts_div.append(html_to_add);
     };
 
     this.addTaxonomies = function(post) {
@@ -324,11 +330,18 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.getFeaturedImageHtml = function(post)
     {   if( typeof post._embedded['wp:featuredmedia'] == "object"
             && typeof post._embedded['wp:featuredmedia'][0] == "object"
-            && typeof post._embedded['wp:featuredmedia'][0].media_details == "object"
-            && typeof post._embedded['wp:featuredmedia'][0].media_details.sizes == "object"
-            && typeof post._embedded['wp:featuredmedia'][0].media_details.sizes.full == "object") {
-            let featured_media_url = post._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url
-            return '<div class="single-featured-image-header"><img src="' + featured_media_url + '" class="wp-post-image"/></div>';
+            && typeof post._embedded['wp:featuredmedia'][0].media_details == "object") {
+            var featured_media_url = null;
+            if( typeof post._embedded['wp:featuredmedia'][0].media_details.sizes == "object"
+                && typeof post._embedded['wp:featuredmedia'][0].media_details.sizes.full == "object") {
+                featured_media_url = post._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url;
+            } else if (typeof post._embedded['wp:featuredmedia'][0].source_url == "string") {
+                featured_media_url = post._embedded['wp:featuredmedia'][0].source_url;
+            }
+
+            if(featured_media_url !== null) {
+                return '<div class="single-featured-image-header"><img src="' + featured_media_url + '" class="wp-post-image"/></div>';
+            }
         }
         return '';
     }

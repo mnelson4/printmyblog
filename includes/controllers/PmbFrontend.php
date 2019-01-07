@@ -152,7 +152,7 @@ class PmbFrontend extends BaseController
      */
     protected function enqueueInlineStyleBasedOnOptions()
     {
-        $columns = intval($this->getFromRequest('columns',2));
+        $columns = intval($this->getFromRequest('columns',1));
         $post_page_break = (bool)$this->getFromRequest('post-page-break',false);
         $font_size = sanitize_key($this->getFromRequest('font-size', 'small'));
         $css = "
