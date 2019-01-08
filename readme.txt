@@ -53,8 +53,7 @@ Want this plugin to be even better?
 Here’s how you can help:
 
 * [give it a good review](https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post) and tell your friends
-* help test. If you find a bug, please create an issue on [GitHub](https://github.com/mnelson4/printmyblog)
-* help code. Create a pull request on [GitHub](https://github.com/mnelson4/printmyblog)
+* [give feedback](https://github.com/mnelson4/printmyblog) on GitHub about what features you want or bugs you find
 * help translate. Make this accessible to users everywhere using [WordPress' Glotpress](https://translate.wordpress.org/projects/wp-plugins/print-my-blog)
 * help help. Answer other users’ questions in the [support section](https://wordpress.org/support/plugin/print-my-blog).
 
