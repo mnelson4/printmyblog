@@ -69,6 +69,14 @@ class PmbFrontend extends BaseController
             array(),
             filemtime(PMB_ASSETS_DIR . 'styles/print_page.css')
         );
+        // Enqueue tiled gallery too. It's par of Jetpack so it's common, and if we're printing a WordPress.com blog
+        // it's very likely to be used.
+        wp_enqueue_style(
+            'tiled-gallery',
+            PMB_ASSETS_URL . 'styles/tiled-gallery.css',
+            array(),
+            filemtime(PMB_ASSETS_DIR . 'styles/tiled-gallery.css')
+        );
         wp_localize_script(
             'pmb_print_page',
             'pmb_print_data',

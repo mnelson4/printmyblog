@@ -85,6 +85,11 @@ Your website might not be around forever, nor might WordPress. But by printing i
 
 == Changelog ==
 
+= 1.2.3 =
+* Fixed a bug from 1.2.0 that caused text resizing to not load
+* Fixed some featured images not loading because of unusual REST API response
+* Fixed JetPack's Tiled Galleries by enqueuing its stylesheet
+
 = 1.2.2 =
 * Bump minimum compatible version of WordPress to 4.6 (this will help with translations, and now is probably the easiest time to make the change)
 
