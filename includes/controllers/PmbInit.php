@@ -56,6 +56,9 @@ class PmbInit extends BaseController
             $controller = new PmbFrontend();
         }
         $controller->setHooks();
+        require_once('PmbGutenbergBlock.php');
+        $block_controller = new PmbGutenbergBlock();
+        $block_controller->setHooks();
     }
 
     public function setUrls()

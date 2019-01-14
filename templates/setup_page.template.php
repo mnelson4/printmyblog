@@ -118,7 +118,7 @@
                             <label for="rendering-wait"><?php esc_html_e('Post Rendering Wait-Time','print-my-blog' );?></label>
                         </th>
                         <td>
-                            <input name="rendering-wait" value="500"><?php esc_html_e('ms','print-my-blog' );?>
+                            <input name="rendering-wait" value="200"><?php esc_html_e('ms','print-my-blog' );?>
                             <p class="description"><?php esc_html_e('Milliseconds to wait between rendering posts. If posts are rendered too quickly on the page, sometimes images won\'t load properly. ','print-my-blog' );?></p>
                         </td>
                     </tr>

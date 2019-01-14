@@ -84,6 +84,10 @@ Your website might not be around forever, nor might WordPress. But by printing i
 
 == Changelog ==
 
+= 1.2.4 =
+* Add Gutenberg Block so site visitors can print the blog
+* Increased post rendering from 500ms to 200ms per post
+
 = 1.2.3 =
 * Fixed a bug from 1.2.0 that caused text resizing to not load
 * Fixed some featured images not loading because of unusual REST API response
