@@ -11,22 +11,27 @@
     }
     ?>
     <p><?php esc_html_e('Configure how you\'d like the blog to be printed, or just use our recommended defaults.', 'print-my-blog'); ?></p>
-    <a href="" onclick="jQuery('.pmb-page-setup-options-advanced').toggle();return false;"><?php esc_html_e('Show Options', 'print-my-blog'); ?></a><br/><br/>
     <form action="<?php echo site_url();?>" method="get">
+        <?php if(PMB_REST_PROXY_EXISTS){?>
+        <table class="form-table">
+            <tbody>
+                <tr>
+                    <th scope="row"><?php esc_html_e('Site URL (including "https://" or "http://")', 'print-my-blog');?></th>
+                    <td>
+                        <input name="site" placeholder="<?php echo site_url();?>">
+                        <p class="description"><?php esc_html_e('URL of the WordPress site (self-hosted or on WordPress.com) you\'d like to print. Leave blank to use this current site.', 'print-my-blog');?></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <?php }?>
+
+        <a href="" onclick="jQuery('.pmb-page-setup-options-advanced').toggle();return false;"><?php esc_html_e('Show Options', 'print-my-blog'); ?></a><br/><br/>
         <div class="pmb-page-setup-options-advanced" style="display:none">
             <h1><?php esc_html_e('Options','print-my-blog' );?></h1>
             <h2><?php esc_html_e('Content','print-my-blog' );?></h2>
             <table class="form-table">
                 <tbody>
-                <?php if(PMB_REST_PROXY_EXISTS){?>
-                    <tr>
-                        <th scope="row"><?php esc_html_e('Site URL (including "https://" or "http://")', 'print-my-blog');?></th>
-                        <td>
-                            <input name="site" placeholder="<?php echo site_url();?>">
-                            <p class="description"><?php esc_html_e('URL of the WordPress site (self-hosted or on WordPress.com) you\'d like to print. Leave blank to use this current site.', 'print-my-blog');?></p>
-                        </td>
-                    </tr>
-                <?php }?>
                 <tr>
                     <th scope="row">
                         <?php esc_html_e('Content to Print','print-my-blog' );?>

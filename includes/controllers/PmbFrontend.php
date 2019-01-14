@@ -210,6 +210,10 @@ class PmbFrontend extends BaseController
                 'proxy_for' => null
             );
         }
+        // If they forgot to add http(s), add it for them.
+        if(strpos($_GET['site'], 'http://') === false && strpos($_GET['site'], 'https://') === false) {
+            $_GET['site'] = 'http://' . $_GET['site'];
+        }
         // if there is one, check if it exists in wordpress.com, eg "retirementreflections.com"
         $site = sanitize_text_field($_GET['site']);
 
