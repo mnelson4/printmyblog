@@ -87,6 +87,7 @@ Your website might not be around forever, nor might WordPress. But by printing i
 = 1.2.4 =
 * Add Gutenberg Block so site visitors can print the blog
 * Increased post rendering from 500ms to 200ms per post
+* Moved WP REST Proxy area outside of advanced area
 
 = 1.2.3 =
 * Fixed a bug from 1.2.0 that caused text resizing to not load
