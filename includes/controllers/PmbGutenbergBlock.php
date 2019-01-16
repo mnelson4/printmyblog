@@ -22,7 +22,7 @@ class PmbGutenbergBlock extends BaseController
         wp_register_script(
             'pmb-setupform',
             PMB_ASSETS_URL . 'scripts/pmb-block.js',
-            array('wp-blocks', 'wp-element')
+            array('wp-blocks', 'wp-element', 'wp-components')
         );
 
         register_block_type('printmyblog/setupform', array(

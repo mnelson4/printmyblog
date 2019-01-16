@@ -1,6 +1,6 @@
 var el = wp.element.createElement,
     registerBlockType = wp.blocks.registerBlockType,
-    blockStyle = { backgroundColor: '#900', color: '#fff', padding: '20px' };
+    ServerSideRender = wp.components.ServerSideRender;
 
 registerBlockType( 'printmyblog/setupform', {
     title: 'Print My Blog',
@@ -9,8 +9,13 @@ registerBlockType( 'printmyblog/setupform', {
 
     category: 'layout',
 
-    edit: function() {
-        return 'Print My Blog Form Here';
+    edit: function(props) {
+        return (
+            el(ServerSideRender, {
+                block: "printmyblog/setupform",
+                attributes: props.attributes
+            })
+        );
     },
 
     save: function() {
