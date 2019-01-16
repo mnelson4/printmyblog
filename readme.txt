@@ -13,13 +13,13 @@ Create a paper/PDF copy of your entire blog in one click!
 
 == Description ==
 
-Create a paper/PDF copy of your entire blog in one click!
-A paper copy will be readable in 100 years- long after your website is taken down and your digital backups are corrupted.
+Create a paper/PDF copy of your entire blog in 2 clicks!
+A paper copy may  be readable in 100 years- long after your website is taken down and your digital backups are corrupted.
 "Print My Blog" makes this really easy: no need to print your blog posts one-by-one, or print unnecessary stuff like your sidebar widgets or footer.
 One click printing of your entire blog's contents in a format optimized for print.
-Plugin alternative to [blog2print](https://www.blog2print.com), except you can print with your own printer or even your browser's print-to-pdf feature.
+Plugin alternative to [blog2print](https://www.blog2print.com) and [blogbooker](https://blogbooker.com/), except you can print with your own printer or even your browser's print-to-pdf feature.
 
-No upsells, no premium version. Entirely supported by donations.
+No upsells, no premium version.
 
 = Why would I want to print my entire blog? =
 
@@ -31,9 +31,9 @@ Glad you asked:
 * when shutting down a blog, convert its content to an easy-to-read format
 
 = How does it work? =
-Watch this 45 second video!
+Watch this 2 minute video.
 
-https://www.youtube.com/watch?v=puMi_CLxl3s&feature=youtu.be
+https://youtu.be/shOjx-Ijung
 
 It works with hundreds of blog posts (or pages, but not other custom post types yet), with Gutenberg, and page builders.
 Only your posts’ content is printed, not your logo, site title, sidebar widgets, footer, etc. Just the stuff you care to read.
