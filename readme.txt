@@ -56,6 +56,7 @@ Here’s how you can help:
 * [give feedback](https://github.com/mnelson4/printmyblog) on GitHub about what features you want or bugs you find
 * help translate. Make this accessible to users everywhere using [WordPress' Glotpress](https://translate.wordpress.org/projects/wp-plugins/print-my-blog)
 * help help. Answer other users’ questions in the [support section](https://wordpress.org/support/plugin/print-my-blog).
+* fund development. [Make a donation](https://www.paypal.me/cmljnelson)
 
 == What's the Big Deal? ==
 
