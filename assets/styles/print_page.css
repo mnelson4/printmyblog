@@ -16,23 +16,34 @@
 @media not print{
     .pmb-posts{
         display:none;
+        width:600px;
+        margin: 0 auto 0 auto;
+        box-shadow:0.5em 1em darkgray;
+        background-color:white;
+        border: 1px solid darkgray;
+        padding:6em;
+    }
+
+    .pmb-posts img{
+        max-width:100%;
+    }
+
+    body.pmb-print-page{
+        background-color:lightgray;
     }
 }
 
-body.pmb-print-page{
-    background-color:white;
-}
 .pmb-waiting-message-fullpage{
-    background-color:white;
     color:black;
     z-index:1000;
 }
 
 .pmb-waiting-message-outer-container{
+    background-color:white;
     margin: 5% auto 5% auto;
-    box-shadow: 0.5em 1em lightgrey;
-    border:1px solid grey;
-    max-width:600px;
+    box-shadow: 0.5em 1em darkgray;
+    border:1px solid darkgray;
+    max-width:40em;
     padding-bottom:1em;
 }
 
