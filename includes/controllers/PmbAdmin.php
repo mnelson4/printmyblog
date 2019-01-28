@@ -35,8 +35,8 @@ class PmbAdmin extends BaseController
     {
         add_submenu_page(
             'tools.php',
-            esc_html__('Print My Blog', 'printmyblog'),
-            esc_html__('Print My Blog', 'printmyblog'),
+            esc_html__('Print My Blog', 'print-my-blog'),
+            esc_html__('Print My Blog', 'print-my-blog'),
             PMB_ADMIN_CAP,
             PMB_ADMIN_PAGE_SLUG,
             array(
@@ -65,7 +65,7 @@ class PmbAdmin extends BaseController
         $links[] = '<a href="'
             . admin_url(PMB_ADMIN_PAGE_PATH)
             . '">'
-            . esc_html__('Print Setup Page', 'printmyblog')
+            . esc_html__('Print Setup Page', 'print-my-blog')
             . '</a>';
         return $links;
     }

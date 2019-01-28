@@ -1,10 +1,10 @@
 <div class="wrap nosubsub">
-<h1><?php esc_html_e('Print My Blog','printmyblog' );?></h1>
+<h1><?php esc_html_e('Print My Blog','print-my-blog' );?></h1>
     <?php if(isset($_GET['welcome'])){
         ?>
         <div class="updated fade">
             <p>
-                <?php esc_html_e('Welcome! This is where you begin preparing your blog for printing. You can get here from the left-hand menu, under "Tools", then "Print My Blog."','printmyblog' );?>
+                <?php esc_html_e('Welcome! This is where you begin preparing your blog for printing. You can get here from the left-hand menu, under "Tools", then "Print My Blog."','print-my-blog' );?>
             </p>
         </div>
     <?php
@@ -142,6 +142,6 @@
             </div>
             <input type="hidden" name="<?php echo PMB_PRINTPAGE_SLUG;?>" value="1">
         </div>
-        <button class="button-primary"><?php esc_html_e('Prepare Print Page','printmyblog' );?></button>
+        <button class="button-primary"><?php esc_html_e('Prepare Print-Page','print-my-blog' );?></button>
     </form>
 </div>

@@ -22,31 +22,33 @@
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
-<div class="pmb-waiting-message-fullpage">
+<body <?php body_class('pmb-print-page'); ?>>
+<div class="pmb-waiting-message-fullpage pmb-extra-content">
     <div class="pmb-waiting-message-outer-container">
         <div class="pmb-waiting-area">
-            <h1 class="pmb-waiting-h1"><?php _e('We are preparing your blog&#8217;s content for printing. Please wait...','printmyblog' );?></h1>
-            <div class="pmb-spinner-container">
-                <div class="pmb-spinner"></div>
-            </div>
-            <p class="pmb-status"><span class="pmb-posts-count">0</span><?php esc_html_e(' posts loaded','printmyblog' );?></p>
+            <h1 id='pmb-in-progress-h1' class="pmb-waiting-h1"><?php _e('Initializing...','print-my-blog' );?></h1>
         </div>
-        <div class="pmb-print-ready">
-            <h1 class="pmb-waiting-h1"><?php _e('Ready to Print!','printmyblog' );?></h1>
-            <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print Now','printmyblog' );?>"/>
-            <input type="submit" onclick="pmb_print_preview()" value="<?php esc_attr_e('View Printable Content','printmyblog' );?>">
+        <div class="pmb-print-ready" style="visibility:hidden">
+            <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print From Browser','print-my-blog' );?>"/>
         </div>
     </div>
+</div>
+<div class="pmb-posts-placeholder pmb-extra-content">
+    <div class="pmb-spinner-container">
+        <div class="pmb-spinner"></div>
+    </div>
+    <p class="pmb-status"><span class="pmb-posts-count"></span></p>
 </div>
 <div class="pmb-posts">
     <div class="pmb-posts-header">
         <h1 class="site-title"><?php echo $pmb_site_name;?></h1>
         <p class="site-description"><?php echo $pmb_site_description;?></p>
         <p><?php printf(
-                esc_html__('Printout of %1$s, generated on %2$s using "Print My Blog" plugin.','printmyblog' ),
+                esc_html__('Printout of %1$s on %2$s using %3$sPrint My Blog%4$s','print-my-blog' ),
                 $pmb_site_url,
-                date_i18n( get_option( 'date_format' ))
+                date_i18n( get_option( 'date_format' )),
+                '<a href="https://wordpress.org/plugins/print-my-blog/">',
+                '</a>'
             );?>
         </p>
     </div>

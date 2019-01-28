@@ -19,20 +19,29 @@
     }
 }
 
+body.pmb-print-page{
+    background-color:white;
+}
 .pmb-waiting-message-fullpage{
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
     background-color:white;
     color:black;
     z-index:1000;
 }
 
 .pmb-waiting-message-outer-container{
+    margin: 5% auto 5% auto;
+    box-shadow: 0.5em 1em lightgrey;
+    border:1px solid grey;
+    max-width:600px;
+    padding-bottom:1em;
+}
+
+.pmb-extra-content{
     text-align:center;
-    margin-top:10%;
+}
+
+.pmb-posts-placeholder{
+    margin-top:5%;
 }
 
 div.pmb-post-header{
@@ -51,9 +60,6 @@ div.pmb-post-header{
 }
 button{
     background-color:lightskyblue;
-}
-.pmb-print-ready{
-    display:none;
 }
 .print-preview-instructions ol{
      text-align:left;

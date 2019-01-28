@@ -7,6 +7,7 @@ Tested up to: 5.0
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Donate link: https://www.paypal.me/cmljnelson
 
 
 Create a paper/PDF copy of your entire blog in one click!
@@ -78,8 +79,10 @@ Here’s how you can help this plugin to continue to exist and improve:
 1. Upload the plugin files to the `/wp-content/plugins/print-my-blog` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
 1. Go to Tools->Print To Blog
-1. Press "Prepare Print Page"
-1. When you see "Print Now" appear, click it.
+1. Press "Prepare Print Page". Your blog's content will be loaded into the following page.
+1. When you see "Print From Browser" appear, click it. Your blog will be printed from your browser.
+
+
 
 == Troubleshooting ==
 

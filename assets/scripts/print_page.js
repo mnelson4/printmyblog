@@ -24,7 +24,6 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.total_posts = 0;
     this.posts = [];
     this.taxonomies = {};
-    this.original_posts = [];
     this.ordered_posts = [];
     this.rendering_wait = pmb_instance_vars.rendering_wait;
     this.include_inline_js = pmb_instance_vars.include_inline_js;
@@ -69,6 +68,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     };
 
     this.beginLoading = function () {
+        this.header.html(this.translations.loading_content);
         let collection = this.getCollection();
         var data = this.getCollectionQueryData();
         collection.fetch({data: data,
@@ -104,7 +104,6 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         var posts_to_render = this.posts;
         if(this.post_type === 'page') {
             this.status_span.html( this.translations.organizing_posts);
-            this.original_posts = this.posts.slice();
             // Sort according to order (don't worry about hierarchy yet).
             this.posts = this.posts.sort(
                 (a, b) => {
@@ -126,6 +125,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             this.ordered_posts = this.posts;
         }
         //render
+        this.header.html(this.translations.rendering_posts);
         this.renderPosts();
     };
 
@@ -148,7 +148,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.renderPosts = function() {
         var post = this.ordered_posts.shift();
         if(typeof post === 'object') {
-            this.status_span.html( this.translations.rendering_posts + ' ' + this.ordered_posts.length + ' ' + this.translations.left);
+            this.status_span.html( (this.total_posts - this.ordered_posts.length) + '/' + this.total_posts);
             this.addPostToPage(post);
             setTimeout(
                 () => {
@@ -189,11 +189,13 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
 
     this.finish = function () {
-        this.status_span.html(this.translations.wrapping_up);
+        this.header.html(this.translations.wrapping_up);
+        this.status_span.html('');
         setTimeout(
             () => {
+                this.header.html(this.translations.ready);
+                this.print_ready.css('visibility','visible');
                 this.waiting_area.hide();
-                this.print_ready.show();
                 this.prettyUpPrintedPage();
             },
             5000
@@ -360,11 +362,11 @@ jQuery(document).ready(function () {
     wp.api.loadPromise.done( function() {
         pmb = new PmbPrintPage(
             {
-                header_selector: '.pmb-waiting-h1',
+                header_selector: '#pmb-in-progress-h1',
                 status_span_selector: '.pmb-status',
                 posts_count_span_selector: '.pmb-posts-count',
                 posts_div_selector: '.pmb-posts-body',
-                waiting_area_selector: '.pmb-waiting-area',
+                waiting_area_selector: '.pmb-posts-placeholder',
                 print_ready_selector: '.pmb-print-ready',
                 locale: pmb_print_data.data.locale,
                 image_size: pmb_print_data.data.image_size,
