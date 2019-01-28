@@ -15,13 +15,13 @@
 }
 @media not print{
     .pmb-posts{
-        display:none;
-        width:600px;
+        display: none;
+        width: 1000px;
         margin: 0 auto 0 auto;
         box-shadow:0.5em 1em darkgray;
         background-color:white;
         border: 1px solid darkgray;
-        padding:6em;
+        padding: 6em;
     }
 
     .pmb-posts img{
