@@ -34,8 +34,8 @@
         </div>
         <div class="pmb-print-ready">
             <h1 class="pmb-waiting-h1"><?php _e('Ready to Print!','printmyblog' );?></h1>
-                <button onclick="window.print()"><?php esc_html_e('Print Now','printmyblog' );?></button>
-            <button onclick="pmb_print_preview()"><?php esc_html_e('View Printable Content','printmyblog' );?></button>
+            <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print Now','printmyblog' );?>"/>
+            <input type="submit" onclick="pmb_print_preview()" value="<?php esc_attr_e('View Printable Content','printmyblog' );?>">
         </div>
     </div>
 </div>
