@@ -13,7 +13,7 @@ Create a paper/PDF copy of your entire blog in one click!
 
 == Description ==
 
-Create a paper/PDF copy of your entire blog in 2 clicks!
+Print your  blog in 1 click! Use your own web browser to create a paper, PDF, or even e-book copy.
 A paper copy may  be readable in 100 years- long after your website is taken down and your digital backups are corrupted.
 "Print My Blog" makes this really easy: no need to print your blog posts one-by-one, or print unnecessary stuff like your sidebar widgets or footer.
 One click printing of your entire blog's contents in a format optimized for print.
@@ -25,44 +25,53 @@ No upsells, no premium version.
 
 Glad you asked:
 
-* backup your memories in a format that has no technological dependencies: paper!
+* backup your memories in a format that has no technological dependencies: paper! (Or other portable formats like PDF or ePub.)
 * easily share an entire blog offline
 * create a book from your blog (although [Anthologize](https://wordpress.org/plugins/anthologize/) might be a better option for that)
 * when shutting down a blog, convert its content to an easy-to-read format
 
-= How does it work? =
+= What Does It Do? =
 Watch this 2 minute video.
 
 https://youtu.be/shOjx-Ijung
 
-It works with hundreds of blog posts (or pages, but not other custom post types yet), with Gutenberg, and page builders.
+It works with thousands of blog posts (or pages), with Gutenberg, and page builders.
 Only your posts’ content is printed, not your logo, site title, sidebar widgets, footer, etc. Just the stuff you care to read.
+
+= How Does It Work? =
+
+After activating the plugin and clicking "Prepare Print Page"
+1. your blog's posts are fetched in a way that thousands can be put on the page at once
+(using the WP REST API)
+2. a few instructions are given to the browser on how to print the page nicely (using CSS)
+3. your web browser takes care of printing.
+
+It turns out web browsers are pretty good at printing to paper. They're also good at saving the web page to a PDF file (eg Google Chrome)
+ and even creating e-books (they may an add-on for this.)
 
 = But You’re Destroying Trees! =
 Yes it can be a lot of paper. But
 
-* there are paper-saving options, like using small text, multiple columns, and use smaller images (or removing them altogether)
-* your latest package delivery used up about the same amount of tree
-* you can recycle the pages if you’re done anyways
+* it might not be that much compared to how much paper you've used on books, cereal boxes, and package deliveries (and it's recyclable anyway)
+* there are paper-saving options, like using small text, multiple columns, and smaller images (or no images at all)
 * lastly, you don’t need to actually print to paper. Google Chrome and other browsers allow you to instead print to PDF.
-
-== Contribute ==
-
-Want this plugin to be even better?
-
-Here’s how you can help:
-
-* [give it a good review](https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post) and tell your friends
-* [give feedback](https://github.com/mnelson4/printmyblog) on GitHub about what features you want or bugs you find
-* help translate. Make this accessible to users everywhere using [WordPress' Glotpress](https://translate.wordpress.org/projects/wp-plugins/print-my-blog)
-* help help. Answer other users’ questions in the [support section](https://wordpress.org/support/plugin/print-my-blog).
-* fund development. [Make a donation](https://www.paypal.me/cmljnelson)
 
 == What's the Big Deal? ==
 
 The mission is: preserve your blog for decades to come in a low-tech format.
 
 Your website might not be around forever, nor might WordPress. But by printing it, there’s hope your blog’s ideas and stories can live on.
+
+== Contribute ==
+
+Here’s how you can help this plugin to continue to exist and improve:
+
+* [give it a good review](https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post) and tell your friends
+* [give feedback](https://github.com/mnelson4/printmyblog) on GitHub about what features you want or bugs you find
+* help translate. Make this accessible to users everywhere using [WordPress' Glotpress](https://translate.wordpress.org/projects/wp-plugins/print-my-blog)
+* help help. Answer other users’ questions in the [support section](https://wordpress.org/support/plugin/print-my-blog).
+* fund development. [Make a donation](https://www.paypal.me/cmljnelson) and we'll try to prioritize the work you've requested.
+
 
 == Installation ==
 
@@ -76,6 +85,7 @@ Your website might not be around forever, nor might WordPress. But by printing i
 
 * the WP API (or REST API) needs to not be deactivated
 * caching plugins should probably be deactivated before use
+* recommended web browsers: Firefox, Google Chrome.  
 
 == Screenshots ==
 
