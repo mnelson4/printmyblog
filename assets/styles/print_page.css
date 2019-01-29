@@ -36,15 +36,20 @@
 .pmb-waiting-message-fullpage{
     color:black;
     z-index:1000;
+    position: fixed;
+    left: 50%;
+    top:0;
+    transform: translate(-50%, -2em);
+    width:25em;
+    max-width:96%;
+
 }
 
 .pmb-waiting-message-outer-container{
     background-color:white;
-    margin: 5% auto 5% auto;
     box-shadow: 0.5em 1em darkgray;
     border:1px solid darkgray;
-    max-width:40em;
-    padding-bottom:1em;
+    padding-bottom: 1em;
 }
 
 .pmb-extra-content{
@@ -52,7 +57,11 @@
 }
 
 .pmb-posts-placeholder{
-    margin-top:5%;
+    /*position: fixed;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -2em);
+    */
 }
 
 div.pmb-post-header{

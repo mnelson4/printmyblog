@@ -31,14 +31,15 @@
         <div class="pmb-print-ready" style="visibility:hidden">
             <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print From Browser','print-my-blog' );?>"/>
         </div>
+        <div class="pmb-posts-placeholder pmb-extra-content">
+            <div class="pmb-spinner-container">
+                <div class="pmb-spinner"></div>
+            </div>
+            <p class="pmb-status"><span class="pmb-posts-count"></span></p>
+        </div>
     </div>
 </div>
-<div class="pmb-posts-placeholder pmb-extra-content">
-    <div class="pmb-spinner-container">
-        <div class="pmb-spinner"></div>
-    </div>
-    <p class="pmb-status"><span class="pmb-posts-count"></span></p>
-</div>
+
 <div class="pmb-posts">
     <div class="pmb-posts-header">
         <h1 class="site-title"><?php echo $pmb_site_name;?></h1>
