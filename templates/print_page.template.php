@@ -29,7 +29,7 @@
             <h1 id='pmb-in-progress-h1' class="pmb-waiting-h1"><?php _e('Initializing...','print-my-blog' );?></h1>
         </div>
         <div class="pmb-print-ready" style="visibility:hidden">
-            <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print From Browser','print-my-blog' );?>"/>
+            <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print','print-my-blog' );?>"/>
         </div>
         <div class="pmb-posts-placeholder pmb-extra-content">
             <div class="pmb-spinner-container">

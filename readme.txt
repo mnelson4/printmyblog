@@ -80,7 +80,7 @@ Here’s how you can help this plugin to continue to exist and improve:
 1. Activate the plugin through the 'Plugins' screen in WordPress
 1. Go to Tools->Print To Blog
 1. Press "Prepare Print Page". Your blog's content will be loaded into the following page.
-1. When you see "Print From Browser" appear, click it. Your blog will be printed from your browser.
+1. When you see the "Print" button appear, click it. Your blog will be printed from your browser.
 
 
 
