@@ -98,6 +98,10 @@ Here’s how you can help this plugin to continue to exist and improve:
 
 == Changelog ==
 
+= 1.3.1 =
+* Move pretend page down a bit so we dont hide the page title
+* Remove ellipsis because they look ugly in RTL languages
+
 = 1.3.0 =
 * Improved print page to look more like a print preview
 * Use submit inputs instead of buttons because themes generally style them better
