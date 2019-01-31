@@ -82,10 +82,10 @@ class PmbFrontend extends BaseController
             'pmb_print_data',
             array(
                 'i18n' => array(
-                    'loading_content' => esc_html__('Loading Content...', 'print-my-blog'),
+                    'loading_content' => esc_html__('Loading Content', 'print-my-blog'),
                     'organizing_posts' => esc_html__('Ordering Posts', 'print-my-blog'),
-                    'rendering_posts' => esc_html__('Placing Content on Page...', 'print-my-blog'),
-                    'wrapping_up' => esc_html__('Optimizing for Print...', 'print-my-blog'),
+                    'rendering_posts' => esc_html__('Placing Content on Page', 'print-my-blog'),
+                    'wrapping_up' => esc_html__('Optimizing for Print', 'print-my-blog'),
                     'ready' => esc_html__('Print-Page Ready', 'print-my-blog'),
                     'error_fetching_posts' => esc_html__('There was an error fetching posts. It was: ', 'print-my-blog'),
                 ),
