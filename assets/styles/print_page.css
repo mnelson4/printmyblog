@@ -39,7 +39,7 @@
     position: fixed;
     left: 50%;
     top:0;
-    transform: translate(-50%, -2em);
+    transform: translate(-50%, 1em);
     width:25em;
     max-width:96%;
 
