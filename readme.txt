@@ -98,6 +98,11 @@ Here’s how you can help this plugin to continue to exist and improve:
 
 == Changelog ==
 
+= 1.3.0 =
+* Improved print page to look more like a print preview
+* Use submit inputs instead of buttons because themes generally style them better
+* Add link to make donations
+
 = 1.2.4 =
 * Add Gutenberg Block so site visitors can print the blog
 * Increased post rendering from 500ms to 200ms per post
