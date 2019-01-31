@@ -26,7 +26,7 @@
 <div class="pmb-waiting-message-fullpage pmb-extra-content">
     <div class="pmb-waiting-message-outer-container">
         <div class="pmb-waiting-area">
-            <h1 id='pmb-in-progress-h1' class="pmb-waiting-h1"><?php _e('Initializing...','print-my-blog' );?></h1>
+            <h1 id='pmb-in-progress-h1' class="pmb-waiting-h1"><?php _e('Initializing','print-my-blog' );?></h1>
         </div>
         <div class="pmb-print-ready" style="visibility:hidden">
             <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print','print-my-blog' );?>"/>
