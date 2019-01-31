@@ -98,6 +98,11 @@ Here’s how you can help this plugin to continue to exist and improve:
 
 == Changelog ==
 
+= 1.3.2 =
+* Remove ellipsis from "Initializing..."
+* Added assets/styles/plugin-compatibility.css for CSS that is for compatibility with specific plugins (so far that's [Yuzo Related Posts](
+https://wordpress.org/plugins/yuzo-related-post/) and [I Recommend This](https://wordpress.org/plugins/i-recommend-this/))
+
 = 1.3.1 =
 * Move pretend page down a bit so we dont hide the page title
 * Remove ellipsis because they look ugly in RTL languages
