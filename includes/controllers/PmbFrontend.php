@@ -77,6 +77,13 @@ class PmbFrontend extends BaseController
             array(),
             filemtime(PMB_ASSETS_DIR . 'styles/tiled-gallery.css')
         );
+        // Enqueue the CSS for compatibility with known troublemaking plugins.
+        wp_enqueue_style(
+            'pmb-plugin-compatibility',
+            PMB_ASSETS_URL . 'styles/plugin-compatibility.css',
+            array(),
+            filemtime(PMB_ASSETS_DIR . 'styles/plugin-compatibility.css')
+        );
         wp_localize_script(
             'pmb_print_page',
             'pmb_print_data',
