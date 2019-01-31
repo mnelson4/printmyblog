@@ -59,15 +59,15 @@ class PmbFrontend extends BaseController
         );
         wp_enqueue_script(
             'pmb_print_page',
-            PMB_ASSETS_URL . 'scripts/print_page.js',
+            PMB_ASSETS_URL . 'scripts/print-page.js',
             array('jquery', 'wp-api', 'luxon'),
-            filemtime(PMB_ASSETS_DIR . 'scripts/print_page.js')
+            filemtime(PMB_ASSETS_DIR . 'scripts/print-page.js')
         );
         wp_enqueue_style(
             'pmb_print_page',
-            PMB_ASSETS_URL . 'styles/print_page.css',
+            PMB_ASSETS_URL . 'styles/print-page.css',
             array(),
-            filemtime(PMB_ASSETS_DIR . 'styles/print_page.css')
+            filemtime(PMB_ASSETS_DIR . 'styles/print-page.css')
         );
         // Enqueue tiled gallery too. It's par of Jetpack so it's common, and if we're printing a WordPress.com blog
         // it's very likely to be used.
