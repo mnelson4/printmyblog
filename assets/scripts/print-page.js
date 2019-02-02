@@ -25,6 +25,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.posts = [];
     this.taxonomies = {};
     this.ordered_posts = [];
+    this.loadComments = pmb_instance_vars.comments;
+    this.comments = [];
+    this.total_comments = 0;
+    this.ordered_comments = [];
     this.rendering_wait = pmb_instance_vars.rendering_wait;
     this.include_inline_js = pmb_instance_vars.include_inline_js;
     /**
@@ -67,6 +71,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         return data;
     };
 
+    this.getCommentCollection = function () {
+      return new wp.api.collections.Comments();
+    };
+
     this.beginLoading = function () {
         this.header.html(this.translations.loading_content);
         let collection = this.getCollection();
@@ -96,11 +104,109 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 this.storePostsAndMaybeFetchMore(posts, collection);
             });
         } else {
-            this.wrapUp();
+            this.maybeStoreComments();
         }
     };
 
-    this.wrapUp = function() {
+    /**
+     * Begins loading comments if that was requested, otherwise skips right to sorting and rendering posts.
+     */
+    this.maybeStoreComments = function() {
+        if (this.loadComments) {
+            this.beginLoadingComments();
+            // once we are done loading comments, we'll sort and render posts etc.
+        } else {
+            // skip loading comments.
+            this.sortPosts();
+            this.render();
+        }
+    };
+
+
+
+
+    this.beginLoadingComments = function () {
+        this.header.html(this.translations.loading_comments);
+        let collection = this.getCommentCollection();
+        collection.fetch({data:{order:'asc'}}).done((comments) => {
+            this.storeCommentsAndMaybeFetchMore(comments, collection);
+        });
+    };
+
+    this.storeCommentsAndMaybeFetchMore = function(comments, collection) {
+        if(typeof comments === 'object' && 'errors' in comments) {
+            var first_error_key = Object.keys(comments.errors)[0];
+            var first_error_message = comments.errors[first_error_key];
+            this.status_span.html( this.translations.error_fetching_posts + first_error_message + ' (' + first_error_key + ')');
+            return;
+        }
+        this.comments = this.comments.concat(comments);
+        this.total_comments = collection.state.totalObjects;
+        let comments_so_far = this.comments.length;
+        this.posts_count_span.html(comments_so_far + '/' + this.total_comments);
+        if (collection.hasMore()) {
+            collection.more().done((comments) => {
+                this.storeCommentsAndMaybeFetchMore(comments, collection);
+            });
+        } else {
+            this.organizeComments();
+        }
+    };
+
+    this.organizeComments = function(){
+        for(let i=0; i<this.total_comments; i++) {
+            let comment = this.comments[i];
+            if(comment.parent === 0) {
+                let post = this.findPostWithId(comment.post);
+                if( typeof post === 'object' && post !== null) {
+                    if( jQuery.type( post.comments) !== 'array') {
+                        post.comments = [];
+                    }
+                    post.comments.push(comment);
+                }
+            } else {
+                let parent_comment = this.getCommentWithId(comment.parent);
+                if( typeof parent_comment === 'object' && parent_comment !== null ){
+                    if( jQuery.type(parent_comment.children) !== 'array') {
+                        parent_comment.children = [];
+                    }
+                    parent_comment.children.push(comment);
+                }
+            }
+        }
+        this.sortPosts();
+        this.render();
+    };
+
+    /**
+     *
+     * @param post_id
+     * @return {*}
+     */
+    this.findPostWithId = function(post_id) {
+        for(let i=0; i<this.total_posts; i++){
+            let post = this.posts[i] || this.ordered_posts[i];
+            if( post.id === post_id) {
+                return post;
+            }
+        }
+        return null;
+    };
+
+    this.getCommentWithId = function(comment_id) {
+        for(let i=0; i<this.total_comments; i++){
+            let comment = this.comments[i];
+            if( comment.id === comment_id) {
+                return comment;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Sorts posts or pages in the right order and stores them on this.ordered_posts. This is done synchronously.
+     */
+    this.sortPosts = function(){
         var posts_to_render = this.posts;
         if(this.post_type === 'page') {
             this.status_span.html( this.translations.organizing_posts);
@@ -119,15 +225,12 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 }
             );
             posts_to_render = this.getChildrenOf(0);
-
             this.organizePostsInPage(posts_to_render);
         } else {
             this.ordered_posts = this.posts;
         }
-        //render
-        this.header.html(this.translations.rendering_posts);
-        this.renderPosts();
     };
+
 
 
     /**
@@ -143,6 +246,14 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             }
             post = posts.shift();
         }
+    };
+
+    /**
+     * Renders the posts on the page
+     */
+    this.render = function() {
+        this.header.html(this.translations.rendering_posts);
+        this.renderPosts();
     };
 
     this.renderPosts = function() {
@@ -284,6 +395,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         }
         html_to_add += '</div>'
              + '</article>';
+        html_to_add += this.renderCommentsOf(post);
         this.posts_div.append(html_to_add);
     };
 
@@ -319,7 +431,12 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
     this.getPublishedDate = function(post)
     {
-        let ld = luxon.DateTime.fromJSDate(new Date(post.date));
+        return this.getPrettyDate(post.date);
+    }
+
+    this.getPrettyDate = function(iso_date)
+    {
+        let ld = luxon.DateTime.fromJSDate(new Date(iso_date));
         let format = {month: 'long', day: 'numeric', year: 'numeric'};
         ld.setLocale(this.locale);
         return ld.toLocaleString(format);
@@ -347,6 +464,86 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         }
         return '';
     }
+
+    this.renderCommentsOf = function(post)
+    {
+        let html = '';
+        let has_comments = typeof post.comments !== 'undefined' && post.comments !== null && post.comments.length > 0;
+            // There are comments
+
+        html += '<div id="comments" class="comments-area">';
+        html += '<div class="';
+        if( has_comments) {
+            html += 'comments-title-wrap';
+        } else {
+            html += 'comments-title-wrap no-responses';
+        }
+        html +='">';
+        html +='<h2 class="comments-title">' + this.translations.comments + '</h2>';
+        html += '</div>';
+        html += '<ol class="comment-list">';
+        if( has_comments) {
+            let htmlAndEven = this.renderComments(post.comments, 1, true, true);
+            html += htmlAndEven.html;
+        }
+        html += '</ol>';
+        return html;
+    }
+
+    this.renderComments = function(comments, depth, evenThread, even) {
+        let html = '';
+        for(let i=0; i<comments.length; i++){
+            let comment = comments[i];
+            let even_text;
+            if(even){
+                even_text = 'even';
+            } else {
+                even_text = 'odd';
+            }
+            let even_thread_text;
+            if(evenThread){
+                even_thread_text = 'thread-even';
+            } else {
+                even_thread_text = 'thread-odd';
+            }
+            html += '<li id="comment-'+comment.id+'" class="'+comment.type+' '+even_text+' '+even_thread_text+' depth-'+depth+'">\n' +
+                '\t\t\t<article id="div-comment-'+comment.id+'" class="comment-body">\n' +
+                '\t\t\t\t<footer class="comment-meta">\n' +
+                '\t\t\t\t\t<div class="comment-author vcard">\n' +
+                // comment.author_avatar_urls
+                '\t\t\t\t\t\t\t\t\t\t\t\t<b class="fn">'+comment.author_name+'</b> '+this.translations.says+'\t\t\t\t\t</div><!-- .comment-author -->\n' +
+                '\n' +
+                '\t\t\t\t\t<div class="comment-metadata">\n' +
+                '\t\t\t\t\t\t\t<time datetime="'+comment.date+'">\n' +
+                '\t\t\t\t\t\t\t\t'+this.getPrettyDate(comment.date)+'\t\t\t\t\t\t\t</time>\n' +
+                '\t\t\t\t\t\t</a>\n' +
+                '\t\t\t\t\t\t\t\t\t\t\t</div><!-- .comment-metadata -->\n' +
+                '\n' +
+                '\t\t\t\t\t\t\t\t\t</footer><!-- .comment-meta -->\n' +
+                '\n' +
+                '\t\t\t\t<div class="comment-content">\n' +
+                '\t\t\t\t\t'+comment.content.rendered+
+                '\t\t\t\t</div><!-- .comment-content -->\n' +
+                '\n';
+
+            if( typeof comment.children !== 'undefined' && comment.children !== null && comment.children.length > 0) {
+                html += '<ol class="children">';
+                let htmlAndEven = this.renderComments(comment.children, depth++, evenThread, ! even);
+                even = ! htmlAndEven.even;
+                html += htmlAndEven.html;
+                html += '</ol>';
+            }
+            html += '</li>';
+
+            // Alternate even and odd.
+            evenThread = ! evenThread;
+            even = ! even;
+        }
+        return {
+            html:html,
+            even:even
+        };
+    };
 }
 
 /**
@@ -375,7 +572,8 @@ jQuery(document).ready(function () {
                 columns: pmb_print_data.data.columns,
                 post_type: pmb_print_data.data.post_type,
                 rendering_wait: pmb_print_data.data.rendering_wait,
-                include_inline_js: pmb_print_data.data.include_inline_js
+                include_inline_js: pmb_print_data.data.include_inline_js,
+                comments: pmb_print_data.data.comments
             },
             pmb_print_data.i18n
         );

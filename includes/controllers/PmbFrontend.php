@@ -90,11 +90,14 @@ class PmbFrontend extends BaseController
             array(
                 'i18n' => array(
                     'loading_content' => esc_html__('Loading Content', 'print-my-blog'),
+                    'loading_comments' => esc_html__('Loading Comments', 'print-my-blog'),
                     'organizing_posts' => esc_html__('Ordering Posts', 'print-my-blog'),
                     'rendering_posts' => esc_html__('Placing Content on Page', 'print-my-blog'),
                     'wrapping_up' => esc_html__('Optimizing for Print', 'print-my-blog'),
                     'ready' => esc_html__('Print-Page Ready', 'print-my-blog'),
                     'error_fetching_posts' => esc_html__('There was an error fetching posts. It was: ', 'print-my-blog'),
+                    'comments' => esc_html__('Comments', 'print-my-blog'),
+                    'says' => __('<span class="screen-reader-text says">says:</span>', 'print-my-blog')
                 ),
                 'data' => array(
                     'locale' => get_locale(),
@@ -104,7 +107,8 @@ class PmbFrontend extends BaseController
                     'columns' => $this->getFromRequest('columns',1),
                     'post_type' => $this->getFromRequest('post-type', 'post'),
                     'rendering_wait' => $this->getFromRequest('rendering-wait', 500),
-                    'include_inline_js' => (bool)$this->getFromRequest('include-inline-js', false)
+                    'include_inline_js' => (bool)$this->getFromRequest('include-inline-js', false),
+                    'comments' => (bool)$this->getFromRequest('comments', false)
                 ),
             )
         );

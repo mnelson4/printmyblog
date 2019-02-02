@@ -45,6 +45,16 @@
                 </tr>
                 <tr>
                     <th scope="row">
+                        <label for="comments"><?php esc_html_e('Include Comments','print-my-blog' );?></label>
+                    </th>
+                    <td>
+                        <input type="checkbox" name="comments" value="1">
+                        <p class="description"><?php esc_html_e('Whether to include the posts\'s comments.','print-my-blog' );?></p>
+                    </td>
+
+                </tr>
+                <tr>
+                    <th scope="row">
                         <label for="include-excerpts"><?php esc_html_e('Include Excerpts','print-my-blog' );?></label>
                     </th>
                     <td>
