@@ -467,6 +467,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
     this.renderCommentsOf = function(post)
     {
+        if(! this.loadComments){
+            return '';
+        }
         let html = '';
         let has_comments = typeof post.comments !== 'undefined' && post.comments !== null && post.comments.length > 0;
             // There are comments
