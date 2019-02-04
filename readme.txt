@@ -98,6 +98,9 @@ Here’s how you can help this plugin to continue to exist and improve:
 
 == Changelog ==
 
+= 1.3.3 =
+* Fix fatal error when function "register_block_type" isn't defined
+
 = 1.3.2 =
 * Remove ellipsis from "Initializing..."
 * Added assets/styles/plugin-compatibility.css for CSS that is for compatibility with specific plugins (so far that's [Yuzo Related Posts](
