@@ -7,7 +7,7 @@ Tested up to: 5.0
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Donate link: https://www.paypal.me/cmljnelson
+Donate link: https://opencollective.com/print-my-blog
 
 
 Create a paper/PDF copy of your entire blog in one click!
@@ -71,7 +71,7 @@ Here’s how you can help this plugin to continue to exist and improve:
 * [give feedback](https://github.com/mnelson4/printmyblog) on GitHub about what features you want or bugs you find
 * help translate. Make this accessible to users everywhere using [WordPress' Glotpress](https://translate.wordpress.org/projects/wp-plugins/print-my-blog)
 * help help. Answer other users’ questions in the [support section](https://wordpress.org/support/plugin/print-my-blog).
-* fund development. [Make a donation](https://www.paypal.me/cmljnelson) and we'll try to prioritize the work you've requested.
+* fund development. [Make an optional donation](https://opencollective.com/print-my-blog) to support ongoing development.
 
 
 == Installation ==
@@ -97,6 +97,9 @@ Here’s how you can help this plugin to continue to exist and improve:
 3. The Blog is Ready for Printing!
 
 == Changelog ==
+
+= 1.3.4 =
+* Add links to support, review, and sponsor.
 
 = 1.3.3 =
 * Fix fatal error when function "register_block_type" isn't defined
