@@ -25,6 +25,28 @@
 <body <?php body_class('pmb-print-page'); ?>>
 <div class="pmb-waiting-message-fullpage pmb-extra-content">
     <div class="pmb-waiting-message-outer-container">
+        <div class="pmb-help">
+            <span class="pmb-help-ask"><?php printf(
+                    __('What do you think? %1$s', 'print-my-blog'),
+                    '<a id="pmb-help-love" href="javascript:pmb_help_show(\'pmb-help-love-text\');">😍</a> <a id="pmb-help-happy" href="javascript:pmb_help_show(\'pmb-help-happy-text\');")>😃</a> <a id="pmb-help-sad" href="javascript:pmb_help_show(\'pmb-help-sad-text\');")>☹️</a>'
+                );?>
+            </span>
+            <span class="pmb-help-love-text" style="display:none"><?php printf(
+                    __('Great! %1$sMaybe sponsor it (opens in new tab).%2$s', 'print-my-blog'),
+                    '<a href="https://opencollective.com/print-my-blog" target="_blank">',
+                    '</a>'
+                );?></span>
+            <span class="pmb-help-happy-text" style="display:none"><?php printf(
+                    __('Nice! %1$sPlease leave a review (opens in new tab)%2$s.', 'print-my-blog'),
+                    '<a href="https://wordpress.org/support/plugin/print-my-blog/reviews/?filter=5" target="_blank">',
+                    '</a>'
+            );?></span>
+            <span class="pmb-help-sad-text" style="display:none"><?php printf(
+                    __('That’s disappointing. %1$sPlease tell us how to improve (opens in new tab).%2$s', 'print-my-blog'),
+                    '<a href="https://wordpress.org/support/plugin/print-my-blog/" target="_blank">',
+                    '</a>'
+                    );?></span>
+        </div>
         <div class="pmb-waiting-area">
             <h1 id='pmb-in-progress-h1' class="pmb-waiting-h1"><?php _e('Initializing','print-my-blog' );?></h1>
         </div>
