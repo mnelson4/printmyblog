@@ -66,14 +66,18 @@
     <div class="pmb-posts-header">
         <h1 class="site-title"><?php echo $pmb_site_name;?></h1>
         <p class="site-description"><?php echo $pmb_site_description;?></p>
-        <p><?php printf(
-                esc_html__('Printout of %1$s on %2$s using %3$sPrint My Blog%4$s','print-my-blog' ),
-                $pmb_site_url,
-                date_i18n( get_option( 'date_format' )),
-                '<a href="https://wordpress.org/plugins/print-my-blog/">',
-                '</a>'
-            );?>
-        </p>
+        <?php
+        if( $pmb_printout_meta) {?><p class="pmb-printout-meta"><?php printf(
+            esc_html__('Printout of %1$s on %2$s using %3$sPrint My Blog%4$s','print-my-blog' ),
+            $pmb_site_url,
+            date_i18n( get_option( 'date_format' )),
+            '<a href="https://wordpress.org/plugins/print-my-blog/">',
+            '</a>'
+        );
+        ?></p>
+        <?php
+        }
+        ?>
     </div>
     <div class="pmb-posts-body">
 

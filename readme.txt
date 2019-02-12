@@ -98,6 +98,9 @@ Here’s how you can help this plugin to continue to exist and improve:
 
 == Changelog ==
 
+= 1.3.5 =
+* Make showing printout meta info (blog's URL, date of printing, and that it was done with this plugin) optional
+
 = 1.3.4 =
 * Add links to support, review, and sponsor.
 

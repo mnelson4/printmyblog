@@ -49,7 +49,7 @@
                     </th>
                     <td>
                         <input type="checkbox" name="include-excerpts" value="1">
-                        <p class="description"><?php esc_html_e('Whether to include the posts\'s excerpt before the rest of the content. Useful in case you put different content in there.','print-my-blog' );?></p>
+                        <p class="description"><?php esc_html_e('Whether to include the posts’s excerpt before the rest of the content. Useful in case you put different content in there.','print-my-blog' );?></p>
                     </td>
 
                 </tr>
@@ -59,6 +59,15 @@
             <h2><?php esc_html_e('Page Layout','print-my-blog' );?></h2>
             <table class="form-table">
                 <tbody>
+                <tr>
+                    <th scope="row">
+                        <label for="printout-meta"><?php esc_html_e('Show Printout Meta Info','print-my-blog' );?></label>
+                    </th>
+                    <td>
+                        <input type="checkbox" name="printout-meta" id="printout-meta" checked="checked">
+                        <p class="description"><?php esc_html_e('Whether to include your blog’s URL, date of printing, and that this printout was made using Print My Blog.','print-my-blog' );?></p>
+                    </td>
+                </tr>
                 <tr>
                     <th scope="row">
                         <label for="post-page-break"><?php esc_html_e('Each Post Begins on a New Page','print-my-blog' );?></label>
