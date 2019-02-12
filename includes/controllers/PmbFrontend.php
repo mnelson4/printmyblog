@@ -105,7 +105,8 @@ class PmbFrontend extends BaseController
                     'columns' => $this->getFromRequest('columns',1),
                     'post_type' => $this->getFromRequest('post-type', 'post'),
                     'rendering_wait' => $this->getFromRequest('rendering-wait', 500),
-                    'include_inline_js' => (bool)$this->getFromRequest('include-inline-js', false)
+                    'include_inline_js' => (bool)$this->getFromRequest('include-inline-js', false),
+                    'links' => (string)$this->getFromRequest('links', 'include'),
                 ),
             )
         );

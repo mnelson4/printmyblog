@@ -118,6 +118,19 @@
                         <p class="description"><?php esc_html_e('If you want to save paper, choose a smaller image size, or hide images altogether. On the other hand, deafult size images often look the best.','print-my-blog' );?></p>
                     </td>
                 </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="links"><?php esc_html_e('Include Hyperlinks','print-my-blog' );?></label>
+                    </th>
+                    <td>
+                        <select name="links" id="image-size">
+                            <option value="include" selected="selected"><?php esc_html_e('Include','print-my-blog' );?></option>
+                            <option value="remove"><?php esc_html_e('Remove','print-my-blog' );?></option>
+
+                        </select>
+                        <p class="description"><?php esc_html_e('Whether to remove hyperlinks or not.','print-my-blog' );?></p>
+                    </td>
+                </tr>
                 </tbody>
             </table>
 

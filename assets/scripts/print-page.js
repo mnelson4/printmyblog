@@ -27,6 +27,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.ordered_posts = [];
     this.rendering_wait = pmb_instance_vars.rendering_wait;
     this.include_inline_js = pmb_instance_vars.include_inline_js;
+    this.links = pmb_instance_vars.links;
     /**
      * @function
      */
@@ -225,17 +226,19 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             }
         }
 
-        jQuery('h1').addClass('pmb-header');
-        jQuery('h2').addClass('pmb-header');
-        jQuery('h3').addClass('pmb-header');
-        jQuery('h4').addClass('pmb-header');
-        jQuery('h5').addClass('pmb-header');
+        jQuery('.pmb-posts h1').addClass('pmb-header');
+        jQuery('.pmb-posts h2').addClass('pmb-header');
+        jQuery('.pmb-posts h3').addClass('pmb-header');
+        jQuery('.pmb-posts h4').addClass('pmb-header');
+        jQuery('.pmb-posts h5').addClass('pmb-header');
+        if(this.links === 'remove'){
+			jQuery('.pmb-posts a').contents().unwrap();
+        }
 
         // Remove inline styles that dynamically set height and width on WP Videos.
         // They use some Javascript that doesn't get enqueued, so better to let the browser decide their dimensions.
         jQuery('div.wp-video').css({'width': '','min-width':'', 'height': '', 'min-height': ''});
-        // unhide the contents. Google Chrome doesn't print headers properly if they're not displayed. (Mind you, we still
-        // have the full page overlay hiding them.)
+        // unhide the contents.
         jQuery('.pmb-posts').toggle();
         jQuery(document).trigger('pmb_wrap_up');
     };
@@ -382,7 +385,8 @@ jQuery(document).ready(function () {
 						columns: pmb_print_data.data.columns,
 						post_type: pmb_print_data.data.post_type,
 						rendering_wait: pmb_print_data.data.rendering_wait,
-						include_inline_js: pmb_print_data.data.include_inline_js
+						include_inline_js: pmb_print_data.data.include_inline_js,
+                        links: pmb_print_data.data.links
 					},
 					pmb_print_data.i18n
 				);
