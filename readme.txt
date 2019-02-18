@@ -3,7 +3,7 @@ Contributors: mnelson4
 Tags: print, pdf, backup
 Requires at least: 4.6
 Stable tag: trunk
-Tested up to: 5.0
+Tested up to: 5.1
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -64,11 +64,11 @@ The mission is: preserve your blog for decades to come in a low-tech format.
 Your website might not be around forever, nor might WordPress. But by printing it, there’s hope your blog’s ideas and stories can live on.
 
 == Contribute ==
-
+s
 Here’s how you can help this plugin to continue to exist and improve:
 
 * [give it a good review](https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post) and tell your friends
-* [give feedback](https://github.com/mnelson4/printmyblog) on GitHub about what features you want or bugs you find
+* give feedback on [GitHub](https://github.com/mnelson4/printmyblog) or [WordPress support forum](https://wordpress.org/support/plugin/print-my-blog) about what features you want or bugs you find
 * help translate. Make this accessible to users everywhere using [WordPress' Glotpress](https://translate.wordpress.org/projects/wp-plugins/print-my-blog)
 * help help. Answer other users’ questions in the [support section](https://wordpress.org/support/plugin/print-my-blog).
 * fund development. [Make an optional donation](https://opencollective.com/print-my-blog) to support ongoing development.
@@ -100,6 +100,7 @@ Here’s how you can help this plugin to continue to exist and improve:
 
 = 1.3.5 =
 * Make showing printout meta info (blog's URL, date of printing, and that it was done with this plugin) optional
+* Allow removing hyperlinks from content.
 
 = 1.3.4 =
 * Add links to support, review, and sponsor.
