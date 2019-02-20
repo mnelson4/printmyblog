@@ -39,6 +39,8 @@ https://youtu.be/shOjx-Ijung
 It works with thousands of blog posts (or pages), with Gutenberg, and page builders.
 Only your posts’ content is printed, not your logo, site title, sidebar widgets, footer, etc. Just the stuff you care to read.
 
+There is also a Print My Blog block which you can place on a page which will allow your site visitors to print the entire blog too.
+
 = How Does It Work? =
 
 After activating the plugin and clicking "Prepare Print Page"
@@ -64,7 +66,7 @@ The mission is: preserve your blog for decades to come in a low-tech format.
 Your website might not be around forever, nor might WordPress. But by printing it, there’s hope your blog’s ideas and stories can live on.
 
 == Contribute ==
-s
+
 Here’s how you can help this plugin to continue to exist and improve:
 
 * [give it a good review](https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post) and tell your friends
@@ -73,6 +75,7 @@ Here’s how you can help this plugin to continue to exist and improve:
 * help help. Answer other users’ questions in the [support section](https://wordpress.org/support/plugin/print-my-blog).
 * fund development. [Make an optional donation](https://opencollective.com/print-my-blog) to support ongoing development.
 
+Please join our [Open Collective](https://opencollective.com/print-my-blog) to watch and contribute to the plugin’s maintenance and development.
 
 == Installation ==
 
