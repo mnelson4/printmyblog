@@ -25,6 +25,29 @@
 <body <?php body_class('pmb-print-page'); ?>>
 <div class="pmb-waiting-message-fullpage pmb-extra-content">
     <div class="pmb-waiting-message-outer-container">
+        <div class="pmb-help">
+            <span class="pmb-help-ask"><?php printf(
+                    __('What do you think? %1$s', 'print-my-blog'),
+                    '<a id="pmb-help-love" href="javascript:pmb_help_show(\'pmb-help-love-text\');">😍</a> <a id="pmb-help-happy" href="javascript:pmb_help_show(\'pmb-help-happy-text\');")>😃</a> <a id="pmb-help-sad" href="javascript:pmb_help_show(\'pmb-help-sad-text\');")>☹️</a>'
+                );?>
+            </span>
+            <span class="pmb-help-love-text" style="display:none"><?php printf(
+                    __('Great! %1$sPlease sponsor%2$s or %3$sreview it%2$s (opens in new tab).', 'print-my-blog'),
+                    '<a href="https://opencollective.com/print-my-blog" target="_blank">',
+                    '</a>',
+                    '<a href="https://wordpress.org/support/plugin/print-my-blog/reviews/?filter=5" target="_blank">'
+                );?></span>
+            <span class="pmb-help-happy-text" style="display:none"><?php printf(
+                    __('Nice! %1$sPlease leave a review (opens in new tab)%2$s.', 'print-my-blog'),
+                    '<a href="https://wordpress.org/support/plugin/print-my-blog/reviews/?filter=5" target="_blank">',
+                    '</a>'
+            );?></span>
+            <span class="pmb-help-sad-text" style="display:none"><?php printf(
+                    __('That’s disappointing. %1$sPlease tell us how to improve (opens in new tab).%2$s', 'print-my-blog'),
+                    '<a href="https://wordpress.org/support/plugin/print-my-blog/" target="_blank">',
+                    '</a>'
+                    );?></span>
+        </div>
         <div class="pmb-waiting-area">
             <h1 id='pmb-in-progress-h1' class="pmb-waiting-h1"><?php _e('Initializing','print-my-blog' );?></h1>
         </div>
@@ -44,14 +67,18 @@
     <div class="pmb-posts-header">
         <h1 class="site-title"><?php echo $pmb_site_name;?></h1>
         <p class="site-description"><?php echo $pmb_site_description;?></p>
-        <p><?php printf(
-                esc_html__('Printout of %1$s on %2$s using %3$sPrint My Blog%4$s','print-my-blog' ),
-                $pmb_site_url,
-                date_i18n( get_option( 'date_format' )),
-                '<a href="https://wordpress.org/plugins/print-my-blog/">',
-                '</a>'
-            );?>
-        </p>
+        <?php
+        if( $pmb_printout_meta) {?><p class="pmb-printout-meta"><?php printf(
+            esc_html__('Printout of %1$s on %2$s using %3$sPrint My Blog%4$s','print-my-blog' ),
+            $pmb_site_url,
+            date_i18n( get_option( 'date_format' )),
+            '<a href="https://wordpress.org/plugins/print-my-blog/">',
+            '</a>'
+        );
+        ?></p>
+        <?php
+        }
+        ?>
     </div>
     <div class="pmb-posts-body">
 

@@ -31,6 +31,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.ordered_comments = [];
     this.rendering_wait = pmb_instance_vars.rendering_wait;
     this.include_inline_js = pmb_instance_vars.include_inline_js;
+    this.links = pmb_instance_vars.links;
     /**
      * @function
      */
@@ -336,17 +337,19 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             }
         }
 
-        jQuery('h1').addClass('pmb-header');
-        jQuery('h2').addClass('pmb-header');
-        jQuery('h3').addClass('pmb-header');
-        jQuery('h4').addClass('pmb-header');
-        jQuery('h5').addClass('pmb-header');
+        jQuery('.pmb-posts h1').addClass('pmb-header');
+        jQuery('.pmb-posts h2').addClass('pmb-header');
+        jQuery('.pmb-posts h3').addClass('pmb-header');
+        jQuery('.pmb-posts h4').addClass('pmb-header');
+        jQuery('.pmb-posts h5').addClass('pmb-header');
+        if(this.links === 'remove'){
+			jQuery('.pmb-posts a').contents().unwrap();
+        }
 
         // Remove inline styles that dynamically set height and width on WP Videos.
         // They use some Javascript that doesn't get enqueued, so better to let the browser decide their dimensions.
         jQuery('div.wp-video').css({'width': '','min-width':'', 'height': '', 'min-height': ''});
-        // unhide the contents. Google Chrome doesn't print headers properly if they're not displayed. (Mind you, we still
-        // have the full page overlay hiding them.)
+        // unhide the contents.
         jQuery('.pmb-posts').toggle();
         jQuery(document).trigger('pmb_wrap_up');
     };
@@ -472,7 +475,8 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         }
         let html = '';
         let has_comments = typeof post.comments !== 'undefined' && post.comments !== null && post.comments.length > 0;
-            // There are comments
+        var comments_header_text = this.translations.comments;
+        // There are comments
 
         html += '<div id="comments" class="comments-area">';
         html += '<div class="';
@@ -480,9 +484,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             html += 'comments-title-wrap';
         } else {
             html += 'comments-title-wrap no-responses';
+            comments_header_text = this.translations.no_comments;
         }
         html +='">';
-        html +='<h2 class="comments-title">' + this.translations.comments + '</h2>';
+        html +='<h2 class="comments-title">' + comments_header_text + '</h2>';
         html += '</div>';
         html += '<ol class="comment-list">';
         if( has_comments) {
@@ -557,32 +562,43 @@ function pmb_print_preview()
     jQuery('.pmb-waiting-message-fullpage').toggle();
 }
 
+function pmb_help_show(id){
+    jQuery('.' + id).show();
+    jQuery('.pmb-help-ask').hide();
+}
+
 var pmb = null;
 jQuery(document).ready(function () {
     wp.api.loadPromise.done( function() {
-        pmb = new PmbPrintPage(
-            {
-                header_selector: '#pmb-in-progress-h1',
-                status_span_selector: '.pmb-status',
-                posts_count_span_selector: '.pmb-posts-count',
-                posts_div_selector: '.pmb-posts-body',
-                waiting_area_selector: '.pmb-posts-placeholder',
-                print_ready_selector: '.pmb-print-ready',
-                locale: pmb_print_data.data.locale,
-                image_size: pmb_print_data.data.image_size,
-                proxy_for: pmb_print_data.data.proxy_for,
-                include_excerpts: pmb_print_data.data.include_excerpts,
-                columns: pmb_print_data.data.columns,
-                post_type: pmb_print_data.data.post_type,
-                rendering_wait: pmb_print_data.data.rendering_wait,
-                include_inline_js: pmb_print_data.data.include_inline_js,
-                comments: pmb_print_data.data.comments
-            },
-            pmb_print_data.i18n
-        );
+        setTimeout(
+            function(){
+				pmb = new PmbPrintPage(
+					{
+						header_selector: '#pmb-in-progress-h1',
+						status_span_selector: '.pmb-status',
+						posts_count_span_selector: '.pmb-posts-count',
+						posts_div_selector: '.pmb-posts-body',
+						waiting_area_selector: '.pmb-posts-placeholder',
+						print_ready_selector: '.pmb-print-ready',
+						locale: pmb_print_data.data.locale,
+						image_size: pmb_print_data.data.image_size,
+						proxy_for: pmb_print_data.data.proxy_for,
+						include_excerpts: pmb_print_data.data.include_excerpts,
+						columns: pmb_print_data.data.columns,
+						post_type: pmb_print_data.data.post_type,
+						rendering_wait: pmb_print_data.data.rendering_wait,
+						include_inline_js: pmb_print_data.data.include_inline_js,
+                        links: pmb_print_data.data.links,
+						comments: pmb_print_data.data.comments
+					},
+					pmb_print_data.i18n
+				);
 
-        pmb.initialize();
-        pmb.beginLoading();
+				pmb.initialize();
+				pmb.beginLoading();
+            },
+            1000
+        );
     });
 });
 

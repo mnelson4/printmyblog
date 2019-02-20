@@ -24,11 +24,12 @@ class PmbGutenbergBlock extends BaseController
             PMB_ASSETS_URL . 'scripts/pmb-block.js',
             array('wp-blocks', 'wp-element', 'wp-components')
         );
-
-        register_block_type('printmyblog/setupform', array(
-            'editor_script' => 'pmb-setupform',
-            'render_callback' => [$this, 'block_dynamic_render_cb'],
-        ));
+        if (function_exists('register_block_type')) {
+            register_block_type('printmyblog/setupform', array(
+                'editor_script' => 'pmb-setupform',
+                'render_callback' => [$this, 'block_dynamic_render_cb'],
+            ));
+        }
     }
 
     /**

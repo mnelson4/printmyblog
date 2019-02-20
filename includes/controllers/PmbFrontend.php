@@ -31,10 +31,11 @@ class PmbFrontend extends BaseController
                 $pmb_wp_error = $site_info;
                 return PMB_TEMPLATES_DIR . 'print_page_error.template.php';
             }
-            global $pmb_site_name, $pmb_site_description, $pmb_site_url;
+            global $pmb_site_name, $pmb_site_description, $pmb_site_url,  $pmb_printout_meta;
             $pmb_site_name = $site_info['name'];
             $pmb_site_description = $site_info['description'];
             $pmb_site_url = $site_info['url'];
+            $pmb_printout_meta = $this->getFromRequest('printout-meta', false);
             $this->proxy_for = $site_info['proxy_for'];
             // enqueue our scripts and styles at the right time
             // specifically, after everybody else, so we can override them.
@@ -97,6 +98,7 @@ class PmbFrontend extends BaseController
                     'ready' => esc_html__('Print-Page Ready', 'print-my-blog'),
                     'error_fetching_posts' => esc_html__('There was an error fetching posts. It was: ', 'print-my-blog'),
                     'comments' => esc_html__('Comments', 'print-my-blog'),
+                    'no_comments' => esc_html('No Comments', 'print-my-blog'),
                     'says' => __('<span class="screen-reader-text says">says:</span>', 'print-my-blog')
                 ),
                 'data' => array(
@@ -108,7 +110,8 @@ class PmbFrontend extends BaseController
                     'post_type' => $this->getFromRequest('post-type', 'post'),
                     'rendering_wait' => $this->getFromRequest('rendering-wait', 500),
                     'include_inline_js' => (bool)$this->getFromRequest('include-inline-js', false),
-                    'comments' => (bool)$this->getFromRequest('comments', false)
+                    'links' => (string)$this->getFromRequest('links', 'include'),
+                    'comments' => (bool)$this->getFromRequest('comments', false),
                 ),
             )
         );

@@ -3,11 +3,11 @@ Contributors: mnelson4
 Tags: print, pdf, backup
 Requires at least: 4.6
 Stable tag: trunk
-Tested up to: 5.0
+Tested up to: 5.1
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Donate link: https://www.paypal.me/cmljnelson
+Donate link: https://opencollective.com/print-my-blog
 
 
 Create a paper/PDF copy of your entire blog in one click!
@@ -39,6 +39,8 @@ https://youtu.be/shOjx-Ijung
 It works with thousands of blog posts (or pages), with Gutenberg, and page builders.
 Only your posts’ content is printed, not your logo, site title, sidebar widgets, footer, etc. Just the stuff you care to read.
 
+There is also a Print My Blog block which you can place on a page which will allow your site visitors to print the entire blog too.
+
 = How Does It Work? =
 
 After activating the plugin and clicking "Prepare Print Page"
@@ -68,11 +70,12 @@ Your website might not be around forever, nor might WordPress. But by printing i
 Here’s how you can help this plugin to continue to exist and improve:
 
 * [give it a good review](https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post) and tell your friends
-* [give feedback](https://github.com/mnelson4/printmyblog) on GitHub about what features you want or bugs you find
+* give feedback on [GitHub](https://github.com/mnelson4/printmyblog) or [WordPress support forum](https://wordpress.org/support/plugin/print-my-blog) about what features you want or bugs you find
 * help translate. Make this accessible to users everywhere using [WordPress' Glotpress](https://translate.wordpress.org/projects/wp-plugins/print-my-blog)
 * help help. Answer other users’ questions in the [support section](https://wordpress.org/support/plugin/print-my-blog).
-* fund development. [Make a donation](https://www.paypal.me/cmljnelson) and we'll try to prioritize the work you've requested.
+* fund development. [Make an optional donation](https://opencollective.com/print-my-blog) to support ongoing development.
 
+Please join our [Open Collective](https://opencollective.com/print-my-blog) to watch and contribute to the plugin’s maintenance and development.
 
 == Installation ==
 
@@ -97,6 +100,16 @@ Here’s how you can help this plugin to continue to exist and improve:
 3. The Blog is Ready for Printing!
 
 == Changelog ==
+
+= 1.3.5 =
+* Make showing printout meta info (blog's URL, date of printing, and that it was done with this plugin) optional
+* Allow removing hyperlinks from content.
+
+= 1.3.4 =
+* Add links to support, review, and sponsor.
+
+= 1.3.3 =
+* Fix fatal error when function "register_block_type" isn't defined
 
 = 1.3.2 =
 * Remove ellipsis from "Initializing..."
