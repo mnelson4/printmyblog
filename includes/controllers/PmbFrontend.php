@@ -93,6 +93,7 @@ class PmbFrontend extends BaseController
                     'loading_content' => esc_html__('Loading Content', 'print-my-blog'),
                     'loading_comments' => esc_html__('Loading Comments', 'print-my-blog'),
                     'organizing_posts' => esc_html__('Ordering Posts', 'print-my-blog'),
+                    'organizing_comments' => esc_html__('Ordering Comments', 'print-my-blog'),
                     'rendering_posts' => esc_html__('Placing Content on Page', 'print-my-blog'),
                     'wrapping_up' => esc_html__('Optimizing for Print', 'print-my-blog'),
                     'ready' => esc_html__('Print-Page Ready', 'print-my-blog'),

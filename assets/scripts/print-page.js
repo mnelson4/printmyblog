@@ -59,18 +59,31 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         }
     };
 
-    this.getCollectionQueryData = function () {
-        var data = {
-            status: 'publish',
-            _embed:true,
-            proxy_for: this.proxy_for,
-        };
+    this.getPostsCollectionQueryData = function () {
+        var data = this.getCollectionQueryData();
+        data.status = 'publish';
+        data._embed = true;
         if(this.post_type === 'post') {
             data.orderby = 'date';
             data.order = 'asc';
         }
         return data;
     };
+
+	this.getCommentsCollectionQueryData = function () {
+		var data = this.getCollectionQueryData();
+		data.order = 'asc';
+		return data;
+	};
+
+	this.getCollectionQueryData = function () {
+		var data = {
+			proxy_for: this.proxy_for,
+		};
+		return data;
+	};
+
+
 
     this.getCommentCollection = function () {
       return new wp.api.collections.Comments();
@@ -79,8 +92,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.beginLoading = function () {
         this.header.html(this.translations.loading_content);
         let collection = this.getCollection();
-        var data = this.getCollectionQueryData();
-        collection.fetch({data: data,
+        collection.fetch({data: this.getPostsCollectionQueryData(),
         }).done((posts) => {
             this.storePostsAndMaybeFetchMore(posts, collection);
         });
@@ -129,7 +141,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.beginLoadingComments = function () {
         this.header.html(this.translations.loading_comments);
         let collection = this.getCommentCollection();
-        collection.fetch({data:{order:'asc'}}).done((comments) => {
+        collection.fetch({data:this.getCommentsCollectionQueryData()}).done((comments) => {
             this.storeCommentsAndMaybeFetchMore(comments, collection);
         });
     };
@@ -155,7 +167,8 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     };
 
     this.organizeComments = function(){
-        for(let i=0; i<this.total_comments; i++) {
+        this.header.html(this.translations.organizing_comments);
+        for(let i=0; i<this.comments.length; i++) {
             let comment = this.comments[i];
             if(comment.parent === 0) {
                 let post = this.findPostWithId(comment.post);
