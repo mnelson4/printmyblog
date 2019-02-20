@@ -42,6 +42,7 @@ Only your posts’ content is printed, not your logo, site title, sidebar widget
 There is also a Print My Blog block which you can place on a page which will allow your site visitors to print the entire blog too.\
 
 Features:
+
 * loads all your blog's posts into a single page so you can print them from your web browser
 * supports printing thousands of blog posts in one click (the record is over 3000 posts)
 * print posts and pages
