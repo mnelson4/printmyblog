@@ -39,7 +39,24 @@ https://youtu.be/shOjx-Ijung
 It works with thousands of blog posts (or pages), with Gutenberg, and page builders.
 Only your posts’ content is printed, not your logo, site title, sidebar widgets, footer, etc. Just the stuff you care to read.
 
-There is also a Print My Blog block which you can place on a page which will allow your site visitors to print the entire blog too.
+There is also a Print My Blog block which you can place on a page which will allow your site visitors to print the entire blog too.\
+
+Features:
+* loads all your blog's posts into a single page so you can print them from your web browser
+* supports printing thousands of blog posts in one click (the record is over 3000 posts)
+* print posts and pages
+* does not print ink-guzzlers like site logo, sidebar widgets, or footer
+* uses your theme's and plugins' styles (so Gutenberg and page builders are supported)
+* optionally print comments
+* optionally place each post on a new page
+* resize text
+* resize images or remove them altogether
+* no watermark in print-out (it does say you used this plugin, but that can be removed)
+* remove hyperlinks
+* optionally include post's excerpt
+* place the "Print My Blog" Gutenberg block on a page and allow site visitors to print your blog
+
+Please see the [GitHub issue tracker](https://github.com/mnelson4/printmyblog/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc) for other features requested.
 
 = How Does It Work? =
 
@@ -100,6 +117,10 @@ Please join our [Open Collective](https://opencollective.com/print-my-blog) to w
 3. The Blog is Ready for Printing!
 
 == Changelog ==
+
+= 1.4.0 February 20, 2018 =
+* Allow printing comments
+* Tweaked "What do you think?" text
 
 = 1.3.5 =
 * Make showing printout meta info (blog's URL, date of printing, and that it was done with this plugin) optional
