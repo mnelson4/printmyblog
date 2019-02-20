@@ -38,7 +38,7 @@
                 );?>
             </span>
             <span class="pmb-help-love-text" style="display:none"><?php printf(
-                    __('Great! %1$sPlease sponsor%2$s or %3$sreview%2$s it.', 'print-my-blog'),
+                    __('Great! %1$sFYI you can sponsor%2$s or %3$sreview%2$s it.', 'print-my-blog'),
                     '<a href="https://opencollective.com/print-my-blog" target="_blank" title="' . __('Sponsor development (opens in new tab)', 'print-my-blog') . '">',
                     '</a>',
                     '<a href="https://wordpress.org/support/plugin/print-my-blog/reviews/?filter=5" target="_blank" title="' . __('Plugin Reviews (opens in new tab)', 'print-my-blog') . '">'
