@@ -29,11 +29,11 @@
             <span class="pmb-help-ask"><?php printf(
                     __('What do you think? %1$s', 'print-my-blog'),
                     '<a id="pmb-help-love" href="javascript:pmb_help_show(\'pmb-help-love-text\');" title="'
-                    . __('Love it', 'print-my-blog')
+                    . __('Love it (shows feedback options)', 'print-my-blog')
                     . '">😍</a> <a id="pmb-help-happy" href="javascript:pmb_help_show(\'pmb-help-happy-text\');")" title="'
-                    . __('Like it', 'print-my-blog')
+                    . __('Like it (shows feedback options)', 'print-my-blog')
                     . '">😃</a> <a id="pmb-help-sad" href="javascript:pmb_help_show(\'pmb-help-sad-text\');" title="'
-                    . __('Don’t like something', 'print-my-blog')
+                    . __('Don’t like something (shows feedback options)', 'print-my-blog')
                     . '")>☹️</a>'
                 );?>
             </span>
