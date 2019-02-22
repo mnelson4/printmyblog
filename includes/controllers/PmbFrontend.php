@@ -13,7 +13,7 @@ class PmbFrontend extends BaseController
     protected $proxy_for;
     public function setHooks()
     {
-        add_filter('template_include', array($this, 'templateRedirect'), 12 /* after Elementor */);
+        add_filter('template_include', array($this, 'templateRedirect'), 20001 /* after Enfold theme, 20,000 */);
     }
 
     /**
