@@ -32,6 +32,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.rendering_wait = pmb_instance_vars.rendering_wait;
     this.include_inline_js = pmb_instance_vars.include_inline_js;
     this.links = pmb_instance_vars.links;
+    this.post_url = pmb_instance_vars.post_url;
     /**
      * @function
      */
@@ -378,6 +379,13 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             + '</h1>'
             + '</header>'
             + '<div class="entry-meta">';
+        if(this.post_url) {
+            html_to_add += '<span class="url"><a href="'
+                + post.link
+                + '">'
+                + post.link
+                + '</a></span>';
+        }
         if(this.post_type === 'post') {
             html_to_add += '<span class="posted-on">'
                 +   this.getPublishedDate(post)

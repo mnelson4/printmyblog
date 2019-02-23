@@ -10,7 +10,7 @@
     <?php
     }
     ?>
-    <p><?php esc_html_e('Configure how you\'d like the blog to be printed, or just use our recommended defaults.', 'print-my-blog'); ?></p>
+    <p><?php esc_html_e('Configure how you’d like the blog to be printed, or just use our recommended defaults.', 'print-my-blog'); ?></p>
     <form action="<?php echo site_url();?>" method="get">
         <?php if(PMB_REST_PROXY_EXISTS){?>
         <table class="form-table">
@@ -19,7 +19,7 @@
                     <th scope="row"><?php esc_html_e('Site URL (including "https://" or "http://")', 'print-my-blog');?></th>
                     <td>
                         <input name="site" placeholder="<?php echo site_url();?>">
-                        <p class="description"><?php esc_html_e('URL of the WordPress site (self-hosted or on WordPress.com) you\'d like to print. Leave blank to use this current site.', 'print-my-blog');?></p>
+                        <p class="description"><?php esc_html_e('URL of the WordPress site (self-hosted or on WordPress.com) you’d like to print. Leave blank to use this current site.', 'print-my-blog');?></p>
                     </td>
                 </tr>
             </tbody>
@@ -49,7 +49,17 @@
                     </th>
                     <td>
                         <input type="checkbox" name="comments" value="1">
-                        <p class="description"><?php esc_html_e('Whether to include the posts\'s comments.','print-my-blog' );?></p>
+                        <p class="description"><?php esc_html_e('Whether to include the posts’s comments.','print-my-blog' );?></p>
+                    </td>
+
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="post_url"><?php esc_html_e('Include URL','print-my-blog' );?></label>
+                    </th>
+                    <td>
+                        <input type="checkbox" name="post_url" value="1">
+                        <p class="description"><?php esc_html_e('Whether to include the posts’s URL.','print-my-blog' );?></p>
                     </td>
 
                 </tr>
@@ -156,7 +166,7 @@
                         </th>
                         <td>
                             <input name="rendering-wait" value="200"><?php esc_html_e('ms','print-my-blog' );?>
-                            <p class="description"><?php esc_html_e('Milliseconds to wait between rendering posts. If posts are rendered too quickly on the page, sometimes images won\'t load properly. ','print-my-blog' );?></p>
+                            <p class="description"><?php esc_html_e('Milliseconds to wait between rendering posts. If posts are rendered too quickly on the page, sometimes images won’t load properly. ','print-my-blog' );?></p>
                         </td>
                     </tr>
                     <tr>

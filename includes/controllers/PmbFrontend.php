@@ -127,6 +127,7 @@ class PmbFrontend extends BaseController
                     'include_inline_js' => (bool)$this->getFromRequest('include-inline-js', false),
                     'links' => (string)$this->getFromRequest('links', 'include'),
                     'comments' => (bool)$this->getFromRequest('comments', false),
+                    'post_url' => (bool)$this->getFromRequest('post_url', false),
                 ),
             )
         );
