@@ -13,7 +13,15 @@ class PmbFrontend extends BaseController
     protected $proxy_for;
     public function setHooks()
     {
-        add_filter('template_include', array($this, 'templateRedirect'), 20001 /* after Enfold theme, 20,000 */);
+        add_filter(
+            'template_include',
+            array($this, 'templateRedirect'),
+            /* after Elementor at priority 12,
+            Enfold theme at the ridiculous priority 20,000...
+            Someday, perhaps we should have a regular page dedicated to Print My Blog.
+            If you're reading this code and agree, feel free to work on a pull request! */
+            20001
+        );
     }
 
     /**
