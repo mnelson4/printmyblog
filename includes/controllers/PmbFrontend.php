@@ -111,11 +111,17 @@ class PmbFrontend extends BaseController
                     'says' => __('<span class="screen-reader-text says">says:</span>', 'print-my-blog')
                 ),
                 'data' => array(
+                    'header_selector' => '#pmb-in-progress-h1',
+                    'status_span_selector' => '.pmb-status',
+                    'posts_count_span_selector' => '.pmb-posts-count',
+                    'posts_div_selector' => '.pmb-posts-body',
+                    'waiting_area_selector' => '.pmb-posts-placeholder',
+                    'print_ready_selector' => '.pmb-print-ready',
                     'locale' => get_locale(),
                     'image_size' => $this->getImageRelativeSize(),
                     'proxy_for' => $this->proxy_for,
                     'include_excerpts' => (bool)$this->getFromRequest('include-excerpts', false),
-                    'columns' => $this->getFromRequest('columns',1),
+                    'columns' => $this->getFromRequest('columns', 1),
                     'post_type' => $this->getFromRequest('post-type', 'post'),
                     'rendering_wait' => $this->getFromRequest('rendering-wait', 500),
                     'include_inline_js' => (bool)$this->getFromRequest('include-inline-js', false),

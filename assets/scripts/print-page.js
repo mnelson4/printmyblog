@@ -586,24 +586,7 @@ jQuery(document).ready(function () {
         setTimeout(
             function(){
 				pmb = new PmbPrintPage(
-					{
-						header_selector: '#pmb-in-progress-h1',
-						status_span_selector: '.pmb-status',
-						posts_count_span_selector: '.pmb-posts-count',
-						posts_div_selector: '.pmb-posts-body',
-						waiting_area_selector: '.pmb-posts-placeholder',
-						print_ready_selector: '.pmb-print-ready',
-						locale: pmb_print_data.data.locale,
-						image_size: pmb_print_data.data.image_size,
-						proxy_for: pmb_print_data.data.proxy_for,
-						include_excerpts: pmb_print_data.data.include_excerpts,
-						columns: pmb_print_data.data.columns,
-						post_type: pmb_print_data.data.post_type,
-						rendering_wait: pmb_print_data.data.rendering_wait,
-						include_inline_js: pmb_print_data.data.include_inline_js,
-                        links: pmb_print_data.data.links,
-						comments: pmb_print_data.data.comments
-					},
+					pmb_print_data.data,
 					pmb_print_data.i18n
 				);
 
