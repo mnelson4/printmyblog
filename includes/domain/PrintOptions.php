@@ -15,13 +15,13 @@ class PrintOptions
     public function postContentOptions()
     {
         return [
-            'show_id' => [
-                'label' => esc_html__('ID', 'print-my-blog'),
-                'default' => false,
-            ],
             'show_title' => [
                 'label' => esc_html__('Title', 'print-my-blog'),
                 'default' => true
+            ],
+            'show_id' => [
+                'label' => esc_html__('ID', 'print-my-blog'),
+                'default' => false,
             ],
             'show_url' => [
                 'label' => esc_html__('URL', 'print-my-blog'),

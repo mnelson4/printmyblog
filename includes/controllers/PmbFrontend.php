@@ -112,7 +112,7 @@ class PmbFrontend extends BaseController
         ];
         $print_options = new PrintOptions();
         foreach($print_options->postContentOptions() as $option_name => $option_details){
-            $data[$option_name] = (bool)$this->getFromRequest($option_name, $option_details['default']);
+            $data[$option_name] = (bool)$this->getFromRequest($option_name, false);
         }
 
         wp_localize_script(

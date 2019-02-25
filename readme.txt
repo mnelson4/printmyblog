@@ -119,10 +119,12 @@ Please join our [Open Collective](https://opencollective.com/print-my-blog) to w
 
 == Changelog ==
 
-= 1.4.1 February 22, 2019 =
+= 1.5.0 =
 * Enfold theme compatibility
+* Optionally add a divider
+* Allow adding or removing any part of post content
 
-= 1.4.0 February 20, 2019=
+= 1.4.0 =
 * Allow printing comments
 * Tweaked "What do you think?" text
 
