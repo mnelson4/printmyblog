@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\controllers;
 
+use PrintMyBlog\domain\PrintOptions;
 use Twine\controllers\BaseController;
 use WP_Error;
 
@@ -93,6 +94,27 @@ class PmbFrontend extends BaseController
             array(),
             filemtime(PMB_ASSETS_DIR . 'styles/plugin-compatibility.css')
         );
+        $data = [
+            'header_selector' => '#pmb-in-progress-h1',
+            'status_span_selector' => '.pmb-status',
+            'posts_count_span_selector' => '.pmb-posts-count',
+            'posts_div_selector' => '.pmb-posts-body',
+            'waiting_area_selector' => '.pmb-posts-placeholder',
+            'print_ready_selector' => '.pmb-print-ready',
+            'locale' => get_locale(),
+            'image_size' => $this->getImageRelativeSize(),
+            'proxy_for' => $this->proxy_for,
+            'columns' => $this->getFromRequest('columns', 1),
+            'post_type' => $this->getFromRequest('post-type', 'post'),
+            'rendering_wait' => $this->getFromRequest('rendering-wait', 500),
+            'include_inline_js' => (bool)$this->getFromRequest('include-inline-js', false),
+            'links' => (string)$this->getFromRequest('links', 'include'),
+        ];
+        $print_options = new PrintOptions();
+        foreach($print_options->postContentOptions() as $option_name => $option_details){
+            $data[$option_name] = (bool)$this->getFromRequest($option_name, $option_details['default']);
+        }
+
         wp_localize_script(
             'pmb_print_page',
             'pmb_print_data',
@@ -108,27 +130,10 @@ class PmbFrontend extends BaseController
                     'error_fetching_posts' => esc_html__('There was an error fetching posts. It was: ', 'print-my-blog'),
                     'comments' => esc_html__('Comments', 'print-my-blog'),
                     'no_comments' => esc_html('No Comments', 'print-my-blog'),
-                    'says' => __('<span class="screen-reader-text says">says:</span>', 'print-my-blog')
+                    'says' => __('<span class="screen-reader-text says">says:</span>', 'print-my-blog'),
+                    'id' => esc_html__('ID:', 'print-my-blog')
                 ),
-                'data' => array(
-                    'header_selector' => '#pmb-in-progress-h1',
-                    'status_span_selector' => '.pmb-status',
-                    'posts_count_span_selector' => '.pmb-posts-count',
-                    'posts_div_selector' => '.pmb-posts-body',
-                    'waiting_area_selector' => '.pmb-posts-placeholder',
-                    'print_ready_selector' => '.pmb-print-ready',
-                    'locale' => get_locale(),
-                    'image_size' => $this->getImageRelativeSize(),
-                    'proxy_for' => $this->proxy_for,
-                    'include_excerpts' => (bool)$this->getFromRequest('include-excerpts', false),
-                    'columns' => $this->getFromRequest('columns', 1),
-                    'post_type' => $this->getFromRequest('post-type', 'post'),
-                    'rendering_wait' => $this->getFromRequest('rendering-wait', 500),
-                    'include_inline_js' => (bool)$this->getFromRequest('include-inline-js', false),
-                    'links' => (string)$this->getFromRequest('links', 'include'),
-                    'comments' => (bool)$this->getFromRequest('comments', false),
-                    'post_url' => (bool)$this->getFromRequest('post_url', false),
-                ),
+                'data' => $data,
             )
         );
         $this->enqueueInlineStyleBasedOnOptions();

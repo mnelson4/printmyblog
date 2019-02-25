@@ -117,3 +117,7 @@ div.tiled-gallery{
 .pmb-posts-body article.pmb-post-article{
     float:none;
 }
+
+.pmb-divider{
+    margin-bottom:3em;
+}

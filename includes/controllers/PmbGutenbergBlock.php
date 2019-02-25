@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\controllers;
 
+use PrintMyBlog\domain\PrintOptions;
 use Twine\controllers\BaseController;
 
 class PmbGutenbergBlock extends BaseController
@@ -46,6 +47,7 @@ class PmbGutenbergBlock extends BaseController
     public function block_dynamic_render_cb ( $att ) {
         // Coming from RichText, each line is an array's element
         ob_start();
+        $print_options = new PrintOptions();
         include(PMB_TEMPLATES_DIR . 'setup_page.template.php');
         return ob_get_clean();
     }

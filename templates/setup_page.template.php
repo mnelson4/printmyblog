@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var $print_options PrintMyBlog\domain\PrintOptions
+ */
+
+use PrintMyBlog\domain\PrintOptions;
+
+?>
 <div class="wrap nosubsub">
 <h1><?php esc_html_e('Print My Blog','print-my-blog' );?></h1>
     <?php if(isset($_GET['welcome'])){
@@ -33,9 +41,7 @@
             <table class="form-table">
                 <tbody>
                 <tr>
-                    <th scope="row">
-                        <?php esc_html_e('Content to Print','print-my-blog' );?>
-                    </th>
+                    <th scope="row"><?php esc_html_e('Post Selection','event_espresso' );?></th>
                     <td>
                         <label><input type="radio" name="post-type" value="post" checked="checked"><?php esc_html_e('Posts', 'print-my-blog');?></label>
                         <br>
@@ -43,35 +49,30 @@
                     </td>
 
                 </tr>
-                <tr>
-                    <th scope="row">
-                        <label for="comments"><?php esc_html_e('Include Comments','print-my-blog' );?></label>
-                    </th>
-                    <td>
-                        <input type="checkbox" name="comments" value="1">
-                        <p class="description"><?php esc_html_e('Whether to include the posts’s comments.','print-my-blog' );?></p>
-                    </td>
+                <?php
 
-                </tr>
+                ?>
                 <tr>
-                    <th scope="row">
-                        <label for="post_url"><?php esc_html_e('Include URL','print-my-blog' );?></label>
-                    </th>
+                    <th scope="row"> <?php esc_html_e('Post Content to Print','print-my-blog' );?></th>
                     <td>
-                        <input type="checkbox" name="post_url" value="1">
-                        <p class="description"><?php esc_html_e('Whether to include the posts’s URL.','print-my-blog' );?></p>
-                    </td>
+                    <?php
+                    foreach($print_options->postContentOptions() as $option_name => $option_details){
+                        ?>
+                        <label for="<?php echo $option_name;?>">
+                            <input type="checkbox" name="<?php echo $option_name;?>" id="<?php echo $option_name;?>"
+                                <?php
+                                if ($option_details['default']){
+                                ?> checked="checked"
+                            <?php
+                            }
+                            ?> value="1">
+                            <?php echo $option_details['label'];?></label><br>
 
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <label for="include-excerpts"><?php esc_html_e('Include Excerpts','print-my-blog' );?></label>
-                    </th>
-                    <td>
-                        <input type="checkbox" name="include-excerpts" value="1">
-                        <p class="description"><?php esc_html_e('Whether to include the posts’s excerpt before the rest of the content. Useful in case you put different content in there.','print-my-blog' );?></p>
-                    </td>
 
+                    <?php
+                    }
+                    ?>
+                    </td>
                 </tr>
                 </tbody>
             </table>

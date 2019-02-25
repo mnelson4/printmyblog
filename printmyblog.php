@@ -42,6 +42,7 @@ if (!defined('PMB_VERSION')) {
 
     register_activation_hook(PMB_MAIN_FILE, 'pmb_plugin_activation');
     require_once(PMB_INCLUDES_DIR . 'constants.php');
+    require_once(PMB_INCLUDES_DIR . 'domain/PrintOptions.php');
     require_once(PMB_TWINE_INCLUDES_DIR . 'controllers/BaseController.php');
     require_once(PMB_INCLUDES_DIR . 'controllers/PmbInit.php');
     $init_controller = new PmbInit();

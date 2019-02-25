@@ -18,21 +18,28 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.locale = pmb_instance_vars.locale;
     this.image_size = pmb_instance_vars.image_size;
     this.translations = translations;
-    this.include_excerpts = pmb_instance_vars.include_excerpts;
     this.columns = pmb_instance_vars.columns;
     this.post_type = pmb_instance_vars.post_type;
     this.total_posts = 0;
     this.posts = [];
     this.taxonomies = {};
     this.ordered_posts = [];
-    this.loadComments = pmb_instance_vars.comments;
     this.comments = [];
     this.total_comments = 0;
     this.ordered_comments = [];
     this.rendering_wait = pmb_instance_vars.rendering_wait;
     this.include_inline_js = pmb_instance_vars.include_inline_js;
     this.links = pmb_instance_vars.links;
-    this.post_url = pmb_instance_vars.post_url;
+    this.showUrl = pmb_instance_vars.show_url;
+    this.showId = pmb_instance_vars.show_id;
+    this.showTitle = pmb_instance_vars.show_title;
+    this.showFeaturedImage = pmb_instance_vars.show_featured_image;
+    this.showDate = pmb_instance_vars.show_date;
+    this.showCategories = pmb_instance_vars.show_categories;
+	this.showExcerpt = pmb_instance_vars.show_excerpt;
+    this.showContent = pmb_instance_vars.show_content;
+	this.showComments = pmb_instance_vars.show_comments;
+	this.showDivider = pmb_instance_vars.show_divider;
     /**
      * @function
      */
@@ -126,7 +133,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      * Begins loading comments if that was requested, otherwise skips right to sorting and rendering posts.
      */
     this.maybeStoreComments = function() {
-        if (this.loadComments) {
+        if (this.showComments) {
             this.beginLoadingComments();
             // once we are done loading comments, we'll sort and render posts etc.
         } else {
@@ -373,58 +380,75 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      */
     this.addPostToPage = function (post) {
         var html_to_add = '<article id="post-' + post.id + '" class="post-' + post.id + ' post type-' + this.post_type + ' status-' + post.status + ' hentry pmb-post-article">'
-            + '<header class="pmb-post-header entry-header">'
-            + '<h1 class="entry-title">'
-            + post.title.rendered
-            + '</h1>'
-            + '</header>'
+            + '<header class="pmb-post-header entry-header">';
+        if(this.showTitle) {
+            html_to_add += '<h1 class="entry-title">'
+				+ post.title.rendered
+				+ '</h1>'
+        }
+        html_to_add += '</header>'
             + '<div class="entry-meta">';
-        if(this.post_url) {
+		if(this.showId) {
+			html_to_add += '<span class="post-id">' +this.translations.id + post.id + '</span> ';
+		}
+        if(this.showUrl) {
             html_to_add += '<span class="url"><a href="'
                 + post.link
                 + '">'
                 + post.link
-                + '</a></span>';
+                + '</a></span> ';
         }
-        if(this.post_type === 'post') {
+        if(this.showDate) {
             html_to_add += '<span class="posted-on">'
                 +   this.getPublishedDate(post)
-                +   '</span>';
+                +   '</span> ';
         }
         if(this.post_type === 'page') {
             html_to_add += '<!-- id:' + post.id + ' , parent:' + post.parent + ', order:' + post.menu_order + '-->';
         }
-        html_to_add += this.addTaxonomies(post);
-        html_to_add += '</div>'
-            + '<div class="entry-content">'
-            + this.getFeaturedImageHtml(post);
-        if(this.include_excerpts) {
+        if(this.showCategories) {
+			html_to_add += this.addTaxonomies(post);
+		}
+		html_to_add += '</div>'
+			+ '<div class="entry-content">';
+		if(this.showFeaturedImage){
+            html_to_add += this.getFeaturedImageHtml(post);
+        }
+
+        if(this.showExcerpt) {
             html_to_add += '<div class="entry-excerpt">'
                 + post.excerpt.rendered
                 + '</div>';
         }
-        if(this.include_inline_js) {
-            html_to_add += post.content.rendered;
-        } else {
-            var parsed_nodes = jQuery.parseHTML(post.content.rendered);
-            if(parsed_nodes !== null) {
-                for (var i = 0; i < parsed_nodes.length; i++) {
-                    if (typeof parsed_nodes[i].outerHTML === 'string') {
-                        html_to_add += parsed_nodes[i].outerHTML;
-                    } else if (typeof parsed_nodes[i].wholeText === 'string') {
-                        html_to_add += parsed_nodes[i].wholeText;
-                    }
-                }
-            }
-        }
+        if(this.showContent) {
+			if (this.include_inline_js) {
+				html_to_add += post.content.rendered;
+			} else {
+				var parsed_nodes = jQuery.parseHTML(post.content.rendered);
+				if (parsed_nodes !== null) {
+					for (var i = 0; i < parsed_nodes.length; i++) {
+						if (typeof parsed_nodes[i].outerHTML === 'string') {
+							html_to_add += parsed_nodes[i].outerHTML;
+						} else if (typeof parsed_nodes[i].wholeText === 'string') {
+							html_to_add += parsed_nodes[i].wholeText;
+						}
+					}
+				}
+			}
+		}
         html_to_add += '</div>'
              + '</article>';
-        html_to_add += this.renderCommentsOf(post);
+		if(this.showComments){
+			html_to_add += this.renderCommentsOf(post);
+        }
+        if(this.showDivider){
+		    html_to_add += '<hr class="pmb-divider">';
+        }
         this.posts_div.append(html_to_add);
     };
 
     this.addTaxonomies = function(post) {
-        var html = '';
+        var html = ' ';
         if(post._embedded['wp:term']) {
             for( taxonomy in post._embedded['wp:term']) {
                 var term_names = [];
@@ -491,9 +515,6 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
     this.renderCommentsOf = function(post)
     {
-        if(! this.loadComments){
-            return '';
-        }
         let html = '';
         let has_comments = typeof post.comments !== 'undefined' && post.comments !== null && post.comments.length > 0;
         var comments_header_text = this.translations.comments;
