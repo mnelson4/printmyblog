@@ -120,9 +120,9 @@ Please join our [Open Collective](https://opencollective.com/print-my-blog) to w
 == Changelog ==
 
 = 1.5.0 =
-* Enfold theme compatibility
-* Optionally add a divider
 * Allow adding or removing any part of post content
+* Optionally add a divider
+* Enfold theme compatibility
 
 = 1.4.0 =
 * Allow printing comments
