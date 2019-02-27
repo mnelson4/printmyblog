@@ -119,89 +119,89 @@ Please join our [Open Collective](https://opencollective.com/print-my-blog) to w
 
 == Changelog ==
 
-= 1.5.0 =
+= 1.5.0 Feb 27 2019=
 * Allow adding or removing any part of post content
 * Optionally add a divider
 * Enfold theme compatibility
 
-= 1.4.0 =
+= 1.4.0 Feb 20 2019=
 * Allow printing comments
 * Tweaked "What do you think?" text
 
-= 1.3.5 =
+= 1.3.5 Feb 12 2019=
 * Make showing printout meta info (blog's URL, date of printing, and that it was done with this plugin) optional
 * Allow removing hyperlinks from content.
 
-= 1.3.4 =
+= 1.3.4 Feb 8 2019=
 * Add links to support, review, and sponsor.
 
-= 1.3.3 =
+= 1.3.3 Feb 3 2019=
 * Fix fatal error when function "register_block_type" isn't defined
 
-= 1.3.2 =
+= 1.3.2 Jan 31 2019=
 * Remove ellipsis from "Initializing..."
 * Added assets/styles/plugin-compatibility.css for CSS that is for compatibility with specific plugins (so far that's [Yuzo Related Posts](
 https://wordpress.org/plugins/yuzo-related-post/) and [I Recommend This](https://wordpress.org/plugins/i-recommend-this/))
 
-= 1.3.1 =
+= 1.3.1 Jan 30 2019=
 * Move pretend page down a bit so we dont hide the page title
 * Remove ellipsis because they look ugly in RTL languages
 
-= 1.3.0 =
+= 1.3.0 Jan 30 2019=
 * Improved print page to look more like a print preview
 * Use submit inputs instead of buttons because themes generally style them better
 * Add link to make donations
 
-= 1.2.4 =
+= 1.2.4 Jan 15 2019=
 * Add Gutenberg Block so site visitors can print the blog
 * Increased post rendering from 500ms to 200ms per post
 * Moved WP REST Proxy area outside of advanced area
 
-= 1.2.3 =
+= 1.2.3 Jan 7 2019=
 * Fixed a bug from 1.2.0 that caused text resizing to not load
 * Fixed some featured images not loading because of unusual REST API response
 * Fixed JetPack's Tiled Galleries by enqueuing its stylesheet
 
-= 1.2.2 =
+= 1.2.2 Jan 1 2019=
 * Bump minimum compatible version of WordPress to 4.6 (this will help with translations, and now is probably the easiest time to make the change)
 
-= 1.2.1 =
+= 1.2.1 Jan 1 2019=
 * Add text domain for translators
 
-= 1.2.0 =
+= 1.2.0 Jan 1 2019=
 * Add support for printing pages
 * Fixed a bug where header tags don't appear when printing from Google Chrome
 * Show categories, terms, and other custom taxonomies
 * Add option to remove inline javascript from posts (defaults to remove them)
 * Add option to slowdown post rendering (if it's too fast, images might not load)
 
-= 1.1.6 =
+= 1.1.6 Dec 17 2018=
 * Improved layout of WP Video and (JetPack) Tiled Gallery shortcodes
 
-= 1.1.5 =
+= 1.1.5 Dec 17 2018=
 * Move featured image and post excerpts into columns
 * Improved image resizing by using inline styles instead of stylesheets
 * Updated translated strings for image and text size option names
 * Improved text resizing
 
-= 1.1.4 =
+= 1.1.4 Dec 8 2018=
 * Replaced "Print Preview" with "View Printable Content"
 
-= 1.1.3 =
+= 1.1.3 Dec 8 2018=
 * Improved compatibility with themes twentyeleven and twentyfourteen
 
-= 1.1.2 = 
+= 1.1.2 Nov 5 2018=
 * Update minimum PHP version in readme.txt
 
-= 1.1.1 =
+= 1.1.1 Nov 2 2018=
 * Fix image sizes
 * Fix translation domains
 
-= 1.1.0 =
+= 1.1.0 Nov 2 2018=
 * Added page setup options: columns, text size, page-break on new post, and image size
 
-= 1.0.1 =
+= 1.0.1 Nov 1 2018=
 * Changes to readme
 
-= 1.0.0 =
+= 1.0.0 Nov 1 2018=
 * Initial version.
