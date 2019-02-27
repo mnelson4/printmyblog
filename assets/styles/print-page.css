@@ -121,3 +121,6 @@ div.tiled-gallery{
 .pmb-divider{
     margin-bottom:3em;
 }
+.pmb-posts .wp-caption{
+    max-width:100%;
+}
