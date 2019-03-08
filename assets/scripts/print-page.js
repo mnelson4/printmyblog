@@ -40,6 +40,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.showContent = pmb_instance_vars.show_content;
 	this.showComments = pmb_instance_vars.show_comments;
 	this.showDivider = pmb_instance_vars.show_divider;
+	this.filters = pmb_instance_vars.filters;
     /**
      * @function
      */
@@ -85,9 +86,15 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 	};
 
 	this.getCollectionQueryData = function () {
-		var data = {
-			proxy_for: this.proxy_for,
-		};
+		let data;
+		if(this.filters){
+		    data = this.filters;
+        } else {
+		    data = {};
+        }
+        if( data.proxy_for){
+			data.proxy_for = this.proxy_for;
+        }
 		return data;
 	};
 

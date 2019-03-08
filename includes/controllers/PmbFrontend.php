@@ -46,7 +46,7 @@ class PmbFrontend extends BaseController
             $pmb_site_description = $site_info->getDescription();
             $pmb_site_url = $site_info->getSite();
             $pmb_printout_meta = $this->getFromRequest('printout-meta', false);
-            if($site_info->getLocal()) {
+            if($site_info->isLocal()) {
                 $this->proxy_for = '';
             } else {
                 $this->proxy_for = $site_info->getRestApiUrl();
@@ -112,8 +112,9 @@ class PmbFrontend extends BaseController
             'columns' => $this->getFromRequest('columns', 1),
             'post_type' => $this->getFromRequest('post-type', 'post'),
             'rendering_wait' => $this->getFromRequest('rendering-wait', 500),
-            'include_inline_js' => (bool)$this->getFromRequest('include-inline-js', false),
-            'links' => (string)$this->getFromRequest('links', 'include'),
+            'include_inline_js' => (bool) $this->getFromRequest('include-inline-js', false),
+            'links' => (string) $this->getFromRequest('links', 'include'),
+            'filters' => (array) $this->getFromRequest('filters', [])
         ];
         $print_options = new PrintOptions();
         foreach($print_options->postContentOptions() as $option_name => $option_details){

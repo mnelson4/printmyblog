@@ -56,15 +56,20 @@ class RestApiDetector
             $this->setSite( 'http://' . $this->getSite());
         }
         // if there is one, check if it exists in wordpress.com, eg "retirementreflections.com"
-        $site = sanitize_text_field($this->getSite());
+        $site = trailingslashit(sanitize_text_field($this->getSite()));
 
 
         // Let's see if it's self-hosted...
         $data = $this->getSelfHostedSiteInfo($site);
+//        if($data === false){
+//            // Alright, there was no link to the REST API index. But maybe it's a WordPress.com site...
+//            $data = $this->guessSelfHostedSiteInfo($site);
+//        }
         if($data === false){
+            // Alright, there was no link to the REST API index. But maybe it's a WordPress.com site...
             $data = $this->getWordPressComSiteInfo($site);
         }
-        // Alright, there was no link to the REST API index. But maybe it's a WordPress.com site...
+
         return $data;
     }
 
@@ -96,7 +101,10 @@ class RestApiDetector
             return false;
         }
         // grab from site index
-        $wp_api_url = $matches[1];
+        return $this->fetchWpJsonRootInfo($matches[1]);
+    }
+
+    protected function fetchWpJsonRootInfo($wp_api_url) {
         $response = $this->sendHttpGetRequest($wp_api_url);
         if (is_wp_error($response)) {
             // The WP JSON index existed, but didn't work. Let's tell the user.
@@ -106,7 +114,7 @@ class RestApiDetector
         $response_data = json_decode($response_body,true);
         if (! is_array($response_data)) {
             throw new RestApiDetectorError(
-                new WP_Error('no_json', __('The self-hosted WordPress site has an error in its REST API data.', 'print-my-blog'))
+                new WP_Error('no_json', __('The WordPress site has an error in its REST API data.', 'print-my-blog'))
             );
         }
         if (isset($response_data['code'], $response_data['message'])) {
@@ -123,8 +131,22 @@ class RestApiDetector
         }
         // so we didn't get an error or a proper response, but it's JSON? That's really weird.
         throw new RestApiDetectorError(
-            new WP_Error('unknown_response', __('The self-hosted WordPress site responded with an unexpected response.', 'print-my-blog'))
+            new WP_Error('unknown_response', __('The WordPress site responded with an unexpected response.', 'print-my-blog'))
         );
+    }
+
+    /**
+     * We didn't see any indication the website has the WP API enabled. Just take a guess that
+     * /wp-json is the REST API base url. Maybe we'll get lucky.
+     * @since $VID:$
+     * @param $site
+     * @return bool
+     * @throws RestApiDetectorError
+     */
+    protected function guessSelfHostedSiteInfo($site){
+        // add /wp-json as a guess
+        return $this->fetchWpJsonRootInfo($site . 'wp-json');
+        // and if it responds with valid JSON, it's ok
     }
 
     /**
@@ -138,41 +160,9 @@ class RestApiDetector
      */
     protected function getWordPressComSiteInfo($site){
         $domain = str_replace(array('http://','https://'),'',$site);
-        $response = $this->sendHttpGetRequest(
-            'https://public-api.wordpress.com/rest/v1.1/sites/' . $domain
-        );
 
-        // let's see what WordPress.com has to say about this site...
-        if (is_wp_error($response)) {
-            throw new RestApiDetectorError($response);
-        }
-        $response_body = wp_remote_retrieve_body($response);
-        $response_data = json_decode($response_body, true);
-        if (! is_array($response_data)) {
-            throw new RestApiDetectorError(
-                new WP_Error('no_json', __('The WordPress.com site has an error in its REST API data.', 'print-my-blog'))
-            );
-        }
-        if(isset($response_data['error'], $response_data['message'])) {
-            if($response_data['error'] === 'unknown_blog') {
-                throw new RestApiDetectorError(
-                    new WP_Error('not_wordpress', esc_html__('The URL you provided does not appear to be a WordPress website', 'print-my-blog'))
-                );
-            }
-            throw new RestApiDetectorError(
-                new WP_Error($response_data['error'], $response_data['message'])
-            );
-        }
-        if (isset($response_data['name'], $response_data['description'])) {
-            $this->setName($response_data['name']);
-            $this->setDescription(($response_data['description']));
-            $this->setRestApiUrl('https://public-api.wordpress.com/wp/v2/sites/' . $domain);
-            $this->setLocal(false);
-            return true;
-        }
-        // so we didn't get an error or a proper response, but it's JSON? That's really weird.
-        throw new RestApiDetectorError(
-            new WP_Error('unknown_response', __('The WordPress.com site responded with an unexpected response.', 'print-my-blog'))
+        return $this->fetchWpJsonRootInfo(
+            'https://public-api.wordpress.com/rest/v1.1/sites/' . $domain
         );
     }
 
@@ -187,7 +177,8 @@ class RestApiDetector
             $url,
             [
                 'timeout' => 30,
-                'sslverify' => false
+                'sslverify' => false,
+                'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0'
             ]
         );
     }
@@ -259,7 +250,7 @@ class RestApiDetector
     /**
      * @return mixed
      */
-    public function getLocal()
+    public function isLocal()
     {
         return $this->local;
     }

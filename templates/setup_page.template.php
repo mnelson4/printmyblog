@@ -24,9 +24,15 @@ use PrintMyBlog\domain\PrintOptions;
         <table class="form-table">
             <tbody>
                 <tr>
-                    <th scope="row"><?php esc_html_e('Site URL (including "https://" or "http://")', 'print-my-blog');?></th>
+                    <th scope="row">
+                        <?php esc_html_e('Site URL (including "https://" or "http://")', 'print-my-blog');?>
+                    </th>
                     <td>
-                        <input name="site" placeholder="<?php echo site_url();?>">
+                        <input name="site" id="pmb-site" placeholder="<?php echo site_url();?>">
+                        <div class="pmb-spinner-container">
+                            <div id="pmb-site-checking" class="pmb-spinner pmb-hidden-initially"></div>
+                        </div>
+                        <span id="pmb-site-ok" class="pmb-hidden-initially">✅</span><span id="pmb-site-bad" class="pmb-hidden-initially">❌</span><span id="pmb-site-status"></span>
                         <p class="description"><?php esc_html_e('URL of the WordPress site (self-hosted or on WordPress.com) you’d like to print. Leave blank to use this current site.', 'print-my-blog');?></p>
                     </td>
                 </tr>
@@ -34,10 +40,10 @@ use PrintMyBlog\domain\PrintOptions;
         </table>
         <?php }?>
 
-        <a href="" onclick="jQuery('.pmb-page-setup-options-advanced').toggle();return false;"><?php esc_html_e('Show Options', 'print-my-blog'); ?></a><br/><br/>
+        <a href="#" onclick="jQuery('.pmb-page-setup-options-advanced').toggle();return false;"><?php esc_html_e('Show Options', 'print-my-blog'); ?></a><br/><br/>
         <div class="pmb-page-setup-options-advanced" style="display:none">
             <h1><?php esc_html_e('Options','print-my-blog' );?></h1>
-            <h2><?php esc_html_e('Content','print-my-blog' );?></h2>
+            <h2><?php esc_html_e('Post Selection','print-my-blog' );?></h2>
             <table class="form-table">
                 <tbody>
                 <tr>
@@ -47,8 +53,24 @@ use PrintMyBlog\domain\PrintOptions;
                         <br>
                         <label><input type="radio" name="post-type" value="page"><?php esc_html_e('Pages', 'print-my-blog');?></label>
                     </td>
-
                 </tr>
+                </tbody>
+            </table>
+            <h2><?php esc_html_e('Filters', 'print-my-blog');?></h2>
+            <table class="form-table">
+                <tbody id="pmb-dynamic-categories">
+                <tr>
+                    <th><div class="pmb-spinner"></div></th>
+                    <td>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+                <h2><?php esc_html_e('Content','print-my-blog' );?></h2>
+            <table class="form-table">
+                <tbody>
                 <?php
 
                 ?>
