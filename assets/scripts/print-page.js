@@ -457,7 +457,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
     this.addTaxonomies = function(post) {
         var html = ' ';
-        if(post._embedded['wp:term']) {
+        if('_embedded' in post && 'wp:term' in post._embedded) {
             for( taxonomy in post._embedded['wp:term']) {
                 var term_names = [];
                 var taxonomy_slug = '';
@@ -503,7 +503,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      * @return string HTML for the featured image
      */
     this.getFeaturedImageHtml = function(post)
-    {   if( typeof post._embedded['wp:featuredmedia'] == "object"
+    {   if( '_embedded' in post && 'wp:featuredmedia' in post._embedded && typeof post._embedded['wp:featuredmedia'] == "object"
             && typeof post._embedded['wp:featuredmedia'][0] == "object"
             && typeof post._embedded['wp:featuredmedia'][0].media_details == "object") {
             var featured_media_url = null;
