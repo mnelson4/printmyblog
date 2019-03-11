@@ -364,6 +364,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 });
             }
         }
+        jQuery('.foogallery img')
 
         jQuery('.pmb-posts h1').addClass('pmb-header');
         jQuery('.pmb-posts h2').addClass('pmb-header');
@@ -380,6 +381,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         jQuery('div.wp-video').css({'width': '','min-width':'', 'height': '', 'min-height': ''});
         // unhide the contents.
         jQuery('.pmb-posts').toggle();
+        this.posts_div.append('<script type="text/javascript" src="http://cmljnelson.test/wp-content/plugins/foogallery/extensions/default-templates/shared/js/foogallery.min.js"></script><link rel="stylesheet" type="text/css" href="http://cmljnelson.test/wp-content/plugins/foogallery/extensions/default-templates/shared/css/foogallery.min.css">');
         jQuery(document).trigger('pmb_wrap_up');
     };
 
