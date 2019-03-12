@@ -106,6 +106,7 @@ div.tiled-gallery{
 
 .pmb-posts-body article.pmb-post-article{
     float:none;
+    width:100%;
 }
 
 .pmb-divider{
