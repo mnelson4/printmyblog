@@ -114,7 +114,8 @@ class PmbFrontend extends BaseController
             'rendering_wait' => $this->getFromRequest('rendering-wait', 500),
             'include_inline_js' => (bool) $this->getFromRequest('include-inline-js', false),
             'links' => (string) $this->getFromRequest('links', 'include'),
-            'filters' => (array) $this->getFromRequest('filters', [])
+            'filters' => (array) $this->getFromRequest('filters', []),
+            'foogallery' => function_exists('foogallery_fs')
         ];
         $print_options = new PrintOptions();
         foreach($print_options->postContentOptions() as $option_name => $option_details){
