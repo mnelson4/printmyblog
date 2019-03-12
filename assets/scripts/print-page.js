@@ -71,7 +71,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.getPostsCollectionQueryData = function () {
         var data = this.getCollectionQueryData();
         data.status = 'publish';
-        data._embed = true;
+        data._embed = 1;
         if(this.post_type === 'post') {
             data.orderby = 'date';
             data.order = 'asc';
