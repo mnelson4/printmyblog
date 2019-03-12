@@ -382,7 +382,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         // unhide the contents.
         jQuery('.pmb-posts').toggle();
         if(this.foogallery) {
-			this.posts_div.append('<script type="text/javascript" src="/wp-content/plugins/foogallery/extensions/default-templates/shared/js/foogallery.min.js"></script><link rel="stylesheet" type="text/css" href="/wp-content/plugins/foogallery/extensions/default-templates/shared/css/foogallery.min.css">');
+			this.posts_div.append('<script type="text/javascript" src="/wp-includes/js/masonry.min.js?ver=3.3.2"></script><script type="text/javascript" src="/wp-content/plugins/foogallery/extensions/default-templates/shared/js/foogallery.min.js"></script><link rel="stylesheet" type="text/css" href="/wp-content/plugins/foogallery/extensions/default-templates/shared/css/foogallery.min.css">');
 		}
         jQuery(document).trigger('pmb_wrap_up');
     };
