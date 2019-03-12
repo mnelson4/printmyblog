@@ -40,8 +40,8 @@ use PrintMyBlog\domain\PrintOptions;
         </table>
         <?php }?>
 
-        <a href="#" onclick="jQuery('.pmb-page-setup-options-advanced').toggle();return false;"><?php esc_html_e('Show Options', 'print-my-blog'); ?></a><br/><br/>
-        <div class="pmb-page-setup-options-advanced" style="display:none">
+        <details class="pmb-details">
+            <summary class="pmb-reveal-options"><?php esc_html_e('Show Options', 'print-my-blog'); ?></summary>
             <h1><?php esc_html_e('Options','print-my-blog' );?></h1>
             <h2><?php esc_html_e('Post Selection','print-my-blog' );?></h2>
             <table class="form-table">
@@ -177,10 +177,9 @@ use PrintMyBlog\domain\PrintOptions;
                 </tbody>
             </table>
 
-            <a href="" onclick="jQuery('#pmb-troubleshooting-options').toggle();return false;"><?php esc_html_e('Show Troubleshooting Options', 'print-my-blog'); ?></a><br/><br/>
 
-            <div id="pmb-troubleshooting-options" style="display:none">
-                <h2><?php esc_html_e('Troubleshooting Options','print-my-blog' );?></h2>
+            <details class="pmb-details">
+                <summary class="pmb-reveal-options"><?php esc_html_e('Troubleshooting Options','print-my-blog' );?></summary>
                 <table class="form-table">
                     <tbody>
                     <tr>
@@ -204,9 +203,9 @@ use PrintMyBlog\domain\PrintOptions;
                     </tr>
                     </tbody>
                 </table>
-            </div>
+            </details>
             <input type="hidden" name="<?php echo PMB_PRINTPAGE_SLUG;?>" value="1">
-        </div>
+        </details>
         <button class="button-primary"><?php esc_html_e('Prepare Print-Page','print-my-blog' );?></button>
     </form>
 </div>
