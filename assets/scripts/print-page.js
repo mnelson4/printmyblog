@@ -351,7 +351,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     {
         // Don't wrap tiled gallery images- we have CSS to avoid page breaks in them
         // although currently, they don't display well because they need JS that doesn't get enqueued
-        var non_emojis = jQuery('img:not(.emoji, div.tiled-gallery img)');
+        var non_emojis = jQuery('img:not(.emoji, div.tiled-gallery img, img.fg-image)');
         if(this.image_size === 0){
             non_emojis.remove();
         } else{
@@ -382,7 +382,18 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         // unhide the contents.
         jQuery('.pmb-posts').toggle();
         if(this.foogallery) {
-			this.posts_div.append('<script type="text/javascript" src="/wp-includes/js/masonry.min.js?ver=3.3.2"></script><script type="text/javascript" src="/wp-content/plugins/foogallery/extensions/default-templates/shared/js/foogallery.min.js"></script><link rel="stylesheet" type="text/css" href="/wp-content/plugins/foogallery/extensions/default-templates/shared/css/foogallery.min.css">');
+            jQuery('img[data-src-fg]').each(function(arg1, arg2){
+               let el = jQuery(this);
+               el.attr('src', el.attr('data-src-fg'));
+               let src = el.attr('src');
+            });
+            setTimeout(
+                () =>{
+					this.posts_div.append('<script type="text/javascript" src="/wp-includes/js/masonry.min.js?ver=3.3.2"></script><script type="text/javascript" src="/wp-content/plugins/foogallery/extensions/default-templates/shared/js/foogallery.min.js"></script><link rel="stylesheet" type="text/css" href="/wp-content/plugins/foogallery/extensions/default-templates/shared/css/foogallery.min.css">');
+                },
+                this.rendering_wait
+            );
+
 		}
         jQuery(document).trigger('pmb_wrap_up');
     };
