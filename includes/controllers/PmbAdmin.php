@@ -112,7 +112,8 @@ class PmbAdmin extends BaseController
             'pmb_setup_page',
             [
                 'translations' => [
-                    'unknown_site_name' => esc_html__('Unknown site name', 'print-my-blog')
+                    'unknown_site_name' => esc_html__('Unknown site name', 'print-my-blog'),
+                    'no_categories' => esc_html__('No categories available.', 'print-my-blog')
                 ],
                 'data' => [
                     'site_input_selector' => '#pmb-site',

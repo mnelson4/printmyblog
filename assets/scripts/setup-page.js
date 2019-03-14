@@ -10,7 +10,7 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 	this.dynamic_categories_spinner = jQuery(pmb_instance_vars.dynamic_categories_spinner_selector);
 	this.post_type_selector = pmb_instance_vars.post_type_selector;
 	this.translations = translations;
-	this.taxonomies = null;
+	this.taxonomies = {};
 
 	site_input = jQuery(pmb_instance_vars.site_input_selector);
 
@@ -88,6 +88,7 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 		};
 		let post_type = jQuery(this.post_type_selector + ':checked').val();
 		data.type = post_type;
+		// Reset taxonomies to null, so we know it's not up-to-date.
 		alltaxonomiesCollection.fetch({data:data}).done((taxonomies) => {
 			this.taxonomies = taxonomies;
 			this.generateTaxonomyInputs();
@@ -96,6 +97,9 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 
 	this.generateTaxonomyInputs = function() {
 		this.dynamic_categories_spinner.hide();
+		if (jQuery.isEmptyObject( this.taxonomies )){
+			this.dynamic_categories.html('<tr><th scope="row">' + this.translations.no_categories + '</th></tr>');
+		}
 		jQuery.each(this.taxonomies, (index, taxonomy)=>{
 			const slug = taxonomy.rest_base;
 			this.dynamic_categories.append(
