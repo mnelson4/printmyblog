@@ -7,13 +7,16 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 	this.site_bad = jQuery(pmb_instance_vars.site_bad_selector);
 	this.site_status = jQuery(pmb_instance_vars.site_status_selector);
 	this.dynamic_categories = jQuery(pmb_instance_vars.dynamic_categories_selector);
+	this.dynamic_categories_spinner = jQuery(pmb_instance_vars.dynamic_categories_spinner_selector);
+	this.post_type_selector = pmb_instance_vars.post_type_selector;
 	this.translations = translations;
-	this.taxonomies = [];
+	this.taxonomies = null;
 
 	site_input = jQuery(pmb_instance_vars.site_input_selector);
 
 
 	this.init = function() {
+		// If WP REST API proxy is enabled, change the REST API URL depending on what they enter into the site URL.
 		jQuery(site_input).keyup(
 			jQuery.debounce(
 				() => {
@@ -22,7 +25,15 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 				2000
 			)
 		);
+		// Initialize the list of taxonomies etc.
 		this.updateRestApiUrl(site_input.val());
+
+		let post_type = jQuery(this.post_type_selector + ':checked').val();
+
+		// If they change the post type, change the taxonomies available.
+		jQuery('input' + this.post_type_selector + '[type=radio]').change(() => {
+			this.getTaxonomies();
+		});
 	};
 
 	this.updateRestApiUrl = function(site_url) {
@@ -69,10 +80,14 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 	};
 
 	this.getTaxonomies = function() {
+		this.dynamic_categories_spinner.show();
+		this.dynamic_categories.html('');
 		var alltaxonomiesCollection = new wp.api.collections.Taxonomies();
 		let data = {
 			proxy_for : this.proxy_for
 		};
+		let post_type = jQuery(this.post_type_selector + ':checked').val();
+		data.type = post_type;
 		alltaxonomiesCollection.fetch({data:data}).done((taxonomies) => {
 			this.taxonomies = taxonomies;
 			this.generateTaxonomyInputs();
@@ -80,13 +95,14 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 	};
 
 	this.generateTaxonomyInputs = function() {
-		this.dynamic_categories.html('');
+		this.dynamic_categories_spinner.hide();
 		jQuery.each(this.taxonomies, (index, taxonomy)=>{
 			const slug = taxonomy.rest_base;
 			this.dynamic_categories.append(
 				'<tr><th scope="row"><label for="' + slug + '">' + taxonomy.name+ '</label></th><td><select id="' + slug + '" class="pmb-taxonomies-select" name="filters[' + slug + '][]" multiple="multiple"></select></td></tr>'
 			);
 			jQuery('#'+slug).select2({
+				width: 'resolve',
 				ajax: {
 					url: this.default_rest_url + '/' + taxonomy.rest_base,
 					dataType: 'json',

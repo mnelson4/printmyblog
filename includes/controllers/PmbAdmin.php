@@ -117,9 +117,11 @@ class PmbAdmin extends BaseController
                 'data' => [
                     'site_input_selector' => '#pmb-site',
                     'spinner_selector' => '#pmb-site-checking',
+                    'dynamic_categories_spinner_selector' => '#pmb-categories-spinner',
                     'site_ok_selector' => '#pmb-site-ok',
                     'site_bad_selector' => '#pmb-site-bad',
                     'site_status_selector' => '#pmb-site-status',
+                    'post_type_selector' => '.pmb-post-type',
                     'dynamic_categories_selector' => '#pmb-dynamic-categories',
                     'default_rest_url' => rest_url('/wp/v2')
                 ]

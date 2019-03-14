@@ -41,7 +41,7 @@ use PrintMyBlog\domain\PrintOptions;
         <?php }?>
 
         <details class="pmb-details">
-            <summary class="pmb-reveal-options"><?php esc_html_e('Show Options', 'print-my-blog'); ?></summary>
+            <summary class="pmb-reveal-options" id="pmb-reveal-main-options"><?php esc_html_e('Show Options', 'print-my-blog'); ?></summary>
             <h1><?php esc_html_e('Options','print-my-blog' );?></h1>
             <h2><?php esc_html_e('Post Selection','print-my-blog' );?></h2>
             <table class="form-table">
@@ -49,21 +49,16 @@ use PrintMyBlog\domain\PrintOptions;
                 <tr>
                     <th scope="row"><?php esc_html_e('Post Selection','event_espresso' );?></th>
                     <td>
-                        <label><input type="radio" name="post-type" value="post" checked="checked"><?php esc_html_e('Posts', 'print-my-blog');?></label>
+                        <label><input class="pmb-post-type" type="radio" name="post-type" value="post" checked="checked"><?php esc_html_e('Posts', 'print-my-blog');?></label>
                         <br>
-                        <label><input type="radio" name="post-type" value="page"><?php esc_html_e('Pages', 'print-my-blog');?></label>
+                        <label><input class="pmb-post-type" type="radio" name="post-type" value="page"><?php esc_html_e('Pages', 'print-my-blog');?></label>
                     </td>
                 </tr>
                 </tbody>
             </table>
-            <h2><?php esc_html_e('Filters', 'print-my-blog');?></h2>
+            <h2><?php esc_html_e('Filters', 'print-my-blog');?> <div style="display:inline-block" id="pmb-categories-spinner"><div class="pmb-spinner"></div></div></h2>
             <table class="form-table">
                 <tbody id="pmb-dynamic-categories">
-                <tr>
-                    <th><div class="pmb-spinner"></div></th>
-                    <td>
-                    </td>
-                </tr>
                 </tbody>
             </table>
 

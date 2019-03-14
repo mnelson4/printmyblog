@@ -2,7 +2,8 @@
     display:inline-block;
 }
 .pmb-taxonomies-select{
-    min-width:15em;
+    min-width:20em;
+    width:20em;
 }
 details.pmb-details{
     margin:1em;
