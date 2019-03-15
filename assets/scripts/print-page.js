@@ -108,7 +108,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.beginLoading = function () {
         this.header.html(this.translations.loading_content);
         let collection = this.getCollection();
-        collection.fetch({data: this.getPostsCollectionQueryData(),
+        collection.fetch(
+            {
+                data: this.getPostsCollectionQueryData(),
+
         }).done((posts) => {
             this.storePostsAndMaybeFetchMore(posts, collection);
         });
@@ -633,6 +636,7 @@ function pmb_help_show(id){
 }
 
 var pmb = null;
+var original_backbone_sync;
 jQuery(document).ready(function () {
     wp.api.loadPromise.done( function() {
         setTimeout(
@@ -648,6 +652,23 @@ jQuery(document).ready(function () {
             1000
         );
     });
+    // Override Backbone's jQuery AJAX calls to be tolerant of erroneous text before the start of the JSON.
+    original_backbone_sync = Backbone.sync;
+    Backbone.sync = function(method,model,options){
+        // Change the jQuery AJAX "converters" text-to-json method.
+		options.converters = {
+			'text json': function(result) {
+			    // Find the beginning of JSON object or array...
+				const start_of_json = Math.min(
+					result.indexOf('{'),
+					result.indexOf('[')
+				);
+				// ...and only send that, skip everything before it.
+				return jQuery.parseJSON(result.substring(start_of_json));
+			}
+		};
+        return original_backbone_sync(method,model,options);
+    };
 });
 
 
