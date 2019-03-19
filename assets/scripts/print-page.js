@@ -78,9 +78,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             data.order = 'asc';
         }
 		if(this.filters){
-			data = this.filters;
-		} else {
-			data = {};
+			jQuery.extend(data, this.filters);
 		}
         return data;
     };
