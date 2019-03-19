@@ -109,7 +109,16 @@ Please join our [Open Collective](https://opencollective.com/print-my-blog) to w
 
 * the WP API (or REST API) needs to not be deactivated
 * caching plugins should probably be deactivated before use
-* recommended web browsers: Firefox, Google Chrome.  
+* recommended web browsers: Firefox, Google Chrome.
+
+== Frequently Asked Questions ==
+
+= Some images aren't appearing =
+
+Print My Blog can work too fast for some webservers, meaning the webservers refuse to load all the content, most noticeably some images.
+In order to fix this, you need to tell Print My Blog to slow down. On the configuration page, show options, then scroll
+down to show Troubleshooting options, and increase "Post Rendering Wait-Time" (eg to 2000 milliseconds, or whatever
+value you need to in order to get all the images to load).
 
 == Screenshots ==
 
@@ -180,33 +189,33 @@ https://wordpress.org/plugins/yuzo-related-post/) and [I Recommend This](https:/
 * Add option to remove inline javascript from posts (defaults to remove them)
 * Add option to slowdown post rendering (if it's too fast, images might not load)
 
-= 1.1.6 Dec 17 2018=
+= 1.1.6 Dec 17 2018 =
 * Improved layout of WP Video and (JetPack) Tiled Gallery shortcodes
 
-= 1.1.5 Dec 17 2018=
+= 1.1.5 Dec 17 2018 =
 * Move featured image and post excerpts into columns
 * Improved image resizing by using inline styles instead of stylesheets
 * Updated translated strings for image and text size option names
 * Improved text resizing
 
-= 1.1.4 Dec 8 2018=
+= 1.1.4 Dec 8 2018 =
 * Replaced "Print Preview" with "View Printable Content"
 
-= 1.1.3 Dec 8 2018=
+= 1.1.3 Dec 8 2018 =
 * Improved compatibility with themes twentyeleven and twentyfourteen
 
-= 1.1.2 Nov 5 2018=
+= 1.1.2 Nov 5 2018 =
 * Update minimum PHP version in readme.txt
 
-= 1.1.1 Nov 2 2018=
+= 1.1.1 Nov 2 2018 =
 * Fix image sizes
 * Fix translation domains
 
-= 1.1.0 Nov 2 2018=
+= 1.1.0 Nov 2 2018 =
 * Added page setup options: columns, text size, page-break on new post, and image size
 
-= 1.0.1 Nov 1 2018=
+= 1.0.1 Nov 1 2018 =
 * Changes to readme
 
-= 1.0.0 Nov 1 2018=
+= 1.0.0 Nov 1 2018 =
 * Initial version.
