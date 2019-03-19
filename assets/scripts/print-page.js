@@ -77,6 +77,11 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             data.orderby = 'date';
             data.order = 'asc';
         }
+		if(this.filters){
+			data = this.filters;
+		} else {
+			data = {};
+		}
         return data;
     };
 
@@ -87,12 +92,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 	};
 
 	this.getCollectionQueryData = function () {
-		let data;
-		if(this.filters){
-		    data = this.filters;
-        } else {
-		    data = {};
-        }
+		let data = {};
         if( data.proxy_for){
 			data.proxy_for = this.proxy_for;
         }
