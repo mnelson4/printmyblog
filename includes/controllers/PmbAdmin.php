@@ -77,56 +77,7 @@ class PmbAdmin extends BaseController
         if ( 'tools_page_print-my-blog' !== $hook ) {
             return;
         }
-        wp_register_script(
-            'jquery_debounce',
-            PMB_ASSETS_URL . 'scripts/libs/jquery.debounce-1.0.5.js',
-            ['jquery'],
-            '1.0.5'
-        );
-        wp_register_script(
-            'select2',
-            PMB_ASSETS_URL . 'scripts/libs/select2/select2.min.js',
-            [],
-            '4.0.6'
-        );
-        wp_register_style(
-            'select2',
-            PMB_ASSETS_URL . 'styles/libs/select2.css',
-            [],
-            '4.0.6'
-        );
-        wp_enqueue_script(
-            'pmb_setup_page',
-            PMB_ASSETS_URL . 'scripts/setup-page.js',
-            ['jquery_debounce', 'select2', 'wp-api', 'jquery'],
-            filemtime(PMB_ASSETS_DIR .  'scripts/setup-page.js')
-        );
-        wp_enqueue_style(
-            'pmb_setup_page',
-            PMB_ASSETS_URL . 'styles/setup-page.css',
-            ['pmb_common', 'select2'],
-            filemtime(PMB_ASSETS_DIR .  'styles/setup-page.css')
-        );
-        wp_localize_script(
-            'pmb_setup_page',
-            'pmb_setup_page',
-            [
-                'translations' => [
-                    'unknown_site_name' => esc_html__('Unknown site name', 'print-my-blog'),
-                    'no_categories' => esc_html__('No categories available.', 'print-my-blog')
-                ],
-                'data' => [
-                    'site_input_selector' => '#pmb-site',
-                    'spinner_selector' => '#pmb-site-checking',
-                    'dynamic_categories_spinner_selector' => '#pmb-categories-spinner',
-                    'site_ok_selector' => '#pmb-site-ok',
-                    'site_bad_selector' => '#pmb-site-bad',
-                    'site_status_selector' => '#pmb-site-status',
-                    'post_type_selector' => '.pmb-post-type',
-                    'dynamic_categories_selector' => '#pmb-dynamic-categories',
-                    'default_rest_url' => rest_url('/wp/v2')
-                ]
-            ]
-        );
+        wp_enqueue_script('pmb-setup-page');
+        wp_enqueue_style('pmb-setup-page');
     }
 }

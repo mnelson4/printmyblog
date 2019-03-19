@@ -1,5 +1,6 @@
 function PmbSetupPage(pmb_instance_vars, translations) {
 	this.default_rest_url = pmb_instance_vars.default_rest_url;
+	this.ajax_url = pmb_instance_vars.ajax_url;
 	this.proxy_for = '';
 	this.site_name = '';
 	this.spinner = jQuery(pmb_instance_vars.spinner_selector);
@@ -50,8 +51,7 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 			'site': site_url
 		};
 
-		// since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
-		jQuery.post(ajaxurl, data, (response) => {
+		jQuery.post(this.ajax_url, data, (response) => {
 				this.spinner.hide();
 				if(response.success && response.data.name && response.data.proxy_for){
 					if( ! response.data.is_local){
