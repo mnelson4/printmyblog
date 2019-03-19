@@ -12,3 +12,7 @@
 .pmb-hidden-initially{
     display:none;
 }
+
+.pmb-wide-input{
+    min-width:20em;
+}

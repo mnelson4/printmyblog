@@ -28,7 +28,7 @@ use PrintMyBlog\domain\PrintOptions;
                         <?php esc_html_e('Site URL (including "https://" or "http://")', 'print-my-blog');?>
                     </th>
                     <td>
-                        <input name="site" id="pmb-site" placeholder="<?php echo site_url();?>">
+                        <input name="site" id="pmb-site" class="pmb-wide-input" placeholder="<?php echo site_url();?>">
                         <div class="pmb-spinner-container">
                             <div id="pmb-site-checking" class="pmb-spinner pmb-hidden-initially"></div>
                         </div>
