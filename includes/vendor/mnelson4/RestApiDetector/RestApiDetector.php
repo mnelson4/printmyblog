@@ -202,7 +202,7 @@ class RestApiDetector
     /**
      * @param mixed $name
      */
-    protected function setName($name): void
+    protected function setName($name)
     {
         $this->name = $name;
     }
@@ -210,7 +210,7 @@ class RestApiDetector
     /**
      * @param mixed $site
      */
-    protected function setSite($site): void
+    protected function setSite($site)
     {
         $this->site = $site;
     }
@@ -226,7 +226,7 @@ class RestApiDetector
     /**
      * @param mixed $description
      */
-    protected function setDescription($description): void
+    protected function setDescription($description)
     {
         $this->description = $description;
     }
@@ -242,7 +242,7 @@ class RestApiDetector
     /**
      * @param mixed $rest_api_url
      */
-    protected function setRestApiUrl($rest_api_url): void
+    protected function setRestApiUrl($rest_api_url)
     {
         $this->rest_api_url = $rest_api_url;
     }
@@ -258,7 +258,7 @@ class RestApiDetector
     /**
      * @param mixed $local
      */
-    protected function setLocal($local): void
+    protected function setLocal($local)
     {
         $this->local = $local;
     }
@@ -266,7 +266,7 @@ class RestApiDetector
     /**
      * @return bool
      */
-    protected function isInitialized(): bool
+    protected function isInitialized()
     {
         return $this->initialized;
     }
@@ -274,7 +274,7 @@ class RestApiDetector
     /**
      * @param bool $initialized
      */
-    protected function setInitialized(bool $initialized): void
+    protected function setInitialized(bool $initialized)
     {
         $this->initialized = $initialized;
     }

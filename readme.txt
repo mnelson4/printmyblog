@@ -123,7 +123,10 @@ value you need to in order to get all the images to load).
 
 == Changelog ==
 
-= 1.6.0 March 19 2019 =
+= 1.6.1 March 20 2019 =
+* Removed some PHP7-only code
+
+= 1.6.0 March 20 2019 =
 * Add filtering by post taxonomies (categories, terms, and custom taxonomies)
 * Foo Gallery support
 * Handle polluted JSON responses
