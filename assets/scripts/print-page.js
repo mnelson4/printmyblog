@@ -40,6 +40,8 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.showContent = pmb_instance_vars.show_content;
 	this.showComments = pmb_instance_vars.show_comments;
 	this.showDivider = pmb_instance_vars.show_divider;
+	this.filters = pmb_instance_vars.filters;
+	this.foogallery = pmb_instance_vars.foogallery;
     /**
      * @function
      */
@@ -70,11 +72,14 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.getPostsCollectionQueryData = function () {
         var data = this.getCollectionQueryData();
         data.status = 'publish';
-        data._embed = true;
+        data._embed = 1;
         if(this.post_type === 'post') {
             data.orderby = 'date';
             data.order = 'asc';
         }
+		if(this.filters){
+			jQuery.extend(data, this.filters);
+		}
         return data;
     };
 
@@ -85,9 +90,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 	};
 
 	this.getCollectionQueryData = function () {
-		var data = {
-			proxy_for: this.proxy_for,
-		};
+		let data = {};
+        if( data.proxy_for){
+			data.proxy_for = this.proxy_for;
+        }
 		return data;
 	};
 
@@ -100,7 +106,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.beginLoading = function () {
         this.header.html(this.translations.loading_content);
         let collection = this.getCollection();
-        collection.fetch({data: this.getPostsCollectionQueryData(),
+        collection.fetch(
+            {
+                data: this.getPostsCollectionQueryData(),
+
         }).done((posts) => {
             this.storePostsAndMaybeFetchMore(posts, collection);
         });
@@ -343,7 +352,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     {
         // Don't wrap tiled gallery images- we have CSS to avoid page breaks in them
         // although currently, they don't display well because they need JS that doesn't get enqueued
-        var non_emojis = jQuery('img:not(.emoji, div.tiled-gallery img)');
+        var non_emojis = jQuery('img:not(.emoji, div.tiled-gallery img, img.fg-image)');
         if(this.image_size === 0){
             non_emojis.remove();
         } else{
@@ -373,6 +382,20 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         jQuery('div.wp-video').css({'width': '','min-width':'', 'height': '', 'min-height': ''});
         // unhide the contents.
         jQuery('.pmb-posts').toggle();
+        if(this.foogallery) {
+            jQuery('img[data-src-fg]').each(function(arg1, arg2){
+               let el = jQuery(this);
+               el.attr('src', el.attr('data-src-fg'));
+               let src = el.attr('src');
+            });
+            setTimeout(
+                () =>{
+					this.posts_div.append('<script type="text/javascript" src="/wp-includes/js/masonry.min.js?ver=3.3.2"></script><script type="text/javascript" src="/wp-content/plugins/foogallery/extensions/default-templates/shared/js/foogallery.min.js"></script><link rel="stylesheet" type="text/css" href="/wp-content/plugins/foogallery/extensions/default-templates/shared/css/foogallery.min.css">');
+                },
+                this.rendering_wait
+            );
+
+		}
         jQuery(document).trigger('pmb_wrap_up');
     };
 
@@ -450,7 +473,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
     this.addTaxonomies = function(post) {
         var html = ' ';
-        if(post._embedded['wp:term']) {
+        if('_embedded' in post && 'wp:term' in post._embedded) {
             for( taxonomy in post._embedded['wp:term']) {
                 var term_names = [];
                 var taxonomy_slug = '';
@@ -496,7 +519,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      * @return string HTML for the featured image
      */
     this.getFeaturedImageHtml = function(post)
-    {   if( typeof post._embedded['wp:featuredmedia'] == "object"
+    {   if( '_embedded' in post && 'wp:featuredmedia' in post._embedded && typeof post._embedded['wp:featuredmedia'] == "object"
             && typeof post._embedded['wp:featuredmedia'][0] == "object"
             && typeof post._embedded['wp:featuredmedia'][0].media_details == "object") {
             var featured_media_url = null;
@@ -611,6 +634,7 @@ function pmb_help_show(id){
 }
 
 var pmb = null;
+var original_backbone_sync;
 jQuery(document).ready(function () {
     wp.api.loadPromise.done( function() {
         setTimeout(
@@ -626,6 +650,23 @@ jQuery(document).ready(function () {
             1000
         );
     });
+    // Override Backbone's jQuery AJAX calls to be tolerant of erroneous text before the start of the JSON.
+    original_backbone_sync = Backbone.sync;
+    Backbone.sync = function(method,model,options){
+        // Change the jQuery AJAX "converters" text-to-json method.
+		options.converters = {
+			'text json': function(result) {
+			    // Find the beginning of JSON object or array...
+				const start_of_json = Math.min(
+					result.indexOf('{'),
+					result.indexOf('[')
+				);
+				// ...and only send that, skip everything before it.
+				return jQuery.parseJSON(result.substring(start_of_json));
+			}
+		};
+        return original_backbone_sync(method,model,options);
+    };
 });
 
 

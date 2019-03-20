@@ -26,6 +26,7 @@ class PmbAdmin extends BaseController
     {
         add_action('admin_menu', array($this, 'addToMenu'));
         add_filter('plugin_action_links_' . PMB_BASENAME, array($this, 'pluginPageLinks'));
+        add_action( 'admin_enqueue_scripts', [$this,'enqueueScripts'] );
     }
 
     /**
@@ -70,5 +71,13 @@ class PmbAdmin extends BaseController
             . esc_html__('Print Setup Page', 'print-my-blog')
             . '</a>';
         return $links;
+    }
+
+    function enqueueScripts($hook) {
+        if ( 'tools_page_print-my-blog' !== $hook ) {
+            return;
+        }
+        wp_enqueue_script('pmb-setup-page');
+        wp_enqueue_style('pmb-setup-page');
     }
 }

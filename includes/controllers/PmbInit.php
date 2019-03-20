@@ -43,12 +43,11 @@ class PmbInit extends BaseController
      */
     public function init()
     {
-        if (defined('DOING_AJAX') && DOING_AJAX) {
-            // we have nothing to do on ajax requests.
-            return;
-        }
         $this->setUrls();
-        if (is_admin()) {
+        if (defined('DOING_AJAX') && DOING_AJAX) {
+            require_once('PmbAjax.php');
+            $controller = new PmbAjax();
+        } else if (is_admin()) {
             require_once('PmbAdmin.php');
             $controller = new PmbAdmin();
         } else {
@@ -56,9 +55,14 @@ class PmbInit extends BaseController
             $controller = new PmbFrontend();
         }
         $controller->setHooks();
+
         require_once('PmbGutenbergBlock.php');
         $block_controller = new PmbGutenbergBlock();
         $block_controller->setHooks();
+
+        require_once('PmbCommon.php');
+        $common_controller = new PmbCommon();
+        $common_controller->setHooks();
     }
 
     public function setUrls()

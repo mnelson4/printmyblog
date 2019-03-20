@@ -2,9 +2,11 @@
 
 namespace PrintMyBlog\controllers;
 
+use mnelson4\RestApiDetector\RestApiDetector;
+use mnelson4\RestApiDetectorError;
 use PrintMyBlog\domain\PrintOptions;
 use Twine\controllers\BaseController;
-use WP_Error;
+use stdClass;
 
 class PmbFrontend extends BaseController
 {
@@ -33,19 +35,23 @@ class PmbFrontend extends BaseController
     {
 
         if (isset($_GET[PMB_PRINTPAGE_SLUG])) {
-
-            $site_info = $this->getSiteInfo();
-            if(is_wp_error($site_info)){
+            try {
+                $site_info = new RestApiDetector($this->getFromRequest('site', ''));
+            }catch(RestApiDetectorError $exception){
                 global $pmb_wp_error;
-                $pmb_wp_error = $site_info;
+                $pmb_wp_error = $exception->wp_error();
                 return PMB_TEMPLATES_DIR . 'print_page_error.template.php';
             }
             global $pmb_site_name, $pmb_site_description, $pmb_site_url,  $pmb_printout_meta;
-            $pmb_site_name = $site_info['name'];
-            $pmb_site_description = $site_info['description'];
-            $pmb_site_url = $site_info['url'];
+            $pmb_site_name = $site_info->getName();
+            $pmb_site_description = $site_info->getDescription();
+            $pmb_site_url = $site_info->getSite();
             $pmb_printout_meta = $this->getFromRequest('printout-meta', false);
-            $this->proxy_for = $site_info['proxy_for'];
+            if($site_info->isLocal()) {
+                $this->proxy_for = '';
+            } else {
+                $this->proxy_for = $site_info->getRestApiUrl();
+            }
             // enqueue our scripts and styles at the right time
             // specifically, after everybody else, so we can override them.
             add_action(
@@ -107,8 +113,10 @@ class PmbFrontend extends BaseController
             'columns' => $this->getFromRequest('columns', 1),
             'post_type' => $this->getFromRequest('post-type', 'post'),
             'rendering_wait' => $this->getFromRequest('rendering-wait', 500),
-            'include_inline_js' => (bool)$this->getFromRequest('include-inline-js', false),
-            'links' => (string)$this->getFromRequest('links', 'include'),
+            'include_inline_js' => (bool) $this->getFromRequest('include-inline-js', false),
+            'links' => (string) $this->getFromRequest('links', 'include'),
+            'filters' => (object) $this->getFromRequest('filters', new stdClass),
+            'foogallery' => function_exists('foogallery_fs')
         ];
         $print_options = new PrintOptions();
         foreach($print_options->postContentOptions() as $option_name => $option_details){
@@ -227,134 +235,6 @@ class PmbFrontend extends BaseController
             'pmb_print_page',
             $css
         );
-    }
-
-    /**
-     * Gets the site name and URL (works if they provide the "site" query param too,
-     * being the URL, including schema, of a self-hosted or WordPress.com site)
-     * @since $VID:$
-     * @return array|null
-     */
-    protected function getSiteInfo()
-    {
-        // check for a site request param
-        if(empty($_GET['site'])){
-            return array(
-                'name' => get_bloginfo('name'),
-                'description' => get_bloginfo('description'),
-                'url' => get_bloginfo('url'),
-                'proxy_for' => null
-            );
-        }
-        // If they forgot to add http(s), add it for them.
-        if(strpos($_GET['site'], 'http://') === false && strpos($_GET['site'], 'https://') === false) {
-            $_GET['site'] = 'http://' . $_GET['site'];
-        }
-        // if there is one, check if it exists in wordpress.com, eg "retirementreflections.com"
-        $site = sanitize_text_field($_GET['site']);
-
-
-        // Let's see if it's self-hosted...
-        $data = $this->getSelfHostedSiteInfo($site);
-        if($data === false){
-            $data = $this->getWordPressComSiteInfo($site);
-        }
-        // Alright, there was no link to the REST API index. But maybe it's a WordPress.com site...
-        return $data;
-    }
-
-    /**
-     * Tries to get the site's name, description, and URL, assuming it's self-hosted.
-     * Returns an array on success, false if the site wasn't a self-hosted WordPress site, or
-     * WP_Error if the site is self-hosted WordPress but had an error.
-     * @since $VID:$
-     * @param $site
-     * @return array|bool|WP_Error
-     */
-    protected function getSelfHostedSiteInfo($site){
-        $response = wp_remote_get($site, array('timeout'     => 30));
-        if (is_wp_error($response)) {
-            return $response;
-        }
-        $response_body = wp_remote_retrieve_body($response);
-        $wp_api_url = null;
-        $matches = array();
-        if( preg_match(
-            //looking for somethign like "<link rel='https://api.w.org/' href='http://wpcowichan.org/wp-json/' />"
-                '<link rel=\'https\:\/\/api\.w\.org\/\' href=\'(.*)\' \/>',
-                $response_body,
-                $matches
-            )
-            && count($matches) === 2) {
-            // grab from site index
-            $wp_api_url = $matches[1];
-            $response = wp_remote_get($wp_api_url, array('timeout'     => 30));
-            if (is_wp_error($response)) {
-                // The WP JSON index existed, but didn't work. Let's tell the user.
-                return $response;
-            }
-            $response_body = wp_remote_retrieve_body($response);
-            $response_data = json_decode($response_body,true);
-            if (! is_array($response_data)) {
-                return new WP_Error('no_json', __('The self-hosted WordPress site has an error in its REST API data.', 'print-my-blog'));
-            }
-            if (isset($response_data['code'], $response_data['message'])) {
-                return new WP_Error($response_data['code'], $response_data['message']);
-            }
-            if(isset($response_data['name'], $response_data['description'])){
-                return array(
-                    'name' => $response_data['name'],
-                    'description' => $response_data['description'],
-                    'proxy_for' => $wp_api_url . 'wp/v2/',
-                    'url' => $site
-                );
-            }
-            // so we didn't get an error or a proper response, but it's JSON? That's really weird.
-            return new WP_Error('unknown_response', __('The self-hosted WordPress site responded with an unexpected response.', 'print-my-blog'));
-        }
-        // ok, let caller know we didn't have an error, but nor did we find the site's data.
-        return false;
-    }
-
-    /**
-     * Tries to get the site name, description and URL from a site on WordPress.com.
-     * Returns an array on success, or a WP_Error. If the site doesn't appear to be on WordPress.com
-     * also has an error.
-     * @since $VID:$
-     * @param $site
-     * @return array|WP_Error
-     */
-    protected function getWordPressComSiteInfo($site){
-        $domain = str_replace(array('http://','https://'),'',$site);
-        $response = wp_remote_get(
-            'https://public-api.wordpress.com/rest/v1.1/sites/' . $domain
-        );
-
-        // let's see what WordPress.com has to say about this site...
-        if (is_wp_error($response)) {
-            return $response;
-        }
-        $response_body = wp_remote_retrieve_body($response);
-        $response_data = json_decode($response_body, true);
-        if (! is_array($response_data)) {
-            return new WP_Error('no_json', __('The WordPress.com site has an error in its REST API data.', 'print-my-blog'));
-        }
-        if (isset($response_data['name'], $response_data['description'])) {
-            return array(
-                'name' => $response_data['name'],
-                'description' => $response_data['description'],
-                'proxy_for' => 'https://public-api.wordpress.com/wp/v2/sites/' . $domain,
-                'url' => $site,
-            );
-        }
-        if(isset($response_data['error'], $response_data['message'])) {
-            if($response_data['error'] === 'unknown_blog') {
-                return new WP_Error('not_wordpress', esc_html__('The URL you provided does not appear to be a WordPress website', 'print-my-blog'));
-            }
-            return new WP_Error($response_data['error'], $response_data['message']);
-        }
-        // so we didn't get an error or a proper response, but it's JSON? That's really weird.
-        return new WP_Error('unknown_response', __('The WordPress.com site responded with an unexpected response.', 'print-my-blog'));
     }
 
     /**
