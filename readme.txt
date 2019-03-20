@@ -42,7 +42,7 @@ https://youtu.be/shOjx-Ijung
 * does not print ink-guzzlers like site logo, sidebar widgets, or footer
 * avoids page breaks inside images, between images and captions, and even right after headers; generally makes the content print-ready
 * uses your theme’s and plugins’ styles (so Gutenberg and page builders are supported)
-* Growing support for plugin and theme shortcodes and Gutenberg blocks
+* growing support for plugin and theme shortcodes and Gutenberg blocks
 * print your entire blog, or only for specific categories and tags
 * optionally prints comments
 * optionally places each post on a new page
