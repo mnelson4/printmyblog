@@ -10,13 +10,13 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://opencollective.com/print-my-blog
 
 
-Print your blog to paper or pdf in one click.
+Print your blog to paper or pdf in one click!
 
 == Description ==
 
-Print your blog to paper or pdf in one click.
+**Print your blog to paper or pdf in one click!**
 
-= Give your story life outside your blog! =
+= Give your story life outside your blog =
 
 Not everyone likes reading online. Create a paper copy of your blog to share with them.
 And in a few decades, your blog probably won’t be online. Create a paper backup (book or printout) to share with the future.
@@ -29,7 +29,7 @@ If you find this plugin to be useful, you can sponsor our registered non-profit 
 software. You’ll get a tax receipt (for claiming business expenses), public recognition of your contribution, and ensure
 your favorite plugin isn’t abandoned. [Learn more about sponsoring and recommended donations.](https://opencollective.com/print-my-blog)
 
-Want to see it in action? Here's a 2 minute video.
+= Watch the 2 Minute Demo =
 
 https://youtu.be/shOjx-Ijung
 
@@ -53,7 +53,7 @@ https://youtu.be/shOjx-Ijung
 * place the “Print My Blog” Gutenberg block on a page and allow site visitors to print your blog too
 * no watermark in print-out, and attribution optional,
 * no upsells, advertising, or data collection (we can't even know which sites use this software)
-* free, open-source software, so you can use it for whatever you like without fear of changing terms of use, can \
+* free, open-source software, so you can use it for whatever you like without fear of changing terms of use,
 customize it to fit your needs (although we'd curious to hear what you've done with it), and even redistribute it. There is no
 lengthy legal document describing how you're giving up your rights by using this software!
 
@@ -61,13 +61,13 @@ Want more? [Tell us what matters to you on GitHub](https://github.com/mnelson4/p
 
 = Example Use-Cases =
 
-*Time to prune your website’s content?* You can print it, annotate and sort through a physical stack of paper.
+**Time to prune your website’s content?** You can print it, annotate and sort through a physical stack of paper.
 
-*Disconnecting offline for a bit?* Print your blog to paper, or even an ePub file to read from your Kindle or phone.
+**Disconnecting offline for a bit?** Print your blog to paper, or even an ePub file to read from your Kindle or phone.
 
-*Shutting down your site?* In addition to making a regular backup (which can only be read by recreating your entire site, which may be difficult as the software it requires gets more dated), make a PDF backup of it.
+**Shutting down your site?** In addition to making a regular backup (which can only be read by recreating your entire site, which may be difficult as the software it requires gets more dated), make a PDF backup of it.
 
-*Wonder what will happen to your blog’s stories after your gone?* Your blog might not be online forever, but you can use Print My Blog to distribute readable copies of it to those you care about.
+**Wonder what will happen to your blog’s stories after your gone?** Your blog might not be online forever, but you can use Print My Blog to distribute readable copies of it to those you care about.
 
 Check out some of the reviews to see pretty exciting uses for Print My Blog.
 
@@ -90,6 +90,7 @@ If this doesn't meet your needs, there are good paid and free alternatives.
 = Contributing =
 
 If you find it useful, please:
+
 * [make the recommended donation to the non-profit]((https://opencollective.com/print-my-blog))
 * [give it a 5 star review]((https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post))
 * [translate it into your language using WordPress' GlotPress]((https://translate.wordpress.org/projects/wp-plugins/print-my-blog))
