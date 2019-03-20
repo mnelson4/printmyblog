@@ -91,7 +91,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
 	this.getCollectionQueryData = function () {
 		let data = {};
-        if( data.proxy_for){
+        if( this.proxy_for){
 			data.proxy_for = this.proxy_for;
         }
 		return data;
