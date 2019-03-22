@@ -25,9 +25,7 @@ Print My Blog allows your words to transcend being just on your blog.
 
 = No Upsells, Instead Sponsor Our Non-Profit =
 
-If you find this plugin to be useful, you can sponsor our registered non-profit organization with the money you would have spent on paid
-software. You’ll get a tax receipt (for claiming business expenses), public recognition of your contribution, and ensure
-your favorite plugin isn’t abandoned. [Learn more about sponsoring and recommended donations.](https://opencollective.com/print-my-blog)
+If you find this plugin to be useful, you can sponsor our registered non-profit organization with the money you would have spent on paid software. You’ll get a tax receipt (for claiming business expenses), public recognition of your contribution, and ensure your favorite plugin isn’t abandoned. [Learn more about sponsoring and recommended donations.](https://opencollective.com/print-my-blog)
 
 = Watch the 2 Minute Demo =
 
@@ -54,8 +52,7 @@ https://youtu.be/shOjx-Ijung
 * no watermark in print-out, and attribution optional,
 * no upsells, advertising, or data collection (we can't even know which sites use this software)
 * free, open-source software, so you can use it for whatever you like without fear of changing terms of use,
-customize it to fit your needs (although we'd curious to hear what you've done with it), and even redistribute it. There is no
-lengthy legal document describing how you're giving up your rights by using this software!
+customize it to fit your needs (although we'd curious to hear what you've done with it), and even redistribute it. There is no lengthy legal document describing how you're giving up your rights by using this software!
 
 Want more? [Tell us what matters to you on GitHub](https://github.com/mnelson4/printmyblog/issues).
 
@@ -91,10 +88,12 @@ If this doesn't meet your needs, there are good paid and free alternatives.
 
 If you find it useful, please:
 
-* [make the recommended donation to the non-profit]((https://opencollective.com/print-my-blog))
+* [make the recommended donation to the non-profit]((https://opencollective.com/print-my-blog)
 * [give it a 5 star review]((https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post))
 * [translate it into your language using WordPress' GlotPress]((https://translate.wordpress.org/projects/wp-plugins/print-my-blog))
 * report bugs and suggest features on GitHub or [WordPress Support Forum]((https://wordpress.org/support/plugin/print-my-blog))
+
+[Read plugin updates and see how donations are being used on our non-profit Open Collective.]((https://opencollective.com/print-my-blog)
 
 Best Wishes Preserving Your Blog!
 
