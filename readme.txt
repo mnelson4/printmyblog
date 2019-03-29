@@ -16,13 +16,11 @@ Print your blog to paper or pdf in one click!
 
 **Print your blog to paper or pdf in one click!**
 
-= Give your story life outside your blog =
-
-* **Print your blog** to share friends who don't like to read online.
+* **Print your blog** to read offline.
 * **Create a paper backup** (book or printout) to read when your blog is taken offline.
-* **Create a PDF or ePub file** as a human-readable, portable backup. Send the file to friends, store it in the cloud or a hard drive, or even send it to a historical organization.
+* **Create a PDF or ePub file** as a human-readable, portable backup. Send it to friends, store it in the cloud or a hard drive, or even archive it with a historical organization.
 
-**Print My Blog allows your words to transcend being just on your blog.**
+**Give your story life outside your blog!**
 
 = No Upsells, Instead Sponsor Our Non-Profit =
 
