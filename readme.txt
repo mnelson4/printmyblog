@@ -18,10 +18,11 @@ Print your blog to paper or pdf in one click!
 
 = Give your story life outside your blog =
 
-Not everyone likes reading online. Create a paper copy of your blog to share with them.
-And in a few decades, your blog probably won’t be online. Create a paper backup (book or printout) to share with the future.
-Want to save paper though? Create a PDF or ePub file as a human-readable backup. Send the file to friends, store it in the cloud or a hard drive, or even send it to a historical organization.
-Print My Blog allows your words to transcend being just on your blog.
+* Not everyone likes reading online. Create a paper copy of your blog to share with them.
+* And in a few decades, your blog probably won’t be online. Create a paper backup (book or printout) to share with the future.
+* Want a portable digital copy? Create a PDF or ePub file as a human-readable backup. Send the file to friends, store it in the cloud or a hard drive, or even send it to a historical organization.
+
+**Print My Blog allows your words to transcend being just on your blog.**
 
 = No Upsells, Instead Sponsor Our Non-Profit Open Collective =
 
@@ -83,7 +84,7 @@ Your website might not be around forever, nor might WordPress. But by printing i
 
 If this doesn't meet your needs, there are good paid and free alternatives.
 
-[Dead Easy Family History](https://deadeasyfamilyhistory.org/print-my-blog) runs a hosted version of this same plugin, so you can print your blog without even installing this. Especially useful for WordPress.*com* users, or those who can't install the plugin on their site.
+[Dead Easy Family History](https://deadeasyfamilyhistory.org/print-my-blog) runs a hosted version of this same plugin, so you can print your blog without even installing this. Especially useful for WordPress**.com** users, or those who can't install the plugin on their site.
 (Its free, but won't use your blog's styles).
 [Anthologize](https://wordpress.org/plugins/anthologize/) is another great plugin for customizing your blog's content before exporting to an e-book format. Also free.
 [bloxp](http://www.bloxp.com/) converts your blog into an e-book with any type of blog (not just WordPress). Fewer, but different, options. Supported by donations.
@@ -101,7 +102,7 @@ If you find it useful, please:
 
 [Translators and code contributors can be reimbursed for their time](https://opencollective.com/print-my-blog/expenses/new).
 
-[Read plugin updates and see how donations are being used on our non-profit Open Collective.]((https://opencollective.com/print-my-blog)
+[Read plugin updates and see how donations are being used on our non-profit Open Collective.](https://opencollective.com/print-my-blog)
 
 Best Wishes Preserving Your Blog!
 
