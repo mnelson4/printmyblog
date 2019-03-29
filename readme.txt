@@ -23,9 +23,9 @@ And in a few decades, your blog probably won’t be online. Create a paper backu
 Want to save paper though? Create a PDF or ePub file as a human-readable backup. Send the file to friends, store it in the cloud or a hard drive, or even send it to a historical organization.
 Print My Blog allows your words to transcend being just on your blog.
 
-= No Upsells, Instead Sponsor Our Non-Profit =
+= No Upsells, Instead Sponsor Our Non-Profit Open Collective =
 
-If you find this plugin to be useful, you can sponsor our registered non-profit organization with the money you would have spent on paid software. You’ll get a tax receipt (for claiming business expenses), public recognition of your contribution, and ensure your favorite plugin isn’t abandoned. [Learn more about sponsoring and recommended donations.](https://opencollective.com/print-my-blog)
+If you find this plugin to be useful, you can sponsor our registered non-profit organization with the money you would have spent on paid software. You’ll get a tax receipt (for claiming business expenses), public recognition of your contribution, and reimburse contributors for their time spent (not just the original plugin author). [Learn more about how our open collective works, what your recommended donation is, and how it will help.](https://opencollective.com/print-my-blog)
 
 = Watch the 2 Minute Demo =
 
@@ -93,6 +93,7 @@ If you find it useful, please:
 * [translate it into your language using WordPress' GlotPress]((https://translate.wordpress.org/projects/wp-plugins/print-my-blog))
 * report bugs and suggest features on GitHub or [WordPress Support Forum]((https://wordpress.org/support/plugin/print-my-blog))
 
+[Translators and code contributors can be reimbursed for their time by our Open Collective]((you can be [reimbursed for your time by our open collective](https://opencollective.com/print-my-blog/expenses/new)).
 [Read plugin updates and see how donations are being used on our non-profit Open Collective.]((https://opencollective.com/print-my-blog)
 
 Best Wishes Preserving Your Blog!
@@ -121,6 +122,9 @@ value you need to in order to get all the images to load).
 3. The Blog is Ready for Printing!
 
 == Changelog ==
+
+= 1.6.3 March 29 2019 =
+* Fixed a 1.6.0 bug that made this not work for wordpress.com sites
 
 = 1.6.2 March 20 2019 =
 * Fixed a new bug (introduced in 1.6.0) that prevented WP REST Proxy from working correctly.

@@ -88,7 +88,6 @@ class RestApiDetector
             throw new RestApiDetectorError($response);
         }
         $response_body = wp_remote_retrieve_body($response);
-        $wp_api_url = null;
         $matches = array();
         if( ! preg_match(
             //looking for somethign like "<link rel='https://api.w.org/' href='http://wpcowichan.org/wp-json/' />"
@@ -101,7 +100,11 @@ class RestApiDetector
             return false;
         }
         // grab from site index
-        return $this->fetchWpJsonRootInfo($matches[1]);
+        $success = $this->fetchWpJsonRootInfo($matches[1]);
+        if($success){
+            $this->setRestApiUrl($matches[1] . 'wp/v2/');
+        }
+        return $success;
     }
 
     protected function fetchWpJsonRootInfo($wp_api_url) {
@@ -125,7 +128,6 @@ class RestApiDetector
         if(isset($response_data['name'], $response_data['description'])){
             $this->setName($response_data['name']);
             $this->setDescription($response_data['description']);
-            $this->setRestApiUrl($wp_api_url . 'wp/v2/');
             $this->setLocal(false);
             return true;
         }
@@ -161,9 +163,13 @@ class RestApiDetector
     protected function getWordPressComSiteInfo($site){
         $domain = str_replace(array('http://','https://'),'',$site);
 
-        return $this->fetchWpJsonRootInfo(
+        $success =  $this->fetchWpJsonRootInfo(
             'https://public-api.wordpress.com/rest/v1.1/sites/' . $domain
         );
+        if($success){
+            $this->setRestApiUrl('https://public-api.wordpress.com/wp/v2/sites/' . $domain);
+        }
+        return $success;
     }
 
     /**
