@@ -18,9 +18,9 @@ Print your blog to paper or pdf in one click!
 
 = Give your story life outside your blog =
 
-* Not everyone likes reading online. Create a paper copy of your blog to share with them.
-* And in a few decades, your blog probably won’t be online. Create a paper backup (book or printout) to share with the future.
-* Want a portable digital copy? Create a PDF or ePub file as a human-readable backup. Send the file to friends, store it in the cloud or a hard drive, or even send it to a historical organization.
+* Not everyone likes reading online. **Print your blog** to share with them.
+* And in a few decades, your blog probably won’t be online. **Create a paper backup** (book or printout) to share with the future.
+* Want a portable digital copy? **Create a PDF or ePub file** as a human-readable backup. Send the file to friends, store it in the cloud or a hard drive, or even send it to a historical organization.
 
 **Print My Blog allows your words to transcend being just on your blog.**
 
