@@ -18,15 +18,15 @@ Print your blog to paper or pdf in one click!
 
 = Give your story life outside your blog =
 
-* Not everyone likes reading online. **Print your blog** to share with them.
-* And in a few decades, your blog probably won’t be online. **Create a paper backup** (book or printout) to share with the future.
-* Want a portable digital copy? **Create a PDF or ePub file** as a human-readable backup. Send the file to friends, store it in the cloud or a hard drive, or even send it to a historical organization.
+* **Print your blog** to share friends who don't like to read online.
+* **Create a paper backup** (book or printout) to read when your blog is taken offline.
+* **Create a PDF or ePub file** as a human-readable, portable backup. Send the file to friends, store it in the cloud or a hard drive, or even send it to a historical organization.
 
 **Print My Blog allows your words to transcend being just on your blog.**
 
-= No Upsells, Instead Sponsor Our Non-Profit Open Collective =
+= No Upsells, Instead Sponsor Our Non-Profit =
 
-If you find this plugin to be useful, you can sponsor our registered non-profit organization with the money you would have spent on paid software. You’ll
+If you like this plugin as much as paid software, you can sponsor our registered non-profit open collective. You’ll
 
 * get a tax receipt (for claiming business expenses)
 * be recognized for your contribution, and
