@@ -25,7 +25,13 @@ Print My Blog allows your words to transcend being just on your blog.
 
 = No Upsells, Instead Sponsor Our Non-Profit Open Collective =
 
-If you find this plugin to be useful, you can sponsor our registered non-profit organization with the money you would have spent on paid software. You’ll get a tax receipt (for claiming business expenses), public recognition of your contribution, and reimburse contributors for their time spent (not just the original plugin author). [Learn more about how our open collective works, what your recommended donation is, and how it will help.](https://opencollective.com/print-my-blog)
+If you find this plugin to be useful, you can sponsor our registered non-profit organization with the money you would have spent on paid software. You’ll
+
+* get a tax receipt (for claiming business expenses)
+* be recognized for your contribution, and
+* reimburse contributors for their time spent (not just the original plugin author).
+
+[Learn more about how our open collective works, what your recommended donation is, and how it will help.](https://opencollective.com/print-my-blog)
 
 = Watch the 2 Minute Demo =
 
@@ -88,12 +94,13 @@ If this doesn't meet your needs, there are good paid and free alternatives.
 
 If you find it useful, please:
 
-* [make the recommended donation to the non-profit]((https://opencollective.com/print-my-blog)
+* [make the recommended donation to the non-profit](https://opencollective.com/print-my-blog)
 * [give it a 5 star review]((https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post))
 * [translate it into your language using WordPress' GlotPress]((https://translate.wordpress.org/projects/wp-plugins/print-my-blog))
 * report bugs and suggest features on GitHub or [WordPress Support Forum]((https://wordpress.org/support/plugin/print-my-blog))
 
-[Translators and code contributors can be reimbursed for their time by our Open Collective]((you can be [reimbursed for your time by our open collective](https://opencollective.com/print-my-blog/expenses/new)).
+[Translators and code contributors can be reimbursed for their time](https://opencollective.com/print-my-blog/expenses/new).
+
 [Read plugin updates and see how donations are being used on our non-profit Open Collective.]((https://opencollective.com/print-my-blog)
 
 Best Wishes Preserving Your Blog!
