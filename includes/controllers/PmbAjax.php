@@ -26,7 +26,7 @@ class PmbAjax extends BaseController
     {
         $callback = [$this, 'handleFetchRestApiUrl'];
         add_action('wp_ajax_pmb_fetch_rest_api_url', $callback);
-        add_action('wp_ajax_no_priv_pmb_fetch_rest_api_url', $callback);
+        add_action('wp_ajax_nopriv_pmb_fetch_rest_api_url', $callback);
     }
 
 

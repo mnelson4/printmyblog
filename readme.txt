@@ -129,8 +129,11 @@ value you need to in order to get all the images to load).
 
 == Changelog ==
 
+= 1.6.4 April 2019 =
+* Fixed a bug that made WP REST API Proxy integration only work when logged in.
+
 = 1.6.3 March 29 2019 =
-* Fixed a 1.6.0 bug that made this not work for wordpress.com sites
+* Fixed a 1.6.0 bug that made this not work for wordpress.com sites.
 
 = 1.6.2 March 20 2019 =
 * Fixed a new bug (introduced in 1.6.0) that prevented WP REST Proxy from working correctly.
