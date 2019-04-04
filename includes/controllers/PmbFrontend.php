@@ -116,7 +116,8 @@ class PmbFrontend extends BaseController
             'include_inline_js' => (bool) $this->getFromRequest('include-inline-js', false),
             'links' => (string) $this->getFromRequest('links', 'include'),
             'filters' => (object) $this->getFromRequest('filters', new stdClass),
-            'foogallery' => function_exists('foogallery_fs')
+            'foogallery' => function_exists('foogallery_fs'),
+            'is_user_logged_in' => is_user_logged_in()
         ];
         $print_options = new PrintOptions();
         foreach($print_options->postContentOptions() as $option_name => $option_details){

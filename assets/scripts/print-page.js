@@ -42,6 +42,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 	this.showDivider = pmb_instance_vars.show_divider;
 	this.filters = pmb_instance_vars.filters;
 	this.foogallery = pmb_instance_vars.foogallery;
+	this.isUserLoggedIn = pmb_instance_vars.is_user_logged_in;
     /**
      * @function
      */
@@ -94,6 +95,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         if( this.proxy_for){
 			data.proxy_for = this.proxy_for;
         }
+        // If they're logged in, and its a request for this site, try to show password-protected content
+        if( this.isUserLoggedIn && ! this.proxy_for) {
+			data.context = 'edit';
+		}
 		return data;
 	};
 

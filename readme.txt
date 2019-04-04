@@ -121,6 +121,10 @@ In order to fix this, you need to tell Print My Blog to slow down. On the config
 down to show Troubleshooting options, and increase "Post Rendering Wait-Time" (eg to 2000 milliseconds, or whatever
 value you need to in order to get all the images to load).
 
+= The Print Page is stuck on "Loading Content" =
+
+You may have disabled the WP REST API. (Eg by using "All in One WP Security" plugin's "Disallow Unauthorized REST API Requests" or "Disable REST API" plugin). Print My Blog uses the WP REST API to load your posts into the print-page, so please ensure the WP REST API is enabled.
+
 == Screenshots ==
 
 1. Print Setup Page
@@ -129,7 +133,10 @@ value you need to in order to get all the images to load).
 
 == Changelog ==
 
-= 1.6.4 April 2019 =
+= 1.6.5 April 4 2019 =
+* For logged-in users, try to show protected and private posts content
+
+= 1.6.4 April 1 2019 =
 * Fixed a bug that made WP REST API Proxy integration only work when logged in.
 
 = 1.6.3 March 29 2019 =
