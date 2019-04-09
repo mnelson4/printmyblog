@@ -11,3 +11,7 @@ details.pmb-details{
 summary.pmb-reveal-options{
     cursor:pointer;
 }
+
+.select2-container--open{
+    z-index:10;
+}
