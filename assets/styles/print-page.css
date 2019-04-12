@@ -29,10 +29,9 @@
     position: fixed;
     left: 50%;
     top:0;
-    transform: translate(-50%, 1em);
+    transform: translate(-50%, 32px);
     width:25em;
     max-width:96%;
-
 }
 
 .pmb-waiting-message-outer-container{
@@ -118,4 +117,10 @@ div.tiled-gallery{
 
 .youtube-player{
     max-width:100%;
+}
+
+@media screen and (max-width: 782px) {
+    .pmb-waiting-message-fullpage{
+        transform: translate(-50%, 46px);
+    }
 }

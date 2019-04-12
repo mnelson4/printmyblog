@@ -357,7 +357,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     {
         // Don't wrap tiled gallery images- we have CSS to avoid page breaks in them
         // although currently, they don't display well because they need JS that doesn't get enqueued
-        var non_emojis = jQuery('img:not(.emoji, div.tiled-gallery img, img.fg-image)');
+        var non_emojis = jQuery('.pmb-posts img:not(.emoji, div.tiled-gallery img, img.fg-image)');
         if(this.image_size === 0){
             non_emojis.remove();
         } else{
