@@ -124,3 +124,9 @@ div.tiled-gallery{
         transform: translate(-50%, 46px);
     }
 }
+h1.pmb-waiting-h1{
+    color:black;
+}
+p.pmb-status{
+    color:black;
+}
