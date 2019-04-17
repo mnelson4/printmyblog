@@ -661,13 +661,33 @@ jQuery(document).ready(function () {
         // Change the jQuery AJAX "converters" text-to-json method.
 		options.converters = {
 			'text json': function(result) {
-			    // Find the beginning of JSON object or array...
-				const start_of_json = Math.min(
-					result.indexOf('{'),
-					result.indexOf('[')
-				);
-				// ...and only send that, skip everything before it.
-				return jQuery.parseJSON(result.substring(start_of_json));
+			    let new_result = result;
+			    // Sometimes other plugins echo out junk before the start of the real JSON response.
+        // So we need to chop off all that extra stuff.
+        do{
+            // Find the first spot that could be the beginning of valid JSON...
+					var start_of_json = Math.min(
+						new_result.indexOf('{'),
+						new_result.indexOf('['),
+						new_result.indexOf('true'),
+						new_result.indexOf('false'),
+						new_result.indexOf('"')
+					);
+					// Remove everything before it...
+					new_result = new_result.substring(start_of_json);
+					try{
+					    // Try to parse it...
+						let i = jQuery.parseJSON(new_result);
+						// If that didn't have an error, great. We found valid JSON!
+						return i;
+          }catch(error){
+					    // There was an error parsing that substring. So let's chop off some more and keep hunting for valid JSON.
+            // Chop off the character that made this look like it could be valid JSON, and then continue iterating...
+            new_result = new_result.substring(1);
+          }
+        }while(start_of_json !== false);
+				// Never found any valid JSON. Throw the error.
+        throw "No JSON found in AJAX response using custom JSON parser.";
 			}
 		};
         return original_backbone_sync(method,model,options);
