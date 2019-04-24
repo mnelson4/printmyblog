@@ -35,7 +35,7 @@
     <p><?php esc_html_e('Are you sure the blog hasn\'t deactivated the REST API?', 'print-my-blog');?></p>
     <p><?php
         printf(
-            esc_html__('If you are still having problem, please report it to the %1$sPrint My Blog%2$s support forum.','print-my-blog'),
+            esc_html__('If you are still having problems, please report it to the %1$sPrint My Blog%2$s support forum.','print-my-blog'),
             '<a href="https://wordpress.org/support/plugin/print-my-blog">',
             '</a>'
         );
