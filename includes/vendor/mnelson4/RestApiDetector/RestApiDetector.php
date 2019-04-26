@@ -30,6 +30,10 @@ class RestApiDetector
      */
     public function __construct($site)
     {
+        // If the REST API Proxy Plugin isn't active, always use the current site.
+        if(! PMB_REST_PROXY_EXISTS){
+            $site = '';
+        }
         $this->setSite($site);
         $this->getSiteInfo();
     }
