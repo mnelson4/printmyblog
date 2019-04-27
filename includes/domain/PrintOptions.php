@@ -32,7 +32,7 @@ class PrintOptions
                 'default' => true,
             ],
             'show_categories' => [
-                'label' => esc_html__('Categories and Terms', 'print-my-blog'),
+                'label' => esc_html__('Categories and Tags', 'print-my-blog'),
                 'default' => true
             ],
             'show_featured_image' => [

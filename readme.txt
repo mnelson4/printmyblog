@@ -96,7 +96,7 @@ If you find it useful, please:
 * [make the recommended donation to the non-profit](https://opencollective.com/print-my-blog)
 * [give it a 5 star review]((https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post))
 * [translate it into your language using WordPress' GlotPress]((https://translate.wordpress.org/projects/wp-plugins/print-my-blog))
-* report bugs and suggest features on GitHub or [WordPress Support Forum]((https://wordpress.org/support/plugin/print-my-blog))
+* report bugs and suggest features on [GitHub](https://github.com/mnelson4/printmyblog) or [WordPress Support Forum]((https://wordpress.org/support/plugin/print-my-blog))
 
 [Translators and code contributors can be reimbursed for their time](https://opencollective.com/print-my-blog/expenses/new).
 
@@ -108,7 +108,7 @@ Best Wishes Preserving Your Blog!
 
 1. Upload the plugin files to the `/wp-content/plugins/print-my-blog` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
-1. Go to Tools->Print To Blog
+1. Go to Tools->Print My Blog
 1. Press "Prepare Print Page". Your blog's content will be loaded into the following page.
 1. When you see the "Print" button appear, click it. Your blog will be printed from your browser.
 
@@ -133,8 +133,9 @@ You may have disabled the WP REST API. (Eg by using "All in One WP Security" plu
 
 == Changelog ==
 
-=1.6.6 April 10 2019 =
+= 1.6.6 April 10 2019 =
 * Fixed category and taxonomy selectors so they don't interfere with each other.
+* If REST Proxy plugin isn't active, ignore thee site parameter.
 
 = 1.6.5 April 8 2019 =
 * For logged-in users, try to show protected and private posts content.
