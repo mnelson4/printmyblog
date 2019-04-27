@@ -133,11 +133,9 @@ You may have disabled the WP REST API. (Eg by using "All in One WP Security" plu
 
 == Changelog ==
 
-= 1.6.6 April 26 2019 =
-* If REST Proxy plugin isn't active, ignore thee site parameter.
-
 = 1.6.6 April 10 2019 =
 * Fixed category and taxonomy selectors so they don't interfere with each other.
+* If REST Proxy plugin isn't active, ignore thee site parameter.
 
 = 1.6.5 April 8 2019 =
 * For logged-in users, try to show protected and private posts content.

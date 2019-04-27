@@ -9,7 +9,7 @@ Plugin Name: Print My Blog
 Plugin URI: https://wordpress.org/plugins/print-my-blog/
 Description: Print your blog to paper or pdf in one click! Just go to tools -> Print My Blog.
 Author: Michael Nelson
-Version: 1.6.7
+Version: 1.6.6
 Requires at least: 4.6
 Requires PHP: 5.4
 Author URI: https://cmljnelson.wordpress.com
