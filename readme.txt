@@ -20,6 +20,8 @@ Print your blog to paper or pdf in one click!
 * **Create a paper backup** (book or printout) to read when your blog is taken offline.
 * **Create a PDF or ePub file** as a human-readable, portable backup. Send it to friends, store it in the cloud or a hard drive, or even archive it with a historical organization.
 
+[](http://coderisk.com/wp/plugin/print-my-blog/RIPS-Bs3Z7ec5hQ)
+
 **Give your story life outside your blog!**
 
 = No Upsells, Instead Sponsor Our Non-Profit =
