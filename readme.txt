@@ -133,7 +133,10 @@ You may have disabled the WP REST API. (Eg by using "All in One WP Security" plu
 
 == Changelog ==
 
-= 1.6.6 April 10 2019 =
+= 1.6.7 APril 26 2019 =
+* Fixed a bug with WP REST Proxy while trying to sanitize the site parameter
+
+= 1.6.6 April 26 2019 =
 * Fixed category and taxonomy selectors so they don't interfere with each other.
 * If REST Proxy plugin isn't active, ignore thee site parameter.
 * Add wp_footer() in the print-page footer
