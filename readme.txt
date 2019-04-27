@@ -138,7 +138,7 @@ You may have disabled the WP REST API. (Eg by using "All in One WP Security" plu
 
 = 1.6.6 April 26 2019 =
 * Fixed category and taxonomy selectors so they don't interfere with each other.
-* If REST Proxy plugin isn't active, ignore thee site parameter.
+* If REST Proxy plugin isn't active, ignore thee site parameter. Props to Magnus Klaaborg Stubman for finding it and practicing responsible disclosure (see http://dumpco.re/bugs/wp-plugin-print-my-blog-ssrf)
 * Add wp_footer() in the print-page footer
 * Do a better job of handling polluted AJAX responses
 
