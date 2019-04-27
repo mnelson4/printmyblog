@@ -78,15 +78,23 @@ class RestApiDetector
         if(! PMB_REST_PROXY_EXISTS){
             return '';
         }
+        if(empty($site)){
+            return '';
+        }
         // If they forgot to add http(s), add it for them.
         if(strpos($site, 'http://') === false && strpos($site, 'https://') === false) {
             $site = 'http://' . $site;
         }
-        // if there is one, check if it exists in wordpress.com, eg "retirementreflections.com"
-
-        $file_info = pathinfo($site);
-        if( isset($file_info['extension'])){
-            $site = str_replace($file_info['filename'] . "." . $file_info['extension'], "", $site);
+        // Remove unexpected URL parts.
+        $url_parts = parse_url($site);
+        if(isset($url_parts['port'])){
+            $site = str_replace(':' . $url_parts['port'], '', $site);
+        }
+        if(isset($url_parts['query'])){
+            $site = str_replace('?' . $url_parts['query'], '', $site);
+        }
+        if(isset($url_parts['fragment'])){
+            $site = str_replace('#' . $url_parts['fragment'], '', $site);
         }
         $site = trailingslashit(sanitize_text_field($site));
         return $site;
