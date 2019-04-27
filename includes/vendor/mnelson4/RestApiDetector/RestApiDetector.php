@@ -30,11 +30,7 @@ class RestApiDetector
      */
     public function __construct($site)
     {
-        // If the REST API Proxy Plugin isn't active, always use the current site.
-        if(! PMB_REST_PROXY_EXISTS){
-            $site = '';
-        }
-        $this->setSite($site);
+        $this->setSite($this->sanitizeSite($site));
         $this->getSiteInfo();
     }
 
@@ -55,14 +51,7 @@ class RestApiDetector
             $this->setLocal(true);
             return;
         }
-        // If they forgot to add http(s), add it for them.
-        if(strpos($this->getSite(), 'http://') === false && strpos($this->getSite(), 'https://') === false) {
-            $this->setSite( 'http://' . $this->getSite());
-        }
-        // if there is one, check if it exists in wordpress.com, eg "retirementreflections.com"
-        $site = trailingslashit(sanitize_text_field($this->getSite()));
-
-
+        $site = $this->getSite();
         // Let's see if it's self-hosted...
         $data = $this->getSelfHostedSiteInfo($site);
 //        if($data === false){
@@ -75,6 +64,32 @@ class RestApiDetector
         }
 
         return $data;
+    }
+
+    /**
+     * Avoid SSRF by sanitizing the site received.
+     * @since $VID:$
+     * @param $site
+     * @return mixed|string
+     */
+    protected function sanitizeSite($site)
+    {
+        // If the REST API Proxy Plugin isn't active, always use the current site.
+        if(! PMB_REST_PROXY_EXISTS){
+            return '';
+        }
+        // If they forgot to add http(s), add it for them.
+        if(strpos($site, 'http://') === false && strpos($site, 'https://') === false) {
+            $site = 'http://' . $site;
+        }
+        // if there is one, check if it exists in wordpress.com, eg "retirementreflections.com"
+
+        $file_info = pathinfo($site);
+        if( isset($file_info['extension'])){
+            $site = str_replace($file_info['filename'] . "." . $file_info['extension'], "", $site);
+        }
+        $site = trailingslashit(sanitize_text_field($site));
+        return $site;
     }
 
     /**
