@@ -135,7 +135,10 @@ You may have disabled the WP REST API. (Eg by using "All in One WP Security" plu
 
 == Changelog ==
 
-= 1.6.7 APril 26 2019 =
+= 1.6.8 April 30 2019 =
+* Escape site parameter when printing it out
+
+= 1.6.7 April 26 2019 =
 * Fixed a bug with WP REST Proxy while trying to sanitize the site parameter
 
 = 1.6.6 April 26 2019 =
