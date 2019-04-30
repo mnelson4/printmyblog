@@ -3,7 +3,7 @@
 namespace PrintMyBlog\controllers;
 
 use mnelson4\RestApiDetector\RestApiDetector;
-use mnelson4\RestApiDetectorError;
+use mnelson4\RestApiDetector\RestApiDetectorError;
 use PrintMyBlog\domain\PrintOptions;
 use Twine\controllers\BaseController;
 use stdClass;

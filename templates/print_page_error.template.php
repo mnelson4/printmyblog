@@ -29,7 +29,7 @@
     <p><?php printf(esc_html__('Code: %s','print-my-blog' ),$pmb_wp_error->get_error_code());?></p>
     <p><?php
         if(isset($_GET['site']) && $_GET['site'] !== site_url()){
-            printf(esc_html__('The site URL you provided was "%1$s". Are you sure that URL is correct and that it\'s a WordPress site?','event_espresso' ), $_GET['site']);
+            printf(esc_html__('The site URL you provided was "%1$s". Are you sure that URL is correct and that it\'s a WordPress site?','event_espresso' ), esc_url($_GET['site']));
         }
         ?></p>
     <p><?php esc_html_e('Are you sure the blog hasn\'t deactivated the REST API?', 'print-my-blog');?></p>
