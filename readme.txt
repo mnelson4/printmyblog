@@ -127,6 +127,16 @@ value you need to in order to get all the images to load).
 
 You may have disabled the WP REST API. (Eg by using "All in One WP Security" plugin's "Disallow Unauthorized REST API Requests" or "Disable REST API" plugin). Print My Blog uses the WP REST API to load your posts into the print-page, so please ensure the WP REST API is enabled.
 
+= How do I remove post content from the printout? =
+
+There may be text, images, and other stuff that looks great when viewed from a screen, but doesn't make sense to have in the printout. Eg, related posts, share buttons, etc.
+To remove them from printouts, [add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-screen-only".
+
+= How do I make post content only appear in the printout? =
+
+This is the opposite of the previous question. [Add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-print-only".
+
+
 == Screenshots ==
 
 1. Print Setup Page
@@ -134,6 +144,10 @@ You may have disabled the WP REST API. (Eg by using "All in One WP Security" plu
 3. The Blog is Ready for Printing!
 
 == Changelog ==
+
+= 1.7.0 May 21 2019 =
+* Hide Adcontrol and Sharedaddy content in printouts
+* Add CSS classes to facilitate only showing content when on a screen ("pmb-screen-only"), or only showing in printouts ("pmb-print-only")
 
 = 1.6.8 April 30 2019 =
 * Escape site parameter when printing it out
