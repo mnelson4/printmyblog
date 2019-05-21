@@ -1,6 +1,17 @@
+/* Hide Content from the following plugins...*/
+/* Yuzo Related Posts */
 .pmb-posts .yuzo_related_post{
     display:none;
 }
+/* I Recommend This */
 .pmb-posts .dot-irecommendthis{
+    display:none;
+}
+/* AdControl */
+.pmb-print-page #ac-top{
+    display:none;
+}
+/* JetPack's ShareDaddy content */
+.pmb-posts .sharedaddy{
     display:none;
 }
