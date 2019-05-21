@@ -418,17 +418,17 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         html_to_add += '</header>'
             + '<div class="entry-meta">';
 		if(this.showId) {
-			html_to_add += '<span class="post-id">' +this.translations.id + post.id + '</span> ';
+			html_to_add += '<span class="post-id pmb-post-meta">' +this.translations.id + post.id + '</span> ';
 		}
         if(this.showUrl) {
-            html_to_add += '<span class="url"><a href="'
+            html_to_add += '<span class="url pmb-post-meta"><a href="'
                 + post.link
                 + '">'
                 + post.link
                 + '</a></span> ';
         }
         if(this.showDate) {
-            html_to_add += '<span class="posted-on">'
+            html_to_add += '<span class="posted-on pmb-post-meta">'
                 +   this.getPublishedDate(post)
                 +   '</span> ';
         }
@@ -487,8 +487,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                     taxonomy_slug = term.taxonomy;
                 });
                 if(term_names.length > 0) {
-                    html += ' ' + this.taxonomies[taxonomy_slug].name + ': ';
+                    html += ' <span class="pmb-post-meta taxonomy-links ' + taxonomy_slug + '-links">'  + this.taxonomies[taxonomy_slug].name + ': ';
                     html += term_names.join(', ');
+                    html += '</span>';
                 }
             }
         }

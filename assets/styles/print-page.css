@@ -130,3 +130,7 @@ h1.pmb-waiting-h1{
 p.pmb-status{
     color:black;
 }
+/* default to making each PMB post metasection not go inline */
+span.pmb-post-meta{
+    display:block;
+}

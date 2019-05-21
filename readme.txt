@@ -146,20 +146,21 @@ This is the opposite of the previous question. [Add the CSS class](https://techn
 == Changelog ==
 
 = 1.7.0 May 21 2019 =
-* Hide Adcontrol and Sharedaddy content in printouts
-* Add CSS classes to facilitate only showing content when on a screen ("pmb-screen-only"), or only showing in printouts ("pmb-print-only")
+* Hide Adcontrol and Sharedaddy content in printouts.
+* Add CSS classes to facilitate only showing content when on a screen ("pmb-screen-only"), or only showing in printouts ("pmb-print-only").
+* Put post date, url, categories, etc, onto different lines by default (add custom CSS `.pmb-post-meta{display:inline;}` to instead show them inline).
 
 = 1.6.8 April 30 2019 =
-* Escape site parameter when printing it out
+* Escape site parameter when printing it out.
 
 = 1.6.7 April 26 2019 =
-* Fixed a bug with WP REST Proxy while trying to sanitize the site parameter
+* Fixed a bug with WP REST Proxy while trying to sanitize the site parameter.
 
 = 1.6.6 April 26 2019 =
 * Fixed category and taxonomy selectors so they don't interfere with each other.
-* If REST Proxy plugin isn't active, ignore thee site parameter. Props to Magnus Klaaborg Stubman for finding it and practicing responsible disclosure (see http://dumpco.re/bugs/wp-plugin-print-my-blog-ssrf)
-* Add wp_footer() in the print-page footer
-* Do a better job of handling polluted AJAX responses
+* If REST Proxy plugin isn't active, ignore thee site parameter. Props to Magnus Klaaborg Stubman for finding it and practicing responsible disclosure (see http://dumpco.re/bugs/wp-plugin-print-my-blog-ssrf).
+* Add wp_footer() in the print-page footer.
+* Do a better job of handling polluted AJAX responses.
 
 = 1.6.5 April 8 2019 =
 * For logged-in users, try to show protected and private posts content.
