@@ -72,7 +72,11 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
     this.getPostsCollectionQueryData = function () {
         var data = this.getCollectionQueryData();
-        data.status = 'publish';
+        if( this.canGetSensitiveData()){
+			data.status = 'publish, private, future';
+        } else {
+			data.status = 'publish';
+        }
         data._embed = 1;
         if(this.post_type === 'post') {
             data.orderby = 'date';
@@ -96,11 +100,15 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 			data.proxy_for = this.proxy_for;
         }
         // If they're logged in, and its a request for this site, try to show password-protected content
-        if( this.isUserLoggedIn && ! this.proxy_for) {
+        if( this.canGetSensitiveData()) {
 			data.context = 'edit';
 		}
 		return data;
 	};
+
+	this.canGetSensitiveData = function() {
+	    return this.isUserLoggedIn && ! this.proxy_for;
+    }
 
 
 
