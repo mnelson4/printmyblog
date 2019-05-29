@@ -132,6 +132,8 @@ You may have disabled the WP REST API. (Eg by using "All in One WP Security" plu
 There may be text, images, and other stuff that looks great when viewed from a screen, but doesn't make sense to have in the printout. Eg, related posts, share buttons, etc.
 To remove them from printouts, [add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-screen-only".
 
+Also, if it's content automatically added by a plugin or theme, please let us know in the support forum, and we can hide that content in the next release of Print My Blog.
+
 = How do I make post content only appear in the printout? =
 
 This is the opposite of the previous question. [Add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-print-only".
