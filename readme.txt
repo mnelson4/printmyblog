@@ -147,6 +147,9 @@ This is the opposite of the previous question. [Add the CSS class](https://techn
 
 == Changelog ==
 
+= 1.7.1 May 29 2019 =
+* Include private and future posts in printouts for privileged users
+
 = 1.7.0 May 21 2019 =
 * Hide Adcontrol and Sharedaddy content in printouts.
 * Add CSS classes to facilitate only showing content when on a screen ("pmb-screen-only"), or only showing in printouts ("pmb-print-only").
