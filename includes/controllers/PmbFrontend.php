@@ -42,7 +42,14 @@ class PmbFrontend extends BaseController
                 $pmb_wp_error = $exception->wp_error();
                 return PMB_TEMPLATES_DIR . 'print_page_error.template.php';
             }
-            global $pmb_site_name, $pmb_site_description, $pmb_site_url,  $pmb_printout_meta, $pmb_after_date, $pmb_before_date;
+            global $pmb_site_name,
+                   $pmb_site_description,
+                   $pmb_site_url,
+                   $pmb_printout_meta,
+                   $pmb_after_date,
+                   $pmb_before_date,
+                    $pmb_post_type,
+                    $pmb_taxonomy_filters;
             $pmb_site_name = $site_info->getName();
             $pmb_site_description = $site_info->getDescription();
             $pmb_site_url = $site_info->getSite();
@@ -61,6 +68,15 @@ class PmbFrontend extends BaseController
             );
             $pmb_after_date = $this->getDateString('after');
             $pmb_before_date = $this->getDateString('before');
+
+            // Figure out what post type was selected.
+            $post_types_using_query_var = get_post_types(array('name' => $_GET['post-type']), 'object');
+            if(is_array($post_types_using_query_var)){
+                $post_type_info = reset($post_types_using_query_var);
+                $pmb_post_type = $post_type_info->label;
+            } else {
+                $pmb_post_type = esc_html__('Unknown post type', 'print-my-blog');
+            }
 
             return PMB_TEMPLATES_DIR . 'print_page.template.php';
         }

@@ -85,11 +85,11 @@
         <?php
             // If they specified an after date, show it
             if($pmb_after_date && $pmb_before_date){
-                $date_range_string = sprintf('%s - %s', $pmb_after_date, $pmb_before_date);
+                $date_range_string = sprintf('%1$s from %2$s - %3$s', $pmb_post_type, $pmb_after_date, $pmb_before_date);
             } elseif( $pmb_after_date && ! $pmb_before_date){
-                $date_range_string = sprintf(esc_html__('After %s', 'event_espresso'), $pmb_after_date);
+                $date_range_string = sprintf(esc_html__('%1$s after %2$s', 'print-my-blog'),$pmb_post_type, $pmb_after_date);
             } elseif( ! $pmb_after_date && $pmb_before_date){
-                $date_range_string = sprintf(esc_html__('Before %s', 'event_espresso'), $pmb_before_date);
+                $date_range_string = sprintf(esc_html__('%1$s before %2$s', 'print-my-blog'),$pmb_post_type, $pmb_before_date);
             } else {
                 $date_range_string = '';
             }
