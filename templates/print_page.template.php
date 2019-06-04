@@ -83,6 +83,21 @@
         );
         ?></p>
         <?php
+            // If they specified an after date, show it
+            if($pmb_after_date && $pmb_before_date){
+                $date_range_string = sprintf('%s - %s', $pmb_after_date, $pmb_before_date);
+            } elseif( $pmb_after_date && ! $pmb_before_date){
+                $date_range_string = sprintf(esc_html__('After %s', 'event_espresso'), $pmb_after_date);
+            } elseif( ! $pmb_after_date && $pmb_before_date){
+                $date_range_string = sprintf(esc_html__('Before %s', 'event_espresso'), $pmb_before_date);
+            } else {
+                $date_range_string = '';
+            }
+            if($date_range_string){
+                ?>
+                <p class="pmb-date-range"><?php echo $date_range_string;?></p>
+                <?php
+            }
         }
         ?>
     </div>

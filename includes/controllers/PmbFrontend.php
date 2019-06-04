@@ -42,7 +42,7 @@ class PmbFrontend extends BaseController
                 $pmb_wp_error = $exception->wp_error();
                 return PMB_TEMPLATES_DIR . 'print_page_error.template.php';
             }
-            global $pmb_site_name, $pmb_site_description, $pmb_site_url,  $pmb_printout_meta;
+            global $pmb_site_name, $pmb_site_description, $pmb_site_url,  $pmb_printout_meta, $pmb_after_date, $pmb_before_date;
             $pmb_site_name = $site_info->getName();
             $pmb_site_description = $site_info->getDescription();
             $pmb_site_url = $site_info->getSite();
@@ -59,10 +59,28 @@ class PmbFrontend extends BaseController
                 array($this,'enqueue_scripts'),
                 100
             );
+            $pmb_after_date = $this->getDateString('after');
+            $pmb_before_date = $this->getDateString('before');
 
             return PMB_TEMPLATES_DIR . 'print_page.template.php';
         }
         return $template;
+    }
+
+    /**
+     * @since $VID:$
+     * @param $date_filter_key
+     * @return null|string
+     */
+    protected function getDateString($date_filter_key){
+        if(isset(
+            $_GET['dates'],
+            $_GET['dates'][$date_filter_key]
+        )) {
+            return date_i18n( get_option( 'date_format'), strtotime($_GET['dates'][$date_filter_key]));
+        } else {
+            return null;
+        }
     }
 
     public function enqueue_scripts()
