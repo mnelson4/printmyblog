@@ -134,9 +134,11 @@ To remove them from printouts, [add the CSS class](https://technicalsupport.blog
 
 Also, if it's content automatically added by a plugin or theme, please let us know in the support forum, and we can hide that content in the next release of Print My Blog.
 
+https://www.youtube.com/watch?v=IMBxCp7AVPE&feature=youtu.be
+
 = How do I make post content only appear in the printout? =
 
-This is the opposite of the previous question. [Add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-print-only".
+[Add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-print-only". See the above question for more details.
 
 
 == Screenshots ==
