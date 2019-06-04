@@ -108,7 +108,7 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 		jQuery.each(this.taxonomies, (index, taxonomy)=>{
 			const slug = taxonomy.rest_base;
 			this.dynamic_categories.append(
-				'<tr><th scope="row"><label for="' + slug + '">' + taxonomy.name+ '</label></th><td><select id="' + slug + '" class="pmb-taxonomies-select" name="filters[' + slug + '][]" multiple="multiple"></select></td></tr>'
+				'<tr><th scope="row"><label for="' + slug + '">' + taxonomy.name+ '</label></th><td><select id="' + slug + '" class="pmb-taxonomies-select" name="taxonomies[' + slug + '][]" multiple="multiple"></select></td></tr>'
 			);
 			jQuery('#'+slug).select2({
 				width: 'resolve',

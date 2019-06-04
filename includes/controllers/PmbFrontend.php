@@ -78,6 +78,36 @@ class PmbFrontend extends BaseController
                 $pmb_post_type = esc_html__('Unknown post type', 'print-my-blog');
             }
 
+            // Figure out what taxonomies were selected (if any) and their terms
+            $filtering_taxonomies = $_GET['taxonomies'];
+            global $wp_taxonomies;
+            foreach($filtering_taxonomies as $taxonomy => $terms_ids){
+                $matching_taxonomy_objects = get_taxonomies(
+                    array(
+                        'rest_base' => $taxonomy
+                    ),
+                    'objects'
+                );
+                if(! is_array($matching_taxonomy_objects) || ! $matching_taxonomy_objects){
+                    continue;
+                }
+                $taxonomy_object = reset($matching_taxonomy_objects);
+                $term_objects = get_terms(
+                    array(
+                        'include' => implode(',',$terms_ids),
+                        'hide_empty' => false
+                    )
+                );
+                $term_names = array();
+                foreach($term_objects as $term_object){
+                    $term_names[] = $term_object->name;
+                }
+                $pmb_taxonomy_filters[] = array(
+                    'taxonomy' => $taxonomy_object,
+                    'terms' => $term_names
+                );
+            }
+
             return PMB_TEMPLATES_DIR . 'print_page.template.php';
         }
         return $template;
@@ -92,7 +122,8 @@ class PmbFrontend extends BaseController
         if(isset(
             $_GET['dates'],
             $_GET['dates'][$date_filter_key]
-        )) {
+        ) && $_GET['dates'][$date_filter_key]
+        ) {
             return date_i18n( get_option( 'date_format'), strtotime($_GET['dates'][$date_filter_key]));
         } else {
             return null;
@@ -150,7 +181,7 @@ class PmbFrontend extends BaseController
             'rendering_wait' => $this->getFromRequest('rendering-wait', 500),
             'include_inline_js' => (bool) $this->getFromRequest('include-inline-js', false),
             'links' => (string) $this->getFromRequest('links', 'include'),
-            'filters' => (object) $this->getFromRequest('filters', new stdClass),
+            'filters' => (object) $this->getFromRequest('taxonomies', new stdClass),
             'foogallery' => function_exists('foogallery_fs'),
             'is_user_logged_in' => is_user_logged_in(),
         ];

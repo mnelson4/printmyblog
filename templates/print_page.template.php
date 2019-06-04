@@ -93,11 +93,29 @@
             } else {
                 $date_range_string = '';
             }
-            if($date_range_string){
-                ?>
-                <p class="pmb-date-range"><?php echo $date_range_string;?></p>
-                <?php
+
+            // Figure out taxonomy filters used and how to display them.
+            $taxonomy_filters_strings = array();
+            foreach($pmb_taxonomy_filters as $taxonomy_filter){
+                $taxonomy = $taxonomy_filter['taxonomy'];
+                $terms = $taxonomy_filter['terms'];
+                $taxonomy_filters_strings[] = sprintf(
+                    esc_html__('%1$s: %2$s', 'print-my-blog'),
+                    count($terms) > 1 ? $taxonomy->labels->name : $taxonomy->labels->singular_name,
+                    implode(', ', $terms)
+                );
+
             }
+            $taxonomy_filters_string = count($taxonomy_filters_strings) ?
+                sprintf(
+                    esc_html__('with %s', 'print-my-blog'),
+                    implode('; ', $taxonomy_filters_strings)
+                ) :
+                '';
+            ?>
+            <p class="pmb-filters"><?php echo $pmb_post_type;?> <?php echo $date_range_string;?> <?php echo $taxonomy_filters_string;?></p>
+            <?php
+
         }
         ?>
     </div>
