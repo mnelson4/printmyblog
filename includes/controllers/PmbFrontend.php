@@ -100,6 +100,7 @@ class PmbFrontend extends BaseController
             array(),
             filemtime(PMB_ASSETS_DIR . 'styles/plugin-compatibility.css')
         );
+
         $data = [
             'header_selector' => '#pmb-in-progress-h1',
             'status_span_selector' => '.pmb-status',
@@ -117,8 +118,15 @@ class PmbFrontend extends BaseController
             'links' => (string) $this->getFromRequest('links', 'include'),
             'filters' => (object) $this->getFromRequest('filters', new stdClass),
             'foogallery' => function_exists('foogallery_fs'),
-            'is_user_logged_in' => is_user_logged_in()
+            'is_user_logged_in' => is_user_logged_in(),
         ];
+        // add the before and after filters, if they were provided
+        $dates = $this->getFromRequest('dates', array());
+        foreach($dates as $key => $date){
+            if($date){
+                $data['filters']->$key = $date . 'T00:00:00';
+            }
+        }
         $print_options = new PrintOptions();
         foreach($print_options->postContentOptions() as $option_name => $option_details){
             $data[$option_name] = (bool)$this->getFromRequest($option_name, false);

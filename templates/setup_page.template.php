@@ -61,6 +61,18 @@ use PrintMyBlog\domain\PrintOptions;
                 <tbody id="pmb-dynamic-categories">
                 </tbody>
             </table>
+            <table class="form-table">
+                <tbody>
+                <tr>
+                    <th scope="row"><?php esc_html_e('Posted After...', 'event_espresso'); ?></th>
+                    <td><input type="text" class="pmb-date" name="dates[after]"></td>
+                </tr>
+                <tr>
+                    <th scope="row"><?php esc_html_e('Posted Before', 'event_espresso'); ?></th>
+                    <td><input type="text" class="pmb-date" name="dates[before]"></td>
+                </tr>
+                </tbody>
+            </table>
 
 
                 <h2><?php esc_html_e('Content','print-my-blog' );?></h2>

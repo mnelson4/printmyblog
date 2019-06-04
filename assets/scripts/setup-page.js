@@ -30,6 +30,11 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 		this.updateRestApiUrl(site_input.val());
 
 		let post_type = jQuery(this.post_type_selector + ':checked').val();
+		jQuery( ".pmb-date" ).datepicker({
+			dateFormat: 'yy-mm-dd',
+			changeYear: true,
+			changeMonth: true,
+		});
 
 		// If they change the post type, change the taxonomies available.
 		jQuery('input' + this.post_type_selector + '[type=radio]').change(() => {
