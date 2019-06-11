@@ -116,6 +116,20 @@ Best Wishes Preserving Your Blog!
 
 == Frequently Asked Questions ==
 
+= How do I create a PDF using Print My Blog? =
+This plugin just puts the content onto a single web page so your browser can print it or create a PDF from it. Because your browser is what creates the PDF, it depends on the browser. Check out the instructions that apply to you:
+
+Google Chrome
+
+https://youtu.be/ngId20fP5I8
+
+Mozilla Firefox
+
+https://youtu.be/ekwg2a1FPV0
+
+Safari: it is not recommended to create a PDF from mobile Safari. The PDF won't have pages, and includes content intended for web-only.
+
+
 = Some images aren't appearing =
 
 Print My Blog can work too fast for some webservers, meaning the webservers refuse to load all the content, most noticeably some images.
