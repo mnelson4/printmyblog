@@ -82,7 +82,7 @@ class PmbFrontend extends BaseController
             // Ideally we'll do this via the REST API, but I'm in a pinch so just doing it via PHP and
             // only when not using WP REST Proxy.
             global $wp_taxonomies;
-            if(empty($_GET['site'])){
+            if(empty($_GET['site']) && !empty($_GET['taxonomies'])){
                 $filtering_taxonomies = $_GET['taxonomies'];
                 foreach($filtering_taxonomies as $taxonomy => $terms_ids){
                     $matching_taxonomy_objects = get_taxonomies(

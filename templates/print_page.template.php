@@ -77,7 +77,7 @@
         if( $pmb_printout_meta) {
             // If they specified an after date, show it
             if($pmb_after_date && $pmb_before_date){
-                $date_range_string = sprintf('between %1$s - %2$s,', $pmb_after_date, $pmb_before_date);
+                $date_range_string = sprintf('between %1$s and %2$s,', $pmb_after_date, $pmb_before_date);
             } elseif( $pmb_after_date && ! $pmb_before_date){
                 $date_range_string = sprintf(esc_html__('after %1$s,', 'print-my-blog'), $pmb_after_date);
             } elseif( ! $pmb_after_date && $pmb_before_date){

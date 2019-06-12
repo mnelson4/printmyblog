@@ -137,7 +137,7 @@ In order to fix this, you need to tell Print My Blog to slow down. On the config
 down to show Troubleshooting options, and increase "Post Rendering Wait-Time" (eg to 2000 milliseconds, or whatever
 value you need to in order to get all the images to load).
 
-= The Print Page is stuck on "Loading Content" =
+= The Print Page is stuck on "Loading Content" and I can't filter by categories or terms =
 
 You may have disabled the WP REST API. (Eg by using "All in One WP Security" plugin's "Disallow Unauthorized REST API Requests" or "Disable REST API" plugin). Print My Blog uses the WP REST API to load your posts into the print-page, so please ensure the WP REST API is enabled.
 
