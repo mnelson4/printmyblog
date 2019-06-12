@@ -78,34 +78,41 @@ class PmbFrontend extends BaseController
                 $pmb_post_type = esc_html__('Unknown post type', 'print-my-blog');
             }
 
-            // Figure out what taxonomies were selected (if any) and their terms
-            $filtering_taxonomies = $_GET['taxonomies'];
+            // Figure out what taxonomies were selected (if any) and their terms.
+            // Ideally we'll do this via the REST API, but I'm in a pinch so just doing it via PHP and
+            // only when not using WP REST Proxy.
             global $wp_taxonomies;
-            foreach($filtering_taxonomies as $taxonomy => $terms_ids){
-                $matching_taxonomy_objects = get_taxonomies(
-                    array(
-                        'rest_base' => $taxonomy
-                    ),
-                    'objects'
-                );
-                if(! is_array($matching_taxonomy_objects) || ! $matching_taxonomy_objects){
-                    continue;
+            if(empty($_GET['site'])){
+                $filtering_taxonomies = $_GET['taxonomies'];
+                foreach($filtering_taxonomies as $taxonomy => $terms_ids){
+                    $matching_taxonomy_objects = get_taxonomies(
+                        array(
+                            'rest_base' => $taxonomy
+                        ),
+                        'objects'
+                    );
+                    if(! is_array($matching_taxonomy_objects) || ! $matching_taxonomy_objects){
+                        continue;
+                    }
+                    $taxonomy_object = reset($matching_taxonomy_objects);
+                    $term_objects = get_terms(
+                        array(
+                            'include' => implode(',',$terms_ids),
+                            'hide_empty' => false
+                        )
+                    );
+                    $term_names = array();
+                    foreach($term_objects as $term_object){
+                        $term_names[] = $term_object->name;
+                    }
+                    $pmb_taxonomy_filters[] = array(
+                        'taxonomy' => $taxonomy_object,
+                        'terms' => $term_names
+                    );
                 }
-                $taxonomy_object = reset($matching_taxonomy_objects);
-                $term_objects = get_terms(
-                    array(
-                        'include' => implode(',',$terms_ids),
-                        'hide_empty' => false
-                    )
-                );
-                $term_names = array();
-                foreach($term_objects as $term_object){
-                    $term_names[] = $term_object->name;
-                }
-                $pmb_taxonomy_filters[] = array(
-                    'taxonomy' => $taxonomy_object,
-                    'terms' => $term_names
-                );
+            } else {
+                $pmb_taxonomy_filters = array();
+                $wp_taxonomies = array();
             }
 
             return PMB_TEMPLATES_DIR . 'print_page.template.php';

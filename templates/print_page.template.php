@@ -74,22 +74,14 @@
         <h1 class="site-title"><?php echo $pmb_site_name;?></h1>
         <p class="site-description"><?php echo $pmb_site_description;?></p>
         <?php
-        if( $pmb_printout_meta) {?><p class="pmb-printout-meta"><?php printf(
-            esc_html__('Printout of %1$s on %2$s using %3$sPrint My Blog%4$s','print-my-blog' ),
-            $pmb_site_url,
-            date_i18n( get_option( 'date_format' )),
-            '<a href="https://wordpress.org/plugins/print-my-blog/">',
-            '</a>'
-        );
-        ?></p>
-        <?php
+        if( $pmb_printout_meta) {
             // If they specified an after date, show it
             if($pmb_after_date && $pmb_before_date){
-                $date_range_string = sprintf('%1$s from %2$s - %3$s', $pmb_post_type, $pmb_after_date, $pmb_before_date);
+                $date_range_string = sprintf('between %1$s - %2$s,', $pmb_after_date, $pmb_before_date);
             } elseif( $pmb_after_date && ! $pmb_before_date){
-                $date_range_string = sprintf(esc_html__('%1$s after %2$s', 'print-my-blog'),$pmb_post_type, $pmb_after_date);
+                $date_range_string = sprintf(esc_html__('after %1$s,', 'print-my-blog'), $pmb_after_date);
             } elseif( ! $pmb_after_date && $pmb_before_date){
-                $date_range_string = sprintf(esc_html__('%1$s before %2$s', 'print-my-blog'),$pmb_post_type, $pmb_before_date);
+                $date_range_string = sprintf(esc_html__('before %1$s,', 'print-my-blog'), $pmb_before_date);
             } else {
                 $date_range_string = '';
             }
@@ -108,14 +100,24 @@
             }
             $taxonomy_filters_string = count($taxonomy_filters_strings) ?
                 sprintf(
-                    esc_html__('with %s', 'print-my-blog'),
+                        // @translators: $s, the categories and terms used to filter this print-out,
+                        //  eg "Category: WordPress, Blogging; Term: Computers, Headphones".
+                    esc_html__('with %s,', 'print-my-blog'),
                     implode('; ', $taxonomy_filters_strings)
                 ) :
                 '';
-            ?>
-            <p class="pmb-filters"><?php echo $pmb_post_type;?> <?php echo $date_range_string;?> <?php echo $taxonomy_filters_string;?></p>
-            <?php
+            $content_description =  $pmb_post_type . ' ' . $date_range_string . ' ' . $taxonomy_filters_string;
 
+            ?><p class="pmb-printout-meta"><?php printf(
+                esc_html__('%1$s from %2$s on %3$s using %4$sPrint My Blog%5$s', 'print-my-blog'),
+                $content_description,
+                $pmb_site_url,
+                date_i18n(get_option('date_format')),
+                '<a href="https://wordpress.org/plugins/print-my-blog/">',
+                '</a>'
+            );
+            ?></p>
+        <?php
         }
         ?>
     </div>
