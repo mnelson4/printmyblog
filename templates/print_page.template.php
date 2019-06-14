@@ -108,10 +108,15 @@
                 '';
             $content_description =  $pmb_post_type . ' ' . $date_range_string . ' ' . $taxonomy_filters_string;
 
-            ?><p class="pmb-printout-meta"><?php printf(
-                esc_html__('%1$s from %2$s on %3$s using %4$sPrint My Blog%5$s', 'print-my-blog'),
+            ?><p class="pmb-printout-meta">
+            <?php
+            printf(
+                esc_html__('%1$s from %2$s.', 'print-my-blog'),
                 $content_description,
-                $pmb_site_url,
+                $pmb_site_url
+            );?> <?php
+            printf(
+                esc_html__('Printed on %1$s using %2$sPrint My Blog%3$s', 'print-my-blog'),
                 date_i18n(get_option('date_format')),
                 '<a href="https://wordpress.org/plugins/print-my-blog/">',
                 '</a>'
