@@ -163,6 +163,10 @@ https://www.youtube.com/watch?v=IMBxCp7AVPE&feature=youtu.be
 
 == Changelog ==
 
+= 1.8.0 June 14 2019 =
+* Allow filtering posts by date
+* Print meta line now mentions the post type, categories, and dates used in filtering
+
 = 1.7.1 May 29 2019 =
 * Include private and future posts in printouts for privileged users
 
