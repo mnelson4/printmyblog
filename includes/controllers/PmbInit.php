@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\controllers;
 
+use Twine\admin\news\DashboardNews;
 use Twine\controllers\BaseController;
 
 /**
@@ -50,6 +51,18 @@ class PmbInit extends BaseController
         } else if (is_admin()) {
             require_once('PmbAdmin.php');
             $controller = new PmbAdmin();
+            require_once(PMB_TWINE_INCLUDES_DIR . 'admin/news/DashboardNews.php');
+            $news = new DashboardNews(
+                'https://cmljnelson.blog/category/wordpress/print-my-blog/rss',
+                'https://cmljnelson.blog/category/wordpress/print-my-blog',
+                [
+                    'product_title' => 'print my blog',
+                    'item_prefix' => esc_html__('Print My Blog', 'print-my-blog'),
+                    'item_description' => esc_html__('Print My Blog news', 'print-my-blog'),
+                    'dismiss_tooltip' => __('Dismiss all Print My Blog news', 'print-my-blog'),
+                    'dismiss_confirm' => __('Are you sure you want to dismiss all Print My Blog news forever?', 'print-my-blog'),
+                ]
+            );
         } else {
             require_once('PmbFrontend.php');
             $controller = new PmbFrontend();
