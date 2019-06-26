@@ -48,7 +48,7 @@ https://youtu.be/shOjx-Ijung
 * avoids page breaks inside images, between images and captions, and even right after headers; generally makes the content print-ready
 * uses your theme’s and plugins’ styles (so Gutenberg and page builders are supported)
 * growing support for plugin and theme shortcodes and Gutenberg blocks
-* print your entire blog, or only for specific categories and tags
+* print your entire blog, or filter by date, category, and tags
 * optionally prints comments
 * optionally places each post on a new page
 * resize text
@@ -162,6 +162,9 @@ https://www.youtube.com/watch?v=IMBxCp7AVPE&feature=youtu.be
 3. The Blog is Ready for Printing!
 
 == Changelog ==
+
+= 1.9.0 June 26 2019 =
+* Add Print My Blog to WordPress News dashboard widget (and make it dismissable)
 
 = 1.8.0 June 14 2019 =
 * Allow filtering posts by date
