@@ -51,6 +51,29 @@ class PmbInit extends BaseController
         } else if (is_admin()) {
             require_once('PmbAdmin.php');
             $controller = new PmbAdmin();
+        } else {
+            require_once('PmbFrontend.php');
+            $controller = new PmbFrontend();
+        }
+        $this->initDashboardNews();
+        $controller->setHooks();
+
+        require_once('PmbGutenbergBlock.php');
+        $block_controller = new PmbGutenbergBlock();
+        $block_controller->setHooks();
+
+        require_once('PmbCommon.php');
+        $common_controller = new PmbCommon();
+        $common_controller->setHooks();
+    }
+
+    /**
+     * Initializes the dashboard news code to run on AJAX and the WP dashboard page.
+     * @since 1.9.1
+     */
+    protected function initDashboardNews()
+    {
+        if(is_admin()){
             require_once(PMB_TWINE_INCLUDES_DIR . 'admin/news/DashboardNews.php');
             $news = new DashboardNews(
                 'https://cmljnelson.blog/category/wordpress/print-my-blog/rss',
@@ -63,21 +86,8 @@ class PmbInit extends BaseController
                     'dismiss_confirm' => __('Are you sure you want to dismiss all Print My Blog news forever?', 'print-my-blog'),
                 ]
             );
-        } else {
-            require_once('PmbFrontend.php');
-            $controller = new PmbFrontend();
         }
-        $controller->setHooks();
-
-        require_once('PmbGutenbergBlock.php');
-        $block_controller = new PmbGutenbergBlock();
-        $block_controller->setHooks();
-
-        require_once('PmbCommon.php');
-        $common_controller = new PmbCommon();
-        $common_controller->setHooks();
     }
-
     public function setUrls()
     {
         $plugin_url = plugin_dir_url(PMB_MAIN_FILE);

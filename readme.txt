@@ -163,6 +163,9 @@ https://www.youtube.com/watch?v=IMBxCp7AVPE&feature=youtu.be
 
 == Changelog ==
 
+= 1.9.1 June 26 2019 =
+* Fix Print My Blog WordPress News posts not dismissable
+
 = 1.9.0 June 26 2019 =
 * Add Print My Blog to WordPress News dashboard widget (and make it dismissable)
 
