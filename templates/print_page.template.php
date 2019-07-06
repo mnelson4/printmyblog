@@ -59,6 +59,13 @@
         </div>
         <div class="pmb-print-ready" style="visibility:hidden">
             <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print','print-my-blog' );?>"/>
+            <a
+                    target="_blank"
+                    href="https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20a%20pdf%20using%20print%20my%20blog%3F"
+                    title="<?php esc_html_e('opens in new tab','print-my-blog' );?>"
+            >
+                <?php esc_html_e('How do I print to PDF?','print-my-blog' );?>
+            </a>
         </div>
         <div class="pmb-posts-placeholder pmb-extra-content">
             <div class="pmb-spinner-container">

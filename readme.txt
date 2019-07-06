@@ -163,6 +163,9 @@ https://www.youtube.com/watch?v=IMBxCp7AVPE&feature=youtu.be
 
 == Changelog ==
 
+= 1.9.3 July 5 2019 =
+* Add a link to explain how to print to PDF
+
 = 1.9.2 July 5 2019 =
 * Fix some strings which weren't translatable
 
