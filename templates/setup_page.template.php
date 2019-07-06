@@ -47,7 +47,7 @@ use PrintMyBlog\domain\PrintOptions;
             <table class="form-table">
                 <tbody>
                 <tr>
-                    <th scope="row"><?php esc_html_e('Post Selection','event_espresso' );?></th>
+                    <th scope="row"><?php esc_html_e('Post Selection','print-my-blog' );?></th>
                     <td>
                         <label><input class="pmb-post-type" type="radio" name="post-type" value="post" checked="checked"><?php esc_html_e('Posts', 'print-my-blog');?></label>
                         <br>
@@ -64,11 +64,11 @@ use PrintMyBlog\domain\PrintOptions;
             <table class="form-table">
                 <tbody>
                 <tr>
-                    <th scope="row"><?php esc_html_e('Posted After...', 'event_espresso'); ?></th>
+                    <th scope="row"><?php esc_html_e('Posted After...', 'print-my-blog'); ?></th>
                     <td><input type="text" class="pmb-date" name="dates[after]"></td>
                 </tr>
                 <tr>
-                    <th scope="row"><?php esc_html_e('Posted Before', 'event_espresso'); ?></th>
+                    <th scope="row"><?php esc_html_e('Posted Before', 'print-my-blog'); ?></th>
                     <td><input type="text" class="pmb-date" name="dates[before]"></td>
                 </tr>
                 </tbody>

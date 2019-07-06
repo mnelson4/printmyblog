@@ -25,11 +25,11 @@
 <body <?php body_class(); ?>>
 <div class="pmb-waiting-area">
     <h1 class="pmb-waiting-h1"><?php esc_html_e('Sorry, we could not print the WordPress Blog.','print-my-blog' );?></h1>
-    <p><?php printf(esc_html__('Problem: %s','event_espresso' ), $pmb_wp_error->get_error_message());?></p>
+    <p><?php printf(esc_html__('Problem: %s','print-my-blog' ), $pmb_wp_error->get_error_message());?></p>
     <p><?php printf(esc_html__('Code: %s','print-my-blog' ),$pmb_wp_error->get_error_code());?></p>
     <p><?php
         if(isset($_GET['site']) && $_GET['site'] !== site_url()){
-            printf(esc_html__('The site URL you provided was "%1$s". Are you sure that URL is correct and that it\'s a WordPress site?','event_espresso' ), esc_url($_GET['site']));
+            printf(esc_html__('The site URL you provided was "%1$s". Are you sure that URL is correct and that it\'s a WordPress site?','print-my-blog' ), esc_url($_GET['site']));
         }
         ?></p>
     <p><?php esc_html_e('Are you sure the blog hasn\'t deactivated the REST API?', 'print-my-blog');?></p>

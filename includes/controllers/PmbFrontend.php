@@ -218,7 +218,7 @@ class PmbFrontend extends BaseController
                     'ready' => esc_html__('Print-Page Ready', 'print-my-blog'),
                     'error_fetching_posts' => esc_html__('There was an error fetching posts. It was: ', 'print-my-blog'),
                     'comments' => esc_html__('Comments', 'print-my-blog'),
-                    'no_comments' => esc_html('No Comments', 'print-my-blog'),
+                    'no_comments' => esc_html__('No Comments', 'print-my-blog'),
                     'says' => __('<span class="screen-reader-text says">says:</span>', 'print-my-blog'),
                     'id' => esc_html__('ID:', 'print-my-blog')
                 ),
