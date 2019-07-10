@@ -103,6 +103,17 @@ div.tiled-gallery{
     color:blue;
 }
 
+.pmb-window-buttons{
+    position:absolute;
+    top:0;
+    left:0;
+    line-height:1em;
+    font-size:0.8em;
+    colo:gray;
+    margin-top:5px;
+    margin-left:5px;
+}
+
 .pmb-posts-body article.pmb-post-article{
     float:none;
     width:100%;

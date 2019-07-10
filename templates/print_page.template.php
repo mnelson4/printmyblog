@@ -25,6 +25,13 @@
 <body <?php body_class('pmb-print-page'); ?>>
 <div class="pmb-waiting-message-fullpage pmb-extra-content">
     <div class="pmb-waiting-message-outer-container">
+        <div class="pmb-window-buttons">
+            <span class="pmb-cancel-button">
+                <a href="javascript:history.back();">❌
+                <?php esc_html_e('Cancel', 'print-my-blog');?>
+                </a>
+            </span>
+        </div>
         <div class="pmb-help">
             <span class="pmb-help-ask"><?php printf(
                     __('What do you think? %1$s', 'print-my-blog'),
