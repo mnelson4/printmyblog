@@ -162,7 +162,8 @@ https://www.youtube.com/watch?v=IMBxCp7AVPE&feature=youtu.be
 3. The Blog is Ready for Printing!
 
 == Changelog ==
-= 1.9.4  July 16 2019 =
+
+= 1.9.4  July 18 2019 =
 * Allow thumbnail and medium images to be inline
 
 = 1.9.3 July 9 2019 =
