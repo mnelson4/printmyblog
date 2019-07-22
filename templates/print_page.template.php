@@ -83,7 +83,7 @@
     </div>
 </div>
 
-<div class="pmb-posts">
+<article class="pmb-posts dotEPUBcontent">
     <div class="pmb-posts-header">
         <h1 class="site-title"><?php echo $pmb_site_name;?></h1>
         <p class="site-description"><?php echo $pmb_site_description;?></p>
@@ -143,7 +143,7 @@
     <div class="pmb-posts-body">
 
     </div>
-</div>
+</article>
 <?php wp_footer();?>
 
 </body>

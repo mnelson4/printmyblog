@@ -420,7 +420,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      * @var  wp.api.models.Post post
      */
     this.addPostToPage = function (post) {
-        var html_to_add = '<article id="post-' + post.id + '" class="post-' + post.id + ' post type-' + this.post_type + ' status-' + post.status + ' hentry pmb-post-article">'
+        var html_to_add = '<div>'
             + '<header class="pmb-post-header entry-header">';
         if(this.showTitle) {
             html_to_add += '<h1 class="entry-title">'
@@ -478,7 +478,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 			}
 		}
         html_to_add += '</div>'
-             + '</article>';
+             + '</div>';
 		if(this.showComments){
 			html_to_add += this.renderCommentsOf(post);
         }
