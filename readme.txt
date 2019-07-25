@@ -163,6 +163,9 @@ https://www.youtube.com/watch?v=IMBxCp7AVPE&feature=youtu.be
 
 == Changelog ==
 
+= 1.9.5  July 24 2019 =
+* Add a suggestion to use the browser's print preview
+
 = 1.9.4  July 18 2019 =
 * Allow thumbnail and medium images to be inline
 

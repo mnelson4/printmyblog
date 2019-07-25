@@ -2,6 +2,9 @@
     .pmb-waiting-message-fullpage{
         display:none;
     }
+    .pmb-preview-note{
+        display:none;
+    }
 }
 @media not print{
     .pmb-posts{
@@ -144,4 +147,15 @@ p.pmb-status{
 /* default to making each PMB post metasection not go inline */
 span.pmb-post-meta{
     display:block;
+}
+
+.pmb-preview-note{
+    position: fixed;
+    bottom:0;
+    left:0;
+    line-height:1em;
+    background-color:white;
+    opacity:0.5;
+    z-index:1000;
+    color:black;
 }
