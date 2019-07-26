@@ -154,6 +154,17 @@ https://www.youtube.com/watch?v=IMBxCp7AVPE&feature=youtu.be
 
 [Add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-print-only". See the above question for more details.
 
+= How do I show or hide background colors in the printout? =
+
+Your theme may use different styles when printed, including setting the background to white in order to conserve ink.
+
+But if not, your browser can also remove background colors.
+
+* For Google Chrome: when printing, [click on "More Options", then uncheck "Background graphics"](https://drive.google.com/file/d/1V5c9XJbBGhSeRlmGxqZBRv5n4CTWZyag/view?usp=sharing)
+
+* For Firefox: when viewing the print preview, [click "Page Setup" then uncheck "Print Background (colors & images)".](https://drive.google.com/open?id=1VoVCC6ehqd8vZyO89PQq5hZbQ4u94vBK)
+
+* For Firefox Extension "Print to PDF": [click on "Add-ons", then click "Print to PDF", then "Options", and uncheck "Whether the background colors should be shown"](https://drive.google.com/open?id=1WjCS84LLOL6v0ccjASjJ3c_vaUmgIfTO)
 
 == Screenshots ==
 
