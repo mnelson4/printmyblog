@@ -174,6 +174,9 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 1.9.6 July 26 2019 =
+* Add "site" CSS class to top-level div on print page, as styles may use it for styling
+
 = 1.9.5  July 24 2019 =
 * Add a suggestion to use the browser's print preview
 
