@@ -83,7 +83,8 @@
     </div>
 </div>
 
-<article class="pmb-posts dotEPUBcontent">
+<div class="pmb-posts site dotEPUBcontent">
+    <div class="pmb-preview-note"><?php esc_html_e('Use your browser’s "print preview" for the best preview.','print-my-blog' );?></div>
     <div class="pmb-posts-header">
         <h1 class="site-title"><?php echo $pmb_site_name;?></h1>
         <p class="site-description"><?php echo $pmb_site_description;?></p>
@@ -143,7 +144,7 @@
     <div class="pmb-posts-body">
 
     </div>
-</article>
+</div>
 <?php wp_footer();?>
 
 </body>
