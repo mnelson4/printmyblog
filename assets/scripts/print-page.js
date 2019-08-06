@@ -384,11 +384,13 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             }
         }
 
-        jQuery('.pmb-posts h1').addClass('pmb-header');
-        jQuery('.pmb-posts h2').addClass('pmb-header');
-        jQuery('.pmb-posts h3').addClass('pmb-header');
-        jQuery('.pmb-posts h4').addClass('pmb-header');
-        jQuery('.pmb-posts h5').addClass('pmb-header');
+        // jQuery('.pmb-posts h1').addClass('pmb-header');
+        // jQuery('.pmb-posts h2').addClass('pmb-header');
+        // jQuery('.pmb-posts h3').addClass('pmb-header');
+        // jQuery('.pmb-posts h4').addClass('pmb-header');
+        // jQuery('.pmb-posts h5').addClass('pmb-header');
+
+
         // Remove inline styles added on image captions. They force a width in pixels which stinks with multiple columns.
         if(this.links === 'remove'){
 			jQuery('.pmb-posts a').contents().unwrap();
@@ -420,15 +422,13 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      * @var  wp.api.models.Post post
      */
     this.addPostToPage = function (post) {
-        var html_to_add = '<div>'
-            + '<header class="pmb-post-header entry-header">';
+        var html_to_add = '<div>';
         if(this.showTitle) {
             html_to_add += '<h1 class="entry-title">'
 				+ post.title.rendered
 				+ '</h1>'
         }
-        html_to_add += '</header>'
-            + '<div class="entry-meta">';
+        html_to_add += '<div class="entry-meta">';
 		if(this.showId) {
 			html_to_add += '<span class="post-id pmb-post-meta">' +this.translations.id + post.id + '</span> ';
 		}
