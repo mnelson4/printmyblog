@@ -66,7 +66,7 @@ div.pmb-post-header{
 .pmb-image{
     page-break-inside:avoid;
 }
-.pmb-header{
+.pmb-posts h1, .pmb-posts h2, .pmb-posts h3, .pmb-posts h4, .pmb-posts h5, .pmb-posts h6{
     page-break-inside:avoid;
     page-break-after:avoid;
 }
@@ -159,3 +159,4 @@ span.pmb-post-meta{
     z-index:1000;
     color:black;
 }
+
