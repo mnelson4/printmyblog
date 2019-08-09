@@ -384,6 +384,13 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             }
         }
 
+        // jQuery('.pmb-posts h1').addClass('pmb-header');
+        // jQuery('.pmb-posts h2').addClass('pmb-header');
+        // jQuery('.pmb-posts h3').addClass('pmb-header');
+        // jQuery('.pmb-posts h4').addClass('pmb-header');
+        // jQuery('.pmb-posts h5').addClass('pmb-header');
+
+
         // Remove inline styles added on image captions. They force a width in pixels which stinks with multiple columns.
         if(this.links === 'remove'){
 			jQuery('.pmb-posts a').contents().unwrap();
