@@ -228,7 +228,7 @@ use PrintMyBlog\domain\PrintOptions;
                             'help_text' => esc_html__('Print a physical copy using your web browser’s print functionality.', 'print-my-blog'),
                             'checked' => true
                         ),
-                        'digital-pdf' => array(
+                        'pdf' => array(
                             'label' => esc_html__('Digital PDF', 'print-my-blog'),
                             'help_text' => esc_html__('Make a PDF file, intended for reading from a computer or other device, using your browser or a browser extension.', 'print-my-blog'),
                             'link' => 'https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20a%20pdf%20using%20print%20my%20blog%3F'
