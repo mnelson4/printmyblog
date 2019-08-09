@@ -1,6 +1,6 @@
 === Print My Blog ===
 Contributors: mnelson4
-Tags: print, pdf, backup
+Tags: print, pdf, backup, epub, mobi, ebook
 Requires at least: 4.6
 Stable tag: trunk
 Tested up to: 5.2
