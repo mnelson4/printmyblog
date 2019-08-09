@@ -69,7 +69,7 @@
             if( $pmb_format === 'ebook'){
                 ?>
                 <p>
-                    <?php esc_html_e('You may now use dotEPUB to create the ebook.', 'print-my-blog'); ?>
+                    <?php esc_html_e('You may now use dotEPUB to create the eBook.', 'print-my-blog'); ?>
                     <a href="https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20an%20ebook%20using%20print%20my%20blog%3F"><?php esc_html_e('How?', 'print-my-blog'); ?></a>
                 </p>
                 <?php

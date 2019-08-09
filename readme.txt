@@ -1,6 +1,6 @@
 === Print My Blog ===
 Contributors: mnelson4
-Tags: print, pdf, backup, epub, mobi, ebook
+Tags: print, PDF, backup, eBook, ePub, MOBI
 Requires at least: 4.6
 Stable tag: trunk
 Tested up to: 5.2
@@ -10,15 +10,15 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://opencollective.com/print-my-blog
 
 
-Print your blog to paper or pdf in one click!
+Print your blog to paper, PDF, or eBook in one click!
 
 == Description ==
 
-**Print your blog to paper or pdf in one click!**
+**Print your blog to paper, pdf, or eBook in one click!**
 
 * **Print your blog** to read offline.
 * **Create a paper backup** (book or printout) to read when your blog is taken offline.
-* **Create a PDF or ePub file** as a human-readable, portable backup. Send it to friends, store it in the cloud or a hard drive, or even archive it with a historical organization.
+* **Create a PDF, ePub, or MOBI file** as a human-readable, portable backup. Send it to friends, store it in the cloud or a hard drive, or even archive it with a historical organization.
 
 [](http://coderisk.com/wp/plugin/print-my-blog/RIPS-Bs3Z7ec5hQ)
 
@@ -129,8 +129,8 @@ https://youtu.be/ekwg2a1FPV0
 
 Safari: it is not recommended to create a PDF from mobile Safari. The PDF won't have pages, and includes content intended for web-only.
 
-= How do I create an ebook using Print My Blog? =
-This plugin puts your blog's content onto a single web page, and you can then use the [dotEPUB browser extension](https:dotepub.com) to turn it into an ebook.
+= How do I create an eBook using Print My Blog? =
+This plugin puts your blog's content onto a single web page, and you can then use the [dotEPUB browser extension](https:dotepub.com) to turn it into an eBook.
 
 https://youtu.be/M5ZZN3KsqOA
 
@@ -179,7 +179,7 @@ But if not, your browser can also remove background colors.
 == Changelog ==
 
 = 1.10.0 August 9 2019 =
-* Added better support for creating ePub and MOBI ebooks using dotEPUB
+* Added better support for creating ePub and MOBI eBooks using dotEPUB
 * Print setup page now asks for desired format, then tailors the print page for it
 
 = 1.9.6 July 30 2019 =
