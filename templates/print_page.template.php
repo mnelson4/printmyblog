@@ -86,7 +86,7 @@
 <div class="pmb-posts site dotEPUBcontent">
     <div class="pmb-preview-note"><?php esc_html_e('Use your browser’s "print preview" for the best preview.','print-my-blog' );?></div>
     <div class="pmb-posts-header">
-        <h1 class="site-title"><?php echo $pmb_site_name;?></h1>
+        <h1 class="site-title" id="dotEPUBtitle"><?php echo $pmb_site_name;?></h1>
         <p class="site-description"><?php echo $pmb_site_description;?></p>
         <?php
         if( $pmb_printout_meta) {
