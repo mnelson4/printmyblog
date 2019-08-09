@@ -65,14 +65,37 @@
             <h1 id='pmb-in-progress-h1' class="pmb-waiting-h1"><?php _e('Initializing', 'print-my-blog'); ?></h1>
         </div>
         <div class="pmb-print-ready" style="visibility:hidden">
-            <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print', 'print-my-blog'); ?>"/>
-            <a
-                    target="_blank"
-                    href="https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20a%20pdf%20using%20print%20my%20blog%3F"
-                    title="<?php esc_html_e('opens in new tab', 'print-my-blog'); ?>"
-            >
-                <?php esc_html_e('How do I print to PDF?', 'print-my-blog'); ?>
-            </a>
+            <?php
+            if( $pmb_format === 'ebook'){
+                ?>
+                <p>
+                    <?php esc_html_e('You may now use dotEPUB to create the ebook.', 'event_espresso'); ?>
+                    <a href=""><?php esc_html_e('How?', 'event_espresso'); ?></a>
+                </p>
+                <?php
+            } else if ($pmb_format === 'pdf'){
+                if ($pmb_browser === 'chrome'){
+                    ?>
+                    <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print to PDF', 'print-my-blog'); ?>"/>
+                    <?php
+                } else{
+                    ?><p> <?php esc_html_e('You may now create the PDF using a browser extension.', 'event_espresso'); ?></p><?php
+                }
+                ?>
+                <a
+                        target="_blank"
+                        href="https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20a%20pdf%20using%20print%20my%20blog%3F"
+                        title="<?php esc_html_e('opens in new tab', 'print-my-blog'); ?>"
+                >
+                    <?php esc_html_e('How?', 'print-my-blog'); ?>
+                </a>
+                <?php
+            } else { // default: print
+                ?>
+                <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print', 'print-my-blog'); ?>"/>
+                <?php
+            }
+            ?>
         </div>
         <div class="pmb-posts-placeholder pmb-extra-content">
             <div class="pmb-spinner-container">

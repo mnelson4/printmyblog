@@ -50,7 +50,8 @@ class PmbFrontend extends BaseController
                    $pmb_before_date,
                    $pmb_post_type,
                    $pmb_taxonomy_filters,
-                   $pmb_format;
+                   $pmb_format,
+                   $pmb_browser;
             $pmb_site_name = $site_info->getName();
             $pmb_site_description = $site_info->getDescription();
             $pmb_site_url = $site_info->getSite();
@@ -116,7 +117,7 @@ class PmbFrontend extends BaseController
                 $wp_taxonomies = array();
             }
             $pmb_format = $this->getFromRequest('format', 'print');
-
+            $pmb_browser = $this->getBrowser();
             return PMB_TEMPLATES_DIR . 'print_page.template.php';
         }
         return $template;
@@ -137,6 +138,28 @@ class PmbFrontend extends BaseController
         } else {
             return null;
         }
+    }
+
+    /**
+     * @since $VID:$
+     * @return string
+     */
+    protected function getBrowser(){
+        if (isset($_SERVER['HTTP_USER_AGENT'])) {
+            $agent = $_SERVER['HTTP_USER_AGENT'];
+        } else {
+            $agent = '';
+        }
+        // From https://stackoverflow.com/questions/3047894/how-to-detect-google-chrome-as-the-user-agent-using-php
+        if(preg_match('/(Chrome|CriOS)\//i',$agent)
+            && !preg_match('/(Aviator|ChromePlus|coc_|Dragon|Edge|Flock|Iron|Kinza|Maxthon|MxNitro|Nichrome|OPR|Perk|Rockmelt|Seznam|Sleipnir|Spark|UBrowser|Vivaldi|WebExplorer|YaBrowser)/i',$_SERVER['HTTP_USER_AGENT'])){
+            return 'chrome';
+        }
+        // From https://stackoverflow.com/questions/9209649/how-to-detect-if-browser-is-firefox-with-php
+        if (strlen(strstr($agent, 'Firefox')) > 0) {
+            return 'firefox';
+        }
+        return 'unknown';
     }
 
     public function enqueue_scripts()
