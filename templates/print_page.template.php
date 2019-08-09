@@ -69,8 +69,8 @@
             if( $pmb_format === 'ebook'){
                 ?>
                 <p>
-                    <?php esc_html_e('You may now use dotEPUB to create the ebook.', 'event_espresso'); ?>
-                    <a href=""><?php esc_html_e('How?', 'event_espresso'); ?></a>
+                    <?php esc_html_e('You may now use dotEPUB to create the ebook.', 'print-my-blog'); ?>
+                    <a href=""><?php esc_html_e('How?', 'print-my-blog'); ?></a>
                 </p>
                 <?php
             } else if ($pmb_format === 'pdf'){
@@ -79,7 +79,7 @@
                     <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print to PDF', 'print-my-blog'); ?>"/>
                     <?php
                 } else{
-                    ?><p> <?php esc_html_e('You may now create the PDF using a browser extension.', 'event_espresso'); ?></p><?php
+                    ?><p> <?php esc_html_e('You may now create the PDF using a browser extension.', 'print-my-blog'); ?></p><?php
                 }
                 ?>
                 <a
