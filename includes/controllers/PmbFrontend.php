@@ -48,8 +48,9 @@ class PmbFrontend extends BaseController
                    $pmb_printout_meta,
                    $pmb_after_date,
                    $pmb_before_date,
-                    $pmb_post_type,
-                    $pmb_taxonomy_filters;
+                   $pmb_post_type,
+                   $pmb_taxonomy_filters,
+                   $pmb_format;
             $pmb_site_name = $site_info->getName();
             $pmb_site_description = $site_info->getDescription();
             $pmb_site_url = $site_info->getSite();
@@ -114,6 +115,7 @@ class PmbFrontend extends BaseController
                 $pmb_taxonomy_filters = array();
                 $wp_taxonomies = array();
             }
+            $pmb_format = $this->getFromRequest('format', 'print');
 
             return PMB_TEMPLATES_DIR . 'print_page.template.php';
         }

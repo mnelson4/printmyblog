@@ -30,7 +30,7 @@ use PrintMyBlog\domain\PrintOptions;
                     <?php
                     $formats = array(
                             'print' => array(
-                                    'label' => esc_html__('Print', 'event_espresso'),
+                                    'label' => esc_html__('Print to Paper', 'event_espresso'),
                                     'help_text' => esc_html__('Print a physical copy using your web browser’s print functionality.', 'event_espresso'),
                                     'checked' => true
                             ),
