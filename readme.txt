@@ -129,6 +129,10 @@ https://youtu.be/ekwg2a1FPV0
 
 Safari: it is not recommended to create a PDF from mobile Safari. The PDF won't have pages, and includes content intended for web-only.
 
+= How do I create an ebook using Print My Blog? =
+This plugin puts your blog's content onto a single web page, and you can then use the [dotEPUB browser extension](https:dotepub.com) to turn it into an ebook.
+
+https://youtu.be/M5ZZN3KsqOA
 
 = Some images aren't appearing =
 
@@ -173,6 +177,10 @@ But if not, your browser can also remove background colors.
 3. The Blog is Ready for Printing!
 
 == Changelog ==
+
+= 1.10.0 August 9 2019 =
+* Added better support for creating ePub and MOBI ebooks using dotEPUB
+* Print setup page now asks for desired format, then tailors the print page for it
 
 = 1.9.6 July 30 2019 =
 * Add "site" CSS class to top-level div on print page, as styles may use it for styling

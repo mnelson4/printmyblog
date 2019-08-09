@@ -236,7 +236,7 @@ use PrintMyBlog\domain\PrintOptions;
                         'ebook' => array(
                             'label' => esc_html__('ePub or MOBI', 'print-my-blog'),
                             'help_text' => esc_html__('Make a free eBook using dotEPUB.', 'print-my-blog'),
-
+                            'link' => 'https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20an%20ebook%20using%20print%20my%20blog%3F'
                         )
                     );
                     foreach($formats as $key => $details){
@@ -248,7 +248,7 @@ use PrintMyBlog\domain\PrintOptions;
                             </label>
                             <p class="description">
                                 <?php echo $details['help_text']; ?>
-                                <?php echo isset($details['link']) ? '<a href="' . $details['link'] . '" target="_blank">' . esc_html__('Read More','print-my-blog' ) . '</a>' : '';?>
+                                <?php echo isset($details['link']) ? '<a href="' . $details['link'] . '" target="_blank">' . esc_html__('Learn More','print-my-blog' ) . '</a>' : '';?>
                             </p>
                         </div>
                         <?php
