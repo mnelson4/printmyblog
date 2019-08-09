@@ -426,7 +426,8 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.addPostToPage = function (post) {
         var html_to_add = '';
         if(this.format !== 'ebook'){
-            html_to_add += '<article><div class="entry-title">';
+            html_to_add += '<article id="post-\' + post.id + \'" class="post-\' + post.id + \' post type-\' + this.post_type + \' status-\' + post.status + \' hentry pmb-post-article">'
+			+ '<header class="pmb-post-header entry-header">';
         }
         if(this.showTitle) {
             html_to_add += '<h1 class="entry-title">'
@@ -434,7 +435,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 				+ '</h1>'
         }
         if(this.format !== 'ebook'){
-            html_to_add += '</div>';
+            html_to_add += '</header>';
         }
         html_to_add += '<div class="entry-meta">';
 		if(this.showId) {
