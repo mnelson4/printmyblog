@@ -14,7 +14,7 @@ Print your blog to paper, PDF, or eBook in one click!
 
 == Description ==
 
-**Print your blog to paper, pdf, or eBook in one click!**
+**Print your blog to paper, PDF, or eBook in one click!**
 
 * **Print your blog** to read offline.
 * **Create a paper backup** (book or printout) to read when your blog is taken offline.
