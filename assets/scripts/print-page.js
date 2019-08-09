@@ -45,6 +45,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 	this.filters = pmb_instance_vars.filters;
 	this.foogallery = pmb_instance_vars.foogallery;
 	this.isUserLoggedIn = pmb_instance_vars.is_user_logged_in;
+	this.format = pmb_instance_vars.format;
     /**
      * @function
      */
@@ -384,12 +385,13 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             }
         }
 
-        // jQuery('.pmb-posts h1').addClass('pmb-header');
-        // jQuery('.pmb-posts h2').addClass('pmb-header');
-        // jQuery('.pmb-posts h3').addClass('pmb-header');
-        // jQuery('.pmb-posts h4').addClass('pmb-header');
-        // jQuery('.pmb-posts h5').addClass('pmb-header');
-
+        if(this.format !== 'ebook') {
+			jQuery('.pmb-posts h1').addClass('pmb-header');
+			jQuery('.pmb-posts h2').addClass('pmb-header');
+			jQuery('.pmb-posts h3').addClass('pmb-header');
+			jQuery('.pmb-posts h4').addClass('pmb-header');
+			jQuery('.pmb-posts h5').addClass('pmb-header');
+		}
 
         // Remove inline styles added on image captions. They force a width in pixels which stinks with multiple columns.
         if(this.links === 'remove'){
@@ -422,11 +424,17 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      * @var  wp.api.models.Post post
      */
     this.addPostToPage = function (post) {
-        var html_to_add = '<div>';
+        var html_to_add = '';
+        if(this.format !== 'ebook'){
+            html_to_add += '<article><div class="entry-title">';
+        }
         if(this.showTitle) {
             html_to_add += '<h1 class="entry-title">'
 				+ post.title.rendered
 				+ '</h1>'
+        }
+        if(this.format !== 'ebook'){
+            html_to_add += '</div>';
         }
         html_to_add += '<div class="entry-meta">';
 		if(this.showId) {
@@ -477,8 +485,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 				}
 			}
 		}
-        html_to_add += '</div>'
-             + '</div>';
+        html_to_add += '</div>';
+		if(this.format !== 'ebook'){
+			html_to_add += '</article>';
+		}
 		if(this.showComments){
 			html_to_add += this.renderCommentsOf(post);
         }

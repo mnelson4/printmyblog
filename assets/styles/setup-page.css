@@ -15,3 +15,7 @@ summary.pmb-reveal-options{
 .select2-container--open{
     z-index:10;
 }
+
+.pmb-format-option{
+    margin-bottom:1em;
+}

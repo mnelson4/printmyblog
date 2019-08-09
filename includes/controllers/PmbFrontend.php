@@ -192,6 +192,7 @@ class PmbFrontend extends BaseController
             'filters' => (object) $this->getFromRequest('taxonomies', new stdClass),
             'foogallery' => function_exists('foogallery_fs'),
             'is_user_logged_in' => is_user_logged_in(),
+            'format' => $this->getFromRequest('format', 'print'),
         ];
         // add the before and after filters, if they were provided
         $dates = $this->getFromRequest('dates', array());

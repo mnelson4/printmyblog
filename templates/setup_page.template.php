@@ -20,6 +20,48 @@ use PrintMyBlog\domain\PrintOptions;
     ?>
     <p><?php esc_html_e('Configure how you’d like the blog to be printed, or just use our recommended defaults.', 'print-my-blog'); ?></p>
     <form action="<?php echo site_url();?>" method="get">
+        <table class="form-table">
+            <tbody>
+            <tr>
+                <th scope="row">
+                    <?php esc_html_e('Destination Format', 'print-my-blog');?>
+                </th>
+                <td>
+                    <?php
+                    $formats = array(
+                            'print' => array(
+                                    'label' => esc_html__('Print', 'event_espresso'),
+                                    'help_text' => esc_html__('Print a physical copy using your web browser’s print functionality.', 'event_espresso'),
+                                    'checked' => true
+                            ),
+                            'digital-pdf' => array(
+                                    'label' => esc_html__('Digital PDF', 'event_espresso'),
+                                    'help_text' => esc_html__('Make a PDF file, intended for reading from a computer or other device, using your browser or a browser extension.', 'event_espresso'),
+                                    'link' => 'https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20a%20pdf%20using%20print%20my%20blog%3F'
+                            ),
+                            'ebook' => array(
+                                    'label' => esc_html__('ePub or MOBI', 'event_espresso'),
+                                    'help_text' => esc_html__('Make a free eBook using dotEPUB.', 'event_espresso'),
+
+                            )
+                    );
+                    foreach($formats as $key => $details){
+                        ?>
+                        <div class="pmb-format-option">
+                            <input type="radio" name="format" id="format-<?php echo $key;?>" value="<?php echo $key;?>" <?php echo isset($details['checked']) ? 'checked="checked"' : '';?>>
+                            <label for="format-<?php echo $key;?>">
+                                <?php echo $details['label']; ?>
+                            </label>
+                            <p class="description">
+                                <?php echo $details['help_text']; ?>
+                                <?php echo isset($details['link']) ? '<a href="' . $details['link'] . '" target="_blank">' . esc_html__('Read More','event_espresso' ) . '</a>' : '';?>
+                            </p>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </td>
+            </tr>
         <?php if(PMB_REST_PROXY_EXISTS){?>
         <table class="form-table">
             <tbody>
@@ -36,9 +78,9 @@ use PrintMyBlog\domain\PrintOptions;
                         <p class="description"><?php esc_html_e('URL of the WordPress site (self-hosted or on WordPress.com) you’d like to print. Leave blank to use this current site.', 'print-my-blog');?></p>
                     </td>
                 </tr>
+        <?php }?>
             </tbody>
         </table>
-        <?php }?>
 
         <details class="pmb-details">
             <summary class="pmb-reveal-options" id="pmb-reveal-main-options"><?php esc_html_e('Show Options', 'print-my-blog'); ?></summary>
