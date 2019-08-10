@@ -234,7 +234,7 @@ use PrintMyBlog\domain\PrintOptions;
                             'link' => 'https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20a%20pdf%20using%20print%20my%20blog%3F'
                         ),
                         'ebook' => array(
-                            'label' => esc_html__('ePub or MOBI', 'print-my-blog'),
+                            'label' => esc_html__('eBook (ePub or MOBI)', 'print-my-blog'),
                             'help_text' => esc_html__('Make a free eBook using dotEPUB.', 'print-my-blog'),
                             'link' => 'https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20an%20ebook%20using%20print%20my%20blog%3F'
                         )
