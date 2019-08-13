@@ -33,7 +33,7 @@ class PmbCommon extends BaseController
     public function enqueueScripts()
     {
         wp_register_style('jquery-ui',
-            'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css',
+            'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css',
             array(),
             '1.8'
         );

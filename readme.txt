@@ -178,6 +178,9 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 1.10.1 August 13 2019 =
+* Fixed datepicker pop-ups not appearing correctly on HTTPS sites
+
 = 1.10.0 August 9 2019 =
 * Added better support for creating ePub and MOBI eBooks using dotEPUB
 * Print setup page now asks for desired format, then tailors the print page for it
