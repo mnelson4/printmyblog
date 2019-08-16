@@ -3,3 +3,7 @@
     margin-left:1em;
     margin-right:1em;
 }
+
+body.has-header-image .site-title, body.has-header-video .site-title, body.has-header-image .site-title a, body.has-header-video .site-title a, body.has-header-image .site-description, body.has-header-video .site-description{
+    color:black;
+}
