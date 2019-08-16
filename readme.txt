@@ -179,6 +179,9 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 1.11.1 August 15 2019 =
+* Fixed incorrect translation domain
+
 = 1.11.0 August 15 2019 =
 * Add option to exclude private and password-protected posts
 * Fix datepicker pop-ups not appearing correctly on HTTPS sites
