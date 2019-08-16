@@ -49,6 +49,7 @@ https://youtu.be/shOjx-Ijung
 * uses your theme’s and plugins’ styles (so Gutenberg and page builders are supported)
 * growing support for plugin and theme shortcodes and Gutenberg blocks
 * print your entire blog, or filter by date, category, and tags
+* optionally include private and password-protected posts
 * optionally prints comments
 * optionally places each post on a new page
 * resize text
@@ -178,11 +179,12 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
-= 1.10.1 August 13 2019 =
-* Fixed datepicker pop-ups not appearing correctly on HTTPS sites
+= 1.11.0 August 15 2019 =
+* Add option to exclude private and password-protected posts
+* Fix datepicker pop-ups not appearing correctly on HTTPS sites
 
 = 1.10.0 August 9 2019 =
-* Added better support for creating ePub and MOBI eBooks using dotEPUB
+* Add better support for creating ePub and MOBI eBooks using dotEPUB
 * Print setup page now asks for desired format, then tailors the print page for it
 
 = 1.9.6 July 30 2019 =
