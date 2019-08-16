@@ -218,6 +218,7 @@ class PmbFrontend extends BaseController
             'foogallery' => function_exists('foogallery_fs'),
             'is_user_logged_in' => is_user_logged_in(),
             'format' => $this->getFromRequest('format', 'print'),
+            'include_private_posts' => (bool) $this->getFromRequest('include-private-posts', false),
         ];
         // add the before and after filters, if they were provided
         $dates = $this->getFromRequest('dates', array());

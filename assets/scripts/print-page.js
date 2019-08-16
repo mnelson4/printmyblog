@@ -46,6 +46,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 	this.foogallery = pmb_instance_vars.foogallery;
 	this.isUserLoggedIn = pmb_instance_vars.is_user_logged_in;
 	this.format = pmb_instance_vars.format;
+	this.include_private_posts = pmb_instance_vars.include_private_posts;
     /**
      * @function
      */
@@ -76,7 +77,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
     this.getPostsCollectionQueryData = function () {
         var data = this.getCollectionQueryData();
-        if( this.canGetSensitiveData()){
+        if( this.canGetSensitiveData() && this.include_private_posts){
 			data.status = 'publish, private, future';
         } else {
 			data.status = 'publish';
@@ -424,6 +425,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      * @var  wp.api.models.Post post
      */
     this.addPostToPage = function (post) {
+        // Exclude password-protected posts if requested
+        if(! this.include_private_posts && post.content.protected){
+            return;
+        }
         var html_to_add = '';
         if(this.format !== 'ebook'){
             html_to_add += '<article id="post-\' + post.id + \'" class="post-\' + post.id + \' post type-\' + this.post_type + \' status-\' + post.status + \' hentry pmb-post-article">'

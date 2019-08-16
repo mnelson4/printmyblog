@@ -54,6 +54,19 @@ use PrintMyBlog\domain\PrintOptions;
                         <label><input class="pmb-post-type" type="radio" name="post-type" value="page"><?php esc_html_e('Pages', 'print-my-blog');?></label>
                     </td>
                 </tr>
+                <?php
+                if( is_user_logged_in()){
+                ?>
+                    <tr>
+                        <th scope="row"><label for="pmb-include-private-posts"><?php esc_html_e('Include Password-Protected and Private Posts','print-my-blog' );?></label></th>
+                        <td>
+                            <input type="checkbox" id="pmb-include-private-posts" name="include-private-posts" value="1" checked="checked">
+                            <p class="description"><?php esc_html_e('If unchecked, only public posts will be included in the printout.', 'event_espresso'); ?></p>
+                        </td>
+                    </tr>
+                <?php
+                }
+                ?>
                 </tbody>
             </table>
             <h2><?php esc_html_e('Filters', 'print-my-blog');?> <div style="display:inline-block" id="pmb-categories-spinner"><div class="pmb-spinner"></div></div></h2>
