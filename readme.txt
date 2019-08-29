@@ -1,4 +1,4 @@
-=== Print My Blog ===
+=== Print My Blog - Print, PDF, & eBook Converter WordPress Plugin ===
 Contributors: mnelson4
 Tags: print, PDF, backup, eBook, ePub, MOBI
 Requires at least: 4.6
@@ -89,6 +89,8 @@ If this doesn't meet your needs, there are good paid and free alternatives.
 (Its free, but won't use your blog's styles).
 [Anthologize](https://wordpress.org/plugins/anthologize/) is another great plugin for customizing your blog's content before exporting to an e-book format. Also free.
 [bloxp](http://www.bloxp.com/) converts your blog into an e-book with any type of blog (not just WordPress). Fewer, but different, options. Supported by donations.
+[MPL - Publisher](https://wordpress.org/plugins/mpl-publisher/) is another free eBook creator / PDF converter plugin you can use to self-publish a book. Good features but not recently updated.
+[PressBooks](https://pressbooks.com/) is a boog eBook maker. Begin creating or import content for free, but you must pay to export to PDF or other formats.
 [blogbooker](https://blogbooker.com/) prints a book, or creates a PDF, from your blog using their pre-made styles. Paid service.
 [blog2print](https://www.blog2print.com/) ditto, but temporarily requests your username and password. Paid service.
 
