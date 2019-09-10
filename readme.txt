@@ -181,6 +181,9 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 1.11.2 September 10 2019 =
+* Fixed a fatal error
+
 = 1.11.1 August 15 2019 =
 * Fixed incorrect translation domain
 

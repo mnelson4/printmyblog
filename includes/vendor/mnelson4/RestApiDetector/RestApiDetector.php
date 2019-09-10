@@ -39,19 +39,20 @@ class RestApiDetector
      * being the URL, including schema, of a self-hosted or WordPress.com site)
      * @since $VID:$
      * @throws RestApiDetectorError
+     * @return boolean if successfully retrieved and stored site info.
      */
     public function getSiteInfo()
     {
         // check for a site request param
-        if(empty($this->getSite())){
+        $site = $this->getSite();
+        if(empty($site)){
             $this->setName(get_bloginfo('name'));
             $this->setDescription(get_bloginfo('description'));
             $this->setRestApiUrl(get_rest_url());
             $this->setSite(get_bloginfo('url'));
             $this->setLocal(true);
-            return;
+            return true;
         }
-        $site = $this->getSite();
         // Let's see if it's self-hosted...
         $data = $this->getSelfHostedSiteInfo($site);
 //        if($data === false){
