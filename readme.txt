@@ -182,6 +182,9 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 1.12.0 September 17 2019 =
+* Replace each Youtube video with the video's title, URL, and image
+
 = 1.11.2 September 10 2019 =
 * Fixed a fatal error
 * Made change to readme in order to rank for searches for "PDF Generator"
