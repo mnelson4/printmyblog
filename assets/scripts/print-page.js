@@ -369,6 +369,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      */
     this.prettyUpPrintedPage = function()
     {
+        this.convertYoutubeVideosToImages();
         // Don't wrap tiled gallery images- we have CSS to avoid page breaks in them
         // although currently, they don't display well because they need JS that doesn't get enqueued
         var non_emojis = jQuery('.pmb-posts img:not(.emoji, div.tiled-gallery img, img.fg-image, img.size-medium, img.size-thumbnail)');
@@ -476,20 +477,22 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 + '</div>';
         }
         if(this.showContent) {
+            var content_html = '';
 			if (this.include_inline_js) {
-				html_to_add += post.content.rendered;
+				content_html = post.content.rendered;
 			} else {
 				var parsed_nodes = jQuery.parseHTML(post.content.rendered);
 				if (parsed_nodes !== null) {
 					for (var i = 0; i < parsed_nodes.length; i++) {
 						if (typeof parsed_nodes[i].outerHTML === 'string') {
-							html_to_add += parsed_nodes[i].outerHTML;
+							content_html += parsed_nodes[i].outerHTML;
 						} else if (typeof parsed_nodes[i].wholeText === 'string') {
-							html_to_add += parsed_nodes[i].wholeText;
+							content_html += parsed_nodes[i].wholeText;
 						}
 					}
 				}
 			}
+			html_to_add += content_html;
 		}
         html_to_add += '</div>';
 		if(this.format !== 'ebook'){
@@ -502,6 +505,20 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 		    html_to_add += '<hr class="pmb-divider">';
         }
         this.posts_div.append(html_to_add);
+    };
+
+    this.convertYoutubeVideosToImages = function(content) {
+		jQuery('div.wp-block-embed__wrapper iframe[src*=youtube]').unwrap().end();
+        var selection = jQuery('iframe[src*=youtube]');
+		selection.replaceWith(function(index){
+            var title = this.title;
+            var src = this.src;
+			var youtube_id = src.replace('https://www.youtube.com/embed/','');
+            youtube_id = youtube_id.substring(0, youtube_id.indexOf('?'));
+            var image_url = 'https://img.youtube.com/vi/' + youtube_id + '/maxresdefault.jpg';
+            return '<div class="pmb-youtube-video-replacement-wrapper"><b>' + title + '</b><br/>' + src + '<img class="pmb-youtube-video-replacement" src="' + image_url + '"></div>';
+        });
+
     };
 
     this.addTaxonomies = function(post) {

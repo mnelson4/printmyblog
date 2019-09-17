@@ -159,3 +159,6 @@ span.pmb-post-meta{
     z-index:1000;
     color:black;
 }
+div.pmb-youtube-video-replacement-wrapper{
+    page-break-inside:avoid;
+}

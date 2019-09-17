@@ -91,6 +91,7 @@ If this doesn't meet your needs, there are good paid and free alternatives.
 [bloxp](http://www.bloxp.com/) converts your blog into an e-book with any type of blog (not just WordPress). Fewer, but different, options. Supported by donations.
 [MPL - Publisher](https://wordpress.org/plugins/mpl-publisher/) is another free eBook creator / PDF converter plugin you can use to self-publish a book. Good features but not recently updated.
 [PressBooks](https://pressbooks.com/) is a good eBook maker. Begin creating or import content for free, and can pay to export to PDF and other formats.
+[Blog To HTML](https://wordpress.org/plugins/blog-to-html/) is actually very similar to Print My Blog. It allows you to export your blog to HTML for eBook creation.
 [blogbooker](https://blogbooker.com/) prints a book, or creates a PDF, from your blog using their pre-made styles. Paid service.
 [blog2print](https://www.blog2print.com/) ditto, but temporarily requests your username and password. Paid service.
 
@@ -183,6 +184,7 @@ But if not, your browser can also remove background colors.
 
 = 1.11.2 September 10 2019 =
 * Fixed a fatal error
+* Made change to readme in order to rank for searches for "PDF Generator"
 
 = 1.11.1 August 15 2019 =
 * Fixed incorrect translation domain
