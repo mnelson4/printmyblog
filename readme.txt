@@ -54,6 +54,7 @@ https://youtu.be/shOjx-Ijung
 * optionally places each post on a new page
 * resize text
 * resize images or remove them altogether
+* makes YouTube videos print nicely
 * optionally removes hyperlinks
 * optionally includes post’s excerpt
 * place the “Print My Blog” Gutenberg block on a page and allow site visitors to print your blog too
