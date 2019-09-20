@@ -516,7 +516,8 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 			var youtube_id = src.replace('https://www.youtube.com/embed/','');
             youtube_id = youtube_id.substring(0, youtube_id.indexOf('?'));
             var image_url = 'https://img.youtube.com/vi/' + youtube_id + '/maxresdefault.jpg';
-            return '<div class="pmb-youtube-video-replacement-wrapper"><b>' + title + '</b><br/>' + src + '<img class="pmb-youtube-video-replacement" src="' + image_url + '"></div>';
+            var link = 'https://youtube.com/watch?v=' + youtube_id;
+            return '<div class="pmb-youtube-video-replacement-wrapper"><b class="pmb-youtube-video-title">' + title + '</b><br/><a href="' + link +'" target="_blank">' + link + '</a><img class="pmb-youtube-video-replacement" src="' + image_url + '"></div>';
         });
 
     };
