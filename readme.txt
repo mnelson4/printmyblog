@@ -54,7 +54,7 @@ https://youtu.be/shOjx-Ijung
 * optionally places each post on a new page
 * resize text
 * resize images or remove them altogether
-* makes YouTube videos print nicely
+* replaces embedded YouTube videos with a link, full video title, and screenshot
 * optionally removes hyperlinks
 * optionally includes post’s excerpt
 * place the “Print My Blog” Gutenberg block on a page and allow site visitors to print your blog too
@@ -184,7 +184,7 @@ But if not, your browser can also remove background colors.
 == Changelog ==
 
 = 1.12.0 September 17 2019 =
-* Replace each Youtube video with the video's title, URL, and image
+* Replace each Youtube video with the video's title, URL, and screenshot
 
 = 1.11.2 September 10 2019 =
 * Fixed a fatal error
