@@ -29,12 +29,17 @@
     <p><?php printf(esc_html__('Code: %s','print-my-blog' ),$pmb_wp_error->get_error_code());?></p>
     <p><?php
         if(isset($_GET['site']) && $_GET['site'] !== site_url()){
-            printf(esc_html__('The site URL you provided was "%1$s". Are you sure that URL is correct and that it\'s a WordPress site?','print-my-blog' ), esc_url($_GET['site']));
+            printf(
+                    // translators: 1: submitted URL
+                    esc_html__('The site URL you provided was "%1$s". Are you sure that URL is correct and that it\'s a WordPress site?','print-my-blog' ),
+                    esc_url($_GET['site'])
+            );
         }
         ?></p>
     <p><?php esc_html_e('Are you sure the blog hasn\'t deactivated the REST API?', 'print-my-blog');?></p>
     <p><?php
         printf(
+                // translators: 1: opening link tag, 2: closing link tag
             esc_html__('If you are still having problems, please report it to the %1$sPrint My Blog%2$s support forum.','print-my-blog'),
             '<a href="https://wordpress.org/support/plugin/print-my-blog">',
             '</a>'

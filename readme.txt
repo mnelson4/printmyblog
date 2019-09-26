@@ -183,6 +183,9 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 1.12.1 September 26 2019 =
+* Added translator comments to translated strings
+
 = 1.12.0 September 17 2019 =
 * Replace each Youtube video with the video's title, URL, and screenshot
 

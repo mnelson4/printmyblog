@@ -34,6 +34,7 @@
         </div>
         <div class="pmb-help">
             <span class="pmb-help-ask"><?php printf(
+                    // translators: 1: a bunch of HTML for emoji buttons
                     __('What do you think? %1$s', 'print-my-blog'),
                     '<a id="pmb-help-love" href="javascript:pmb_help_show(\'pmb-help-love-text\');" title="'
                     . __('Love it (shows feedback options)', 'print-my-blog')
@@ -45,17 +46,20 @@
                 ); ?>
             </span>
             <span class="pmb-help-love-text" style="display:none"><?php printf(
+                    // translators: 1: opening link tag, 2: closing link tag, 3: different opening link tag
                     __('Great! %1$sFYI you can sponsor%2$s or %3$sreview%2$s it.', 'print-my-blog'),
                     '<a href="https://opencollective.com/print-my-blog" target="_blank" title="' . __('Sponsor development (opens in new tab)', 'print-my-blog') . '">',
                     '</a>',
                     '<a href="https://wordpress.org/support/plugin/print-my-blog/reviews/?filter=5" target="_blank" title="' . __('Plugin Reviews (opens in new tab)', 'print-my-blog') . '">'
                 ); ?></span>
             <span class="pmb-help-happy-text" style="display:none"><?php printf(
+                    // translators: 1: opening link tag, 2: closing link tag
                     __('Nice! %1$sPlease leave a review%2$s.', 'print-my-blog'),
                     '<a href="https://wordpress.org/support/plugin/print-my-blog/reviews/?filter=5" target="_blank" title="' . __('Plugin Reviews (opens in new tab)', 'print-my-blog') . '">',
                     '</a>'
                 ); ?></span>
             <span class="pmb-help-sad-text" style="display:none"><?php printf(
+                    // translators: 1: opening link tag, 2: closing link tag.
                     __('That’s disappointing. %1$sPlease tell us how to improve.%2$s', 'print-my-blog'),
                     '<a href="https://wordpress.org/support/plugin/print-my-blog/" target="_blank" title="' . __('Plugin support forum (opens in new tab)', 'print-my-blog') . '">',
                     '</a>'
@@ -130,9 +134,17 @@
             if ($pmb_after_date && $pmb_before_date) {
                 $date_range_string = sprintf('between %1$s and %2$s,', $pmb_after_date, $pmb_before_date);
             } elseif ($pmb_after_date && !$pmb_before_date) {
-                $date_range_string = sprintf(esc_html__('after %1$s,', 'print-my-blog'), $pmb_after_date);
+                $date_range_string = sprintf(
+                    // translators: 1: date string
+                    esc_html__('after %1$s,', 'print-my-blog'),
+                    $pmb_after_date
+                );
             } elseif (!$pmb_after_date && $pmb_before_date) {
-                $date_range_string = sprintf(esc_html__('before %1$s,', 'print-my-blog'), $pmb_before_date);
+                $date_range_string = sprintf(
+                        // translators: 1: date string
+                        esc_html__('before %1$s,', 'print-my-blog'),
+                        $pmb_before_date
+                );
             } else {
                 $date_range_string = '';
             }
@@ -143,6 +155,7 @@
                 $taxonomy = $taxonomy_filter['taxonomy'];
                 $terms = $taxonomy_filter['terms'];
                 $taxonomy_filters_strings[] = sprintf(
+                        // translators: 1 taxonomy name, 2: list of terms that apply to this post
                     esc_html__('%1$s: %2$s', 'print-my-blog'),
                     count($terms) > 1 ? $taxonomy->labels->name : $taxonomy->labels->singular_name,
                     implode(', ', $terms)
@@ -162,11 +175,14 @@
             ?><p class="pmb-printout-meta">
             <?php
             printf(
+                // translators: 1 description of printout, 2: site URL
                 esc_html__('%1$s from %2$s.', 'print-my-blog'),
                 $content_description,
                 $pmb_site_url
-            ); ?><?php
+            );
+            ?><?php
             printf(
+                // translators: 1: date, 2: opening link tag, 3: closing link tag
                 esc_html__('Printed on %1$s using %2$sPrint My Blog%3$s', 'print-my-blog'),
                 date_i18n(get_option('date_format')),
                 '<a href="https://wordpress.org/plugins/print-my-blog/">',
