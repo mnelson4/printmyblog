@@ -183,6 +183,10 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 1.12.2 September 26 2019 =
+* Require PHP 5.4 (don't just rely on WordPress core to enforce it)
+* Give an error message if two versions of Print My Blog are running
+
 = 1.12.1 September 26 2019 =
 * Added translator comments to translated strings
 
