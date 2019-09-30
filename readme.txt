@@ -183,6 +183,9 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 1.13.0 September 30, 2019 =
+* Make printing site title, tagline, URL, printout filters, and Print My Blog credits optional
+
 = 1.12.2 September 26 2019 =
 * Require PHP 5.4 (don't just rely on WordPress core to enforce it)
 * Give an error message if two versions of Print My Blog are running
