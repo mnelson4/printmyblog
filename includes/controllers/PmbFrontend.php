@@ -45,7 +45,12 @@ class PmbFrontend extends BaseController
             global $pmb_site_name,
                    $pmb_site_description,
                    $pmb_site_url,
-                   $pmb_printout_meta,
+                   $pmb_show_site_title,
+                   $pmb_show_site_tagline,
+                   $pmb_show_site_url,
+                   $pmb_show_filters,
+                   $pmb_show_date_printed,
+                   $pmb_show_credit,
                    $pmb_after_date,
                    $pmb_before_date,
                    $pmb_post_type,
@@ -55,7 +60,12 @@ class PmbFrontend extends BaseController
             $pmb_site_name = $site_info->getName();
             $pmb_site_description = $site_info->getDescription();
             $pmb_site_url = $site_info->getSite();
-            $pmb_printout_meta = $this->getFromRequest('printout-meta', false);
+            $pmb_show_site_title = $this->getFromRequest('show_site_title', false);
+            $pmb_show_site_tagline = $this->getFromRequest('show_site_tagline', false);
+            $pmb_show_site_url = $this->getFromRequest('show_site_url', false);
+            $pmb_show_filters = $this->getFromRequest('show_filters', false);
+            $pmb_show_date_printed = $this->getFromRequest('show_date_printed', false);
+            $pmb_show_credit = $this->getFromRequest('show_credit', false);
             if($site_info->isLocal()) {
                 $this->proxy_for = '';
             } else {
@@ -229,7 +239,7 @@ class PmbFrontend extends BaseController
         }
         $print_options = new PrintOptions();
         foreach($print_options->postContentOptions() as $option_name => $option_details){
-            $data[$option_name] = (bool)$this->getFromRequest($option_name, false);
+            $data['show_' . $option_name] = (bool)$this->getFromRequest('show_' . $option_name, false);
         }
 
         wp_localize_script(

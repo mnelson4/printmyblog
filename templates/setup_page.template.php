@@ -91,17 +91,39 @@ use PrintMyBlog\domain\PrintOptions;
                 <h2><?php esc_html_e('Content','print-my-blog' );?></h2>
             <table class="form-table">
                 <tbody>
-                <?php
-
-                ?>
+                <tr>
+                    <th scope="row">
+                        <label ><?php esc_html_e('Header Content to Print','print-my-blog' );?></label>
+                    </th>
+                    <td>
+                        <?php foreach($print_options->headerContentOptions() as $option_name => $option_details){
+                            ?>
+                        <label for="show_<?php echo esc_attr($option_name);?>">
+                            <input type="checkbox" name="show_<?php echo esc_attr($option_name);?>" id="show_<?php echo $option_name;?>"
+                                <?php
+                                if ($option_details['default']){
+                                    ?> checked="checked"
+                                    <?php
+                                }
+                                ?> value="1">
+                            <?php echo $option_details['label'];?></label><br>
+                        <?php
+                            if (isset($option_details['help'])){
+                            ?> <p class="description"><?php echo $option_details['help'];?></p>
+                            <?php
+                            }
+                        }
+                        ?>
+                    </td>
+                </tr>
                 <tr>
                     <th scope="row"> <?php esc_html_e('Post Content to Print','print-my-blog' );?></th>
                     <td>
                     <?php
                     foreach($print_options->postContentOptions() as $option_name => $option_details){
                         ?>
-                        <label for="<?php echo $option_name;?>">
-                            <input type="checkbox" name="<?php echo $option_name;?>" id="<?php echo $option_name;?>"
+                        <label for="show_<?php echo esc_attr($option_name);?>">
+                            <input type="checkbox" name="show_<?php echo esc_attr($option_name);?>" id="show_<?php echo esc_attr($option_name);?>"
                                 <?php
                                 if ($option_details['default']){
                                 ?> checked="checked"
@@ -109,8 +131,6 @@ use PrintMyBlog\domain\PrintOptions;
                             }
                             ?> value="1">
                             <?php echo $option_details['label'];?></label><br>
-
-
                     <?php
                     }
                     ?>
@@ -122,15 +142,6 @@ use PrintMyBlog\domain\PrintOptions;
             <h2><?php esc_html_e('Page Layout','print-my-blog' );?></h2>
             <table class="form-table">
                 <tbody>
-                <tr>
-                    <th scope="row">
-                        <label for="printout-meta"><?php esc_html_e('Show Printout Meta Info','print-my-blog' );?></label>
-                    </th>
-                    <td>
-                        <input type="checkbox" name="printout-meta" id="printout-meta" checked="checked">
-                        <p class="description"><?php esc_html_e('Whether to include your blog’s URL, date of printing, and that this printout was made using Print My Blog.','print-my-blog' );?></p>
-                    </td>
-                </tr>
                 <tr>
                     <th scope="row">
                         <label for="post-page-break"><?php esc_html_e('Each Post Begins on a New Page','print-my-blog' );?></label>
