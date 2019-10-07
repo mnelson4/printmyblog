@@ -48,6 +48,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 	this.format = pmb_instance_vars.format;
 	this.include_private_posts = pmb_instance_vars.include_private_posts;
     /**
+     * Initializes variables and begins fetching taxonomies, then gets started fetching posts/pages.
      * @function
      */
     this.initialize = function () {
@@ -62,6 +63,8 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         var alltaxonomiesCollection = new wp.api.collections.Taxonomies();
         alltaxonomiesCollection.fetch().done((taxonomies) => {
             this.taxonomies = taxonomies;
+            // ok we have everything we need to start. So let's get it started!
+			this.beginLoading();
         });
     };
 
@@ -697,7 +700,6 @@ jQuery(document).ready(function () {
 				);
 
 				pmb.initialize();
-				pmb.beginLoading();
             },
             1000
         );
