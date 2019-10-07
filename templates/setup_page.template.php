@@ -183,9 +183,9 @@ use PrintMyBlog\domain\PrintOptions;
                     </th>
                     <td>
                         <select name="image-size" id="image-size">
-                            <option value="full" selected="selected"><?php esc_html_e('Full (theme default)','print-my-blog' );?></option>
+                            <option value="full"><?php esc_html_e('Full (theme default)','print-my-blog' );?></option>
                             <option value="large"><?php esc_html_e('Large (3/4 size)','print-my-blog' );?></option>
-                            <option value="medium" ><?php esc_html_e('Medium (1/2 size)', 'print-my-blog'); ?></option>
+                            <option value="medium" selected="selected"><?php esc_html_e('Medium (1/2 size)', 'print-my-blog'); ?></option>
                             <option value="small"><?php esc_html_e('Small (1/4 size)', 'print-my-blog'); ?></option>
                             <option value="none"><?php esc_html_e('None (hide images)', 'print-my-blog'); ?></option>
                         </select>
