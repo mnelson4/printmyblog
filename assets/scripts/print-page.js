@@ -384,7 +384,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 var pmb = this;
                 non_emojis.each(function () {
                     var obj = jQuery(this);
-                    var width = pmb.image_size / pmb.columns;
+                    var width = pmb.image_size;
                     // Modify the CSS here. We could have written CSS rules but the selector worked slightly differently
                     // in CSS compared to jQuery.
                     // Let's make the image smaller and centered
