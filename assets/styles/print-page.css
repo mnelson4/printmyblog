@@ -161,4 +161,19 @@ span.pmb-post-meta{
 }
 div.pmb-youtube-video-replacement-wrapper{
     page-break-inside:avoid;
+    text-align:center;
+}
+div.pmb-youtube-video-replacement-header{
+    display:inline-block;
+}
+div.pmb-youtube-video-replacement-icon{
+    display:inline-block;
+    text-align:center;
+}
+div.pmb-youtube-video-replacement-icon img{
+    vertical-align:middle;
+    font-size:3em;
+}
+div.pmb-youtube-video-replacement-text{
+    display:inline-block;
 }
