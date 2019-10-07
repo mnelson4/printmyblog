@@ -185,6 +185,8 @@ But if not, your browser can also remove background colors.
 
 = 1.13.1 October 7 2019 =
 * Fix error when posts start rendering before taxonomies fully loaded
+* Center resized images
+* Default to medium-sized images instead of full-width
 
 = 1.13.0 September 30, 2019 =
 * Make printing site title, tagline, URL, printout filters, and Print My Blog credits optional
