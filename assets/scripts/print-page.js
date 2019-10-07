@@ -385,7 +385,15 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 non_emojis.each(function () {
                     var obj = jQuery(this);
                     var width = pmb.image_size / pmb.columns;
-                    obj.css('width', width + 'in');
+                    // Modify the CSS here. We could have written CSS rules but the selector worked slightly differently
+                    // in CSS compared to jQuery.
+                    // Let's make the image smaller and centered
+                    obj.css({
+                        'width': width + 'in',
+                        'display': 'block',
+                        'margin-left': 'auto',
+                        'margin-right': 'auto'
+                    });
                 });
             }
         }
