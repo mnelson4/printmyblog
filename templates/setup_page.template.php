@@ -189,7 +189,7 @@ use PrintMyBlog\domain\PrintOptions;
                             <option value="small"><?php esc_html_e('Small (1/4 size)', 'print-my-blog'); ?></option>
                             <option value="none"><?php esc_html_e('None (hide images)', 'print-my-blog'); ?></option>
                         </select>
-                        <p class="description"><?php esc_html_e('If you want to save paper, choose a smaller image size, or hide images altogether. On the other hand, default size images often look the best.','print-my-blog' );?></p>
+                        <p class="description"><?php esc_html_e('If you want to save paper, choose a smaller image size, or hide images altogether.','print-my-blog' );?></p>
                     </td>
                 </tr>
                 <tr>
