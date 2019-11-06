@@ -83,6 +83,9 @@ button{
 .entry-excerpt{
     font-style:italic;
 }
+.pmb-posts-body .entry-content{
+    margin-top:1em;
+}
 div.tiled-gallery{
     page-break-inside:avoid;
 }
