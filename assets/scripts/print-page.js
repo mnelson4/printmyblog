@@ -116,7 +116,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
 	this.canGetSensitiveData = function() {
 	    return this.isUserLoggedIn && ! this.proxy_for;
-    }
+    };
 
 
 
@@ -253,7 +253,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             }
         }
         return null;
-    }
+    };
 
     /**
      * Sorts posts or pages in the right order and stores them on this.ordered_posts. This is done synchronously.
@@ -389,7 +389,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                     // in CSS compared to jQuery.
                     // Let's make the image smaller and centered
                     obj.css({
-                        'width': width + 'in',
+                        'max-height': width + 'in',
+                        'max-width:': '100%',
+                        'width': 'auto',
+                        'height': 'auto',
                         'display': 'block',
                         'margin-left': 'auto',
                         'margin-right': 'auto'
@@ -573,7 +576,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.getPublishedDate = function(post)
     {
         return this.getPrettyDate(post.date);
-    }
+    };
 
     this.getPrettyDate = function(iso_date)
     {
@@ -581,7 +584,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         let format = {month: 'long', day: 'numeric', year: 'numeric'};
         ld.setLocale(this.locale);
         return ld.toLocaleString(format);
-    }
+    };
 
     /**
      * @param object post
@@ -604,7 +607,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             }
         }
         return '';
-    }
+    };
 
     this.renderCommentsOf = function(post)
     {
@@ -631,7 +634,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         }
         html += '</ol>';
         return html;
-    }
+    };
 
     this.renderComments = function(comments, depth, evenThread, even) {
         let html = '';

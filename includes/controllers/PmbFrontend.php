@@ -270,16 +270,16 @@ class PmbFrontend extends BaseController
     protected function getImageRelativeSize()
     {
         $requested_size = sanitize_key($this->getFromRequest('image-size','full'));
-        $page_width = 8.5;
+        $page_height = 11;
         switch($requested_size) {
             case 'large':
-                return $page_width * 3 / 4;
+                return $page_height * 3 / 4;
                 break;
             case 'medium':
-                return $page_width / 2;
+                return $page_height / 2;
                 break;
             case 'small':
-                return $page_width / 4;
+                return $page_height / 4;
                 break;
             case 'none':
                 return 0;
