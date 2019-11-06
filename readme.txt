@@ -183,6 +183,10 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 1.13.2 November 5 2019 =
+* Resize images based on page height instead of width
+* Add a little space after post meta info
+
 = 1.13.1 October 7 2019 =
 * Fix error when posts start rendering before taxonomies fully loaded
 * Center resized images
