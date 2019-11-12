@@ -48,7 +48,7 @@ https://youtu.be/shOjx-Ijung
 * avoids page breaks inside images, between images and captions, and even right after headers; generally makes the content print-ready
 * uses your theme’s and plugins’ styles (so Gutenberg and page builders are supported)
 * growing support for plugin and theme shortcodes and Gutenberg blocks
-* print your entire blog, or filter by date, category, and tags
+* print your entire blog, or filter by author, date, category, and tags
 * optionally include private and password-protected posts
 * optionally prints comments
 * optionally places each post on a new page
@@ -182,6 +182,10 @@ But if not, your browser can also remove background colors.
 3. The Blog is Ready for Printing!
 
 == Changelog ==
+
+= 1.14.0 November 11 2019 =
+* Allow filtering posts by author
+* Optionally add the post's author below each post
 
 = 1.13.2 November 5 2019 =
 * Resize images based on page height instead of width
