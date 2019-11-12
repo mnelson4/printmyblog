@@ -47,6 +47,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 	this.isUserLoggedIn = pmb_instance_vars.is_user_logged_in;
 	this.format = pmb_instance_vars.format;
 	this.include_private_posts = pmb_instance_vars.include_private_posts;
+	this.author = pmb_instance_vars.author;
     /**
      * Initializes variables and begins fetching taxonomies, then gets started fetching posts/pages.
      * @function
@@ -93,6 +94,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 		if(this.filters){
 			jQuery.extend(data, this.filters);
 		}
+		if(this.author){
+		    data.author=this.author;
+        }
         return data;
     };
 
