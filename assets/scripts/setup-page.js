@@ -12,6 +12,7 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 	this.post_type_selector = pmb_instance_vars.post_type_selector;
 	this.translations = translations;
 	this.taxonomies = {};
+	this.author = jQuery(pmb_instance_vars.author_selector);
 
 	site_input = jQuery(pmb_instance_vars.site_input_selector);
 
@@ -46,6 +47,7 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 		if(site_url === '') {
 			this.proxy_for = '';
 			this.getTaxonomies();
+			this.updateAuthorSelector();
 		}
 		this.spinner.show();
 		this.site_bad.hide();
@@ -67,6 +69,7 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 					this.site_name = response.data.name;
 					this.site_ok.show();
 					this.getTaxonomies();
+                    this.updateAuthorSelector();
 				} else if(response.data.error && response.data.message) {
 					this.reportNoRestApiUrl(response.data.message, response.data.error);
 				} else {
@@ -98,6 +101,52 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 			this.taxonomies = taxonomies;
 			this.generateTaxonomyInputs();
 		});
+	};
+    /**
+	 * Sets up the author select2 input. If this is working with WP API Proxy, the base URL may have changed,
+	 * so we need to be able to call this dynamically and/or repeatedly.
+     */
+	this.updateAuthorSelector = function () {
+		this.author.select2({
+			width: '300px',
+            ajax: {
+                url: this.default_rest_url + '/users',
+                dataType: 'json',
+                // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+                data: (params) => {
+                    var query = {
+                        _envelope:1,
+                    };
+                    if(params.term){
+                        query.search=params.term;
+                    }
+                    if(params.page){
+                        query.page=params.page;
+                    }
+                    if(this.proxy_for){
+                        query.proxy_for = this.proxy_for;
+                    }
+                    return query;
+                },
+                processResults: (data, params) => {
+                    const current_page = params.page || 1;
+                    let prepared_data = {
+                        results: [],
+                        pagination:{
+                            more:data.headers['X-WP-TotalPages'] > current_page
+                        }
+                    };
+                    for(var i=0; i<data.body.length; i++){
+                        let user = data.body[i];
+                        prepared_data.results.push({
+                            id:user.id,
+                            text: user.name + ' (' + user.slug + ')'
+                        });
+                    }
+                    return prepared_data;
+                }
+            }
+		})
 	};
 
 	this.generateTaxonomyInputs = function() {
