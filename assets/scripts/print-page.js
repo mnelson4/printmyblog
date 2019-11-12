@@ -34,6 +34,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.links = pmb_instance_vars.links;
     this.showUrl = pmb_instance_vars.show_url;
     this.showId = pmb_instance_vars.show_id;
+    this.showAuthor = pmb_instance_vars.show_author;
     this.showTitle = pmb_instance_vars.show_title;
     this.showFeaturedImage = pmb_instance_vars.show_featured_image;
     this.showDate = pmb_instance_vars.show_date;
@@ -462,6 +463,12 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             html_to_add += '</header>';
         }
         html_to_add += '<div class="entry-meta">';
+        if(this.showAuthor
+            && typeof post._embedded === 'object'
+            && typeof post._embedded.author === 'object'
+            && typeof post._embedded.author[0] === 'object') {
+            html_to_add += '<span class="byline"><span class="author-name pmb-post-meta">' + this.translations.by + ' ' + post._embedded.author[0].name + '</span></span>';
+        }
 		if(this.showId) {
 			html_to_add += '<span class="post-id pmb-post-meta">' +this.translations.id + post.id + '</span> ';
 		}
