@@ -168,7 +168,7 @@
                     );
 
                 }
-                $taxonomy_filters_string = count($taxonomy_filters_strings) ?
+                $filters_string = count($taxonomy_filters_strings) ?
                     sprintf(
                     // @translators: $s, the categories and terms used to filter this print-out,
                     //  eg "Category: WordPress, Blogging; Term: Computers, Headphones".
@@ -176,7 +176,10 @@
                         implode('; ', $taxonomy_filters_strings)
                     ) :
                     '';
-                $content_description = $pmb_post_type . ' ' . $date_range_string . ' ' . $taxonomy_filters_string;
+                if($pmb_author){
+                    $filters_string .= ' ' . sprintf(esc_html__('by %s', 'print-my-blog'), $pmb_author->display_name);
+                }
+                $content_description = $pmb_post_type . ' ' . $date_range_string . ' ' . $filters_string;
 
                 ?>
                 <?php
@@ -192,6 +195,16 @@
                         esc_html__('%1$s from %2$s.', 'print-my-blog'),
                         $content_description,
                         $pmb_site_url
+                    );
+                } elseif($content_description){
+                    // if we're not showing the site's URL, but there's a content description to show, by all means...
+                    // it should still be shown.
+                    printf(
+                        _x(
+                            '%s.',
+                            'Description of what\'s in the printout. Eg the post type, dante range, and filters.',
+                            'print-my-blog'),
+                        $content_description
                     );
                 }
                 ?><?php

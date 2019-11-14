@@ -77,6 +77,10 @@ use PrintMyBlog\domain\PrintOptions;
             <table class="form-table">
                 <tbody>
                 <tr>
+                    <th scope="row"><?php esc_html_e('Authored By', 'print-my-blog'); ?></th>
+                    <td><select id="pmb-author-select" class="pmb-author-select" name="pmb-author"></select></td>
+                </tr>
+                <tr>
                     <th scope="row"><?php esc_html_e('Posted After...', 'print-my-blog'); ?></th>
                     <td><input type="text" class="pmb-date" name="dates[after]"></td>
                 </tr>

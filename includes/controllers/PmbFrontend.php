@@ -56,7 +56,8 @@ class PmbFrontend extends BaseController
                    $pmb_post_type,
                    $pmb_taxonomy_filters,
                    $pmb_format,
-                   $pmb_browser;
+                   $pmb_browser,
+                   $pmb_author;
             $pmb_site_name = $site_info->getName();
             $pmb_site_description = $site_info->getDescription();
             $pmb_site_url = $site_info->getSite();
@@ -66,6 +67,12 @@ class PmbFrontend extends BaseController
             $pmb_show_filters = $this->getFromRequest('show_filters', false);
             $pmb_show_date_printed = $this->getFromRequest('show_date_printed', false);
             $pmb_show_credit = $this->getFromRequest('show_credit', false);
+            $user_id_to_filter_by = $this->getFromRequest('pmb-author', null);
+            if($user_id_to_filter_by){
+                $pmb_author = get_userdata( $user_id_to_filter_by);
+            } else {
+                $pmb_author = null;
+            }
             if($site_info->isLocal()) {
                 $this->proxy_for = '';
             } else {
@@ -229,6 +236,7 @@ class PmbFrontend extends BaseController
             'is_user_logged_in' => is_user_logged_in(),
             'format' => $this->getFromRequest('format', 'print'),
             'include_private_posts' => (bool) $this->getFromRequest('include-private-posts', false),
+            'author' => $this->getFromRequest('pmb-author', null),
         ];
         // add the before and after filters, if they were provided
         $dates = $this->getFromRequest('dates', array());
@@ -258,7 +266,8 @@ class PmbFrontend extends BaseController
                     'comments' => esc_html__('Comments', 'print-my-blog'),
                     'no_comments' => esc_html__('No Comments', 'print-my-blog'),
                     'says' => __('<span class="screen-reader-text says">says:</span>', 'print-my-blog'),
-                    'id' => esc_html__('ID:', 'print-my-blog')
+                    'id' => esc_html__('ID:', 'print-my-blog'),
+                    'by' => esc_html__('By', 'print-my-blog')
                 ),
                 'data' => $data,
             )

@@ -55,6 +55,10 @@ class PrintOptions
                 'label' => esc_html__('ID', 'print-my-blog'),
                 'default' => false,
             ],
+            'author' => [
+                'label' => esc_html__('Author', 'print-my-blog'),
+                'default' => false,
+            ],
             'url' => [
                 'label' => esc_html__('URL', 'print-my-blog'),
                 'default' => false
