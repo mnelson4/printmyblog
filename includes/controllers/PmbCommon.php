@@ -92,7 +92,8 @@ class PmbCommon extends BaseController
                     'dynamic_categories_selector' => '#pmb-dynamic-categories',
                     'default_rest_url' => rest_url('/wp/v2'),
                     'ajax_url' => admin_url( 'admin-ajax.php' ),
-                    'author_selector' => '#pmb-author-select'
+                    'author_selector' => '#pmb-author-select',
+                    'nonce' => wp_create_nonce('wp_rest')
                 ]
             ]
         );

@@ -13,6 +13,7 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 	this.translations = translations;
 	this.taxonomies = {};
 	this.author = jQuery(pmb_instance_vars.author_selector);
+	this.nonce = pmb_instance_vars.nonce;
 
 	site_input = jQuery(pmb_instance_vars.site_input_selector);
 
@@ -116,6 +117,7 @@ function PmbSetupPage(pmb_instance_vars, translations) {
                 data: (params) => {
                     var query = {
                         _envelope:1,
+						_wpnonce:this.nonce
                     };
                     if(params.term){
                         query.search=params.term;
