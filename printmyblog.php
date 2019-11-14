@@ -75,7 +75,7 @@ if (defined('PMB_VERSION')) {
         add_action('admin_notices', 'pmb_minimum_php_version_error', 1);
     } else {
     // it's all good! go for it!
-    define('PMB_VERSION', '1.14.03.rc.000');
+    define('PMB_VERSION', '1.14.0.rc.000');
     define('PMB_DIR', wp_normalize_path(__DIR__) . '/');
     define('PMB_MAIN_FILE', __FILE__);
     define('PMB_TEMPLATES_DIR', PMB_DIR . 'templates/');
