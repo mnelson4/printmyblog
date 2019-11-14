@@ -116,8 +116,8 @@ function PmbSetupPage(pmb_instance_vars, translations) {
                 // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
                 data: (params) => {
                     var query = {
-                        _envelope:1,
-						_wpnonce:this.nonce
+                        _envelope: 1,
+                        _wpnonce: this.nonce
                     };
                     if(params.term){
                         query.search=params.term;
