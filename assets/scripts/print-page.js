@@ -49,6 +49,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 	this.format = pmb_instance_vars.format;
 	this.include_private_posts = pmb_instance_vars.include_private_posts;
 	this.author = pmb_instance_vars.author;
+	this.post = pmb_instance_vars.post;
     /**
      * Initializes variables and begins fetching taxonomies, then gets started fetching posts/pages.
      * @function
@@ -97,6 +98,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 		}
 		if(this.author){
 		    data.author=this.author;
+        }
+        if(this.post){
+            data.include=this.post;
         }
         return data;
     };

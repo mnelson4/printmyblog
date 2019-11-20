@@ -237,6 +237,7 @@ class PmbFrontend extends BaseController
             'format' => $this->getFromRequest('format', 'print'),
             'include_private_posts' => (bool) $this->getFromRequest('include-private-posts', false),
             'author' => $this->getFromRequest('pmb-author', null),
+            'post' => $this->getFromRequest('pmb-post', null)
         ];
         // add the before and after filters, if they were provided
         $dates = $this->getFromRequest('dates', array());
