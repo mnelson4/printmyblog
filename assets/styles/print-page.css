@@ -180,3 +180,9 @@ div.pmb-youtube-video-replacement-icon img{
 div.pmb-youtube-video-replacement-text{
     display:inline-block;
 }
+div.pmb-print-this-page{
+    float:right;
+}
+.pmb-posts div.pmb-print-this-page{
+    display:none;
+}
