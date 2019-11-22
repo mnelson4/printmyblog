@@ -112,7 +112,7 @@
     </div>
 </div>
 
-<div class="pmb-posts site dotEPUBcontent">
+<div class="pmb-posts <?php if ($pmb_format !== 'print'){ echo 'site';}?> dotEPUBcontent">
     <?php
     if ($pmb_format !== 'ebook') {
     // dotEPUB skips the title and description if they're not in the same div.
