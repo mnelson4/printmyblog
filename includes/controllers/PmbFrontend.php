@@ -32,7 +32,7 @@ class PmbFrontend extends BaseController
     }
     public function addPrintButton($content){
         global $post;
-        if($post->post_type === 'post'){
+        if($post->post_type === 'post' && is_single()){
             $base_url = site_url() . "?post-type=post&include-private-posts=1&show_site_title=1&show_site_tagline=1&show_site_url=1&show_date_printed=1&show_title=1&show_date=1&show_categories=1&show_featured_image=1&show_content=1&post-page-break=on&columns=1&font-size=normal&image-size=medium&links=include&rendering-wait=10&print-my-blog=1&format=%s&pmb-post=%d";
             $print_url = sprintf(
                 $base_url,
