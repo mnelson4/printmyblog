@@ -184,6 +184,15 @@ div.pmb-youtube-video-replacement-text{
     display:none;
 }
 /* Prevent themes like "hueman" from floating the site description on the print page and ruining the layout*/
-.pmb-posts-header .site-description{
+.pmb-posts-header .site-description {
+    float: none;
+}
+.site-title{
+    margin-top:0em;
+    padding-top:0em;
     float:none;
+}
+/* Adds some space between the posts' content and the site title*/
+.pmb-posts-header{
+    margin-bottom:2em;
 }
