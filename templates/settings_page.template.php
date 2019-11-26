@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var $pmb_print_now_formats \PrintMyBlog\domain\PrintNowSettings
+ */
+?>
 <div class="wrap nosubsub">
     <h1><?php esc_html_e('Print My Blog','print-my-blog' );?></h1>
     <p><?php esc_html_e('Configure how site visitors print your blog.', 'print-my-blog'); ?></p>
@@ -11,28 +16,19 @@
                 </th>
                 <td>
                     <table>
-                        <tr>
-                            <td>
-                                <label>
-                                    <input type="checkbox" id="pmb-paper" name="format" value="paper" checked="checked">
-                                    <?php esc_html_e('Paper', 'print-my-blog'); ?>
-                                </label>
-                            </td>
-                            <td>
-                                <?php esc_html_e('Label', 'print-my-blog'); ?> <input type="text" id="pmb-paper-label" name="format-paper-label" value="<?php esc_html_e('Print', 'print-my-blog'); ?>">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>
-                                    <input type="checkbox" id="pmb-pdf" name="format" value="pdf" checked="checked">
-                                    <?php esc_html_e('PDF', 'print-my-blog'); ?>
-                                </label>
-                            </td>
-                            <td>
-                                <?php esc_html_e('Label', 'print-my-blog'); ?> <input type="text" id="pmb-pdf-label" name="format-pdf-label" value="<?php esc_html_e('PDF', 'print-my-blog'); ?>">
-                            </td>
-                        </tr>
+                        <?php foreach($pmb_print_now_formats->formats() as $slug => $format){ ?>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input type="checkbox" id="pmb-<?php echo $slug;?>" name="format" value="<?php echo $slug;?>" <?php echo $pmb_print_now_formats->isActive($slug)? 'checked="checked"' : '';?>>
+                                        <?php echo $format['admin_label'] ?>
+                                    </label>
+                                </td>
+                                <td>
+                                    <?php esc_html_e('Label', 'print-my-blog'); ?> <input type="text" id="pmb-<?php echo $slug;?>-label" name="frontend_labels[<?php echo $slug;?>]" value="<?php echo $pmb_print_now_formats->getFrontendLabel($slug); ?>">
+                                </td>
+                            </tr>
+                        <?php } ?>
                     </table>
                 </td>
             </tr>

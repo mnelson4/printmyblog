@@ -87,6 +87,7 @@ if (defined('PMB_VERSION')) {
     define('PMB_ADMIN_PAGE_SLUG', 'print-my-blog');
     define('PMB_ADMIN_PAGE_PATH', '/tools.php?page=' . PMB_ADMIN_PAGE_SLUG);
 
+
     /**
      * adds a wp-option to indicate that PMB has been activated via the WP admin plugins page.
      * This can be used to do initial plugin installation or redirect the user to the setup page.
@@ -101,6 +102,7 @@ if (defined('PMB_VERSION')) {
     require_once(PMB_INCLUDES_DIR . 'vendor/mnelson4/RestApiDetector/RestApiDetector.php');
     require_once(PMB_INCLUDES_DIR . 'vendor/mnelson4/RestApiDetector/RestApiDetectorError.php');
     require_once(PMB_INCLUDES_DIR . 'domain/PrintOptions.php');
+    require_once(PMB_INCLUDES_DIR . 'domain/PrintNowSettings.php');
     require_once(PMB_TWINE_INCLUDES_DIR . 'controllers/BaseController.php');
     require_once(PMB_INCLUDES_DIR . 'controllers/PmbInit.php');
     $init_controller = new PrintMyBlog\controllers\PmbInit();

@@ -1,5 +1,6 @@
 <?php
 namespace PrintMyBlog\domain;
+
 /**
  * Class PrintOptions
  *
