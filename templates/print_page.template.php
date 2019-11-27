@@ -23,6 +23,7 @@
 </head>
 
 <body <?php body_class('pmb-print-page'); ?>>
+<!-- Print My Blog Version <?php echo PMB_VERSION;?>-->
 <div class="pmb-waiting-message-fullpage pmb-extra-content">
     <div class="pmb-waiting-message-outer-container">
         <div class="pmb-window-buttons">
