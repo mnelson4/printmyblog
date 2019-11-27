@@ -33,3 +33,9 @@
 .pmb-posts .pmb-screen-only{
     display:none;
 }
+details.pmb-details{
+    margin:1em;
+}
+summary.pmb-reveal-options{
+    cursor:pointer;
+}

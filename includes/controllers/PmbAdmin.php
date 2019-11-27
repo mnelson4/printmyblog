@@ -2,9 +2,9 @@
 
 namespace PrintMyBlog\controllers;
 
+use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
 use Twine\controllers\BaseController;
-use PrintMyBlog\domain\PrintNowSettings;
 
 /**
  * Class PmbAdmin
@@ -70,12 +70,12 @@ class PmbAdmin extends BaseController
     }
 
     public function settingsPage(){
-        $pmb_print_now_formats = new PrintNowSettings();
+        $pmb_print_now_formats = new FrontendPrintSettings();
         $pmb_print_now_formats->load();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Ok save those settings!
             if(isset($_POST['pmb-reset'])){
-                $pmb_print_now_formats = new PrintNowSettings();
+                $pmb_print_now_formats = new FrontendPrintSettings();
             } else {
                 foreach($pmb_print_now_formats->formatSlugs() as $slug){
                     if(isset($_POST['format'][$slug])){

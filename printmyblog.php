@@ -102,7 +102,7 @@ if (defined('PMB_VERSION')) {
     require_once(PMB_INCLUDES_DIR . 'vendor/mnelson4/RestApiDetector/RestApiDetector.php');
     require_once(PMB_INCLUDES_DIR . 'vendor/mnelson4/RestApiDetector/RestApiDetectorError.php');
     require_once(PMB_INCLUDES_DIR . 'domain/PrintOptions.php');
-    require_once(PMB_INCLUDES_DIR . 'domain/PrintNowSettings.php');
+    require_once(PMB_INCLUDES_DIR . 'domain/FrontendPrintSettings.php');
     require_once(PMB_TWINE_INCLUDES_DIR . 'controllers/BaseController.php');
     require_once(PMB_INCLUDES_DIR . 'controllers/PmbInit.php');
     $init_controller = new PrintMyBlog\controllers\PmbInit();

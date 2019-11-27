@@ -11,7 +11,7 @@ namespace PrintMyBlog\domain;
  * @since         $VID:$
  *
  */
-class PrintNowSettings
+class FrontendPrintSettings
 {
     protected $formats;
     protected $settings;

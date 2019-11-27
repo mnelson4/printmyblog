@@ -5,12 +5,6 @@
     min-width:20em;
     width:20em;
 }
-details.pmb-details{
-    margin:1em;
-}
-summary.pmb-reveal-options{
-    cursor:pointer;
-}
 
 .select2-container--open{
     z-index:10;

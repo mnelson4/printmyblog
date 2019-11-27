@@ -24,8 +24,10 @@
                                         <?php echo $format['admin_label'] ?>
                                     </label>
                                 </td>
-                                <td>
-                                    <?php esc_html_e('Label', 'print-my-blog'); ?> <input type="text" id="pmb-<?php echo $slug;?>-label" name="frontend_labels[<?php echo $slug;?>]" value="<?php echo $pmb_print_now_formats->getFrontendLabel($slug); ?>">
+                                <td> <details class="pmb-format-label">
+                                        <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('Customize', 'event_espresso'); ?></summary>
+                                    <label><?php esc_html_e('Label', 'print-my-blog'); ?> <input type="text" id="pmb-<?php echo $slug;?>-label" name="frontend_labels[<?php echo $slug;?>]" value="<?php echo $pmb_print_now_formats->getFrontendLabel($slug); ?>"></label>
+                                    </details>
                                 </td>
                             </tr>
                         <?php } ?>
