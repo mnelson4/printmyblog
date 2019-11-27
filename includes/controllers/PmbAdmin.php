@@ -19,6 +19,8 @@ use PrintMyBlog\domain\PrintNowSettings;
  */
 class PmbAdmin extends BaseController
 {
+
+    const SETTINGS_SAVED_OPTION = 'pmb-settings-saved';
     /**
      * Sets hooks that we'll use in the admin.
      * @since 1.0.0
@@ -89,7 +91,13 @@ class PmbAdmin extends BaseController
                 }
             }
             $pmb_print_now_formats->save();
+            update_option(self::SETTINGS_SAVED_OPTION,true, false);
             wp_redirect('');
+        }
+        $saved = get_option(self::SETTINGS_SAVED_OPTION,false);
+        if($saved){
+            update_option(self::SETTINGS_SAVED_OPTION, false, false);
+            echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Settings Saved', 'event_espresso') . '</p></div>';
         }
 
         include(PMB_TEMPLATES_DIR . 'settings_page.template.php');
