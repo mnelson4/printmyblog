@@ -89,7 +89,14 @@ class PmbFrontend extends BaseController
                    $pmb_author;
             $pmb_site_name = $site_info->getName();
             $pmb_site_description = $site_info->getDescription();
-            $pmb_site_url = $site_info->getSite();
+            $pmb_site_url = str_replace(
+                array(
+                    'https://',
+                    'http://'
+                ),
+                '',
+                $site_info->getSite()
+            );
             $pmb_show_site_title = $this->getFromRequest('show_site_title', false);
             $pmb_show_site_tagline = $this->getFromRequest('show_site_tagline', false);
             $pmb_show_site_url = $this->getFromRequest('show_site_url', false);

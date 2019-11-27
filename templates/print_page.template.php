@@ -187,19 +187,21 @@
                 ?>
                 <?php
             } else {
-                $content_description = $pmb_post_type;
+                $content_description = '';
             }
             ?>
             <p class="pmb-printout-meta">
                 <?php
-                if ($pmb_show_site_url) {
+                if ($pmb_show_site_url && $content_description) {
                     printf(
                     // translators: 1 description of printout, 2: site URL
                         esc_html__('%1$s from %2$s.', 'print-my-blog'),
                         $content_description,
                         $pmb_site_url
                     );
-                } elseif($content_description){
+                } elseif ($pmb_show_site_url && ! $content_description) {
+                        echo $pmb_site_url;
+                } elseif ($content_description) {
                     // if we're not showing the site's URL, but there's a content description to show, by all means...
                     // it should still be shown.
                     printf(
