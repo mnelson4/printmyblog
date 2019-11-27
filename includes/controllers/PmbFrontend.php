@@ -39,6 +39,9 @@ class PmbFrontend extends BaseController
             $print_settings->load();
             $html = '<div class="pmb-print-this-page">';
             foreach($print_settings->formats() as $slug => $settings){
+                if(! $print_settings->isActive($slug)){
+                    continue;
+                }
                 $url = sprintf(
                     $base_url,
                     $slug,
