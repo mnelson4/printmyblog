@@ -4,10 +4,10 @@
  */
 ?>
 <div class="wrap nosubsub">
-    <h1><?php esc_html_e('Print My Blog','print-my-blog' );?></h1>
-    <p><?php esc_html_e('Configure how site visitors print your blog.', 'print-my-blog'); ?></p>
+    <h1><?php esc_html_e('Print My Blog Frontend Print Settings','print-my-blog' );?></h1>
     <form method="post">
         <h2><?php esc_html_e('Print Buttons', 'print-my-blog'); ?></h2>
+        <p><?php esc_html_e('What print options would you like to appear on posts?', 'print-my-blog'); ?></p>
         <table class="form-table">
             <tbody>
             <tr>
@@ -20,7 +20,7 @@
                             <tr>
                                 <td>
                                     <label>
-                                        <input type="checkbox" id="pmb-<?php echo $slug;?>" name="format" value="<?php echo $slug;?>" <?php echo $pmb_print_now_formats->isActive($slug)? 'checked="checked"' : '';?>>
+                                        <input type="checkbox" id="pmb-<?php echo $slug;?>" name="format[<?php echo $slug;?>]" value="<?php echo $slug;?>" <?php echo $pmb_print_now_formats->isActive($slug)? 'checked="checked"' : '';?>>
                                         <?php echo $format['admin_label'] ?>
                                     </label>
                                 </td>

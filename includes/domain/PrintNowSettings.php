@@ -69,7 +69,7 @@ class PrintNowSettings
         if(! isset($this->settings[$format])){
             return false;
         }
-        return (bool)$this->settings['format']['active'];
+        return (bool)$this->settings[$format]['active'];
     }
 
     /**
@@ -133,7 +133,7 @@ class PrintNowSettings
      */
     public function load()
     {
-        $stored_settings = get_option(OPTION_NAME, null);
+        $stored_settings = get_option(self::OPTION_NAME, null);
         if($stored_settings !== null){
             $this->settings = $stored_settings;
         }

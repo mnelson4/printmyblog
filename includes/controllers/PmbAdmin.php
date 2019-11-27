@@ -70,6 +70,24 @@ class PmbAdmin extends BaseController
     public function settingsPage(){
         $pmb_print_now_formats = new PrintNowSettings();
         $pmb_print_now_formats->load();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Ok save those settings!
+            foreach($pmb_print_now_formats->formatSlugs() as $slug){
+                if(isset($_POST['format'][$slug])){
+                    $active = true;
+                } else {
+                    $active = false;
+                }
+                $pmb_print_now_formats->setFormatActive($slug,$active);
+                if(isset($_POST['frontend_labels'][$slug])){
+                    $pmb_print_now_formats->setFormatFrontendLabel($slug,$_POST['frontend_labels'][$slug]);
+                }
+
+            }
+            $pmb_print_now_formats->save();
+            wp_redirect('');
+        }
+
         include(PMB_TEMPLATES_DIR . 'settings_page.template.php');
     }
 
