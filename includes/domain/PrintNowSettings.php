@@ -22,15 +22,15 @@ class PrintNowSettings
         $this->formats = array(
             'print'=> array(
                 'admin_label' => esc_html__('Print', 'event_espresso'),
-                'default' => esc_html__('Print', 'event_espresso'),
+                'default' => esc_html__('Print 🖨', 'event_espresso'),
             ),
             'pdf' => array(
                 'admin_label' => esc_html__('PDF', 'event_espresso'),
-                'default' => esc_html__('PDF', 'event_espresso'),
+                'default' => esc_html__('PDF 📄', 'event_espresso'),
             ),
             'ebook' => array(
                 'admin_label' => esc_html__('eBook', 'event_espresso'),
-                'default' => esc_html__('eBook', 'event_espresso'),
+                'default' => esc_html__('eBook 📱', 'event_espresso'),
             )
         );
         // Initialize the settings with the defaults.
