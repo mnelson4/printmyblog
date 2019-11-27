@@ -34,6 +34,6 @@
             </tr>
             </tbody>
         </table>
-        <button class="button-primary"><?php esc_html_e('Save Settings','print-my-blog' );?></button>
+        <button class="button-primary"><?php esc_html_e('Save Settings','print-my-blog' );?></button> <input name="pmb-reset" class="button button-secondary" type="submit" value="<?php esc_html_e('Reset to Defaults', 'event_espresso'); ?>">
     </form>
 </div>
