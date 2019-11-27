@@ -33,7 +33,8 @@
                 </a>
             </span>
         </div>
-        <div class="pmb-help">
+        <?php if(is_user_logged_in()){?>
+            <div class="pmb-help">
             <span class="pmb-help-ask"><?php printf(
                 // translators: 1: a bunch of HTML for emoji buttons
                     __('What do you think? %1$s', 'print-my-blog'),
@@ -46,26 +47,27 @@
                     . '")>☹️</a>'
                 ); ?>
             </span>
-            <span class="pmb-help-love-text" style="display:none"><?php printf(
-                // translators: 1: opening link tag, 2: closing link tag, 3: different opening link tag
-                    __('Great! %1$sFYI you can sponsor%2$s or %3$sreview%2$s it.', 'print-my-blog'),
-                    '<a href="https://opencollective.com/print-my-blog" target="_blank" title="' . __('Sponsor development (opens in new tab)', 'print-my-blog') . '">',
-                    '</a>',
-                    '<a href="https://wordpress.org/support/plugin/print-my-blog/reviews/?filter=5" target="_blank" title="' . __('Plugin Reviews (opens in new tab)', 'print-my-blog') . '">'
-                ); ?></span>
-            <span class="pmb-help-happy-text" style="display:none"><?php printf(
-                // translators: 1: opening link tag, 2: closing link tag
-                    __('Nice! %1$sPlease leave a review%2$s.', 'print-my-blog'),
-                    '<a href="https://wordpress.org/support/plugin/print-my-blog/reviews/?filter=5" target="_blank" title="' . __('Plugin Reviews (opens in new tab)', 'print-my-blog') . '">',
-                    '</a>'
-                ); ?></span>
-            <span class="pmb-help-sad-text" style="display:none"><?php printf(
-                // translators: 1: opening link tag, 2: closing link tag.
-                    __('That’s disappointing. %1$sPlease tell us how to improve.%2$s', 'print-my-blog'),
-                    '<a href="https://wordpress.org/support/plugin/print-my-blog/" target="_blank" title="' . __('Plugin support forum (opens in new tab)', 'print-my-blog') . '">',
-                    '</a>'
-                ); ?></span>
-        </div>
+                <span class="pmb-help-love-text" style="display:none"><?php printf(
+                    // translators: 1: opening link tag, 2: closing link tag, 3: different opening link tag
+                        __('Great! %1$sFYI you can sponsor%2$s or %3$sreview%2$s it.', 'print-my-blog'),
+                        '<a href="https://opencollective.com/print-my-blog" target="_blank" title="' . __('Sponsor development (opens in new tab)', 'print-my-blog') . '">',
+                        '</a>',
+                        '<a href="https://wordpress.org/support/plugin/print-my-blog/reviews/?filter=5" target="_blank" title="' . __('Plugin Reviews (opens in new tab)', 'print-my-blog') . '">'
+                    ); ?></span>
+                <span class="pmb-help-happy-text" style="display:none"><?php printf(
+                    // translators: 1: opening link tag, 2: closing link tag
+                        __('Nice! %1$sPlease leave a review%2$s.', 'print-my-blog'),
+                        '<a href="https://wordpress.org/support/plugin/print-my-blog/reviews/?filter=5" target="_blank" title="' . __('Plugin Reviews (opens in new tab)', 'print-my-blog') . '">',
+                        '</a>'
+                    ); ?></span>
+                <span class="pmb-help-sad-text" style="display:none"><?php printf(
+                    // translators: 1: opening link tag, 2: closing link tag.
+                        __('That’s disappointing. %1$sPlease tell us how to improve.%2$s', 'print-my-blog'),
+                        '<a href="https://wordpress.org/support/plugin/print-my-blog/" target="_blank" title="' . __('Plugin support forum (opens in new tab)', 'print-my-blog') . '">',
+                        '</a>'
+                    ); ?></span>
+            </div>
+        <?php }?>
         <div class="pmb-waiting-area">
             <h1 id='pmb-in-progress-h1' class="pmb-waiting-h1"><?php _e('Initializing', 'print-my-blog'); ?></h1>
         </div>
