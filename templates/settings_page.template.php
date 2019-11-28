@@ -20,13 +20,13 @@
                             <tr>
                                 <td>
                                     <label>
-                                        <input type="checkbox" id="pmb-<?php echo $slug;?>" name="format[<?php echo $slug;?>]" value="<?php echo $slug;?>" <?php echo $pmb_print_now_formats->isActive($slug)? 'checked="checked"' : '';?>>
+                                        <input type="checkbox" id="pmb-<?php echo esc_attr($slug);?>" name="format[<?php echo esc_attr($slug);?>]" value="<?php echo esc_attr($slug);?>" <?php echo $pmb_print_now_formats->isActive($slug)? 'checked="checked"' : '';?>>
                                         <?php echo $format['admin_label'] ?>
                                     </label>
                                 </td>
                                 <td> <details class="pmb-format-label">
                                         <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('Customize', 'event_espresso'); ?></summary>
-                                    <label><?php esc_html_e('Label', 'print-my-blog'); ?> <input type="text" id="pmb-<?php echo $slug;?>-label" name="frontend_labels[<?php echo $slug;?>]" value="<?php echo $pmb_print_now_formats->getFrontendLabel($slug); ?>"></label>
+                                    <label><?php esc_html_e('Label', 'print-my-blog'); ?> <input type="text" id="pmb-<?php echo $slug;?>-label" name="frontend_labels[<?php echo esc_attr($slug);?>]" value="<?php echo esc_attr( $pmb_print_now_formats->getFrontendLabel($slug)); ?>"></label>
                                     </details>
                                 </td>
                             </tr>
