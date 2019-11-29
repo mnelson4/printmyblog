@@ -63,7 +63,7 @@ class PmbAdmin extends BaseController
             esc_html__('Print My Blog Settings', 'print-my-blog'),
             esc_html__('Settings', 'print-my-blog'),
             'manage_options',
-            'print-my-blog-settings',
+            PMB_ADMIN_SETTINGS_PAGE_SLUG,
             array($this,'settingsPage')
 
         );
@@ -121,11 +121,23 @@ class PmbAdmin extends BaseController
      */
     public function pluginPageLinks($links)
     {
-        $links[] = '<a href="'
+        $links = array_merge(
+            $links,
+            array(
+                '<a href="'
             . admin_url(PMB_ADMIN_PAGE_PATH)
             . '">'
-            . esc_html__('Print Setup Page', 'print-my-blog')
-            . '</a>';
+            . esc_html__('Print Now', 'print-my-blog')
+            . '</a>',
+
+            '<a href="'
+            . admin_url(PMB_ADMIN_SETTINGS_PAGE_PATH)
+            . '">'
+            . esc_html__('Settings', 'event_espresso')
+            . '</a>'
+            )
+        );
+
         return $links;
     }
 
