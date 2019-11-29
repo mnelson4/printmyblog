@@ -4,10 +4,10 @@
  */
 ?>
 <div class="wrap nosubsub">
-    <h1><?php esc_html_e('Print My Blog Frontend Print Settings','print-my-blog' );?></h1>
+    <h1><?php esc_html_e('Print My Blog - Settings','print-my-blog' );?></h1>
     <form method="post">
         <h2><?php esc_html_e('Print Buttons', 'print-my-blog'); ?></h2>
-        <p><?php esc_html_e('What print options would you like to appear on posts?', 'print-my-blog'); ?></p>
+        <p><?php esc_html_e('Choose what print buttons you want to show on posts.', 'print-my-blog'); ?></p>
         <table class="form-table">
             <tbody>
             <tr>

@@ -7,7 +7,7 @@ use PrintMyBlog\domain\PrintOptions;
 
 ?>
 <div class="wrap nosubsub">
-<h1><?php esc_html_e('Print My Blog','print-my-blog' );?></h1>
+<h1><?php esc_html_e('Print My Blog - Print Now','print-my-blog' );?></h1>
     <?php if(isset($_GET['welcome'])){
         ?>
         <div class="updated fade">
