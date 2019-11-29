@@ -84,7 +84,7 @@ if (defined('PMB_VERSION')) {
     define('PMB_TWINE_INCLUDES_DIR', PMB_TWINE_DIR . 'includes/');
     define('PMB_ADMIN_CAP', 'read_private_posts');
     define('PMB_BASENAME', plugin_basename(PMB_MAIN_FILE));
-    define('PMB_ADMIN_PAGE_SLUG', 'print-my-blog');
+    define('PMB_ADMIN_PAGE_SLUG', 'print-my-blog-now');
     define('PMB_ADMIN_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_PAGE_SLUG);
     define('PMB_ADMIN_SETTINGS_PAGE_SLUG', 'print-my-blog-settings');
     define('PMB_ADMIN_SETTINGS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_SETTINGS_PAGE_SLUG);

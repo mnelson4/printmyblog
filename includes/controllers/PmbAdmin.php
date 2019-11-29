@@ -67,6 +67,19 @@ class PmbAdmin extends BaseController
             array($this,'settingsPage')
 
         );
+
+        // Add the legacy button, just so folks aren't confused.
+        add_submenu_page(
+            'tools.php',
+            esc_html__('Print My Blog', 'print-my-blog'),
+            esc_html__('Print My Blog', 'print-my-blog'),
+            PMB_ADMIN_CAP,
+            'print-my-blog',
+            array(
+                $this,
+                'renderLegacyAdminPage'
+            )
+        );
     }
 
     public function settingsPage(){
@@ -114,6 +127,13 @@ class PmbAdmin extends BaseController
         include(PMB_TEMPLATES_DIR . 'setup_page.template.php');
     }
 
+    public function renderLegacyAdminPage()
+    {
+        $print_options = new PrintOptions();
+        $legacy_page = true;
+        include(PMB_TEMPLATES_DIR . 'setup_page.template.php');
+    }
+
     /**
      * Adds links to PMB stuff on the plugins page.
      * @since 1.0.0
@@ -142,7 +162,13 @@ class PmbAdmin extends BaseController
     }
 
     function enqueueScripts($hook) {
-        if ( 'toplevel_page_print-my-blog' !== $hook ) {
+        if ( ! in_array(
+            $hook,
+            array(
+                'tools_page_print-my-blog',
+                'toplevel_page_print-my-blog-now'
+            )
+        ) ) {
             return;
         }
         wp_enqueue_script('pmb-setup-page');

@@ -7,7 +7,6 @@ use PrintMyBlog\domain\PrintOptions;
 
 ?>
 <div class="wrap nosubsub">
-    <div class=""
 <h1><?php esc_html_e('Print My Blog - Print Now','print-my-blog' );?></h1>
     <?php if(isset($_GET['welcome'])){
         ?>
@@ -22,6 +21,15 @@ use PrintMyBlog\domain\PrintOptions;
                 ); ?></p>
         </div>
     <?php
+    }
+    if(isset($legacy_page)){
+        ?>
+        <div class="notice notice-warning">
+            <p>
+                <?php esc_html_e('Print My Blog’s Page is moving! It’s new location is on the left, under "Print My Blog", then "Print Now". (You can )', 'event_espresso'); ?>
+            </p>
+        </div>
+        <?php
     }
     ?>
     <p><?php esc_html_e('Configure how you’d like the blog to be printed, or just use our recommended defaults.', 'print-my-blog'); ?></p>
