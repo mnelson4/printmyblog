@@ -123,8 +123,14 @@ class PmbAdmin extends BaseController
      */
     public function renderAdminPage()
     {
-        $print_options = new PrintOptions();
-        include(PMB_TEMPLATES_DIR . 'setup_page.template.php');
+
+        if(isset($_GET['welcome'])){
+            include(PMB_TEMPLATES_DIR . 'welcome.template.php');
+        } else {
+            $print_options = new PrintOptions();
+            include(PMB_TEMPLATES_DIR . 'setup_page.template.php');
+        }
+
     }
 
     public function renderLegacyAdminPage()
@@ -171,7 +177,17 @@ class PmbAdmin extends BaseController
         ) ) {
             return;
         }
-        wp_enqueue_script('pmb-setup-page');
-        wp_enqueue_style('pmb-setup-page');
+        if(isset($_GET['welcome'])) {
+            wp_enqueue_style(
+                'pmb_welcome',
+                PMB_ASSETS_URL . 'styles/welcome.css',
+                array(),
+                filemtime(PMB_ASSETS_DIR . 'styles/welcome.css')
+            );
+        } else {
+            wp_enqueue_script('pmb-setup-page');
+            wp_enqueue_style('pmb-setup-page');
+        }
+
     }
 }

@@ -8,20 +8,7 @@ use PrintMyBlog\domain\PrintOptions;
 ?>
 <div class="wrap nosubsub">
 <h1><?php esc_html_e('Print My Blog - Print Now','print-my-blog' );?></h1>
-    <?php if(isset($_GET['welcome'])){
-        ?>
-        <div class="updated fade">
-            <p>
-                <?php esc_html_e('Welcome! This is where you setup your blog for printing. You can get here from the left-hand menu, under "Print My Blog", then "Print Now."','print-my-blog' );?>
-            </p>
-            <p><?php printf(
-                    esc_html__('If you would like to add print buttons for site visitors, %1$sgo to Print My Blog’s Frontend Print Settings.%2$s', 'event_espresso'),
-                '<a href="' . admin_url(PMB_ADMIN_SETTINGS_PAGE_PATH) . '">',
-                '</a>'
-                ); ?></p>
-        </div>
     <?php
-    }
     if(isset($legacy_page)){
         ?>
         <div class="notice notice-warning">

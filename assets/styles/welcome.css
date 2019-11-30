@@ -1,0 +1,24 @@
+.pmb-welcome h1{
+    font-size:3em;
+    text-align:center;
+    margin-top:4em;
+    margin-bottom:1em;
+}
+p.pmb-middle-important-text{
+    text-align:center;
+    font-size:2em;
+}
+.pmb-welcome-options{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+}
+.pmb-welcome-options .pmb-welcome-option-wrap{
+    padding:1em;
+    min-width:300px;
+}
+.pmb-welcome-option-inner{
+    border: 1px solid #e5e5e5;
+    background-color:#fff;
+    padding:1em;
+}
