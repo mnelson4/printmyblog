@@ -110,7 +110,7 @@ class PmbAdmin extends BaseController
         $saved = get_option(self::SETTINGS_SAVED_OPTION,false);
         if($saved){
             update_option(self::SETTINGS_SAVED_OPTION, false, false);
-            echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Settings Saved', 'event_espresso') . '</p></div>';
+            echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Settings Saved', 'print-my-blog') . '</p></div>';
         }
 
         include(PMB_TEMPLATES_DIR . 'settings_page.template.php');
@@ -159,7 +159,7 @@ class PmbAdmin extends BaseController
             '<a href="'
             . admin_url(PMB_ADMIN_SETTINGS_PAGE_PATH)
             . '">'
-            . esc_html__('Settings', 'event_espresso')
+            . esc_html__('Settings', 'print-my-blog')
             . '</a>'
             )
         );

@@ -21,16 +21,16 @@ class FrontendPrintSettings
     public function __construct(){
         $this->formats = array(
             'print'=> array(
-                'admin_label' => esc_html__('Print', 'event_espresso'),
-                'default' => esc_html__('Print 🖨', 'event_espresso'),
+                'admin_label' => esc_html__('Print', 'print-my-blog'),
+                'default' => esc_html__('Print 🖨', 'print-my-blog'),
             ),
             'pdf' => array(
-                'admin_label' => esc_html__('PDF', 'event_espresso'),
-                'default' => esc_html__('PDF 📄', 'event_espresso'),
+                'admin_label' => esc_html__('PDF', 'print-my-blog'),
+                'default' => esc_html__('PDF 📄', 'print-my-blog'),
             ),
             'ebook' => array(
-                'admin_label' => esc_html__('eBook', 'event_espresso'),
-                'default' => esc_html__('eBook 📱', 'event_espresso'),
+                'admin_label' => esc_html__('eBook', 'print-my-blog'),
+                'default' => esc_html__('eBook 📱', 'print-my-blog'),
             )
         );
         // Initialize the settings with the defaults.

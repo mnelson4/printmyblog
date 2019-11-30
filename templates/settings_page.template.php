@@ -7,7 +7,7 @@
     <h1><?php esc_html_e('Print My Blog - Settings','print-my-blog' );?></h1>
     <form method="post">
         <h2><?php esc_html_e('Print Buttons', 'print-my-blog'); ?></h2>
-        <p><?php esc_html_e('Choose what print buttons you want to show on posts.', 'print-my-blog'); ?></p>
+        <p><?php esc_html_e('Would you like to show visitors buttons to print your posts?', 'print-my-blog'); ?></p>
         <table class="form-table">
             <tbody>
             <tr>
@@ -25,7 +25,7 @@
                                     </label>
                                 </td>
                                 <td> <details class="pmb-format-label">
-                                        <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('Customize', 'event_espresso'); ?></summary>
+                                        <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('Customize', 'print-my-blog'); ?></summary>
                                     <label><?php esc_html_e('Label', 'print-my-blog'); ?> <input type="text" id="pmb-<?php echo $slug;?>-label" name="frontend_labels[<?php echo esc_attr($slug);?>]" value="<?php echo esc_attr( $pmb_print_now_formats->getFrontendLabel($slug)); ?>"></label>
                                     </details>
                                 </td>
@@ -36,6 +36,6 @@
             </tr>
             </tbody>
         </table>
-        <button class="button-primary"><?php esc_html_e('Save Settings','print-my-blog' );?></button> <input name="pmb-reset" class="button button-secondary" type="submit" value="<?php esc_html_e('Reset to Defaults', 'event_espresso'); ?>">
+        <button class="button-primary"><?php esc_html_e('Save Settings','print-my-blog' );?></button> <input name="pmb-reset" class="button button-secondary" type="submit" value="<?php esc_html_e('Reset to Defaults', 'print-my-blog'); ?>">
     </form>
 </div>
