@@ -316,7 +316,9 @@ class PmbFrontend extends BaseController
     protected function getImageRelativeSize()
     {
         $requested_size = sanitize_key($this->getFromRequest('image-size','full'));
-        $page_height = 11;
+        // The actual usable vertical space is quite a bit less than 11 inches; especially when you take
+        // into account there is the post's header and metainfo.
+        $page_height = 8;
         switch($requested_size) {
             case 'large':
                 return $page_height * 3 / 4;
