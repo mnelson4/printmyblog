@@ -112,7 +112,18 @@ class PmbAdmin extends BaseController
         $saved = get_option(self::SETTINGS_SAVED_OPTION,false);
         if($saved){
             update_option(self::SETTINGS_SAVED_OPTION, false, false);
-            echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Settings Saved', 'print-my-blog') . '</p></div>';
+            $posts = get_posts( array ( 'orderby' => 'desc', 'posts_per_page' => '1' ));
+            $text = esc_html__('Settings Saved!', 'print-my-blog');
+            if($posts){
+                $a_post = reset($posts);
+                $permalink = get_permalink($a_post);
+                $text .= ' ' . sprintf(
+                    esc_html__('You should see the changes on your %1$slatest post%2$s.', 'event_espresso'),
+                    '<a href="' . $permalink . '" target="_blank">',
+                    '</a>'
+                );
+            }
+            echo '<div class="notice notice-success is-dismissible"><p>' . $text .  '</p></div>';
         }
 
         include(PMB_TEMPLATES_DIR . 'settings_page.template.php');
