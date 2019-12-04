@@ -15,7 +15,6 @@ class FrontendPrintSettings
 {
     protected $formats;
     protected $settings;
-    protected $labels;
     const OPTION_NAME = 'pmb-print-now-settings';
 
     public function __construct(){
@@ -34,11 +33,13 @@ class FrontendPrintSettings
             )
         );
         // Initialize the settings with the defaults.
-        $this->settings = [];
+        $this->settings = [
+            'show_buttons' => false
+        ];
         foreach($this->formats as $slug => $format){
             $this->settings[$slug] = array(
                 'frontend_label' => $format['default'],
-                'active' => false
+                'active' => true
             );
         }
     }
@@ -100,6 +101,22 @@ class FrontendPrintSettings
     public function getFrontendLabel($format){
         $this->beforeSet($format);
         return (string)$this->settings[$format]['frontend_label'];
+    }
+
+    /**
+     * @since $VID:$
+     * @param bool $show
+     */
+    public function setShowButtons($show = true){
+        $this->settings['show_buttons'] = (bool)$show;
+    }
+
+    /**
+     * @since $VID:$
+     * @return bool
+     */
+    public function showButtons(){
+        return (bool)$this->settings['show_buttons'];
     }
 
     /**

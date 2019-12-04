@@ -13,7 +13,7 @@ use PrintMyBlog\domain\PrintOptions;
         ?>
         <div class="notice notice-warning">
             <p>
-                <?php esc_html_e('Print My Blog’s Page is moving! It’s new location is on the left, under "Print My Blog", then "Print Now". (You can )', 'print-my-blog'); ?>
+                <?php esc_html_e('Print My Blog’s Page is moving! It’s new location is on the left, under "Print My Blog", then "Print Now".', 'print-my-blog'); ?>
             </p>
         </div>
         <?php

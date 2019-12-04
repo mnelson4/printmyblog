@@ -86,10 +86,12 @@ class PmbAdmin extends BaseController
         $pmb_print_now_formats = new FrontendPrintSettings();
         $pmb_print_now_formats->load();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            check_admin_referer('pmb-settings');
             // Ok save those settings!
             if(isset($_POST['pmb-reset'])){
                 $pmb_print_now_formats = new FrontendPrintSettings();
             } else {
+                $pmb_print_now_formats->setShowButtons(isset($_POST['show_buttons']));
                 foreach($pmb_print_now_formats->formatSlugs() as $slug){
                     if(isset($_POST['format'][$slug])){
                         $active = true;

@@ -39,3 +39,6 @@ details.pmb-details{
 summary.pmb-reveal-options{
     cursor:pointer;
 }
+.pmb-print-this-page{
+    text-align:right;
+}

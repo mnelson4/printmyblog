@@ -35,23 +35,25 @@ class PmbFrontend extends BaseController
     public function addPrintButton($content){
         global $post;
         if($post->post_type === 'post' && is_single()){
-            $base_url = site_url() . "?post-type=post&include-private-posts=1&show_site_title=1&show_site_tagline=1&show_site_url=1&show_date_printed=1&show_title=1&show_date=1&show_categories=1&show_featured_image=1&show_content=1&post-page-break=on&columns=1&font-size=normal&image-size=medium&links=include&rendering-wait=10&print-my-blog=1&format=%s&pmb-post=%d";
             $print_settings = new FrontendPrintSettings();
             $print_settings->load();
-            $html = '<div class="pmb-print-this-page">';
-            foreach($print_settings->formats() as $slug => $settings){
-                if(! $print_settings->isActive($slug)){
-                    continue;
+            if($print_settings->showButtons()){
+                $base_url = site_url() . "?post-type=post&include-private-posts=1&show_site_title=1&show_site_tagline=1&show_site_url=1&show_date_printed=1&show_title=1&show_date=1&show_categories=1&show_featured_image=1&show_content=1&post-page-break=on&columns=1&font-size=normal&image-size=medium&links=include&rendering-wait=10&print-my-blog=1&format=%s&pmb-post=%d";
+                $html = '<div class="pmb-print-this-page">';
+                foreach($print_settings->formats() as $slug => $settings){
+                    if(! $print_settings->isActive($slug)){
+                        continue;
+                    }
+                    $url = sprintf(
+                        $base_url,
+                        $slug,
+                        $post->ID
+                    );
+                    $html .= ' <a href="' . $url . '" class="button button-secondary">' . $print_settings->getFrontendLabel($slug) . '</a>';
                 }
-                $url = sprintf(
-                    $base_url,
-                    $slug,
-                    $post->ID
-                );
-                $html .= ' <a href="' . $url . '" class="button button-secondary">' . $print_settings->getFrontendLabel($slug) . '</a>';
+                $html .= '</div>';
+                return $html . $content;
             }
-            $html .= '</div>';
-            return $html . $content;
         }
         return $content;
     }
