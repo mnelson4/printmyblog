@@ -49,7 +49,7 @@ class PmbFrontend extends BaseController
                         $slug,
                         $post->ID
                     );
-                    $html .= ' <a href="' . $url . '" class="button button-secondary">' . $print_settings->getFrontendLabel($slug) . '</a>';
+                    $html .= ' <a href="' . $url . '" class="button button-secondary wp-block-button__link">' . $print_settings->getFrontendLabel($slug) . '</a>';
                 }
                 $html .= '</div>';
                 return $html . $content;

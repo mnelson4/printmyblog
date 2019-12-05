@@ -42,3 +42,10 @@ summary.pmb-reveal-options{
 .pmb-print-this-page{
     text-align:right;
 }
+.pmb-print-this-page{
+    display:flex;
+    justify-content:flex-end;
+}
+.pmb-print-this-page .button{
+    margin-left:1em;
+}
