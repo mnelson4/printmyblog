@@ -47,5 +47,10 @@ summary.pmb-reveal-options{
     justify-content:flex-end;
 }
 .pmb-print-this-page .button{
+    /* Keep buttons spaced apart a bit */
     margin-left:1em;
+}
+.pmb-print-this-page .wp-block-button__link{
+    /* Prevent the default block styling from adding unnecesary space above these buttons*/
+    margin-top:0 !important;
 }
