@@ -132,8 +132,6 @@ Mozilla Firefox
 
 https://youtu.be/ekwg2a1FPV0
 
-Safari: it is not recommended to create a PDF from mobile Safari. The PDF won't have pages, and includes content intended for web-only.
-
 = How do I create an eBook using Print My Blog? =
 This plugin puts your blog's content onto a single web page, and you can then use the [dotEPUB browser extension](https:dotepub.com) to turn it into an eBook.
 
