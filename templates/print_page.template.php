@@ -81,24 +81,75 @@
                 </p>
                 <?php
             } else if ($pmb_format === 'pdf') {
-                if ($pmb_browser === 'chrome') {
+                if ($pmb_browser === 'firefox') {
                     ?>
-                    <input type="submit" onclick="window.print()"
-                           value="<?php esc_attr_e('Print to PDF', 'print-my-blog'); ?>"/>
+                    <p> <?php esc_html_e('You may now create the PDF using a browser extension.', 'print-my-blog'); ?></p>
                     <?php
                 } else {
                     ?>
-                    <p> <?php esc_html_e('You may now create the PDF using a browser extension.', 'print-my-blog'); ?></p><?php
+                    <input type="submit" onclick="window.print()"
+                           value="<?php esc_attr_e('Print to PDF', 'print-my-blog'); ?>"/><?php
                 }
-                ?>
-                <a
-                        target="_blank"
-                        href="https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20a%20pdf%20using%20print%20my%20blog%3F"
-                        title="<?php esc_html_e('opens in new tab', 'print-my-blog'); ?>"
-                >
-                    <?php esc_html_e('How?', 'print-my-blog'); ?>
-                </a>
-                <?php
+                if(is_user_logged_in()) {
+                    ?>
+                    <a
+                            target="_blank"
+                            href="https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20a%20pdf%20using%20print%20my%20blog%3F"
+                            title="<?php esc_html_e('opens in new tab', 'print-my-blog'); ?>"
+                    >
+                        <?php esc_html_e('How?', 'print-my-blog'); ?>
+                    </a>
+                    <?php
+                } else {
+                    if ($pmb_browser === 'firefox') {
+                        ?>
+                        <details class="pmb-details">
+                            <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('How?', 'print-my-blog'); ?>
+                            </summary>
+                            <ol>
+                                <li><a href="https://addons.mozilla.org/en-US/firefox/addon/print-to-pdf-document/" target="_blank" title="<?php esc_html_e('opens in new tab', 'print-my-blog'); ?>"><?php esc_html_e('Download Print to PDF Browser Extension', 'print-my-blog'); ?></a></li>
+                                <li><?php esc_html_e('Click the extension’s button.', 'print-my-blog'); ?></li>
+                            </ol>
+
+                        </details>
+                        <?php
+                    } elseif($pmb_browser === 'chrome') {
+                        ?>
+                        <details class="pmb-details">
+                            <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('How?', 'print-my-blog'); ?>
+                            </summary>
+                            <p><?php esc_html_e('After clicking "Print to PDF", set the "Destination" to "Save as PDF."', 'print-my-blog'); ?></p>
+                        </details>
+                        <?php
+                    } else {
+                        ?>
+                        <details class="pmb-details">
+                            <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('How on Safari on Desktop', 'print-my-blog'); ?>
+                            </summary>
+                            <ol>
+                                <li><?php esc_html_e('Click "Print to PDF"', 'print-my-blog'); ?></li>
+                                <li><?php esc_html_e('Choose to "Save as PDF."', 'print-my-blog'); ?></li>
+                            </ol>
+                        </details>
+                        <details class="pmb-details">
+                            <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('How on Mobile Safari', 'print-my-blog'); ?>
+                            </summary>
+                            <ol>
+                                <li>
+                                    <?php esc_html_e('Click the share button', 'print-my-blog'); ?>
+                                </li>
+                                <li>
+                                    <?php esc_html_e('Click "Options" and choose PDF', 'print-my-blog'); ?>
+                                </li>
+                                <li>
+                                    <?php esc_html_e('Save to Files', 'print-my-blog'); ?>
+                                </li>
+                            </ol>
+                        </details>
+                        <?php
+                    }
+
+                }
             } else { // default: print
                 ?>
                 <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print', 'print-my-blog'); ?>"/>

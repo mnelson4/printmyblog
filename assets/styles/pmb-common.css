@@ -54,3 +54,6 @@ summary.pmb-reveal-options{
     /* Prevent the default block styling from adding unnecesary space above these buttons*/
     margin-top:0 !important;
 }
+.pmb-print-ready ol{
+    text-align:left;
+}
