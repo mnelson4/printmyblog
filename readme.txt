@@ -1,6 +1,6 @@
 === Print My Blog - Print, PDF, & eBook Converter WordPress Plugin ===
 Contributors: mnelson4
-Tags: print, PDF, backup, eBook, ePub, MOBI
+Tags: print, PDF, backup, eBook, ePub, print buttons
 Requires at least: 4.6
 Stable tag: trunk
 Tested up to: 5.3
@@ -10,12 +10,16 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://opencollective.com/print-my-blog
 
 
-Print your blog to paper, PDF, or eBook in one click!
+Easily print one posts or thousands. Without all the junk.
 
 == Description ==
 
-**Print your blog to paper, PDF, or eBook in one click!**
+**Easily print one post or thousands to paper, PDF, or eBook. Without all the junk.**
 
+With Print My Blog, you can:
+
+* **Easily add Print Buttons** to your posts for site visitors.
+* **Let visitors print whatever they want** with an easy-to-use Gutenberg block.
 * **Print your blog** to read offline.
 * **Create a paper backup** (book or printout) to read when your blog is taken offline.
 * **Create a PDF, ePub, or MOBI file** as a human-readable, portable backup. Send it to friends, store it in the cloud or a hard drive, or even archive it with a historical organization.
@@ -59,6 +63,7 @@ https://youtu.be/shOjx-Ijung
 * optionally includes post’s excerpt
 * place the “Print My Blog” Gutenberg block on a page and allow site visitors to print your blog too
 * no watermark in print-out, and attribution optional,
+* [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation) compliant (no data is collected about your visitors)
 * no upsells, advertising, or data collection (we can't even know which sites use this software)
 * free, open-source software, so you can use it for whatever you like without fear of changing terms of use,
 customize it to fit your needs (although we'd curious to hear what you've done with it), and even redistribute it. There is no lengthy legal document describing how you're giving up your rights by using this software!
@@ -86,6 +91,8 @@ Your website might not be around forever, nor might WordPress. But by printing i
 
 If this doesn't meet your needs, there are good paid and free alternatives.
 
+** Alternatives for printing your entire blog **
+
 [Dead Easy Family History](https://deadeasyfamilyhistory.org/print-my-blog) runs a hosted version of this same plugin, so you can print your blog without even installing this. Especially useful for WordPress**.com** users, or those who can't install the plugin on their site.
 (Its free, but won't use your blog's styles).
 [Anthologize](https://wordpress.org/plugins/anthologize/) is another great plugin for customizing your blog's content before exporting to an e-book format. Also free.
@@ -95,6 +102,13 @@ If this doesn't meet your needs, there are good paid and free alternatives.
 [Blog To HTML](https://wordpress.org/plugins/blog-to-html/) is actually very similar to Print My Blog. It allows you to export your blog to HTML for eBook creation.
 [blogbooker](https://blogbooker.com/) prints a book, or creates a PDF, from your blog using their pre-made styles. Paid service.
 [blog2print](https://www.blog2print.com/) ditto, but temporarily requests your username and password. Paid service.
+
+** Alternatives for adding print buttons **
+[Print, PDF, Email by PrintFriendly](https://wordpress.org/plugins/printfriendly/) lets visitors easily print to paper, PDF, or email themselves a copy. Easy setup and very customizable. Doesn’t use theme’s styles. The free version is not GDPR-compliant and inserts advertisements.
+[WP Print Friendly](https://wordpress.org/plugins/wp-print-friendly/) automatically adds a link to print the current post, page, or custom post type. Can convert links to endnotes. Doesn’t use theme’s styles.
+[WP-Print](https://wordpress.org/plugins/wp-print/) printouts quite customizable. Requires editing theme files. Does not use theme’s styles.
+[Print-o-Matic](https://wordpress.org/plugins/print-o-matic/) add print buttons with a shortcode. Customizable and can work with theme’s and plugin’s styles.
+
 
 = Contributing =
 
