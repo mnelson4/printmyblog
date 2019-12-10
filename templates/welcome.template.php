@@ -1,5 +1,5 @@
 <div class="wrap nosubsub pmb-welcome">
-    <h1>🎉<?php esc_html_e('Thank you for using Print My Blog!','print-my-blog' );?>🎉</h1>
+    <h1>🎉<?php esc_html_e('Let’s make it easy to print your blog!','print-my-blog' );?>🎉</h1>
     <p class="pmb-middle-important-text"><?php esc_html_e('What would you like to do?', 'print-my-blog'); ?></p>
     <div class="pmb-welcome-options">
         <div class="pmb-welcome-option-wrap">
