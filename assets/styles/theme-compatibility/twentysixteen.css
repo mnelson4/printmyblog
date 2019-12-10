@@ -1,0 +1,5 @@
+/* Override twentysxiteen's */
+.pmb-posts .entry-content{
+    float:none !important;
+    width:100% !important;
+}
