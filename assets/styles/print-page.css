@@ -196,3 +196,6 @@ div.pmb-youtube-video-replacement-text{
 .pmb-posts-header{
     margin-bottom:2em;
 }
+.pmb-posts article.post{
+    display:block;
+}
