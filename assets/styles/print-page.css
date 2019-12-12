@@ -196,6 +196,7 @@ div.pmb-youtube-video-replacement-text{
 .pmb-posts-header{
     margin-bottom:2em;
 }
+/* Don't let Activello or others change disply to inline blocks which drops content from the printout*/
 .pmb-posts article.post{
     display:block;
 }
