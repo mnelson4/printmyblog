@@ -86,7 +86,7 @@ Your website might not be around forever, nor might WordPress. But by printing i
 
 If this doesn't meet your needs, there are good paid and free alternatives.
 
-** Alternatives for printing your entire blog **
+**Alternatives for printing your entire blog**
 
 [Dead Easy Family History](https://deadeasyfamilyhistory.org/print-my-blog) runs a hosted version of this same plugin, so you can print your blog without even installing this. Especially useful for WordPress**.com** users, or those who can't install the plugin on their site.
 (Its free, but won't use your blog's styles).
@@ -98,7 +98,7 @@ If this doesn't meet your needs, there are good paid and free alternatives.
 [blogbooker](https://blogbooker.com/) prints a book, or creates a PDF, from your blog using their pre-made styles. Paid service.
 [blog2print](https://www.blog2print.com/) ditto, but temporarily requests your username and password. Paid service.
 
-** Alternatives for adding print buttons **
+**Alternatives for adding print buttons**
 [Print, PDF, Email by PrintFriendly](https://wordpress.org/plugins/printfriendly/) lets visitors easily print to paper, PDF, or email themselves a copy. Easy setup and very customizable. Doesn’t use theme’s styles. The free version is not GDPR-compliant and inserts advertisements.
 [WP Print Friendly](https://wordpress.org/plugins/wp-print-friendly/) automatically adds a link to print the current post, page, or custom post type. Can convert links to endnotes. Doesn’t use theme’s styles.
 [WP-Print](https://wordpress.org/plugins/wp-print/) printouts quite customizable. Requires editing theme files. Does not use theme’s styles.
@@ -125,17 +125,17 @@ Best Wishes Preserving Your Blog!
 1. Upload the plugin files to the `/wp-content/plugins/print-my-blog` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
 
-** To Print Your Blog **
+**To Print Your Blog**
 1. Under the "Print My Blog" menu item, click "Print Now."
 1. Select the format you want, and click "Prepare Print Page."
 1. When you see the "Print" button appear, click it. Your blog will be printed from your browser.
 
-** To Add Print Buttons to Posts **
+**To Add Print Buttons to Posts**
 1. Under the "Print My Blog" menu item, click "Settings."
 1. Check "Show visitors buttons to print your posts?"
 1. Click "Save Settings"
 
-** To Add a Print Form for Visitors **
+**To Add a Print Form for Visitors**
 1. Add a page using the block editor (added in WordPress 5.0), maybe call it something like "Print My Blog"
 1. Add the "Print My Blog" block anywhere you like
 1. Publish the post or page.
