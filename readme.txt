@@ -9,34 +9,29 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://opencollective.com/print-my-blog
 
-
-Easily print one posts or thousands. Without all the junk.
+Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
 == Description ==
 
-**Easily print one post or thousands to paper, PDF, or eBook. Without all the junk.**
+**Make printing your blog easy and impressive. For you & your visitors. One post or thousands.**
 
-With Print My Blog, you can:
+Print My Blog lets you easily print your entire blog to paper, PDF, or eBook. You can also automatically add print buttons to help your visitors print your blog.
 
-* **Easily add Print Buttons** to your posts for site visitors.
-* **Let visitors print whatever they want** with an easy-to-use Gutenberg block.
+Why would I want to print my blog?
+
 * **Print your blog** to read offline.
 * **Create a paper backup** (book or printout) to read when your blog is taken offline.
 * **Create a PDF, ePub, or MOBI file** as a human-readable, portable backup. Send it to friends, store it in the cloud or a hard drive, or even archive it with a historical organization.
 
+Why would visitors want to print my blog?
+
+* **Share** your content with friends offline
+* **Save** it for reading later
+* **Improve long reads** by converting a portion of your blog to eBook or PDF
+
 [](http://coderisk.com/wp/plugin/print-my-blog/RIPS-Bs3Z7ec5hQ)
 
 **Give your story life outside your blog!**
-
-= No Upsells, Instead Sponsor Our Non-Profit =
-
-If you like this plugin as much as paid software, you can sponsor our registered non-profit open collective. You’ll
-
-* get a tax receipt (for claiming business expenses)
-* be recognized for your contribution, and
-* reimburse contributors for their time spent (not just the original plugin author).
-
-[Learn more about how our open collective works, what your recommended donation is, and how it will help.](https://opencollective.com/print-my-blog)
 
 = Watch the 2 Minute Demo =
 
@@ -129,9 +124,22 @@ Best Wishes Preserving Your Blog!
 
 1. Upload the plugin files to the `/wp-content/plugins/print-my-blog` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
-1. Go to Tools->Print My Blog
-1. Press "Prepare Print Page". Your blog's content will be loaded into the following page.
+
+** To Print Your Blog **
+1. Under the "Print My Blog" menu item, click "Print Now."
+1. Select the format you want, and click "Prepare Print Page."
 1. When you see the "Print" button appear, click it. Your blog will be printed from your browser.
+
+** To Add Print Buttons to Posts **
+1. Under the "Print My Blog" menu item, click "Settings."
+1. Check "Show visitors buttons to print your posts?"
+1. Click "Save Settings"
+
+** To Add a Print Form for Visitors **
+1. Add a page using the block editor (added in WordPress 5.0), maybe call it something like "Print My Blog"
+1. Add the "Print My Blog" block anywhere you like
+1. Publish the post or page.
+1. You may want to add a link to the page in a menu, widget, or footer
 
 == Frequently Asked Questions ==
 
@@ -197,6 +205,7 @@ But if not, your browser can also remove background colors.
 4. ...and customize what content gets included and how its formatted.
 5. Optionally add print buttons to your posts for use by site visitors.
 6. Setting up the print buttons is really simple.
+7. Add the Print My Blog block to add a form visitors can use to select what and how to print your blog.
 
 == Changelog ==
 
