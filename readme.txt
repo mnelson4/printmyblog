@@ -187,6 +187,8 @@ But if not, your browser can also remove background colors.
 
 * For Firefox Extension "Print to PDF": [click on "Add-ons", then click "Print to PDF", then "Options", and uncheck "Whether the background colors should be shown"](https://drive.google.com/open?id=1WjCS84LLOL6v0ccjASjJ3c_vaUmgIfTO)
 
+= How do I force a page break before something? (So it's always at the top of a page) =
+[Add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-page-break" onto the the element/block you want to be at the top of the page.
 == Screenshots ==
 
 1. Print My Blog removes junk that doesn’t belong in a printout— like ink-guzzling logos, menus, search-bars, sidebars, footer widgets, etc.
