@@ -39,6 +39,10 @@ details.pmb-details{
 summary.pmb-reveal-options{
     cursor:pointer;
 }
+/* If a theme changes oursummary tag to display block or inline or anything, the cute arrow disappears in Firefox*/
+summary.pmb-reveal-options{
+    display:flow-root list-item;
+}
 .pmb-print-this-page{
     text-align:right;
 }
