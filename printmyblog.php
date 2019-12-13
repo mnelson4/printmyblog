@@ -7,7 +7,7 @@
 /*
 Plugin Name: Print My Blog
 Plugin URI: https://wordpress.org/plugins/print-my-blog/
-Description: Easily print one posts or thousands to paper, PDF, or eBook.
+Description: Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 Author: Michael Nelson
 Version: 2.0.0
 Requires at least: 4.6

@@ -211,8 +211,14 @@ But if not, your browser can also remove background colors.
 
 = 2.0.0 December 12 2019 =
 * Adds new top-level Print My Blog admin dashboard menu, with sub-items "Print Now" and "Settings"
+* Add full-page welcome screen
+* Deprecate the old menu item under Tools
 * Optionally add print buttons to posts
 * When not showing "Filters Used" in Header Content, also remove the post type (so it doesn’t say "Posts.")
+* CSS improvements to help with printouts with various themes
+* Several translated strings changed (sorry translators!)
+* Only show "What do you think?" to logged-in users
+* Provide more in-page help converting the print-page to PDF (rather than redirecting the user elsewhere.)
 
 = 1.14.0 November 11 2019 =
 * Allow filtering posts by author

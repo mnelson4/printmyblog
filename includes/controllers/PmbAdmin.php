@@ -118,7 +118,7 @@ class PmbAdmin extends BaseController
                 $a_post = reset($posts);
                 $permalink = get_permalink($a_post);
                 $text .= ' ' . sprintf(
-                    esc_html__('You should see the changes on your %1$slatest post%2$s.', 'event_espresso'),
+                    esc_html__('You should see the changes on your %1$slatest post%2$s.', 'print-my-blog'),
                     '<a href="' . $permalink . '" target="_blank">',
                     '</a>'
                 );
