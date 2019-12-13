@@ -126,16 +126,19 @@ Best Wishes Preserving Your Blog!
 1. Activate the plugin through the 'Plugins' screen in WordPress
 
 **To Print Your Blog**
+
 1. Under the "Print My Blog" menu item, click "Print Now."
 1. Select the format you want, and click "Prepare Print Page."
 1. When you see the "Print" button appear, click it. Your blog will be printed from your browser.
 
 **To Add Print Buttons to Posts**
+
 1. Under the "Print My Blog" menu item, click "Settings."
 1. Check "Show visitors buttons to print your posts?"
 1. Click "Save Settings"
 
 **To Add a Print Form for Visitors**
+
 1. Add a page using the block editor (added in WordPress 5.0), maybe call it something like "Print My Blog"
 1. Add the "Print My Blog" block anywhere you like
 1. Publish the post or page.
