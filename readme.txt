@@ -189,11 +189,19 @@ But if not, your browser can also remove background colors.
 
 == Screenshots ==
 
-1. Print Setup Page
-2. Printing Page
-3. The Blog is Ready for Printing!
+1. Print My Blog removes junk that doesn’t belong in a printout— like ink-guzzling logos, menus, search-bars, sidebars, footer widgets, etc.
+2. Print Setup page, show basic options. You can setup your entire blog for printing within a few seconds.
+3. Or you can use the more advanced Post Selection options to only include specific posts...
+4. ...and customize what content gets included and how its formatted.
+5. Optionally add print buttons to your posts for use by site visitors.
+6. Setting up the print buttons is really simple.
 
 == Changelog ==
+
+= 2.0.0 December 12 2019 =
+* Adds new top-level Print My Blog admin dashboard menu, with sub-items "Print Now" and "Settings"
+* Optionally add print buttons to posts
+* When not showing "Filters Used" in Header Content, also remove the post type (so it doesn’t say "Posts.")
 
 = 1.14.0 November 11 2019 =
 * Allow filtering posts by author
