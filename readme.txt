@@ -33,10 +33,9 @@ Why would visitors want to print my blog?
 
 **Give your story life outside your blog!**
 
-= Watch the 2 Minute Demo =
-
 https://youtu.be/shOjx-Ijung
 
+https://www.youtube.com/watch?v=rvSo9NCOIX0
 
 = Features =
 
