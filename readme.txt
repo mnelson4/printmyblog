@@ -56,6 +56,7 @@ https://youtu.be/shOjx-Ijung
 * replaces embedded YouTube videos with a link, full video title, and screenshot
 * optionally removes hyperlinks
 * optionally includes post’s excerpt
+* order posts by date, or pages by the "order" attribute
 * place the “Print My Blog” Gutenberg block on a page and allow site visitors to print your blog too
 * no watermark in print-out, and attribution optional,
 * [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation) compliant (no data is collected about your visitors)
@@ -211,6 +212,9 @@ But if not, your browser can also remove background colors.
 7. Add the Print My Blog block to add a form visitors can use to select what and how to print your blog.
 
 == Changelog ==
+
+= 2.1.0 December 24 2019 =
+* Add option to reverse the order of posts or pages
 
 = 2.0.0 December 12 2019 =
 * Adds new top-level Print My Blog admin dashboard menu, with sub-items "Print Now" and "Settings"
