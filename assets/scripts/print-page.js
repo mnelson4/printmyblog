@@ -50,6 +50,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 	this.include_private_posts = pmb_instance_vars.include_private_posts;
 	this.author = pmb_instance_vars.author;
 	this.post = pmb_instance_vars.post;
+	this.order = pmb_instance_vars.order;
     /**
      * Initializes variables and begins fetching taxonomies, then gets started fetching posts/pages.
      * @function
@@ -290,6 +291,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         } else {
             this.ordered_posts = this.posts;
         }
+		// If we are reversing the posts' order, this is where we'd do it
+		if(this.order === 'desc'){
+			this.ordered_posts.reverse();
+		}
     };
 
 

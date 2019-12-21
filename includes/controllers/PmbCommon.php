@@ -93,7 +93,9 @@ class PmbCommon extends BaseController
                     'default_rest_url' => rest_url('/wp/v2'),
                     'ajax_url' => admin_url( 'admin-ajax.php' ),
                     'author_selector' => '#pmb-author-select',
-                    'nonce' => wp_create_nonce('wp_rest')
+                    'nonce' => wp_create_nonce('wp_rest'),
+                    'order_date_selector' => '#pmb-order-by-date',
+                    'order_menu_selector' => '#pmb-order-by-menu'
                 ]
             ]
         );

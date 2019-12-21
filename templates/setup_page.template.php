@@ -55,6 +55,21 @@ use PrintMyBlog\domain\PrintOptions;
                         <label><input class="pmb-post-type" type="radio" name="post-type" value="page"><?php esc_html_e('Pages', 'print-my-blog');?></label>
                     </td>
                 </tr>
+                <tr>
+                    <th scope="row"><?php esc_html_e('Order', 'print-my-blog'); ?></th>
+                    <td>
+                        <div id="pmb-order-by-date">
+                            <p><?php esc_html_e('Posts will be ordered:', 'print-my-blog'); ?></p>
+                            <label><input class="pmb-order" type="radio" name="order-date" value="asc" checked="checked"><?php esc_html_e('Oldest First', 'print-my-blog'); ?></label><br/>
+                            <label><input class="pmb-order" type="radio" name="order-date" value="desc"><?php esc_html_e('Newest First', 'print-my-blog'); ?></label>
+                        </div>
+                        <div id="pmb-order-by-menu">
+                            <p><?php esc_html_e('Pages will be ordered using the "Order" attribute:', 'print-my-blog'); ?></p>
+                            <label><input class="pmb-order" type="radio" name="order-menu" value="asc" checked="checked"><?php esc_html_e('From Lowest to Highest', 'print-my-blog'); ?></label><br>
+                            <label><input class="pmb-order" type="radio" name="order-menu" value="desc" ><?php esc_html_e('From Highest to Lowest', 'print-my-blog'); ?></label>
+                        </div>
+                    </td>
+                </tr>
                 <?php
                 if( is_user_logged_in()){
                 ?>
