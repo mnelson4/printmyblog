@@ -215,6 +215,7 @@ But if not, your browser can also remove background colors.
 
 = 2.1.0 December 24 2019 =
 * Add option to reverse the order of posts or pages
+* Style the print page like a single page, not like the homepage. Introduces filter "pmb-print-page-treat-as-single" which can override this.
 
 = 2.0.0 December 12 2019 =
 * Adds new top-level Print My Blog admin dashboard menu, with sub-items "Print Now" and "Settings"
