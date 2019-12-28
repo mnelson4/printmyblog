@@ -253,6 +253,14 @@ class PmbFrontend extends BaseController
             filemtime(PMB_ASSETS_DIR . 'styles/plugin-compatibility.css')
         );
 
+        $post_type = $this->getFromRequest('post-type', 'post');
+        if($post_type === 'post'){
+            $order_var_to_use = 'order-date';
+
+        } else {
+            $order_var_to_use = 'order-menu';
+        }
+        $order = $this->getFromRequest($order_var_to_use, 'asc');
         $data = [
             'header_selector' => '#pmb-in-progress-h1',
             'status_span_selector' => '.pmb-status',
@@ -265,7 +273,7 @@ class PmbFrontend extends BaseController
             'image_size' => $this->getImageRelativeSize(),
             'proxy_for' => $this->proxy_for,
             'columns' => $this->getFromRequest('columns', 1),
-            'post_type' => $this->getFromRequest('post-type', 'post'),
+            'post_type' => $post_type,
             'rendering_wait' => $this->getFromRequest('rendering-wait', 500),
             'include_inline_js' => (bool) $this->getFromRequest('include-inline-js', false),
             'links' => (string) $this->getFromRequest('links', 'include'),
@@ -275,7 +283,8 @@ class PmbFrontend extends BaseController
             'format' => $this->getFromRequest('format', 'print'),
             'include_private_posts' => (bool) $this->getFromRequest('include-private-posts', false),
             'author' => $this->getFromRequest('pmb-author', null),
-            'post' => $this->getFromRequest('pmb-post', null)
+            'post' => $this->getFromRequest('pmb-post', null),
+            'order' => $order
         ];
         // add the before and after filters, if they were provided
         $dates = $this->getFromRequest('dates', array());

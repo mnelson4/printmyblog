@@ -200,3 +200,8 @@ div.pmb-youtube-video-replacement-text{
 .pmb-posts article.post{
     display:block;
 }
+/* Some themes place the title in front of an image, and so prefer to make it look black. That's fine on web,
+but in the printout they're in front of white paper, so best to have them in black. */
+.pmb-posts .entry-title{
+    color:black;
+}

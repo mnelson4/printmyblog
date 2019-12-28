@@ -14,6 +14,8 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 	this.taxonomies = {};
 	this.author = jQuery(pmb_instance_vars.author_selector);
 	this.nonce = pmb_instance_vars.nonce;
+	this.order_date = jQuery(pmb_instance_vars.order_date_selector);
+	this.order_menu = jQuery(pmb_instance_vars.order_menu_selector);
 
 	site_input = jQuery(pmb_instance_vars.site_input_selector);
 
@@ -30,6 +32,7 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 		);
 		// Initialize the list of taxonomies etc.
 		this.updateRestApiUrl(site_input.val());
+		this.showOrderOptions();
 
 		let post_type = jQuery(this.post_type_selector + ':checked').val();
 		jQuery( ".pmb-date" ).datepicker({
@@ -41,7 +44,19 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 		// If they change the post type, change the taxonomies available.
 		jQuery('input' + this.post_type_selector + '[type=radio]').change(() => {
 			this.getTaxonomies();
+			this.showOrderOptions();
 		});
+	};
+
+	this.showOrderOptions = function() {
+		let post_type = jQuery(this.post_type_selector + ':checked').val();
+		if(post_type==='post'){
+			jQuery(this.order_date).show();
+			jQuery(this.order_menu).hide();
+		} else {
+			jQuery(this.order_date).hide();
+			jQuery(this.order_menu).show();
+		}
 	};
 
 	this.updateRestApiUrl = function(site_url) {

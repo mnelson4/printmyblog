@@ -11,7 +11,9 @@
  * @since 1.0
  * @version 1.0
  */
-
+if(apply_filters('pmb-print-page-treat-as-single', true)){
+    $wp_query->is_home = false;$wp_query->is_single = true;
+}
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
