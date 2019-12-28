@@ -1,6 +1,6 @@
 === Print My Blog - Print, PDF, & eBook Converter WordPress Plugin ===
 Contributors: mnelson4
-Tags: print, PDF, backup, eBook, ePub, print buttons
+Tags: print, PDF, backup, eBook, print button
 Requires at least: 4.6
 Stable tag: trunk
 Tested up to: 5.3
@@ -213,7 +213,7 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
-= 2.1.0 December 24 2019 =
+= 2.1.0 December 27 2019 =
 * Add option to reverse the order of posts or pages
 * Style the print page like a single page, not like the homepage. Introduces filter "pmb-print-page-treat-as-single" which can override this.
 
