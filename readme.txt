@@ -214,6 +214,8 @@ But if not, your browser can also remove background colors.
 
 = 2.1.1 December 30 2019 =
 * Don't redirect to welcome page on bulk activations or reactivation
+* Hide print buttons when printing a page without Print My Blog
+* Hide print buttons when post is password-protected
 
 = 2.1.0 December 27 2019 =
 * Add option to reverse the order of posts or pages
