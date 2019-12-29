@@ -34,7 +34,7 @@ class PmbFrontend extends BaseController
     }
     public function addPrintButton($content){
         global $post;
-        if($post->post_type === 'post' && is_single()){
+        if($post->post_type === 'post' && is_single() && ! post_password_required($post)){
             $print_settings = new FrontendPrintSettings();
             $print_settings->load();
             if($print_settings->showButtons()){
