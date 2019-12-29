@@ -212,6 +212,9 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 2.1.1 December 30 2019 =
+* Don't redirect to welcome page on bulk activations or reactivation
+
 = 2.1.0 December 27 2019 =
 * Add option to reverse the order of posts or pages
 * Style the print page like a single page, not like the homepage. Introduces filter "pmb-print-page-treat-as-single" which can override this.

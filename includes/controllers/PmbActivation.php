@@ -36,6 +36,10 @@ class PmbActivation extends BaseController
     {
         if (get_option('pmb_activation') && current_user_can(PMB_ADMIN_CAP)) {
             update_option('pmb_activation', false);
+            // Don't redirect if it's a bulk plugin activation
+            if(isset($_GET['activate-multi'])){
+               return;
+            }
             wp_redirect(
                 add_query_arg(
                     array(
