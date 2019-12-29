@@ -34,7 +34,7 @@ class PmbFrontend extends BaseController
     }
     public function addPrintButton($content){
         global $post;
-//        if($post->post_type === 'post' && is_single()){
+        if($post->post_type === 'post' && is_single()){
             $print_settings = new FrontendPrintSettings();
             $print_settings->load();
             if($print_settings->showButtons()){
@@ -54,7 +54,7 @@ class PmbFrontend extends BaseController
                 $html .= '</div>';
                 return $html . $content;
             }
-//        }
+        }
         return $content;
     }
 
