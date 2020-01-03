@@ -68,7 +68,7 @@ class PmbFrontend extends BaseController
         if (isset($_GET[PMB_PRINTPAGE_SLUG])) {
             try {
                 $site_info = new RestApiDetector($this->getFromRequest('site', ''));
-            }catch(RestApiDetectorError $exception){
+            } catch(RestApiDetectorError $exception) {
                 global $pmb_wp_error;
                 $pmb_wp_error = $exception->wp_error();
                 return PMB_TEMPLATES_DIR . 'print_page_error.template.php';

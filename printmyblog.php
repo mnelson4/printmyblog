@@ -79,7 +79,7 @@ if (defined('PMB_VERSION')) {
     define('PMB_DIR', wp_normalize_path(__DIR__) . '/');
     define('PMB_MAIN_FILE', __FILE__);
     define('PMB_TEMPLATES_DIR', PMB_DIR . 'templates/');
-    define('PMB_INCLUDES_DIR', PMB_DIR . 'includes/');
+    define('PMB_VENDOR_DIR', PMB_DIR . 'vendor/');
     define('PMB_TWINE_DIR', PMB_DIR . 'twine_framework/');
     define('PMB_TWINE_INCLUDES_DIR', PMB_TWINE_DIR . 'includes/');
     define('PMB_ADMIN_CAP', 'read_private_posts');
@@ -100,13 +100,11 @@ if (defined('PMB_VERSION')) {
     }
 
     register_activation_hook(PMB_MAIN_FILE, 'pmb_plugin_activation');
-    require_once(PMB_INCLUDES_DIR . 'constants.php');
-    require_once(PMB_INCLUDES_DIR . 'vendor/mnelson4/RestApiDetector/RestApiDetector.php');
-    require_once(PMB_INCLUDES_DIR . 'vendor/mnelson4/RestApiDetector/RestApiDetectorError.php');
-    require_once(PMB_INCLUDES_DIR . 'domain/PrintOptions.php');
-    require_once(PMB_INCLUDES_DIR . 'domain/FrontendPrintSettings.php');
-    require_once(PMB_TWINE_INCLUDES_DIR . 'controllers/BaseController.php');
-    require_once(PMB_INCLUDES_DIR . 'controllers/PmbInit.php');
+
+    require PMB_VENDOR_DIR . 'autoload.php';
+
+    define('PMB_PRINTPAGE_SLUG', 'print-my-blog');
+
     $init_controller = new PrintMyBlog\controllers\PmbInit();
     $init_controller->setHooks();
 }

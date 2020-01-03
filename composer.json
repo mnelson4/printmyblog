@@ -1,0 +1,20 @@
+{
+    "name": "mnelson4/printmyblog",
+    "description": "WordPress Plugin that simplifies printing your entire blog.",
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "szepeviktor/phpstan-wordpress": "^0.5.0"
+    },
+    "config": {
+        "optimize-autoloader": true
+    },
+    "autoload": {
+        "psr-4": {
+            "mnelson4\\": "src/mnelson4/",
+            "PrintMyBlog\\": "src/PrintMyBlog/",
+            "Twine\\": "src/Twine/"
+        }
+    }
+}
