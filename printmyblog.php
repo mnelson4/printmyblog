@@ -1,24 +1,25 @@
 <?php
+
 /**
  * @package PrintMyBlog
  * @version 1.0
+ *
+ * @wordpress-plugin
+ * Plugin Name: Print My Blog
+ * Plugin URI: https://wordpress.org/plugins/print-my-blog/
+ * Description: Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
+ * Author: Michael Nelson
+ * Author URI: https://cmljnelson.blog/
+ * Version: 2.1.1
+ * Requires at least: 4.6
+ * Requires PHP: 5.4
+ * Text Domain: print-my-blog
  */
-
-/*
-Plugin Name: Print My Blog
-Plugin URI: https://wordpress.org/plugins/print-my-blog/
-Description: Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
-Author: Michael Nelson
-Version: 2.1.1
-Requires at least: 4.6
-Requires PHP: 5.4
-Author URI: https://cmljnelson.blog
-Text Domain: print-my-blog
-*/
 
 if (! defined('PMB_MIN_PHP_VER_REQUIRED')) {
     define('PMB_MIN_PHP_VER_REQUIRED', '5.4.0');
 }
+
 // make sure another version of PMB isn't installed
 if (defined('PMB_VERSION')) {
     /**
@@ -42,38 +43,39 @@ if (defined('PMB_VERSION')) {
         <?php
     }
 
-    add_action('admin_notices', 'pmb_already_active', 1);
+    add_action('admin_notices', 'pmb_already_active', 1, 0);
+
     // then make sure the minimum version of PHP is being used
 } else if (! version_compare(PHP_VERSION, PMB_MIN_PHP_VER_REQUIRED, '>=')) {
-        /**
-         * pmb_minimum_php_version_error
-         *
-         * @return void
-         */
-        function pmb_minimum_php_version_error()
-        {
-            ?>
-            <div class="error">
-                <p>
-                    <?php
-                    printf(
-                        esc_html__(
-                            'We’re sorry, but Print My Blog requires PHP version %1$s or greater in order to operate. You are currently running version %2$s.%3$sIn order to update your version of PHP, you will need to contact your current hosting provider.%3$sFor information on stable PHP versions, please go to %4$s.',
-                            'print-my-blog'
-                        ),
-                        PMB_MIN_PHP_VER_REQUIRED,
-                        PHP_VERSION,
-                        '<br/>',
-                        '<a href="http://php.net/downloads.php">http://php.net/downloads.php</a>'
-                    );
-                    ?>
-                </p>
-            </div>
-            <?php
-        }
+    /**
+     * pmb_minimum_php_version_error
+     *
+     * @return void
+     */
+    function pmb_minimum_php_version_error()
+    {
+        ?>
+        <div class="error">
+            <p>
+                <?php
+                printf(
+                    esc_html__(
+                        'We’re sorry, but Print My Blog requires PHP version %1$s or greater in order to operate. You are currently running version %2$s.%3$sIn order to update your version of PHP, you will need to contact your current hosting provider.%3$sFor information on stable PHP versions, please go to %4$s.',
+                        'print-my-blog'
+                    ),
+                    PMB_MIN_PHP_VER_REQUIRED,
+                    PHP_VERSION,
+                    '<br/>',
+                    '<a href="http://php.net/downloads.php">http://php.net/downloads.php</a>'
+                );
+                ?>
+            </p>
+        </div>
+        <?php
+    }
 
-        add_action('admin_notices', 'pmb_minimum_php_version_error', 1);
-    } else {
+    add_action('admin_notices', 'pmb_minimum_php_version_error', 1, 0);
+} else {
     // it's all good! go for it!
     define('PMB_VERSION', '2.1.1.rc.000');
     define('PMB_DIR', wp_normalize_path(__DIR__) . '/');
@@ -89,7 +91,6 @@ if (defined('PMB_VERSION')) {
     define('PMB_ADMIN_SETTINGS_PAGE_SLUG', 'print-my-blog-settings');
     define('PMB_ADMIN_SETTINGS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_SETTINGS_PAGE_SLUG);
 
-
     /**
      * adds a wp-option to indicate that PMB has been activated via the WP admin plugins page.
      * This can be used to do initial plugin installation or redirect the user to the setup page.
@@ -100,13 +101,13 @@ if (defined('PMB_VERSION')) {
     }
 
     register_activation_hook(PMB_MAIN_FILE, 'pmb_plugin_activation');
-    require_once(PMB_INCLUDES_DIR . 'constants.php');
-    require_once(PMB_INCLUDES_DIR . 'vendor/mnelson4/RestApiDetector/RestApiDetector.php');
-    require_once(PMB_INCLUDES_DIR . 'vendor/mnelson4/RestApiDetector/RestApiDetectorError.php');
-    require_once(PMB_INCLUDES_DIR . 'domain/PrintOptions.php');
-    require_once(PMB_INCLUDES_DIR . 'domain/FrontendPrintSettings.php');
-    require_once(PMB_TWINE_INCLUDES_DIR . 'controllers/BaseController.php');
-    require_once(PMB_INCLUDES_DIR . 'controllers/PmbInit.php');
-    $init_controller = new PrintMyBlog\controllers\PmbInit();
-    $init_controller->setHooks();
+    require_once PMB_INCLUDES_DIR . 'constants.php';
+    require_once PMB_INCLUDES_DIR . 'vendor/mnelson4/RestApiDetector/RestApiDetector.php';
+    require_once PMB_INCLUDES_DIR . 'vendor/mnelson4/RestApiDetector/RestApiDetectorError.php';
+    require_once PMB_INCLUDES_DIR . 'domain/PrintOptions.php';
+    require_once PMB_INCLUDES_DIR . 'domain/FrontendPrintSettings.php';
+    require_once PMB_TWINE_INCLUDES_DIR . 'controllers/BaseController.php';
+    require_once PMB_INCLUDES_DIR . 'controllers/PmbInit.php';
+
+    (new PrintMyBlog\controllers\PmbInit())->setHooks();
 }
