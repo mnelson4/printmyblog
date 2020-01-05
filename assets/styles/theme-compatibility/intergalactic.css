@@ -1,4 +1,4 @@
-.pmb-posts .single-thumbnail .entry-title{
+.pmb-posts .entry-title{
     position:initial;
     z-index:0;
     top:initial;
@@ -7,7 +7,7 @@
     -webkit-transform: translateY(0%);
     transform: translateY(0%);
 }
-.pmb-posts .single-thumbnail .entry-header{
+.pmb-posts .entry-header{
     position: initial;
     clear: none;
     height: initial;
