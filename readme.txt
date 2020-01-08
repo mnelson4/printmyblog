@@ -212,6 +212,10 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 2.1.2 January 7 2020 =
+* Fix styling of Intergalactic 2 printouts
+* Remove "Protected:" and "Private:" from post titles
+
 = 2.1.1 December 30 2019 =
 * Don't redirect to welcome page on bulk activations or reactivation
 * Hide print buttons when printing a page without Print My Blog

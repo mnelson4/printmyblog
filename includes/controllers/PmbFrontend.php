@@ -315,7 +315,9 @@ class PmbFrontend extends BaseController
                     'no_comments' => esc_html__('No Comments', 'print-my-blog'),
                     'says' => __('<span class="screen-reader-text says">says:</span>', 'print-my-blog'),
                     'id' => esc_html__('ID:', 'print-my-blog'),
-                    'by' => esc_html__('By', 'print-my-blog')
+                    'by' => esc_html__('By', 'print-my-blog'),
+                    'protected' => esc_html__('Protected:', 'print-my-blog'),
+                    'private' => esc_html__('Private:', 'print-my-blog'),
                 ),
                 'data' => $data,
             )
