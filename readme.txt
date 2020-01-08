@@ -214,6 +214,7 @@ But if not, your browser can also remove background colors.
 
 = 2.1.2 January 6 2020 =
 * Fix styling of Intergalactic 2 printouts
+* Remove "Protected:" and "Private:" from post titles (in English only)
 
 = 2.1.1 December 30 2019 =
 * Don't redirect to welcome page on bulk activations or reactivation

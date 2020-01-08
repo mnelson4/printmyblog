@@ -465,7 +465,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         }
         if(this.showTitle) {
             html_to_add += '<h1 class="entry-title">'
-				+ post.title.rendered.replace('Protected:', '').replace('Private:','');
+				+ post.title.rendered.replace(this.translations.protected, '').replace(this.translations.private,'');
 				+ '</h1>'
         }
         if(this.format !== 'ebook'){
