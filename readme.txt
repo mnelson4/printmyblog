@@ -212,6 +212,9 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 2.1.3 January 10 2020 =
+* Cleanup main file props szepeviktor
+
 = 2.1.2 January 7 2020 =
 * Fix styling of Intergalactic 2 printouts
 * Remove "Protected:" and "Private:" from post titles
