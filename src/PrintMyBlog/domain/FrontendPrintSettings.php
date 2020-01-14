@@ -126,7 +126,7 @@ class FrontendPrintSettings
      */
     protected function beforeSet($format){
         if(! isset($this->formats[$format])) {
-            throw new Exception('The format "' . $format . '" is invalid. It should be one of ' . implode(', ', $this->formatSlugs()));
+            throw new \Exception('The format "' . $format . '" is invalid. It should be one of ' . implode(', ', $this->formatSlugs()));
         }
         if(! isset($this->settings[$format])){
             $this->settings[$format] = array(

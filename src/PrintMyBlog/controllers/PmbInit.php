@@ -29,7 +29,6 @@ class PmbInit extends BaseController
 
     public function earlyInit()
     {
-        require_once('PmbActivation.php');
         $controller = new PmbActivation();
         $controller->setHooks();
         if(function_exists('rest_proxy_loaded')) {
@@ -46,23 +45,18 @@ class PmbInit extends BaseController
     {
         $this->setUrls();
         if (defined('DOING_AJAX') && DOING_AJAX) {
-            require_once('PmbAjax.php');
             $controller = new PmbAjax();
         } else if (is_admin()) {
-            require_once('PmbAdmin.php');
             $controller = new PmbAdmin();
         } else {
-            require_once('PmbFrontend.php');
             $controller = new PmbFrontend();
         }
         $this->initDashboardNews();
         $controller->setHooks();
 
-        require_once('PmbGutenbergBlock.php');
         $block_controller = new PmbGutenbergBlock();
         $block_controller->setHooks();
 
-        require_once('PmbCommon.php');
         $common_controller = new PmbCommon();
         $common_controller->setHooks();
     }
@@ -74,8 +68,7 @@ class PmbInit extends BaseController
     protected function initDashboardNews()
     {
         if(is_admin()){
-            require_once(PMB_TWINE_INCLUDES_DIR . 'admin/news/DashboardNews.php');
-            $news = new DashboardNews(
+            new DashboardNews(
                 'https://cmljnelson.blog/category/wordpress/print-my-blog/rss',
                 'https://cmljnelson.blog/category/wordpress/print-my-blog',
                 [
