@@ -212,8 +212,11 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 2.1.4 January 14 2020 =
+* Add autoloading, props @szepeviktor
+
 = 2.1.3 January 10 2020 =
-* Cleanup main file props szepeviktor
+* Cleanup main file props @szepeviktor
 
 = 2.1.2 January 7 2020 =
 * Fix styling of Intergalactic 2 printouts
