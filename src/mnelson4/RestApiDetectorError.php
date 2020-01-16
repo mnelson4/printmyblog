@@ -10,7 +10,7 @@ use WP_Error;
  *
  * An error while trying to detect REST API information about a site.
  *
- * @package     Event Espresso
+ * @package     Print My Blog
  * @author         Mike Nelson
  * @since         $VID:$
  *

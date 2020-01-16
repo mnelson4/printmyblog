@@ -12,7 +12,7 @@ use Twine\controllers\BaseController;
  * Hooks needed to add our stuff to the admin.
  * Mostly it's just an admin page.
  *
- * @package     Event Espresso
+ * @package     Print My Blog
  * @author         Mike Nelson
  * @since         1.0.0
  *

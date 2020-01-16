@@ -11,7 +11,7 @@ use Twine\controllers\BaseController;
  *
  * Initializes the systems required to handle requests and do our logic.
  *
- * @package     Event Espresso
+ * @package     Print My Blog
  * @author         Mike Nelson
  * @since         1.0.0
  *

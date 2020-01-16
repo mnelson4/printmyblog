@@ -11,7 +11,7 @@ use Twine\controllers\BaseController;
  *
  * Handles AJAX requests
  *
- * @package     Event Espresso
+ * @package     Print My Blog
  * @author         Mike Nelson
  * @since         1.0.0
  *

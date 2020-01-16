@@ -9,7 +9,7 @@ use Twine\controllers\BaseController;
  *
  * Takes care of any special activation logic relating to this PMB.
  *
- * @package     Event Espresso
+ * @package     Print My Blog
  * @author         Mike Nelson
  * @since         1.0.0
  *

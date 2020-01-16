@@ -9,7 +9,7 @@ use WP_Error;
  * Finds the REST API base URL for the site requested. Works with both self-hosted sites and WordPress.com sites.
  *
  *
- * @package     Event Espresso
+ * @package     Print My Blog
  * @author         Mike Nelson
  * @since         $VID:$
  *

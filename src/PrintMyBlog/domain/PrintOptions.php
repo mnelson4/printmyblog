@@ -6,7 +6,7 @@ namespace PrintMyBlog\domain;
  *
  * Description
  *
- * @package     Event Espresso
+ * @package     Print My Blog
  * @author         Mike Nelson
  * @since         $VID:$
  *

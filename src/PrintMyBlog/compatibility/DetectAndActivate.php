@@ -10,7 +10,7 @@ use Twine\compatibility\CompatibilityBase;
  *
  * Description
  *
- * @package     Event Espresso
+ * @package     Print My Blog
  * @author         Mike Nelson
  * @since         2.1.4
  *
