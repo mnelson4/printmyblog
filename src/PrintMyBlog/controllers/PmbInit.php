@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\controllers;
 
+use PrintMyBlog\compatibility\DetectAndActivate;
 use Twine\admin\news\DashboardNews;
 use Twine\controllers\BaseController;
 
@@ -25,6 +26,8 @@ class PmbInit extends BaseController
     {
         add_action('init', array($this, 'earlyInit'), 5);
         add_action('init', array($this, 'init'));
+        $compatibility_mods_loader = new DetectAndActivate();
+        $compatibility_mods_loader->detectAndActivateCompatibilityMods();
     }
 
     public function earlyInit()
