@@ -7,7 +7,7 @@ namespace Twine\controllers;
  *
  * Description
  *
- * @package     Print My Blog
+ * @package     Twine
  * @author         Mike Nelson
  * @since         1.0.0
  *
