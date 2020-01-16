@@ -206,6 +206,7 @@ class PmbFrontend extends BaseController
             $agent = '';
         }
         // From https://stackoverflow.com/questions/3047894/how-to-detect-google-chrome-as-the-user-agent-using-php
+        // Note: Brave gets detected as Chrome.
         if(preg_match('/(Chrome|CriOS)\//i',$agent)
             && !preg_match('/(Aviator|ChromePlus|coc_|Dragon|Edge|Flock|Iron|Kinza|Maxthon|MxNitro|Nichrome|OPR|Perk|Rockmelt|Seznam|Sleipnir|Spark|UBrowser|Vivaldi|WebExplorer|YaBrowser)/i',$_SERVER['HTTP_USER_AGENT'])){
             return 'chrome';
@@ -214,6 +215,15 @@ class PmbFrontend extends BaseController
         if (strlen(strstr($agent, 'Firefox')) > 0) {
             return 'firefox';
         }
+        // From https://stackoverflow.com/a/186779/1493883
+//        if (strstr($agent, " AppleWebKit/") && strstr($agent, " Mobile/"))
+//        {
+//            return 'mobile_safari';
+//        }
+//        // From https://stackoverflow.com/q/15415883/1493883
+//        if(strlen(strstr($agent,"Safari")) > 0 ){
+//            return 'desktop_safari';
+//        }
         return 'unknown';
     }
 

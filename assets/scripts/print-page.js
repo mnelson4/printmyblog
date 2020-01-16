@@ -376,7 +376,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 this.cancel_button.hide();
                 this.prettyUpPrintedPage();
             },
-            5000
+            // Guess that we'd like 50 milliseconds per post. That's too long for simple text; too short for ones
+            // with images or videos.
+            this.ordered_posts.length * 50
         );
     };
 

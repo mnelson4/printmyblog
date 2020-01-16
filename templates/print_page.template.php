@@ -87,10 +87,14 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                     ?>
                     <p> <?php esc_html_e('You may now create the PDF using a browser extension.', 'print-my-blog'); ?></p>
                     <?php
-                } else {
+                } elseif(in_array($pmb_browser, ['chrome','desktop_safari'])) {
                     ?>
                     <input type="submit" onclick="window.print()"
                            value="<?php esc_attr_e('Print to PDF', 'print-my-blog'); ?>"/><?php
+                } else {
+                    ?>
+                    <p><?php esc_html_e('Use your browser to print to PDF.', 'event_espresso'); ?></p>
+                    <?php
                 }
                 if(is_user_logged_in()) {
                     ?>
@@ -123,16 +127,20 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                             <p><?php esc_html_e('After clicking "Print to PDF", set the "Destination" to "Save as PDF."', 'print-my-blog'); ?></p>
                         </details>
                         <?php
-                    } else {
+                    } elseif($pmb_browser === 'desktop_safari') {
                         ?>
-                        <details class="pmb-details">
-                            <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('How on Safari on Desktop', 'print-my-blog'); ?>
-                            </summary>
-                            <ol>
-                                <li><?php esc_html_e('Click "Print to PDF"', 'print-my-blog'); ?></li>
-                                <li><?php esc_html_e('Choose to "Save as PDF."', 'print-my-blog'); ?></li>
-                            </ol>
-                        </details>
+            <details class="pmb-details">
+                <summary
+                        class="pmb-reveal-options pmb-inline"><?php esc_html_e('How on Safari on Desktop', 'print-my-blog'); ?>
+                </summary>
+                <ol>
+                    <li><?php esc_html_e('Click "Print to PDF"', 'print-my-blog'); ?></li>
+                    <li><?php esc_html_e('Choose to "Save as PDF."', 'print-my-blog'); ?></li>
+                </ol>
+            </details>
+            <?php
+                    } elseif( $pmb_browser === 'mobile_safari'){
+                        ?>
                         <details class="pmb-details">
                             <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('How on Mobile Safari', 'print-my-blog'); ?>
                             </summary>
@@ -150,7 +158,6 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                         </details>
                         <?php
                     }
-
                 }
             } else { // default: print
                 ?>
