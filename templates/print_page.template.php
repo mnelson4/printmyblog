@@ -93,7 +93,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                            value="<?php esc_attr_e('Print to PDF', 'print-my-blog'); ?>"/><?php
                 } else {
                     ?>
-                    <p><?php esc_html_e('Use your browser to print to PDF.', 'event_espresso'); ?></p>
+                    <p><?php esc_html_e('Use your browser to print to PDF.', 'print-my-blog'); ?></p>
                     <?php
                 }
                 if(is_user_logged_in()) {
@@ -158,6 +158,12 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                         </details>
                         <?php
                     }
+                }
+                // Warn Firefox and Safari users links won't appear
+                if(in_array($pmb_browser, ['firefox','mobile_safari','desktop_safari'])){
+                    ?>
+                    <p><?php esc_html_e('Note: your browser does not produce PDFs with hyperlinks. If you want them, please use different browser.', 'print-my-blog'); ?></p>
+                    <?php
                 }
             } else { // default: print
                 ?>

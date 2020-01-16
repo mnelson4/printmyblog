@@ -216,14 +216,14 @@ class PmbFrontend extends BaseController
             return 'firefox';
         }
         // From https://stackoverflow.com/a/186779/1493883
-//        if (strstr($agent, " AppleWebKit/") && strstr($agent, " Mobile/"))
-//        {
-//            return 'mobile_safari';
-//        }
-//        // From https://stackoverflow.com/q/15415883/1493883
-//        if(strlen(strstr($agent,"Safari")) > 0 ){
-//            return 'desktop_safari';
-//        }
+        if (strstr($agent, " AppleWebKit/") && strstr($agent, " Mobile/"))
+        {
+            return 'mobile_safari';
+        }
+        // From https://stackoverflow.com/q/15415883/1493883
+        if(strlen(strstr($agent,"Safari")) > 0 ){
+            return 'desktop_safari';
+        }
         return 'unknown';
     }
 
