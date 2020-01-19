@@ -208,20 +208,20 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                 // If they specified an after date, show it
                 if ($pmb_after_date && $pmb_before_date) {
                     if($pmb_after_date === $pmb_before_date){
-                        $date_range_string = sprintf('on %1$s,', $pmb_after_date);
+                        $date_range_string = sprintf('published on %1$s,', $pmb_after_date);
                     } else {
-                        $date_range_string = sprintf('between %1$s and %2$s,', $pmb_after_date, $pmb_before_date);
+                        $date_range_string = sprintf('published from %1$s to %2$s,', $pmb_after_date, $pmb_before_date);
                     }
                 } elseif ($pmb_after_date && !$pmb_before_date) {
                     $date_range_string = sprintf(
                     // translators: 1: date string
-                        esc_html__('on or after %1$s,', 'print-my-blog'),
+                        esc_html__('published on %1$s and later,', 'print-my-blog'),
                         $pmb_after_date
                     );
                 } elseif (!$pmb_after_date && $pmb_before_date) {
                     $date_range_string = sprintf(
                     // translators: 1: date string
-                        esc_html__('on or before %1$s,', 'print-my-blog'),
+                        esc_html__('published on %1$s and earlier,', 'print-my-blog'),
                         $pmb_before_date
                     );
                 } else {
