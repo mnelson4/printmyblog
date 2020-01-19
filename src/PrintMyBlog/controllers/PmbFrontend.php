@@ -298,10 +298,10 @@ class PmbFrontend extends BaseController
         ];
         // add the before and after filters, if they were provided
         $dates = $this->getFromRequest('dates', array());
-        if(isset($dates['after'])){
+        if(!empty($dates['after'])){
             $data['filters']->after = $dates['after'] . 'T00:00:00';
         }
-        if(isset($dates['before'])){
+        if(!empty($dates['before'])){
             $data['filters']->before = $dates['before'] . 'T23:59:59';
         }
         $print_options = new PrintOptions();
