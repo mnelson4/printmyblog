@@ -159,12 +159,6 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                         <?php
                     }
                 }
-                // Warn Firefox and Safari users links won't appear
-                if(in_array($pmb_browser, ['firefox','mobile_safari','desktop_safari'])){
-                    ?>
-                    <p><?php esc_html_e('Note: your browser does not produce PDFs with hyperlinks. If you want them, please use different browser.', 'print-my-blog'); ?></p>
-                    <?php
-                }
             } else { // default: print
                 ?>
                 <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print', 'print-my-blog'); ?>"/>

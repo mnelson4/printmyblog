@@ -298,6 +298,13 @@ class PmbFrontend extends BaseController
         ];
         // add the before and after filters, if they were provided
         $dates = $this->getFromRequest('dates', array());
+        // Check if they entered the dates backwards.
+        if(!empty($dates['before']) && !empty($dates['after']) && $dates['before'] < $dates['after']){
+            $dates = [
+                'after' => $dates['before'],
+                'before' => $dates['after']
+            ];
+        }
         if(!empty($dates['after'])){
             $data['filters']->after = $dates['after'] . 'T00:00:00';
         }

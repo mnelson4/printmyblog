@@ -97,11 +97,11 @@ use PrintMyBlog\domain\PrintOptions;
                     <td><select id="pmb-author-select" class="pmb-author-select" name="pmb-author"></select></td>
                 </tr>
                 <tr>
-                    <th scope="row"><?php esc_html_e('Posted On or After...', 'print-my-blog'); ?></th>
+                    <th scope="row"><?php esc_html_e('Posted After (and Including)', 'print-my-blog'); ?></th>
                     <td><input type="text" class="pmb-date" name="dates[after]"></td>
                 </tr>
                 <tr>
-                    <th scope="row"><?php esc_html_e('Posted On or Before...', 'print-my-blog'); ?></th>
+                    <th scope="row"><?php esc_html_e('Posted Before (and Including)', 'print-my-blog'); ?></th>
                     <td><input type="text" class="pmb-date" name="dates[before]"></td>
                 </tr>
                 </tbody>
