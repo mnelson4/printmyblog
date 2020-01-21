@@ -215,8 +215,8 @@ But if not, your browser can also remove background colors.
 = 2.1.4 January 14 2020 =
 * Add autoloading, props @szepeviktor
 * Make Easy Footnotes plugin show footnotes in printouts
-* Warn that Firefox and Safari's PDFs don't have hyperlinks
-* Clarify date filtering by date includes the selecetd dates
+* Clarify date filtering by date includes the selected dates
+* If users enter dates backwards, fix it for them
 
 = 2.1.3 January 10 2020 =
 * Cleanup main file props @szepeviktor
