@@ -378,7 +378,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             },
             // Guess that we'd like 50 milliseconds per post. That's too long for simple text; too short for ones
             // with images or videos.
-            this.ordered_posts.length * 50
+            this.total_posts * 25
         );
     };
 
