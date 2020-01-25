@@ -212,7 +212,7 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
-= 2.1.5 January 26 2020 =
+= 2.1.5 January 25 2020 =
 * Fix dotEpub integration (all the text was appearing in a header, and only the first post was being included)
 
 = 2.1.4 January 14 2020 =
