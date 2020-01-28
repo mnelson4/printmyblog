@@ -212,6 +212,10 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 2.1.6 January 29 2020 =
+* Don't show URLs after hyperlinks (some themes try it; it looks terrible, especially behind images and isn't necessary in digital PDFs)
+* JetPack's Tiled Gallery captions should still have a background because they're overlayed over images
+
 = 2.1.5 January 25 2020 =
 * Fix dotEpub integration (all the text was appearing in a header, and only the first post was being included)
 
