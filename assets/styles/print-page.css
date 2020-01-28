@@ -205,3 +205,9 @@ but in the printout they're in front of white paper, so best to have them in bla
 .pmb-posts .entry-title{
     color:black;
 }
+/* Prevent themes like nisarg from adding those awkward URLs after links. Thanks for trying, but they usually just
+mess up the layout (especially in galleries!) Footnotes are much better. Or links
+ */
+.pmb-posts a[href]:after {
+    content:'';
+}
