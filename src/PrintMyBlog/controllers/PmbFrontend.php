@@ -428,6 +428,21 @@ class PmbFrontend extends BaseController
             ul, ol, p{margin-bottom:0.5em;margin-top:0.5em;}
             blockquote{font-size:1em}";
         }
+
+        // Dynamically handle adding the CSS to place URLs in parentheses after some hyperlinks
+        // (but be careful to not put them in headers, image galleries, and other places they look terrible.)
+        if($this->getFromRequest('links','') === 'parens'){
+            $pre_selects = array(
+                '.pmb-posts p',
+                '.pmb-posts ul',
+                '.pmb-posts ol'
+            );
+            $full_css_selctors = array();
+            foreach($pre_selects as $pre_select){
+                $full_css_selctors[] = $pre_select . ' a[href]:after';
+            }
+            $css .= implode(', ', $full_css_selctors) . '{content: " (" attr(href) ")"';
+        }
         // Let's make margin smaller or bigger too, if the text was resized.
         wp_add_inline_style(
             'pmb_print_page',

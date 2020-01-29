@@ -220,7 +220,7 @@ use PrintMyBlog\domain\PrintOptions;
                         <select name="links" id="image-size">
                             <option value="include" selected="selected"><?php esc_html_e('Include','print-my-blog' );?></option>
                             <option value="remove"><?php esc_html_e('Remove','print-my-blog' );?></option>
-
+                            <option value="parens"><?php esc_html_e('Replace with URL in Parenthesis','print-my-blog' );?></option>
                         </select>
                         <p class="description"><?php esc_html_e('Whether to remove hyperlinks or not.','print-my-blog' );?></p>
                     </td>
