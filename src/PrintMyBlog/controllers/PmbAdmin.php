@@ -161,7 +161,6 @@ class PmbAdmin extends BaseController
     public function pluginPageLinks($links)
     {
         $links = array_merge(
-            $links,
             array(
                 '<a href="'
             . admin_url(PMB_ADMIN_PAGE_PATH)
@@ -174,7 +173,8 @@ class PmbAdmin extends BaseController
             . '">'
             . esc_html__('Settings', 'print-my-blog')
             . '</a>'
-            )
+            ),
+            $links
         );
 
         return $links;
