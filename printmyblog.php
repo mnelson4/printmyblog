@@ -10,7 +10,7 @@
  * Description: Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
  * Author: Michael Nelson
  * Author URI: https://cmljnelson.blog/
- * Version: 2.1.6
+ * Version: 2.2.0
  * Requires at least: 4.6
  * Requires PHP: 5.4
  * Text Domain: print-my-blog
