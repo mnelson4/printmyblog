@@ -169,7 +169,7 @@ In order to fix this, you need to tell Print My Blog to slow down. On the config
 down to show Troubleshooting options, and increase "Post Rendering Wait-Time" (eg to 2000 milliseconds, or whatever
 value you need to in order to get all the images to load).
 
-= The Print Page is stuck on "Loading Content" and I can't filter by categories or terms =
+= The Print Page says "There seems to be an error initializing...", or is stuck on "Loading Content", or I can't filter by categories or terms from the print setup page=
 
 You may have disabled the WP REST API. (Eg by using "All in One WP Security" plugin's "Disallow Unauthorized REST API Requests" or "Disable REST API" plugin). Print My Blog uses the WP REST API to load your posts into the print-page, so please ensure the WP REST API is enabled.
 
@@ -215,6 +215,7 @@ But if not, your browser can also remove background colors.
 = 2.2.0 January 29 2020 =
 * Optionally place URLs in parentheses after hyperlinks
 * JetPack's Tiled Gallery captions should still have a background because they're overlayed over images
+* Show an error message if the print page fails to initialize. Recommend using a newer browser and enabling the WP REST API
 
 = 2.1.5 January 25 2020 =
 * Fix dotEpub integration (all the text was appearing in a header, and only the first post was being included)

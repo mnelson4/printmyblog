@@ -316,6 +316,10 @@ class PmbFrontend extends BaseController
             $data['show_' . $option_name] = (bool)$this->getFromRequest('show_' . $option_name, false);
         }
 
+        $init_error_message = esc_html__('There seems to be an error initializing. Please verify you are using an up-to-date web browser.', 'print-my-blog');
+        if(is_user_logged_in()){
+            $init_error_message .= "\n" . esc_html__('Also check the WP REST API isn’t disabled by a security plugin. Feel free to contact Print My Blog support.', 'print-my-blog');
+        }
         wp_localize_script(
             'pmb_print_page',
             'pmb_print_data',
@@ -336,6 +340,7 @@ class PmbFrontend extends BaseController
                     'by' => esc_html__('By', 'print-my-blog'),
                     'protected' => esc_html__('Protected:', 'print-my-blog'),
                     'private' => esc_html__('Private:', 'print-my-blog'),
+                    'init_error' => $init_error_message
                 ),
                 'data' => $data,
             )

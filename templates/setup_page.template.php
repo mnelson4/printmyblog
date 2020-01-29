@@ -222,7 +222,6 @@ use PrintMyBlog\domain\PrintOptions;
                             <option value="remove"><?php esc_html_e('Remove','print-my-blog' );?></option>
                             <option value="parens"><?php esc_html_e('Replace with URL in Parenthesis','print-my-blog' );?></option>
                         </select>
-                        <p class="description"><?php esc_html_e('Whether to remove hyperlinks or not.','print-my-blog' );?></p>
                     </td>
                 </tr>
                 </tbody>

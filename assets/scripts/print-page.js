@@ -51,6 +51,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 	this.author = pmb_instance_vars.author;
 	this.post = pmb_instance_vars.post;
 	this.order = pmb_instance_vars.order;
+	this.working = false;
     /**
      * Initializes variables and begins fetching taxonomies, then gets started fetching posts/pages.
      * @function
@@ -66,6 +67,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
         var alltaxonomiesCollection = new wp.api.collections.Taxonomies();
         alltaxonomiesCollection.fetch().done((taxonomies) => {
+            this.working = true;
             this.taxonomies = taxonomies;
             // ok we have everything we need to start. So let's get it started!
 			this.beginLoading();
@@ -730,13 +732,22 @@ function pmb_help_show(id){
 var pmb = null;
 var original_backbone_sync;
 jQuery(document).ready(function () {
+	pmb = new PmbPrintPage(
+		pmb_print_data.data,
+		pmb_print_data.i18n
+	);
+	// I know I'll add babel.js someday. But for now, if there's an error initializing (probably because of a
+    // Javascript syntax error, or the REST API isn't working) let the user know.
+	setTimeout(function(){
+        if(! pmb.working){
+			alert(pmb.translations.init_error);
+		}
+	},
+	5000);
     wp.api.loadPromise.done( function() {
         setTimeout(
             function(){
-				pmb = new PmbPrintPage(
-					pmb_print_data.data,
-					pmb_print_data.i18n
-				);
+
 
 				pmb.initialize();
             },
