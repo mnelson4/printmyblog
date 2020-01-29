@@ -1,1 +1,48 @@
+# https://docs.travis-ci.com/user/reference/overview/#linux
+dist: bionic
+
 language: php
+
+cache:
+  directories:
+    - "$HOME/.composer/cache"
+
+php:
+# TODO Add unit tests with Codeception: https://github.com/lucatume/wp-browser
+#  - "7.0"
+#  - "7.1"
+#  - "7.2"
+  - "7.3"
+#  - "7.4"
+
+#jobs:
+#  include:
+#  - dist: trusty
+#    php: "5.4"
+#  - dist: trusty
+#    php: "5.6"
+
+before_install:
+  - |
+    if [ "$(phpenv version-name)" != 7.4 ]; then
+      phpenv config-rm xdebug.ini
+    fi
+  - |
+    composer validate --no-interaction --strict
+install:
+  - |
+    composer install --no-interaction --no-suggest
+  - |
+    composer outdated --no-interaction --direct
+script:
+  - |
+    find src/ -type f -name '*.php' -print0 | xargs -0 -L1 -P4 -- php -l
+  - |
+    vendor/bin/phpstan analyze --no-progress
+  - |
+    composer require --no-interaction --dev wp-coding-standards/wpcs
+    vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/
+    # TODO Follow WPCS.
+    vendor/bin/phpcs --parallel=4 --standard=WordPress-Core src/ || true
+  - |
+    echo "TODO: Lint JavaScript, CSS and SVG files."
