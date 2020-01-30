@@ -743,7 +743,7 @@ jQuery(document).ready(function () {
 			alert(pmb.translations.init_error);
 		}
 	},
-	5000);
+	10000);
     wp.api.loadPromise.done( function() {
         setTimeout(
             function(){

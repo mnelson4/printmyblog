@@ -212,6 +212,9 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 2.2.1 January 29 2020 =
+* Wait a few more seconds before assuming the print page didn't initialize properly.
+
 = 2.2.0 January 29 2020 =
 * Optionally place URLs in parentheses after hyperlinks
 * JetPack's Tiled Gallery captions should still have a background because they're overlayed over images
