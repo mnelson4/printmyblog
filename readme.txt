@@ -162,6 +162,8 @@ This plugin puts your blog's content onto a single web page, and you can then us
 
 https://youtu.be/M5ZZN3KsqOA
 
+You'll probably want to download the eBook to your phone or tablet for reading, but you can also [read ePubs](https://www.wikihow.com/Open-EPUB-Files) and [MOBI files](https://www.howtogeek.com/360419/what-is-a-mobi-file/) from your computer using the right software.
+
 = Some images aren't appearing =
 
 Print My Blog can work too fast for some webservers, meaning the webservers refuse to load all the content, most noticeably some images.
