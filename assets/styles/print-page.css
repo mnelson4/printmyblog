@@ -205,6 +205,10 @@ but in the printout they're in front of white paper, so best to have them in bla
 .pmb-posts .entry-title{
     color:black;
 }
+/* For themes that have a dark background, the text colour might be light. In printouts we want it to be displayed black still, by default.*/
+.pmb-posts {
+    color:black;
+}
 /* Prevent themes like nisarg from adding those awkward URLs after links. Thanks for trying, but they usually just
 mess up the layout (especially in galleries!) Footnotes are much better. Or links
  */
