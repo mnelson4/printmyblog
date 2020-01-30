@@ -222,6 +222,7 @@ use PrintMyBlog\domain\PrintOptions;
                             <option value="remove"><?php esc_html_e('Remove','print-my-blog' );?></option>
                             <option value="parens"><?php esc_html_e('Replace with URL in Parenthesis','print-my-blog' );?></option>
                         </select>
+                        <p class="description"><?php esc_html_e('Note: PDFs generated in Firefox and Safari automatically remove hyperlinks. If you want your PDF to include hyperlinks, please use another browser.', 'print-my-blog'); ?></p>
                     </td>
                 </tr>
                 </tbody>
