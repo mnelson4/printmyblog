@@ -24,7 +24,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class('pmb-print-page'); ?>>
+<body class="<?php echo str_replace('has-sidebar', '', implode(' ',get_body_class('pmb-print-page'))); ?>">
 <!-- Print My Blog Version <?php echo PMB_VERSION;?>-->
 <div class="pmb-waiting-message-fullpage pmb-extra-content">
     <div class="pmb-waiting-message-outer-container">

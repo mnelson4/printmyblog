@@ -212,6 +212,9 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 2.2.2 January 30 2020 =
+* Fix innocuous Javascript error in 2017 theme
+
 = 2.2.1 January 29 2020 =
 * Wait a few more seconds before assuming the print page didn't initialize properly.
 
