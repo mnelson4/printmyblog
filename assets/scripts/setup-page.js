@@ -76,13 +76,18 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 
 		jQuery.post(this.ajax_url, data, (response) => {
 				this.spinner.hide();
-				if(response.success && response.data.name && response.data.proxy_for){
+				if(response.success && response.data.site && response.data.proxy_for){
 					if( ! response.data.is_local){
 						this.proxy_for =	response.data.proxy_for;
 					} else {
 						this.proxy_for = '';
 					}
-					this.site_name = response.data.name;
+					// If the site doesn't have a name, don't worry about it.
+					if(response.data.name){
+						this.site_name = response.data.name;
+					} else {
+						this.site_name = response.data.site;
+					}
 					this.site_ok.show();
 					this.getTaxonomies();
                     this.updateAuthorSelector();
