@@ -79,7 +79,10 @@ class PmbInit extends BaseController
                     'item_prefix' => esc_html__('Print My Blog', 'print-my-blog'),
                     'item_description' => esc_html__('Print My Blog news', 'print-my-blog'),
                     'dismiss_tooltip' => __('Dismiss all Print My Blog news', 'print-my-blog'),
-                    'dismiss_confirm' => __('Are you sure you want to dismiss all Print My Blog news forever?', 'print-my-blog'),
+                    'dismiss_confirm' => __(
+                        'Are you sure you want to dismiss all Print My Blog news forever?',
+                        'print-my-blog'
+                    ),
                 ]
             );
         }

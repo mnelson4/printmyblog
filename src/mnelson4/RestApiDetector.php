@@ -166,7 +166,10 @@ class RestApiDetector
         }
         // so we didn't get an error or a proper response, but it's JSON? That's really weird.
         throw new RestApiDetectorError(
-            new WP_Error('unknown_response', __('The WordPress site responded with an unexpected response.', 'print-my-blog'))
+            new WP_Error(
+                'unknown_response',
+                __('The WordPress site responded with an unexpected response.', 'print-my-blog')
+            )
         );
     }
 

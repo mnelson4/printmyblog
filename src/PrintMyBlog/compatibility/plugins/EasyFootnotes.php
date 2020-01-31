@@ -27,7 +27,8 @@ class EasyFootnotes extends CompatibilityBase
     protected $old_wp_query_is_singular_value;
     public function setHooks()
     {
-        // There's no actions between when we know it's a REST request ('parse_request' is when "REST_REQUEST" gets defined)
+        // There's no actions between when we know it's a REST request ('parse_request' is when "REST_REQUEST" gets
+        // defined)
         // and the posts are fetched for the REST API response, except this one (and maybe another).
         add_filter('rest_pre_dispatch', [$this,'checkIfRestRequest'], 11);
     }

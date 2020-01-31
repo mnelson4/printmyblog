@@ -39,8 +39,10 @@ class RestApiDetectorError extends Exception
      * @since $VID:$
      * @return WP_Error
      */
+    //phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     public function wp_error()
     {
+        //phpcs:enable
         return $this->wp_error;
     }
 }

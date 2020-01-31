@@ -177,7 +177,7 @@ class PmbAdmin extends BaseController
         return $links;
     }
 
-    function enqueueScripts($hook)
+    public function enqueueScripts($hook)
     {
         if (
             ! in_array(

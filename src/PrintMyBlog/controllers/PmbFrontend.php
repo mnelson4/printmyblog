@@ -39,7 +39,9 @@ class PmbFrontend extends BaseController
             $print_settings = new FrontendPrintSettings();
             $print_settings->load();
             if ($print_settings->showButtons()) {
+                //phpcs:disable Generic.Files.LineLength.TooLong
                 $base_url = site_url() . "?post-type=post&include-private-posts=1&show_site_title=1&show_site_tagline=1&show_site_url=1&show_date_printed=1&show_title=1&show_date=1&show_categories=1&show_featured_image=1&show_content=1&post-page-break=on&columns=1&font-size=normal&image-size=medium&links=include&rendering-wait=10&print-my-blog=1&format=%s&pmb-post=%d";
+                //phpcs:enable
                 $html = '<div class="pmb-print-this-page wp-block-button">';
                 foreach ($print_settings->formats() as $slug => $settings) {
                     if (! $print_settings->isActive($slug)) {
@@ -50,7 +52,11 @@ class PmbFrontend extends BaseController
                         $slug,
                         $post->ID
                     );
-                    $html .= ' <a href="' . $url . '" class="button button-secondary wp-block-button__link">' . $print_settings->getFrontendLabel($slug) . '</a>';
+                    $html .= ' <a href="'
+                        . $url
+                        . '" class="button button-secondary wp-block-button__link">'
+                        . $print_settings->getFrontendLabel($slug)
+                        . '</a>';
                 }
                 $html .= '</div>';
                 return $html . $content;
@@ -218,7 +224,9 @@ class PmbFrontend extends BaseController
         // Note: Brave gets detected as Chrome.
         if (
             preg_match('/(Chrome|CriOS)\//i', $agent)
+            //phpcs:disable Generic.Files.LineLength.TooLong
             && !preg_match('/(Aviator|ChromePlus|coc_|Dragon|Edge|Flock|Iron|Kinza|Maxthon|MxNitro|Nichrome|OPR|Perk|Rockmelt|Seznam|Sleipnir|Spark|UBrowser|Vivaldi|WebExplorer|YaBrowser)/i', $_SERVER['HTTP_USER_AGENT'])
+            //phpcs:enable
         ) {
             return 'chrome';
         }
@@ -237,8 +245,10 @@ class PmbFrontend extends BaseController
         return 'unknown';
     }
 
+    //phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     public function enqueue_scripts()
     {
+        //phpcs:enable
         wp_register_script(
             'luxon',
             PMB_ASSETS_URL . 'scripts/luxon.min.js',
@@ -322,12 +332,24 @@ class PmbFrontend extends BaseController
         }
         $print_options = new PrintOptions();
         foreach ($print_options->postContentOptions() as $option_name => $option_details) {
-            $data['show_' . $option_name] = (bool)$this->getFromRequest('show_' . $option_name, false);
+            $data['show_' . $option_name] = (bool)$this->getFromRequest(
+                'show_' . $option_name,
+                false
+            );
         }
 
-        $init_error_message = esc_html__('There seems to be an error initializing. Please verify you are using an up-to-date web browser.', 'print-my-blog');
+        $init_error_message = esc_html__(
+            'There seems to be an error initializing. Please verify you are using an up-to-date web browser.',
+            'print-my-blog'
+        );
         if (is_user_logged_in()) {
-            $init_error_message .= "\n" . esc_html__('Also check the WP REST API isn’t disabled by a security plugin. Feel free to contact Print My Blog support.', 'print-my-blog');
+            $init_error_message .= "\n"
+                . esc_html__(
+                    //phpcs:disable Generic.Files.LineLength.TooLong
+                    'Also check the WP REST API isn’t disabled by a security plugin. Feel free to contact Print My Blog support.',
+                    //phpcs:enable
+                    'print-my-blog'
+                );
         }
         wp_localize_script(
             'pmb_print_page',
@@ -341,7 +363,10 @@ class PmbFrontend extends BaseController
                     'rendering_posts' => esc_html__('Placing Content on Page', 'print-my-blog'),
                     'wrapping_up' => esc_html__('Optimizing for Print', 'print-my-blog'),
                     'ready' => esc_html__('Print-Page Ready', 'print-my-blog'),
-                    'error_fetching_posts' => esc_html__('There was an error fetching posts. It was: ', 'print-my-blog'),
+                    'error_fetching_posts' => esc_html__(
+                        'There was an error fetching posts. It was: ',
+                        'print-my-blog'
+                    ),
                     'comments' => esc_html__('Comments', 'print-my-blog'),
                     'no_comments' => esc_html__('No Comments', 'print-my-blog'),
                     'says' => __('<span class="screen-reader-text says">says:</span>', 'print-my-blog'),

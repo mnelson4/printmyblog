@@ -46,8 +46,10 @@ class PmbGutenbergBlock extends BaseController
      * @param $att Attributes from the JS block
      * @return string Rendered HTML
      */
+    //phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     public function block_dynamic_render_cb($att)
     {
+        //phpcs:enable
         // Coming from RichText, each line is an array's element
         ob_start();
         $print_options = new PrintOptions();

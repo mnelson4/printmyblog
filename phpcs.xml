@@ -3,9 +3,13 @@
     <description>Print My Blogs src directory follows PSR 12</description>
 
     <file>src/</file>
+    <exclude-pattern>src/Twine/admin/news/DashboardNews.php</exclude-pattern>
 
     <arg name="colors" />
     <arg name="parallel" value="75"/>
+    <arg value="s"/>
     <!--<arg name="standard" value="PSR12"/>-->
-    <rule ref="PSR12"/>3
+    <rule ref="PSR12">
+        <exclude name="PSR12.Properties.ConstantVisibility.NotFound"/>
+    </rule>
 </ruleset>
