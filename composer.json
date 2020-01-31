@@ -18,5 +18,8 @@
             "PrintMyBlog\\": "src/PrintMyBlog/",
             "Twine\\": "src/Twine/"
         }
+    },
+    "scripts": {
+        "release": "git archive HEAD --format=zip --output ../printmyblog.zip"
     }
 }
