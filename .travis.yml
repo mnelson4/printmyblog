@@ -40,7 +40,6 @@ script:
   - |
     vendor/bin/phpstan analyze --no-progress
   - |
-    composer require --no-interaction --dev squizlabs/php_codesniffer
     # TODO Follow PSR-12.
     vendor/bin/phpcs --parallel=4 --standard=PSR12 src/ || true
   - |
