@@ -41,6 +41,6 @@ script:
     vendor/bin/phpstan analyze --no-progress
   - |
     # TODO Follow PSR-12.
-    vendor/bin/phpcs --parallel=4 --standard=PSR12 src/ || true
+    vendor/bin/phpcs || true
   - |
     echo "TODO: Lint JavaScript, CSS and SVG files."

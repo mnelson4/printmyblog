@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ruleset name="Print My Blog Ruleset">
+    <description>Print My Blogs src directory follows PSR 12</description>
+
+    <file>src/</file>
+
+    <arg name="colors" />
+    <arg name="parallel" value="75"/>
+    <!--<arg name="standard" value="PSR12"/>-->
+    <rule ref="PSR12"/>3
+</ruleset>
