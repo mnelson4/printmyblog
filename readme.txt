@@ -162,7 +162,9 @@ This plugin puts your blog's content onto a single web page, and you can then us
 
 https://youtu.be/M5ZZN3KsqOA
 
-You'll probably want to download the eBook to your phone or tablet for reading, but you can also [read ePubs](https://www.wikihow.com/Open-EPUB-Files) and [MOBI files](https://www.howtogeek.com/360419/what-is-a-mobi-file/) from your computer using the right software.
+Note: if your printout has many images, dotEpub warns you it will replace them with links.
+
+Once the eBook has been generated, you can read it from your computer (here's instructions on how to [read ePubs](https://www.wikihow.com/Open-EPUB-Files) and [MOBI files](https://www.howtogeek.com/360419/what-is-a-mobi-file/)), or a phone or tablet.
 
 = Some images aren't appearing =
 
@@ -216,6 +218,9 @@ But if not, your browser can also remove background colors.
 
 = 2.2.2 January 30 2020 =
 * Fix innocuous Javascript error in 2017 theme
+* Work even if site has no title
+* Set text to black in printouts
+* Mention Safari and Firefox remove hyperlinks in printouts
 
 = 2.2.1 January 29 2020 =
 * Wait a few more seconds before assuming the print page didn't initialize properly.

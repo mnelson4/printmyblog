@@ -89,8 +89,6 @@ class PmbFrontend extends BaseController
                    $pmb_format,
                    $pmb_browser,
                    $pmb_author;
-            $pmb_site_name = $site_info->getName();
-            $pmb_site_description = $site_info->getDescription();
             $pmb_site_url = str_replace(
                 array(
                     'https://',
@@ -99,6 +97,13 @@ class PmbFrontend extends BaseController
                 '',
                 $site_info->getSite()
             );
+            $pmb_site_name = $site_info->getName();
+            // If there's no name for the site, use the URL. dotEpub has an error if there is no title for the eBooks.
+            if( ! $pmb_site_name){
+                $pmb_site_name = $pmb_site_url;
+            }
+            $pmb_site_description = $site_info->getDescription();
+
             $pmb_show_site_title = $this->getFromRequest('show_site_title', false);
             $pmb_show_site_tagline = $this->getFromRequest('show_site_tagline', false);
             $pmb_show_site_url = $this->getFromRequest('show_site_url', false);
