@@ -14,7 +14,6 @@ namespace Twine\compatibility;
 abstract class CompatibilityBase
 {
     abstract public function setHooks();
-
 }
 // End of file Base.php
 // Location: Twine\compatibility/Base.php

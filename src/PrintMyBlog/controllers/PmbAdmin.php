@@ -29,7 +29,7 @@ class PmbAdmin extends BaseController
     {
         add_action('admin_menu', array($this, 'addToMenu'));
         add_filter('plugin_action_links_' . PMB_BASENAME, array($this, 'pluginPageLinks'));
-        add_action( 'admin_enqueue_scripts', [$this,'enqueueScripts'] );
+        add_action('admin_enqueue_scripts', [$this,'enqueueScripts']);
     }
 
     /**
@@ -56,7 +56,6 @@ class PmbAdmin extends BaseController
             PMB_ADMIN_CAP,
             PMB_ADMIN_PAGE_SLUG,
             array($this,'renderAdminPage')
-
         );
         add_submenu_page(
             PMB_ADMIN_PAGE_SLUG,
@@ -65,7 +64,6 @@ class PmbAdmin extends BaseController
             'manage_options',
             PMB_ADMIN_SETTINGS_PAGE_SLUG,
             array($this,'settingsPage')
-
         );
 
         // Add the legacy button, just so folks aren't confused.
@@ -82,39 +80,39 @@ class PmbAdmin extends BaseController
         );
     }
 
-    public function settingsPage(){
+    public function settingsPage()
+    {
         $pmb_print_now_formats = new FrontendPrintSettings();
         $pmb_print_now_formats->load();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             check_admin_referer('pmb-settings');
             // Ok save those settings!
-            if(isset($_POST['pmb-reset'])){
+            if (isset($_POST['pmb-reset'])) {
                 $pmb_print_now_formats = new FrontendPrintSettings();
             } else {
                 $pmb_print_now_formats->setShowButtons(isset($_POST['show_buttons']));
-                foreach($pmb_print_now_formats->formatSlugs() as $slug){
-                    if(isset($_POST['format'][$slug])){
+                foreach ($pmb_print_now_formats->formatSlugs() as $slug) {
+                    if (isset($_POST['format'][$slug])) {
                         $active = true;
                     } else {
                         $active = false;
                     }
-                    $pmb_print_now_formats->setFormatActive($slug,$active);
-                    if(isset($_POST['frontend_labels'][$slug])){
-                        $pmb_print_now_formats->setFormatFrontendLabel($slug,$_POST['frontend_labels'][$slug]);
+                    $pmb_print_now_formats->setFormatActive($slug, $active);
+                    if (isset($_POST['frontend_labels'][$slug])) {
+                        $pmb_print_now_formats->setFormatFrontendLabel($slug, $_POST['frontend_labels'][$slug]);
                     }
-
                 }
             }
             $pmb_print_now_formats->save();
-            update_option(self::SETTINGS_SAVED_OPTION,true, false);
+            update_option(self::SETTINGS_SAVED_OPTION, true, false);
             wp_redirect('');
         }
-        $saved = get_option(self::SETTINGS_SAVED_OPTION,false);
-        if($saved){
+        $saved = get_option(self::SETTINGS_SAVED_OPTION, false);
+        if ($saved) {
             update_option(self::SETTINGS_SAVED_OPTION, false, false);
-            $posts = get_posts( array ( 'orderby' => 'desc', 'posts_per_page' => '1' ));
+            $posts = get_posts(array ( 'orderby' => 'desc', 'posts_per_page' => '1' ));
             $text = esc_html__('Settings Saved!', 'print-my-blog');
-            if($posts){
+            if ($posts) {
                 $a_post = reset($posts);
                 $permalink = get_permalink($a_post);
                 $text .= ' ' . sprintf(
@@ -137,13 +135,12 @@ class PmbAdmin extends BaseController
     public function renderAdminPage()
     {
 
-        if(isset($_GET['welcome'])){
+        if (isset($_GET['welcome'])) {
             include(PMB_TEMPLATES_DIR . 'welcome.template.php');
         } else {
             $print_options = new PrintOptions();
             include(PMB_TEMPLATES_DIR . 'setup_page.template.php');
         }
-
     }
 
     public function renderLegacyAdminPage()
@@ -180,17 +177,20 @@ class PmbAdmin extends BaseController
         return $links;
     }
 
-    function enqueueScripts($hook) {
-        if ( ! in_array(
-            $hook,
-            array(
+    function enqueueScripts($hook)
+    {
+        if (
+            ! in_array(
+                $hook,
+                array(
                 'tools_page_print-my-blog',
                 'toplevel_page_print-my-blog-now'
+                )
             )
-        ) ) {
+        ) {
             return;
         }
-        if(isset($_GET['welcome'])) {
+        if (isset($_GET['welcome'])) {
             wp_enqueue_style(
                 'pmb_welcome',
                 PMB_ASSETS_URL . 'styles/welcome.css',
@@ -201,6 +201,5 @@ class PmbAdmin extends BaseController
             wp_enqueue_script('pmb-setup-page');
             wp_enqueue_style('pmb-setup-page');
         }
-
     }
 }

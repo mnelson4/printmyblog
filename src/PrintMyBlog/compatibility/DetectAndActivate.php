@@ -26,15 +26,14 @@ class DetectAndActivate
          * @var $compatiblity_mods_to_activate CompatibilityBase[]
          */
         $compatiblity_mods_to_activate = [];
-        if(class_exists('easyFootnotes')){
+        if (class_exists('easyFootnotes')) {
             $compatiblity_mods_to_activate[] = new EasyFootnotes();
         }
 
-        foreach($compatiblity_mods_to_activate as $compatibility_mod){
+        foreach ($compatiblity_mods_to_activate as $compatibility_mod) {
             $compatibility_mod->setHooks();
         }
     }
-
 }
 // End of file DetectAndActivate.php
 // Location: PrintMyBlog\compatibility/DetectAndActivate.php

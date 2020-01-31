@@ -1,6 +1,7 @@
 <?php
 
 namespace mnelson4\RestApiDetector;
+
 use WP_Error;
 
 /**
@@ -45,7 +46,7 @@ class RestApiDetector
     {
         // check for a site request param
         $site = $this->getSite();
-        if(empty($site)){
+        if (empty($site)) {
             $this->setName(get_bloginfo('name'));
             $this->setDescription(get_bloginfo('description'));
             $this->setRestApiUrl(get_rest_url());
@@ -59,7 +60,7 @@ class RestApiDetector
 //            // Alright, there was no link to the REST API index. But maybe it's a WordPress.com site...
 //            $data = $this->guessSelfHostedSiteInfo($site);
 //        }
-        if($data === false){
+        if ($data === false) {
             // Alright, there was no link to the REST API index. But maybe it's a WordPress.com site...
             $data = $this->getWordPressComSiteInfo($site);
         }
@@ -76,25 +77,25 @@ class RestApiDetector
     protected function sanitizeSite($site)
     {
         // If the REST API Proxy Plugin isn't active, always use the current site.
-        if(! PMB_REST_PROXY_EXISTS){
+        if (! PMB_REST_PROXY_EXISTS) {
             return '';
         }
-        if(empty($site)){
+        if (empty($site)) {
             return '';
         }
         // If they forgot to add http(s), add it for them.
-        if(strpos($site, 'http://') === false && strpos($site, 'https://') === false) {
+        if (strpos($site, 'http://') === false && strpos($site, 'https://') === false) {
             $site = 'http://' . $site;
         }
         // Remove unexpected URL parts.
         $url_parts = parse_url($site);
-        if(isset($url_parts['port'])){
+        if (isset($url_parts['port'])) {
             $site = str_replace(':' . $url_parts['port'], '', $site);
         }
-        if(isset($url_parts['query'])){
+        if (isset($url_parts['query'])) {
             $site = str_replace('?' . $url_parts['query'], '', $site);
         }
-        if(isset($url_parts['fragment'])){
+        if (isset($url_parts['fragment'])) {
             $site = str_replace('#' . $url_parts['fragment'], '', $site);
         }
         $site = trailingslashit(sanitize_text_field($site));
@@ -110,39 +111,43 @@ class RestApiDetector
      * @return bool false if the site exists but it's not a self-hosted WordPress site.
      * @throws RestApiDetectorError
      */
-    protected function getSelfHostedSiteInfo($site){
+    protected function getSelfHostedSiteInfo($site)
+    {
         $response = $this->sendHttpGetRequest($site);
         if (is_wp_error($response)) {
             throw new RestApiDetectorError($response);
         }
         $response_body = wp_remote_retrieve_body($response);
         $matches = array();
-        if( ! preg_match(
+        if (
+            ! preg_match(
             //looking for somethign like "<link rel='https://api.w.org/' href='http://wpcowichan.org/wp-json/' />"
                 '<link rel=\'https\:\/\/api\.w\.org\/\' href=\'(.*)\' \/>',
                 $response_body,
                 $matches
             )
-            ||  count($matches) !== 2) {
+            ||  count($matches) !== 2
+        ) {
             // The site exists, but it's not self-hosted.
             return false;
         }
         // grab from site index
         $success = $this->fetchWpJsonRootInfo($matches[1]);
-        if($success){
+        if ($success) {
             $this->setRestApiUrl($matches[1] . 'wp/v2/');
         }
         return $success;
     }
 
-    protected function fetchWpJsonRootInfo($wp_api_url) {
+    protected function fetchWpJsonRootInfo($wp_api_url)
+    {
         $response = $this->sendHttpGetRequest($wp_api_url);
         if (is_wp_error($response)) {
             // The WP JSON index existed, but didn't work. Let's tell the user.
             throw new RestApiDetectorError($response);
         }
         $response_body = wp_remote_retrieve_body($response);
-        $response_data = json_decode($response_body,true);
+        $response_data = json_decode($response_body, true);
         if (! is_array($response_data)) {
             throw new RestApiDetectorError(
                 new WP_Error('no_json', __('The WordPress site has an error in its REST API data.', 'print-my-blog'))
@@ -153,7 +158,7 @@ class RestApiDetector
                 new WP_Error($response_data['code'], $response_data['message'])
             );
         }
-        if(isset($response_data['name'], $response_data['description'])){
+        if (isset($response_data['name'], $response_data['description'])) {
             $this->setName($response_data['name']);
             $this->setDescription($response_data['description']);
             $this->setLocal(false);
@@ -173,7 +178,8 @@ class RestApiDetector
      * @return bool
      * @throws RestApiDetectorError
      */
-    protected function guessSelfHostedSiteInfo($site){
+    protected function guessSelfHostedSiteInfo($site)
+    {
         // add /wp-json as a guess
         return $this->fetchWpJsonRootInfo($site . 'wp-json');
         // and if it responds with valid JSON, it's ok
@@ -188,13 +194,14 @@ class RestApiDetector
      * @return bool
      * @throws RestApiDetectorError
      */
-    protected function getWordPressComSiteInfo($site){
-        $domain = str_replace(array('http://','https://'),'',$site);
+    protected function getWordPressComSiteInfo($site)
+    {
+        $domain = str_replace(array('http://','https://'), '', $site);
 
         $success =  $this->fetchWpJsonRootInfo(
             'https://public-api.wordpress.com/rest/v1.1/sites/' . $domain
         );
-        if($success){
+        if ($success) {
             $this->setRestApiUrl('https://public-api.wordpress.com/wp/v2/sites/' . $domain);
         }
         return $success;

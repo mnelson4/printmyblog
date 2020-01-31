@@ -46,7 +46,8 @@ class PmbGutenbergBlock extends BaseController
      * @param $att Attributes from the JS block
      * @return string Rendered HTML
      */
-    public function block_dynamic_render_cb ( $att ) {
+    public function block_dynamic_render_cb($att)
+    {
         // Coming from RichText, each line is an array's element
         ob_start();
         $print_options = new PrintOptions();

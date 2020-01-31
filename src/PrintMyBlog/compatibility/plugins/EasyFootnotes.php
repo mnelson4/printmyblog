@@ -41,8 +41,8 @@ class EasyFootnotes extends CompatibilityBase
     public function checkIfRestRequest($normal_result)
     {
 
-        add_filter( 'the_content', [$this, 'tellEasyFootnotesItsASingularRequest'], 19 );
-        add_filter( 'the_content', [$this,'okNoMoreNeedForTheDisguise'], 21 );
+        add_filter('the_content', [$this, 'tellEasyFootnotesItsASingularRequest'], 19);
+        add_filter('the_content', [$this,'okNoMoreNeedForTheDisguise'], 21);
         return $normal_result;
     }
 
@@ -52,7 +52,8 @@ class EasyFootnotes extends CompatibilityBase
      * @param $content
      * @return mixed
      */
-    public function tellEasyFootnotesItsASingularRequest($content){
+    public function tellEasyFootnotesItsASingularRequest($content)
+    {
         global $wp_query;
         $this->old_wp_query_is_singular_value = $wp_query->is_singular;
         $wp_query->is_singular = true;
@@ -65,12 +66,12 @@ class EasyFootnotes extends CompatibilityBase
      * @param $content
      * @return mixed
      */
-    public function okNoMoreNeedForTheDisguise($content){
+    public function okNoMoreNeedForTheDisguise($content)
+    {
         global $wp_query;
         $wp_query->is_singular = $this->old_wp_query_is_singular_value;
         return $content;
     }
-
 }
 // End of file EasyFootnotes.php
 // Location: PrintMyBlog\compatibility\plugins/EasyFootnotes.php

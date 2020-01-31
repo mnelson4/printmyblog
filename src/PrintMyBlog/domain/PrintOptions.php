@@ -1,4 +1,5 @@
 <?php
+
 namespace PrintMyBlog\domain;
 
 /**
@@ -94,7 +95,6 @@ class PrintOptions
             ]
         ];
     }
-
 }
 // End of file PrintOptions.php
 // Location: ${NAMESPACE}/PrintOptions.php

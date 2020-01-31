@@ -32,16 +32,17 @@ class PmbFrontend extends BaseController
             array($this, 'addPrintButton')
         );
     }
-    public function addPrintButton($content){
+    public function addPrintButton($content)
+    {
         global $post;
-        if($post->post_type === 'post' && is_single() && ! post_password_required($post)){
+        if ($post->post_type === 'post' && is_single() && ! post_password_required($post)) {
             $print_settings = new FrontendPrintSettings();
             $print_settings->load();
-            if($print_settings->showButtons()){
+            if ($print_settings->showButtons()) {
                 $base_url = site_url() . "?post-type=post&include-private-posts=1&show_site_title=1&show_site_tagline=1&show_site_url=1&show_date_printed=1&show_title=1&show_date=1&show_categories=1&show_featured_image=1&show_content=1&post-page-break=on&columns=1&font-size=normal&image-size=medium&links=include&rendering-wait=10&print-my-blog=1&format=%s&pmb-post=%d";
                 $html = '<div class="pmb-print-this-page wp-block-button">';
-                foreach($print_settings->formats() as $slug => $settings){
-                    if(! $print_settings->isActive($slug)){
+                foreach ($print_settings->formats() as $slug => $settings) {
+                    if (! $print_settings->isActive($slug)) {
                         continue;
                     }
                     $url = sprintf(
@@ -68,7 +69,7 @@ class PmbFrontend extends BaseController
         if (isset($_GET[PMB_PRINTPAGE_SLUG])) {
             try {
                 $site_info = new RestApiDetector($this->getFromRequest('site', ''));
-            } catch(RestApiDetectorError $exception) {
+            } catch (RestApiDetectorError $exception) {
                 global $pmb_wp_error;
                 $pmb_wp_error = $exception->wp_error();
                 return PMB_TEMPLATES_DIR . 'print_page_error.template.php';
@@ -99,7 +100,7 @@ class PmbFrontend extends BaseController
             );
             $pmb_site_name = $site_info->getName();
             // If there's no name for the site, use the URL. dotEpub has an error if there is no title for the eBooks.
-            if( ! $pmb_site_name){
+            if (! $pmb_site_name) {
                 $pmb_site_name = $pmb_site_url;
             }
             $pmb_site_description = $site_info->getDescription();
@@ -111,12 +112,12 @@ class PmbFrontend extends BaseController
             $pmb_show_date_printed = $this->getFromRequest('show_date_printed', false);
             $pmb_show_credit = $this->getFromRequest('show_credit', false);
             $user_id_to_filter_by = $this->getFromRequest('pmb-author', null);
-            if($user_id_to_filter_by){
-                $pmb_author = get_userdata( $user_id_to_filter_by);
+            if ($user_id_to_filter_by) {
+                $pmb_author = get_userdata($user_id_to_filter_by);
             } else {
                 $pmb_author = null;
             }
-            if($site_info->isLocal()) {
+            if ($site_info->isLocal()) {
                 $this->proxy_for = '';
             } else {
                 $this->proxy_for = $site_info->getRestApiUrl();
@@ -133,7 +134,7 @@ class PmbFrontend extends BaseController
 
             // Figure out what post type was selected.
             $post_types_using_query_var = get_post_types(array('name' => $_GET['post-type']), 'object');
-            if(is_array($post_types_using_query_var)){
+            if (is_array($post_types_using_query_var)) {
                 $post_type_info = reset($post_types_using_query_var);
                 $pmb_post_type = $post_type_info->label;
             } else {
@@ -144,27 +145,27 @@ class PmbFrontend extends BaseController
             // Ideally we'll do this via the REST API, but I'm in a pinch so just doing it via PHP and
             // only when not using WP REST Proxy.
             global $wp_taxonomies;
-            if(empty($_GET['site']) && !empty($_GET['taxonomies'])){
+            if (empty($_GET['site']) && !empty($_GET['taxonomies'])) {
                 $filtering_taxonomies = $_GET['taxonomies'];
-                foreach($filtering_taxonomies as $taxonomy => $terms_ids){
+                foreach ($filtering_taxonomies as $taxonomy => $terms_ids) {
                     $matching_taxonomy_objects = get_taxonomies(
                         array(
                             'rest_base' => $taxonomy
                         ),
                         'objects'
                     );
-                    if(! is_array($matching_taxonomy_objects) || ! $matching_taxonomy_objects){
+                    if (! is_array($matching_taxonomy_objects) || ! $matching_taxonomy_objects) {
                         continue;
                     }
                     $taxonomy_object = reset($matching_taxonomy_objects);
                     $term_objects = get_terms(
                         array(
-                            'include' => implode(',',$terms_ids),
+                            'include' => implode(',', $terms_ids),
                             'hide_empty' => false
                         )
                     );
                     $term_names = array();
-                    foreach($term_objects as $term_object){
+                    foreach ($term_objects as $term_object) {
                         $term_names[] = $term_object->name;
                     }
                     $pmb_taxonomy_filters[] = array(
@@ -188,13 +189,15 @@ class PmbFrontend extends BaseController
      * @param $date_filter_key
      * @return null|string
      */
-    protected function getDateString($date_filter_key){
-        if(isset(
-            $_GET['dates'],
-            $_GET['dates'][$date_filter_key]
-        ) && $_GET['dates'][$date_filter_key]
+    protected function getDateString($date_filter_key)
+    {
+        if (
+            isset(
+                $_GET['dates'],
+                $_GET['dates'][$date_filter_key]
+            ) && $_GET['dates'][$date_filter_key]
         ) {
-            return date_i18n( get_option( 'date_format'), strtotime($_GET['dates'][$date_filter_key]));
+            return date_i18n(get_option('date_format'), strtotime($_GET['dates'][$date_filter_key]));
         } else {
             return null;
         }
@@ -204,7 +207,8 @@ class PmbFrontend extends BaseController
      * @since $VID:$
      * @return string
      */
-    protected function getBrowser(){
+    protected function getBrowser()
+    {
         if (isset($_SERVER['HTTP_USER_AGENT'])) {
             $agent = $_SERVER['HTTP_USER_AGENT'];
         } else {
@@ -212,8 +216,10 @@ class PmbFrontend extends BaseController
         }
         // From https://stackoverflow.com/questions/3047894/how-to-detect-google-chrome-as-the-user-agent-using-php
         // Note: Brave gets detected as Chrome.
-        if(preg_match('/(Chrome|CriOS)\//i',$agent)
-            && !preg_match('/(Aviator|ChromePlus|coc_|Dragon|Edge|Flock|Iron|Kinza|Maxthon|MxNitro|Nichrome|OPR|Perk|Rockmelt|Seznam|Sleipnir|Spark|UBrowser|Vivaldi|WebExplorer|YaBrowser)/i',$_SERVER['HTTP_USER_AGENT'])){
+        if (
+            preg_match('/(Chrome|CriOS)\//i', $agent)
+            && !preg_match('/(Aviator|ChromePlus|coc_|Dragon|Edge|Flock|Iron|Kinza|Maxthon|MxNitro|Nichrome|OPR|Perk|Rockmelt|Seznam|Sleipnir|Spark|UBrowser|Vivaldi|WebExplorer|YaBrowser)/i', $_SERVER['HTTP_USER_AGENT'])
+        ) {
             return 'chrome';
         }
         // From https://stackoverflow.com/questions/9209649/how-to-detect-if-browser-is-firefox-with-php
@@ -221,12 +227,11 @@ class PmbFrontend extends BaseController
             return 'firefox';
         }
         // From https://stackoverflow.com/a/186779/1493883
-        if (strstr($agent, " AppleWebKit/") && strstr($agent, " Mobile/"))
-        {
+        if (strstr($agent, " AppleWebKit/") && strstr($agent, " Mobile/")) {
             return 'mobile_safari';
         }
         // From https://stackoverflow.com/q/15415883/1493883
-        if(strlen(strstr($agent,"Safari")) > 0 ){
+        if (strlen(strstr($agent, "Safari")) > 0) {
             return 'desktop_safari';
         }
         return 'unknown';
@@ -269,9 +274,8 @@ class PmbFrontend extends BaseController
         );
 
         $post_type = $this->getFromRequest('post-type', 'post');
-        if($post_type === 'post'){
+        if ($post_type === 'post') {
             $order_var_to_use = 'order-date';
-
         } else {
             $order_var_to_use = 'order-menu';
         }
@@ -292,7 +296,7 @@ class PmbFrontend extends BaseController
             'rendering_wait' => $this->getFromRequest('rendering-wait', 500),
             'include_inline_js' => (bool) $this->getFromRequest('include-inline-js', false),
             'links' => (string) $this->getFromRequest('links', 'include'),
-            'filters' => (object) $this->getFromRequest('taxonomies', new stdClass),
+            'filters' => (object) $this->getFromRequest('taxonomies', new stdClass()),
             'foogallery' => function_exists('foogallery_fs'),
             'is_user_logged_in' => is_user_logged_in(),
             'format' => $this->getFromRequest('format', 'print'),
@@ -304,25 +308,25 @@ class PmbFrontend extends BaseController
         // add the before and after filters, if they were provided
         $dates = $this->getFromRequest('dates', array());
         // Check if they entered the dates backwards.
-        if(!empty($dates['before']) && !empty($dates['after']) && $dates['before'] < $dates['after']){
+        if (!empty($dates['before']) && !empty($dates['after']) && $dates['before'] < $dates['after']) {
             $dates = [
                 'after' => $dates['before'],
                 'before' => $dates['after']
             ];
         }
-        if(!empty($dates['after'])){
+        if (!empty($dates['after'])) {
             $data['filters']->after = $dates['after'] . 'T00:00:00';
         }
-        if(!empty($dates['before'])){
+        if (!empty($dates['before'])) {
             $data['filters']->before = $dates['before'] . 'T23:59:59';
         }
         $print_options = new PrintOptions();
-        foreach($print_options->postContentOptions() as $option_name => $option_details){
+        foreach ($print_options->postContentOptions() as $option_name => $option_details) {
             $data['show_' . $option_name] = (bool)$this->getFromRequest('show_' . $option_name, false);
         }
 
         $init_error_message = esc_html__('There seems to be an error initializing. Please verify you are using an up-to-date web browser.', 'print-my-blog');
-        if(is_user_logged_in()){
+        if (is_user_logged_in()) {
             $init_error_message .= "\n" . esc_html__('Also check the WP REST API isn’t disabled by a security plugin. Feel free to contact Print My Blog support.', 'print-my-blog');
         }
         wp_localize_script(
@@ -356,11 +360,11 @@ class PmbFrontend extends BaseController
 
     protected function getImageRelativeSize()
     {
-        $requested_size = sanitize_key($this->getFromRequest('image-size','full'));
+        $requested_size = sanitize_key($this->getFromRequest('image-size', 'full'));
         // The actual usable vertical space is quite a bit less than 11 inches; especially when you take
         // into account there is the post's header and metainfo.
         $page_height = 8;
-        switch($requested_size) {
+        switch ($requested_size) {
             case 'large':
                 return $page_height * 3 / 4;
                 break;
@@ -387,7 +391,7 @@ class PmbFrontend extends BaseController
         $theme = wp_get_theme();
         $slug = $theme->get('TextDomain');
         $theme_slug_path =  'styles/theme-compatibility/' . $slug . '.css';
-        if(file_exists(PMB_ASSETS_DIR . $theme_slug_path)){
+        if (file_exists(PMB_ASSETS_DIR . $theme_slug_path)) {
             wp_enqueue_style(
                 'pmb_print_page_theme_compatibility',
                 PMB_ASSETS_URL . $theme_slug_path,
@@ -396,7 +400,7 @@ class PmbFrontend extends BaseController
             );
         }
         $script_slug_path = 'scripts/theme-compatibility/' . $slug . '.js';
-        if(file_exists(PMB_ASSETS_DIR . $script_slug_path)){
+        if (file_exists(PMB_ASSETS_DIR . $script_slug_path)) {
             wp_enqueue_script(
                 'pmb_print_page_script_compatibility',
                 PMB_ASSETS_URL . $script_slug_path,
@@ -412,15 +416,15 @@ class PmbFrontend extends BaseController
      */
     protected function enqueueInlineStyleBasedOnOptions()
     {
-        $columns = intval($this->getFromRequest('columns',1));
-        $post_page_break = (bool)$this->getFromRequest('post-page-break',false);
+        $columns = intval($this->getFromRequest('columns', 1));
+        $post_page_break = (bool)$this->getFromRequest('post-page-break', false);
         $font_size = sanitize_key($this->getFromRequest('font-size', 'small'));
         $css = "
         .entry-content{
             column-count: $columns;
         }
         ";
-        if($post_page_break){
+        if ($post_page_break) {
             $css .= '.pmb-post-article:not(:first-child){page-break-before:always;}';
         }
         $font_size_map = array(
@@ -429,7 +433,7 @@ class PmbFrontend extends BaseController
             // Leave out normal, let the theme decide.
             'large' => '1.25em',
         );
-        if(isset($font_size_map[$font_size])){
+        if (isset($font_size_map[$font_size])) {
             $font_size_css = $font_size_map[$font_size];
             $css .= ".pmb-posts{font-size:$font_size_css;}
             h1{font-size:1.3em !important;}
@@ -441,14 +445,14 @@ class PmbFrontend extends BaseController
 
         // Dynamically handle adding the CSS to place URLs in parentheses after some hyperlinks
         // (but be careful to not put them in headers, image galleries, and other places they look terrible.)
-        if($this->getFromRequest('links','') === 'parens'){
+        if ($this->getFromRequest('links', '') === 'parens') {
             $pre_selects = array(
                 '.pmb-posts p',
                 '.pmb-posts ul',
                 '.pmb-posts ol'
             );
             $full_css_selctors = array();
-            foreach($pre_selects as $pre_select){
+            foreach ($pre_selects as $pre_select) {
                 $full_css_selctors[] = $pre_select . ' a[href]:after';
             }
             $css .= implode(', ', $full_css_selctors) . '{content: " (" attr(href) ")"';
@@ -467,7 +471,8 @@ class PmbFrontend extends BaseController
      * @param $default
      * @return mixed
      */
-    protected function getFromRequest($query_param_name, $default) {
+    protected function getFromRequest($query_param_name, $default)
+    {
         return isset($_GET[$query_param_name]) ? $_GET[$query_param_name] : $default;
     }
 }

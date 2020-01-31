@@ -32,7 +32,8 @@ class PmbCommon extends BaseController
 
     public function enqueueScripts()
     {
-        wp_register_style('jquery-ui',
+        wp_register_style(
+            'jquery-ui',
             'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css',
             array(),
             '1.8'
@@ -91,7 +92,7 @@ class PmbCommon extends BaseController
                     'post_type_selector' => '.pmb-post-type',
                     'dynamic_categories_selector' => '#pmb-dynamic-categories',
                     'default_rest_url' => rest_url('/wp/v2'),
-                    'ajax_url' => admin_url( 'admin-ajax.php' ),
+                    'ajax_url' => admin_url('admin-ajax.php'),
                     'author_selector' => '#pmb-author-select',
                     'nonce' => wp_create_nonce('wp_rest'),
                     'order_date_selector' => '#pmb-order-by-date',

@@ -34,9 +34,9 @@ class PmbInit extends BaseController
     {
         $controller = new PmbActivation();
         $controller->setHooks();
-        if(function_exists('rest_proxy_loaded')) {
-            define('PMB_REST_PROXY_EXISTS',true);
-        } else{
+        if (function_exists('rest_proxy_loaded')) {
+            define('PMB_REST_PROXY_EXISTS', true);
+        } else {
             define('PMB_REST_PROXY_EXISTS', false);
         }
     }
@@ -49,7 +49,7 @@ class PmbInit extends BaseController
         $this->setUrls();
         if (defined('DOING_AJAX') && DOING_AJAX) {
             $controller = new PmbAjax();
-        } else if (is_admin()) {
+        } elseif (is_admin()) {
             $controller = new PmbAdmin();
         } else {
             $controller = new PmbFrontend();
@@ -70,7 +70,7 @@ class PmbInit extends BaseController
      */
     protected function initDashboardNews()
     {
-        if(is_admin()){
+        if (is_admin()) {
             new DashboardNews(
                 'https://cmljnelson.blog/category/wordpress/print-my-blog/rss',
                 'https://cmljnelson.blog/category/wordpress/print-my-blog',
