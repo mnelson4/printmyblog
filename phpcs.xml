@@ -6,7 +6,7 @@
     <exclude-pattern>src/Twine/admin/news/DashboardNews.php</exclude-pattern>
 
     <arg name="colors" />
-    <arg name="parallel" value="75"/>
+    <arg name="parallel" value="4"/>
     <arg value="s"/>
     <!--<arg name="standard" value="PSR12"/>-->
     <rule ref="PSR12">
