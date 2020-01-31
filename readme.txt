@@ -157,6 +157,8 @@ Mozilla Firefox
 
 https://youtu.be/ekwg2a1FPV0
 
+Note: images may be missing from very large PDFs. See the FAQ "My PDFs are missing images" below for help.
+
 = How do I create an eBook using Print My Blog? =
 This plugin puts your blog's content onto a single web page, and you can then use the [dotEPUB browser extension](https:dotepub.com) to turn it into an eBook.
 
@@ -172,6 +174,10 @@ Print My Blog can work too fast for some webservers, meaning the webservers refu
 In order to fix this, you need to tell Print My Blog to slow down. On the configuration page, show options, then scroll
 down to show Troubleshooting options, and increase "Post Rendering Wait-Time" (eg to 2000 milliseconds, or whatever
 value you need to in order to get all the images to load).
+
+= My PDFs are missing images =
+If your print-page has hundreds of images, browsers may generate PDFs that are missing images at the end.
+To fix this, just retry generate the PDF. Each time the browser will fetch more images. Continue re-generating the PDF until the images at the end are included.
 
 = The Print Page says "There seems to be an error initializing...", or is stuck on "Loading Content", or I can't filter by categories or terms from the print setup page=
 
@@ -223,12 +229,12 @@ But if not, your browser can also remove background colors.
 * Mention Safari and Firefox remove hyperlinks in printouts
 
 = 2.2.1 January 29 2020 =
-* Wait a few more seconds before assuming the print page didn't initialize properly.
+* Wait a few more seconds before assuming the print-page didn't initialize properly.
 
 = 2.2.0 January 29 2020 =
 * Optionally place URLs in parentheses after hyperlinks
 * JetPack's Tiled Gallery captions should still have a background because they're overlayed over images
-* Show an error message if the print page fails to initialize. Recommend using a newer browser and enabling the WP REST API
+* Show an error message if the print-page fails to initialize. Recommend using a newer browser and enabling the WP REST API
 
 = 2.1.5 January 25 2020 =
 * Fix dotEpub integration (all the text was appearing in a header, and only the first post was being included)
@@ -253,7 +259,7 @@ But if not, your browser can also remove background colors.
 
 = 2.1.0 December 27 2019 =
 * Add option to reverse the order of posts or pages
-* Style the print page like a single page, not like the homepage. Introduces filter "pmb-print-page-treat-as-single" which can override this.
+* Style the print-page like a single page, not like the homepage. Introduces filter "pmb-print-page-treat-as-single" which can override this.
 
 = 2.0.0 December 12 2019 =
 * Adds new top-level Print My Blog admin dashboard menu, with sub-items "Print Now" and "Settings"
@@ -305,10 +311,10 @@ But if not, your browser can also remove background colors.
 
 = 1.10.0 August 9 2019 =
 * Add better support for creating ePub and MOBI eBooks using dotEPUB
-* Print setup page now asks for desired format, then tailors the print page for it
+* Print setup page now asks for desired format, then tailors the print-page for it
 
 = 1.9.6 July 30 2019 =
-* Add "site" CSS class to top-level div on print page, as styles may use it for styling
+* Add "site" CSS class to top-level div on print-page, as styles may use it for styling
 
 = 1.9.5  July 24 2019 =
 * Add a suggestion to use the browser's print preview
@@ -403,7 +409,7 @@ https://wordpress.org/plugins/yuzo-related-post/) and [I Recommend This](https:/
 * Remove ellipsis because they look ugly in RTL languages.
 
 = 1.3.0 Jan 30 2019 =
-* Improved print page to look more like a print preview.
+* Improved print-page to look more like a print preview.
 * Use submit inputs instead of buttons because themes generally style them better.
 * Add link to make donations.
 

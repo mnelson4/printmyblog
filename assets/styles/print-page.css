@@ -62,7 +62,7 @@ div.pmb-post-header{
 .pmb-page-break{
     page-break-before: always;
 }
-/* On the print page, try to avoid page breaks in the middle of images*/
+/* On the print-page, try to avoid page breaks in the middle of images*/
 .pmb-image{
     page-break-inside:avoid;
 }
@@ -183,7 +183,7 @@ div.pmb-youtube-video-replacement-text{
 .pmb-posts div.pmb-print-this-page{
     display:none;
 }
-/* Prevent themes like "hueman" from floating the site description on the print page and ruining the layout*/
+/* Prevent themes like "hueman" from floating the site description on the print-page and ruining the layout*/
 .pmb-posts-header .site-description {
     float: none;
 }
