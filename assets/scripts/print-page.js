@@ -740,7 +740,7 @@ jQuery(document).ready(function () {
     // Javascript syntax error, or the REST API isn't working) let the user know.
 	setTimeout(function(){
         if(! pmb.working){
-			alert(pmb.translations.init_error);
+			alert(pmb_print_data.i18n.init_error);
 		}
 	},
 	10000);
