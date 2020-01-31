@@ -6,6 +6,15 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
+    'PHPStan\\WordPress\\Composer\\FixWpStubs' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/Composer/FixWpStubs.php',
+    'PHPStan\\WordPress\\EscSqlDynamicFunctionReturnTypeExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/EscSqlDynamicFunctionReturnTypeExtension.php',
+    'PHPStan\\WordPress\\GetPostDynamicFunctionReturnTypeExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/GetPostDynamicFunctionReturnTypeExtension.php',
+    'PHPStan\\WordPress\\IsWpErrorFunctionTypeSpecifyingExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/IsWpErrorFunctionTypeSpecifyingExtension.php',
+    'PHPStan\\WordPress\\RedirectCanonicalDynamicFunctionReturnTypeExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/RedirectCanonicalDynamicFunctionReturnTypeExtension.php',
+    'PHPStan\\WordPress\\WpThemeMagicPropertiesClassReflectionExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/WpThemeMagicPropertiesClassReflectionExtension.php',
+    'PrintMyBlog\\compatibility\\DetectAndActivate' => $baseDir . '/src/PrintMyBlog/compatibility/DetectAndActivate.php',
+    'PrintMyBlog\\compatibility\\plugins\\EasyFootnotes' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/EasyFootnotes.php',
     'PrintMyBlog\\controllers\\PmbActivation' => $baseDir . '/src/PrintMyBlog/controllers/PmbActivation.php',
     'PrintMyBlog\\controllers\\PmbAdmin' => $baseDir . '/src/PrintMyBlog/controllers/PmbAdmin.php',
     'PrintMyBlog\\controllers\\PmbAjax' => $baseDir . '/src/PrintMyBlog/controllers/PmbAjax.php',
@@ -15,7 +24,9 @@ return array(
     'PrintMyBlog\\controllers\\PmbInit' => $baseDir . '/src/PrintMyBlog/controllers/PmbInit.php',
     'PrintMyBlog\\domain\\FrontendPrintSettings' => $baseDir . '/src/PrintMyBlog/domain/FrontendPrintSettings.php',
     'PrintMyBlog\\domain\\PrintOptions' => $baseDir . '/src/PrintMyBlog/domain/PrintOptions.php',
+    'Symfony\\Polyfill\\Php73\\Php73' => $vendorDir . '/symfony/polyfill-php73/Php73.php',
     'Twine\\admin\\news\\DashboardNews' => $baseDir . '/src/Twine/admin/news/DashboardNews.php',
+    'Twine\\compatibility\\CompatibilityBase' => $baseDir . '/src/Twine/compatibility/CompatibilityBase.php',
     'Twine\\controllers\\BaseController' => $baseDir . '/src/Twine/controllers/BaseController.php',
     'mnelson4\\RestApiDetector\\RestApiDetector' => $baseDir . '/src/mnelson4/RestApiDetector.php',
     'mnelson4\\RestApiDetector\\RestApiDetectorError' => $baseDir . '/src/mnelson4/RestApiDetectorError.php',
