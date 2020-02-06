@@ -48,14 +48,15 @@ class PmbInit extends BaseController
     {
         $this->setUrls();
         if (defined('DOING_AJAX') && DOING_AJAX) {
-            $controller = new PmbAjax();
+            (new PmbAjax())->setHooks();
         } elseif (is_admin()) {
-            $controller = new PmbAdmin();
+            (new PmbAdmin())->setHooks();
+            $this->initDashboardNews();
         } else {
-            $controller = new PmbFrontend();
+            (new PmbFrontend())->setHooks();
+            (new PmbPrintPage())->setHooks();
         }
-        $this->initDashboardNews();
-        $controller->setHooks();
+
 
         $block_controller = new PmbGutenbergBlock();
         $block_controller->setHooks();

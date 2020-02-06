@@ -19,6 +19,18 @@ abstract class BaseController
      * @since 1.0.0
      */
     abstract public function setHooks();
+
+    /**
+     * Helper for getting a value from the request, or setting a default.
+     * @since 2.2.3
+     * @param $query_param_name
+     * @param $default
+     * @return mixed
+     */
+    protected function getFromRequest($query_param_name, $default)
+    {
+        return isset($_GET[$query_param_name]) ? $_GET[$query_param_name] : $default;
+    }
 }
 // End of file BaseController.php
 // Location: Twine\controllers/BaseController.php
