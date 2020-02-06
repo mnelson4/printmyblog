@@ -62,18 +62,18 @@ class PmbFrontend extends BaseController
                     $args = $base_args;
                     $args['format'] = $slug;
                     $args['pmb-post'] = $post->ID;
-                    if($slug === 'print'){
+                    if ($slug === 'print') {
                         $args['links'] = 'parens';
                     }
                     $url = add_query_arg(
                         $args,
                         site_url()
                     );
-                    $html .= ' <a href="'
-                        . $url
-                        . '" class="button button-secondary wp-block-button__link">'
-                        . $print_settings->getFrontendLabel($slug)
-                        . '</a>';
+                    $html .= sprintf(
+                        ' <a href="%s" class="button button-secondary wp-block-button__link">%s</a>',
+                        esc_url($url),
+                        esc_html($print_settings->getFrontendLabel($slug))
+                    );
                 }
                 $html .= '</div>';
                 return $html . $content;
