@@ -97,5 +97,4 @@ class PmbFrontend extends BaseController
     public function enqueue_scripts()
     {
     }
-
 }
