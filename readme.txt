@@ -222,6 +222,9 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 2.2.3 February 6 2020 =
+* Code cleanup
+
 = 2.2.2 January 30 2020 =
 * Fix innocuous Javascript error in 2017 theme
 * Work even if site has no title
