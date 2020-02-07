@@ -22,3 +22,9 @@
         background: rgba(255, 255, 255, .8) !important;
     }
 }
+
+/* PowerPress https://wordpress.org/plugins/powerpress/
+ */
+.pmb-posts .powerpress_player{
+    display:none;
+}
