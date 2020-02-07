@@ -469,7 +469,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         }
         if(this.showTitle) {
             html_to_add += '<h1 class="entry-title">'
-				+ post.title.rendered.replace(this.translations.protected, '').replace(this.translations.private,'')
+				+ this.stripShortcodes(post.title.rendered.replace(this.translations.protected, '').replace(this.translations.private,''))
 				+ '</h1>';
         }
         if(this.format !== 'ebook'){
@@ -511,7 +511,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
         if(this.showExcerpt) {
             html_to_add += '<div class="entry-excerpt">'
-                + post.excerpt.rendered
+                + this.stripShortcodes(post.excerpt.rendered)
                 + '</div>';
         }
         if(this.showContent) {
@@ -530,7 +530,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 					}
 				}
 			}
-			html_to_add += content_html;
+			html_to_add += this.stripShortcodes(content_html);
 		}
         html_to_add += '</div>';
 		if(this.format !== 'ebook'){
@@ -544,6 +544,15 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         }
         this.posts_div.append(html_to_add);
     };
+
+    /**
+     * Removes awkwardly unrendered shortcodes that may have been forgotten.
+     * @param content
+     * @return {*}
+     */
+    this.stripShortcodes = function (content) {
+        return content.replace(/\[[^\]]+\]/g, '');
+    }
 
     this.convertYoutubeVideosToImages = function(content) {
 		jQuery('div.wp-block-embed__wrapper iframe[src*=youtube]').unwrap().end();
