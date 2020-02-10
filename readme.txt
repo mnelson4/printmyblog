@@ -22,6 +22,7 @@ Why would I want to print my blog?
 * **Print your blog** to read offline.
 * **Create a paper backup** (book or printout) to read when your blog is taken offline.
 * **Create a PDF, ePub, or MOBI file** as a human-readable, portable backup. Send it to friends, store it in the cloud or a hard drive, or even archive it with a historical organization.
+* **Copy your entire Blog** for quick pasting into another program like Microsoft Word or Google Docs
 
 Why would visitors want to print my blog?
 
@@ -39,7 +40,7 @@ https://www.youtube.com/watch?v=rvSo9NCOIX0
 
 = Features =
 
-* loads all your blog’s posts into a single web page so you can print them from your web browser (to paper, PDF, ePub, or anything your web browser supports)
+* loads all your blog’s posts into a single web page so you can print them from your web browser (to paper, PDF, ePub, or anything your web browser supports) or copy-and-paste them into another program (although the other program likely won’t format it as nicely)
 * supports printing thousands of blog posts in one click (the record is over 3000 posts)
 * prints posts and pages
 * does not print ink-guzzlers like site logo, sidebar widgets, or footer
