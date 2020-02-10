@@ -52,6 +52,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 	this.post = pmb_instance_vars.post;
 	this.order = pmb_instance_vars.order;
 	this.working = false;
+	this.shortcodes = pmb_instance_vars.shortcodes;
     /**
      * Initializes variables and begins fetching taxonomies, then gets started fetching posts/pages.
      * @function
@@ -469,7 +470,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         }
         if(this.showTitle) {
             html_to_add += '<h1 class="entry-title">'
-				+ this.stripShortcodes(post.title.rendered.replace(this.translations.protected, '').replace(this.translations.private,''))
+				+ this.maybeStripShortcodes(post.title.rendered.replace(this.translations.protected, '').replace(this.translations.private,''))
 				+ '</h1>';
         }
         if(this.format !== 'ebook'){
@@ -511,7 +512,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
         if(this.showExcerpt) {
             html_to_add += '<div class="entry-excerpt">'
-                + this.stripShortcodes(post.excerpt.rendered)
+                + this.maybeStripShortcodes(post.excerpt.rendered)
                 + '</div>';
         }
         if(this.showContent) {
@@ -530,7 +531,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 					}
 				}
 			}
-			html_to_add += this.stripShortcodes(content_html);
+			html_to_add += this.maybeStripShortcodes(content_html);
 		}
         html_to_add += '</div>';
 		if(this.format !== 'ebook'){
@@ -550,9 +551,12 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      * @param content
      * @return {*}
      */
-    this.stripShortcodes = function (content) {
-        return content.replace(/\[[^\]]+\]/g, '');
-    }
+    this.maybeStripShortcodes = function (content) {
+        if( ! this.shortcodes){
+            return content.replace(/\[[^\]]+\]/g, '');
+        }
+        return content;
+    };
 
     this.convertYoutubeVideosToImages = function(content) {
 		jQuery('div.wp-block-embed__wrapper iframe[src*=youtube]').unwrap().end();

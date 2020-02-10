@@ -252,7 +252,16 @@ use PrintMyBlog\domain\PrintOptions;
                         </td>
 
                     </tr>
-                    </tbody>
+                    <tr>
+                        <th scope="row">
+                            <label for="shortcodes"><?php esc_html_e('Include Unrendered Shortcodes','print-my-blog' );?></label>
+                        </th>
+                        <td>
+                            <input type="checkbox" name="shortcodes" value="1">
+                            <p class="description"><?php esc_html_e('If you left shortcodes from deactivated deactivated plugins or themes in your posts, they are automatically removed from printouts. Check this to leave them.','print-my-blog' );?></p>
+                        </td>
+
+                    </tr>                    </tbody>
                 </table>
             </details>
             <input type="hidden" name="<?php echo PMB_PRINTPAGE_SLUG;?>" value="1">
