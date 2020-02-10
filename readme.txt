@@ -226,6 +226,8 @@ But if not, your browser can also remove background colors.
 * Code cleanup
 * Printing a post using the print buttons now defaults to putting links in parentheses
 * Remove unrendered shortcodes
+* Hide PowerPlay playback controls as they don't work in printouts
+* Fixed a bug that happened first time loading the print-page
 
 = 2.2.2 January 30 2020 =
 * Fix innocuous Javascript error in 2017 theme

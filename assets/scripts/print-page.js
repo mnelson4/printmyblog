@@ -400,10 +400,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         } else{
             non_emojis.wrap('<div class="pmb-image"></div>');
             if(this.image_size !== false) {
-                var pmb = this;
+                var pmb_print = this;
                 non_emojis.each(function () {
                     var obj = jQuery(this);
-                    var width = pmb.image_size;
+                    var width = pmb_print.image_size;
                     // Modify the CSS here. We could have written CSS rules but the selector worked slightly differently
                     // in CSS compared to jQuery.
                     // Let's make the image smaller and centered
@@ -742,17 +742,17 @@ function pmb_help_show(id){
     jQuery('.pmb-help-ask').hide();
 }
 
-var pmb = null;
+var pmb_print = null;
 var original_backbone_sync;
 jQuery(document).ready(function () {
-	pmb = new PmbPrintPage(
+    pmb_print = new PmbPrintPage(
 		pmb_print_data.data,
 		pmb_print_data.i18n
 	);
 	// I know I'll add babel.js someday. But for now, if there's an error initializing (probably because of a
     // Javascript syntax error, or the REST API isn't working) let the user know.
 	setTimeout(function(){
-        if(! pmb.working){
+        if(! pmb_print.working){
 			alert(pmb_print_data.i18n.init_error);
 		}
 	},
@@ -762,7 +762,7 @@ jQuery(document).ready(function () {
             function(){
 
 
-				pmb.initialize();
+                pmb_print.initialize();
             },
             1000
         );

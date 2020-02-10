@@ -225,11 +225,11 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 	};
 }
 
-var pmb = null;
+var pmb_setup = null;
 jQuery(document).ready(function () {
 	wp.api.loadPromise.done( function() {
 		// @var object pmb_setup_page
-		pmb = new PmbSetupPage(pmb_setup_page.data, pmb_setup_page.translations);
-		pmb.init();
+        pmb_setup = new PmbSetupPage(pmb_setup_page.data, pmb_setup_page.translations);
+        pmb_setup.init();
 	});
 });

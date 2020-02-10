@@ -215,9 +215,3 @@ mess up the layout (especially in galleries!) Footnotes are much better. Or link
 .pmb-posts a[href]:after {
     content:'';
 }
-/* Prevents plugin https://www.tipsandtricks-hq.com/wordpress-audio-music-player-plugin-4556
-from adding a gray box in the footer when using Prince
- */
-.pmb-posts #sm2movie {
-    display: none;
-}
