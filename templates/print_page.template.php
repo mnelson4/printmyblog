@@ -28,10 +28,17 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
 <!-- Print My Blog Version <?php echo PMB_VERSION;?>-->
 <div class="pmb-waiting-message-fullpage pmb-extra-content">
     <div class="pmb-waiting-message-outer-container">
-        <div class="pmb-window-buttons">
-            <span class="pmb-cancel-button">
+        <div class="pmb-window-buttons pmb-top-left">
+            <span class="pmb-loading-content">
                 <a href="javascript:history.back();">❌
                     <?php esc_html_e('Cancel', 'print-my-blog'); ?>
+                </a>
+            </span>
+        </div>
+        <div class="pmb-window-buttons pmb-top-left">
+            <span class="pmb-print-ready">
+                <a href="javascript:history.back();">✅
+                    <?php esc_html_e('All Done', 'print-my-blog'); ?>
                 </a>
             </span>
         </div>
@@ -73,7 +80,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
         <div class="pmb-waiting-area">
             <h1 id='pmb-in-progress-h1' class="pmb-waiting-h1"><?php _e('Initializing', 'print-my-blog'); ?></h1>
         </div>
-        <div class="pmb-print-ready" style="visibility:hidden">
+        <div class="pmb-print-ready pmb-print-instructions">
             <?php
             if ($pmb_format === 'ebook') {
                 ?>

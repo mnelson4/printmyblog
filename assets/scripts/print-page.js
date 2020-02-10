@@ -14,8 +14,8 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.waiting_area = null;
     this.print_ready_selector = pmb_instance_vars.print_ready_selector;
     this.print_ready = null;
-    this.cancel_button_selector = pmb_instance_vars.cancel_button_selector;
-    this.cancel_button = null;
+    this.loading_content_selector = pmb_instance_vars.loading_content_selector;
+    this.loading_content = null;
     this.proxy_for = pmb_instance_vars.proxy_for;
     this.locale = pmb_instance_vars.locale;
     this.image_size = pmb_instance_vars.image_size;
@@ -64,7 +64,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         this.posts_div = jQuery(this.posts_div_selector);
         this.waiting_area = jQuery(this.waiting_area_selector);
         this.print_ready = jQuery(this.print_ready_selector);
-        this.cancel_button = jQuery(this.cancel_button_selector);
+        this.loading_content = jQuery(this.loading_content_selector);
 
         var alltaxonomiesCollection = new wp.api.collections.Taxonomies();
         alltaxonomiesCollection.fetch().done((taxonomies) => {
@@ -376,7 +376,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 this.header.html(this.translations.ready);
                 this.print_ready.css('visibility','visible');
                 this.waiting_area.hide();
-                this.cancel_button.hide();
+                this.loading_content.hide();
                 this.prettyUpPrintedPage();
             },
             // Guess that we'd like 50 milliseconds per post. That's too long for simple text; too short for ones

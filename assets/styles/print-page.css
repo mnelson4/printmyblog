@@ -111,13 +111,25 @@ div.tiled-gallery{
 
 .pmb-window-buttons{
     position:absolute;
-    top:0;
-    left:0;
     line-height:1em;
     font-size:0.8em;
     color:gray;
     margin-top:5px;
     margin-left:5px;
+}
+.pmb-top-left{
+    top:0;
+    left:0;
+}
+
+.pmb-bottom-right{
+    bottom:0;
+    right:0;
+    text-align:right;
+}
+
+.pmb-print-ready{
+    visibility:hidden;
 }
 
 .pmb-posts-body article.pmb-post-article{

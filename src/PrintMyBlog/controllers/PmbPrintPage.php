@@ -269,7 +269,7 @@ class PmbPrintPage extends BaseController
             'posts_div_selector' => '.pmb-posts-body',
             'waiting_area_selector' => '.pmb-posts-placeholder',
             'print_ready_selector' => '.pmb-print-ready',
-            'cancel_button_selector' => '.pmb-cancel-button',
+            'loading_content_selector' => '.pmb-loading-content',
             'locale' => get_locale(),
             'image_size' => $this->getImageRelativeSize(),
             'proxy_for' => $this->proxy_for,
