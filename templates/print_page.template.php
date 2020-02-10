@@ -34,11 +34,9 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                     <?php esc_html_e('Cancel', 'print-my-blog'); ?>
                 </a>
             </span>
-        </div>
-        <div class="pmb-window-buttons pmb-top-left">
             <span class="pmb-print-ready">
                 <a href="javascript:history.back();">✅
-                    <?php esc_html_e('All Done', 'print-my-blog'); ?>
+                    <?php esc_html_e('Return', 'print-my-blog'); ?>
                 </a>
             </span>
         </div>
@@ -166,6 +164,10 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                         <?php
                     }
                 }
+            } elseif($pmb_format === 'html'){// HTML
+                ?>
+                <input type="submit" onclick="pmb_copy()" value="<?php esc_attr_e('Copy to Clipboard', 'print-my-blog'); ?>"/>
+                <?php
             } else { // default: print
                 ?>
                 <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print', 'print-my-blog'); ?>"/>
@@ -188,7 +190,11 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
     // dotEPUB skips the title and description if they're not in the same div.
     // But it's nice for print and PDFs to have that area be in a different stylable div.
     ?>
+    <?php
+        if (in_array($pmb_format,['print','pdf'] )){
+        ?>
     <div class="pmb-preview-note"><?php esc_html_e('Use your browser’s "print preview" for the best preview.', 'print-my-blog'); ?></div>
+    <?php } ?>
     <div class="pmb-posts-header">
         <?php
         } else {

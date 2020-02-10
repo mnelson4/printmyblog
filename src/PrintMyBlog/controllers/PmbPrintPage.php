@@ -347,7 +347,8 @@ class PmbPrintPage extends BaseController
                     'by' => esc_html__('By', 'print-my-blog'),
                     'protected' => esc_html__('Protected:', 'print-my-blog'),
                     'private' => esc_html__('Private:', 'print-my-blog'),
-                    'init_error' => $init_error_message
+                    'init_error' => $init_error_message,
+                    'copied' => esc_html__('Posts’ copied! Ready to paste.', 'print-my-blog')
                 ),
                 'data' => $data,
             )

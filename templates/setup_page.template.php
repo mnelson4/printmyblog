@@ -290,7 +290,11 @@ use PrintMyBlog\domain\PrintOptions;
                             'label' => esc_html__('eBook (ePub or MOBI)', 'print-my-blog'),
                             'help_text' => esc_html__('Make a free eBook using dotEPUB.', 'print-my-blog'),
                             'link' => 'https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20an%20ebook%20using%20print%20my%20blog%3F'
-                        )
+                        ),
+                        'html' => array(
+                                'label' => esc_html__('HTML', 'print-my-blog'),
+                            'help_text' => esc_html__('Easily copy-and-paste into another program like Microsoft Word or Google Docs. (Although other programs will not format the content as well as WordPress.)', 'print-my-blog')
+                        ),
                     );
                     foreach($formats as $key => $details){
                         ?>

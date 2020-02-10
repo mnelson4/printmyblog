@@ -727,6 +727,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             even:even
         };
     };
+    this.copyPosts = function(){
+        copyToClip(this.posts_div.html());
+    }
 }
 
 /**
@@ -740,6 +743,11 @@ function pmb_print_preview()
 function pmb_help_show(id){
     jQuery('.' + id).show();
     jQuery('.pmb-help-ask').hide();
+}
+
+function pmb_copy(){
+    pmb_print.copyPosts();
+    alert(pmb_print.translations.copied);
 }
 
 var pmb_print = null;
@@ -806,4 +814,17 @@ jQuery(document).ready(function () {
     };
 });
 
-
+/**
+ * From https://stackoverflow.com/a/50067769/1493883
+ * @param str
+ */
+function copyToClip(str) {
+    function listener(e) {
+        e.clipboardData.setData("text/html", str);
+        e.clipboardData.setData("text/plain", str);
+        e.preventDefault();
+    }
+    document.addEventListener("copy", listener);
+    document.execCommand("copy");
+    document.removeEventListener("copy", listener);
+};

@@ -122,12 +122,6 @@ div.tiled-gallery{
     left:0;
 }
 
-.pmb-bottom-right{
-    bottom:0;
-    right:0;
-    text-align:right;
-}
-
 .pmb-print-ready{
     visibility:hidden;
 }

@@ -222,12 +222,14 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
-= 2.2.3 February 6 2020 =
+= 2.3.0 February 6 2020 =
 * Code cleanup
 * Printing a post using the print buttons now defaults to putting links in parentheses
 * Remove unrendered shortcodes
 * Hide PowerPlay playback controls as they don't work in printouts
 * Fixed a bug that happened first time loading the print-page
+* Add a "Return" button when the print-page is ready
+* Added "HTML" format for easy copy-and-pasting
 
 = 2.2.2 January 30 2020 =
 * Fix innocuous Javascript error in 2017 theme
