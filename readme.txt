@@ -7,7 +7,7 @@ Tested up to: 5.3
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Donate link: https://opencollective.com/print-my-blog
+Donate link: https://www.paypal.com/paypalme2/cmljnelson/20
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -110,14 +110,9 @@ If this doesn't meet your needs, there are good paid and free alternatives.
 
 If you find it useful, please:
 
-* [make the recommended donation to the non-profit](https://opencollective.com/print-my-blog)
 * [give it a 5 star review]((https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post))
 * [translate it into your language using WordPress' GlotPress]((https://translate.wordpress.org/projects/wp-plugins/print-my-blog))
 * report bugs and suggest features on [GitHub](https://github.com/mnelson4/printmyblog) or [WordPress Support Forum]((https://wordpress.org/support/plugin/print-my-blog))
-
-[Translators and code contributors can be reimbursed for their time](https://opencollective.com/print-my-blog/expenses/new).
-
-[Read plugin updates and see how donations are being used on our non-profit Open Collective.](https://opencollective.com/print-my-blog)
 
 Best Wishes Preserving Your Blog!
 

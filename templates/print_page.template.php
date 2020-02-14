@@ -45,22 +45,13 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
             <span class="pmb-help-ask"><?php printf(
                 // translators: 1: a bunch of HTML for emoji buttons
                     __('What do you think? %1$s', 'print-my-blog'),
-                    '<a id="pmb-help-love" href="javascript:pmb_help_show(\'pmb-help-love-text\');" title="'
+                    '<a id="pmb-help-love" href="javascript:pmb_help_show(\'pmb-help-happy-text\');" title="'
                     . __('Love it (shows feedback options)', 'print-my-blog')
-                    . '">😍</a> <a id="pmb-help-happy" href="javascript:pmb_help_show(\'pmb-help-happy-text\');")" title="'
-                    . __('Like it (shows feedback options)', 'print-my-blog')
-                    . '">😃</a> <a id="pmb-help-sad" href="javascript:pmb_help_show(\'pmb-help-sad-text\');" title="'
+                    . '">😍</a> <a id="pmb-help-sad" href="javascript:pmb_help_show(\'pmb-help-sad-text\');" title="'
                     . __('Don’t like something (shows feedback options)', 'print-my-blog')
                     . '")>☹️</a>'
                 ); ?>
             </span>
-                <span class="pmb-help-love-text" style="display:none"><?php printf(
-                    // translators: 1: opening link tag, 2: closing link tag, 3: different opening link tag
-                        __('Great! %1$sFYI you can sponsor%2$s or %3$sreview%2$s it.', 'print-my-blog'),
-                        '<a href="https://opencollective.com/print-my-blog" target="_blank" title="' . __('Sponsor development (opens in new tab)', 'print-my-blog') . '">',
-                        '</a>',
-                        '<a href="https://wordpress.org/support/plugin/print-my-blog/reviews/?filter=5" target="_blank" title="' . __('Plugin Reviews (opens in new tab)', 'print-my-blog') . '">'
-                    ); ?></span>
                 <span class="pmb-help-happy-text" style="display:none"><?php printf(
                     // translators: 1: opening link tag, 2: closing link tag
                         __('Nice! %1$sPlease leave a review%2$s.', 'print-my-blog'),
