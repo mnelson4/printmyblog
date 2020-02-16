@@ -47,7 +47,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                     __('What do you think? %1$s', 'print-my-blog'),
                     '<a id="pmb-help-love" href="javascript:pmb_help_show(\'pmb-help-happy-text\');" title="'
                     . __('Love it (shows feedback options)', 'print-my-blog')
-                    . '">😍</a> <a id="pmb-help-sad" href="javascript:pmb_help_show(\'pmb-help-sad-text\');" title="'
+                    . '">😃</a> <a id="pmb-help-sad" href="javascript:pmb_help_show(\'pmb-help-sad-text\');" title="'
                     . __('Don’t like something (shows feedback options)', 'print-my-blog')
                     . '")>☹️</a>'
                 ); ?>
