@@ -293,7 +293,9 @@ use PrintMyBlog\domain\PrintOptions;
                         ),
                         'html' => array(
                                 'label' => esc_html__('HTML', 'print-my-blog'),
-                            'help_text' => esc_html__('Easily copy-and-paste into another program like Microsoft Word or Google Docs. (Although other programs will not format the content as well as WordPress.)', 'print-my-blog')
+                            'help_text' => esc_html__('Easily copy-and-paste into another program like Microsoft Word or Google Docs. Note: this is not recommended for customizing printouts, as other programs usually format the content poorly. Instead, use Print My Blog’s CSS classes to remove or add content from printouts.', 'print-my-blog'),
+                            'link' => 'https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20remove%20post%20content%20from%20the%20printout%3F'
+
                         ),
                     );
                     foreach($formats as $key => $details){
