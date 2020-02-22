@@ -218,6 +218,9 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 2.3.1 February 24 2020 =
+* Add filter to place print buttons below post content
+
 = 2.3.0 February 17 2020 =
 * Added "HTML" format for easy copy-and-pasting
 * Printing a post using the print buttons now defaults to putting links in parentheses
