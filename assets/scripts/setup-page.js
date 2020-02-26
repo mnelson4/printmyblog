@@ -21,6 +21,10 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 
 
 	this.init = function() {
+		// double-check the setup page is actually rendered. No need doing anything more if it isn't.
+		if(this.dynamic_categories.length == 0){
+			return;
+		}
 		// If WP REST API proxy is enabled, change the REST API URL depending on what they enter into the site URL.
 		jQuery(site_input).keyup(
 			jQuery.debounce(
