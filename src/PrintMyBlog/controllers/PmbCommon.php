@@ -46,9 +46,9 @@ class PmbCommon extends BaseController
         );
         wp_register_script(
             'jquery-debounce',
-            PMB_ASSETS_URL . 'scripts/libs/jquery.debounce-1.0.5.js',
+            PMB_ASSETS_URL . 'scripts/libs/jquery.debounce-1.1.min.js',
             ['jquery'],
-            '1.0.5'
+            '1.1'
         );
         wp_register_script(
             'select2',

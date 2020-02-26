@@ -24,10 +24,10 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 		// If WP REST API proxy is enabled, change the REST API URL depending on what they enter into the site URL.
 		jQuery(site_input).keyup(
 			jQuery.debounce(
+                2000,
 				() => {
 					return this.updateRestApiUrl(site_input.val());
-				},
-				2000
+				}
 			)
 		);
 		// Initialize the list of taxonomies etc.
