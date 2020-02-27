@@ -286,7 +286,7 @@ class PmbPrintPage extends BaseController
             'author' => $this->getFromRequest('pmb-author', null),
             'post' => $this->getFromRequest('pmb-post', null),
             'order' => $order,
-            'shortcodes' => $this->getFromRequest('shortcodes',null)
+            'shortcodes' => $this->getFromRequest('shortcodes', null)
         ];
         // add the before and after filters, if they were provided
         $dates = $this->getFromRequest('dates', array());
