@@ -82,7 +82,11 @@ class PmbFrontend extends BaseController
                     );
                 }
                 $html .= '</div>';
-                $add_to_top = apply_filters('\PrintMyBlog\controllers\PmbFrontend->addPrintButton $add_to_top', true, $post);
+                $add_to_top = apply_filters(
+                    '\PrintMyBlog\controllers\PmbFrontend->addPrintButton $add_to_top',
+                    true,
+                    $post
+                );
                 if ($add_to_top) {
                     return $html . $content;
                 } else {
