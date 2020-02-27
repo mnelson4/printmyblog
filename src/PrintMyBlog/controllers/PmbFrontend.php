@@ -33,27 +33,27 @@ class PmbFrontend extends BaseController
             $print_settings->load();
             if ($print_settings->showButtons()) {
                 $base_args = array(
-                        'post-type' => 'post',
-                        'include-private-posts' => '1',
-                        'show_site_title' => '1',
-                        'show_site_tagline' => '1',
-                        'show_site_url' => '1',
-                        'show_date_printed' => '1',
-                        'show_title' => '1',
-                        'show_date' => '1',
-                        'show_categories' => '1',
-                        'show_featured_image' => '1',
-                        'show_content' => '1',
-                        'post-page-break' => 'on',
-                        'columns' => '1',
-                        'font-size' => 'normal',
-                        'image-size' => 'medium',
-                        'links' => 'include',
-                        'rendering-wait' => '10',
-                        'print-my-blog' => '1',
-                        'format' => '%s',
-                        'pmb-post' => '%d',
-                    );
+                    'post-type' => 'post',
+                    'include-private-posts' => '1',
+                    'show_site_title' => '1',
+                    'show_site_tagline' => '1',
+                    'show_site_url' => '1',
+                    'show_date_printed' => '1',
+                    'show_title' => '1',
+                    'show_date' => '1',
+                    'show_categories' => '1',
+                    'show_featured_image' => '1',
+                    'show_content' => '1',
+                    'post-page-break' => 'on',
+                    'columns' => '1',
+                    'font-size' => 'normal',
+                    'image-size' => 'medium',
+                    'links' => 'include',
+                    'rendering-wait' => '10',
+                    'print-my-blog' => '1',
+                    'format' => '%s',
+                    'pmb-post' => '%d',
+                );
                 $html = '<div class="pmb-print-this-page wp-block-button">';
                 foreach ($print_settings->formats() as $slug => $settings) {
                     if (! $print_settings->isActive($slug)) {
@@ -66,7 +66,13 @@ class PmbFrontend extends BaseController
                         $args['links'] = 'parens';
                     }
                     $url = add_query_arg(
-                        $args,
+                        apply_filters(
+                            '\PrintMyBlog\controllers\PmbFrontend->addPrintButton $base_args',
+                            $args,
+                            $post,
+                            $slug,
+                            $settings
+                        ),
                         site_url()
                     );
                     $html .= sprintf(
