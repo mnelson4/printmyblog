@@ -6,10 +6,10 @@
  *
  * @wordpress-plugin
  * Plugin Name: Print My Blog
- * Plugin URI: https://wordpress.org/plugins/print-my-blog/
+ * Plugin URI: https://printmy.blog
  * Description: Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
  * Author: Michael Nelson
- * Author URI: https://cmljnelson.blog/
+ * Author URI: https://printmy.blog
  * Version: 2.3.1
  * Requires at least: 4.6
  * Requires PHP: 5.4

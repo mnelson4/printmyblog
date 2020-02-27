@@ -222,6 +222,7 @@ But if not, your browser can also remove background colors.
 * Add filter to place print buttons below post content, and their settings can be customized
 * Update to jQuery debounce 1.1
 * Avoid requests to taxonomies endpoint unless print settings block is actually in-use
+* Use new printmy.blog RSS feed
 
 = 2.3.0 February 17 2020 =
 * Added "HTML" format for easy copy-and-pasting

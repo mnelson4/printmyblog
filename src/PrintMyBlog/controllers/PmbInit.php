@@ -73,8 +73,8 @@ class PmbInit extends BaseController
     {
         if (is_admin()) {
             new DashboardNews(
-                'https://cmljnelson.blog/category/wordpress/print-my-blog/rss',
-                'https://cmljnelson.blog/category/wordpress/print-my-blog',
+                'https://printmy.blog/rss',
+                'https://printmy.blog',
                 [
                     'product_title' => 'print my blog',
                     'item_prefix' => esc_html__('Print My Blog', 'print-my-blog'),
