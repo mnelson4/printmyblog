@@ -37,3 +37,12 @@ from adding a gray box in the footer when using Prince
 .pmb-posts #sm2movie {
     display: none;
 }
+
+/* Fusion gallery (possibly from Avada theme) doesn't appear on print pages. They're using some Javascript wizardry to place the images,
+which I don't think is necessary. A regular flex layout seems to handle it fine. See https://github.com/mnelson4/printmyblog/issues/57#issuecomment-592063316*/
+.pmb-posts .fusion-gallery{
+    display:flex;
+}
+.pmb-posts .fusion-gallery .fusion-gallery-column{
+    display:inline-block;
+}
