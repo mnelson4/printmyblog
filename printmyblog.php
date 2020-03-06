@@ -101,11 +101,6 @@ if (defined('PMB_VERSION')) {
     }
 
     register_activation_hook(PMB_MAIN_FILE, 'pmb_plugin_activation');
-
-    require PMB_VENDOR_DIR . 'autoload.php';
-
     define('PMB_PRINTPAGE_SLUG', 'print-my-blog');
-
-    $pmb_init = new PrintMyBlog\controllers\PmbInit();
-    $pmb_init->setHooks();
+    require_once('bootstrap.php');
 }
