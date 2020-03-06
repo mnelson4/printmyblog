@@ -219,7 +219,7 @@ But if not, your browser can also remove background colors.
 == Changelog ==
 
 = 2.3.2 March 5 2020 =
-* Fix fatal error for PHP 5.3 users (plugin instead gracefully deactivates)
+* Fix fatal error for PHP 5.2 and 5.3 users
 
 = 2.3.1 February 24 2020 =
 * Add filter to place print buttons below post content, and their settings can be customized
