@@ -10,7 +10,7 @@
  * Description: Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
  * Author: Michael Nelson
  * Author URI: https://printmy.blog
- * Version: 2.3.1
+ * Version: 2.3.2
  * Requires at least: 4.6
  * Requires PHP: 5.4
  * Text Domain: print-my-blog
@@ -46,7 +46,7 @@ if (defined('PMB_VERSION')) {
     add_action('admin_notices', 'pmb_already_active', 1, 0);
 
     // then make sure the minimum version of PHP is being used
-} else if (! version_compare(PHP_VERSION, PMB_MIN_PHP_VER_REQUIRED, '>=')) {
+} else if ( version_compare(PHP_VERSION, PMB_MIN_PHP_VER_REQUIRED, '<')) {
     /**
      * pmb_minimum_php_version_error
      *
@@ -77,7 +77,7 @@ if (defined('PMB_VERSION')) {
     add_action('admin_notices', 'pmb_minimum_php_version_error', 1, 0);
 } else {
     // it's all good! go for it!
-    define('PMB_VERSION', '2.3.1.rc.000');
+    define('PMB_VERSION', '2.3.2.rc.000');
     define('PMB_DIR', wp_normalize_path(__DIR__) . '/');
     define('PMB_MAIN_FILE', __FILE__);
     define('PMB_TEMPLATES_DIR', PMB_DIR . 'templates/');
@@ -106,5 +106,6 @@ if (defined('PMB_VERSION')) {
 
     define('PMB_PRINTPAGE_SLUG', 'print-my-blog');
 
-    (new PrintMyBlog\controllers\PmbInit())->setHooks();
+    $pmb_init = new PrintMyBlog\controllers\PmbInit();
+    $pmb_init->setHooks();
 }
