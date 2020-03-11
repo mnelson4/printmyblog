@@ -111,9 +111,6 @@ div.tiled-gallery{
 
 .pmb-window-buttons{
     position:absolute;
-    line-height:1em;
-    font-size:0.8em;
-    color:gray;
     margin-top:5px;
     margin-left:5px;
 }
@@ -220,4 +217,19 @@ mess up the layout (especially in galleries!) Footnotes are much better. Or link
  */
 .pmb-posts a[href]:after {
     content:'';
+}
+
+/* Make sure the print button is clearly a pressable button; some themes style it as a block and so the cursor
+won't switch to a pointer when they hover over it; and it won't be centered anymore*/
+.pmb-waiting-message-outer-container input[type=submit]{
+    cursor:pointer;
+    /* In case the theme made the input display:block, use margins to center it.*/
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.pmb-small-instructions{
+    line-height:1em;
+    font-size:0.8em;
+    color:gray;
 }

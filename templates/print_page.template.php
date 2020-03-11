@@ -28,7 +28,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
 <!-- Print My Blog Version <?php echo PMB_VERSION;?>-->
 <div class="pmb-waiting-message-fullpage pmb-extra-content">
     <div class="pmb-waiting-message-outer-container">
-        <div class="pmb-window-buttons pmb-top-left">
+        <div class="pmb-window-buttons pmb-top-left pmb-small-instructions">
             <span class="pmb-loading-content">
                 <a href="javascript:history.back();">❌
                     <?php esc_html_e('Cancel', 'print-my-blog'); ?>
@@ -162,6 +162,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
             } else { // default: print
                 ?>
                 <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print', 'print-my-blog'); ?>"/>
+                <div class="pmb-small-instructions"><?php esc_html_e('Use your browser to print.', 'event_espresso'); ?></div>
                 <?php
             }
             ?>
