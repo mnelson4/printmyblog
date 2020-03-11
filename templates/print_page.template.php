@@ -55,7 +55,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                 <span class="pmb-help-happy-text" style="display:none"><?php printf(
                     // translators: 1: opening link tag, 2: closing link tag
                         __('Nice! %1$sPlease leave a review%2$s.', 'print-my-blog'),
-                        '<a href="https://wordpress.org/support/plugin/print-my-blog/reviews/?filter=5" target="_blank" title="' . __('Plugin Reviews (opens in new tab)', 'print-my-blog') . '">',
+                        '<a href="https://wordpress.org/support/plugin/print-my-blog/reviews/" target="_blank" title="' . __('Plugin Reviews (opens in new tab)', 'print-my-blog') . '">',
                         '</a>'
                     ); ?></span>
                 <span class="pmb-help-sad-text" style="display:none"><?php printf(
