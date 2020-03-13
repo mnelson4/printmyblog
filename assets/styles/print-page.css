@@ -23,6 +23,7 @@
 
     body.pmb-print-page{
         background-color:lightgray;
+        background-image:none;
     }
 }
 
