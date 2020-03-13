@@ -221,6 +221,8 @@ But if not, your browser can also remove background colors.
 = 2.3.3 March 12, 2020 =
 * Instruct users to print with their browser (in case the button doesn't work)
 * CSS added for compatibility with Avada Theme/"Fusion Styles"
+* Add "pmb-format-{format}" (eg "pmb-format-print" and "pmb-format-pdf") CSS class to body
+* Only force background white for print; other formats use the theme's background color
 
 = 2.3.2 March 5 2020 =
 * Fix fatal error for PHP 5.2 and 5.3 users
