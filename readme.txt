@@ -218,6 +218,9 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 2.3.4 Mar 18, 2020 =
+* Re-add "pmb-img" wrapping div around images
+
 = 2.3.3 March 18, 2020 =
 * Instruct users to print with their browser (in case the button doesn't work)
 * CSS added for compatibility with Avada Theme/"Fusion Styles"

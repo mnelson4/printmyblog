@@ -398,7 +398,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         if(this.image_size === 0){
             non_emojis.remove();
         } else{
-            // non_emojis.wrap('<div class="pmb-image"></div>');
+            non_emojis.wrap('<div class="pmb-image"></div>');
             if(this.image_size !== false) {
                 var pmb_print = this;
                 non_emojis.each(function () {
