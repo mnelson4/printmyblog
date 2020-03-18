@@ -398,7 +398,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         if(this.image_size === 0){
             non_emojis.remove();
         } else{
-            non_emojis.wrap('<div class="pmb-image"></div>');
+            // non_emojis.wrap('<div class="pmb-image"></div>');
             if(this.image_size !== false) {
                 var pmb_print = this;
                 non_emojis.each(function () {
@@ -452,6 +452,12 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             );
 
 		}
+		// Load Avada's lazy images (they took out images' "src" attribute and put it into "data-orig-src". Put it back.)
+        jQuery('img[data-orig-src]').each(function(index,element){
+           var jqelement = jQuery(this);
+           jqelement.attr('src',jqelement.attr('data-orig-src'));
+           jqelement.attr('srcset',jqelement.attr('data-orig-src'));
+        });
         jQuery(document).trigger('pmb_wrap_up');
     };
 
