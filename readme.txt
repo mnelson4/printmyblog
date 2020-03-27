@@ -218,6 +218,9 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 2.3.5 Mar 26, 2020 =
+* When printing a single post, put the post's title into the HTML page title
+
 = 2.3.4 Mar 18, 2020 =
 * Re-add "pmb-img" wrapping div around images
 
