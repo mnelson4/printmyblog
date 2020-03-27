@@ -322,17 +322,17 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      */
     this.render = function() {
         this.header.html(this.translations.rendering_posts);
-        this.renderPosts();
+        this.renderPosts(0);
     };
 
-    this.renderPosts = function() {
-        var post = this.ordered_posts.shift();
+    this.renderPosts = function(index) {
+        var post = this.ordered_posts[index];
         if(typeof post === 'object') {
-            this.status_span.html( (this.total_posts - this.ordered_posts.length) + '/' + this.total_posts);
+            this.status_span.html( index + '/' + this.total_posts);
             this.addPostToPage(post);
             setTimeout(
                 () => {
-                    this.renderPosts();
+                    this.renderPosts(index + 1);
                 },
                 this.rendering_wait
             );
@@ -378,6 +378,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 this.waiting_area.hide();
                 this.loading_content.hide();
                 this.prettyUpPrintedPage();
+                this.prettyUpPageMeta();
             },
             // Guess that we'd like 50 milliseconds per post. That's too long for simple text; too short for ones
             // with images or videos.
@@ -462,6 +463,23 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     };
 
     /**
+     * Pretty up the site's title and URL for printing, especially for single posts.
+     */
+    this.prettyUpPageMeta = function() {
+        if(this.post){
+            var post = this.ordered_posts[0];
+            if( typeof(post) === 'object') {
+                var current_title = jQuery('title').text();
+                var new_title = this.getPostTitle(post);
+                if(current_title !== ''){
+                    new_title = new_title + ' – ' + current_title;
+                }
+                jQuery('title').text(new_title);
+            }
+        }
+    }
+
+    /**
      * @var  wp.api.models.Post post
      */
     this.addPostToPage = function (post) {
@@ -476,7 +494,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         }
         if(this.showTitle) {
             html_to_add += '<h1 class="entry-title">'
-				+ this.maybeStripShortcodes(post.title.rendered.replace(this.translations.protected, '').replace(this.translations.private,''))
+				+ this.maybeStripShortcodes(this.getPostTitle(post))
 				+ '</h1>';
         }
         if(this.format !== 'ebook'){
@@ -553,6 +571,15 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     };
 
     /**
+     * Gets the post's title and removes "Protected:" and "Private:" from it.
+     * @param post
+     * @return {*}
+     */
+    this.getPostTitle = function(post){
+        return post.title.rendered.replace(this.translations.protected, '').replace(this.translations.private,'')
+    };
+
+    /**
      * Removes awkwardly unrendered shortcodes that may have been forgotten.
      * @param content
      * @return {*}
@@ -604,17 +631,6 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         }
         return html;
     };
-
-    // this.getAuthorName = function (post)
-    // {
-    //     if( typeof post._embedded['author'] == 'array'
-    //         &&  typeof post._embedded['author'][0] == 'object'
-    //     ) {
-    //         return post._embedded['author'][0].name;
-    //     } else {
-    //         return 'Unknown';
-    //     }
-    // }
 
     this.getPublishedDate = function(post)
     {
