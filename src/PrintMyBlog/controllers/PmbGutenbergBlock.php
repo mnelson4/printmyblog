@@ -16,6 +16,7 @@ class PmbGutenbergBlock extends BaseController
     public function setHooks()
     {
         $this->registerGutenbergBlock();
+        add_filter('the_content', array($this, 'enqueueFrontendScript'));
     }
 
     public function registerGutenbergBlock()
@@ -28,11 +29,25 @@ class PmbGutenbergBlock extends BaseController
         if (function_exists('register_block_type')) {
             register_block_type('printmyblog/setupform', array(
                 'editor_script' => 'pmb-block',
-                'script' => 'pmb-setup-page',
                 'style' => 'pmb-setup-page',
                 'render_callback' => [$this, 'block_dynamic_render_cb'],
             ));
         }
+    }
+
+    /**
+     * Enqueues the script on the frontend only if the block is in use.
+     * See https://wordpress.stackexchange.com/questions/328536/load-css-javascript-in-frontend-conditionally-if-block-is-used/328553#328553
+     * @since 2.3.6
+     * @param string $content
+     * @return string
+     */
+    public function enqueueFrontendScript($content)
+    {
+        if (has_block('printmyblog/setupform')) {
+            wp_enqueue_script('pmb-setup-page', '', '', '', true);
+        }
+        return $content;
     }
 
     /**

@@ -68,7 +68,7 @@ Want more? [Tell us what matters to you on GitHub](https://github.com/mnelson4/p
 
 = Example Use-Cases =
 
-**Time to prune your website’s content?** You can print it, annotate and sort through a physical stack of paper.
+**Time to prune your website’s content?** You can print it, annotate and sort through a physical stack of paper. Alternatively, scrape content from your WordPress blog, then copy and paste it into a Word document or Google Doc for tweaking.
 
 **Disconnecting offline for a bit?** Print your blog to paper, or even an ePub file to read from your Kindle or phone.
 
@@ -217,6 +217,9 @@ But if not, your browser can also remove background colors.
 7. Add the Print My Blog block to add a form visitors can use to select what and how to print your blog.
 
 == Changelog ==
+
+= 2.3.6 Mar 31, 2020 =
+* Fix bug that loaded unnecessary script on every page
 
 = 2.3.5 Mar 26, 2020 =
 * When printing a single post, put the post's title into the HTML page title
