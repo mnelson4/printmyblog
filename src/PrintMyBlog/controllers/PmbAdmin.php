@@ -4,6 +4,7 @@ namespace PrintMyBlog\controllers;
 
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
+use PrintMyBlog\services\display\FormInputs;
 use Twine\controllers\BaseController;
 
 /**
@@ -139,6 +140,7 @@ class PmbAdmin extends BaseController
             include(PMB_TEMPLATES_DIR . 'welcome.template.php');
         } else {
             $print_options = new PrintOptions();
+            $displayer = new FormInputs();
             include(PMB_TEMPLATES_DIR . 'setup_page.template.php');
         }
     }

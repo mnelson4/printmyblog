@@ -1,9 +1,11 @@
 <?php
 /**
  * @var $print_options PrintMyBlog\domain\PrintOptions
+ * @var $displayer PrintMyBlog\services\display\FormInputs
  */
 
 use PrintMyBlog\domain\PrintOptions;
+use PrintMyBlog\services\display\FormInputs;
 
 ?>
 <div class="wrap nosubsub">
@@ -140,19 +142,7 @@ use PrintMyBlog\domain\PrintOptions;
                     <th scope="row"> <?php esc_html_e('Post Content to Print','print-my-blog' );?></th>
                     <td>
                     <?php
-                    foreach($print_options->postContentOptions() as $option_name => $option_details){
-                        ?>
-                        <label for="show_<?php echo esc_attr($option_name);?>">
-                            <input type="checkbox" name="show_<?php echo esc_attr($option_name);?>" id="show_<?php echo esc_attr($option_name);?>"
-                                <?php
-                                if ($option_details['default']){
-                                ?> checked="checked"
-                            <?php
-                            }
-                            ?> value="1">
-                            <?php echo $option_details['label'];?></label><br>
-                    <?php
-                    }
+                    echo $displayer->getHtmlForOptions($print_options->postContentOptions());
                     ?>
                     </td>
                 </tr>
