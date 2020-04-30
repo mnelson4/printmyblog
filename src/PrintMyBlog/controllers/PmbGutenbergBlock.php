@@ -3,6 +3,7 @@
 namespace PrintMyBlog\controllers;
 
 use PrintMyBlog\domain\PrintOptions;
+use PrintMyBlog\services\display\FormInputs;
 use Twine\controllers\BaseController;
 
 class PmbGutenbergBlock extends BaseController
@@ -68,6 +69,7 @@ class PmbGutenbergBlock extends BaseController
         // Coming from RichText, each line is an array's element
         ob_start();
         $print_options = new PrintOptions();
+        $displayer = new FormInputs();
         include(PMB_TEMPLATES_DIR . 'setup_page.template.php');
         return ob_get_clean();
     }
