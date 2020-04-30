@@ -2,6 +2,7 @@
     "name": "mnelson4/printmyblog",
     "description": "WordPress Plugin that simplifies printing your entire blog.",
     "license": "GPL-2.0-or-later",
+    "type": "wordpress-plugin",
     "require": {
         "php": ">=5.4"
     },
