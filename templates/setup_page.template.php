@@ -109,27 +109,14 @@ use PrintMyBlog\services\display\FormInputs;
                 </tbody>
             </table>
 
-            <?php require_once('partials/content_options.template.php'); ?>
+            <?php include('partials/content_options.template.php'); ?>
 
-            <h2><?php esc_html_e('Page Layout','print-my-blog' );?></h2>
-            <table class="form-table">
-                <tbody>
-                <?php echo $displayer->getHtmlForTabledOptions($print_options->pageLayoutOptions());?>
-                </tbody>
-            </table>
+            <?php include('partials/layout_options.template.php');?>
 
+            <?php include('partials/debug_options.template.php');?>
 
-            <details class="pmb-details">
-                <summary class="pmb-reveal-options"><?php esc_html_e('Troubleshooting Options','print-my-blog' );?></summary>
-                <table class="form-table">
-                    <tbody>
-                    <?php echo $displayer->getHtmlForTabledOptions($print_options->troubleshootingOptions());?>
-                    </tbody>
-                </table>
-            </details>
-            <input type="hidden" name="<?php echo PMB_PRINTPAGE_SLUG;?>" value="1">
         </details>
-
+        <input type="hidden" name="<?php echo PMB_PRINTPAGE_SLUG;?>" value="1">
         <table class="form-table">
             <tbody>
             <tr>

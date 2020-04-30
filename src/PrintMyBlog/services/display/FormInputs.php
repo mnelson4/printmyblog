@@ -47,7 +47,7 @@ class FormInputs
             $html .= '</th>';
             $html .=  '<td>';
             if(is_bool($option_details['default'])){
-                $html .= '<input type="checkbox" name="' . esc_attr($option_name) . '" id="' . esc_attr($option_name);
+                $html .= '<input type="checkbox" name="' . esc_attr($option_name) . '" id="' . esc_attr($option_name) . '"';
                 if ($option_details['default']) {
                     $html .= ' checked="checked"';
                 }
