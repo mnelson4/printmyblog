@@ -118,23 +118,8 @@ use PrintMyBlog\services\display\FormInputs;
                         <label ><?php esc_html_e('Header Content to Print','print-my-blog' );?></label>
                     </th>
                     <td>
-                        <?php foreach($print_options->headerContentOptions() as $option_name => $option_details){
-                            ?>
-                        <label for="show_<?php echo esc_attr($option_name);?>">
-                            <input type="checkbox" name="show_<?php echo esc_attr($option_name);?>" id="show_<?php echo $option_name;?>"
-                                <?php
-                                if ($option_details['default']){
-                                    ?> checked="checked"
-                                    <?php
-                                }
-                                ?> value="1">
-                            <?php echo $option_details['label'];?></label><br>
                         <?php
-                            if (isset($option_details['help'])){
-                            ?> <p class="description"><?php echo $option_details['help'];?></p>
-                            <?php
-                            }
-                        }
+                        echo $displayer->getHtmlForOptions($print_options->headerContentOptions());
                         ?>
                     </td>
                 </tr>

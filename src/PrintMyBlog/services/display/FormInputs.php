@@ -30,6 +30,9 @@ class FormInputs
                 $html .= ' checked="checked"';
             }
             $html .= 'value="1">' . $option_details['label'] . '</label><br>';
+            if (isset($option_details['help'])){
+                $html .= '<p class="description">' . $option_details['help'] .'</p>';
+            }
         }
         return $html;
     }
