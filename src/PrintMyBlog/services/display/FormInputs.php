@@ -14,6 +14,25 @@ namespace PrintMyBlog\services\display;
  */
 class FormInputs
 {
+    protected $inputs_prefix = '';
+
+    public function setInputPrefix($prefix){
+        $this->inputs_prefix = $prefix;
+    }
+
+    protected function id($id){
+        if($this->inputs_prefix){
+            $id = $this->inputs_prefix . '_' . $id;
+        }
+        return esc_attr($id);
+    }
+
+    protected function name($name){
+        if($this->inputs_prefix){
+            $name = '[' . $this->inputs_prefix . ']' . $name;
+        }
+        return esc_attr($name);
+    }
     /**
      * @since $VID:$
      * @param array $options. Top-level keys are the input names, values are arrays with keys 'label', 'help', and 'default'.
@@ -24,8 +43,8 @@ class FormInputs
         $html = '';
         foreach ($options as $option_name => $option_details) {
 
-            $html .= '<label for="show_' . esc_attr($option_name) . '">';
-            $html .= '<input type="checkbox" name="show_' . esc_attr($option_name) . '" id="show_' . esc_attr($option_name) . '"';
+            $html .= '<label for="' . $this->id('show_' . $option_name) . '">';
+            $html .= '<input type="checkbox" name="' . $this->name('show_' . $option_name) . '" id="' . $this->id('show_' . $option_name) . '"';
             if ($option_details['default']) {
                 $html .= ' checked="checked"';
             }
@@ -43,17 +62,17 @@ class FormInputs
         foreach($options as $option_name => $option_details) {
             $html .= '<tr>';
             $html .= '<th scope="row">';
-            $html .= '<label for="' . esc_attr($option_name) .'">' . $option_details['label'] . '</label>';
+            $html .= '<label for="' . $this->id($option_name) .'">' . $option_details['label'] . '</label>';
             $html .= '</th>';
             $html .=  '<td>';
             if(is_bool($option_details['default'])){
-                $html .= '<input type="checkbox" name="' . esc_attr($option_name) . '" id="' . esc_attr($option_name) . '"';
+                $html .= '<input type="checkbox" name="' . $this->name($option_name) . '" id="' . $this->id($option_name) . '"';
                 if ($option_details['default']) {
                     $html .= ' checked="checked"';
                 }
                 $html .= '>';
             } elseif(isset($option_details['options'])){
-                $html .= '<select name="' . esc_attr($option_name). '" id="' . esc_attr($option_name) . '">';
+                $html .= '<select name="' . $this->name($option_name). '" id="' . $this->id($option_name) . '">';
                 foreach($option_details['options'] as $option_value => $option_label){
                     $html .= '<option value="' . esc_attr($option_value) . '"';
                     if($option_details['default'] == $option_value){
@@ -66,7 +85,7 @@ class FormInputs
                 $html .= '</select>';
             } else {
                 // normal input
-                $html .= '<input type="text" name="' . esc_attr($option_name) . '" value="' . esc_attr($option_details['default']) . '">';
+                $html .= '<input type="text" name="' . $this->name($option_name) . '" id="' . $this->id($option_name) . '" value="' . esc_attr($option_details['default']) . '">';
                 if(isset($option_details['after_input'])){
                     $html .= $option_details['after_input'];
                 }

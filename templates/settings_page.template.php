@@ -44,7 +44,9 @@ use PrintMyBlog\services\display\FormInputs;
 
                         <details class="pmb-details">
                             <summary class="pmb-reveal-options" id="pmb-reveal-main-options"><?php esc_html_e('Show Options', 'print-my-blog'); ?></summary>
-                            <?php include('partials/display_options.template.php');?>
+                            <?php
+                            $displayer->setInputPrefix($slug);
+                            include('partials/display_options.template.php');?>
                         </details>
                     </td>
                 </tr>
