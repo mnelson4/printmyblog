@@ -66,6 +66,10 @@ class FormInputs
                 $html .= '</select>';
             } else {
                 // normal input
+                $html .= '<input type="text" name="' . esc_attr($option_name) . '" value="' . esc_attr($option_details['default']) . '">';
+                if(isset($option_details['after_input'])){
+                    $html .= $option_details['after_input'];
+                }
             }
             if(isset($option_details['help'])){
                 $html .= '<p class="description">' . $option_details['help'] . '</p>';

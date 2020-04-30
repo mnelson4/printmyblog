@@ -148,6 +148,32 @@ class PrintOptions
             ]
         ];
     }
+
+    /**
+     * @since $VID:$
+     * @return array
+     */
+    public function troubleshootingOptions()
+    {
+        return [
+            'rendering_wait' => [
+                'label' => esc_html__('Post Rendering Wait-Time','print-my-blog' ),
+                'default' => 200,
+                'after_input' => esc_html__('ms', 'print-my-blog'),
+                'help' => esc_html__('Milliseconds to wait between rendering posts. If posts are rendered too quickly on the page, sometimes images won’t load properly. ','print-my-blog' )
+            ],
+            'include_inline_js' => [
+                'label' => esc_html__('Include Inline Javascript','print-my-blog' ),
+                'default' => true,
+                'help' => esc_html__('Sometimes posts contain inline javascript which can cause errors and stop the page from rendering.','print-my-blog' )
+            ],
+            'shortcodes' => [
+                'label' => esc_html__('Include Unrendered Shortcodes','print-my-blog' ),
+                'default' => true,
+                'help' => esc_html__('If you left shortcodes from deactivated deactivated plugins or themes in your posts, they are automatically removed from printouts. Check this to leave them.','print-my-blog' )
+            ]
+        ];
+    }
 }
 // End of file PrintOptions.php
 // Location: ${NAMESPACE}/PrintOptions.php

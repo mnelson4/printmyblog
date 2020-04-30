@@ -123,35 +123,8 @@ use PrintMyBlog\services\display\FormInputs;
                 <summary class="pmb-reveal-options"><?php esc_html_e('Troubleshooting Options','print-my-blog' );?></summary>
                 <table class="form-table">
                     <tbody>
-                    <tr>
-                        <th scope="row">
-                            <label for="rendering-wait"><?php esc_html_e('Post Rendering Wait-Time','print-my-blog' );?></label>
-                        </th>
-                        <td>
-                            <input name="rendering-wait" value="200"><?php esc_html_e('ms','print-my-blog' );?>
-                            <p class="description"><?php esc_html_e('Milliseconds to wait between rendering posts. If posts are rendered too quickly on the page, sometimes images won’t load properly. ','print-my-blog' );?></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <label for="include-inline-js"><?php esc_html_e('Include Inline Javascript','print-my-blog' );?></label>
-                        </th>
-                        <td>
-                            <input type="checkbox" name="include-inline-js" value="1">
-                            <p class="description"><?php esc_html_e('Sometimes posts contain inline javascript which can cause errors and stop the page from rendering.','print-my-blog' );?></p>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <label for="shortcodes"><?php esc_html_e('Include Unrendered Shortcodes','print-my-blog' );?></label>
-                        </th>
-                        <td>
-                            <input type="checkbox" name="shortcodes" value="1">
-                            <p class="description"><?php esc_html_e('If you left shortcodes from deactivated deactivated plugins or themes in your posts, they are automatically removed from printouts. Check this to leave them.','print-my-blog' );?></p>
-                        </td>
-
-                    </tr>                    </tbody>
+                    <?php echo $displayer->getHtmlForTabledOptions($print_options->troubleshootingOptions());?>
+                    </tbody>
                 </table>
             </details>
             <input type="hidden" name="<?php echo PMB_PRINTPAGE_SLUG;?>" value="1">
