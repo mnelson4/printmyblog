@@ -124,7 +124,8 @@ class PmbAdmin extends BaseController
             }
             echo '<div class="notice notice-success is-dismissible"><p>' . $text .  '</p></div>';
         }
-
+        $print_options = new PrintOptions();
+        $displayer = new FormInputs();
         include(PMB_TEMPLATES_DIR . 'settings_page.template.php');
     }
 
