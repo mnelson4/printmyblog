@@ -111,21 +111,28 @@ class FrontendPrintSettings
         $this->beforeSet($format);
         $values_to_save = [];
         foreach($this->print_options->allPrintOptions() as $option_name => $details ){
-            if(! isset($submitted_values[$option_name])){
-                continue;
-            }
-            $new_value = null;
             $default = $details['default'];
-            if(is_bool($default)) {
-                $new_value = (bool)($submitted_values[$option_name]);
-            } elseif(is_numeric($default)){
-                $new_value = (int)$submitted_values[$option_name];
-            }else{
-                $new_value = strip_tags($submitted_values[$option_name]);
-            }
-            if(isset($details['options']) && ! array_key_exists($new_value,$details['options'])){
-                // that's not one of the acceptable options. Replace it with the default
-                $new_value = $default;
+            $new_value = null;
+            if(isset($submitted_values[$option_name])){
+                if(is_bool($default)) {
+                    $new_value = (bool)($submitted_values[$option_name]);
+                } elseif(is_numeric($default)){
+                    $new_value = (int)$submitted_values[$option_name];
+                }else{
+                    $new_value = strip_tags($submitted_values[$option_name]);
+                }
+                if(isset($details['options']) && ! array_key_exists($new_value,$details['options'])){
+                    // that's not one of the acceptable options. Replace it with the default
+                    $new_value = $default;
+                }
+            } else {
+                if(is_bool($default)) {
+                    $new_value = false;
+                } elseif(is_numeric($default)){
+                    $new_value = 0;
+                }else{
+                    $new_value = '';
+                }
             }
             $values_to_save[$option_name] = $new_value;
         }
@@ -138,8 +145,15 @@ class FrontendPrintSettings
      * @return array keys are the option names, values are their saved values
      */
     public function getPrintOptions($format){
+        $frontend_deviations = [
+            'show_credit' => false,
+        ];
+        if($format === 'print'){
+            $frontend_deviations['links'] = 'parens';
+        }
         return array_merge(
             $this->print_options->allPrintOptionDefaults(),
+            $frontend_deviations,
             $this->settings[$format]['print_options']
         );
     }
