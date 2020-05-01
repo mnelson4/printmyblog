@@ -20,7 +20,9 @@ use Twine\controllers\BaseController;
  */
 class PmbAdmin extends BaseController
 {
-
+    /**
+     * name of the option that just indicates we successfully saved the setttings
+     */
     const SETTINGS_SAVED_OPTION = 'pmb-settings-saved';
     /**
      * Sets hooks that we'll use in the admin.
@@ -83,13 +85,13 @@ class PmbAdmin extends BaseController
 
     public function settingsPage()
     {
-        $pmb_print_now_formats = new FrontendPrintSettings();
+        $pmb_print_now_formats = new FrontendPrintSettings(new PrintOptions());
         $pmb_print_now_formats->load();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             check_admin_referer('pmb-settings');
             // Ok save those settings!
             if (isset($_POST['pmb-reset'])) {
-                $pmb_print_now_formats = new FrontendPrintSettings();
+                $pmb_print_now_formats = new FrontendPrintSettings(new PrintOptions());
             } else {
                 $pmb_print_now_formats->setShowButtons(isset($_POST['show_buttons']));
                 foreach ($pmb_print_now_formats->formatSlugs() as $slug) {
@@ -101,6 +103,9 @@ class PmbAdmin extends BaseController
                     $pmb_print_now_formats->setFormatActive($slug, $active);
                     if (isset($_POST['frontend_labels'][$slug])) {
                         $pmb_print_now_formats->setFormatFrontendLabel($slug, $_POST['frontend_labels'][$slug]);
+                    }
+                    if(isset($_POST['print_options'][$slug])){
+                        $pmb_print_now_formats->setPrintOptions($slug,$_POST['print_options'][$slug]);
                     }
                 }
             }

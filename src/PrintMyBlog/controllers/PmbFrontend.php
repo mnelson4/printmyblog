@@ -4,6 +4,7 @@ namespace PrintMyBlog\controllers;
 
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintNowSettings;
+use PrintMyBlog\domain\PrintOptions;
 use Twine\controllers\BaseController;
 
 /**
@@ -29,7 +30,7 @@ class PmbFrontend extends BaseController
     {
         global $post;
         if ($post->post_type === 'post' && is_single() && ! post_password_required($post)) {
-            $print_settings = new FrontendPrintSettings();
+            $print_settings = new FrontendPrintSettings(new PrintOptions());
             $print_settings->load();
             if ($print_settings->showButtons()) {
                 $base_args = array(

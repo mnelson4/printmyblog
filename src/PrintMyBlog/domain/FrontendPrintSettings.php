@@ -20,8 +20,14 @@ class FrontendPrintSettings
     protected $settings;
     const OPTION_NAME = 'pmb-print-now-settings';
 
-    public function __construct()
+    /**
+     * @var PrintOptions
+     */
+    protected $print_options;
+
+    public function __construct(PrintOptions $print_options)
     {
+        $this->print_options = $print_options;
         $this->formats = array(
             'print' => array(
                 'admin_label' => esc_html__('Print', 'print-my-blog'),
@@ -101,6 +107,42 @@ class FrontendPrintSettings
         $this->settings[$format]['frontend_label'] = sanitize_text_field($label);
     }
 
+    public function setPrintOptions($format, $submitted_values){
+        $this->beforeSet($format);
+        $values_to_save = [];
+        foreach($this->print_options->allPrintOptions() as $option_name => $details ){
+            if(! isset($submitted_values[$option_name])){
+                continue;
+            }
+            $new_value = null;
+            $default = $details['default'];
+            if(is_bool($default)) {
+                $new_value = (bool)($submitted_values[$option_name]);
+            } elseif(is_numeric($default)){
+                $new_value = (int)$submitted_values[$option_name];
+            }else{
+                $new_value = strip_tags($submitted_values[$option_name]);
+            }
+            if(isset($details['options']) && ! array_key_exists($new_value,$details['options'])){
+                // that's not one of the acceptable options. Replace it with the default
+                $new_value = $default;
+            }
+            $values_to_save[$option_name] = $new_value;
+        }
+        $this->settings[$format]['print_options'] = $values_to_save;
+    }
+
+    /**
+     * @since $VID:$
+     * @param $format
+     * @return array keys are the option names, values are their saved values
+     */
+    public function getPrintOptions($format){
+        return array_merge(
+            $this->print_options->allPrintOptionDefaults(),
+            $this->settings[$format]['print_options']
+        );
+    }
     /**
      * @since $VID:$
      * @param $format

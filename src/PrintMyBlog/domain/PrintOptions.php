@@ -17,28 +17,28 @@ class PrintOptions
     public function headerContentOptions()
     {
         return [
-            'site_title' => [
+            'show_site_title' => [
                 'label' => esc_html__('Site Title', 'print-my-blog'),
                 'default' => true
             ],
-            'site_tagline' => [
+            'show_site_tagline' => [
                 'label' => esc_html__('Tagline', 'print-my-blog'),
                 'default' => true
             ],
-            'site_url' => [
+            'show_site_url' => [
                 'label' => esc_html__('Site URL', 'print-my-blog'),
                 'default' => true
             ],
-            'filters' => [
+            'show_filters' => [
                 'label' => esc_html__('Filters Used', 'print-my-blog'),
                 'default' => true,
                 'help' => esc_html__('E.g. selected categories, taxonomies, and date range.', 'print-my-blog')
             ],
-            'date_printed' => [
+            'show_date_printed' => [
                 'label' => esc_html__('Date Printed', 'print-my-blog'),
                 'default' => true
             ],
-            'credit' => [
+            'show_credit' => [
                 'label' => esc_html__('Credit Print My Blog Plugin', 'print-my-blog'),
                 'default' => true,
                 'help' => esc_html__('Says the printout was made using Print My Blog', 'print-my-blog')
@@ -49,47 +49,47 @@ class PrintOptions
     public function postContentOptions()
     {
         return [
-            'title' => [
+            'show_title' => [
                 'label' => esc_html__('Title', 'print-my-blog'),
                 'default' => true
             ],
-            'id' => [
+            'show_id' => [
                 'label' => esc_html__('ID', 'print-my-blog'),
                 'default' => false,
             ],
-            'author' => [
+            'show_author' => [
                 'label' => esc_html__('Author', 'print-my-blog'),
                 'default' => false,
             ],
-            'url' => [
+            'show_url' => [
                 'label' => esc_html__('URL', 'print-my-blog'),
                 'default' => false
             ],
-            'date' => [
+            'show_date' => [
                 'label' => esc_html__('Published Date', 'print-my-blog'),
                 'default' => true,
             ],
-            'categories' => [
+            'show_categories' => [
                 'label' => esc_html__('Categories and Tags', 'print-my-blog'),
                 'default' => true
             ],
-            'featured_image' => [
+            'show_featured_image' => [
                 'label' => esc_html__('Featured Image', 'print-my-blog'),
                 'default' => true
             ],
-            'excerpt' => [
+            'show_excerpt' => [
                 'label' => esc_html__('Excerpt', 'print-my-blog'),
                 'default' => false
             ],
-            'content' => [
+            'show_content' => [
                 'label' => esc_html__('Content', 'print-my-blog'),
                 'default' => true,
             ],
-            'comments' => [
+            'show_comments' => [
                 'label' => esc_html__('Comments', 'print-my-blog'),
                 'default' => false
             ],
-            'divider' => [
+            'show_divider' => [
                 'label' => esc_html__('Extra dividing line at end of post', 'print-my-blog'),
                 'default' => false
             ]
@@ -173,6 +173,33 @@ class PrintOptions
                 'help' => esc_html__('If you left shortcodes from deactivated deactivated plugins or themes in your posts, they are automatically removed from printouts. Check this to leave them.','print-my-blog' )
             ]
         ];
+    }
+
+    /**
+     * Returns the print options
+     * @return array
+     */
+    public function allPrintOptions()
+    {
+        return array_merge(
+            $this->troubleshootingOptions(),
+            $this->pageLayoutOptions(),
+            $this->headerContentOptions(),
+            $this->postContentOptions()
+        );
+    }
+
+    /**
+     * @since $VID:$
+     * @return array keys are option names, values are their default values
+     */
+    public function allPrintOptionDefaults(){
+        $all = $this->allPrintOptions();
+        $defaults = [];
+        foreach($all as $name => $details){
+            $defaults[$name] = $details['default'];
+        }
+        return $defaults;
     }
 }
 // End of file PrintOptions.php

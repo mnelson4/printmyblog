@@ -14,22 +14,29 @@ namespace PrintMyBlog\services\display;
  */
 class FormInputs
 {
-    protected $inputs_prefix = '';
+    protected $inputs_prefixes = [];
 
-    public function setInputPrefix($prefix){
-        $this->inputs_prefix = $prefix;
+    public function setInputPrefixes($prefixes){
+        $this->inputs_prefixes = $prefixes;
     }
 
     protected function id($id){
-        if($this->inputs_prefix){
-            $id = $this->inputs_prefix . '_' . $id;
+        if($this->inputs_prefixes){
+            $id = implode('_', $this->inputs_prefixes) . '_' . $id;
         }
         return esc_attr($id);
     }
 
     protected function name($name){
-        if($this->inputs_prefix){
-            $name = '[' . $this->inputs_prefix . ']' . $name;
+        if($this->inputs_prefixes){
+            $parts = $this->inputs_prefixes;
+            $parts[] = $name;
+            $first_part = array_shift($parts);
+
+            $name = $first_part;
+            if($parts){
+                $name .='[' . implode('][',$parts) . ']';
+            }
         }
         return esc_attr($name);
     }
@@ -43,8 +50,8 @@ class FormInputs
         $html = '';
         foreach ($options as $option_name => $option_details) {
 
-            $html .= '<label for="' . $this->id('show_' . $option_name) . '">';
-            $html .= '<input type="checkbox" name="' . $this->name('show_' . $option_name) . '" id="' . $this->id('show_' . $option_name) . '"';
+            $html .= '<label for="' . $this->id( $option_name) . '">';
+            $html .= '<input type="checkbox" name="' . $this->name( $option_name) . '" id="' . $this->id( $option_name) . '"';
             if ($option_details['default']) {
                 $html .= ' checked="checked"';
             }
