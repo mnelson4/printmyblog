@@ -85,31 +85,31 @@ class PmbAdmin extends BaseController
 
     public function settingsPage()
     {
-        $pmb_print_now_formats = new FrontendPrintSettings(new PrintOptions());
-        $pmb_print_now_formats->load();
+        $settings = new FrontendPrintSettings(new PrintOptions());
+        $settings->load();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             check_admin_referer('pmb-settings');
             // Ok save those settings!
             if (isset($_POST['pmb-reset'])) {
-                $pmb_print_now_formats = new FrontendPrintSettings(new PrintOptions());
+                $settings = new FrontendPrintSettings(new PrintOptions());
             } else {
-                $pmb_print_now_formats->setShowButtons(isset($_POST['show_buttons']));
-                foreach ($pmb_print_now_formats->formatSlugs() as $slug) {
+                $settings->setShowButtons(isset($_POST['show_buttons']));
+                foreach ($settings->formatSlugs() as $slug) {
                     if (isset($_POST['format'][$slug])) {
                         $active = true;
                     } else {
                         $active = false;
                     }
-                    $pmb_print_now_formats->setFormatActive($slug, $active);
+                    $settings->setFormatActive($slug, $active);
                     if (isset($_POST['frontend_labels'][$slug])) {
-                        $pmb_print_now_formats->setFormatFrontendLabel($slug, $_POST['frontend_labels'][$slug]);
+                        $settings->setFormatFrontendLabel($slug, $_POST['frontend_labels'][$slug]);
                     }
                     if(isset($_POST['print_options'][$slug])){
-                        $pmb_print_now_formats->setPrintOptions($slug,$_POST['print_options'][$slug]);
+                        $settings->setPrintOptions($slug,$_POST['print_options'][$slug]);
                     }
                 }
             }
-            $pmb_print_now_formats->save();
+            $settings->save();
             update_option(self::SETTINGS_SAVED_OPTION, true, false);
             wp_redirect('');
         }

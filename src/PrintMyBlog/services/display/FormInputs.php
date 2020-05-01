@@ -16,6 +16,14 @@ class FormInputs
 {
     protected $inputs_prefixes = [];
 
+    /**
+     * @var array
+     */
+    protected $new_values = [];
+
+    public function setNewValues($new_values){
+        $this->new_values = $new_values;
+    }
     public function setInputPrefixes($prefixes){
         $this->inputs_prefixes = $prefixes;
     }
@@ -52,7 +60,7 @@ class FormInputs
 
             $html .= '<label for="' . $this->id( $option_name) . '">';
             $html .= '<input type="checkbox" name="' . $this->name( $option_name) . '" id="' . $this->id( $option_name) . '"';
-            if ($option_details['default']) {
+            if ($this->getValue($option_name,$option_details)) {
                 $html .= ' checked="checked"';
             }
             $html .= 'value="1">' . $option_details['label'] . '</label><br>';
@@ -61,6 +69,20 @@ class FormInputs
             }
         }
         return $html;
+    }
+
+    /**
+     * Gets the value if set, otherwise uses the default.
+     * @since $VID:$
+     * @param $option_name
+     * @param $option_details
+     * @return mixed
+     */
+    protected function getValue($option_name, $option_details){
+        if(isset($this->new_values[$option_name])){
+            return $this->new_values[$option_name];
+        }
+        return $option_details['default'];
     }
 
     public function getHtmlForTabledOptions($options)
@@ -74,7 +96,7 @@ class FormInputs
             $html .=  '<td>';
             if(is_bool($option_details['default'])){
                 $html .= '<input type="checkbox" name="' . $this->name($option_name) . '" id="' . $this->id($option_name) . '"';
-                if ($option_details['default']) {
+                if ($this->getValue($option_name,$option_details)) {
                     $html .= ' checked="checked"';
                 }
                 $html .= '>';
@@ -82,7 +104,7 @@ class FormInputs
                 $html .= '<select name="' . $this->name($option_name). '" id="' . $this->id($option_name) . '">';
                 foreach($option_details['options'] as $option_value => $option_label){
                     $html .= '<option value="' . esc_attr($option_value) . '"';
-                    if($option_details['default'] == $option_value){
+                    if($this->getValue($option_name,$option_details) == $option_value){
                         $html .= 'selected="selected"';
                     }
                     $html .= '>';
@@ -92,7 +114,7 @@ class FormInputs
                 $html .= '</select>';
             } else {
                 // normal input
-                $html .= '<input type="text" name="' . $this->name($option_name) . '" id="' . $this->id($option_name) . '" value="' . esc_attr($option_details['default']) . '">';
+                $html .= '<input type="text" name="' . $this->name($option_name) . '" id="' . $this->id($option_name) . '" value="' . esc_attr($this->getValue($option_name,$option_details)) . '">';
                 if(isset($option_details['after_input'])){
                     $html .= $option_details['after_input'];
                 }
