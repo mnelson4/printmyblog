@@ -3,7 +3,7 @@
 namespace PrintMyBlog\controllers;
 
 use PrintMyBlog\domain\PrintOptions;
-use PrintMyBlog\services\display\FormInputs;
+use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
 
 class PmbGutenbergBlock extends BaseController

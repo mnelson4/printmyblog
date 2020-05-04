@@ -1,6 +1,6 @@
 <?php
 
-namespace PrintMyBlog\services\display;
+namespace Twine\services\display;
 
 /**
  * Class FormInputs
@@ -128,4 +128,4 @@ class FormInputs
     }
 }
 // End of file FormInputs.php
-// Location: PrintMyBlog\services\display/FormInputs.php
+// Location: Twine\services\display/FormInputs.php
