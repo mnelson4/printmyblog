@@ -32,11 +32,16 @@ class PmbFrontend extends BaseController
         if ($post->post_type === 'post' && is_single() && ! post_password_required($post)) {
             $print_settings = new FrontendPrintSettings(new PrintOptions());
             $print_settings->load();
-            if ($print_settings->showButtons()) {
-                $base_args = array(
+            if (
+                apply_filters(
+                'PrintMyBlog\controllers\PmbFrontend__addPrintButtons__showButtons',
+                $print_settings->showButtons(),
+                $post
+            )) {
+                $base_args = [
                     'print-my-blog' => '1',
-                    'post-type' => 'post'
-                );
+                    'post-type' => 'post',
+                ];
                 $html = '<div class="pmb-print-this-page wp-block-button">';
                 foreach ($print_settings->formats() as $slug => $settings) {
                     if (! $print_settings->isActive($slug)) {
