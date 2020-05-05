@@ -48,7 +48,7 @@ use PrintMyBlog\domain\FrontendPrintSettings;
                             <summary class="pmb-reveal-options" id="pmb-reveal-main-options"><?php esc_html_e('Show Options', 'print-my-blog'); ?></summary>
                             <?php
                             $displayer->setInputPrefixes(['print_options',$slug,]);
-                            $displayer->setNewValues($settings->getPrintOptions($slug));
+                            $displayer->setNewValues($settings->getPrintOptionsAndValues($slug));
                             include('partials/display_options.template.php');?>
                         </details>
                     </td>

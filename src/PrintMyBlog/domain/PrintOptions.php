@@ -41,7 +41,11 @@ class PrintOptions
             'show_credit' => [
                 'label' => esc_html__('Credit Print My Blog Plugin', 'print-my-blog'),
                 'default' => true,
-                'help' => esc_html__('Says the printout was made using Print My Blog', 'print-my-blog')
+                'help' => sprintf(
+                    // @translators: 1: heart emoji
+                    esc_html__('Show some love and tell your readers about Print My Blog %1$s', 'print-my-blog'),
+                    '❤️'
+                )
             ],
         ];
     }
@@ -175,6 +179,20 @@ class PrintOptions
         ];
     }
 
+    protected function defaultOverrides($format){
+        $overrides = [];
+        switch($format){
+            case 'pdf':
+                break;
+            case 'ebook':
+                break;
+            case 'print':
+            default:
+                $overrides['links'] = 'parens';
+        }
+        return $overrides;
+    }
+
     /**
      * Returns the print options
      * @return array
@@ -191,15 +209,19 @@ class PrintOptions
 
     /**
      * @since $VID:$
+     * @param string $format
      * @return array keys are option names, values are their default values
      */
-    public function allPrintOptionDefaults(){
+    public function allPrintOptionDefaults($format = 'print'){
         $all = $this->allPrintOptions();
         $defaults = [];
         foreach($all as $name => $details){
             $defaults[$name] = $details['default'];
         }
-        return $defaults;
+        return array_merge(
+            $defaults,
+            $this->defaultOverrides($format)
+        );
     }
 }
 // End of file PrintOptions.php

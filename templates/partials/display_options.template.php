@@ -2,7 +2,7 @@
 // Template to show the HTML for display options
 /**
  * @var $print_options PrintMyBlog\domain\PrintOptions
- * @var $displayer PrintMyBlog\services\display\FormInputs
+ * @var $displayer Twine\services\display\FormInputs
  */
 
 include('content_options.template.php');

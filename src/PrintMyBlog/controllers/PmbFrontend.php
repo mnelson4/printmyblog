@@ -44,7 +44,7 @@ class PmbFrontend extends BaseController
                     }
                     $args = array_merge(
                         $base_args,
-                        $print_settings->getPrintOptions($slug)
+                        $print_settings->getPrintOptionsAndValues($slug)
                     );
                     $args['format'] = $slug;
                     $args['pmb-post'] = $post->ID;

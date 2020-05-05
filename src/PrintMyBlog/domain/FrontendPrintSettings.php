@@ -49,7 +49,8 @@ class FrontendPrintSettings
         foreach ($this->formats as $slug => $format) {
             $this->settings[$slug] = array(
                 'frontend_label' => $format['default'],
-                'active' => true
+                'active' => true,
+                'print_options' => []
             );
         }
     }
@@ -140,23 +141,26 @@ class FrontendPrintSettings
     }
 
     /**
+     * Gets the print option names and their current values
      * @since $VID:$
      * @param $format
      * @return array keys are the option names, values are their saved values
      */
-    public function getPrintOptions($format){
+    public function getPrintOptionsAndValues($format){
         $frontend_deviations = [
             'show_credit' => false,
+            'show_filters' => false,
+            'rendering_wait' => 0,
+            'show_divider'=> false,
+            'post_page_break' => false,
         ];
-        if($format === 'print'){
-            $frontend_deviations['links'] = 'parens';
-        }
         return array_merge(
-            $this->print_options->allPrintOptionDefaults(),
+            $this->print_options->allPrintOptionDefaults($format),
             $frontend_deviations,
-            $this->settings[$format]['print_options']
+            $this->settings[ $format ]['print_options']
         );
     }
+
     /**
      * @since $VID:$
      * @param $format
