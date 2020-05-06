@@ -306,7 +306,7 @@ class PmbPrintPage extends BaseController
         $print_options = new PrintOptions();
         foreach ($print_options->postContentOptions() as $option_name => $option_details) {
             $data[ $option_name] = (bool)$this->getFromRequest(
-                 $option_name,
+                $option_name,
                 false
             );
         }

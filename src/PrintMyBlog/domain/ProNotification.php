@@ -22,7 +22,7 @@ class ProNotification
     public function setHooks()
     {
         $this->checkForSubmission();
-        add_action('admin_notices',[$this,'maybeAddNotice']);
+        add_action('admin_notices', [$this,'maybeAddNotice']);
     }
 
     /**
@@ -30,11 +30,13 @@ class ProNotification
      */
     public function checkForSubmission()
     {
-        if(isset(
-            $_POST['pmb_pro_notice_signup'],
-            $_POST['name'],
-            $_POST['email']
-        )){
+        if (
+            isset(
+                $_POST['pmb_pro_notice_signup'],
+                $_POST['name'],
+                $_POST['email']
+            )
+        ) {
             $this->rememberDismissed('accepted');
             wp_remote_post(
                 'https://blog.us19.list-manage.com/subscribe/post?u=5881790528ea076edfc10d859&id=32ccd044c3',
@@ -50,7 +52,7 @@ class ProNotification
                 'https://printmy.blog/thanks/thanks-for-signing-up/'
             );
         }
-        if(isset($_GET['pmb_pro_notice_dismiss'])){
+        if (isset($_GET['pmb_pro_notice_dismiss'])) {
             $this->rememberDismissed('dismiss');
         }
     }
@@ -61,10 +63,9 @@ class ProNotification
     public function maybeAddNotice()
     {
         global $pagenow;
-        if($pagenow === 'index.php' && current_user_can(PMB_ADMIN_CAP) && ! $this->wasDismissed()){
+        if ($pagenow === 'index.php' && current_user_can(PMB_ADMIN_CAP) && ! $this->wasDismissed()) {
             $this->addNotice();
         }
-
     }
 
     public function addNotice()
@@ -75,12 +76,13 @@ class ProNotification
 
     public function wasDismissed()
     {
-        return get_option(self::DISMISSED_OPTION_NAME,false);
+        return get_option(self::DISMISSED_OPTION_NAME, false);
     }
 
-    public function rememberDismissed($choice){
-        if(!$this->wasDismissed()){
-            add_option(self::DISMISSED_OPTION_NAME, $choice,null,'no');
+    public function rememberDismissed($choice)
+    {
+        if (!$this->wasDismissed()) {
+            add_option(self::DISMISSED_OPTION_NAME, $choice, null, 'no');
         }
     }
 }

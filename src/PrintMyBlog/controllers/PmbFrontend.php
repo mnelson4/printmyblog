@@ -34,10 +34,11 @@ class PmbFrontend extends BaseController
             $print_settings->load();
             if (
                 apply_filters(
-                'PrintMyBlog\controllers\PmbFrontend__addPrintButtons__showButtons',
-                $print_settings->showButtons(),
-                $post
-            )) {
+                    'PrintMyBlog\controllers\PmbFrontend__addPrintButtons__showButtons',
+                    $print_settings->showButtons(),
+                    $post
+                )
+            ) {
                 $base_args = [
                     'print-my-blog' => '1',
                     'post-type' => 'post',

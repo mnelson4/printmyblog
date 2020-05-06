@@ -104,8 +104,8 @@ class PmbAdmin extends BaseController
                     if (isset($_POST['frontend_labels'][$slug])) {
                         $settings->setFormatFrontendLabel($slug, $_POST['frontend_labels'][$slug]);
                     }
-                    if(isset($_POST['print_options'][$slug])){
-                        $settings->setPrintOptions($slug,$_POST['print_options'][$slug]);
+                    if (isset($_POST['print_options'][$slug])) {
+                        $settings->setPrintOptions($slug, $_POST['print_options'][$slug]);
                     }
                 }
             }

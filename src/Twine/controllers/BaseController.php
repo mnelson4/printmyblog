@@ -29,10 +29,10 @@ abstract class BaseController
      */
     protected function getFromRequest($query_param_name, $default)
     {
-        if(isset($_GET[$query_param_name])){
+        if (isset($_GET[$query_param_name])) {
             return isset($_GET[$query_param_name]) ? $_GET[$query_param_name] : $default;
         } else {
-            $query_param_name = str_replace('-','_', $query_param_name);
+            $query_param_name = str_replace('-', '_', $query_param_name);
             return isset($_GET[$query_param_name]) ? $_GET[$query_param_name] : $default;
         }
     }

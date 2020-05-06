@@ -108,30 +108,31 @@ class FrontendPrintSettings
         $this->settings[$format]['frontend_label'] = sanitize_text_field($label);
     }
 
-    public function setPrintOptions($format, $submitted_values){
+    public function setPrintOptions($format, $submitted_values)
+    {
         $this->beforeSet($format);
         $values_to_save = [];
-        foreach($this->print_options->allPrintOptions() as $option_name => $details ){
+        foreach ($this->print_options->allPrintOptions() as $option_name => $details) {
             $default = $details['default'];
             $new_value = null;
-            if(isset($submitted_values[$option_name])){
-                if(is_bool($default)) {
+            if (isset($submitted_values[$option_name])) {
+                if (is_bool($default)) {
                     $new_value = (bool)($submitted_values[$option_name]);
-                } elseif(is_numeric($default)){
+                } elseif (is_numeric($default)) {
                     $new_value = (int)$submitted_values[$option_name];
-                }else{
+                } else {
                     $new_value = strip_tags($submitted_values[$option_name]);
                 }
-                if(isset($details['options']) && ! array_key_exists($new_value,$details['options'])){
+                if (isset($details['options']) && ! array_key_exists($new_value, $details['options'])) {
                     // that's not one of the acceptable options. Replace it with the default
                     $new_value = $default;
                 }
             } else {
-                if(is_bool($default)) {
+                if (is_bool($default)) {
                     $new_value = false;
-                } elseif(is_numeric($default)){
+                } elseif (is_numeric($default)) {
                     $new_value = 0;
-                }else{
+                } else {
                     $new_value = '';
                 }
             }
@@ -146,12 +147,13 @@ class FrontendPrintSettings
      * @param $format
      * @return array keys are the option names, values are their saved values
      */
-    public function getPrintOptionsAndValues($format){
+    public function getPrintOptionsAndValues($format)
+    {
         $frontend_deviations = [
             'show_credit' => false,
             'show_filters' => false,
             'rendering_wait' => 0,
-            'show_divider'=> false,
+            'show_divider' => false,
             'post_page_break' => false,
         ];
         return array_merge(
