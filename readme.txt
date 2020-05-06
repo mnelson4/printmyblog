@@ -1,9 +1,9 @@
 === Print My Blog - Print, PDF, & eBook Converter WordPress Plugin ===
 Contributors: mnelson4
-Tags: print, PDF, backup, eBook, print button
+Tags: print, PDF, backup, eBook, print button, ClassicPress
 Requires at least: 4.6
 Stable tag: trunk
-Tested up to: 5.3
+Tested up to: 5.4
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -68,7 +68,7 @@ Want more? [Tell us what matters to you on GitHub](https://github.com/mnelson4/p
 
 = Example Use-Cases =
 
-**Time to prune your website’s content?** You can print it, annotate and sort through a physical stack of paper.
+**Time to prune your website’s content?** You can print it, annotate and sort through a physical stack of paper. Alternatively, scrape content from your WordPress blog, then copy and paste it into a Word document or Google Doc for tweaking.
 
 **Disconnecting offline for a bit?** Print your blog to paper, or even an ePub file to read from your Kindle or phone.
 
@@ -89,7 +89,7 @@ If this doesn't meet your needs, there are good paid and free alternatives.
 
 **Alternatives for printing your entire blog**
 
-[Dead Easy Family History](https://deadeasyfamilyhistory.org/print-my-blog) runs a hosted version of this same plugin, so you can print your blog without even installing this. Especially useful for WordPress**.com** users, or those who can't install the plugin on their site.
+[printmy.blog](https://printmy.blog/now) we run a hosted version of this same plugin, so you can print your blog without even installing this. Especially useful for WordPress**.com** users, or those who can't install the plugin on their site.
 (Its free, but won't use your blog's styles).
 [Anthologize](https://wordpress.org/plugins/anthologize/) is another great plugin for customizing your blog's content before exporting to an e-book format. Also free.
 [bloxp](http://www.bloxp.com/) converts your blog into an e-book with any type of blog (not just WordPress). Fewer, but different, options. Supported by donations.
@@ -217,6 +217,25 @@ But if not, your browser can also remove background colors.
 7. Add the Print My Blog block to add a form visitors can use to select what and how to print your blog.
 
 == Changelog ==
+
+= 2.3.6 Mar 31, 2020 =
+* Fix bug that loaded unnecessary script on every page
+
+= 2.3.5 Mar 26, 2020 =
+* When printing a single post, put the post's title into the HTML page title
+
+= 2.3.4 Mar 18, 2020 =
+* Re-add "pmb-img" wrapping div around images
+
+= 2.3.3 March 18, 2020 =
+* Instruct users to print with their browser (in case the button doesn't work)
+* CSS added for compatibility with Avada Theme/"Fusion Styles"
+* Add "pmb-format-{format}" (eg "pmb-format-print" and "pmb-format-pdf") CSS class to body
+* Only force background white for print; other formats use the theme's background color
+* Fix Avada's lazy-loading
+
+= 2.3.2 March 5 2020 =
+* Fix fatal error for PHP 5.2 and 5.3 users
 
 = 2.3.1 February 24 2020 =
 * Add filter to place print buttons below post content, and their settings can be customized

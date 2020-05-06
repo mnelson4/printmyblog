@@ -425,6 +425,7 @@ class PmbPrintPage extends BaseController
         ";
         if ($post_page_break) {
             $css .= '.pmb-post-article:not(:first-child){page-break-before:always;}';
+            $css .= '@media screen{.pmb-post-article:not(:first-child){margin-top:20vw;}}';
         }
         $font_size_map = array(
             'tiny' => '0.50em',

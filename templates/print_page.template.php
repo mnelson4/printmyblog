@@ -24,11 +24,11 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
     <?php wp_head(); ?>
 </head>
 
-<body class="<?php echo str_replace('has-sidebar', '', implode(' ',get_body_class('pmb-print-page'))); ?>">
+<body class="<?php echo str_replace('has-sidebar', '', implode(' ',get_body_class('pmb-print-page pmb-format-' . $pmb_format))); ?>">
 <!-- Print My Blog Version <?php echo PMB_VERSION;?>-->
 <div class="pmb-waiting-message-fullpage pmb-extra-content">
     <div class="pmb-waiting-message-outer-container">
-        <div class="pmb-window-buttons pmb-top-left">
+        <div class="pmb-window-buttons pmb-top-left pmb-small-instructions">
             <span class="pmb-loading-content">
                 <a href="javascript:history.back();">❌
                     <?php esc_html_e('Cancel', 'print-my-blog'); ?>
@@ -55,7 +55,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                 <span class="pmb-help-happy-text" style="display:none"><?php printf(
                     // translators: 1: opening link tag, 2: closing link tag
                         __('Nice! %1$sPlease leave a review%2$s.', 'print-my-blog'),
-                        '<a href="https://wordpress.org/support/plugin/print-my-blog/reviews/?filter=5" target="_blank" title="' . __('Plugin Reviews (opens in new tab)', 'print-my-blog') . '">',
+                        '<a href="https://wordpress.org/support/plugin/print-my-blog/reviews/" target="_blank" title="' . __('Plugin Reviews (opens in new tab)', 'print-my-blog') . '">',
                         '</a>'
                     ); ?></span>
                 <span class="pmb-help-sad-text" style="display:none"><?php printf(
@@ -162,6 +162,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
             } else { // default: print
                 ?>
                 <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print', 'print-my-blog'); ?>"/>
+                <div class="pmb-small-instructions"><?php esc_html_e('Use your browser to print.', 'event_espresso'); ?></div>
                 <?php
             }
             ?>

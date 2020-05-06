@@ -23,6 +23,7 @@
 
     body.pmb-print-page{
         background-color:lightgray;
+        background-image:none;
     }
 }
 
@@ -111,9 +112,6 @@ div.tiled-gallery{
 
 .pmb-window-buttons{
     position:absolute;
-    line-height:1em;
-    font-size:0.8em;
-    color:gray;
     margin-top:5px;
     margin-left:5px;
 }
@@ -212,12 +210,33 @@ but in the printout they're in front of white paper, so best to have them in bla
     color:black;
 }
 /* For themes that have a dark background, the text colour might be light. In printouts we want it to be displayed black still, by default.*/
-.pmb-posts {
+.pmb-format-print .pmb-posts{
     color:black;
+    background:white;
+}
+@media print{
+    .pmb-format-print{
+        background:white;
+    }
 }
 /* Prevent themes like nisarg from adding those awkward URLs after links. Thanks for trying, but they usually just
 mess up the layout (especially in galleries!) Footnotes are much better. Or links
  */
 .pmb-posts a[href]:after {
     content:'';
+}
+
+/* Make sure the print button is clearly a pressable button; some themes style it as a block and so the cursor
+won't switch to a pointer when they hover over it; and it won't be centered anymore*/
+.pmb-waiting-message-outer-container input[type=submit]{
+    cursor:pointer;
+    /* In case the theme made the input display:block, use margins to center it.*/
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.pmb-small-instructions{
+    line-height:1em;
+    font-size:0.8em;
+    color:gray;
 }
