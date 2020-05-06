@@ -12,7 +12,7 @@
     <div class="image"><img src="<?php echo PMB_IMAGES_URL . 'pmb-book.gif';?>"></div>
     <div class="content">
         <h2>Write Professional Books and Documents Right in WordPress with Print My Blog Pro</h2>
-        <p>Help make it the perfect tool for YOU by having your say.</p>
+        <p>Let me know what features matter to <b>you.</b></p>
         <p>Signup to get involved and <a href="https://printmy.blog/2020/04/27/get-a-major-discount-for-print-my-blog-pro-by-becoming-a-founding-member/">get a major discount (or even a free lifetime license if you're quick!)</a></p>
         <form method="POST" action="<?php echo esc_url( "//" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);?>" target="_blank">
         <input type="hidden" name="pmb_pro_notice_signup" value="signup">
