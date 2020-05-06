@@ -36,15 +36,18 @@ class ProNotification
             $_POST['email']
         )){
             $this->rememberDismissed('accepted');
-            wp_redirect(
-                add_query_arg(
-                    [
-                        'FNAME' => $_POST['name'],
-                        'EMAIL' => $_POST['email']
+            wp_remote_post(
+                'https://blog.us19.list-manage.com/subscribe/post?u=5881790528ea076edfc10d859&id=32ccd044c3',
+                [
+                    'body' => [
+                      'FNAME' => $_POST['name'],
+                      'EMAIL' => $_POST['email']
                     ],
-                    'https://blog.us19.list-manage.com/subscribe/post?u=5881790528ea076edfc10d859&id=32ccd044c3'
-
-                )
+                    'blocking' => false,
+                ]
+            );
+            wp_redirect(
+                'https://printmy.blog/thanks/thanks-for-signing-up/'
             );
         }
         if(isset($_GET['pmb_pro_notice_dismiss'])){
