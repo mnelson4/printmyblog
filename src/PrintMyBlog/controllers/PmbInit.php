@@ -3,6 +3,7 @@
 namespace PrintMyBlog\controllers;
 
 use PrintMyBlog\compatibility\DetectAndActivate;
+use PrintMyBlog\domain\ProNotification;
 use Twine\admin\news\DashboardNews;
 use Twine\controllers\BaseController;
 
@@ -52,6 +53,7 @@ class PmbInit extends BaseController
         } elseif (is_admin()) {
             (new PmbAdmin())->setHooks();
             $this->initDashboardNews();
+            (new ProNotification())->setHooks();
         } else {
             (new PmbFrontend())->setHooks();
             (new PmbPrintPage())->setHooks();
@@ -92,6 +94,13 @@ class PmbInit extends BaseController
     {
         $plugin_url = plugin_dir_url(PMB_MAIN_FILE);
         define('PMB_ASSETS_URL', $plugin_url . 'assets/');
+        define('PMB_IMAGES_URL', PMB_ASSETS_URL . 'images/');
+        define('PMB_SCRIPTS_URL', PMB_ASSETS_URL . 'scripts/');
+        define('PMB_STYLES_URL', PMB_ASSETS_URL . 'styles/');
+
         define('PMB_ASSETS_DIR', PMB_DIR . 'assets/');
+        define('PMB_IMAGES_DIR', PMB_ASSETS_DIR . 'images/');
+        define('PMB_SCRIPTS_DIR', PMB_ASSETS_DIR . 'scripts/');
+        define('PMB_STYLES_DIR', PMB_ASSETS_DIR . 'styles/');
     }
 }

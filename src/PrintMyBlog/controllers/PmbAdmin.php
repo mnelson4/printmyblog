@@ -187,6 +187,12 @@ class PmbAdmin extends BaseController
 
     public function enqueueScripts($hook)
     {
+        wp_enqueue_style(
+            'pmb_admin',
+            PMB_STYLES_URL . 'pmb-admin.css',
+            [],
+            filemtime(PMB_STYLES_DIR . 'pmb-admin.css')
+        );
         if (
             ! in_array(
                 $hook,
