@@ -218,6 +218,11 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 2.4.0 May 6, 2020 =
+* Add front-end print settings
+* Add filter 'PrintMyBlog\controllers\PmbFrontend->addPrintButtons $show_buttons'
+* Add invitation to signup for Print My Blog Pro
+
 = 2.3.6 Mar 31, 2020 =
 * Fix bug that loaded unnecessary script on every page
 
