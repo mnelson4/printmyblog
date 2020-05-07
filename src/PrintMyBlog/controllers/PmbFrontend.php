@@ -4,6 +4,7 @@ namespace PrintMyBlog\controllers;
 
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintNowSettings;
+use PrintMyBlog\domain\PrintOptions;
 use Twine\controllers\BaseController;
 
 /**
@@ -29,42 +30,30 @@ class PmbFrontend extends BaseController
     {
         global $post;
         if ($post->post_type === 'post' && is_single() && ! post_password_required($post)) {
-            $print_settings = new FrontendPrintSettings();
+            $print_settings = new FrontendPrintSettings(new PrintOptions());
             $print_settings->load();
-            if ($print_settings->showButtons()) {
-                $base_args = array(
-                    'post-type' => 'post',
-                    'include-private-posts' => '1',
-                    'show_site_title' => '1',
-                    'show_site_tagline' => '1',
-                    'show_site_url' => '1',
-                    'show_date_printed' => '1',
-                    'show_title' => '1',
-                    'show_date' => '1',
-                    'show_categories' => '1',
-                    'show_featured_image' => '1',
-                    'show_content' => '1',
-                    'post-page-break' => 'on',
-                    'columns' => '1',
-                    'font-size' => 'normal',
-                    'image-size' => 'medium',
-                    'links' => 'include',
-                    'rendering-wait' => '10',
+            if (
+                apply_filters(
+                    'PrintMyBlog\controllers\PmbFrontend->addPrintButtons $show_buttons',
+                    $print_settings->showButtons(),
+                    $post
+                )
+            ) {
+                $base_args = [
                     'print-my-blog' => '1',
-                    'format' => '%s',
-                    'pmb-post' => '%d',
-                );
+                    'post-type' => 'post',
+                ];
                 $html = '<div class="pmb-print-this-page wp-block-button">';
                 foreach ($print_settings->formats() as $slug => $settings) {
                     if (! $print_settings->isActive($slug)) {
                         continue;
                     }
-                    $args = $base_args;
+                    $args = array_merge(
+                        $base_args,
+                        $print_settings->getPrintOptionsAndValues($slug)
+                    );
                     $args['format'] = $slug;
                     $args['pmb-post'] = $post->ID;
-                    if ($slug === 'print') {
-                        $args['links'] = 'parens';
-                    }
                     $url = add_query_arg(
                         apply_filters(
                             '\PrintMyBlog\controllers\PmbFrontend->addPrintButton $base_args',

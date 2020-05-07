@@ -20,8 +20,14 @@ class FrontendPrintSettings
     protected $settings;
     const OPTION_NAME = 'pmb-print-now-settings';
 
-    public function __construct()
+    /**
+     * @var PrintOptions
+     */
+    protected $print_options;
+
+    public function __construct(PrintOptions $print_options)
     {
+        $this->print_options = $print_options;
         $this->formats = array(
             'print' => array(
                 'admin_label' => esc_html__('Print', 'print-my-blog'),
@@ -43,7 +49,8 @@ class FrontendPrintSettings
         foreach ($this->formats as $slug => $format) {
             $this->settings[$slug] = array(
                 'frontend_label' => $format['default'],
-                'active' => true
+                'active' => true,
+                'print_options' => []
             );
         }
     }
@@ -99,6 +106,61 @@ class FrontendPrintSettings
     {
         $this->beforeSet($format);
         $this->settings[$format]['frontend_label'] = sanitize_text_field($label);
+    }
+
+    public function setPrintOptions($format, $submitted_values)
+    {
+        $this->beforeSet($format);
+        $values_to_save = [];
+        foreach ($this->print_options->allPrintOptions() as $option_name => $details) {
+            $default = $details['default'];
+            $new_value = null;
+            if (isset($submitted_values[$option_name])) {
+                if (is_bool($default)) {
+                    $new_value = (bool)($submitted_values[$option_name]);
+                } elseif (is_numeric($default)) {
+                    $new_value = (int)$submitted_values[$option_name];
+                } else {
+                    $new_value = strip_tags($submitted_values[$option_name]);
+                }
+                if (isset($details['options']) && ! array_key_exists($new_value, $details['options'])) {
+                    // that's not one of the acceptable options. Replace it with the default
+                    $new_value = $default;
+                }
+            } else {
+                if (is_bool($default)) {
+                    $new_value = false;
+                } elseif (is_numeric($default)) {
+                    $new_value = 0;
+                } else {
+                    $new_value = '';
+                }
+            }
+            $values_to_save[$option_name] = $new_value;
+        }
+        $this->settings[$format]['print_options'] = $values_to_save;
+    }
+
+    /**
+     * Gets the print option names and their current values
+     * @since $VID:$
+     * @param $format
+     * @return array keys are the option names, values are their saved values
+     */
+    public function getPrintOptionsAndValues($format)
+    {
+        $frontend_deviations = [
+            'show_credit' => false,
+            'show_filters' => false,
+            'rendering_wait' => 0,
+            'show_divider' => false,
+            'post_page_break' => false,
+        ];
+        return array_merge(
+            $this->print_options->allPrintOptionDefaults($format),
+            $frontend_deviations,
+            $this->settings[ $format ]['print_options']
+        );
     }
 
     /**

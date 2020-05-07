@@ -1,0 +1,30 @@
+.pmb-pro-notice{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content:flex-start;
+}
+
+.pmb-pro-notice input[type=email]{
+    min-width:250px;
+}
+
+.pmb-pro-notice div.image{
+    flex:0 1 189px;
+    margin: 12px 12px 12px 0;
+    height:123px;
+
+}
+.pmb-pro-notice div.content{
+    flex:1 1 200px;
+}
+.pmb-pro-notice div.image img{
+    height:100%;
+}
+.pmb-pro-notice div.content{
+    margin-top:12px;
+    margin-bottom:12px;
+}
+.pmb-pro-notice div.content h2{
+    margin-top:0;
+    margin-bottom:15px;
+}

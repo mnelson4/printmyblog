@@ -1,9 +1,11 @@
 <?php
 /**
  * @var $print_options PrintMyBlog\domain\PrintOptions
+ * @var $displayer PrintMyBlog\services\display\FormInputs
  */
 
 use PrintMyBlog\domain\PrintOptions;
+use PrintMyBlog\services\display\FormInputs;
 
 ?>
 <div class="wrap nosubsub">
@@ -107,166 +109,10 @@ use PrintMyBlog\domain\PrintOptions;
                 </tbody>
             </table>
 
+            <?php include('partials/display_options.template.php'); ?>
 
-                <h2><?php esc_html_e('Content','print-my-blog' );?></h2>
-            <table class="form-table">
-                <tbody>
-                <tr>
-                    <th scope="row">
-                        <label ><?php esc_html_e('Header Content to Print','print-my-blog' );?></label>
-                    </th>
-                    <td>
-                        <?php foreach($print_options->headerContentOptions() as $option_name => $option_details){
-                            ?>
-                        <label for="show_<?php echo esc_attr($option_name);?>">
-                            <input type="checkbox" name="show_<?php echo esc_attr($option_name);?>" id="show_<?php echo $option_name;?>"
-                                <?php
-                                if ($option_details['default']){
-                                    ?> checked="checked"
-                                    <?php
-                                }
-                                ?> value="1">
-                            <?php echo $option_details['label'];?></label><br>
-                        <?php
-                            if (isset($option_details['help'])){
-                            ?> <p class="description"><?php echo $option_details['help'];?></p>
-                            <?php
-                            }
-                        }
-                        ?>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row"> <?php esc_html_e('Post Content to Print','print-my-blog' );?></th>
-                    <td>
-                    <?php
-                    foreach($print_options->postContentOptions() as $option_name => $option_details){
-                        ?>
-                        <label for="show_<?php echo esc_attr($option_name);?>">
-                            <input type="checkbox" name="show_<?php echo esc_attr($option_name);?>" id="show_<?php echo esc_attr($option_name);?>"
-                                <?php
-                                if ($option_details['default']){
-                                ?> checked="checked"
-                            <?php
-                            }
-                            ?> value="1">
-                            <?php echo $option_details['label'];?></label><br>
-                    <?php
-                    }
-                    ?>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-            <h2><?php esc_html_e('Page Layout','print-my-blog' );?></h2>
-            <table class="form-table">
-                <tbody>
-                <tr>
-                    <th scope="row">
-                        <label for="post-page-break"><?php esc_html_e('Each Post Begins on a New Page','print-my-blog' );?></label>
-                    </th>
-                    <td>
-                        <input type="checkbox" name="post-page-break" id="post-page-break" checked="checked">
-                        <p class="description"><?php esc_html_e('Whether to force posts to always start on a new page. Doing so makes the page more legible, but uses more paper.','print-my-blog' );?></p>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <label for="columns"><?php esc_html_e('Columns','print-my-blog' );?></label>
-                    </th>
-                    <td>
-                        <select name="columns" id="columns">
-                            <option value="1" selected="selected"><?php esc_html_e('1','print-my-blog' );?></option>
-                            <option value="2"><?php esc_html_e('2', 'print-my-blog'); ?></option>
-                            <option value="3"><?php esc_html_e('3', 'print-my-blog'); ?></option>
-                        </select>
-                        <p class="description"><?php esc_html_e('The number of columns of text on each page. Not supported by some web browsers.','print-my-blog' );?></p>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <label for="font-size"><?php esc_html_e('Font Size','print-my-blog' );?></label>
-                    </th>
-                    <td>
-                        <select name="font-size" id="font-size">
-                            <option value="tiny"><?php esc_html_e('Tiny (1/2 size)','print-my-blog' );?></option>
-                            <option value="small"><?php esc_html_e('Small (3/4 size)', 'print-my-blog'); ?></option>
-                            <option value="normal" selected="selected"><?php esc_html_e('Normal (theme default)', 'print-my-blog'); ?></option>
-                            <option value="large"><?php esc_html_e('Large (slightly larger than normal)', 'print-my-blog'); ?></option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <label for="image-size"><?php esc_html_e('Image Size','print-my-blog' );?></label>
-                    </th>
-                    <td>
-                        <select name="image-size" id="image-size">
-                            <option value="full"><?php esc_html_e('Full (theme default)','print-my-blog' );?></option>
-                            <option value="large"><?php esc_html_e('Large (3/4 size)','print-my-blog' );?></option>
-                            <option value="medium" selected="selected"><?php esc_html_e('Medium (1/2 size)', 'print-my-blog'); ?></option>
-                            <option value="small"><?php esc_html_e('Small (1/4 size)', 'print-my-blog'); ?></option>
-                            <option value="none"><?php esc_html_e('None (hide images)', 'print-my-blog'); ?></option>
-                        </select>
-                        <p class="description"><?php esc_html_e('If you want to save paper, choose a smaller image size, or hide images altogether.','print-my-blog' );?></p>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <label for="links"><?php esc_html_e('Include Hyperlinks','print-my-blog' );?></label>
-                    </th>
-                    <td>
-                        <select name="links" id="image-size">
-                            <option value="include" selected="selected"><?php esc_html_e('Include','print-my-blog' );?></option>
-                            <option value="remove"><?php esc_html_e('Remove','print-my-blog' );?></option>
-                            <option value="parens"><?php esc_html_e('Replace with URL in Parenthesis','print-my-blog' );?></option>
-                        </select>
-                        <p class="description"><?php esc_html_e('Note: PDFs generated in Firefox and Safari automatically remove hyperlinks. If you want your PDF to include hyperlinks, please use another browser.', 'print-my-blog'); ?></p>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-
-            <details class="pmb-details">
-                <summary class="pmb-reveal-options"><?php esc_html_e('Troubleshooting Options','print-my-blog' );?></summary>
-                <table class="form-table">
-                    <tbody>
-                    <tr>
-                        <th scope="row">
-                            <label for="rendering-wait"><?php esc_html_e('Post Rendering Wait-Time','print-my-blog' );?></label>
-                        </th>
-                        <td>
-                            <input name="rendering-wait" value="200"><?php esc_html_e('ms','print-my-blog' );?>
-                            <p class="description"><?php esc_html_e('Milliseconds to wait between rendering posts. If posts are rendered too quickly on the page, sometimes images won’t load properly. ','print-my-blog' );?></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <label for="include-inline-js"><?php esc_html_e('Include Inline Javascript','print-my-blog' );?></label>
-                        </th>
-                        <td>
-                            <input type="checkbox" name="include-inline-js" value="1">
-                            <p class="description"><?php esc_html_e('Sometimes posts contain inline javascript which can cause errors and stop the page from rendering.','print-my-blog' );?></p>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <label for="shortcodes"><?php esc_html_e('Include Unrendered Shortcodes','print-my-blog' );?></label>
-                        </th>
-                        <td>
-                            <input type="checkbox" name="shortcodes" value="1">
-                            <p class="description"><?php esc_html_e('If you left shortcodes from deactivated deactivated plugins or themes in your posts, they are automatically removed from printouts. Check this to leave them.','print-my-blog' );?></p>
-                        </td>
-
-                    </tr>                    </tbody>
-                </table>
-            </details>
-            <input type="hidden" name="<?php echo PMB_PRINTPAGE_SLUG;?>" value="1">
         </details>
-
+        <input type="hidden" name="<?php echo PMB_PRINTPAGE_SLUG;?>" value="1">
         <table class="form-table">
             <tbody>
             <tr>

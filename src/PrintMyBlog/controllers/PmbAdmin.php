@@ -4,6 +4,7 @@ namespace PrintMyBlog\controllers;
 
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
+use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
 
 /**
@@ -19,7 +20,9 @@ use Twine\controllers\BaseController;
  */
 class PmbAdmin extends BaseController
 {
-
+    /**
+     * name of the option that just indicates we successfully saved the setttings
+     */
     const SETTINGS_SAVED_OPTION = 'pmb-settings-saved';
     /**
      * Sets hooks that we'll use in the admin.
@@ -82,28 +85,31 @@ class PmbAdmin extends BaseController
 
     public function settingsPage()
     {
-        $pmb_print_now_formats = new FrontendPrintSettings();
-        $pmb_print_now_formats->load();
+        $settings = new FrontendPrintSettings(new PrintOptions());
+        $settings->load();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             check_admin_referer('pmb-settings');
             // Ok save those settings!
             if (isset($_POST['pmb-reset'])) {
-                $pmb_print_now_formats = new FrontendPrintSettings();
+                $settings = new FrontendPrintSettings(new PrintOptions());
             } else {
-                $pmb_print_now_formats->setShowButtons(isset($_POST['show_buttons']));
-                foreach ($pmb_print_now_formats->formatSlugs() as $slug) {
+                $settings->setShowButtons(isset($_POST['show_buttons']));
+                foreach ($settings->formatSlugs() as $slug) {
                     if (isset($_POST['format'][$slug])) {
                         $active = true;
                     } else {
                         $active = false;
                     }
-                    $pmb_print_now_formats->setFormatActive($slug, $active);
+                    $settings->setFormatActive($slug, $active);
                     if (isset($_POST['frontend_labels'][$slug])) {
-                        $pmb_print_now_formats->setFormatFrontendLabel($slug, $_POST['frontend_labels'][$slug]);
+                        $settings->setFormatFrontendLabel($slug, $_POST['frontend_labels'][$slug]);
+                    }
+                    if (isset($_POST['print_options'][$slug])) {
+                        $settings->setPrintOptions($slug, $_POST['print_options'][$slug]);
                     }
                 }
             }
-            $pmb_print_now_formats->save();
+            $settings->save();
             update_option(self::SETTINGS_SAVED_OPTION, true, false);
             wp_redirect('');
         }
@@ -123,7 +129,8 @@ class PmbAdmin extends BaseController
             }
             echo '<div class="notice notice-success is-dismissible"><p>' . $text .  '</p></div>';
         }
-
+        $print_options = new PrintOptions();
+        $displayer = new FormInputs();
         include(PMB_TEMPLATES_DIR . 'settings_page.template.php');
     }
 
@@ -139,6 +146,7 @@ class PmbAdmin extends BaseController
             include(PMB_TEMPLATES_DIR . 'welcome.template.php');
         } else {
             $print_options = new PrintOptions();
+            $displayer = new FormInputs();
             include(PMB_TEMPLATES_DIR . 'setup_page.template.php');
         }
     }
@@ -179,6 +187,12 @@ class PmbAdmin extends BaseController
 
     public function enqueueScripts($hook)
     {
+        wp_enqueue_style(
+            'pmb_admin',
+            PMB_STYLES_URL . 'pmb-admin.css',
+            [],
+            filemtime(PMB_STYLES_DIR . 'pmb-admin.css')
+        );
         if (
             ! in_array(
                 $hook,
