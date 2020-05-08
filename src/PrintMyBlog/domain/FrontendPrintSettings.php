@@ -43,16 +43,27 @@ class FrontendPrintSettings
             )
         );
         // Initialize the settings with the defaults.
-        $this->settings = [
-            'show_buttons' => false
+        $this->settings = $this->defaultSettings();
+    }
+
+    /**
+     * Gets the default settings
+     * @since $VID:$
+     * @return array
+     */
+    protected function defaultSettings()
+    {
+        $defaults =  [
+            'show_buttons' => false,
         ];
         foreach ($this->formats as $slug => $format) {
-            $this->settings[$slug] = array(
+            $defaults[$slug] = array(
                 'frontend_label' => $format['default'],
                 'active' => true,
                 'print_options' => []
             );
         }
+        return $defaults;
     }
 
     /**
@@ -230,10 +241,10 @@ class FrontendPrintSettings
      */
     public function load()
     {
-        $stored_settings = get_option(self::OPTION_NAME, null);
-        if ($stored_settings !== null) {
-            $this->settings = $stored_settings;
-        }
+        $this->settings = array_replace_recursive(
+            $this->defaultSettings(),
+            get_option(self::OPTION_NAME, [])
+        );
     }
 }
 // End of file Settings.php
