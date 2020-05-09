@@ -395,7 +395,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         this.convertYoutubeVideosToImages();
         // Don't wrap tiled gallery images- we have CSS to avoid page breaks in them
         // although currently, they don't display well because they need JS that doesn't get enqueued
-        var non_emojis = jQuery('.pmb-posts img:not(.emoji, div.tiled-gallery img, img.fg-image, img.size-medium, img.size-thumbnail)');
+        var non_emojis = jQuery('.pmb-posts img:not(.emoji, div.tiled-gallery img, img.fg-image, img.size-medium, img.size-thumbnail)').filter(function() {
+            return  jQuery(this).attr("height") > 400;
+        });
         if(this.image_size === 0){
             non_emojis.remove();
         } else{
