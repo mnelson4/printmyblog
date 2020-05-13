@@ -225,6 +225,11 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 2.4.2 May 15, 2020 =
+* If there is an error loading posts, show an error message and give links to FAQ
+* Don't wrap small images in pmb-image
+* Add VideoJS plugin compatibility
+
 = 2.4.1 May 8, 2020 =
 * Fix warnings on posts when settings weren't re-saved
 
