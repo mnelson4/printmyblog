@@ -45,3 +45,11 @@ Video JS https://wordpress.org/plugins/videojs-html5-player/ Avoid having large 
     width:100%;
     height:auto;
 }
+
+/**
+Hide Google Recaptcha from printouts
+
+ */
+.pmb-posts .grecaptcha-badge{
+    display:none !important;
+}
