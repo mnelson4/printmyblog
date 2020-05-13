@@ -170,7 +170,9 @@ class PrintOptions
         return [
             'rendering_wait' => [
                 'label' => esc_html__('Post Rendering Wait-Time', 'print-my-blog'),
-                'default' => 200,
+                //phpcs:disable Generic.Files.LineLength.TooLong
+                'default' => apply_filters('PrintMyBlog\domain\PrintOptions->troubleshootingOptions rendering_wait default',200),
+                //phpcs:enable
                 'after_input' => esc_html__('ms', 'print-my-blog'),
                 //phpcs:disable Generic.Files.LineLength.TooLong
                 'help' => esc_html__('Milliseconds to wait between rendering posts. If posts are rendered too quickly on the page, sometimes images won’t load properly. ', 'print-my-blog')
