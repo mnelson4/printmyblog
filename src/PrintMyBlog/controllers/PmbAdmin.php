@@ -115,7 +115,7 @@ class PmbAdmin extends BaseController
         }
         $saved = get_option(self::SETTINGS_SAVED_OPTION, false);
         if ($saved) {
-            update_option(self::SETTINGS_SAVED_OPTION, false, false);
+            delete_option(self::SETTINGS_SAVED_OPTION);
             $posts = get_posts(array ( 'orderby' => 'desc', 'posts_per_page' => '1' ));
             $text = esc_html__('Settings Saved!', 'print-my-blog');
             if ($posts) {

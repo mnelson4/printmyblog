@@ -229,10 +229,11 @@ class FrontendPrintSettings
     /**
      * Saves the settings on this class to the database.
      * @since $VID:$
+     * return boolean indicating successful saving
      */
     public function save()
     {
-        update_option(self::OPTION_NAME, $this->settings);
+        return update_option(self::OPTION_NAME, $this->settings);
     }
 
     /**
