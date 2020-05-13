@@ -67,12 +67,16 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         this.loading_content = jQuery(this.loading_content_selector);
 
         var alltaxonomiesCollection = new wp.api.collections.Taxonomies();
-        alltaxonomiesCollection.fetch().done((taxonomies) => {
-            this.working = true;
-            this.taxonomies = taxonomies;
-            // ok we have everything we need to start. So let's get it started!
-			this.beginLoading();
-        });
+        alltaxonomiesCollection.fetch().then(
+            (taxonomies) => {
+                this.working = true;
+                this.taxonomies = taxonomies;
+                // ok we have everything we need to start. So let's get it started!
+                this.beginLoading();
+            },
+            (jqxhr,textStatus,errorThrown) => {
+                this.stopAndShowError(errorThrown);
+            });
     };
 
     this.getCollection = function() {
@@ -144,16 +148,20 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             {
                 data: this.getPostsCollectionQueryData(),
 
-        }).done((posts) => {
-            this.storePostsAndMaybeFetchMore(posts, collection);
-        });
+        }).then(
+            (posts) => {
+                this.storePostsAndMaybeFetchMore(posts, collection);
+            },
+            (jqxhr, textStatus, errorThrown) => {
+                this.stopAndShowError(errorThrown);
+            });
     };
 
     this.storePostsAndMaybeFetchMore = function(posts, collection) {
         if(typeof posts === 'object' && 'errors' in posts) {
             var first_error_key = Object.keys(posts.errors)[0];
             var first_error_message = posts.errors[first_error_key];
-            this.status_span.html( this.translations.error_fetching_posts + first_error_message + ' (' + first_error_key + ')');
+            this.stopAndShowError(first_error_message + ' (' + first_error_key + ')');
             return;
         }
         this.posts = this.posts.concat(posts);
@@ -164,9 +172,13 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         var posts_so_far = this.posts.length;
         this.posts_count_span.html(posts_so_far + '/' + this.total_posts);
         if (collection.hasMore()) {
-            collection.more().done((posts) => {
-                this.storePostsAndMaybeFetchMore(posts, collection);
-            });
+            collection.more().then(
+                (posts) => {
+                    this.storePostsAndMaybeFetchMore(posts, collection);
+                },
+                (jqxhr, textStatus, errorThrown) => {
+                    this.stopAndShowError(errorThrown);
+                });
         } else {
             this.maybeStoreComments();
         }
@@ -192,16 +204,20 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.beginLoadingComments = function () {
         this.header.html(this.translations.loading_comments);
         let collection = this.getCommentCollection();
-        collection.fetch({data:this.getCommentsCollectionQueryData()}).done((comments) => {
-            this.storeCommentsAndMaybeFetchMore(comments, collection);
-        });
+        collection.fetch({data:this.getCommentsCollectionQueryData()}).then(
+            (comments) => {
+                this.storeCommentsAndMaybeFetchMore(comments, collection);
+            },
+            (jqxhr,textStatus,errorThrown) => {
+                this.stopAndShowError(errorThrown);
+            });
     };
 
     this.storeCommentsAndMaybeFetchMore = function(comments, collection) {
         if(typeof comments === 'object' && 'errors' in comments) {
             var first_error_key = Object.keys(comments.errors)[0];
             var first_error_message = comments.errors[first_error_key];
-            this.status_span.html( this.translations.error_fetching_posts + first_error_message + ' (' + first_error_key + ')');
+            this.stopAndShowError( first_error_message + ' (' + first_error_key + ')');
             return;
         }
         this.comments = this.comments.concat(comments);
@@ -209,9 +225,13 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         let comments_so_far = this.comments.length;
         this.posts_count_span.html(comments_so_far + '/' + this.total_comments);
         if (collection.hasMore()) {
-            collection.more().done((comments) => {
-                this.storeCommentsAndMaybeFetchMore(comments, collection);
-            });
+            collection.more().then(
+                (comments) => {
+                    this.storeCommentsAndMaybeFetchMore(comments, collection);
+                },
+                (jqxhr,textStatus,errorThrown) => {
+                    this.stopAndShowError(errorThrown);
+                });
         } else {
             this.organizeComments();
         }
@@ -753,6 +773,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     };
     this.copyPosts = function(){
         copyToClip(this.posts_div.html());
+    }
+    this.stopAndShowError = function(errorText){
+        this.header.html(this.translations.error);
+        this.status_span.html(this.translations.error_fetching_posts + errorText +'<br>' + this.translations.troubleshooting);
     }
 }
 

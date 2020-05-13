@@ -177,7 +177,14 @@ To fix this, just retry generate the PDF. Each time the browser will fetch more 
 
 = The Print Page says "There seems to be an error initializing...", or is stuck on "Loading Content", or I can't filter by categories or terms from the print setup page=
 
-You may have disabled the WP REST API. (Eg by using "All in One WP Security" plugin's "Disallow Unauthorized REST API Requests" or "Disable REST API" plugin). Print My Blog uses the WP REST API to load your posts into the print-page, so please ensure the WP REST API is enabled.
+A plugin has probably disabled the WP REST API, which Print My Blog uses for loading data.
+
+This is often done by a security plugin.
+
+* Don't use "Disable REST API" plugins
+* "All in One WP Security" has a setting called "Disallow Unuahtorized REST API requests". Disable it.
+* Wordfence has a setting on their "All Options" page, under "Brute Force Proection", called "Prevent discovery of usernames through ‘/?author=N’ scans, the oEmbed API, and the WordPress REST API". Disable it.
+
 
 = How do I remove post content from the printout? =
 
