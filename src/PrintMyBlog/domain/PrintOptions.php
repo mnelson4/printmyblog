@@ -171,7 +171,7 @@ class PrintOptions
             'rendering_wait' => [
                 'label' => esc_html__('Post Rendering Wait-Time', 'print-my-blog'),
                 //phpcs:disable Generic.Files.LineLength.TooLong
-                'default' => apply_filters('PrintMyBlog\domain\PrintOptions->troubleshootingOptions rendering_wait default',200),
+                'default' => apply_filters('PrintMyBlog\domain\PrintOptions->troubleshootingOptions rendering_wait default', 200),
                 //phpcs:enable
                 'after_input' => esc_html__('ms', 'print-my-blog'),
                 //phpcs:disable Generic.Files.LineLength.TooLong
