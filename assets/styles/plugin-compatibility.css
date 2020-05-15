@@ -46,6 +46,13 @@ Video JS https://wordpress.org/plugins/videojs-html5-player/ Avoid having large 
     height:auto;
 }
 
+/*
+Video.js https://wordpress.org/plugins/videojs-html5-video-player-for-wordpress/ Avoid page breaks inside videos
+ */
+.pmb-posts .video-wrapper{
+    page-break-inside:avoid;
+}
+
 /**
 Hide Google Recaptcha from printouts
 
