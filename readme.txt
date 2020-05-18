@@ -183,7 +183,7 @@ This is often done by a security plugin.
 
 * Don't use "Disable REST API" plugins
 * "All in One WP Security" has a setting called "Disallow Unuahtorized REST API requests". Disable it.
-* Wordfence has a setting on their "All Options" page, under "Brute Force Proection", called "Prevent discovery of usernames through ‘/?author=N’ scans, the oEmbed API, and the WordPress REST API". Disable it.
+* Wordfence has a setting on their "All Options" page, under "Brute Force Proection", called "Prevent discovery of usernames through ‘/?author=N’ scans, the oEmbed API, and the WordPress REST API". [Disable it.](https://drive.google.com/file/d/1K3-2BjNSWQBUi1uPxq_l2gCj4xXZ44MD/view)
 
 
 = How do I remove post content from the printout? =
