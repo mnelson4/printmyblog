@@ -229,6 +229,8 @@ But if not, your browser can also remove background colors.
 * If there is an error loading posts, show an error message and give links to FAQ
 * Don't wrap small images in pmb-image
 * Add VideoJS plugin compatibility
+* Remove emojis from print button labels if database doesn't support them
+* Add `pmb-no-break` class
 
 = 2.4.1 May 8, 2020 =
 * Fix warnings on posts when settings weren't re-saved
