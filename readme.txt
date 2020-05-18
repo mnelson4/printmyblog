@@ -213,6 +213,9 @@ But if not, your browser can also remove background colors.
 
 = How do I force a page break before something? (So it's always at the top of a page) =
 [Add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-page-break" onto the the element/block you want to be at the top of the page.
+
+= How do I avoid a pagebreak inside something? =
+[Add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-no-break" onto the element/block. The browser will avoid a pagebreak in that element if possible.
 == Screenshots ==
 
 1. Print My Blog removes junk that doesn’t belong in a printout— like ink-guzzling logos, menus, search-bars, sidebars, footer widgets, etc.
