@@ -154,6 +154,7 @@ class PmbAdmin extends BaseController
     public function renderLegacyAdminPage()
     {
         $print_options = new PrintOptions();
+        $displayer = new FormInputs();
         $legacy_page = true;
         include(PMB_TEMPLATES_DIR . 'setup_page.template.php');
     }
