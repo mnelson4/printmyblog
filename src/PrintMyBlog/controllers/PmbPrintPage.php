@@ -340,6 +340,7 @@ class PmbPrintPage extends BaseController
                         'There was an error fetching posts. It was: ',
                         'print-my-blog'
                     ),
+                    'no_response' => esc_html__( 'No response from WP REST API.', 'print-my-blog' ),
                     'error' => esc_html__('Sorry, There was a Problem 😢', 'print-my-blog'),
                     'troubleshooting' => sprintf(
                         esc_html__('%1$sRead our FAQs%2$s, then feel free to ask for help in %3$sthe support forum.%2$s', 'print-my-blog'),
