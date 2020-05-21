@@ -75,7 +75,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                 ?>
                 <p>
                     <?php esc_html_e('You may now use dotEPUB to create the eBook.', 'print-my-blog'); ?>
-                    <a href="https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20an%20ebook%20using%20print%20my%20blog%3F" target="_blank"><?php esc_html_e('How?', 'print-my-blog'); ?></a>
+                    <a href="https://wordpress.org/plugins/print-my-blog/#%0Ahow%20do%20i%20create%20an%20ebook%20using%20print%20my%20blog%3F%0A" target="_blank"><?php esc_html_e('How?', 'print-my-blog'); ?></a>
                 </p>
                 <?php
             } else if ($pmb_format === 'pdf') {
