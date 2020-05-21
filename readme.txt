@@ -230,10 +230,13 @@ But if not, your browser can also remove background colors.
 
 = 2.4.2 May 15, 2020 =
 * If there is an error loading posts, show an error message and give links to FAQ
-* Don't wrap small images in pmb-image
+* Don't wrap small images in pmb-image so they won't take up the full page width
 * Add VideoJS plugin compatibility
 * Remove emojis from print button labels if database doesn't support them
-* Add `pmb-no-break` class
+* Add `pmb-no-break` CSS class to instruct browsers to not break during an HTML element
+* Update minimum WordPress version to 4.7 and enforce it in order to avoid errors
+* Fix an error when used with WordPress 4.7 which assumed the `has_block` function existed
+* Fix saving print settings even when emojis aren’t supported by the database.
 
 = 2.4.1 May 8, 2020 =
 * Fix warnings on posts when settings weren't re-saved
