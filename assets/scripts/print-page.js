@@ -158,6 +158,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     };
 
     this.storePostsAndMaybeFetchMore = function(posts, collection) {
+        if(posts === null){
+            this.stopAndShowError(this.translations.no_response);
+            return;
+        }
         if(typeof posts === 'object' && 'errors' in posts) {
             var first_error_key = Object.keys(posts.errors)[0];
             var first_error_message = posts.errors[first_error_key];
