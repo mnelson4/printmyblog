@@ -240,3 +240,8 @@ won't switch to a pointer when they hover over it; and it won't be centered anym
     font-size:0.8em;
     color:gray;
 }
+
+.pmb-no-break{
+    page-break-inside:avoid;
+    display:block;
+}

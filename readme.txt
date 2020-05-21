@@ -177,7 +177,14 @@ To fix this, just retry generate the PDF. Each time the browser will fetch more 
 
 = The Print Page says "There seems to be an error initializing...", or is stuck on "Loading Content", or I can't filter by categories or terms from the print setup page=
 
-You may have disabled the WP REST API. (Eg by using "All in One WP Security" plugin's "Disallow Unauthorized REST API Requests" or "Disable REST API" plugin). Print My Blog uses the WP REST API to load your posts into the print-page, so please ensure the WP REST API is enabled.
+A plugin has probably disabled the WP REST API, which Print My Blog uses for loading data.
+
+This is often done by a security plugin.
+
+* Don't use "Disable REST API" plugins
+* "All in One WP Security" has a setting called "Disallow Unuahtorized REST API requests". Disable it.
+* Wordfence has a setting on their "All Options" page, under "Brute Force Proection", called "Prevent discovery of usernames through ‘/?author=N’ scans, the oEmbed API, and the WordPress REST API". [Disable it.](https://drive.google.com/file/d/1K3-2BjNSWQBUi1uPxq_l2gCj4xXZ44MD/view)
+
 
 = How do I remove post content from the printout? =
 
@@ -206,6 +213,9 @@ But if not, your browser can also remove background colors.
 
 = How do I force a page break before something? (So it's always at the top of a page) =
 [Add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-page-break" onto the the element/block you want to be at the top of the page.
+
+= How do I avoid a pagebreak inside something? =
+[Add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-no-break" onto the element/block. The browser will avoid a pagebreak in that element if possible.
 == Screenshots ==
 
 1. Print My Blog removes junk that doesn’t belong in a printout— like ink-guzzling logos, menus, search-bars, sidebars, footer widgets, etc.
@@ -217,6 +227,16 @@ But if not, your browser can also remove background colors.
 7. Add the Print My Blog block to add a form visitors can use to select what and how to print your blog.
 
 == Changelog ==
+
+= 2.4.2 May 15, 2020 =
+* If there is an error loading posts, show an error message and give links to FAQ
+* Don't wrap small images in pmb-image so they won't take up the full page width
+* Add VideoJS plugin compatibility
+* Remove emojis from print button labels if database doesn't support them
+* Add `pmb-no-break` CSS class to instruct browsers to not break during an HTML element
+* Update minimum WordPress version to 4.7 and enforce it in order to avoid errors
+* Fix an error when used with WordPress 4.7 which assumed the `has_block` function existed
+* Fix saving print settings even when emojis aren’t supported by the database.
 
 = 2.4.1 May 8, 2020 =
 * Fix warnings on posts when settings weren't re-saved

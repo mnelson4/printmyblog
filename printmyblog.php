@@ -10,14 +10,17 @@
  * Description: Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
  * Author: Michael Nelson
  * Author URI: https://printmy.blog
- * Version: 2.4.1
- * Requires at least: 4.6
+ * Version: 2.4.2
+ * Requires at least: 4.7
  * Requires PHP: 5.4
  * Text Domain: print-my-blog
  */
 
 if (! defined('PMB_MIN_PHP_VER_REQUIRED')) {
     define('PMB_MIN_PHP_VER_REQUIRED', '5.4.0');
+}
+if (! defined('PMB_MIN_WP_VER_REQUIRED')) {
+    define('PMB_MIN_WP_VER_REQUIRED', '4.7');
 }
 
 // make sure another version of PMB isn't installed
@@ -75,9 +78,50 @@ if (defined('PMB_VERSION')) {
     }
 
     add_action('admin_notices', 'pmb_minimum_php_version_error', 1, 0);
-} else {
+} elseif(
+        version_compare(
+        // first account for wp_version being pre-release
+        // (like RC, beta etc) which are usually in the format like 4.7-RC3-39519
+            strpos($wp_version, '-') > 0 ?
+                    substr($wp_version, 0, strpos($wp_version, '-')) :
+                    $wp_version,
+            PMB_MIN_WP_VER_REQUIRED,
+            '<'
+        )
+) {
+    /**
+     * pmb_minimum_php_version_error
+     *
+     * @return void
+     */
+    function pmb_minimum_wp_version_error()
+    {
+        global $wp_version;
+        ?>
+        <div class="error">
+            <p>
+                <?php
+                printf(
+                    esc_html__(
+                        'We’re sorry, but Print My Blog requires WordPress %1$s. You are using %2$s.%3$sFor information on how to update, please see %4$s.',
+                        'print-my-blog'
+                    ),
+                    PMB_MIN_WP_VER_REQUIRED,
+                    $wp_version,
+                    '<br/>',
+                    '<a href="https://wordpress.org/support/article/updating-wordpress/">https://wordpress.org/support/article/updating-wordpress/</a>'
+                );
+                ?>
+            </p>
+        </div>
+        <?php
+    }
+
+    add_action('admin_notices', 'pmb_minimum_wp_version_error', 1, 0);
+
+}else {
     // it's all good! go for it!
-    define('PMB_VERSION', '2.4.1.rc.000');
+    define('PMB_VERSION', '2.4.2.rc.000');
     define('PMB_DIR', wp_normalize_path(__DIR__) . '/');
     define('PMB_MAIN_FILE', __FILE__);
     define('PMB_TEMPLATES_DIR', PMB_DIR . 'templates/');

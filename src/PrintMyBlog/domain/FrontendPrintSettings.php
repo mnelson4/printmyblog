@@ -42,6 +42,25 @@ class FrontendPrintSettings
                 'default' => esc_html__('eBook 📱', 'print-my-blog'),
             )
         );
+        // Remove emojis if the database doesn't support it.
+        global $wpdb;
+        foreach ($this->formats as $key => $settings) {
+            if (method_exists($wpdb, 'strip_invalid_text_for_column')) {
+                $this->formats[$key]['admin_label'] = $wpdb->strip_invalid_text_for_column(
+                    $wpdb->options,
+                    'option_value',
+                    $settings['admin_label']
+                );
+                $this->formats[$key]['default'] = $wpdb->strip_invalid_text_for_column(
+                    $wpdb->options,
+                    'option_value',
+                    $settings['default']
+                );
+            } else {
+                $this->formats[$key]['admin_label'] = str_replace(['🖨','📄','📱'], ['','',''], $settings['admin_label']);
+                $this->formats[$key]['default'] = str_replace(['🖨','📄','📱'], ['','',''], $settings['default']);
+            }
+        }
         // Initialize the settings with the defaults.
         $this->settings = $this->defaultSettings();
     }
@@ -229,10 +248,11 @@ class FrontendPrintSettings
     /**
      * Saves the settings on this class to the database.
      * @since $VID:$
+     * return boolean indicating successful saving
      */
     public function save()
     {
-        update_option(self::OPTION_NAME, $this->settings);
+        return update_option(self::OPTION_NAME, $this->settings);
     }
 
     /**

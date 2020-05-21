@@ -45,7 +45,7 @@ class PmbGutenbergBlock extends BaseController
      */
     public function enqueueFrontendScript($content)
     {
-        if (has_block('printmyblog/setupform')) {
+        if (function_exists('has_block') && has_block('printmyblog/setupform')) {
             wp_enqueue_script('pmb-setup-page', '', '', '', true);
         }
         return $content;

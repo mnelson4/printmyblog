@@ -91,7 +91,7 @@ class PmbCommon extends BaseController
                     'site_status_selector' => '#pmb-site-status',
                     'post_type_selector' => '.pmb-post-type',
                     'dynamic_categories_selector' => '#pmb-dynamic-categories',
-                    'default_rest_url' => rest_url('/wp/v2'),
+                    'default_rest_url' => function_exists('rest_url') ? rest_url('/wp/v2') : '',
                     'ajax_url' => admin_url('admin-ajax.php'),
                     'author_selector' => '#pmb-author-select',
                     'nonce' => wp_create_nonce('wp_rest'),

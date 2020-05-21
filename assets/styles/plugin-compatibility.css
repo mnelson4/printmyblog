@@ -37,3 +37,26 @@ from adding a gray box in the footer when using Prince
 .pmb-posts #sm2movie {
     display: none;
 }
+
+/*
+Video JS https://wordpress.org/plugins/videojs-html5-player/ Avoid having large videos break in the middle
+ */
+.pmb-posts .video-js{
+    width:100%;
+    height:auto;
+}
+
+/*
+Video.js https://wordpress.org/plugins/videojs-html5-video-player-for-wordpress/ Avoid page breaks inside videos
+ */
+.pmb-posts .video-wrapper{
+    page-break-inside:avoid;
+}
+
+/**
+Hide Google Recaptcha from printouts
+
+ */
+.pmb-posts .grecaptcha-badge{
+    display:none !important;
+}
