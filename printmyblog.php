@@ -11,7 +11,7 @@
  * Author: Michael Nelson
  * Author URI: https://printmy.blog
  * Version: 2.4.2
- * Requires at least: 4.6
+ * Requires at least: 4.7
  * Requires PHP: 5.4
  * Text Domain: print-my-blog
  */
@@ -20,7 +20,7 @@ if (! defined('PMB_MIN_PHP_VER_REQUIRED')) {
     define('PMB_MIN_PHP_VER_REQUIRED', '5.4.0');
 }
 if (! defined('PMB_MIN_WP_VER_REQUIRED')) {
-    define('PMB_MIN_WP_VER_REQUIRED', '4.6');
+    define('PMB_MIN_WP_VER_REQUIRED', '4.7');
 }
 
 // make sure another version of PMB isn't installed
