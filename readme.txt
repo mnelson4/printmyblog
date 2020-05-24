@@ -228,6 +228,9 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
+= 2.4.3 May 25, 2020 =
+* Fix copying HTML for iOS devices
+
 = 2.4.2 May 15, 2020 =
 * If there is an error loading posts, show an error message and give links to FAQ
 * Don't wrap small images in pmb-image so they won't take up the full page width
