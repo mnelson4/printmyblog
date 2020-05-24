@@ -776,7 +776,13 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         };
     };
     this.copyPosts = function(){
-        copyToClip(this.posts_div.html());
+        try{
+					  copyToClip(this.posts_div.html());
+					  alert(this.translations.copied);
+        } catch(err) {
+           alert(this.translations.copy_error);
+        }
+
     }
     this.stopAndShowError = function(errorText){
         this.header.html(this.translations.error);
@@ -799,7 +805,7 @@ function pmb_help_show(id){
 
 function pmb_copy(){
     pmb_print.copyPosts();
-    alert(pmb_print.translations.copied);
+
 }
 
 var pmb_print = null;
@@ -867,16 +873,47 @@ jQuery(document).ready(function () {
 });
 
 /**
- * From https://stackoverflow.com/a/50067769/1493883
+ * From https://stackoverflow.com/a/30810322/1493883
  * @param str
  */
-function copyToClip(str) {
-    function listener(e) {
-        e.clipboardData.setData("text/html", str);
-        e.clipboardData.setData("text/plain", str);
-        e.preventDefault();
-    }
-    document.addEventListener("copy", listener);
-    document.execCommand("copy");
-    document.removeEventListener("copy", listener);
-};
+function fallbackCopyTextToClipboard(text) {
+	var textArea = document.createElement("textarea");
+	textArea.value = text;
+
+	// Avoid scrolling to bottom
+	textArea.style.top = "0";
+	textArea.style.left = "0";
+	textArea.style.position = "fixed";
+
+	document.body.appendChild(textArea);
+	textArea.focus();
+	textArea.select();
+
+	try {
+		var successful = document.execCommand('copy');
+		var msg = successful ? 'successful' : 'unsuccessful';
+		console.log('Successful copy');
+	} catch (err) {
+		console.error('Fallback: Oops, unable to copy', err);
+		throw err;
+	}
+
+	document.body.removeChild(textArea);
+}
+
+/**
+ * From https://stackoverflow.com/a/30810322/1493883
+ * @param str
+ */
+function copyToClip(text) {
+	if (!navigator.clipboard) {
+		fallbackCopyTextToClipboard(text);
+		return;
+	}
+	navigator.clipboard.writeText(text).then(function() {
+		console.log('Async: Copying to clipboard was successful!');
+	}, function(err) {
+		alert('Async: Could not copy text: ' + err);
+		throw "Could not copy";
+	});
+}
