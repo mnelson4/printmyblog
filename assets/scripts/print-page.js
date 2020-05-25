@@ -98,7 +98,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 								data.status += ', private, future';
             }
             if(this.include_draft_posts) {
-                data.status += ', draft, auto-draft';
+                data.status += ', draft';
 						}
         }
         data._embed = 1;
