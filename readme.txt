@@ -238,7 +238,7 @@ https://youtu.be/LemXhydDEvg
 == Changelog ==
 
 = 2.5.0 May 25, 2020 =
-* Allow including draft posts in printouts
+* Add printing draft posts
 * Fix frontend print buttons so they work for drafts too
 * Fix copying HTML for iOS devices
 * Fix printing private and password-protected posts when using frontend print buttons
