@@ -43,6 +43,9 @@ class PmbFrontend extends BaseController
                     'print-my-blog' => '1',
                     'post-type' => 'post',
                 ];
+                if($post->post_status === 'private' || $post->post_password != ''){
+                    $base_args['include-private-posts'] = true;
+                }
                 $html = '<div class="pmb-print-this-page wp-block-button">';
                 foreach ($print_settings->formats() as $slug => $settings) {
                     if (! $print_settings->isActive($slug)) {

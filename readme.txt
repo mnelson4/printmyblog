@@ -230,6 +230,7 @@ But if not, your browser can also remove background colors.
 
 = 2.4.3 May 25, 2020 =
 * Fix copying HTML for iOS devices
+* Fix printing private and password-protected posts when using frontend print buttons
 
 = 2.4.2 May 15, 2020 =
 * If there is an error loading posts, show an error message and give links to FAQ
