@@ -48,6 +48,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 	this.isUserLoggedIn = pmb_instance_vars.is_user_logged_in;
 	this.format = pmb_instance_vars.format;
 	this.include_private_posts = pmb_instance_vars.include_private_posts;
+	this.include_draft_posts = pmb_instance_vars.include_draft_posts;
 	this.author = pmb_instance_vars.author;
 	this.post = pmb_instance_vars.post;
 	this.order = pmb_instance_vars.order;
@@ -91,10 +92,14 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
     this.getPostsCollectionQueryData = function () {
         var data = this.getCollectionQueryData();
-        if( this.canGetSensitiveData() && this.include_private_posts){
-			data.status = 'publish, private, future';
-        } else {
-			data.status = 'publish';
+        data.status = 'publish';
+        if( this.canGetSensitiveData()) {
+            if(this.include_private_posts){
+								data.status += ', private, future';
+            }
+            if(this.include_draft_posts) {
+                data.status += ', draft, auto-draft';
+						}
         }
         data._embed = 1;
         if(this.post_type === 'post') {

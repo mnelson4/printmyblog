@@ -79,7 +79,12 @@ use PrintMyBlog\services\display\FormInputs;
                         <th scope="row"><label for="pmb-include-private-posts"><?php esc_html_e('Include Password-Protected and Private Posts','print-my-blog' );?></label></th>
                         <td>
                             <input type="checkbox" id="pmb-include-private-posts" name="include-private-posts" value="1" checked="checked">
-                            <p class="description"><?php esc_html_e('If unchecked, only public posts will be included in the printout.', 'print-my-blog'); ?></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="pmb-include-draft-posts"><?php esc_html_e('Include Draft Posts','print-my-blog' );?></label></th>
+                        <td>
+                            <input type="checkbox" id="pmb-include-draft-posts" name="include-draft-posts" value="1">
                         </td>
                     </tr>
                 <?php

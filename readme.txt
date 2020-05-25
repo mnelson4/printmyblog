@@ -49,6 +49,7 @@ https://www.youtube.com/watch?v=rvSo9NCOIX0
 * growing support for plugin and theme shortcodes and Gutenberg blocks
 * print your entire blog, or filter by author, date, category, and tags
 * optionally include private and password-protected posts
+* optionally include draft posts
 * optionally prints comments
 * optionally places each post on a new page
 * resize text
@@ -69,6 +70,8 @@ Want more? [Tell us what matters to you on GitHub](https://github.com/mnelson4/p
 = Example Use-Cases =
 
 **Time to prune your website’s content?** You can print it, annotate and sort through a physical stack of paper. Alternatively, scrape content from your WordPress blog, then copy and paste it into a Word document or Google Doc for tweaking.
+
+**Want a share a post before it’s posted?** Send a copy to someone for review while your post is still a draft.
 
 **Disconnecting offline for a bit?** Print your blog to paper, or even an ePub file to read from your Kindle or phone.
 
@@ -216,6 +219,12 @@ But if not, your browser can also remove background colors.
 
 = How do I avoid a pagebreak inside something? =
 [Add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-no-break" onto the element/block. The browser will avoid a pagebreak in that element if possible.
+
+= How do I print a draft? =
+The easiest way to print a draft post is to enable the front-end print buttons, then view the preview of the post, and click the print button you want.
+
+https://youtu.be/LemXhydDEvg
+
 == Screenshots ==
 
 1. Print My Blog removes junk that doesn’t belong in a printout— like ink-guzzling logos, menus, search-bars, sidebars, footer widgets, etc.
@@ -228,7 +237,9 @@ But if not, your browser can also remove background colors.
 
 == Changelog ==
 
-= 2.4.3 May 25, 2020 =
+= 2.5.0 May 25, 2020 =
+* Allow including draft posts in printouts
+* Fix frontend print buttons so they work for drafts too
 * Fix copying HTML for iOS devices
 * Fix printing private and password-protected posts when using frontend print buttons
 

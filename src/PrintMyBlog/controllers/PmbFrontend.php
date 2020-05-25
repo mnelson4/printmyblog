@@ -46,6 +46,9 @@ class PmbFrontend extends BaseController
                 if($post->post_status === 'private' || $post->post_password != ''){
                     $base_args['include-private-posts'] = true;
                 }
+                if($post->post_status === 'draft' || $post->post_status === 'auto-draft'){
+                    $base_args['include-draft-posts'] = true;
+                }
                 $html = '<div class="pmb-print-this-page wp-block-button">';
                 foreach ($print_settings->formats() as $slug => $settings) {
                     if (! $print_settings->isActive($slug)) {

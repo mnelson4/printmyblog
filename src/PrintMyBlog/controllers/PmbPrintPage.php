@@ -283,6 +283,7 @@ class PmbPrintPage extends BaseController
             'is_user_logged_in' => is_user_logged_in(),
             'format' => $this->getFromRequest('format', 'print'),
             'include_private_posts' => (bool) $this->getFromRequest('include-private-posts', false),
+            'include_draft_posts' => (bool) $this->getFromRequest('include-draft-posts', false),
             'author' => $this->getFromRequest('pmb-author', null),
             'post' => $this->getFromRequest('pmb-post', null),
             'order' => $order,
