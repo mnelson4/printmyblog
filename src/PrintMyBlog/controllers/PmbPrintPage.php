@@ -341,7 +341,7 @@ class PmbPrintPage extends BaseController
                         'There was an error fetching posts. It was: ',
                         'print-my-blog'
                     ),
-                    'no_response' => esc_html__( 'No response from WP REST API.', 'print-my-blog' ),
+                    'no_response' => esc_html__('No response from WP REST API.', 'print-my-blog'),
                     'error' => esc_html__('Sorry, There was a Problem 😢', 'print-my-blog'),
                     'troubleshooting' => sprintf(
                         //phpcs:disable Generic.Files.LineLength.TooLong
@@ -360,7 +360,9 @@ class PmbPrintPage extends BaseController
                     'private' => esc_html__('Private:', 'print-my-blog'),
                     'init_error' => $init_error_message,
                     'copied' => esc_html__('Copied! Ready to paste.', 'print-my-blog'),
+                    //phpcs:disable Generic.Files.LineLength.TooLong
                     'copy_error' => esc_html__('There was an error copying. You can still select all the text manually and copy it.', 'print-my-blog')
+                    //phpcs:enable
                 ),
                 'data' => $data,
             )
