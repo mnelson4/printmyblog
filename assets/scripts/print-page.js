@@ -881,44 +881,28 @@ jQuery(document).ready(function () {
  * From https://stackoverflow.com/a/30810322/1493883
  * @param str
  */
-function fallbackCopyTextToClipboard(text) {
-	var textArea = document.createElement("textarea");
-	textArea.value = text;
-
-	// Avoid scrolling to bottom
-	textArea.style.top = "0";
-	textArea.style.left = "0";
-	textArea.style.position = "fixed";
-
-	document.body.appendChild(textArea);
-	textArea.focus();
-	textArea.select();
-
-	try {
-		var successful = document.execCommand('copy');
-		var msg = successful ? 'successful' : 'unsuccessful';
-		console.log('Successful copy');
-	} catch (err) {
-		console.error('Fallback: Oops, unable to copy', err);
-		throw err;
-	}
-
-	document.body.removeChild(textArea);
-}
-
-/**
- * From https://stackoverflow.com/a/30810322/1493883
- * @param str
- */
 function copyToClip(text) {
 	if (!navigator.clipboard) {
-		fallbackCopyTextToClipboard(text);
+		copyToClipOld(text);
 		return;
 	}
-	navigator.clipboard.writeText(text).then(function() {
+	var item = new ClipboardItem({ "text/html": text });
+	navigator.clipboard.writeText(item).then(function() {
 		console.log('Async: Copying to clipboard was successful!');
 	}, function(err) {
 		alert('Async: Could not copy text: ' + err);
 		throw "Could not copy";
 	});
 }
+
+function copyToClipOld(str) {
+	function listener(e) {
+		e.clipboardData.setData("text/html", str);
+		e.clipboardData.setData("text/plain", str);
+		e.preventDefault();
+	}
+	document.addEventListener("copy", listener);
+	document.execCommand("copy");
+	document.removeEventListener("copy", listener);
+	console.log('Fallback: Copying to clipboard was successful');
+};
