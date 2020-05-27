@@ -878,23 +878,31 @@ jQuery(document).ready(function () {
 });
 
 /**
+ * Tries to copy to the clilpboard
  * From https://stackoverflow.com/a/30810322/1493883
- * @param str
+ * @param string str
  */
 function copyToClip(text) {
+    // Check browser support. eg Firefox doesn't have a "ClipboardItem"
 	if (!navigator.clipboard || typeof ClipboardItem === 'undefined') {
 		copyToClipOld(text);
 		return;
 	}
+	// Copy it as HTML, not plaintext
 	var item = new ClipboardItem({ "text/html": new Blob([text],{type:"text/html"}) });
 	navigator.clipboard.write([item]).then(function() {
 		console.log('Async: Copying to clipboard was successful!');
 	}, function(err) {
 		console.log('Async: Could not copy text: ' + err);
+		// Maybe there was a permission error? Try ye old fallback.
 		copyToClipOld(text);
 	});
 }
 
+/**
+ * Uses a copy listener to copy to clipboard
+ * @param string str
+ */
 function copyToClipOld(str) {
 	function listener(e) {
 		e.clipboardData.setData("text/html", str);
