@@ -878,47 +878,39 @@ jQuery(document).ready(function () {
 });
 
 /**
+ * Tries to copy to the clilpboard
  * From https://stackoverflow.com/a/30810322/1493883
- * @param str
+ * @param string str
  */
-function fallbackCopyTextToClipboard(text) {
-	var textArea = document.createElement("textarea");
-	textArea.value = text;
-
-	// Avoid scrolling to bottom
-	textArea.style.top = "0";
-	textArea.style.left = "0";
-	textArea.style.position = "fixed";
-
-	document.body.appendChild(textArea);
-	textArea.focus();
-	textArea.select();
-
-	try {
-		var successful = document.execCommand('copy');
-		var msg = successful ? 'successful' : 'unsuccessful';
-		console.log('Successful copy');
-	} catch (err) {
-		console.error('Fallback: Oops, unable to copy', err);
-		throw err;
+function copyToClip(text) {
+    // Check browser support. eg Firefox doesn't have a "ClipboardItem"
+	if (!navigator.clipboard || typeof ClipboardItem === 'undefined') {
+		copyToClipOld(text);
+		return;
 	}
-
-	document.body.removeChild(textArea);
+	// Copy it as HTML, not plaintext
+	var item = new ClipboardItem({ "text/html": new Blob([text],{type:"text/html"}) });
+	navigator.clipboard.write([item]).then(function() {
+		console.log('Async: Copying to clipboard was successful!');
+	}, function(err) {
+		console.log('Async: Could not copy text: ' + err);
+		// Maybe there was a permission error? Try ye old fallback.
+		copyToClipOld(text);
+	});
 }
 
 /**
- * From https://stackoverflow.com/a/30810322/1493883
- * @param str
+ * Uses a copy listener to copy to clipboard
+ * @param string str
  */
-function copyToClip(text) {
-	if (!navigator.clipboard) {
-		fallbackCopyTextToClipboard(text);
-		return;
+function copyToClipOld(str) {
+	function listener(e) {
+		e.clipboardData.setData("text/html", str);
+		e.clipboardData.setData("text/plain", str);
+		e.preventDefault();
 	}
-	navigator.clipboard.writeText(text).then(function() {
-		console.log('Async: Copying to clipboard was successful!');
-	}, function(err) {
-		alert('Async: Could not copy text: ' + err);
-		throw "Could not copy";
-	});
-}
+	document.addEventListener("copy", listener);
+	document.execCommand("copy");
+	document.removeEventListener("copy", listener);
+	console.log('Fallback: Copying to clipboard was attempted');
+};
