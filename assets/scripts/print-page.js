@@ -882,16 +882,16 @@ jQuery(document).ready(function () {
  * @param str
  */
 function copyToClip(text) {
-	if (!navigator.clipboard) {
+	if (!navigator.clipboard || typeof ClipboardItem === 'undefined') {
 		copyToClipOld(text);
 		return;
 	}
-	var item = new ClipboardItem({ "text/html": text });
-	navigator.clipboard.writeText(item).then(function() {
+	var item = new ClipboardItem({ "text/html": new Blob([text],{type:"text/html"}) });
+	navigator.clipboard.write([item]).then(function() {
 		console.log('Async: Copying to clipboard was successful!');
 	}, function(err) {
-		alert('Async: Could not copy text: ' + err);
-		throw "Could not copy";
+		console.log('Async: Could not copy text: ' + err);
+		copyToClipOld(text);
 	});
 }
 
@@ -904,5 +904,5 @@ function copyToClipOld(str) {
 	document.addEventListener("copy", listener);
 	document.execCommand("copy");
 	document.removeEventListener("copy", listener);
-	console.log('Fallback: Copying to clipboard was successful');
+	console.log('Fallback: Copying to clipboard was attempted');
 };

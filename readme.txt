@@ -237,6 +237,9 @@ https://youtu.be/LemXhydDEvg
 
 == Changelog ==
 
+= 2.5.1 May 27, 2020 =
+* Fix copying as HTML, not plaintext
+
 = 2.5.0 May 25, 2020 =
 * Add printing draft posts
 * Fix frontend print buttons so they work for drafts too
