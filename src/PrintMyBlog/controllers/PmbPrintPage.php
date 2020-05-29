@@ -221,6 +221,7 @@ class PmbPrintPage extends BaseController
     public function enqueueScripts()
     {
         //phpcs:enable
+        do_action('PrintMyBlog\controllers\PmbPrintPage->enqueueScripts');
         wp_register_script(
             'luxon',
             PMB_ASSETS_URL . 'scripts/luxon.min.js',
