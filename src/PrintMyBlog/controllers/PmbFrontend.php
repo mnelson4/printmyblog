@@ -43,8 +43,10 @@ class PmbFrontend extends BaseController
                     'print-my-blog' => '1',
                     'post-type' => 'post',
                 ];
-                if ($post->post_status === 'private' || $post->post_password != '') {
-                    $base_args['include-private-posts'] = true;
+                if ( $post->post_password != '') {
+                    $base_args['statuses[]'] = 'password';
+                } else {
+                    $base_args['statuses[]'] = $post->post_status;
                 }
                 if ($post->post_status === 'draft') {
                     $base_args['include-draft-posts'] = true;

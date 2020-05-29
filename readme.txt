@@ -47,9 +47,7 @@ https://www.youtube.com/watch?v=rvSo9NCOIX0
 * avoids page breaks inside images, between images and captions, and even right after headers; generally makes the content print-ready
 * uses your theme’s and plugins’ styles (so Gutenberg and page builders are supported)
 * growing support for plugin and theme shortcodes and Gutenberg blocks
-* print your entire blog, or filter by author, date, category, and tags
-* optionally include private and password-protected posts
-* optionally include draft posts
+* print your entire blog, or filter by author, date, status (eg draft, private, and password-protected), category, and tags
 * optionally prints comments
 * optionally places each post on a new page
 * resize text
@@ -236,6 +234,9 @@ https://youtu.be/LemXhydDEvg
 7. Add the Print My Blog block to add a form visitors can use to select what and how to print your blog.
 
 == Changelog ==
+
+= 2.6.0 May 30, 2020 =
+* Allow filtering posts by any status
 
 = 2.5.1 May 27, 2020 =
 * Fix copying as HTML, not plaintext

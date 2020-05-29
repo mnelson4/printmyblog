@@ -263,6 +263,13 @@ class PmbPrintPage extends BaseController
             $order_var_to_use = 'order-menu';
         }
         $order = $this->getFromRequest($order_var_to_use, 'asc');
+        $statuses = $this->getFromRequest('statuses', ['publish']);
+        $statuses = array_filter(
+            $statuses,
+            function($input){
+                return in_array($input,['draft','private','password','publish','future']);
+            }
+        );
         $data = [
             'header_selector' => '#pmb-in-progress-h1',
             'status_span_selector' => '.pmb-status',
@@ -283,8 +290,7 @@ class PmbPrintPage extends BaseController
             'foogallery' => function_exists('foogallery_fs'),
             'is_user_logged_in' => is_user_logged_in(),
             'format' => $this->getFromRequest('format', 'print'),
-            'include_private_posts' => (bool) $this->getFromRequest('include-private-posts', false),
-            'include_draft_posts' => (bool) $this->getFromRequest('include-draft-posts', false),
+            'statuses' => $statuses,
             'author' => $this->getFromRequest('pmb-author', null),
             'post' => $this->getFromRequest('pmb-post', null),
             'order' => $order,

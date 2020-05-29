@@ -74,11 +74,24 @@ use PrintMyBlog\services\display\FormInputs;
                 </tr>
                 <?php
                 if( is_user_logged_in()){
-                ?>
+
+                    $statuses = [
+                            'draft' => esc_html__('Draft', 'print-my-blog'),
+                            'private' => esc_html__('Private', 'print-my-blog'),
+                            'password' => esc_html__('Password-Protected', 'print-my-blog'),
+                            'publish' => esc_html__('Published', 'print-my-blog'),
+                            'future' => esc_html__('Future', 'print-my-blog')
+                    ];?>
                     <tr>
-                        <th scope="row"><label for="pmb-include-private-posts"><?php esc_html_e('Include Password-Protected and Private Posts','print-my-blog' );?></label></th>
+                        <th scope="row"><label><?php esc_html_e('Statuses','print-my-blog' );?></label></th>
                         <td>
-                            <input type="checkbox" id="pmb-include-private-posts" name="include-private-posts" value="1" checked="checked">
+                            <?php foreach($statuses as $value => $label ){
+                               ?>
+                                <input type="checkbox" name="statuses[]" value="<?php echo esc_attr($value);?>" id="<?php echo esc_attr($value);?>-id" <?php echo $value === 'publish' ? 'checked="checked"' : '';?>>
+                            <label for="<?php echo esc_attr($value);?>-id"><?php echo $label;?></label><br>
+                                <?php
+                            }
+                            ?>
                         </td>
                     </tr>
                     <tr>

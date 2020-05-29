@@ -47,8 +47,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 	this.foogallery = pmb_instance_vars.foogallery;
 	this.isUserLoggedIn = pmb_instance_vars.is_user_logged_in;
 	this.format = pmb_instance_vars.format;
-	this.include_private_posts = pmb_instance_vars.include_private_posts;
-	this.include_draft_posts = pmb_instance_vars.include_draft_posts;
+	this.statuses = pmb_instance_vars.statuses;
 	this.author = pmb_instance_vars.author;
 	this.post = pmb_instance_vars.post;
 	this.order = pmb_instance_vars.order;
@@ -92,15 +91,13 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
     this.getPostsCollectionQueryData = function () {
         var data = this.getCollectionQueryData();
-        data.status = 'publish';
-        if( this.canGetSensitiveData()) {
-            if(this.include_private_posts){
-								data.status += ', private, future';
-            }
-            if(this.include_draft_posts) {
-                data.status += ', draft';
+        data.status = this.statuses || 'publish';
+        if(data.status.includes('password')){
+            data.status = data.status.filter(function(value){return value!=='password';});
+            if(! data.status.includes('publish')){
+                data.status.push('publish');
 						}
-        }
+			}
         data._embed = 1;
         if(this.post_type === 'post') {
             data.orderby = 'date';
@@ -515,7 +512,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      */
     this.addPostToPage = function (post) {
         // Exclude password-protected posts if requested
-        if(! this.include_private_posts && post.content.protected){
+        if( post.status === 'publish'
+          && ((! this.statuses.includes('password') && post.content.protected)
+            || ( ! this.statuses.includes('publish') && ! post.content.protected))){
             return;
         }
         var html_to_add = '';
