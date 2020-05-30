@@ -76,11 +76,13 @@ use PrintMyBlog\services\display\FormInputs;
                 if( is_user_logged_in()){
 
                     $statuses = [
-                            'draft' => esc_html__('Draft', 'print-my-blog'),
-                            'private' => esc_html__('Private', 'print-my-blog'),
+                            'draft' => esc_html__('Draft' ),
+                            'pending' => esc_html__( 'Pending Review' ),
+                            'private' => esc_html__('Private'),
                             'password' => esc_html__('Password-Protected', 'print-my-blog'),
-                            'publish' => esc_html__('Published', 'print-my-blog'),
-                            'future' => esc_html__('Future', 'print-my-blog')
+                            'publish' => esc_html__('Published'),
+                            'future' => esc_html__('Scheduled'),
+                            'trash' => esc_html__('Trash')
                     ];?>
                     <tr>
                         <th scope="row"><label><?php esc_html_e('Statuses','print-my-blog' );?></label></th>
