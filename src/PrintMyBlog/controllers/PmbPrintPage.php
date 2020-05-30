@@ -266,8 +266,8 @@ class PmbPrintPage extends BaseController
         $statuses = $this->getFromRequest('statuses', ['publish','password','private','future']);
         $statuses = array_filter(
             $statuses,
-            function($input){
-                return in_array($input,['draft','pending','private','password','publish','future','trash']);
+            function ($input) {
+                return in_array($input, ['draft','pending','private','password','publish','future','trash']);
             }
         );
         $data = [
