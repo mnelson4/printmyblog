@@ -263,7 +263,7 @@ class PmbPrintPage extends BaseController
             $order_var_to_use = 'order-menu';
         }
         $order = $this->getFromRequest($order_var_to_use, 'asc');
-        $statuses = $this->getFromRequest('statuses', ['publish']);
+        $statuses = $this->getFromRequest('statuses', ['publish','password','private','future']);
         $statuses = array_filter(
             $statuses,
             function($input){

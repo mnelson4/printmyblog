@@ -94,12 +94,6 @@ use PrintMyBlog\services\display\FormInputs;
                             ?>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row"><label for="pmb-include-draft-posts"><?php esc_html_e('Include Draft Posts','print-my-blog' );?></label></th>
-                        <td>
-                            <input type="checkbox" id="pmb-include-draft-posts" name="include-draft-posts" value="1">
-                        </td>
-                    </tr>
                 <?php
                 }
                 ?>
