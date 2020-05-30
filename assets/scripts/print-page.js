@@ -519,7 +519,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         }
         var html_to_add = '';
         if(this.format !== 'ebook'){
-            html_to_add += html_to_add += '<article id="post-' + post.id + '" class="post-' + post.id + ' post type-' + this.post_type + ' status-' + post.status + ' hentry pmb-post-article">'
+            html_to_add += '<article id="post-' + post.id + '" class="post-' + post.id + ' post type-' + this.post_type + ' status-' + post.status + ' hentry pmb-post-article">'
 			+ '<header class="pmb-post-header entry-header">';
         }
         if(this.showTitle) {
