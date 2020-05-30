@@ -59,7 +59,6 @@ https://www.youtube.com/watch?v=rvSo9NCOIX0
 * place the “Print My Blog” Gutenberg block on a page and allow site visitors to print your blog too
 * no watermark in print-out, and attribution optional,
 * [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation) compliant (no data is collected about your visitors)
-* no upsells, advertising, or data collection (we can't even know which sites use this software)
 * free, open-source software, so you can use it for whatever you like without fear of changing terms of use,
 customize it to fit your needs (although we'd curious to hear what you've done with it), and even redistribute it. There is no lengthy legal document describing how you're giving up your rights by using this software!
 
@@ -69,7 +68,7 @@ Want more? [Tell us what matters to you on GitHub](https://github.com/mnelson4/p
 
 **Time to prune your website’s content?** You can print it, annotate and sort through a physical stack of paper. Alternatively, scrape content from your WordPress blog, then copy and paste it into a Word document or Google Doc for tweaking.
 
-**Want a share a post before it’s posted?** Send a copy to someone for review while your post is still a draft.
+**Want a share a post before it’s posted?** Send a draft PDF or printout to someone for review.
 
 **Disconnecting offline for a bit?** Print your blog to paper, or even an ePub file to read from your Kindle or phone.
 
