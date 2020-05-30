@@ -47,7 +47,7 @@ https://www.youtube.com/watch?v=rvSo9NCOIX0
 * avoids page breaks inside images, between images and captions, and even right after headers; generally makes the content print-ready
 * uses your theme’s and plugins’ styles (so Gutenberg and page builders are supported)
 * growing support for plugin and theme shortcodes and Gutenberg blocks
-* print your entire blog, or filter by author, date, status (eg draft, private, and password-protected), category, and tags
+* print your entire blog, or filter by author, date, status (eg draft, pending, private, password-protected, trashed, etc), category, and tags
 * optionally prints comments
 * optionally places each post on a new page
 * resize text
