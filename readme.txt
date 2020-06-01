@@ -234,6 +234,9 @@ https://youtu.be/LemXhydDEvg
 
 == Changelog ==
 
+= 2.6.1 June 2, 2020 =
+* Fix filtering by category and author if REST API is restricted to logged-in users
+
 = 2.6.0 May 30, 2020 =
 * Allow filtering posts by any status
 

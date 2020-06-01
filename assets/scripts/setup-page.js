@@ -170,7 +170,10 @@ function PmbSetupPage(pmb_instance_vars, translations) {
                         });
                     }
                     return prepared_data;
-                }
+                },
+								beforeSend: function ( xhr ) {
+									xhr.setRequestHeader( 'X-WP-Nonce', wpApiSettings.nonce );
+								},
             }
 		})
 	};
@@ -222,7 +225,10 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 							});
 						}
 						return prepared_data;
-					}
+					},
+					beforeSend: function ( xhr ) {
+						xhr.setRequestHeader( 'X-WP-Nonce', wpApiSettings.nonce );
+					},
 				}
 			});
 		});
