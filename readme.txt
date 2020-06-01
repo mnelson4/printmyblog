@@ -236,6 +236,7 @@ https://youtu.be/LemXhydDEvg
 
 = 2.6.1 June 2, 2020 =
 * Fix filtering by category and author if REST API is restricted to logged-in users
+* Fix YouTube video screenshots sometimes not appearing
 
 = 2.6.0 May 30, 2020 =
 * Allow filtering posts by any status
