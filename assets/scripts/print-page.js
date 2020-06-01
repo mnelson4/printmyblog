@@ -67,7 +67,11 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         this.loading_content = jQuery(this.loading_content_selector);
 
         var alltaxonomiesCollection = new wp.api.collections.Taxonomies();
-        alltaxonomiesCollection.fetch().then(
+        alltaxonomiesCollection.fetch(
+          {
+            data: this.getCollectionQueryData(),
+          }
+        ).then(
             (taxonomies) => {
                 this.working = true;
                 this.taxonomies = taxonomies;
@@ -91,13 +95,15 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
     this.getPostsCollectionQueryData = function () {
         var data = this.getCollectionQueryData();
-        data.status = this.statuses || 'publish';
-        if(data.status.includes('password')){
-            data.status = data.status.filter(function(value){return value!=='password';});
-            if(! data.status.includes('publish')){
-                data.status.push('publish');
+        if(this.canGetSensitiveData()){
+					data.status = this.statuses || 'publish';
+					if(data.status.includes('password')){
+						data.status = data.status.filter(function(value){return value!=='password';});
+						if(! data.status.includes('publish')){
+							data.status.push('publish');
 						}
-			}
+					}
+        }
         data._embed = 1;
         if(this.post_type === 'post') {
             data.orderby = 'date';
@@ -511,7 +517,11 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      * @var  wp.api.models.Post post
      */
     this.addPostToPage = function (post) {
-        // Exclude password-protected posts if requested
+        // If they can't view sensitive data, exclude password-protected posts.
+        if( post.content.protected && ! this.canGetSensitiveData()){
+            return;
+        }
+        // Exclude published or password-protected posts if requested.
         if( post.status === 'publish'
           && ((! this.statuses.includes('password') && post.content.protected)
             || ( ! this.statuses.includes('publish') && ! post.content.protected))){
