@@ -518,7 +518,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      */
     this.addPostToPage = function (post) {
         // If they can't view sensitive data, exclude password-protected posts.
-        if( post.content.protected && ! this.canGetSensitiveData()){
+        if( post.content.protected && ! this.canGetSensitiveData() && post.content.rendered === ''){
             return;
         }
         // Exclude published or password-protected posts if requested.
