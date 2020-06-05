@@ -155,6 +155,21 @@ https://youtu.be/ekwg2a1FPV0
 
 Note: images may be missing from very large PDFs. See the FAQ "My PDFs are missing images" below for help.
 
+= How do I remove the headers and footers from printouts? =
+You probably don't want the site's title, date, and URL appearing in printouts. Here is how to remove it for various browsers:
+
+Google Chrome (for paper and PDF)
+
+https://youtu.be/2Kvun-nhCWk
+
+Mozilla Firefox (paper)
+
+https://youtu.be/vp-wGdS8ugE
+
+Mozilla Firefox (PDF)
+
+https://youtu.be/sU02oSPWj34
+
 = How do I create an eBook using Print My Blog? =
 This plugin puts your blog's content onto a single web page, and you can then use the [dotEPUB browser extension](https:dotepub.com) to turn it into an eBook.
 
