@@ -59,7 +59,7 @@ if (!class_exists('Updraft_Dashboard_News')) :
          *
          * @param String $feed_url     - dashboard news feed URL
          * @param String $link         - web page URL
-         * @param Array  $translations - an array of translations, with keys: product_title, item_prefix, item_description, dismiss_confirm
+         * @param array  $translations - an array of translations, with keys: product_title, item_prefix, item_description, dismiss_confirm
          */
         public function __construct($feed_url, $link, $translations, $news_item_count = 1)
         {

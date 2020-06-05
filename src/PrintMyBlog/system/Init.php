@@ -1,41 +1,38 @@
 <?php
 
-namespace PrintMyBlog\controllers;
+namespace PrintMyBlog\system;
 
 use PrintMyBlog\compatibility\DetectAndActivate;
+use PrintMyBlog\controllers\PmbActivation;
+use PrintMyBlog\controllers\PmbAdmin;
+use PrintMyBlog\controllers\PmbAjax;
+use PrintMyBlog\controllers\PmbCommon;
+use PrintMyBlog\controllers\PmbFrontend;
+use PrintMyBlog\controllers\PmbGutenbergBlock;
+use PrintMyBlog\controllers\PmbPrintPage;
 use PrintMyBlog\domain\ProNotification;
 use Twine\admin\news\DashboardNews;
 use Twine\controllers\BaseController;
 
 /**
- * Class PmbInit
+ * Class Init
  *
- * Initializes the systems required to handle requests and do our logic.
+ * Description
  *
- * @package     Print My Blog
+ * @package        Print My Blog
  * @author         Mike Nelson
- * @since         1.0.0
- * @deprecated 3.0.0
+ * @since          3.0.0
+ *
  */
-class PmbInit extends BaseController
+class Init
 {
-    /**
-     * Sets hooks that trigger this class' logic (which decides what other files to load)
-     * @since 1.0.0
-     * @deprecated 3.0.0
-     */
-    public function setHooks()
-    {
+    public function setHooks(){
         add_action('init', array($this, 'earlyInit'), 5);
         add_action('init', array($this, 'init'));
         $compatibility_mods_loader = new DetectAndActivate();
         $compatibility_mods_loader->detectAndActivateCompatibilityMods();
     }
 
-
-    /**
-     * @deprecated 3.0.0
-     */
     public function earlyInit()
     {
         $controller = new PmbActivation();
@@ -48,8 +45,6 @@ class PmbInit extends BaseController
     }
     /**
      * Initialize PMB if everything is safe.
-     * @since 1.0.0
-     * @deprecated 3.0.0
      */
     public function init()
     {
@@ -73,9 +68,32 @@ class PmbInit extends BaseController
         $common_controller->setHooks();
     }
 
+    /**
+     * Initializes the dashboard news code to run on AJAX and the WP dashboard page.
+     */
+    protected function initDashboardNews()
+    {
+        if (is_admin()) {
+            new DashboardNews(
+                'https://printmy.blog/rss',
+                'https://printmy.blog',
+                [
+                    'product_title' => 'print my blog',
+                    'item_prefix' => esc_html__('Print My Blog', 'print-my-blog'),
+                    'item_description' => esc_html__('Print My Blog news', 'print-my-blog'),
+                    'dismiss_tooltip' => __('Dismiss all Print My Blog news', 'print-my-blog'),
+                    'dismiss_confirm' => __(
+                        'Are you sure you want to dismiss all Print My Blog news forever?',
+                        'print-my-blog'
+                    ),
+                ]
+            );
+        }
+    }
+
 
     /**
-     * @deprecated 3.0.0
+     * @since $VID:$
      */
     public function setUrls()
     {

@@ -5,7 +5,7 @@ namespace Twine\controllers;
 /**
  * Class BaseController
  *
- * Description
+ * Classes that
  *
  * @package     Twine
  * @author         Mike Nelson
