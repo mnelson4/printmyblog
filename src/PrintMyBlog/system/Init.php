@@ -26,6 +26,10 @@ use Twine\controllers\BaseController;
  */
 class Init
 {
+
+    /**
+     * Sets up hooks that will initialize the code that will run PMB.
+     */
     public function setHooks(){
         add_action('init', array($this, 'earlyInit'), 5);
         add_action('init', array($this, 'init'));
@@ -33,10 +37,12 @@ class Init
         $compatibility_mods_loader->detectAndActivateCompatibilityMods();
     }
 
+
+    /**
+     * Sets up PMB's environment general environment.
+     */
     public function earlyInit()
     {
-        $controller = new PmbActivation();
-        $controller->setHooks();
         if (function_exists('rest_proxy_loaded')) {
             define('PMB_REST_PROXY_EXISTS', true);
         } else {
@@ -44,10 +50,11 @@ class Init
         }
     }
     /**
-     * Initialize PMB if everything is safe.
+     * Sets up PMB's code that will will set other hooks
      */
     public function init()
     {
+        (new PmbActivation())->detectActivation();
         $this->setUrls();
         if (defined('DOING_AJAX') && DOING_AJAX) {
             (new PmbAjax())->setHooks();
@@ -66,6 +73,8 @@ class Init
 
         $common_controller = new PmbCommon();
         $common_controller->setHooks();
+
+
     }
 
     /**
