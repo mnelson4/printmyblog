@@ -249,6 +249,9 @@ https://youtu.be/LemXhydDEvg
 
 == Changelog ==
 
+= 2.6.2 June 6, 2020 =
+* Fix activation redirect
+
 = 2.6.1 June 2, 2020 =
 * Fix filtering by category and author if REST API is restricted to logged-in users
 * Fix YouTube video screenshots sometimes not appearing
