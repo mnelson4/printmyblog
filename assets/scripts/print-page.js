@@ -438,7 +438,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         });
         var images_with_figures = jQuery('figure.wp-caption').filter(function(){
            var element = jQuery(this);
-           if(element.children('img').length){
+           if(element.find('img').length){
                return true;
            }
            return false;
