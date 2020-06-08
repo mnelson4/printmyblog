@@ -425,6 +425,11 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.prettyUpPrintedPage = function()
     {
         this.convertYoutubeVideosToImages();
+        // Don't float things if we have more than one column. There's just not enough room for that
+        if(this.columns > 1){
+            jQuery('.alignright').removeClass('alignright');
+            jQuery('.alignleft').removeClass('alignleft');
+        }
         // Don't wrap tiled gallery images- we have CSS to avoid page breaks in them
         // although currently, they don't display well because they need JS that doesn't get enqueued
         var non_emojis = jQuery('.pmb-posts img:not(.emoji, div.tiled-gallery img, img.fg-image, img.size-thumbnail)').filter(function() {
