@@ -427,9 +427,23 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         this.convertYoutubeVideosToImages();
         // Don't wrap tiled gallery images- we have CSS to avoid page breaks in them
         // although currently, they don't display well because they need JS that doesn't get enqueued
-        var non_emojis = jQuery('.pmb-posts img:not(.emoji, div.tiled-gallery img, img.fg-image, img.size-medium, img.size-thumbnail)').filter(function() {
-            return  jQuery(this).attr("height") > 400;
+        var non_emojis = jQuery('.pmb-posts img:not(.emoji, div.tiled-gallery img, img.fg-image, img.size-thumbnail)').filter(function() {
+            var element = jQuery(this);
+            // If it's got a figure wrapper, don't wrap the image, we'll select the figure next.
+            if(element.parent('figure').length !== 0){
+                return false;
+            }
+            // only wrap images bigger than 400 pixels.
+            return element.attr("height") > 400;
         });
+        var images_with_figures = jQuery('figure.wp-caption').filter(function(){
+           var element = jQuery(this);
+           if(element.children('img').length){
+               return true;
+           }
+           return false;
+        });
+        images_with_figures.addClass('pmb-image');
         if(this.image_size === 0){
             non_emojis.remove();
         } else{
