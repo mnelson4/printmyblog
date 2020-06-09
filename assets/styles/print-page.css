@@ -245,3 +245,11 @@ won't switch to a pointer when they hover over it; and it won't be centered anym
     page-break-inside:avoid;
     display:block;
 }
+
+/* Give block galleries the full page. Although Firefox, strangely, still doesn't always place a pagebreak before it
+(eg if it's a gallery which all fits on one row, there's no pagebreak; if it takes up more than one row, there is.)
+Chrome always puts a pagebreak.*/
+.wp-block-gallery{
+    page-break-before: always;
+    overflow: hidden;
+}
