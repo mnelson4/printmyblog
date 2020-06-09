@@ -6,6 +6,7 @@ use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintNowSettings;
 use PrintMyBlog\domain\PrintOptions;
 use Twine\controllers\BaseController;
+use WP_Post;
 
 /**
  * Class PmbFrontend
@@ -29,7 +30,7 @@ class PmbFrontend extends BaseController
     public function addPrintButton($content)
     {
         global $post;
-        if ($post->post_type === 'post' && is_single() && ! post_password_required($post)) {
+        if ($post instanceof WP_Post && $post->post_type === 'post' && is_single() && ! post_password_required($post)) {
             $print_settings = new FrontendPrintSettings(new PrintOptions());
             $print_settings->load();
             if (
