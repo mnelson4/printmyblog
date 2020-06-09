@@ -253,6 +253,7 @@ https://youtu.be/LemXhydDEvg
 = 2.6.2 June 6, 2020 =
 * Fix activation redirect
 * Improve image layout of inline images, gallery block, and images in multi-column layouts
+* Disable image lazy-loading on REST requests so images in print-pages appear without needing to scroll
 
 = 2.6.1 June 2, 2020 =
 * Fix filtering by category and author if REST API is restricted to logged-in users
