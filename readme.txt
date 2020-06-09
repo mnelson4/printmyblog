@@ -231,6 +231,7 @@ But if not, your browser can also remove background colors.
 
 = How do I avoid a pagebreak inside something? =
 [Add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-no-break" onto the element/block. The browser will avoid a pagebreak in that element if possible.
+If browsers ignore that, you force the pagebreak to happen just before an element by adding the CSS class "pmb-page-break".
 
 = How do I print a draft? =
 The easiest way to print a draft post is to enable the front-end print buttons, then view the preview of the post, and click the print button you want.
