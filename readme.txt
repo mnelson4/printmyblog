@@ -250,6 +250,10 @@ https://youtu.be/LemXhydDEvg
 
 == Changelog ==
 
+= 2.6.3 June 11, 2020 =
+* Resize gallery blocks like images
+* Clarify the Print My Blog header only appears on the first page
+
 = 2.6.2 June 6, 2020 =
 * Fix activation redirect
 * Improve image layout of inline images, gallery block, and images in multi-column layouts
