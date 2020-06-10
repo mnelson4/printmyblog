@@ -427,23 +427,38 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         this.convertYoutubeVideosToImages();
         // Don't wrap tiled gallery images- we have CSS to avoid page breaks in them
         // although currently, they don't display well because they need JS that doesn't get enqueued
-        var non_emojis = jQuery('.pmb-posts img:not(.emoji, div.tiled-gallery img, img.fg-image, img.size-medium, img.size-thumbnail)').filter(function() {
-            return  jQuery(this).attr("height") > 400;
+        var non_emojis = jQuery('.pmb-posts img:not(.emoji, div.tiled-gallery img, img.fg-image, img.size-thumbnail)').filter(function() {
+            var element = jQuery(this);
+            // If it's got a figure wrapper, don't wrap the image, we'll select the figure next.
+            if(element.parent('figure').length !== 0){
+                return false;
+            }
+            // only wrap images bigger than 400 pixels.
+            return element.attr("height") > 400;
+        });
+        var wp_block_galleries = jQuery('.pmb-posts .wp-block-gallery');
+        var images_with_figures = jQuery('figure.wp-caption').filter(function(){
+           var element = jQuery(this);
+           if(element.find('img').length){
+               return true;
+           }
+           return false;
         });
         if(this.image_size === 0){
             non_emojis.remove();
+            wp_block_galleries.remove();
         } else{
             non_emojis.wrap('<div class="pmb-image"></div>');
             if(this.image_size !== false) {
                 var pmb_print = this;
                 non_emojis.each(function () {
                     var obj = jQuery(this);
-                    var width = pmb_print.image_size;
+                    var height = pmb_print.image_size;
                     // Modify the CSS here. We could have written CSS rules but the selector worked slightly differently
                     // in CSS compared to jQuery.
                     // Let's make the image smaller and centered
                     obj.css({
-                        'max-height': width + 'in',
+                        'max-height': height + 'in',
                         'max-width:': '100%',
                         'width': 'auto',
                         'height': 'auto',
@@ -452,6 +467,14 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                         'margin-right': 'auto'
                     });
                 });
+                wp_block_galleries.each(function(){
+                    var obj = jQuery(this);
+                    obj.css({
+                      'max-width': (pmb_print.image_size * 1.25) + 'in',
+                      'margin-right':'auto',
+                      'margin-left':'auto'
+                    });
+                })
             }
         }
 
