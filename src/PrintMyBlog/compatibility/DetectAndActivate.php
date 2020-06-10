@@ -3,6 +3,7 @@
 namespace PrintMyBlog\compatibility;
 
 use PrintMyBlog\compatibility\plugins\EasyFootnotes;
+use PrintMyBlog\compatibility\plugins\LazyLoadingFeaturePlugin;
 use Twine\compatibility\CompatibilityBase;
 
 /**
@@ -25,7 +26,9 @@ class DetectAndActivate
         /**
          * @var $compatiblity_mods_to_activate CompatibilityBase[]
          */
-        $compatiblity_mods_to_activate = [];
+        $compatiblity_mods_to_activate = [
+            new LazyLoadingFeaturePlugin(),
+        ];
         if (class_exists('easyFootnotes')) {
             $compatiblity_mods_to_activate[] = new EasyFootnotes();
         }

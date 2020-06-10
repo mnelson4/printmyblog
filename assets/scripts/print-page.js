@@ -425,6 +425,11 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.prettyUpPrintedPage = function()
     {
         this.convertYoutubeVideosToImages();
+        // Don't float things if we have more than one column. There's just not enough room for that
+        if(this.columns > 1){
+            jQuery('.alignright').removeClass('alignright');
+            jQuery('.alignleft').removeClass('alignleft');
+        }
         // Don't wrap tiled gallery images- we have CSS to avoid page breaks in them
         // although currently, they don't display well because they need JS that doesn't get enqueued
         var non_emojis = jQuery('.pmb-posts img:not(.emoji, div.tiled-gallery img, img.fg-image, img.size-thumbnail)').filter(function() {
@@ -444,6 +449,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
            }
            return false;
         });
+        images_with_figures.addClass('pmb-image');
         if(this.image_size === 0){
             non_emojis.remove();
             wp_block_galleries.remove();
@@ -469,6 +475,8 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 });
                 wp_block_galleries.each(function(){
                     var obj = jQuery(this);
+                    // Galleries can't be resized by height (they just cut off
+                    // content underneath the set height). Need to use width.
                     obj.css({
                       'max-width': (pmb_print.image_size * 1.25) + 'in',
                       'margin-right':'auto',
