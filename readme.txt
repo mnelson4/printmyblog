@@ -231,6 +231,7 @@ But if not, your browser can also remove background colors.
 
 = How do I avoid a pagebreak inside something? =
 [Add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-no-break" onto the element/block. The browser will avoid a pagebreak in that element if possible.
+If browsers ignore that, you force the pagebreak to happen just before an element by adding the CSS class "pmb-page-break".
 
 = How do I print a draft? =
 The easiest way to print a draft post is to enable the front-end print buttons, then view the preview of the post, and click the print button you want.
@@ -249,8 +250,14 @@ https://youtu.be/LemXhydDEvg
 
 == Changelog ==
 
+= 2.6.3 June 11, 2020 =
+* Resize gallery blocks like images
+* Clarify the Print My Blog header only appears on the first page
+
 = 2.6.2 June 6, 2020 =
 * Fix activation redirect
+* Improve image layout of inline images, gallery block, and images in multi-column layouts
+* Disable image lazy-loading on REST requests so images in print-pages appear without needing to scroll
 
 = 2.6.1 June 2, 2020 =
 * Fix filtering by category and author if REST API is restricted to logged-in users

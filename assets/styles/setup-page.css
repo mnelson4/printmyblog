@@ -13,3 +13,7 @@
 .pmb-format-option{
     margin-bottom:1em;
 }
+
+table.form-table th p.description{
+    font-weight:initial;
+}

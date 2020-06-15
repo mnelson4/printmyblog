@@ -16,6 +16,7 @@ use PrintMyBlog\services\display\FormInputs;
     <tr>
         <th scope="row">
             <label ><?php esc_html_e('Header Content to Print','print-my-blog' );?></label>
+            <p class="description"><?php esc_html_e('Appears at the top of the first page.', 'event_espresso'); ?></p>
         </th>
         <td>
             <?php
