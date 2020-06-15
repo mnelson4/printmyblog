@@ -3,7 +3,7 @@
 namespace PrintMyBlog\system;
 
 use PrintMyBlog\compatibility\DetectAndActivate;
-use PrintMyBlog\controllers\PmbActivation;
+
 use PrintMyBlog\controllers\PmbAdmin;
 use PrintMyBlog\controllers\PmbAjax;
 use PrintMyBlog\controllers\PmbCommon;
@@ -12,12 +12,11 @@ use PrintMyBlog\controllers\PmbGutenbergBlock;
 use PrintMyBlog\controllers\PmbPrintPage;
 use PrintMyBlog\domain\ProNotification;
 use Twine\admin\news\DashboardNews;
-use Twine\controllers\BaseController;
 
 /**
  * Class Init
  *
- * Description
+ * Sets up controller classes and the like.
  *
  * @package        Print My Blog
  * @author         Mike Nelson
@@ -54,7 +53,7 @@ class Init
      */
     public function init()
     {
-        (new PmbActivation())->detectActivation();
+        (new Activation())->detectActivation();
         $this->setUrls();
         if (defined('DOING_AJAX') && DOING_AJAX) {
             (new PmbAjax())->setHooks();

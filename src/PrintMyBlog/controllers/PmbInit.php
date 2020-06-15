@@ -15,7 +15,7 @@ use Twine\controllers\BaseController;
  * @package     Print My Blog
  * @author         Mike Nelson
  * @since         1.0.0
- * @deprecated 3.0.0
+ * @deprecated 3.0.0 Because this isn't really a controller (it doesn't handle responses or do anything.)
  */
 class PmbInit extends BaseController
 {
