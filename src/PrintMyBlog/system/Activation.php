@@ -5,7 +5,9 @@ namespace PrintMyBlog\system;
 /**
  * Class Activation
  *
- * Handles installing Print My Blog, redirecting, and upgrades
+ * Handles installing Print My Blog, redirecting, and upgrades.
+ *
+ * Managed by \PrintMyBlog\system\Context.
  *
  * @package        Print My Blog
  * @author         Mike Nelson
@@ -14,7 +16,15 @@ namespace PrintMyBlog\system;
  */
 class Activation
 {
-    const VERSION_HISTORY = 'pmb_version_history';
+    /**
+     * @var RequestType
+     */
+    protected $request_type;
+    public function inject(
+        RequestType $requestType
+        ){
+        $this->request_type = $requestType;
+    }
     /**
      * Redirects the user to the blog printing page if the user just activated the plugin and
      * they have the necessary capability.
@@ -22,8 +32,10 @@ class Activation
      */
     public function detectActivation()
     {
-        if (get_option('pmb_activation') && current_user_can(PMB_ADMIN_CAP)) {
-            $this->recordVersion();
+        if($this->request_type->shouldCheckDb()){
+            $this->install();
+        }
+        if ($this->request_type->isBrandNewInstall() && current_user_can(PMB_ADMIN_CAP)) {
             update_option('pmb_activation', false);
             // Don't redirect if it's a bulk plugin activation
             if (isset($_GET['activate-multi'])) {
@@ -34,6 +46,18 @@ class Activation
         }
     }
 
+
+    /**
+     *
+     */
+    public function install(){
+        // install tables etc
+    }
+
+
+    /**
+     * Redirects
+     */
     public function redirectToActivationPage(){
         wp_redirect(
             add_query_arg(
@@ -44,25 +68,5 @@ class Activation
             )
         );
         exit;
-    }
-
-    public function recordVersion(){
-        $previous_versions = get_option( self::VERSION_HISTORY,[]);
-        if(is_string($previous_versions)){
-            $previous_versions = json_decode($previous_versions,true);
-        }
-        if(empty($previous_versions)){
-            $previous_versions = [];
-        }
-        if(! isset($previous_versions[PMB_VERSION])){
-            $previous_versions[PMB_VERSION] = [];
-        }
-        $previous_versions[PMB_VERSION][] = date('Y-m-d H:i:s');
-        update_option(self::VERSION_HISTORY,wp_json_encode($previous_versions));
-    }
-
-    public function install()
-    {
-        // Install tables
     }
 }

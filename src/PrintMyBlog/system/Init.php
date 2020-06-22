@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\system;
 
+use OpenCloud\Version;
 use PrintMyBlog\compatibility\DetectAndActivate;
 
 use PrintMyBlog\controllers\PmbAdmin;
@@ -18,6 +19,8 @@ use Twine\admin\news\DashboardNews;
  *
  * Sets up controller classes and the like.
  *
+ * Managed by \PrintMyBlog\system\Context.
+ *
  * @package        Print My Blog
  * @author         Mike Nelson
  * @since          3.0.0
@@ -25,6 +28,24 @@ use Twine\admin\news\DashboardNews;
  */
 class Init
 {
+
+    /**
+     * @var Activation
+     */
+    protected $activation;
+
+    /**
+     * @var VersionHistory
+     */
+    protected $version_history;
+
+    public function inject(
+        Activation $activation,
+        VersionHistory $version_history
+    ){
+        $this->activation = $activation;
+        $this->version_history = $version_history;
+    }
 
     /**
      * Sets up hooks that will initialize the code that will run PMB.
@@ -53,7 +74,8 @@ class Init
      */
     public function init()
     {
-        (new Activation())->detectActivation();
+        $this->activation->detectActivation();
+        $this->version_history->maybeRecordVersionChange();
         $this->setUrls();
         if (defined('DOING_AJAX') && DOING_AJAX) {
             (new PmbAjax())->setHooks();
