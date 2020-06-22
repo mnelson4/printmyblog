@@ -2,7 +2,6 @@
 
 namespace PrintMyBlog\system;
 
-use OpenCloud\Version;
 use PrintMyBlog\compatibility\DetectAndActivate;
 
 use PrintMyBlog\controllers\PmbAdmin;
@@ -13,6 +12,7 @@ use PrintMyBlog\controllers\PmbGutenbergBlock;
 use PrintMyBlog\controllers\PmbPrintPage;
 use PrintMyBlog\domain\ProNotification;
 use Twine\admin\news\DashboardNews;
+use Twine\system\VersionHistory;
 
 /**
  * Class Init

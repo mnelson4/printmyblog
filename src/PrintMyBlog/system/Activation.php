@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\system;
 
+use Twine\system\Activation as BaseActivation;
 /**
  * Class Activation
  *
@@ -14,17 +15,8 @@ namespace PrintMyBlog\system;
  * @since          $VID:$
  *
  */
-class Activation
+class Activation extends BaseActivation
 {
-    /**
-     * @var RequestType
-     */
-    protected $request_type;
-    public function inject(
-        RequestType $requestType
-        ){
-        $this->request_type = $requestType;
-    }
     /**
      * Redirects the user to the blog printing page if the user just activated the plugin and
      * they have the necessary capability.
@@ -32,9 +24,7 @@ class Activation
      */
     public function detectActivation()
     {
-        if($this->request_type->shouldCheckDb()){
-            $this->install();
-        }
+        parent::detectActivation();
         if ($this->request_type->isBrandNewInstall() && current_user_can(PMB_ADMIN_CAP)) {
             update_option('pmb_activation', false);
             // Don't redirect if it's a bulk plugin activation

@@ -2,7 +2,7 @@
 
 namespace PrintMyBlog\system;
 
-use Twine\services\init\Context as BaseContext;
+use Twine\system\Context as BaseContext;
 
 /**
  * Class Context
@@ -25,14 +25,20 @@ class Context extends BaseContext
         $this->deps = [
             'PrintMyBlog\system\Init' => [
                 'PrintMyBlog\system\Activation' => self::REUSE,
-                'PrintMyBlog\system\VersionHistory' => self::REUSE,
+                'Twine\system\VersionHistory' => self::REUSE,
             ],
             'PrintMyBlog\system\Activation' => [
-                'PrintMyBlog\system\RequestType' => self::REUSE,
+                'Twine\system\RequestType' => self::REUSE,
             ],
-            'PrintMyBlog\system\RequestType' => [
-                'PrintMyBlog\system\VersionHistory' => self::REUSE
+            'Twine\system\RequestType' => [
+                'Twine\system\VersionHistory' => self::REUSE,
+                'pmb_activation'
             ],
+            'Twine\system\VersionHistory' => [
+                PMB_VERSION,
+                'pmb_previous_version',
+                'pmb_version_history'
+            ]
         ];
     }
 

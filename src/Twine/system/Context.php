@@ -1,6 +1,6 @@
 <?php
 
-namespace Twine\services\init;
+namespace Twine\system;
 
 use ReflectionClass;
 
@@ -69,12 +69,18 @@ abstract class Context
             $classes_depended_on = $this->deps[$classname];
             $dependency_instances = [];
             foreach($classes_depended_on as $dependency_classname => $policy){
-                $dependency_classname = $this->normalizeClassname($dependency_classname);
-                if($policy === self::USE_NEW){
-                    $dependency_instance = $this->instantiate($dependency_classname);
-                } else {
-                    $dependency_instance = $this->reuse($dependency_classname);
+                // Account for when the dependency isn't a class at all.
+                if(is_int($dependency_classname) && ! is_object($policy)){
+                    $dependency_instance = $policy;
+                } else{
+                    $dependency_classname = $this->normalizeClassname($dependency_classname);
+                    if($policy === self::USE_NEW){
+                        $dependency_instance = $this->instantiate($dependency_classname);
+                    } else {
+                        $dependency_instance = $this->reuse($dependency_classname);
+                    }
                 }
+
                 $dependency_instances[] = $dependency_instance;
             }
             call_user_func_array([$obj,'inject'],$dependency_instances);

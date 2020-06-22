@@ -1,13 +1,11 @@
 <?php
 
-namespace PrintMyBlog\system;
+namespace Twine\system;
 
 /**
  * Class RequestType
  *
- * Knows what type of request this is.
- *
- * Managed by \PrintMyBlog\system\Context.
+ * Description
  *
  * @package        Print My Blog
  * @author         Mike Nelson
@@ -26,8 +24,14 @@ class RequestType
      */
     protected $version_history;
 
-    public function inject(VersionHistory $version_history){
+    /**
+     * @var string|null name of the WP option that's set upon activation.
+     */
+    protected $activation_option_name;
+    public function inject(VersionHistory $version_history, $activation_option_name = null){
         $this->version_history = $version_history;
+        $this->activation_option_name = $activation_option_name;
+
     }
 
 
@@ -70,7 +74,7 @@ class RequestType
         if ($previous_version !== PMB_VERSION){
             return self::REQUEST_TYPE_UPDATE;
         }
-        if(get_option('pmb_activation')){
+        if(isset($this->activation_option_name) && get_option($this->activation_option_name)){
             return self::REQUEST_TYPE_REACTIVATION;
         }
         return self::REQUEST_TYPE_NORMAL;
