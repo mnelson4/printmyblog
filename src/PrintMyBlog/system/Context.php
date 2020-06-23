@@ -29,6 +29,7 @@ class Context extends BaseContext
             ],
             'PrintMyBlog\system\Activation' => [
                 'Twine\system\RequestType' => self::REUSE,
+                'PrintMyBlog\db\TableManager' => self::REUSE,
             ],
             'Twine\system\RequestType' => [
                 'Twine\system\VersionHistory' => self::REUSE,

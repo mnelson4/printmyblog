@@ -2,6 +2,8 @@
 
 namespace PrintMyBlog\system;
 
+use PrintMyBlog\db\TableManager;
+use Twine\system\RequestType;
 use Twine\system\Activation as BaseActivation;
 /**
  * Class Activation
@@ -17,6 +19,17 @@ use Twine\system\Activation as BaseActivation;
  */
 class Activation extends BaseActivation
 {
+
+    /**
+     * @var TableManager
+     */
+    protected $table_manager;
+
+    public function inject(RequestType $request_type, TableManager $table_manager=null)
+    {
+        parent::inject($request_type);
+        $this->table_manager = $table_manager;
+    }
     /**
      * Redirects the user to the blog printing page if the user just activated the plugin and
      * they have the necessary capability.
@@ -41,7 +54,7 @@ class Activation extends BaseActivation
      *
      */
     public function install(){
-        // install tables etc
+        $this->table_manager->installTables();
     }
 
 

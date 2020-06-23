@@ -141,7 +141,7 @@ if (defined('PMB_VERSION')) {
      */
     function pmb_plugin_activation()
     {
-        add_option('pmb_activation', true);
+        update_option('pmb_activation', true, false);
     }
 
     register_activation_hook(PMB_MAIN_FILE, 'pmb_plugin_activation');
