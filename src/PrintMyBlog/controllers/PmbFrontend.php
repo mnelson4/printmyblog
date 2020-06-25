@@ -56,7 +56,8 @@ class PmbFrontend extends BaseController
                 'PrintMyBlog\controllers\PmbFrontend->addPrintButtons $show_buttons',
                 (
                     $pmb_print_settings->showButtons()
-                    && isset($active_post_types[$post->post_type]) && $active_post_types[$post->post_type]
+                    && isset($active_post_types[$post->post_type])
+                    && $active_post_types[$post->post_type]
                     && (is_single() || $post->post_type === 'page')
                     && ! post_password_required($post)
                     && $postmeta_override !== 'hide'
