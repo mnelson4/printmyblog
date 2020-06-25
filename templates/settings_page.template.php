@@ -27,6 +27,13 @@ use PrintMyBlog\domain\FrontendPrintSettings;
             </tr>
             </tbody>
         </table>
+        <h2><?php esc_html_e('Post Types', 'event_espresso'); ?></h2>
+        <?php foreach($settings->activePostTypes() as $post_type => $active){
+            $post_type_obj = get_post_type_object($post_type);
+            ?>
+            <input type="checkbox" id="pmb-<?php echo $post_type;?>" value="1" name="post_types[<?php echo $post_type;?>]" <?php echo $active ? 'checked="checked"' : '';?>> <label for="pmb-<?php echo $post_type;?>"><?php echo $post_type_obj->label;?></label><br>
+            <?php
+        }?>
         <details class="pmb-details">
             <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('Customize Buttons', 'print-my-blog'); ?>
             </summary>

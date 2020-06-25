@@ -94,6 +94,7 @@ class PmbAdmin extends BaseController
                 $settings = new FrontendPrintSettings(new PrintOptions());
             } else {
                 $settings->setShowButtons(isset($_POST['show_buttons']));
+                $settings->setActivePostTypes(isset($_POST['post_types']) ? $_POST['post_types'] : []);
                 foreach ($settings->formatSlugs() as $slug) {
                     if (isset($_POST['format'][$slug])) {
                         $active = true;

@@ -16,7 +16,15 @@ use Exception;
  */
 class FrontendPrintSettings
 {
+
+    /**
+     * @var array
+     */
     protected $formats;
+
+    /**
+     * @var array
+     */
     protected $settings;
     const OPTION_NAME = 'pmb-print-now-settings';
 
@@ -74,6 +82,7 @@ class FrontendPrintSettings
     {
         $defaults =  [
             'show_buttons' => false,
+            'post_types' => $this->postTypes()
         ];
         foreach ($this->formats as $slug => $format) {
             $defaults[$slug] = array(
@@ -265,6 +274,49 @@ class FrontendPrintSettings
             $this->defaultSettings(),
             get_option(self::OPTION_NAME, [])
         );
+    }
+
+
+    /**
+     * Gets which post types are active. Key is the post type slug, value is whether to show print buttons on it.
+     * @since 2.7.0
+     * @return array
+     */
+    public function activePostTypes()
+    {
+        return $this->settings['post_types'];
+    }
+
+
+    /**
+     * @since 2.7.0
+     * @return array keys are post types, values are whether they've active by default or not.
+     */
+    public function postTypes()
+    {
+        return [
+            'post' => true,
+            'page' => false
+        ];
+    }
+
+
+    /**
+     * Sets which post types should show print buttons.
+     * @since 2.7.0
+     * @param array $active_post_types
+     */
+    public function setActivePostTypes($active_post_types){
+        $new_settings = $this->postTypes();
+        foreach(array_keys($new_settings) as $post_type){
+            if(isset($active_post_types[$post_type])){
+                $new_value = true;
+            } else {
+                $new_value = false;
+            }
+            $new_settings[$post_type] = $new_value;
+        }
+        $this->settings['post_types'] = $new_settings;
     }
 }
 // End of file Settings.php
