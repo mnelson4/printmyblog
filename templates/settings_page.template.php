@@ -19,21 +19,24 @@ use PrintMyBlog\domain\FrontendPrintSettings;
             <tbody>
             <tr>
                 <th scope="row">
-                    <label for="pmb-show-print-buttons"> <?php esc_html_e('Show visitors buttons to print your posts?', 'print-my-blog'); ?></label>
+                    <?php esc_html_e('Show print buttons on:', 'print-my-blog'); ?>
                 </th>
                 <td>
                     <input type="checkbox" id="pmb-show-print-buttons" name="show_buttons" value="1" <?php echo $settings->showButtons() ? 'checked="checked"' : '' ?>>
+                    <label for="pmb-show-print-buttons"><?php esc_html_e(
+                        'Posts',
+                        'print-my-blog'
+                        ); ?></label><br/>
+                    <input type="checkbox" id="pmb-show-print-buttons-pages" name="show_buttons_pages" value="1" <?php echo $settings->showButtonsPages() ? 'checked="checked"' : '' ?>>
+                    <label for="pmb-show-print-buttons-pages"><?php esc_html_e(
+                        'Pages',
+                        'print-my-blog'
+                    ); ?>
+                    </label>
                 </td>
             </tr>
             </tbody>
         </table>
-        <h2><?php esc_html_e('Post Types', 'event_espresso'); ?></h2>
-        <?php foreach($settings->activePostTypes() as $post_type => $active){
-            $post_type_obj = get_post_type_object($post_type);
-            ?>
-            <input type="checkbox" id="pmb-<?php echo $post_type;?>" value="1" name="post_types[<?php echo $post_type;?>]" <?php echo $active ? 'checked="checked"' : '';?>> <label for="pmb-<?php echo $post_type;?>"><?php echo $post_type_obj->label;?></label><br>
-            <?php
-        }?>
         <details class="pmb-details">
             <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('Customize Buttons', 'print-my-blog'); ?>
             </summary>
@@ -65,6 +68,6 @@ use PrintMyBlog\domain\FrontendPrintSettings;
             <?php } ?>
         </details>
         <?php wp_nonce_field( 'pmb-settings' );?>
-        <button class="button-primary"><?php esc_html_e('Save Settings','print-my-blog' );?></button> <input name="pmb-reset" class="button button-secondary" type="submit" value="<?php esc_html_e('Reset to Defaults', 'print-my-blog'); ?>">
+        <button class="button-primary"><?php esc_html_e('Save Settings','print-my-blog' );?></button> <input name="pmb-reset" class="button button-secondary" onclick="return confirm('<?php echo esc_attr(__('Are you sure you want to reset the settings back to defaults?','print-my-blog'));?>');" type="submit" value="<?php esc_html_e('Reset to Defaults', 'print-my-blog'); ?>">
     </form>
 </div>

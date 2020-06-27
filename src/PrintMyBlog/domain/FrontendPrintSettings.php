@@ -82,7 +82,7 @@ class FrontendPrintSettings
     {
         $defaults =  [
             'show_buttons' => false,
-            'post_types' => $this->postTypes()
+            'show_buttons_pages' => false
         ];
         foreach ($this->formats as $slug => $format) {
             $defaults[$slug] = array(
@@ -214,7 +214,7 @@ class FrontendPrintSettings
     }
 
     /**
-     * @since $VID:$
+     * Sets whether to show buttons on posts.
      * @param bool $show
      */
     public function setShowButtons($show = true)
@@ -223,12 +223,34 @@ class FrontendPrintSettings
     }
 
     /**
-     * @since $VID:$
+     * Gets whether to show print buttons on posts.
      * @return bool
      */
     public function showButtons()
     {
         return (bool)$this->settings['show_buttons'];
+    }
+
+
+    /**
+     * Sets whether to show print buttons on pages.
+     * @since 2.7.0
+     * @param bool $show
+     */
+    public function setShowButtonsPages($show = true)
+    {
+        $this->settings['show_buttons_pages'] = (bool)$show;
+    }
+
+
+    /**
+     * Gets whether to show print buttons on pages.
+     * @since 2.7.0
+     * @return bool
+     */
+    public function showButtonsPages()
+    {
+        return (bool)$this->settings['show_buttons_pages'];
     }
 
     /**
@@ -284,39 +306,10 @@ class FrontendPrintSettings
      */
     public function activePostTypes()
     {
-        return $this->settings['post_types'];
-    }
-
-
-    /**
-     * @since 2.7.0
-     * @return array keys are post types, values are whether they've active by default or not.
-     */
-    public function postTypes()
-    {
         return [
-            'post' => true,
-            'page' => false
+            'post' => $this->settings['show_buttons'],
+            'page' => $this->settings['show_buttons_pages']
         ];
-    }
-
-
-    /**
-     * Sets which post types should show print buttons.
-     * @since 2.7.0
-     * @param array $active_post_types
-     */
-    public function setActivePostTypes($active_post_types){
-        $new_settings = $this->postTypes();
-        foreach(array_keys($new_settings) as $post_type){
-            if(isset($active_post_types[$post_type])){
-                $new_value = true;
-            } else {
-                $new_value = false;
-            }
-            $new_settings[$post_type] = $new_value;
-        }
-        $this->settings['post_types'] = $new_settings;
     }
 }
 // End of file Settings.php
