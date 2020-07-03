@@ -294,7 +294,7 @@ class FrontendPrintSettings
     {
         $this->settings = array_replace_recursive(
             $this->defaultSettings(),
-            get_option(self::OPTION_NAME, [])
+            (array)get_option(self::OPTION_NAME, [])
         );
     }
 

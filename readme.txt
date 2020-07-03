@@ -255,6 +255,9 @@ Alternatively, if you only want to show the button on specific posts or pages, a
 
 == Changelog ==
 
+= 2.7.1 July 3, 2020 =
+* Fix a warning if print settings erroneously set
+
 = 2.7.0 June 26, 2020 =
 * Add option to show print buttons on pages
 * Use postmeta "pmb_buttons" with value "show" to always show print buttons on a post/page, "hide" to always hide
