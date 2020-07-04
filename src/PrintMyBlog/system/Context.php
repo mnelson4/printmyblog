@@ -26,10 +26,13 @@ class Context extends BaseContext
             'PrintMyBlog\system\Init' => [
                 'PrintMyBlog\system\Activation' => self::REUSE,
                 'Twine\system\VersionHistory' => self::REUSE,
+                'Twine\system\RequestType' => self::REUSE,
+                'PrintMyBlog\system\CustomPostTypes' => self::REUSE
             ],
             'PrintMyBlog\system\Activation' => [
                 'Twine\system\RequestType' => self::REUSE,
                 'PrintMyBlog\db\TableManager' => self::REUSE,
+                'PrintMyBlog\system\Capabilities' => self::REUSE
             ],
             'Twine\system\RequestType' => [
                 'Twine\system\VersionHistory' => self::REUSE,

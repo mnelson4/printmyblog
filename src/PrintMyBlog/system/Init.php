@@ -12,6 +12,7 @@ use PrintMyBlog\controllers\PmbGutenbergBlock;
 use PrintMyBlog\controllers\PmbPrintPage;
 use PrintMyBlog\domain\ProNotification;
 use Twine\admin\news\DashboardNews;
+use Twine\system\RequestType;
 use Twine\system\VersionHistory;
 
 /**
@@ -39,12 +40,27 @@ class Init
      */
     protected $version_history;
 
+    /**
+     * @var RequestType
+     */
+    protected $request_type;
+
+    /**
+     * @var CustomPostTypes
+     */
+    protected $cpt;
+
+
     public function inject(
         Activation $activation,
-        VersionHistory $version_history
+        VersionHistory $version_history,
+        RequestType $request_type,
+        CustomPostTypes $cpt
     ){
         $this->activation = $activation;
         $this->version_history = $version_history;
+        $this->request_type = $request_type;
+        $this->cpt = $cpt;
     }
 
     /**
@@ -74,8 +90,10 @@ class Init
      */
     public function init()
     {
-        $this->activation->detectActivation();
+        $this->request_type->getRequestType();
         $this->version_history->maybeRecordVersionChange();
+        $this->cpt->register();
+        $this->activation->detectActivation();
         $this->setUrls();
         if (defined('DOING_AJAX') && DOING_AJAX) {
             (new PmbAjax())->setHooks();

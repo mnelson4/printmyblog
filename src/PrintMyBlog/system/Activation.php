@@ -25,10 +25,20 @@ class Activation extends BaseActivation
      */
     protected $table_manager;
 
-    public function inject(RequestType $request_type, TableManager $table_manager=null)
-    {
+    /**
+     * @var Capabilities
+     */
+    protected $capabilities;
+
+
+    public function inject(
+        RequestType $request_type,
+        TableManager $table_manager = null,
+        Capabilities $capabilities = null
+    ) {
         parent::inject($request_type);
         $this->table_manager = $table_manager;
+        $this->capabilities = $capabilities;
     }
     /**
      * Redirects the user to the blog printing page if the user just activated the plugin and
@@ -55,6 +65,7 @@ class Activation extends BaseActivation
      */
     public function install(){
         $this->table_manager->installTables();
+        $this->capabilities->grant_capabilities();
     }
 
 

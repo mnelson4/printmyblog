@@ -14,9 +14,21 @@ namespace PrintMyBlog\system;
  */
 class CustomPostTypes
 {
-    public function
+
+    /**
+     * This must not be done before init eh.
+     */
     public function register()
     {
-
+        register_post_type(
+            'pmb_projects',
+            [
+                'label' => esc_html__('Projects', 'print-my-blog'),
+                'description' => esc_html__('Projects for printing with Print My Blog', 'print-my-blog'),
+                // 'show_in_menu' => true,
+                // 'show_ui' => true,
+                'capability_type' => 'pmb_projects',
+            ]
+        );
     }
 }
