@@ -1,0 +1,7 @@
+#pmb-book-layout{
+    max-width:1000px;
+}
+#pmb-book-layout div{
+    width:48%;
+    display:inline-block;
+}

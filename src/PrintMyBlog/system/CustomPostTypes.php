@@ -14,6 +14,7 @@ namespace PrintMyBlog\system;
  */
 class CustomPostTypes
 {
+    const PROJECTS = 'pmb_projects';
 
     /**
      * This must not be done before init eh.
@@ -21,7 +22,7 @@ class CustomPostTypes
     public function register()
     {
         register_post_type(
-            'pmb_projects',
+            self::PROJECTS,
             [
                 'label' => esc_html__('Projects', 'print-my-blog'),
                 'description' => esc_html__('Projects for printing with Print My Blog', 'print-my-blog'),

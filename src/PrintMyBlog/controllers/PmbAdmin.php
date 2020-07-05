@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\controllers;
 
+use PrintMyBlog\controllers\helpers\ProjectsListTable;
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
 use Twine\services\display\FormInputs;
@@ -59,6 +60,14 @@ class PmbAdmin extends BaseController
             PMB_ADMIN_CAP,
             PMB_ADMIN_PAGE_SLUG,
             array($this,'renderAdminPage')
+        );
+        add_submenu_page(
+            PMB_ADMIN_PAGE_SLUG,
+            esc_html__('Projects', 'print-my-blog'),
+            esc_html__('Projects', 'print-my-blog'),
+            PMB_ADMIN_CAP,
+            PMB_ADMIN_PROJECTS_PAGE_SLUG,
+            array($this, 'renderProjects')
         );
         add_submenu_page(
             PMB_ADMIN_PAGE_SLUG,
@@ -194,17 +203,6 @@ class PmbAdmin extends BaseController
             [],
             filemtime(PMB_STYLES_DIR . 'pmb-admin.css')
         );
-        if (
-            ! in_array(
-                $hook,
-                array(
-                'tools_page_print-my-blog',
-                'toplevel_page_print-my-blog-now'
-                )
-            )
-        ) {
-            return;
-        }
         if (isset($_GET['welcome'])) {
             wp_enqueue_style(
                 'pmb_welcome',
@@ -212,9 +210,52 @@ class PmbAdmin extends BaseController
                 array(),
                 filemtime(PMB_ASSETS_DIR . 'styles/welcome.css')
             );
-        } else {
+        } elseif(
+            in_array(
+                $hook,
+                array(
+                    'tools_page_print-my-blog',
+                    'toplevel_page_print-my-blog-now'
+                )
+            )) {
             wp_enqueue_script('pmb-setup-page');
             wp_enqueue_style('pmb-setup-page');
+        } elseif($hook === 'print-my-blog_page_print-my-blog-projects'
+                 && isset($_GET['action'])
+                 && $_GET['action'] === 'edit'
+            ) {
+            wp_register_script(
+                'pmb_sortable',
+                PMB_SCRIPTS_URL . 'libs/Sortable.min.js',
+                array(),
+                filemtime(PMB_SCRIPTS_DIR . 'libs/Sortable.min.js')
+            );
+            wp_enqueue_script(
+                'pmb_project_edit',
+                PMB_SCRIPTS_URL . 'project-edit.js',
+                array('pmb_sortable'),
+                filemtime(PMB_SCRIPTS_DIR . 'project-edit.js')
+            );
+            wp_enqueue_style(
+                'pmb_project_edit',
+                PMB_STYLES_URL . 'project-edit.css',
+                array(),
+                filemtime(PMB_STYLES_DIR . 'project-edit.css')
+            );
         }
+    }
+
+    public function renderProjects()
+    {
+        $action = isset($_GET['action']) ? $_GET['action'] : null;
+        if($action === 'edit'){
+            include(PMB_TEMPLATES_DIR . 'project_edit.template.php');
+        }
+        if(empty($_GET['action'])){
+            $table = new ProjectsListTable();
+            include(PMB_TEMPLATES_DIR . 'projects_list_table.template.php');
+            return;
+        }
+
     }
 }

@@ -23,14 +23,14 @@ class TableManager
         $charset_collate = $wpdb->get_charset_collate();
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         dbDelta(
-          'CREATE TABLE ' . $wpdb->prefix. 'pmb_doc_divisions (
-                doc_id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+          'CREATE TABLE ' . $wpdb->prefix. 'pmb_project_parts (
+                project_id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
                 post_id bigint(20) UNSIGNED NOT NULL DEFAULT \'0\',
                 parent_id bigint(20) UNSIGNED NULL DEFAULT \'0\',
-                doc_order int(11) NOT NULL DEFAULT \'0\',
+                part_order int(11) NOT NULL DEFAULT \'0\',
                 type varchar(50) NOT NULL DEFAULT \'0\',
-                PRIMARY KEY  (doc_id),
-                KEY sorted (doc_id,doc_order)
+                PRIMARY KEY  (project_id),
+                KEY sorted (post_id,part_order)
             ) ' . $charset_collate . '
         ;'
         );

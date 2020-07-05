@@ -121,7 +121,7 @@ if (defined('PMB_VERSION')) {
 
 }else {
     // it's all good! go for it!
-    define('PMB_VERSION', '2.6.3.rc.002');
+    define('PMB_VERSION', '2.6.3.rc.003');
     define('PMB_DIR', wp_normalize_path(__DIR__) . '/');
     define('PMB_MAIN_FILE', __FILE__);
     define('PMB_TEMPLATES_DIR', PMB_DIR . 'templates/');
@@ -132,6 +132,8 @@ if (defined('PMB_VERSION')) {
     define('PMB_BASENAME', plugin_basename(PMB_MAIN_FILE));
     define('PMB_ADMIN_PAGE_SLUG', 'print-my-blog-now');
     define('PMB_ADMIN_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_PAGE_SLUG);
+    define('PMB_ADMIN_PROJECTS_PAGE_SLUG', 'print-my-blog-projects');
+    define('PMB_ADMIN_PROJECTS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_PROJECTS_PAGE_SLUG);
     define('PMB_ADMIN_SETTINGS_PAGE_SLUG', 'print-my-blog-settings');
     define('PMB_ADMIN_SETTINGS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_SETTINGS_PAGE_SLUG);
 
