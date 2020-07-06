@@ -600,7 +600,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 			html_to_add += this.addTaxonomies(post);
 		}
 		html_to_add += '</div>'
-			+ '<div class="entry-content">';
+			+ '<div class="entry-content post-content">';
 		if(this.showFeaturedImage){
             html_to_add += this.getFeaturedImageHtml(post);
         }
