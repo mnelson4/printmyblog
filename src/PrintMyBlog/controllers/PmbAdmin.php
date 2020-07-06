@@ -226,21 +226,28 @@ class PmbAdmin extends BaseController
                  && $_GET['action'] === 'edit'
             ) {
             wp_register_script(
-                'pmb_sortable',
+                'sortablejs',
                 PMB_SCRIPTS_URL . 'libs/Sortable.min.js',
                 array(),
-                filemtime(PMB_SCRIPTS_DIR . 'libs/Sortable.min.js')
+                '1.10.2'
+            );
+            wp_register_style(
+                'bootstrap',
+                // 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css',
+                PMB_STYLES_URL . 'libs/bootstrap.min.css',
+                array(),
+                '3.3.1'
             );
             wp_enqueue_script(
                 'pmb_project_edit',
                 PMB_SCRIPTS_URL . 'project-edit.js',
-                array('pmb_sortable'),
+                array('sortablejs',),
                 filemtime(PMB_SCRIPTS_DIR . 'project-edit.js')
             );
             wp_enqueue_style(
                 'pmb_project_edit',
                 PMB_STYLES_URL . 'project-edit.css',
-                array(),
+                array('bootstrap'),
                 filemtime(PMB_STYLES_DIR . 'project-edit.css')
             );
         }

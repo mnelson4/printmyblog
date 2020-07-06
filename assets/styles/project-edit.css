@@ -5,3 +5,8 @@
     width:48%;
     display:inline-block;
 }
+.pmb-selection-list{
+    height:60vh;
+    overflow-y:auto;
+
+}

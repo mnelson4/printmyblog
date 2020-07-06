@@ -9,17 +9,19 @@
     <h1><?php esc_html_e('Print My Blog - Edit Project', 'event_espresso'); ?></h1>
     <div id="pmb-book-layout">
         <div id="pmb-choices-area">
-            <ul id="items">
-                <li>item 1</li>
-                <li>item 2</li>
-                <li>item 3</li>
+            <ul id="pmb-project-choices" class="pmb-selection-list list-group">
+                <?php for($i=1;$i<3000;$i++){
+                    ?><li class="list-group-item">item<?php echo $i;?></li><?php
+                }
+                ?>
             </ul>
         </div>
         <div id="pmb-project-area">
-            <ul id="items">
-                <li>item 1</li>
-                <li>item 2</li>
-                <li>item 3</li>
+            <ul id="pmb-project-sections" class="pmb-selection-list list-group">
+                <?php for($i=1;$i<3000;$i++){
+                    ?><li class="list-group-item">item<?php echo $i;?></li><?php
+                }
+                ?>
             </ul>
         </div>
     </div>
