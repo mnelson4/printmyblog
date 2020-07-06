@@ -29,70 +29,96 @@ class PmbFrontend extends BaseController
     }
     public function addPrintButton($content)
     {
-        global $post;
-        if ($post instanceof WP_Post && $post->post_type === 'post' && is_single() && ! post_password_required($post)) {
-            $print_settings = new FrontendPrintSettings(new PrintOptions());
-            $print_settings->load();
-            if (
-                apply_filters(
-                    'PrintMyBlog\controllers\PmbFrontend->addPrintButtons $show_buttons',
-                    $print_settings->showButtons(),
-                    $post
+        global $post, $pmb_print_settings;
+        if(! $post instanceof WP_Post || ! in_array($post->post_type,['post','page'])){
+            return $content;
+        }
+        // We can use this filter a lot, so just load the print settings object once.
+        if(! $pmb_print_settings instanceof FrontendPrintSettings){
+            $pmb_print_settings = new FrontendPrintSettings(new PrintOptions());
+            $pmb_print_settings->load();
+        }
+
+        $postmeta_override = get_post_meta($post->ID, 'pmb_buttons',true);
+        $active_post_types = $pmb_print_settings->activePostTypes();
+        if (
+            /**
+             * Lets you override if Print My Blog adds print buttons or not.
+             *
+             * @param bool $show whether to show print buttons on this post/page or not
+             * @param WP_Post $post
+             * @param FrontendPrintSettings $pmb_print_settings
+             * @param string $active_post_types 'show' to always show buttons on this post, 'hide' to hide on this post,
+             *                                  'default', null, or false to use the default settings.
+             * default settings.
+             */
+            apply_filters(
+                'PrintMyBlog\controllers\PmbFrontend->addPrintButtons $show_buttons',
+                (
+                    isset($active_post_types[$post->post_type])
+                    && $active_post_types[$post->post_type]
+                    && (is_single() || $post->post_type === 'page')
+                    && ! post_password_required($post)
+                    && $postmeta_override !== 'hide'
                 )
-            ) {
-                $base_args = [
-                    'print-my-blog' => '1',
-                    'post-type' => 'post',
-                ];
-                if ($post->post_password != '') {
-                    $base_args['statuses[]'] = 'password';
-                } else {
-                    $base_args['statuses[]'] = $post->post_status;
+                || $postmeta_override === 'show',
+                $post,
+                $pmb_print_settings,
+                $postmeta_override
+            )
+        ) {
+            $base_args = [
+                'print-my-blog' => '1',
+                'post-type' => $post->post_type,
+            ];
+            if ($post->post_password != '') {
+                $base_args['statuses[]'] = 'password';
+            } else {
+                $base_args['statuses[]'] = $post->post_status;
+            }
+            if ($post->post_status === 'draft') {
+                $base_args['include-draft-posts'] = true;
+            }
+            $html = '<div class="pmb-print-this-page wp-block-button">';
+            foreach ($pmb_print_settings->formats() as $slug => $settings) {
+                if (! $pmb_print_settings->isActive($slug)) {
+                    continue;
                 }
-                if ($post->post_status === 'draft') {
-                    $base_args['include-draft-posts'] = true;
-                }
-                $html = '<div class="pmb-print-this-page wp-block-button">';
-                foreach ($print_settings->formats() as $slug => $settings) {
-                    if (! $print_settings->isActive($slug)) {
-                        continue;
-                    }
-                    $args = array_merge(
-                        $base_args,
-                        $print_settings->getPrintOptionsAndValues($slug)
-                    );
-                    $args['format'] = $slug;
-                    $args['pmb-post'] = $post->ID;
-                    $url = add_query_arg(
-                        apply_filters(
-                            '\PrintMyBlog\controllers\PmbFrontend->addPrintButton $base_args',
-                            $args,
-                            $post,
-                            $slug,
-                            $settings
-                        ),
-                        site_url()
-                    );
-                    $html .= sprintf(
-                        ' <a href="%s" class="button button-secondary wp-block-button__link">%s</a>',
-                        esc_url($url),
-                        esc_html($print_settings->getFrontendLabel($slug))
-                    );
-                }
-                $html .= '</div>';
-                $add_to_top = apply_filters(
-                    '\PrintMyBlog\controllers\PmbFrontend->addPrintButton $add_to_top',
-                    true,
-                    $post
+                $args = array_merge(
+                    $base_args,
+                    $pmb_print_settings->getPrintOptionsAndValues($slug)
                 );
-                if ($add_to_top) {
-                    return $html . $content;
-                } else {
-                    return $content . $html;
-                }
+                $args['format'] = $slug;
+                $args['pmb-post'] = $post->ID;
+                $url = add_query_arg(
+                    apply_filters(
+                        '\PrintMyBlog\controllers\PmbFrontend->addPrintButton $base_args',
+                        $args,
+                        $post,
+                        $slug,
+                        $settings
+                    ),
+                    site_url()
+                );
+                $html .= sprintf(
+                    ' <a href="%s" class="button button-secondary wp-block-button__link">%s</a>',
+                    esc_url($url),
+                    esc_html($pmb_print_settings->getFrontendLabel($slug))
+                );
+            }
+            $html .= '</div>';
+            $add_to_top = apply_filters(
+                '\PrintMyBlog\controllers\PmbFrontend->addPrintButton $add_to_top',
+                true,
+                $post
+            );
+            if ($add_to_top) {
+                return $html . $content;
+            } else {
+                return $content . $html;
             }
         }
-        return $content;
+    return $content;
     }
 
     /**

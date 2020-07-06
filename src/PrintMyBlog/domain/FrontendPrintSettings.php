@@ -16,7 +16,15 @@ use Exception;
  */
 class FrontendPrintSettings
 {
+
+    /**
+     * @var array
+     */
     protected $formats;
+
+    /**
+     * @var array
+     */
     protected $settings;
     const OPTION_NAME = 'pmb-print-now-settings';
 
@@ -74,6 +82,7 @@ class FrontendPrintSettings
     {
         $defaults =  [
             'show_buttons' => false,
+            'show_buttons_pages' => false
         ];
         foreach ($this->formats as $slug => $format) {
             $defaults[$slug] = array(
@@ -205,7 +214,7 @@ class FrontendPrintSettings
     }
 
     /**
-     * @since $VID:$
+     * Sets whether to show buttons on posts.
      * @param bool $show
      */
     public function setShowButtons($show = true)
@@ -214,12 +223,34 @@ class FrontendPrintSettings
     }
 
     /**
-     * @since $VID:$
+     * Gets whether to show print buttons on posts.
      * @return bool
      */
     public function showButtons()
     {
         return (bool)$this->settings['show_buttons'];
+    }
+
+
+    /**
+     * Sets whether to show print buttons on pages.
+     * @since 2.7.0
+     * @param bool $show
+     */
+    public function setShowButtonsPages($show = true)
+    {
+        $this->settings['show_buttons_pages'] = (bool)$show;
+    }
+
+
+    /**
+     * Gets whether to show print buttons on pages.
+     * @since 2.7.0
+     * @return bool
+     */
+    public function showButtonsPages()
+    {
+        return (bool)$this->settings['show_buttons_pages'];
     }
 
     /**
@@ -263,8 +294,22 @@ class FrontendPrintSettings
     {
         $this->settings = array_replace_recursive(
             $this->defaultSettings(),
-            get_option(self::OPTION_NAME, [])
+            (array)get_option(self::OPTION_NAME, [])
         );
+    }
+
+
+    /**
+     * Gets which post types are active. Key is the post type slug, value is whether to show print buttons on it.
+     * @since 2.7.0
+     * @return array
+     */
+    public function activePostTypes()
+    {
+        return [
+            'post' => $this->settings['show_buttons'],
+            'page' => $this->settings['show_buttons_pages']
+        ];
     }
 }
 // End of file Settings.php

@@ -127,10 +127,10 @@ Best Wishes Preserving Your Blog!
 1. Select the format you want, and click "Prepare Print Page."
 1. When you see the "Print" button appear, click it. Your blog will be printed from your browser.
 
-**To Add Print Buttons to Posts**
+**To Add Print Buttons to Posts and/or Pages**
 
 1. Under the "Print My Blog" menu item, click "Settings."
-1. Check "Show visitors buttons to print your posts?"
+1. Beside "Show print buttons on:", check "Posts" and/or "Pages"
 1. Click "Save Settings"
 
 **To Add a Print Form for Visitors**
@@ -238,6 +238,11 @@ The easiest way to print a draft post is to enable the front-end print buttons, 
 
 https://youtu.be/LemXhydDEvg
 
+= How do I show the print buttons on posts or pages? =
+You can add print buttons to all posts and/or pages from the WordPress admin dashboard, under "Print My Blog", click "Settings", then, next to "Show print buttons on:" select the posts and/or pages.
+If you don't want to show them on certain posts or pages, add the custom field named "pmb_buttons" to them with the value "hide".
+Alternatively, if you only want to show the button on specific posts or pages, add the custom field "pmb_buttons" to those posts or pages with the value "show".
+
 == Screenshots ==
 
 1. Print My Blog removes junk that doesn’t belong in a printout— like ink-guzzling logos, menus, search-bars, sidebars, footer widgets, etc.
@@ -249,6 +254,16 @@ https://youtu.be/LemXhydDEvg
 7. Add the Print My Blog block to add a form visitors can use to select what and how to print your blog.
 
 == Changelog ==
+
+= 2.7.2 July 8, 2020 =
+* Add CSS class "post-content" which improves the look in some themes like Rowling
+
+= 2.7.1 July 3, 2020 =
+* Fix a warning if print settings erroneously set
+
+= 2.7.0 June 26, 2020 =
+* Add option to show print buttons on pages
+* Use postmeta "pmb_buttons" with value "show" to always show print buttons on a post/page, "hide" to always hide
 
 = 2.6.3 June 11, 2020 =
 * Resize gallery blocks like images

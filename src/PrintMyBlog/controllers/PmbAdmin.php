@@ -103,6 +103,7 @@ class PmbAdmin extends BaseController
                 $settings = new FrontendPrintSettings(new PrintOptions());
             } else {
                 $settings->setShowButtons(isset($_POST['show_buttons']));
+                $settings->setShowButtonsPages(isset($_POST['show_buttons_pages']));
                 foreach ($settings->formatSlugs() as $slug) {
                     if (isset($_POST['format'][$slug])) {
                         $active = true;
