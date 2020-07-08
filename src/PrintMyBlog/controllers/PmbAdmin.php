@@ -3,6 +3,7 @@
 namespace PrintMyBlog\controllers;
 
 use PrintMyBlog\controllers\helpers\ProjectsListTable;
+use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
 use Twine\services\display\FormInputs;
@@ -21,6 +22,14 @@ use Twine\controllers\BaseController;
  */
 class PmbAdmin extends BaseController
 {
+
+    /**
+     * @var PostFetcher
+     */
+    protected $post_fetcher;
+    public function inject(PostFetcher $post_fetcher){
+        $this->post_fetcher = $post_fetcher;
+    }
     /**
      * name of the option that just indicates we successfully saved the setttings
      */
@@ -257,6 +266,7 @@ class PmbAdmin extends BaseController
     {
         $action = isset($_GET['action']) ? $_GET['action'] : null;
         if($action === 'edit'){
+            $post_options = $this->post_fetcher->fetchPostOptionssForProject();
             include(PMB_TEMPLATES_DIR . 'project_edit.template.php');
         }
         if(empty($_GET['action'])){

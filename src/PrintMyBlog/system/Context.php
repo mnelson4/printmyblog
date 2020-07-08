@@ -42,6 +42,9 @@ class Context extends BaseContext
                 PMB_VERSION,
                 'pmb_previous_version',
                 'pmb_version_history'
+            ],
+            'PrintMyBlog\controllers\PmbAdmin' => [
+                'PrintMyBlog\db\PostFetcher' => self::REUSE
             ]
         ];
     }

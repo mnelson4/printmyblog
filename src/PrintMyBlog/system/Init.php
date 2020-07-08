@@ -98,7 +98,9 @@ class Init
         if (defined('DOING_AJAX') && DOING_AJAX) {
             (new PmbAjax())->setHooks();
         } elseif (is_admin()) {
-            (new PmbAdmin())->setHooks();
+            $context = \PrintMyBlog\system\Context::instance();
+            $admin = $context->reuse('PrintMyBlog\controllers\PmbAdmin');
+            $admin->setHooks();
             $this->initDashboardNews();
             (new ProNotification())->setHooks();
         } else {

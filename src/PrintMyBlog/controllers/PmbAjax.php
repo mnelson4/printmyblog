@@ -51,4 +51,16 @@ class PmbAjax extends BaseController
             ]
         );
     }
+
+
+    /**
+     * Fetches posts based on request data for possible inclusion in a project. Echos JSON
+     * @since $VID:$
+     */
+    public function handleFetchPostOptionss(){
+        global $wpdb;
+        $results = $wpdb->get_results('SELECT * FROM ' . $wpdb->posts);
+        echo wp_json_encode($results);
+        exit;
+    }
 }

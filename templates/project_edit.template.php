@@ -10,8 +10,8 @@
     <div id="pmb-book-layout">
         <div id="pmb-choices-area">
             <ul id="pmb-project-choices" class="pmb-selection-list list-group">
-                <?php for($i=1;$i<3000;$i++){
-                    ?><li class="list-group-item">item<?php echo $i;?></li><?php
+                <?php foreach($post_options as $post){
+                    ?><li class="list-group-item"><?php echo $post->post_title;?></li><?php
                 }
                 ?>
             </ul>
