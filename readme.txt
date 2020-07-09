@@ -210,11 +210,11 @@ If you're handy writing CSS, add some additional CSS to your theme that uses the
 
 For example, if you want to hide all divs with CSS class "my-video" in printouts, but not on the regular website, add the following CSS to your theme:
 
-```
+`
 .pmb-print-page div.my-video{
     display:none;
 }
-```
+`
 
 Also, if it's content automatically added by a plugin or theme, please let us know in the support forum, and we can hide that content in the next release of Print My Blog.
 
