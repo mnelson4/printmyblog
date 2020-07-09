@@ -25,7 +25,7 @@ class PostFetcher
     public function fetchPostOptionssForProject(){
         $query = new WP_Query(
             [
-                'posts_per_page' => 20
+                'posts_per_page' => 1000
             ]
         );
         $posts = $query->get_posts();
