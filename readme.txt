@@ -253,6 +253,10 @@ You can add print buttons to all posts and/or pages from the WordPress admin das
 If you don't want to show them on certain posts or pages, add the custom field named "pmb_buttons" to them with the value "hide".
 Alternatively, if you only want to show the button on specific posts or pages, add the custom field "pmb_buttons" to those posts or pages with the value "show".
 
+https://www.youtube.com/watch?v=Ehep6GO5J6c
+
+https://www.youtube.com/watch?v=mWD8kDrhWMs
+
 == Screenshots ==
 
 1. Print My Blog removes junk that doesn’t belong in a printout— like ink-guzzling logos, menus, search-bars, sidebars, footer widgets, etc.
