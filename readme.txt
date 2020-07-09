@@ -265,8 +265,9 @@ Alternatively, if you only want to show the button on specific posts or pages, a
 
 == Changelog ==
 
-= 2.7.2 July 8, 2020 =
+= 2.7.2 July 9, 2020 =
 * Add CSS class "post-content" in addition to "entry-content" which improves the look in some themes like Rowling 1.x
+* Wait 30 seconds before assuming print page isn't loading instead of only 10
 
 = 2.7.1 July 3, 2020 =
 * Fix a warning if print settings erroneously set
