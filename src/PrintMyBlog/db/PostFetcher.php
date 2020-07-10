@@ -23,12 +23,11 @@ class PostFetcher
      * @return WP_Post[]
      */
     public function fetchPostOptionssForProject(){
-        $query = new WP_Query(
-            [
-                'posts_per_page' => 1000
-            ]
+        global $wpdb;
+        return $wpdb->get_results(
+            'SELECT ID, post_title FROM '
+            . $wpdb->posts
+            . ' WHERE post_type NOT IN (\'auto-draft\')'
         );
-        $posts = $query->get_posts();
-        return $posts;
     }
 }

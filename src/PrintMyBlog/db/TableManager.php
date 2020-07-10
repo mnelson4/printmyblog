@@ -24,13 +24,14 @@ class TableManager
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         dbDelta(
           'CREATE TABLE ' . $wpdb->prefix. 'pmb_project_parts (
-                project_id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+                ID bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+                project_id bigint(20) UNSIGNED NOT NULL,
                 post_id bigint(20) UNSIGNED NOT NULL DEFAULT \'0\',
                 parent_id bigint(20) UNSIGNED NULL DEFAULT \'0\',
                 part_order int(11) NOT NULL DEFAULT \'0\',
-                type varchar(50) NOT NULL DEFAULT \'0\',
-                PRIMARY KEY  (project_id),
-                KEY sorted (post_id,part_order)
+                type varchar(50) NOT NULL DEFAULT \'\',
+                PRIMARY KEY  (ID),
+                KEY sorted (project_id,part_order)
             ) ' . $charset_collate . '
         ;'
         );

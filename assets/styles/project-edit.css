@@ -1,8 +1,11 @@
-#pmb-book-layout{
+.pmb-project-layout{
     max-width:1000px;
+    margin-left:auto;
+    margin-right:auto;
 }
-#pmb-book-layout div{
-    width:48%;
+
+.pmb-project-layout ul{
+    width:45%;
     display:inline-block;
 }
 .pmb-selection-list{
@@ -27,4 +30,44 @@
     cursor: grabbing;
     cursor: -moz-grabbing;
     cursor: -webkit-grabbing;
+}
+
+.pmb-project-item{
+    padding:10px 15px;
+    margin-bottom:-1px;
+    border:1px solid #ddd;
+    position:relative;
+    display:block;
+}
+.form-group{
+    margin-bottom: 15px;
+}
+
+.form-group label{
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+.form-control{
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.list-group{
+    margin-top:0px;
+    margin-bottom:0px;
 }

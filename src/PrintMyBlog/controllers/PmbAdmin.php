@@ -3,11 +3,13 @@
 namespace PrintMyBlog\controllers;
 
 use PrintMyBlog\controllers\helpers\ProjectsListTable;
+use PrintMyBlog\db\PartFetcher;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
 use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
+use WP_Post;
 
 /**
  * Class PmbAdmin
@@ -27,8 +29,20 @@ class PmbAdmin extends BaseController
      * @var PostFetcher
      */
     protected $post_fetcher;
-    public function inject(PostFetcher $post_fetcher){
+
+    /**
+     * @var PartFetcher
+     */
+    protected $part_fetcher;
+
+    /**
+     * @since $VID:$
+     * @param PostFetcher $post_fetcher
+     * @param PartFetcher $part_fetcher
+     */
+    public function inject(PostFetcher $post_fetcher, PartFetcher $part_fetcher){
         $this->post_fetcher = $post_fetcher;
+        $this->part_fetcher = $part_fetcher;
     }
     /**
      * name of the option that just indicates we successfully saved the setttings
@@ -240,13 +254,7 @@ class PmbAdmin extends BaseController
                 array(),
                 '1.10.2'
             );
-            wp_register_style(
-                'bootstrap',
-                // 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css',
-                PMB_STYLES_URL . 'libs/bootstrap.min.css',
-                array(),
-                '3.3.1'
-            );
+
             wp_enqueue_script(
                 'pmb_project_edit',
                 PMB_SCRIPTS_URL . 'project-edit.js',
@@ -256,7 +264,7 @@ class PmbAdmin extends BaseController
             wp_enqueue_style(
                 'pmb_project_edit',
                 PMB_STYLES_URL . 'project-edit.css',
-                array('bootstrap'),
+                array(),
                 filemtime(PMB_STYLES_DIR . 'project-edit.css')
             );
         }
@@ -265,15 +273,66 @@ class PmbAdmin extends BaseController
     public function renderProjects()
     {
         $action = isset($_GET['action']) ? $_GET['action'] : null;
-        if($action === 'edit'){
+        if($action === 'new'){
+            $project = new WP_Post();
             $post_options = $this->post_fetcher->fetchPostOptionssForProject();
+            $parts = [];
+            $form_url = add_query_arg(
+                [
+                    'action' => 'edit',
+                ],
+                admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+            );
             include(PMB_TEMPLATES_DIR . 'project_edit.template.php');
+        }
+        if($action === 'edit'){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $this->saveProject();
+                wp_redirect('');
+            }
+            $post_options = $this->post_fetcher->fetchPostOptionssForProject();
+            $project = get_post($_GET['ID']);
+            $parts = $this->part_fetcher->fetchPartsFor($_GET['ID']);
+            $form_url = add_query_arg(
+                [
+                    'ID' => $project->ID,
+                    'action' => 'edit',
+                ],
+                admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+            );
+            include(PMB_TEMPLATES_DIR . 'project_edit.template.php');
+            return;
+
         }
         if(empty($_GET['action'])){
             $table = new ProjectsListTable();
             include(PMB_TEMPLATES_DIR . 'projects_list_table.template.php');
             return;
         }
+    }
 
+    /**
+     * Saves the project's name and parts etc.
+     */
+    protected function saveProject()
+    {
+        check_admin_referer('pmb-project-edit');
+        if(isset($_GET['ID'])) {
+            $project_id = $_GET['ID'];
+        } else {
+            $project_id = wp_insert_post(
+                [
+                    'post_title' => stripslashes($_POST['pmb-project-title']),
+                ],
+                true
+            );
+            if(is_wp_error($project_id)){
+                wp_die($project_id->get_error_message());
+            }
+        }
+        $parts_string = stripslashes($_POST['pmb-project-sections-data']);
+        $parts = json_decode($parts_string);
+        $this->part_fetcher->clearPartsFor($project_id);
+        $this->part_fetcher->setPartsFor($project_id, $parts);
     }
 }
