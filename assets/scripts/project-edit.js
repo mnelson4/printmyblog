@@ -19,4 +19,13 @@ jQuery(document).ready(function(){
 			},
 			animation:150,
 		});
+	jQuery('#pmb-save').click(function(){
+		var pmb_items = [];
+		jQuery('#pmb-project-area .pmb-project-item').each(function(index, element){
+				pmb_items.push(element.attributes['data-id'].nodeValue);
+		});
+		var pmb_items_json = JSON.stringify(pmb_items);
+
+		console.log(pmb_items_json);
+	})
 });

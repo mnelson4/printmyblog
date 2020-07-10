@@ -8,23 +8,20 @@
         <!-- or use https://gcostudios.com/how-to-add-jquery-ui-tabs-into-wordpress/ for jquery ui tabs -->
     <h1><?php esc_html_e('Print My Blog - Edit Project', 'event_espresso'); ?></h1>
     <div id="pmb-book-layout">
-        <div id="pmb-choices-area">
+        <div id="pmb-choices-area" class="pmb-draggable-area">
             <ul id="pmb-project-choices" class="pmb-selection-list list-group">
                 <?php foreach($post_options as $post){
-                    ?><li class="list-group-item"><?php echo $post->post_title;?></li><?php
+                    ?><li class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($post->ID);?>"><?php echo $post->post_title;?></li><?php
                 }
                 ?>
             </ul>
         </div>
-        <div id="pmb-project-area">
+        <div id="pmb-project-area" class="pmb-draggable-area">
             <ul id="pmb-project-sections" class="pmb-selection-list list-group">
-                <?php for($i=1;$i<3000;$i++){
-                    ?><li class="list-group-item">item<?php echo $i;?></li><?php
-                }
-                ?>
             </ul>
         </div>
     </div>
+    <input type="submit" id="pmb-save" value="<?php esc_html_e('Save', 'print-my-blog'); ?>">
 
 
 

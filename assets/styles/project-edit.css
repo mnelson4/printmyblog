@@ -10,3 +10,21 @@
     overflow-y:auto;
 
 }
+.pmb-draggable-area{
+    min-height:200px;
+    padding:5px;
+    border:1px solid gray;
+}
+
+.pmb-grabbable{
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+.pmb-grabbable:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
