@@ -269,6 +269,9 @@ https://www.youtube.com/watch?v=mWD8kDrhWMs
 
 == Changelog ==
 
+= 2.7.3 July 14, 2020 =
+* Fix issue with Restrict Content Pro and printing posts as less-privileged users
+
 = 2.7.2 July 9, 2020 =
 * Add CSS class "post-content" in addition to "entry-content" which improves the look in some themes like Rowling 1.x
 * Wait 30 seconds before assuming print page isn't loading instead of only 10
