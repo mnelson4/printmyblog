@@ -53,6 +53,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 	this.order = pmb_instance_vars.order;
 	this.working = false;
 	this.shortcodes = pmb_instance_vars.shortcodes;
+	this.can_view_sensitive_data = null;
     /**
      * Initializes variables and begins fetching taxonomies, then gets started fetching posts/pages.
      * @function
@@ -66,22 +67,33 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         this.print_ready = jQuery(this.print_ready_selector);
         this.loading_content = jQuery(this.loading_content_selector);
 
-        var alltaxonomiesCollection = new wp.api.collections.Taxonomies();
-        alltaxonomiesCollection.fetch(
-          {
-            data: this.getCollectionQueryData(),
-          }
-        ).then(
-            (taxonomies) => {
-                this.working = true;
-                this.taxonomies = taxonomies;
-                // ok we have everything we need to start. So let's get it started!
-                this.beginLoading();
-            },
-            (jqxhr,textStatus,errorThrown) => {
-                this.stopAndShowError(errorThrown);
-            });
+        this.preloadTaxonomies();
     };
+    this.preloadTaxonomies = function() {
+			var alltaxonomiesCollection = new wp.api.collections.Taxonomies();
+			alltaxonomiesCollection.fetch(
+				{
+					data: this.getCollectionQueryData(),
+				}
+			).then(
+				(taxonomies) => {
+					this.working = true;
+					this.taxonomies = taxonomies;
+					// ok we have everything we need to start. So let's get it started!
+					this.beginLoading();
+				},
+				(jqxhr,textStatus,errorThrown) => {
+					if(errorThrown==='Forbidden'){
+						// They might be logged-in but not have permission to
+						// edit the post. So try again but in read context.
+						this.can_view_sensitive_data = false;
+						this.preloadTaxonomies();
+					} else {
+						this.stopAndShowError(errorThrown);
+          }
+
+				});
+    }
 
     this.getCollection = function() {
         if(this.post_type === 'post') {
@@ -140,7 +152,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 	};
 
 	this.canGetSensitiveData = function() {
-	    return this.isUserLoggedIn && ! this.proxy_for;
+	    if(this.can_view_sensitive_data === null){
+	        this.can_view_sensitive_data = this.isUserLoggedIn && ! this.proxy_for;
+      }
+      return this.can_view_sensitive_data;
     };
 
 
