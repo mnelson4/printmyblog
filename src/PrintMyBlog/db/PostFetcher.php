@@ -24,10 +24,14 @@ class PostFetcher
      */
     public function fetchPostOptionssForProject(){
         global $wpdb;
+        $in_search_post_types = get_post_types( array( 'exclude_from_search' => false ) );
+        unset($in_search_post_types['attachment']);
+        $post_types = array_map( 'esc_sql', $in_search_post_types );
+
         return $wpdb->get_results(
             'SELECT ID, post_title FROM '
             . $wpdb->posts
-            . ' WHERE post_type NOT IN (\'auto-draft\')'
+            . ' WHERE post_type IN (\'' . implode('\',\'',$post_types) . '\')'
         );
     }
 }
