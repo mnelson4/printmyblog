@@ -199,12 +199,22 @@ This is often done by a security plugin.
 * Don't use "Disable REST API" plugins
 * "All in One WP Security" has a setting called "Disallow Unuahtorized REST API requests". Disable it.
 * Wordfence has a setting on their "All Options" page, under "Brute Force Proection", called "Prevent discovery of usernames through ‘/?author=N’ scans, the oEmbed API, and the WordPress REST API". [Disable it.](https://drive.google.com/file/d/1K3-2BjNSWQBUi1uPxq_l2gCj4xXZ44MD/view)
-
+* iThemes security has a setting under "WordPress Tweaks" called "REST API". [Switch it to "Default Access"](https://drive.google.com/file/d/1jvujNmQuMMUDWls1LNndHM8pmpP53Ktt/view) if you want to let site visitors print your blog.
 
 = How do I remove post content from the printout? =
 
 There may be text, images, and other stuff that looks great when viewed from a screen, but doesn't make sense to have in the printout. Eg, related posts, share buttons, etc.
 To remove them from printouts, [add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-screen-only".
+
+If you're handy writing CSS, add some additional CSS to your theme that uses the "pmb-print-page" class which is added to the `body` tag of the print page.
+
+For example, if you want to hide all divs with CSS class "my-video" in printouts, but not on the regular website, add the following CSS to your theme:
+
+`
+.pmb-print-page div.my-video{
+    display:none;
+}
+`
 
 Also, if it's content automatically added by a plugin or theme, please let us know in the support forum, and we can hide that content in the next release of Print My Blog.
 
@@ -243,6 +253,10 @@ You can add print buttons to all posts and/or pages from the WordPress admin das
 If you don't want to show them on certain posts or pages, add the custom field named "pmb_buttons" to them with the value "hide".
 Alternatively, if you only want to show the button on specific posts or pages, add the custom field "pmb_buttons" to those posts or pages with the value "show".
 
+https://www.youtube.com/watch?v=Ehep6GO5J6c
+
+https://www.youtube.com/watch?v=mWD8kDrhWMs
+
 == Screenshots ==
 
 1. Print My Blog removes junk that doesn’t belong in a printout— like ink-guzzling logos, menus, search-bars, sidebars, footer widgets, etc.
@@ -255,8 +269,9 @@ Alternatively, if you only want to show the button on specific posts or pages, a
 
 == Changelog ==
 
-= 2.7.2 July 8, 2020 =
-* Add CSS class "post-content" which improves the look in some themes like Rowling
+= 2.7.2 July 9, 2020 =
+* Add CSS class "post-content" in addition to "entry-content" which improves the look in some themes like Rowling 1.x
+* Wait 30 seconds before assuming print page isn't loading instead of only 10
 
 = 2.7.1 July 3, 2020 =
 * Fix a warning if print settings erroneously set

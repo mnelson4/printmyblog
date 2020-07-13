@@ -867,7 +867,7 @@ jQuery(document).ready(function () {
 			alert(pmb_print_data.i18n.init_error);
 		}
 	},
-	10000);
+	30000);
     wp.api.loadPromise.done( function() {
         setTimeout(
             function(){
