@@ -57,6 +57,9 @@ class PmbAdmin extends BaseController
         add_action('admin_menu', array($this, 'addToMenu'));
         add_filter('plugin_action_links_' . PMB_BASENAME, array($this, 'pluginPageLinks'));
         add_action('admin_enqueue_scripts', [$this,'enqueueScripts']);
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            add_action('admin_init', [$this, 'checkFormSubmission']);
+        }
     }
 
     /**
@@ -287,8 +290,20 @@ class PmbAdmin extends BaseController
         }
         if($action === 'edit'){
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                $this->saveProject();
-                wp_redirect('');
+                $project_id = $this->saveProject();
+                if($_POST['pmb-save'] === 'pdf'){
+                    $url = add_query_arg(
+                        [
+                            PMB_PRINTPAGE_SLUG => 2,
+                            'project' => $project_id
+                        ],
+                        site_url()
+                    );
+                    wp_redirect($url);
+                    exit;
+                } else {
+                    wp_redirect('');
+                }
             }
             $post_options = $this->post_fetcher->fetchPostOptionssForProject();
             $project = get_post($_GET['ID']);
@@ -313,6 +328,7 @@ class PmbAdmin extends BaseController
 
     /**
      * Saves the project's name and parts etc.
+     * @return int project ID
      */
     protected function saveProject()
     {
@@ -334,5 +350,33 @@ class PmbAdmin extends BaseController
         $parts = json_decode($parts_string);
         $this->part_fetcher->clearPartsFor($project_id);
         $this->part_fetcher->setPartsFor($project_id, $parts);
+        return $project_id;
+    }
+
+
+    /**
+     * Checks if a form was submitted, in which case we'd want to redirect.
+     * @since 3.0
+     *
+     */
+    public function checkFormSubmission()
+    {
+        $action = isset($_GET['action']) ? $_GET['action'] : null;
+        if($action === 'edit'){
+            $project_id = $this->saveProject();
+            if($_POST['pmb-save'] === 'pdf'){
+                $url = add_query_arg(
+                    [
+                        PMB_PRINTPAGE_SLUG => 3,
+                        'project' => $project_id
+                    ],
+                    site_url()
+                );
+                wp_redirect($url);
+                exit;
+            } else {
+                wp_redirect('');
+            }
+        }
     }
 }

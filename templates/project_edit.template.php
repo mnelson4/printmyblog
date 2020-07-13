@@ -30,7 +30,8 @@
             </div>
         </div>
         <?php wp_nonce_field( 'pmb-project-edit' );?>
-        <button class="button-primary button" id="pmb-save"><?php esc_html_e('Save', 'print-my-blog'); ?></button>
+        <button class="button-primary button" id="pmb-save" name="pmb-save" value="save"><?php esc_html_e('Save', 'print-my-blog'); ?></button>
+        <button class="button-primary button" id="pmb-save" name="pmb-save" value="pdf"><?php esc_html_e('Generate PDF', 'print-my-blog'); ?></button>
     </form>
 
 
