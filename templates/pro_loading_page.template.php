@@ -70,8 +70,6 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
             <h1 id='pmb-in-progress-h1' class="pmb-waiting-h1"><?php _e('Initializing', 'print-my-blog'); ?></h1>
         </div>
         <div class="pmb-print-ready pmb-print-instructions">
-            DOWNLOAD!
-            ?>
         </div>
         <div class="pmb-posts-placeholder pmb-extra-content">
             <div class="pmb-spinner-container">
@@ -83,7 +81,6 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
 </div>
 
 <div class="pmb-posts site">
-    <div class="pmb-preview-note"><?php esc_html_e('Use your browser’s "print preview" for the best preview.', 'print-my-blog'); ?></div>
     <div class="pmb-posts-header">
         <div class="pmb-posts-body">
         </div>
