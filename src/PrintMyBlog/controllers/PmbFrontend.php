@@ -109,7 +109,7 @@ class PmbFrontend extends BaseController
             $html .= '</div>';
             $add_to_top = apply_filters(
                 '\PrintMyBlog\controllers\PmbFrontend->addPrintButton $add_to_top',
-                true,
+                $pmb_print_settings->showButtonsAbove(),
                 $post
             );
             if ($add_to_top) {

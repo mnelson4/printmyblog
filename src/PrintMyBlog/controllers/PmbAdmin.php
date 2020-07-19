@@ -95,6 +95,7 @@ class PmbAdmin extends BaseController
             } else {
                 $settings->setShowButtons(isset($_POST['show_buttons']));
                 $settings->setShowButtonsPages(isset($_POST['show_buttons_pages']));
+                $settings->setPlaceAbove($_POST['place_above']);
                 foreach ($settings->formatSlugs() as $slug) {
                     if (isset($_POST['format'][$slug])) {
                         $active = true;
