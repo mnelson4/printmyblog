@@ -40,7 +40,6 @@ use PrintMyBlog\domain\FrontendPrintSettings;
         <details class="pmb-details">
             <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('Customize Buttons', 'print-my-blog'); ?>
             </summary>
-            <h2><?php esc_html_e('Button Placement', 'print-my-blog');?></h2>
             <table class="form-table">
                 <tbody>
                 <tr>
@@ -53,6 +52,9 @@ use PrintMyBlog\domain\FrontendPrintSettings;
                             <option value="0" <?php echo ! $settings->showButtonsAbove() ? 'selected="selected"' : '';?>><?php esc_html_e('Below Content', 'print-my-blog');?></option>
                         </select>
                     </td>
+                </tr>
+                </tbody>
+            </table>
             <h2><?php esc_html_e('Print Formats', 'print-my-blog');?></h2>
             <?php foreach($settings->formats() as $slug => $format){ ?>
             <table class="form-table">
