@@ -83,7 +83,7 @@ class FrontendPrintSettings
         $defaults =  [
             'show_buttons' => false,
             'show_buttons_pages' => false,
-	        'place_above_content' => true
+	        'place_above' => true
         ];
         foreach ($this->formats as $slug => $format) {
             $defaults[$slug] = array(
