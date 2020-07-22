@@ -269,6 +269,9 @@ https://www.youtube.com/watch?v=mWD8kDrhWMs
 
 == Changelog ==
 
+= 2.8.1 July 24, 2020 =
+* Fixed removing images from printouts
+
 = 2.8.0 July 20, 2020 =
 * Add setting for placing print buttons below post content
 * Fix issue with Restrict Content Pro and printing posts as less-privileged users
