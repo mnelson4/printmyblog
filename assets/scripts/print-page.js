@@ -466,7 +466,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         });
         images_with_figures.addClass('pmb-image');
         if(this.image_size === 0){
-            non_emojis.remove();
+            jQuery('.pmb-posts img:not(.emoji)').remove();
             wp_block_galleries.remove();
         } else{
             non_emojis.wrap('<div class="pmb-image"></div>');
