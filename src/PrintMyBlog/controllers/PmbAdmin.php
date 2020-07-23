@@ -322,6 +322,12 @@ class PmbAdmin extends BaseController
         check_admin_referer('pmb-project-edit');
         if(isset($_GET['ID'])) {
             $project_id = $_GET['ID'];
+            wp_update_post(
+            	[
+            		'ID' => $project_id,
+            	    'post_title' => $_POST['pmb-project-title']
+	            ]
+            );
         } else {
             $project_id = wp_insert_post(
                 [
