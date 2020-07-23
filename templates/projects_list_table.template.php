@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h1><?php esc_html_e('Print My Blog - Projects', 'event_espresso'); ?></h1>
+    <h1 class="wp-heading-inline"><?php esc_html_e('Print My Blog - Projects', 'event_espresso'); ?></h1> <a href="<?php echo $add_new_url;?>" class="page-title-action">Add New</a>
 
     <div id="poststuff">
         <div id="post-body" class="metabox-holder columns-2">

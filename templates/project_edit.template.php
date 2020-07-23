@@ -10,7 +10,7 @@
     <form id="pmb-project-form" method="POST" action="<?php echo $form_url;?>">
         <div id="pmb-project-main" class="pmb-project-main form-group">
             <label for="pmb-project-title"><?php esc_html_e('Name', 'event_espresso'); ?></label>
-            <input type="text" class="form-control" name="pmb-project-name" value="<?php echo esc_attr($project->post_title);?>">
+            <input type="text" class="form-control" name="pmb-project-title" value="<?php echo esc_attr($project->post_title);?>">
         </div>
         <div id="pmb-project-layout" class="pmb-project-layout">
             <div class="pmb-project-layout-inner">
