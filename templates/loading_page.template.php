@@ -11,9 +11,6 @@
  * @since 1.0
  * @version 1.0
  */
-if(apply_filters('pmb-print-page-treat-as-single', true)){
-    $wp_query->is_home = false;$wp_query->is_single = true;
-}
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
@@ -24,7 +21,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
     <?php wp_head(); ?>
 </head>
 
-<body class="<?php echo str_replace('has-sidebar', '', implode(' ',get_body_class('pmb-print-page pmb-format-' . $pmb_format))); ?>">
+<body class="<?php get_body_class(); ?>">
 <!-- Print My Blog Version <?php echo PMB_VERSION;?>-->
 <div class="pmb-waiting-message-fullpage pmb-extra-content">
     <div class="pmb-waiting-message-outer-container">

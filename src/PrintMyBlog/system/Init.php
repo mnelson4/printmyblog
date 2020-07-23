@@ -10,7 +10,7 @@ use PrintMyBlog\controllers\PmbCommon;
 use PrintMyBlog\controllers\PmbFrontend;
 use PrintMyBlog\controllers\PmbGutenbergBlock;
 use PrintMyBlog\controllers\PmbPrintPage;
-use PrintMyBlog\controllers\ProLoadingPage;
+use PrintMyBlog\controllers\LoadingPage;
 use PrintMyBlog\domain\ProNotification;
 use Twine\admin\news\DashboardNews;
 use Twine\system\RequestType;
@@ -107,7 +107,7 @@ class Init
         } else {
             (new PmbFrontend())->setHooks();
             (new PmbPrintPage())->setHooks();
-            (new ProLoadingPage())->setHooks();
+            (new LoadingPage())->setHooks();
         }
 
 

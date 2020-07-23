@@ -14,7 +14,7 @@ use Twine\controllers\BaseController;
  * @since          $VID:$
  *
  */
-class ProLoadingPage extends BaseController
+class LoadingPage extends BaseController
 {
 
     /**
@@ -50,7 +50,7 @@ class ProLoadingPage extends BaseController
                 100
             );
 
-            return PMB_TEMPLATES_DIR . 'pro_loading_page.template.php';
+            return PMB_TEMPLATES_DIR . 'loading_page.template.php';
         }
         return $template;
     }
@@ -59,15 +59,15 @@ class ProLoadingPage extends BaseController
     {
         wp_enqueue_script(
             'pmb_pro_loading_page',
-            PMB_ASSETS_URL . 'scripts/pro-loading-page.js',
+            PMB_ASSETS_URL . 'scripts/loading-page.js',
             array('jquery',),
-            filemtime(PMB_ASSETS_DIR . 'scripts/pro-loading-page.js')
+            filemtime(PMB_ASSETS_DIR . 'scripts/loading-page.js')
         );
         wp_enqueue_style(
             'pmb_pro_loading_page',
-            PMB_ASSETS_URL . 'styles/pro-loading-page.css',
+            PMB_ASSETS_URL . 'styles/loading-page.css',
             array(),
-            filemtime(PMB_ASSETS_DIR . 'styles/pro-loading-page.css')
+            filemtime(PMB_ASSETS_DIR . 'styles/loading-page.css')
         );
 
         $data = [

@@ -69,3 +69,7 @@ won't switch to a pointer when they hover over it; and it won't be centered anym
 .pmb-help a:hover{
     color:blue;
 }
+
+.pmb-print-ready{
+    display:none;
+}
