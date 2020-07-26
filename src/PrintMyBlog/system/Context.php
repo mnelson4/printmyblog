@@ -24,10 +24,7 @@ class Context extends BaseContext
     protected function setDependencies(){
         $this->deps = [
             'PrintMyBlog\system\Init' => [
-                'PrintMyBlog\system\Activation' => self::REUSE,
-                'Twine\system\VersionHistory' => self::REUSE,
-                'Twine\system\RequestType' => self::REUSE,
-                'PrintMyBlog\system\CustomPostTypes' => self::REUSE
+                'PrintMyBlog\system\Context' => self::REUSE
             ],
             'PrintMyBlog\system\Activation' => [
                 'Twine\system\RequestType' => self::REUSE,
@@ -46,7 +43,10 @@ class Context extends BaseContext
             'PrintMyBlog\controllers\PmbAdmin' => [
                 'PrintMyBlog\db\PostFetcher' => self::REUSE,
                 'PrintMyBlog\db\PartFetcher' => self::REUSE,
-            ]
+            ],
+	        'PrintMyBlog\controllers\PmbAjax' => [
+	        	'PrintMyBlog\orm\ProjectManager' => self::REUSE
+	        ]
         ];
     }
 

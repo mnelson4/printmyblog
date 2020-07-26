@@ -44,7 +44,7 @@ class PmbPrintPage extends BaseController
     public function templateRedirect($template)
     {
 
-        if (isset($_GET[PMB_PRINTPAGE_SLUG]) & $_GET[PMB_PRINTPAGE_SLUG] === '1') {
+        if (isset($_GET[PMB_PRINTPAGE_SLUG]) && $_GET[PMB_PRINTPAGE_SLUG] === '1') {
             try {
                 $site_info = new RestApiDetector($this->getFromRequest('site', ''));
             } catch (RestApiDetectorError $exception) {

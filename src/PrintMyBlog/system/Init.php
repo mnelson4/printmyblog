@@ -51,23 +51,16 @@ class Init
      */
     protected $cpt;
 
-
-    public function inject(
-        Activation $activation,
-        VersionHistory $version_history,
-        RequestType $request_type,
-        CustomPostTypes $cpt
-    ){
-        $this->activation = $activation;
-        $this->version_history = $version_history;
-        $this->request_type = $request_type;
-        $this->cpt = $cpt;
-    }
+	/**
+	 * @var Context
+	 */
+	protected $context;
 
     /**
      * Sets up hooks that will initialize the code that will run PMB.
      */
     public function setHooks(){
+	    $this->context = Context::instance();
         add_action('init', array($this, 'earlyInit'), 5);
         add_action('init', array($this, 'init'));
         $compatibility_mods_loader = new DetectAndActivate();
@@ -91,16 +84,20 @@ class Init
      */
     public function init()
     {
-        $this->request_type->getRequestType();
-        $this->version_history->maybeRecordVersionChange();
-        $this->cpt->register();
-        $this->activation->detectActivation();
+    	$request_type = $this->context->reuse('Twine\system\RequestType');
+        $request_type->getRequestType();
+        $version_history = $this->context->reuse('Twine\system\VersionHistory');
+        $version_history->maybeRecordVersionChange();
+        $cpt = $this->context->reuse('PrintMyBlog\system\CustomPostTypes');
+        $cpt->register();
+        $activation = $this->context->reuse('PrintMyBlog\system\Activation');
+        $activation->detectActivation();
         $this->setUrls();
         if (defined('DOING_AJAX') && DOING_AJAX) {
-            (new PmbAjax())->setHooks();
+        	$ajax = $this->context->reuse('PrintMyBlog\controllers\PmbAJax');
+            $ajax->setHooks();
         } elseif (is_admin()) {
-            $context = \PrintMyBlog\system\Context::instance();
-            $admin = $context->reuse('PrintMyBlog\controllers\PmbAdmin');
+            $admin = $this->context->reuse('PrintMyBlog\controllers\PmbAdmin');
             $admin->setHooks();
             $this->initDashboardNews();
             (new ProNotification())->setHooks();
