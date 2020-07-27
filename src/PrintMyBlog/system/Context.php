@@ -46,6 +46,9 @@ class Context extends BaseContext
             ],
 	        'PrintMyBlog\controllers\PmbAjax' => [
 	        	'PrintMyBlog\orm\ProjectManager' => self::REUSE
+	        ],
+	        'PrintMyBlog\orm\Project' => [
+	        	'PrintMyBlog\db\PartFetcher' => self::REUSE
 	        ]
         ];
     }

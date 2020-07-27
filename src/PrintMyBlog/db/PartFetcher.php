@@ -16,9 +16,15 @@ use WP_Query;
  */
 class PartFetcher
 {
+	/**
+	 * Gets the database rows (stdClasses) from pmb_project_parts for this project in order
+	 * @param $project_id
+	 *
+	 * @return stdClass[]
+	 */
     public function fetchPartsFor($project_id){
         global $wpdb;
-        $parts = $wpdb->get_results(
+        return $wpdb->get_results(
             $wpdb->prepare(
                 'SELECT posts.ID, posts.post_title FROM ' . $wpdb->prefix . 'pmb_project_parts parts
                 INNER JOIN
@@ -28,7 +34,25 @@ class PartFetcher
                 $project_id
             )
         );
-        return $parts;
+    }
+
+	/**
+	 * Gets the IDs of the posts that comprise this project. Unordered for efficiency.
+	 * @param $project_id
+	 *
+	 * @return int[]
+	 */
+    public function fetchPartPostIdsUnordered($project_id)
+    {
+	    global $wpdb;
+	    return $wpdb->get_col(
+		    $wpdb->prepare(
+			    'SELECT post_id FROM ' . $wpdb->prefix . 'pmb_project_parts parts
+                  WHERE project_id=%d',
+			    $project_id
+		    ),
+		    'ID'
+	    );
     }
 
     public function clearPartsFor($project_id){

@@ -84,50 +84,26 @@ class PmbAjax extends BaseController
     public function handleLoadStep()
     {
     	// Find project by ID.
-	    $project = get_post($_GET['project_id']);
+	    $project = $this->project_manager->getById($_GET['project_id']);
 
 	    // Find if it's already been generated, if so return that.
-	    if(get_post_meta($project->ID,'_pmb_generated')){
-		    $upload_dir_info = wp_upload_dir();
-		    $project_code = get_post_meta($project->ID, '_pmb_project_code');
-	    	$response = [
-	    	    'html_file' => $upload_dir_info['url'] . 'pmb/' . $project_code . '/' . $project->post_name . '.html'
-		    ];
-	    }
-	    // If not, generate it...
-		$part_fetcher = new PartFetcher();
-	    $parts = $part_fetcher->fetchPartsFor($project->ID);
-	    $part_ids = array_map(
-	    	$parts,
-		    function($part){
-	    		return $part->post_id
+	    if(! $project->generated()){
+		    $done = $project->generateHtmlFile();
+		    if( $done ) {
+			    $url = $project->generatedHtmlFileUrl();
+		    } else {
+		    	$url = null;
 		    }
-	    );
-	    // Fetch some of its posts at the same time...
-		$query = new WP_Query(
-			[
-				'post__in' => $part_ids,
-				'showposts' => 10
-			]
-		);
-		$posts = $query->get_posts();
+	    } else {
+		    $url = $project->generatedHtmlFileUrl();
+		}
 
-	    // Dump them into the page, and remember what scripts got used.
-	    $fhandle = fopen($upload_dir_info['path'],'a');
-		foreach($posts as $post){
-			fwrite($fhandle, $post->post_content);
-		}
-	    // If that's all the posts done, add the header and footer, using the scripts we enqueued.
-		if($part_fetcher->countParts($project->ID) >= $parts){
-			update_post_meta($project->ID, '_pmb_generated',true);
-			$response = [
-				'html_file' => $upload_dir_info['url'] . 'pmb/' . $project_code . '/' . $project->post_name . '.html'
-			];
-		}
 	    // If we're all done, return the file.
 	    $response = [
-	    	'done' => count($parts),
-		    'todo' => $part_fetcher->countParts($project->ID)
+	    	'url' => $url
 	    ];
+
+		wp_send_json($response);
+		exit;
     }
 }

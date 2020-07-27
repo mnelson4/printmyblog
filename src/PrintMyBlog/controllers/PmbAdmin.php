@@ -332,7 +332,6 @@ class PmbAdmin extends BaseController
             $project_id = wp_insert_post(
                 [
                     'post_title' => stripslashes($_POST['pmb-project-title']),
-	                'post_name' => wp_generate_password(20),
 	                'post_content' => '',
 	                'post_type' => CustomPostTypes::PROJECTS,
 	                'post_status' => 'publish'
