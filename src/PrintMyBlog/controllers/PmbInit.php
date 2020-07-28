@@ -57,6 +57,7 @@ class PmbInit extends BaseController
         } else {
             (new PmbFrontend())->setHooks();
             (new PmbPrintPage())->setHooks();
+	        (new Shortcode())->setHooks();
         }
 
 
