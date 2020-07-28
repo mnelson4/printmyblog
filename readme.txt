@@ -271,6 +271,7 @@ https://www.youtube.com/watch?v=mWD8kDrhWMs
 
 = 2.8.1 July 24, 2020 =
 * Fixed removing images from printouts
+* In Twentyseventeen theme, add more space between featured images and post content
 
 = 2.8.0 July 20, 2020 =
 * Add setting for placing print buttons below post content
