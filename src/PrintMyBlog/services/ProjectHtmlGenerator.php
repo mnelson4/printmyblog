@@ -5,6 +5,8 @@ namespace PrintMyBlog\services;
 
 use PrintMyBlog\orm\Project;
 use Twine\services\filesystem\FileWriter;
+use WP_Post;
+use WP_Query;
 
 class ProjectHtmlGenerator {
 	/**

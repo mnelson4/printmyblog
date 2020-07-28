@@ -1,6 +1,12 @@
 <?php
 namespace Twine\services\filesystem;
 
+/**
+ * Class FileWriter
+ * Give it a filepath, and it can make sure that file/folder exists.
+ *
+ * @package Twine\services\filesystem
+ */
 class FileWriter {
 
 	/**
