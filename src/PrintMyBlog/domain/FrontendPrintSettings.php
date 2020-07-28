@@ -83,7 +83,7 @@ class FrontendPrintSettings
         $defaults =  [
             'show_buttons' => false,
             'show_buttons_pages' => false,
-	        'place_above' => true
+            'place_above' => true
         ];
         foreach ($this->formats as $slug => $format) {
             $defaults[$slug] = array(
@@ -254,25 +254,24 @@ class FrontendPrintSettings
         return (bool)$this->settings['show_buttons_pages'];
     }
 
-	/**
-	 * Sets whether buttons should appear above the content or below.
-	 *
-	 * @param bool $new_value
-	 */
+    /**
+     * Sets whether buttons should appear above the content or below.
+     *
+     * @param bool $new_value
+     */
     public function setPlaceAbove($new_value)
     {
-    	$this->settings['place_above'] = (bool)$new_value;
-
+        $this->settings['place_above'] = (bool)$new_value;
     }
 
-	/**
-	 * Whether buttons should appear above the content, or below.
-	 *
-	 * @return bool
-	 */
+    /**
+     * Whether buttons should appear above the content, or below.
+     *
+     * @return bool
+     */
     public function showButtonsAbove()
     {
-    	return (bool)$this->settings['place_above'];
+        return (bool)$this->settings['place_above'];
     }
 
     /**

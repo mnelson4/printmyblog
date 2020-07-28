@@ -30,16 +30,16 @@ class PmbFrontend extends BaseController
     public function addPrintButton($content)
     {
         global $post, $pmb_print_settings;
-        if(! $post instanceof WP_Post || ! in_array($post->post_type,['post','page'])){
+        if (! $post instanceof WP_Post || ! in_array($post->post_type, ['post','page'])) {
             return $content;
         }
         // We can use this filter a lot, so just load the print settings object once.
-        if(! $pmb_print_settings instanceof FrontendPrintSettings){
+        if (! $pmb_print_settings instanceof FrontendPrintSettings) {
             $pmb_print_settings = new FrontendPrintSettings(new PrintOptions());
             $pmb_print_settings->load();
         }
 
-        $postmeta_override = get_post_meta($post->ID, 'pmb_buttons',true);
+        $postmeta_override = get_post_meta($post->ID, 'pmb_buttons', true);
         $active_post_types = $pmb_print_settings->activePostTypes();
         if (
             /**
@@ -118,7 +118,7 @@ class PmbFrontend extends BaseController
                 return $content . $html;
             }
         }
-    return $content;
+        return $content;
     }
 
     /**
