@@ -7,16 +7,22 @@ namespace PrintMyBlog\controllers;
 use PrintMyBlog\domain\PrintButtons;
 use Twine\controllers\BaseController;
 
-class Shortcode extends BaseController {
+/**
+ * Class Shortcodes
+ *
+ * Adds and executes shortcodes.
+ * @package PrintMyBlog\controllers
+ */
+class Shortcodes extends BaseController {
 
 	public function setHooks() {
 		add_shortcode(
-			'print_my_blog',
-			[$this,'do_shortcode']
+			'pmb_print_buttons',
+			[$this,'print_buttons_shortcode']
 		);
 	}
 
-	public function do_shortcode($atts)
+	public function print_buttons_shortcode($atts)
 	{
 		$atts = shortcode_atts(
 			[

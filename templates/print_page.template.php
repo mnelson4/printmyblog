@@ -41,7 +41,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
             </span>
         </div>
         <?php if(is_user_logged_in()){?>
-            <div class="pmb-help">
+            <div class="pmb-help pmb-top">
             <span class="pmb-help-ask"><?php printf(
                 // translators: 1: a bunch of HTML for emoji buttons
                     __('What do you think? %1$s', 'print-my-blog'),
@@ -112,7 +112,6 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                                 <li><a href="https://addons.mozilla.org/en-US/firefox/addon/print-to-pdf-document/" target="_blank" title="<?php esc_html_e('opens in new tab', 'print-my-blog'); ?>"><?php esc_html_e('Download Print to PDF Browser Extension', 'print-my-blog'); ?></a></li>
                                 <li><?php esc_html_e('Click the extension’s button.', 'print-my-blog'); ?></li>
                             </ol>
-
                         </details>
                         <?php
                     } elseif($pmb_browser === 'chrome') {
@@ -155,6 +154,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                         <?php
                     }
                 }
+                ?><p class="pmb-help"><?php esc_html_e('Note: Google Chrome and Microsoft Edge are recommended for producing PDFs.', 'print-my-blog');?></_E></_E></_E></p><?php
             } elseif($pmb_format === 'html'){// HTML
                 ?>
                 <input type="submit" onclick="pmb_copy()" value="<?php esc_attr_e('Copy to Clipboard', 'print-my-blog'); ?>"/>
