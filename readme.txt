@@ -281,7 +281,7 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 
 == Changelog ==
 
-= 2.9.0 July 24, 2020 =
+= 2.9.0 July 30, 2020 =
 * Add [pmb_print_buttons] shortcode for adding print buttons anywhere to post body
 * Fixed removing images from printouts
 * In Twentyseventeen theme, add more space between featured images and post content
