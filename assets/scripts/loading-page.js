@@ -1,13 +1,30 @@
 // Ask the server if the print-page content
 function PmbProLoadingPage(pmb_instance_vars, translations) {
-	this.working = False;
+	this.working = false;
+	this.instance_vars = pmb_instance_vars;
+	this.translations = translations;
 
 	/**
 	 * Initializes variables and begins fetching taxonomies, then gets started fetching posts/pages.
 	 * @function
 	 */
 	this.initialize = function () {
-		alert('load PDF!');
+		this.checkHtmlPageStatus();
+	};
+
+	this.checkHtmlPageStatus = function() {
+		jQuery.post(
+			this.instance_vars.status_url,
+			[],
+			(response) => {
+				alert('success');
+			},
+			'json'
+		).fail( function(){
+				alert(this.translations.error);
+			}
+		);
+		this.working = true;
 	};
 
 	/**

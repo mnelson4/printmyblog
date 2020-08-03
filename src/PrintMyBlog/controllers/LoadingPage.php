@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\controllers;
 
+use Exception;
 use Twine\controllers\BaseController;
 
 /**
@@ -55,6 +56,14 @@ class LoadingPage extends BaseController
         return $template;
     }
 
+    protected function getProjectIdFromRequest()
+    {
+    	if(isset($_GET['project'])){
+    		return $_GET['project'];
+	    }
+    	throw new Exception(__('Bad URL. No project specified'), 'print-my-blog');
+    }
+
     public function enqueueScripts()
     {
         wp_enqueue_script(
@@ -71,6 +80,14 @@ class LoadingPage extends BaseController
         );
 
         $data = [
+        	'status_url' => add_query_arg(
+        		[
+			        'pmb_ajax' => true,
+			        'ID' => $this->getProjectIdFromRequest(),
+			        'pmb_loading_page' => 1
+		        ],
+		        admin_url( 'admin-ajax.php' )
+	        ),
         ];
         $init_error_message = esc_html__(
             'There seems to be an error initializing. Please verify you are using an up-to-date web browser.',
@@ -78,7 +95,7 @@ class LoadingPage extends BaseController
         );
         wp_localize_script(
             'pmb_pro_loading_page',
-            'pmb_pro_loading_data',
+            'pmb_load_data',
             array(
                 'i18n' => array(
                     'ready' => esc_html__('Print-Page Ready', 'print-my-blog'),
