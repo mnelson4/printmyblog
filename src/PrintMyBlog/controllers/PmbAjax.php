@@ -38,9 +38,16 @@ class PmbAjax extends BaseController
      */
     public function setHooks()
     {
-        $callback = [$this, 'handleFetchRestApiUrl'];
-        add_action('wp_ajax_pmb_fetch_rest_api_url', $callback);
-        add_action('wp_ajax_nopriv_pmb_fetch_rest_api_url', $callback);
+        $this->addUnauthenticatedCallback(
+        	'pmb_fetch_rest_api_url',
+	        'handleFetchRestApiUrl'
+        );
+    }
+
+    protected function addUnauthenticatedCallback($ajax_action, $method_name){
+	    $callback = [$this, $method_name];
+	    add_action('wp_ajax_' . $ajax_action, $callback);
+	    add_action('wp_ajax_nopriv_' . $ajax_action, $callback);
     }
 
 
