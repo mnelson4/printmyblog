@@ -50,14 +50,18 @@ class PartFetcher
 			    'SELECT post_id FROM ' . $wpdb->prefix . 'pmb_project_parts parts
                   WHERE project_id=%d',
 			    $project_id
-		    ),
-		    'ID'
+		    )
 	    );
     }
 
+	/**
+	 * @param $project_id
+	 *
+	 * @return int|false number of rows deleted, or false on error
+	 */
     public function clearPartsFor($project_id){
         global $wpdb;
-        $wpdb->delete(
+        return $wpdb->delete(
             $wpdb->prefix . 'pmb_project_parts',
             [
                 'project_id' => $project_id

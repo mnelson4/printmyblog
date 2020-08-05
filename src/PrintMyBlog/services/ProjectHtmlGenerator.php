@@ -88,4 +88,13 @@ class ProjectHtmlGenerator {
 			)
 		);
 	}
+
+	/**
+	 * Deletes the generated HTML file, if it exists.
+	 * @return bool
+	 */
+	public function deleteHtmlFile()
+	{
+		return $this->getFileWriter()->delete();
+	}
 }

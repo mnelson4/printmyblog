@@ -82,9 +82,8 @@ class LoadingPage extends BaseController
         $data = [
         	'status_url' => add_query_arg(
         		[
-			        'pmb_ajax' => true,
 			        'ID' => $this->getProjectIdFromRequest(),
-			        'pmb_loading_page' => 1
+			        'action' => 'pmb_project_status'
 		        ],
 		        admin_url( 'admin-ajax.php' )
 	        ),

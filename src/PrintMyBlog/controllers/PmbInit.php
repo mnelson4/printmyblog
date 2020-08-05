@@ -55,7 +55,7 @@ class PmbInit extends BaseController
     {
         $this->setUrls();
         if (defined('DOING_AJAX') && DOING_AJAX) {
-            (new PmbAjax())->setHooks();
+            (new Ajax())->setHooks();
         } elseif (is_admin()) {
             (new PmbAdmin())->setHooks();
             $this->initDashboardNews();

@@ -40,13 +40,26 @@ class FileWriter {
 		$this->ensureFolderExists();
 		fwrite($this->getFileHandle(), $content);
 	}
+
+	/**
+	 * Deletes the file.
+	 *
+	 * @return bool success. If the file didn't exist anyways, also returns true.
+	 */
+	public function delete()
+	{
+		if($this->fileExists()){
+			return unlink($this->file_path);
+		}
+		return true;
+	}
 	/**
 	 * @return resource
 	 */
 	protected function getFileHandle()
 	{
 		if( ! $this->file_handle){
-			$this->file_handle = fopen($this->project->generatedHtmlFilePath(), 'a+');
+			$this->file_handle = fopen($this->file_path, 'a+');
 		}
 		return $this->file_handle;
 	}
@@ -116,5 +129,13 @@ class FileWriter {
 	public function folderExists()
 	{
 		return is_dir($this->getFolderPath());
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function fileExists()
+	{
+		return is_file($this->getFilePath());
 	}
 }

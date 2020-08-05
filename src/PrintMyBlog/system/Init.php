@@ -5,7 +5,7 @@ namespace PrintMyBlog\system;
 use PrintMyBlog\compatibility\DetectAndActivate;
 
 use PrintMyBlog\controllers\PmbAdmin;
-use PrintMyBlog\controllers\PmbAjax;
+use PrintMyBlog\controllers\Ajax;
 use PrintMyBlog\controllers\PmbCommon;
 use PrintMyBlog\controllers\PmbFrontend;
 use PrintMyBlog\controllers\PmbGutenbergBlock;
@@ -94,7 +94,7 @@ class Init
         $activation->detectActivation();
         $this->setUrls();
         if (defined('DOING_AJAX') && DOING_AJAX) {
-        	$ajax = $this->context->reuse('PrintMyBlog\controllers\PmbAJax');
+        	$ajax = $this->context->reuse( 'PrintMyBlog\controllers\Ajax' );
             $ajax->setHooks();
         } elseif (is_admin()) {
             $admin = $this->context->reuse('PrintMyBlog\controllers\PmbAdmin');

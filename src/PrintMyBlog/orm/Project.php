@@ -5,6 +5,7 @@ namespace PrintMyBlog\orm;
 
 use PrintMyBlog\db\PartFetcher;
 use PrintMyBlog\services\ProjectHtmlGenerator;
+use WP_Post;
 use WP_Query;
 
 /**
@@ -28,6 +29,11 @@ class Project {
 	 * @var PartFetcher
 	 */
 	protected $part_fetcher;
+
+	/**
+	 * @var ProjectHtmlGenerator
+	 */
+	protected $html_generator;
 
 	public function __construct(WP_Post $post){
 		$this->wp_post = $post;
@@ -63,7 +69,17 @@ class Project {
 	 */
 	public function code()
 	{
-		return (string)get_post_meta($this->getWpPost()->ID, self::POSTMETA_CODE);
+		return (string)get_post_meta($this->getWpPost()->ID, self::POSTMETA_CODE, true);
+	}
+
+	/**
+	 * Sets the project's code in postmeta.
+	 *
+	 * @return bool
+	 */
+	public function setCode()
+	{
+		return (bool)add_post_meta($this->getWpPost()->ID, self::POSTMETA_CODE, wp_generate_password(20,false));
 	}
 
 	/**
@@ -72,7 +88,7 @@ class Project {
 	public function generatedHtmlFileUrl()
 	{
 		$upload_dir_info = wp_upload_dir();
-		return $upload_dir_info['url'] . '/pmb/generated/' . $this->code() . '/' . $this->getWpPost()->post_name . '.html';
+		return $upload_dir_info['baseurl'] . '/pmb/generated/' . $this->code() . '/' . $this->getWpPost()->post_name . '.html';
 	}
 
 	public function generatedHtmlFilePath()
@@ -81,7 +97,7 @@ class Project {
 		return str_replace(
 			'..',
 			'',
-			$upload_dir_info['path'] . '/pmb/generated/' . $this->code() . '/' . $this->getWpPost()->post_name . '.html'
+			$upload_dir_info['basedir'] . '/pmb/generated/' . $this->code() . '/' . $this->getWpPost()->post_name . '.html'
 		);
 	}
 
@@ -90,8 +106,7 @@ class Project {
 	 */
 	public function generateHtmlFile()
 	{
-		$generator = new ProjectHtmlGenerator($this);
-		return $generator->generateHtmlFile();
+		return $this->getProjectHtmlGenerator()->generateHtmlFile();
 	}
 
 	/**
@@ -100,6 +115,34 @@ class Project {
 	 */
 	public function getPartPostIds()
 	{
-		$this->part_fetcher->fetchPartPostIdsUnordered($this->getWpPost()->ID);
+		return $this->part_fetcher->fetchPartPostIdsUnordered($this->getWpPost()->ID);
+	}
+
+	/**
+	 * @return ProjectHtmlGenerator
+	 */
+	protected function getProjectHtmlGenerator()
+	{
+		if( ! $this->html_generator instanceof ProjectHtmlGenerator){
+			$this->html_generator = new ProjectHtmlGenerator($this);
+		}
+		return $this->html_generator;
+	}
+
+	/**
+	 *
+	 * return bool success
+	 */
+	public function delete()
+	{
+		$successes = $this->part_fetcher->clearPartsFor($this->getWpPost()->ID());
+		if( $successes === false){
+			return false;
+		}
+		$success = $this->getProjectHtmlGenerator()->deleteHtmlFile();
+		if( ! $success ){
+			return false;
+		}
+		return wp_delete_post($this->getWpPost()->ID);
 	}
 }

@@ -21,6 +21,6 @@
         }
     },
     "scripts": {
-        "release": "git archive HEAD --format=zip --output ../printmyblog.zip"
+        "release": "git archive HEAD --format=zip --output ../printmyblog.zip2"
     }
 }

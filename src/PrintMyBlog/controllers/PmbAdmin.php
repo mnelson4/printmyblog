@@ -7,6 +7,7 @@ use PrintMyBlog\db\PartFetcher;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
+use PrintMyBlog\orm\Project;
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
@@ -338,6 +339,8 @@ class PmbAdmin extends BaseController
                 ],
                 true
             );
+            $project_obj = new Project($project_id);
+            $project_obj->setCode();
             if(is_wp_error($project_id)){
                 wp_die($project_id->get_error_message());
             }

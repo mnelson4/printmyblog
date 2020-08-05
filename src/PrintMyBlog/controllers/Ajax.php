@@ -19,7 +19,7 @@ use WP_Query;
  * @since         1.0.0
  *
  */
-class PmbAjax extends BaseController
+class Ajax extends BaseController
 {
 	/**
 	 * @var ProjectManager
@@ -41,6 +41,10 @@ class PmbAjax extends BaseController
         $this->addUnauthenticatedCallback(
         	'pmb_fetch_rest_api_url',
 	        'handleFetchRestApiUrl'
+        );
+        $this->addUnauthenticatedCallback(
+        	'pmb_project_status',
+	        'handleProjectStatus'
         );
     }
 
@@ -73,25 +77,13 @@ class PmbAjax extends BaseController
         );
     }
 
-
-    /**
-     * Fetches posts based on request data for possible inclusion in a project. Echos JSON
-     * @since $VID:$
-     */
-    public function handleFetchPostOptionss(){
-        global $wpdb;
-        $results = $wpdb->get_results('SELECT * FROM ' . $wpdb->posts);
-        echo wp_json_encode($results);
-        exit;
-    }
-
 	/**
 	 * Proceeds with loading printing a project and returns a response indicating the status.
 	 */
-    public function handleLoadStep()
+    public function handleProjectStatus()
     {
     	// Find project by ID.
-	    $project = $this->project_manager->getById($_GET['project_id']);
+	    $project = $this->project_manager->getById($_GET['ID']);
 
 	    // Find if it's already been generated, if so return that.
 	    if(! $project->generated()){

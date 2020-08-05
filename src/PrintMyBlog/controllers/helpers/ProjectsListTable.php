@@ -1,5 +1,7 @@
 <?php
 namespace PrintMyBlog\controllers\helpers;
+use PrintMyBlog\orm\ProjectManager;
+use PrintMyBlog\system\Context;
 use PrintMyBlog\system\CustomPostTypes;
 use WP_List_Table;
 use WP_Post;
@@ -53,9 +55,11 @@ class ProjectsListTable extends WP_List_Table
         $total_items = self::record_count();
         $data = $this->get_records($per_page, $current_page);
         $this->set_pagination_args(
-            ['total_items' => $total_items, //WE have to calculate the total number of items
-             'per_page' => $per_page // WE have to determine how many items to show on a page
-            ]);
+            [
+            	'total_items' => $total_items, //WE have to calculate the total number of items
+                'per_page' => $per_page // WE have to determine how many items to show on a page
+            ]
+        );
         $this->items = $data;
     }
 
@@ -146,6 +150,13 @@ class ProjectsListTable extends WP_List_Table
         return $sortable_columns;
     }
 
+    protected function get_bulk_actions()
+    {
+    	return [
+    		'delete' => __('Delete')
+	    ];
+    }
+
     /**
      * Render the bulk edit checkbox
      * * @param WP_Post $post
@@ -176,26 +187,17 @@ class ProjectsListTable extends WP_List_Table
         );
     }
 
-    /**
-     * Returns an associative array containing the bulk action
-     * * @return array */
-    public function get_bulk_actions()
-    {
-        return [];
-        // $actions = ['bulk-delete' => 'Delete'];
-        // return $actions;
-    }
     public function process_bulk_action()
     {
         // Detect when a bulk action is being triggered...
         if ('delete' === $this->current_action()) {
             // In our file that handles the request, verify the nonce.
             $nonce = esc_attr($_REQUEST['_wpnonce']);
-            if (!wp_verify_nonce($nonce, 'bx_delete_records')) {
+            if (!wp_verify_nonce($nonce, 'delete')) {
                 die('The request has expired. Please refresh the previous page and try again.');
             }
             else {
-                $this->delete_records(absint($_GET['record']));
+                $this->delete_records($_GET['ID']);
                 $redirect = admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH);
                 wp_redirect($redirect);
                 exit;
@@ -219,14 +221,15 @@ class ProjectsListTable extends WP_List_Table
     }
     /**
      * Delete a record.
-     * * @param int $id customer ID
+     * * @param int[] $ids customer ID
      */
-    public function delete_records($id)
+    public function delete_records($ids)
     {
-        {
-            global $wpdb;
-            $wpdb->delete("custom_records", ['id' => $id], ['%d']);
-        }
+	    /**
+	     * @var $manager ProjectManager
+	     */
+        $manager = Context::instance()->reuse('PrintMyBlog\orm\ProjectManager');
+        $manager->deleteProjects($ids);
     }
 
     /**
