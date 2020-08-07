@@ -67,6 +67,13 @@ div.pmb-post-header{
 .pmb-image{
     page-break-inside:avoid;
 }
+.pmb-image img{
+    width: auto;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 .pmb-header{
     page-break-inside:avoid;
     page-break-after:avoid;
@@ -93,15 +100,17 @@ div.tiled-gallery{
 .pmb-waiting-h1{
     margin-top:1em;
 }
-.pmb-help{
+.pmb-top{
     position:absolute;
     top:0;
     right:0;
+    margin-top:5px;
+    margin-right:5px;
+}
+.pmb-help{
     line-height:1em;
     font-size:0.8em;
     color:gray;
-    margin-top:5px;
-    margin-right:5px;
 }
 .pmb-help a{
     color:lightblue;

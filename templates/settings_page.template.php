@@ -40,6 +40,21 @@ use PrintMyBlog\domain\FrontendPrintSettings;
         <details class="pmb-details">
             <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('Customize Buttons', 'print-my-blog'); ?>
             </summary>
+            <table class="form-table">
+                <tbody>
+                <tr>
+                    <th scope="row">
+                        <label for="pmb-place-above"><?php esc_html_e('Place Buttons', 'print-my-blog');?></label>
+                    </th>
+                    <td>
+                        <select name="place_above" id="pmb-place-above">
+                            <option value="1" <?php echo $settings->showButtonsAbove() ? 'selected="selected"' : '';?>><?php esc_html_e('Above Content', 'print-my-blog');?></option>
+                            <option value="0" <?php echo ! $settings->showButtonsAbove() ? 'selected="selected"' : '';?>><?php esc_html_e('Below Content', 'print-my-blog');?></option>
+                        </select>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
             <h2><?php esc_html_e('Print Formats', 'print-my-blog');?></h2>
             <?php foreach($settings->formats() as $slug => $format){ ?>
             <table class="form-table">
