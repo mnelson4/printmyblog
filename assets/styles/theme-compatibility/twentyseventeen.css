@@ -11,3 +11,6 @@ body.has-header-image .site-title, body.has-header-video .site-title, body.has-h
 .pmb-posts .single-featured-image-header{
     margin-bottom:2em;
 }
+.pmb-posts .byline{
+    display:block;
+}
