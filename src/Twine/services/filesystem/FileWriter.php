@@ -33,7 +33,7 @@ class FileWriter {
 	 */
 	public function __construct($filepath){
 		$this->file_path   = $this->standardizeFilepath($filepath);
-		$this->folder_path = rtrim($this->file_path,'/');
+		$this->folder_path = dirname($this->file_path);
 	}
 
 	public function append($content){

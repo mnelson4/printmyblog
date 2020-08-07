@@ -35,7 +35,15 @@ class Project {
 	 */
 	protected $html_generator;
 
-	public function __construct(WP_Post $post){
+	/**
+	 * Project constructor.
+	 *
+	 * @param WP_Post|int $post object or ID
+	 */
+	public function __construct($post){
+		if(is_int($post) || is_string($post)){
+			$post = get_post($post);
+		}
 		$this->wp_post = $post;
 	}
 

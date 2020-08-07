@@ -75,7 +75,7 @@ class ProjectHtmlGenerator {
 	protected function getFileWriter()
 	{
 		if(! $this->file_writer instanceof FileWriter){
-			$this->file_writer = new FileWriter($this->project->generatedHtmlFileUrl());
+			$this->file_writer = new FileWriter($this->project->generatedHtmlFilePath());
 		}
 		return $this->file_writer;
 	}
