@@ -110,11 +110,15 @@ class Project {
 	}
 
 	/**
-	 * @return bool success
+	 * @return bool complete
 	 */
 	public function generateHtmlFile()
 	{
-		return $this->getProjectHtmlGenerator()->generateHtmlFile();
+		$complete = $this->getProjectHtmlGenerator()->generateHtmlFile();
+		if($complete){
+			$this->setGenerated(true);
+		}
+		return $complete;
 	}
 
 	/**
