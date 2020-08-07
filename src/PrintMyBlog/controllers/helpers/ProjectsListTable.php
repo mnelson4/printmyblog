@@ -183,7 +183,7 @@ class ProjectsListTable extends WP_List_Table
                 ],
                 admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
             ),
-            $post->post_name
+            $post->post_title
         );
     }
 
