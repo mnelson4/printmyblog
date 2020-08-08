@@ -147,7 +147,7 @@ class Project {
 	 */
 	public function delete()
 	{
-		$successes = $this->part_fetcher->clearPartsFor($this->getWpPost()->ID());
+		$successes = $this->part_fetcher->clearPartsFor($this->getWpPost()->ID);
 		if( $successes === false){
 			return false;
 		}
@@ -156,5 +156,16 @@ class Project {
 			return false;
 		}
 		return wp_delete_post($this->getWpPost()->ID);
+	}
+
+	/**
+	 * Clears out the generated files. Useful in case the project has changed and so should be re-generated.
+	 * @return bool
+	 */
+	public function clearGeneratedFiles()
+	{
+		$this->setGenerated(false);
+		$this->getProjectHtmlGenerator()->deleteHtmlFile();
+		return true;
 	}
 }

@@ -20,7 +20,7 @@ class Capabilities
     {
         $post_types = get_post_types([],'objects');
         foreach($post_types as $post_type){
-            if($post_type instanceof WP_Post_Type && $post_type->name === 'pmb_projects'){
+            if($post_type instanceof WP_Post_Type && $post_type->name === CustomPostTypes::PROJECT){
                 break;
             }
         }

@@ -8,6 +8,8 @@ use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
 use PrintMyBlog\orm\Project;
+use PrintMyBlog\orm\ProjectManager;
+use PrintMyBlog\system\Context;
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
@@ -330,24 +332,26 @@ class PmbAdmin extends BaseController
             	    'post_title' => $_POST['pmb-project-title']
 	            ]
             );
+            $project_obj = new Project($project_id);
         } else {
             $project_id = wp_insert_post(
                 [
                     'post_title' => stripslashes($_POST['pmb-project-title']),
 	                'post_content' => '',
-	                'post_type' => CustomPostTypes::PROJECTS,
+	                'post_type' => CustomPostTypes::PROJECT,
 	                'post_status' => 'publish'
                 ],
                 true
             );
-            $project_obj = new Project($project_id);
-            $project_obj->setCode();
             if(is_wp_error($project_id)){
                 wp_die($project_id->get_error_message());
             }
+	        $project_obj = new Project($project_id);
+	        $project_obj->setCode();
         }
         $parts_string = stripslashes($_POST['pmb-project-sections-data']);
         $parts = json_decode($parts_string);
+	    $project_obj->clearGeneratedFiles();
         $this->part_fetcher->clearPartsFor($project_id);
         $this->part_fetcher->setPartsFor($project_id, $parts);
         return $project_id;
@@ -361,7 +365,7 @@ class PmbAdmin extends BaseController
      */
     public function checkFormSubmission()
     {
-        $action = isset($_GET['action']) ? $_GET['action'] : null;
+        $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
         if(in_array($action,['new','edit'],true)){
             $project_id = $this->saveProject();
             if($_POST['pmb-save'] === 'pdf'){
@@ -374,17 +378,39 @@ class PmbAdmin extends BaseController
                 );
                 wp_redirect($url);
                 exit;
-            } else {
-                wp_redirect(
-	                add_query_arg(
-		                [
-			                'ID' => $project_id,
-			                'action' => 'edit',
-		                ],
-		                admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-	                )
-                );
             }
+            // Just redirect back to the editing page.
+            wp_redirect(
+                add_query_arg(
+	                [
+		                'ID' => $project_id,
+		                'action' => 'edit',
+	                ],
+	                admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+                )
+            );
+            exit;
+        } elseif($action === 'delete'){
+        	$this->deleteProjects();
+	        $redirect = admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH);
+	        wp_redirect($redirect);
+	        exit;
         }
     }
+
+	protected function deleteProjects()
+	{
+		// In our file that handles the request, verify the nonce.
+		$nonce = esc_attr($_REQUEST['_wpnonce']);
+		if (!wp_verify_nonce($nonce, 'bulk-projects')) {
+			die('The request has expired. Please refresh the previous page and try again.');
+		}
+		else {
+			/**
+			 * @var $manager ProjectManager
+			 */
+			$manager = Context::instance()->reuse('PrintMyBlog\orm\ProjectManager');
+			$manager->deleteProjects($_POST['ID']);
+		}
+	}
 }
