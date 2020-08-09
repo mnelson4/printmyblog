@@ -17,7 +17,9 @@
 	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
-    [wp_head]
+    <?php
+    // @todo: we should instead render this after we've fetched all the posts and found all the scripts they depend on
+    wp_head();?>
 </head>
 
 <body class="<?php echo str_replace('has-sidebar', '', implode(' ',get_body_class('pmb-print-page'))); ?>">
