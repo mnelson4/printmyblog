@@ -42,10 +42,9 @@ class ProjectHtmlGenerator {
 //				'showposts' => 10
 			]
 		);
-		$posts = $query->get_posts();
 
 		$this->generateHtmlFileHeader();
-		$this->addPostsToHtmlFile($posts);
+		$this->addPostsToHtmlFile($query);
 		$this->generateHtmlFileFooter();
 		return true;
 
@@ -86,11 +85,12 @@ class ProjectHtmlGenerator {
 	/**
 	 * @param WP_Post[] $posts
 	 */
-	protected function addPostsToHtmlFile($posts)
-	{
-		foreach($posts as $post){
-			$this->addPostToHtmlFile($post);
+	protected function addPostsToHtmlFile(WP_Query $query) {
+		while ( $query->have_posts() ) {
+			$query->the_post();
+			$this->addPostToHtmlFile();
 		}
+		wp_reset_postdata();
 	}
 
 	/**
@@ -109,15 +109,11 @@ class ProjectHtmlGenerator {
 		return PMB_DEFAULT_DESIGNS_DIR . 'classic/';
 	}
 
-	protected function addPostToHtmlFile(WP_Post $post_to_add)
+	protected function addPostToHtmlFile()
 	{
-		global $post;
-		$global_post = $post;
-		$post = $post_to_add;
 		ob_start();
 		include( $this->getSelectedDesignDir() . 'section.php');
 		$this->getFileWriter()->write(ob_get_clean());
-		$post = $global_post;
 	}
 
 	/**
