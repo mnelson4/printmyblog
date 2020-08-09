@@ -99,13 +99,26 @@ class Project {
 		return $upload_dir_info['baseurl'] . '/pmb/generated/' . $this->code() . '/' . $this->getWpPost()->post_name . '.html';
 	}
 
+	/**
+	 * Gets the filepath to the main generated file.
+	 * @return string
+	 */
 	public function generatedHtmlFilePath()
+	{
+		return $this->generatedHtmlFileFolderPath() . $this->getWpPost()->post_name . '.html';
+	}
+
+	/**
+	 * Returns the filepath to the folder containing the generated file(s).
+	 * @return string
+	 */
+	public function generatedHtmlFileFolderPath()
 	{
 		$upload_dir_info = wp_upload_dir();
 		return str_replace(
 			'..',
 			'',
-			$upload_dir_info['basedir'] . '/pmb/generated/' . $this->code() . '/' . $this->getWpPost()->post_name . '.html'
+			$upload_dir_info['basedir'] . '/pmb/generated/' . $this->code() . '/'
 		);
 	}
 

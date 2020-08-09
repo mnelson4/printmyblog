@@ -18,6 +18,7 @@ function PmbProLoadingPage(pmb_instance_vars, translations) {
 			[],
 			(response) => {
 				alert('success');
+
 			},
 			'json'
 		).fail( function(){

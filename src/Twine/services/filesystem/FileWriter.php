@@ -36,7 +36,12 @@ class FileWriter {
 		$this->folder_path = dirname($this->file_path);
 	}
 
-	public function append($content){
+	/**
+	 * Writes the content to the file. Note: it defaults to appending, so if the file already exists, the content
+	 * will be *added* to it; it will not overwrite it.
+	 * @param $content
+	 */
+	public function write($content){
 		$this->ensureFolderExists();
 		fwrite($this->getFileHandle(), $content);
 	}

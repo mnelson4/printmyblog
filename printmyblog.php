@@ -135,6 +135,7 @@ if (defined('PMB_VERSION')) {
     define('PMB_ADMIN_PROJECTS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_PROJECTS_PAGE_SLUG);
     define('PMB_ADMIN_SETTINGS_PAGE_SLUG', 'print-my-blog-settings');
     define('PMB_ADMIN_SETTINGS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_SETTINGS_PAGE_SLUG);
+    define('PMB_DEFAULT_DESIGNS_DIR',PMB_DIR . 'default_designs/');
 
     /**
      * adds a wp-option to indicate that PMB has been activated via the WP admin plugins page.
