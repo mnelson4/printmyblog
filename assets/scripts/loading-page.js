@@ -17,11 +17,14 @@ function PmbProLoadingPage(pmb_instance_vars, translations) {
 			this.instance_vars.status_url,
 			[],
 			(response) => {
-				alert('success');
-
+				if (typeof(response) === 'object' && typeof(response.url) === 'string'){
+					window.location.replace(response.url);
+				} else {
+					alert(this.translations.error);
+				}
 			},
 			'json'
-		).fail( function(){
+		).fail( () => {
 				alert(this.translations.error);
 			}
 		);
