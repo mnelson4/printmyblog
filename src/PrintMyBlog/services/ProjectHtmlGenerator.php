@@ -44,6 +44,8 @@ class ProjectHtmlGenerator {
 		);
 
 		$this->generateHtmlFileHeader();
+
+		$this->sortPosts($query, $part_post_ids);
 		$this->addPostsToHtmlFile($query);
 		$this->generateHtmlFileFooter();
 		return true;
@@ -86,6 +88,24 @@ class ProjectHtmlGenerator {
 		ob_start();
 		include( $this->getSelectedDesignDir() . 'footer.php');
 		$this->getFileWriter()->write(ob_get_clean());
+	}
+
+	/**
+	 * Orders $query->posts according to the order specified by $post_ids_in_order
+	 * @param WP_Query $query
+	 * @param $post_ids_in_order
+	 */
+	protected function sortPosts(WP_Query $query, $post_ids_in_order){
+		$ordered_posts = [];
+		$unordered_posts = $query->posts;
+		foreach($post_ids_in_order as $post_id){
+			foreach($unordered_posts as $post){
+				if($post_id == $post->ID){
+					$ordered_posts[] = $post;
+				}
+			}
+		}
+		$query->posts = $ordered_posts;
 	}
 
 	/**
