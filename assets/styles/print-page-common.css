@@ -1,0 +1,143 @@
+/**
+* Styles which should be reusable by all print-page designs.
+*/
+
+div.pmb-post-header{
+    page-break-inside:avoid;
+}
+.pmb-page-break{
+    page-break-before: always;
+}
+/* On the print-page, try to avoid page breaks in the middle of images*/
+.pmb-image{
+    page-break-inside:avoid;
+}
+.pmb-image img{
+    width: auto;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.pmb-header{
+    page-break-inside:avoid;
+    page-break-after:avoid;
+}
+button{
+    background-color:lightskyblue;
+}
+.entry-excerpt{
+    font-style:italic;
+}
+.pmb-posts-body .entry-content{
+    margin-top:1em;
+}
+div.tiled-gallery{
+    page-break-inside:avoid;
+}
+
+.pmb-posts-body article.pmb-post-article{
+    float:none;
+    width:100%;
+}
+
+.pmb-divider{
+    margin-bottom:3em;
+}
+.pmb-posts .wp-caption{
+    max-width:100%;
+}
+
+.youtube-player{
+    max-width:100%;
+}
+
+p.pmb-status{
+    color:black;
+}
+/* default to making each PMB post metasection not go inline */
+span.pmb-post-meta{
+    display:block;
+}
+
+div.pmb-youtube-video-replacement-wrapper{
+    page-break-inside:avoid;
+    text-align:center;
+}
+div.pmb-youtube-video-replacement-header{
+    display:inline-block;
+}
+div.pmb-youtube-video-replacement-icon{
+    display:inline-block;
+    text-align:center;
+}
+div.pmb-youtube-video-replacement-icon img{
+    vertical-align:middle;
+    font-size:3em;
+}
+div.pmb-youtube-video-replacement-text{
+    display:inline-block;
+}
+.pmb-posts div.pmb-print-this-page{
+    display:none;
+}
+/* Prevent themes like "hueman" from floating the site description on the print-page and ruining the layout*/
+.pmb-posts-header .site-description {
+    float: none;
+}
+.site-title{
+    margin-top:0em;
+    padding-top:0em;
+    float:none;
+}
+/* Adds some space between the posts' content and the site title*/
+.pmb-posts-header{
+    margin-bottom:2em;
+}
+/* Don't let Activello or others change disply to inline blocks which drops content from the printout*/
+.pmb-posts article.post{
+    display:block;
+}
+/* Some themes place the title in front of an image, and so prefer to make it look black. That's fine on web,
+but in the printout they're in front of white paper, so best to have them in black. */
+.pmb-posts .entry-title{
+    color:black;
+}
+/* For themes that have a dark background, the text colour might be light. In printouts we want it to be displayed black still, by default.*/
+.pmb-format-print .pmb-posts{
+    color:black;
+    background:white;
+}
+@media print{
+    .pmb-format-print{
+        background:white;
+    }
+}
+/* Prevent themes like nisarg from adding those awkward URLs after links. Thanks for trying, but they usually just
+mess up the layout (especially in galleries!) Footnotes are much better. Or links
+ */
+.pmb-posts a[href]:after {
+    content:'';
+}
+
+/* Make sure the print button is clearly a pressable button; some themes style it as a block and so the cursor
+won't switch to a pointer when they hover over it; and it won't be centered anymore*/
+.pmb-waiting-message-outer-container input[type=submit]{
+    cursor:pointer;
+    /* In case the theme made the input display:block, use margins to center it.*/
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.pmb-no-break{
+    page-break-inside:avoid;
+    display:block;
+}
+
+/* Give block galleries the full page. Although Firefox, strangely, still doesn't always place a pagebreak before it
+(eg if it's a gallery which all fits on one row, there's no pagebreak; if it takes up more than one row, there is.)
+Chrome always puts a pagebreak.*/
+.wp-block-gallery{
+    page-break-before: always;
+    overflow: hidden;
+}

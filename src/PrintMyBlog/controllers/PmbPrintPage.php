@@ -237,7 +237,7 @@ class PmbPrintPage extends BaseController
         wp_enqueue_style(
             'pmb_print_page',
             PMB_ASSETS_URL . 'styles/print-page.css',
-            array(),
+            array('pmb_print_common'),
             filemtime(PMB_ASSETS_DIR . 'styles/print-page.css')
         );
         // Enqueue tiled gallery too. It's par of Jetpack so it's common, and if we're printing a WordPress.com blog
