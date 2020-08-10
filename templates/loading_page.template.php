@@ -63,16 +63,20 @@
                     ); ?></span>
             </div>
         <?php }?>
-        <div class="pmb-waiting-area">
+        <div class="pmb-waiting-area pmb-loading-content">
             <h1 id='pmb-in-progress-h1' class="pmb-waiting-h1"><?php _e('Initializing', 'print-my-blog'); ?></h1>
-        </div>
-        <div class="pmb-print-ready pmb-print-instructions">
-        </div>
-        <div class="pmb-posts-placeholder pmb-extra-content">
             <div class="pmb-spinner-container">
                 <div class="pmb-spinner"></div>
             </div>
             <p class="pmb-status"><span class="pmb-posts-count"></span></p>
+        </div>
+        <div class="pmb-print-ready">
+            <h1>Ready</h1>
+            <a class="button" id="pmb-download-pdf">Download Test PDF</a>
+            <a href="" class="button button-secondary" id="pmb-view-html">View HTML</a>
+            <div class="pmb-print-instructions">
+
+            </div>
         </div>
     </div>
 </div>

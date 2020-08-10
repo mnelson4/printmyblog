@@ -3,6 +3,7 @@ function PmbProLoadingPage(pmb_instance_vars, translations) {
 	this.working = false;
 	this.instance_vars = pmb_instance_vars;
 	this.translations = translations;
+	this.html_url = null;
 
 	/**
 	 * Initializes variables and begins fetching taxonomies, then gets started fetching posts/pages.
@@ -18,7 +19,9 @@ function PmbProLoadingPage(pmb_instance_vars, translations) {
 			[],
 			(response) => {
 				if (typeof(response) === 'object' && typeof(response.url) === 'string'){
-					window.location.replace(response.url);
+					// window.location.replace(response.url);
+					this.html_url = response.url;
+					this.finished();
 				} else {
 					alert(this.translations.error);
 				}
@@ -30,6 +33,29 @@ function PmbProLoadingPage(pmb_instance_vars, translations) {
 		);
 		this.working = true;
 	};
+	this.finished = function(){
+		jQuery('.pmb-print-ready').show();
+		jQuery('.pmb-loading-content').hide();
+		jQuery('#pmb-view-html').attr('href',this.html_url);
+		jQuery('#pmb-download-pdf').click(
+			() => {
+				this.generatePdf();
+			}
+		);
+	}
+	this.generatePdf = function(){
+		DocRaptor.createAndDownloadDoc("YOUR_API_KEY_HERE", {
+			test: true, // test documents are free, but watermarked
+			type: "pdf",
+			// document_content: document.querySelector('html').innerHTML, // use this page's HTML
+			// document_content: "<h1>Hello world!</h1>",               // or supply HTML directly
+			document_url: this.html_url,            // or use a URL
+			// javascript: true,                                        // enable JavaScript processing
+			// prince_options: {
+			//   media: "screen",                                       // use screen styles instead of print styles
+			// }
+		})
+	}
 
 	/**
 	 * Converts text response, which we hope to mostly be JSON, into a Javascript object.

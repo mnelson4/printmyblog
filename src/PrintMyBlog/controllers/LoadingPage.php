@@ -66,17 +66,23 @@ class LoadingPage extends BaseController
 
     public function enqueueScripts()
     {
+    	wp_register_script(
+    		'docraptor',
+		    PMB_SCRIPTS_URL . 'docraptor.js',
+		    [],
+		    '1.0.0'
+	    );
         wp_enqueue_script(
             'pmb_pro_loading_page',
-            PMB_ASSETS_URL . 'scripts/loading-page.js',
-            array('jquery',),
-            filemtime(PMB_ASSETS_DIR . 'scripts/loading-page.js')
+            PMB_SCRIPTS_URL . 'loading-page.js',
+            array('jquery','docraptor'),
+            filemtime(PMB_SCRIPTS_DIR . 'loading-page.js')
         );
         wp_enqueue_style(
             'pmb_pro_loading_page',
-            PMB_ASSETS_URL . 'styles/loading-page.css',
+            PMB_STYLES_URL . 'loading-page.css',
             array(),
-            filemtime(PMB_ASSETS_DIR . 'styles/loading-page.css')
+            filemtime(PMB_STYLES_DIR . 'loading-page.css')
         );
 
         $data = [
