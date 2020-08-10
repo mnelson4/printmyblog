@@ -30,6 +30,10 @@ class PmbCommon extends BaseController
         $this->registerCommonStuff();
     }
 
+	/**
+	 * Just registers scripts and styles early on, so that when some other code calls "enqueue_script" or "enqueue_style",
+	 * these will be ready.
+	 */
     public function registerCommonStuff()
     {
 	    wp_register_style(
@@ -102,7 +106,9 @@ class PmbCommon extends BaseController
 	    );
     }
 
-
+	/**
+	 * Actually enqueues common scripts and styles that should be available on all page requests.
+	 */
     public function enqueueScripts()
     {
         wp_enqueue_style(
