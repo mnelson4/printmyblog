@@ -42,7 +42,10 @@ class ProjectHtmlGenerator {
 //				'showposts' => 10
 			]
 		);
-
+		// Includes the design's functions.php file, if it exists
+		if(file_exists($this->getSelectedDesignDir() . 'functions.php')){
+			include($this->getSelectedDesignDir() . 'functions.php');
+		}
 		$this->generateHtmlFileHeader();
 
 		$this->sortPosts($query, $part_post_ids);
