@@ -156,5 +156,7 @@ class Init
         define('PMB_IMAGES_DIR', PMB_ASSETS_DIR . 'images/');
         define('PMB_SCRIPTS_DIR', PMB_ASSETS_DIR . 'scripts/');
         define('PMB_STYLES_DIR', PMB_ASSETS_DIR . 'styles/');
+
+        define('PMB_DEFAULT_DESIGNS_URL', $plugin_url . 'default_designs/');
     }
 }

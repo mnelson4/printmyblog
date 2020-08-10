@@ -61,6 +61,12 @@ class ProjectHtmlGenerator {
 
 	protected function generateHtmlFileHeader()
 	{
+		wp_enqueue_style(
+			'pmb-design' . $this->getSelectedDesignSlug(),
+			$this->getSelectedDesignUrl() . 'style.css',
+			[],
+			filemtime($this->getSelectedDesignDir() . 'style.css')
+		);
 		global $pmb_project;
 		$pmb_project = $this->project;
 		$pmb_show_site_title = true;
@@ -104,9 +110,17 @@ class ProjectHtmlGenerator {
 		return $this->file_writer;
 	}
 
+	protected function getSelectedDesignSlug()
+	{
+		return 'classic';
+	}
 	protected function getSelectedDesignDir()
 	{
-		return PMB_DEFAULT_DESIGNS_DIR . 'classic/';
+		return PMB_DEFAULT_DESIGNS_DIR . $this->getSelectedDesignSlug() . '/';
+	}
+	protected function getSelectedDesignUrl()
+	{
+		return PMB_DEFAULT_DESIGNS_URL .$this->getSelectedDesignSlug() . '/';
 	}
 
 	protected function addPostToHtmlFile()
