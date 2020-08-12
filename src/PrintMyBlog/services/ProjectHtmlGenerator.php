@@ -4,7 +4,7 @@
 namespace PrintMyBlog\services;
 
 use PrintMyBlog\orm\Project;
-use Twine\services\filesystem\FileWriter;
+use Twine\services\filesystem\File;
 use WP_Post;
 use WP_Query;
 
@@ -15,7 +15,7 @@ class ProjectHtmlGenerator {
 	private $project;
 
 	/**
-	 * @var FileWriter
+	 * @var File
 	 */
 	private $file_writer;
 
@@ -123,12 +123,12 @@ class ProjectHtmlGenerator {
 	}
 
 	/**
-	 * @return FileWriter
+	 * @return File
 	 */
 	protected function getFileWriter()
 	{
-		if(! $this->file_writer instanceof FileWriter){
-			$this->file_writer = new FileWriter($this->project->generatedHtmlFilePath());
+		if(! $this->file_writer instanceof File){
+			$this->file_writer = new File($this->project->generatedHtmlFilePath());
 		}
 		return $this->file_writer;
 	}
