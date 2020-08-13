@@ -21,7 +21,7 @@ class Shortcodes extends BaseController
             [$this,'print_buttons_shortcode']
         );
     }
-
+	// @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     public function print_buttons_shortcode($atts)
     {
         $atts = shortcode_atts(
