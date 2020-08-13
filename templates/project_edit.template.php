@@ -14,19 +14,25 @@
         </div>
         <div id="pmb-project-layout" class="pmb-project-layout">
             <div class="pmb-project-layout-inner">
-                <ul id="pmb-project-choices" class="pmb-draggable-area pmb-selection-list list-group">
-                    <?php foreach($post_options as $post){
+                <div class="pmb-project-column">
+                    <h2><?php _e('Available Content', 'print-my-blog');?></h2>
+                    <ul id="pmb-project-choices" class="pmb-draggable-area pmb-selection-list list-group">
+                        <?php foreach($post_options as $post){
+                            ?><li class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($post->ID);?>"><?php echo $post->post_title;?></li><?php
+                        }
+                        ?>
+                    </ul>
+                </div>
+                <div class="pmb-project-column">
+                    <h2><?php _e('Project Content', 'print-my-blog');?></h2>
+                    <ul id="pmb-project-sections" class="pmb-draggable-area pmb-selection-list list-group">
+                        <?php foreach($parts as $post){
                         ?><li class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($post->ID);?>"><?php echo $post->post_title;?></li><?php
-                    }
-                    ?>
-                </ul>
-                <ul id="pmb-project-sections" class="pmb-draggable-area pmb-selection-list list-group">
-                    <?php foreach($parts as $post){
-                    ?><li class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($post->ID);?>"><?php echo $post->post_title;?></li><?php
-                    }
-                    ?>
-                </ul>
-                <input type="hidden" name="pmb-project-sections-data" id="pmb-project-sections-data">
+                        }
+                        ?>
+                    </ul>
+                    <input type="hidden" name="pmb-project-sections-data" id="pmb-project-sections-data">
+                </div>
             </div>
         </div>
         <?php wp_nonce_field( 'pmb-project-edit' );?>

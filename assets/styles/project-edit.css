@@ -4,7 +4,7 @@
     margin-right:auto;
 }
 
-.pmb-project-layout ul{
+.pmb-project-layout .pmb-project-column{
     width:45%;
     display:inline-block;
 }
