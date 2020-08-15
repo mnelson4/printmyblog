@@ -60,3 +60,10 @@ Hide Google Recaptcha from printouts
 .pmb-posts .grecaptcha-badge{
     display:none !important;
 }
+
+/**
+Hide footer added by user switching add-on.
+ */
+.pmb-print-page p#user_switching_switch_on{
+    display:none;
+}

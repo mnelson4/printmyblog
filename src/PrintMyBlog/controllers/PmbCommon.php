@@ -66,6 +66,13 @@ class PmbCommon extends BaseController
 		    [],
 		    '4.0.6'
 	    );
+	    // Enqueue the CSS for compatibility with known troublemaking plugins.
+	    wp_register_style(
+		    'pmb-plugin-compatibility',
+		    PMB_ASSETS_URL . 'styles/plugin-compatibility.css',
+		    array(),
+		    filemtime(PMB_ASSETS_DIR . 'styles/plugin-compatibility.css')
+	    );
 	    wp_register_script(
 		    'pmb-setup-page',
 		    PMB_ASSETS_URL . 'scripts/setup-page.js',

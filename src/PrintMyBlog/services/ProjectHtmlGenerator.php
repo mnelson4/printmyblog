@@ -69,7 +69,7 @@ class ProjectHtmlGenerator {
 		wp_enqueue_style(
 			'pmb-design' . $this->getSelectedDesignSlug(),
 			$this->getSelectedDesignUrl() . 'style.css',
-			['pmb_print_common'],
+			['pmb_print_common', 'pmb-plugin-compatibility'],
 			filemtime($this->getSelectedDesignDir() . 'style.css')
 		);
 		global $pmb_project;
