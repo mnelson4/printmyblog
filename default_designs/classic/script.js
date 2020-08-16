@@ -4,7 +4,7 @@ jQuery(document).ready(function(){
     if(toc.length !== 0){
         // get all the H1s
         var h1s = jQuery('.pmb-posts h1').each(function(index){
-            jQuery(this).append('<li><a href="' + this.innerText + '"></a></li>');
+            jQuery('#pmb-toc-list').append('<li><a href="' + this.id + '">' + this.innerText + '</a></li>');
         })
     }
 
