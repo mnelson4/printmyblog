@@ -74,6 +74,12 @@ class PmbCommon extends BaseController
 		    filemtime(PMB_ASSETS_DIR . 'styles/plugin-compatibility.css')
 	    );
 	    wp_register_script(
+	    	'pmb-beautifier-functions',
+		    PMB_SCRIPTS_URL . 'print-page-beautifier-functions.js',
+		    [],
+		    filemtime(PMB_SCRIPTS_DIR . 'print-page-beautifier-functions.js')
+	    );
+	    wp_register_script(
 		    'pmb-setup-page',
 		    PMB_ASSETS_URL . 'scripts/setup-page.js',
 		    ['jquery-debounce', 'select2', 'wp-api', 'jquery-ui-datepicker'],

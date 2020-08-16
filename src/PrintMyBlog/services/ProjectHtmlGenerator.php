@@ -66,12 +66,27 @@ class ProjectHtmlGenerator {
 
 	protected function generateHtmlFileHeader()
 	{
-		wp_enqueue_style(
-			'pmb-design' . $this->getSelectedDesignSlug(),
-			$this->getSelectedDesignUrl() . 'style.css',
-			['pmb_print_common', 'pmb-plugin-compatibility'],
-			filemtime($this->getSelectedDesignDir() . 'style.css')
-		);
+		wp_enqueue_style('pmb_print_common');
+		wp_enqueue_style('pmb-plugin-compatibility');
+		wp_enqueue_style('pmb-beautifier-functions');
+		$style_file = $this->getSelectedDesignDir() . 'style.css';
+		$script_file = $this->getSelectedDesignDir() . 'script.js';
+		if(file_exists($style_file)){
+			wp_enqueue_style(
+				'pmb-design',
+				$this->getSelectedDesignUrl() . 'style.css',
+				[],
+				filemtime($style_file)
+			);
+		}
+		if(file_exists($script_file)){
+			wp_enqueue_script(
+				'pmb-design',
+				$this->getSelectedDesignUrl() . 'script.js',
+				['jquery'],
+				filemtime($script_file)
+			);
+		}
 		global $pmb_project;
 		$pmb_project = $this->project;
 		$pmb_show_site_title = true;

@@ -231,7 +231,7 @@ class PmbPrintPage extends BaseController
         wp_enqueue_script(
             'pmb_print_page',
             PMB_ASSETS_URL . 'scripts/print-page.js',
-            array('jquery', 'wp-api', 'luxon'),
+            array('jquery', 'wp-api', 'luxon', 'pmb-beautifier-functions'),
             filemtime(PMB_ASSETS_DIR . 'scripts/print-page.js')
         );
         wp_enqueue_style(

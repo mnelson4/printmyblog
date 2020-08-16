@@ -1,0 +1,36 @@
+/* toc */
+#toc a:after {
+    content: leader('.') target-counter(attr(href), page);
+}
+
+/* pagination */
+
+.pmb-toc {
+    display: block;
+    page: table-of-contents;
+    counter-reset: page 1
+}
+@page table-of-contents {
+    @top {
+        content: "Table of Contents"
+    }
+    @bottom {
+        content: counter(page, lower-alpha)
+    }
+}
+.pmb-posts {
+    display: block;
+    page: main;
+    counter-reset: page 1
+}
+@page main {
+    @top {
+        content: string(chapter-title)
+    }
+    @bottom {
+        content: counter(page)
+    }
+}
+.chapter h1 {
+    string-set: chapter-title content()
+}
