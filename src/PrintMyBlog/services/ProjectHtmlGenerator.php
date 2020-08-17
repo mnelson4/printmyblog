@@ -87,6 +87,7 @@ class ProjectHtmlGenerator {
 				filemtime($script_file)
 			);
 		}
+		add_filter('wp_enqueue_scripts', [$this,'remove_theme_style'],20);
 		global $pmb_project;
 		$pmb_project = $this->project;
 		$pmb_show_site_title = true;
@@ -101,6 +102,12 @@ class ProjectHtmlGenerator {
 		$this->getFileWriter()->write(ob_get_clean());
 	}
 
+	public function remove_theme_style()
+	{
+		$active_theme_slug = get_stylesheet();
+		wp_dequeue_style($active_theme_slug . '-style');
+		wp_dequeue_style($active_theme_slug . '-print-style');
+	}
 	protected function generateHtmlFileFooter()
 	{
 		ob_start();
