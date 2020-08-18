@@ -68,7 +68,7 @@ class ProjectHtmlGenerator {
 	{
 		wp_enqueue_style('pmb_print_common');
 		wp_enqueue_style('pmb-plugin-compatibility');
-		wp_enqueue_style('pmb-beautifier-functions');
+		wp_enqueue_script('pmb-beautifier-functions');
 		$style_file = $this->getSelectedDesignDir() . 'style.css';
 		$script_file = $this->getSelectedDesignDir() . 'script.js';
 		if(file_exists($style_file)){
@@ -83,7 +83,7 @@ class ProjectHtmlGenerator {
 			wp_enqueue_script(
 				'pmb-design',
 				$this->getSelectedDesignUrl() . 'script.js',
-				['jquery'],
+				['jquery', 'pmb-beautifier-functions'],
 				filemtime($script_file)
 			);
 		}

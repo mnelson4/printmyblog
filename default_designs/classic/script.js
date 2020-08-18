@@ -11,5 +11,14 @@ jQuery(document).ready(function(){
         });
     }
 
+    // Pretty up the page
+    pmb_dont_float();
+    pmb_add_header_classes();
+    // pmb_remove_hyperlinks();
+    pmb_fix_wp_videos();
+    jQuery(document).trigger('pmb_wrap_up');
+    pmb_resize_images(4);
+    pmb_convert_youtube_videos_to_images();
+    pmb_load_avada_lazy_images();
 
 });
