@@ -41,4 +41,7 @@
     .pmb-toc-list a::after {
         content: leader('.') target-counter(attr(href), page) !important;
     }
+    .pmb-section{
+        break-before:page;
+    }
 }
