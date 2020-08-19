@@ -19,5 +19,6 @@ jQuery(document).ready(function(){
     pmb_resize_images(4);
     pmb_convert_youtube_videos_to_images();
     pmb_load_avada_lazy_images();
+    pmb_replace_internal_links_with_page_refs();
     jQuery(document).trigger('pmb_wrap_up');
 });

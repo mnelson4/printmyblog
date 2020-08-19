@@ -75,7 +75,7 @@ class ProjectHtmlGenerator {
 			wp_enqueue_style(
 				'pmb-design',
 				$this->getSelectedDesignUrl() . 'style.css',
-				[],
+				['pmb_print_common', 'pmb-plugin-compatibility'],
 				filemtime($style_file)
 			);
 		}
@@ -85,8 +85,7 @@ class ProjectHtmlGenerator {
 				$this->getSelectedDesignUrl() . 'script.js',
 				['jquery', 'pmb-beautifier-functions'],
 				filemtime($script_file)
-			);
-		}
+			);		}
 		add_filter('wp_enqueue_scripts', [$this,'remove_theme_style'],20);
 		global $pmb_project;
 		$pmb_project = $this->project;

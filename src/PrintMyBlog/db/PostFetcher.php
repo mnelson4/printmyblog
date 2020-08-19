@@ -31,7 +31,7 @@ class PostFetcher
         return $wpdb->get_results(
             'SELECT ID, post_title FROM '
             . $wpdb->posts
-            . ' WHERE post_type IN (\'' . implode('\',\'',$post_types) . '\')'
+            . ' WHERE post_type IN (\'' . implode('\',\'',$post_types) . '\') AND post_status in ("publish","draft")'
         );
     }
 }

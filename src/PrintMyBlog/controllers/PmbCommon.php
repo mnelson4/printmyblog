@@ -79,6 +79,14 @@ class PmbCommon extends BaseController
 		    [],
 		    filemtime(PMB_SCRIPTS_DIR . 'print-page-beautifier-functions.js')
 	    );
+	    wp_localize_script(
+		    'pmb-beautifier-functions',
+		    'pmb',
+		    [
+			    'site_url' => site_url(),
+			    'site_url_attr' => esc_attr(site_url())
+		    ]
+	    );
 	    wp_register_script(
 		    'pmb-setup-page',
 		    PMB_ASSETS_URL . 'scripts/setup-page.js',

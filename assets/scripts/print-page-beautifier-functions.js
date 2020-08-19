@@ -125,3 +125,18 @@ function pmb_load_avada_lazy_images(){
         jqelement.attr('srcset',jqelement.attr('data-orig-src'));
     });
 }
+
+/**
+ * Adds the class "pmb-page-ref" onto all hyperlinks to posts/things that are actually in the current project.
+ */
+function pmb_replace_internal_links_with_page_refs()
+{
+    jQuery('a[href^="' + pmb.site_url_attr + '"]').each(function(index){
+        var a = jQuery(this);
+        var new_href = '#' + a.attr('href').replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g,'\\$1');      ;
+        if(jQuery(new_href).length > 0){
+            a.addClass('pmb-page-ref');
+            a.attr('href','#' + a.attr('href'));
+        }
+    });
+}
