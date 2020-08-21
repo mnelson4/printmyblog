@@ -15,6 +15,20 @@
         }
     }
 
+
+    @page {
+        counter-reset: footnote;
+
+        @footnotes {
+            border-top: solid black thin;
+            padding-top: 8pt;
+        }
+}
+    .pmb-posts p {
+        prince-footnote-policy: keep-with-line;
+    }
+
+
     .pmb-posts {
         display: block;
         page: main;
@@ -46,5 +60,10 @@
     }
     .pmb-posts a.pmb-page-ref[href]::after{
         content: " (see page " target-counter(attr(href), page) ")";
+    }
+    .pmb-posts span.pmb-footnote{
+        float:footnote;
+        text-align:left;
+
     }
 }

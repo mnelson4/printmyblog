@@ -5,12 +5,12 @@
         <div class="entry-header-inner section-inner medium">
             <?php the_title( '<h1 class="entry-title">', '</h1>' );?>
 
-            <div class="entry-categories">
-                <span class="screen-reader-text"><?php _e( 'Categories', 'print-my-blog' ); ?></span>
-                <div class="entry-categories-inner">
-			        <?php the_category( ' ' ); ?>
-                </div><!-- .entry-categories-inner -->
-            </div><!-- .entry-categories -->
+<!--            <div class="entry-categories">-->
+<!--                <span class="screen-reader-text">--><?php //_e( 'Categories', 'print-my-blog' ); ?><!--</span>-->
+<!--                <div class="entry-categories-inner">-->
+<!--			        --><?php //the_category( ' ' ); ?>
+<!--                </div>-->
+<!--            </div>-->
             <div class="entry-meta">
                 <span class="posted-on pmb-post-meta">
                     <?php the_date();?>

@@ -127,16 +127,19 @@ function pmb_load_avada_lazy_images(){
 }
 
 /**
- * Adds the class "pmb-page-ref" onto all hyperlinks to posts/things that are actually in the current project.
+ * Adds the class "pmb-page-ref" onto all hyperlinks to posts/things that are actually in the current project,
+ * and a span named "pmb-footnote", with the value of the hyperlink to all the links to external content.
  */
-function pmb_replace_internal_links_with_page_refs()
+function pmb_replace_internal_links_with_page_refs_and_footnotes()
 {
-    jQuery('a[href^="' + pmb.site_url_attr + '"]').each(function(index){
+    jQuery('.pmb-section a[href]').each(function(index){
         var a = jQuery(this);
         var new_href = '#' + a.attr('href').replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g,'\\$1');      ;
         if(jQuery(new_href).length > 0){
             a.addClass('pmb-page-ref');
             a.attr('href','#' + a.attr('href'));
+        } else {
+            a.after('<span class="pmb-footnote">See ' + a.attr('href') + '</span>');
         }
     });
 }
