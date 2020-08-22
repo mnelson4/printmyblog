@@ -10,7 +10,7 @@
  * Description: Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
  * Author: Michael Nelson
  * Author URI: https://printmy.blog
- * Version: 2.9.1
+ * Version: 2.9.2
  * Requires at least: 4.7
  * Requires PHP: 5.4
  * Text Domain: print-my-blog
@@ -120,7 +120,7 @@ if (defined('PMB_VERSION')) {
 
 }else {
     // it's all good! go for it!
-    define('PMB_VERSION', '2.9.1.rc.000');
+    define('PMB_VERSION', '2.9.2.rc.000');
     define('PMB_DIR', wp_normalize_path(__DIR__) . '/');
     define('PMB_MAIN_FILE', __FILE__);
     define('PMB_TEMPLATES_DIR', PMB_DIR . 'templates/');
