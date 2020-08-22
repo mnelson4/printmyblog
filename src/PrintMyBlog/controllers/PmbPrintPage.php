@@ -296,9 +296,9 @@ class PmbPrintPage extends BaseController
             'order' => $order,
             'shortcodes' => $this->getFromRequest('shortcodes', null),
         ];
-        $lang = $this->getFromRequest('lang',null);
-        if($lang){
-        	$data['lang'] = $lang;
+        $lang = $this->getFromRequest('lang', null);
+        if ($lang) {
+            $data['lang'] = $lang;
         }
         // add the before and after filters, if they were provided
         $dates = $this->getFromRequest('dates', array());
