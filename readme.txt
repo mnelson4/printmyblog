@@ -283,6 +283,7 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 = 2.9.2 August 22, 2020 =
 * Improve integration with Hueman theme by adding the CSS class "entry" onto posts in print page
 * Add WPML integration by adding "lang" attribute to print page
+* Fix printing lone pages with a parent, and when the parent not included in printout
 
 = 2.9.1 August 11, 2020 =
 * Fix Twentyseventeen theme so it displays authors
