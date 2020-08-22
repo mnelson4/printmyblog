@@ -294,8 +294,12 @@ class PmbPrintPage extends BaseController
             'author' => $this->getFromRequest('pmb-author', null),
             'post' => $this->getFromRequest('pmb-post', null),
             'order' => $order,
-            'shortcodes' => $this->getFromRequest('shortcodes', null)
+            'shortcodes' => $this->getFromRequest('shortcodes', null),
         ];
+        $lang = $this->getFromRequest('lang',null);
+        if($lang){
+        	$data['lang'] = $lang;
+        }
         // add the before and after filters, if they were provided
         $dates = $this->getFromRequest('dates', array());
         // Check if they entered the dates backwards.

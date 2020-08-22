@@ -45,6 +45,9 @@ class PrintButtons
             );
             $args['format'] = $slug;
             $args['pmb-post'] = $post->ID;
+            if(defined('ICL_LANGUAGE_CODE')){
+            	$args['lang'] = ICL_LANGUAGE_CODE;
+            }
             $url = add_query_arg(
                 apply_filters(
                     '\PrintMyBlog\controllers\PmbFrontend->addPrintButton $base_args',

@@ -54,6 +54,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 	this.working = false;
 	this.shortcodes = pmb_instance_vars.shortcodes;
 	this.can_view_sensitive_data = null;
+	this.lang = pmb_instance_vars.lang;
     /**
      * Initializes variables and begins fetching taxonomies, then gets started fetching posts/pages.
      * @function
@@ -148,6 +149,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         if( this.canGetSensitiveData()) {
 			data.context = 'edit';
 		}
+        // Add the language if WPML or someone set it.
+        if(this.lang){
+            data.lang = this.lang;
+        }
 		return data;
 	};
 
