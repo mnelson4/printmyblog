@@ -280,6 +280,14 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 7. Add the Print My Blog block to add a form visitors can use to select what and how to print your blog.
 
 == Changelog ==
+= 2.9.3 September 2, 2020 =
+* Fix a warning when used with AMP for WP plugin
+
+= 2.9.2 August 22, 2020 =
+* Improve integration with Hueman theme by adding the CSS class "entry" onto posts in print page
+* Add WPML integration by adding "lang" attribute to print page
+* Fix printing single pages without a parent, and when the parent not included in printout
+
 = 2.9.1 August 11, 2020 =
 * Fix Twentyseventeen theme so it displays authors
 

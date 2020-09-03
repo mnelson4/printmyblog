@@ -122,7 +122,6 @@ class PmbPrintPage extends BaseController
             // Figure out what taxonomies were selected (if any) and their terms.
             // Ideally we'll do this via the REST API, but I'm in a pinch so just doing it via PHP and
             // only when not using WP REST Proxy.
-            global $wp_taxonomies;
             if (empty($_GET['site']) && !empty($_GET['taxonomies'])) {
                 $filtering_taxonomies = $_GET['taxonomies'];
                 foreach ($filtering_taxonomies as $taxonomy => $terms_ids) {
@@ -153,7 +152,6 @@ class PmbPrintPage extends BaseController
                 }
             } else {
                 $pmb_taxonomy_filters = array();
-                $wp_taxonomies = array();
             }
             $pmb_format = $this->getFromRequest('format', 'print');
             $pmb_browser = $this->getBrowser();
@@ -288,8 +286,12 @@ class PmbPrintPage extends BaseController
             'author' => $this->getFromRequest('pmb-author', null),
             'post' => $this->getFromRequest('pmb-post', null),
             'order' => $order,
-            'shortcodes' => $this->getFromRequest('shortcodes', null)
+            'shortcodes' => $this->getFromRequest('shortcodes', null),
         ];
+        $lang = $this->getFromRequest('lang', null);
+        if ($lang) {
+            $data['lang'] = $lang;
+        }
         // add the before and after filters, if they were provided
         $dates = $this->getFromRequest('dates', array());
         // Check if they entered the dates backwards.

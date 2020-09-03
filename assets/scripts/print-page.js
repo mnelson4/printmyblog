@@ -54,6 +54,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 	this.working = false;
 	this.shortcodes = pmb_instance_vars.shortcodes;
 	this.can_view_sensitive_data = null;
+	this.lang = pmb_instance_vars.lang;
     /**
      * Initializes variables and begins fetching taxonomies, then gets started fetching posts/pages.
      * @function
@@ -148,6 +149,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         if( this.canGetSensitiveData()) {
 			data.context = 'edit';
 		}
+        // Add the language if WPML or someone set it.
+        if(this.lang){
+            data.lang = this.lang;
+        }
 		return data;
 	};
 
@@ -338,6 +343,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             );
             posts_to_render = this.getChildrenOf(0);
             this.organizePostsInPage(posts_to_render);
+            this.dontForgotOrphanPages();
         } else {
             this.ordered_posts = this.posts;
         }
@@ -363,6 +369,26 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             post = posts.shift();
         }
     };
+
+    /**
+     * If pages didn't have the parent in the collection, they could get missed. This adds them to the end.
+     */
+    this.dontForgotOrphanPages = function(){
+        for(var i=0;i<this.posts.length;i++){
+            var page_id = this.posts[i].id;
+            var found = false;
+            for(var j=0; j<this.ordered_posts.length; j++){
+                var added_page_id = this.ordered_posts[j].id;
+                if( page_id === added_page_id){
+                    found = true;
+                    break;
+                }
+            }
+            if(!found){
+                this.ordered_posts.push(this.posts[i]);
+            }
+        }
+    }
 
     /**
      * Renders the posts on the page
@@ -513,7 +539,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         }
         var html_to_add = '';
         if(this.format !== 'ebook'){
-            html_to_add += '<article id="post-' + post.id + '" class="post-' + post.id + ' post type-' + this.post_type + ' status-' + post.status + ' hentry pmb-post-article">'
+            // added CSS class "entry" for Hueman theme https://wordpress.org/themes/hueman/ whch adds that CSS class on the frontend
+            // and uses it for styling.
+            html_to_add += '<article id="post-' + post.id + '" class="post-' + post.id + ' post type-' + this.post_type + ' status-' + post.status + ' entry hentry pmb-post-article">'
 			+ '<header class="pmb-post-header entry-header">';
         }
         if(this.showTitle) {
