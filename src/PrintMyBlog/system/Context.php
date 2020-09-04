@@ -43,12 +43,15 @@ class Context extends BaseContext
 	        'PrintMyBlog\controllers\PmbAdmin' => [
                 'PrintMyBlog\db\PostFetcher' => self::REUSE,
                 'PrintMyBlog\db\PartFetcher' => self::REUSE,
+		        'PrintMyBlog\orm\ProjectManager' => self::REUSE,
+		        'PrintMyBlog\domain\ProjectFormatManager' => self::REUSE,
             ],
 	        'PrintMyBlog\controllers\Ajax'     => [
 	        	'PrintMyBlog\orm\ProjectManager' => self::REUSE
 	        ],
 	        'PrintMyBlog\orm\Project'          => [
-	        	'PrintMyBlog\db\PartFetcher' => self::REUSE
+	        	'PrintMyBlog\db\PartFetcher' => self::REUSE,
+		        'PrintMyBlog\domain\ProjectFormatManager' => self::REUSE
 	        ],
         ];
     }

@@ -7,6 +7,7 @@ use PrintMyBlog\db\PartFetcher;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
+use PrintMyBlog\domain\ProjectFormatManager;
 use PrintMyBlog\orm\Project;
 use PrintMyBlog\orm\ProjectManager;
 use PrintMyBlog\system\Context;
@@ -39,14 +40,30 @@ class PmbAdmin extends BaseController
      */
     protected $part_fetcher;
 
+	/**
+	 * @var ProjectManager
+	 */
+    protected $project_manager;
+
+	/**
+	 * @var ProjectFormatManager
+	 */
+    protected $project_format_manager;
+
     /**
      * @since $VID:$
      * @param PostFetcher $post_fetcher
      * @param PartFetcher $part_fetcher
      */
-    public function inject(PostFetcher $post_fetcher, PartFetcher $part_fetcher){
+    public function inject(
+    	PostFetcher $post_fetcher,
+	    PartFetcher $part_fetcher,
+	    ProjectManager $project_manager,
+		ProjectFormatManager $project_format_manager){
         $this->post_fetcher = $post_fetcher;
         $this->part_fetcher = $part_fetcher;
+        $this->project_manager = $project_manager;
+        $this->project_format_manager = $project_format_manager;
     }
     /**
      * name of the option that just indicates we successfully saved the setttings
@@ -254,21 +271,44 @@ class PmbAdmin extends BaseController
             wp_enqueue_style('pmb-setup-page');
         } elseif($hook === 'print-my-blog_page_print-my-blog-projects'
                  && isset($_GET['action'])
-                 && in_array($_GET['action'], ['edit','new'],true)
+	            && $_GET['action'] === 'edit'
             ) {
-            wp_register_script(
-                'sortablejs',
-                PMB_SCRIPTS_URL . 'libs/Sortable.min.js',
-                array(),
-                '1.10.2'
-            );
+        	switch(isset($_GET['subaction']) ? $_GET['subaction'] : null){
+		        case 'content':
+			        wp_register_script(
+				        'sortablejs',
+				        PMB_SCRIPTS_URL . 'libs/Sortable.min.js',
+				        array(),
+				        '1.10.2'
+			        );
 
-            wp_enqueue_script(
-                'pmb_project_edit',
-                PMB_SCRIPTS_URL . 'project-edit.js',
-                array('sortablejs',),
-                filemtime(PMB_SCRIPTS_DIR . 'project-edit.js')
-            );
+			        wp_enqueue_script(
+				        'pmb_project_edit_content',
+				        PMB_SCRIPTS_URL . 'project-edit-content.js',
+				        array('sortablejs',),
+				        filemtime(PMB_SCRIPTS_DIR . 'project-edit-content.js')
+			        );
+			        break;
+		        case 'main':
+		        default:
+		        	wp_enqueue_script('pmb_project_edit_main',
+			        PMB_SCRIPTS_URL . 'project-edit-main.js',
+			        array('jquery', 'jquery-debounce'),
+			        filemtime(PMB_SCRIPTS_DIR . 'project-edit-main.js')
+			        );
+		        	wp_localize_script(
+		        		'pmb_project_edit_main',
+				        'pmb_project_edit',
+				        [
+				        	'translations' => [
+				        		'saved' => __('Saved', 'print-my-blog'),
+						        'error' => __('Error saving. Check your internet connection and try modifying again.','print-my-blog')
+					        ]
+				        ]
+			        );
+	        }
+
+	        // everybody uses the style, right?
             wp_enqueue_style(
                 'pmb_project_edit',
                 PMB_STYLES_URL . 'project-edit.css',
@@ -281,74 +321,83 @@ class PmbAdmin extends BaseController
     public function renderProjects()
     {
         $action = isset($_GET['action']) ? $_GET['action'] : null;
-        if(in_array($action,['new','edit'],true)) {
-			if($action === 'new') {
-				$project = new WP_Post(new \stdClass());
-				$post_options = $this->post_fetcher->fetchPostOptionssForProject();
-				$parts = [];
-				$form_url = add_query_arg(
-					[
-						'action' => 'edit',
-					],
-					admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-				);
-			} else {
-				$post_options = $this->post_fetcher->fetchPostOptionssForProject();
-				$project = get_post($_GET['ID']);
-				$parts = $this->part_fetcher->fetchPartsFor($_GET['ID']);
-				$form_url = add_query_arg(
-					[
-						'ID' => $project->ID,
-						'action' => 'edit',
-					],
-					admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-				);
-			}
-	        include(PMB_TEMPLATES_DIR . 'project_edit.template.php');
-			return;
+        if($action === 'edit') {
+        	$subaction = isset($_GET['subaction']) ? $_GET['subaction'] : null;
+        	switch($subaction) {
+		        case 'choose_design':
+			        $this->editChooseDesign();
+			        break;
+		        case 'customize_design':
+			        $this->editCustomizeDesign();
+			        break;
+		        case 'content':
+		        	$this->editContent();
+		        case 'metadata':
+			        $this->editMetadata();
+			        break;
+		        case 'generate':
+			        $this->editGenerate();
+			        break;
+		        case 'main':
+		        default:
+			        $this->editMain();
+	        }
+
+        } else {
+	        $table = new ProjectsListTable();
+	        $add_new_url = add_query_arg(
+		        [
+			        'action' => 'new',
+		        ],
+		        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+	        );
+	        include(PMB_TEMPLATES_DIR . 'projects_list_table.template.php');
         }
-        $table = new ProjectsListTable();
-        $add_new_url = add_query_arg(
-	        [
-		        'action' => 'new',
-	        ],
-	        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-        );
-        include(PMB_TEMPLATES_DIR . 'projects_list_table.template.php');
+
+    }
+
+	/**
+	 * @param $action
+	 */
+    protected function editMain(){
+		$project = $this->project_manager->getById($_GET['ID']);
+		$form_url = add_query_arg(
+			[
+				'action' => 'pmb_save_project_main',
+				'_nonce' => wp_create_nonce( 'pmb-project-edit' ),
+				'ID' => $project->getWpPost()->ID
+			],
+	        admin_url('admin-ajax.php')
+		);
+		$formats = $this->project_format_manager->getFormats();
+		include(PMB_TEMPLATES_DIR . 'project_edit_main.template.php');
+    }
+
+    protected function editContent()
+    {
+	    $post_options = $this->post_fetcher->fetchPostOptionssForProject();
+	    $project = get_post($_GET['ID']);
+	    $parts = $this->part_fetcher->fetchPartsFor($_GET['ID']);
+	    $form_url = add_query_arg(
+		    [
+			    'ID' => $project->ID,
+			    'action' => 'edit',
+			    'subaction' => 'content'
+		    ],
+		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+	    );
+	    include(PMB_TEMPLATES_DIR . 'project_edit_content.template.php');
     }
 
     /**
      * Saves the project's name and parts etc.
      * @return int project ID
      */
-    protected function saveProject()
+    protected function saveProjectContent()
     {
         check_admin_referer('pmb-project-edit');
-        if(isset($_GET['ID'])) {
-            $project_id = $_GET['ID'];
-            wp_update_post(
-            	[
-            		'ID' => $project_id,
-            	    'post_title' => $_POST['pmb-project-title']
-	            ]
-            );
-            $project_obj = new Project($project_id);
-        } else {
-            $project_id = wp_insert_post(
-                [
-                    'post_title' => stripslashes($_POST['pmb-project-title']),
-	                'post_content' => '',
-	                'post_type' => CustomPostTypes::PROJECT,
-	                'post_status' => 'publish'
-                ],
-                true
-            );
-            if(is_wp_error($project_id)){
-                wp_die($project_id->get_error_message());
-            }
-	        $project_obj = new Project($project_id);
-	        $project_obj->setCode();
-        }
+        $project_id = $_GET['ID'];
+        $project_obj = new Project($project_id);
         $parts_string = stripslashes($_POST['pmb-project-sections-data']);
         $parts = json_decode($parts_string);
 	    $project_obj->clearGeneratedFiles();
@@ -366,8 +415,50 @@ class PmbAdmin extends BaseController
     public function checkFormSubmission()
     {
         $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
-        if(in_array($action,['new','edit'],true)){
-            $project_id = $this->saveProject();
+        if($action === 'new'){
+        	// Create a draft project
+	        $project_id = wp_insert_post(
+		        [
+			        'post_content' => '',
+			        'post_type' => CustomPostTypes::PROJECT,
+			        'post_status' => 'draft'
+		        ],
+		        true
+	        );
+	        if(is_wp_error($project_id)){
+		        wp_die($project_id->get_error_message());
+	        }
+	        $project_obj = new Project($project_id);
+	        $project_obj->setCode();
+	        // Redirect to it
+	        wp_redirect(
+		        add_query_arg(
+			        [
+				        'ID' => $project_id,
+				        'action' => 'edit',
+				        'subaction' => 'main'
+			        ],
+			        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+		        )
+	        );
+	        exit;
+        }
+        if( $action === 'edit'){
+        	$subaction = isset($_GET['subaction']) ? $_GET['subaction'] : null;
+        	switch($subaction){
+		        case 'choose_design':
+			        $this->saveProjectChooseDesign();
+			        break;
+		        case 'customize_design':
+			        $this->saveProjectCustomizeDesign();
+			        break;
+		        case 'content':
+			        $this->saveProjectContent();
+		        case 'metadata':
+			        $this->saveProjectMetadata();
+			        break;
+	        }
+	        $project_id = isset($_GET['ID']) ? $_GET['ID'] : null;
             if($_POST['pmb-save'] === 'pdf'){
                 $url = add_query_arg(
                     [
@@ -385,6 +476,7 @@ class PmbAdmin extends BaseController
 	                [
 		                'ID' => $project_id,
 		                'action' => 'edit',
+		                'subaction' => 'main'
 	                ],
 	                admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
                 )

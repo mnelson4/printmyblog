@@ -6,12 +6,9 @@
 <!--        </h2>-->
         <!-- clunky tabs: https://code.tutsplus.com/tutorials/the-wordpress-settings-api-part-5-tabbed-navigation-for-settings--wp-24971 -->
         <!-- or use https://gcostudios.com/how-to-add-jquery-ui-tabs-into-wordpress/ for jquery ui tabs -->
-    <h1><?php esc_html_e('Print My Blog - Edit Project', 'event_espresso'); ?></h1>
+    <h1><?php esc_html_e('Print My Blog - Edit Project Content', 'event_espresso'); ?></h1>
+    <h2><?php esc_html($project->post_title);?></h2>
     <form id="pmb-project-form" method="POST" action="<?php echo $form_url;?>">
-        <div id="pmb-project-main" class="pmb-project-main form-group">
-            <label for="pmb-project-title"><?php esc_html_e('Name', 'event_espresso'); ?></label>
-            <input type="text" class="form-control" name="pmb-project-title" value="<?php echo esc_attr($project->post_title);?>">
-        </div>
         <div id="pmb-project-layout" class="pmb-project-layout">
             <div class="pmb-project-layout-inner">
                 <div class="pmb-project-column">
@@ -37,7 +34,6 @@
         </div>
         <?php wp_nonce_field( 'pmb-project-edit' );?>
         <button class="button-primary button" id="pmb-save" name="pmb-save" value="save"><?php esc_html_e('Save', 'print-my-blog'); ?></button>
-        <button class="button-primary button" id="pmb-save" name="pmb-save" value="pdf"><?php esc_html_e('Generate PDF', 'print-my-blog'); ?></button>
     </form>
 
 

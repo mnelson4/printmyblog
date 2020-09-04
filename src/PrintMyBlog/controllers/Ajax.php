@@ -46,6 +46,7 @@ class Ajax extends BaseController
         	'pmb_project_status',
 	        'handleProjectStatus'
         );
+	    add_action('wp_ajax_pmb_save_project_main', [$this, 'handleSaveProjectMain' ]);
     }
 
     protected function addUnauthenticatedCallback($ajax_action, $method_name){
@@ -105,4 +106,22 @@ class Ajax extends BaseController
 		wp_send_json($response);
 		exit;
     }
+
+	public function handleSaveProjectMain(){
+		// Get the ID
+		$project_id = $_REQUEST['ID'];
+		// Check permission
+		if(check_admin_referer('pmb-project-edit') && current_user_can('edit_project', $project_id)){
+			// Save it
+			$project = $this->project_manager->getById($project_id);
+			$success = $project->setTitle($_REQUEST['pmb_title']);
+			$project->setFormatsSelected($_REQUEST['pmb_format']);
+		}
+		// Say it worked
+		if(is_wp_error($success)){
+			wp_send_json_error($success);
+		} else {
+			wp_send_json_success();
+		}
+	}
 }

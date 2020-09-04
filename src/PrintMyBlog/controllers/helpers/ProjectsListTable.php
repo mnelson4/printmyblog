@@ -178,6 +178,7 @@ class ProjectsListTable extends WP_List_Table
                 [
                     'ID' => $post->ID,
                     'action' => 'edit',
+	                'subaction' => 'main'
                 ],
                 admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
             ),

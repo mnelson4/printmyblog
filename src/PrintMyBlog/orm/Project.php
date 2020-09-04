@@ -4,6 +4,7 @@
 namespace PrintMyBlog\orm;
 
 use PrintMyBlog\db\PartFetcher;
+use PrintMyBlog\domain\ProjectFormatManager;
 use PrintMyBlog\services\ProjectHtmlGenerator;
 use WP_Post;
 use WP_Query;
@@ -15,8 +16,10 @@ use WP_Query;
  */
 class Project {
 
-	const POSTMETA_GENERATED = '_generated';
-	const POSTMETA_CODE = '_code';
+	const POSTMETA_GENERATED = '_pmb_generated';
+	const POSTMETA_CODE = '_pmb_code';
+	const POSTMETA_FORMAT = '_pmb_format';
+	const POSTMETA_DESIGN = '_pmb_design_for_';
 
 
 
@@ -34,6 +37,10 @@ class Project {
 	 * @var ProjectHtmlGenerator
 	 */
 	protected $html_generator;
+	/**
+	 * @var ProjectFormatManager
+	 */
+	protected $format_manager;
 
 	/**
 	 * Project constructor.
@@ -47,9 +54,12 @@ class Project {
 		$this->wp_post = $post;
 	}
 
-	public function inject(PartFetcher $part_fetcher)
+	public function inject(
+		PartFetcher $part_fetcher,
+		ProjectFormatManager $format_manager)
 	{
 		$this->part_fetcher = $part_fetcher;
+		$this->format_manager = $format_manager;
 	}
 
 	/**
@@ -57,6 +67,21 @@ class Project {
 	 */
 	public function getWpPost() {
 		return $this->wp_post;
+	}
+
+	/**
+	 * Sets the project's title and immediately saves it.
+	 * @param $title
+	 *
+	 * @return int|\WP_Error
+	 */
+	public function setTitle($title){
+		return wp_update_post(
+			[
+				'ID' => $this->getWpPost()->ID,
+				'post_title' => $title
+			]
+		);
 	}
 
 	public function generated()
@@ -152,6 +177,113 @@ class Project {
 			$this->html_generator = new ProjectHtmlGenerator($this);
 		}
 		return $this->html_generator;
+	}
+
+	/**
+	 * @param $project_format_slug
+	 *
+	 * @return bool
+	 */
+	public function isFormatSelected($project_format_slug){
+		return in_array(
+			$project_format_slug,
+			$this->getFormatsSelected()
+		);
+	}
+
+	/**
+	 * Gets the selected formats. Note: it's possible for a format to NOT be selected but still have a chosen design.
+	 * @return array of selected format slugs
+	 */
+	public function getFormatsSelected(){
+		return get_post_meta(
+			$this->getWpPost()->ID,
+			self::POSTMETA_FORMAT,
+			false
+		);
+	}
+
+	/**
+	 * @param $new_formats
+	 */
+	public function setFormatsSelected($new_formats){
+		$previous_formats = $this->getFormatsSelected();
+
+		foreach($this->format_manager->getFormats() as $format){
+			if(in_array($format->slug(), $new_formats)){
+				// It's requested to make this a selected format...
+				if(! in_array($format->slug(), $previous_formats)){
+					// if it wasn't already, add it.
+					add_post_meta(
+						$this->getWpPost()->ID,
+						self::POSTMETA_FORMAT,
+						$format->slug()
+					);
+				}
+				// if it's already selected, no need to do anything.
+			} else {
+				// We want it remove it...
+				if(in_array($format->slug(), $previous_formats)){
+					// and it was previously a selected format.
+					delete_post_meta(
+						$this->getWpPost()->ID,
+						self::POSTMETA_FORMAT,
+						$format->slug()
+					);
+				}
+				// If it wasn't previously selected, no need to change anything.
+			}
+		}
+	}
+
+	/**
+	 * Gets the slug of the design to use for the format specified.
+	 * @param $format_slug
+	 *
+	 * @return string
+	 */
+	public function getDesignFor($format_slug){
+		$value = get_post_meta(
+			$this->getWpPost()->ID,
+			self::POSTMETA_DESIGN . $format_slug,
+			true
+		);
+		if($value){
+			return $value;
+		}
+		return 'classic';
+	}
+
+	/**
+	 * Gets an the chosen designs for the chosen formats.
+	 * Keys are format slugs, values are design slugs.
+	 * @return array
+	 */
+	public function getDesigns()
+	{
+		$designs = [];
+		foreach($this->format_manager->getFormats() as $format){
+			$design = $this->getDesignFor($format->slug());
+			if($design){
+				$designs[$format->slug()] = $design;
+			}
+		}
+		return $designs;
+	}
+
+	/**
+	 * Sets the project's chosen design for the specified format.
+	 * @param $format_slug
+	 * @param $design_slug
+	 *
+	 * @return bool success
+	 */
+	public function setDesignFor($format_slug, $design_slug){
+		return (bool)update_post_meta(
+			$this->getWpPost()->ID,
+			self::POSTMETA_DESIGN . $format_slug,
+			$design_slug
+		);
 	}
 
 	/**
