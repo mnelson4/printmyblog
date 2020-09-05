@@ -5,7 +5,7 @@ namespace PrintMyBlog\controllers;
 use mnelson4\RestApiDetector\RestApiDetector;
 use mnelson4\RestApiDetector\RestApiDetectorError;
 use PrintMyBlog\db\PartFetcher;
-use PrintMyBlog\orm\ProjectManager;
+use PrintMyBlog\orm\managers\ProjectManager;
 use Twine\controllers\BaseController;
 use WP_Query;
 

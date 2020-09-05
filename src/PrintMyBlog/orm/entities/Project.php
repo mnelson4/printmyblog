@@ -1,11 +1,12 @@
 <?php
 
 
-namespace PrintMyBlog\orm;
+namespace PrintMyBlog\orm\entities;
 
 use PrintMyBlog\db\PartFetcher;
-use PrintMyBlog\domain\ProjectFormatManager;
+use PrintMyBlog\domain\FormatManager;
 use PrintMyBlog\services\ProjectHtmlGenerator;
+use Twine\orm\entities\PostWrapper;
 use WP_Post;
 use WP_Query;
 
@@ -14,19 +15,12 @@ use WP_Query;
  * @package PrintMyBlog\orm
  * Class that wraps a WP_Post, but also stores related info like parts, and has related methods.
  */
-class Project {
+class Project extends PostWrapper{
 
 	const POSTMETA_GENERATED = '_pmb_generated';
 	const POSTMETA_CODE = '_pmb_code';
 	const POSTMETA_FORMAT = '_pmb_format';
 	const POSTMETA_DESIGN = '_pmb_design_for_';
-
-
-
-	/**
-	 * @var WP_Post
-	 */
-	protected $wp_post;
 
 	/**
 	 * @var PartFetcher
@@ -38,35 +32,16 @@ class Project {
 	 */
 	protected $html_generator;
 	/**
-	 * @var ProjectFormatManager
+	 * @var FormatManager
 	 */
 	protected $format_manager;
 
-	/**
-	 * Project constructor.
-	 *
-	 * @param WP_Post|int $post object or ID
-	 */
-	public function __construct($post){
-		if(is_int($post) || is_string($post)){
-			$post = get_post($post);
-		}
-		$this->wp_post = $post;
-	}
-
 	public function inject(
 		PartFetcher $part_fetcher,
-		ProjectFormatManager $format_manager)
+		FormatManager $format_manager)
 	{
 		$this->part_fetcher = $part_fetcher;
 		$this->format_manager = $format_manager;
-	}
-
-	/**
-	 * @return WP_Post
-	 */
-	public function getWpPost() {
-		return $this->wp_post;
 	}
 
 	/**
@@ -300,7 +275,7 @@ class Project {
 		if( ! $success ){
 			return false;
 		}
-		return wp_delete_post($this->getWpPost()->ID);
+		return parent::delete();
 	}
 
 	/**

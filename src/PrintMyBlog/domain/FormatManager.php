@@ -4,11 +4,13 @@
 namespace PrintMyBlog\domain;
 
 
-class ProjectFormatManager {
+use PrintMyBlog\entities\Format;
+
+class FormatManager {
 
 	/**
 	 * Gets the declared project formats
-	 * @return ProjectFormat[]
+	 * @return Format[]
 	 */
 	public function getFormats()
 	{
@@ -21,20 +23,20 @@ class ProjectFormatManager {
 	}
 
 	/**
-	 * @return ProjectFormat[]
+	 * @return Format[]
 	 */
 	protected function declareFormats()
 	{
 		/**
-		 * @var $formats ProjectFormat[]
+		 * @var $formats Format[]
 		 */
 		$formats = apply_filters(
 			'PrintMyBlog\domain\ProjectFormatManager->declareFormats',
 			[
-				'digital_pdf' => new ProjectFormat(
+				'digital_pdf' => new Format(
 					__('Digital PDF', 'print-my-blog')
 				),
-				'print_pdf' => new ProjectFormat(
+				'print_pdf' => new Format(
 					__('Print PDF', 'print-my-blog')
 				)
 			]

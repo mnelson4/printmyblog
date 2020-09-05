@@ -1,10 +1,10 @@
 <?php
 
 
-namespace PrintMyBlog\domain;
+namespace PrintMyBlog\entities;
 
 
-class ProjectFormat {
+class Format {
 	/**
 	 * @var string
 	 */

@@ -7,9 +7,9 @@ use PrintMyBlog\db\PartFetcher;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
-use PrintMyBlog\domain\ProjectFormatManager;
-use PrintMyBlog\orm\Project;
-use PrintMyBlog\orm\ProjectManager;
+use PrintMyBlog\domain\FormatManager;
+use PrintMyBlog\orm\entities\Project;
+use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\system\Context;
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\services\display\FormInputs;
@@ -46,7 +46,7 @@ class PmbAdmin extends BaseController
     protected $project_manager;
 
 	/**
-	 * @var ProjectFormatManager
+	 * @var FormatManager
 	 */
     protected $project_format_manager;
 
@@ -59,7 +59,7 @@ class PmbAdmin extends BaseController
     	PostFetcher $post_fetcher,
 	    PartFetcher $part_fetcher,
 	    ProjectManager $project_manager,
-		ProjectFormatManager $project_format_manager){
+		FormatManager $project_format_manager){
         $this->post_fetcher = $post_fetcher;
         $this->part_fetcher = $part_fetcher;
         $this->project_manager = $project_manager;
@@ -501,7 +501,7 @@ class PmbAdmin extends BaseController
 			/**
 			 * @var $manager ProjectManager
 			 */
-			$manager = Context::instance()->reuse('PrintMyBlog\orm\ProjectManager');
+			$manager = Context::instance()->reuse('PrintMyBlog\orm\managers\ProjectManager');
 			$manager->deleteProjects($_POST['ID']);
 		}
 	}

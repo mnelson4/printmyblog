@@ -41,17 +41,17 @@ class Context extends BaseContext
                 'pmb_version_history'
             ],
 	        'PrintMyBlog\controllers\PmbAdmin' => [
-                'PrintMyBlog\db\PostFetcher' => self::REUSE,
-                'PrintMyBlog\db\PartFetcher' => self::REUSE,
-		        'PrintMyBlog\orm\ProjectManager' => self::REUSE,
-		        'PrintMyBlog\domain\ProjectFormatManager' => self::REUSE,
+		        'PrintMyBlog\db\PostFetcher'              => self::REUSE,
+		        'PrintMyBlog\db\PartFetcher'              => self::REUSE,
+		        'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
+		        'PrintMyBlog\domain\FormatManager'        => self::REUSE,
             ],
 	        'PrintMyBlog\controllers\Ajax'     => [
-	        	'PrintMyBlog\orm\ProjectManager' => self::REUSE
+	        	'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE
 	        ],
-	        'PrintMyBlog\orm\Project'          => [
-	        	'PrintMyBlog\db\PartFetcher' => self::REUSE,
-		        'PrintMyBlog\domain\ProjectFormatManager' => self::REUSE
+	        'PrintMyBlog\orm\entities\Project'          => [
+		        'PrintMyBlog\db\PartFetcher'       => self::REUSE,
+		        'PrintMyBlog\domain\FormatManager' => self::REUSE
 	        ],
         ];
     }

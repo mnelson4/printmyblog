@@ -1,7 +1,5 @@
 <?php
 namespace PrintMyBlog\controllers\helpers;
-use PrintMyBlog\orm\ProjectManager;
-use PrintMyBlog\system\Context;
 use PrintMyBlog\system\CustomPostTypes;
 use WP_List_Table;
 use WP_Post;

@@ -3,7 +3,7 @@
 
 namespace PrintMyBlog\services;
 
-use PrintMyBlog\orm\Project;
+use PrintMyBlog\orm\entities\Project;
 use Twine\services\filesystem\File;
 use WP_Post;
 use WP_Query;
