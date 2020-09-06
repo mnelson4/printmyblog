@@ -125,8 +125,6 @@ if (defined('PMB_VERSION')) {
     define('PMB_MAIN_FILE', __FILE__);
     define('PMB_TEMPLATES_DIR', PMB_DIR . 'templates/');
     define('PMB_VENDOR_DIR', PMB_DIR . 'vendor/');
-    define('PMB_TWINE_DIR', PMB_DIR . 'twine_framework/');
-    define('PMB_TWINE_INCLUDES_DIR', PMB_TWINE_DIR . 'includes/');
     define('PMB_ADMIN_CAP', 'read_private_posts');
     define('PMB_BASENAME', plugin_basename(PMB_MAIN_FILE));
     define('PMB_ADMIN_PAGE_SLUG', 'print-my-blog-now');

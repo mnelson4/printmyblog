@@ -158,5 +158,12 @@ class Init
         define('PMB_STYLES_DIR', PMB_ASSETS_DIR . 'styles/');
 
         define('PMB_DEFAULT_DESIGNS_URL', $plugin_url . 'default_designs/');
+
+        // Twine constants
+	    define('TWINE_SCRIPTS_URL', PMB_SCRIPTS_URL . 'twine/');
+	    define('TWINE_STYLES_URL', PMB_SCRIPTS_URL . 'twine/');
+
+	    define('TWINE_SCRIPTS_DIR', PMB_ASSETS_DIR . 'twine/');
+	    define('TWINE_STYLES_DIR', PMB_ASSETS_DIR . 'twine/');
     }
 }

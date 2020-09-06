@@ -32,6 +32,19 @@ class PostWrapper {
 	}
 
 	/**
+	 * Generic function to get metadata stored on the post object.
+	 * @param $meta_name
+	 * @return mixed
+	 */
+	public function getMeta($meta_name){
+		return get_post_meta(
+			$this->getWpPost()->ID,
+			$meta_name,
+			true
+		);
+	}
+
+	/**
 	 *
 	 * return bool success
 	 */

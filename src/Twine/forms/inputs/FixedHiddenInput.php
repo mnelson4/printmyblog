@@ -1,0 +1,25 @@
+<?php
+namespace Twine\forms\inputs;
+/**
+ * Fixed_Hidden_Input
+ *
+ * @package         Event Espresso
+ * @subpackage
+ * @author              Brent Christensen
+ */
+class FixedHiddenInput extends HiddenInput
+{
+
+
+    /**
+     * Fixed Inputs are inputs that do NOT accept user input
+     * therefore they will ALWAYS return the default value that was set upon their creation
+     * and NO normalization or sanitization will occur because the $_REQUEST value is being ignored
+     *
+     * @param array $req_data like $_POST
+     * @return boolean whether or not there was an error
+     */
+    protected function _normalize($req_data)
+    {
+    }
+}

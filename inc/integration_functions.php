@@ -6,8 +6,9 @@
  */
 function pmb_register_design_template($slug, $configuration_callback){
 	// slug
-	// pretty name
+	// title
 	// format
+	// directory
 	// options
 	// metadata
 }

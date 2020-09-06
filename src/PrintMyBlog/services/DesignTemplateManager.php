@@ -36,11 +36,25 @@ class DesignTemplateManager {
 			if(! isset($this->design_template_callbacks[$slug])) {
 				throw new Exception( 'There is no callback for the design template "' . $slug . '"' );
 			}
-			$design_template = call_user_func($this->design_template_callbacks[$slug]);
+			$this->design_templates[$slug] = call_user_func($this->design_template_callbacks[$slug]);
 		}
-		if(! $design_template instanceof DesignTemplate){
+		if(! $this->design_templates[$slug] instanceof DesignTemplate){
 			throw new Exception('Did not find a proper DesignTemplate for slug "' . $slug . '"');
 		}
-		return $design_template;
+		return $this->design_templates[$slug];
+	}
+
+	/**
+	 * Gets all the registered design templates
+	 * @return DesignTemplate[]
+	 */
+	public function getDesignTemplates()
+	{
+		foreach($this->design_template_callbacks as $slug => $callback){
+			if(! isset($this->design_templates[$slug]) || ! $this->design_templates[$slug] instanceof DesignTemplate){
+				$this->design_templates[$slug] = call_user_func($this->design_template_callbacks[$slug]);
+			}
+		}
+		return $this->design_templates;
 	}
 }
