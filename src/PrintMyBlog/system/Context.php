@@ -29,7 +29,8 @@ class Context extends BaseContext
 	        'PrintMyBlog\system\Activation' => [
                 'Twine\system\RequestType' => self::REUSE,
                 'PrintMyBlog\db\TableManager' => self::REUSE,
-                'PrintMyBlog\system\Capabilities' => self::REUSE
+                'PrintMyBlog\system\Capabilities' => self::REUSE,
+		        'PrintMyBlog\services\DesignRegistry' => self::REUSE
             ],
 	        'Twine\system\RequestType'         => [
                 'Twine\system\VersionHistory' => self::REUSE,
@@ -53,6 +54,10 @@ class Context extends BaseContext
 		        'PrintMyBlog\db\PartFetcher'       => self::REUSE,
 		        'PrintMyBlog\domain\FormatManager' => self::REUSE
 	        ],
+	        'PrintMyBlog\services\DesignRegistry' => [
+	        	'PrintMyBlog\orm\managers\DesignManager' => self::REUSE,
+		        'PrintMyBlog\services\DesignTemplateRegistry' => self::REUSE
+	        ]
         ];
     }
 

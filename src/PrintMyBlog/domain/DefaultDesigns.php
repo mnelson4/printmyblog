@@ -4,16 +4,27 @@
 namespace PrintMyBlog\domain;
 
 
-class DefaultDesigns {
-	public function registerDefaultDesignTemplates()
-	{
-		pmb_register_design(
-			'classic'
-		);
-	}
+use PrintMyBlog\entities\DesignTemplate;
 
+class DefaultDesigns {
 	public function registerDefaultDesigns()
 	{
-		pmb_regi
+		pmb_register_design(
+			'classic_digital',
+			'classic_digital_pdf',
+			function(DesignTemplate $design_template){
+				return [
+					'title' => __('Classic Digital PDF', 'print-my-blog'),
+					'description' => __('Look inspired by Print My Blogs original, containing a quick printout heading and compact design.', 'print-my-blog'),
+					'featured_image' => plugins_url($design_template->getDir() . '/preview.png'),
+					'design_defaults' => [
+						'use_title' => true,
+					],
+					'project_defaults' => [
+						'title' => get_bloginfo('name')
+					]
+				];
+			}
+		);
 	}
 }

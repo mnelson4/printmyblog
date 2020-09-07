@@ -4,6 +4,7 @@
 namespace Twine\orm\managers;
 
 
+use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\system\Context;
 use WP_Post;
 
@@ -17,8 +18,20 @@ class PostWrapperManager {
 	 */
 	public function getById($post_id){
 		$wp_post = get_post($post_id);
-		$post_wrapper = $this->createProjectFromWpPost($wp_post);
+		$post_wrapper = $this->createWrapperAroundPost($wp_post);
 		return $post_wrapper;
+	}
+
+	/**
+	 * @param $slug
+	 * @return Design|null
+	 */
+	public function getBySlug($slug){
+		$post_object = get_page_by_path($slug, OBJECT, $this->cap_slug);
+		if($post_object instanceof WP_Post){
+			return $this->createWrapperAroundPost($post_object);
+		}
+		return null;
 	}
 
 	/**
@@ -26,7 +39,7 @@ class PostWrapperManager {
 	 *
 	 * @return PostWrapperManager
 	 */
-	protected function createProjectFromWpPost(WP_Post $post){
+	protected function createWrapperAroundPost(WP_Post $post){
 		$post_wrapper = Context::instance()->use_new(
 			$this->class_to_instantiate,
 			[$post]
@@ -47,7 +60,7 @@ class PostWrapperManager {
 			if(! current_user_can('delete_' . $this->cap_slug, $post)){
 				continue;
 			}
-			$project = $this->createProjectFromWpPost($post);
+			$project = $this->createWrapperAroundPost($post);
 			if($project instanceof Project){
 				$project->delete();
 			}

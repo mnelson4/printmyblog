@@ -3,6 +3,7 @@
 namespace PrintMyBlog\system;
 
 use PrintMyBlog\db\TableManager;
+use PrintMyBlog\services\DesignRegistry;
 use Twine\system\RequestType;
 use Twine\system\Activation as BaseActivation;
 /**
@@ -29,16 +30,22 @@ class Activation extends BaseActivation
      * @var Capabilities
      */
     protected $capabilities;
+	/**
+	 * @var DesignRegistry|null
+	 */
+	protected $design_registry;
 
 
-    public function inject(
+	public function inject(
         RequestType $request_type,
         TableManager $table_manager = null,
-        Capabilities $capabilities = null
+        Capabilities $capabilities = null,
+		DesignRegistry $design_registry = null
     ) {
         parent::inject($request_type);
         $this->table_manager = $table_manager;
         $this->capabilities = $capabilities;
+        $this->design_registry = $design_registry;
     }
     /**
      * Redirects the user to the blog printing page if the user just activated the plugin and
@@ -66,6 +73,7 @@ class Activation extends BaseActivation
     public function install(){
         $this->table_manager->installTables();
         $this->capabilities->grant_capabilities();
+        $this->design_registry->createRegisteredDesign();
     }
 
 

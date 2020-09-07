@@ -4,10 +4,12 @@
 namespace PrintMyBlog\services;
 
 
+use Exception;
 use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\orm\entities\Design;
+use PrintMyBlog\system\Context;
 
-class DesignTemplateManager {
+class DesignTemplateRegistry {
 	/**
 	 * @var $design_template_callbacks callable[]
 	 */
@@ -20,7 +22,7 @@ class DesignTemplateManager {
 
 	/**
 	 * @param $slug
-	 * @param callabel $callback
+	 * @param callable $callback that returns the args to pass into DesignTemplate::__construct()
 	 */
 	public function registerDesignTemplateCallback($slug, $callback){
 		$this->design_template_callbacks[$slug] = $callback;
@@ -36,7 +38,13 @@ class DesignTemplateManager {
 			if(! isset($this->design_template_callbacks[$slug])) {
 				throw new Exception( 'There is no callback for the design template "' . $slug . '"' );
 			}
-			$this->design_templates[$slug] = call_user_func($this->design_template_callbacks[$slug]);
+			$this->design_templates[$slug] = Context::instance()->use_new(
+				'PrintMyBlog\entities\DesignTemplate',
+				[
+					$slug,
+					call_user_func($this->design_template_callbacks[$slug])
+				]
+			);
 		}
 		if(! $this->design_templates[$slug] instanceof DesignTemplate){
 			throw new Exception('Did not find a proper DesignTemplate for slug "' . $slug . '"');
