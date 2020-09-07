@@ -15,21 +15,6 @@ use Twine\forms\helpers\ImproperUsageException;
  */
 abstract class FormSectionBase
 {
-
-    /**
-     * the URL the form is submitted to
-     *
-     * @var string
-     */
-    protected $_action;
-
-    /**
-     * POST (default) or GET
-     *
-     * @var string
-     */
-    protected $_method;
-
     /**
      * html_id and html_name are derived from this by default
      *
@@ -140,55 +125,6 @@ abstract class FormSectionBase
             $this->_construct_finalize($this->_parent_section, $this->_name);
         }
     }
-
-
-
-    /**
-     * @return string
-     */
-    public function action()
-    {
-        return $this->_action;
-    }
-
-
-
-    /**
-     * @param string $action
-     */
-    public function set_action($action)
-    {
-        $this->_action = $action;
-    }
-
-
-
-    /**
-     * @return string
-     */
-    public function method()
-    {
-        return ! empty($this->_method) ? $this->_method : 'POST';
-    }
-
-
-
-    /**
-     * @param string $method
-     */
-    public function set_method($method)
-    {
-        switch ($method) {
-            case 'get':
-            case 'GET':
-                $this->_method = 'GET';
-                break;
-            default:
-                $this->_method = 'POST';
-        }
-    }
-
-
 
     /**
      * Sets the html_id to its default value, if none was specified in the constructor.
@@ -386,72 +322,8 @@ abstract class FormSectionBase
      *
      * @return FormSectionProper
      */
-    public function parent_section()
-    {
-        return $this->_parent_section;
-    }
-
-
-    /**
-     * returns HTML for generating the opening form HTML tag (<form>)
-     *
-     * @param string $action           the URL the form is submitted to
-     * @param string $method           POST (default) or GET
-     * @param string $other_attributes anything else added to the form open tag, MUST BE VALID HTML
-     * @return string
-     * @throws Error
-     */
-    public function form_open($action = '', $method = '', $other_attributes = '')
-    {
-        if (! empty($action)) {
-            $this->set_action($action);
-        }
-        if (! empty($method)) {
-            $this->set_method($method);
-        }
-        $html = EEH_HTML::nl(1, 'form') . '<form';
-        $html .= $this->html_id() !== '' ? ' id="' . $this->get_html_id_for_form($this->html_id()) . '"' : '';
-        $html .= ' action="' . $this->action() . '"';
-        $html .= ' method="' . $this->method() . '"';
-        $html .= ' name="' . $this->name() . '"';
-        $html .= $other_attributes . '>';
-        return $html;
-    }
-
-
-
-    /**
-     * ensures that html id for form either ends in "-form" or "-frm"
-     * so that id doesn't conflict/collide with other elements
-     *
-     * @param string $html_id
-     * @return string
-     */
-    protected function get_html_id_for_form($html_id)
-    {
-        $strlen = strlen($html_id);
-        $html_id = strpos($html_id, '-form') === $strlen-5 || strpos($html_id, '-frm') === $strlen - 4
-            ? $html_id
-            : $html_id . '-frm';
-        return $html_id;
-    }
-
-
-    /**
-     * returns HTML for generating the closing form HTML tag (</form>)
-     *
-     * @return string
-     * @throws Error
-     */
-    public function form_close()
-    {
-        return EEH_HTML::nl(-1, 'form')
-               . '</form>'
-               . EEH_HTML::nl()
-               . '<!-- end of ee-'
-               . $this->html_id()
-               . '-form -->'
-               . EEH_HTML::nl();
+    public function parent_section() {
+	    return $this->_parent_section;
     }
 
 
@@ -465,6 +337,16 @@ abstract class FormSectionBase
      */
     public function enqueue_js()
     {
+    	if(!defined('TWINE_SCRIPTS_URL')){
+    		$plugin_base_path = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
+		    $plugin_url = plugin_dir_url($plugin_base_path);
+		    // Twine constants
+		    define('TWINE_SCRIPTS_URL', $plugin_url . 'src/Twine/assets/scripts/');
+		    define('TWINE_STYLES_URL', $plugin_url . 'src/Twine/assets/styles/');
+
+		    define('TWINE_SCRIPTS_DIR', $plugin_base_path . 'src/Twine/assets/scripts/');
+		    define('TWINE_STYLES_DIR', $plugin_base_path . 'src/Twine/assets/styles');
+	    }
         // defaults to enqueue NO js or css
     }
 
