@@ -7,7 +7,7 @@ use PrintMyBlog\db\PartFetcher;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
-use PrintMyBlog\domain\FormatManager;
+use PrintMyBlog\domain\FileFormats;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\system\Context;
@@ -46,7 +46,7 @@ class PmbAdmin extends BaseController
     protected $project_manager;
 
 	/**
-	 * @var FormatManager
+	 * @var FileFormats
 	 */
     protected $project_format_manager;
 
@@ -59,7 +59,7 @@ class PmbAdmin extends BaseController
     	PostFetcher $post_fetcher,
 	    PartFetcher $part_fetcher,
 	    ProjectManager $project_manager,
-		FormatManager $project_format_manager){
+		FileFormats $project_format_manager){
         $this->post_fetcher = $post_fetcher;
         $this->part_fetcher = $part_fetcher;
         $this->project_manager = $project_manager;

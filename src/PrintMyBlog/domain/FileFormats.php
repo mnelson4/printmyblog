@@ -6,7 +6,7 @@ namespace PrintMyBlog\domain;
 
 use PrintMyBlog\entities\Format;
 
-class FormatManager {
+class FileFormats {
 
 	/**
 	 * Gets the declared project formats

@@ -4,7 +4,7 @@
 namespace PrintMyBlog\orm\entities;
 
 use PrintMyBlog\db\PartFetcher;
-use PrintMyBlog\domain\FormatManager;
+use PrintMyBlog\domain\FileFormats;
 use PrintMyBlog\services\ProjectHtmlGenerator;
 use Twine\orm\entities\PostWrapper;
 use WP_Post;
@@ -32,13 +32,13 @@ class Project extends PostWrapper{
 	 */
 	protected $html_generator;
 	/**
-	 * @var FormatManager
+	 * @var FileFormats
 	 */
 	protected $format_manager;
 
 	public function inject(
 		PartFetcher $part_fetcher,
-		FormatManager $format_manager)
+		FileFormats $format_manager)
 	{
 		$this->part_fetcher = $part_fetcher;
 		$this->format_manager = $format_manager;
