@@ -2,12 +2,14 @@
 
 namespace PrintMyBlog\controllers;
 
+use Exception;
 use PrintMyBlog\controllers\helpers\ProjectsListTable;
 use PrintMyBlog\db\PartFetcher;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
 use PrintMyBlog\domain\FileFormats;
+use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\system\Context;
@@ -331,24 +333,25 @@ class PmbAdmin extends BaseController
         $action = isset($_GET['action']) ? $_GET['action'] : null;
         if($action === self::SLUG_ACTION_EDIT_PROJECT) {
         	$subaction = isset($_GET['subaction']) ? $_GET['subaction'] : null;
+	        $project = $this->project_manager->getById($_GET['ID']);
         	switch($subaction) {
 		        case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
-			        $this->editChooseDesign();
+			        $this->editChooseDesign($project);
 			        break;
 		        case self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN:
-			        $this->editCustomizeDesign();
+			        $this->editCustomizeDesign($project);
 			        break;
 		        case self::SLUG_SUBACTION_PROJECT_CONTENT:
-		        	$this->editContent();
+		        	$this->editContent($project);
 		        case self::SLUG_SUBACTION_PROJECT_META:
-			        $this->editMetadata();
+			        $this->editMetadata($project);
 			        break;
 		        case self::SLUG_SUBACTION_PROJECT_GENERATE:
-			        $this->editGenerate();
+			        $this->editGenerate($project);
 			        break;
 		        case self::SLUG_SUBACTION_PROJECT_MAIN:
 		        default:
-			        $this->editMain();
+			        $this->editMain($project);
 	        }
 
         } else {
@@ -367,8 +370,7 @@ class PmbAdmin extends BaseController
 	/**
 	 * @param $action
 	 */
-    protected function editMain(){
-		$project = $this->project_manager->getById($_GET['ID']);
+    protected function editMain(Project $project){
 		$form_url = add_query_arg(
 			[
 				'action' => 'pmb_save_project_main',
@@ -381,10 +383,32 @@ class PmbAdmin extends BaseController
 		include(PMB_TEMPLATES_DIR . 'project_edit_main.template.php');
     }
 
-    protected function editContent()
+    protected function editCustomizeDesign(Project $project){
+    	$format_slug = $_GET['format'];
+    	$design = $project->getDesignFor($format_slug);
+    	if(! $design instanceof Design){
+    		throw new Exception(sprintf(
+    			'Could not determine the design for project "%s" for format "%s"',
+		        $project->getWpPost()->ID,
+		        $format_slug
+		    ));
+	    }
+    	$form = $design->getDesignTemplate()->getDesignForm();
+    	$form_url = add_query_arg(
+		    [
+			    'action' => self::SLUG_ACTION_EDIT_PROJECT,
+			    'subaction' => self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN,
+			    '_nonce' => wp_create_nonce( 'pmb-project-edit' ),
+			    'ID' => $project->getWpPost()->ID
+		    ],
+		    admin_url('admin-ajax.php')
+	    );
+    	include(PMB_TEMPLATES_DIR . 'design_customize.template.php');
+    }
+
+    protected function editContent(Project $project)
     {
 	    $post_options = $this->post_fetcher->fetchPostOptionssForProject();
-	    $project = get_post($_GET['ID']);
 	    $parts = $this->part_fetcher->fetchPartsFor($_GET['ID']);
 	    $form_url = add_query_arg(
 		    [

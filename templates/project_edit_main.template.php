@@ -35,7 +35,8 @@ use PrintMyBlog\controllers\PmbAdmin;
 		            [
 			            'ID' => $project->getWpPost()->ID,
 			            'action' => PmbAdmin::SLUG_ACTION_EDIT_PROJECT,
-			            'subaction' => PmbAdmin::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN
+			            'subaction' => PmbAdmin::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN,
+                        'format' => $format->slug()
 		            ],
 		            admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	            );

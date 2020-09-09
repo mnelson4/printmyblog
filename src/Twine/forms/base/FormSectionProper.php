@@ -7,7 +7,9 @@ use Twine\forms\helpers\ImproperUsageException;
 use Twine\forms\helpers\ValidationError;
 use Twine\forms\inputs\FormInputBase;
 use Twine\forms\strategies\display\HiddenDisplay;
+use Twine\forms\strategies\layout\AdminTwoColumnLayout;
 use Twine\forms\strategies\layout\FormSectionLayoutBase;
+use Twine\forms\strategies\layout\TwoColumnLayout;
 use Twine\helpers\Array2;
 
 /**
@@ -357,6 +359,24 @@ class FormSectionProper extends FormSectionValidatable
                 }
             }
         }
+    }
+
+	/**
+	 * Recursively searches through the form for an input with the specified name.
+	 * @param $input_name
+	 *
+	 * @return FormSectionValidatable|null
+	 */
+    public function findSection($input_name){
+    	foreach($this->subsections() as $subsection_name => $subsection_obj){
+    		if($subsection_name === $input_name){
+    			return $subsection_obj;
+		    }
+    		if($subsection_obj instanceof FormSectionProper){
+    			return $subsection_obj->findSection($input_name);
+		    }
+	    }
+    	return null;
     }
 
 

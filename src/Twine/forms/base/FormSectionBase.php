@@ -4,6 +4,16 @@ use EventEspresso\core\exceptions\InvalidDataTypeException;
 use EventEspresso\core\libraries\form_sections\strategies\filter\FormHtmlFilter;
 use Twine\forms\helpers\ImproperUsageException;
 
+if(!defined('TWINE_SCRIPTS_URL')){
+	$plugin_base_path = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
+	$plugin_url = plugin_dir_url($plugin_base_path);
+	// Twine constants
+	define('TWINE_SCRIPTS_URL', $plugin_url . '/src/Twine/assets/scripts/');
+	define('TWINE_STYLES_URL', $plugin_url . '/src/Twine/assets/styles/');
+
+	define('TWINE_SCRIPTS_DIR', $plugin_base_path . '/src/Twine/assets/scripts/');
+	define('TWINE_STYLES_DIR', $plugin_base_path . '/src/Twine/assets/styles');
+}
 /**
  * FormSectionBase
  * For shared functionality between form sections that are for display-only, and
@@ -337,16 +347,6 @@ abstract class FormSectionBase
      */
     public function enqueue_js()
     {
-    	if(!defined('TWINE_SCRIPTS_URL')){
-    		$plugin_base_path = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
-		    $plugin_url = plugin_dir_url($plugin_base_path);
-		    // Twine constants
-		    define('TWINE_SCRIPTS_URL', $plugin_url . 'src/Twine/assets/scripts/');
-		    define('TWINE_STYLES_URL', $plugin_url . 'src/Twine/assets/styles/');
-
-		    define('TWINE_SCRIPTS_DIR', $plugin_base_path . 'src/Twine/assets/scripts/');
-		    define('TWINE_STYLES_DIR', $plugin_base_path . 'src/Twine/assets/styles');
-	    }
         // defaults to enqueue NO js or css
     }
 

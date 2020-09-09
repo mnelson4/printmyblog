@@ -11,7 +11,7 @@ namespace Twine\forms\strategies\normalization;
  * @subpackage
  * @author                Mike Nelson
  */
-class BooleanNormalization extends NormalizationStrategyBase
+class BooleanNormalization extends NormalizationBase
 {
 
     /**

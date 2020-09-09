@@ -6,6 +6,7 @@ namespace PrintMyBlog\orm\entities;
 use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\services\DesignTemplateRegistry;
 use Twine\forms\base\FormSectionProper;
+use Twine\forms\inputs\FormInputBase;
 use Twine\orm\entities\PostWrapper;
 
 /**
@@ -27,6 +28,7 @@ class Design extends PostWrapper {
 	 * @var FormSectionProper
 	 */
 	protected $project_form;
+	protected $design_form;
 
 	public function inject(DesignTemplateRegistry $design_template_manager){
 		$this->design_template_manager = $design_template_manager;
@@ -37,9 +39,41 @@ class Design extends PostWrapper {
 	 */
 	public function getDesignTemplate(){
 		if( ! $this->design_template instanceof DesignTemplate){
-			$this->design_template = $this->design_template_manager->getDesignTemplate($this->getPmbMeta('template'));
+			$this->design_template = $this->design_template_manager->getDesignTemplate($this->getPmbMeta('design_template'));
 		}
 		return $this->design_template;
+	}
+
+	public function getSetting($setting_name){
+		// tries to get the setting from a postmeta
+		$setting = $this->getPmbMeta($setting_name);
+		if($setting !== null){
+			return $setting;
+		}
+		// otherwise falls back to using the default in the form
+		if($setting_name === 'design_template'){
+			throw new Exception(
+				sprintf('Could not determine design template for the design "%s". The postmeta is missing.',
+					$this->getWpPost()->post_title)
+			);
+		}
+		$form = $this->getDesignForm();
+		$section = $form->findSection($setting_name);
+		if($section instanceof FormInputBase){
+			return $section->get_default();
+		}
+		return null;
+	}
+
+	/**
+	 * @return FormSectionProper
+	 */
+	public function getDesignForm(){
+		if(! $this->design_form instanceof FormSectionProper){
+			$design_template = $this->getDesignTemplate();
+			$this->design_form = $design_template->getDesignForm();
+		}
+		return $this->design_form;
 	}
 
 	/**

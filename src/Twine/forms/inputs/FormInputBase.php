@@ -233,10 +233,6 @@ abstract class FormInputBase extends FormSectionValidatable
             $this->set_default($input_args['default']);
             unset($input_args['default']);
         }
-        if (! $this->_sensitive_data_removal_strategy) {
-            $this->_sensitive_data_removal_strategy = new No_Sensitive_Data_Removal();
-        }
-        $this->_sensitive_data_removal_strategy->_construct_finalize($this);
         parent::__construct($input_args);
     }
 
