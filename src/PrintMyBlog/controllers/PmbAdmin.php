@@ -30,6 +30,14 @@ use WP_Post;
 class PmbAdmin extends BaseController
 {
 
+	const SLUG_ACTION_EDIT_PROJECT = 'edit';
+	const SLUG_SUBACTION_PROJECT_MAIN = 'main';
+	const SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN = 'customize_design';
+	const SLUG_SUBACTION_PROJECT_CHANGE_DESIGN = 'choose_design';
+	const SLUG_SUBACTION_PROJECT_CONTENT = 'content';
+	const SLUG_SUBACTION_PROJECT_META = 'metadata';
+	const SLUG_SUBACTION_PROJECT_GENERATE = 'generate';
+
     /**
      * @var PostFetcher
      */
@@ -271,10 +279,10 @@ class PmbAdmin extends BaseController
             wp_enqueue_style('pmb-setup-page');
         } elseif($hook === 'print-my-blog_page_print-my-blog-projects'
                  && isset($_GET['action'])
-	            && $_GET['action'] === 'edit'
+	            && $_GET['action'] === self::SLUG_ACTION_EDIT_PROJECT
             ) {
         	switch(isset($_GET['subaction']) ? $_GET['subaction'] : null){
-		        case 'content':
+		        case self::SLUG_SUBACTION_PROJECT_CONTENT:
 			        wp_register_script(
 				        'sortablejs',
 				        PMB_SCRIPTS_URL . 'libs/Sortable.min.js',
@@ -289,7 +297,7 @@ class PmbAdmin extends BaseController
 				        filemtime(PMB_SCRIPTS_DIR . 'project-edit-content.js')
 			        );
 			        break;
-		        case 'main':
+		        case self::SLUG_SUBACTION_PROJECT_MAIN:
 		        default:
 		        	wp_enqueue_script('pmb_project_edit_main',
 			        PMB_SCRIPTS_URL . 'project-edit-main.js',
@@ -321,24 +329,24 @@ class PmbAdmin extends BaseController
     public function renderProjects()
     {
         $action = isset($_GET['action']) ? $_GET['action'] : null;
-        if($action === 'edit') {
+        if($action === self::SLUG_ACTION_EDIT_PROJECT) {
         	$subaction = isset($_GET['subaction']) ? $_GET['subaction'] : null;
         	switch($subaction) {
-		        case 'choose_design':
+		        case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
 			        $this->editChooseDesign();
 			        break;
-		        case 'customize_design':
+		        case self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN:
 			        $this->editCustomizeDesign();
 			        break;
-		        case 'content':
+		        case self::SLUG_SUBACTION_PROJECT_CONTENT:
 		        	$this->editContent();
-		        case 'metadata':
+		        case self::SLUG_SUBACTION_PROJECT_META:
 			        $this->editMetadata();
 			        break;
-		        case 'generate':
+		        case self::SLUG_SUBACTION_PROJECT_GENERATE:
 			        $this->editGenerate();
 			        break;
-		        case 'main':
+		        case self::SLUG_SUBACTION_PROJECT_MAIN:
 		        default:
 			        $this->editMain();
 	        }
@@ -381,8 +389,8 @@ class PmbAdmin extends BaseController
 	    $form_url = add_query_arg(
 		    [
 			    'ID' => $project->ID,
-			    'action' => 'edit',
-			    'subaction' => 'content'
+			    'action' => self::SLUG_ACTION_EDIT_PROJECT,
+			    'subaction' => self::SLUG_SUBACTION_PROJECT_CONTENT
 		    ],
 		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	    );
@@ -435,26 +443,26 @@ class PmbAdmin extends BaseController
 		        add_query_arg(
 			        [
 				        'ID' => $project_id,
-				        'action' => 'edit',
-				        'subaction' => 'main'
+				        'action' => self::SLUG_ACTION_EDIT_PROJECT,
+				        'subaction' => self::SLUG_SUBACTION_PROJECT_MAIN
 			        ],
 			        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 		        )
 	        );
 	        exit;
         }
-        if( $action === 'edit'){
+        if( $action === self::SLUG_ACTION_EDIT_PROJECT){
         	$subaction = isset($_GET['subaction']) ? $_GET['subaction'] : null;
         	switch($subaction){
-		        case 'choose_design':
+		        case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
 			        $this->saveProjectChooseDesign();
 			        break;
-		        case 'customize_design':
+		        case self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN:
 			        $this->saveProjectCustomizeDesign();
 			        break;
-		        case 'content':
+		        case self::SLUG_SUBACTION_PROJECT_CONTENT:
 			        $this->saveProjectContent();
-		        case 'metadata':
+		        case self::SLUG_SUBACTION_PROJECT_META:
 			        $this->saveProjectMetadata();
 			        break;
 	        }
@@ -475,7 +483,7 @@ class PmbAdmin extends BaseController
                 add_query_arg(
 	                [
 		                'ID' => $project_id,
-		                'action' => 'edit',
+		                'action' => self::SLUG_ACTION_EDIT_PROJECT,
 		                'subaction' => 'main'
 	                ],
 	                admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)

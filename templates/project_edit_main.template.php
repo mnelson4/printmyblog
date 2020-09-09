@@ -1,4 +1,5 @@
 <?php
+use PrintMyBlog\controllers\PmbAdmin;
 /**
  * @var $form_url string
  * @var $project PrintMyBlog\orm\entities\Project
@@ -30,6 +31,22 @@
             <tbody>
             <?php foreach($formats as $format){
                 $design = $project->getDesignFor($format);
+	            $customize_url = add_query_arg(
+		            [
+			            'ID' => $project->getWpPost()->ID,
+			            'action' => PmbAdmin::SLUG_ACTION_EDIT_PROJECT,
+			            'subaction' => PmbAdmin::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN
+		            ],
+		            admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+	            );
+	            $change_design_url = add_query_arg(
+		            [
+			            'ID' => $project->getWpPost()->ID,
+			            'action' => PmbAdmin::SLUG_ACTION_EDIT_PROJECT,
+			            'subaction' => PmbAdmin::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN
+		            ],
+		            admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+	            );
                 ?>
             <tr>
                 <th scope="row">
@@ -40,8 +57,8 @@
                 </th>
                 <td>
                     <?php printf(esc_html('Design: %s', 'print-my-blog'), '<b>' . $design->getWpPost()->post_title . '</b>');?>
-                    <a href=""><?php esc_html_e('Customize', 'print-my-blog');?></a> |
-                    <a href=""><?php esc_html_e('Use Different...','print-my-blog');?></a>
+                <a href="<?php echo esc_attr($customize_url);?>"><?php esc_html_e('Customize', 'print-my-blog');?></a> |
+                <a href="<?php echo esc_attr($change_design_url);?>"><?php esc_html_e('Use Different...','print-my-blog');?></a>
                 </td>
             </tr>
             <?php }?>
