@@ -5,6 +5,8 @@ namespace PrintMyBlog\orm\entities;
 
 use PrintMyBlog\db\PartFetcher;
 use PrintMyBlog\domain\FileFormats;
+use PrintMyBlog\entities\Format;
+use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\services\ProjectHtmlGenerator;
 use Twine\orm\entities\PostWrapper;
 use WP_Post;
@@ -35,13 +37,20 @@ class Project extends PostWrapper{
 	 * @var FileFormats
 	 */
 	protected $format_manager;
+	/**
+	 * @var DesignManager
+	 */
+	protected $design_manager;
 
 	public function inject(
 		PartFetcher $part_fetcher,
-		FileFormats $format_manager)
+		FileFormats $format_manager,
+		DesignManager $design_manager
+	)
 	{
 		$this->part_fetcher = $part_fetcher;
 		$this->format_manager = $format_manager;
+		$this->design_manager = $design_manager;
 	}
 
 	/**
@@ -217,7 +226,7 @@ class Project extends PostWrapper{
 	 *
 	 * @return string
 	 */
-	public function getDesignFor($format_slug){
+	public function getDesignSlugFor($format_slug){
 		$value = get_post_meta(
 			$this->getWpPost()->ID,
 			self::POSTMETA_DESIGN . $format_slug,
@@ -226,7 +235,22 @@ class Project extends PostWrapper{
 		if($value){
 			return $value;
 		}
-		return 'classic';
+		return 'classic_' . $format_slug;
+	}
+
+	/**
+	 * Gets the design object for this project in the given format.
+	 *
+	 * @param string|Format $format
+	 *
+	 * @return Design|null
+	 */
+	public function getDesignFor( $format){
+		if ( $format instanceof Format){
+			$format = $format->slug();
+		}
+		$design_slug = $this->getDesignSlugFor( $format);
+		return $this->design_manager->getBySlug($design_slug);
 	}
 
 	/**

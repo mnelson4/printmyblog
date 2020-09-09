@@ -1,7 +1,8 @@
 <?php
 /**
  * @var $form_url string
- * @var $project \PrintMyBlog\orm\Project
+ * @var $project PrintMyBlog\orm\entities\Project
+ * @var $formats PrintMyBlog\entities\Format[]
  */
 // Editing project
 
@@ -27,7 +28,9 @@
         <p class="pmb-comment description"><?php esc_html_e('File formats you intend to generate for this project.', 'print-my-blog');?></p>
         <table class="form-table">
             <tbody>
-            <?php foreach($formats as $format){?>
+            <?php foreach($formats as $format){
+                $design = $project->getDesignFor($format);
+                ?>
             <tr>
                 <th scope="row">
                     <label>
@@ -36,7 +39,9 @@
                     </label>
                 </th>
                 <td>
-                    Design:x Edit | Choose Another
+                    <?php printf(esc_html('Design: %s', 'print-my-blog'), '<b>' . $design->getWpPost()->post_title . '</b>');?>
+                    <a href=""><?php esc_html_e('Customize', 'print-my-blog');?></a> |
+                    <a href=""><?php esc_html_e('Use Different...','print-my-blog');?></a>
                 </td>
             </tr>
             <?php }?>
