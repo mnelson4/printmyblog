@@ -7,7 +7,7 @@ class Sample_Form extends FormSectionProper
             'h1'=>new FormSectionHtml('hello wordl'),
             'name'=>new Text_Input(array('required'=>true,'default'=>'your name here')),
             'email'=>new Email_Input(array('required'=>false)),
-            'shirt_size'=>new Select_Input(array(''=>'Please select...', 's'=>  __("Small", "event_espresso"),'m'=>  __("Medium", "event_espresso"),'l'=>  __("Large", "event_espresso")), array('required'=>true,'default'=>'s')),
+            'shirt_size'=>new SelectInput(array(''=>'Please select...', 's'=>  __("Small", "event_espresso"),'m'=>  __("Medium", "event_espresso"),'l'=>  __("Large", "event_espresso")), array('required'=>true,'default'=>'s')),
             'month_normal'=>new Month_Input(),
             'month_leading_zero'=>new Month_Input(true),
             'year_2'=>new Year_Input(false, 1, 1),

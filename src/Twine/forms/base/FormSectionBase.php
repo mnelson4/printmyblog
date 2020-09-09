@@ -72,13 +72,6 @@ abstract class FormSectionBase
      */
     protected $_construction_finalized;
 
-    /**
-     * Strategy for parsing the form HTML upon display
-     *
-     * @var FormHtmlFilter
-     */
-    protected $_form_html_filter;
-
 
     /**
      * @param array $options_array {
@@ -98,10 +91,6 @@ abstract class FormSectionBase
                     throw new InvalidDataTypeException($key, $value, 'array');
                 }
             }
-        }
-        // set parser which allows the form section's rendered HTML to be filtered
-        if (isset($options_array['form_html_filter']) && $options_array['form_html_filter'] instanceof FormHtmlFilter) {
-            $this->_form_html_filter = $options_array['form_html_filter'];
         }
     }
 

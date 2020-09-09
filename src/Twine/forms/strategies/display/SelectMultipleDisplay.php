@@ -1,5 +1,11 @@
 <?php
 namespace Twine\forms\strategies\display;
+use EEH_Array;
+use EEH_HTML;
+use Exception;
+use Twine\forms\inputs\FormInputWithOptionsBase;
+use Twine\helpers\Html;
+
 /**
  * SelectMultipleDisplay
  *
@@ -14,17 +20,17 @@ class SelectMultipleDisplay extends SelectDisplay
 
     /**
      *
-     * @throws Error
+     * @throws Exception
      * @return string of html to display the field
      */
     public function display()
     {
 
         if (! $this->_input instanceof FormInputWithOptionsBase) {
-            throw new Error(sprintf(__('Cannot use Select Multiple Display Strategy with an input that doesn\'t have options', "event_espresso")));
+            throw new Exception(sprintf(__('Cannot use Select Multiple Display Strategy with an input that doesn\'t have options', "event_espresso")));
         }
-
-        $html = EEH_HTML::nl(0, 'select');
+		$html_generator = Html::instance();
+        $html = $html_generator->nl(0, 'select');
         $html .= '<select multiple';
         $html .= ' id="' . $this->_input->html_id() . '"';
         $html .= ' name="' . $this->_input->html_name() . '[]"';
@@ -36,14 +42,14 @@ class SelectMultipleDisplay extends SelectDisplay
         $html .= ' ' . $this->_input->other_html_attributes();
         $html .= '>';
 
-        EEH_HTML::indent(1, 'select');
+        $html_generator->indent(1, 'select');
         if (EEH_Array::is_multi_dimensional_array($this->_input->options())) {
-            throw new Error(sprintf(__("Select multiple display strategy does not allow for nested arrays of options.", "event_espresso")));
+            throw new Exception(sprintf(__("Select multiple display strategy does not allow for nested arrays of options.", "event_espresso")));
         } else {
             $html.=$this->_display_options($this->_input->options());
         }
 
-        $html.= EEH_HTML::nl(-1, 'select') . "</select>";
+        $html.= $html_generator->nl(-1, 'select') . "</select>";
         return $html;
     }
 

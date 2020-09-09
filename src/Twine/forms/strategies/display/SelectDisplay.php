@@ -1,5 +1,12 @@
 <?php
 namespace Twine\forms\strategies\display;
+use EEH_Array;
+use EEH_HTML;
+use Exception;
+use Twine\forms\inputs\FormInputWithOptionsBase;
+use Twine\helpers\Array2;
+use Twine\helpers\Html;
+
 /**
  *
  * Class SelectDisplay
@@ -17,41 +24,41 @@ class SelectDisplay extends DisplayBase
 
     /**
      *
-     * @throws Error
+     * @throws Exception
      * @return string of html to display the field
      */
     public function display()
     {
         if (! $this->_input instanceof FormInputWithOptionsBase) {
-            throw new Error(sprintf(__('Cannot use Select Display Strategy with an input that doesn\'t have options', 'event_espresso')));
+            throw new Exception(sprintf(__('Cannot use Select Display Strategy with an input that doesn\'t have options', 'event_espresso')));
         }
-
-        $html = EEH_HTML::nl(0, 'select');
+		$html_generator = Html::instance();
+        $html = $html_generator->nl(0, 'select');
         $html .= '<select';
         $html .= $this->_attributes_string(
             $this->_standard_attributes_array()
         );
         $html .= '>';
 
-        if (EEH_Array::is_multi_dimensional_array($this->_input->options())) {
-            EEH_HTML::indent(1, 'optgroup');
+        if (Array2::is_multi_dimensional_array($this->_input->options())) {
+            $html_generator->indent(1, 'optgroup');
             foreach ($this->_input->options() as $opt_group_label => $opt_group) {
                 if (! empty($opt_group_label)) {
-                    $html .= EEH_HTML::nl(0, 'optgroup') . '<optgroup label="' . esc_attr($opt_group_label) . '">';
+                    $html .= $html_generator->nl(0, 'optgroup') . '<optgroup label="' . esc_attr($opt_group_label) . '">';
                 }
-                EEH_HTML::indent(1, 'option');
+                $html_generator->indent(1, 'option');
                 $html .= $this->_display_options($opt_group);
-                EEH_HTML::indent(-1, 'option');
+                $html_generator->indent(-1, 'option');
                 if (! empty($opt_group_label)) {
-                    $html .= EEH_HTML::nl(0, 'optgroup') . '</optgroup>';
+                    $html .= $html_generator->nl(0, 'optgroup') . '</optgroup>';
                 }
             }
-            EEH_HTML::indent(-1, 'optgroup');
+            $html_generator->indent(-1, 'optgroup');
         } else {
             $html.=$this->_display_options($this->_input->options());
         }
 
-        $html.= EEH_HTML::nl(0, 'select') . '</select>';
+        $html.= $html_generator->nl(0, 'select') . '</select>';
         return $html;
     }
 
@@ -65,15 +72,16 @@ class SelectDisplay extends DisplayBase
     protected function _display_options($options)
     {
         $html = '';
-        EEH_HTML::indent(1, 'option');
+        $html_generator = Html::instance();
+        $html_generator->indent(1, 'option');
         foreach ($options as $value => $display_text) {
             // even if this input uses TextNormalization if one of the array keys is a numeric string, like "123",
             // PHP will have converted it to a PHP integer (eg 123). So we need to make sure it's a string
             $unnormalized_value = $this->_input->get_normalization_strategy()->unnormalize_one($value);
             $selected = $this->_check_if_option_selected($unnormalized_value) ? ' selected="selected"' : '';
-            $html.= EEH_HTML::nl(0, 'option') . '<option value="' . esc_attr($unnormalized_value) . '"' . $selected . '>' . $display_text . '</option>';
+            $html.= $html_generator->nl(0, 'option') . '<option value="' . esc_attr($unnormalized_value) . '"' . $selected . '>' . $display_text . '</option>';
         }
-        EEH_HTML::indent(-1, 'option');
+        $html_generator->indent(-1, 'option');
         return $html;
     }
 

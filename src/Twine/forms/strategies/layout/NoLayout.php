@@ -1,5 +1,13 @@
 <?php
 namespace Twine\forms\strategies\layout;
+use Twine\forms\base\FormSectionProper;
+use Twine\forms\inputs\FormInputBase;
+use Twine\forms\inputs\FormInputWithOptionsBase;
+use Twine\forms\inputs\HiddenInput;
+use Twine\forms\inputs\SelectInput;
+use Twine\forms\inputs\SubmitInput;
+use Twine\helpers\Html;
+
 /**
  * Template Layout strategy class for the EE Forms System that applies no layout.
  *
@@ -45,7 +53,8 @@ class NoLayout extends DivPerSectionLayout
      */
     public function layout_form_begin()
     {
-        return EEH_HTML::nl(1);
+	    $html_generator = Html::instance();
+        return $html_generator->nl(1);
     }
 
 
@@ -59,32 +68,33 @@ class NoLayout extends DivPerSectionLayout
      */
     public function layout_input($input)
     {
+	    $html_generator = Html::instance();
         $html = '';
-        if ($input instanceof Hidden_Input) {
-            $html .= EEH_HTML::nl() . $input->get_html_for_input();
-        } elseif ($input instanceof Submit_Input) {
+        if ($input instanceof HiddenInput) {
+            $html .= $html_generator->nl() . $input->get_html_for_input();
+        } elseif ($input instanceof SubmitInput) {
             $html .= $this->br();
             $html .= $input->get_html_for_input();
-        } elseif ($input instanceof Select_Input) {
+        } elseif ($input instanceof SelectInput) {
             $html .= $this->br();
-            $html .= EEH_HTML::nl(1) . $input->get_html_for_label();
-            $html .= EEH_HTML::nl() . $input->get_html_for_errors();
-            $html .= EEH_HTML::nl() . $input->get_html_for_input();
-            $html .= EEH_HTML::nl() . $input->get_html_for_help();
+            $html .= $html_generator->nl(1) . $input->get_html_for_label();
+            $html .= $html_generator->nl() . $input->get_html_for_errors();
+            $html .= $html_generator->nl() . $input->get_html_for_input();
+            $html .= $html_generator->nl() . $input->get_html_for_help();
             $html .= $this->br();
         } elseif ($input instanceof FormInputWithOptionsBase) {
             $html .= $this->br();
-            $html .= EEH_HTML::nl() . $input->get_html_for_errors();
-            $html .= EEH_HTML::nl() . $input->get_html_for_input();
-            $html .= EEH_HTML::nl() . $input->get_html_for_help();
+            $html .= $html_generator->nl() . $input->get_html_for_errors();
+            $html .= $html_generator->nl() . $input->get_html_for_input();
+            $html .= $html_generator->nl() . $input->get_html_for_help();
         } else {
             $html .= $this->br();
-            $html .= EEH_HTML::nl(1) . $input->get_html_for_label();
-            $html .= EEH_HTML::nl() . $input->get_html_for_errors();
-            $html .= EEH_HTML::nl() . $input->get_html_for_input();
-            $html .= EEH_HTML::nl() . $input->get_html_for_help();
+            $html .= $html_generator->nl(1) . $input->get_html_for_label();
+            $html .= $html_generator->nl() . $input->get_html_for_errors();
+            $html .= $html_generator->nl() . $input->get_html_for_input();
+            $html .= $html_generator->nl() . $input->get_html_for_help();
         }
-        $html .= EEH_HTML::nl(-1);
+        $html .= $html_generator->nl(-1);
         return $html;
     }
 
@@ -98,8 +108,8 @@ class NoLayout extends DivPerSectionLayout
      */
     public function layout_subsection($form_section)
     {
-        //      d( $form_section );
-        return EEH_HTML::nl(1) . $form_section->get_html() . EEH_HTML::nl(-1);
+	    $html_generator = Html::instance();
+        return $html_generator->nl(1) . $form_section->get_html() . $html_generator->nl(-1);
     }
 
 
@@ -111,7 +121,8 @@ class NoLayout extends DivPerSectionLayout
      */
     public function layout_form_end()
     {
-        return EEH_HTML::nl(-1);
+	    $html_generator = Html::instance();
+        return $html_generator->nl(-1);
     }
 
 
@@ -123,6 +134,7 @@ class NoLayout extends DivPerSectionLayout
      */
     protected function br()
     {
-        return $this->_use_break_tags ? EEH_HTML::br() : '';
+	    $html_generator = Html::instance();
+        return $this->_use_break_tags ? $html_generator->br() : '';
     }
 }

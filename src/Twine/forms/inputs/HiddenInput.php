@@ -5,7 +5,7 @@ use Twine\forms\strategies\normalization\NormalizationBase;
 use Twine\forms\strategies\normalization\TextNormalization;
 
 /**
- * Hidden_Input
+ * HiddenInput
  *
  * @package         Event Espresso
  * @subpackage

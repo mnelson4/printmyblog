@@ -144,8 +144,8 @@ class FormSectionProper extends FormSectionValidatable
             // just enqueue the generic form scripts and initialize the form immediately in the JS
             FormSectionProper::wp_enqueue_scripts(true);
         } else {
-            add_action('wp_enqueue_scripts', array( 'FormSectionProper', 'wp_enqueue_scripts'));
-            add_action('admin_enqueue_scripts', array( 'FormSectionProper', 'wp_enqueue_scripts'));
+            add_action('wp_enqueue_scripts', array( 'Twine\forms\base\FormSectionProper', 'wp_enqueue_scripts'));
+            add_action('admin_enqueue_scripts', array( 'Twine\forms\base\FormSectionProper', 'wp_enqueue_scripts'));
         }
         add_action('wp_footer', array($this, 'ensure_scripts_localized'), 1);
         /**
@@ -606,9 +606,7 @@ class FormSectionProper extends FormSectionValidatable
     public function get_html()
     {
         $this->ensure_construct_finalized_called();
-        return $this->_form_html_filter
-            ? $this->_form_html_filter->filterHtml($this->_layout_strategy->layout_form(), $this)
-            : $this->_layout_strategy->layout_form();
+        return $this->_layout_strategy->layout_form();
     }
 
 
@@ -674,8 +672,8 @@ class FormSectionProper extends FormSectionValidatable
         // so we need to add our form section data to a static variable accessible by all form sections
         // and localize it just before the footer
         $this->localize_validation_rules();
-        add_action( 'wp_footer', array('FormSectionProper', 'localize_script_for_all_forms'), 2);
-        add_action( 'admin_footer', array('FormSectionProper', 'localize_script_for_all_forms'));
+        add_action( 'wp_footer', array('Twine\forms\base\FormSectionProper', 'localize_script_for_all_forms'), 2);
+        add_action( 'admin_footer', array('Twine\forms\base\FormSectionProper', 'localize_script_for_all_forms'));
     }
 
 

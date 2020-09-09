@@ -1,7 +1,7 @@
 <?php
 namespace Twine\forms\inputs;
 /**
- * Submit_Input
+ * SubmitInput
  *
  * @package         Event Espresso
  * @subpackage

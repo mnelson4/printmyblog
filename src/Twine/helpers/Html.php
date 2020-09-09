@@ -22,13 +22,32 @@ namespace Twine\helpers;
   */
 class Html
 {
+	protected static $instance;
 
+	/**
+	 * @return Html
+	 */
+	public static function instance(){
+		if(! self::$instance instanceof Html){
+			self::$instance = new Html();
+		}
+		return self::$instance;
+	}
+
+	/**
+	 * Resets indentation
+	 * @return Html
+	 */
+	public static function reset(){
+		self::$instance = null;
+		return self::instance();
+	}
 	/**
 	 *  class
 	 *
 	 * @access    private
 	 */
-	public function __construct()
+	protected function __construct()
 	{
 		// set some initial formatting for table indentation
 		$this->_indent = array(
@@ -776,11 +795,6 @@ class Html
 	 */
 	public function indent($indent, $tag = 'none')
 	{
-		$default_indentation = false;
-		if (! $default_indentation) {
-			$this->_set_default_indentation();
-			$default_indentation = true;
-		}
 		if (! isset($this->_indent[ $tag ])) {
 			$this->_indent[ $tag ] = 0;
 		}

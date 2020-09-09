@@ -1,5 +1,7 @@
 <?php
 namespace Twine\forms\strategies\display;
+use Twine\helpers\Html;
+
 /**
  * Class RadioButtonDisplay
  * displays a set of radio buttons
@@ -9,12 +11,12 @@ namespace Twine\forms\strategies\display;
  * @author      Mike Nelson
  * @since       4.6
  */
-class RadioButtonDisplay extends CompoundInputDisplayStrategy
+class RadioButtonDisplay extends CompoundInputDisplay
 {
 
     /**
      *
-     * @throws Error
+     * @throws Exception
      * @return string of html to display the field
      */
     public function display()
@@ -23,11 +25,12 @@ class RadioButtonDisplay extends CompoundInputDisplayStrategy
         $input->set_label_sizes();
         $label_size_class = $input->get_label_size_class();
         $html = '';
+        $html_generator = Html::instance();
         foreach ($input->options() as $value => $display_text) {
             $value = $input->get_normalization_strategy()->unnormalize($value);
 
             $html_id = $this->get_sub_input_id($value);
-            $html .= EEH_HTML::nl(0, 'radio');
+            $html .= $html_generator->nl(0, 'radio');
 
             $html .= $this->_opening_tag('label');
             $html .= $this->_attributes_string(
@@ -44,7 +47,7 @@ class RadioButtonDisplay extends CompoundInputDisplayStrategy
                 )
             );
             $html .= '>';
-            $html .= EEH_HTML::nl(1, 'radio');
+            $html .= $html_generator->nl(1, 'radio');
             $html .= $this->_opening_tag('input');
             $attributes = array(
                 'id' => $html_id,
@@ -63,10 +66,10 @@ class RadioButtonDisplay extends CompoundInputDisplayStrategy
 
             $html .= '>&nbsp;';
             $html .= $display_text;
-            $html .= EEH_HTML::nl(-1, 'radio') . '</label>';
+            $html .= $html_generator->nl(-1, 'radio') . '</label>';
         }
-        $html .= EEH_HTML::div('', '', 'clear-float');
-        $html .= EEH_HTML::divx();
+        $html .= $html_generator->div('', '', 'clear-float');
+        $html .= $html_generator->divx();
         return apply_filters('FH_RadioButtonDisplay__display', $html, $this, $this->_input);
     }
 }

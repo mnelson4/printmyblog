@@ -1,7 +1,7 @@
 <?php
 namespace Twine\forms\inputs;
 /**
- * Fixed_Hidden_Input
+ * Fixed_HiddenInput
  *
  * @package         Event Espresso
  * @subpackage

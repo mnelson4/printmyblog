@@ -1,5 +1,7 @@
 <?php
 namespace Twine\forms\strategies\layout;
+use Twine\helpers\Html;
+
 /**
  * Class FieldsetSectionLayout
  * Description
@@ -52,7 +54,8 @@ class FieldsetSectionLayout extends DivPerSectionLayout
      */
     public function layout_form_begin()
     {
-        $html = EEH_HTML::nl(1)
+	    $html_generator = Html::instance();
+        $html = $html_generator->nl(1)
                 . '<fieldset id="'
                 . $this->_form_section->html_id()
                 . '" class="'
@@ -73,7 +76,8 @@ class FieldsetSectionLayout extends DivPerSectionLayout
      */
     public function layout_form_end()
     {
-        return EEH_HTML::nl(-1) . '</fieldset>';
+	    $html_generator = Html::instance();
+        return $html_generator->nl(-1) . '</fieldset>';
     }
 
 

@@ -6,7 +6,7 @@ use Twine\forms\strategies\validation\PlaintextValidation;
 
 /**
  * Button_Input
- * Similar to Submit_Input, but renders a button element, and its text being displayed
+ * Similar to SubmitInput, but renders a button element, and its text being displayed
  * can differ from the value, and it can contain HTML.
  * @package         Event Espresso
  * @subpackage

@@ -68,7 +68,7 @@ class FullHtmlValidation extends ValidationBase
 			    'a' => array('target')
 		    )
 	    );
-	    return apply_filters('FHEE__EEH_HTML__get_simple_tags', $tags_we_allow);
+	    return apply_filters('Twine\forms\strategies\validation\FullHtmlValidation::getAllowedTags', $tags_we_allow);
     }
 
 

@@ -41,7 +41,7 @@ class AdminFileUploaderDisplay extends DisplayBase
         $input .= 'value="' . $this->_input->raw_value_in_form() . '" ';
         $input .= $this->_input->other_html_attributes() . '>';
         // image uploader
-	    $html = new Html();
+	    $html = Html::instance();
         $uploader = $html->link('#', '<img src="' . admin_url('images/media-button-image.gif') . '" >', __('click to add an image', 'event_espresso'), '', 'ee_media_upload');
         // only attempt to show the image if it at least exists
 	    if($this->src_exists($this->_input->raw_value())){

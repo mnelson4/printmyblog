@@ -1,5 +1,8 @@
 <?php
 namespace Twine\forms\strategies\display;
+use Exception;
+use Twine\forms\inputs\FormInputWithOptionsBase;
+
 /**
  *
  * Class CompoundInputDisplay
@@ -52,13 +55,13 @@ abstract class CompoundInputDisplay extends DisplayBase
      * Overrides parent to make sure this display strategy is only used with the
      * appropriate input type
      *
-     * @return \FormInputWithOptionsBase
+     * @return FormInputWithOptionsBase
      * @throws \Error
      */
     public function get_input()
     {
         if (! $this->_input instanceof FormInputWithOptionsBase) {
-            throw new Error(
+            throw new Exception(
                 sprintf(
                     __(
                         'Can not use a Compound Input Display Strategy (eg checkbox or radio) with an input that doesn\'t have options',

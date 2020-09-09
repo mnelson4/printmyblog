@@ -2,6 +2,15 @@
 namespace Twine\forms\strategies\layout;
 
 
+use Exception;
+use Twine\forms\base\FormSectionProper;
+use Twine\forms\inputs\FormInputBase;
+use Twine\forms\inputs\FormInputWithOptionsBase;
+use Twine\forms\inputs\HiddenInput;
+use Twine\forms\inputs\SelectInput;
+use Twine\forms\inputs\SubmitInput;
+use Twine\helpers\Html;
+
 /**
  * Class DivPerSectionLayout
  * Description
@@ -21,7 +30,8 @@ class DivPerSectionLayout extends FormSectionLayoutBase
      */
     public function layout_form_begin()
     {
-        return EEH_HTML::div(
+	    $html_generator = Html::instance();
+        return $html_generator->div(
             '',
             $this->_form_section->html_id(),
             $this->_form_section->html_class(),
@@ -36,10 +46,11 @@ class DivPerSectionLayout extends FormSectionLayoutBase
      *
      * @param FormInputBase $input
      * @return string
-     * @throws \Error
+     * @throws Exception
      */
     public function layout_input($input)
     {
+	    $html_generator = Html::instance();
         $html = '';
         // set something unique for the id
         $html_id = (string) $input->html_id() !== ''
@@ -47,38 +58,38 @@ class DivPerSectionLayout extends FormSectionLayoutBase
             : spl_object_hash($input);
         // and add a generic input type class
         $html_class = sanitize_key(str_replace('_', '-', get_class($input))) . '-dv';
-        if ($input instanceof Hidden_Input) {
-            $html .= EEH_HTML::nl() . $input->get_html_for_input();
-        } elseif ($input instanceof Submit_Input) {
-            $html .= EEH_HTML::div(
+        if ($input instanceof HiddenInput) {
+            $html .= $html_generator->nl() . $input->get_html_for_input();
+        } elseif ($input instanceof SubmitInput) {
+            $html .= $html_generator->div(
                 $input->get_html_for_input(),
                 $html_id . '-submit-dv',
                 "{$input->html_class()}-submit-dv {$html_class}"
             );
-        } elseif ($input instanceof Select_Input) {
-            $html .= EEH_HTML::div(
-                EEH_HTML::nl(1) . $input->get_html_for_label() .
-                EEH_HTML::nl() . $input->get_html_for_errors() .
-                EEH_HTML::nl() . $input->get_html_for_input() .
-                EEH_HTML::nl() . $input->get_html_for_help(),
+        } elseif ($input instanceof SelectInput) {
+            $html .= $html_generator->div(
+                $html_generator->nl(1) . $input->get_html_for_label() .
+                $html_generator->nl() . $input->get_html_for_errors() .
+                $html_generator->nl() . $input->get_html_for_input() .
+                $html_generator->nl() . $input->get_html_for_help(),
                 $html_id . '-input-dv',
                 "{$input->html_class()}-input-dv {$html_class}"
             );
         } elseif ($input instanceof FormInputWithOptionsBase) {
-            $html .= EEH_HTML::div(
-                EEH_HTML::nl() . $this->_display_label_for_option_type_question($input) .
-                EEH_HTML::nl() . $input->get_html_for_errors() .
-                EEH_HTML::nl() . $input->get_html_for_input() .
-                EEH_HTML::nl() . $input->get_html_for_help(),
+            $html .= $html_generator->div(
+                $html_generator->nl() . $this->_display_label_for_option_type_question($input) .
+                $html_generator->nl() . $input->get_html_for_errors() .
+                $html_generator->nl() . $input->get_html_for_input() .
+                $html_generator->nl() . $input->get_html_for_help(),
                 $html_id . '-input-dv',
                 "{$input->html_class()}-input-dv {$html_class}"
             );
         } else {
-            $html .= EEH_HTML::div(
-                EEH_HTML::nl(1) . $input->get_html_for_label() .
-                EEH_HTML::nl() . $input->get_html_for_errors() .
-                EEH_HTML::nl() . $input->get_html_for_input() .
-                EEH_HTML::nl() . $input->get_html_for_help(),
+            $html .= $html_generator->div(
+                $html_generator->nl(1) . $input->get_html_for_label() .
+                $html_generator->nl() . $input->get_html_for_errors() .
+                $html_generator->nl() . $input->get_html_for_input() .
+                $html_generator->nl() . $input->get_html_for_help(),
                 $html_id . '-input-dv',
                 "{$input->html_class()}-input-dv {$html_class}"
             );
@@ -99,11 +110,12 @@ class DivPerSectionLayout extends FormSectionLayoutBase
      */
     protected function _display_label_for_option_type_question(FormInputWithOptionsBase $input)
     {
+	    $html_generator = Html::instance();
         if ($input->display_html_label_text()) {
             $html_label_text = $input->html_label_text();
-            $label_html = EEH_HTML::div(
+            $label_html = $html_generator->div(
                 $input->required()
-                    ? $html_label_text . EEH_HTML::span('*', '', 'ee-asterisk')
+                    ? $html_label_text . $html_generator->span('*', '', 'ee-asterisk')
                     : $html_label_text,
                 $input->html_label_id(),
                 $input->required()
@@ -112,10 +124,10 @@ class DivPerSectionLayout extends FormSectionLayoutBase
                 $input->html_label_style(),
                 $input->other_html_attributes()
             );
-            // if no content was provided to EEH_HTML::div() above (ie: an empty label),
+            // if no content was provided to $html_generator->div() above (ie: an empty label),
             // then we need to close the div manually
             if (empty($html_label_text)) {
-                $label_html .= EEH_HTML::divx($input->html_label_id(), $input->html_label_class());
+                $label_html .= $html_generator->divx($input->html_label_id(), $input->html_label_class());
             }
             return $label_html;
         }
@@ -132,7 +144,8 @@ class DivPerSectionLayout extends FormSectionLayoutBase
      */
     public function layout_subsection($form_section)
     {
-        return EEH_HTML::nl(1) . $form_section->get_html() . EEH_HTML::nl(-1);
+	    $html_generator = Html::instance();
+        return $html_generator->nl(1) . $form_section->get_html() . $html_generator->nl(-1);
     }
 
 
@@ -144,6 +157,7 @@ class DivPerSectionLayout extends FormSectionLayoutBase
      */
     public function layout_form_end()
     {
-        return EEH_HTML::divx($this->_form_section->html_id(), $this->_form_section->html_class());
+	    $html_generator = Html::instance();
+        return $html_generator->divx($this->_form_section->html_id(), $this->_form_section->html_class());
     }
 }

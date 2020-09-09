@@ -1,6 +1,10 @@
 <?php
 namespace Twine\forms\strategies\layout;
+use Twine\forms\base\FormSectionBase;
 use Twine\forms\base\FormSectionProper;
+use Twine\forms\inputs\FormInputBase;
+use Twine\forms\strategies\display\HiddenDisplay;
+use Twine\helpers\Html;
 
 /**
  * Abstract parent class for all form layouts. Mostly just contains a reference to the form
@@ -290,6 +294,7 @@ abstract class FormSectionLayoutBase
      */
     public function add_form_section_hooks_and_filters($html)
     {
+	    $html_generator = Html::instance();
         // replace dashes and spaces with underscores
         $hook_name = str_replace(array('-', ' '), '_', $this->_form_section->html_id());
         do_action('AH_Form_Section_Layout__' . $hook_name, $this->_form_section);
@@ -298,8 +303,8 @@ abstract class FormSectionLayoutBase
             $html,
             $this->_form_section
         );
-        $html .= EEH_HTML::nl() . '<!-- AH_Form_Section_Layout__' . $hook_name . '__html -->';
-        $html .= EEH_HTML::nl() . '<!-- AF_Form_Section_Layout__' . $hook_name . ' -->';
+        $html .= $html_generator->nl() . '<!-- AH_Form_Section_Layout__' . $hook_name . '__html -->';
+        $html .= $html_generator->nl() . '<!-- AF_Form_Section_Layout__' . $hook_name . ' -->';
         return $html;
     }
 }

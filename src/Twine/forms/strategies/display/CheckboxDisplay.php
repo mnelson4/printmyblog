@@ -39,7 +39,7 @@ class CheckboxDisplay extends CompoundInputDisplayStrategy
                 )
             );
         }
-        $html = new Html();
+        $html = Html::instance();
         $input_raw_value = (array) $input->raw_value();
         foreach ($input->options() as $value => $display_text) {
             $value = $input->get_normalization_strategy()->unnormalize_one($value);

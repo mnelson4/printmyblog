@@ -74,7 +74,7 @@ class TemplateLayout extends DivPerSectionLayout
     public function layout_form()
     {
         if ($this->_layout_template_file) {
-            return EEH_Template::locate_template($this->_layout_template_file, $this->template_args(), true, true);
+        	return $this->renderTemplate($this->_layout_template_file);
         } else {
             return parent::layout_form();
         }
@@ -90,11 +90,9 @@ class TemplateLayout extends DivPerSectionLayout
     public function layout_form_begin()
     {
         if ($this->_layout_begin_template_file) {
-            return EEH_Template::locate_template(
+            return $this->renderTemplate(
                 $this->_layout_begin_template_file,
-                $this->template_args(),
-                true,
-                true
+                $this->template_args()
             );
         } else {
             return parent::layout_form_begin();
@@ -113,7 +111,7 @@ class TemplateLayout extends DivPerSectionLayout
     public function layout_input($input)
     {
         if ($this->_input_template_file) {
-            return EEH_Template::locate_template($this->_input_template_file, array('input' => $input), true, true);
+            return $this->renderTemplate($this->_input_template_file, array('input' => $input));
         }
         return parent::layout_input($input);
     }
@@ -130,7 +128,7 @@ class TemplateLayout extends DivPerSectionLayout
     public function layout_subsection($form_section)
     {
         if ($this->_subsection_template_file) {
-            return EEH_Template::locate_template($this->_subsection_template_file, $this->template_args(), true, true);
+            return $this->renderTemplate($this->_subsection_template_file);
         }
         return parent::layout_subsection($form_section);
     }
@@ -145,7 +143,7 @@ class TemplateLayout extends DivPerSectionLayout
     public function layout_form_end()
     {
         if ($this->_layout_end_template_file) {
-            return EEH_Template::locate_template($this->_layout_end_template_file, $this->template_args(), true, true);
+            return $this->renderTemplate($this->_layout_end_template_file);
         } else {
             return parent::layout_form_end();
         }
@@ -219,4 +217,14 @@ class TemplateLayout extends DivPerSectionLayout
     {
         return TemplateLayout::prep_form_subsection_key_name($subsection_name);
     }
+
+    protected function renderTemplate($filepath, $args = null){
+    	if(! $args){
+    	    $args = $this->template_args();
+	    }
+    	extract($args);
+    	ob_start();
+    	require($filepath);
+    	return ob_get_clean();
+	}
 }

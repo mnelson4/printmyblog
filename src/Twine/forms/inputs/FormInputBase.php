@@ -472,12 +472,7 @@ abstract class FormInputBase extends FormSectionValidatable
      */
     public function get_html_for_input()
     {
-        return $this->_form_html_filter
-            ? $this->_form_html_filter->filterHtml(
-                $this->_get_display_strategy()->display(),
-                $this
-            )
-            : $this->_get_display_strategy()->display();
+        return $this->_get_display_strategy()->display();
     }
 
 

@@ -4,7 +4,7 @@ use Twine\forms\strategies\display\SelectDisplay;
 use Twine\forms\strategies\validation\EnumValidation;
 
 /**
- * Class Select_Input
+ * Class SelectInput
  *
  * Generates an HTML <select> form input
  *
