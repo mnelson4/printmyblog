@@ -155,7 +155,7 @@ abstract class DisplayBase extends FormInputStrategyBase
             'id'    => $this->_input->html_id(),
             'class' => $this->_input->html_class(true),
             0       => array('required', $this->_input->required()),
-            1       => $this->_input->other_html_attributes(),
+            1       => $this->_input->otherHtmlAttributesString(),
             'style' => $this->_input->html_style(),
         );
     }

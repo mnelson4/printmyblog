@@ -64,7 +64,7 @@ class TextInputDisplay extends DisplayBase
         $input .= $this->_input->required() ? ' required' : '';
         $input .= ' value="' . $this->_input->raw_value_in_form() . '"';
         $input .= ' style="' . $this->_input->html_style() . '"';
-        $input .= $this->_input->other_html_attributes();
+        $input .= $this->_input->otherHtmlAttributesString();
         $input .= '/>';
         return $input;
     }

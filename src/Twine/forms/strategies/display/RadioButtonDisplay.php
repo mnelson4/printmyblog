@@ -56,7 +56,7 @@ class RadioButtonDisplay extends CompoundInputDisplay
                 'style' => $input->html_style(),
                 'type' => 'radio',
                 'value' => $value,
-                0 => $input->other_html_attributes(),
+                0 => $input->otherHtmlAttributesString(),
                 'data-question_label' => $input->html_label_id()
             );
             if ($input->raw_value() === $value) {

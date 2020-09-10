@@ -47,7 +47,12 @@ class DefaultDesignTemplates {
 					'design_form_callback'  => function() {
 						return new FormSectionProper( [
 							'subsections' => [
-								'show_title' => new YesNoInput()
+								'show_title' => new YesNoInput(
+									[
+										'default' => true
+									]
+								),
+								'show_description' => new YesNoInput()
 							]
 						] );
 					},

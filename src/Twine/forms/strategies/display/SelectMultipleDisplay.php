@@ -39,7 +39,7 @@ class SelectMultipleDisplay extends SelectDisplay
         // add html5 required
         $html .= $this->_input->required() ? ' required' : '';
         $html .= ' style="' . $this->_input->html_style() . '"';
-        $html .= ' ' . $this->_input->other_html_attributes();
+        $html .= ' ' . $this->_input->otherHtmlAttributesString();
         $html .= '>';
 
         $html_generator->indent(1, 'select');

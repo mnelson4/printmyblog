@@ -39,7 +39,7 @@ class AdminFileUploaderDisplay extends DisplayBase
         $input .= 'name="' . $this->_input->html_name() . '" ';
         $input .= $this->_input->html_class() != '' ? 'class="large-text ee_media_url ' . $this->_input->html_class() . '" ' : 'class="large-text ee_media_url" ';
         $input .= 'value="' . $this->_input->raw_value_in_form() . '" ';
-        $input .= $this->_input->other_html_attributes() . '>';
+        $input .= $this->_input->otherHtmlAttributesString() . '>';
         // image uploader
 	    $html = Html::instance();
         $uploader = $html->link('#', '<img src="' . admin_url('images/media-button-image.gif') . '" >', __('click to add an image', 'event_espresso'), '', 'ee_media_upload');

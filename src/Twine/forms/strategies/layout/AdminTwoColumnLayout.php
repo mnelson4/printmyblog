@@ -2,6 +2,7 @@
 namespace Twine\forms\strategies\layout;
 use Twine\forms\inputs\FormInputBase;
 use Twine\forms\inputs\HiddenInput;
+use Twine\forms\inputs\TextAreaInput;
 use Twine\forms\strategies\display\AdminFileUploaderDisplay;
 use Twine\forms\strategies\display\TextAreaDisplay;
 use Twine\forms\strategies\display\TextInputDisplay;
@@ -39,12 +40,15 @@ class AdminTwoColumnLayout extends TwoColumnLayout
     {
 	    $html_generator = Html::instance();
         if ($input->get_display_strategy() instanceof TextAreaDisplay
-            || $input->get_display_strategy() instanceof TextInputDisplay
+            || (
+            	$input->get_display_strategy() instanceof TextInputDisplay
+                && ! in_array($input->get_display_strategy()->get_type(), ['checkbox','radio'])
+                )
             || $input->get_display_strategy() instanceof AdminFileUploaderDisplay
         ) {
             $input->set_html_class($input->html_class() . ' large-text');
         }
-        if ($input instanceof Text_Area_Input) {
+        if ($input instanceof TextAreaInput) {
             $input->set_rows(4);
             $input->set_cols(60);
         }

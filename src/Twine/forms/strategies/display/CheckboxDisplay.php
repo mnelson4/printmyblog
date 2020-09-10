@@ -12,18 +12,16 @@ use Twine\helpers\Html;
  * @author        Mike Nelson
  * @since         4.6
  */
-class CheckboxDisplay extends CompoundInputDisplayStrategy
+class CheckboxDisplay extends CompoundInputDisplay
 {
 
     /**
-     * @throws Error
+     * @throws Exception
      * @return string of html to display the field
      */
     public function display()
     {
         $input = $this->get_input();
-        $input->set_label_sizes();
-        $label_size_class = $input->get_label_size_class();
         $html = '';
         if (! is_array($input->raw_value()) && $input->raw_value() !== null) {
             throw new Exception(
@@ -39,20 +37,19 @@ class CheckboxDisplay extends CompoundInputDisplayStrategy
                 )
             );
         }
-        $html = Html::instance();
+        $html_generator = Html::instance();
         $input_raw_value = (array) $input->raw_value();
         foreach ($input->options() as $value => $display_text) {
             $value = $input->get_normalization_strategy()->unnormalize_one($value);
             $html_id = $this->get_sub_input_id($value);
-            $html .= $html->nl(0, 'checkbox');
+            $html .= $html_generator->nl(0, 'checkbox');
             $html .= '<label for="'
                      . $html_id
                      . '" id="'
                      . $html_id
                      . '-lbl" class="ee-checkbox-label-after'
-                     . $label_size_class
                      . '">';
-            $html .= $html->nl(1, 'checkbox');
+            $html .= $html_generator->nl(1, 'checkbox');
             $html .= '<input type="checkbox"';
             $html .= ' name="' . $input->html_name() . '[]"';
             $html .= ' id="' . $html_id . '"';
@@ -62,11 +59,11 @@ class CheckboxDisplay extends CompoundInputDisplayStrategy
             $html .= ! empty($input_raw_value) && in_array($value, $input_raw_value, true)
                 ? ' checked="checked"'
                 : '';
-            $html .= ' ' . $this->_input->other_html_attributes();
+            $html .= ' ' . $this->_input->otherHtmlAttributesString();
             $html .= ' data-question_label="' . $input->html_label_id() . '"';
             $html .= '>&nbsp;';
             $html .= $display_text;
-            $html .= $html->nl(-1, 'checkbox') . '</label>';
+            $html .= $html_generator->nl(-1, 'checkbox') . '</label>';
         }
         return $html;
     }

@@ -1,5 +1,8 @@
 <?php
 namespace Twine\forms\inputs;
+use Twine\forms\strategies\display\SingleCheckboxDisplay;
+use Twine\forms\strategies\normalization\BooleanNormalization;
+
 /**
  * Yes_No_Input
  *
@@ -7,7 +10,7 @@ namespace Twine\forms\inputs;
  * @subpackage
  * @author              Mike Nelson
  */
-class YesNoInput extends SelectInput
+class YesNoInput extends FormInputBase
 {
 
     /**
@@ -15,8 +18,8 @@ class YesNoInput extends SelectInput
      */
     public function __construct($options = array())
     {
-        $select_options = array(true=>  __("Yes", "event_espresso"),false=>  __("No", "event_espresso"));
-
-        parent::__construct($select_options, $options);
+    	$this->set_normalization_strategy(new BooleanNormalization());
+    	$this->set_display_strategy(new SingleCheckboxDisplay());
+        parent::__construct($options);
     }
 }

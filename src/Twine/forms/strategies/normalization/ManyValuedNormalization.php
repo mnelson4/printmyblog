@@ -8,7 +8,7 @@ namespace Twine\forms\strategies\normalization;
  * @subpackage
  * @author                Mike Nelson
  */
-class ManyValuedNormalization extends NormalizationStrategyBase
+class ManyValuedNormalization extends NormalizationBase
 {
 
     protected $_individual_item_normalization_strategy = array();

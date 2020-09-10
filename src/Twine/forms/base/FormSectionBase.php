@@ -54,7 +54,7 @@ abstract class FormSectionBase
      * $_other_html_attributes keys are attribute names, values are their values.
      * @var array
      */
-    protected $_other_html_attributes;
+    protected $_other_html_attributes = array();
 
     /**
      * The form section of which this form section is a part
@@ -261,10 +261,14 @@ abstract class FormSectionBase
 
 	/**
 	 * @param $name
-	 * @param $value
+	 * @param $value optional. Leave blank for standalone attributes like "checked"
 	 */
-    public function addOtherHtmlAttribute($name, $value){
-    	$this->_other_html_attributes[$name] = $value;
+    public function addOtherHtmlAttribute($name, $value = null){
+    	if($value === null){
+    		$this->_other_html_attributes[] = $name;
+	    } else{
+		    $this->_other_html_attributes[$name] = $value;
+	    }
     }
 
 	/**
@@ -281,7 +285,7 @@ abstract class FormSectionBase
      */
     public function other_html_attributes()
     {
-        return ! empty($this->_other_html_attributes) ? ' ' . $this->_other_html_attributes : '';
+        return $this->_other_html_attributes;
     }
 
 	/**
@@ -291,9 +295,13 @@ abstract class FormSectionBase
     public function otherHtmlAttributesString(){
     	$keyvaluepairs = [];
     	foreach($this->other_html_attributes() as $key => $value){
-    		$keyvaluepairs[] = $key . '="' . esc_attr($value) . '"';
+    		if(is_numeric($key)){
+    			$keyvaluepairs[] = esc_attr($value);
+		    } else{
+			    $keyvaluepairs[] = $key . '="' . esc_attr($value) . '"';
+		    }
 	    }
-    	return implode(' ', $keyvaluepairs);
+    	return ' ' . implode(' ', $keyvaluepairs);
     }
 
 

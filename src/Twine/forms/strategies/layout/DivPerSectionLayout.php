@@ -122,7 +122,7 @@ class DivPerSectionLayout extends FormSectionLayoutBase
                     ? 'ee-required-label ' . $input->html_label_class()
                     : $input->html_label_class(),
                 $input->html_label_style(),
-                $input->other_html_attributes()
+                $input->otherHtmlAttributesString()
             );
             // if no content was provided to $html_generator->div() above (ie: an empty label),
             // then we need to close the div manually

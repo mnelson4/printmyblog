@@ -23,7 +23,7 @@ class TextAreaDisplay extends DisplayBase
         $html .= ' name="' . $input->html_name() . '"';
         $html .= ' class="' . $input->html_class() . '"' ;
         $html .= ' style="' . $input->html_style() . '"';
-        $html .= $input->other_html_attributes();
+        $html .= $input->otherHtmlAttributesString();
         $html .= ' rows= "' . $rows . '" cols="' . $cols . '">';
         $html .= esc_textarea($raw_value);
         $html .= '</textarea>';
