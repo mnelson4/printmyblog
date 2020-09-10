@@ -44,25 +44,33 @@ class Design extends PostWrapper {
 		return $this->design_template;
 	}
 
-	public function getSetting($setting_name){
+	public function getSetting($setting_name) {
 		// tries to get the setting from a postmeta
-		$setting = $this->getPmbMeta($setting_name);
-		if($setting !== null){
+		$setting = $this->getPmbMeta( $setting_name );
+		if ( $setting !== null ) {
 			return $setting;
 		}
 		// otherwise falls back to using the default in the form
-		if($setting_name === 'design_template'){
+		if ( $setting_name === 'design_template' ) {
 			throw new Exception(
-				sprintf('Could not determine design template for the design "%s". The postmeta is missing.',
-					$this->getWpPost()->post_title)
+				sprintf( 'Could not determine design template for the design "%s". The postmeta is missing.',
+					$this->getWpPost()->post_title )
 			);
 		}
-		$form = $this->getDesignForm();
-		$section = $form->findSection($setting_name);
-		if($section instanceof FormInputBase){
+		$form    = $this->getDesignForm();
+		$section = $form->findSection( $setting_name );
+		if ( $section instanceof FormInputBase ) {
 			return $section->get_default();
 		}
 		return null;
+	}
+
+	/**
+	 * @param $setting_name string
+	 * @param $value mixed
+	 */
+	public function setSetting($setting_name, $value){
+		$this->setPmbMeta($setting_name, $value);
 	}
 
 	/**

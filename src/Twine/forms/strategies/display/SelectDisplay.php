@@ -1,7 +1,5 @@
 <?php
 namespace Twine\forms\strategies\display;
-use EEH_Array;
-use EEH_HTML;
 use Exception;
 use Twine\forms\inputs\FormInputWithOptionsBase;
 use Twine\helpers\Array2;

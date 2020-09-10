@@ -322,10 +322,6 @@ class FormSectionProper extends FormSectionValidatable
         $this->_normalize($req_data);
         if ($validate) {
             $this->_validate();
-            // if it's invalid, we're going to want to re-display so remember what they submitted
-            if (! $this->is_valid()) {
-                $this->store_submitted_form_data_in_session();
-            }
         }
         if ($this->submission_error_message() === '' && ! $this->is_valid()) {
             $this->set_submission_error_message();
@@ -718,9 +714,9 @@ class FormSectionProper extends FormSectionValidatable
 
     /**
      * Gets a flat array of inputs for this form section and its subsections.
-     * Keys are their form names, and values are the inputs themselves
+     * Keys are their form input names, and values are the inputs themselves
      *
-     * @return FormInputBase
+     * @return FormInputBase[]
      */
     public function inputs_in_subsections()
     {

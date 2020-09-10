@@ -6,6 +6,7 @@ namespace Twine\orm\managers;
 
 use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\system\Context;
+use Twine\orm\entities\PostWrapper;
 use WP_Post;
 
 class PostWrapperManager {
@@ -14,7 +15,7 @@ class PostWrapperManager {
 	/**
 	 * @param $post_id
 	 *
-	 * @return PostWrapperManager
+	 * @return PostWrapper
 	 */
 	public function getById($post_id){
 		$wp_post = get_post($post_id);
@@ -24,7 +25,7 @@ class PostWrapperManager {
 
 	/**
 	 * @param $slug
-	 * @return Design|null
+	 * @return PostWrapper|null
 	 */
 	public function getBySlug($slug){
 		$post_object = get_page_by_path($slug, OBJECT, $this->cap_slug);

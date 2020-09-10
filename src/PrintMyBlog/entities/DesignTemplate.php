@@ -4,6 +4,7 @@
 namespace PrintMyBlog\entities;
 
 
+use Exception;
 use Twine\forms\base\FormSectionProper;
 
 class DesignTemplate {

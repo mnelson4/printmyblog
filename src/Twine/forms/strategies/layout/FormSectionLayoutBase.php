@@ -246,7 +246,7 @@ abstract class FormSectionLayoutBase
         if ($input->get_validation_errors()) {
             return "<label  id='"
                    . $input->html_id()
-                   . "-error' class='error' for='{$input->html_name()}'>"
+                   . "-error' class='twine-error' for='{$input->html_name()}'>"
                    . $input->get_validation_error_string()
                    . '</label>';
         }

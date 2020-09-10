@@ -87,6 +87,6 @@ class PostWrapper {
 	 * @return bool|int
 	 */
 	public function setPmbMeta($meta_name, $new_value){
-		return $this->setMeta($meta_name, $new_value);
+		return $this->setMeta(self::META_PREFIX . $meta_name, $new_value);
 	}
 }

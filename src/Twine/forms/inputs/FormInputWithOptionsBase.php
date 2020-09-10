@@ -1,10 +1,10 @@
 <?php
 namespace Twine\forms\inputs;
-use EEH_Array;
 use Twine\forms\strategies\normalization\BooleanNormalization;
 use Twine\forms\strategies\normalization\IntNormalization;
 use Twine\forms\strategies\normalization\ManyValuedNormalization;
 use Twine\forms\strategies\normalization\TextNormalization;
+use Twine\helpers\Array2;
 
 /**
  * FormInputWithOptionsBase
@@ -175,7 +175,7 @@ abstract class FormInputWithOptionsBase extends FormInputBase
     protected function _flatten_select_options($arr)
     {
         $flat_array = array();
-        if (EEH_Array::is_multi_dimensional_array($arr)) {
+        if (Array2::is_multi_dimensional_array($arr)) {
             foreach ($arr as $sub_array) {
                 foreach ((array) $sub_array as $key => $value) {
                     $flat_array[ $key ] = $value;

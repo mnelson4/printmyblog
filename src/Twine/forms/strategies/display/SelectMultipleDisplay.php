@@ -1,9 +1,8 @@
 <?php
 namespace Twine\forms\strategies\display;
-use EEH_Array;
-use EEH_HTML;
 use Exception;
 use Twine\forms\inputs\FormInputWithOptionsBase;
+use Twine\helpers\Array2;
 use Twine\helpers\Html;
 
 /**
@@ -43,7 +42,7 @@ class SelectMultipleDisplay extends SelectDisplay
         $html .= '>';
 
         $html_generator->indent(1, 'select');
-        if (EEH_Array::is_multi_dimensional_array($this->_input->options())) {
+        if (Array2::is_multi_dimensional_array($this->_input->options())) {
             throw new Exception(sprintf(__("Select multiple display strategy does not allow for nested arrays of options.", "event_espresso")));
         } else {
             $html.=$this->_display_options($this->_input->options());

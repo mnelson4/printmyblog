@@ -14,9 +14,9 @@ use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\system\Context;
 use PrintMyBlog\system\CustomPostTypes;
+use Twine\forms\base\FormSectionProper;
 use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
-use WP_Post;
 
 /**
  * Class PmbAdmin
@@ -59,6 +59,11 @@ class PmbAdmin extends BaseController
 	 * @var FileFormats
 	 */
     protected $project_format_manager;
+
+	/**
+	 * @var FormSectionProper
+	 */
+    protected $invalid_form;
 
     /**
      * @since $VID:$
@@ -393,15 +398,27 @@ class PmbAdmin extends BaseController
 		        $format_slug
 		    ));
 	    }
-    	$form = $design->getDesignTemplate()->getDesignForm();
+    	// If there was an invalid form submission, show it.
+    	if( $this->invalid_form instanceof FormSectionProper){
+    		$form = $this->invalid_form;
+	    } else {
+		    $form = $design->getDesignTemplate()->getDesignForm();
+		    $defaults = [];
+		    foreach($form->inputs_in_subsections() as $input){
+		    	$defaults[$input->name()] = $design->getSetting($input->name());
+		    }
+		    $form->populate_defaults($defaults);
+	    }
+
     	$form_url = add_query_arg(
 		    [
 			    'action' => self::SLUG_ACTION_EDIT_PROJECT,
 			    'subaction' => self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN,
 			    '_nonce' => wp_create_nonce( 'pmb-project-edit' ),
-			    'ID' => $project->getWpPost()->ID
+			    'ID' => $project->getWpPost()->ID,
+			    'format' => $format_slug
 		    ],
-		    admin_url('admin-ajax.php')
+		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	    );
     	include(PMB_TEMPLATES_DIR . 'design_customize.template.php');
     }
@@ -420,24 +437,6 @@ class PmbAdmin extends BaseController
 	    );
 	    include(PMB_TEMPLATES_DIR . 'project_edit_content.template.php');
     }
-
-    /**
-     * Saves the project's name and parts etc.
-     * @return int project ID
-     */
-    protected function saveProjectContent()
-    {
-        check_admin_referer('pmb-project-edit');
-        $project_id = $_GET['ID'];
-        $project_obj = new Project($project_id);
-        $parts_string = stripslashes($_POST['pmb-project-sections-data']);
-        $parts = json_decode($parts_string);
-	    $project_obj->clearGeneratedFiles();
-        $this->part_fetcher->clearPartsFor($project_id);
-        $this->part_fetcher->setPartsFor($project_id, $parts);
-        return $project_id;
-    }
-
 
     /**
      * Checks if a form was submitted, in which case we'd want to redirect.
@@ -489,19 +488,16 @@ class PmbAdmin extends BaseController
 		        case self::SLUG_SUBACTION_PROJECT_META:
 			        $this->saveProjectMetadata();
 			        break;
+		        case self::SLUG_SUBACTION_PROJECT_GENERATE:
+		        	$this->saveProjectGenerate();
+		        	break;
+	        }
+	        if($this->invalid_form instanceof FormSectionProper){
+	        	// did we have validation issues? Don't redirect, just show the invalid form again then.
+		        return;
 	        }
 	        $project_id = isset($_GET['ID']) ? $_GET['ID'] : null;
-            if($_POST['pmb-save'] === 'pdf'){
-                $url = add_query_arg(
-                    [
-                        PMB_PRINTPAGE_SLUG => 3,
-                        'project' => $project_id
-                    ],
-                    site_url()
-                );
-                wp_redirect($url);
-                exit;
-            }
+
             // Just redirect back to the editing page.
             wp_redirect(
                 add_query_arg(
@@ -517,9 +513,67 @@ class PmbAdmin extends BaseController
         } elseif($action === 'delete'){
         	$this->deleteProjects();
 	        $redirect = admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH);
-	        wp_redirect($redirect);
+	        wp_safe_redirect($redirect);
 	        exit;
         }
+    }
+
+	/**
+	 * Saves the project's name and parts etc.
+	 * @return int project ID
+	 */
+	protected function saveProjectContent()
+	{
+		check_admin_referer('pmb-project-edit');
+		$project_id = $_GET['ID'];
+		$project_obj = new Project($project_id);
+		$parts_string = stripslashes($_POST['pmb-project-sections-data']);
+		$parts = json_decode($parts_string);
+		$project_obj->clearGeneratedFiles();
+		$this->part_fetcher->clearPartsFor($project_id);
+		$this->part_fetcher->setPartsFor($project_id, $parts);
+		return $project_id;
+	}
+
+    protected function saveProjectCustomizeDesign()
+    {
+	    /**
+	     * @var $project Project
+	     */
+    	$project = $this->project_manager->getById($_GET['ID']);
+
+    	$design = $project->getDesignFor($_GET['format']);
+
+    	$design_form = $design->getDesignTemplate()->getDesignForm();
+    	$design_form->receive_form_submission($_REQUEST);
+    	if($design_form->is_valid()){
+    		foreach($design_form->input_values(true,true) as $setting_name => $normalized_value){
+    			$design->setSetting($setting_name, $normalized_value);
+		    }
+    		wp_safe_redirect(
+			    add_query_arg(
+				    [
+					    'ID' => $project->getWpPost()->ID,
+					    'action' => self::SLUG_ACTION_EDIT_PROJECT,
+					    'subaction' => 'main'
+				    ],
+				    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+			    )
+		    );
+	    }
+    	$this->invalid_form = $design_form;
+    }
+
+    protected function saveProjectGenerate(){
+		    $url = add_query_arg(
+			    [
+				    PMB_PRINTPAGE_SLUG => 3,
+				    'project' => $_GET['ID']
+			    ],
+			    site_url()
+		    );
+		    wp_safe_redirect($url);
+		    exit;
     }
 
 	protected function deleteProjects()

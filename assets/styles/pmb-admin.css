@@ -31,3 +31,8 @@
 .twine-two-column-layout td>label{
     display:block;
 }
+.twine-error{
+    color:red;
+    padding:.3em;
+    font-weight:bold;
+}
