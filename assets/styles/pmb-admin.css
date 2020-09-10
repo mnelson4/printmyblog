@@ -28,3 +28,6 @@
     margin-top:0;
     margin-bottom:15px;
 }
+.twine-two-column-layout td>label{
+    display:block;
+}

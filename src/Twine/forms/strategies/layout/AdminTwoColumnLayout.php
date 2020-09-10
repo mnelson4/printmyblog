@@ -23,7 +23,7 @@ class AdminTwoColumnLayout extends TwoColumnLayout
      */
     public function layout_form_begin($additional_args = array())
     {
-        $this->_form_section->set_html_class($this->_form_section->html_class() . ' form-table');
+        $this->_form_section->set_html_class($this->_form_section->html_class() . ' form-table twine-two-column-layout');
         return parent::layout_form_begin($additional_args);
     }
 

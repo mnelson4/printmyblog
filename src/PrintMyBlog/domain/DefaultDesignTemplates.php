@@ -4,6 +4,7 @@ namespace PrintMyBlog\domain;
 
 use PrintMyBlog\orm\entities\Design;
 use Twine\forms\base\FormSectionProper;
+use Twine\forms\inputs\CheckboxMultiInput;
 use Twine\forms\inputs\TextInput;
 use Twine\forms\inputs\YesNoInput;
 
@@ -47,12 +48,50 @@ class DefaultDesignTemplates {
 					'design_form_callback'  => function() {
 						return new FormSectionProper( [
 							'subsections' => [
-								'show_title' => new YesNoInput(
+								'header_content' => new CheckboxMultiInput(
 									[
-										'default' => true
+										'title' => __('Project Title', 'print-my-blog'),
+										'subtitle' => __('Subtitle', 'print-my-blog'),
+										'url' => __('Site URL', 'print-my-blog'),
+										'date_printed' => __('Date Printed', 'print-my-blog'),
+										'credit_pmb' => __('Credit Print My Blog', 'print-my-blog')
+									],
+									[
+										'default' => [
+											'title',
+											'description',
+											'url',
+											'date_printed'
+										],
+										'html_label_text' => __('Project Header Content to Print'),
+										'html_help_text' => __('Appears at the top of the first page.', 'print-my-blog')
 									]
 								),
-								'show_description' => new YesNoInput()
+								'post_content' => new CheckboxMultiInput(
+									[
+										'title' => __('Post Title', 'print-my-blog'),
+										'id' => __('ID', 'print-my-blog'),
+										'author' => __('Author', 'print-my-blog'),
+										'url' => __('URL', 'print-my-blog'),
+										'published_date' => __('Published Date', 'print-my-blog'),
+										'categories' => __('Categories and Tags', 'print-my-blog'),
+										'featured_image' => __('Featured Image', 'print-my-blog'),
+										'excerpt' => __('Excerpt', 'print-my-blog'),
+										'content' => __('Content', 'print-my-blog'),
+										'comments' => __('Comments', 'print-my-blog'),
+									],
+									[
+										'default' => [
+											'title',
+											'published_date',
+											'categories',
+											'featured_image',
+											'content'
+										],
+										'html_label_text' => __('Post Content to Print'),
+										'html_help_text' => __('Content from each post to print.', 'print-my-blog')
+									]
+								)
 							]
 						] );
 					},
