@@ -8,15 +8,19 @@ use PrintMyBlog\db\PartFetcher;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
-use PrintMyBlog\domain\FileFormats;
+use PrintMyBlog\domain\DefaultFileFormats;
+use PrintMyBlog\entities\FileFormat;
 use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
+use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\orm\managers\ProjectManager;
+use PrintMyBlog\services\FileFormatRegistry;
 use PrintMyBlog\system\Context;
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\forms\base\FormSectionProper;
 use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
+use WP_Query;
 
 /**
  * Class PmbAdmin
@@ -56,29 +60,40 @@ class PmbAdmin extends BaseController
     protected $project_manager;
 
 	/**
-	 * @var FileFormats
+	 * @var FileFormatRegistry
 	 */
-    protected $project_format_manager;
+    protected $file_format_registry;
+
+	/**
+	 * @var DesignManager
+	 */
+    protected $design_manager;
 
 	/**
 	 * @var FormSectionProper
 	 */
     protected $invalid_form;
 
-    /**
-     * @since $VID:$
-     * @param PostFetcher $post_fetcher
-     * @param PartFetcher $part_fetcher
-     */
+	/**
+	 * @param PostFetcher $post_fetcher
+	 * @param PartFetcher $part_fetcher
+	 * @param ProjectManager $project_manager
+	 * @param FileFormatRegistry $project_format_manager
+	 *
+	 * @since $VID:$
+	 */
     public function inject(
     	PostFetcher $post_fetcher,
 	    PartFetcher $part_fetcher,
 	    ProjectManager $project_manager,
-		FileFormats $project_format_manager){
+		FileFormatRegistry $project_format_manager,
+		DesignManager $design_manager
+    ){
         $this->post_fetcher = $post_fetcher;
         $this->part_fetcher = $part_fetcher;
         $this->project_manager = $project_manager;
-        $this->project_format_manager = $project_format_manager;
+        $this->file_format_registry = $project_format_manager;
+        $this->design_manager = $design_manager;
     }
     /**
      * name of the option that just indicates we successfully saved the setttings
@@ -372,6 +387,25 @@ class PmbAdmin extends BaseController
 
     }
 
+    protected function editChooseDesign(Project $project){
+    	// determine the format
+	    $format = $this->file_format_registry->getFormat($_GET['format']);
+    	// get all the designs for this format
+	    // including which format is actually in-use
+	    $wp_query_args = [
+	    	'meta_query' => [
+	    		[
+		            'key' => Design::META_PREFIX . 'format',
+				    'value' => $format->slug()
+			    ]
+		    ]
+	    ];
+		$designs = $this->design_manager->getAll(new WP_Query($wp_query_args));
+		$chosen_design = $project->getDesignFor($format->slug());
+	    // show them in a template
+	    include(PMB_TEMPLATES_DIR . 'design_choose.template.php');
+    }
+
 	/**
 	 * @param $action
 	 */
@@ -384,7 +418,7 @@ class PmbAdmin extends BaseController
 			],
 	        admin_url('admin-ajax.php')
 		);
-		$formats = $this->project_format_manager->getFormats();
+		$formats = $this->file_format_registry->getFormats();
 		include(PMB_TEMPLATES_DIR . 'project_edit_main.template.php');
     }
 

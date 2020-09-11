@@ -8,6 +8,7 @@ use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\system\Context;
 use Twine\orm\entities\PostWrapper;
 use WP_Post;
+use WP_Query;
 
 class PostWrapperManager {
 	protected $class_to_instantiate;
@@ -36,9 +37,27 @@ class PostWrapperManager {
 	}
 
 	/**
+	 * @param WP_Query $query
+	 *
+	 * @return array|PostWrapperManager[]
+	 */
+	public function getAll(WP_Query $query = null){
+		if(! $query instanceof WP_Query){
+			$query = new WP_Query();
+		}
+		$query->set('post_type',$this->cap_slug);
+		$posts = $query->get_posts();
+		$wrappers = [];
+		foreach($posts as $post){
+			$wrappers[] = $this->createWrapperAroundPost($post);
+		}
+		return $wrappers;
+	}
+
+	/**
 	 * @param WP_Post $post
 	 *
-	 * @return PostWrapperManager
+	 * @return PostWrapper
 	 */
 	protected function createWrapperAroundPost(WP_Post $post){
 		$post_wrapper = Context::instance()->use_new(
@@ -47,7 +66,7 @@ class PostWrapperManager {
 		);
 
 		/**
-		 * @var $post_wrapper PostWrapperManager
+		 * @var $post_wrapper PostWrapper
 		 */
 		return $post_wrapper;
 	}

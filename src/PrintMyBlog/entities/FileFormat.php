@@ -4,7 +4,7 @@
 namespace PrintMyBlog\entities;
 
 
-class Format {
+class FileFormat {
 	/**
 	 * @var string
 	 */
@@ -23,8 +23,11 @@ class Format {
 	 * @type string $slug title slugified
 	 * }
 	 */
-	public function __construct($title, $data = []){
-		$this->title = $title;
+	public function __construct($data = []){
+		if(isset($data['title'])){
+			$this->title = $data['title'];
+		}
+
 	}
 
 	public function title()
@@ -39,6 +42,9 @@ class Format {
 	 */
 	public function construct_finalize($slug){
 		$this->slug = $slug;
+		if( ! $this->title){
+			$this->title = $slug;
+		}
 	}
 
 	/**

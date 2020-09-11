@@ -45,14 +45,15 @@ class Context extends BaseContext
 		        'PrintMyBlog\db\PostFetcher'              => self::REUSE,
 		        'PrintMyBlog\db\PartFetcher'              => self::REUSE,
 		        'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
-		        'PrintMyBlog\domain\FileFormats'          => self::REUSE,
+		        'PrintMyBlog\services\FileFormatRegistry'   => self::REUSE,
+		        'PrintMyBlog\orm\managers\DesignManager' => self::REUSE
             ],
 	        'PrintMyBlog\controllers\Ajax'     => [
 	        	'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE
 	        ],
 	        'PrintMyBlog\orm\entities\Project'          => [
-		        'PrintMyBlog\db\PartFetcher'     => self::REUSE,
-		        'PrintMyBlog\domain\FileFormats' => self::REUSE,
+		        'PrintMyBlog\db\PartFetcher'             => self::REUSE,
+		        'PrintMyBlog\domain\DefaultFileFormats'  => self::REUSE,
 		        'PrintMyBlog\orm\managers\DesignManager' => self::REUSE
 	        ],
 	        'PrintMyBlog\services\DesignRegistry' => [

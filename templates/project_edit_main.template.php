@@ -3,7 +3,7 @@ use PrintMyBlog\controllers\PmbAdmin;
 /**
  * @var $form_url string
  * @var $project PrintMyBlog\orm\entities\Project
- * @var $formats PrintMyBlog\entities\Format[]
+ * @var $formats PrintMyBlog\entities\FileFormat[]
  */
 // Editing project
 
@@ -44,7 +44,8 @@ use PrintMyBlog\controllers\PmbAdmin;
 		            [
 			            'ID' => $project->getWpPost()->ID,
 			            'action' => PmbAdmin::SLUG_ACTION_EDIT_PROJECT,
-			            'subaction' => PmbAdmin::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN
+			            'subaction' => PmbAdmin::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN,
+                        'format' => $format->slug()
 		            ],
 		            admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	            );

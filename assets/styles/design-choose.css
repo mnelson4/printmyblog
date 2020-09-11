@@ -1,0 +1,33 @@
+.pmb-design-browser{
+    display:flex;
+}
+
+.pmb-design:nth-child(odd){
+    margin-right:5%;
+}
+
+.pmb-design{
+    width:500px;
+    max-width:95%;
+    border:1px solid #ddd;
+    margin: 0 4% 4% 0;
+}
+
+.pmb-design.pmb-active .pmb-design-id-container{
+}
+
+.pmb-design-id-container h2{
+    font-size:15px;
+    height:18px;
+    margin:0;
+    padding:15px;
+    overflow:hidden;
+    white-sapce:nowrap;
+    text-overflow:ellipsis;;
+}
+.pmb-design.pmb-active .pmb-design-id-container h2{
+    background:#23282d;
+    color:#fff;
+    padding-right:110px;
+    font-weight:300;
+}

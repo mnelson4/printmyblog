@@ -14,6 +14,7 @@ use PrintMyBlog\controllers\PmbPrintPage;
 use PrintMyBlog\controllers\LoadingPage;
 use PrintMyBlog\domain\DefaultDesigns;
 use PrintMyBlog\domain\DefaultDesignTemplates;
+use PrintMyBlog\domain\DefaultFileFormats;
 use PrintMyBlog\domain\ProNotification;
 use Twine\admin\news\DashboardNews;
 use Twine\system\RequestType;
@@ -87,7 +88,7 @@ class Init
      */
     public function init()
     {
-    	$this->includes();;
+    	$this->includes();
     	$this->defineTerms();
 		$this->setupDbEnvironment();
         $this->takeActionOnIncomingRequest();
@@ -125,6 +126,13 @@ class Init
 	    $cpt = $this->context->reuse('PrintMyBlog\system\CustomPostTypes');
 	    $cpt->register();
 	    $this->setUrls();
+
+	    /**
+	     * @var $default_formats DefaultFileFormats
+	     */
+	    $default_formats = $this->context->reuse('PrintMyBlog\domain\DefaultFileFormats');
+	    $default_formats->registerFileFormats();
+
 	    /**
 	     * @var $default_design_templates DefaultDesignTemplates
 	     */

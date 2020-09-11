@@ -43,5 +43,22 @@ class DefaultDesigns {
 				];
 			}
 		);
+		pmb_register_design(
+			'classic_print',
+			'economical_print_pdf',
+			function(DesignTemplate $design_template){
+				return [
+					'title' => __('Economical Print PDF', 'print-my-blog'),
+					'description' => __('Compact design meant to save paper but still deliver all the content.', 'print-my-blog'),
+					'featured_image' => plugins_url($design_template->getDir() . '/preview.png'),
+					'design_defaults' => [
+						'use_title' => true,
+					],
+					'project_defaults' => [
+						'title' => get_bloginfo('name')
+					]
+				];
+			}
+		);
 	}
 }

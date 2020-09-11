@@ -4,8 +4,8 @@
 namespace PrintMyBlog\orm\entities;
 
 use PrintMyBlog\db\PartFetcher;
-use PrintMyBlog\domain\FileFormats;
-use PrintMyBlog\entities\Format;
+use PrintMyBlog\domain\DefaultFileFormats;
+use PrintMyBlog\entities\FileFormat;
 use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\services\ProjectHtmlGenerator;
 use Twine\orm\entities\PostWrapper;
@@ -34,7 +34,7 @@ class Project extends PostWrapper{
 	 */
 	protected $html_generator;
 	/**
-	 * @var FileFormats
+	 * @var DefaultFileFormats
 	 */
 	protected $format_manager;
 	/**
@@ -44,7 +44,7 @@ class Project extends PostWrapper{
 
 	public function inject(
 		PartFetcher $part_fetcher,
-		FileFormats $format_manager,
+		DefaultFileFormats $format_manager,
 		DesignManager $design_manager
 	)
 	{
@@ -241,12 +241,12 @@ class Project extends PostWrapper{
 	/**
 	 * Gets the design object for this project in the given format.
 	 *
-	 * @param string|Format $format
+	 * @param string|FileFormat $format
 	 *
 	 * @return Design|null
 	 */
 	public function getDesignFor( $format){
-		if ( $format instanceof Format){
+		if ( $format instanceof FileFormat){
 			$format = $format->slug();
 		}
 		$design_slug = $this->getDesignSlugFor( $format);

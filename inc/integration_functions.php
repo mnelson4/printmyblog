@@ -4,17 +4,33 @@ use PrintMyBlog\services\DesignTemplateRegistry;
 use PrintMyBlog\system\Context;
 
 /**
+ * @param $file_format_slug
+ * @param $args passed into \PrintMyBlog\entities\FileFormat::__construct
+ */
+function pmb_register_file_format($file_format_slug, $args){
+	/**
+	 * @var $file_format_registry \PrintMyBlog\services\FileFormatRegistry
+	 */
+	$file_format_registry = Context::instance()->reuse(
+		'PrintMyBlog\services\FileFormatRegistry'
+	);
+	$file_format_registry->registerFormat(
+		$file_format_slug,
+		$args
+	);
+}
+/**
  * @param string $slug
  * @param callable $design_template_args_callback that returns the arguments to pass into the new DesignTemplate
  */
 function pmb_register_design_template($slug, $design_template_args_callback){
 	/**
-	 * @var $template_manager DesignTemplateRegistry
+	 * @var $design_template_registry DesignTemplateRegistry
 	 */
-	$template_manager = Context::instance()->reuse(
+	$design_template_registry = Context::instance()->reuse(
 		'PrintMyBlog\services\DesignTemplateRegistry'
 	);
-	$template_manager->registerDesignTemplateCallback($slug, $design_template_args_callback);
+	$design_template_registry->registerDesignTemplateCallback($slug, $design_template_args_callback);
 }
 
 /**
@@ -25,12 +41,12 @@ function pmb_register_design_template($slug, $design_template_args_callback){
  */
 function pmb_register_design($design_template_slug, $design_slug, $design_args_callback){
 	/**
-	 * @var $design_manager \PrintMyBlog\services\DesignRegistry
+	 * @var $design_registry \PrintMyBlog\services\DesignRegistry
 	 */
-	$design_manager = Context::instance()->reuse(
+	$design_registry = Context::instance()->reuse(
 		'PrintMyBlog\services\DesignRegistry'
 	);
-	$design_manager->registerDesignCallback(
+	$design_registry->registerDesignCallback(
 		$design_template_slug,
 		$design_slug,
 		$design_args_callback
