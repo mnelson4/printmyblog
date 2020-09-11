@@ -400,7 +400,7 @@ class PmbPrintPage extends BaseController
                 return 0;
                 break;
             default:
-                return false;
+                return $page_height;
         }
     }
 
