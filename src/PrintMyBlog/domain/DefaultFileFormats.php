@@ -23,7 +23,7 @@ class DefaultFileFormats {
 		pmb_register_file_format(
 			'print_pdf',
 			[
-				__('Print PDF', 'print-my-blog')
+				'title' => __('Print PDF', 'print-my-blog')
 			]
 		);
 	}

@@ -99,6 +99,7 @@ class Init
 	 */
     protected function includes()
     {
+    	require_once(PMB_DIR . 'inc/internal_functions.php');
 	    require_once(PMB_DIR . 'inc/integration_functions.php');
 	    require_once(PMB_DIR . 'inc/template_functions.php');
     }
