@@ -2,11 +2,14 @@
 namespace PrintMyBlog\domain;
 
 
+use Dompdf\Renderer\Text;
 use PrintMyBlog\orm\entities\Design;
 use Twine\forms\base\FormSectionProper;
+use Twine\forms\inputs\AdminFileUploaderInput;
 use Twine\forms\inputs\CheckboxMultiInput;
 use Twine\forms\inputs\FormInputBase;
 use Twine\forms\inputs\SelectInput;
+use Twine\forms\inputs\TextAreaInput;
 use Twine\forms\inputs\TextInput;
 use Twine\forms\inputs\YesNoInput;
 
@@ -22,7 +25,10 @@ class DefaultDesignTemplates {
 					'format'                => 'print_pdf',
 					'dir'                   => PMB_DEFAULT_DESIGNS_DIR . '/classic_digital',
 					'design_form_callback'  => function () {
-						$sections = $this->getDefaultDesignFormSections();
+						$sections = array_merge(
+							$this->getDefaultDesignFormSections(),
+							$this->getGenericDesignFormSections()
+						);
 						$sections['internal_links'] = new SelectInput(
 							[
 								'remove' => __('Remove', 'print-my-blog'),
@@ -54,8 +60,11 @@ class DefaultDesignTemplates {
 					},
 					'project_form_callback' => function ( Design $design ) {
 						$sections = [];
-						if ( $design->getPmbMeta( 'show_title' ) ) {
+						if ( $design->getPmbMeta( 'title' ) ) {
 							$sections['title'] = new TextInput();
+						}
+						if( $design->getPmbMeta('desc')) {
+							$sections['subtitle'] = new TextInput();
 						}
 
 						return new FormSectionProper( [
@@ -74,7 +83,10 @@ class DefaultDesignTemplates {
 					'dir'             => PMB_DEFAULT_DESIGNS_DIR . 'classic_digital/',
 					'design_form_callback'  => function() {
 						return new FormSectionProper( [
-							'subsections' => $this->getDefaultDesignFormSections()
+							'subsections' => array_merge(
+								$this->getDefaultDesignFormSections(),
+								$this->getGenericDesignFormSections()
+							),
 						] );
 					},
 					'project_form_callback' => function(Design $design) {
@@ -92,12 +104,65 @@ class DefaultDesignTemplates {
 		// bloggy
 		// magaziney
 		// bookey
-//		pmb_register_design_template(
-//			'buurma',
-//			[
-//
-//			]
-//		);
+		pmb_register_design_template(
+			'buurma',
+			function() {
+				return [
+					'title'           => __( 'Buurma Digital PDF' ),
+					'format'          => 'digital_pdf',
+					'dir'             => PMB_DEFAULT_DESIGNS_DIR . 'buurma/',
+					'design_form_callback'  => function() {
+						return new FormSectionProper( [
+							'subsections' => array_merge(
+								[
+									'cover_page_image' => new AdminFileUploaderInput(
+										[
+											'html_label_text' => __('Cover Page Background Image', 'print-my-blog'),
+											'html_help_text' => __('Image shown on the design’s cover page', 'print-my-blog')
+										]
+									),
+									'main_page_image' => new AdminFileUploaderInput(
+										[
+											'html_label_text' => __('Background Image', 'print-my-blog'),
+											'html_label_text' => __('Image shown behind all other pages', 'print-my-blog')
+										]
+									)
+								],
+								$this->getGenericDesignFormSections()
+							),
+						] );
+					},
+					'project_form_callback' => function(Design $design) {
+						return new FormSectionProper( [
+							'subsections' => [
+								'title' => new TextInput(
+									[
+										'html_label_text' => __('Title', 'print-my-blog'),
+									]
+								),
+								'subtitle' => new TextAreaInput(
+									[
+										'html_label_text' => __('Subtitle', 'print-my-blog')
+									]
+								),
+								'issue' => new TextInput(
+									[
+										'html_label_text' => __('Issue', 'print-my-blog'),
+										'html_help_text' => __('Text that appears at the top-right of the cover'),
+									]
+								),
+								'cover_preamble' => new TextAreaInput(
+									[
+										'html_label_text' => __('Coverpage Preamble', 'print-my-blog'),
+										'html_help_text' => __('Explanatory text that appears at the bottom of the cover page'
+									]
+								)
+							]
+						] );
+					}
+				];
+			}
+		);
 	}
 
 	/**
@@ -191,5 +256,22 @@ class DefaultDesignTemplates {
 				]
 			)
 		];
+	}
+
+	/**
+	 * Returns generic form inputs which should usually appear on all design forms.
+	 * @return FormSectionBase[]
+	 */
+	public function getGenericDesignFormSections()
+	{
+		return apply_filters(
+			'PrintMyBlog\domain\DefaultDesignTemplates->getGenericDesignFormSections',
+			[
+				'custom_css' => new TextAreaInput([
+					'html_label_text' => __('Custom CSS', 'print-my-blog'),
+					'html_help_text' => __('Styles to be applied only when printing projects using this design.', 'print-my-blog')
+				])
+			]
+		);
 	}
 }

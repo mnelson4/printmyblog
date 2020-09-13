@@ -9,12 +9,13 @@ use PrintMyBlog\entities\DesignTemplate;
 class DefaultDesigns {
 	public function registerDefaultDesigns()
 	{
+
 		pmb_register_design(
-			'classic_print',
-			'classic_print_pdf',
+			'classic_digital',
+			'classic_digital_pdf',
 			function(DesignTemplate $design_template){
 				return [
-					'title' => __('Classic Print PDF', 'print-my-blog'),
+					'title' => __('Classic Digital PDF', 'print-my-blog'),
 					'description' => __('Look inspired by Print My Blogs original, containing a quick printout heading and compact design.', 'print-my-blog'),
 					'featured_image' => plugins_url($design_template->getDir() . '/preview.png'),
 					'design_defaults' => [
@@ -27,11 +28,50 @@ class DefaultDesigns {
 			}
 		);
 		pmb_register_design(
-			'classic_digital',
-			'classic_digital_pdf',
+			'classic_print',
+			'editorial_review',
 			function(DesignTemplate $design_template){
 				return [
-					'title' => __('Classic Digital PDF', 'print-my-blog'),
+					'title' => __('Editorial Review', 'print-my-blog'),
+					'description' => __('Perfect for editing and reviewing your content! Compact to conserve paper, lots of meta-information, and double-spaced text to allow for editor’s notes.', 'print-my-blog'),
+					'featured_image' => plugins_url($design_template->getDir() . '/preview.png'),
+					'design_defaults' => [
+						'header_content' => [
+							'title',
+							'subtitle',
+							'url',
+							'date_printed',
+						],
+						'post_content' => [
+							'title',
+							'id',
+							'author',
+							'url',
+							'published_date',
+							'categories',
+							'featured_image',
+							'excerpt',
+							'content',
+						],
+						'page_per_post' => true,
+						'columns' => 1,
+						'font_size' => 'small',
+						'image_size' => 'small',
+
+					],
+					'project_defaults' => [
+						'title' => get_bloginfo('name')
+					],
+					'custom_css' => 'p{line-height:2;}'
+				];
+			}
+		);
+		pmb_register_design(
+			'classic_print',
+			'classic_print_pdf',
+			function(DesignTemplate $design_template){
+				return [
+					'title' => __('Classic Print PDF', 'print-my-blog'),
 					'description' => __('Look inspired by Print My Blogs original, containing a quick printout heading and compact design.', 'print-my-blog'),
 					'featured_image' => plugins_url($design_template->getDir() . '/preview.png'),
 					'design_defaults' => [
@@ -100,6 +140,24 @@ class DefaultDesigns {
 					],
 					'project_defaults' => [
 						'title' => get_bloginfo('name')
+					]
+				];
+			}
+		);
+		pmb_register_design(
+			'buurma',
+			'buurma',
+			function(DesignTemplate $design_template){
+				return [
+					'title' => __('Buurma Whitepaper', 'print-my-blog'),
+					'description' => __('Digital PDF perfect for a branded whitepaper.', 'print-my-blog'),
+					'featured_image' => plugins_url($design_template->getDir() . '/preview.png'),
+					'design_defaults' => [
+					],
+					'project_defaults' => [
+						'title' => get_bloginfo('name'),
+						'issue' => __('Issue 01', 'print-my-blog'),
+						'cover_preamble' => 
 					]
 				];
 			}
