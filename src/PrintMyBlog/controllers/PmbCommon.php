@@ -51,13 +51,13 @@ class PmbCommon extends BaseController
             '1.1'
         );
         wp_register_script(
-            'select2',
+            'pmb-select2',
             PMB_ASSETS_URL . 'scripts/libs/select2/select2.min.js',
             [],
             '4.0.6'
         );
         wp_register_style(
-            'select2',
+            'pmb-select2',
             PMB_ASSETS_URL . 'styles/libs/select2.css',
             [],
             '4.0.6'
@@ -65,13 +65,13 @@ class PmbCommon extends BaseController
         wp_register_script(
             'pmb-setup-page',
             PMB_ASSETS_URL . 'scripts/setup-page.js',
-            ['jquery-debounce', 'select2', 'wp-api', 'jquery-ui-datepicker'],
+            ['jquery-debounce', 'pmb-select2', 'wp-api', 'jquery-ui-datepicker'],
             filemtime(PMB_ASSETS_DIR .  'scripts/setup-page.js')
         );
         wp_register_style(
             'pmb-setup-page',
             PMB_ASSETS_URL . 'styles/setup-page.css',
-            ['pmb_common', 'select2', 'jquery-ui'],
+            ['pmb_common', 'pmb-select2', 'jquery-ui'],
             filemtime(PMB_ASSETS_DIR .  'styles/setup-page.css')
         );
         wp_localize_script(
