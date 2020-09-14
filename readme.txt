@@ -281,6 +281,9 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 
 == Changelog ==
 
+= 2.9.5 September 14, 2020 =
+* Fix a conflict with OceanWP theme from registering select2 JS unnecessarily
+
 = 2.9.4 September 12, 2020 =
 * Fixed images not appearing when selecting that they be "fullsize"
 
