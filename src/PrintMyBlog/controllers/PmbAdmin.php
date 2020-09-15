@@ -605,7 +605,7 @@ class PmbAdmin extends BaseController
 		$project = $this->project_manager->getById($_GET['ID']);
 
 		$design = $project->getDesignFor($_GET['format']);
-		$project->setDesignFor($_GET['format'],)
+		$project->setDesignFor($_GET['format']);
 	}
 
     protected function saveProjectGenerate(){
