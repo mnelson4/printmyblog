@@ -101,9 +101,6 @@ class DefaultDesignTemplates {
 				];
 			}
 		);
-		// bloggy
-		// magaziney
-		// bookey
 		pmb_register_design_template(
 			'buurma',
 			function() {
@@ -140,9 +137,10 @@ class DefaultDesignTemplates {
 										'html_label_text' => __('Title', 'print-my-blog'),
 									]
 								),
-								'subtitle' => new TextAreaInput(
+								'byline' => new TextAreaInput(
 									[
-										'html_label_text' => __('Subtitle', 'print-my-blog')
+										'html_label_text' => __('By Line', 'print-my-blog'),
+										'html_help_text' => __('List of authors', 'print-my-blog'),
 									]
 								),
 								'issue' => new TextInput(
@@ -154,7 +152,7 @@ class DefaultDesignTemplates {
 								'cover_preamble' => new TextAreaInput(
 									[
 										'html_label_text' => __('Coverpage Preamble', 'print-my-blog'),
-										'html_help_text' => __('Explanatory text that appears at the bottom of the cover page'
+										'html_help_text' => __('Explanatory text that appears at the bottom of the cover page','print-my-blog')
 									]
 								)
 							]

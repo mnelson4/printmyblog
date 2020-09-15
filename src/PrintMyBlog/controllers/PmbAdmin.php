@@ -598,6 +598,16 @@ class PmbAdmin extends BaseController
     	$this->invalid_form = $design_form;
     }
 
+	protected function saveProjectChooseDesign(){
+		/**
+		 * @var $project Project
+		 */
+		$project = $this->project_manager->getById($_GET['ID']);
+
+		$design = $project->getDesignFor($_GET['format']);
+		$project->setDesignFor($_GET['format'],)
+	}
+
     protected function saveProjectGenerate(){
 		    $url = add_query_arg(
 			    [

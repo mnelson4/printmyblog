@@ -33,7 +33,7 @@ foreach($designs as $design){
 				'action' => PmbAdmin::SLUG_ACTION_EDIT_PROJECT,
 				'subaction' => PmbAdmin::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN,
 				'format' => $format->slug(),
-				'design' => $design->getWpPost()->post_name
+				'design' => $design->getWpPost()->ID
 			],
 			admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 		);

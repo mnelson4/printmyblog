@@ -148,6 +148,12 @@ class DefaultDesigns {
 			'buurma',
 			'buurma',
 			function(DesignTemplate $design_template){
+				$current_user = wp_get_current_user();
+				if($current_user instanceof WP_User && $current_user->exists()){
+					$name = $current_user->first_name . ' ' . $current_user->last_name;
+				} else {
+					$name = '';
+				}
 				return [
 					'title' => __('Buurma Whitepaper', 'print-my-blog'),
 					'description' => __('Digital PDF perfect for a branded whitepaper.', 'print-my-blog'),
@@ -156,8 +162,9 @@ class DefaultDesigns {
 					],
 					'project_defaults' => [
 						'title' => get_bloginfo('name'),
+						'byline' => $name,
 						'issue' => __('Issue 01', 'print-my-blog'),
-						'cover_preamble' => 
+						'cover_preamble' => __('Text explaining the purpose of the paper and gives a brief summary of it, so folks know they’re reading the right thing.', 'print-my-blog')
 					]
 				];
 			}

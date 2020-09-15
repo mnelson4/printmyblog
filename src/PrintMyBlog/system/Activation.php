@@ -73,7 +73,7 @@ class Activation extends BaseActivation
     public function install(){
         $this->table_manager->installTables();
         $this->capabilities->grant_capabilities();
-        $this->design_registry->createRegisteredDesign();
+        $this->design_registry->createRegisteredDesigns();
     }
 
 

@@ -90,7 +90,7 @@ class DesignRegistry {
 	/**
 	 * Loops through all the registered default designs and creates a design for them.
 	 */
-	public function createRegisteredDesign()
+	public function createRegisteredDesigns()
 	{
 		// loop through all the registered designs
 		foreach($this->design_callbacks as $design_template_slug => $designs){
