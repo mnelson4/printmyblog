@@ -446,6 +446,17 @@ class PmbPrintPage extends BaseController
             column-count: $columns;
         }
         ";
+        // If it's a multi-column design, remove the margins around "pmb_image"s. They offset the image so that even
+	    // if it takes up the full column width, it's now offset and so spills over onto the other column.
+	    // Removing the margins fixes that. And because "pmb_image"s take up the width, they don't prevent
+	    // the image contained inside them from being centered anyhow. So this seems to be win-win.
+        if($columns > 1){
+        	$css .= "
+        	.pmb-image{
+        	    margin-left:0;
+        	    margin-right:0;
+        	}";
+        }
         if ($post_page_break) {
             $css .= '.pmb-post-article:not(:first-child){page-break-before:always;}';
             $css .= '@media screen{.pmb-post-article:not(:first-child){margin-top:20vw;}}';
