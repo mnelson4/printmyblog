@@ -4,6 +4,7 @@
 namespace PrintMyBlog\orm\managers;
 
 
+use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\system\Context;
 use Twine\orm\managers\PostWrapperManager;
 use WP_Post;

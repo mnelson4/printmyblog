@@ -24,7 +24,7 @@ abstract class Config {
 	protected function ensureLoadedFromDb(){
 		if($this->settings === null){
 			$this->settings = array_merge(
-				$this->getDefaults(),
+				$this->declareDefaults(),
 				get_option($this->optionName()), array()
 			);
 		}
@@ -41,17 +41,6 @@ abstract class Config {
 	 * @return array
 	 */
 	protected abstract function declareDefaults();
-
-	/**
-	 * Gets the default values lazily.
-	 * @return array
-	 */
-	public function getDefaults(){
-		if($this->defaults === null){
-			$this->defaults = $this->declareDefaults();
-		}
-		return $this->defaults;
-	}
 
 	/**
 	 * Gets the saved setting

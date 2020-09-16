@@ -604,8 +604,29 @@ class PmbAdmin extends BaseController
 		 */
 		$project = $this->project_manager->getById($_GET['ID']);
 
-		$design = $project->getDesignFor($_GET['format']);
-		$project->setDesignFor($_GET['format']);
+		$design = $this->design_manager->getById((int)$_GET['design']);
+		$format = $this->file_format_registry->getFormat($_GET['format']);
+		if(! $design instanceof Design || ! $format instanceof FileFormat){
+			throw new Exception(
+				sprintf(
+					__('An invalid design (%s) or format provided(%s)', 'print-my-blog'),
+				$_GET['design'],
+				$_GET['format']
+				)
+			);
+		}
+		$project->setDesignFor($format, $design);
+		// send back to main
+		wp_safe_redirect(
+			add_query_arg(
+				[
+					'ID' => $project->getWpPost()->ID,
+					'action' => self::SLUG_ACTION_EDIT_PROJECT,
+					'subaction' => 'main'
+				],
+				admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+			)
+		);
 	}
 
     protected function saveProjectGenerate(){

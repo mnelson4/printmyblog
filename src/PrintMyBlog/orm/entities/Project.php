@@ -7,6 +7,7 @@ use PrintMyBlog\db\PartFetcher;
 use PrintMyBlog\domain\DefaultFileFormats;
 use PrintMyBlog\entities\FileFormat;
 use PrintMyBlog\orm\managers\DesignManager;
+use PrintMyBlog\services\config\Config;
 use PrintMyBlog\services\ProjectHtmlGenerator;
 use Twine\orm\entities\PostWrapper;
 use WP_Post;
@@ -41,16 +42,22 @@ class Project extends PostWrapper{
 	 * @var DesignManager
 	 */
 	protected $design_manager;
+	/**
+	 * @var Config
+	 */
+	protected $config;
 
 	public function inject(
 		PartFetcher $part_fetcher,
 		DefaultFileFormats $format_manager,
-		DesignManager $design_manager
+		DesignManager $design_manager,
+		Config $config
 	)
 	{
 		$this->part_fetcher = $part_fetcher;
 		$this->format_manager = $format_manager;
 		$this->design_manager = $design_manager;
+		$this->config = $config;
 	}
 
 	/**
@@ -222,20 +229,23 @@ class Project extends PostWrapper{
 
 	/**
 	 * Gets the slug of the design to use for the format specified.
-	 * @param $format_slug
+	 * @param FileFormat|string $format_slug
 	 *
-	 * @return string
+	 * @return int
 	 */
-	public function getDesignSlugFor($format_slug){
+	public function getDesignIdFor($format){
+		if ( $format instanceof FileFormat){
+			$format = $format->slug();
+		}
 		$value = get_post_meta(
 			$this->getWpPost()->ID,
-			self::POSTMETA_DESIGN . $format_slug,
+			self::POSTMETA_DESIGN . $format,
 			true
 		);
 		if($value){
 			return $value;
 		}
-		return 'classic_' . $format_slug;
+		return 0;
 	}
 
 	/**
@@ -245,12 +255,17 @@ class Project extends PostWrapper{
 	 *
 	 * @return Design|null
 	 */
-	public function getDesignFor( $format){
+	public function getDesignFor($format){
 		if ( $format instanceof FileFormat){
 			$format = $format->slug();
 		}
-		$design_slug = $this->getDesignSlugFor( $format);
-		return $this->design_manager->getBySlug($design_slug);
+		$design_id = $this->getDesignIdFor( $format);
+		if( $design_id ) {
+			return $this->design_manager->getById( $design_id );
+		}
+		// Ok fallback to default
+		return $this->config->getDefaultDesignFor($format);
+
 	}
 
 	/**
@@ -272,16 +287,23 @@ class Project extends PostWrapper{
 
 	/**
 	 * Sets the project's chosen design for the specified format.
-	 * @param $format_slug
-	 * @param $design_slug
+	 *
+	 * @param string|FileFormat $format
+	 * @param int|Design $design
 	 *
 	 * @return bool success
 	 */
-	public function setDesignFor($format_slug, $design_slug){
+	public function setDesignFor( $format, $design){
+		if($format instanceof FileFormat){
+			$format = $format->slug();
+		}
+		if($design instanceof Design){
+			$design = $design->getWpPost()->ID;
+		}
 		return (bool)update_post_meta(
 			$this->getWpPost()->ID,
-			self::POSTMETA_DESIGN . $format_slug,
-			$design_slug
+			self::POSTMETA_DESIGN . $format,
+			$design
 		);
 	}
 
