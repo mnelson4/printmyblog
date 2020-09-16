@@ -280,6 +280,14 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 7. Add the Print My Blog block to add a form visitors can use to select what and how to print your blog.
 
 == Changelog ==
+
+= 2.9.5 September 16, 2020 =
+* Fix a conflict with OceanWP theme from registering select2 JS unnecessarily
+* Prevent images in multi-column layout from spilling over into other columns
+
+= 2.9.4 September 12, 2020 =
+* Fixed images not appearing when selecting that they be "fullsize"
+
 = 2.9.3 September 2, 2020 =
 * Fix a warning when used with AMP for WP plugin
 
