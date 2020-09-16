@@ -281,7 +281,7 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 
 == Changelog ==
 
-= 2.9.5 September 14, 2020 =
+= 2.9.5 September 16, 2020 =
 * Fix a conflict with OceanWP theme from registering select2 JS unnecessarily
 * Prevent images in multi-column layout from spilling over into other columns
 
