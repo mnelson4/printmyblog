@@ -455,6 +455,12 @@ class PmbPrintPage extends BaseController
         	.pmb-image{
         	    margin-left:0;
         	    margin-right:0;
+        	}
+        	.pmb-image img{
+        	    width:100%;
+        	}
+        	.single-featured-image-header img{
+        	    width:100%;
         	}";
         }
         if ($post_page_break) {
