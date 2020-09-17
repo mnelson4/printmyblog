@@ -1,6 +1,7 @@
 <?php
 namespace Twine\forms\strategies\display;
 use Twine\helpers\Html;
+use WP_Error;
 
 /**
  * Class AdminFileUploaderDisplay
@@ -51,7 +52,7 @@ class AdminFileUploaderDisplay extends DisplayBase
 	    }
 
         // html string
-        return $html::div($input . $html::nbsp() . $uploader . $image, '', 'twine_media_uploader_area');
+        return $html->div($input . $html->nbsp() . $uploader . $image, '', 'twine_media_uploader_area');
     }
 
 
