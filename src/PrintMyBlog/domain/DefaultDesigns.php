@@ -54,7 +54,6 @@ class DefaultDesigns {
 							'content',
 						],
 						'page_per_post' => true,
-						'columns' => 1,
 						'font_size' => 'small',
 						'image_size' => 'small',
 
@@ -178,6 +177,25 @@ class DefaultDesigns {
 					'description' => __('Digital 2-column magazine', 'print-my-blog'),
 					'featured_image' => plugins_url($design_template->getDir() . '/preview.png'),
 					'design_defaults' => [
+						'header_content' => [
+							'title',
+							'subtitle',
+							'url',
+							'date_printed',
+						],
+						'post_content' => [
+							'title',
+							'id',
+							'author',
+							'url',
+							'published_date',
+							'categories',
+							'featured_image',
+							'excerpt',
+							'content',
+						],
+						'page_per_post' => false,
+						'post_header_in_columns' => false
 					],
 					'project_defaults' => [
 						'title' => get_bloginfo('name'),

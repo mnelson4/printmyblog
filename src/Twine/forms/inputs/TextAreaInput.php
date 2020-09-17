@@ -1,5 +1,9 @@
 <?php
 namespace Twine\forms\inputs;
+use Twine\forms\strategies\display\TextAreaDisplay;
+use Twine\forms\strategies\normalization\TextNormalization;
+use Twine\forms\strategies\validation\PlaintextValidation;
+
 /**
  * Text_Area
  *
