@@ -161,13 +161,59 @@ class DefaultDesignTemplates {
 				];
 			}
 		);
+		pmb_register_design_template(
+			'mayer',
+			function() {
+				return [
+					'title'           => __( 'Mayer Digital PDF' ),
+					'format'          => 'digital_pdf',
+					'dir'             => PMB_DEFAULT_DESIGNS_DIR . 'classic_digital/',
+					'design_form_callback'  => function() {
+						$sections = array_merge(
+							[
+								'post_header_in_columns' => new YesNoInput(
+									[
+										'html_label_text' => __('Show Post Header inside Columns','print-my-blog'),
+										'html_help_text' => __('Check this to make post header information, like title, date, author, etc, appear inside columns; uncheck this to have it take up the full page width', 'print-my-blog')
+									]
+								)
+							],
+							$this->getDefaultDesignFormSections(),
+							$this->getGenericDesignFormSections()
+						);
+						// all images will take up the full column width
+						unset($sections['image_size']);
+						return new FormSectionProper( [
+							'subsections' => $sections,
+						] );
+					},
+					'project_form_callback' => function(Design $design) {
+						return $this->getDefaultProjectFormSections($design);
+					}
+				];
+			}
+		);
+	}
+
+	public function getDefaultProjectFormSections(Design $design){
+		$sections = [];
+		$header_content = $design->getPmbMeta('header_content');
+		if(in_array('title', $header_content)){
+			$sections['title'] = new TextInput();
+		}
+		if(in_array('subtitle', $header_content)){
+			$sections['subtitle'] = new TextInput();
+		}
+		return new FormSectionProper( [
+			'subsections' => $sections
+		] );
 	}
 
 	/**
 	 * Gets the default design form sections for classic default designs.
 	 * @return FormInputBase[]
 	 */
-	protected function getDefaultDesignFormSections()
+	public function getDefaultDesignFormSections()
 	{
 		return [
 			'header_content' => new CheckboxMultiInput(
@@ -219,17 +265,6 @@ class DefaultDesignTemplates {
 					'default' => true,
 					'html_label_text' => __('Each Post Begins on a New Page', 'print-my-blog'),
 					'html_help_text' => __('Whether to force posts to always start on a new page. Doing so makes the page more legible, but uses more paper.','print-my-blog'),
-				]
-			),
-			'columns' => new SelectInput(
-				[
-					1 => '1',
-					2 => '2',
-					3 => '3'
-				],
-				[
-					'default' => 1,
-					'html_label_text' => __('The number of columns of text on each page.', 'print-my-blog')
 				]
 			),
 			'font_size' => new SelectInput(

@@ -169,5 +169,21 @@ class DefaultDesigns {
 				];
 			}
 		);
+		pmb_register_design(
+			'mayer',
+			'mayer',
+			function(DesignTemplate $design_template){
+				return [
+					'title' => __('Mayer Magazine', 'print-my-blog'),
+					'description' => __('Digital 2-column magazine', 'print-my-blog'),
+					'featured_image' => plugins_url($design_template->getDir() . '/preview.png'),
+					'design_defaults' => [
+					],
+					'project_defaults' => [
+						'title' => get_bloginfo('name'),
+					]
+				];
+			}
+		);
 	}
 }
