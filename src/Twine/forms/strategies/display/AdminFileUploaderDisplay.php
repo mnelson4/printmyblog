@@ -22,7 +22,11 @@ class AdminFileUploaderDisplay extends DisplayBase
     {
         wp_enqueue_media();
         wp_enqueue_script('media-upload');
-        wp_enqueue_script('pmb-media-uploader', PMB_SCRIPTS_URL .'media-uploader.js');
+        wp_enqueue_script('pmb-media-uploader', TWINE_SCRIPTS_URL .'media-uploader.js');
+        wp_enqueue_style(
+        	'pmb-media-uploader',
+	        TWINE_STYLES_URL . 'media-uploader.css'
+        );
         parent::enqueue_js();
     }
 
@@ -35,24 +39,26 @@ class AdminFileUploaderDisplay extends DisplayBase
 
     public function display()
     {
+	    // image uploader
+	    $html_generator = Html::instance();
+	    $html = $html_generator->link('#', __('Choose File', 'twine'), __('click to add an image', 'event_espresso'), '', 'twine_media_upload button');
         // the actual input
-        $input = '<input type="text" size="34" ';
-        $input .= 'name="' . $this->_input->html_name() . '" ';
-        $input .= $this->_input->html_class() != '' ? 'class="large-text ee_media_url ' . $this->_input->html_class() . '" ' : 'class="large-text ee_media_url" ';
-        $input .= 'value="' . $this->_input->raw_value_in_form() . '" ';
-        $input .= $this->_input->otherHtmlAttributesString() . '>';
-        // image uploader
-	    $html = Html::instance();
-        $uploader = $html->link('#', '<img src="' . admin_url('images/media-button-image.gif') . '" >', __('click to add an image', 'event_espresso'), '', 'ee_media_upload');
+        $html .= '<input type="text" size="34" ';
+        $html .= 'name="' . $this->_input->html_name() . '" ';
+        $html .= $this->_input->html_class() != '' ? 'class="large-text twine_media_url ' . $this->_input->html_class() . '" ' : 'class="large-text twine_media_url" ';
+        $html .= 'value="' . $this->_input->raw_value_in_form() . '" ';
+        $html .= 'placeholder="https://..." ';
+        $html .= $this->_input->otherHtmlAttributesString() . '>';
+
         // only attempt to show the image if it at least exists
 	    if($this->src_exists($this->_input->raw_value())){
-		    $image = '<br><br>' . $html->br() . $html->br() . $html->img($this->_input->raw_value(), '', '', "twine_media_image");
+		    $image = '<br><br>' . $html_generator->br() . $html_generator->br() . $html_generator->img($this->_input->raw_value(), '', '', "twine_media_image");
 	    } else {
 	    	$image = '';
 	    }
 
         // html string
-        return $html->div($input . $html->nbsp() . $uploader . $image, '', 'twine_media_uploader_area');
+        return $html_generator->div($html . $html_generator->nbsp() . $image, '', 'twine_media_uploader_area');
     }
 
 

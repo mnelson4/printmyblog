@@ -2,14 +2,23 @@
 namespace Twine\forms\base;
 use EventEspresso\core\exceptions\InvalidDataTypeException;
 use EventEspresso\core\libraries\form_sections\strategies\filter\FormHtmlFilter;
+use Exception;
 use Twine\forms\helpers\ImproperUsageException;
 
 if(!defined('TWINE_SCRIPTS_URL')){
-	$plugin_base_path = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
-	$plugin_url = plugin_dir_url($plugin_base_path);
+	if(! defined('TWINE_MAIN_FILE')){
+		throw new Exception(
+			__(
+				'In order to use Twine forms, you need to define TWINE_MAIN_FILE to be the main file of your plugin, then put Twine folder inside wp-content/plugins/yourplugin/src/Twine',
+				'twine'
+			)
+		);
+	}
+	$plugin_base_path = dirname(TWINE_MAIN_FILE);
+	$plugin_url = plugin_dir_url(TWINE_MAIN_FILE);
 	// Twine constants
-	define('TWINE_SCRIPTS_URL', $plugin_url . '/src/Twine/assets/scripts/');
-	define('TWINE_STYLES_URL', $plugin_url . '/src/Twine/assets/styles/');
+	define('TWINE_SCRIPTS_URL', $plugin_url . 'src/Twine/assets/scripts/');
+	define('TWINE_STYLES_URL', $plugin_url . 'src/Twine/assets/styles/');
 
 	define('TWINE_SCRIPTS_DIR', $plugin_base_path . '/src/Twine/assets/scripts/');
 	define('TWINE_STYLES_DIR', $plugin_base_path . '/src/Twine/assets/styles');

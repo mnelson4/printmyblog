@@ -27,8 +27,8 @@ jQuery(document).ready(function($){
         custom_uploader.on( 'select', function() {
             var attachment = custom_uploader.state().get('selection').first().toJSON();
             if ( typeof attachment.url !== 'undefined' ) {
-                $( upload_btn.target ).parents( '.ee_media_uploader_area' ).find( '.twine_media_image' ).attr( 'src', attachment.url  );
-                $( upload_btn.target ).parents( '.ee_media_uploader_area' ).find( '.twine_media_url' ).val( attachment.url  );
+                $( upload_btn.target ).parents( '.twine_media_uploader_area' ).find( '.twine_media_image' ).attr( 'src', attachment.url  );
+                $( upload_btn.target ).parents( '.twine_media_uploader_area' ).find( '.twine_media_url' ).val( attachment.url  );
             }
         });
         //Open the uploader dialog
