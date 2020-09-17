@@ -4,3 +4,6 @@ input.twine_media_url{
 .twine_media_upload{
     margin-right:1em;
 }
+.twine_media_image{
+    max-height:150px;
+}

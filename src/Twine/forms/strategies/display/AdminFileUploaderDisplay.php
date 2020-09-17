@@ -52,7 +52,7 @@ class AdminFileUploaderDisplay extends DisplayBase
 
         // only attempt to show the image if it at least exists
 	    if($this->src_exists($this->_input->raw_value())){
-		    $image = '<br><br>' . $html_generator->br() . $html_generator->br() . $html_generator->img($this->_input->raw_value(), '', '', "twine_media_image");
+		    $image = $html_generator->br() . $html_generator->br() . $html_generator->img($this->_input->raw_value(), '', '', "twine_media_image");
 	    } else {
 	    	$image = '';
 	    }
