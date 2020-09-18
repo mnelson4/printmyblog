@@ -81,6 +81,13 @@ class DesignTemplate {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getUrl(){
+		return plugins_url($this->getDir());
+	}
+
+	/**
 	 * @return FormSectionProper
 	 */
 	public function getDesignForm()

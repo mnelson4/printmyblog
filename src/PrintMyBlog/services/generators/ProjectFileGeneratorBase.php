@@ -3,9 +3,9 @@
 
 namespace PrintMyBlog\services\generators;
 
+use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
-use PrintMyBlog\orm\entities\ProjectGeneration;
-use Twine\services\filesystem\File;
+use PrintMyBlog\entities\ProjectGeneration;
 use WP_Post;
 use WP_Query;
 
@@ -43,8 +43,8 @@ abstract class ProjectFileGeneratorBase {
 			]
 		);
 		// Includes the design's functions.php file, if it exists
-		if(file_exists($this->getSelectedDesignDir() . 'functions.php')){
-			include($this->getSelectedDesignDir() . 'functions.php');
+		if(file_exists( $this->getDesignDir() . 'functions.php')){
+			include( $this->getDesignDir() . 'functions.php');
 		}
 		$this->startGenerating();
 
@@ -123,24 +123,37 @@ abstract class ProjectFileGeneratorBase {
 		wp_reset_postdata();
 	}
 
-	protected function getSelectedDesignSlug()
+	/**
+	 * @return \PrintMyBlog\orm\entities\Design|null
+	 */
+	protected function getDesign()
 	{
-		return 'classic';
+		return $this->project->getDesignFor($this->project_generation->getFormat());
 	}
-	protected function getSelectedDesignDir()
+
+	/**
+	 * Gets the base path to the directory of the design template's files.
+	 * @return string
+	 */
+	protected function getDesignDir()
 	{
-		return PMB_DEFAULT_DESIGNS_DIR . $this->getSelectedDesignSlug() . '/';
+		return $this->getDesign()->getDesignTemplate()->getDir();
 	}
-	protected function getSelectedDesignUrl()
+
+	/**
+	 * Gets the base URL of the design template's files
+	 * @return string
+	 */
+	protected function getDesignUrl()
 	{
-		return PMB_DEFAULT_DESIGNS_URL .$this->getSelectedDesignSlug() . '/';
+		return $this->getDesign()->getDesignTemplate()->getUrl;
 	}
 
 	/**
 	 * Deletes the generated HTML file, if it exists.
 	 * @return bool
 	 */
-	public function deleteHtmlFile()
+	public function deleteFile()
 	{
 		return $this->getFileWriter()->delete();
 	}

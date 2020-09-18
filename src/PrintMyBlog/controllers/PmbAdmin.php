@@ -524,7 +524,7 @@ class PmbAdmin extends BaseController
     }
 
     protected function editGenerate(Project $project){
-    	$formats = $project->getFormatsSelected();
+    	$generations = $project->getAllGenerations();
     	include(PMB_TEMPLATES_DIR . 'project_edit_generate.template.php');
     }
 
@@ -617,9 +617,14 @@ class PmbAdmin extends BaseController
 	protected function saveProjectContent(Project $project)
 	{
 		check_admin_referer('pmb-project-edit');
+		foreach($project->getAllGenerations() as $project_generation){
+			$project_generation->addDirtyReason(
+				'content_update',
+				__('The content in your project has changed', 'print-my-blog')
+			);
+		}
 		$parts_string = stripslashes($_POST['pmb-project-sections-data']);
 		$parts = json_decode($parts_string);
-		$project->clearGeneratedFiles();
 		$this->part_fetcher->clearPartsFor($project->getWpPost()->ID);
 		$this->part_fetcher->setPartsFor($project->getWpPost()->ID, $parts);
 	}
@@ -635,6 +640,11 @@ class PmbAdmin extends BaseController
         foreach($design_form->input_values(true,true) as $setting_name => $normalized_value){
             $design->setSetting($setting_name, $normalized_value);
 	    }
+        $project_generation = $project->getGenerationFor($_GET['format']);
+        $project_generation->addDirtyReason(
+        	'design_change',
+	        __('You have customized this design', 'print-my-blog')
+        );
         wp_safe_redirect(
 		    add_query_arg(
 			    [
@@ -660,6 +670,11 @@ class PmbAdmin extends BaseController
 			);
 		}
 		$project->setDesignFor($format, $design);
+		$project_generation = $project->getGenerationFor($format);
+		$project_generation->addDirtyReason(
+			'design_change',
+			__('You changed the design', 'print-my-blog')
+		);
 		// send back to main
 		wp_safe_redirect(
 			add_query_arg(
@@ -690,6 +705,13 @@ class PmbAdmin extends BaseController
 		foreach($form->input_values(true,true) as $setting_name => $normalized_value){
 			$project->setSetting($setting_name, $normalized_value);
 		}
+		$project_generations = $project->getAllGenerations();
+		foreach($project_generations as $generation){
+			$generation->addDirtyReason(
+				'metadata',
+				__('You changed projected metadata', 'print-my-blog')
+			);
+		}
 		wp_safe_redirect(
 			add_query_arg(
 				[
@@ -713,6 +735,9 @@ class PmbAdmin extends BaseController
 		if(! $format instanceof FileFormat){
 			throw new Exception(__('There is no file format with the slug "%s"', 'print-my-blog'),$_GET['format']);
 		}
+		$project_generation = $project->getGenerationFor($format);
+		$project_generation->clearDirty();
+		$project_generation->setIntermediaryGeneratedTime();
 	    $url = add_query_arg(
 		    [
 			    PMB_PRINTPAGE_SLUG => 3,

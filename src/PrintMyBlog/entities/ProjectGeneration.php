@@ -1,10 +1,10 @@
 <?php
 
 
-namespace PrintMyBlog\orm\entities;
+namespace PrintMyBlog\entities;
 
 
-use PrintMyBlog\entities\FileFormat;
+use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
 
 /**
@@ -17,6 +17,7 @@ use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
  */
 class ProjectGeneration {
 	const POSTMETA_GENERATED = '_pmb_generated_';
+	const POSTMETA_DIRTY = '_pmb_dirty_';
 	/**
 	 * @var Project
 	 */
@@ -44,14 +45,25 @@ class ProjectGeneration {
 	 */
 	public function isGenerated()
 	{
-		return (bool)get_post_meta($this->project->getWpPost()->ID, $this->postMetaKey(), true);
+		return (bool)$this->generatedTimeSql();
+	}
+
+	public function generatedTimeSql(){
+		return get_post_meta($this->project->getWpPost()->ID, $this->generatedPostMetaKey(), true);
+	}
+
+	/**
+	 * @return int
+	 */
+	public function generatedTimestamp(){
+		return strtotime($this->generatedTimeSql());
 	}
 
 	/**
 	 * Gets the postmeta key for this file generation
 	 * @return string
 	 */
-	protected function postMetaKey()
+	protected function generatedPostMetaKey()
 	{
 		return self::POSTMETA_GENERATED . $this->format->slug();
 	}
@@ -62,7 +74,7 @@ class ProjectGeneration {
 	 */
 	public function setIntermediaryGeneratedTime()
 	{
-		return update_post_meta($this->project->getWpPost()->ID,$this->postMetaKey(), current_time('mysql'));
+		return update_post_meta($this->project->getWpPost()->ID,$this->generatedPostMetaKey(), current_time('mysql'));
 	}
 
 	/**
@@ -71,7 +83,7 @@ class ProjectGeneration {
 	 */
 	public function clearIntermediaryGeneratedTime()
 	{
-		return delete_post_meta($this->project->getWpPost()->ID, $this->postMetaKey());
+		return delete_post_meta($this->project->getWpPost()->ID, $this->generatedPostMetaKey());
 	}
 
 	/**
@@ -128,7 +140,7 @@ class ProjectGeneration {
 	 *
 	 * @return ProjectFileGeneratorBase
 	 */
-	protected function getProjectHtmlGenerator()
+	public function getProjectHtmlGenerator()
 	{
 		if( ! $this->generator instanceof ProjectFileGeneratorBase){
 			$generator_classname = $this->format->generatorClassname();
@@ -142,5 +154,67 @@ class ProjectGeneration {
 	 */
 	public function getProject() {
 		return $this->project;
+	}
+
+	/**
+	 * @return FileFormat
+	 */
+	public function getFormat() {
+		return $this->format;
+	}
+
+	/**
+	 * Returns whether or not the last generation of this project for this format is stale/needs-to-be-updated.
+	 * @return bool
+	 */
+	public function isDirty(){
+		return (bool)$this->getDirtyReasons();
+	}
+
+	/**
+	 * Gets all the reasons this project generation may be dirty.
+	 * @return array
+	 */
+	public function getDirtyReasons(){
+		$reasons = get_post_meta(
+			$this->project->getWpPost()->ID,
+			$this->dirtyPostmetaName(),
+			true
+		);
+		if($reasons){
+			return $reasons;
+		}
+		return [];
+	}
+
+	/**
+	 * Removes all the dirty reasons. Makes sense when the project file for this format is re-generated
+	 */
+	public function clearDirty(){
+		delete_post_meta(
+			$this->project->getWpPost()->ID,
+			$this->dirtyPostmetaName()
+		);
+	}
+
+	/**
+	 * Adds another reason this project generation is dirty and should be re-done.
+	 *
+	 * @param string $key used to avoid duplicates
+	 * @param string $dirty_reason translated string to be shown to end user.
+	 * @return bool
+	 */
+	public function addDirtyReason($key, $dirty_reason){
+		$existing_reasons = $this->getDirtyReasons();
+		$existing_reasons[$key] = $dirty_reason;
+		return update_post_meta(
+			$this->project->getWpPost()->ID,
+			$this->dirtyPostmetaName(),
+			$existing_reasons
+		);
+	}
+
+	protected function dirtyPostmetaName(){
+		return self::POSTMETA_DIRTY . $this->format->slug();
 	}
 }

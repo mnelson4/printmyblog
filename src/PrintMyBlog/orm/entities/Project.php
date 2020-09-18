@@ -7,6 +7,7 @@ use Exception;
 use PrintMyBlog\db\PartFetcher;
 use PrintMyBlog\domain\DefaultFileFormats;
 use PrintMyBlog\entities\FileFormat;
+use PrintMyBlog\entities\ProjectGeneration;
 use PrintMyBlog\helpers\ArgMagician;
 use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\services\config\Config;
@@ -25,7 +26,6 @@ use WP_Query;
  */
 class Project extends PostWrapper{
 
-	const POSTMETA_GENERATED = '_pmb_generated_';
 	const POSTMETA_CODE = '_pmb_code';
 	const POSTMETA_FORMAT = '_pmb_format';
 	const POSTMETA_DESIGN = '_pmb_design_for_';
@@ -36,9 +36,9 @@ class Project extends PostWrapper{
 	protected $part_fetcher;
 
 	/**
-	 * @var ProjectFileGeneratorBase
+	 * @var ProjectGeneration[]
 	 */
-	protected $html_generators;
+	protected $generations = [];
 
 	/**
 	 * @var FileFormatRegistry
@@ -213,9 +213,7 @@ class Project extends PostWrapper{
 	 * @return Design|null
 	 */
 	public function getDesignFor($format){
-		if ( $format instanceof FileFormat){
-			$format = $format->slug();
-		}
+		$format = ArgMagician::castToFormatSlug($format);
 		$design_id = $this->getDesignIdFor( $format);
 		if( $design_id ) {
 			return $this->design_manager->getById( $design_id );
@@ -282,13 +280,43 @@ class Project extends PostWrapper{
 	}
 
 	/**
+	 * Gets the object with all the logic around generating files for projects, for the given format.
+	 * @param FileFormat|string $format
+	 *
+	 * @return ProjectGeneration
+	 */
+	public function getGenerationFor($format){
+		$format_slug = ArgMagician::castToFormatSlug($format);
+		if( ! isset($this->generations[$format_slug]) || ! $this->generations[$format_slug] instanceof ProjectGeneration){
+			if( ! $format instanceof FileFormat){
+				$format = $this->format_registry->getFormat($format);
+			}
+			$this->generations[$format_slug] = new ProjectGeneration($this, $format);
+		}
+		return $this->generations[$format_slug];
+	}
+
+	/**
+	 * Gets all the project generations of this project
+	 * @return ProjectGeneration[]
+	 */
+	public function getAllGenerations(){
+		$generations = [];
+		foreach($this->getFormatsSelected() as $format){
+			$generations[$format->slug()] = $this->getGenerationFor($format);
+		}
+		return $generations;
+	}
+
+	/**
 	 * Clears out the generated files. Useful in case the project has changed and so should be re-generated.
 	 * @return bool
 	 */
 	public function clearGeneratedFiles()
 	{
-		$this->setHtmlGeneratedTime(false);
-		$this->getProjectHtmlGenerator()->deleteHtmlFile();
+		$project_generation = new ProjectGeneration($this, $this->getFormatsSelected());
+		$project_generation->clearIntermediaryGeneratedTime();
+		$project_generation->getProjectHtmlGenerator()->deleteFile();
 		return true;
 	}
 

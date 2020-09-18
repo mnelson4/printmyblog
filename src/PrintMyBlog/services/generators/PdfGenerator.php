@@ -21,12 +21,12 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 		wp_enqueue_style('pmb_print_common');
 		wp_enqueue_style('pmb-plugin-compatibility');
 		wp_enqueue_script('pmb-beautifier-functions');
-		$style_file = $this->getSelectedDesignDir() . 'style.css';
-		$script_file = $this->getSelectedDesignDir() . 'script.js';
+		$style_file = $this->getDesignDir() . 'style.css';
+		$script_file = $this->getDesignDir() . 'script.js';
 		if(file_exists($style_file)){
 			wp_enqueue_style(
 				'pmb-design',
-				$this->getSelectedDesignUrl() . 'style.css',
+				$this->getDesignUrl() . 'style.css',
 				['pmb_print_common', 'pmb-plugin-compatibility'],
 				filemtime($style_file)
 			);
@@ -34,7 +34,7 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 		if(file_exists($script_file)){
 			wp_enqueue_script(
 				'pmb-design',
-				$this->getSelectedDesignUrl() . 'script.js',
+				$this->getDesignUrl() . 'script.js',
 				['jquery', 'pmb-beautifier-functions'],
 				filemtime($script_file)
 			);		}
@@ -48,7 +48,7 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 		$pmb_show_date_printed = true;
 		$pmb_show_credit = true;
 		ob_start();
-		$file = $this->getSelectedDesignDir() . 'header.php';
+		$file = $this->getDesignDir() . 'header.php';
 		include( $file );
 		$this->getFileWriter()->write(ob_get_clean());
 	}
@@ -56,14 +56,14 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 	protected function generatePost()
 	{
 		ob_start();
-		include( $this->getSelectedDesignDir() . 'section.php');
+		include( $this->getDesignDir() . 'section.php');
 		$this->getFileWriter()->write(ob_get_clean());
 	}
 
 	protected function finishGenerating()
 	{
 		ob_start();
-		include( $this->getSelectedDesignDir() . 'footer.php');
+		include( $this->getDesignDir() . 'footer.php');
 		$this->getFileWriter()->write(ob_get_clean());
 	}
 
