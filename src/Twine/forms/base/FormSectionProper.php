@@ -398,7 +398,7 @@ class FormSectionProper extends FormSectionValidatable
      *                                                      with construction finalize being called later
      *                                                      (realizing that the subsections' html names
      *                                                      might not be set yet, etc.)
-     * @return FormSectionBase
+     * @return FormSectionBase|null
      * @throws ImproperUsageException
      */
     public function get_subsection($name, $require_construction_to_be_finalized = true)

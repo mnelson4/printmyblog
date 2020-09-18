@@ -489,6 +489,32 @@ class PmbAdmin extends BaseController
 	    include(PMB_TEMPLATES_DIR . 'project_edit_content.template.php');
     }
 
+    protected function editMetadata(Project $project){
+
+	    if( $this->invalid_form instanceof FormSectionProper){
+		    $form = $this->invalid_form;
+	    } else {
+		    $form = $project->getMetaForm();
+		    $defaults = [];
+		    foreach($form->inputs_in_subsections() as $input){
+			    $saved_value = $project->getSetting($input->name());
+			    if($saved_value && ! $input->get_default()){
+				    $defaults[$input->name()] = $saved_value;
+			    }
+		    }
+		    $form->populate_defaults($defaults);
+	    }
+    	$form_url = add_query_arg(
+		    [
+			    'ID' => $project->getWpPost()->ID,
+			    'action' => self::SLUG_ACTION_EDIT_PROJECT,
+			    'subaction' => self::SLUG_SUBACTION_PROJECT_META
+		    ],
+		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+	    );
+    	include(PMB_TEMPLATES_DIR . 'project_edit_metadata.template.php');
+    }
+
     /**
      * Checks if a form was submitted, in which case we'd want to redirect.
      * @since 3.0
@@ -527,21 +553,22 @@ class PmbAdmin extends BaseController
         }
         if( $action === self::SLUG_ACTION_EDIT_PROJECT){
         	$subaction = isset($_GET['subaction']) ? $_GET['subaction'] : null;
+	        $project = $this->project_manager->getById($_GET['ID']);
         	switch($subaction){
 		        case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
-			        $this->saveProjectChooseDesign();
+			        $this->saveProjectChooseDesign($project);
 			        break;
 		        case self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN:
-			        $this->saveProjectCustomizeDesign();
+			        $this->saveProjectCustomizeDesign($project);
 			        break;
 		        case self::SLUG_SUBACTION_PROJECT_CONTENT:
-			        $this->saveProjectContent();
+			        $this->saveProjectContent($project);
 			        break;
 		        case self::SLUG_SUBACTION_PROJECT_META:
-			        $this->saveProjectMetadata();
+			        $this->saveProjectMetadata($project);
 			        break;
 		        case self::SLUG_SUBACTION_PROJECT_GENERATE:
-		        	$this->saveProjectGenerate();
+		        	$this->saveProjectGenerate($project);
 		        	break;
 	        }
 	        if($this->invalid_form instanceof FormSectionProper){
@@ -574,54 +601,40 @@ class PmbAdmin extends BaseController
 	 * Saves the project's name and parts etc.
 	 * @return int project ID
 	 */
-	protected function saveProjectContent()
+	protected function saveProjectContent(Project $project)
 	{
 		check_admin_referer('pmb-project-edit');
-		$project_id = $_GET['ID'];
-		$project_obj = new Project($project_id);
 		$parts_string = stripslashes($_POST['pmb-project-sections-data']);
 		$parts = json_decode($parts_string);
-		$project_obj->clearGeneratedFiles();
-		$this->part_fetcher->clearPartsFor($project_id);
-		$this->part_fetcher->setPartsFor($project_id, $parts);
-		return $project_id;
+		$project->clearGeneratedFiles();
+		$this->part_fetcher->clearPartsFor($project->getWpPost()->ID);
+		$this->part_fetcher->setPartsFor($project->getWpPost()->ID, $parts);
 	}
 
-    protected function saveProjectCustomizeDesign()
+    protected function saveProjectCustomizeDesign(Project $project)
     {
-	    /**
-	     * @var $project Project
-	     */
-    	$project = $this->project_manager->getById($_GET['ID']);
-
     	$design = $project->getDesignFor($_GET['format']);
-
     	$design_form = $design->getDesignTemplate()->getDesignForm();
     	$design_form->receive_form_submission($_REQUEST);
-    	if($design_form->is_valid()){
-    		foreach($design_form->input_values(true,true) as $setting_name => $normalized_value){
-    			$design->setSetting($setting_name, $normalized_value);
-		    }
-    		wp_safe_redirect(
-			    add_query_arg(
-				    [
-					    'ID' => $project->getWpPost()->ID,
-					    'action' => self::SLUG_ACTION_EDIT_PROJECT,
-					    'subaction' => 'main'
-				    ],
-				    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-			    )
-		    );
+    	if(! $design_form->is_valid()) {
+		    $this->invalid_form = $design_form;
 	    }
-    	$this->invalid_form = $design_form;
+        foreach($design_form->input_values(true,true) as $setting_name => $normalized_value){
+            $design->setSetting($setting_name, $normalized_value);
+	    }
+        wp_safe_redirect(
+		    add_query_arg(
+			    [
+				    'ID' => $project->getWpPost()->ID,
+				    'action' => self::SLUG_ACTION_EDIT_PROJECT,
+				    'subaction' => 'main'
+			    ],
+			    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+		    )
+	    );
     }
 
-	protected function saveProjectChooseDesign(){
-		/**
-		 * @var $project Project
-		 */
-		$project = $this->project_manager->getById($_GET['ID']);
-
+	protected function saveProjectChooseDesign(Project $project){
 		$design = $this->design_manager->getById((int)$_GET['design']);
 		$format = $this->file_format_registry->getFormat($_GET['format']);
 		if(! $design instanceof Design || ! $format instanceof FileFormat){
@@ -647,7 +660,36 @@ class PmbAdmin extends BaseController
 		);
 	}
 
-    protected function saveProjectGenerate(){
+	/**
+	 * Gets the project form, which is a combination of the project forms for all the designs in use.
+	 * @param Project $project
+	 *
+	 * @return FormSectionProper
+	 * @throws \Twine\forms\helpers\ImproperUsageException
+	 */
+	protected function saveProjectMetadata(Project $project){
+		$form = $project->getMetaForm();
+		$form->receive_form_submission($_REQUEST);
+		if(! $form->is_valid()) {
+			$this->invalid_form = $form;
+			return;
+		}
+		foreach($form->input_values(true,true) as $setting_name => $normalized_value){
+			$project->setSetting($setting_name, $normalized_value);
+		}
+		wp_safe_redirect(
+			add_query_arg(
+				[
+					'ID' => $project->getWpPost()->ID,
+					'action' => self::SLUG_ACTION_EDIT_PROJECT,
+					'subaction' => 'main'
+				],
+				admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+			)
+		);
+	}
+
+    protected function saveProjectGenerate(Project $project){
 		    $url = add_query_arg(
 			    [
 				    PMB_PRINTPAGE_SLUG => 3,

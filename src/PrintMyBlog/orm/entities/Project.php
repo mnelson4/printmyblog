@@ -3,12 +3,15 @@
 
 namespace PrintMyBlog\orm\entities;
 
+use Exception;
 use PrintMyBlog\db\PartFetcher;
 use PrintMyBlog\domain\DefaultFileFormats;
 use PrintMyBlog\entities\FileFormat;
 use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\services\config\Config;
 use PrintMyBlog\services\ProjectHtmlGenerator;
+use Twine\forms\base\FormSectionProper;
+use Twine\forms\inputs\FormInputBase;
 use Twine\orm\entities\PostWrapper;
 use WP_Post;
 use WP_Query;
@@ -333,5 +336,52 @@ class Project extends PostWrapper{
 		$this->setGenerated(false);
 		$this->getProjectHtmlGenerator()->deleteHtmlFile();
 		return true;
+	}
+
+	/**
+	 * Gets a form that is actually a combination of all the forms for the project's chosen designs.
+	 * @param Project $project
+	 *
+	 * @return FormSectionProper
+	 * @throws ImproperUsageException
+	 */
+	public function getMetaForm(){
+		$formats = $this->getFormatsSelected();
+		$forms = [];
+		foreach($formats as $format){
+			$forms[] = $this->getDesignFor($format)->getProjectForm();
+		}
+		$project_form = new FormSectionProper();
+		foreach($forms as $form){
+			$project_form->add_subsections($form->subsections(false));
+		}
+		// If there's a field named "title", set its default to be the post title.
+		$title_input = $project_form->get_subsection('title');
+		if($title_input instanceof FormInputBase){
+			$title_input->set_default($this->getWpPost()->post_title);
+		}
+		return $form;
+	}
+
+	public function getSetting($setting_name) {
+		// tries to get the setting from a postmeta
+		$setting = $this->getPmbMeta( $setting_name );
+		if ( $setting !== null ) {
+			return $setting;
+		}
+		$form    = $this->getMetaForm();
+		$section = $form->findSection( $setting_name );
+		if ( $section instanceof FormInputBase ) {
+			return $section->get_default();
+		}
+		return null;
+	}
+
+	/**
+	 * @param $setting_name string
+	 * @param $value mixed
+	 */
+	public function setSetting($setting_name, $value){
+		$this->setPmbMeta($setting_name, $value);
 	}
 }
