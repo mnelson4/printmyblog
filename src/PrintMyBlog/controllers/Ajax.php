@@ -5,7 +5,9 @@ namespace PrintMyBlog\controllers;
 use mnelson4\RestApiDetector\RestApiDetector;
 use mnelson4\RestApiDetector\RestApiDetectorError;
 use PrintMyBlog\db\PartFetcher;
+use PrintMyBlog\orm\entities\ProjectGeneration;
 use PrintMyBlog\orm\managers\ProjectManager;
+use PrintMyBlog\services\FileFormatRegistry;
 use Twine\controllers\BaseController;
 use WP_Query;
 
@@ -25,12 +27,17 @@ class Ajax extends BaseController
 	 * @var ProjectManager
 	 */
 	protected $project_manager;
+	/**
+	 * @var FileFormatRegistry
+	 */
+	protected $format_registry;
 
 	/**
 	 * @param ProjectManager $project_manager
 	 */
-	public function inject(ProjectManager $project_manager){
+	public function inject(ProjectManager $project_manager, FileFormatRegistry $format_registry){
 		$this->project_manager = $project_manager;
+		$this->format_registry = $format_registry;
 	}
     /**
      * Sets hooks that we'll use in the admin.
@@ -85,17 +92,18 @@ class Ajax extends BaseController
     {
     	// Find project by ID.
 	    $project = $this->project_manager->getById($_GET['ID']);
-
+	    $format = $this->format_registry->getFormat($_GET['format']);
+		$project_generation = new ProjectGeneration($project, $format);
 	    // Find if it's already been generated, if so return that.
-	    if(! $project->generated()){
-		    $done = $project->generateHtmlFile();
+	    if(! $project_generation->isGenerated()){
+		    $done = $project_generation->generateIntermediaryFile();
 		    if( $done ) {
-			    $url = $project->generatedHtmlFileUrl();
+			    $url = $project_generation->getGeneratedIntermediaryFileUrl();
 		    } else {
 		    	$url = null;
 		    }
 	    } else {
-		    $url = $project->generatedHtmlFileUrl();
+		    $url = $project_generation->getGeneratedIntermediaryFileUrl();
 		}
 
 	    // If we're all done, return the file.

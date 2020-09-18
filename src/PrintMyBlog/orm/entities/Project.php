@@ -7,10 +7,11 @@ use Exception;
 use PrintMyBlog\db\PartFetcher;
 use PrintMyBlog\domain\DefaultFileFormats;
 use PrintMyBlog\entities\FileFormat;
+use PrintMyBlog\helpers\ArgMagician;
 use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\services\config\Config;
 use PrintMyBlog\services\FileFormatRegistry;
-use PrintMyBlog\services\ProjectHtmlGenerator;
+use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
 use Twine\forms\base\FormSectionProper;
 use Twine\forms\inputs\FormInputBase;
 use Twine\orm\entities\PostWrapper;
@@ -24,7 +25,7 @@ use WP_Query;
  */
 class Project extends PostWrapper{
 
-	const POSTMETA_GENERATED = '_pmb_generated';
+	const POSTMETA_GENERATED = '_pmb_generated_';
 	const POSTMETA_CODE = '_pmb_code';
 	const POSTMETA_FORMAT = '_pmb_format';
 	const POSTMETA_DESIGN = '_pmb_design_for_';
@@ -35,9 +36,9 @@ class Project extends PostWrapper{
 	protected $part_fetcher;
 
 	/**
-	 * @var ProjectHtmlGenerator
+	 * @var ProjectFileGeneratorBase
 	 */
-	protected $html_generator;
+	protected $html_generators;
 
 	/**
 	 * @var FileFormatRegistry
@@ -82,18 +83,7 @@ class Project extends PostWrapper{
 		);
 	}
 
-	public function generated()
-	{
-		return (bool)get_post_meta($this->getWpPost()->ID, self::POSTMETA_GENERATED, true);
-	}
 
-	/**
-	 * @return success
-	 */
-	public function setGenerated($new_value)
-	{
-		return update_post_meta($this->getWpPost()->ID,self::POSTMETA_GENERATED, (bool)$new_value);
-	}
 
 	/**
 	 * @return string
@@ -114,50 +104,6 @@ class Project extends PostWrapper{
 	}
 
 	/**
-	 * @return string
-	 */
-	public function generatedHtmlFileUrl()
-	{
-		$upload_dir_info = wp_upload_dir();
-		return $upload_dir_info['baseurl'] . '/pmb/generated/' . $this->code() . '/' . $this->getWpPost()->post_name . '.html';
-	}
-
-	/**
-	 * Gets the filepath to the main generated file.
-	 * @return string
-	 */
-	public function generatedHtmlFilePath()
-	{
-		return $this->generatedHtmlFileFolderPath() . $this->getWpPost()->post_name . '.html';
-	}
-
-	/**
-	 * Returns the filepath to the folder containing the generated file(s).
-	 * @return string
-	 */
-	public function generatedHtmlFileFolderPath()
-	{
-		$upload_dir_info = wp_upload_dir();
-		return str_replace(
-			'..',
-			'',
-			$upload_dir_info['basedir'] . '/pmb/generated/' . $this->code() . '/'
-		);
-	}
-
-	/**
-	 * @return bool complete
-	 */
-	public function generateHtmlFile()
-	{
-		$complete = $this->getProjectHtmlGenerator()->generateHtmlFile();
-		if($complete){
-			$this->setGenerated(true);
-		}
-		return $complete;
-	}
-
-	/**
 	 * Gets the database rows indicating the parts
 	 * @return int[]
 	 */
@@ -166,16 +112,7 @@ class Project extends PostWrapper{
 		return $this->part_fetcher->fetchPartPostIdsUnordered($this->getWpPost()->ID);
 	}
 
-	/**
-	 * @return ProjectHtmlGenerator
-	 */
-	protected function getProjectHtmlGenerator()
-	{
-		if( ! $this->html_generator instanceof ProjectHtmlGenerator){
-			$this->html_generator = new ProjectHtmlGenerator($this);
-		}
-		return $this->html_generator;
-	}
+
 
 	/**
 	 * @param $project_format_slug
@@ -350,7 +287,7 @@ class Project extends PostWrapper{
 	 */
 	public function clearGeneratedFiles()
 	{
-		$this->setGenerated(false);
+		$this->setHtmlGeneratedTime(false);
 		$this->getProjectHtmlGenerator()->deleteHtmlFile();
 		return true;
 	}

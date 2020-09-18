@@ -49,7 +49,8 @@ class Context extends BaseContext
 		        'PrintMyBlog\orm\managers\DesignManager' => self::REUSE
             ],
 	        'PrintMyBlog\controllers\Ajax'     => [
-	        	'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE
+	        	'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
+		        'PrintMyBlog\services\FileFormatRegistry' => self::REUSE,
 	        ],
 	        'PrintMyBlog\orm\entities\Project'          => [
 		        'PrintMyBlog\db\PartFetcher'             => self::REUSE,

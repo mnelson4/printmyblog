@@ -1,32 +1,32 @@
 <?php
 
 
-namespace PrintMyBlog\services;
+namespace PrintMyBlog\services\generators;
 
 use PrintMyBlog\orm\entities\Project;
+use PrintMyBlog\orm\entities\ProjectGeneration;
 use Twine\services\filesystem\File;
 use WP_Post;
 use WP_Query;
 
-class ProjectHtmlGenerator {
+abstract class ProjectFileGeneratorBase {
 	/**
 	 * @var Project
 	 */
-	private $project;
-
+	protected $project;
 	/**
-	 * @var File
+	 * @var ProjectGeneration
 	 */
-	private $file_writer;
+	protected $project_generation;
 
 	/**
 	 * ProjectHtmlGenerator constructor.
 	 *
 	 * @param Project $project
 	 */
-	public function __construct(Project $project){
-
-		$this->project = $project;
+	public function __construct(ProjectGeneration $project_generation){
+		$this->project_generation = $project_generation;
+		$this->project = $project_generation->getProject();
 	}
 
 	/**
@@ -46,11 +46,11 @@ class ProjectHtmlGenerator {
 		if(file_exists($this->getSelectedDesignDir() . 'functions.php')){
 			include($this->getSelectedDesignDir() . 'functions.php');
 		}
-		$this->generateHtmlFileHeader();
+		$this->startGenerating();
 
 		$this->sortPosts($query, $part_post_ids);
 		$this->addPostsToHtmlFile($query);
-		$this->generateHtmlFileFooter();
+		$this->finishGenerating();
 		return true;
 
 //		// If that's all the posts done, add the header and footer, using the scripts we enqueued.
@@ -64,54 +64,34 @@ class ProjectHtmlGenerator {
 //		];
 	}
 
-	protected function generateHtmlFileHeader()
-	{
-		wp_enqueue_style('pmb_print_common');
-		wp_enqueue_style('pmb-plugin-compatibility');
-		wp_enqueue_script('pmb-beautifier-functions');
-		$style_file = $this->getSelectedDesignDir() . 'style.css';
-		$script_file = $this->getSelectedDesignDir() . 'script.js';
-		if(file_exists($style_file)){
-			wp_enqueue_style(
-				'pmb-design',
-				$this->getSelectedDesignUrl() . 'style.css',
-				['pmb_print_common', 'pmb-plugin-compatibility'],
-				filemtime($style_file)
-			);
-		}
-		if(file_exists($script_file)){
-			wp_enqueue_script(
-				'pmb-design',
-				$this->getSelectedDesignUrl() . 'script.js',
-				['jquery', 'pmb-beautifier-functions'],
-				filemtime($script_file)
-			);		}
-		add_filter('wp_enqueue_scripts', [$this,'remove_theme_style'],20);
-		global $pmb_project;
-		$pmb_project = $this->project;
-		$pmb_show_site_title = true;
-		$pmb_show_site_tagline = false;
-		$pmb_site_name = $pmb_project->getWpPost()->post_title;
-		$pmb_site_description = '';
-		$pmb_show_date_printed = true;
-		$pmb_show_credit = true;
-		ob_start();
-		$file = $this->getSelectedDesignDir() . 'header.php';
-		include( $file );
-		$this->getFileWriter()->write(ob_get_clean());
-	}
+	/**
+	 * @global Project $pmb_project
+	 * @global Design $pmb_design
+	 */
+	protected abstract function startGenerating();
+
+	/**
+	 * Generates for the current post in global $wp_post. We call WP_Query::the_post() just before calling this.
+	 * @global WP_Post $wp_post
+	 * @global Project $pmb_project
+	 * @global Design $pmb_design
+	 * @return bool success
+	 */
+	protected abstract function generatePost();
+
+	/**
+	 * @global WP_Post $wp_post
+	 * @global Project $pmb_project
+	 * @global Design $pmb_design
+	 * @return bool
+	 */
+	protected abstract function finishGenerating();
 
 	public function remove_theme_style()
 	{
 		$active_theme_slug = get_stylesheet();
 		wp_dequeue_style($active_theme_slug . '-style');
 		wp_dequeue_style($active_theme_slug . '-print-style');
-	}
-	protected function generateHtmlFileFooter()
-	{
-		ob_start();
-		include( $this->getSelectedDesignDir() . 'footer.php');
-		$this->getFileWriter()->write(ob_get_clean());
 	}
 
 	/**
@@ -138,20 +118,9 @@ class ProjectHtmlGenerator {
 	protected function addPostsToHtmlFile(WP_Query $query) {
 		while ( $query->have_posts() ) {
 			$query->the_post();
-			$this->addPostToHtmlFile();
+			$this->generatePost();
 		}
 		wp_reset_postdata();
-	}
-
-	/**
-	 * @return File
-	 */
-	protected function getFileWriter()
-	{
-		if(! $this->file_writer instanceof File){
-			$this->file_writer = new File($this->project->generatedHtmlFilePath());
-		}
-		return $this->file_writer;
 	}
 
 	protected function getSelectedDesignSlug()
@@ -165,13 +134,6 @@ class ProjectHtmlGenerator {
 	protected function getSelectedDesignUrl()
 	{
 		return PMB_DEFAULT_DESIGNS_URL .$this->getSelectedDesignSlug() . '/';
-	}
-
-	protected function addPostToHtmlFile()
-	{
-		ob_start();
-		include( $this->getSelectedDesignDir() . 'section.php');
-		$this->getFileWriter()->write(ob_get_clean());
 	}
 
 	/**

@@ -4,6 +4,9 @@
 namespace PrintMyBlog\entities;
 
 
+use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
+use Twine\forms\helpers\ImproperUsageException;
+
 class FileFormat {
 	/**
 	 * @var string
@@ -27,7 +30,10 @@ class FileFormat {
 		if(isset($data['title'])){
 			$this->title = $data['title'];
 		}
-
+		if(! isset($data['generator'])){
+			throw new ImproperUsageException(__('No generator class specified for format "%s"', 'print-my-blog'), $this->slug());
+		}
+		$this->generator = $data['generator'];
 	}
 
 	public function title()
@@ -52,5 +58,13 @@ class FileFormat {
 	 */
 	public function slug(){
 		return $this->slug;
+	}
+
+	/**
+	 * Gets the project generator classname.
+	 * @return string
+	 */
+	public function generatorClassname(){
+		return $this->generator;
 	}
 }
