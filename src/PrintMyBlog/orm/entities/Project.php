@@ -9,6 +9,7 @@ use PrintMyBlog\domain\DefaultFileFormats;
 use PrintMyBlog\entities\FileFormat;
 use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\services\config\Config;
+use PrintMyBlog\services\FileFormatRegistry;
 use PrintMyBlog\services\ProjectHtmlGenerator;
 use Twine\forms\base\FormSectionProper;
 use Twine\forms\inputs\FormInputBase;
@@ -37,14 +38,17 @@ class Project extends PostWrapper{
 	 * @var ProjectHtmlGenerator
 	 */
 	protected $html_generator;
+
 	/**
-	 * @var DefaultFileFormats
+	 * @var FileFormatRegistry
 	 */
-	protected $format_manager;
+	protected $format_registry;
+
 	/**
 	 * @var DesignManager
 	 */
 	protected $design_manager;
+
 	/**
 	 * @var Config
 	 */
@@ -52,15 +56,15 @@ class Project extends PostWrapper{
 
 	public function inject(
 		PartFetcher $part_fetcher,
-		DefaultFileFormats $format_manager,
+		FileFormatRegistry $format_manager,
 		DesignManager $design_manager,
 		Config $config
 	)
 	{
-		$this->part_fetcher = $part_fetcher;
-		$this->format_manager = $format_manager;
-		$this->design_manager = $design_manager;
-		$this->config = $config;
+		$this->part_fetcher    = $part_fetcher;
+		$this->format_registry = $format_manager;
+		$this->design_manager  = $design_manager;
+		$this->config          = $config;
 	}
 
 	/**
@@ -181,15 +185,15 @@ class Project extends PostWrapper{
 	public function isFormatSelected($project_format_slug){
 		return in_array(
 			$project_format_slug,
-			$this->getFormatsSelected()
+			$this->getFormatSlugsSelected()
 		);
 	}
 
 	/**
-	 * Gets the selected formats. Note: it's possible for a format to NOT be selected but still have a chosen design.
+	 * Gets the slugs of selected formats. Note: it's possible for a format to NOT be selected but still have a chosen design.
 	 * @return array of selected format slugs
 	 */
-	public function getFormatsSelected(){
+	public function getFormatSlugsSelected(){
 		return get_post_meta(
 			$this->getWpPost()->ID,
 			self::POSTMETA_FORMAT,
@@ -198,12 +202,25 @@ class Project extends PostWrapper{
 	}
 
 	/**
+	 * Like Project::getFormatSlugsSelected(), but gets actual FileFormat objects.
+	 * @return FileFormat[]
+	 */
+	public function getFormatsSelected(){
+		$format_slugs = $this->getFormatSlugsSelected();
+		$formats = [];
+		foreach($format_slugs as $slug){
+			$formats[$slug] = $this->format_registry->getFormat($slug);
+		}
+		return $formats;
+	}
+
+	/**
 	 * @param $new_formats
 	 */
 	public function setFormatsSelected($new_formats){
-		$previous_formats = $this->getFormatsSelected();
+		$previous_formats = $this->getFormatSlugsSelected();
 
-		foreach($this->format_manager->getFormats() as $format){
+		foreach($this->format_registry->getFormats() as $format){
 			if(in_array($format->slug(), $new_formats)){
 				// It's requested to make this a selected format...
 				if(! in_array($format->slug(), $previous_formats)){
@@ -279,7 +296,7 @@ class Project extends PostWrapper{
 	public function getDesigns()
 	{
 		$designs = [];
-		foreach($this->format_manager->getFormats() as $format){
+		foreach($this->format_registry->getFormats() as $format){
 			$design = $this->getDesignFor($format->slug());
 			if($design){
 				$designs[$format->slug()] = $design;
@@ -346,7 +363,7 @@ class Project extends PostWrapper{
 	 * @throws ImproperUsageException
 	 */
 	public function getMetaForm(){
-		$formats = $this->getFormatsSelected();
+		$formats = $this->getFormatSlugsSelected();
 		$forms = [];
 		foreach($formats as $format){
 			$forms[] = $this->getDesignFor($format)->getProjectForm();

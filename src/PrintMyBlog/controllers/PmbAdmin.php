@@ -435,6 +435,14 @@ class PmbAdmin extends BaseController
 		    ],
 		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	    );
+	    $project_generate_url = add_query_arg(
+		    [
+			    'ID' => $project->getWpPost()->ID,
+			    'action' => self::SLUG_ACTION_EDIT_PROJECT,
+			    'subaction' => self::SLUG_SUBACTION_PROJECT_GENERATE
+		    ],
+		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+	    );
 		$formats = $this->file_format_registry->getFormats();
 		include(PMB_TEMPLATES_DIR . 'project_edit_main.template.php');
     }
@@ -513,6 +521,11 @@ class PmbAdmin extends BaseController
 		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	    );
     	include(PMB_TEMPLATES_DIR . 'project_edit_metadata.template.php');
+    }
+
+    protected function editGenerate(Project $project){
+    	$formats = $project->getFormatsSelected();
+    	include(PMB_TEMPLATES_DIR . 'project_edit_generate.template.php');
     }
 
     /**
@@ -689,16 +702,27 @@ class PmbAdmin extends BaseController
 		);
 	}
 
+	/**
+	 * Currently unused, but probably will be once we support skipping re-generating etc.
+	 * @param Project $project
+	 *
+	 * @throws Exception
+	 */
     protected function saveProjectGenerate(Project $project){
-		    $url = add_query_arg(
-			    [
-				    PMB_PRINTPAGE_SLUG => 3,
-				    'project' => $_GET['ID']
-			    ],
-			    site_url()
-		    );
-		    wp_safe_redirect($url);
-		    exit;
+		$format = $this->file_format_registry->getFormat($_GET['format']);
+		if(! $format instanceof FileFormat){
+			throw new Exception(__('There is no file format with the slug "%s"', 'print-my-blog'),$_GET['format']);
+		}
+	    $url = add_query_arg(
+		    [
+			    PMB_PRINTPAGE_SLUG => 3,
+			    'project' => $project->getWpPost()->ID,
+			    'format' => $format->slug()
+		    ],
+		    site_url()
+	    );
+	    wp_safe_redirect($url);
+	    exit;
     }
 
 	protected function deleteProjects()
