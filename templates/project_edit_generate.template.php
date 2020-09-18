@@ -49,9 +49,9 @@ foreach($generations as $generation){
             </b>
             <br/>
             <form class="pmb-inline-form" method="POST" action="<?php echo esc_attr($generate_link);?>">
-                <button class="button button-primary"><?php esc_html_e('Regenerate Anyway', 'print-my-blog');?></button>
+                <button class="button"><?php esc_html_e('Regenerate Anyway', 'print-my-blog');?></button>
             </form>
-            <a href="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>" class="button"><?php esc_html_e('Download', 'print-my-blog');?></a>
+            <a href="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>" class="button button-primary"><?php esc_html_e('Download', 'print-my-blog');?></a>
             <?php
         }
     } else {
