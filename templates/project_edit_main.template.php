@@ -4,6 +4,8 @@ use PrintMyBlog\controllers\PmbAdmin;
  * @var $form_url string
  * @var $project PrintMyBlog\orm\entities\Project
  * @var $formats PrintMyBlog\entities\FileFormat[]
+ * @var $project_content_url string
+ * @var $project_metadata_url string
  */
 // Editing project
 
@@ -66,5 +68,11 @@ use PrintMyBlog\controllers\PmbAdmin;
             <?php }?>
             </tbody>
         </table>
+        <h2><?php esc_html_e('Project Contents', 'print-my-blog');?></h2>
+        <p class="pmb-comment description"><?php esc_html_e('The chosen posts and content for this project.', 'print-my-blog');?></p>
+        <a href="<?php echo esc_attr($project_content_url);?>" class="button"><?php esc_html_e('Edit Metadata', 'print-my-blog');?></a>
+        <h2><?php esc_html_e('Project Metadata', 'print-my-blog');?></h2>
+        <p class="pmb-comment description"><?php esc_html_e('Miscellaneous data used for your chosen file formats and designs.', 'print-my-blog');?></p>
+        <a href="<?php echo esc_attr($project_metadata_url);?>" class="button"><?php esc_html_e('Edit Metadata', 'print-my-blog');?></a>
     </form>
 </div>

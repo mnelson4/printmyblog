@@ -363,6 +363,7 @@ class PmbAdmin extends BaseController
 			        break;
 		        case self::SLUG_SUBACTION_PROJECT_CONTENT:
 		        	$this->editContent($project);
+		        	break;
 		        case self::SLUG_SUBACTION_PROJECT_META:
 			        $this->editMetadata($project);
 			        break;
@@ -418,6 +419,22 @@ class PmbAdmin extends BaseController
 			],
 	        admin_url('admin-ajax.php')
 		);
+	    $project_content_url = add_query_arg(
+		    [
+			    'ID' => $project->getWpPost()->ID,
+			    'action' => self::SLUG_ACTION_EDIT_PROJECT,
+			    'subaction' => self::SLUG_SUBACTION_PROJECT_CONTENT
+		    ],
+		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+	    );
+	    $project_metadata_url = add_query_arg(
+		    [
+			    'ID' => $project->getWpPost()->ID,
+			    'action' => self::SLUG_ACTION_EDIT_PROJECT,
+			    'subaction' => self::SLUG_SUBACTION_PROJECT_META
+		    ],
+		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+	    );
 		$formats = $this->file_format_registry->getFormats();
 		include(PMB_TEMPLATES_DIR . 'project_edit_main.template.php');
     }
@@ -463,7 +480,7 @@ class PmbAdmin extends BaseController
 	    $parts = $this->part_fetcher->fetchPartsFor($_GET['ID']);
 	    $form_url = add_query_arg(
 		    [
-			    'ID' => $project->ID,
+			    'ID' => $project->getWpPost()->ID,
 			    'action' => self::SLUG_ACTION_EDIT_PROJECT,
 			    'subaction' => self::SLUG_SUBACTION_PROJECT_CONTENT
 		    ],
@@ -519,6 +536,7 @@ class PmbAdmin extends BaseController
 			        break;
 		        case self::SLUG_SUBACTION_PROJECT_CONTENT:
 			        $this->saveProjectContent();
+			        break;
 		        case self::SLUG_SUBACTION_PROJECT_META:
 			        $this->saveProjectMetadata();
 			        break;
