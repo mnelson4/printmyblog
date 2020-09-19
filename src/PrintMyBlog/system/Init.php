@@ -8,7 +8,7 @@ use PrintMyBlog\compatibility\DetectAndActivate;
 use PrintMyBlog\controllers\Admin;
 use PrintMyBlog\controllers\Ajax;
 use PrintMyBlog\controllers\Common;
-use PrintMyBlog\controllers\PmbFrontend;
+use PrintMyBlog\controllers\Frontend;
 use PrintMyBlog\controllers\PmbGutenbergBlock;
 use PrintMyBlog\controllers\PmbPrintPage;
 use PrintMyBlog\controllers\LoadingPage;
@@ -170,7 +170,7 @@ class Init
 		    $this->initDashboardNews();
 		    (new ProNotification())->setHooks();
 	    } else {
-		    (new PmbFrontend())->setHooks();
+		    (new Frontend())->setHooks();
 		    (new PmbPrintPage())->setHooks();
 		    (new LoadingPage())->setHooks();
 	    }

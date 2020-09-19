@@ -19,7 +19,7 @@ use WP_Post;
  * @since         $VID:$
  *
  */
-class PmbFrontend extends BaseController
+class Frontend extends BaseController
 {
     public function setHooks()
     {
