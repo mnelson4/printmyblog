@@ -18,7 +18,7 @@ use Twine\controllers\BaseController;
  * @since         $VID:$
  *
  */
-class PmbPrintPage extends BaseController
+class LegacyPrintPage extends BaseController
 {
     /**
      * @var URL of domain we'd like this site to proxy for, so we can print that blog instead.

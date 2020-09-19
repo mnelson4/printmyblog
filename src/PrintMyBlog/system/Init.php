@@ -10,7 +10,7 @@ use PrintMyBlog\controllers\Ajax;
 use PrintMyBlog\controllers\Common;
 use PrintMyBlog\controllers\Frontend;
 use PrintMyBlog\controllers\GutenbergBlock;
-use PrintMyBlog\controllers\PmbPrintPage;
+use PrintMyBlog\controllers\LegacyPrintPage;
 use PrintMyBlog\controllers\LoadingPage;
 use PrintMyBlog\domain\DefaultDesigns;
 use PrintMyBlog\domain\DefaultDesignTemplates;
@@ -171,7 +171,7 @@ class Init
 		    (new ProNotification())->setHooks();
 	    } else {
 		    (new Frontend())->setHooks();
-		    (new PmbPrintPage())->setHooks();
+		    (new LegacyPrintPage())->setHooks();
 		    (new LoadingPage())->setHooks();
 	    }
 

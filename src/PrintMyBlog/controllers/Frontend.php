@@ -90,7 +90,7 @@ class Frontend extends BaseController
      */
     public function templateRedirect($template)
     {
-        $print_page = new PmbPrintPage();
+        $print_page = new LegacyPrintPage();
         return $print_page->templateRedirect($template);
     }
 
