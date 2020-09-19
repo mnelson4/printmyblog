@@ -507,8 +507,10 @@ class Admin extends BaseController
         $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
         if($action === 'new'){
         	// Create a draft project
+
 	        $project_id = wp_insert_post(
 		        [
+		        	'post_title' => get_bloginfo('name'),
 			        'post_content' => '',
 			        'post_type' => CustomPostTypes::PROJECT,
 			        'post_status' => 'draft'
