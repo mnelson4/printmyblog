@@ -26,7 +26,7 @@ use PrintMyBlog\controllers\Admin;
         <?php wp_nonce_field( 'pmb-project-edit' );?>
         <div id="pmb-project-main" class="pmb-project-main form-group">
             <label for="pmb-project-title"><?php esc_html_e('Name', 'event_espresso'); ?></label><span class="pmb-comment description" id="pmb-project-title-saved-status"></span>
-            <input type="text" id="pmb-project-title" class="form-control" name="pmb_title" value="<?php echo esc_attr($project->getWpPost()->post_title);?>">
+            <input type="text" id="pmb-project-title" class="form-control" name="pmb_title" value="<?php echo esc_attr($project->getWpPost()->post_title);?>" autofocus placeholder="<?php echo esc_attr(__('My Great Project...', 'print-my-blog'));?>">
         </div>
         <h2><?php esc_html_e('Project Format(s)', 'print-my-blog');?></h2>
         <p class="pmb-comment description"><?php esc_html_e('File formats you intend to generate for this project.', 'print-my-blog');?></p>

@@ -510,7 +510,6 @@ class Admin extends BaseController
 
 	        $project_id = wp_insert_post(
 		        [
-		        	'post_title' => get_bloginfo('name'),
 			        'post_content' => '',
 			        'post_type' => CustomPostTypes::PROJECT,
 			        'post_status' => 'draft'
