@@ -1,5 +1,5 @@
 <?php
-use PrintMyBlog\controllers\PmbAdmin;
+use PrintMyBlog\controllers\Admin;
 /**
  * @var $form_url string
  * @var $project PrintMyBlog\orm\entities\Project
@@ -37,8 +37,8 @@ use PrintMyBlog\controllers\PmbAdmin;
 	            $customize_url = add_query_arg(
 		            [
 			            'ID' => $project->getWpPost()->ID,
-			            'action' => PmbAdmin::SLUG_ACTION_EDIT_PROJECT,
-			            'subaction' => PmbAdmin::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN,
+			            'action' => Admin::SLUG_ACTION_EDIT_PROJECT,
+			            'subaction' => Admin::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN,
                         'format' => $format->slug()
 		            ],
 		            admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
@@ -46,8 +46,8 @@ use PrintMyBlog\controllers\PmbAdmin;
 	            $change_design_url = add_query_arg(
 		            [
 			            'ID' => $project->getWpPost()->ID,
-			            'action' => PmbAdmin::SLUG_ACTION_EDIT_PROJECT,
-			            'subaction' => PmbAdmin::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN,
+			            'action' => Admin::SLUG_ACTION_EDIT_PROJECT,
+			            'subaction' => Admin::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN,
                         'format' => $format->slug()
 		            ],
 		            admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)

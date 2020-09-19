@@ -6,7 +6,7 @@
  * @var $format \PrintMyBlog\entities\FileFormat
  */
 
-use PrintMyBlog\controllers\PmbAdmin;
+use PrintMyBlog\controllers\Admin;
 
 ?>
 <div class="pmb-design-browser">
@@ -20,8 +20,8 @@ foreach($designs as $design){
 		$link_url = add_query_arg(
 			[
 				'ID' => $project->getWpPost()->ID,
-				'action' => PmbAdmin::SLUG_ACTION_EDIT_PROJECT,
-				'subaction' => PmbAdmin::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN,
+				'action' => Admin::SLUG_ACTION_EDIT_PROJECT,
+				'subaction' => Admin::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN,
 				'format' => $format->slug()
 			],
 			admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
@@ -30,8 +30,8 @@ foreach($designs as $design){
 		$link_url = add_query_arg(
 			[
 				'ID' => $project->getWpPost()->ID,
-				'action' => PmbAdmin::SLUG_ACTION_EDIT_PROJECT,
-				'subaction' => PmbAdmin::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN,
+				'action' => Admin::SLUG_ACTION_EDIT_PROJECT,
+				'subaction' => Admin::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN,
 				'format' => $format->slug(),
 				'design' => $design->getWpPost()->ID
 			],

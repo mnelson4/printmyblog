@@ -33,7 +33,7 @@ use WP_Query;
  * @since         1.0.0
  *
  */
-class PmbAdmin extends BaseController
+class Admin extends BaseController
 {
 
 	const SLUG_ACTION_EDIT_PROJECT = 'edit';

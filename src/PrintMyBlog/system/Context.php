@@ -32,23 +32,23 @@ class Context extends BaseContext
                 'PrintMyBlog\system\Capabilities' => self::REUSE,
 		        'PrintMyBlog\services\DesignRegistry' => self::REUSE
             ],
-	        'Twine\system\RequestType'         => [
+	        'Twine\system\RequestType'      => [
                 'Twine\system\VersionHistory' => self::REUSE,
                 'pmb_activation'
             ],
-	        'Twine\system\VersionHistory'      => [
+	        'Twine\system\VersionHistory'   => [
                 PMB_VERSION,
                 'pmb_previous_version',
                 'pmb_version_history'
             ],
-	        'PrintMyBlog\controllers\PmbAdmin' => [
+	        'PrintMyBlog\controllers\Admin' => [
 		        'PrintMyBlog\db\PostFetcher'              => self::REUSE,
 		        'PrintMyBlog\db\PartFetcher'              => self::REUSE,
 		        'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
 		        'PrintMyBlog\services\FileFormatRegistry'   => self::REUSE,
 		        'PrintMyBlog\orm\managers\DesignManager' => self::REUSE
             ],
-	        'PrintMyBlog\controllers\Ajax'     => [
+	        'PrintMyBlog\controllers\Ajax'  => [
 	        	'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
 		        'PrintMyBlog\services\FileFormatRegistry' => self::REUSE,
 	        ],

@@ -5,7 +5,7 @@ namespace PrintMyBlog\system;
 use EventEspresso\core\domain\values\Version;
 use PrintMyBlog\compatibility\DetectAndActivate;
 
-use PrintMyBlog\controllers\PmbAdmin;
+use PrintMyBlog\controllers\Admin;
 use PrintMyBlog\controllers\Ajax;
 use PrintMyBlog\controllers\PmbCommon;
 use PrintMyBlog\controllers\PmbFrontend;
@@ -165,7 +165,7 @@ class Init
 		    $ajax = $this->context->reuse( 'PrintMyBlog\controllers\Ajax' );
 		    $ajax->setHooks();
 	    } elseif (is_admin()) {
-		    $admin = $this->context->reuse('PrintMyBlog\controllers\PmbAdmin');
+		    $admin = $this->context->reuse( 'PrintMyBlog\controllers\Admin' );
 		    $admin->setHooks();
 		    $this->initDashboardNews();
 		    (new ProNotification())->setHooks();
