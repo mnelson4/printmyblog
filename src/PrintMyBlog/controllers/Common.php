@@ -13,7 +13,7 @@ use Twine\controllers\BaseController;
  * @since         $VID:$
  *
  */
-class PmbCommon extends BaseController
+class Common extends BaseController
 {
     public function setHooks()
     {

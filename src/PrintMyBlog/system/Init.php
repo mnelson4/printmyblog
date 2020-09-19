@@ -7,7 +7,7 @@ use PrintMyBlog\compatibility\DetectAndActivate;
 
 use PrintMyBlog\controllers\Admin;
 use PrintMyBlog\controllers\Ajax;
-use PrintMyBlog\controllers\PmbCommon;
+use PrintMyBlog\controllers\Common;
 use PrintMyBlog\controllers\PmbFrontend;
 use PrintMyBlog\controllers\PmbGutenbergBlock;
 use PrintMyBlog\controllers\PmbPrintPage;
@@ -179,7 +179,7 @@ class Init
 	    $block_controller = new PmbGutenbergBlock();
 	    $block_controller->setHooks();
 
-	    $common_controller = new PmbCommon();
+	    $common_controller = new Common();
 	    $common_controller->setHooks();
     }
 
