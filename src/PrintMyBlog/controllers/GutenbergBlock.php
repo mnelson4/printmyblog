@@ -6,7 +6,7 @@ use PrintMyBlog\domain\PrintOptions;
 use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
 
-class PmbGutenbergBlock extends BaseController
+class GutenbergBlock extends BaseController
 {
 
 
