@@ -5,6 +5,7 @@ namespace Twine\orm\managers;
 
 
 use PrintMyBlog\orm\entities\Design;
+use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\system\Context;
 use Twine\orm\entities\PostWrapper;
 use WP_Post;

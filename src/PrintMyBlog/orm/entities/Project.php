@@ -268,13 +268,11 @@ class Project extends PostWrapper{
 	 */
 	public function delete()
 	{
-		$successes = $this->part_fetcher->clearPartsFor($this->getWpPost()->ID);
-		if( $successes === false){
-			return false;
-		}
-		$success = $this->getProjectHtmlGenerator()->deleteHtmlFile();
-		if( ! $success ){
-			return false;
+		$this->part_fetcher->clearPartsFor($this->getWpPost()->ID);
+		// delete the generated files for the project too
+		foreach($this->getFormatsSelected() as $format){
+			$project_generation = new ProjectGeneration($this, $format);
+			$project_generation->deleteGeneratedFiles();
 		}
 		return parent::delete();
 	}

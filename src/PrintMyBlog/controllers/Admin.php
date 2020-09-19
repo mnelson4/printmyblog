@@ -729,11 +729,7 @@ class Admin extends BaseController
 			die('The request has expired. Please refresh the previous page and try again.');
 		}
 		else {
-			/**
-			 * @var $manager ProjectManager
-			 */
-			$manager = Context::instance()->reuse('PrintMyBlog\orm\managers\ProjectManager');
-			$manager->deleteProjects($_POST['ID']);
+			$this->project_manager->deleteProjects($_POST['ID']);
 		}
 	}
 }

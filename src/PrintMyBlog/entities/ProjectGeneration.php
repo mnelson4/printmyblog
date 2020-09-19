@@ -217,4 +217,13 @@ class ProjectGeneration {
 	protected function dirtyPostmetaName(){
 		return self::POSTMETA_DIRTY . $this->format->slug();
 	}
+
+	/**
+	 * Deletes the generated files for this project in this format.
+	 * @return bool success
+	 */
+	public function deleteGeneratedFiles()
+	{
+		return $this->getProjectHtmlGenerator()->deleteFile();
+	}
 }
