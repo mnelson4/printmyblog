@@ -75,3 +75,14 @@
 .pmb-comment{
     margin-left:1em;
 }
+
+.pmb-project-content-chosen .pmb-nested-sortable{
+    /*border: 1px dotted gray;*/
+    margin-top:.5em;
+    margin-bottom:.5em;
+    margin-left:2em;
+    min-height:1em;
+}
+.pmb-nested-sortabe:hover{
+
+}

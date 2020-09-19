@@ -21,21 +21,27 @@
             <div class="pmb-project-layout-inner">
                 <div class="pmb-project-column">
                     <h2><?php _e('Available Content', 'print-my-blog');?></h2>
-                    <ul id="pmb-project-choices" class="pmb-draggable-area pmb-selection-list list-group">
+                    <div id="pmb-project-choices" class="pmb-draggable-area pmb-project-content-available pmb-selection-list list-group">
                         <?php foreach($post_options as $post){
-                            ?><li class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($post->ID);?>"><?php echo $post->post_title;?></li><?php
+                            ?><div class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($post->ID);?>">
+                            <?php echo $post->post_title;?>
+                            <div class="pmb-nested-sortable pmb-sortable"></div>
+                            </div><?php
                         }
                         ?>
-                    </ul>
+                    </div>
                 </div>
                 <div class="pmb-project-column">
                     <h2><?php _e('Project Content', 'print-my-blog');?></h2>
-                    <ul id="pmb-project-sections" class="pmb-draggable-area pmb-selection-list list-group">
+                    <div id="pmb-project-sections" class="pmb-draggable-area pmb-project-content-chosen pmb-selection-list list-group pmb-sortable">
                         <?php foreach($parts as $post){
-                        ?><li class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($post->ID);?>"><?php echo $post->post_title;?></li><?php
+                        ?><div class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($post->ID);?>">
+                            <?php echo $post->post_title;?>
+                            <div class="pmb-nested-sortable pmb-sortable"></div>
+                            </div><?php
                         }
                         ?>
-                    </ul>
+                    </div>
                     <input type="hidden" name="pmb-project-sections-data" id="pmb-project-sections-data">
                 </div>
             </div>
