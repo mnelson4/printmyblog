@@ -33,7 +33,7 @@
 }
 
 .pmb-project-item{
-    padding:10px 15px;
+    padding: 10px 0px 10px 15px;
     margin-bottom:-1px;
     border:1px solid #ddd;
     position:relative;
@@ -83,6 +83,14 @@
     margin-left:2em;
     min-height:1em;
 }
-.pmb-nested-sortabe:hover{
-
+.pmb-project-item-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.pmb-project-item-title{
+    flex-grow:1;
+}
+.pmb-project-item-type-container{
+    flex-shrink:0;
 }

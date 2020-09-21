@@ -4,6 +4,22 @@
  * @var $form_url string
  *
  */
+
+function pmb_template_selector(){
+    return '<select class="pmb-type"><option value="header">Header</option><option value="no-header">No header</option></select>';
+}
+function pmb_content_item($post){
+    ?>
+    <div class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($post->ID);?>">
+        <div class="pmb-project-item-header">
+            <span class="pmb-project-item-title"><?php echo $post->post_title;?></span>
+            <span class="pmb-project-item-type-container"><?php echo pmb_template_selector();?></span>
+        </div>
+        <div class="pmb-nested-sortable pmb-sortable pmb-subs"></div>
+
+    </div>
+<?php
+}
 ?>
 
 <div class="wrap nosubsub">
@@ -22,11 +38,9 @@
                 <div class="pmb-project-column">
                     <h2><?php _e('Available Content', 'print-my-blog');?></h2>
                     <div id="pmb-project-choices" class="pmb-draggable-area pmb-project-content-available pmb-selection-list list-group">
-                        <?php foreach($post_options as $post){
-                            ?><div class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($post->ID);?>">
-                            <?php echo $post->post_title;?>
-                            <div class="pmb-nested-sortable pmb-sortable"></div>
-                            </div><?php
+                        <?php
+                        foreach($post_options as $post){
+	                        pmb_content_item($post);
                         }
                         ?>
                     </div>
@@ -34,11 +48,9 @@
                 <div class="pmb-project-column">
                     <h2><?php _e('Project Content', 'print-my-blog');?></h2>
                     <div id="pmb-project-sections" class="pmb-draggable-area pmb-project-content-chosen pmb-selection-list list-group pmb-sortable">
-                        <?php foreach($parts as $post){
-                        ?><div class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($post->ID);?>">
-                            <?php echo $post->post_title;?>
-                            <div class="pmb-nested-sortable pmb-sortable"></div>
-                            </div><?php
+                        <?php
+                        foreach($parts as $post) {
+	                        pmb_content_item( $post );
                         }
                         ?>
                     </div>
