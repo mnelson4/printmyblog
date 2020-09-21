@@ -57,9 +57,9 @@ function pmb_get_contents(jquery_obj){
 		var type = type_jquery_obj.val();
 		var subs = child_jquery_obj.children('.pmb-subs ');
 		items.push([
-			child.attributes['data-id'].nodeValue,
-			type,
-			pmb_get_contents(subs)
+			child.attributes['data-id'].nodeValue, // post ID
+			type, // desired template type
+			pmb_get_contents(subs) // sub-items
 		]);
 	}
 	return items;

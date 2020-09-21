@@ -8,14 +8,20 @@
 function pmb_template_selector(){
     return '<select class="pmb-type"><option value="header">Header</option><option value="no-header">No header</option></select>';
 }
-function pmb_content_item($post){
+function pmb_content_item($posty_row){
     ?>
-    <div class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($post->ID);?>">
+    <div class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($posty_row->ID);?>">
         <div class="pmb-project-item-header">
-            <span class="pmb-project-item-title"><?php echo $post->post_title;?></span>
+            <span class="pmb-project-item-title"><?php echo $posty_row->post_title;?></span>
             <span class="pmb-project-item-type-container"><?php echo pmb_template_selector();?></span>
         </div>
-        <div class="pmb-nested-sortable pmb-sortable pmb-subs"></div>
+        <div class="pmb-nested-sortable pmb-sortable pmb-subs">
+            <?php if(isset($posty_row->subs)){
+                foreach($posty_row->subs as $sub){
+	                pmb_content_item($sub);
+                }
+            }?>
+        </div>
 
     </div>
 <?php
