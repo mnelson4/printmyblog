@@ -5,15 +5,24 @@
  *
  */
 
-function pmb_template_selector(){
-    return '<select class="pmb-type"><option value="header">Header</option><option value="no-header">No header</option></select>';
+function pmb_template_selector($selected_type){
+    $options = [
+            'header' => __('Standard', 'print-my-blog'),
+            'no_header' => __('No Header', 'print-my-blog')
+    ];
+    $html = '<select class="pmb-type">';
+    foreach($options as $value => $display_text){
+        $html .= '<option value="' . esc_attr($value) . '" ' . selected($value, $selected_type, false) . '>' . $display_text . '</option>';
+    }
+    $html .= '</select>';
+    return $html;
 }
 function pmb_content_item($posty_row){
     ?>
     <div class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($posty_row->ID);?>">
         <div class="pmb-project-item-header">
             <span class="pmb-project-item-title"><?php echo $posty_row->post_title;?></span>
-            <span class="pmb-project-item-type-container"><?php echo pmb_template_selector();?></span>
+            <span class="pmb-project-item-type-container"><?php echo pmb_template_selector(isset($posty_row->type) ? $posty_row->type : null);?></span>
         </div>
         <div class="pmb-nested-sortable pmb-sortable pmb-subs">
             <?php if(isset($posty_row->subs)){
