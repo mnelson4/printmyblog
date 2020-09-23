@@ -53,12 +53,12 @@ function pmb_get_contents(jquery_obj){
 	for(var index = 0; index < element.children.length; index++){
 		var child = element.children[index];
 		var child_jquery_obj = jQuery(child);
-		var type_jquery_obj = child_jquery_obj.children('.pmb-project-item-header').find('select.pmb-type');
-		var type = type_jquery_obj.val();
+		var template_jquery_obj = child_jquery_obj.children('.pmb-project-item-header').find('select.pmb-template');
+		var template = template_jquery_obj.val();
 		var subs = child_jquery_obj.children('.pmb-subs ');
 		items.push([
 			child.attributes['data-id'].nodeValue, // post ID
-			type, // desired template type
+			template, // desired template type
 			pmb_get_contents(subs) // sub-items
 		]);
 	}

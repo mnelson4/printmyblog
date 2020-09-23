@@ -26,7 +26,7 @@ class PartFetcher
         global $wpdb;
         $rows = $wpdb->get_results(
             $wpdb->prepare(
-                'SELECT posts.ID, posts.post_title, parts.parent_id, parts.type FROM ' . $wpdb->prefix . 'pmb_project_parts parts
+                'SELECT posts.ID, posts.post_title, parts.parent_id, parts.type, parts.template FROM ' . $wpdb->prefix . 'pmb_project_parts parts
                 INNER JOIN
                   ' . $wpdb->posts . ' posts 
                   ON  parts.post_id=posts.ID
@@ -116,7 +116,7 @@ class PartFetcher
 	    $this->getDbRowsFrom($project_id,$parts_data, 0, $order, $rows);
         $result = $wpdb->query(
             'INSERT INTO ' . $wpdb->prefix . 'pmb_project_parts
-            (project_id, post_id, parent_id, part_order, type) VALUES '
+            (project_id, post_id, parent_id, part_order, template) VALUES '
             . implode(',', $rows)
         );
         return $result;
@@ -134,7 +134,7 @@ class PartFetcher
 	    global $wpdb;
 	    foreach($parts_data as $part_data){
 		    $post_id = $part_data[0];
-		    $type = $part_data[1];
+		    $template = $part_data[1];
 		    $sub_parts = $part_data[2];
 		    $rows[] = $wpdb->prepare(
 			    '(%d, %d, %d, %d, %s)',
@@ -142,7 +142,7 @@ class PartFetcher
 			    $post_id,
 			    $parent_id,
 			    $order++,
-			    $type
+			    $template
 		    );
 		    $this->getDbRowsFrom($project_id, $sub_parts, $post_id, $order, $rows);
         }

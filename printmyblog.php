@@ -10,7 +10,7 @@
  * Description: Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
  * Author: Michael Nelson
  * Author URI: https://printmy.blog
- * Version: 3.0.0.alpha.000
+ * Version: 3.0.0.alpha.005
  * Requires at least: 4.7
  * Requires PHP: 5.4
  * Text Domain: print-my-blog
@@ -120,7 +120,7 @@ if (defined('PMB_VERSION')) {
 
 }else {
     // it's all good! go for it!
-    define('PMB_VERSION', '3.0.0.alpha.004');
+    define('PMB_VERSION', '3.0.0.alpha.005');
     define('PMB_DIR', wp_normalize_path(__DIR__) . '/');
     define('PMB_MAIN_FILE', __FILE__);
     define('PMB_TEMPLATES_DIR', PMB_DIR . 'templates/');
@@ -130,8 +130,6 @@ if (defined('PMB_VERSION')) {
     define('PMB_ADMIN_PAGE_SLUG', 'print-my-blog-now');
     define('PMB_ADMIN_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_PAGE_SLUG);
     define('PMB_ADMIN_PROJECTS_PAGE_SLUG', 'print-my-blog-projects');
-	define('PMB_ADMIN_PROJECT_VIEW_CONTENTS_PAGE_SLUG', 'print-my-blog-view-contents');
-	define('PMB_ADMIN_PROJECT_ADD_CONTENTS_PAGE_SLUG', 'print-my-blog-add-contents');
     define('PMB_ADMIN_PROJECTS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_PROJECTS_PAGE_SLUG);
     define('PMB_ADMIN_SETTINGS_PAGE_SLUG', 'print-my-blog-settings');
     define('PMB_ADMIN_SETTINGS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_SETTINGS_PAGE_SLUG);

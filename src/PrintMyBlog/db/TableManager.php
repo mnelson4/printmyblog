@@ -29,7 +29,8 @@ class TableManager
                 post_id bigint(20) UNSIGNED NOT NULL DEFAULT \'0\',
                 parent_id bigint(20) UNSIGNED NULL DEFAULT \'0\',
                 part_order int(11) NOT NULL DEFAULT \'0\',
-                type varchar(50) NOT NULL DEFAULT \'\',
+                template varchar(50) NOT NULL DEFAULT \'\',
+                type varchar(10) NOT NULL DEFAULT \'main\',
                 PRIMARY KEY  (ID),
                 KEY sorted (project_id,part_order)
             ) ' . $charset_collate . '
