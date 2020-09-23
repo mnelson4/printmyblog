@@ -29,6 +29,10 @@ class DesignTemplate {
 	 * @var callable
 	 */
 	protected $project_form_callback;
+	/**
+	 * @var int
+	 */
+	protected $levels;
 
 	/**
 	 * DesignTemplate constructor.
@@ -43,12 +47,13 @@ class DesignTemplate {
 	 * }
 	 */
 	public function __construct($slug, $args){
-		$this->slug = $slug;
-		$this->title = $args['title'];
-		$this->format = (string)$args['format'];
-		$this->dir = (string)$args['dir'];
-		$this->design_form_callback = $args['design_form_callback'];
+		$this->slug                  = $slug;
+		$this->title                 = $args['title'];
+		$this->format                = (string)$args['format'];
+		$this->dir                   = (string)$args['dir'];
+		$this->design_form_callback  = $args['design_form_callback'];
 		$this->project_form_callback = $args['project_form_callback'];
+		$this->levels                = isset($args['levels']) ? intval($args['levels']) : 1;
 	}
 
 	/**
@@ -107,5 +112,15 @@ class DesignTemplate {
 	 */
 	public function getProjectCallback(){
 		return $this->project_form_callback;
+	}
+
+	/**
+	 * Returns how many nesting levels or divisions this design allows.
+	 * 1 means its flat sections, no nesting; 2 means it has parts-and-sections; 3 means books-parts-sections,
+	 * 4 means books-parts-sections-subsections, etc.
+	 * @return int
+	 */
+	public function getLevels(){
+		return $this->levels;
 	}
 }

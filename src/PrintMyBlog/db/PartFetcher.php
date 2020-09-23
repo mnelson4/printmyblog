@@ -18,11 +18,14 @@ class PartFetcher
 {
 	/**
 	 * Gets the database rows (stdClasses) from pmb_project_parts for this project in order
+	 *
 	 * @param $project_id
+	 *
+	 * @param int $max_levels
 	 *
 	 * @return stdClass[] with properties ID, post_title, parent_id, type
 	 */
-    public function fetchPartsFor($project_id){
+    public function fetchPartsFor($project_id, $max_levels = 1){
         global $wpdb;
         $rows = $wpdb->get_results(
             $wpdb->prepare(
@@ -36,26 +39,42 @@ class PartFetcher
         );
         $index = 0;
         $parent_id = 0;
-        return $this->structureParts($rows, $index, $parent_id);
+        return $this->structureParts($rows, $index, $parent_id, $max_levels);
     }
 
 	/**
 	 * Takes the 2d array of $part_rows (From the DB), and using the parent_id property,
 	 * creates a tree of rows.
+	 *
 	 * @param $part_rows
 	 * @param int $index
 	 * @param int $current_parent_id
 	 *
+	 * @param int $max_levels
+	 * @param int $current_level
+	 *
 	 * @return array
 	 */
-    protected function structureParts(&$part_rows, &$index = 0, $current_parent_id = 0){
+    protected function structureParts(&$part_rows, &$index = 0, $current_parent_id = 0, $max_levels = 1, $current_level = 1){
 		$structured_rows = [];
 		for(;$index<count($part_rows);$index++){
 
 			if( intval($part_rows[$index]->parent_id) === intval($current_parent_id)){
 				$structured_rows[] = $part_rows[$index];
 			} elseif(intval($part_rows[$index - 1]->ID) === intval($part_rows[$index]->parent_id)) {
-				$structured_rows[ count( $structured_rows ) - 1]->subs = $this->structureParts( $part_rows, $index, $part_rows[ $index -1 ]->ID );
+				$subs = $this->structureParts(
+					$part_rows,
+					$index,
+					$part_rows[ $index -1 ]->ID,
+					$max_levels,
+					$current_level + 1
+				);
+				if( $current_level < $max_levels){
+					$structured_rows[ count( $structured_rows ) - 1]->subs = $subs;
+				} else {
+					$structured_rows = array_merge($structured_rows, $subs);
+				}
+
 			} else {
 				// this item isn't a child of $current_parent_id, nor the previous item. Just finish
 				$index--;

@@ -24,6 +24,7 @@ class DefaultDesignTemplates {
 					'title'                 => __( 'Classic Print PDf', 'print-my-blog' ),
 					'format'                => 'print_pdf',
 					'dir'                   => PMB_DEFAULT_DESIGNS_DIR . '/classic_digital',
+					'levels' => 2,
 					'design_form_callback'  => function () {
 						$sections = array_merge(
 							$this->getDefaultDesignFormSections(),
@@ -81,6 +82,7 @@ class DefaultDesignTemplates {
 					'title'           => __( 'Classic Digital PDF' ),
 					'format'          => 'digital_pdf',
 					'dir'             => PMB_DEFAULT_DESIGNS_DIR . 'classic_digital/',
+					'levels' => 2,
 					'design_form_callback'  => function() {
 						return new FormSectionProper( [
 							'subsections' => array_merge(
@@ -108,6 +110,7 @@ class DefaultDesignTemplates {
 					'title'           => __( 'Buurma Digital PDF' ),
 					'format'          => 'digital_pdf',
 					'dir'             => PMB_DEFAULT_DESIGNS_DIR . 'buurma/',
+					'levels' => 1,
 					'design_form_callback'  => function() {
 						return new FormSectionProper( [
 							'subsections' => array_merge(
@@ -168,6 +171,7 @@ class DefaultDesignTemplates {
 					'title'           => __( 'Mayer Digital PDF' ),
 					'format'          => 'digital_pdf',
 					'dir'             => PMB_DEFAULT_DESIGNS_DIR . 'classic_digital/',
+					'levels' => 2,
 					'design_form_callback'  => function() {
 						$sections = array_merge(
 							[

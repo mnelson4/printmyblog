@@ -241,6 +241,37 @@ class Project extends PostWrapper{
 	}
 
 	/**
+	 * Gets all the designs for selected formats.
+	 * @return Design[]
+	 */
+	public function getDesignsSelected(){
+		$formats = $this->getFormatsSelected();
+		$chosen_designs = [];
+		foreach($formats as $format){
+			$design = $this->getDesignFor($format);
+			if($design){
+				$chosen_designs[] = $design;
+			}
+		}
+		return $chosen_designs;
+	}
+
+	/**
+	 * Gets the allow amount of nesting levels based on each design's nesting level.
+	 * See DesignTemplate::levels.
+	 * @return int
+	 */
+	public function getLevelsAllowed(){
+		$lowest_allowed_by_a_design = 5;
+		foreach($this->getDesignsSelected() as $design){
+			if( $design->getDesignTemplate()->getLevels() < $lowest_allowed_by_a_design){
+				$lowest_allowed_by_a_design = $design->getDesignTemplate()->getLevels();
+			}
+		}
+		return $lowest_allowed_by_a_design;
+	}
+
+	/**
 	 * Sets the project's chosen design for the specified format.
 	 *
 	 * @param string|FileFormat $format

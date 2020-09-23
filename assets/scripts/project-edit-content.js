@@ -22,26 +22,46 @@ jQuery(document).ready(function(){
 	// 		// swapThreshold: 0.65
 	// 	});
 	jQuery('.pmb-sortable').each(function(index, element){
-		Sortable.create(
-			element,
-			{
-				group:{
-					name: 'shared',
-				},
-				animation:150,
-				fallbackOnBody: true,
-				swapThreshold: 0.25
-			});
+		pmb_create_sortable_from(element);
 	});
 	jQuery('#pmb-project-form').submit(function(){
 		var pmb_items = pmb_get_contents(jQuery('#pmb-project-sections'));
-		// jQuery('#pmb-project-sections .pmb-project-item').each(function(index, element){
-		// 		pmb_items.push(element.attributes['data-id'].nodeValue);
-		// });
 		var pmb_items_json = JSON.stringify(pmb_items);
 		jQuery('#pmb-project-sections-data').val(pmb_items_json);
 	})
 });
+
+function pmb_create_sortable_from(element){
+	var sorter = Sortable.create(
+		element,
+		{
+			group:{
+				name: 'shared',
+			},
+			animation:150,
+			fallbackOnBody: true,
+			swapThreshold: 0.25,
+			onAdd: function (event) {
+				var nested_level = pmb_count_level(jQuery(event.target));
+				if(nested_level < pmb_project_edit_content_data.levels){
+					var sortable_items = jQuery(event.item).children('.pmb-sortable-inactive');
+					if(sortable_items.length){
+						pmb_create_sortable_from(sortable_items[0]);
+						sortable_items.removeClass('pmb-sortable-disabled');
+						sortable_items.addClass('pmb-sortable');
+					}
+				} else {
+					var sortable_items = jQuery(event.item).children('.pmb-sortable');
+					if(sortable_items.length){
+						sortable_items[0].sorter.destroy();
+						sortable_items.removeClass('pmb-sortable');
+						sortable_items.addClass('pmb-sortable-disabled');
+					}
+				}
+			},
+		});
+	element.sorter = sorter;
+}
 
 function pmb_get_contents(jquery_obj){
 	var items = [];
@@ -63,4 +83,8 @@ function pmb_get_contents(jquery_obj){
 		]);
 	}
 	return items;
+}
+
+function pmb_count_level(jquery_obj){
+	return jquery_obj.parents('.pmb-sortable').length + 1;
 }

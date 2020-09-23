@@ -307,6 +307,17 @@ class Admin extends BaseController
 				        array('sortablejs',),
 				        filemtime(PMB_SCRIPTS_DIR . 'project-edit-content.js')
 			        );
+			        /**
+			         * @var $project Project
+			         */
+			        $project = $this->project_manager->getById($_GET['ID']);
+			        wp_localize_script(
+			        	'pmb_project_edit_content',
+				        'pmb_project_edit_content_data',
+				        [
+				        	'levels' => $project->getLevelsAllowed()
+				        ]
+			        );
 			        break;
 		        case self::SLUG_SUBACTION_PROJECT_MAIN:
 		        default:
@@ -474,7 +485,7 @@ class Admin extends BaseController
     protected function editContent(Project $project)
     {
 	    $post_options = $this->post_fetcher->fetchPostOptionssForProject();
-	    $parts = $this->part_fetcher->fetchPartsFor($_GET['ID']);
+	    $parts = $this->part_fetcher->fetchPartsFor($_GET['ID'], $project->getLevelsAllowed());
 	    $form_url = add_query_arg(
 		    [
 			    'ID' => $project->getWpPost()->ID,
