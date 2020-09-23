@@ -26,6 +26,7 @@ class PostFetcher
         global $wpdb;
         $in_search_post_types = get_post_types( array( 'exclude_from_search' => false ) );
         unset($in_search_post_types['attachment']);
+        $in_search_post_types['pmb_content'] = 'pmb_content';
         $post_types = array_map( 'esc_sql', $in_search_post_types );
 
         return $wpdb->get_results(

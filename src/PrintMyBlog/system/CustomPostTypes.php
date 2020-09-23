@@ -75,6 +75,24 @@ class CustomPostTypes
 		    10,
 		    4
 	    );
+
+	    register_post_type( 'pmb_content',
+		    // WordPress CPT Options Start
+		    array(
+			    'labels' => array(
+				    'name' => __( 'Project Contents' ),
+				    'singular_name' => __( 'Project Content' )
+			    ),
+			    'has_archive' => true,
+			    'public' => false,
+			    'show_ui' => true,
+			    'show_in_menu' => PMB_ADMIN_PAGE_SLUG,
+			    'rewrite' => array('slug' => 'pmb'),
+			    'show_in_rest' => true,
+			    'supports' => array('title', 'editor', 'revisions', 'author','thumbnail', 'custom-fields'),
+			    'taxonomies' => array('category', 'post_tag')
+		    )
+	    );
     }
 
 	function map_meta_cap( $caps, $cap, $user_id, $args, $cap_slug ) {

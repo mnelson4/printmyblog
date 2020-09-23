@@ -146,6 +146,7 @@ class Admin extends BaseController
             PMB_ADMIN_PROJECTS_PAGE_SLUG,
             array($this, 'renderProjects')
         );
+	    $this->hackSubmenuContentIntoRightSpot();
         add_submenu_page(
             PMB_ADMIN_PAGE_SLUG,
             esc_html__('Print My Blog Settings', 'print-my-blog'),
@@ -154,6 +155,25 @@ class Admin extends BaseController
             PMB_ADMIN_SETTINGS_PAGE_SLUG,
             array($this,'settingsPage')
         );
+
+    }
+
+	/**
+	 * Hacks WP menu so the links to the PMB contents CPT appear underneath the Print My Blog top-level menu.
+	 */
+    protected function hackSubmenuContentIntoRightSpot(){
+	    global $submenu;
+
+	    if(array_key_exists(PMB_ADMIN_PAGE_SLUG, $submenu)){
+
+		    foreach($submenu[PMB_ADMIN_PAGE_SLUG] as $key => $value){
+			    $k = array_search('edit.php?post_type=pmb_content', $value);
+			    if($k) {
+				    unset( $submenu[ PMB_ADMIN_PAGE_SLUG ][ $key ] );
+				    $submenu[ PMB_ADMIN_PAGE_SLUG ][] = $value;
+			    }
+		    }
+	    }
     }
 
     public function settingsPage()

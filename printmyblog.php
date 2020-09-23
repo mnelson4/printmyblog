@@ -130,6 +130,8 @@ if (defined('PMB_VERSION')) {
     define('PMB_ADMIN_PAGE_SLUG', 'print-my-blog-now');
     define('PMB_ADMIN_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_PAGE_SLUG);
     define('PMB_ADMIN_PROJECTS_PAGE_SLUG', 'print-my-blog-projects');
+	define('PMB_ADMIN_PROJECT_VIEW_CONTENTS_PAGE_SLUG', 'print-my-blog-view-contents');
+	define('PMB_ADMIN_PROJECT_ADD_CONTENTS_PAGE_SLUG', 'print-my-blog-add-contents');
     define('PMB_ADMIN_PROJECTS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_PROJECTS_PAGE_SLUG);
     define('PMB_ADMIN_SETTINGS_PAGE_SLUG', 'print-my-blog-settings');
     define('PMB_ADMIN_SETTINGS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_SETTINGS_PAGE_SLUG);
