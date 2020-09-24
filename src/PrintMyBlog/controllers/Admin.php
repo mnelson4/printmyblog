@@ -226,7 +226,7 @@ class Admin extends BaseController
         }
         $print_options = new PrintOptions();
         $displayer = new FormInputs();
-        include(PMB_TEMPLATES_DIR . 'settings_page.template.php');
+        include(PMB_TEMPLATES_DIR . 'settings_page.html');
     }
 
 
@@ -238,11 +238,11 @@ class Admin extends BaseController
     {
 
         if (isset($_GET['welcome'])) {
-            include(PMB_TEMPLATES_DIR . 'welcome.template.php');
+            include(PMB_TEMPLATES_DIR . 'welcome.html');
         } else {
             $print_options = new PrintOptions();
             $displayer = new FormInputs();
-            include(PMB_TEMPLATES_DIR . 'setup_page.template.php');
+            include(PMB_TEMPLATES_DIR . 'setup_page.html');
         }
     }
 
@@ -383,7 +383,7 @@ class Admin extends BaseController
 		        ],
 		        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	        );
-	        include(PMB_TEMPLATES_DIR . 'projects_list_table.template.php');
+	        include(PMB_TEMPLATES_DIR . 'projects_list_table.html');
         }
 
     }
@@ -404,7 +404,7 @@ class Admin extends BaseController
 		$designs = $this->design_manager->getAll(new WP_Query($wp_query_args));
 		$chosen_design = $project->getDesignFor($format->slug());
 	    // show them in a template
-	    include(PMB_TEMPLATES_DIR . 'design_choose.template.php');
+	    include(PMB_TEMPLATES_DIR . 'design_choose.html');
     }
 
 	/**
@@ -444,7 +444,7 @@ class Admin extends BaseController
 		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	    );
 		$formats = $this->file_format_registry->getFormats();
-		include(PMB_TEMPLATES_DIR . 'project_edit_main.template.php');
+		include(PMB_TEMPLATES_DIR . 'project_edit_main.html');
     }
 
     protected function editCustomizeDesign(Project $project){
@@ -479,7 +479,7 @@ class Admin extends BaseController
 		    ],
 		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	    );
-    	include(PMB_TEMPLATES_DIR . 'design_customize.template.php');
+    	include(PMB_TEMPLATES_DIR . 'design_customize.html');
     }
 
     protected function editContent(Project $project)
@@ -494,7 +494,7 @@ class Admin extends BaseController
 		    ],
 		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	    );
-	    include(PMB_TEMPLATES_DIR . 'project_edit_content.template.php');
+	    include(PMB_TEMPLATES_DIR . 'project_edit_content.html');
     }
 
     protected function editMetadata(Project $project){
@@ -520,12 +520,12 @@ class Admin extends BaseController
 		    ],
 		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	    );
-    	include(PMB_TEMPLATES_DIR . 'project_edit_metadata.template.php');
+    	include(PMB_TEMPLATES_DIR . 'project_edit_metadata.html');
     }
 
     protected function editGenerate(Project $project){
     	$generations = $project->getAllGenerations();
-    	include(PMB_TEMPLATES_DIR . 'project_edit_generate.template.php');
+    	include(PMB_TEMPLATES_DIR . 'project_edit_generate.html');
     }
 
     /**

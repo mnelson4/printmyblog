@@ -36,16 +36,19 @@
     }
 
     @page main {
-        @top {
+        @top-left: {
+            content: string(part-title, first-except);
+        }
+        @top-right {
             content: string(section-title, first-except)
         }
-        @bottom {
+        @bottom-outside {
             content: counter(page)
         }
     }
 
     .pmb-section h1.entry-title {
-        string-set: section-title content()
+        string-set: section-title content();
     }
 
     /* toc */
@@ -66,4 +69,27 @@
         text-align:left;
 
     }
+
+    /* part styling*/
+    .pmb-part{
+        break-before:right;
+        page: part-start;
+    }
+    @page main {
+        @top {
+            content: '';
+        }
+        @bottom {
+            content: '';
+        }
+    }
+    .pmb-part h1.entry-title{
+        font-size:120%;
+        string-set: part-title content();
+        margin-top:2in;
+    }
+    .pmb-part .entry-content{
+        margin-top:1in;
+    }
+
 }

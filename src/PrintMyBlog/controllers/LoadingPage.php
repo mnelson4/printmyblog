@@ -51,7 +51,7 @@ class LoadingPage extends BaseController
                 100
             );
 
-            return PMB_TEMPLATES_DIR . 'loading_page.template.php';
+            return PMB_TEMPLATES_DIR . 'loading_page.html';
         }
         return $template;
     }

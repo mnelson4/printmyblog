@@ -48,7 +48,7 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 		$pmb_show_date_printed = true;
 		$pmb_show_credit = true;
 		ob_start();
-		$file = $this->getDesignDir() . 'header.php';
+		$file = $this->getDesignDir() . 'projet_start.php';
 		include( $file );
 		$this->getFileWriter()->write(ob_get_clean());
 	}
@@ -63,7 +63,7 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 	protected function finishGenerating()
 	{
 		ob_start();
-		include( $this->getDesignDir() . 'footer.php');
+		include( $this->getDesignDir() . 'project_stop.php');
 		$this->getFileWriter()->write(ob_get_clean());
 	}
 
