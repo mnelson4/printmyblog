@@ -49,7 +49,7 @@ abstract class ProjectFileGeneratorBase {
 
 		$this->startGenerating();
 		// Don't let anything from a previous generation affect this one.
-		$this->project_generation->setLastLevel(null);
+		$this->project_generation->setLastSectionId(null);
 		$this->maybeGenerateFrontMatter();
 		$this->generateMainMatter();
 		$this->maybeGenerateBackMatter();
@@ -202,17 +202,17 @@ abstract class ProjectFileGeneratorBase {
 	 * @return void
 	 */
 	protected function maybeGenerateDivisionTransition(WP_Post $post){
-		$previous_level = $this->project_generation->getLastLevel();
-		if(! $previous_level){
+		$last_section = $this->project_generation->getLastSection();
+		if(! $last_section){
 			// no transition necessary
 			return;
 		}
-		$current_level = $this->getLevel($post->pmb_section, $this->project);
-		$this->generateDivisionEnd($previous_level, $current_level);
+
+		$this->generateDivisionEnd($last_section, $post->pmb_section);
 	}
 
 
-	protected abstract function generateDivisionEnd($last_level, $current_level);
+	protected abstract function generateDivisionEnd(ProjectSection $previous_section, ProjectSection $current_section);
 
 	/**
 	 * Gets a string of HTML from inluding the specified file.
@@ -240,10 +240,10 @@ abstract class ProjectFileGeneratorBase {
 	 * @return string
 	 */
 	protected function getLevel(ProjectSection $section){
-		$level = $this->project_generation->getLastLevel();
+		$level = $this->project_generation->getLastSectionId();
 		if( ! $level){
 			$level = $section->getLevel();
-			$this->project_generation->setLastLevel($level);
+			$this->project_generation->setLastSectionId($level);
 		}
 		return $level;
 	}

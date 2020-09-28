@@ -52,11 +52,12 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 		global $post;
 		// determine which template to use, depending on the current section's height and how template specified
 		if($post->pmb_section instanceof ProjectSection){
+			$this->project_generation->setLastSection($post->pmb_section);
 			$template = $post->pmb_section->getTemplate();
 			if($template){
 				$this->writeDesignTemplateInDivision($template);
 			} else {
-				$height = $this->project->getLevelsUsed() - $this->getLevel($post->pmb_section);
+				$height = $post->pmb_section->getHeight();
 				$division = $this->mapLevelHeightToMainDivision($height);
 				$this->writeDesignTemplateInDivision($division);
 			}
@@ -110,35 +111,35 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 	}
 
 	/**
-	 * @param int $last_level
-	 * @param int $current_level
+	 * @param int $previous_depth
+	 * @param int $current_depth
 	 */
-	protected function generateDivisionEnd($last_level, $current_level){
-		$previous_height = $this->project->getLevelsUsed() - $last_level;
-		$current_height = $this->project->getLevelsUsed() - $current_level;
-		do{
+	protected function generateDivisionEnd(ProjectSection $previous_section, ProjectSection $current_section){
+		$iterate_depth = $previous_section->getDepth();
+		while($iterate_depth >= $current_section->getDepth()){
 			$this->writeClosingForDesignTemplate(
 				$this->mapLevelHeightToMainDivision(
-					$current_height
+					$previous_section->getHeight()
 				)
 			);
-		}while(++$current_height <= $previous_height);
+			$iterate_depth--;
+		}
 	}
 	protected function generateFrontMatter( array $project_sections ) {
 		$this->writeDesignTemplateInDivision('front_matter');
 		$this->generateSections($project_sections);
-		$this->writeDesignTemplateInDivision('front_matter', false);
+		$this->writeClosingForDesignTemplate('front_matter');
 	}
 
 	protected function generateMainMatter() {
 		$this->writeDesignTemplateInDivision('main');
 		$this->generateSections($this->project->getFlatSections(1000,0,false,'main'));
-		$this->writeDesignTemplateInDivision('main', false);
+		$this->writeClosingForDesignTemplate('main');
 	}
 
 	protected function generateBackMatter( array $project_sections ) {
 		$this->writeDesignTemplateInDivision('back_matter');
 		$this->generateSections($project_sections);
-		$this->writeDesignTemplateInDivision('back_matter', false);
+		$this->writeClosingForDesignTemplate('back_matter');
 	}
 }

@@ -22,8 +22,8 @@ class ProjectSectionManager {
 	 *
 	 * @return ProjectSection[]
 	 */
-	public function fetchSectionsFor($project_id, $max_levels = 1, $limit = 20, $offset = 0, $include_title = false, $placement = 'main'){
-		$sections = $this->fetchFlatSectionsFor($project_id, $limit, $offset, $include_title, $placement);
+	public function getSectionsFor($project_id, $max_levels = 1, $limit = 20, $offset = 0, $include_title = false, $placement = 'main'){
+		$sections = $this->getFlatSectionsFor($project_id, $limit, $offset, $include_title, $placement);
 		$index = 0;
 		$parent_id = 0;
 		return $this->nestSections(
@@ -35,6 +35,22 @@ class ProjectSectionManager {
 	}
 
 	/**
+	 * @param int $section_id
+	 *
+	 * @return ProjectSection
+	 */
+	public function getSection($section_id){
+		global $wpdb;
+		$row = $wpdb->get_row(
+			$wpdb->prepare(
+			'SELECT ID ' . $this->defaultFrom() . 'WHERE ID=%d',
+				$section_id
+			)
+		);
+		return $this->createObjFromRow($row);
+	}
+
+	/**
 	 * Gets a 1-dimensional array of project parts, ignoring parent hierarchy (although the parent_id is included on each
 	 * object)
 	 * @param int $project_id
@@ -43,10 +59,10 @@ class ProjectSectionManager {
 	 *
 	 * @return ProjectSection[] unlike fetchPartsFor(), this is a flat array, objects don't have a 'subs' property
 	 */
-	public function fetchFlatSectionsFor($project_id, $limit = 20, $offset = 0, $include_post_title = false, $placement = null){
+	public function getFlatSectionsFor($project_id, $limit = 20, $offset = 0, $include_post_title = false, $placement = null){
 		global $wpdb;
 
-		$select_sql = 'sections.ID, sections.post_id, sections.parent_id, sections.placement, sections.template';
+		$select_sql = $this->defaultSelection();
 		$join_sql = '';
 		$where_sql = $wpdb->prepare(' WHERE project_id=%d', $project_id);;
 		if($include_post_title){
@@ -61,7 +77,7 @@ class ProjectSectionManager {
 		return $this->createObjsFromRows(
 			$wpdb->get_results(
 				$wpdb->prepare(
-					'SELECT ' . $select_sql . ' FROM ' . $wpdb->prefix . TableManager::SECTIONS_TABLE . ' sections '
+					 $select_sql . $this->defaultFrom()
 	                    . $join_sql . $where_sql .
 	                  ' ORDER BY section_order ASC
 	                  limit %d, %d',
@@ -70,6 +86,15 @@ class ProjectSectionManager {
 				)
 			)
 		);
+	}
+
+	protected function defaultSelection(){
+		return 'SELECT sections.ID, sections.post_id, sections.parent_id, sections.placement, sections.template, sections.height, sections.depth';
+	}
+
+	protected function defaultFrom(){
+		global $wpdb;
+		return ' FROM ' . $wpdb->prefix . TableManager::SECTIONS_TABLE . ' sections ';
 	}
 
 	/**
@@ -179,7 +204,9 @@ class ProjectSectionManager {
 		foreach ( $sections_data as $section_data){
 			$post_id = $section_data[0];
 			$template = $section_data[1];
-			$subsections = $section_data[2];
+			$height = $section_data[2];
+			$depth = $section_data[3];
+			$subsections = $section_data[4];
 			$success = $wpdb->insert(
 				$wpdb->prefix . TableManager::SECTIONS_TABLE,
 				[
@@ -188,7 +215,9 @@ class ProjectSectionManager {
 					'parent_id' => $parent_id,
 					'section_order' => $order++,
 					'template' => $template,
-					'placement' => 'main'
+					'placement' => 'main',
+					'height' => $height,
+					'depth' => $depth
 				],
 				[
 					'%d',//project_id
@@ -197,6 +226,8 @@ class ProjectSectionManager {
 					'%d',//section_order
 					'%s',//template
 					'%s',//placement
+					'%d',//height
+					'%d',//depth
 				]
 			);
 			if(! $success) {

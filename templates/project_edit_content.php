@@ -22,15 +22,17 @@ function pmb_content_item($posty_row, $init_subs){
         $id = $posty_row->getPostId();
         $title = $posty_row->getPostTitle();
         $template = $posty_row->getTemplate();
+        $height = $posty_row->getHeight();
         $subs = $posty_row->getCachedSubsections();
     } else {
         $id = $posty_row->ID;
         $title = $posty_row->post_title;
         $template = null;
+        $height = 0;
         $subs = [];
     }
     ?>
-    <div class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($id);?>">
+    <div class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($id);?>" data-height="<?php echo esc_attr($height);?>">
         <div class="pmb-project-item-header">
             <span class="pmb-project-item-title"><?php echo $title;?></span>
             <span class="pmb-project-item-template-container"><?php echo pmb_template_selector($template);?></span>
@@ -82,7 +84,7 @@ function pmb_content_item($posty_row, $init_subs){
                         ?>
                     </div>
                     <input type="hidden" name="pmb-project-sections-data" id="pmb-project-sections-data">
-                    <input type="hidden" name="pmb-project-layers-detected" id="pmb-project-layers-detected">
+                    <input type="hidden" name="pmb-project-depth" id="pmb-project-depth">
                 </div>
             </div>
         </div>

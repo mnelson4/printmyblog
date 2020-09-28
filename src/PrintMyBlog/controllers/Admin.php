@@ -486,7 +486,7 @@ class Admin extends BaseController
     protected function editContent(Project $project)
     {
 	    $post_options = $this->post_fetcher->fetchPostOptionssForProject();
-	    $sections = $this->section_manager->fetchSectionsFor($_GET['ID'], $project->getLevelsAllowed(), 1000, 0, true);
+	    $sections = $this->section_manager->getSectionsFor($_GET['ID'], $project->getLevelsAllowed(), 1000, 0, true);
 	    $form_url = add_query_arg(
 		    [
 			    'ID' => $project->getWpPost()->ID,
@@ -626,7 +626,7 @@ class Admin extends BaseController
 			);
 		}
 		$sections_string = stripslashes($_POST['pmb-project-sections-data']);
-		$project->setLevelsUsed(intval($_POST['pmb-project-layers-detected']));
+		$project->setProjectDepth(intval($_POST['pmb-project-depth']));
 		$sections_array_data = json_decode($sections_string);
 		$this->section_manager->clearSectionsFor($project->getWpPost()->ID);
 		$this->section_manager->setSectionsFor($project->getWpPost()->ID, $sections_array_data);

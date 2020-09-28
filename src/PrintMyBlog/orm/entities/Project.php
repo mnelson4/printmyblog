@@ -7,6 +7,7 @@ use Exception;
 use PrintMyBlog\domain\DefaultFileFormats;
 use PrintMyBlog\entities\FileFormat;
 use PrintMyBlog\entities\ProjectGeneration;
+use PrintMyBlog\factories\ProjectGenerationFactory;
 use PrintMyBlog\helpers\ArgMagician;
 use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\orm\managers\ProjectSectionManager;
@@ -29,7 +30,7 @@ class Project extends PostWrapper{
 	const POSTMETA_CODE = '_pmb_code';
 	const POSTMETA_FORMAT = '_pmb_format';
 	const POSTMETA_DESIGN = '_pmb_design_for_';
-	const POSTMETA_LEVELS_USED = '_pmb_levels_used';
+	const POSTMETA_PROJECT_DEPTH = '_pmb_levels_used';
 
 	/**
 	 * @var ProjectGeneration[]
@@ -54,18 +55,31 @@ class Project extends PostWrapper{
 	 * @var ProjectSectionManager
 	 */
 	protected $section_manager;
+	/**
+	 * @var ProjectGenerationFactory
+	 */
+	protected $project_generation_factory;
 
+	/**
+	 * @param ProjectSectionManager $section_manager
+	 * @param FileFormatRegistry $format_manager
+	 * @param DesignManager $design_manager
+	 * @param Config $config
+	 * @param ProjectGenerationFactory $project_generation_factory
+	 */
 	public function inject(
 		ProjectSectionManager $section_manager,
 		FileFormatRegistry $format_manager,
 		DesignManager $design_manager,
-		Config $config
+		Config $config,
+		ProjectGenerationFactory $project_generation_factory
 	)
 	{
 		$this->section_manager    = $section_manager;
 		$this->format_registry = $format_manager;
 		$this->design_manager  = $design_manager;
 		$this->config          = $config;
+		$this->project_generation_factory = $project_generation_factory;
 	}
 
 	/**
@@ -122,7 +136,7 @@ class Project extends PostWrapper{
 	 */
 	public function getSections($limit=20, $offset=0, $include_title = false, $placement = null)
 	{
-		return $this->section_manager->fetchSectionsFor(
+		return $this->section_manager->getSectionsFor(
 			$this->getWpPost()->ID,
 			$this->getLevelsAllowed(),
 			$limit,
@@ -142,7 +156,7 @@ class Project extends PostWrapper{
 	 * @return ProjectSection[]
 	 */
 	public function getFlatSections($limit=20, $offset=0, $include_title=false, $placement = null){
-		return $this->section_manager->fetchFlatSectionsFor(
+		return $this->section_manager->getFlatSectionsFor(
 			$this->getWpPost()->ID,
 			$limit,
 			$offset,
@@ -341,7 +355,7 @@ class Project extends PostWrapper{
 		$this->section_manager->clearSectionsFor($this->getWpPost()->ID);
 		// delete the generated files for the project too
 		foreach($this->getFormatsSelected() as $format){
-			$project_generation = new ProjectGeneration($this, $format);
+			$project_generation = $this->project_generation_factory->create($this, $format);
 			$project_generation->deleteGeneratedFiles();
 		}
 		return parent::delete();
@@ -359,7 +373,7 @@ class Project extends PostWrapper{
 			if( ! $format instanceof FileFormat){
 				$format = $this->format_registry->getFormat($format);
 			}
-			$this->generations[$format_slug] = new ProjectGeneration($this, $format);
+			$this->generations[$format_slug] = $this->project_generation_factory->create($this, $format);
 		}
 		return $this->generations[$format_slug];
 	}
@@ -382,7 +396,7 @@ class Project extends PostWrapper{
 	 */
 	public function clearGeneratedFiles()
 	{
-		$project_generation = new ProjectGeneration($this, $this->getFormatsSelected());
+		$project_generation = $this->project_generation_factory->create($this, $this->getFormatsSelected());
 		$project_generation->clearIntermediaryGeneratedTime();
 		$project_generation->getProjectHtmlGenerator()->deleteFile();
 		return true;
@@ -438,8 +452,8 @@ class Project extends PostWrapper{
 	/**
 	 * @return int
 	 */
-	public function getLevelsUsed(){
-		return (int)$this->getMeta(self::POSTMETA_LEVELS_USED);
+	public function getProjectDepth(){
+		return (int)$this->getMeta(self::POSTMETA_PROJECT_DEPTH);
 	}
 
 	/**
@@ -448,8 +462,8 @@ class Project extends PostWrapper{
 	 *
 	 * @return bool|int
 	 */
-	public function setLevelsUsed($levels){
-		return $this->setMeta(self::POSTMETA_LEVELS_USED, (int)$levels);
+	public function setProjectDepth($levels){
+		return $this->setMeta(self::POSTMETA_PROJECT_DEPTH, (int)$levels);
 	}
 
 	/**

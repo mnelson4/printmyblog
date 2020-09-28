@@ -15,11 +15,8 @@ class ProjectSection {
 	protected $section_order;
 	protected $template;
 	protected $placement;
-	/**
-	 * The layer this is in. This can be
-	 * @var int
-	 */
-	protected $layer;
+	protected $height;
+	protected $depth;
 
 	/**
 	 * @var ProjectSection[]
@@ -43,6 +40,8 @@ class ProjectSection {
 		}
 		$this->template  = $db_row->template;
 		$this->placement = $db_row->placement;
+		$this->height    = $db_row->height;
+		$this->depth     = $db_row->depth;
 	}
 
 	/**
@@ -111,18 +110,18 @@ class ProjectSection {
 	}
 
 	/**
-	 * Figures out what level this section is in the project (1 being the top-most, 2 being the one under that etc.)
+	 * Gets how many layers DEEP this section is. Eg, how many layers there are ABOVE it.
 	 * @return int
 	 */
-	public function getLevel(){
-		// Cheat
-		$manager = Context::instance()->reuse('PrintMyBlog\orm\managers\ProjectSectionManager');
-		$parent_id = $this->getParentId();
-		$level = 1;
-		while($parent_id){
-			$parent_id = $manager->getParentOf($parent_id);
-			$level++;
-		};
-		return $level;
+	public function getDepth(){
+		return $this->depth;
+	}
+
+	/**
+	 * Gets how many layers HIGH this section is. Eg, how many layers there are BELOW it.
+	 * @return int
+	 */
+	public function getHeight() {
+		return $this->height;
 	}
 }

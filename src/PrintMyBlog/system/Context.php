@@ -56,7 +56,8 @@ class Context extends BaseContext
 		        'PrintMyBlog\orm\managers\ProjectSectionManager'             => self::REUSE,
 		        'PrintMyBlog\services\FileFormatRegistry'  => self::REUSE,
 		        'PrintMyBlog\orm\managers\DesignManager' => self::REUSE,
-		        'PrintMyBlog\services\config\Config' => self::REUSE
+		        'PrintMyBlog\services\config\Config' => self::REUSE,
+		        'PrintMyBlog\factories\ProjectGenerationFactory' => self::REUSE,
 	        ],
 	        'PrintMyBlog\services\DesignRegistry' => [
 	        	'PrintMyBlog\orm\managers\DesignManager' => self::REUSE,
@@ -68,6 +69,9 @@ class Context extends BaseContext
 	        'PrintMyBlog\services\config\Config' => [
 	        	'PrintMyBlog\services\FileFormatRegistry' => self::REUSE,
 	        	'PrintMyBLog\orm\managers\DesignManager' => self::REUSE
+	        ],
+	        'PrintMyBlog\entities\ProjectGeneration' => [
+	        	'PrintMyBlog\orm\managers\ProjectSectionManager' => self::REUSE
 	        ]
         ];
     }

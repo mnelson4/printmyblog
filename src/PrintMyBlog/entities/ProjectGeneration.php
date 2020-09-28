@@ -4,6 +4,8 @@ namespace PrintMyBlog\entities;
 
 use DateTime;
 use PrintMyBlog\orm\entities\Project;
+use PrintMyBlog\orm\entities\ProjectSection;
+use PrintMyBlog\orm\managers\ProjectSectionManager;
 use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
 use WP_Post;
 use strptime;
@@ -20,7 +22,7 @@ class ProjectGeneration {
 	const POSTMETA_GENERATED = '_pmb_generated_';
 	const POSTMETA_DIRTY = '_pmb_dirty_';
 	const POSTMETA_LAST_DIVISION = '_pmb_last_section_type_';
-	const POSTMETA_LAST_LEVEL = '_pmb_last_level_';
+	const POSTMETA_LAST_SECTION_ID = '_pmb_last_section_';
 	/**
 	 * @var Project
 	 */
@@ -33,11 +35,23 @@ class ProjectGeneration {
 	 * @var ProjectFileGeneratorBase
 	 */
 	protected $generator;
+	/**
+	 * @var ProjectSectionManager
+	 */
+	protected $section_manager;
+
+	/**
+	 * @var ProjectSection|null
+	 */
+	protected $last_section;
 
 	public function __construct(Project $project, FileFormat $format){
-
 		$this->project = $project;
 		$this->format = $format;
+	}
+
+	public function inject(ProjectSectionManager $section_manager){
+		$this->section_manager = $section_manager;
 	}
 
 	/**
@@ -218,7 +232,6 @@ class ProjectGeneration {
 
 	/**
 	 * Removes all the dirty reasons. Makes sense when the project file for this format is re-generated
-	 * @return success
 	 */
 	public function clearDirty(){
 		$this->deletePostMetaForFormat(self::POSTMETA_DIRTY);
@@ -248,20 +261,45 @@ class ProjectGeneration {
 	}
 
 	/**
-	 * @return int how far deep the last generated section was.
+	 * @return int ID
 	 */
-	public function getLastLevel(){
-		return (int)$this->getPostMetaForFormat(self::POSTMETA_LAST_LEVEL);
+	public function getLastSectionId(){
+		return (int)$this->getPostMetaForFormat(self::POSTMETA_LAST_SECTION_ID);
+	}
+
+	/**
+	 * @return ProjectSection|null
+	 */
+	public function getLastSection(){
+		if(! $this->last_section instanceof ProjectSection){
+			$id = $this->getLastSectionId();
+			if(! $id){
+				return null;
+			}
+			$this->last_section = $this->section_manager->getSection($id);
+		}
+		return $this->last_section;
 	}
 
 	/**
 	 * Sets the last-used level. (How many layers deep the last-generated section was.)
-	 * @param int $level
+	 *
+	 * @param int $id
+	 *
 	 * @return bool
 	 */
-	public function setLastLevel($level){
-		return $this->setPostMetaForFormat(self::POSTMETA_LAST_LEVEL, (int)$level);
+	public function setLastSectionId($id){
+		return $this->setPostMetaForFormat(self::POSTMETA_LAST_SECTION_ID, (int)$id);
 	}
 
+	/**
+	 * @param ProjectSection $section
+	 *
+	 * @return bool|int
+	 */
+	public function setLastSection(ProjectSection $section){
+		$this->last_section = $section;
+		return $this->setLastSectionId($section->getId());
+	}
 
 }

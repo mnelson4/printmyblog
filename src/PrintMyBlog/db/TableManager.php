@@ -32,6 +32,8 @@ class TableManager
                 section_order int(11) NOT NULL DEFAULT \'0\',
                 template varchar(50) NOT NULL DEFAULT \'\',
                 placement varchar(15) NOT NULL DEFAULT \'main\',
+                height smallint NOT NULL DEFAULT \'0\',
+                depth smallint NOT NULL DEFAULT \'0\',
                 PRIMARY KEY  (ID),
                 KEY sorted (project_id,placement,section_order)
             ) ' . $charset_collate . '
