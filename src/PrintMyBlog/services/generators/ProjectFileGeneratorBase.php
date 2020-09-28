@@ -3,9 +3,12 @@
 
 namespace PrintMyBlog\services\generators;
 
+use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\entities\ProjectGeneration;
+use PrintMyBlog\orm\entities\ProjectSection;
+use stdClass;
 use WP_Post;
 use WP_Query;
 
@@ -20,36 +23,36 @@ abstract class ProjectFileGeneratorBase {
 	protected $project_generation;
 
 	/**
+	 * @var Design
+	 */
+	protected $design;
+
+	/**
 	 * ProjectHtmlGenerator constructor.
 	 *
 	 * @param Project $project
 	 */
-	public function __construct(ProjectGeneration $project_generation){
+	public function __construct(ProjectGeneration $project_generation, Design $design){
 		$this->project_generation = $project_generation;
 		$this->project = $project_generation->getProject();
+		$this->design = $design;
 	}
 
 	/**
 	 * @return bool whether complete or not
 	 */
 	public function generateHtmlFile() {
-		// If not, generate it...
-		$part_post_ids = $this->project->getPartPostIds();
-		// Fetch some of its posts at the same time...
-		$query = new WP_Query(
-			[
-				'post__in' => $part_post_ids,
-//				'showposts' => 10
-			]
-		);
 		// Includes the design's functions.php file, if it exists
 		if(file_exists( $this->getDesignDir() . 'functions.php')){
 			include( $this->getDesignDir() . 'functions.php');
 		}
-		$this->startGenerating();
 
-		$this->sortPosts($query, $part_post_ids);
-		$this->addPostsToHtmlFile($query);
+		$this->startGenerating();
+		// Don't let anything from a previous generation affect this one.
+		$this->project_generation->setLastLevel(null);
+		$this->maybeGenerateFrontMatter();
+		$this->generateMainMatter();
+		$this->maybeGenerateBackMatter();
 		$this->finishGenerating();
 		return true;
 
@@ -71,13 +74,44 @@ abstract class ProjectFileGeneratorBase {
 	protected abstract function startGenerating();
 
 	/**
+	 * @return bool
+	 */
+	protected function maybeGenerateFrontMatter(){
+		$front_matter = $this->project->getSections(1000,0,false,'front_matter');
+		if($this->design->getDesignTemplate()->supports(DesignTemplate::IMPLIED_DIVISION_FRONTMATTER)
+			&& $front_matter){
+			$this->generateFrontMatter($front_matter);
+		}
+	}
+
+	/**
+	 * @param array $project_sections
+	 *
+	 * @return bool
+	 */
+	protected abstract function generateFrontMatter(array $project_sections);
+
+	/**
+	 * @return bool
+	 */
+	protected function maybeGenerateBackMatter(){
+		$sections = $this->project->getSections(1000,0,false,'back_matter');
+		if($this->design->getDesignTemplate()->supports(DesignTemplate::IMPLIED_DIVISION_FRONTMATTER)
+		   && $sections){
+			$this->generateBackMatter($sections);
+		}
+	}
+
+	protected abstract function generateBackMatter(array $project_sections);
+
+	/**
 	 * Generates for the current post in global $wp_post. We call WP_Query::the_post() just before calling this.
 	 * @global WP_Post $wp_post
 	 * @global Project $pmb_project
 	 * @global Design $pmb_design
 	 * @return bool success
 	 */
-	protected abstract function generatePost();
+	protected abstract function generateSection();
 
 	/**
 	 * @global WP_Post $wp_post
@@ -96,15 +130,20 @@ abstract class ProjectFileGeneratorBase {
 
 	/**
 	 * Orders $query->posts according to the order specified by $post_ids_in_order
+	 *
 	 * @param WP_Query $query
-	 * @param $post_ids_in_order
+	 * @param ProjectSection[] $sections
+	 *
+	 * @return void but updates $query->posts by putting the posts in the order
+	 * indicated by $project_parts, and also gives each post a new property "pmb_part" which is a ProjectSection
 	 */
-	protected function sortPosts(WP_Query $query, $post_ids_in_order){
+	protected function sortPostsAndAttachSections(WP_Query $query, $sections){
 		$ordered_posts = [];
 		$unordered_posts = $query->posts;
-		foreach($post_ids_in_order as $post_id){
+		foreach ( $sections as $section){
 			foreach($unordered_posts as $post){
-				if($post_id == $post->ID){
+				if($section->getPostId() == $post->ID){
+					$post->pmb_section = $section;
 					$ordered_posts[] = $post;
 				}
 			}
@@ -113,14 +152,121 @@ abstract class ProjectFileGeneratorBase {
 	}
 
 	/**
-	 * @param WP_Post[] $posts
+	 * Generates the main matter of the project. May be called repeatedly.
+	 * @return void
 	 */
-	protected function addPostsToHtmlFile(WP_Query $query) {
+	protected abstract function generateMainMatter();
+
+	/**
+	 * @param ProjectSection[] $project_sections
+	 */
+	protected function generateSections(array $project_sections) {
+		$query = $this->setupWpQuery($project_sections);
+		global $post;
 		while ( $query->have_posts() ) {
 			$query->the_post();
-			$this->generatePost();
+			$this->maybeGenerateDivisionTransition($post);
+			$this->generateSection();
 		}
 		wp_reset_postdata();
+	}
+
+	/**
+	 * @param ProjectSection[] $project_sections
+	 *
+	 * @return WP_Query
+	 */
+	protected function setupWpQuery(array $project_sections){
+		$post_ids = array_map(
+			function($item){
+				return $item->getPostId();
+			},
+			$project_sections
+		);
+		// Fetch some of its posts at the same time...
+		$query = new WP_Query(
+			[
+				'post__in' => $post_ids,
+				'showposts' => count($post_ids),
+				'post_type' => 'any'
+			]
+		);
+		$this->sortPostsAndAttachSections($query, $project_sections);
+		return $query;
+	}
+
+	/**
+	 *
+	 * @param WP_Post $post with an attached ProjectSection on the property pmb_section
+	 *
+	 * @return void
+	 */
+	protected function maybeGenerateDivisionTransition(WP_Post $post){
+		$previous_level = $this->project_generation->getLastLevel();
+		if(! $previous_level){
+			// no transition necessary
+			return;
+		}
+		$current_level = $this->getLevel($post->pmb_section, $this->project);
+		$this->generateDivisionEnd($previous_level, $current_level);
+	}
+
+
+	protected abstract function generateDivisionEnd($last_level, $current_level);
+
+	/**
+	 * Gets a string of HTML from inluding the specified file.
+	 *
+	 * @param $template_file
+	 *
+	 * @param array $template_variables to be used in the template.
+	 *
+	 * @return false|string
+	 */
+	protected function getHtmlFrom($template_file){
+		global $post, $pmb_project, $pmb_design, $pmb_project_generation;
+		$pmb_project = $this->project;
+		$pmb_design = $this->design;
+		$pmb_project_generation = $this->project_generation;
+		ob_start();
+		include($template_file);
+		return ob_get_clean();
+	}
+
+	/**
+	 * Gets the level "height" (how many levels there are under) of a section.
+	 * @param ProjectSection $section
+	 *
+	 * @return string
+	 */
+	protected function getLevel(ProjectSection $section){
+		$level = $this->project_generation->getLastLevel();
+		if( ! $level){
+			$level = $section->getLevel();
+			$this->project_generation->setLastLevel($level);
+		}
+		return $level;
+	}
+
+	/**
+	 * Gets the default division (a string used to identify the default template)
+	 * of a section at a given "height" (the difference between a project's highest level and the current level.)
+	 * @param int $height
+	 *
+	 * @return string
+	 */
+	protected function mapLevelHeightToMainDivision($height){
+		switch($height){
+			case 1:
+				return 'part';
+			case 2:
+				return 'volume';
+			case 3:
+				return 'anthology';
+			case 0:
+			default:
+				return 'article';
+		}
 	}
 
 	/**
@@ -128,7 +274,7 @@ abstract class ProjectFileGeneratorBase {
 	 */
 	protected function getDesign()
 	{
-		return $this->project->getDesignFor($this->project_generation->getFormat());
+		return $this->design;
 	}
 
 	/**

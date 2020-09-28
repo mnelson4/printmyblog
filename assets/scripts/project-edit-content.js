@@ -25,9 +25,11 @@ jQuery(document).ready(function(){
 		pmb_create_sortable_from(element);
 	});
 	jQuery('#pmb-project-form').submit(function(){
-		var pmb_items = pmb_get_contents(jQuery('#pmb-project-sections'));
-		var pmb_items_json = JSON.stringify(pmb_items);
+		var content_data = pmb_get_contents(jQuery('#pmb-project-sections'), 0, 0);
+
+		var pmb_items_json = JSON.stringify(content_data['items']);
 		jQuery('#pmb-project-sections-data').val(pmb_items_json);
+		jQuery('#pmb-project-layers-detected').val(content_data['layers_detected']);
 	})
 });
 
@@ -63,12 +65,21 @@ function pmb_create_sortable_from(element){
 	element.sorter = sorter;
 }
 
-function pmb_get_contents(jquery_obj){
+function pmb_get_contents(jquery_obj, layers_detected = 0, current_layer = 0){
 	var items = [];
 	if( !jquery_obj || ! jquery_obj.length){
 		return items;
 	}
 	var element = jquery_obj[0];
+
+	// Keep track of how many layers there are
+	// but only if this layer isn't empty.
+	if(element.children.length) {
+		current_layer++;
+		if (layers_detected < current_layer) {
+			layers_detected = current_layer;
+		}
+	}
 
 	for(var index = 0; index < element.children.length; index++){
 		var child = element.children[index];
@@ -76,13 +87,20 @@ function pmb_get_contents(jquery_obj){
 		var template_jquery_obj = child_jquery_obj.children('.pmb-project-item-header').find('select.pmb-template');
 		var template = template_jquery_obj.val();
 		var subs = child_jquery_obj.children('.pmb-subs ');
+		var sub_content_data = pmb_get_contents(subs, layers_detected, current_layer);
 		items.push([
 			child.attributes['data-id'].nodeValue, // post ID
-			template, // desired template type
-			pmb_get_contents(subs) // sub-items
+			template, // desired template
+			sub_content_data['items'] // sub-items
 		]);
+		if(layers_detected < sub_content_data['layers_detected']){
+			layers_detected = sub_content_data['layers_detected'];
+		}
 	}
-	return items;
+	return {
+		'items': items,
+		'layers_detected': layers_detected
+	}
 }
 
 function pmb_count_level(jquery_obj){

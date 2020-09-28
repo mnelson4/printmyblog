@@ -71,7 +71,7 @@ class ProNotification
     public function addNotice()
     {
         global $current_user;
-        include(PMB_TEMPLATES_DIR . 'pro_notice.html');
+        include(PMB_TEMPLATES_DIR . 'pro_notice.php');
     }
 
     public function wasDismissed()

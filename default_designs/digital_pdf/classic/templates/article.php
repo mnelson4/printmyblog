@@ -1,4 +1,5 @@
-<article <?php post_class('pmb-section'); ?> id="<?php the_permalink(); ?>">
+<div class="pmb-article-wrapper" id="<?php echo esc_attr($post->post_name);?>-wrapper">
+<article <?php post_class('pmb-article'); ?> id="<?php the_permalink(); ?>">
 
     <header class="entry-header has-text-align-center<?php echo esc_attr( $entry_header_classes ); ?>">
 
@@ -12,5 +13,6 @@
         </div><!-- .entry-header-inner -->
     </header><!-- .entry-header -->
 
-	<?php include( 'partials/content.html' );?>
+	<?php pmb_include_design_template( 'partials/content.php' );?>
 </article>
+<?php // don't close wrapping div, we'll close it elsewhere

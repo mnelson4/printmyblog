@@ -123,7 +123,7 @@ use PrintMyBlog\services\display\FormInputs;
                 </tbody>
             </table>
 
-            <?php include('partials/display_options.html'); ?>
+            <?php include('partials/display_options.php'); ?>
 
         </details>
         <input type="hidden" name="<?php echo PMB_PRINTPAGE_SLUG;?>" value="1">

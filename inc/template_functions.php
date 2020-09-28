@@ -2,6 +2,9 @@
 /**
  * This function is only included when rendering Print My Blog
  */
+
+use PrintMyBlog\orm\entities\Design;
+
 /**
  * @param $post
  *
@@ -22,4 +25,16 @@ function pmb_the_post_anchor(){
 
 function pmb_convert_url_to_anchor($url){
 	return esc_attr($url);
+}
+
+/**
+ * @param string $relative_filepath filepath relative to the current design's templates directory
+ * @global Design $pmb_design
+ */
+function pmb_include_design_template($relative_filepath){
+	/**
+	 * @var $pmb_design Design
+	 */
+	global $pmb_design;
+	require($pmb_design->getDesignTemplate()->getDirForTemplates() . $relative_filepath);
 }

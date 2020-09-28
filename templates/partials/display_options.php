@@ -5,6 +5,6 @@
  * @var $displayer Twine\services\display\FormInputs
  */
 
-include('content_options.html');
-include('layout_options.html');
-include('debug_options.html');
+include('content_options.php');
+include('layout_options.php');
+include('debug_options.php');

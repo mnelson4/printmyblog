@@ -64,7 +64,3 @@
             <!-- Populated dynamically by JS -->
         </ul>
     </div>
-
-<!-- Print My Blog Version <?php echo PMB_VERSION;?>-->
-<div class="pmb-posts site">
-<?php // sections will be added onto here, one at a time, then the footer.php file.

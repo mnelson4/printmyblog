@@ -8,6 +8,17 @@ use Exception;
 use Twine\forms\base\FormSectionProper;
 
 class DesignTemplate {
+
+	const IMPLIED_DIVISION_MAIN = 'main';
+	const IMPLIED_DIVISION_PROJECT = 'project';
+	const IMPLIED_DIVISION_FRONTMATTER = 'front_matter';
+
+	const DIVISION_ARTICLE = 'article';
+	const DIVISION_PART = 'part';
+	const DIVISION_VOLUME = 'volume';
+	const DIVISION_ANTHOLOGY = 'anthology';
+	const DIVISION_BACK_MATTER = 'back_matter';
+
 	protected $format;
 	protected $slug;
 	protected $title;
@@ -82,7 +93,14 @@ class DesignTemplate {
 	 * @return string
 	 */
 	public function getDir(){
-		return $this->dir;
+		return trailingslashit($this->dir);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDirForTemplates(){
+		return $this->getDir() . 'templates/';
 	}
 
 	/**
@@ -123,4 +141,65 @@ class DesignTemplate {
 	public function getLevels(){
 		return $this->levels;
 	}
+
+	/**
+	 * Gets the path to where a template file SHOULD be, if it were to exist.
+	 * Makes no guarantee that the file exists.
+	 *
+	 * @param string $division see DesignTemplate::validDivisions()
+	 * @param bool $beginning
+	 */
+	public function getTemplatePathToDivision($division, $beginning = true){
+		// add an underscore to the transition if its not the article template.
+		if ( ! $beginning){
+			$division .= '_end';
+		}
+		return $this->getDirForTemplates() . $division . '.php';
+	}
+
+	/**
+	 * @param $division
+	 * @param string $beginning
+	 *
+	 * @return bool
+	 */
+	public function templateFileExists($division, $beginning = true){
+		return file_exists($this->getTemplatePathToDivision($division, $beginning));
+	}
+
+	/**
+	 * Determines if the design template supports a type of division.
+	 * @param string $division see DesignTemplate::validDivisions()
+	 *
+	 * @return bool
+	 */
+	public function supports($division){
+		return $this->templateFileExists($division, 'begin');
+	}
+
+	/**
+	 * Gets the list of all valid divisions. These
+	 * @return string[]
+	 */
+	public static function validDivisions(){
+		return [
+			self::DIVISION_ARTICLE,
+			self::DIVISION_PART,
+			self::DIVISION_VOLUME,
+			self::DIVISION_ANTHOLOGY,
+			self::DIVISION_BACK_MATTER
+		];
+	}
+
+	public static function validDivisionsIncludingImplied(){
+		return array_merge(
+			[
+				self::IMPLIED_DIVISION_MAIN,
+				self::IMPLIED_DIVISION_FRONTMATTER,
+				self::IMPLIED_DIVISION_PROJECT
+			],
+			self::validDivisions()
+		);
+	}
+
 }

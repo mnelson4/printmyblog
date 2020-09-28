@@ -7,8 +7,8 @@
 
 function pmb_template_selector($selected_template){
     $options = [
-            'header' => __('Standard', 'print-my-blog'),
-            'no_header' => __('No Header', 'print-my-blog')
+            '' => __('Default Template', 'print-my-blog'),
+            'just_content' => __('Just Content', 'print-my-blog')
     ];
     $html = '<select class="pmb-template">';
     foreach($options as $value => $display_text){
@@ -18,19 +18,30 @@ function pmb_template_selector($selected_template){
     return $html;
 }
 function pmb_content_item($posty_row, $init_subs){
+    if($posty_row instanceof \PrintMyBlog\orm\entities\ProjectSection){
+        $id = $posty_row->getPostId();
+        $title = $posty_row->getPostTitle();
+        $template = $posty_row->getTemplate();
+        $subs = $posty_row->getCachedSubsections();
+    } else {
+        $id = $posty_row->ID;
+        $title = $posty_row->post_title;
+        $template = null;
+        $subs = [];
+    }
     ?>
-    <div class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($posty_row->ID);?>">
+    <div class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($id);?>">
         <div class="pmb-project-item-header">
-            <span class="pmb-project-item-title"><?php echo $posty_row->post_title;?></span>
-            <span class="pmb-project-item-template-container"><?php echo pmb_template_selector(isset($posty_row->template) ? $posty_row->template : null);?></span>
+            <span class="pmb-project-item-title"><?php echo $title;?></span>
+            <span class="pmb-project-item-template-container"><?php echo pmb_template_selector($template);?></span>
         </div>
 
         <div class="pmb-nested-sortable <?php echo $init_subs ? 'pmb-sortable' : 'pmb-sortable-inactive';?> pmb-subs">
-            <?php if(isset($posty_row->subs)){
-                foreach($posty_row->subs as $sub){
+            <?php
+                foreach($subs as $sub){
 	                pmb_content_item($sub, $init_subs);
                 }
-            }?>
+            ?>
         </div>
 
     </div>
@@ -65,12 +76,13 @@ function pmb_content_item($posty_row, $init_subs){
                     <h2><?php _e('Project Content', 'print-my-blog');?></h2>
                     <div id="pmb-project-sections" class="pmb-draggable-area pmb-project-content-chosen pmb-selection-list list-group pmb-sortable pmb-sortable-base">
                         <?php
-                        foreach($parts as $post) {
+                        foreach($sections as $post) {
 	                        pmb_content_item( $post, true );
                         }
                         ?>
                     </div>
                     <input type="hidden" name="pmb-project-sections-data" id="pmb-project-sections-data">
+                    <input type="hidden" name="pmb-project-layers-detected" id="pmb-project-layers-detected">
                 </div>
             </div>
         </div>

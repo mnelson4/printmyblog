@@ -24,7 +24,10 @@ class Folder extends ThingOnServer {
 	 */
 	public function exists()
 	{
-		return is_dir($this->getPath());
+		if($this->exists === null){
+			$this->exists = is_dir($this->getPath());
+		}
+		return $this->exists;
 	}
 	public function parentFolderPath()
 	{

@@ -43,7 +43,7 @@ class Context extends BaseContext
             ],
 	        'PrintMyBlog\controllers\Admin' => [
 		        'PrintMyBlog\db\PostFetcher'              => self::REUSE,
-		        'PrintMyBlog\db\PartFetcher'              => self::REUSE,
+		        'PrintMyBlog\orm\managers\ProjectSectionManager'              => self::REUSE,
 		        'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
 		        'PrintMyBlog\services\FileFormatRegistry'   => self::REUSE,
 		        'PrintMyBlog\orm\managers\DesignManager' => self::REUSE
@@ -53,7 +53,7 @@ class Context extends BaseContext
 		        'PrintMyBlog\services\FileFormatRegistry' => self::REUSE,
 	        ],
 	        'PrintMyBlog\orm\entities\Project'          => [
-		        'PrintMyBlog\db\PartFetcher'             => self::REUSE,
+		        'PrintMyBlog\orm\managers\ProjectSectionManager'             => self::REUSE,
 		        'PrintMyBlog\services\FileFormatRegistry'  => self::REUSE,
 		        'PrintMyBlog\orm\managers\DesignManager' => self::REUSE,
 		        'PrintMyBlog\services\config\Config' => self::REUSE

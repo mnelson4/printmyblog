@@ -4,12 +4,12 @@
 namespace PrintMyBlog\orm\entities;
 
 use Exception;
-use PrintMyBlog\db\PartFetcher;
 use PrintMyBlog\domain\DefaultFileFormats;
 use PrintMyBlog\entities\FileFormat;
 use PrintMyBlog\entities\ProjectGeneration;
 use PrintMyBlog\helpers\ArgMagician;
 use PrintMyBlog\orm\managers\DesignManager;
+use PrintMyBlog\orm\managers\ProjectSectionManager;
 use PrintMyBlog\services\config\Config;
 use PrintMyBlog\services\FileFormatRegistry;
 use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
@@ -29,11 +29,7 @@ class Project extends PostWrapper{
 	const POSTMETA_CODE = '_pmb_code';
 	const POSTMETA_FORMAT = '_pmb_format';
 	const POSTMETA_DESIGN = '_pmb_design_for_';
-
-	/**
-	 * @var PartFetcher
-	 */
-	protected $part_fetcher;
+	const POSTMETA_LEVELS_USED = '_pmb_levels_used';
 
 	/**
 	 * @var ProjectGeneration[]
@@ -54,15 +50,19 @@ class Project extends PostWrapper{
 	 * @var Config
 	 */
 	protected $config;
+	/**
+	 * @var ProjectSectionManager
+	 */
+	protected $section_manager;
 
 	public function inject(
-		PartFetcher $part_fetcher,
+		ProjectSectionManager $section_manager,
 		FileFormatRegistry $format_manager,
 		DesignManager $design_manager,
 		Config $config
 	)
 	{
-		$this->part_fetcher    = $part_fetcher;
+		$this->section_manager    = $section_manager;
 		$this->format_registry = $format_manager;
 		$this->design_manager  = $design_manager;
 		$this->config          = $config;
@@ -78,7 +78,14 @@ class Project extends PostWrapper{
 		return wp_update_post(
 			[
 				'ID' => $this->getWpPost()->ID,
-				'post_title' => $title
+				'post_title' => $title,
+				'post_name' => wp_unique_post_slug(
+					$title,
+				$this->getWpPost()->ID,
+				'publish',
+				'pmb_project',
+				0
+				)
 			]
 		);
 	}
@@ -105,11 +112,43 @@ class Project extends PostWrapper{
 
 	/**
 	 * Gets the database rows indicating the parts
-	 * @return int[]
+	 *
+	 * @param int $limit
+	 * @param int $offset
+	 * @param bool $include_title
+	 * @param string|null $placement
+	 *
+	 * @return ProjectSection[]
 	 */
-	public function getPartPostIds()
+	public function getSections($limit=20, $offset=0, $include_title = false, $placement = null)
 	{
-		return $this->part_fetcher->fetchPartPostIdsUnordered($this->getWpPost()->ID);
+		return $this->section_manager->fetchSectionsFor(
+			$this->getWpPost()->ID,
+			$this->getLevelsAllowed(),
+			$limit,
+			$offset,
+			$include_title,
+			$placement
+		);
+	}
+
+	/**
+	 * Gets project sections as a flat array
+	 * @param int $limit
+	 * @param int $offset
+	 * @param bool $include_title
+	 * @param null $placement
+	 *
+	 * @return ProjectSection[]
+	 */
+	public function getFlatSections($limit=20, $offset=0, $include_title=false, $placement = null){
+		return $this->section_manager->fetchFlatSectionsFor(
+			$this->getWpPost()->ID,
+			$limit,
+			$offset,
+			$include_title,
+			$placement
+		);
 	}
 
 
@@ -299,7 +338,7 @@ class Project extends PostWrapper{
 	 */
 	public function delete()
 	{
-		$this->part_fetcher->clearPartsFor($this->getWpPost()->ID);
+		$this->section_manager->clearSectionsFor($this->getWpPost()->ID);
 		// delete the generated files for the project too
 		foreach($this->getFormatsSelected() as $format){
 			$project_generation = new ProjectGeneration($this, $format);
@@ -394,5 +433,37 @@ class Project extends PostWrapper{
 	 */
 	public function setSetting($setting_name, $value){
 		$this->setPmbMeta($setting_name, $value);
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getLevelsUsed(){
+		return (int)$this->getMeta(self::POSTMETA_LEVELS_USED);
+	}
+
+	/**
+	 * Remembers how many levels of divisions this project actually uses.
+	 * @param $levels
+	 *
+	 * @return bool|int
+	 */
+	public function setLevelsUsed($levels){
+		return $this->setMeta(self::POSTMETA_LEVELS_USED, (int)$levels);
+	}
+
+	/**
+	 * Declares whether or not all the designs for this project support a division.
+	 * @param string $division see DesignTemplate::validDivisions()
+	 *
+	 * @return bool
+	 */
+	protected function designSupports($division){
+		foreach($this->getDesignsSelected() as $design){
+			if( ! $design->getDesignTemplate()->supports($division)){
+				return false;
+			}
+		}
+		return true;
 	}
 }

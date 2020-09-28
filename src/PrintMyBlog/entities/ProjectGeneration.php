@@ -1,11 +1,12 @@
 <?php
-
-
 namespace PrintMyBlog\entities;
 
 
+use DateTime;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
+use WP_Post;
+use strptime;
 
 /**
  * Class ProjectGeneration
@@ -18,6 +19,8 @@ use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
 class ProjectGeneration {
 	const POSTMETA_GENERATED = '_pmb_generated_';
 	const POSTMETA_DIRTY = '_pmb_dirty_';
+	const POSTMETA_LAST_DIVISION = '_pmb_last_section_type_';
+	const POSTMETA_LAST_LEVEL = '_pmb_last_level_';
 	/**
 	 * @var Project
 	 */
@@ -48,24 +51,53 @@ class ProjectGeneration {
 		return (bool)$this->generatedTimeSql();
 	}
 
+	/**
+	 * Avoids a bit of repetion, when getting, with always appending the format for all the options saved for this project-meta combo.
+	 * @param string $key to which the format's slug will automatically get appended.
+	 *
+	 * @return mixed
+	 */
+	protected function getPostMetaForFormat($key){
+		return get_post_meta(
+			$this->project->getWpPost()->ID,
+			$key . $this->format->slug(),
+			true
+		);
+	}
+
+	/**
+	 * Avoids a bit of repetition, when setting, with always appending the format onto all the options saved for this project-format
+	 * combo.
+	 * @param $key
+	 * @param $value
+	 *
+	 * @return bool|int
+	 */
+	protected function setPostMetaForFormat($key, $value){
+		return update_post_meta(
+			$this->project->getWpPost()->ID,
+			$key . $this->format->slug(),
+			$value
+		);
+	}
+
+	protected function deletePostMetaForFormat($key){
+		return delete_post_meta(
+			$this->project->getWpPost()->ID,
+			$key . $this->format->slug()
+		);
+	}
+
+	/**
+	 * @return string like 2020-02-02 02:02:02
+	 */
 	public function generatedTimeSql(){
-		return get_post_meta($this->project->getWpPost()->ID, $this->generatedPostMetaKey(), true);
+		return $this->getPostMetaForFormat(self::POSTMETA_GENERATED);
 	}
 
-	/**
-	 * @return int
-	 */
 	public function generatedTimestamp(){
-		return strtotime($this->generatedTimeSql());
-	}
-
-	/**
-	 * Gets the postmeta key for this file generation
-	 * @return string
-	 */
-	protected function generatedPostMetaKey()
-	{
-		return self::POSTMETA_GENERATED . $this->format->slug();
+		$d = new DateTime($this->generatedTimeSql());
+		return $d->getTimestamp();
 	}
 
 	/**
@@ -74,7 +106,7 @@ class ProjectGeneration {
 	 */
 	public function setIntermediaryGeneratedTime()
 	{
-		return update_post_meta($this->project->getWpPost()->ID,$this->generatedPostMetaKey(), current_time('mysql'));
+		return $this->setPostMetaForFormat(self::POSTMETA_GENERATED, current_time('mysql'));
 	}
 
 	/**
@@ -83,7 +115,7 @@ class ProjectGeneration {
 	 */
 	public function clearIntermediaryGeneratedTime()
 	{
-		return delete_post_meta($this->project->getWpPost()->ID, $this->generatedPostMetaKey());
+		return $this->deletePostMetaForFormat(self::POSTMETA_GENERATED);
 	}
 
 	/**
@@ -144,7 +176,8 @@ class ProjectGeneration {
 	{
 		if( ! $this->generator instanceof ProjectFileGeneratorBase){
 			$generator_classname = $this->format->generatorClassname();
-			$this->generator = new $generator_classname($this);
+			$design = $this->project->getDesignFor($this->format);
+			$this->generator = new $generator_classname($this, $design);
 		}
 		return $this->generator;
 	}
@@ -176,11 +209,7 @@ class ProjectGeneration {
 	 * @return array
 	 */
 	public function getDirtyReasons(){
-		$reasons = get_post_meta(
-			$this->project->getWpPost()->ID,
-			$this->dirtyPostmetaName(),
-			true
-		);
+		$reasons = $this->getPostMetaForFormat(self::POSTMETA_DIRTY);
 		if($reasons){
 			return $reasons;
 		}
@@ -189,12 +218,10 @@ class ProjectGeneration {
 
 	/**
 	 * Removes all the dirty reasons. Makes sense when the project file for this format is re-generated
+	 * @return success
 	 */
 	public function clearDirty(){
-		delete_post_meta(
-			$this->project->getWpPost()->ID,
-			$this->dirtyPostmetaName()
-		);
+		$this->deletePostMetaForFormat(self::POSTMETA_DIRTY);
 	}
 
 	/**
@@ -207,15 +234,7 @@ class ProjectGeneration {
 	public function addDirtyReason($key, $dirty_reason){
 		$existing_reasons = $this->getDirtyReasons();
 		$existing_reasons[$key] = $dirty_reason;
-		return update_post_meta(
-			$this->project->getWpPost()->ID,
-			$this->dirtyPostmetaName(),
-			$existing_reasons
-		);
-	}
-
-	protected function dirtyPostmetaName(){
-		return self::POSTMETA_DIRTY . $this->format->slug();
+		return $this->setPostMetaForFormat(self::POSTMETA_DIRTY,$existing_reasons);
 	}
 
 	/**
@@ -224,6 +243,25 @@ class ProjectGeneration {
 	 */
 	public function deleteGeneratedFiles()
 	{
+		$this->clearIntermediaryGeneratedTime();
 		return $this->getProjectHtmlGenerator()->deleteFile();
 	}
+
+	/**
+	 * @return int how far deep the last generated section was.
+	 */
+	public function getLastLevel(){
+		return (int)$this->getPostMetaForFormat(self::POSTMETA_LAST_LEVEL);
+	}
+
+	/**
+	 * Sets the last-used level. (How many layers deep the last-generated section was.)
+	 * @param int $level
+	 * @return bool
+	 */
+	public function setLastLevel($level){
+		return $this->setPostMetaForFormat(self::POSTMETA_LAST_LEVEL, (int)$level);
+	}
+
+
 }

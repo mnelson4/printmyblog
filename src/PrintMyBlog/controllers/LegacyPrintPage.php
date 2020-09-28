@@ -50,7 +50,7 @@ class LegacyPrintPage extends BaseController
             } catch (RestApiDetectorError $exception) {
                 global $pmb_wp_error;
                 $pmb_wp_error = $exception->wp_error();
-                return PMB_TEMPLATES_DIR . 'print_page_error.html';
+                return PMB_TEMPLATES_DIR . 'print_page_error.php';
             }
             global $pmb_site_name,
                    $pmb_site_description,
@@ -155,7 +155,7 @@ class LegacyPrintPage extends BaseController
             }
             $pmb_format = $this->getFromRequest('format', 'print');
             $pmb_browser = $this->getBrowser();
-            return PMB_TEMPLATES_DIR . 'print_page.html';
+            return PMB_TEMPLATES_DIR . 'print_page.php';
         }
         return $template;
     }

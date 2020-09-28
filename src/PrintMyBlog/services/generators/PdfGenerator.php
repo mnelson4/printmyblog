@@ -3,6 +3,9 @@
 
 namespace PrintMyBlog\services\generators;
 
+use PrintMyBlog\entities\DesignTemplate;
+use PrintMyBlog\orm\entities\Design;
+use PrintMyBlog\orm\entities\ProjectSection;
 use Twine\services\filesystem\File;
 
 /**
@@ -21,8 +24,8 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 		wp_enqueue_style('pmb_print_common');
 		wp_enqueue_style('pmb-plugin-compatibility');
 		wp_enqueue_script('pmb-beautifier-functions');
-		$style_file = $this->getDesignDir() . 'style.css';
-		$script_file = $this->getDesignDir() . 'script.js';
+		$style_file = $this->getDesignDir() . 'assets/style.css';
+		$script_file = $this->getDesignDir() . 'assets/script.js';
 		if(file_exists($style_file)){
 			wp_enqueue_style(
 				'pmb-design',
@@ -39,32 +42,38 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 				filemtime($script_file)
 			);		}
 		add_filter('wp_enqueue_scripts', [$this,'remove_theme_style'],20);
-		global $pmb_project;
-		$pmb_project = $this->project;
-		$pmb_show_site_title = true;
-		$pmb_show_site_tagline = false;
-		$pmb_site_name = $pmb_project->getWpPost()->post_title;
-		$pmb_site_description = '';
-		$pmb_show_date_printed = true;
-		$pmb_show_credit = true;
-		ob_start();
-		$file = $this->getDesignDir() . 'projet_start.php';
-		include( $file );
-		$this->getFileWriter()->write(ob_get_clean());
+		$this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT);
 	}
 
-	protected function generatePost()
+
+
+	protected function generateSection()
 	{
-		ob_start();
-		include( $this->getDesignDir() . 'section.php');
-		$this->getFileWriter()->write(ob_get_clean());
+		global $post;
+		// determine which template to use, depending on the current section's height and how template specified
+		if($post->pmb_section instanceof ProjectSection){
+			$template = $post->pmb_section->getTemplate();
+			if($template){
+				$this->writeDesignTemplateInDivision($template);
+			} else {
+				$height = $this->project->getLevelsUsed() - $this->getLevel($post->pmb_section);
+				$division = $this->mapLevelHeightToMainDivision($height);
+				$this->writeDesignTemplateInDivision($division);
+			}
+		}
 	}
 
 	protected function finishGenerating()
 	{
-		ob_start();
-		include( $this->getDesignDir() . 'project_stop.php');
-		$this->getFileWriter()->write(ob_get_clean());
+		$this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT,false);
+	}
+
+
+	/**
+	 * @param string $template_file
+	 */
+	protected function writeTemplateToFile($template_file){
+		$this->getFileWriter()->write('<!-- pmb template: ' . $template_file . '-->' . $this->getHtmlFrom($template_file));
 	}
 
 	/**
@@ -76,5 +85,60 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 			$this->file_writer = new File($this->project_generation->getGeneratedIntermediaryFilePath());
 		}
 		return $this->file_writer;
+	}
+
+	/**
+	 * @param $division
+	 * @param bool $beginning whether to show the beginning, or end, of this division.
+	 */
+	protected function writeDesignTemplateInDivision($division, $beginning = true){
+		$this->writeTemplateToFile(
+			$this->design->getDesignTemplate()->getTemplatePathToDivision(
+				$division,
+				$beginning
+			)
+		);
+	}
+
+	protected function writeClosingForDesignTemplate($division){
+		if($this->design->getDesignTemplate()->templateFileExists($division,false)){
+			$this->writeDesignTemplateInDivision($division,false);
+		} else {
+			// If the design template didn't delcare that file, it's ok. Assume it just ends in a div.
+			$this->getFileWriter()->write('</div>');
+		}
+	}
+
+	/**
+	 * @param int $last_level
+	 * @param int $current_level
+	 */
+	protected function generateDivisionEnd($last_level, $current_level){
+		$previous_height = $this->project->getLevelsUsed() - $last_level;
+		$current_height = $this->project->getLevelsUsed() - $current_level;
+		do{
+			$this->writeClosingForDesignTemplate(
+				$this->mapLevelHeightToMainDivision(
+					$current_height
+				)
+			);
+		}while(++$current_height <= $previous_height);
+	}
+	protected function generateFrontMatter( array $project_sections ) {
+		$this->writeDesignTemplateInDivision('front_matter');
+		$this->generateSections($project_sections);
+		$this->writeDesignTemplateInDivision('front_matter', false);
+	}
+
+	protected function generateMainMatter() {
+		$this->writeDesignTemplateInDivision('main');
+		$this->generateSections($this->project->getFlatSections(1000,0,false,'main'));
+		$this->writeDesignTemplateInDivision('main', false);
+	}
+
+	protected function generateBackMatter( array $project_sections ) {
+		$this->writeDesignTemplateInDivision('back_matter');
+		$this->generateSections($project_sections);
+		$this->writeDesignTemplateInDivision('back_matter', false);
 	}
 }

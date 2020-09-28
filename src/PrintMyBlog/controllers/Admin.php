@@ -4,18 +4,16 @@ namespace PrintMyBlog\controllers;
 
 use Exception;
 use PrintMyBlog\controllers\helpers\ProjectsListTable;
-use PrintMyBlog\db\PartFetcher;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
-use PrintMyBlog\domain\DefaultFileFormats;
 use PrintMyBlog\entities\FileFormat;
 use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\orm\managers\ProjectManager;
+use PrintMyBlog\orm\managers\ProjectSectionManager;
 use PrintMyBlog\services\FileFormatRegistry;
-use PrintMyBlog\system\Context;
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\forms\base\FormSectionProper;
 use Twine\services\display\FormInputs;
@@ -50,9 +48,9 @@ class Admin extends BaseController
     protected $post_fetcher;
 
     /**
-     * @var PartFetcher
+     * @var ProjectSectionManager
      */
-    protected $part_fetcher;
+    protected $section_manager;
 
 	/**
 	 * @var ProjectManager
@@ -76,7 +74,7 @@ class Admin extends BaseController
 
 	/**
 	 * @param PostFetcher $post_fetcher
-	 * @param PartFetcher $part_fetcher
+	 * @param ProjectSectionManager $section_manager
 	 * @param ProjectManager $project_manager
 	 * @param FileFormatRegistry $project_format_manager
 	 *
@@ -84,13 +82,13 @@ class Admin extends BaseController
 	 */
     public function inject(
     	PostFetcher $post_fetcher,
-	    PartFetcher $part_fetcher,
+	    ProjectSectionManager $section_manager,
 	    ProjectManager $project_manager,
 		FileFormatRegistry $project_format_manager,
 		DesignManager $design_manager
     ){
-        $this->post_fetcher = $post_fetcher;
-        $this->part_fetcher = $part_fetcher;
+        $this->post_fetcher    = $post_fetcher;
+        $this->section_manager = $section_manager;
         $this->project_manager = $project_manager;
         $this->file_format_registry = $project_format_manager;
         $this->design_manager = $design_manager;
@@ -226,7 +224,7 @@ class Admin extends BaseController
         }
         $print_options = new PrintOptions();
         $displayer = new FormInputs();
-        include(PMB_TEMPLATES_DIR . 'settings_page.html');
+        include(PMB_TEMPLATES_DIR . 'settings_page.php');
     }
 
 
@@ -238,11 +236,11 @@ class Admin extends BaseController
     {
 
         if (isset($_GET['welcome'])) {
-            include(PMB_TEMPLATES_DIR . 'welcome.html');
+            include(PMB_TEMPLATES_DIR . 'welcome.php');
         } else {
             $print_options = new PrintOptions();
             $displayer = new FormInputs();
-            include(PMB_TEMPLATES_DIR . 'setup_page.html');
+            include(PMB_TEMPLATES_DIR . 'setup_page.php');
         }
     }
 
@@ -288,7 +286,10 @@ class Admin extends BaseController
                 array(),
                 filemtime(PMB_ASSETS_DIR . 'styles/welcome.css')
             );
-        } elseif($hook === 'print-my-blog_page_print-my-blog-projects'
+        } elseif($hook === 'toplevel_page_print-my-blog-now'){
+	        wp_enqueue_script('pmb-setup-page');
+	        wp_enqueue_style('pmb-setup-page');
+        }elseif ($hook === 'print-my-blog_page_print-my-blog-projects'
                  && isset($_GET['action'])
 	            && $_GET['action'] === self::SLUG_ACTION_EDIT_PROJECT
             ) {
@@ -383,7 +384,7 @@ class Admin extends BaseController
 		        ],
 		        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	        );
-	        include(PMB_TEMPLATES_DIR . 'projects_list_table.html');
+	        include(PMB_TEMPLATES_DIR . 'projects_list_table.php');
         }
 
     }
@@ -404,7 +405,7 @@ class Admin extends BaseController
 		$designs = $this->design_manager->getAll(new WP_Query($wp_query_args));
 		$chosen_design = $project->getDesignFor($format->slug());
 	    // show them in a template
-	    include(PMB_TEMPLATES_DIR . 'design_choose.html');
+	    include(PMB_TEMPLATES_DIR . 'design_choose.php');
     }
 
 	/**
@@ -444,7 +445,7 @@ class Admin extends BaseController
 		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	    );
 		$formats = $this->file_format_registry->getFormats();
-		include(PMB_TEMPLATES_DIR . 'project_edit_main.html');
+		include(PMB_TEMPLATES_DIR . 'project_edit_main.php');
     }
 
     protected function editCustomizeDesign(Project $project){
@@ -479,13 +480,13 @@ class Admin extends BaseController
 		    ],
 		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	    );
-    	include(PMB_TEMPLATES_DIR . 'design_customize.html');
+    	include(PMB_TEMPLATES_DIR . 'design_customize.php');
     }
 
     protected function editContent(Project $project)
     {
 	    $post_options = $this->post_fetcher->fetchPostOptionssForProject();
-	    $parts = $this->part_fetcher->fetchPartsFor($_GET['ID'], $project->getLevelsAllowed());
+	    $sections = $this->section_manager->fetchSectionsFor($_GET['ID'], $project->getLevelsAllowed(), 1000, 0, true);
 	    $form_url = add_query_arg(
 		    [
 			    'ID' => $project->getWpPost()->ID,
@@ -494,7 +495,7 @@ class Admin extends BaseController
 		    ],
 		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	    );
-	    include(PMB_TEMPLATES_DIR . 'project_edit_content.html');
+	    include(PMB_TEMPLATES_DIR . 'project_edit_content.php');
     }
 
     protected function editMetadata(Project $project){
@@ -520,12 +521,12 @@ class Admin extends BaseController
 		    ],
 		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	    );
-    	include(PMB_TEMPLATES_DIR . 'project_edit_metadata.html');
+    	include(PMB_TEMPLATES_DIR . 'project_edit_metadata.php');
     }
 
     protected function editGenerate(Project $project){
     	$generations = $project->getAllGenerations();
-    	include(PMB_TEMPLATES_DIR . 'project_edit_generate.html');
+    	include(PMB_TEMPLATES_DIR . 'project_edit_generate.php');
     }
 
     /**
@@ -543,7 +544,7 @@ class Admin extends BaseController
 		        [
 			        'post_content' => '',
 			        'post_type' => CustomPostTypes::PROJECT,
-			        'post_status' => 'draft'
+			        'post_status' => 'publish'
 		        ],
 		        true
 	        );
@@ -624,10 +625,11 @@ class Admin extends BaseController
 				__('The content in your project has changed', 'print-my-blog')
 			);
 		}
-		$parts_string = stripslashes($_POST['pmb-project-sections-data']);
-		$parts = json_decode($parts_string);
-		$this->part_fetcher->clearPartsFor($project->getWpPost()->ID);
-		$this->part_fetcher->setPartsFor($project->getWpPost()->ID, $parts);
+		$sections_string = stripslashes($_POST['pmb-project-sections-data']);
+		$project->setLevelsUsed(intval($_POST['pmb-project-layers-detected']));
+		$sections_array_data = json_decode($sections_string);
+		$this->section_manager->clearSectionsFor($project->getWpPost()->ID);
+		$this->section_manager->setSectionsFor($project->getWpPost()->ID, $sections_array_data);
 	}
 
     protected function saveProjectCustomizeDesign(Project $project)
@@ -737,8 +739,8 @@ class Admin extends BaseController
 			throw new Exception(__('There is no file format with the slug "%s"', 'print-my-blog'),$_GET['format']);
 		}
 		$project_generation = $project->getGenerationFor($format);
+		$project_generation->deleteGeneratedFiles();
 		$project_generation->clearDirty();
-		$project_generation->setIntermediaryGeneratedTime();
 	    $url = add_query_arg(
 		    [
 			    PMB_PRINTPAGE_SLUG => 3,

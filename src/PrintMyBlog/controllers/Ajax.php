@@ -4,12 +4,12 @@ namespace PrintMyBlog\controllers;
 
 use mnelson4\RestApiDetector\RestApiDetector;
 use mnelson4\RestApiDetector\RestApiDetectorError;
-use PrintMyBlog\db\PartFetcher;
 use PrintMyBlog\entities\ProjectGeneration;
 use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\services\FileFormatRegistry;
 use Twine\controllers\BaseController;
 use WP_Query;
+use PrintMyBlog\orm\entities\Project;
 
 /**
  * Class PmbAjax
@@ -91,8 +91,14 @@ class Ajax extends BaseController
     public function handleProjectStatus()
     {
     	// Find project by ID.
+	    /*
+	     * @var $project Project
+	     */
 	    $project = $this->project_manager->getById($_GET['ID']);
 	    $format = $this->format_registry->getFormat($_GET['format']);
+	    /**
+	     * @var $project_generation ProjectGeneration
+	     */
 		$project_generation = $project->getGenerationFor($format);
 	    // Find if it's already been generated, if so return that.
 	    if(! $project_generation->isGenerated()){

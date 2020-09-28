@@ -23,7 +23,7 @@ class DefaultDesignTemplates {
 				return [
 					'title'                 => __( 'Classic Print PDf', 'print-my-blog' ),
 					'format'                => 'print_pdf',
-					'dir'                   => PMB_DEFAULT_DESIGNS_DIR . '/classic_digital',
+					'dir'                   => PMB_DEFAULT_DESIGNS_DIR . '/print_pdf/classic',
 					'levels' => 2,
 					'design_form_callback'  => function () {
 						$sections = array_merge(
@@ -81,7 +81,7 @@ class DefaultDesignTemplates {
 				return [
 					'title'           => __( 'Classic Digital PDF' ),
 					'format'          => 'digital_pdf',
-					'dir'             => PMB_DEFAULT_DESIGNS_DIR . 'classic_digital/',
+					'dir'             => PMB_DEFAULT_DESIGNS_DIR . 'digital_pdf/classic/',
 					'levels' => 2,
 					'design_form_callback'  => function() {
 						return new FormSectionProper( [
