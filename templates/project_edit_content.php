@@ -17,19 +17,21 @@ function pmb_template_selector($selected_template){
     $html .= '</select>';
     return $html;
 }
-function pmb_content_item($posty_row, $init_subs){
+function pmb_content_item($posty_row, $max_nesting = 0){
     if($posty_row instanceof \PrintMyBlog\orm\entities\ProjectSection){
         $id = $posty_row->getPostId();
         $title = $posty_row->getPostTitle();
         $template = $posty_row->getTemplate();
         $height = $posty_row->getHeight();
         $subs = $posty_row->getCachedSubsections();
+        $depth = $posty_row->getDepth();
     } else {
         $id = $posty_row->ID;
         $title = $posty_row->post_title;
         $template = null;
         $height = 0;
         $subs = [];
+        $depth = 1;
     }
     ?>
     <div class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($id);?>" data-height="<?php echo esc_attr($height);?>">
@@ -38,10 +40,10 @@ function pmb_content_item($posty_row, $init_subs){
             <span class="pmb-project-item-template-container"><?php echo pmb_template_selector($template);?></span>
         </div>
 
-        <div class="pmb-nested-sortable <?php echo $init_subs ? 'pmb-sortable' : 'pmb-sortable-inactive';?> pmb-subs">
+        <div class="pmb-nested-sortable <?php echo $depth < $max_nesting ? 'pmb-sortable' : 'pmb-sortable-inactive';?> pmb-subs">
             <?php
                 foreach($subs as $sub){
-	                pmb_content_item($sub, $init_subs);
+	                pmb_content_item($sub, $max_nesting);
                 }
             ?>
         </div>
@@ -69,7 +71,7 @@ function pmb_content_item($posty_row, $init_subs){
                     <div id="pmb-project-choices" class="pmb-draggable-area pmb-project-content-available pmb-selection-list list-group">
                         <?php
                         foreach($post_options as $post){
-	                        pmb_content_item($post, false);
+	                        pmb_content_item($post, 0);
                         }
                         ?>
                     </div>

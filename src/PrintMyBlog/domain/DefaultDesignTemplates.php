@@ -82,7 +82,6 @@ class DefaultDesignTemplates {
 					'title'           => __( 'Classic Digital PDF' ),
 					'format'          => 'digital_pdf',
 					'dir'             => PMB_DEFAULT_DESIGNS_DIR . 'digital_pdf/classic/',
-					'levels' => 2,
 					'design_form_callback'  => function() {
 						return new FormSectionProper( [
 							'subsections' => array_merge(

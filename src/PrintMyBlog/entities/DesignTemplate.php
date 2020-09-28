@@ -64,7 +64,6 @@ class DesignTemplate {
 		$this->dir                   = (string)$args['dir'];
 		$this->design_form_callback  = $args['design_form_callback'];
 		$this->project_form_callback = $args['project_form_callback'];
-		$this->levels                = isset($args['levels']) ? intval($args['levels']) : 1;
 	}
 
 	/**
@@ -139,6 +138,19 @@ class DesignTemplate {
 	 * @return int
 	 */
 	public function getLevels(){
+		if($this->levels === null){
+
+			if($this->supports('anthology')) {
+				$this->levels = 4;
+			} else if($this->supports('volume')){
+				$this->levels = 3;
+			} else if($this->supports('part')){
+				$this->levels = 2;
+			} else{
+				$this->levels = 1;
+			}
+
+		}
 		return $this->levels;
 	}
 
