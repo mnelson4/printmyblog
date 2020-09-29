@@ -3,6 +3,7 @@ namespace PrintMyBlog\entities;
 
 
 use DateTime;
+use PrintMyBlog\factories\ProjectFileGeneratorFactory;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;
 use PrintMyBlog\orm\managers\ProjectSectionManager;
@@ -44,14 +45,19 @@ class ProjectGeneration {
 	 * @var ProjectSection|null
 	 */
 	protected $last_section;
+	/**
+	 * @var ProjectFileGeneratorFactory
+	 */
+	protected $project_generator_factory;
 
 	public function __construct(Project $project, FileFormat $format){
 		$this->project = $project;
 		$this->format = $format;
 	}
 
-	public function inject(ProjectSectionManager $section_manager){
+	public function inject(ProjectSectionManager $section_manager, ProjectFileGeneratorFactory $project_generator_factory){
 		$this->section_manager = $section_manager;
+		$this->project_generator_factory = $project_generator_factory;
 	}
 
 	/**
@@ -191,7 +197,7 @@ class ProjectGeneration {
 		if( ! $this->generator instanceof ProjectFileGeneratorBase){
 			$generator_classname = $this->format->generatorClassname();
 			$design = $this->project->getDesignFor($this->format);
-			$this->generator = new $generator_classname($this, $design);
+			$this->generator = $this->project_generator_factory->create($generator_classname, $this, $design);
 		}
 		return $this->generator;
 	}

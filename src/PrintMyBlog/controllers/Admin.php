@@ -643,15 +643,15 @@ class Admin extends BaseController
 		    	[
 				    $title_page->ID,
 					'just_content',
-				    1,
 				    0,
+				    1,
 				    []
 			    ],
 			    [
 					$toc_page->ID,
 				    '',
-				    1,
 				    0,
+				    1,
 				    []
 			    ]
 		    ],

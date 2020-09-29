@@ -72,7 +72,11 @@ class Context extends BaseContext
 	        	'PrintMyBLog\orm\managers\DesignManager' => self::REUSE
 	        ],
 	        'PrintMyBlog\entities\ProjectGeneration' => [
-	        	'PrintMyBlog\orm\managers\ProjectSectionManager' => self::REUSE
+	        	'PrintMyBlog\orm\managers\ProjectSectionManager' => self::REUSE,
+		        'PrintMyBlog\factories\ProjectFileGeneratorFactory' => self::REUSE
+	        ],
+	        'PrintMyBlog\services\generators\PdfGenerator' => [
+	        	'PrintMyBlog\db\PostFetcher' => self::REUSE
 	        ]
         ];
     }

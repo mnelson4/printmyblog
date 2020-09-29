@@ -3,6 +3,7 @@
 
 namespace PrintMyBlog\services\generators;
 
+use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
@@ -26,6 +27,10 @@ abstract class ProjectFileGeneratorBase {
 	 * @var Design
 	 */
 	protected $design;
+	/**
+	 * @var PostFetcher
+	 */
+	protected $post_fetcher;
 
 	/**
 	 * ProjectHtmlGenerator constructor.
@@ -36,6 +41,10 @@ abstract class ProjectFileGeneratorBase {
 		$this->project_generation = $project_generation;
 		$this->project = $project_generation->getProject();
 		$this->design = $design;
+	}
+
+	public function inject(PostFetcher $post_fetcher){
+		$this->post_fetcher = $post_fetcher;
 	}
 
 	/**
@@ -77,7 +86,7 @@ abstract class ProjectFileGeneratorBase {
 	 * @return bool
 	 */
 	protected function maybeGenerateFrontMatter(){
-		$front_matter = $this->project->getSections(1000,0,false,'front_matter');
+		$front_matter = $this->project->getSections(1000,0,false,DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER);
 		if($this->design->getDesignTemplate()->supports(DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER)
 			&& $front_matter){
 			$this->generateFrontMatter($front_matter);
@@ -95,7 +104,7 @@ abstract class ProjectFileGeneratorBase {
 	 * @return bool
 	 */
 	protected function maybeGenerateBackMatter(){
-		$sections = $this->project->getSections(1000,0,false,'back_matter');
+		$sections = $this->project->getSections(1000,0,false,DesignTemplate::IMPLIED_DIVISION_BACK_MATTER);
 		if($this->design->getDesignTemplate()->supports(DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER)
 		   && $sections){
 			$this->generateBackMatter($sections);
@@ -188,7 +197,7 @@ abstract class ProjectFileGeneratorBase {
 			[
 				'post__in' => $post_ids,
 				'showposts' => count($post_ids),
-				'post_type' => 'any'
+				'post_type' => $this->post_fetcher->getProjectPostTypes()
 			]
 		);
 		$this->sortPostsAndAttachSections($query, $project_sections);
