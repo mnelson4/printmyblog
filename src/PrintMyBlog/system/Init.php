@@ -12,6 +12,7 @@ use PrintMyBlog\controllers\Frontend;
 use PrintMyBlog\controllers\GutenbergBlock;
 use PrintMyBlog\controllers\LegacyPrintPage;
 use PrintMyBlog\controllers\LoadingPage;
+use PrintMyBlog\controllers\Shortcodes;
 use PrintMyBlog\domain\DefaultDesigns;
 use PrintMyBlog\domain\DefaultDesignTemplates;
 use PrintMyBlog\domain\DefaultFileFormats;
@@ -174,6 +175,8 @@ class Init
 		    (new LegacyPrintPage())->setHooks();
 		    (new LoadingPage())->setHooks();
 	    }
+	    // These are needed at least during frontend and ajax requests
+	    (new Shortcodes())->setHooks();
 
 
 	    $block_controller = new GutenbergBlock();
