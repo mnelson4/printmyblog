@@ -182,8 +182,9 @@ class ProjectSectionManager {
 
 	/**
 	 * @param $project_id
-	 * @param array $sections_data . Top-level array has sub-arrays, each with 3 items: the post ID, its "type", and an
-	 * array of its sub-items (whose structure is just like the top-level array).
+	 * @param array $sections_data . Top-level array has sub-arrays, each with 5 items: the post ID, its template, its
+	 * "height" in the tree, its "depth" in the tree, and an array of its sub-items (whose structure is just like the
+	 * top-level array).
 	 * @param $placement see DesignTemplate::validPlacements()
 	 *
 	 * @return bool|int

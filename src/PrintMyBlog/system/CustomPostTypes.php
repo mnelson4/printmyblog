@@ -16,6 +16,7 @@ class CustomPostTypes
 {
     const PROJECT = 'pmb_project';
     const DESIGN = 'pmb_design';
+    const CONTENT = 'pmb_content';
 
     /**
      * This must not be done before init eh.
@@ -76,7 +77,7 @@ class CustomPostTypes
 		    4
 	    );
 
-	    register_post_type( 'pmb_content',
+	    register_post_type( self::CONTENT,
 		    // WordPress CPT Options Start
 		    array(
 			    'labels' => array(

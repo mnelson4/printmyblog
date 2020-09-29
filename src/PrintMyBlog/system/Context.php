@@ -30,7 +30,8 @@ class Context extends BaseContext
                 'Twine\system\RequestType' => self::REUSE,
                 'PrintMyBlog\db\TableManager' => self::REUSE,
                 'PrintMyBlog\system\Capabilities' => self::REUSE,
-		        'PrintMyBlog\services\DesignRegistry' => self::REUSE
+		        'PrintMyBlog\services\DesignRegistry' => self::REUSE,
+		        'PrintMyBlog\domain\DefaultProjectContents' => self::REUSE
             ],
 	        'Twine\system\RequestType'      => [
                 'Twine\system\VersionHistory' => self::REUSE,

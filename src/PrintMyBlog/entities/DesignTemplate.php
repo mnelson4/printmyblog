@@ -19,6 +19,9 @@ class DesignTemplate {
 	const DIVISION_VOLUME = 'volume';
 	const DIVISION_ANTHOLOGY = 'anthology';
 
+	const TEMPLATE_TITLE_PAGE ='title_page';
+	const TEMPLATE_JUST_CONTENT = 'just_content';
+
 	protected $format;
 	protected $slug;
 	protected $title;

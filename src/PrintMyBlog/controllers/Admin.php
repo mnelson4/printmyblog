@@ -567,32 +567,7 @@ class Admin extends BaseController
     {
         $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
         if($action === 'new'){
-        	// Create a draft project
-
-	        $project_id = wp_insert_post(
-		        [
-			        'post_content' => '',
-			        'post_type' => CustomPostTypes::PROJECT,
-			        'post_status' => 'publish'
-		        ],
-		        true
-	        );
-	        if(is_wp_error($project_id)){
-		        wp_die($project_id->get_error_message());
-	        }
-	        $project_obj = new Project($project_id);
-	        $project_obj->setCode();
-	        // Redirect to it
-	        wp_redirect(
-		        add_query_arg(
-			        [
-				        'ID' => $project_id,
-				        'action' => self::SLUG_ACTION_EDIT_PROJECT,
-				        'subaction' => self::SLUG_SUBACTION_PROJECT_MAIN
-			        ],
-			        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-		        )
-	        );
+        	$this->saveNewProject();
 	        exit;
         }
         if( $action === self::SLUG_ACTION_EDIT_PROJECT){
@@ -639,6 +614,60 @@ class Admin extends BaseController
 	        wp_safe_redirect($redirect);
 	        exit;
         }
+    }
+
+    protected function saveNewProject()
+    {
+	    // Create a draft project
+
+	    $project_id = wp_insert_post(
+		    [
+			    'post_content' => '',
+			    'post_type' => CustomPostTypes::PROJECT,
+			    'post_status' => 'publish'
+		    ],
+		    true
+	    );
+	    if(is_wp_error($project_id)){
+		    wp_die($project_id->get_error_message());
+	    }
+	    $project_obj = new Project($project_id);
+	    $project_obj->setCode();
+	    // add default sections
+	    // ...after we figure out what they should be.
+	    $title_page = get_page_by_path('pmb-title-page', OBJECT, CustomPostTypes::CONTENT);
+	    $toc_page = get_page_by_path('pmb-toc', OBJECT, CustomPostTypes::CONTENT);
+	    $this->section_manager->setSectionsFor(
+	    	$project_id,
+		    [
+		    	[
+				    $title_page->ID,
+					'just_content',
+				    1,
+				    0,
+				    []
+			    ],
+			    [
+					$toc_page->ID,
+				    '',
+				    1,
+				    0,
+				    []
+			    ]
+		    ],
+		    DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER
+	    );
+	    // Redirect to it
+	    wp_redirect(
+		    add_query_arg(
+			    [
+				    'ID' => $project_id,
+				    'action' => self::SLUG_ACTION_EDIT_PROJECT,
+				    'subaction' => self::SLUG_SUBACTION_PROJECT_MAIN
+			    ],
+			    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+		    )
+	    );
     }
 
 	/**
