@@ -7,6 +7,7 @@ use PrintMyBlog\controllers\helpers\ProjectsListTable;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
+use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\entities\FileFormat;
 use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
@@ -486,7 +487,35 @@ class Admin extends BaseController
     protected function editContent(Project $project)
     {
 	    $post_options = $this->post_fetcher->fetchPostOptionssForProject();
-	    $sections = $this->section_manager->getSectionsFor($_GET['ID'], $project->getLevelsAllowed(), 1000, 0, true);
+	    $project_support_front_matter = $project->supportsDivision(DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER);
+	    if($project_support_front_matter){
+	    	$front_matter_sections = $project->getSections(
+			    1000,
+			    0,
+			    true,
+		        DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER
+		    );
+	    } else {
+	    	$front_matter_sections = null;
+	    }
+	    $sections = $project->getSections(
+	    	1000,
+		    0,
+		    true,
+		    DesignTemplate::IMPLIED_DIVISION_MAIN_MATTER
+	    );
+	    $project_support_back_matter = $project->supportsDivision(DesignTemplate::IMPLIED_DIVISION_BACK_MATTER);
+	    if($project_support_back_matter){
+		    $back_matter_sections = $project->getSections(
+			    1000,
+			    0,
+			    true,
+			    DesignTemplate::IMPLIED_DIVISION_BACK_MATTER
+		    );
+	    } else {
+	    	$back_matter_sections = null;
+	    }
+
 	    $form_url = add_query_arg(
 		    [
 			    'ID' => $project->getWpPost()->ID,
@@ -625,11 +654,36 @@ class Admin extends BaseController
 				__('The content in your project has changed', 'print-my-blog')
 			);
 		}
-		$sections_string = stripslashes($_POST['pmb-project-sections-data']);
 		$project->setProjectDepth(intval($_POST['pmb-project-depth']));
-		$sections_array_data = json_decode($sections_string);
+
 		$this->section_manager->clearSectionsFor($project->getWpPost()->ID);
-		$this->section_manager->setSectionsFor($project->getWpPost()->ID, $sections_array_data);
+		$this->setSectionFromRequest(
+			$project,
+			'pmb-project-front-matter-data',
+			DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER
+		);
+		$this->setSectionFromRequest(
+			$project,
+			'pmb-project-main-matter-data',
+			DesignTemplate::IMPLIED_DIVISION_MAIN_MATTER
+		);
+		$this->setSectionFromRequest(
+			$project,
+			'pmb-project-back-matter-data',
+			DesignTemplate::IMPLIED_DIVISION_BACK_MATTER
+		);
+	}
+
+	protected function setSectionFromRequest(Project $project, $request_data, $placement){
+		$section_data = stripslashes($_POST[$request_data]);
+		$sections = json_decode($section_data);
+		if($section_data) {
+			$this->section_manager->setSectionsFor(
+				$project->getWpPost()->ID,
+				$sections,
+				$placement
+			);
+		}
 	}
 
     protected function saveProjectCustomizeDesign(Project $project)

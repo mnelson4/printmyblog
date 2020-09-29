@@ -25,13 +25,12 @@ jQuery(document).ready(function(){
 		pmb_create_sortable_from(element);
 	});
 	jQuery('#pmb-project-form').submit(function(){
-		var sections = jQuery('#pmb-project-sections');
-		pmb_update_heights(sections);
-		var items = pmb_get_contents(sections, 1);
 
-		var pmb_items_json = JSON.stringify(items);
-		jQuery('#pmb-project-sections-data').val(pmb_items_json);
-		var first_item = sections.children('.pmb-project-item:first');
+		pmb_get_sections_json_from('#pmb-project-front-matter','#pmb-project-front-matter-data');
+		pmb_get_sections_json_from('#pmb-project-main-matter','#pmb-project-main-matter-data');
+		pmb_get_sections_json_from('#pmb-project-back-matter','#pmb-project-back-matter-data');
+
+		var first_item = main_sections.children('.pmb-project-item:first');
 		var depth = 0;
 		if(first_item.length){
 			depth = first_item[0].attributes['data-height'].nodeValue;
@@ -39,6 +38,18 @@ jQuery(document).ready(function(){
 		jQuery('#pmb-project-depth').val(depth);
 	})
 });
+
+/**
+ * Creates a string of JSON from the data from the sortable items and stuff it into the specified input.
+ * @param items_selector string
+ * @param input_selector string
+ */
+function pmb_get_sections_json_from(items_selector,input_selector){
+	var sections = jQuery(items_selector);
+	var items = pmb_get_contents(sections, 1);
+	var json = JSON.stringify(items);
+	jQuery(input_selector).val(json);
+}
 
 function pmb_create_sortable_from(element){
 	var sorter = Sortable.create(
@@ -52,11 +63,13 @@ function pmb_create_sortable_from(element){
 			swapThreshold: 0.25,
 			onAdd: function (event) {
 				var nested_level = pmb_count_level(jQuery(event.target));
-				if(nested_level < pmb_project_edit_content_data.levels){
+				var jquery_obj = jQuery(event.target);
+				var max_levels = jquery_obj.parents('.pmb-sortable-base').attr('data-max-nesting');
+				if(nested_level < max_levels){
 					var sortable_items = jQuery(event.item).children('.pmb-sortable-inactive');
 					if(sortable_items.length){
 						pmb_create_sortable_from(sortable_items[0]);
-						sortable_items.removeClass('pmb-sortable-disabled');
+						sortable_items.removeClass('pmb-sortable-inactive');
 						sortable_items.addClass('pmb-sortable');
 					}
 				} else {
@@ -64,7 +77,7 @@ function pmb_create_sortable_from(element){
 					if(sortable_items.length){
 						sortable_items[0].sorter.destroy();
 						sortable_items.removeClass('pmb-sortable');
-						sortable_items.addClass('pmb-sortable-disabled');
+						sortable_items.addClass('pmb-sortable-inactive');
 					}
 				}
 			},

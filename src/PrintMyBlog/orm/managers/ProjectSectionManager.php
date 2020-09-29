@@ -5,6 +5,7 @@ namespace PrintMyBlog\orm\managers;
 
 
 use PrintMyBlog\db\TableManager;
+use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\orm\entities\ProjectSection;
 use stdClass;
 
@@ -183,14 +184,14 @@ class ProjectSectionManager {
 	 * @param $project_id
 	 * @param array $sections_data . Top-level array has sub-arrays, each with 3 items: the post ID, its "type", and an
 	 * array of its sub-items (whose structure is just like the top-level array).
-	 * @param int $layers_detected
+	 * @param $placement see DesignTemplate::validPlacements()
 	 *
 	 * @return bool|int
 	 */
-	public function setSectionsFor($project_id, $sections_data)
+	public function setSectionsFor($project_id, $sections_data, $placement)
 	{
 		$order = 1;
-		return $this->insertDbRows($project_id,$sections_data,0,$order);
+		return $this->insertDbRows($project_id,$sections_data,0,$order, $placement);
 	}
 
 	/**
@@ -198,8 +199,11 @@ class ProjectSectionManager {
 	 * @param $sections_data
 	 * @param $parent_id
 	 * @param $order
+	 * @param $placement see DesignTemplate::valid
+	 *
+	 * @return bool
 	 */
-	protected function insertDbRows($project_id, $sections_data, $parent_id, &$order){
+	protected function insertDbRows($project_id, $sections_data, $parent_id, &$order, $placement){
 		global $wpdb;
 		foreach ( $sections_data as $section_data){
 			$post_id = $section_data[0];
@@ -215,7 +219,7 @@ class ProjectSectionManager {
 					'parent_id' => $parent_id,
 					'section_order' => $order++,
 					'template' => $template,
-					'placement' => 'main',
+					'placement' => $placement,
 					'height' => $height,
 					'depth' => $depth
 				],
@@ -237,7 +241,8 @@ class ProjectSectionManager {
 				$project_id,
 				$subsections,
 				$wpdb->insert_id,
-				$order
+				$order,
+				$placement
 			);
 		}
 		return true;

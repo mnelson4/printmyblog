@@ -2,6 +2,12 @@
 /**
  * @var $project \PrintMyBlog\orm\entities\Project
  * @var $form_url string
+ * @var $project_support_front_matter bool
+ * @var $project_support_back_matter bool
+ * @var $front_matter_sections \PrintMyBlog\orm\entities\ProjectSection[]
+ * @var $main_matter_sections \PrintMyBlog\orm\entities\ProjectSection[]
+ * @var $back_matter_sections \PrintMyBlog\orm\entities\ProjectSection[]
+ *
  *
  */
 
@@ -66,26 +72,55 @@ function pmb_content_item($posty_row, $max_nesting = 0){
     <form id="pmb-project-form" method="POST" action="<?php echo $form_url;?>">
         <div id="pmb-project-layout" class="pmb-project-layout">
             <div class="pmb-project-layout-inner">
-                <div class="pmb-project-column">
+                <div class="pmb-project-column pmb-project-choices-column">
                     <h2><?php _e('Available Content', 'print-my-blog');?></h2>
-                    <div id="pmb-project-choices" class="pmb-draggable-area pmb-project-content-available pmb-selection-list list-group">
+                    <div id="pmb-project-choices" class="pmb-draggable-area pmb-project-content-available pmb-scrollable-window list-group">
                         <?php
                         foreach($post_options as $post){
-	                        pmb_content_item($post, 0);
+	                        pmb_content_item($post, 1);
                         }
                         ?>
                     </div>
                 </div>
-                <div class="pmb-project-column">
-                    <h2><?php _e('Project Content', 'print-my-blog');?></h2>
-                    <div id="pmb-project-sections" class="pmb-draggable-area pmb-project-content-chosen pmb-selection-list list-group pmb-sortable pmb-sortable-base">
+                <div class="pmb-project-column pmb-project-matters-wrapper">
+                    <h2><?php esc_html_e('Project Content', 'print-my-blog');?></h2>
+                    <div class="pmb-project-matters pmb-scrollable-window">
+                        <?php if($project_support_front_matter){
+                           ?>
+                            <h2><?php esc_html_e('Front Matter', 'print-my-blog');?></h2>
+                            <div id="pmb-project-front-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base" data-max-nesting="1">
+	                            <?php
+	                            foreach($front_matter_sections as $post) {
+		                            pmb_content_item( $post, 1 );
+	                            }
+	                            ?>
+                            </div>
                         <?php
-                        foreach($sections as $post) {
-	                        pmb_content_item( $post, true );
-                        }
-                        ?>
+                        }?>
+                        <h2><?php _e('Main Content', 'print-my-blog');?></h2>
+                        <div id="pmb-project-main-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base" data-max-nesting="<?php echo esc_attr($project->getLevelsAllowed());?>">
+                            <?php
+                            foreach($sections as $post) {
+                                pmb_content_item( $post, $project->getLevelsAllowed() );
+                            }
+                            ?>
+                        </div>
+	                    <?php if($project_support_back_matter){
+		                    ?>
+                            <h2><?php esc_html_e('Back Matter', 'print-my-blog');?></h2>
+                            <div id="pmb-project-back-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base" data-max-nesting="1">
+			                    <?php
+			                    foreach($back_matter_sections as $post) {
+				                    pmb_content_item( $post, $project->getLevelsAllowed() );
+			                    }
+			                    ?>
+                            </div>
+		                    <?php
+	                    }?>
                     </div>
-                    <input type="hidden" name="pmb-project-sections-data" id="pmb-project-sections-data">
+                    <input type="hidden" name="pmb-project-front-matter-data" id="pmb-project-front-matter-data">
+                    <input type="hidden" name="pmb-project-main-matter-data" id="pmb-project-main-matter-data">
+                    <input type="hidden" name="pmb-project-back-matter-data" id="pmb-project-back-matter-data">
                     <input type="hidden" name="pmb-project-depth" id="pmb-project-depth">
                 </div>
             </div>

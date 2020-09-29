@@ -1,22 +1,18 @@
 .pmb-project-layout{
-    max-width:1000px;
     margin-left:auto;
     margin-right:auto;
 }
 
 .pmb-project-layout .pmb-project-column{
-    width:45%;
     display:inline-block;
 }
-.pmb-selection-list{
-    height:60vh;
+.pmb-scrollable-window{
+    height:70vh;
     overflow-y:auto;
-
+    border:1px solid gray;
 }
 .pmb-draggable-area{
     min-height:200px;
-    padding:5px;
-    border:1px solid gray;
 }
 
 .pmb-grabbable{
@@ -32,8 +28,16 @@
     cursor: -webkit-grabbing;
 }
 
+.pmb-project-choices-column{
+    max-width:500px;
+}
+.pmb-project-matters-wrapper{
+    width:calc(100% - 550px);
+}
+
+
 .pmb-project-item{
-    padding: 10px 0px 10px 15px;
+    padding: 5px 0px 5px 10px;
     margin-bottom:-1px;
     border:1px solid #ddd;
     position:relative;
@@ -78,10 +82,7 @@
 
 .pmb-project-content-chosen .pmb-nested-sortable{
     /*border: 1px dotted gray;*/
-    margin-top:.5em;
-    margin-bottom:.5em;
-    margin-left:2em;
-    min-height:1em;
+    margin: .5em 1em .5em 2em;
 }
 .pmb-project-item-header{
     display: flex;

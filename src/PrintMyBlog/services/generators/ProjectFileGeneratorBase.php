@@ -78,7 +78,7 @@ abstract class ProjectFileGeneratorBase {
 	 */
 	protected function maybeGenerateFrontMatter(){
 		$front_matter = $this->project->getSections(1000,0,false,'front_matter');
-		if($this->design->getDesignTemplate()->supports(DesignTemplate::IMPLIED_DIVISION_FRONTMATTER)
+		if($this->design->getDesignTemplate()->supports(DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER)
 			&& $front_matter){
 			$this->generateFrontMatter($front_matter);
 		}
@@ -96,7 +96,7 @@ abstract class ProjectFileGeneratorBase {
 	 */
 	protected function maybeGenerateBackMatter(){
 		$sections = $this->project->getSections(1000,0,false,'back_matter');
-		if($this->design->getDesignTemplate()->supports(DesignTemplate::IMPLIED_DIVISION_FRONTMATTER)
+		if($this->design->getDesignTemplate()->supports(DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER)
 		   && $sections){
 			$this->generateBackMatter($sections);
 		}

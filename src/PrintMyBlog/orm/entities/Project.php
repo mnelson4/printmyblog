@@ -59,6 +59,10 @@ class Project extends PostWrapper{
 	 * @var ProjectGenerationFactory
 	 */
 	protected $project_generation_factory;
+	/**
+	 * @var array keys are design divisions, values are
+	 */
+	protected $supports_division = [];
 
 	/**
 	 * @param ProjectSectionManager $section_manager
@@ -344,6 +348,24 @@ class Project extends PostWrapper{
 			self::POSTMETA_DESIGN . $format,
 			$design
 		);
+	}
+
+	/**
+	 * @param $division
+	 *
+	 * @return bool
+	 */
+	public function supportsDivision($division){
+		if(! isset($this->supports_division[$division])){
+			$this->supports_division[$division] = true;
+			foreach($this->getDesignsSelected() as $design){
+				if(! $design->getDesignTemplate()->supports($division)){
+					$this->supports_division[$division] = false;
+					break;
+				}
+			}
+		}
+		return $this->supports_division[$division];
 	}
 
 	/**

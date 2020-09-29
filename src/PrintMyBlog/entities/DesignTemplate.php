@@ -9,15 +9,15 @@ use Twine\forms\base\FormSectionProper;
 
 class DesignTemplate {
 
-	const IMPLIED_DIVISION_MAIN = 'main';
+	const IMPLIED_DIVISION_MAIN_MATTER = 'main';
 	const IMPLIED_DIVISION_PROJECT = 'project';
-	const IMPLIED_DIVISION_FRONTMATTER = 'front_matter';
+	const IMPLIED_DIVISION_FRONT_MATTER = 'front_matter';
+	const IMPLIED_DIVISION_BACK_MATTER = 'back_matter';
 
 	const DIVISION_ARTICLE = 'article';
 	const DIVISION_PART = 'part';
 	const DIVISION_VOLUME = 'volume';
 	const DIVISION_ANTHOLOGY = 'anthology';
-	const DIVISION_BACK_MATTER = 'back_matter';
 
 	protected $format;
 	protected $slug;
@@ -199,19 +199,28 @@ class DesignTemplate {
 			self::DIVISION_PART,
 			self::DIVISION_VOLUME,
 			self::DIVISION_ANTHOLOGY,
-			self::DIVISION_BACK_MATTER
 		];
 	}
 
 	public static function validDivisionsIncludingImplied(){
 		return array_merge(
 			[
-				self::IMPLIED_DIVISION_MAIN,
-				self::IMPLIED_DIVISION_FRONTMATTER,
 				self::IMPLIED_DIVISION_PROJECT
 			],
+			self::validPlacements(),
 			self::validDivisions()
 		);
 	}
 
+	/**
+	 * All the valid values for the 'placement' column on the project sections table.
+	 * @return string[]
+	 */
+	public static function validPlacements(){
+		return [
+			self::IMPLIED_DIVISION_FRONT_MATTER,
+			self::IMPLIED_DIVISION_MAIN_MATTER,
+			self::IMPLIED_DIVISION_BACK_MATTER
+		];
+	}
 }
