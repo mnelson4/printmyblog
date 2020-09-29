@@ -502,4 +502,19 @@ class Project extends PostWrapper{
 		}
 		return true;
 	}
+
+	/**
+	 * Returns the title that is to be used in the generated files (as opposed to what's displayed in the WordPress
+	 * admin dashboard.)
+	 * If the project has a "title" setting, we use that. Otherwise, we fallback to the project's title (that's
+	 * displayed in the admin.)
+	 * @return mixed|string
+	 */
+	public function getPublishedTitle(){
+		$meta_title = $this->getPmbMeta('title');
+		if($meta_title){
+			return $meta_title;
+		}
+		return $this->getWpPost()->post_title;
+	}
 }

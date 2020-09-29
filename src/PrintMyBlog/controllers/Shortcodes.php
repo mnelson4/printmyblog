@@ -50,7 +50,7 @@ class Shortcodes extends BaseController
     public function projectTitle(){
     	global $pmb_project;
     	if($pmb_project instanceof Project){
-    		return $pmb_project->getWpPost()->post_title;
+    		return $pmb_project->getPublishedTitle();
 	    }
     	return '<-- pmb there is no project title because this post is not being viewed as part of a project. You should probably not show this post to site visitors by making it private.-->';
     }

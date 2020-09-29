@@ -6,8 +6,9 @@
  */
 ?>
 <div class="pmb-posts-header">
-	<?php if ($pmb_show_site_title) { ?>
-        <h1 class="site-title" id="dotEPUBtitle"><?php echo $pmb_site_name; ?></h1>
+	<?php
+    if (in_array('title',$pmb_design->getPmbMeta('header_content'))) { ?>
+        <h1 class="site-title" id="dotEPUBtitle"><?php echo $pmb_project->getPublishedTitle(); ?></h1>
 	<?php } ?>
 	<?php if ($pmb_show_site_tagline) { ?>
         <p class="site-description"><?php echo $pmb_site_description; ?></p>
