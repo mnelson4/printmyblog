@@ -258,27 +258,6 @@ abstract class ProjectFileGeneratorBase {
 	}
 
 	/**
-	 * Gets the default division (a string used to identify the default template)
-	 * of a section at a given "height" (the difference between a project's highest level and the current level.)
-	 * @param int $height
-	 *
-	 * @return string
-	 */
-	protected function mapLevelHeightToMainDivision($height){
-		switch($height){
-			case 1:
-				return 'part';
-			case 2:
-				return 'volume';
-			case 3:
-				return 'anthology';
-			case 0:
-			default:
-				return 'article';
-		}
-	}
-
-	/**
 	 * @return \PrintMyBlog\orm\entities\Design|null
 	 */
 	protected function getDesign()

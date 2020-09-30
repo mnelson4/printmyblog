@@ -88,7 +88,7 @@ function pmb_content_item($posty_row, $max_nesting = 0){
                         <?php if($project_support_front_matter){
                            ?>
                             <h2><?php esc_html_e('Front Matter', 'print-my-blog');?></h2>
-                            <div id="pmb-project-front-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base" data-max-nesting="1">
+                            <div id="pmb-project-front-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="1">
 	                            <?php
 	                            foreach($front_matter_sections as $post) {
 		                            pmb_content_item( $post, 1 );
@@ -98,7 +98,7 @@ function pmb_content_item($posty_row, $max_nesting = 0){
                         <?php
                         }?>
                         <h2><?php _e('Main Content', 'print-my-blog');?></h2>
-                        <div id="pmb-project-main-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base" data-max-nesting="<?php echo esc_attr($project->getLevelsAllowed());?>">
+                        <div id="pmb-project-main-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="<?php echo esc_attr($project->getLevelsAllowed());?>">
                             <?php
                             foreach($sections as $post) {
                                 pmb_content_item( $post, $project->getLevelsAllowed() );
@@ -108,7 +108,7 @@ function pmb_content_item($posty_row, $max_nesting = 0){
 	                    <?php if($project_support_back_matter){
 		                    ?>
                             <h2><?php esc_html_e('Back Matter', 'print-my-blog');?></h2>
-                            <div id="pmb-project-back-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base" data-max-nesting="1">
+                            <div id="pmb-project-back-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="1">
 			                    <?php
 			                    foreach($back_matter_sections as $post) {
 				                    pmb_content_item( $post, $project->getLevelsAllowed() );

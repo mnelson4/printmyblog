@@ -57,9 +57,9 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 			if($template){
 				$this->writeDesignTemplateInDivision($template);
 			} else {
-				$height = $post->pmb_section->getHeight();
-				$division = $this->mapLevelHeightToMainDivision($height);
-				$this->writeDesignTemplateInDivision($division);
+				$this->writeDesignTemplateInDivision(
+					pmb_map_section_to_division($post->pmb_section)
+				);
 			}
 		}
 	}
@@ -118,8 +118,8 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 		$iterate_depth = $previous_section->getDepth();
 		while($iterate_depth >= $current_section->getDepth()){
 			$this->writeClosingForDesignTemplate(
-				$this->mapLevelHeightToMainDivision(
-					$previous_section->getHeight()
+				pmb_map_section_to_division(
+					$previous_section
 				)
 			);
 			$iterate_depth--;

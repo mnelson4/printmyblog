@@ -1,6 +1,6 @@
-<div class="pmb-part-wrapper" id="<?php echo esc_attr($post->post_name);?>-wrapper">
+<div class="<?php pmb_section_wrapper_class();?>" id="<?php echo esc_attr($post->post_name);?>-wrapper">
 
-    <article <?php post_class('pmb-part'); ?> id="<?php the_permalink(); ?>">
+    <article <?php pmb_section_class(); ?> id="<?php the_permalink(); ?>">
 
         <header class="entry-header has-text-align-center<?php echo esc_attr( $entry_header_classes ); ?>">
 

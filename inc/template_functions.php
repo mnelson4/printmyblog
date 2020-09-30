@@ -38,3 +38,32 @@ function pmb_include_design_template($relative_filepath){
 	global $pmb_design;
 	require($pmb_design->getDesignTemplate()->getDirForTemplates() . $relative_filepath);
 }
+
+/**
+ * Add this to the HTML div that wraps a section and its subsections.
+ * @param string $class
+ */
+function pmb_section_wrapper_class($class = ''){
+	global $post;
+	$section = $post->pmb_section;
+	$pmb_classes = '';
+	if($section instanceof \PrintMyBlog\orm\entities\ProjectSection){
+		$pmb_classes = 'pmb-' . pmb_map_section_to_division($section) . '-wrapper';
+	}
+	echo $pmb_classes . ' ' . $class;
+}
+
+/**
+ * Add this to any article tags for a PMB section.
+ * @param string $class
+ * @return void echoes
+ */
+function pmb_section_class($class = ''){
+	global $post;
+	$section = $post->pmb_section;
+	$pmb_classes = '';
+	if($section instanceof \PrintMyBlog\orm\entities\ProjectSection){
+		$pmb_classes = 'pmb-' . pmb_map_section_to_division($section) . ' pmb-height-' . $section->getHeight() . ' pmb-depth-' . $section->getDepth();
+	}
+	post_class($pmb_classes . $class);
+}

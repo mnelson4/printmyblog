@@ -64,7 +64,12 @@ function pmb_create_sortable_from(element){
 			onAdd: function (event) {
 				var nested_level = pmb_count_level(jQuery(event.target));
 				var jquery_obj = jQuery(event.target);
-				var max_levels = jquery_obj.parents('.pmb-sortable-base').attr('data-max-nesting');
+
+				var max_levels = jquery_obj.attr('data-max-nesting');
+				// If that target didn't know the max nesting level, ask the root.
+				if( ! max_levels){
+					jquery_obj.parents('.pmb-sortable-root').attr('data-max-nesting');
+				}
 				if(nested_level < max_levels){
 					var sortable_items = jQuery(event.item).children('.pmb-sortable-inactive');
 					if(sortable_items.length){

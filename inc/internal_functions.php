@@ -27,3 +27,31 @@ function pmb_pro_best(){
 function pmb_pro(){
 	return defined('PMB_PRO');
 }
+
+/**
+ * Maps
+ * @param \PrintMyBlog\orm\entities\ProjectSection $section
+ *
+ * @return string
+ */
+function pmb_map_section_to_division(\PrintMyBlog\orm\entities\ProjectSection $section){
+	switch($section->getHeight()){
+		case 1:
+			$division_name = 'part';
+			break;
+		case 2:
+			$division_name = 'volume';
+			break;
+		case 3:
+			$division_name = 'anthology';
+			break;
+		case 0:
+		default:
+		$division_name = 'article';
+	}
+	return apply_filters(
+		'pmb_map_section_to_division',
+		$division_name,
+		$section
+	);
+}

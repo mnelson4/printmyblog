@@ -143,3 +143,7 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes()
         }
     });
 }
+
+function pmb_populate_toc(){
+    //
+}
