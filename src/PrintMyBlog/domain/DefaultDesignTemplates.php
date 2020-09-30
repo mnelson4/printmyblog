@@ -24,6 +24,7 @@ class DefaultDesignTemplates {
 					'title'                 => __( 'Classic Print PDf', 'print-my-blog' ),
 					'format'                => 'print_pdf',
 					'dir'                   => PMB_DEFAULT_DESIGNS_DIR . '/print_pdf/classic',
+					'url' => plugins_url('default_designs/print_pdf/classic', PMB_MAIN_FILE),
 					'levels' => 2,
 					'design_form_callback'  => function () {
 						$sections = array_merge(
@@ -60,17 +61,7 @@ class DefaultDesignTemplates {
 						] );
 					},
 					'project_form_callback' => function ( Design $design ) {
-						$sections = [];
-						if ( $design->getPmbMeta( 'title' ) ) {
-							$sections['title'] = new TextInput();
-						}
-						if( $design->getPmbMeta('desc')) {
-							$sections['subtitle'] = new TextInput();
-						}
-
-						return new FormSectionProper( [
-							'subsections' => $sections
-						] );
+						return $this->getDefaultProjectForm($design);
 					}
 				];
 			}
@@ -82,6 +73,7 @@ class DefaultDesignTemplates {
 					'title'           => __( 'Classic Digital PDF' ),
 					'format'          => 'digital_pdf',
 					'dir'             => PMB_DEFAULT_DESIGNS_DIR . 'digital_pdf/classic/',
+					'url' => plugins_url('default_designs/digital_pdf/classic', PMB_MAIN_FILE),
 					'design_form_callback'  => function() {
 						return new FormSectionProper( [
 							'subsections' => array_merge(
@@ -91,13 +83,7 @@ class DefaultDesignTemplates {
 						] );
 					},
 					'project_form_callback' => function(Design $design) {
-						$sections = [];
-						if($design->getPmbMeta('show_title')){
-							$sections['title'] = new TextInput();
-						}
-						return new FormSectionProper( [
-							'subsections' => $sections
-						] );
+						return $this->getDefaultProjectForm($design);
 					}
 				];
 			}
@@ -191,14 +177,14 @@ class DefaultDesignTemplates {
 						] );
 					},
 					'project_form_callback' => function(Design $design) {
-						return $this->getDefaultProjectFormSections($design);
+						return $this->getDefaultProjectForm($design);
 					}
 				];
 			}
 		);
 	}
 
-	public function getDefaultProjectFormSections(Design $design){
+	public function getDefaultProjectForm(Design $design){
 		$sections = [];
 		$header_content = $design->getPmbMeta('header_content');
 		if(in_array('title', $header_content)){

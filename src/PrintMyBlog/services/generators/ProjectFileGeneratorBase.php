@@ -299,9 +299,9 @@ abstract class ProjectFileGeneratorBase {
 	 * Gets the base URL of the design template's files
 	 * @return string
 	 */
-	protected function getDesignUrl()
+	protected function getDesignAssetsUrl()
 	{
-		return $this->getDesign()->getDesignTemplate()->getUrl;
+		return $this->getDesign()->getDesignTemplate()->getAssetsUrl();
 	}
 
 	/**

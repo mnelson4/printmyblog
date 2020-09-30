@@ -47,9 +47,15 @@
         }
     }
 
-    .pmb-section h1.entry-title {
-        string-set: section-title content();
+    /* Title Page styles */
+    .pmb-posts-header{
+        margin-top:2in;
+        text-align:center;
     }
+    .pmb-posts-header .site-title{
+        font-size:5em;
+    }
+
 
     /* toc */
     .pmb-toc-list li{
@@ -57,17 +63,6 @@
     }
     .pmb-toc-list a::after {
         content: leader('.') target-counter(attr(href), page) !important;
-    }
-    .pmb-section{
-        break-before:page;
-    }
-    .pmb-posts a.pmb-page-ref[href]::after{
-        content: " (see page " target-counter(attr(href), page) ")";
-    }
-    .pmb-posts span.pmb-footnote{
-        float:footnote;
-        text-align:left;
-
     }
 
     /* part styling*/
@@ -92,4 +87,22 @@
         margin-top:1in;
     }
 
+    /* Article styles */
+    .pmb-section h1.entry-title {
+        string-set: section-title content();
+    }
+
+    .pmb-section{
+        break-before:page;
+    }
+
+
+    .pmb-posts a.pmb-page-ref[href]::after{
+        content: " (see page " target-counter(attr(href), page) ")";
+    }
+    .pmb-posts span.pmb-footnote{
+        float:footnote;
+        text-align:left;
+
+    }
 }

@@ -47,6 +47,11 @@ class DesignTemplate {
 	 * @var int
 	 */
 	protected $levels;
+	/**
+	 * URL of the design templates directory.
+	 * @var string
+	 */
+	protected $url;
 
 	/**
 	 * DesignTemplate constructor.
@@ -65,6 +70,7 @@ class DesignTemplate {
 		$this->title                 = $args['title'];
 		$this->format                = (string)$args['format'];
 		$this->dir                   = (string)$args['dir'];
+		$this->url = (string)$args['url'];
 		$this->design_form_callback  = $args['design_form_callback'];
 		$this->project_form_callback = $args['project_form_callback'];
 	}
@@ -109,7 +115,14 @@ class DesignTemplate {
 	 * @return string
 	 */
 	public function getUrl(){
-		return plugins_url($this->getDir());
+		return trailingslashit($this->url);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getAssetsUrl(){
+		return $this->getUrl() . 'assets/';
 	}
 
 	/**

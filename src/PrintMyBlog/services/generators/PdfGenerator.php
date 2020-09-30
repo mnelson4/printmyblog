@@ -29,7 +29,7 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 		if(file_exists($style_file)){
 			wp_enqueue_style(
 				'pmb-design',
-				$this->getDesignUrl() . 'style.css',
+				$this->getDesignAssetsUrl() . 'style.css',
 				['pmb_print_common', 'pmb-plugin-compatibility'],
 				filemtime($style_file)
 			);
@@ -37,7 +37,7 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 		if(file_exists($script_file)){
 			wp_enqueue_script(
 				'pmb-design',
-				$this->getDesignUrl() . 'script.js',
+				$this->getDesignAssetsUrl() . 'script.js',
 				['jquery', 'pmb-beautifier-functions'],
 				filemtime($script_file)
 			);		}
