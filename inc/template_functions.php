@@ -50,7 +50,7 @@ function pmb_section_wrapper_class($class = ''){
 	if($section instanceof \PrintMyBlog\orm\entities\ProjectSection){
 		$pmb_classes = 'pmb-' . pmb_map_section_to_division($section) . '-wrapper';
 	}
-	echo $pmb_classes . ' ' . $class;
+	echo 'class="' . esc_attr($pmb_classes . ' ' . $class) . '"';
 }
 
 /**
@@ -66,4 +66,15 @@ function pmb_section_class($class = ''){
 		$pmb_classes = 'pmb-' . pmb_map_section_to_division($section) . ' pmb-height-' . $section->getHeight() . ' pmb-depth-' . $section->getDepth();
 	}
 	post_class($pmb_classes . $class);
+}
+
+function pmb_section_wrapper_id(){
+	global $post;
+	echo 'id="' . esc_attr($post->post_name) . '-wrapper"';
+}
+/**
+ * Echoes out the ID attribute to use on the section.
+ */
+function pmb_section_id(){
+	echo 'id="' . esc_attr(get_the_permalink()) . '"';
 }
