@@ -24,7 +24,7 @@ class DefaultFileFormats {
 		pmb_register_file_format(
 			'print_pdf',
 			[
-				'title' => __('Print PDF', 'print-my-blog'),
+				'title' => __('Print-Ready PDF', 'print-my-blog'),
 				'generator' => 'PrintMyBlog\services\generators\PdfGenerator'
 			]
 		);
