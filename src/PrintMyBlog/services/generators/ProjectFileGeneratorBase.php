@@ -132,9 +132,16 @@ abstract class ProjectFileGeneratorBase {
 
 	public function remove_theme_style()
 	{
+		$all_styles = wp_styles();
 		$active_theme_slug = get_stylesheet();
-		wp_dequeue_style($active_theme_slug . '-style');
-		wp_dequeue_style($active_theme_slug . '-print-style');
+		foreach($all_styles->queue as $handle){
+			if(strpos($handle, $active_theme_slug) !== false){
+				wp_dequeue_style($handle);
+			}
+		}
+
+//		wp_dequeue_style($active_theme_slug . '-style');
+//		wp_dequeue_style($active_theme_slug . '-print-style');
 	}
 
 	/**

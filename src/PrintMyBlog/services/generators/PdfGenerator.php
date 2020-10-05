@@ -41,7 +41,9 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 				['jquery', 'pmb-beautifier-functions'],
 				filemtime($script_file)
 			);		}
-		add_filter('wp_enqueue_scripts', [$this,'remove_theme_style'],20);
+		if(! $this->design->getPmbMeta('use_theme')){
+			add_filter('wp_enqueue_scripts', [$this,'remove_theme_style'],20);
+		}
 		$this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT);
 	}
 

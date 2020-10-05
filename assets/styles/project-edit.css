@@ -97,6 +97,7 @@
 }
 .pmb-drag-here{
     text-align:center;
+    float:bottom;
 }
 .pmb-project-choices-column .pmb-remove-item{
     display:none;
