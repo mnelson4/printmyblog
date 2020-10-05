@@ -130,6 +130,9 @@ abstract class ProjectFileGeneratorBase {
 	 */
 	protected abstract function finishGenerating();
 
+	/**
+	 * Dequeues the active theme's styles by guessing that all their styles are registered with their name in it.
+	 */
 	public function remove_theme_style()
 	{
 		$all_styles = wp_styles();
@@ -139,9 +142,6 @@ abstract class ProjectFileGeneratorBase {
 				wp_dequeue_style($handle);
 			}
 		}
-
-//		wp_dequeue_style($active_theme_slug . '-style');
-//		wp_dequeue_style($active_theme_slug . '-print-style');
 	}
 
 	/**
