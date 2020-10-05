@@ -39,3 +39,8 @@
 .pmb-inline-form{
     display:inline
 }
+.pmb-help{
+    font-weight:100;
+    font-size:13px;
+    font-style:italic;
+}

@@ -97,7 +97,10 @@ function pmb_content_item($posty_row, $max_nesting = 0){
                             </div>
                         <?php
                         }?>
-                        <h2><?php _e('Main Content', 'print-my-blog');?></h2>
+                        <h2>
+                            <?php _e('Main Content', 'print-my-blog');?>
+                            <span class="pmb-help"><?php printf(__('Project designs support %d layers of nested divisions.','print-my-blog'), $project->getLevelsAllowed());?></span>
+                        </h2>
                         <div id="pmb-project-main-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="<?php echo esc_attr($project->getLevelsAllowed());?>">
                             <?php
                             foreach($sections as $post) {
