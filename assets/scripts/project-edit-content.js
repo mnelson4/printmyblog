@@ -25,10 +25,11 @@ jQuery(document).ready(function(){
 		pmb_create_sortable_from(element);
 	});
 	jQuery('#pmb-project-form').submit(function(){
-
-		pmb_get_sections_json_from('#pmb-project-front-matter','#pmb-project-front-matter-data');
-		pmb_get_sections_json_from('#pmb-project-main-matter','#pmb-project-main-matter-data');
-		pmb_get_sections_json_from('#pmb-project-back-matter','#pmb-project-back-matter-data');
+		var main_sections = jQuery('#pmb-project-main-matter');
+		pmb_get_sections_json_from(jQuery('#pmb-project-front-matter'),'#pmb-project-front-matter-data');
+		pmb_update_heights(main_sections);
+		pmb_get_sections_json_from(main_sections,'#pmb-project-main-matter-data');
+		pmb_get_sections_json_from(jQuery('#pmb-project-back-matter'),'#pmb-project-back-matter-data');
 
 		var first_item = main_sections.children('.pmb-project-item:first');
 		var depth = 0;
@@ -44,9 +45,8 @@ jQuery(document).ready(function(){
  * @param items_selector string
  * @param input_selector string
  */
-function pmb_get_sections_json_from(items_selector,input_selector){
-	var sections = jQuery(items_selector);
-	var items = pmb_get_contents(sections, 1);
+function pmb_get_sections_json_from(selection,input_selector){
+	var items = pmb_get_contents(selection, 1);
 	var json = JSON.stringify(items);
 	jQuery(input_selector).val(json);
 }

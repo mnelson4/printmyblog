@@ -66,6 +66,7 @@ function pmb_section_class($class = ''){
 		$pmb_classes = 'pmb-' . pmb_map_section_to_division($section) . ' pmb-height-' . $section->getHeight() . ' pmb-depth-' . $section->getDepth();
 	}
 	post_class($pmb_classes . $class);
+	echo 'data-height="' . esc_attr($section->getHeight()) . '" data-depth="' . esc_attr($section->getDepth()) . '"';
 }
 
 function pmb_section_wrapper_id(){
@@ -77,4 +78,11 @@ function pmb_section_wrapper_id(){
  */
 function pmb_section_id(){
 	echo 'id="' . esc_attr(get_the_permalink()) . '"';
+}
+
+/**
+ * Echoes out the section's title and makes sure to add the CSS class PMB expects (especially important for finding the table of contents.)
+ */
+function pmb_the_title(){
+	the_title('<h1 class="pmb-title">','</h1>');
 }

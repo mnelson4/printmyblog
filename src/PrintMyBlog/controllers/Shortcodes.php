@@ -57,7 +57,7 @@ class Shortcodes extends BaseController
 
     public function tableOfContents(){
     	return '<div  class="pmb-toc">
-	        <ul id="pmb-toc-list" class="pmb-toc-list">
+	        <ul id="pmb-toc-list" class="pmb-toc-list ">
 	            <!-- Populated dynamically by JS -->
 	        </ul>
 	    </div>';

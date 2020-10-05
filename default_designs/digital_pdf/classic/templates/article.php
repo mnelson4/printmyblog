@@ -4,7 +4,7 @@
     <header class="entry-header has-text-align-center<?php echo esc_attr( $entry_header_classes ); ?>">
 
         <div class="entry-header-inner section-inner medium">
-            <?php the_title( '<h1 class="entry-title">', '</h1>' );?>
+            <?php pmb_the_title();?>
             <div class="entry-meta">
                 <span class="posted-on pmb-post-meta">
                     <?php the_date();?>
