@@ -25,36 +25,7 @@ jQuery(document).ready(function(){
     pmb_convert_youtube_videos_to_images();
     pmb_load_avada_lazy_images();
     pmb_replace_internal_links_with_page_refs_and_footnotes();
-    pmb_create_toc_for_depth(jQuery('.pmb-print-page'), 1)
+    new PmbToc();
     jQuery(document).trigger('pmb_wrap_up');
 });
 
-/**
- * Search for PMB titles in the selector at the specified depth, and return them
- * @param jquery_obj
- * @param depth_to_look_for
- */
-function pmb_find_articles_of_depth(selection, depth){
-    return jQuery(selection ).find( ' .pmb-depth-' + depth);
-}
-
-function pmb_create_toc_for_depth(selection, depth){
-    var articles = pmb_find_articles_of_depth(selection, depth);
-    articles.each(function(index,element){
-        // find its title
-        var selection = jQuery(element);
-        var title_element = jQuery(element).find('.pmb-title');
-        var id = selection.attr('id');
-        // if it's a PMB-core section, like title page or TOC, don't show it.
-        if(id.indexOf('pmb-') !== -1){
-            return;
-        }
-        var depth = parseInt(selection.attr('data-depth'));
-        var height = parseInt(selection.attr('data-height'));
-        var title_text = title_element.html();
-        jQuery('#pmb-toc-list').append('<li class="pmb-toc-item pmb-toc-depth-' + depth + ' pmb-toc-height-' + height + '"><a href="#' + id + '">' + title_text + '</a></li>');
-
-        // find its children
-        pmb_create_toc_for_depth(selection.siblings('div'),depth + 1);
-    });
-}
