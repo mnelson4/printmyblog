@@ -31,6 +31,8 @@ function pmb_content_item($posty_row, $max_nesting = 0){
         $height = $posty_row->getHeight();
         $subs = $posty_row->getCachedSubsections();
         $depth = $posty_row->getDepth();
+        $edit_url = get_edit_post_link($posty_row->getPostId());
+        $view_url = get_permalink($posty_row->getPostId());
     } else {
         $id = $posty_row->ID;
         $title = $posty_row->post_title;
@@ -38,11 +40,19 @@ function pmb_content_item($posty_row, $max_nesting = 0){
         $height = 0;
         $subs = [];
         $depth = 1;
+        $edit_url = get_edit_post_link($posty_row->ID);
+        $view_url = get_permalink($posty_row->ID);
     }
     ?>
-    <div class="list-group-item pmb-grabbable pmb-project-item" data-id="<?php echo esc_attr($id);?>" data-height="<?php echo esc_attr($height);?>">
+    <div class="list-group-item pmb-project-item" data-id="<?php echo esc_attr($id);?>" data-height="<?php echo esc_attr($height);?>">
         <div class="pmb-project-item-header">
-            <span class="pmb-project-item-title"><?php echo $title;?></span>
+            <span class="pmb-grabbable pmb-project-item-title">
+                <span class="dashicons dashicons-menu"></span>
+                <span class=""><?php echo $title;?></span>
+            </span>
+            <a href="<?php echo esc_attr($view_url);?>" target="_blank"><span class="dashicons dashicons-visibility pmb-icon"></span></a>
+            <a href="<?php echo esc_attr($edit_url);?>" target="_blank"><span class="dashicons dashicons-edit pmb-icon"></span></a>
+            <a class="pmb-remove-item"><span class="dashicons dashicons-trash pmb-icon"></span></a>
             <span class="pmb-project-item-template-container"><?php echo pmb_template_selector($template);?></span>
         </div>
 
@@ -56,6 +66,15 @@ function pmb_content_item($posty_row, $max_nesting = 0){
 
     </div>
 <?php
+}
+    function pmb_drag_here(){
+    // nm don't do anythign for now
+    return;
+    ?>
+    <div class="pmb-help pmb-no-sort pmb-drag-here">
+        <span class="dashicons dashicons-plus-alt"></span> <?php esc_html_e('Drag content here', 'print-my-blog');?>
+    </div>
+    <?php
 }
 ?>
 
@@ -93,8 +112,10 @@ function pmb_content_item($posty_row, $max_nesting = 0){
 	                            foreach($front_matter_sections as $post) {
 		                            pmb_content_item( $post, 1 );
 	                            }
+	                            pmb_drag_here();
 	                            ?>
                             </div>
+
                         <?php
                         }?>
                         <h2>
@@ -106,6 +127,7 @@ function pmb_content_item($posty_row, $max_nesting = 0){
                             foreach($sections as $post) {
                                 pmb_content_item( $post, $project->getLevelsAllowed() );
                             }
+                            pmb_drag_here();
                             ?>
                         </div>
 	                    <?php if($project_support_back_matter){
@@ -116,6 +138,7 @@ function pmb_content_item($posty_row, $max_nesting = 0){
 			                    foreach($back_matter_sections as $post) {
 				                    pmb_content_item( $post, $project->getLevelsAllowed() );
 			                    }
+			                    pmb_drag_here();
 			                    ?>
                             </div>
 		                    <?php

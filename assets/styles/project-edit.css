@@ -95,3 +95,9 @@
 .pmb-project-item-type-container{
     flex-shrink:0;
 }
+.pmb-drag-here{
+    text-align:center;
+}
+.pmb-project-choices-column .pmb-remove-item{
+    visibility:hidden;
+}

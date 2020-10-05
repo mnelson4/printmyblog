@@ -44,3 +44,7 @@
     font-size:13px;
     font-style:italic;
 }
+.pmb-icon{
+    text-decoration:none;
+    cursor:pointer;
+}
