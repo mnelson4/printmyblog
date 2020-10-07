@@ -226,6 +226,6 @@ class Init
         define('PMB_SCRIPTS_DIR', PMB_ASSETS_DIR . 'scripts/');
         define('PMB_STYLES_DIR', PMB_ASSETS_DIR . 'styles/');
 
-        define('PMB_DEFAULT_DESIGNS_URL', $plugin_url . 'default_designs/');
+        define('PMB_DESIGNS_URL', $plugin_url . 'designs/');
     }
 }

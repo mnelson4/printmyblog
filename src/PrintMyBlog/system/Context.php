@@ -67,6 +67,9 @@ class Context extends BaseContext
 	        'PrintMyBlog\orm\entities\Design' => [
 	        	'PrintMyBlog\services\DesignTemplateRegistry' => self::REUSE
 	        ],
+	        'PrintMyBlog\entities\DesignTemplate' => [
+	        	'PrintMyBlog\services\FileFormatRegistry' => self::REUSE,
+	        ],
 	        'PrintMyBlog\services\config\Config' => [
 	        	'PrintMyBlog\services\FileFormatRegistry' => self::REUSE,
 	        	'PrintMyBLog\orm\managers\DesignManager' => self::REUSE
@@ -77,6 +80,12 @@ class Context extends BaseContext
 	        ],
 	        'PrintMyBlog\services\generators\PdfGenerator' => [
 	        	'PrintMyBlog\db\PostFetcher' => self::REUSE
+	        ],
+	        'PrintMyBlog\services\FileFormatRegistry' => [
+	        	'PrintMyBlog\factories\FileFormatFactory' => self::REUSE,
+	        ],
+	        'PrintMyBlog\entities\FileFormat' => [
+	        	'PrintMyBlog\services\DesignTemplateRegistry' => self::REUSE,
 	        ]
         ];
     }

@@ -21,7 +21,7 @@ if(!defined('TWINE_SCRIPTS_URL')){
 	define('TWINE_STYLES_URL', $plugin_url . 'src/Twine/assets/styles/');
 
 	define('TWINE_SCRIPTS_DIR', $plugin_base_path . '/src/Twine/assets/scripts/');
-	define('TWINE_STYLES_DIR', $plugin_base_path . '/src/Twine/assets/styles');
+	define('TWINE_STYLES_DIR', $plugin_base_path . '/src/Twine/assets/styles/');
 }
 /**
  * FormSectionBase

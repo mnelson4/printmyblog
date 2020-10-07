@@ -80,7 +80,7 @@ class DesignRegistry {
 		}
 		/* @var $design Design */
 		$design = $this->design_manager->getById($design_post_id);
-		$design->setMeta('_pmb_format', $design_template->getFormat());
+		$design->setMeta('_pmb_format', $design_template->getFormatSlug());
 		$design->setMeta('_pmb_design_template', $design_template->getSlug());
 		foreach($args['design_defaults'] as $key => $value){
 			$design->setPmbMeta($key, $value);

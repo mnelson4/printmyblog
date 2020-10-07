@@ -63,7 +63,7 @@ function pmb_section_class($class = ''){
 	$section = $post->pmb_section;
 	$pmb_classes = '';
 	if($section instanceof \PrintMyBlog\orm\entities\ProjectSection){
-		$pmb_classes = 'pmb-' . pmb_map_section_to_division($section) . ' pmb-height-' . $section->getHeight() . ' pmb-depth-' . $section->getDepth();
+		$pmb_classes = 'pmb-section pmb-' . pmb_map_section_to_division($section) . ' pmb-height-' . $section->getHeight() . ' pmb-depth-' . $section->getDepth();
 	}
 	post_class($pmb_classes . $class);
 	echo 'data-height="' . esc_attr($section->getHeight()) . '" data-depth="' . esc_attr($section->getDepth()) . '"';

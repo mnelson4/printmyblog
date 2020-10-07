@@ -18,14 +18,16 @@ class DefaultFileFormats {
 			'digital_pdf',
 			[
 				'title' => __('Digital PDF', 'print-my-blog'),
-				'generator' => 'PrintMyBlog\services\generators\PdfGenerator'
+				'generator' => 'PrintMyBlog\services\generators\PdfGenerator',
+				'default' => 'classic_digital',
 			]
 		);
 		pmb_register_file_format(
 			'print_pdf',
 			[
 				'title' => __('Print-Ready PDF', 'print-my-blog'),
-				'generator' => 'PrintMyBlog\services\generators\PdfGenerator'
+				'generator' => 'PrintMyBlog\services\generators\PdfGenerator',
+				'default' => 'classic_print'
 			]
 		);
 	}

@@ -641,10 +641,22 @@ class FormSectionProper extends FormSectionValidatable
      */
     public static function wp_enqueue_scripts($init_form_validation_automatically = true)
     {
-        wp_register_script(
+    	wp_register_script(
+    		'twine-jquery-validate',
+		    TWINE_SCRIPTS_URL . '/jquery.validate.min.js',
+		    array('jquery'),
+		    filemtime(TWINE_SCRIPTS_DIR . 'jquery.validate.min.js')
+	    );
+	    wp_register_script(
+		    'twine-jquery-validate-additional-methods',
+		    TWINE_SCRIPTS_URL . '/jquery.validate.additional-methods.min.js',
+		    array('jquery'),
+		    filemtime(TWINE_SCRIPTS_DIR . 'jquery.validate.additional-methods.min.js')
+	    );
+        wp_enqueue_script(
             'ee_form_section_validation',
 	        TWINE_SCRIPTS_URL . '/form_section_validation.js',
-            array('jquery-validate', 'jquery-ui-datepicker', 'jquery-validate-extra-methods'),
+            array('twine-jquery-validate', 'jquery-ui-datepicker', 'twine-jquery-validate-additional-methods'),
             filemtime(TWINE_SCRIPTS_DIR . 'form_section_validation.js'),
             true
         );
@@ -652,6 +664,12 @@ class FormSectionProper extends FormSectionValidatable
             'ee_form_section_validation',
             'ee_form_section_validation_init',
             array('init' => $init_form_validation_automatically ? '1' : '0')
+        );
+        wp_enqueue_style(
+        	'twine-jquery-ui',
+	        TWINE_STYLES_URL . '/jquery-ui-1.10.3.custom.css',
+	        [],
+	        filemtime(TWINE_STYLES_DIR . 'jquery-ui-1.10.3.custom.css')
         );
     }
 

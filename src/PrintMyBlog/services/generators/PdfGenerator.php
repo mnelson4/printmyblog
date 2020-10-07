@@ -44,6 +44,7 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 		if(! $this->design->getPmbMeta('use_theme')){
 			add_filter('wp_enqueue_scripts', [$this,'remove_theme_style'],20);
 		}
+		do_action('pmb_pdf_generation_start', $this->project_generation, $this->design);
 		$this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT);
 	}
 

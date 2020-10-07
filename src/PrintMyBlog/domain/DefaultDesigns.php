@@ -12,7 +12,7 @@ class DefaultDesigns {
 
 		pmb_register_design(
 			'classic_digital',
-			'classic_digital_pdf',
+			'classic_digital',
 			function(DesignTemplate $design_template){
 				return [
 					'title' => __('Classic Digital PDF', 'print-my-blog'),

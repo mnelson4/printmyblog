@@ -5,8 +5,18 @@ namespace PrintMyBlog\services;
 
 
 use PrintMyBlog\entities\FileFormat;
+use PrintMyBlog\factories\FileFormatFactory;
 
 class FileFormatRegistry {
+
+	/**
+	 * @var FileFormatFactory
+	 */
+	protected $factory;
+
+	public function inject(FileFormatFactory $factory){
+		$this->factory = $factory;
+	}
 	/**
 	 * @var FileFormat[]
 	 */
@@ -37,7 +47,7 @@ class FileFormatRegistry {
 	 * @param array $args
 	 */
 	public function registerFormat($slug, $args){
-		$format = new FileFormat($args);
+		$format = $this->factory->create($args);
 		$format->construct_finalize($slug);
 		$this->formats[$slug] = $format;
 	}

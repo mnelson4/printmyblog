@@ -96,39 +96,13 @@ jQuery(document).ready(function($){
 			// if datepicker function exists
 			if ( $.fn.datepicker ) {
 				// activate datepicker fields
-				$( '.datepicker' ).datepicker({
+				$( '.twine-datepicker' ).datepicker({
 					changeMonth: true,
 					changeYear: true,
-					yearRange: eei18n.datepicker_yearRange
+					yearRange: "-50:+50"
 					// yearRange: "-150:+20"
 				});
 			}
-			// to internationalize the datepicker, copy the following to somewhere safe,
-			// then edit and use the language code returned from the WP PHP function: get_bloginfo( 'language' ) for the array key.
-			// Multiple languages can be added this way
-			/*
-			$.datepicker.regional['fr_FR'] = {
-				closeText: 'Fermer',
-				prevText: 'Précédent',
-				nextText: 'Suivant',
-				currentText: 'Aujourd\'hui',
-				monthNames: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin',
-				'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
-				monthNamesShort: ['janv.', 'févr.', 'mars', 'avril', 'mai', 'juin',
-				'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'],
-				dayNames: ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'],
-				dayNamesShort: ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'],
-				dayNamesMin: ['D','L','M','M','J','V','S'],
-				weekHeader: 'Sem.',
-				dateFormat: 'dd/mm/yy',
-				firstDay: 1,
-				isRTL: false,
-				showMonthAfterYear: false,
-				yearSuffix: ''
-			};
-			$.datepicker.setDefaults($.datepicker.regional[ eei18n.language ]);
-			//	will automagically produce something like:	$.datepicker.setDefaults($.datepicker.regional['fr_FR']);
-			 */
 		},
 
 		/**

@@ -133,7 +133,7 @@ if (defined('PMB_VERSION')) {
     define('PMB_ADMIN_PROJECTS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_PROJECTS_PAGE_SLUG);
     define('PMB_ADMIN_SETTINGS_PAGE_SLUG', 'print-my-blog-settings');
     define('PMB_ADMIN_SETTINGS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_SETTINGS_PAGE_SLUG);
-    define('PMB_DEFAULT_DESIGNS_DIR',PMB_DIR . 'default_designs/');
+    define('PMB_DESIGNS_DIR', PMB_DIR . 'designs/');
     define('TWINE_MAIN_FILE', PMB_MAIN_FILE);
 
     /**

@@ -4,7 +4,8 @@
 namespace PrintMyBlog\entities;
 
 
-use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
+use PrintMyBlog\services\DesignTemplateRegistry;
+use Exception;
 use Twine\forms\helpers\ImproperUsageException;
 
 class FileFormat {
@@ -17,6 +18,19 @@ class FileFormat {
 	 * @var string
 	 */
 	protected $slug;
+
+	/**
+	 * @var string
+	 */
+	protected $default_design_template_slug;
+	/**
+	 * @var DesignTemplate
+	 */
+	protected $default_design_template;
+	/**
+	 * @var DesignTemplateRegistry
+	 */
+	protected $design_template_registry;
 
 	/**
 	 * ProjectFormat constructor.
@@ -33,7 +47,14 @@ class FileFormat {
 		if(! isset($data['generator'])){
 			throw new ImproperUsageException(__('No generator class specified for format "%s"', 'print-my-blog'), $this->slug());
 		}
+		if( isset($data['default'])){
+			$this->default_design_template_slug = (string)$data['default'];
+		}
 		$this->generator = $data['generator'];
+	}
+
+	public function inject(DesignTemplateRegistry $design_template_registry){
+		$this->design_template_registry = $design_template_registry;
 	}
 
 	public function title()
@@ -66,5 +87,23 @@ class FileFormat {
 	 */
 	public function generatorClassname(){
 		return $this->generator;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function defaultDesignTemplateSlug(){
+		return $this->default_design_template_slug;
+	}
+
+	/**
+	 * @return DesignTemplate
+	 * @throws Exception
+	 */
+	public function getDefaultDesignTemplate(){
+		if( ! $this->default_design_template instanceof DesignTemplate){
+			$this->default_design_template = $this->design_template_registry->getDesignTemplate($this->defaultDesignTemplateSlug());
+		}
+		return $this->default_design_template;
 	}
 }

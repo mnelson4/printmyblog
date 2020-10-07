@@ -5,6 +5,8 @@ namespace PrintMyBlog\entities;
 
 
 use Exception;
+use PrintMyBlog\exceptions\TemplateDoesNotExist;
+use PrintMyBlog\services\FileFormatRegistry;
 use Twine\forms\base\FormSectionProper;
 
 class DesignTemplate {
@@ -22,7 +24,7 @@ class DesignTemplate {
 	const TEMPLATE_TITLE_PAGE ='title_page';
 	const TEMPLATE_JUST_CONTENT = 'just_content';
 
-	protected $format;
+	protected $format_slug;
 	protected $slug;
 	protected $title;
 	/**
@@ -34,6 +36,11 @@ class DesignTemplate {
 	 * @var callable
 	 */
 	protected $design_form_callback;
+
+	/**
+	 * @var string
+	 */
+	protected $default_design_slug;
 
 	/**
 	 * @var FormSectionProper
@@ -52,6 +59,19 @@ class DesignTemplate {
 	 * @var string
 	 */
 	protected $url;
+	/**
+	 * @var FileFormatRegistry
+	 */
+	protected $file_format_registry;
+	/**
+	 * @var FileFormat
+	 */
+	protected $format;
+	/**
+	 * @var array strings indicating support for various features. Eg 'front_matter', 'back_matter', 'part', 'volume',
+	 * 'anthology', 'just_content', etc.
+	 */
+	protected $supports = array();
 
 	/**
 	 * DesignTemplate constructor.
@@ -68,17 +88,34 @@ class DesignTemplate {
 	public function __construct($slug, $args){
 		$this->slug                  = $slug;
 		$this->title                 = $args['title'];
-		$this->format                = (string)$args['format'];
+		$this->format_slug           = (string)$args['format'];
 		$this->dir                   = (string)$args['dir'];
-		$this->url = (string)$args['url'];
+		$this->default_design_slug   = (string)$args['default'];
+		$this->url                   = (string)$args['url'];
+		if(isset($args['supports'])){
+			$this->supports = (array)$args['supports'];
+		}
 		$this->design_form_callback  = $args['design_form_callback'];
 		$this->project_form_callback = $args['project_form_callback'];
 	}
 
+	public function inject(FileFormatRegistry $file_format_registry){
+		$this->file_format_registry = $file_format_registry;
+	}
 	/**
 	 * @return string
 	 */
-	public function getFormat() {
+	public function getFormatSlug() {
+		return $this->format_slug;
+	}
+
+	/**
+	 * @return FileFormat
+	 */
+	public function getFormat(){
+		if(! $this->format instanceof FileFormat){
+			$this->format = $this->file_format_registry->getFormat($this->getFormatSlug());
+		}
 		return $this->format;
 	}
 
@@ -171,18 +208,37 @@ class DesignTemplate {
 	}
 
 	/**
-	 * Gets the path to where a template file SHOULD be, if it were to exist.
+	 * Gets the path to where a template file is. If it doesn't exist, returns
 	 * Makes no guarantee that the file exists.
 	 *
 	 * @param string $division see DesignTemplate::validDivisions()
 	 * @param bool $beginning
 	 */
-	public function getTemplatePathToDivision($division, $beginning = true){
+	public function getTemplatePathToDivision($division, $beginning = true, $use_fallback = true){
 		// add an underscore to the transition if its not the article template.
+		if(! $this->templateFileExists($division, $beginning, false) && $use_fallback){
+			if(! $this->getFormat()->getDefaultDesignTemplate()->templateFileExists($division, $beginning, false)){
+				throw new TemplateDoesNotExist($this->calculateTemplatePathToDivision($division, $beginning));
+			}
+			// try the default design template, but don't infinitely keep trying fallbacks
+			return $this->getFormat()->getDefaultDesignTemplate()->getTemplatePathToDivision($division, $beginning, false);
+		}
+		return $this->calculateTemplatePathToDivision($division, $beginning);
+	}
+
+	/**
+	 * Calculates where thie template file SHOULD be in this design template, if it exists at all.
+	 * @param $division
+	 * @param $beginning
+	 *
+	 * @return string
+	 * @throws Exception
+	 */
+	protected function calculateTemplatePathToDivision($division,$beginning){
 		if ( ! $beginning){
 			$division .= '_end';
 		}
-		return $this->getDirForTemplates() . $division . '.php';
+		return  $this->getDirForTemplates() . $division . '.php';
 	}
 
 	/**
@@ -191,8 +247,12 @@ class DesignTemplate {
 	 *
 	 * @return bool
 	 */
-	public function templateFileExists($division, $beginning = true){
-		return file_exists($this->getTemplatePathToDivision($division, $beginning));
+	public function templateFileExists($division, $beginning = true, $use_fallback = false){
+		$exists = file_exists($this->calculateTemplatePathToDivision($division, $beginning));
+		if(! $exists && $use_fallback){
+			$exists = $this->getFormat()->getDefaultDesignTemplate()->calculateTemplatePathToDivision($division, $beginning);
+		}
+		return $exists;
 	}
 
 	/**
@@ -202,7 +262,7 @@ class DesignTemplate {
 	 * @return bool
 	 */
 	public function supports($division){
-		return $this->templateFileExists($division, 'begin');
+		return $this->templateFileExists($division, 'begin') || in_array($division, $this->supports);
 	}
 
 	/**

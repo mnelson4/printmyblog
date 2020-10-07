@@ -7,6 +7,7 @@ use PrintMyBlog\orm\entities\Design;
 use Twine\forms\base\FormSectionProper;
 use Twine\forms\inputs\AdminFileUploaderInput;
 use Twine\forms\inputs\CheckboxMultiInput;
+use Twine\forms\inputs\DatepickerInput;
 use Twine\forms\inputs\FormInputBase;
 use Twine\forms\inputs\SelectInput;
 use Twine\forms\inputs\TextAreaInput;
@@ -23,8 +24,9 @@ class DefaultDesignTemplates {
 				return [
 					'title'                 => __( 'Classic Print PDf', 'print-my-blog' ),
 					'format'                => 'print_pdf',
-					'dir'                   => PMB_DEFAULT_DESIGNS_DIR . '/print_pdf/classic',
-					'url' => plugins_url('default_designs/print_pdf/classic', PMB_MAIN_FILE),
+					'dir'                   => PMB_DESIGNS_DIR . '/pdf/print/classic',
+					'url' => plugins_url('designs/print_pdf/classic', PMB_MAIN_FILE),
+					'default' => 'classic_print',
 					'levels' => 2,
 					'design_form_callback'  => function () {
 						$sections = array_merge(
@@ -72,8 +74,15 @@ class DefaultDesignTemplates {
 				return [
 					'title'           => __( 'Classic Digital PDF' ),
 					'format'          => 'digital_pdf',
-					'dir'             => PMB_DEFAULT_DESIGNS_DIR . 'digital_pdf/classic/',
-					'url' => plugins_url('default_designs/digital_pdf/classic', PMB_MAIN_FILE),
+					'default' => 'classic_digital',
+					'dir'             => PMB_DESIGNS_DIR . 'pdf/digital/classic/',
+					'url' => plugins_url('designs/pdf/digital/classic', PMB_MAIN_FILE),
+					'supports' => [
+						'front_matter',
+						'back_matter',
+						'just_content',
+						'part',
+					],
 					'design_form_callback'  => function() {
 						return new FormSectionProper( [
 							'subsections' => array_merge(
@@ -94,24 +103,36 @@ class DefaultDesignTemplates {
 				return [
 					'title'           => __( 'Buurma Digital PDF' ),
 					'format'          => 'digital_pdf',
-					'dir'             => PMB_DEFAULT_DESIGNS_DIR . 'buurma/',
-					'levels' => 1,
+					'dir'             => PMB_DESIGNS_DIR . 'pdf/digital/buurma/',
+					'default' => 'buurma',
+					'url' => plugins_url('designs/pdf/digital/buurma', PMB_MAIN_FILE),
+					'supports' => [
+						'front_matter',
+						'back_matter',
+						'just_content',
+					],
 					'design_form_callback'  => function() {
 						return new FormSectionProper( [
 							'subsections' => array_merge(
 								[
-									'cover_page_image' => new AdminFileUploaderInput(
+									'title_page_banner' => new AdminFileUploaderInput(
 										[
-											'html_label_text' => __('Cover Page Background Image', 'print-my-blog'),
-											'html_help_text' => __('Image shown on the design’s cover page', 'print-my-blog')
+											'html_label_text' => __('Title Page Top-Banner', 'print-my-blog'),
+											'html_help_text' => __('Image used as the top of the background on the title page.', 'print-my-blog'),
+											'default' => plugins_url('designs/pdf/digital/buurma/assets/banner.png', PMB_MAIN_FILE)
 										]
 									),
-									'main_page_image' => new AdminFileUploaderInput(
+									'org' => new TextInput([
+										'html_label_text' => __('Organization Name', 'print-my-blog'),
+										'html_help_text' => __('Shown in the title page. Eg "Institute of Print My Blog"'),
+									]),
+									'background_embellishment' => new AdminFileUploaderInput(
 										[
-											'html_label_text' => __('Background Image', 'print-my-blog'),
-											'html_label_text' => __('Image shown behind all other pages', 'print-my-blog')
+											'html_label_text' => __('Background Embellishment', 'print-my-blog'),
+											'html_help_text' => __('Faded image used as a full-page background on the title page, and next to the page number on numbered pages.', 'print-my-blog'),
+											'default' => plugins_url('designs/pdf/digital/buurma/assets/logo.svg', PMB_MAIN_FILE)
 										]
-									)
+									),
 								],
 								$this->getGenericDesignFormSections()
 							),
@@ -120,6 +141,12 @@ class DefaultDesignTemplates {
 					'project_form_callback' => function(Design $design) {
 						return new FormSectionProper( [
 							'subsections' => [
+								'issue' => new TextInput(
+									[
+										'html_label_text' => __('Issue', 'print-my-blog'),
+										'html_help_text' => __('Text that appears at the top-right of the cover'),
+									]
+								),
 								'title' => new TextInput(
 									[
 										'html_label_text' => __('Title', 'print-my-blog'),
@@ -131,12 +158,10 @@ class DefaultDesignTemplates {
 										'html_help_text' => __('List of authors', 'print-my-blog'),
 									]
 								),
-								'issue' => new TextInput(
-									[
-										'html_label_text' => __('Issue', 'print-my-blog'),
-										'html_help_text' => __('Text that appears at the top-right of the cover'),
-									]
-								),
+								'date' => new DatepickerInput([
+									'html_label_text' => __('Date issued', 'print-my-blog'),
+									'html_help_text' => __('Text that appears under the byline', 'print-my-blog'),
+								]),
 								'cover_preamble' => new TextAreaInput(
 									[
 										'html_label_text' => __('Coverpage Preamble', 'print-my-blog'),
@@ -155,7 +180,8 @@ class DefaultDesignTemplates {
 				return [
 					'title'           => __( 'Mayer Digital PDF' ),
 					'format'          => 'digital_pdf',
-					'dir'             => PMB_DEFAULT_DESIGNS_DIR . 'classic_digital/',
+					'dir'             => PMB_DESIGNS_DIR . 'classic_digital/',
+					'default' => 'mayer',
 					'levels' => 2,
 					'design_form_callback'  => function() {
 						$sections = array_merge(
