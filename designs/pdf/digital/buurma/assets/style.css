@@ -3,46 +3,62 @@
     .pmb-title-page{
         page:title-page;
     }
-    .pmb-toc {
+    .pmb-front-matter {
         display: block;
-        page: table-of-contents;
+        page: front-matter;
         counter-reset: page 1
     }
 
-    @page table-of-contents {
-        @top {
-            content: "Table of Contents"
-        }
-        @bottom {
+    @page front-matter {
+        /*@top {*/
+        /*    content: "Table of Contents"*/
+        /*}*/
+        @bottom-right {
             content: counter(page, lower-roman)
         }
     }
 
 
-    @page {
+    .pmb-main-matter {
+        display: block;
+        page: main;
+        counter-reset: page 1
+    }
+    @page main {
         counter-reset: footnote;
 
         @footnotes {
             border-top: solid black thin;
             padding-top: 8pt;
         }
+        @bottom-right {
+            content: counter(page)
+        }
     }
     .pmb-posts p {
         prince-footnote-policy: keep-with-line;
     }
 
-
-    .pmb-posts {
-        display: block;
-        page: main;
-        counter-reset: page 1
+    .pmb-back-matter{
+        page:back-matter;
     }
-
-    @page main {
+    @page back-matter{
         @bottom-right {
-            content: counter(page)
+            content: counter(page);
         }
     }
+
+    /* General styles*/
+    body{
+        font-family:Times;
+    }
+    h1,h2,h3,h4,h5,h6{
+        font-family:Calibri;
+        page-break-after:avoid;
+        page-break-inside:avoid;
+    }
+
+
 
     /* Title Page styles */
     .buurma-issue{
@@ -68,17 +84,6 @@
         float:bottom;
         page-break-after:always;
     }
-    body{
-        font-family:Times;
-    }
-
-
-
-    h1,h2,h3,h4,h5,h6{
-        font-family:Calibri;
-        page-break-after:avoid;
-        page-break-inside:avoid;
-    }
 
 
     /* toc */
@@ -97,14 +102,6 @@
         break-before:right;
         page: part-start;
     }
-    @page main {
-        @top {
-            content: '';
-        }
-        @bottom {
-            content: '';
-        }
-    }
     .pmb-part h1.entry-title{
         font-size:120%;
         string-set: part-title content();
@@ -121,10 +118,6 @@
 
     .pmb-section-wrapper:not(.pmb-first-section-wrapper){
         break-before:page;
-    }
-
-    .pmb-back-matter{
-        page:back-matter;
     }
 
 
