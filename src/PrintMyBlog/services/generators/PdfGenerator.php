@@ -113,13 +113,38 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 		}
 	}
 
+	protected function maybeGenerateDivisionStart(ProjectSection $last_section = null, ProjectSection $current_section = null){
+		if(! $current_section instanceof ProjectSection){
+			return;
+		}
+
+		$last_section_placement = null;
+		if($last_section instanceof ProjectSection) {
+			$last_section_placement = $last_section->getPlacement();
+		}
+		if($last_section_placement !== $current_section->getPlacement()
+		   && $this->design->getDesignTemplate()->supports($current_section->getPlacement())) {
+			$this->writeDesignTemplateInDivision( $current_section->getPlacement());
+		}
+	}
+
 	/**
 	 * @param int $previous_depth
 	 * @param int $current_depth
 	 */
-	protected function generateDivisionEnd(ProjectSection $previous_section, ProjectSection $current_section){
+	protected function maybeGenerateDivisionEnd(ProjectSection $previous_section = null, ProjectSection $current_section = null){
+		if(! $previous_section){
+			// no transition necessary
+			return;
+		}
 		$iterate_depth = $previous_section->getDepth();
-		while($iterate_depth >= $current_section->getDepth()){
+		$current_depth = 0;
+		$current_placement = null;
+		if($current_section instanceof ProjectSection){
+			$current_depth = $current_section->getDepth();
+			$current_placement = $current_section->getPlacement();
+		}
+		while($iterate_depth >= $current_depth){
 			$this->writeClosingForDesignTemplate(
 				pmb_map_section_to_division(
 					$previous_section
@@ -127,22 +152,15 @@ class PdfGenerator extends ProjectFileGeneratorBase {
 			);
 			$iterate_depth--;
 		}
-	}
-	protected function generateFrontMatter( array $project_sections ) {
-		$this->writeDesignTemplateInDivision('front_matter');
-		$this->generateSections($project_sections);
-		$this->writeClosingForDesignTemplate('front_matter');
+		// take care of closing front_matter, main_matter, and back_matter
+		if($previous_section->getPlacement() !== $current_placement){
+			$this->writeClosingForDesignTemplate(
+				pmb_map_section_to_division($previous_section)
+			);
+		}
 	}
 
 	protected function generateMainMatter() {
-		$this->writeDesignTemplateInDivision('main');
-		$this->generateSections($this->project->getFlatSections(1000,0,false,'main'));
-		$this->writeClosingForDesignTemplate('main');
-	}
-
-	protected function generateBackMatter( array $project_sections ) {
-		$this->writeDesignTemplateInDivision('back_matter');
-		$this->generateSections($project_sections);
-		$this->writeClosingForDesignTemplate('back_matter');
+		$this->generateSections($this->project->getFlatSections(1000,0,false));
 	}
 }

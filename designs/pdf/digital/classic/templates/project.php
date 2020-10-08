@@ -23,5 +23,3 @@
 </head>
 
 <body class="<?php echo str_replace('has-sidebar', '', implode(' ',get_body_class('pmb-print-page'))); ?>">
-
-</div>

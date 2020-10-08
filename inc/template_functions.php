@@ -48,7 +48,10 @@ function pmb_section_wrapper_class($class = ''){
 	$section = $post->pmb_section;
 	$pmb_classes = '';
 	if($section instanceof \PrintMyBlog\orm\entities\ProjectSection){
-		$pmb_classes = 'pmb-' . pmb_map_section_to_division($section) . '-wrapper';
+		$pmb_classes = 'pmb-' . pmb_map_section_to_division($section) . '-wrapper pmb-section-wrapper';
+		if($section->getSectionOrder() === 1){
+			$pmb_classes .= ' pmb-first-section-wrapper';
+		}
 	}
 	echo 'class="' . esc_attr($pmb_classes . ' ' . $class) . '"';
 }
@@ -63,9 +66,12 @@ function pmb_section_class($class = ''){
 	$section = $post->pmb_section;
 	$pmb_classes = '';
 	if($section instanceof \PrintMyBlog\orm\entities\ProjectSection){
-		$pmb_classes = 'pmb-section pmb-' . pmb_map_section_to_division($section) . ' pmb-height-' . $section->getHeight() . ' pmb-depth-' . $section->getDepth();
+		$pmb_classes = ' pmb-section pmb-' . pmb_map_section_to_division($section) . ' pmb-height-' . $section->getHeight() . ' pmb-depth-' . $section->getDepth();
+		if($section->getSectionOrder() == 1){
+			$pmb_classes .= ' pmb-first-section';
+		}
 	}
-	post_class($pmb_classes . $class);
+	post_class($pmb_classes . ' ' . $class);
 	echo 'data-height="' . esc_attr($section->getHeight()) . '" data-depth="' . esc_attr($section->getDepth()) . '"';
 }
 

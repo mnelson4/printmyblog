@@ -90,7 +90,7 @@ class ProjectSectionManager {
 	}
 
 	protected function defaultSelection(){
-		return 'SELECT sections.ID, sections.post_id, sections.parent_id, sections.placement, sections.template, sections.height, sections.depth';
+		return 'SELECT sections.ID, sections.post_id, sections.parent_id, sections.placement, sections.template, sections.height, sections.depth, sections.section_order';
 	}
 
 	protected function defaultFrom(){
@@ -187,11 +187,12 @@ class ProjectSectionManager {
 	 * top-level array).
 	 * @param $placement see DesignTemplate::validPlacements()
 	 *
+	 * @param int $order
+	 *
 	 * @return bool|int
 	 */
-	public function setSectionsFor($project_id, $sections_data, $placement)
+	public function setSectionsFor($project_id, $sections_data, $placement, &$order = 1)
 	{
-		$order = 1;
 		return $this->insertDbRows($project_id,$sections_data,0,$order, $placement);
 	}
 

@@ -35,7 +35,15 @@ function pmb_pro(){
  * @return string
  */
 function pmb_map_section_to_division(\PrintMyBlog\orm\entities\ProjectSection $section){
-	switch($section->getHeight()){
+	return apply_filters(
+		'pmb_map_section_to_division',
+		pmb_map_section_height_to_division($section->getHeight()),
+		$section
+	);
+}
+
+function pmb_map_section_height_to_division($height){
+	switch($height){
 		case 1:
 			$division_name = 'part';
 			break;
@@ -47,11 +55,7 @@ function pmb_map_section_to_division(\PrintMyBlog\orm\entities\ProjectSection $s
 			break;
 		case 0:
 		default:
-		$division_name = 'article';
+			$division_name = 'article';
 	}
-	return apply_filters(
-		'pmb_map_section_to_division',
-		$division_name,
-		$section
-	);
+	return $division_name;
 }

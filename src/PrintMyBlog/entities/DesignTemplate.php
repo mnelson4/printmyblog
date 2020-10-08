@@ -262,7 +262,9 @@ class DesignTemplate {
 	 * @return bool
 	 */
 	public function supports($division){
-		return $this->templateFileExists($division, 'begin') || in_array($division, $this->supports);
+		return $division === self::IMPLIED_DIVISION_MAIN_MATTER
+		|| $this->templateFileExists($division)
+		       || in_array($division, $this->supports);
 	}
 
 	/**

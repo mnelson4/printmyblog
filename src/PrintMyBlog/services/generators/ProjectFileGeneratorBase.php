@@ -59,9 +59,7 @@ abstract class ProjectFileGeneratorBase {
 		$this->startGenerating();
 		// Don't let anything from a previous generation affect this one.
 		$this->project_generation->setLastSectionId(null);
-		$this->maybeGenerateFrontMatter();
 		$this->generateMainMatter();
-		$this->maybeGenerateBackMatter();
 		$this->finishGenerating();
 		return true;
 
@@ -81,37 +79,6 @@ abstract class ProjectFileGeneratorBase {
 	 * @global Design $pmb_design
 	 */
 	protected abstract function startGenerating();
-
-	/**
-	 * @return bool
-	 */
-	protected function maybeGenerateFrontMatter(){
-		$front_matter = $this->project->getSections(1000,0,false,DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER);
-		if($this->design->getDesignTemplate()->supports(DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER)
-			&& $front_matter){
-			$this->generateFrontMatter($front_matter);
-		}
-	}
-
-	/**
-	 * @param array $project_sections
-	 *
-	 * @return bool
-	 */
-	protected abstract function generateFrontMatter(array $project_sections);
-
-	/**
-	 * @return bool
-	 */
-	protected function maybeGenerateBackMatter(){
-		$sections = $this->project->getSections(1000,0,false,DesignTemplate::IMPLIED_DIVISION_BACK_MATTER);
-		if($this->design->getDesignTemplate()->supports(DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER)
-		   && $sections){
-			$this->generateBackMatter($sections);
-		}
-	}
-
-	protected abstract function generateBackMatter(array $project_sections);
 
 	/**
 	 * Generates for the current post in global $wp_post. We call WP_Query::the_post() just before calling this.
@@ -219,16 +186,14 @@ abstract class ProjectFileGeneratorBase {
 	 */
 	protected function maybeGenerateDivisionTransition(WP_Post $post){
 		$last_section = $this->project_generation->getLastSection();
-		if(! $last_section){
-			// no transition necessary
-			return;
-		}
-
-		$this->generateDivisionEnd($last_section, $post->pmb_section);
+		$this->maybeGenerateDivisionEnd($last_section, $post->pmb_section);
+		$this->maybeGenerateDivisionStart($last_section, $post->pmb_section);
 	}
 
+	protected abstract function maybeGenerateDivisionStart(ProjectSection $last_section = null, ProjectSection $current_section = null);
 
-	protected abstract function generateDivisionEnd(ProjectSection $previous_section, ProjectSection $current_section);
+
+	protected abstract function maybeGenerateDivisionEnd(ProjectSection $previous_section = null, ProjectSection $current_section = null);
 
 	/**
 	 * Gets a string of HTML from inluding the specified file.

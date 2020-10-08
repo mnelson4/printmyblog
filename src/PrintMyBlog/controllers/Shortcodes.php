@@ -35,6 +35,10 @@ class Shortcodes extends BaseController
         	'pmb_title_page',
 	        [$this,'titlePage']
         );
+        add_shortcode(
+        	'pmb_footnote',
+	        [$this,'footnote']
+        );
     }
 	// @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     public function printButtons($atts)
@@ -73,5 +77,17 @@ class Shortcodes extends BaseController
 	    } else {
     		return do_shortcode('<h1>[pmb_project_title]</h1>');
 	    }
+    }
+
+	/**
+	 * Just wraps the content in a footnote
+	 * @param $atts
+	 * @param $content
+	 * @param $shortcode_tag
+	 *
+	 * @return string
+	 */
+    public function footnote($atts, $content, $shortcode_tag){
+    	return '<span class="pmb-footnote">'. $content . '</span>';
     }
 }

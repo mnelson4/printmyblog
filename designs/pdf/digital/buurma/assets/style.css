@@ -71,9 +71,6 @@
     body{
         font-family:Times;
     }
-    .pmb-section{
-        page-break-before:always;
-    }
 
 
 
@@ -122,8 +119,12 @@
         string-set: section-title content();
     }
 
-    .pmb-section{
+    .pmb-section-wrapper:not(.pmb-first-section-wrapper){
         break-before:page;
+    }
+
+    .pmb-back-matter{
+        page:back-matter;
     }
 
 
@@ -133,6 +134,5 @@
     .pmb-posts span.pmb-footnote{
         float:footnote;
         text-align:left;
-
     }
 }

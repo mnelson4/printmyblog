@@ -12,3 +12,4 @@
         <h2 class="project-byline"><?php echo $pmb_project->getPmbMeta('byline'); ?></h2>
         <span class="project-date"><?php echo $pmb_project->getPmbMeta('date');?></span>
     <div class="project-description"><?php echo $pmb_project->getPmbMeta('cover_preamble');?></div>
+</div>

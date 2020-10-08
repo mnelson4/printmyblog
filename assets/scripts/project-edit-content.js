@@ -32,7 +32,7 @@ jQuery(document).ready(function(){
 		pmb_get_sections_json_from(jQuery('#pmb-project-back-matter'),'#pmb-project-back-matter-data');
 
 		var first_item = main_sections.children('.pmb-project-item:first');
-		var depth = 0;
+		var depth = 1;
 		if(first_item.length){
 			depth = first_item[0].attributes['data-height'].nodeValue;
 		}
@@ -55,7 +55,7 @@ jQuery(document).ready(function(){
  * @param input_selector string
  */
 function pmb_get_sections_json_from(selection,input_selector){
-	var items = pmb_get_contents(selection, 1);
+	var items = pmb_get_contents(selection, 0);
 	var json = JSON.stringify(items);
 	jQuery(input_selector).val(json);
 }

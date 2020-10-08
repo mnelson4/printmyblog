@@ -686,31 +686,36 @@ class Admin extends BaseController
 		$project->setProjectDepth(intval($_POST['pmb-project-depth']));
 
 		$this->section_manager->clearSectionsFor($project->getWpPost()->ID);
+		$order = 1;
 		$this->setSectionFromRequest(
 			$project,
 			'pmb-project-front-matter-data',
-			DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER
+			DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER,
+			$order
 		);
 		$this->setSectionFromRequest(
 			$project,
 			'pmb-project-main-matter-data',
-			DesignTemplate::IMPLIED_DIVISION_MAIN_MATTER
+			DesignTemplate::IMPLIED_DIVISION_MAIN_MATTER,
+			$order
 		);
 		$this->setSectionFromRequest(
 			$project,
 			'pmb-project-back-matter-data',
-			DesignTemplate::IMPLIED_DIVISION_BACK_MATTER
+			DesignTemplate::IMPLIED_DIVISION_BACK_MATTER,
+			$order
 		);
 	}
 
-	protected function setSectionFromRequest(Project $project, $request_data, $placement){
+	protected function setSectionFromRequest(Project $project, $request_data, $placement, &$order = 1){
 		$section_data = stripslashes($_POST[$request_data]);
 		$sections = json_decode($section_data);
 		if($section_data) {
 			$this->section_manager->setSectionsFor(
 				$project->getWpPost()->ID,
 				$sections,
-				$placement
+				$placement,
+				$order
 			);
 		}
 	}

@@ -129,17 +129,44 @@ function pmb_load_avada_lazy_images(){
 /**
  * Adds the class "pmb-page-ref" onto all hyperlinks to posts/things that are actually in the current project,
  * and a span named "pmb-footnote", with the value of the hyperlink to all the links to external content.
+ * @param external_link_policy string can be 'footnote', 'leave', 'remove'
+ * @param internal_link_policy string can be 'inline_ref', 'footnote_ref', 'leave_ref' (leaves it as an internal link
+ *  though), 'leave' (leaves it as a link to the website), 'remove' (removes the hyperlink altogether)
  */
-function pmb_replace_internal_links_with_page_refs_and_footnotes()
+function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_policy, internal_link_policy)
 {
     jQuery('.pmb-section a[href]').each(function(index){
         var a = jQuery(this);
-        var new_href = '#' + a.attr('href').replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g,'\\$1');      ;
-        if(jQuery(new_href).length > 0){
-            a.addClass('pmb-page-ref');
-            a.attr('href','#' + a.attr('href'));
+        var id_from_href = '#' + a.attr('href').replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g,'\\$1');
+        if(jQuery(id_from_href).length > 0){
+            // internal
+            switch(internal_link_policy){
+                case 'inline_ref':
+                    a.addClass('pmb-page-ref');
+                    a.attr('href','#' + a.attr('href'));
+                    break;
+                case 'footnote_ref':
+                    a.after('<span class="pmb-footnote">See ' + a.attr('href') + '</span>');
+                    break;
+                case 'leave_ref':
+                    a.attr('href','#' + a.attr('href'));
+                    break;
+                case 'remove':
+                    a.contents().unwrap();
+                    break;
+                    // otherwise, leave alone
+            }
         } else {
-            a.after('<span class="pmb-footnote">See ' + a.attr('href') + '</span>');
+            // external
+            switch(external_link_policy){
+                case 'footnote':
+                a.after('<span class="pmb-footnote">See ' + a.attr('href') + '</span>');
+                break;
+                case 'remove':
+                a.contents().unwrap();
+                break;
+                // otherwise, leave alone
+            }
         }
     });
 }
