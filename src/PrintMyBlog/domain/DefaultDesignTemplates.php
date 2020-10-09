@@ -4,10 +4,12 @@ namespace PrintMyBlog\domain;
 
 use Dompdf\Renderer\Text;
 use PrintMyBlog\orm\entities\Design;
+use Twine\forms\base\FormSectionDetails;
 use Twine\forms\base\FormSectionProper;
 use Twine\forms\inputs\AdminFileUploaderInput;
 use Twine\forms\inputs\CheckboxMultiInput;
 use Twine\forms\inputs\DatepickerInput;
+use Twine\forms\inputs\FloatInput;
 use Twine\forms\inputs\FormInputBase;
 use Twine\forms\inputs\SelectInput;
 use Twine\forms\inputs\TextAreaInput;
@@ -17,7 +19,6 @@ use Twine\forms\inputs\YesNoInput;
 class DefaultDesignTemplates {
 	public function registerDesignTemplates()
 	{
-		$default_design_form_sections = $this->getDefaultDesignFormSections();
 		pmb_register_design_template(
 			'classic_print',
 			function() {
@@ -29,38 +30,37 @@ class DefaultDesignTemplates {
 					'default' => 'classic_print',
 					'levels' => 2,
 					'design_form_callback'  => function () {
-						$sections = array_merge(
-							$this->getDefaultDesignFormSections(),
-							$this->getGenericDesignFormSections()
-						);
-						$sections['internal_links'] = new SelectInput(
-							[
-								'remove' => __('Remove', 'print-my-blog'),
-								'parens' => __('Replace with URL in parentheses', 'print-my-blog'),
-								'page_ref' => __('Replace with inline page reference', 'print-my-blog') . pmb_pro_only(),
-								'footnote' => __('Replace with footnote', 'print-my-blog') . pmb_pro_only(),
-							],
-							[
-								'default' => pmb_pro() ? 'footnote' : 'remove',
-								'html_label_text' => __('Internal Hyperlinks', 'print-my-blog'),
-								'html_help_text' => __('How to display hyperlinks to content included in this project.')
+						return $this->getDefaultDesignForm()->merge(new FormSectionProper( [
+							'subsections' => [
+								'links' => new FormSectionProper([
+									'internal_links' => new SelectInput(
+										[
+											'remove' => __('Remove', 'print-my-blog'),
+											'parens' => __('Replace with URL in parentheses', 'print-my-blog'),
+											'page_ref' => __('Replace with inline page reference', 'print-my-blog') . pmb_pro_only(),
+											'footnote' => __('Replace with footnote', 'print-my-blog') . pmb_pro_only(),
+										],
+										[
+											'default' => pmb_pro() ? 'footnote' : 'remove',
+											'html_label_text' => __('Internal Hyperlinks', 'print-my-blog'),
+											'html_help_text' => __('How to display hyperlinks to content included in this project.')
+										]
+									),
+									'external_links' => new SelectInput(
+										[
+											'remove' => __('Remove', 'print-my-blog'),
+											'parens' => __('Replace with URL in parentheses', 'print-my-blog'),
+											'footnote' => __('Replace with footnote', 'print-my-blog') . pmb_pro_only(),
+										],
+										[
+											'default' => pmb_pro() ? 'footnote' : 'remove',
+											'html_label_text' => __('External Hyperlinks', 'print-my-blog'),
+											'html_help_text' => __('How to display hyperlinks to content not included in this project.')
+										]
+									)
+								])
 							]
-						);
-						$sections['external_links'] = new SelectInput(
-							[
-								'remove' => __('Remove', 'print-my-blog'),
-								'parens' => __('Replace with URL in parentheses', 'print-my-blog'),
-								'footnote' => __('Replace with footnote', 'print-my-blog') . pmb_pro_only(),
-							],
-							[
-								'default' => pmb_pro() ? 'footnote' : 'remove',
-								'html_label_text' => __('External Hyperlinks', 'print-my-blog'),
-								'html_help_text' => __('How to display hyperlinks to content not included in this project.')
-							]
-						);
-						return new FormSectionProper( [
-							'subsections' => $sections
-						] );
+						] ))->merge($this->getGenericDesignForm());
 					},
 					'project_form_callback' => function ( Design $design ) {
 						return $this->getDefaultProjectForm($design);
@@ -84,12 +84,19 @@ class DefaultDesignTemplates {
 						'part',
 					],
 					'design_form_callback'  => function() {
-						return new FormSectionProper( [
-							'subsections' => array_merge(
-								$this->getDefaultDesignFormSections(),
-								$this->getGenericDesignFormSections()
-							),
-						] );
+						return $this->getDefaultDesignForm()->merge(new FormSectionProper( [
+							'subsections' => [
+								'image' => new FormSectionProper([
+									'subsections' => [
+										'image_placement' => new SelectInput([
+											'default' => __('Don’t move', 'print-my-blog'),
+											'snap' => __('Snap to the top or bottom of the page', 'print-my-blog'),
+											'snap-unless-fit' => __('Only snap if the image would cause a page break', 'print-my-blog')
+										])
+									]
+								])
+							],
+						] ))->merge($this->getGenericDesignForm());
 					},
 					'project_form_callback' => function(Design $design) {
 						return $this->getDefaultProjectForm($design);
@@ -112,8 +119,8 @@ class DefaultDesignTemplates {
 						'just_content',
 					],
 					'design_form_callback'  => function() {
-						return new FormSectionProper( [
-							'subsections' => array_merge(
+						return (new FormSectionProper( [
+							'subsections' =>
 								[
 									'title_page_banner' => new AdminFileUploaderInput(
 										[
@@ -134,9 +141,7 @@ class DefaultDesignTemplates {
 										]
 									),
 								],
-								$this->getGenericDesignFormSections()
-							),
-						] );
+						] ))->merge($this->getGenericDesignForm());
 					},
 					'project_form_callback' => function(Design $design) {
 						return new FormSectionProper( [
@@ -184,8 +189,8 @@ class DefaultDesignTemplates {
 					'default' => 'mayer',
 					'levels' => 2,
 					'design_form_callback'  => function() {
-						$sections = array_merge(
-							[
+						return (new FormSectionProper( [
+							'subsections' => [
 								'post_header_in_columns' => new YesNoInput(
 									[
 										'html_label_text' => __('Show Post Header inside Columns','print-my-blog'),
@@ -193,14 +198,7 @@ class DefaultDesignTemplates {
 									]
 								)
 							],
-							$this->getDefaultDesignFormSections(),
-							$this->getGenericDesignFormSections()
-						);
-						// all images will take up the full column width
-						unset($sections['image_size']);
-						return new FormSectionProper( [
-							'subsections' => $sections,
-						] );
+						] ))->merge($this->getGenericDesignForm());
 					},
 					'project_form_callback' => function(Design $design) {
 						return $this->getDefaultProjectForm($design);
@@ -226,108 +224,152 @@ class DefaultDesignTemplates {
 
 	/**
 	 * Gets the default design form sections for classic default designs.
-	 * @return FormInputBase[]
+	 * @return FormSectionProper
 	 */
-	public function getDefaultDesignFormSections()
+	public function getDefaultDesignForm()
 	{
-		return [
-			'header_content' => new CheckboxMultiInput(
-				[
-					'title' => __('Project Title', 'print-my-blog'),
-					'subtitle' => __('Subtitle', 'print-my-blog'),
-					'url' => __('Site URL', 'print-my-blog'),
-					'date_printed' => __('Date Printed', 'print-my-blog'),
-					'credit_pmb' => __('Credit Print My Blog', 'print-my-blog')
-				],
-				[
-					'default' => [
-						'title',
-						'description',
-						'url',
-						'date_printed'
-					],
-					'html_label_text' => __('Project Header Content to Print'),
-					'html_help_text' => __('Appears at the top of the first page.', 'print-my-blog')
+		return new FormSectionProper(
+			[
+				'subsections' => [
+					'header_content' => new CheckboxMultiInput(
+						[
+							'title' => __('Project Title', 'print-my-blog'),
+							'subtitle' => __('Subtitle', 'print-my-blog'),
+							'url' => __('Site URL', 'print-my-blog'),
+							'date_printed' => __('Date Printed', 'print-my-blog'),
+							'credit_pmb' => __('Credit Print My Blog', 'print-my-blog')
+						],
+						[
+							'default' => [
+								'title',
+								'description',
+								'url',
+								'date_printed'
+							],
+							'html_label_text' => __('Project Header Content to Print'),
+							'html_help_text' => __('Appears at the top of the first page.', 'print-my-blog')
+						]
+					),
+					'post_content' => new CheckboxMultiInput(
+						[
+							'title' => __('Post Title', 'print-my-blog'),
+							'id' => __('ID', 'print-my-blog'),
+							'author' => __('Author', 'print-my-blog'),
+							'url' => __('URL', 'print-my-blog'),
+							'published_date' => __('Published Date', 'print-my-blog'),
+							'categories' => __('Categories and Tags', 'print-my-blog'),
+							'featured_image' => __('Featured Image', 'print-my-blog'),
+							'excerpt' => __('Excerpt', 'print-my-blog'),
+							'content' => __('Content', 'print-my-blog'),
+							'comments' => __('Comments', 'print-my-blog'),
+						],
+						[
+							'default' => [
+								'title',
+								'published_date',
+								'categories',
+								'featured_image',
+								'content'
+							],
+							'html_label_text' => __('Post Content to Print'),
+							'html_help_text' => __('Content from each post to print.', 'print-my-blog')
+						]
+					),
+					'page_per_post' => new YesNoInput(
+						[
+							'default' => true,
+							'html_label_text' => __('Each Post Begins on a New Page', 'print-my-blog'),
+							'html_help_text' => __('Whether to force posts to always start on a new page. Doing so makes the page more legible, but uses more paper.','print-my-blog'),
+						]
+					),
+					'font_size' => new SelectInput(
+						[
+							'tiny' => __('Tiny', 'print-my-blog'),
+							'small' => __('Small', 'print-my-blog'),
+							'normal' => __('Normal', 'print-my-blog'),
+							'large' => __('Large', 'print-my-blog')
+						],
+						[
+							'default' => 'normal',
+							'html_label_text' => __('Font Size', 'print-my-blog'),
+						]
+					),
+					
+					'image' => new FOrmSEctionProper([
+						'subsections' => [
+							'image_size' => new SelectInput(
+								[
+									'none' => __('None (hide images)', 'print-my-blog'),
+									'small' => __('Small (1/4 size)', 'print-my-blog'),
+									'medium' => __('Medium (1/2 size)', 'print-my-blog'),
+									'large' => __('Large (3/4 size)', 'print-my-blog'),
+									'full' => __('Full (theme default)', 'print-my-blog')
+								]
+							),
+						]
+					]),
+					'page' => new FormSectionDetails([
+						'html_summary' => __('Page Options', 'print-my-blog'),
+						'subsections' => [
+							'page_width' => new TextInput([
+								'html_label_text' => __('Page Width', 'print-my-blog'),
+								'html_help_text' => sprintf(
+									__('Use standard %1$sCSS units%2$s', 'print-my-blog'),
+									'<a href="https://www.w3schools.com/CSSref/css_units.asp">',
+									'</a>'
+								),
+								'default' => '210mm'
+							]),
+							'page_height' => new TextInput([
+								'html_label_text' => __('Page Height', 'print-my-blog'),
+								'html_help_text' => sprintf(
+									__('Use standard %1$sCSS units%2$s', 'print-my-blog'),
+									'<a href="https://www.w3schools.com/CSSref/css_units.asp">',
+									'</a>'
+								),
+								'default' => '297mm'
+							]),
+						]
+					])
 				]
-			),
-			'post_content' => new CheckboxMultiInput(
-				[
-					'title' => __('Post Title', 'print-my-blog'),
-					'id' => __('ID', 'print-my-blog'),
-					'author' => __('Author', 'print-my-blog'),
-					'url' => __('URL', 'print-my-blog'),
-					'published_date' => __('Published Date', 'print-my-blog'),
-					'categories' => __('Categories and Tags', 'print-my-blog'),
-					'featured_image' => __('Featured Image', 'print-my-blog'),
-					'excerpt' => __('Excerpt', 'print-my-blog'),
-					'content' => __('Content', 'print-my-blog'),
-					'comments' => __('Comments', 'print-my-blog'),
-				],
-				[
-					'default' => [
-						'title',
-						'published_date',
-						'categories',
-						'featured_image',
-						'content'
-					],
-					'html_label_text' => __('Post Content to Print'),
-					'html_help_text' => __('Content from each post to print.', 'print-my-blog')
-				]
-			),
-			'page_per_post' => new YesNoInput(
-				[
-					'default' => true,
-					'html_label_text' => __('Each Post Begins on a New Page', 'print-my-blog'),
-					'html_help_text' => __('Whether to force posts to always start on a new page. Doing so makes the page more legible, but uses more paper.','print-my-blog'),
-				]
-			),
-			'font_size' => new SelectInput(
-				[
-					'tiny' => __('Tiny', 'print-my-blog'),
-					'small' => __('Small', 'print-my-blog'),
-					'normal' => __('Normal', 'print-my-blog'),
-					'large' => __('Large', 'print-my-blog')
-				],
-				[
-					'default' => 'normal',
-					'html_label_text' => __('Font Size', 'print-my-blog'),
-				]
-			),
-			'image_size' => new SelectInput(
-				[
-					'none' => __('None (hide images)', 'print-my-blog'),
-					'small' => __('Small (1/4 size)', 'print-my-blog'),
-					'medium' => __('Medium (1/2 size)', 'print-my-blog'),
-					'large' => __('Large (3/4 size)', 'print-my-blog'),
-					'full' => __('Full (theme default)', 'print-my-blog')
-				]
-			)
-		];
+			]
+		);
 	}
 
 	/**
 	 * Returns generic form inputs which should usually appear on all design forms.
-	 * @return FormSectionBase[]
+	 * @return FormSectionProper
 	 */
-	public function getGenericDesignFormSections()
+	public function getGenericDesignForm()
 	{
 		$theme = wp_get_theme();
 
-		return apply_filters(
-			'PrintMyBlog\domain\DefaultDesignTemplates->getGenericDesignFormSections',
+		return new FormSectionProper(
 			[
-				'use_theme' => new YesNoInput([
-					'html_label_text' => __('Include Theme CSS', 'print-my-blog'),
-					'html_help_text' => sprintf(
-						__('%s’s CSS may interfere with the generated file’s CSS, so it’s usually best to not include it.', 'print-my-blog'),
-						$theme->get('Name')
+				'subsections' => [
+					'generic_sections' => new FormSectionProper(
+						[
+							'subsections' =>
+								apply_filters(
+									'PrintMyBlog\domain\DefaultDesignTemplates->getGenericDesignFormSections',
+									[
+										'use_theme'  => new YesNoInput( [
+											'html_label_text' => __( 'Include Theme CSS', 'print-my-blog' ),
+											'html_help_text'  => sprintf(
+												__( '%s’s CSS may interfere with the generated file’s CSS, so it’s usually best to not include it.', 'print-my-blog' ),
+												$theme->get( 'Name' )
+											)
+										] ),
+										'custom_css' => new TextAreaInput( [
+											'html_label_text' => __( 'Custom CSS', 'print-my-blog' ),
+											'html_help_text'  => __( 'Styles to be applied only when printing projects using this design.', 'print-my-blog' )
+										] )
+									]
+
+								)
+						]
 					)
-				]),
-				'custom_css' => new TextAreaInput([
-					'html_label_text' => __('Custom CSS', 'print-my-blog'),
-					'html_help_text' => __('Styles to be applied only when printing projects using this design.', 'print-my-blog')
-				])
+				]
 			]
 		);
 	}

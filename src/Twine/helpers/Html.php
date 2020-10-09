@@ -107,8 +107,53 @@ class Html
 		$html = $this->nl(0, $tag) . '<' . $tag . $attributes . '>';
 		$html .= ! empty($content) ? $this->nl(1, $tag) . $content : '';
 		$indent = ! empty($content) || $force_close ? true : false;
-		$html .= ! empty($content) || $force_close ? $this->_close_tag($tag, $id, $class, $indent) : '';
+		$html .= ! empty($content) || $force_close ? $this->closeTag($tag, $id, $class, $indent) : '';
 		return $html;
+	}
+
+	public function openTag(
+		$tag = 'div',
+		$id = '',
+		$class = '',
+		$style = '',
+		$other_attributes = ''
+	) {
+		return $this->_open_tag(
+			$tag,
+			'',
+			$id,
+			$class,
+			$style,
+			$other_attributes,
+			false
+		);
+	}
+
+	/**
+	 * @param string $tag
+	 * @param string $content
+	 * @param string $id
+	 * @param string $class
+	 * @param string $style
+	 * @param string $other_attributes
+	 *
+	 * @return string
+	 */
+	public function tag($tag = 'div',
+		$content = '',
+		$id = '',
+		$class = '',
+		$style = '',
+		$other_attributes = ''){
+		return $this->_open_tag(
+			$tag,
+			$content,
+			$id,
+			$class,
+			$style,
+			$other_attributes,
+			true
+		);
 	}
 
 
@@ -124,7 +169,7 @@ class Html
 	 * @param bool   $indent
 	 * @return string
 	 */
-	protected function _close_tag($tag = 'div', $id = '', $class = '', $indent = true)
+	public function closeTag($tag = 'div', $id = '', $class = '', $indent = true)
 	{
 		$comment = '';
 		if ($id) {
@@ -169,7 +214,7 @@ class Html
 	 */
 	public function divx($id = '', $class = '')
 	{
-		return $this->_close_tag('div', $id, $class);
+		return $this->closeTag('div', $id, $class);
 	}
 
 
@@ -327,7 +372,7 @@ class Html
 	 */
 	public function ulx($id = '', $class = '')
 	{
-		return $this->_close_tag('ul', $id, $class);
+		return $this->closeTag('ul', $id, $class);
 	}
 
 
@@ -361,7 +406,7 @@ class Html
 	 */
 	public function lix($id = '', $class = '')
 	{
-		return $this->_close_tag('li', $id, $class);
+		return $this->closeTag('li', $id, $class);
 	}
 
 
@@ -393,7 +438,7 @@ class Html
 	 */
 	public function tablex($id = '', $class = '')
 	{
-		return $this->_close_tag('table', $id, $class);
+		return $this->closeTag('table', $id, $class);
 	}
 
 
@@ -425,7 +470,7 @@ class Html
 	 */
 	public function theadx($id = '', $class = '')
 	{
-		return $this->_close_tag('thead', $id, $class);
+		return $this->closeTag('thead', $id, $class);
 	}
 
 
@@ -457,7 +502,7 @@ class Html
 	 */
 	public function tbodyx($id = '', $class = '')
 	{
-		return $this->_close_tag('tbody', $id, $class);
+		return $this->closeTag('tbody', $id, $class);
 	}
 
 
@@ -489,7 +534,7 @@ class Html
 	 */
 	public function trx($id = '', $class = '')
 	{
-		return $this->_close_tag('tr', $id, $class);
+		return $this->closeTag('tr', $id, $class);
 	}
 
 
@@ -521,7 +566,7 @@ class Html
 	 */
 	public function thx($id = '', $class = '')
 	{
-		return $this->_close_tag('th', $id, $class);
+		return $this->closeTag('th', $id, $class);
 	}
 
 
@@ -553,7 +598,7 @@ class Html
 	 */
 	public function tdx($id = '', $class = '')
 	{
-		return $this->_close_tag('td', $id, $class);
+		return $this->closeTag('td', $id, $class);
 	}
 
 
@@ -636,30 +681,6 @@ class Html
 	 * Generates HTML <label></label> tags, inserts content, and adds any passed attributes
 	 * usage: echo $this->span( 'this is some inline text' );
 	 *
-	 * @access protected
-	 * @param string $tag
-	 * @param string $content - inserted after opening tag, and appends closing tag, otherwise tag is left open
-	 * @param string $id - html id attribute
-	 * @param string $class - html class attribute
-	 * @param string $style - html style attribute for applying inline styles
-	 * @param string $other_attributes - additional attributes like "colspan", inline JS, "rel" tags, etc
-	 * @return string
-	 */
-	protected function _inline_tag($tag = 'span', $content = '', $id = '', $class = '', $style = '', $other_attributes = '')
-	{
-		$attributes = ! empty($id) ? ' id="' . $this->sanitize_id($id) . '"' : '';
-		$attributes .= ! empty($class) ? ' class="' . $class . '"' : '';
-		$attributes .= ! empty($style) ? ' style="' . $style . '"' : '';
-		$attributes .= ! empty($other_attributes) ? ' ' . $other_attributes : '';
-		return '<' . $tag . ' ' . $attributes . '>'  . $content  . '</' . $tag . '>';
-	}
-
-
-
-	/**
-	 * Generates HTML <label></label> tags, inserts content, and adds any passed attributes
-	 * usage: echo $this->span( 'this is some inline text' );
-	 *
 	 * @param string $content - inserted after opening tag, and appends closing tag, otherwise tag is left open
 	 * @param string $id - html id attribute
 	 * @param string $class - html class attribute
@@ -669,7 +690,7 @@ class Html
 	 */
 	public function label($content = '', $id = '', $class = '', $style = '', $other_attributes = '')
 	{
-		return $this->_inline_tag('label', $content, $id, $class, $style, $other_attributes);
+		return $this->_open_tag('label', $content, $id, $class, $style, $other_attributes);
 	}
 
 
@@ -687,7 +708,7 @@ class Html
 	 */
 	public function span($content = '', $id = '', $class = '', $style = '', $other_attributes = '')
 	{
-		return $this->_inline_tag('span', $content, $id, $class, $style, $other_attributes);
+		return $this->_open_tag('span', $content, $id, $class, $style, $other_attributes);
 	}
 
 
@@ -705,7 +726,7 @@ class Html
 	 */
 	public function strong($content = '', $id = '', $class = '', $style = '', $other_attributes = '')
 	{
-		return $this->_inline_tag('strong', $content, $id, $class, $style, $other_attributes);
+		return $this->_open_tag('strong', $content, $id, $class, $style, $other_attributes);
 	}
 
 

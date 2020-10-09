@@ -437,9 +437,12 @@ class Project extends PostWrapper{
 		foreach($formats as $format){
 			$forms[] = $this->getDesignFor($format)->getProjectForm();
 		}
-		$project_form = new FormSectionProper();
+		$project_form = new FormSectionProper(
+			['name' => 'pmb_project']
+		);
+
 		foreach($forms as $form){
-			$project_form->add_subsections($form->subsections(false));
+			$project_form->merge($form);
 		}
 		// If there's a field named "title", set its default to be the post title.
 		$title_input = $project_form->get_subsection('title');

@@ -1,22 +1,19 @@
 /* pagination */
 @media print, screen {
-    .pmb-toc {
+    .pmb-front-matter {
         display: block;
-        page: table-of-contents;
+        page: front-matter;
         counter-reset: page 1
     }
 
-    @page table-of-contents {
-        @top {
-            content: "Table of Contents"
-        }
-        @bottom {
+    @page front-matter {
+        @bottom-right {
             content: counter(page, lower-roman)
         }
     }
 
 
-    @page {
+    @page main-matter{
         counter-reset: footnote;
 
         @footnotes {
@@ -29,20 +26,20 @@
     }
 
 
-    .pmb-posts {
+    .pmb-main-matter {
         display: block;
-        page: main;
+        page: main-matter;
         counter-reset: page 1
     }
 
-    @page main {
+    @page main-matter {
         @top-left: {
             content: string(part-title, first-except);
         }
         @top-right {
             content: string(section-title, first-except)
         }
-        @bottom-outside {
+        @bottom-right {
             content: counter(page)
         }
     }
@@ -69,18 +66,6 @@
     }
 
     /* part styling*/
-    .pmb-part{
-        break-before:right;
-        page: part-start;
-    }
-    @page main {
-        @top {
-            content: '';
-        }
-        @bottom {
-            content: '';
-        }
-    }
     .pmb-part h1.entry-title{
         font-size:120%;
         string-set: part-title content();
@@ -106,6 +91,5 @@
     .pmb-posts span.pmb-footnote{
         float:footnote;
         text-align:left;
-
     }
 }

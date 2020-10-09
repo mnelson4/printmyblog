@@ -171,6 +171,27 @@ class FormSectionProper extends FormSectionValidatable
         }
     }
 
+	/**
+	 * Merges this form with the other one. Recursively calls merge on conflicting proper subsections.
+	 * @param FormSectionProper $other_form
+	 *
+	 * @return FormSectionProper returns this updated form section
+	 * @throws ImproperUsageException
+	 */
+    public function merge(FormSectionProper $other_form){
+    	foreach($other_form->subsections(false) as $name => $subsection){
+    		if($this->subsection_exists($name)){
+			    if($subsection instanceof FormSectionProper){
+				    $this->get_subsection($name, false)->merge($subsection);
+			    }
+			    // else it's a conflicting input. Leave the original.
+    		} else {
+    			$this->addSubsection($name, $subsection);
+		    }
+	    }
+    	return $this;
+    }
+
 
     /**
      * Finishes construction given the parent form section and this form section's name
@@ -353,6 +374,11 @@ class FormSectionProper extends FormSectionValidatable
                 } elseif ( $subsection instanceof FormSectionProper) {
                     $subsection->populate_defaults($default_data[ $subsection_name ]);
                 }
+            } else {
+            	// maybe the defaults are for form inputs only? try that
+	            if($subsection instanceof FormSectionProper){
+	            	$subsection->populate_defaults($default_data);
+	            }
             }
         }
     }
@@ -682,6 +708,12 @@ class FormSectionProper extends FormSectionValidatable
     public function _enqueue_and_localize_form_js()
     {
         $this->ensure_construct_finalized_called();
+        wp_enqueue_style(
+        	'twine-forms',
+	        TWINE_STYLES_URL . 'forms.css',
+	        [],
+	        filemtime(TWINE_STYLES_DIR . 'forms.css')
+        );
         // actually, we don't want to localize just yet. There may be other forms on the page.
         // so we need to add our form section data to a static variable accessible by all form sections
         // and localize it just before the footer
@@ -1208,6 +1240,18 @@ class FormSectionProper extends FormSectionValidatable
                 $subsection->_construct_finalize($this, $name);
             }
         }
+    }
+
+	/**
+	 * Adds the specified section
+	 * @param string $name
+	 * @param FormSectionBase $form_section
+	 */
+    public function addSubsection($name, FormSectionBase $form_section){
+    	$this->_subsections[$name] = $form_section;
+    	if ($this->_construction_finalized){
+    		$form_section->_construct_finalize($this, $name);
+	    }
     }
 
 

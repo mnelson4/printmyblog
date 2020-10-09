@@ -1,5 +1,8 @@
 <?php
 namespace Twine\forms\strategies\normalization;
+use Twine\forms\helpers\ValidationError;
+use Twine\forms\strategies\validation\FloatValidation;
+
 /**
  * FloatNormalization
  * Casts to float, and allows spaces, commas, and periods in the inputted string
@@ -8,7 +11,7 @@ namespace Twine\forms\strategies\normalization;
  * @subpackage
  * @author                Mike Nelson
  */
-class FloatNormalization extends NormalizationStrategyBase
+class FloatNormalization extends NormalizationBase
 {
 
     /*
@@ -23,7 +26,7 @@ class FloatNormalization extends NormalizationStrategyBase
     /**
      * @param string $value_to_normalize
      * @return float
-     * @throws \ValidationError
+     * @throws ValidationError
      */
     public function normalize($value_to_normalize)
     {
