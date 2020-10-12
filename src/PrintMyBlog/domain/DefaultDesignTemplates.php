@@ -25,39 +25,39 @@ class DefaultDesignTemplates {
 				return [
 					'title'                 => __( 'Classic Print PDf', 'print-my-blog' ),
 					'format'                => 'print_pdf',
-					'dir'                   => PMB_DESIGNS_DIR . '/pdf/print/classic',
-					'url' => plugins_url('designs/print_pdf/classic', PMB_MAIN_FILE),
+					'dir'                   => PMB_DESIGNS_DIR . 'pdf/print/classic',
+					'url' => plugins_url('designs/pdf/print/classic', PMB_MAIN_FILE),
 					'default' => 'classic_print',
 					'levels' => 2,
 					'design_form_callback'  => function () {
 						return $this->getDefaultDesignForm()->merge(new FormSectionProper( [
 							'subsections' => [
 								'links' => new FormSectionProper([
-									'internal_links' => new SelectInput(
-										[
-											'remove' => __('Remove', 'print-my-blog'),
-											'parens' => __('Replace with URL in parentheses', 'print-my-blog'),
-											'page_ref' => __('Replace with inline page reference', 'print-my-blog') . pmb_pro_only(),
-											'footnote' => __('Replace with footnote', 'print-my-blog') . pmb_pro_only(),
-										],
-										[
-											'default' => pmb_pro() ? 'footnote' : 'remove',
-											'html_label_text' => __('Internal Hyperlinks', 'print-my-blog'),
-											'html_help_text' => __('How to display hyperlinks to content included in this project.')
-										]
-									),
-									'external_links' => new SelectInput(
-										[
-											'remove' => __('Remove', 'print-my-blog'),
-											'parens' => __('Replace with URL in parentheses', 'print-my-blog'),
-											'footnote' => __('Replace with footnote', 'print-my-blog') . pmb_pro_only(),
-										],
-										[
-											'default' => pmb_pro() ? 'footnote' : 'remove',
-											'html_label_text' => __('External Hyperlinks', 'print-my-blog'),
-											'html_help_text' => __('How to display hyperlinks to content not included in this project.')
-										]
-									)
+									'subsections'=> [
+										'internal_links' => new SelectInput(
+											[
+												'remove' => __('Remove', 'print-my-blog'),
+												'parens' => __('Replace with page reference', 'print-my-blog'),
+												'footnote' => __('Replace with footnote', 'print-my-blog') . pmb_pro_only(),
+											],
+											[
+												'default' => pmb_pro() ? 'footnote' : 'parens',
+												'html_label_text' => __('Internal Hyperlinks', 'print-my-blog'),
+												'html_help_text' => __('How to display hyperlinks to content included in this project.')
+											]
+										),
+										'external_links' => new SelectInput(
+											[
+												'remove' => __('Remove', 'print-my-blog'),
+												'footnote' => __('Replace with footnote', 'print-my-blog') . pmb_pro_only(),
+											],
+											[
+												'default' => pmb_pro() ? 'footnote' : 'remove',
+												'html_label_text' => __('External Hyperlinks', 'print-my-blog'),
+												'html_help_text' => __('How to display hyperlinks to content not included in this project.')
+											]
+										)
+									]
 								])
 							]
 						] ))->merge($this->getGenericDesignForm());
@@ -93,6 +93,34 @@ class DefaultDesignTemplates {
 											'snap' => __('Snap to the top or bottom of the page', 'print-my-blog'),
 											'snap-unless-fit' => __('Only snap if the image would cause a page break', 'print-my-blog')
 										])
+									]
+								]),
+								'links' => new FormSectionProper([
+									'subsections'=> [
+										'internal_links' => new SelectInput(
+											[
+												'remove' => __('Remove', 'print-my-blog'),
+												'parens' => __('Replace with page reference', 'print-my-blog') . pmb_pro_only(),
+												'footnote' => __('Replace with footnote', 'print-my-blog') . pmb_pro_only(),
+											],
+											[
+												'default' => pmb_pro() ? 'parens' : 'remove',
+												'html_label_text' => __('Internal Hyperlinks', 'print-my-blog'),
+												'html_help_text' => __('How to display hyperlinks to content included in this project.')
+											]
+										),
+										'external_links' => new SelectInput(
+											[
+												'remove' => __('Remove', 'print-my-blog'),
+												'leave' => __('Leave as hyperlink', 'print-my-blog'),
+												'footnote' => __('Replace with footnote', 'print-my-blog') . pmb_pro_only(),
+											],
+											[
+												'default' => pmb_pro() ? 'footnote' : 'leave',
+												'html_label_text' => __('External Hyperlinks', 'print-my-blog'),
+												'html_help_text' => __('How to display hyperlinks to content not included in this project.')
+											]
+										)
 									]
 								])
 							],

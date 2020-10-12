@@ -130,8 +130,8 @@ function pmb_load_avada_lazy_images(){
  * Adds the class "pmb-page-ref" onto all hyperlinks to posts/things that are actually in the current project,
  * and a span named "pmb-footnote", with the value of the hyperlink to all the links to external content.
  * @param external_link_policy string can be 'footnote', 'leave', 'remove'
- * @param internal_link_policy string can be 'inline_ref', 'footnote_ref', 'leave_ref' (leaves it as an internal link
- *  though), 'leave' (leaves it as a link to the website), 'remove' (removes the hyperlink altogether)
+ * @param internal_link_policy string can be 'parens' "(see page 12)", 'footnote' "[1]...See page 12", 'leave'
+ * (leaves hyperlink to the page), 'remove' (removes the hyperlink altogether)
  */
 function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_policy, internal_link_policy)
 {
@@ -141,14 +141,14 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
         if(jQuery(id_from_href).length > 0){
             // internal
             switch(internal_link_policy){
-                case 'inline_ref':
+                case 'parens':
                     a.addClass('pmb-page-ref');
                     a.attr('href','#' + a.attr('href'));
                     break;
-                case 'footnote_ref':
+                case 'foonote':
                     a.after('<span class="pmb-footnote">See ' + a.attr('href') + '</span>');
                     break;
-                case 'leave_ref':
+                case 'leave':
                     a.attr('href','#' + a.attr('href'));
                     break;
                 case 'remove':
