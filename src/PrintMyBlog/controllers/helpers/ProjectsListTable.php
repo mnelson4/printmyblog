@@ -170,6 +170,7 @@ class ProjectsListTable extends WP_List_Table
      */
     function column_ID($post)
     {
+    	$title = $post->post_title ? $post->post_title : __('Untitled', 'print-my-blog');
         return sprintf(
             '<a href="%s" class="btn btn-primary"/>%s</a>',
             add_query_arg(
@@ -180,7 +181,7 @@ class ProjectsListTable extends WP_List_Table
                 ],
                 admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
             ),
-            $post->post_title
+            $title
         );
     }
 
