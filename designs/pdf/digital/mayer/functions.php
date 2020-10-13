@@ -4,7 +4,7 @@
 add_action(
 	'pmb_pdf_generation_start',
 	function(\PrintMyBlog\entities\ProjectGeneration $project_generation, \PrintMyBlog\orm\entities\Design $design){
-		$css = '';
+		$css = pmb_design_styles($design);
 		if($design->getPmbMeta('post_header_in_columns')){
 			$css .= ' .pmb-main-matter{columns:2}';
 		} else {
@@ -14,7 +14,7 @@ add_action(
 			$css .= ' .entry-content{border-bottom:1px solid gray;}';
 		}
 		if($design->getPmbMeta('images_full_column')){
-			$css .=' figure.wp-caption:not(.mayer-noresize), figure.wp-block-image:not(.mayer-no-resize), img:not(.mayer-no-resize){width:100%;}';
+			$css .=' figure.wp-caption:not(.mayer-noresize), figure.wp-block-image:not(.mayer-no-resize), img:not(.mayer-no-resize){width:100%;height:auto;}';
 		}
 		wp_add_inline_style(
 			'pmb_print_common',

@@ -1,0 +1,22 @@
+<?php
+/**
+ * @param \PrintMyBlog\orm\entities\Design $design
+ * @return string CSS to include in the style
+ */
+function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design){
+	$css = '';
+
+	$selector = ' img, .wp-block-image, figure.wp-caption';
+	switch($design->getPmbMeta('image_placement')){
+		case 'snap':
+			$css .= $selector . '{float:prince-snap;}';
+			break;
+		case 'snap-unless-fit':
+			$css .= $selector . '{float:prince-snap unless-fit;}';
+			break;
+		case 'default':
+		default:
+			// leave alone
+	}
+	return $css;
+}

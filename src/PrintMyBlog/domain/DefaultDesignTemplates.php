@@ -28,7 +28,12 @@ class DefaultDesignTemplates {
 					'dir'                   => PMB_DESIGNS_DIR . 'pdf/print/classic',
 					'url' => plugins_url('designs/pdf/print/classic', PMB_MAIN_FILE),
 					'default' => 'classic_print',
-					'levels' => 2,
+					'supports' => [
+						'front_matter',
+						'part',
+						'just_content',
+						'back_matter',
+					],
 					'design_form_callback'  => function () {
 						return $this->getDefaultDesignForm()->merge(new FormSectionProper( [
 							'subsections' => [
@@ -76,7 +81,6 @@ class DefaultDesignTemplates {
 					'format'          => 'digital_pdf',
 					'default' => 'classic_digital',
 					'dir'             => PMB_DESIGNS_DIR . 'pdf/digital/classic/',
-					'levels' => 2,
 					'url' => plugins_url('designs/pdf/digital/classic', PMB_MAIN_FILE),
 					'supports' => [
 						'front_matter',
@@ -141,7 +145,6 @@ class DefaultDesignTemplates {
 					'format'          => 'digital_pdf',
 					'dir'             => PMB_DESIGNS_DIR . 'pdf/digital/buurma/',
 					'default' => 'buurma',
-					'levels' => 1,
 					'url' => plugins_url('designs/pdf/digital/buurma', PMB_MAIN_FILE),
 					'supports' => [
 						'front_matter',
@@ -217,7 +220,10 @@ class DefaultDesignTemplates {
 					'format'          => 'digital_pdf',
 					'dir'             => PMB_DESIGNS_DIR . 'pdf/digital/mayer/',
 					'default' => 'mayer',
-					'levels' => 2,
+					'supports' => [
+						'front_matter',
+						'part'
+					],
 					'url' => plugins_url('designs/pdf/digital/mayer', PMB_MAIN_FILE),
 					'design_form_callback'  => function() {
 						return (new FormSectionProper( [
@@ -234,7 +240,21 @@ class DefaultDesignTemplates {
 								'images_full_column' => new YesNoInput([
 									'html_label_text' => __('Full-Column Images', 'print-my-blog'),
 									'html_help_text' => __('Resizes images to be the full column width (except ones with the CSS class "mayer-no-resize"', 'print-my-blog')
-								])
+								]),
+								'image' => new FormSectionProper([
+									'subsections' => [
+										'image_placement' => new SelectInput([
+											'default' => __('Do Not Adjust Image Placement', 'print-my-blog'),
+											'snap' => __('Snap to Page Top or Bottom', 'print-my-blog'),
+											'snap-unless-fit' => __('Intelligent Snap to Page Top or Bottom', 'print-my-blog')
+										],
+										[
+											'html_label_text' => __('Image Placement', 'print-my-blog'),
+											'html_help_text' => __('To reduce whitespace around images, Print My Blog can move images around in your content.', 'print-my-blog'),
+											'default' => 'snap-unless-fit'
+										])
+									]
+								]),
 							],
 						] ))->merge($this->getGenericDesignForm());
 					},
@@ -344,7 +364,7 @@ class DefaultDesignTemplates {
 						]
 					),
 					
-					'image' => new FOrmSEctionProper([
+					'image' => new FormSectionProper([
 						'subsections' => [
 							'image_size' => new SelectInput(
 								[

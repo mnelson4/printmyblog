@@ -71,6 +71,9 @@
     }
 
     /* part styling*/
+    .pmb-part{
+        column-span: all;
+    }
     .pmb-part h1.entry-title{
         font-size:200%;
         font-weight:200;
@@ -78,7 +81,9 @@
     }
     .pmb-part .entry-content{
         margin-top:1in;
+        columns:2;
     }
+
 
     /* Article styles */
     .pmb-section h1.entry-title {

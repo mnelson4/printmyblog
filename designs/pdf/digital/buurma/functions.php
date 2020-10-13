@@ -4,9 +4,10 @@
 add_action(
 	'pmb_pdf_generation_start',
 	function(\PrintMyBlog\entities\ProjectGeneration $project_generation, \PrintMyBlog\orm\entities\Design $design){
+		$css = pmb_design_styles($design);
 		wp_add_inline_style(
 			'pmb_print_common',
-			'@page title-page /*body*/{
+			$css . '@page title-page /*body*/{
 					background: url(' . $design->getPmbMeta('title_page_banner'). ') no-repeat,
 						url(' . $design->getPmbMeta('background_embellishment') . ') center center no-repeat,
 						linear-gradient(#cce5ff, #e6f2ff);

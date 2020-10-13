@@ -6,7 +6,7 @@ add_action(
 	function(\PrintMyBlog\entities\ProjectGeneration $project_generation, \PrintMyBlog\orm\entities\Design $design){
 		wp_add_inline_style(
 			'pmb_print_common',
-			''
+			pmb_design_styles($design)
 		);
 		wp_localize_script(
 			'pmb-design',
