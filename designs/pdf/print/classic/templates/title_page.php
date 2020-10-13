@@ -8,7 +8,7 @@
 <div class="pmb-posts-header">
 	<?php
     if (in_array('title',$pmb_design->getPmbMeta('header_content'))) { ?>
-        <h1 class="site-title" id="dotEPUBtitle"><?php echo $pmb_project->getPublishedTitle(); ?></h1>
+        <h1 class="site-title project-title"><?php echo $pmb_project->getPublishedTitle(); ?></h1>
 	<?php }
     if (in_array('subtitle',$pmb_design->getPmbMeta('header_content'))) { ?>
         <p class="site-description"><?php echo $pmb_project->getPmbMeta('subtitle'); ?></p>

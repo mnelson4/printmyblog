@@ -76,6 +76,7 @@ class DefaultDesignTemplates {
 					'format'          => 'digital_pdf',
 					'default' => 'classic_digital',
 					'dir'             => PMB_DESIGNS_DIR . 'pdf/digital/classic/',
+					'levels' => 2,
 					'url' => plugins_url('designs/pdf/digital/classic', PMB_MAIN_FILE),
 					'supports' => [
 						'front_matter',
@@ -140,6 +141,7 @@ class DefaultDesignTemplates {
 					'format'          => 'digital_pdf',
 					'dir'             => PMB_DESIGNS_DIR . 'pdf/digital/buurma/',
 					'default' => 'buurma',
+					'levels' => 1,
 					'url' => plugins_url('designs/pdf/digital/buurma', PMB_MAIN_FILE),
 					'supports' => [
 						'front_matter',
@@ -188,11 +190,11 @@ class DefaultDesignTemplates {
 								'byline' => new TextAreaInput(
 									[
 										'html_label_text' => __('By Line', 'print-my-blog'),
-										'html_help_text' => __('List of authors', 'print-my-blog'),
+										'html_help_text' => __('List of Aauthors', 'print-my-blog'),
 									]
 								),
 								'date' => new DatepickerInput([
-									'html_label_text' => __('Date issued', 'print-my-blog'),
+									'html_label_text' => __('Date Issued', 'print-my-blog'),
 									'html_help_text' => __('Text that appears under the byline', 'print-my-blog'),
 								]),
 								'cover_preamble' => new TextAreaInput(
@@ -213,9 +215,10 @@ class DefaultDesignTemplates {
 				return [
 					'title'           => __( 'Mayer Digital PDF' ),
 					'format'          => 'digital_pdf',
-					'dir'             => PMB_DESIGNS_DIR . 'classic_digital/',
+					'dir'             => PMB_DESIGNS_DIR . 'pdf/digital/mayer/',
 					'default' => 'mayer',
 					'levels' => 2,
+					'url' => plugins_url('designs/pdf/digital/mayer', PMB_MAIN_FILE),
 					'design_form_callback'  => function() {
 						return (new FormSectionProper( [
 							'subsections' => [
@@ -224,12 +227,30 @@ class DefaultDesignTemplates {
 										'html_label_text' => __('Show Post Header inside Columns','print-my-blog'),
 										'html_help_text' => __('Check this to make post header information, like title, date, author, etc, appear inside columns; uncheck this to have it take up the full page width', 'print-my-blog')
 									]
-								)
+								),
+								'dividing_line' => new YesNoInput([
+									'html_label_text' => __('Show a Dividing Line Between Posts', 'print-my-blog'),
+								]),
+								'images_full_column' => new YesNoInput([
+									'html_label_text' => __('Full-Column Images', 'print-my-blog'),
+									'html_help_text' => __('Resizes images to be the full column width (except ones with the CSS class "mayer-no-resize"', 'print-my-blog')
+								])
 							],
 						] ))->merge($this->getGenericDesignForm());
 					},
 					'project_form_callback' => function(Design $design) {
-						return $this->getDefaultProjectForm($design);
+						$sections['title'] = new TextInput(
+							[
+								'html_display_text' => __('Title', 'print-my-blog'),
+							]
+						);
+						$sections['intro'] = new TextAreaInput([
+							'html_display_text' => __('Introduction', 'print-my-blog'),
+							'html_help_text' => __('A highlighted description of this project, shown just underneath the title.', 'print-my-blog')
+						]);
+						return new FormSectionProper( [
+							'subsections' => $sections
+						] );
 					}
 				];
 			}

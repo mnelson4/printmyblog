@@ -43,15 +43,15 @@ function pmb_convert_youtube_videos_to_images() {
 
 };
 
-function pmb_resize_images(image_size) {
+function pmb_resize_images(max_size_inches) {
     // Images that take up the entire page width are usually too big, so we usually want to shrink images and center them.
     // Plus, we want to avoid page breaks inside them. But tiny emojis shouldn't be shrunk, nor do we need to worry about
     // page breaks inside them. Images that are part of a gallery, or are pretty small and inline, also shouldn't be shrunk.
     // So first let's determine how tall the user requested the tallest image could be. Anything bigger than that
     // needs to be wrapped in a div (or figure) and resized.
-    var desired_max_height = image_size * 100; // 1 inch is about 100 pixels.
+    var desired_max_height = max_size_inches * 100; // 1 inch is about 100 pixels.
     var wp_block_galleries = jQuery('.pmb-posts .wp-block-gallery');
-    if(image_size === 0){
+    if(max_size_inches === 0){
         // Remove all images, except emojis.
         jQuery('.pmb-posts img:not(.emoji)').remove();
         wp_block_galleries.remove();
@@ -83,17 +83,6 @@ function pmb_resize_images(image_size) {
         });
         figures_containing_a_big_image.addClass('pmb-image');
         big_images_without_figures.wrap('<div class="pmb-image"></div>');
-        // Center the images inside pmb-images
-        // figures_containing_a_big_image.add(big_images_without_figures).each(function() {
-        //     var obj = jQuery(this);
-        //     obj.css({
-        //         'width': 'auto',
-        //         'height': 'auto',
-        //         'display': 'block',
-        //         'margin-left': 'auto',
-        //         'margin-right': 'auto'
-        //     });
-        // });
         big_images.each(function () {
             var obj = jQuery(this);
             // Modify the CSS here. We could have written CSS rules but the selector worked slightly differently
@@ -210,5 +199,5 @@ function PmbToc(){
             _this.create_toc_for_depth(selection.siblings('div'),depth + 1);
         });
     }
-    this.create_toc_for_depth('.pmb-print-page', 1);
+    this.create_toc_for_depth('.pmb-print-page', 0);
 }

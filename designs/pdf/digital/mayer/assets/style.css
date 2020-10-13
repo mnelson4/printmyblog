@@ -7,7 +7,7 @@
     }
 
     @page front-matter {
-        @bottom-outside {
+        @bottom-right {
             content: counter(page, lower-roman)
         }
     }
@@ -20,7 +20,7 @@
             border-top: solid black thin;
             padding-top: 8pt;
         }
-}
+    }
     .pmb-posts p {
         prince-footnote-policy: keep-with-line;
     }
@@ -32,28 +32,16 @@
         counter-reset: page 1
     }
 
-    @page:verso main-matter, @page:verso back-matter {
-        @top-middle: {
-             content: string(part-title, first-except);
-         }
-        @bottom-outside {
-            content: counter(page)
+    @page main-matter, @page back-matter {
+        @top-left: {
+            content: string(part-title, first-except);
         }
-    }
-
-    @page:recto main-matter, @page:recto back-matter {
-        @top-middle {
+        @top-right {
             content: string(section-title, first-except)
         }
-        @bottom-outside {
+        @bottom-right {
             content: counter(page)
         }
-    }
-
-
-    body{
-        background-color:white;
-        color:black;
     }
 
     /* Title Page styles */
@@ -61,7 +49,7 @@
         margin-top:2in;
         text-align:center;
     }
-    .pmb-posts-header .site-title{
+    .pmb-posts-header .project-title{
         font-size:5em;
     }
 
@@ -77,11 +65,16 @@
         content: leader('.') target-counter(attr(href), page) !important;
     }
 
+    /* General */
+    img, figure{
+        max-width:100%;
+    }
+
     /* part styling*/
     .pmb-part h1.entry-title{
-        font-size:120%;
+        font-size:200%;
+        font-weight:200;
         string-set: part-title content();
-        margin-top:2in;
     }
     .pmb-part .entry-content{
         margin-top:1in;
@@ -92,8 +85,15 @@
         string-set: section-title content();
     }
 
-    .pmb-section{
-        break-before:page;
+    .project-title{
+        border-bottom:2px solid black;
+    }
+    .mayer-wide{
+        column-span: all;
+    }
+    .project-intro{
+        background-color:lightgrey;
+        font-style:italic;
     }
 
 

@@ -36,7 +36,7 @@ function pmb_include_design_template($relative_filepath){
 	 * @var $pmb_design Design
 	 */
 	global $pmb_design;
-	require($pmb_design->getDesignTemplate()->getDirForTemplates() . $relative_filepath);
+	require($pmb_design->getDesignTemplate()->getTemplatePathToDivision($relative_filepath));
 }
 
 /**
