@@ -48,3 +48,10 @@
     text-decoration:none;
     cursor:pointer;
 }
+
+.pmb-breadcrumb{
+    font-size:1em;
+}
+.pmb-breadcrumb span:not(:first-child)::before{
+    content: " / ";
+}

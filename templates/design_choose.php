@@ -8,6 +8,14 @@
 
 use PrintMyBlog\controllers\Admin;
 
+pmb_render_template(
+	'partials/project_header.php',
+	[
+		'project' => $project,
+		'page_title' => __('Edit Project Content', 'print-my-blog'),
+		'show_back' => true
+	]
+);
 ?>
 <div class="pmb-design-browser">
 
@@ -78,3 +86,4 @@ foreach($designs as $design){
 }
 ?>
 </div>
+<?php pmb_render_template('partials/project_footer.php');

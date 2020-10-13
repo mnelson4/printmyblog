@@ -3,6 +3,14 @@
  * @var $generations \PrintMyBlog\entities\ProjectGeneration[]
  * @var $project \PrintMyBlog\orm\entities\Project
  */
+pmb_render_template(
+	'partials/project_header.php',
+	[
+		'project' => $project,
+		'page_title' => __('Generate Project', 'print-my-blog'),
+		'show_back' => true
+	]
+);
 ?>
 <p><?php esc_html_e('Ready to see what your project looks like? There is a link below for each of your project’s formats.', 'print-my-blog');?></p>
 <?php
@@ -62,5 +70,5 @@ foreach($generations as $generation){
 	<?php
     }
 }
-?>
+pmb_render_template('partials/project_footer.php');
 

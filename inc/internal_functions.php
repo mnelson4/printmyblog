@@ -59,3 +59,12 @@ function pmb_map_section_height_to_division($height){
 	}
 	return $division_name;
 }
+
+/**
+ * @param $template_name
+ * @param array $context
+ */
+function pmb_render_template($template_name, $context=[]){
+	extract($context);
+	require(PMB_TEMPLATES_DIR . $template_name);
+}

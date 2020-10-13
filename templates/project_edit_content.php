@@ -76,18 +76,15 @@ function pmb_content_item($posty_row, $max_nesting = 0){
     </div>
     <?php
 }
+pmb_render_template(
+	'partials/project_header.php',
+	[
+		'project' => $project,
+		'page_title' => __('Edit Project Content', 'print-my-blog'),
+		'show_back' => true
+	]
+);
 ?>
-
-<div class="wrap nosubsub">
-
-<!--        <h2 class="nav-tab-wrapper">-->
-<!--            <a href="#" class="nav-tab">Display Options</a>-->
-<!--            <a href="#" class="nav-tab">Social Options</a>-->
-<!--        </h2>-->
-        <!-- clunky tabs: https://code.tutsplus.com/tutorials/the-wordpress-settings-api-part-5-tabbed-navigation-for-settings--wp-24971 -->
-        <!-- or use https://gcostudios.com/how-to-add-jquery-ui-tabs-into-wordpress/ for jquery ui tabs -->
-    <h1><?php esc_html_e('Print My Blog - Edit Project Content', 'event_espresso'); ?></h1>
-    <h2><?php esc_html($project->getWpPost()->post_title);?></h2>
     <form id="pmb-project-form" method="POST" action="<?php echo $form_url;?>">
         <div id="pmb-project-layout" class="pmb-project-layout">
             <div class="pmb-project-layout-inner">
@@ -155,5 +152,4 @@ function pmb_content_item($posty_row, $max_nesting = 0){
         <button class="button-primary button" id="pmb-save" name="pmb-save" value="save"><?php esc_html_e('Save', 'print-my-blog'); ?></button>
     </form>
 
-
-</div>
+<?php pmb_render_template('partials/project_footer.php');

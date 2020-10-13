@@ -19,9 +19,15 @@ use PrintMyBlog\controllers\Admin;
 // Content
 
 // Generate link
+pmb_render_template(
+        'partials/project_header.php',
+        [
+                'project' => $project,
+                'page_title' => __('Edit Project', 'print-my-blog'),
+                'show_back' => false
+        ]
+);
 ?>
-<div class="wrap nosubsub">
-    <h1><?php esc_html_e('Print My Blog - Edit Project', 'event_espresso'); ?></h1>
     <form id="pmb-project-form" method="POST" action="<?php echo $form_url;?>">
         <?php wp_nonce_field( 'pmb-project-edit' );?>
         <div id="pmb-project-main" class="pmb-project-main form-group">
@@ -80,4 +86,4 @@ use PrintMyBlog\controllers\Admin;
         <br/><br/>
         <a href="<?php echo esc_attr($project_generate_url);?>" class="button button-primary"><?php esc_html_e('Generate Project Files', 'print-my-blog');?></a>
     </form>
-</div>
+<?php pmb_render_template('partials/project_footer.php');

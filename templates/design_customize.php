@@ -8,6 +8,14 @@
 
 // save button, and textbox to make into a new design
 
+pmb_render_template(
+	'partials/project_header.php',
+	[
+		'project' => $project,
+		'page_title' => __('Customize Design', 'print-my-blog'),
+		'show_back' => true
+	]
+);
 ?>
 <div><span class="pmb-help"><?php printf(__('Design supports %d layers of nested divisions', 'print-my-blog'), $design->getDesignTemplate()->getLevels());?></span></div>
 <form method="POST" action="<?php echo esc_attr($form_url);?>">
@@ -15,3 +23,4 @@
     <button class="button button-primary pmb-save"><?php esc_html_e('Save', 'print-my-blog');?></button>
 <!--    <button id="pmb-save-as" class="button button-primary pmb-save-as">--><?php //esc_html_e('Save As...', 'print-my-blog');?><!--</button>-->
 </form>
+<?php pmb_render_template('partials/project_footer.php');
