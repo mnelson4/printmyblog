@@ -8,20 +8,20 @@ add_action(
 		wp_add_inline_style(
 			'pmb_print_common',
 			$css . '@page title-page /*body*/{
-					background: url(' . $design->getPmbMeta('title_page_banner'). ') no-repeat,
-						url(' . $design->getPmbMeta('background_embellishment') . ') center center no-repeat,
+					background: url(' . $design->getSetting('title_page_banner'). ') no-repeat,
+						url(' . $design->getSetting('background_embellishment') . ') center center no-repeat,
 						linear-gradient(#cce5ff, #e6f2ff);
 						@top-right {
-				            content: "' . $design->getPmbMeta('org'). '";
+				            content: "' . $design->getSetting('org'). '";
 				            color:white;
 				        }
 				}
 				@page main /*article*/{
-					background: url(' . $design->getPmbMeta('background_embellishment') . ') right bottom/150px no-repeat,
+					background: url(' . $design->getSetting('background_embellishment') . ') right bottom/150px no-repeat,
 						linear-gradient(127deg, rgba(230,242,255,1) 0%, rgba(230,242,255,1) 92%, rgba(204,229,255,1) 100%);;
 				}
 				@page back-matter{
-					url(' . $design->getPmbMeta('background_embellishment') . ') center center no-repeat,
+					url(' . $design->getSetting('background_embellishment') . ') center center no-repeat,
 						linear-gradient(#cce5ff, #e6f2ff);
 				}
 			/* MIKE STYLE */'

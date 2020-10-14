@@ -165,7 +165,7 @@ class DesignTemplate {
 	/**
 	 * @return FormSectionProper
 	 */
-	public function getDesignForm()
+	public function getDesignFormTemplate()
 	{
 		if(! $this->design_form instanceof FormSectionProper){
 			$this->design_form = call_user_func($this->design_form_callback);

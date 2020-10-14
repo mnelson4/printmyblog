@@ -5,7 +5,7 @@
 ?>
 <div <?php pmb_section_wrapper_class();?> <?php pmb_section_wrapper_id();?>>
 <article <?php pmb_section_class(); ?> <?php pmb_section_id(); ?>>
-    <?php $post_content = $project->getPmbMeta('post_content');?>
+    <?php $post_content = $project->getSetting('post_content');?>
     <header class="entry-header has-text-align-center<?php echo esc_attr( $entry_header_classes ); ?>">
 
         <div class="entry-header-inner section-inner medium">

@@ -502,15 +502,7 @@ class Admin extends BaseController
     	if( $this->invalid_form instanceof FormSectionProper){
     		$form = $this->invalid_form;
 	    } else {
-		    $form = $design->getDesignTemplate()->getDesignForm();
-		    $defaults = [];
-		    foreach($form->inputs_in_subsections() as $input){
-		    	$saved_default = $design->getSetting($input->name());
-		    	if($saved_default !== null){
-				    $defaults[$input->name()] = $saved_default;
-			    }
-		    }
-		    $form->populate_defaults($defaults);
+		    $form = $design->getDesignForm();
 	    }
 
     	$form_url = add_query_arg(
@@ -765,7 +757,7 @@ class Admin extends BaseController
     protected function saveProjectCustomizeDesign(Project $project)
     {
     	$design = $project->getDesignFor($_GET['format']);
-    	$design_form = $design->getDesignTemplate()->getDesignForm();
+    	$design_form = $design->getDesignTemplate()->getDesignFormTemplate();
     	$design_form->receive_form_submission($_REQUEST);
     	if(! $design_form->is_valid()) {
 		    $this->invalid_form = $design_form;

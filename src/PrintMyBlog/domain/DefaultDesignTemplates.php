@@ -97,6 +97,11 @@ class DefaultDesignTemplates {
 											'default' => __('Don’t move', 'print-my-blog'),
 											'snap' => __('Snap to the top or bottom of the page', 'print-my-blog'),
 											'snap-unless-fit' => __('Only snap if the image would cause a page break', 'print-my-blog')
+										],
+										[
+											'html_label_text' => __('Image Placement', 'print-my-blog'),
+											'html_help_text' => __('To reduce whitespace around images, Print My Blog can move images around in your content.', 'print-my-blog'),
+											'default' => 'snap-unless-fit'
 										])
 									]
 								]),
@@ -279,12 +284,21 @@ class DefaultDesignTemplates {
 
 	public function getDefaultProjectForm(Design $design){
 		$sections = [];
-		$header_content = $design->getPmbMeta('header_content');
+		$header_content = $design->getSetting('header_content');
 		if(in_array('title', $header_content)){
 			$sections['title'] = new TextInput();
 		}
 		if(in_array('subtitle', $header_content)){
 			$sections['subtitle'] = new TextInput();
+		}
+		if(in_array('url',$header_content)){
+			$sections['url'] = new TextInput(
+				[
+					'default' => site_url(),
+					'html_label_text' => __('Source Location', 'print-my-blog'),
+					'html_help_text' => __('Shown on the title page under the subtitle. Could be your website’s URL, or anything else you like.', 'print-my-blog')
+				]
+			);
 		}
 		return new FormSectionProper( [
 			'subsections' => $sections
@@ -311,7 +325,7 @@ class DefaultDesignTemplates {
 						[
 							'default' => [
 								'title',
-								'description',
+								'subtitle',
 								'url',
 								'date_printed'
 							],
@@ -373,6 +387,10 @@ class DefaultDesignTemplates {
 									'medium' => __('Medium (1/2 size)', 'print-my-blog'),
 									'large' => __('Large (3/4 size)', 'print-my-blog'),
 									'full' => __('Full (theme default)', 'print-my-blog')
+								],
+								[
+									'html_label_text' => __('Image Size', 'print-my-blog'),
+									'default' => 'medium'
 								]
 							),
 						]

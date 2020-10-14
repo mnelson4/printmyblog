@@ -65,6 +65,11 @@ class Project extends PostWrapper{
 	protected $supports_division = [];
 
 	/**
+	 * @var FormSectionProper
+	 */
+	protected $meta_form;
+
+	/**
 	 * @param ProjectSectionManager $section_manager
 	 * @param FileFormatRegistry $format_manager
 	 * @param DesignManager $design_manager
@@ -431,27 +436,37 @@ class Project extends PostWrapper{
 	 * @return FormSectionProper
 	 * @throws ImproperUsageException
 	 */
-	public function getMetaForm(){
-		$formats = $this->getFormatSlugsSelected();
-		$forms = [];
-		foreach($formats as $format){
-			$forms[] = $this->getDesignFor($format)->getProjectForm();
-		}
-		$project_form = new FormSectionProper(
-			['name' => 'pmb_project']
-		);
+	public function getMetaForm() {
+		if ( ! $this->meta_form instanceof FormSectionProper ) {
+			$formats = $this->getFormatSlugsSelected();
+			$forms   = [];
+			foreach ( $formats as $format ) {
+				$forms[] = $this->getDesignFor( $format )->getProjectForm();
+			}
+			$project_form = new FormSectionProper(
+				[ 'name' => 'pmb_project' ]
+			);
 
-		foreach($forms as $form){
-			$project_form->merge($form);
+			foreach ( $forms as $form ) {
+				$project_form->merge( $form );
+			}
+			// If there's a field named "title", set its default to be the post title.
+			$title_input = $project_form->get_subsection( 'title' );
+			if ( $title_input instanceof FormInputBase ) {
+				$title_input->set_default( $this->getWpPost()->post_title );
+			}
+			$this->meta_form = $project_form;
 		}
-		// If there's a field named "title", set its default to be the post title.
-		$title_input = $project_form->get_subsection('title');
-		if($title_input instanceof FormInputBase){
-			$title_input->set_default($this->getWpPost()->post_title);
-		}
-		return $project_form;
+		return $this->meta_form;
 	}
 
+	/**
+	 * Gets the value saved from the project meta-form. If it wasn't set, uses
+	 * the form's default value
+	 * @param string $setting_name
+	 *
+	 * @return mixed|null
+	 */
 	public function getSetting($setting_name) {
 		// tries to get the setting from a postmeta
 		$setting = $this->getPmbMeta( $setting_name );

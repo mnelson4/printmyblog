@@ -12,8 +12,8 @@ add_action(
 			'pmb-design',
 			'pmb_classic_options',
 			[
-				'external_links' => $design->getPmbMeta('external_links'),
-				'internal_links' => $design->getPmbMeta('internal_links')
+				'external_links' => $design->getSetting('external_links'),
+				'internal_links' => $design->getSetting('internal_links')
 			]
 		);
 	},

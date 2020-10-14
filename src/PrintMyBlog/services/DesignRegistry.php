@@ -82,9 +82,16 @@ class DesignRegistry {
 		$design = $this->design_manager->getById($design_post_id);
 		$design->setMeta('_pmb_format', $design_template->getFormatSlug());
 		$design->setMeta('_pmb_design_template', $design_template->getSlug());
-		foreach($args['design_defaults'] as $key => $value){
-			$design->setPmbMeta($key, $value);
+
+		// Set all the settings from the form too, taking into account the defaults set on the design itself.
+		$design_form = $design->getDesignForm();
+		if(isset($args['design_defaults'])){
+			$design_form->populate_defaults($args['design_defaults']);
 		}
+		foreach($design_form->input_values(true,true) as $setting_name => $normalized_value){
+			$design->setSetting($setting_name, $normalized_value);
+		}
+
 	}
 
 	/**

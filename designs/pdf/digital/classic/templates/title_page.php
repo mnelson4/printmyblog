@@ -7,33 +7,43 @@
 ?>
 <div class="pmb-posts-header">
 	<?php
-    if (in_array('title',$pmb_design->getPmbMeta('header_content'))) { ?>
+    if (in_array('title',$pmb_design->getSetting('header_content'))) {
+        ?>
         <h1 class="site-title"><?php echo $pmb_project->getPublishedTitle(); ?></h1>
-	<?php }
-    if (in_array('subtitle',$pmb_design->getPmbMeta('header_content'))) { ?>
-        <p class="site-description"><?php echo $pmb_project->getPmbMeta('subtitle'); ?></p>
-	<?php } ?>
+	    <?php
+    }
+    if (in_array('subtitle',$pmb_design->getSetting('header_content'))) {
+        ?>
+        <p class="site-description pmb-subtitle"><?php echo $pmb_project->getSetting('subtitle'); ?></p>
+	    <?php
+    }
+    if(in_array('url', $pmb_design->getSetting('header_content'))){
+        ?>
+        <p class="site-url"><?php echo $pmb_project->getSetting('url');?></p>
+        <?php
+	}
+	?>
     <p class="pmb-printout-meta">
 		<?php
 		//give it some space
 		echo ' ';
-		if (in_array('date_printed',$pmb_design->getPmbMeta('header_content')) &&
-		    in_array('credit_pmb',$pmb_design->getPmbMeta('header_content'))) {
+		if (in_array('date_printed',$pmb_design->getSetting('header_content')) &&
+		    in_array('credit_pmb',$pmb_design->getSetting('header_content'))) {
 
 			printf(
 			// translators: 1: date, 2: opening link tag, 3: closing link tag
 				esc_html__('Printed on %1$s using %2$sPrint My Blog%3$s', 'print-my-blog'),
 				date_i18n(get_option('date_format')),
-				'<a href="https:printmy.blog">',
+				'<a href="https://printmy.blog">',
 				'</a>'
 			);
-		} elseif (in_array('date_printed',$pmb_design->getPmbMeta('header_content'))) {
+		} elseif (in_array('date_printed',$pmb_design->getSetting('header_content'))) {
 			// translators: 1: date
 			printf(
 				esc_html__('Printed on %1$s', 'print-my-blog'),
 				date_i18n(get_option('date_format'))
 			);
-		} elseif (in_array('credit_pmb',$pmb_design->getPmbMeta('header_content'))) {
+		} elseif (in_array('credit_pmb',$pmb_design->getSetting('header_content'))) {
 			printf(
 				esc_html__('Printed using %1$sPrint My Blog%2$s', 'print-my-blog'),
 				'<a href="https://printmy.blog">',

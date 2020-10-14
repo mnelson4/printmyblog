@@ -12,7 +12,7 @@ pmb_render_template(
 	'partials/project_header.php',
 	[
 		'project' => $project,
-		'page_title' => __('Customize Design', 'print-my-blog'),
+		'page_title' => sprintf(__('Customize Design: %s', 'print-my-blog'), $design->getWpPost()->post_title),
 		'show_back' => true
 	]
 );
