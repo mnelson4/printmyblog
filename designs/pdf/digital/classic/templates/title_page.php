@@ -19,7 +19,7 @@
     }
     if(in_array('url', $pmb_design->getSetting('header_content'))){
         ?>
-        <p class="site-url"><?php echo $pmb_project->getSetting('url');?></p>
+        <p class="site-url "><?php echo $pmb_project->getSetting('url');?></p>
         <?php
 	}
 	?>

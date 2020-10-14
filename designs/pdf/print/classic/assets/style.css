@@ -95,7 +95,7 @@
         string-set: section-title content();
     }
 
-    .pmb-section{
+    .pmb-section-wrapper:not(.pmb-first-section-wrapper){
         break-before:page;
     }
 
