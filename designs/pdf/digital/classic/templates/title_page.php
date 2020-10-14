@@ -18,8 +18,22 @@
 	    <?php
     }
     if(in_array('url', $pmb_design->getSetting('header_content'))){
+        $url_text = $pmb_project->getSetting('url');
+        $true_url = esc_url_raw($url_text) === $url_text;
         ?>
-        <p class="site-url "><?php echo $pmb_project->getSetting('url');?></p>
+        <p class="site-url "><?php
+            if($true_url){
+                ?>
+                <a href="<?php echo esc_attr($url_text);?>">
+                <?php
+            }
+            echo $url_text;
+            if($true_url){
+                ?>
+                </a>
+            <?php
+        }
+            ?></p>
         <?php
 	}
 	?>

@@ -144,10 +144,10 @@ abstract class ProjectFileGeneratorBase {
 	 * @param ProjectSection[] $project_sections
 	 */
 	protected function generateSections(array $project_sections) {
-		$query = $this->setupWpQuery($project_sections);
-		global $post;
-		while ( $query->have_posts() ) {
-			$query->the_post();
+		global $post, $wp_query;
+		$wp_query = $this->setupWpQuery($project_sections);
+		while ( $wp_query->have_posts() ) {
+			$wp_query->the_post();
 			$this->maybeGenerateDivisionTransition($post);
 			$this->generateSection();
 		}

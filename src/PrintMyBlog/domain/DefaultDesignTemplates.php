@@ -344,7 +344,7 @@ class DefaultDesignTemplates {
 							'featured_image' => __('Featured Image', 'print-my-blog'),
 							'excerpt' => __('Excerpt', 'print-my-blog'),
 							'content' => __('Content', 'print-my-blog'),
-							'comments' => __('Comments', 'print-my-blog'),
+							//'comments' => __('Comments', 'print-my-blog'),
 						],
 						[
 							'default' => [

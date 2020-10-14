@@ -570,7 +570,7 @@ class Admin extends BaseController
 		    $defaults = [];
 		    foreach($form->inputs_in_subsections() as $input){
 			    $saved_value = $project->getSetting($input->name());
-			    if($saved_value && ! $input->get_default()){
+			    if($saved_value){
 				    $defaults[$input->name()] = $saved_value;
 			    }
 		    }

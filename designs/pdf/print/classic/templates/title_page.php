@@ -1,43 +1,60 @@
 <?php
 /**
- * @var $pmb_project \PrintMyBlog\orm\entities\Project
- * @var $pmb_design \PrintMyBlog\orm\entities\Design
-*
+ * @var \PrintMyBlog\orm\entities\Project $pmb_project
+ * @var PrintMyBlog\orm\entities\Design $pmb_design
  */
 ?>
-<div class="pmb-posts-header">
-	<?php
-    if (in_array('title',$pmb_design->getSetting('header_content'))) { ?>
-        <h1 class="site-title project-title"><?php echo $pmb_project->getPublishedTitle(); ?></h1>
-	<?php }
-    if (in_array('subtitle',$pmb_design->getSetting('header_content'))) { ?>
-        <p class="site-description"><?php echo $pmb_project->getSetting('subtitle'); ?></p>
-	<?php } ?>
-    <p class="pmb-printout-meta">
-		<?php
-		//give it some space
-		echo ' ';
-		if (in_array('date_printed',$pmb_design->getSetting('header_content')) &&
-		    in_array('credit_pmb',$pmb_design->getSetting('header_content'))) {
+<div <?php pmb_section_wrapper_class();?> <?php pmb_section_wrapper_id();?>>
+    <article <?php pmb_section_class(); ?> <?php pmb_section_id(); ?>>
+		<?php $post_content = $pmb_design->getSetting('post_content');?>
+        <header class="entry-header has-text-align-center">
 
-			printf(
-			// translators: 1: date, 2: opening link tag, 3: closing link tag
-				esc_html__('Printed on %1$s using %2$sPrint My Blog%3$s', 'print-my-blog'),
-				date_i18n(get_option('date_format')),
-				'<a href="https:printmy.blog">',
-				'</a>'
-			);
-		} elseif (in_array('date_printed',$pmb_design->getSetting('header_content'))) {
-			// translators: 1: date
-			printf(
-				esc_html__('Printed on %1$s', 'print-my-blog'),
-				date_i18n(get_option('date_format'))
-			);
-		} elseif (in_array('credit_pmb',$pmb_design->getSetting('header_content'))) {
-			printf(
-				esc_html__('Printed using %1$sPrint My Blog%2$s', 'print-my-blog'),
-				'<a href="https://printmy.blog">',
-				'</a>'
-			);
+            <div class="entry-header-inner section-inner medium">
+				<?php if(in_array('title', $post_content))pmb_the_title();?>
+                <div class="entry-meta">
+					<?php
+					if(in_array('id',$post_content)){
+						?>
+                        <span><?php printf(__('ID:%s', 'print-my-blog'), get_the_ID());?></span>
+						<?php
+					}
+					if(in_array('author',$post_content)){
+						?>
+                        <span><?php printf(__('By %s', 'print-my-blog'), get_the_author());?></span>
+						<?php
+					}
+					if(in_array('published_date', $post_content)){
+						?>
+                        <span class="posted-on pmb-post-meta">
+                        <?php the_date();?>
+                    </span>
+						<?php
+					}
+					if(in_array('categories', $post_content)){
+						the_category(',');
+					}
+
+					if(in_array('url', $post_content)){
+						?>
+                        <div><span class="pmb-url"><a href="<?php the_permalink();?>"><?php the_permalink();?></a></</span></div>
+						<?php
+					}?>
+                </div>
+            </div><!-- .entry-header-inner -->
+        </header><!-- .entry-header -->
+		<?php
+		if (in_array('featured_image',$post_content) && has_post_thumbnail() ) {
+			the_post_thumbnail('full');
 		}
-		?></p>
+		if(in_array('excerpt',$post_content)){
+			?>
+            <div class="excerpt"><?php the_excerpt();?></div>
+			<?php
+		}
+		?>
+		<?php
+		if(in_array('content',$post_content))pmb_include_design_template( 'partials/content' );
+		?>
+    </article>
+<?php // if(in_array('comments',$post_content))pmb_include_design_template('partials/comments');?>
+<?php // don't close wrapping div, we'll close it elsewhere

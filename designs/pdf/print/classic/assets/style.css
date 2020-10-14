@@ -64,6 +64,16 @@
     .pmb-posts-header .site-title{
         font-size:5em;
     }
+    .site-description{
+        width:50%;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .pmb-url{
+        font-style:italic;
+        color:darkgray;
+        text-align:center;
+    }
 
 
     /* toc */
@@ -106,5 +116,12 @@
     .pmb-posts span.pmb-footnote{
         float:footnote;
         text-align:left;
+    }
+    .excerpt{
+        width:80%;
+        margin-left:auto;
+        margin-right:auto;
+        size:1.5em;
+        font-style:italic;
     }
 }
