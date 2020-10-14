@@ -55,3 +55,6 @@
 .pmb-breadcrumb span:not(:first-child)::before{
     content: " / ";
 }
+.pmb-uninstall, .pmb-uninstall:hover, .pmb-uninstall:active, .pmb-uninstall:visited{
+    color:#a00;
+}

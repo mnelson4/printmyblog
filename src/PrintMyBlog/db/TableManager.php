@@ -40,4 +40,10 @@ class TableManager
         ;'
         );
     }
+
+    public function dropTables()
+    {
+    	global $wpdb;
+    	return $wpdb->query('DROP TABLE ' . $wpdb->prefix . self::SECTIONS_TABLE);
+    }
 }

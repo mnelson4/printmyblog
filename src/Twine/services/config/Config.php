@@ -23,9 +23,13 @@ abstract class Config {
 	 */
 	protected function ensureLoadedFromDb(){
 		if($this->settings === null){
+			$saved_config = get_option($this->optionName());
+			if(! is_array($saved_config)){
+				$saved_config = [];
+			}
 			$this->settings = array_merge(
 				$this->declareDefaults(),
-				get_option($this->optionName()), array()
+				$saved_config
 			);
 		}
 	}

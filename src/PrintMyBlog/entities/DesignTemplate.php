@@ -268,6 +268,14 @@ class DesignTemplate {
 	}
 
 	/**
+	 * Gets the slug of the default design
+	 * @return string
+	 */
+	public function getDefaultDesignSlug(){
+		return $this->default_design_slug;
+	}
+
+	/**
 	 * Gets the list of all valid divisions. These
 	 * @return string[]
 	 */

@@ -449,7 +449,7 @@ class Project extends PostWrapper{
 		if($title_input instanceof FormInputBase){
 			$title_input->set_default($this->getWpPost()->post_title);
 		}
-		return $form;
+		return $project_form;
 	}
 
 	public function getSetting($setting_name) {

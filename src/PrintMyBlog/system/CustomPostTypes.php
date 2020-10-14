@@ -137,4 +137,15 @@ class CustomPostTypes
 		/* Return the capabilities required by the user. */
 		return $caps;
 	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getPostTypes(){
+    	return [
+    		self::CONTENT,
+		    self::DESIGN,
+		    self::PROJECT
+	    ];
+	}
 }

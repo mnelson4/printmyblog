@@ -78,13 +78,16 @@
     }
 
     /* part styling*/
-    .pmb-part h1.entry-title{
-        font-size:120%;
+    .pmb-part h1.pmb-title{
+        font-size:300%;
         string-set: part-title content();
         margin-top:2in;
     }
     .pmb-part .entry-content{
-        margin-top:1in;
+        margin-top:2in;
+        width:50%;
+        margin-right:auto;
+        margin-left:auto;
     }
 
     /* Article styles */

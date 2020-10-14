@@ -5,6 +5,7 @@ namespace PrintMyBlog\controllers;
 use Exception;
 use PrintMyBlog\controllers\helpers\ProjectsListTable;
 use PrintMyBlog\db\PostFetcher;
+use PrintMyBlog\db\TableManager;
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
 use PrintMyBlog\entities\DesignTemplate;
@@ -72,12 +73,19 @@ class Admin extends BaseController
 	 * @var FormSectionProper
 	 */
     protected $invalid_form;
+	/**
+	 * @var TableManager
+	 */
+	protected $table_manager;
 
 	/**
 	 * @param PostFetcher $post_fetcher
 	 * @param ProjectSectionManager $section_manager
 	 * @param ProjectManager $project_manager
 	 * @param FileFormatRegistry $project_format_manager
+	 *
+	 * @param DesignManager $design_manager
+	 * @param TableManager $table_manager
 	 *
 	 * @since $VID:$
 	 */
@@ -86,13 +94,15 @@ class Admin extends BaseController
 	    ProjectSectionManager $section_manager,
 	    ProjectManager $project_manager,
 		FileFormatRegistry $project_format_manager,
-		DesignManager $design_manager
+		DesignManager $design_manager,
+		TableManager $table_manager
     ){
         $this->post_fetcher    = $post_fetcher;
         $this->section_manager = $section_manager;
         $this->project_manager = $project_manager;
         $this->file_format_registry = $project_format_manager;
         $this->design_manager = $design_manager;
+        $this->table_manager = $table_manager;
     }
     /**
      * name of the option that just indicates we successfully saved the setttings
@@ -109,6 +119,16 @@ class Admin extends BaseController
         add_action('admin_enqueue_scripts', [$this,'enqueueScripts']);
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             add_action('admin_init', [$this, 'checkFormSubmission']);
+        }
+        if(isset($_GET['action']) && $_GET['action'] === 'uninstall'){
+	        $this->uninstall();
+	        if (current_user_can('activate_plugins')) {
+		        if (! function_exists('deactivate_plugins')) {
+			        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		        }
+		        deactivate_plugins(PMB_BASENAME, true);
+	        }
+	        wp_safe_redirect(admin_url('plugins.php'));
         }
     }
 
@@ -266,7 +286,19 @@ class Admin extends BaseController
             . esc_html__('Settings', 'print-my-blog')
             . '</a>'
             ),
-            $links
+            $links,
+	        [
+	        	'<a href="'
+		        . add_query_arg(
+		        	[
+		        		'action' => 'uninstall'
+			        ],
+		        	admin_url(PMB_ADMIN_PAGE_PATH)
+		        )
+		        . '" id="pmb-uninstall" class="pmb-uninstall">'
+		        . esc_html__('Uninstall', 'print-my-blog')
+		        . '</a>'
+	        ]
         );
 
         return $links;
@@ -347,6 +379,13 @@ class Admin extends BaseController
                 array(),
                 filemtime(PMB_STYLES_DIR . 'project-edit.css')
             );
+        } elseif($hook === 'plugins.php'){
+        	wp_enqueue_script(
+        		'pmb-plugins-page',
+		        PMB_SCRIPTS_URL . 'pmb-plugins-page.js',
+		        [],
+		        filemtime(PMB_SCRIPTS_DIR . 'pmb-plugins-page.js')
+	        );
         }
     }
 
@@ -851,5 +890,18 @@ class Admin extends BaseController
 		else {
 			$this->project_manager->deleteProjects($_POST['ID']);
 		}
+	}
+
+	protected function uninstall()
+	{
+		// clear custom table
+		$this->table_manager->dropTables();
+
+		// clear CPTs
+		$deleted = $this->post_fetcher->deleteCustomPostTypes();
+
+		// clear options
+		global $wpdb;
+		$wpdb->query('DELETE FROM ' . $wpdb->options . ' WHERE option_name LIKE "pmb_%"');
 	}
 }

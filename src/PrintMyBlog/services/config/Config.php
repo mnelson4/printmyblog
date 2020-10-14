@@ -20,7 +20,7 @@ class Config extends TwineConfig {
 	protected $design_manager;
 
 	protected function optionName() {
-		return 'print_my_blog';
+		return 'pmb_config';
 	}
 
 	protected function declareDefaults() {
@@ -55,8 +55,8 @@ class Config extends TwineConfig {
 	 * @return Design|null
 	 */
 	public function getDefaultDesignFor($format){
-		if($format instanceof FileFormat){
-			$format = $format->slug();
+		if(! $format instanceof FileFormat){
+			$format = $this->format_registry->getFormat($format);
 		}
 		$key = $this->getSettingForDefaultDesignForFormat($format);
 		$design_id = $this->getSetting($key);
@@ -67,7 +67,7 @@ class Config extends TwineConfig {
 			}
 		}
 		// We didn't find an existing design. Just look for a design with the default slug.
-		$design = $this->design_manager->getBySlug('classic_' . $format);
+		$design = $this->design_manager->getBySlug($format->getDefaultDesignTemplate()->getDefaultDesignSlug());
 		if($design instanceof Design){
 			$this->setSetting($key, $design->getWpPost()->ID);
 			return $design;

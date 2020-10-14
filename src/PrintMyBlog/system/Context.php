@@ -47,7 +47,8 @@ class Context extends BaseContext
 		        'PrintMyBlog\orm\managers\ProjectSectionManager'              => self::REUSE,
 		        'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
 		        'PrintMyBlog\services\FileFormatRegistry'   => self::REUSE,
-		        'PrintMyBlog\orm\managers\DesignManager' => self::REUSE
+		        'PrintMyBlog\orm\managers\DesignManager' => self::REUSE,
+		        'PrintMyBlog\db\TableManager' => self::REUSE
             ],
 	        'PrintMyBlog\controllers\Ajax'  => [
 	        	'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
@@ -86,6 +87,9 @@ class Context extends BaseContext
 	        ],
 	        'PrintMyBlog\entities\FileFormat' => [
 	        	'PrintMyBlog\services\DesignTemplateRegistry' => self::REUSE,
+	        ],
+	        'PrintMyBlog\db\PostFetcher' => [
+	        	'PrintMyBlog\system\CustomPostTypes' => self::REUSE
 	        ]
         ];
     }

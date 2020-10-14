@@ -67,7 +67,7 @@ class DefaultDesigns {
 		);
 		pmb_register_design(
 			'classic_print',
-			'classic_print_pdf',
+			'classic_print',
 			function(DesignTemplate $design_template){
 				return [
 					'title' => __('Classic Print PDF', 'print-my-blog'),
@@ -84,7 +84,7 @@ class DefaultDesigns {
 		);
 		pmb_register_design(
 			'classic_print',
-			'economical_print_pdf',
+			'economical_print',
 			function(DesignTemplate $design_template){
 				return [
 					'title' => __('Economical Print PDF', 'print-my-blog'),
@@ -115,7 +115,7 @@ class DefaultDesigns {
 		);
 		pmb_register_design(
 			'classic_print',
-			'tree_saver_print_pdf',
+			'tree_saver_print',
 			function(DesignTemplate $design_template){
 				return [
 					'title' => __('Tree-Saver Print PDF', 'print-my-blog'),

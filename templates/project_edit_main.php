@@ -59,19 +59,19 @@ pmb_render_template(
 		            admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	            );
                 ?>
-            <tr>
-                <th scope="row">
-                    <label>
-                        <input type="checkbox" name="pmb_format[]" value="<?php echo $format->slug();?>" <?php checked($project->isFormatSelected($format->slug()));?>>
-	                    <?php echo $format->title();?>
-                    </label>
-                </th>
-                <td>
-                    <?php printf(esc_html('Design: %s', 'print-my-blog'), '<b>' . $design->getWpPost()->post_title . '</b>');?>
-                <a href="<?php echo esc_attr($customize_url);?>"><?php esc_html_e('Customize', 'print-my-blog');?></a> |
-                <a href="<?php echo esc_attr($change_design_url);?>"><?php esc_html_e('Use Different...','print-my-blog');?></a>
-                </td>
-            </tr>
+                <tr>
+                    <th scope="row">
+                        <label>
+                            <input type="checkbox" name="pmb_format[]" value="<?php echo $format->slug();?>" <?php checked($project->isFormatSelected($format->slug()));?>>
+                            <?php echo $format->title();?>
+                        </label>
+                    </th>
+                    <td>
+                        <?php printf(esc_html('Design: %s', 'print-my-blog'), '<b>' . $design->getWpPost()->post_title . '</b>');?>
+                    <a href="<?php echo esc_attr($customize_url);?>"><?php esc_html_e('Customize', 'print-my-blog');?></a> |
+                    <a href="<?php echo esc_attr($change_design_url);?>"><?php esc_html_e('Use Different...','print-my-blog');?></a>
+                    </td>
+                </tr>
             <?php }?>
             </tbody>
         </table>

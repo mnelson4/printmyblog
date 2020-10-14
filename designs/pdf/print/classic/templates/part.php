@@ -9,6 +9,6 @@
             </div><!-- .entry-header-inner -->
         </header><!-- .entry-header -->
 
-        <?php pmb_include_design_template( 'partials/content.php' );?>
+        <?php pmb_include_design_template( 'partials/content' );?>
     </article>
 <?php // div automatically closed

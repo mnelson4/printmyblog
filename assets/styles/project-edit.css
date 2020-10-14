@@ -82,7 +82,7 @@
 
 .pmb-project-content-chosen .pmb-nested-sortable{
     /*border: 1px dotted gray;*/
-    margin: .5em 1em .5em 2em;
+    margin: .5em 0 .5em 2em;
 }
 .pmb-project-item-header{
     display: flex;
