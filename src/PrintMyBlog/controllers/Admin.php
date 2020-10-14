@@ -505,7 +505,10 @@ class Admin extends BaseController
 		    $form = $design->getDesignTemplate()->getDesignForm();
 		    $defaults = [];
 		    foreach($form->inputs_in_subsections() as $input){
-		    	$defaults[$input->name()] = $design->getSetting($input->name());
+		    	$saved_default = $design->getSetting($input->name());
+		    	if($saved_default !== null){
+				    $defaults[$input->name()] = $saved_default;
+			    }
 		    }
 		    $form->populate_defaults($defaults);
 	    }

@@ -39,11 +39,15 @@ class PostWrapper {
 	 * @return mixed
 	 */
 	public function getMeta($meta_name){
-		return get_post_meta(
+		$metas = get_post_meta(
 			$this->getWpPost()->ID,
 			$meta_name,
-			true
+			false
 		);
+		if(count($metas)){
+			return reset($metas);
+		}
+		return null;
 	}
 
 	/**
