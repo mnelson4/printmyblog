@@ -683,7 +683,7 @@ class Admin extends BaseController
 			    ],
 			    [
 					$toc_page->ID,
-				    '',
+				    'just_content',
 				    0,
 				    1,
 				    []
