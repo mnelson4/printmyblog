@@ -31,8 +31,8 @@
             if($true_url){
                 ?>
                 </a>
-            <?php
-        }
+                <?php
+            }
             ?></p>
         <?php
 	}

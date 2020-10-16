@@ -296,7 +296,7 @@ class Admin extends BaseController
 		        	admin_url(PMB_ADMIN_PAGE_PATH)
 		        )
 		        . '" id="pmb-uninstall" class="pmb-uninstall">'
-		        . esc_html__('Uninstall', 'print-my-blog')
+		        . esc_html__('Uninstall & Delete', 'print-my-blog')
 		        . '</a>'
 	        ]
         );
@@ -683,7 +683,7 @@ class Admin extends BaseController
 			    ],
 			    [
 					$toc_page->ID,
-				    'just_content',
+				    '',
 				    0,
 				    1,
 				    []

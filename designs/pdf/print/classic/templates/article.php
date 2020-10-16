@@ -31,7 +31,7 @@
                     <?php
                 }
                 if(in_array('categories', $post_content)){
-                    the_category(',');
+                    echo strip_tags(get_the_category(','));
                 }
 
                 if(in_array('url', $post_content)){

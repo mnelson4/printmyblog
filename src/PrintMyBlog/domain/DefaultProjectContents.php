@@ -40,7 +40,7 @@ class DefaultProjectContents {
 				],
 				'pmb-toc' => [
 					'post_title' => __('Table of Contents', 'print-my-blog'),
-					'post_content' => '<h1 class="pmb-header has-text-align-center">Table of Contents</h1> [pmb_toc]'
+					'post_content' => '[pmb_toc]'
 				]
 			]
 		);

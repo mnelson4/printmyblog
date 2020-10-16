@@ -3,6 +3,9 @@
  * Functions used internally by Print My Blog that other devs probably won't need.
  */
 
+use PrintMyBlog\entities\DesignTemplate;
+use PrintMyBlog\orm\entities\ProjectSection;
+
 /**
  * Returns a string that says this feature only works with Print My Blog Pro.
  * @return string
@@ -34,7 +37,13 @@ function pmb_pro(){
  *
  * @return string
  */
-function pmb_map_section_to_division(\PrintMyBlog\orm\entities\ProjectSection $section){
+function pmb_map_section_to_division(ProjectSection $section){
+	if($section->getPlacement() === DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER){
+		return 'front_matter_article';
+	}
+	if($section->getPlacement() === DesignTemplate::IMPLIED_DIVISION_BACK_MATTER){
+		return 'back_matter_article';
+	}
 	return apply_filters(
 		'pmb_map_section_to_division',
 		pmb_map_section_height_to_division($section->getHeight()),

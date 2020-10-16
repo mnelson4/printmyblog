@@ -11,30 +11,34 @@
 
             <div class="entry-header-inner section-inner medium">
 				<?php if(in_array('title', $post_content))pmb_the_title();?>
-				<?php
-				if(in_array('id',$post_content)){
-					?>
-                    <span><?php printf(__('ID:%s', 'print-my-blog'), get_the_ID());?></span>
-					<?php
-				}
-				if(in_array('author',$post_content)){
-					?>
-                    <span><?php printf(__('By %s', 'print-my-blog'), get_the_author());?></span>
-					<?php
-				}
-				if(in_array('url', $post_content)){
-					?>
-                    <div><span class="pmb-url"><a href="<?php the_permalink();?>"><?php the_permalink();?></a></span></div>
-					<?php
-				}
-
-				?>
-
                 <div class="entry-meta">
-                <span class="posted-on pmb-post-meta">
-                    <?php if(in_array('published_date', $post_content))the_date();?>
-                </span>
-					<?php if(in_array('categories'))the_category();?>
+					<?php
+					if(in_array('id',$post_content)){
+						?>
+                        <span><?php printf(__('ID:%s', 'print-my-blog'), get_the_ID());?></span>
+						<?php
+					}
+					if(in_array('author',$post_content)){
+						?>
+                        <span><?php printf(__('By %s', 'print-my-blog'), get_the_author());?></span>
+						<?php
+					}
+					if(in_array('published_date', $post_content)){
+						?>
+                        <span class="posted-on pmb-post-meta">
+                        <?php the_date();?>
+                    </span>
+						<?php
+					}
+					if(in_array('categories', $post_content)){
+						the_category(',');
+					}
+
+					if(in_array('url', $post_content)){
+						?>
+                        <div><span class="pmb-url"><a href="<?php echo esc_attr(get_the_permalink());?>"<?php the_permalink();?></span></div>
+						<?php
+					}?>
                 </div>
             </div><!-- .entry-header-inner -->
         </header><!-- .entry-header -->
