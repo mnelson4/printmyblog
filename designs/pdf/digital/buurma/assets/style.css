@@ -35,7 +35,7 @@
             content: counter(page)
         }
     }
-    .pmb-posts p {
+    body{
         prince-footnote-policy: keep-with-line;
     }
 
