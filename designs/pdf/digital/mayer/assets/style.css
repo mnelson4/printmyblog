@@ -33,12 +33,12 @@
     }
 
     @page main-matter {
-        @top-left: {
+        @top-left {
             content: string(part-title, first-except);
         }
-        @top-right {
+        /*@top-right {
             content: string(article-title, first-except)
-        }
+        }*/
         @bottom-right {
             content: counter(page)
         }
@@ -87,8 +87,8 @@
         column-span: all;
     }
     .pmb-part h1.pmb-title{
-        font-size:200%;
-        font-weight:200;
+        font-size:300%;
+        font-weight:400;
         string-set: part-title content();
     }
     .pmb-part .entry-content{
