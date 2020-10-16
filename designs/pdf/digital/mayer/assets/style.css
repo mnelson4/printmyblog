@@ -32,12 +32,21 @@
         counter-reset: page 1
     }
 
-    @page main-matter, @page back-matter {
+    @page main-matter {
         @top-left: {
             content: string(part-title, first-except);
         }
         @top-right {
-            content: string(section-title, first-except)
+            content: string(article-title, first-except)
+        }
+        @bottom-right {
+            content: counter(page)
+        }
+    }
+
+    @page back-matter {
+        @top-right {
+            content: string(article-title, first-except)
         }
         @bottom-right {
             content: counter(page)
@@ -77,7 +86,7 @@
     .pmb-part{
         column-span: all;
     }
-    .pmb-part h1.entry-title{
+    .pmb-part h1.pmb-title{
         font-size:200%;
         font-weight:200;
         string-set: part-title content();
@@ -89,8 +98,8 @@
 
 
     /* Article styles */
-    .pmb-section h1.entry-title {
-        string-set: section-title content();
+    .pmb-article h1.pmb-title {
+        string-set: article-title content();
     }
 
     .project-title{
