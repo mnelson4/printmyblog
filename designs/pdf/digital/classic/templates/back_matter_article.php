@@ -1,9 +1,3 @@
-<div <?php pmb_section_wrapper_class();?> <?php pmb_section_wrapper_id();?>>
-    <article <?php pmb_section_class('pmb-just-content'); ?> <?php pmb_section_id(); ?>>
-        <header class="entry-header has-text-align-center">
-            <div class="entry-header-inner section-inner medium">
-				<?php pmb_the_title();?>
-            </div>
-        </header>
-		<?php pmb_include_design_template( 'partials/content' );?>
-    </article>
+<?php
+// prevent some duplication by just reusing the classic PDF's functions.php
+require(PMB_DESIGNS_DIR . 'pdf/print/classic/templates/back_matter_article.php');

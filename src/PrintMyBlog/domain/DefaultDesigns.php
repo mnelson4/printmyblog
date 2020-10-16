@@ -54,7 +54,6 @@ class DefaultDesigns {
 							'content',
 						],
 						'page_per_post' => true,
-						'font_size' => 'small',
 						'image_size' => 'small',
 
 					],
@@ -103,7 +102,7 @@ class DefaultDesigns {
 						],
 						'page_per_page' => false,
 						'columns' => 2,
-						'font_size' => 'small',
+						'font_size' => '10pt',
 						'image_size' => 'small',
 						// purposefully leave hyperlink defaults dynamic
 					],
@@ -133,7 +132,7 @@ class DefaultDesigns {
 						],
 						'page_per_page' => false,
 						'columns' => 3,
-						'font_size' => 'tiny',
+						'font_size' => '8pt',
 						'image_size' => 'none',
 						// use defaults of design template for hyperlinks
 					],

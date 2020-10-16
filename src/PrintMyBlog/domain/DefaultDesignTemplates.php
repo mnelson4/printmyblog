@@ -11,6 +11,7 @@ use Twine\forms\inputs\CheckboxMultiInput;
 use Twine\forms\inputs\DatepickerInput;
 use Twine\forms\inputs\FloatInput;
 use Twine\forms\inputs\FormInputBase;
+use Twine\forms\inputs\IntegerInput;
 use Twine\forms\inputs\SelectInput;
 use Twine\forms\inputs\TextAreaInput;
 use Twine\forms\inputs\TextInput;
@@ -365,32 +366,27 @@ class DefaultDesignTemplates {
 							'html_help_text' => __('Whether to force posts to always start on a new page. Doing so makes the page more legible, but uses more paper.','print-my-blog'),
 						]
 					),
-					'font_size' => new SelectInput(
+					'font_size' => new TextInput(
 						[
-							'tiny' => __('Tiny', 'print-my-blog'),
-							'small' => __('Small', 'print-my-blog'),
-							'normal' => __('Normal', 'print-my-blog'),
-							'large' => __('Large', 'print-my-blog')
-						],
-						[
-							'default' => 'normal',
+							'default' => '12pt',
 							'html_label_text' => __('Font Size', 'print-my-blog'),
+							'html_help_text' => sprintf(
+								__('Use any recognized %1$sCSS font-size keyword%2$s (like "large", "medium", "small") or a %3$slength in any units%2$s (eg "14pt", "50%%", or "10px").'),
+								'<a href="https://www.w3schools.com/cssref/pr_font_font-size.asp" target="_blank">',
+								'</a>',
+								'<a href="https://www.w3schools.com/cssref/css_units.asp" target="_blank">'
+							)
 						]
 					),
-					
 					'image' => new FormSectionProper([
 						'subsections' => [
-							'image_size' => new SelectInput(
+							'image_size' => new IntegerInput(
 								[
-									'none' => __('None (hide images)', 'print-my-blog'),
-									'small' => __('Small (1/4 size)', 'print-my-blog'),
-									'medium' => __('Medium (1/2 size)', 'print-my-blog'),
-									'large' => __('Large (3/4 size)', 'print-my-blog'),
-									'full' => __('Full (theme default)', 'print-my-blog')
-								],
-								[
-									'html_label_text' => __('Image Size', 'print-my-blog'),
-									'default' => 'medium'
+									'html_label_text' => __('Maximum Image Height (in pixels)', 'print-my-blog'),
+									'html_help_text' => sprintf(
+										__('Larger images will be resized to this, smaller images will be unchanged.', 'print-my-blog')
+									),
+									'default' => 500
 								]
 							),
 						]

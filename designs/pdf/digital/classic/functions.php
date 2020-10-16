@@ -1,22 +1,3 @@
 <?php
-// Add filters, action callback, and functions you want to use in your design.
-// Note that this file only gets included when gnerating a new project, not on every pageload.
-add_action(
-	'pmb_pdf_generation_start',
-	function(\PrintMyBlog\entities\ProjectGeneration $project_generation, \PrintMyBlog\orm\entities\Design $design){
-		wp_add_inline_style(
-			'pmb_print_common',
-			pmb_design_styles($design)
-		);
-		wp_localize_script(
-			'pmb-design',
-			'pmb_classic_options',
-			[
-				'external_links' => $design->getSetting('external_links'),
-				'internal_links' => $design->getSetting('internal_links')
-			]
-		);
-	},
-	10,
-	2
-);
+// prevent some duplication by just reusing the classic PDF's functions.php
+require_once(PMB_DESIGNS_DIR . 'pdf/print/classic/functions.php');

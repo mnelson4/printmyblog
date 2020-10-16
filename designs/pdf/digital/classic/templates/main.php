@@ -1,3 +1,3 @@
-<!-- Print My Blog Version <?php echo PMB_VERSION;?>-->
-<div class="pmb-posts site pmb-main-matter">
-<?php // sections will be added onto here, one at a time, then the footer.php file.
+<?php
+// prevent some duplication by just reusing the classic PDF's functions.php
+require(PMB_DESIGNS_DIR . 'pdf/print/classic/templates/main.php');
