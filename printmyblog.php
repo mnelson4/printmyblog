@@ -148,4 +148,12 @@ if (defined('PMB_VERSION')) {
     register_activation_hook(PMB_MAIN_FILE, 'pmb_plugin_activation');
     define('PMB_PRINTPAGE_SLUG', 'print-my-blog');
     require_once('bootstrap.php');
+
+	// disable the active theme if generating a PDF.
+    // This needs to be done super early
+	if(defined('DOING_AJAX') && isset($_REQUEST['action'], $_REQUEST['format']) && $_REQUEST['action'] === 'pmb_project_status'){
+		add_filter( 'wp_using_themes', '__return_false' );
+		add_filter('template_directory', '__return_false', 100);
+		add_filter('stylesheet_directory', '__return_false', 100);
+	}
 }

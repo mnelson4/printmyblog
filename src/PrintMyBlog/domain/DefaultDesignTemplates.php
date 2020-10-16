@@ -436,13 +436,13 @@ class DefaultDesignTemplates {
 								apply_filters(
 									'PrintMyBlog\domain\DefaultDesignTemplates->getGenericDesignFormSections',
 									[
-										'use_theme'  => new YesNoInput( [
-											'html_label_text' => __( 'Include Theme CSS', 'print-my-blog' ),
-											'html_help_text'  => sprintf(
-												__( '%s’s CSS may interfere with the generated file’s CSS, so it’s usually best to not include it.', 'print-my-blog' ),
-												$theme->get( 'Name' )
-											)
-										] ),
+//										'use_theme'  => new YesNoInput( [
+//											'html_label_text' => __( 'Include Theme CSS', 'print-my-blog' ),
+//											'html_help_text'  => sprintf(
+//												__( '%s’s CSS may interfere with the generated file’s CSS, so it’s usually best to not include it.', 'print-my-blog' ),
+//												$theme->get( 'Name' )
+//											)
+//										] ),
 										'custom_css' => new TextAreaInput( [
 											'html_label_text' => __( 'Custom CSS', 'print-my-blog' ),
 											'html_help_text'  => __( 'Styles to be applied only when printing projects using this design.', 'print-my-blog' )

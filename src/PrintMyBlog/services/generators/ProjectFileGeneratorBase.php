@@ -100,16 +100,16 @@ abstract class ProjectFileGeneratorBase {
 	/**
 	 * Dequeues the active theme's styles by guessing that all their styles are registered with their name in it.
 	 */
-	public function remove_theme_style()
-	{
-		$all_styles = wp_styles();
-		$active_theme_slug = get_stylesheet();
-		foreach($all_styles->queue as $handle){
-			if(strpos($handle, $active_theme_slug) !== false){
-				wp_dequeue_style($handle);
-			}
-		}
-	}
+//	public function remove_theme_style()
+//	{
+//		$all_styles = wp_styles();
+//		$active_theme_slug = get_stylesheet();
+//		foreach($all_styles->queue as $handle){
+//			if(strpos($handle, $active_theme_slug) !== false){
+//				wp_dequeue_style($handle);
+//			}
+//		}
+//	}
 
 	/**
 	 * Orders $query->posts according to the order specified by $post_ids_in_order
