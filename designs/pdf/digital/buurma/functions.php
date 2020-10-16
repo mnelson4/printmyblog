@@ -11,18 +11,20 @@ add_action(
 					background: url(' . $design->getSetting('title_page_banner'). ') no-repeat,
 						url(' . $design->getSetting('background_embellishment') . ') center center no-repeat,
 						linear-gradient(#cce5ff, #e6f2ff);
-						@top-right {
-				            content: "' . $design->getSetting('org'). '";
-				            color:white;
-				        }
+					background-size:auto,40%;
+					@top-right {
+			            content: "' . $design->getSetting('org'). '";
+			            color:white;
+			        }
 				}
 				@page main /*article*/{
 					background: url(' . $design->getSetting('background_embellishment') . ') right bottom/150px no-repeat,
-						linear-gradient(127deg, rgba(230,242,255,1) 0%, rgba(230,242,255,1) 92%, rgba(204,229,255,1) 100%);;
+						linear-gradient(127deg, rgba(230,242,255,1) 0%, rgba(230,242,255,1) 80%, rgba(204,229,255,1) 100%);;
 				}
 				@page back-matter{
-					url(' . $design->getSetting('background_embellishment') . ') center center no-repeat,
+					background: url(' . $design->getSetting('background_embellishment') . ') center center no-repeat,
 						linear-gradient(#cce5ff, #e6f2ff);
+					background-size:80%;
 				}
 			/* MIKE STYLE */'
 		);

@@ -21,7 +21,7 @@
             padding-top: 8pt;
         }
     }
-    .pmb-posts p {
+    body {
         prince-footnote-policy: keep-with-line;
     }
 
@@ -55,6 +55,9 @@
 
 
     /* toc */
+    .pmb-toc-list{
+        column-span:all;
+    }
     .pmb-toc-list li{
         list-style:none;
     }

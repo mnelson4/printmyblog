@@ -137,17 +137,6 @@ class FormSectionProper extends FormSectionValidatable
             $this->_layout_strategy = is_admin() ? new AdminTwoColumnLayout() : new TwoColumnLayout();
         }
         $this->_layout_strategy->_construct_finalize($this);
-        // ok so we are definitely going to want the forms JS,
-        // so enqueue it or remember to enqueue it during wp_enqueue_scripts
-        if (did_action('wp_enqueue_scripts') || did_action('admin_enqueue_scripts')) {
-            // ok so they've constructed this object after when they should have.
-            // just enqueue the generic form scripts and initialize the form immediately in the JS
-            FormSectionProper::wp_enqueue_scripts(true);
-        } else {
-            add_action('wp_enqueue_scripts', array( 'Twine\forms\base\FormSectionProper', 'wp_enqueue_scripts'));
-            add_action('admin_enqueue_scripts', array( 'Twine\forms\base\FormSectionProper', 'wp_enqueue_scripts'));
-        }
-        add_action('wp_footer', array($this, 'ensure_scripts_localized'), 1);
         /**
          * Gives other plugins a chance to hook in before construct finalize is called.
          * The form probably doesn't yet have a parent form section.
@@ -646,6 +635,17 @@ class FormSectionProper extends FormSectionValidatable
      */
     public function enqueue_js()
     {
+	    // ok so we are definitely going to want the forms JS,
+	    // so enqueue it or remember to enqueue it during wp_enqueue_scripts
+	    if (did_action('wp_enqueue_scripts') || did_action('admin_enqueue_scripts')) {
+		    // ok so they've constructed this object after when they should have.
+		    // just enqueue the generic form scripts and initialize the form immediately in the JS
+		    FormSectionProper::wp_enqueue_scripts(true);
+	    } else {
+		    add_action('wp_enqueue_scripts', array( 'Twine\forms\base\FormSectionProper', 'wp_enqueue_scripts'));
+		    add_action('admin_enqueue_scripts', array( 'Twine\forms\base\FormSectionProper', 'wp_enqueue_scripts'));
+	    }
+	    add_action('wp_footer', array($this, 'ensure_scripts_localized'), 1);
         $this->_enqueue_and_localize_form_js();
         foreach ($this->subsections() as $subsection) {
             $subsection->enqueue_js();

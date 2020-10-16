@@ -92,3 +92,12 @@ function pmb_section_id(){
 function pmb_the_title(){
 	the_title('<h1 class="pmb-title">','</h1>');
 }
+
+function pmb_design_uses($post_content_thing, $default){
+	global $pmb_design;
+	$post_content = $pmb_design->getSetting('post_content');
+	if(! $post_content){
+		return $default;
+	}
+	return in_array($post_content_thing, $post_content);
+}

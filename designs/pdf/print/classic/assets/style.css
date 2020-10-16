@@ -39,10 +39,6 @@
     .pmb-back-matter {
         page:back-matter;
     }
-    .pmb-posts p {
-        prince-footnote-policy: keep-with-line;
-    }
-
 
     .pmb-main-matter {
         display: block;
@@ -90,6 +86,7 @@
     body{
         background-color:white;
         color:black;
+        prince-footnote-policy: keep-with-line;
     }
 
     /* Title Page styles */
@@ -109,6 +106,10 @@
         font-style:italic;
         color:darkgray;
         text-align:center;
+    }
+    a{
+        color:black;
+        text-decoration:none;
     }
 
 
@@ -147,12 +148,13 @@
     }
 
 
-    .pmb-posts a.pmb-page-ref[href]::after{
+    a.pmb-page-ref[href]::after{
         content: " (see page " target-counter(attr(href), page) ")";
     }
-    .pmb-posts span.pmb-footnote{
+    span.pmb-footnote{
         float:footnote;
         text-align:left;
+        font-size:80%;
     }
     .excerpt{
         width:80%;

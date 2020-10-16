@@ -21,7 +21,7 @@
             padding-top: 8pt;
         }
 }
-    .pmb-posts p {
+    body{
         prince-footnote-policy: keep-with-line;
     }
 
@@ -95,11 +95,15 @@
     }
 
 
-    .pmb-posts a.pmb-page-ref[href]::after{
+    a.pmb-page-ref[href]::after{
         content: " (see page " target-counter(attr(href), page) ")";
     }
-    .pmb-posts span.pmb-footnote{
+    span.pmb-footnote{
         float:footnote;
         text-align:left;
+        font-size:80%;
+    }
+    span.pmb-footnote a{
+        color:blue;
     }
 }

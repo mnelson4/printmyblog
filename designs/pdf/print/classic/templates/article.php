@@ -6,35 +6,34 @@
 ?>
 <div <?php pmb_section_wrapper_class();?> <?php pmb_section_wrapper_id();?>>
 <article <?php pmb_section_class(); ?> <?php pmb_section_id(); ?>>
-    <?php $post_content = $pmb_design->getSetting('post_content');?>
     <header class="entry-header has-text-align-center">
 
         <div class="entry-header-inner section-inner medium">
-            <?php if(in_array('title', $post_content))pmb_the_title();?>
+            <?php if(pmb_design_uses('title', true))pmb_the_title();?>
             <div class="entry-meta">
 	            <?php
-	            if(in_array('id',$post_content)){
+	            if(pmb_design_uses('id',false)){
 		            ?>
                     <span><?php printf(__('ID:%s', 'print-my-blog'), get_the_ID());?></span>
 		            <?php
 	            }
-	            if(in_array('author',$post_content)){
+	            if(pmb_design_uses('author',false)){
 		            ?>
                     <span><?php printf(__('By %s', 'print-my-blog'), get_the_author());?></span>
 		            <?php
 	            }
-	            if(in_array('published_date', $post_content)){
+	            if(pmb_design_uses('published_date', false)){
                     ?>
                     <span class="posted-on pmb-post-meta">
                         <?php the_date();?>
                     </span>
                     <?php
                 }
-                if(in_array('categories', $post_content)){
+                if(pmb_design_uses('categories', false)){
                     echo strip_tags(get_the_category(','));
                 }
 
-                if(in_array('url', $post_content)){
+                if(pmb_design_uses('url', false)){
 	                ?>
                     <div><span class="pmb-url"><?php the_permalink();?></span></div>
 	                <?php
@@ -43,17 +42,17 @@
         </div><!-- .entry-header-inner -->
     </header><!-- .entry-header -->
 	<?php
-	if (in_array('featured_image',$post_content) && has_post_thumbnail() ) {
+	if (pmb_design_uses('featured_image',true) && has_post_thumbnail() ) {
 		the_post_thumbnail('full');
 	}
-	if(in_array('excerpt',$post_content)){
+	if(pmb_design_uses('excerpt',false)){
 	    ?>
 	    <div class="excerpt"><?php the_excerpt();?></div>
 	    <?php
     }
 	?>
 	<?php
-    if(in_array('content',$post_content))pmb_include_design_template( 'partials/content' );
+    if(pmb_design_uses('content',true))pmb_include_design_template( 'partials/content' );
 	?>
 </article>
 <?php // if(in_array('comments',$post_content))pmb_include_design_template('partials/comments');?>

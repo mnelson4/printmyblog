@@ -134,7 +134,10 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
                     a.attr('href','#' + a.attr('href'));
                     break;
                 case 'foonote':
-                    a.after('<span class="pmb-footnote">See ' + a.attr('href') + '</span>');
+                    // only add the footnote if the link isn't just the URL spelled out.
+                    if(a.attr('href') !== a.html().trim()) {
+                        a.after('<span class="pmb-footnote">See ' + a.attr('href') + '</span>');
+                    }
                     break;
                 case 'leave':
                     a.attr('href','#' + a.attr('href'));
@@ -148,7 +151,10 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
             // external
             switch(external_link_policy){
                 case 'footnote':
-                a.after('<span class="pmb-footnote">See ' + a.attr('href') + '</span>');
+                    // only add the footnote if the link isn't just the URL spelled out.
+                    if(a.attr('href') !== a.html().trim()){
+                        a.after('<span class="pmb-footnote">See ' + a.attr('href') + '</span>');
+                    }
                 break;
                 case 'remove':
                 a.contents().unwrap();
