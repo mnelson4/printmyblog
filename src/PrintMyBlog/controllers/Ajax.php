@@ -125,7 +125,7 @@ class Ajax extends BaseController
 		// Get the ID
 		$project_id = $_REQUEST['ID'];
 		// Check permission
-		if(check_admin_referer('pmb-project-edit') && current_user_can('edit_project', $project_id)){
+		if(check_admin_referer('pmb-project-edit') && current_user_can('edit_pmb_project', $project_id)){
 			// Save it
 			$project = $this->project_manager->getById($project_id);
 			$success = $project->setTitle($_REQUEST['pmb_title']);

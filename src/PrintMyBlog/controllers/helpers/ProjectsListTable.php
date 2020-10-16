@@ -190,7 +190,7 @@ class ProjectsListTable extends WP_List_Table
      */
     public function no_items()
     {
-        _e('No record found in the database.', 'bx');
+        _e('Click "Add New" 👆 To Make Your First Project!', 'print-my-blog');
     }
 
     /**
