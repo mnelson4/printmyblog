@@ -2,15 +2,20 @@
 
 namespace PrintMyBlog\system;
 
+use EventEspresso\core\domain\values\Version;
 use PrintMyBlog\compatibility\DetectAndActivate;
 
-use PrintMyBlog\controllers\PmbAdmin;
+use PrintMyBlog\controllers\Admin;
 use PrintMyBlog\controllers\Ajax;
-use PrintMyBlog\controllers\PmbCommon;
-use PrintMyBlog\controllers\PmbFrontend;
-use PrintMyBlog\controllers\PmbGutenbergBlock;
-use PrintMyBlog\controllers\PmbPrintPage;
+use PrintMyBlog\controllers\Common;
+use PrintMyBlog\controllers\Frontend;
+use PrintMyBlog\controllers\GutenbergBlock;
+use PrintMyBlog\controllers\LegacyPrintPage;
 use PrintMyBlog\controllers\LoadingPage;
+use PrintMyBlog\controllers\Shortcodes;
+use PrintMyBlog\domain\DefaultDesigns;
+use PrintMyBlog\domain\DefaultDesignTemplates;
+use PrintMyBlog\domain\DefaultFileFormats;
 use PrintMyBlog\domain\ProNotification;
 use Twine\admin\news\DashboardNews;
 use Twine\system\RequestType;
@@ -69,7 +74,7 @@ class Init
 
 
     /**
-     * Sets up PMB's environment general environment.
+     * Sets up PMB's general environment.
      */
     public function earlyInit()
     {
@@ -84,37 +89,102 @@ class Init
      */
     public function init()
     {
-    	$request_type = $this->context->reuse('Twine\system\RequestType');
-        $request_type->getRequestType();
-        $version_history = $this->context->reuse('Twine\system\VersionHistory');
-        $version_history->maybeRecordVersionChange();
-        $cpt = $this->context->reuse('PrintMyBlog\system\CustomPostTypes');
-        $cpt->register();
-        $activation = $this->context->reuse('PrintMyBlog\system\Activation');
-        $activation->detectActivation();
-        $this->setUrls();
-        if (defined('DOING_AJAX') && DOING_AJAX) {
-        	$ajax = $this->context->reuse( 'PrintMyBlog\controllers\Ajax' );
-            $ajax->setHooks();
-        } elseif (is_admin()) {
-            $admin = $this->context->reuse('PrintMyBlog\controllers\PmbAdmin');
-            $admin->setHooks();
-            $this->initDashboardNews();
-            (new ProNotification())->setHooks();
-        } else {
-            (new PmbFrontend())->setHooks();
-            (new PmbPrintPage())->setHooks();
-            (new LoadingPage())->setHooks();
-        }
+    	$this->includes();
+    	$this->defineTerms();
+		$this->setupDbEnvironment();
+        $this->takeActionOnIncomingRequest();
+    }
+
+	/**
+	 * Includes files containing functions
+	 */
+    protected function includes()
+    {
+    	require_once(PMB_DIR . 'inc/internal_functions.php');
+	    require_once(PMB_DIR . 'inc/integration_functions.php');
+	    require_once(PMB_DIR . 'inc/template_functions.php');
+	    require_once(PMB_DIR . 'inc/design_functions.php');
+    }
+
+	/**
+	 * Just setting up code. Not doing anything yet.
+	 */
+    protected function defineTerms()
+    {
+	    /**
+	     * @var $request_type RequestType
+	     */
+	    $request_type = $this->context->reuse('Twine\system\RequestType');
+	    $request_type->getRequestType();
+
+	    /**
+	     * @var $version_history VersionHistory
+	     */
+	    $version_history = $this->context->reuse('Twine\system\VersionHistory');
+	    $version_history->maybeRecordVersionChange();
+
+	    /**
+	     * @var $cpt CustomPostTypes
+	     */
+	    $cpt = $this->context->reuse('PrintMyBlog\system\CustomPostTypes');
+	    $cpt->register();
+	    $this->setUrls();
+
+	    /**
+	     * @var $default_formats DefaultFileFormats
+	     */
+	    $default_formats = $this->context->reuse('PrintMyBlog\domain\DefaultFileFormats');
+	    $default_formats->registerFileFormats();
+
+	    /**
+	     * @var $default_design_templates DefaultDesignTemplates
+	     */
+	    $default_design_templates = $this->context->reuse('PrintMyBlog\domain\DefaultDesignTemplates');
+	    $default_design_templates->registerDesignTemplates();
+
+	    /**
+	     * @var $default_designs DefaultDesigns
+	     */
+	    $default_designs = $this->context->reuse('PrintMyBlog\domain\DefaultDesigns');
+	    $default_designs->registerDefaultDesigns();
+    }
+
+	/**
+	 * Setting up stuff we assume is in the DB
+	 */
+    protected function setupDbEnvironment()
+    {
+	    $activation = $this->context->reuse('PrintMyBlog\system\Activation');
+	    $activation->detectActivation();
+    }
+
+	/**
+	 * Taking action based on the current request
+	 */
+    protected function takeActionOnIncomingRequest()
+    {
+	    if (defined('DOING_AJAX') && DOING_AJAX) {
+		    $ajax = $this->context->reuse( 'PrintMyBlog\controllers\Ajax' );
+		    $ajax->setHooks();
+	    } elseif (is_admin()) {
+		    $admin = $this->context->reuse( 'PrintMyBlog\controllers\Admin' );
+		    $admin->setHooks();
+		    $this->initDashboardNews();
+		    (new ProNotification())->setHooks();
+	    } else {
+		    (new Frontend())->setHooks();
+		    (new LegacyPrintPage())->setHooks();
+		    (new LoadingPage())->setHooks();
+	    }
+	    // These are needed at least during frontend and ajax requests
+	    (new Shortcodes())->setHooks();
 
 
-        $block_controller = new PmbGutenbergBlock();
-        $block_controller->setHooks();
+	    $block_controller = new GutenbergBlock();
+	    $block_controller->setHooks();
 
-        $common_controller = new PmbCommon();
-        $common_controller->setHooks();
-
-
+	    $common_controller = new Common();
+	    $common_controller->setHooks();
     }
 
     /**
@@ -157,6 +227,6 @@ class Init
         define('PMB_SCRIPTS_DIR', PMB_ASSETS_DIR . 'scripts/');
         define('PMB_STYLES_DIR', PMB_ASSETS_DIR . 'styles/');
 
-        define('PMB_DEFAULT_DESIGNS_URL', $plugin_url . 'default_designs/');
+        define('PMB_DESIGNS_URL', $plugin_url . 'designs/');
     }
 }

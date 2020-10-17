@@ -1,7 +1,5 @@
 <?php
 namespace PrintMyBlog\controllers\helpers;
-use PrintMyBlog\orm\ProjectManager;
-use PrintMyBlog\system\Context;
 use PrintMyBlog\system\CustomPostTypes;
 use WP_List_Table;
 use WP_Post;
@@ -172,16 +170,18 @@ class ProjectsListTable extends WP_List_Table
      */
     function column_ID($post)
     {
+    	$title = $post->post_title ? $post->post_title : __('Untitled', 'print-my-blog');
         return sprintf(
             '<a href="%s" class="btn btn-primary"/>%s</a>',
             add_query_arg(
                 [
                     'ID' => $post->ID,
                     'action' => 'edit',
+	                'subaction' => 'main'
                 ],
                 admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
             ),
-            $post->post_title
+            $title
         );
     }
 
@@ -190,7 +190,7 @@ class ProjectsListTable extends WP_List_Table
      */
     public function no_items()
     {
-        _e('No record found in the database.', 'bx');
+        _e('Click "Add New" 👆 To Make Your First Project!', 'print-my-blog');
     }
 
     /**

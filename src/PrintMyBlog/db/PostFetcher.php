@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\db;
 
+use PrintMyBlog\system\CustomPostTypes;
 use WP_Query;
 
 /**
@@ -17,6 +18,15 @@ use WP_Query;
 class PostFetcher
 {
 
+	/**
+	 * @var CustomPostTypes
+	 */
+	private $custom_post_types;
+
+	public function inject(CustomPostTypes $custom_post_types){
+		$this->custom_post_types = $custom_post_types;
+	}
+
     /**
      * Based on the request, fetches posts. Returns an array of WP_Posts
      * @since $VID:$
@@ -24,14 +34,31 @@ class PostFetcher
      */
     public function fetchPostOptionssForProject(){
         global $wpdb;
-        $in_search_post_types = get_post_types( array( 'exclude_from_search' => false ) );
-        unset($in_search_post_types['attachment']);
-        $post_types = array_map( 'esc_sql', $in_search_post_types );
-
         return $wpdb->get_results(
             'SELECT ID, post_title FROM '
             . $wpdb->posts
-            . ' WHERE post_type IN (\'' . implode('\',\'',$post_types) . '\') AND post_status in ("publish","draft")'
+            . ' WHERE post_type IN (\'' . implode('\',\'', $this->getProjectPostTypes()) . '\') AND post_status in ("publish","draft")'
         );
+    }
+
+	/**
+	 * @return array of all the post types that can be in projects.
+	 */
+    public function getProjectPostTypes(){
+	    $in_search_post_types = get_post_types( array( 'exclude_from_search' => false ) );
+	    unset($in_search_post_types['attachment']);
+	    $in_search_post_types['pmb_content'] = 'pmb_content';
+	    return  array_map( 'esc_sql', $in_search_post_types );
+    }
+
+	/**
+	 * Deletes all PMB custom post type posts
+	 * @return int
+	 */
+    public function deleteCustomPostTypes(){
+    	global $wpdb;
+    	return $wpdb->query(
+    		'DELETE posts, postmetas FROM ' . $wpdb->posts . ' AS posts INNER JOIN ' . $wpdb->postmeta . ' AS postmetas WHERE posts.post_type IN ("' . implode('","',$this->custom_post_types->getPostTypes()) . '")'
+	    );
     }
 }

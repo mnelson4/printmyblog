@@ -15,6 +15,8 @@ namespace PrintMyBlog\system;
 class CustomPostTypes
 {
     const PROJECT = 'pmb_project';
+    const DESIGN = 'pmb_design';
+    const CONTENT = 'pmb_content';
 
     /**
      * This must not be done before init eh.
@@ -30,25 +32,74 @@ class CustomPostTypes
                 // 'show_ui' => true,
                 'capability_type' => 'pmb_project',
                 'capabilities' => array(
-	                'publish_posts' => 'publish_projects',
-	                'edit_posts' => 'edit_projects',
-	                'edit_others_posts' => 'edit_others_projects',
-	                'delete_posts' => 'delete_projects',
-	                'delete_others_posts' => 'delete_others_projects',
-	                'read_private_posts' => 'read_private_projects',
-//	                'edit_post' => 'edit_project',
-//	                'delete_post' => 'delete_project',
-//	                'read_post' => 'read_project',
+	                'publish_posts' => 'publish_pmb_projects',
+	                'edit_posts' => 'edit_pmb_projects',
+	                'edit_others_posts' => 'edit_others_pmb_projects',
+	                'delete_posts' => 'delete_pmb_projects',
+	                'delete_others_posts' => 'delete_others_pmb_projects',
+	                'read_private_posts' => 'read_private_pmb_projects',
                 ),
             ]
         );
-	    add_filter( 'map_meta_cap', [$this,'map_project_meta_cap'], 10, 4 );
+	    $cap_slug = 'pmb_project';
+	    add_filter(
+		    'map_meta_cap',
+		    function( $caps, $cap, $user_id, $args) use ($cap_slug) {
+			    return $this->map_meta_cap( $caps, $cap, $user_id, $args, $cap_slug );
+		    },
+		    10,
+		    4
+	    );
+
+	    register_post_type(
+		    self::DESIGN,
+		    [
+			    'label' => esc_html__('Designs', 'print-my-blog'),
+			    'description' => esc_html__('Designs for printing with Print My Blog', 'print-my-blog'),
+			    'capability_type' => 'pmb_design',
+			    'capabilities' => array(
+				    'publish_posts' => 'publish_pmb_designs',
+				    'edit_posts' => 'edit_pmb_designs',
+				    'edit_others_posts' => 'edit_others_pmb_designs',
+				    'delete_posts' => 'delete_pmb_designs',
+				    'delete_others_posts' => 'delete_others_pmb_designs',
+				    'read_private_posts' => 'read_private_pmb_designs',
+			    ),
+		    ]
+	    );
+	    $cap_slug = 'pmb_design';
+	    add_filter(
+	    	'map_meta_cap',
+		    function( $caps, $cap, $user_id, $args) use ($cap_slug) {
+				return $this->map_meta_cap( $caps, $cap, $user_id, $args, $cap_slug );
+		    },
+		    10,
+		    4
+	    );
+
+	    register_post_type( self::CONTENT,
+		    // WordPress CPT Options Start
+		    array(
+			    'labels' => array(
+				    'name' => __( 'Project Contents' ),
+				    'singular_name' => __( 'Project Content' )
+			    ),
+			    'has_archive' => true,
+			    'public' => false,
+			    'show_ui' => true,
+			    'show_in_menu' => PMB_ADMIN_PAGE_SLUG,
+			    'rewrite' => array('slug' => 'pmb'),
+			    'show_in_rest' => true,
+			    'supports' => array('title', 'editor', 'revisions', 'author','thumbnail', 'custom-fields'),
+			    'taxonomies' => array('category', 'post_tag')
+		    )
+	    );
     }
 
-	function map_project_meta_cap( $caps, $cap, $user_id, $args ) {
+	function map_meta_cap( $caps, $cap, $user_id, $args, $cap_slug ) {
 
 		/* If editing, deleting, or reading a project, get the post and post type object. */
-		if ( 'edit_project' == $cap || 'delete_project' == $cap || 'read_project' == $cap ) {
+		if ( 'edit_' . $cap_slug == $cap || 'delete_' . $cap_slug == $cap || 'read_' . $cap_slug == $cap ) {
 			$post = get_post( $args[0] );
 			$post_type = get_post_type_object( $post->post_type );
 
@@ -57,7 +108,7 @@ class CustomPostTypes
 		}
 
 		/* If editing a project, assign the required capability. */
-		if ( 'edit_project' == $cap ) {
+		if ( 'edit_' . $cap_slug == $cap ) {
 			if ( $user_id == $post->post_author )
 				$caps[] = $post_type->cap->edit_posts;
 			else
@@ -65,7 +116,7 @@ class CustomPostTypes
 		}
 
 		/* If deleting a project, assign the required capability. */
-		elseif ( 'delete_project' == $cap ) {
+		elseif ( 'delete_' . $cap_slug == $cap ) {
 			if ( $user_id == $post->post_author )
 				$caps[] = $post_type->cap->delete_posts;
 			else
@@ -73,7 +124,7 @@ class CustomPostTypes
 		}
 
 		/* If reading a private project, assign the required capability. */
-		elseif ( 'read_project' == $cap ) {
+		elseif ( 'read_' . $cap_slug == $cap ) {
 
 			if ( 'private' != $post->post_status )
 				$caps[] = 'read';
@@ -85,5 +136,16 @@ class CustomPostTypes
 
 		/* Return the capabilities required by the user. */
 		return $caps;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getPostTypes(){
+    	return [
+    		self::CONTENT,
+		    self::DESIGN,
+		    self::PROJECT
+	    ];
 	}
 }

@@ -28,3 +28,33 @@
     margin-top:0;
     margin-bottom:15px;
 }
+.twine-two-column-layout td>label{
+    display:block;
+}
+.twine-error{
+    color:red;
+    padding:.3em;
+    font-weight:bold;
+}
+.pmb-inline-form{
+    display:inline
+}
+.pmb-help{
+    font-weight:100;
+    font-size:13px;
+    font-style:italic;
+}
+.pmb-icon{
+    text-decoration:none;
+    cursor:pointer;
+}
+
+.pmb-breadcrumb{
+    font-size:1em;
+}
+.pmb-breadcrumb span:not(:first-child)::before{
+    content: " / ";
+}
+.pmb-uninstall, .pmb-uninstall:hover, .pmb-uninstall:active, .pmb-uninstall:visited{
+    color:#a00;
+}

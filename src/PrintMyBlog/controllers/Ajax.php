@@ -4,10 +4,12 @@ namespace PrintMyBlog\controllers;
 
 use mnelson4\RestApiDetector\RestApiDetector;
 use mnelson4\RestApiDetector\RestApiDetectorError;
-use PrintMyBlog\db\PartFetcher;
-use PrintMyBlog\orm\ProjectManager;
+use PrintMyBlog\entities\ProjectGeneration;
+use PrintMyBlog\orm\managers\ProjectManager;
+use PrintMyBlog\services\FileFormatRegistry;
 use Twine\controllers\BaseController;
 use WP_Query;
+use PrintMyBlog\orm\entities\Project;
 
 /**
  * Class PmbAjax
@@ -25,12 +27,17 @@ class Ajax extends BaseController
 	 * @var ProjectManager
 	 */
 	protected $project_manager;
+	/**
+	 * @var FileFormatRegistry
+	 */
+	protected $format_registry;
 
 	/**
 	 * @param ProjectManager $project_manager
 	 */
-	public function inject(ProjectManager $project_manager){
+	public function inject(ProjectManager $project_manager, FileFormatRegistry $format_registry){
 		$this->project_manager = $project_manager;
+		$this->format_registry = $format_registry;
 	}
     /**
      * Sets hooks that we'll use in the admin.
@@ -46,6 +53,7 @@ class Ajax extends BaseController
         	'pmb_project_status',
 	        'handleProjectStatus'
         );
+	    add_action('wp_ajax_pmb_save_project_main', [$this, 'handleSaveProjectMain' ]);
     }
 
     protected function addUnauthenticatedCallback($ajax_action, $method_name){
@@ -83,18 +91,25 @@ class Ajax extends BaseController
     public function handleProjectStatus()
     {
     	// Find project by ID.
+	    /*
+	     * @var $project Project
+	     */
 	    $project = $this->project_manager->getById($_GET['ID']);
-
+	    $format = $this->format_registry->getFormat($_GET['format']);
+	    /**
+	     * @var $project_generation ProjectGeneration
+	     */
+		$project_generation = $project->getGenerationFor($format);
 	    // Find if it's already been generated, if so return that.
-	    if(! $project->generated()){
-		    $done = $project->generateHtmlFile();
+	    if(! $project_generation->isGenerated()){
+		    $done = $project_generation->generateIntermediaryFile();
 		    if( $done ) {
-			    $url = $project->generatedHtmlFileUrl();
+			    $url = $project_generation->getGeneratedIntermediaryFileUrl();
 		    } else {
 		    	$url = null;
 		    }
 	    } else {
-		    $url = $project->generatedHtmlFileUrl();
+		    $url = $project_generation->getGeneratedIntermediaryFileUrl();
 		}
 
 	    // If we're all done, return the file.
@@ -105,4 +120,22 @@ class Ajax extends BaseController
 		wp_send_json($response);
 		exit;
     }
+
+	public function handleSaveProjectMain(){
+		// Get the ID
+		$project_id = $_REQUEST['ID'];
+		// Check permission
+		if(check_admin_referer('pmb-project-edit') && current_user_can('edit_pmb_project', $project_id)){
+			// Save it
+			$project = $this->project_manager->getById($project_id);
+			$success = $project->setTitle($_REQUEST['pmb_title']);
+			$project->setFormatsSelected($_REQUEST['pmb_format']);
+		}
+		// Say it worked
+		if(is_wp_error($success)){
+			wp_send_json_error($success);
+		} else {
+			wp_send_json_success();
+		}
+	}
 }

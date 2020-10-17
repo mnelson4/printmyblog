@@ -10,7 +10,7 @@
  * Description: Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
  * Author: Michael Nelson
  * Author URI: https://printmy.blog
- * Version: 3.0.0.alpha.000
+ * Version: 3.0.0.alpha.006
  * Requires at least: 4.7
  * Requires PHP: 5.4
  * Text Domain: print-my-blog
@@ -120,13 +120,11 @@ if (defined('PMB_VERSION')) {
 
 }else {
     // it's all good! go for it!
-    define('PMB_VERSION', '3.0.0.alpha.000');
+    define('PMB_VERSION', '3.0.0.alpha.008');
     define('PMB_DIR', wp_normalize_path(__DIR__) . '/');
     define('PMB_MAIN_FILE', __FILE__);
     define('PMB_TEMPLATES_DIR', PMB_DIR . 'templates/');
     define('PMB_VENDOR_DIR', PMB_DIR . 'vendor/');
-    define('PMB_TWINE_DIR', PMB_DIR . 'twine_framework/');
-    define('PMB_TWINE_INCLUDES_DIR', PMB_TWINE_DIR . 'includes/');
     define('PMB_ADMIN_CAP', 'read_private_posts');
     define('PMB_BASENAME', plugin_basename(PMB_MAIN_FILE));
     define('PMB_ADMIN_PAGE_SLUG', 'print-my-blog-now');
@@ -135,7 +133,8 @@ if (defined('PMB_VERSION')) {
     define('PMB_ADMIN_PROJECTS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_PROJECTS_PAGE_SLUG);
     define('PMB_ADMIN_SETTINGS_PAGE_SLUG', 'print-my-blog-settings');
     define('PMB_ADMIN_SETTINGS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_SETTINGS_PAGE_SLUG);
-    define('PMB_DEFAULT_DESIGNS_DIR',PMB_DIR . 'default_designs/');
+    define('PMB_DESIGNS_DIR', PMB_DIR . 'designs/');
+    define('TWINE_MAIN_FILE', PMB_MAIN_FILE);
 
     /**
      * adds a wp-option to indicate that PMB has been activated via the WP admin plugins page.
@@ -149,4 +148,12 @@ if (defined('PMB_VERSION')) {
     register_activation_hook(PMB_MAIN_FILE, 'pmb_plugin_activation');
     define('PMB_PRINTPAGE_SLUG', 'print-my-blog');
     require_once('bootstrap.php');
+
+	// disable the active theme if generating a PDF.
+    // This needs to be done super early
+	if(defined('DOING_AJAX') && isset($_REQUEST['action'], $_REQUEST['format']) && $_REQUEST['action'] === 'pmb_project_status'){
+		add_filter( 'wp_using_themes', '__return_false' );
+		add_filter('template_directory', '__return_false', 100);
+		add_filter('stylesheet_directory', '__return_false', 100);
+	}
 }

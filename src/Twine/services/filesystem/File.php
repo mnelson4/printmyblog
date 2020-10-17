@@ -101,6 +101,9 @@ class File extends ThingOnServer {
 	 */
 	public function fileExists()
 	{
-		return is_file($this->getPath());
+		if($this->exists === null){
+			$this->exists = is_file($this->getPath());
+		}
+		return $this->exists;
 	}
 }

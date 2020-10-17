@@ -9,6 +9,13 @@ class ThingOnServer {
 	 * @var string
 	 */
 	protected $path;
+
+	/**
+	 * Lets us cache whether or not this file/folder exists, so we don't have to keep checking repeatedly during the same request.
+	 * @var bool|null
+	 */
+	protected $exists;
+
 	public function __construct($path){
 		$this->path = $this->standardizeFilepath($path);
 	}

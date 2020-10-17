@@ -51,7 +51,7 @@ class LoadingPage extends BaseController
                 100
             );
 
-            return PMB_TEMPLATES_DIR . 'loading_page.template.php';
+            return PMB_TEMPLATES_DIR . 'loading_page.php';
         }
         return $template;
     }
@@ -89,7 +89,8 @@ class LoadingPage extends BaseController
         	'status_url' => add_query_arg(
         		[
 			        'ID' => $this->getProjectIdFromRequest(),
-			        'action' => 'pmb_project_status'
+			        'action' => 'pmb_project_status',
+			        'format' => $this->getFomatFromRequest(),
 		        ],
 		        admin_url( 'admin-ajax.php' )
 	        ),
@@ -111,4 +112,15 @@ class LoadingPage extends BaseController
             )
         );
     }
+
+	/**
+	 * @return string
+	 */
+	protected function getFomatFromRequest() {
+    	if(isset($_GET['format'])){
+    		return (string)$_GET['format'];
+	    } else {
+    		return 'digital_pdf';
+	    }
+	}
 }

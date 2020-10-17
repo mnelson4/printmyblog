@@ -13,6 +13,7 @@ namespace PrintMyBlog\db;
  */
 class TableManager
 {
+	const SECTIONS_TABLE = 'pmb_project_sections';
 
     /**
      * Ensures PMB's tables exist.
@@ -23,17 +24,26 @@ class TableManager
         $charset_collate = $wpdb->get_charset_collate();
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         dbDelta(
-          'CREATE TABLE ' . $wpdb->prefix. 'pmb_project_parts (
+          'CREATE TABLE ' . $wpdb->prefix. self::SECTIONS_TABLE . ' (
                 ID bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
                 project_id bigint(20) UNSIGNED NOT NULL,
                 post_id bigint(20) UNSIGNED NOT NULL DEFAULT \'0\',
                 parent_id bigint(20) UNSIGNED NULL DEFAULT \'0\',
-                part_order int(11) NOT NULL DEFAULT \'0\',
-                type varchar(50) NOT NULL DEFAULT \'\',
+                section_order int(11) NOT NULL DEFAULT \'0\',
+                template varchar(50) NOT NULL DEFAULT \'\',
+                placement varchar(15) NOT NULL DEFAULT \'main\',
+                height smallint NOT NULL DEFAULT \'0\',
+                depth smallint NOT NULL DEFAULT \'0\',
                 PRIMARY KEY  (ID),
-                KEY sorted (project_id,part_order)
+                KEY sorted (project_id,placement,section_order)
             ) ' . $charset_collate . '
         ;'
         );
+    }
+
+    public function dropTables()
+    {
+    	global $wpdb;
+    	return $wpdb->query('DROP TABLE ' . $wpdb->prefix . self::SECTIONS_TABLE);
     }
 }

@@ -1,0 +1,9 @@
+input.twine_media_url{
+    width:80%;
+}
+.twine_media_upload{
+    margin-right:1em;
+}
+.twine_media_image{
+    max-height:150px;
+}

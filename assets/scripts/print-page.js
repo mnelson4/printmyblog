@@ -486,7 +486,8 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         // unhide the contents.
         jQuery('.pmb-posts').toggle();
         // Resize images after unhiding because then we can know how big images actually are.
-        pmb_resize_images(this.image_size);
+        // btw the image size here was in inches, but we want it in pixels. There are about 100 pixels per inch.
+        pmb_resize_images(this.image_size * 100);
         if(this.foogallery) {
             jQuery('img[data-src-fg]').each(function(arg1, arg2){
                 let el = jQuery(this);
