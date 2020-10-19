@@ -67,7 +67,7 @@
     .pmb-toc-list li{
         list-style:none;
     }
-    .pmb-toc-item.pmb-toc-depth-0{
+    .pmb-toc-item.pmb-toc-height-1{
         font-weight: bold;
         font-size: 1.2em;
         margin-top: 10px;
