@@ -70,7 +70,12 @@
     .pmb-toc-list li{
         list-style:none;
     }
-    .pmb-toc-item.pmb-toc-depth-2{
+    .pmb-toc-item.pmb-toc-depth-0{
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-top: 10px;
+    }
+    .pmb-toc-item.pmb-toc-depth-1{
         margin-left:1em;
     }
     .pmb-toc-list a::after {
