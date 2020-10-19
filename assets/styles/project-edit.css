@@ -13,6 +13,7 @@
 }
 .pmb-draggable-area{
     min-height:200px;
+    padding-bottom:50px;
 }
 
 .pmb-grabbable{
