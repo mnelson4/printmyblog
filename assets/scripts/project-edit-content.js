@@ -147,5 +147,5 @@ function pmb_update_heights(jquery_obj){
 }
 
 function pmb_count_level(jquery_obj){
-	return jquery_obj.parents('.pmb-sortable').length + 1;
+	return jquery_obj.parents('.pmb-sortable').length;
 }
