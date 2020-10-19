@@ -56,7 +56,7 @@ function pmb_content_item($posty_row, $max_nesting = 0){
             <span class="pmb-project-item-template-container"><?php echo pmb_template_selector($template);?></span>
         </div>
 
-        <div class="pmb-nested-sortable <?php echo $depth < $max_nesting ? 'pmb-sortable' : 'pmb-sortable-inactive';?> pmb-subs">
+        <div class="pmb-nested-sortable <?php echo $depth < $max_nesting ? 'pmb-sortable' : 'pmb-sortable-inactive';?> pmb-subs"><?php echo 'depth: ' . $depth . ', max: ' . $max_nesting;?>
             <?php
                 foreach($subs as $sub){
 	                pmb_content_item($sub, $max_nesting);
@@ -93,7 +93,7 @@ pmb_render_template(
                     <div id="pmb-project-choices" class="pmb-draggable-area pmb-project-content-available pmb-scrollable-window list-group">
                         <?php
                         foreach($post_options as $post){
-	                        pmb_content_item($post, 1);
+	                        pmb_content_item($post, 0);
                         }
                         ?>
                     </div>
@@ -107,7 +107,7 @@ pmb_render_template(
                             <div id="pmb-project-front-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="1">
 	                            <?php
 	                            foreach($front_matter_sections as $post) {
-		                            pmb_content_item( $post, 1 );
+		                            pmb_content_item( $post, 0 );
 	                            }
 	                            pmb_drag_here();
 	                            ?>
@@ -133,7 +133,7 @@ pmb_render_template(
                             <div id="pmb-project-back-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="1">
 			                    <?php
 			                    foreach($back_matter_sections as $post) {
-				                    pmb_content_item( $post, $project->getLevelsAllowed() );
+				                    pmb_content_item( $post, 0 );
 			                    }
 			                    pmb_drag_here();
 			                    ?>

@@ -23,7 +23,7 @@ class ProjectSectionManager {
 	 *
 	 * @return ProjectSection[]
 	 */
-	public function getSectionsFor($project_id, $max_levels = 1, $limit = 20, $offset = 0, $include_title = false, $placement = 'main'){
+	public function getSectionsFor($project_id, $max_levels = 0, $limit = 20, $offset = 0, $include_title = false, $placement = 'main'){
 		$sections = $this->getFlatSectionsFor($project_id, $limit, $offset, $include_title, $placement);
 		$index = 0;
 		$parent_id = 0;
@@ -133,7 +133,7 @@ class ProjectSectionManager {
 	 *
 	 * @return ProjectSection[]
 	 */
-	protected function nestSections(&$flat_sections, &$index = 0, $current_parent_id = 0, $max_levels = 1, $current_level = 1){
+	protected function nestSections(&$flat_sections, &$index = 0, $current_parent_id = 0, $max_levels = 0, $current_level = 0){
 		$nested_sections = [];
 		for(;$index<count($flat_sections);$index++){
 

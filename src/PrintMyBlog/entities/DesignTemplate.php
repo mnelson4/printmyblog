@@ -186,21 +186,21 @@ class DesignTemplate {
 
 	/**
 	 * Returns how many nesting levels or divisions this design allows.
-	 * 1 means its flat sections, no nesting; 2 means it has parts-and-sections; 3 means books-parts-sections,
-	 * 4 means books-parts-sections-subsections, etc.
+	 * 0 means its flat sections, no nesting; 1 means it has parts-and-sections; 2 means books-parts-sections,
+	 * 3 means books-parts-sections-subsections, etc.
 	 * @return int
 	 */
 	public function getLevels(){
 		if($this->levels === null){
 
 			if($this->supports('anthology')) {
-				$this->levels = 4;
-			} else if($this->supports('volume')){
 				$this->levels = 3;
-			} else if($this->supports('part')){
+			} else if($this->supports('volume')){
 				$this->levels = 2;
-			} else{
+			} else if($this->supports('part')){
 				$this->levels = 1;
+			} else{
+				$this->levels = 0;
 			}
 
 		}
