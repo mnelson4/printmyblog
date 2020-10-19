@@ -39,15 +39,25 @@ class PostWrapper {
 	 * @return mixed
 	 */
 	public function getMeta($meta_name){
-		$metas = get_post_meta(
-			$this->getWpPost()->ID,
-			$meta_name,
-			false
-		);
+		$metas = $this->getMetas($meta_name);
 		if(count($metas)){
 			return reset($metas);
 		}
 		return null;
+	}
+
+	public function getPmbMetas($meta_name){
+		return $this->getMetas(
+			self::META_PREFIX . $meta_name
+		);
+	}
+
+	public function getMetas($meta_name){
+		return get_post_meta(
+			$this->getWpPost()->ID,
+			$meta_name,
+			false
+		);
 	}
 
 	/**
@@ -92,5 +102,51 @@ class PostWrapper {
 	 */
 	public function setPmbMeta($meta_name, $new_value){
 		return $this->setMeta(self::META_PREFIX . $meta_name, $new_value);
+	}
+
+	/**
+	 * @param $meta_name
+	 * @param $new_value
+	 *
+	 * @return false|int
+	 */
+	public function addPmbMeta($meta_name, $new_value){
+		return $this->addMeta(self::META_PREFIX . $meta_name, $new_value);
+	}
+
+	/**
+	 * @param $meta_name
+	 * @param $new_value
+	 *
+	 * @return false|int
+	 */
+	public function addMeta($meta_name, $new_value){
+		return add_post_meta(
+			$this->getWpPost()->ID,
+			$meta_name,
+			$new_value
+		);
+	}
+	/**
+	 * @param $meta_name
+	 * @param string $value
+	 */
+	public function deletePmbMeta($meta_name, $value = ''){
+		$this->deleteMeta(self::META_PREFIX . $meta_name, $value);
+	}
+
+	/**
+	 * @param $meta_name
+	 *
+	 * @param string $value
+	 *
+	 * @return bool
+	 */
+	public function deleteMeta($meta_name, $value = ''){
+		return delete_post_meta(
+			$this->getWpPost()->ID,
+			$meta_name,
+			$value
+		);
 	}
 }

@@ -58,3 +58,34 @@
 .pmb-uninstall, .pmb-uninstall:hover, .pmb-uninstall:active, .pmb-uninstall:visited{
     color:#a00;
 }
+.pmb-previews{
+    white-space: nowrap;
+}
+.pmb-preview{
+    width:200px;
+    height:260px;
+    box-shadow: 0 0 5px 3px lightgray;
+}
+.pmb-design-browser, .pmb-formats-row{
+    display:flex;
+}
+.pmb-design, .pmb-format{
+    border: 1px solid lightgrey;
+    margin: 0 3% 3% 0;
+    padding: 10px;
+}
+.pmb-actions{
+    margin:5px;
+}
+
+.pmb-chosen-design-for-format{
+    position:relative;
+    margin-top:8px;
+}
+.pmb-format-actions{
+    position:absolute;
+    right:0;
+}
+.pmb-format-design-title{
+    padding:8px;
+}

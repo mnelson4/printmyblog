@@ -27,10 +27,10 @@ use WP_Query;
  */
 class Project extends PostWrapper{
 
-	const POSTMETA_CODE = '_pmb_code';
-	const POSTMETA_FORMAT = '_pmb_format';
-	const POSTMETA_DESIGN = '_pmb_design_for_';
-	const POSTMETA_PROJECT_DEPTH = '_pmb_levels_used';
+	const POSTMETA_CODE = 'pmb_code';
+	const POSTMETA_FORMAT = 'format';
+	const POSTMETA_DESIGN = 'design_for_';
+	const POSTMETA_PROJECT_DEPTH = 'levels_used';
 
 	/**
 	 * @var ProjectGeneration[]
@@ -120,7 +120,7 @@ class Project extends PostWrapper{
 	 */
 	public function code()
 	{
-		return (string)get_post_meta($this->getWpPost()->ID, self::POSTMETA_CODE, true);
+		return $this->getPmbMeta(self::POSTMETA_CODE);
 	}
 
 	/**
@@ -130,7 +130,7 @@ class Project extends PostWrapper{
 	 */
 	public function setCode()
 	{
-		return (bool)add_post_meta($this->getWpPost()->ID, self::POSTMETA_CODE, wp_generate_password(20,false));
+		return $this->setPmbMeta(self::POSTMETA_CODE, wp_generate_password(20,false));
 	}
 
 	/**
@@ -193,10 +193,8 @@ class Project extends PostWrapper{
 	 * @return array of selected format slugs
 	 */
 	public function getFormatSlugsSelected(){
-		return get_post_meta(
-			$this->getWpPost()->ID,
-			self::POSTMETA_FORMAT,
-			false
+		return $this->getPmbMetas(
+			self::POSTMETA_FORMAT
 		);
 	}
 
@@ -218,14 +216,16 @@ class Project extends PostWrapper{
 	 */
 	public function setFormatsSelected($new_formats){
 		$previous_formats = $this->getFormatSlugsSelected();
+		if(! $previous_formats){
+			$previous_formats = [];
+		}
 
 		foreach($this->format_registry->getFormats() as $format){
 			if(in_array($format->slug(), $new_formats)){
 				// It's requested to make this a selected format...
 				if(! in_array($format->slug(), $previous_formats)){
 					// if it wasn't already, add it.
-					add_post_meta(
-						$this->getWpPost()->ID,
+					$this->addPmbMeta(
 						self::POSTMETA_FORMAT,
 						$format->slug()
 					);
@@ -235,8 +235,7 @@ class Project extends PostWrapper{
 				// We want it remove it...
 				if(in_array($format->slug(), $previous_formats)){
 					// and it was previously a selected format.
-					delete_post_meta(
-						$this->getWpPost()->ID,
+					$this->deletePmbMeta(
 						self::POSTMETA_FORMAT,
 						$format->slug()
 					);
@@ -256,10 +255,8 @@ class Project extends PostWrapper{
 		if ( $format instanceof FileFormat){
 			$format = $format->slug();
 		}
-		$value = get_post_meta(
-			$this->getWpPost()->ID,
-			self::POSTMETA_DESIGN . $format,
-			true
+		$value = $this->getPmbMeta(
+			self::POSTMETA_DESIGN . $format
 		);
 		if($value){
 			return $value;
@@ -348,8 +345,7 @@ class Project extends PostWrapper{
 		if($design instanceof Design){
 			$design = $design->getWpPost()->ID;
 		}
-		return (bool)update_post_meta(
-			$this->getWpPost()->ID,
+		return $this->setPmbMeta(
 			self::POSTMETA_DESIGN . $format,
 			$design
 		);
@@ -493,7 +489,7 @@ class Project extends PostWrapper{
 	 * @return int
 	 */
 	public function getProjectDepth(){
-		return (int)$this->getMeta(self::POSTMETA_PROJECT_DEPTH);
+		return (int)$this->getPmbMeta(self::POSTMETA_PROJECT_DEPTH);
 	}
 
 	/**
@@ -503,7 +499,7 @@ class Project extends PostWrapper{
 	 * @return bool|int
 	 */
 	public function setProjectDepth($levels){
-		return $this->setMeta(self::POSTMETA_PROJECT_DEPTH, (int)$levels);
+		return $this->setPMbMeta(self::POSTMETA_PROJECT_DEPTH, (int)$levels);
 	}
 
 	/**

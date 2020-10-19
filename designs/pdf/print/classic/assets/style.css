@@ -43,7 +43,6 @@
     .pmb-main-matter {
         display: block;
         page: main-matter;
-        counter-reset: page 1
     }
 
     @page main-matter:verso {
@@ -162,5 +161,8 @@
         margin-right:auto;
         size:1.5em;
         font-style:italic;
+    }
+    img, div.wp-caption{
+        max-width:100%;
     }
 }

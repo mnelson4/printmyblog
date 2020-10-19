@@ -77,3 +77,12 @@ function pmb_render_template($template_name, $context=[]){
 	extract($context);
 	require(PMB_TEMPLATES_DIR . $template_name);
 }
+
+function pmb_design_preview(\PrintMyBlog\orm\entities\Design $design){
+	return pmb_render_template(
+		'partials/design_preview.php',
+		[
+			'design' => $design
+		]
+	);
+}

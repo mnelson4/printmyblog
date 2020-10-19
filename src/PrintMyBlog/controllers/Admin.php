@@ -82,7 +82,7 @@ class Admin extends BaseController
 	 * @param PostFetcher $post_fetcher
 	 * @param ProjectSectionManager $section_manager
 	 * @param ProjectManager $project_manager
-	 * @param FileFormatRegistry $project_format_manager
+	 * @param FileFormatRegistry $file_format_registry
 	 *
 	 * @param DesignManager $design_manager
 	 * @param TableManager $table_manager
@@ -93,14 +93,14 @@ class Admin extends BaseController
     	PostFetcher $post_fetcher,
 	    ProjectSectionManager $section_manager,
 	    ProjectManager $project_manager,
-		FileFormatRegistry $project_format_manager,
+		FileFormatRegistry $file_format_registry,
 		DesignManager $design_manager,
 		TableManager $table_manager
     ){
         $this->post_fetcher    = $post_fetcher;
         $this->section_manager = $section_manager;
         $this->project_manager = $project_manager;
-        $this->file_format_registry = $project_format_manager;
+        $this->file_format_registry = $file_format_registry;
         $this->design_manager = $design_manager;
         $this->table_manager = $table_manager;
     }
@@ -665,8 +665,16 @@ class Admin extends BaseController
 	    if(is_wp_error($project_id)){
 		    wp_die($project_id->get_error_message());
 	    }
-	    $project_obj = new Project($project_id);
+	    $project_obj = $this->project_manager->getById($project_id);
 	    $project_obj->setCode();
+	    $project_obj->setFormatsSelected(
+	    	array_map(
+	    		function(FileFormat $format){
+		            return $format->slug();
+			    },
+			    $this->file_format_registry->getFormats()
+		    )
+	    );
 	    // add default sections
 	    // ...after we figure out what they should be.
 	    $title_page = get_page_by_path('pmb-title-page', OBJECT, CustomPostTypes::CONTENT);

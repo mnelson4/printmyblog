@@ -102,4 +102,27 @@ class Design extends PostWrapper {
 		}
 		return $this->project_form;
 	}
+
+	/**
+	 * @return array numerically indexed, each item being an array with keys 'url' and 'desc'
+	 */
+	public function getPreviews(){
+		$index = 1;
+		return [
+			$this->getPreview(1),
+			$this->getPreview(2)
+		];
+	}
+
+	/**
+	 * @param $index
+	 *
+	 * @return array with keys url and desc
+	 */
+	public function getPreview($index){
+		return [
+			'url' => $this->getPmbMeta( 'preview_' . $index . '_url'),
+			'desc' => $this->getPmbMeta( 'preview_' . $index . '_desc')
+		];
+	}
 }

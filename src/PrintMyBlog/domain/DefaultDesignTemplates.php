@@ -270,9 +270,9 @@ class DefaultDesignTemplates {
 								'html_display_text' => __('Title', 'print-my-blog'),
 							]
 						);
-						$sections['intro'] = new TextAreaInput([
-							'html_display_text' => __('Introduction', 'print-my-blog'),
-							'html_help_text' => __('A highlighted description of this project, shown just underneath the title.', 'print-my-blog')
+						$sections['cover_preamble'] = new TextAreaInput([
+							'html_label_text' => __('Coverpage Preamble', 'print-my-blog'),
+							'html_help_text' => __('Explanatory text that appears at the bottom of the cover page','print-my-blog')
 						]);
 						return new FormSectionProper( [
 							'subsections' => $sections
@@ -287,7 +287,12 @@ class DefaultDesignTemplates {
 		$sections = [];
 		$header_content = $design->getSetting('header_content');
 		if(in_array('title', $header_content)){
-			$sections['title'] = new TextInput();
+			$sections['title'] = new TextInput(
+				[
+					'html_label_text' => __('Title', 'print-my-blog'),
+					'html_help_text' => __('Title used inside the generated files (often the same as your project, but not necessarily.)', 'print-my-blog'),
+				]
+			);
 		}
 		if(in_array('subtitle', $header_content)){
 			$sections['subtitle'] = new TextInput();

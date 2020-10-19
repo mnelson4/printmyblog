@@ -67,12 +67,14 @@ function pmb_resize_images(desired_max_height) {
         var big_images_without_figures = jQuery('.pmb-posts img').filter(function() {
             var element = jQuery(this);
             // If there's no figure, and the image is big enough, include it.
-            if(element.parent('figure').length === 0 && element.height() > wrap_threshold){
+            if(element.parent('figure').length === 0
+                && element.parent('div.wp-caption').length === 0
+                && element.height() > wrap_threshold){
                 return true;
             }
             return false;
         });
-        var figures_containing_a_big_image = jQuery('figure.wp-caption, figure.wp-block-image').filter(function(){
+        var figures_containing_a_big_image = jQuery('figure.wp-caption, figure.wp-block-image, div.wp-caption').filter(function(){
             var element = jQuery(this);
             // If there's a figure and the figure is big enough, include it.
             if(element.find('img').length && element.height() > wrap_threshold){
@@ -81,6 +83,9 @@ function pmb_resize_images(desired_max_height) {
             return false;
         });
         figures_containing_a_big_image.addClass('pmb-image');
+        figures_containing_a_big_image.css({
+            'width':'auto'
+        });
         big_images_without_figures.wrap('<div class="pmb-image"></div>');
         big_images.each(function () {
             var obj = jQuery(this);
@@ -90,6 +95,7 @@ function pmb_resize_images(desired_max_height) {
             obj.css({
                 'max-height': desired_max_height,
                 'max-width:': '100%',
+                'width':'auto',
             });
         });
         wp_block_galleries.each(function(){
@@ -125,6 +131,10 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
 {
     jQuery('.pmb-section a[href]').each(function(index){
         var a = jQuery(this);
+        // ignore invisible hyperlinks
+        if(! a.text().trim()){
+            return;
+        }
         var id_from_href = '#' + a.attr('href').replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g,'\\$1');
         if(jQuery(id_from_href).length > 0){
             // internal

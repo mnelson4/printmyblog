@@ -80,8 +80,18 @@ class DesignRegistry {
 		}
 		/* @var $design Design */
 		$design = $this->design_manager->getById($design_post_id);
-		$design->setMeta('_pmb_format', $design_template->getFormatSlug());
-		$design->setMeta('_pmb_design_template', $design_template->getSlug());
+		$design->setPmbMeta('format', $design_template->getFormatSlug());
+		$design->setPMbMeta('design_template', $design_template->getSlug());
+
+		// Set preview images
+		if(isset($args['previews'])){
+			$count = 1;
+			foreach((array)$args['previews'] as $preview_data){
+				$design->setPmbMeta('preview_' . $count . '_url', $preview_data['url']);
+				$design->setPmbMeta('preview_' . $count . '_desc', $preview_data['desc']);
+				$count++;
+			}
+		}
 
 		// Set all the settings from the form too, taking into account the defaults set on the design itself.
 		$design_form = $design->getDesignForm();

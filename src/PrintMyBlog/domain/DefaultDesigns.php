@@ -17,9 +17,19 @@ class DefaultDesigns {
 				return [
 					'title' => __('Classic Digital PDF', 'print-my-blog'),
 					'description' => __('Look inspired by Print My Blogs original, containing a quick printout heading and compact design.', 'print-my-blog'),
-					'featured_image' => plugins_url($design_template->getDir() . '/preview.png'),
+					'previews' => [
+						[
+							'url' => $design_template->getUrl() . 'assets/preview1.jpg',
+							'desc' => __('Title page, with working hyperlinks.', 'print-my-blog')
+						],
+						[
+							'url' => $design_template->getUrl() . 'assets/preview2.jpg',
+							'desc' => __('Main matter, showing hyperlinks and large images.', 'print-my-blog')
+						],
+					],
 					'design_defaults' => [
 						'use_title' => true,
+						'image_size' => 800,
 					],
 					'project_defaults' => [
 						'title' => get_bloginfo('name')
@@ -31,10 +41,20 @@ class DefaultDesigns {
 			'classic_print',
 			'editorial_review',
 			function(DesignTemplate $design_template){
+				$preview_folder_url = PMB_ASSETS_URL . '/images/design_previews/pdf/print/edit/';
 				return [
 					'title' => __('Editorial Review', 'print-my-blog'),
 					'description' => __('Perfect for editing and reviewing your content! Compact to conserve paper, lots of meta-information, and double-spaced text to allow for editor’s notes.', 'print-my-blog'),
-					'featured_image' => plugins_url($design_template->getDir() . '/preview.png'),
+					'previews' => [
+						[
+							'url' => $preview_folder_url . '/preview1.jpg',
+							'desc'=>__('Title page, showing the double-spaced text.', 'print-my-blog')
+						],
+						[
+							'url' => $preview_folder_url . '/preview2.jpg',
+							'desc' => __('Main matter, showing smaller images and double-spaced text.', 'print-my-blog')
+						]
+					],
 					'design_defaults' => [
 						'header_content' => [
 							'title',
@@ -54,13 +74,12 @@ class DefaultDesigns {
 							'content',
 						],
 						'page_per_post' => true,
-						'image_size' => 'small',
-
+						'image_size' => 200,
+						'custom_css' => 'article{line-height:2;}'
 					],
 					'project_defaults' => [
 						'title' => get_bloginfo('name')
 					],
-					'custom_css' => 'p{line-height:2;}'
 				];
 			}
 		);
@@ -71,9 +90,19 @@ class DefaultDesigns {
 				return [
 					'title' => __('Classic Print PDF', 'print-my-blog'),
 					'description' => __('Look inspired by Print My Blogs original, containing a quick printout heading and compact design.', 'print-my-blog'),
-					'featured_image' => plugins_url($design_template->getDir() . '/preview.png'),
+					'previews' => [
+						[
+							'url' => $design_template->getUrl() . 'assets/preview1.jpg',
+						    'desc' => __('Title page, showing removed hyperlinks.')
+						],
+						[
+							'url' => $design_template->getUrl() . 'assets/preview2.jpg',
+							'desc' => __('Main matter, showing external hyperlinks automatically converted into footnotes. Page numbers are always on the bottom-outside corner, and each article’s title is shown at the top of right pages.', 'print-my-blog')
+						],
+					],
 					'design_defaults' => [
 						'use_title' => true,
+						'image_size' => 400,
 					],
 					'project_defaults' => [
 						'title' => get_bloginfo('name')
@@ -85,10 +114,20 @@ class DefaultDesigns {
 			'classic_print',
 			'economical_print',
 			function(DesignTemplate $design_template){
+				$preview_folder_url = PMB_ASSETS_URL . 'images/design_previews/pdf/print/economical/';
 				return [
 					'title' => __('Economical Print PDF', 'print-my-blog'),
 					'description' => __('Compact design meant to save paper but still deliver all the content.', 'print-my-blog'),
-					'featured_image' => plugins_url($design_template->getDir() . '/preview.png'),
+					'previews' => [
+						[
+							'url' => $preview_folder_url . 'preview1.jpg',
+							'desc' => __('Title page, showing smaller text.', 'print-my-blog'),
+						],
+						[
+							'url' => $preview_folder_url . 'preview2.jpg',
+							'desc' => __('Main matter, showing smaller text and images to reduce ink usage.', 'print-my-blog')
+						]
+					],
 					'design_defaults' => [
 						'header_content' => [
 							'title',
@@ -101,40 +140,9 @@ class DefaultDesigns {
 							'content',
 						],
 						'page_per_page' => false,
-						'columns' => 2,
-						'font_size' => '10pt',
-						'image_size' => 'small',
+						'font_size' => '9pt',
+						'image_size' => 150,
 						// purposefully leave hyperlink defaults dynamic
-					],
-					'project_defaults' => [
-						'title' => get_bloginfo('name')
-					]
-				];
-			}
-		);
-		pmb_register_design(
-			'classic_print',
-			'tree_saver_print',
-			function(DesignTemplate $design_template){
-				return [
-					'title' => __('Tree-Saver Print PDF', 'print-my-blog'),
-					'description' => __('As compact as possible to save paper.', 'print-my-blog'),
-					'featured_image' => plugins_url($design_template->getDir() . '/preview.png'),
-					'design_defaults' => [
-						'header_content' => [
-							'title',
-							'url',
-							'date_printed',
-						],
-						'post_content' => [
-							'title',
-							'content',
-						],
-						'page_per_page' => false,
-						'columns' => 3,
-						'font_size' => '8pt',
-						'image_size' => 'none',
-						// use defaults of design template for hyperlinks
 					],
 					'project_defaults' => [
 						'title' => get_bloginfo('name')
@@ -155,7 +163,16 @@ class DefaultDesigns {
 				return [
 					'title' => __('Buurma Whitepaper', 'print-my-blog'),
 					'description' => __('Digital PDF perfect for a branded whitepaper.', 'print-my-blog'),
-					'featured_image' => plugins_url($design_template->getDir() . '/preview.png'),
+					'previews' => [
+						[
+							'url' => $design_template->getUrl() . 'assets/preview1.jpg',
+							'desc' => __('Title page, showing a stylzed upper margin for a company name, background gradient and logo, among other things.', 'print-my-blog'),
+						],
+						[
+							'url' => $design_template->getUrl() . 'assets/preview2.jpg',
+							'desc' => __('Main matter, showing working hyperlinks (which also each get an automatic footnote), and page number and logo in bottom-right corner.', 'print-my-blog')
+						]
+					],
 					'design_defaults' => [
 					],
 					'project_defaults' => [
@@ -174,7 +191,16 @@ class DefaultDesigns {
 				return [
 					'title' => __('Mayer Magazine', 'print-my-blog'),
 					'description' => __('Digital 2-column magazine', 'print-my-blog'),
-					'featured_image' => plugins_url($design_template->getDir() . '/preview.png'),
+					'previews' => [
+						[
+							'url' => $design_template->getUrl() . 'assets/preview1.jpg',
+							'desc' => __('Title page and table of contents both fit on the first page.', 'print-my-blog')
+						],
+						[
+							'url' => $design_template->getUrl() . 'assets/preview2.jpg',
+							'desc' => __('Two column layout which compactly shows content and images.', 'print-my-blog')
+						]
+					],
 					'design_defaults' => [
 						'header_content' => [
 							'title',

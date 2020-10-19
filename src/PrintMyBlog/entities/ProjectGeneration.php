@@ -144,7 +144,8 @@ class ProjectGeneration {
 	 */
 	public function getGeneratedIntermediaryFileUrl(){
 		$upload_dir_info = wp_upload_dir();
-		return $upload_dir_info['baseurl'] . '/pmb/generated/' . $this->project->code() . '/' . $this->project->getWpPost()->post_name . '.html';
+		return $upload_dir_info['baseurl'] . '/pmb/generated/' . $this->project->code() . '/' . $this->format->slug()
+		       . '/' . $this->project->getWpPost()->post_name . '.html';
 	}
 
 	public function generatedFileUrl(){
@@ -170,7 +171,7 @@ class ProjectGeneration {
 		return str_replace(
 			'..',
 			'',
-			$upload_dir_info['basedir'] . '/pmb/generated/' . $this->project->code() . '/'
+			$upload_dir_info['basedir'] . '/pmb/generated/' . $this->project->code() . '/' . $this->format->slug() . '/'
 		);
 	}
 

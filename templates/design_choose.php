@@ -64,8 +64,9 @@ foreach($designs as $design){
 				}
 				?>
 			</h2>
+            <?php echo pmb_design_preview($design);?>
             <span class="pmb-help" style="margin-"><?php printf(__('Design supports %d layers of nested divisions', 'print-my-blog'), $design->getDesignTemplate()->getLevels());?></span>
-			<div class="pmb-design-actions">
+			<div class="pmb-actions pmb-design-actions">
 				<?php
 				if($active){
 					?>

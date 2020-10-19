@@ -38,6 +38,8 @@ pmb_render_template(
         <p class="pmb-comment description"><?php esc_html_e('File formats you intend to generate for this project.', 'print-my-blog');?></p>
         <table class="form-table">
             <tbody>
+            <tr>
+                <td colspan="2" class="pmb-formats-row">
             <?php foreach($formats as $format){
                 $design = $project->getDesignFor($format);
 	            $customize_url = add_query_arg(
@@ -59,20 +61,27 @@ pmb_render_template(
 		            admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	            );
                 ?>
-                <tr>
-                    <th scope="row">
+                <div class="pmb-format">
                         <label>
                             <input type="checkbox" name="pmb_format[]" value="<?php echo $format->slug();?>" <?php checked($project->isFormatSelected($format->slug()));?>>
-                            <?php echo $format->title();?>
+		                    <?php echo $format->title();?>
                         </label>
-                    </th>
-                    <td>
-                        <?php printf(esc_html('Design: %s', 'print-my-blog'), '<b>' . $design->getWpPost()->post_title . '</b>');?>
-                    <a href="<?php echo esc_attr($customize_url);?>"><?php esc_html_e('Customize', 'print-my-blog');?></a> |
-                    <a href="<?php echo esc_attr($change_design_url);?>"><?php esc_html_e('Use Different...','print-my-blog');?></a>
-                    </td>
-                </tr>
+                    <div class="pmb-chosen-design-for-format">
+                        <?php echo pmb_design_preview($design);?>
+                        <div class="pmb-actions pmb-format-actions">
+                            <a class="button" href="<?php echo esc_attr($customize_url);?>"><?php esc_html_e('Customize', 'print-my-blog');?></a>
+                            <a class="button" href="<?php echo esc_attr($change_design_url);?>"><?php esc_html_e('Change','print-my-blog');?></a>
+                        </div>
+                        <div class="pmb-format-design-title">
+	                        <?php printf(esc_html('Design: %s', 'print-my-blog'), '<b>' . $design->getWpPost()->post_title . '</b>');?>
+                        </div>
+
+
+                    </div>
+                </div>
             <?php }?>
+                </td>
+            </tr>
             </tbody>
         </table>
 

@@ -4,7 +4,7 @@
  * @return string CSS to include in the style
  */
 function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design){
-	$css = '';
+	$css = $design->getSetting('custom_css');
 
 	$selector = ' img, .wp-block-image, figure.wp-caption';
 	switch($design->getPmbMeta('image_placement')){

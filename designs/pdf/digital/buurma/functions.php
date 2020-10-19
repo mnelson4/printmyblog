@@ -28,7 +28,7 @@ add_action(
 				@page back-matter{
 					background: url(' . $design->getSetting('background_embellishment') . ') center center no-repeat,
 						linear-gradient(#cce5ff, #e6f2ff);
-					background-size:80%;
+					background-size:80%, 100%;
 				}
 			/* MIKE STYLE */'
 		);
