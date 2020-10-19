@@ -72,8 +72,8 @@
         </div>
         <div class="pmb-print-ready">
             <h1>Ready</h1>
-            <a class="button" id="pmb-download-pdf">Download Test PDF</a>
-            <a href="" class="button button-secondary" id="pmb-view-html">View HTML</a>
+            <a class="pmb-button button" id="pmb-download-pdf">Download Test PDF</a>
+            <a class="pmb-button button button-secondary" id="pmb-view-html">View HTML</a>
             <div class="pmb-print-instructions">
 
             </div>

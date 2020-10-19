@@ -335,8 +335,7 @@ class DefaultDesignTemplates {
 								'url',
 								'date_printed'
 							],
-							'html_label_text' => __('Project Header Content to Print'),
-							'html_help_text' => __('Appears at the top of the first page.', 'print-my-blog')
+							'html_label_text' => __('Title Page Content'),
 						]
 					),
 					'post_content' => new CheckboxMultiInput(
@@ -360,7 +359,7 @@ class DefaultDesignTemplates {
 								'featured_image',
 								'content'
 							],
-							'html_label_text' => __('Post Content to Print'),
+							'html_label_text' => __('Post Content'),
 							'html_help_text' => __('Content from each post to print.', 'print-my-blog')
 						]
 					),
