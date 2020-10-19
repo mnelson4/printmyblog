@@ -56,7 +56,7 @@ function pmb_content_item($posty_row, $max_nesting = 0){
             <span class="pmb-project-item-template-container"><?php echo pmb_template_selector($template);?></span>
         </div>
 
-        <div class="pmb-nested-sortable <?php echo $depth < $max_nesting ? 'pmb-sortable' : 'pmb-sortable-inactive';?> pmb-subs"><?php echo 'depth: ' . $depth . ', max: ' . $max_nesting;?>
+        <div class="pmb-nested-sortable <?php echo $depth < $max_nesting ? 'pmb-sortable' : 'pmb-sortable-inactive';?> pmb-subs">
             <?php
                 foreach($subs as $sub){
 	                pmb_content_item($sub, $max_nesting);
