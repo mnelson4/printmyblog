@@ -104,7 +104,7 @@ pmb_render_template(
                         <?php if($project_support_front_matter){
                            ?>
                             <h2><?php esc_html_e('Front Matter', 'print-my-blog');?></h2>
-                            <div id="pmb-project-front-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="1">
+                            <div id="pmb-project-front-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="0">
 	                            <?php
 	                            foreach($front_matter_sections as $post) {
 		                            pmb_content_item( $post, 0 );
@@ -130,7 +130,7 @@ pmb_render_template(
 	                    <?php if($project_support_back_matter){
 		                    ?>
                             <h2><?php esc_html_e('Back Matter', 'print-my-blog');?></h2>
-                            <div id="pmb-project-back-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="1">
+                            <div id="pmb-project-back-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="0">
 			                    <?php
 			                    foreach($back_matter_sections as $post) {
 				                    pmb_content_item( $post, 0 );
