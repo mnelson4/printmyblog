@@ -58,7 +58,7 @@ class PostFetcher
     public function deleteCustomPostTypes(){
     	global $wpdb;
     	return $wpdb->query(
-    		'DELETE posts, postmetas FROM ' . $wpdb->posts . ' AS posts INNER JOIN ' . $wpdb->postmeta . ' AS postmetas WHERE posts.post_type IN ("' . implode('","',$this->custom_post_types->getPostTypes()) . '")'
+    		'DELETE posts, postmetas FROM ' . $wpdb->posts . ' AS posts INNER JOIN ' . $wpdb->postmeta . ' AS postmetas ON posts.ID=postmetas.post_id WHERE posts.post_type IN ("' . implode('","',$this->custom_post_types->getPostTypes()) . '")'
 	    );
     }
 }
