@@ -43,8 +43,59 @@ use PrintMyBlog\services\display\FormInputs;
             </tbody>
         </table>
 
+        <table class="form-table">
+            <tbody>
+            <tr>
+                <th scope="row">
+				    <?php esc_html_e('Format', 'print-my-blog');?>
+                </th>
+                <td>
+				    <?php
+				    $formats = array(
+					    'print' => array(
+						    'label' => esc_html__('Paper', 'print-my-blog'),
+						    'help_text' => esc_html__('Print a physical copy using your web browser’s print functionality.', 'print-my-blog'),
+						    'checked' => true
+					    ),
+					    'pdf' => array(
+						    'label' => esc_html__('Digital PDF', 'print-my-blog'),
+						    'help_text' => esc_html__('Make a PDF file, intended for reading from a computer or other device, using your browser or a browser extension.', 'print-my-blog'),
+						    'link' => 'https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20a%20pdf%20using%20print%20my%20blog%3F'
+					    ),
+					    'ebook' => array(
+						    'label' => esc_html__('eBook (ePub or MOBI)', 'print-my-blog'),
+						    'help_text' => esc_html__('Make a free eBook using dotEPUB.', 'print-my-blog'),
+						    'link' => 'https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20an%20ebook%20using%20print%20my%20blog%3F'
+					    ),
+					    'html' => array(
+						    'label' => esc_html__('HTML', 'print-my-blog'),
+						    'help_text' => esc_html__('Easily copy-and-paste into another program like Microsoft Word or Google Docs. Note: this is not recommended for customizing printouts, as other programs usually format the content poorly. Instead, use Print My Blog’s CSS classes to remove or add content from printouts.', 'print-my-blog'),
+						    'link' => 'https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20remove%20post%20content%20from%20the%20printout%3F'
+
+					    ),
+				    );
+				    foreach($formats as $key => $details){
+					    ?>
+                        <div class="pmb-format-option">
+                            <input type="radio" name="format" id="format-<?php echo $key;?>" value="<?php echo $key;?>" <?php echo isset($details['checked']) ? 'checked="checked"' : '';?>>
+                            <label for="format-<?php echo $key;?>">
+							    <?php echo $details['label']; ?>
+                            </label>
+                            <p class="description">
+							    <?php echo $details['help_text']; ?>
+							    <?php echo isset($details['link']) ? '<a href="' . $details['link'] . '" target="_blank">' . esc_html__('Learn More','print-my-blog' ) . '</a>' : '';?>
+                            </p>
+                        </div>
+					    <?php
+				    }
+				    ?>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
         <details class="pmb-details">
-            <summary class="pmb-reveal-options" id="pmb-reveal-main-options"><?php esc_html_e('Show Options', 'print-my-blog'); ?></summary>
+            <summary class="pmb-reveal-options" id="pmb-reveal-main-options"><?php esc_html_e('Show More Print Options', 'print-my-blog'); ?></summary>
             <h1><?php esc_html_e('Options','print-my-blog' );?></h1>
             <h2><?php esc_html_e('Post Selection','print-my-blog' );?></h2>
             <table class="form-table">
@@ -127,56 +178,6 @@ use PrintMyBlog\services\display\FormInputs;
 
         </details>
         <input type="hidden" name="<?php echo PMB_PRINTPAGE_SLUG;?>" value="1">
-        <table class="form-table">
-            <tbody>
-            <tr>
-                <th scope="row">
-                    <?php esc_html_e('Format', 'print-my-blog');?>
-                </th>
-                <td>
-                    <?php
-                    $formats = array(
-                        'print' => array(
-                            'label' => esc_html__('Paper', 'print-my-blog'),
-                            'help_text' => esc_html__('Print a physical copy using your web browser’s print functionality.', 'print-my-blog'),
-                            'checked' => true
-                        ),
-                        'pdf' => array(
-                            'label' => esc_html__('Digital PDF', 'print-my-blog'),
-                            'help_text' => esc_html__('Make a PDF file, intended for reading from a computer or other device, using your browser or a browser extension.', 'print-my-blog'),
-                            'link' => 'https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20a%20pdf%20using%20print%20my%20blog%3F'
-                        ),
-                        'ebook' => array(
-                            'label' => esc_html__('eBook (ePub or MOBI)', 'print-my-blog'),
-                            'help_text' => esc_html__('Make a free eBook using dotEPUB.', 'print-my-blog'),
-                            'link' => 'https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20an%20ebook%20using%20print%20my%20blog%3F'
-                        ),
-                        'html' => array(
-                                'label' => esc_html__('HTML', 'print-my-blog'),
-                            'help_text' => esc_html__('Easily copy-and-paste into another program like Microsoft Word or Google Docs. Note: this is not recommended for customizing printouts, as other programs usually format the content poorly. Instead, use Print My Blog’s CSS classes to remove or add content from printouts.', 'print-my-blog'),
-                            'link' => 'https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20remove%20post%20content%20from%20the%20printout%3F'
-
-                        ),
-                    );
-                    foreach($formats as $key => $details){
-                        ?>
-                        <div class="pmb-format-option">
-                            <input type="radio" name="format" id="format-<?php echo $key;?>" value="<?php echo $key;?>" <?php echo isset($details['checked']) ? 'checked="checked"' : '';?>>
-                            <label for="format-<?php echo $key;?>">
-                                <?php echo $details['label']; ?>
-                            </label>
-                            <p class="description">
-                                <?php echo $details['help_text']; ?>
-                                <?php echo isset($details['link']) ? '<a href="' . $details['link'] . '" target="_blank">' . esc_html__('Learn More','print-my-blog' ) . '</a>' : '';?>
-                            </p>
-                        </div>
-                        <?php
-                    }
-                    ?>
-                </td>
-            </tr>
-            </tbody>
-        </table>
         <button class="button-primary"><?php esc_html_e('Prepare Print-Page','print-my-blog' );?></button>
     </form>
 </div>
