@@ -12,7 +12,7 @@ use \PrintMyBlog\orm\entities\Project
 		if($project){
 			$projects_url = admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH);
 			?>
-			<span><a href="<?php echo esc_attr($projects_url);?>"><?php esc_html_e('Projects', 'print-my-blog');?></a></span>
+			<span><a href="<?php echo esc_attr($projects_url);?>"><?php esc_html_e('Pro Projects', 'print-my-blog');?></a></span>
 			<?php
 		}
 		if($project instanceof Project){

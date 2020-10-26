@@ -81,8 +81,8 @@ class CustomPostTypes
 		    // WordPress CPT Options Start
 		    array(
 			    'labels' => array(
-				    'name' => __( 'Project Contents' ),
-				    'singular_name' => __( 'Project Content' )
+				    'name' => __( 'Pro Project Contents', 'print-my-blog' ) ,
+				    'singular_name' => __( 'Project Content', 'print-my-blog' )
 			    ),
 			    'has_archive' => true,
 			    'public' => false,

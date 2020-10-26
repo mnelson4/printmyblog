@@ -11,7 +11,7 @@ use PrintMyBlog\orm\entities\ProjectSection;
  * @return string
  */
 function pmb_pro_only(){
-	return ' ' . __('*Pro Only*', 'print-my-blog');
+	return ' ' . __('(Pro)', 'print-my-blog');
 }
 
 /**

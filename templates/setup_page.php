@@ -9,18 +9,20 @@ use PrintMyBlog\services\display\FormInputs;
 
 ?>
 <div class="wrap nosubsub">
-<h1><?php esc_html_e('Print My Blog - Print Now','print-my-blog' );?></h1>
-    <?php
-    if(isset($legacy_page)){
-        ?>
-        <div class="notice notice-warning">
-            <p>
-                <?php esc_html_e('Print My Blog’s Page is moving! It’s new location is on the left, under "Print My Blog", then "Print Now".', 'print-my-blog'); ?>
-            </p>
-        </div>
-        <?php
-    }
-    ?>
+<h1><?php esc_html_e('Print My Blog - Free Quick Print','print-my-blog' );?></h1>
+    <div class="notice notice-success">
+        <p>
+            <?php esc_html_e('This is the quick-and-free option for printing your blog using your web browser.', 'print-my-blog');?>
+        </p>
+        <p>
+            <?php printf(
+                    esc_html__('To demo the professional option (with table of contents, content organizer, and great-looking designs) %1$stry creating a project.%2$s', 'print-my-blog'),
+                    '<a href="' . admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH) . '">',
+                    '</a>'
+            );
+            ?>
+        </p>
+    </div>
     <p><?php esc_html_e('Configure how you’d like the blog to be printed, or just use our recommended defaults.', 'print-my-blog'); ?></p>
     <form action="<?php echo site_url();?>" method="get">
         <?php if(PMB_REST_PROXY_EXISTS){?>
