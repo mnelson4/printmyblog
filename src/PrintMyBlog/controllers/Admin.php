@@ -558,7 +558,18 @@ class Admin extends BaseController
 		    ],
 		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	    );
-	    include(PMB_TEMPLATES_DIR . 'project_edit_content.php');
+	    echo pmb_render_template(
+	    	'project_edit_content.php',
+	    [
+		    'form_url' => $form_url,
+		    'back_matter_sections' => $back_matter_sections,
+		    'sections' => $sections,
+		    'front_matter_sections' => $front_matter_sections,
+		    'post_options' => $post_options,
+		    'project' => $project,
+		    'project_support_front_matter' => $project_support_front_matter,
+	        'project_support_back_matter' => $project_support_back_matter
+	    ]);
     }
 
     protected function editMetadata(Project $project){
@@ -584,7 +595,13 @@ class Admin extends BaseController
 		    ],
 		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	    );
-    	include(PMB_TEMPLATES_DIR . 'project_edit_metadata.php');
+	    echo pmb_render_template(
+	    	'project_edit_metadata.php',
+	    [
+	    	'form_url' => $form_url,
+		    'form' => $form,
+		    'project' => $project
+	    ]);
     }
 
     protected function editGenerate(Project $project){

@@ -1,5 +1,5 @@
 <div <?php pmb_section_wrapper_class();?> <?php pmb_section_wrapper_id();?>>
-    <article <?php pmb_section_class('pmb-just-content'); ?> <?php pmb_section_id(); ?>>
+    <article <?php pmb_section_class('pmb-front-matter-article'); ?> <?php pmb_section_id(); ?>>
         <header class="entry-header has-text-align-center">
             <div class="entry-header-inner section-inner medium">
 				<?php pmb_the_title();?>

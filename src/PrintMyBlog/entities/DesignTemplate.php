@@ -72,6 +72,11 @@ class DesignTemplate {
 	 * 'anthology', 'just_content', etc.
 	 */
 	protected $supports = array();
+	/**
+	 * @var array keys are template name (just add ".php", and it's the name of the file in the design's directory.)
+	 * Values are arrays too, with the key "title" for the template's title to show
+	 */
+	protected $custom_templates = array();
 
 	/**
 	 * DesignTemplate constructor.
@@ -94,6 +99,9 @@ class DesignTemplate {
 		$this->url                   = (string)$args['url'];
 		if(isset($args['supports'])){
 			$this->supports = (array)$args['supports'];
+		}
+		if(isset($args['custom_templates'])){
+			$this->custom_templates = $args['custom_templates'];
 		}
 		$this->design_form_callback  = $args['design_form_callback'];
 		$this->project_form_callback = $args['project_form_callback'];
@@ -308,5 +316,12 @@ class DesignTemplate {
 			self::IMPLIED_DIVISION_MAIN_MATTER,
 			self::IMPLIED_DIVISION_BACK_MATTER
 		];
+	}
+
+	/**
+	 * @return array|mixed
+	 */
+	public function getCustomTemplates(){
+		return $this->custom_templates;
 	}
 }

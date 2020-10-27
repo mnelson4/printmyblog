@@ -68,6 +68,10 @@ class Project extends PostWrapper{
 	 * @var FormSectionProper
 	 */
 	protected $meta_form;
+	/**
+	 * @var array|null @see DefaultDesignTemplate::custom_templates for its format
+	 */
+	protected $custom_templates = null;
 
 	/**
 	 * @param ProjectSectionManager $section_manager
@@ -530,5 +534,60 @@ class Project extends PostWrapper{
 			return $meta_title;
 		}
 		return $this->getWpPost()->post_title;
+	}
+
+	/**
+	 *
+	 * @return array keys are template names, values are arrays with keys:{
+	 * @type string $title
+	 * @type Design[] $used_by
+	 * }
+	 */
+	public function getCustomTemplates()
+	{
+		if( $this->custom_templates === null) {
+			$templates = [];
+			foreach ( $this->getFormatsSelected() as $format ) {
+				$design           = $this->getDesignFor( $format );
+				$design_templates = $design->getDesignTemplate()->getCustomTemplates();
+				foreach ( $design_templates as $template_slug => $template_args ) {
+					if ( ! isset( $templates[ $template_slug ] ) ) {
+						$templates[ $template_slug ] = $template_args;
+					}
+					if ( ! isset( $templates[ $template_slug ]['used_by'] ) ) {
+						$templates[ $template_slug ]['used_by'][ $design->getWpPost()->post_name ] = $design;
+					}
+				}
+			}
+			$this->custom_templates = $templates;
+		}
+		return $this->custom_templates;
+	}
+
+	/**
+	 * @return array keys are template slugs, values are just their translated titles
+	 */
+	public function getSectionTemplateOptions(){
+		$all_templates = [
+				'' => __('Default Template', 'print-my-blog'),
+				'just_content' => __('Just Content', 'print-my-blog')
+			];
+		foreach($this->getCustomTemplates() as $template_slug => $template_args){
+			$title = $template_args['title'];
+			$title_and_qualifier = sprintf(
+				__('%1$s (Used by %2$s)', 'print-my-blog'),
+				$title,
+				implode(', ',
+					array_map(
+						function(Design $design){
+							return $design->getWpPost()->post_title;
+						},
+						$template_args['used_by']
+					)
+				)
+			);
+			$all_templates[$template_slug] = $title_and_qualifier;
+		}
+		return $all_templates;
 	}
 }

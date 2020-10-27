@@ -100,6 +100,9 @@
         margin-top:1in;
         columns:2;
     }
+    .pmb-print-page .pmb-single-column .entry-content{
+        columns:1;
+    }
 
 
     /* Article styles */

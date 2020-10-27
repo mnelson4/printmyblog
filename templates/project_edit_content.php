@@ -1,4 +1,7 @@
 <?php
+
+use PrintMyBlog\orm\entities\Project;
+
 /**
  * @var $project \PrintMyBlog\orm\entities\Project
  * @var $form_url string
@@ -11,11 +14,8 @@
  *
  */
 
-function pmb_template_selector($selected_template){
-    $options = [
-            '' => __('Default Template', 'print-my-blog'),
-            'just_content' => __('Just Content', 'print-my-blog')
-    ];
+function pmb_template_selector($selected_template, Project $project){
+    $options = $project->getSectionTemplateOptions();
     $html = '<select class="pmb-template">';
     foreach($options as $value => $display_text){
         $html .= '<option value="' . esc_attr($value) . '" ' . selected($value, $selected_template, false) . '>' . $display_text . '</option>';
@@ -23,7 +23,13 @@ function pmb_template_selector($selected_template){
     $html .= '</select>';
     return $html;
 }
-function pmb_content_item($posty_row, $max_nesting = 0){
+
+/**
+ * @param $posty_row
+ * @param Project $project
+ * @param int $max_nesting
+ */
+function pmb_content_item($posty_row, Project $project, $max_nesting = 0){
     if($posty_row instanceof \PrintMyBlog\orm\entities\ProjectSection){
         $id = $posty_row->getPostId();
         $title = $posty_row->getPostTitle();
@@ -53,13 +59,13 @@ function pmb_content_item($posty_row, $max_nesting = 0){
             <a href="<?php echo esc_attr($view_url);?>" target="_blank"><span class="dashicons dashicons-visibility pmb-icon"></span></a>
             <a href="<?php echo esc_attr($edit_url);?>" target="_blank"><span class="dashicons dashicons-edit pmb-icon"></span></a>
             <a class="pmb-remove-item"><span class="dashicons dashicons-trash pmb-icon"></span></a>
-            <span class="pmb-project-item-template-container"><?php echo pmb_template_selector($template);?></span>
+            <span class="pmb-project-item-template-container"><?php echo pmb_template_selector($template, $project);?></span>
         </div>
 
         <div class="pmb-nested-sortable <?php echo $depth < $max_nesting ? 'pmb-sortable' : 'pmb-sortable-inactive';?> pmb-subs">
             <?php
                 foreach($subs as $sub){
-	                pmb_content_item($sub, $max_nesting);
+	                pmb_content_item($sub, $project, $max_nesting);
                 }
             ?>
         </div>
@@ -93,7 +99,7 @@ pmb_render_template(
                     <div id="pmb-project-choices" class="pmb-draggable-area pmb-project-content-available pmb-scrollable-window list-group">
                         <?php
                         foreach($post_options as $post){
-	                        pmb_content_item($post, 0);
+	                        pmb_content_item($post, $project, 0);
                         }
                         ?>
                     </div>
@@ -107,7 +113,7 @@ pmb_render_template(
                             <div id="pmb-project-front-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="0">
 	                            <?php
 	                            foreach($front_matter_sections as $post) {
-		                            pmb_content_item( $post, 0 );
+		                            pmb_content_item( $post, $project, 0 );
 	                            }
 	                            pmb_drag_here();
 	                            ?>
@@ -122,7 +128,7 @@ pmb_render_template(
                         <div id="pmb-project-main-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="<?php echo esc_attr($project->getLevelsAllowed());?>">
                             <?php
                             foreach($sections as $post) {
-                                pmb_content_item( $post, $project->getLevelsAllowed() );
+                                pmb_content_item( $post, $project, $project->getLevelsAllowed() );
                             }
                             pmb_drag_here();
                             ?>
@@ -133,7 +139,7 @@ pmb_render_template(
                             <div id="pmb-project-back-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="0">
 			                    <?php
 			                    foreach($back_matter_sections as $post) {
-				                    pmb_content_item( $post, 0 );
+				                    pmb_content_item( $post, $project, 0 );
 			                    }
 			                    pmb_drag_here();
 			                    ?>
