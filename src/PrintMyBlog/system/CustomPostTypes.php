@@ -87,7 +87,7 @@ class CustomPostTypes
 			    'has_archive' => true,
 			    'public' => false,
 			    'show_ui' => true,
-			    'show_in_menu' => PMB_ADMIN_PAGE_SLUG,
+			    'show_in_menu' => PMB_ADMIN_PROJECTS_PAGE_SLUG,
 			    'rewrite' => array('slug' => 'pmb'),
 			    'show_in_rest' => true,
 			    'supports' => array('title', 'editor', 'revisions', 'author','thumbnail', 'custom-fields'),

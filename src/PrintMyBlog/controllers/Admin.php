@@ -142,23 +142,16 @@ class Admin extends BaseController
             esc_html__('Print My Blog', 'print-my-blog'),
             esc_html__('Print My Blog', 'print-my-blog'),
             PMB_ADMIN_CAP,
-            PMB_ADMIN_PAGE_SLUG,
+	        PMB_ADMIN_PROJECTS_PAGE_SLUG,
             array(
                 $this,
-                'renderAdminPage'
+                'renderProjects'
             ),
             'data:image/svg+xml;base64,' . base64_encode(file_get_contents(PMB_DIR . 'assets/images/menu-icon.svg'))
         );
+
         add_submenu_page(
-            PMB_ADMIN_PAGE_SLUG,
-            esc_html__('Print My Blog – Quick Print', 'print-my-blog'),
-            esc_html__('Free Quick Print', 'print-my-blog'),
-            PMB_ADMIN_CAP,
-            PMB_ADMIN_PAGE_SLUG,
-            array($this,'renderAdminPage')
-        );
-        add_submenu_page(
-            PMB_ADMIN_PAGE_SLUG,
+	        PMB_ADMIN_PROJECTS_PAGE_SLUG,
             esc_html__('Projects', 'print-my-blog'),
             esc_html__('Pro Projects', 'print-my-blog'),
             PMB_ADMIN_CAP,
@@ -166,8 +159,16 @@ class Admin extends BaseController
             array($this, 'renderProjects')
         );
 	    $this->hackSubmenuContentIntoRightSpot();
+	    add_submenu_page(
+		    PMB_ADMIN_PROJECTS_PAGE_SLUG,
+		    esc_html__('Print My Blog – Quick Print', 'print-my-blog'),
+		    esc_html__('Free Quick Print', 'print-my-blog'),
+		    PMB_ADMIN_CAP,
+		    PMB_ADMIN_PAGE_SLUG,
+		    array($this,'renderAdminPage')
+	    );
         add_submenu_page(
-            PMB_ADMIN_PAGE_SLUG,
+	        PMB_ADMIN_PROJECTS_PAGE_SLUG,
             esc_html__('Print My Blog Settings', 'print-my-blog'),
             esc_html__('Settings', 'print-my-blog'),
             'manage_options',
@@ -183,13 +184,13 @@ class Admin extends BaseController
     protected function hackSubmenuContentIntoRightSpot(){
 	    global $submenu;
 
-	    if(array_key_exists(PMB_ADMIN_PAGE_SLUG, $submenu)){
+	    if(array_key_exists(PMB_ADMIN_PROJECTS_PAGE_SLUG, $submenu)){
 
-		    foreach($submenu[PMB_ADMIN_PAGE_SLUG] as $key => $value){
+		    foreach($submenu[PMB_ADMIN_PROJECTS_PAGE_SLUG] as $key => $value){
 			    $k = array_search('edit.php?post_type=pmb_content', $value);
 			    if($k) {
-				    unset( $submenu[ PMB_ADMIN_PAGE_SLUG ][ $key ] );
-				    $submenu[ PMB_ADMIN_PAGE_SLUG ][] = $value;
+				    unset( $submenu[ PMB_ADMIN_PROJECTS_PAGE_SLUG ][ $key ] );
+				    $submenu[ PMB_ADMIN_PROJECTS_PAGE_SLUG ][] = $value;
 			    }
 		    }
 	    }
