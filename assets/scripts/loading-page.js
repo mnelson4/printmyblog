@@ -4,6 +4,7 @@ function PmbProLoadingPage(pmb_instance_vars, translations) {
 	this.instance_vars = pmb_instance_vars;
 	this.translations = translations;
 	this.html_url = null;
+	this.media = 'print';
 
 	/**
 	 * Initializes variables and begins fetching taxonomies, then gets started fetching posts/pages.
@@ -21,6 +22,7 @@ function PmbProLoadingPage(pmb_instance_vars, translations) {
 				if (typeof(response) === 'object' && typeof(response.url) === 'string'){
 					// window.location.replace(response.url);
 					this.html_url = response.url;
+					this.media = response.media;
 					this.finished();
 				} else {
 					alert(this.translations.error);
@@ -50,10 +52,10 @@ function PmbProLoadingPage(pmb_instance_vars, translations) {
 			// document_content: document.querySelector('html').innerHTML, // use this page's HTML
 			// document_content: "<h1>Hello world!</h1>",               // or supply HTML directly
 			document_url: this.html_url,            // or use a URL
-			 javascript: true,                                        // enable JavaScript processing
-			// prince_options: {
-			//   media: "screen",                                       // use screen styles instead of print styles
-			// }
+			javascript: true,                                        // enable JavaScript processing
+			prince_options: {
+			  media: this.media,                                       // use screen styles instead of print styles
+			}
 		})
 	}
 

@@ -114,7 +114,8 @@ class Ajax extends BaseController
 
 	    // If we're all done, return the file.
 	    $response = [
-	    	'url' => $url
+	    	'url' => $url,
+		    'media' => $format->slug() === 'digital_pdf' ? 'screen' : 'print'
 	    ];
 
 		wp_send_json($response);
