@@ -19,6 +19,11 @@ p.pmb-middle-important-text{
 }
 .pmb-welcome-option-inner{
     border: 1px solid #e5e5e5;
-    background-color:#fff;
     padding:1em;
+}
+.pmb-welcome-options .pmb-welcome-option-wrap:not(:first-child){
+    border-left:1px solid gray;
+}
+.pmb-pro-highlight{
+    background-color: lightgoldenrodyellow;
 }

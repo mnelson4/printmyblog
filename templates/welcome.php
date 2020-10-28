@@ -1,24 +1,56 @@
 <div class="wrap nosubsub pmb-welcome">
-    <h1>🎉<?php esc_html_e('Let’s make it easy to print your blog!','print-my-blog' );?>🎉</h1>
-    <p class="pmb-middle-important-text"><?php esc_html_e('What would you like to do?', 'print-my-blog'); ?></p>
+    <h1>🎉<?php esc_html_e( 'Let’s make it easy to print your blog!', 'print-my-blog' ); ?>🎉</h1>
+    <p class="pmb-middle-important-text"><?php esc_html_e( 'What would you like to do?', 'print-my-blog' ); ?></p>
     <div class="pmb-welcome-options">
         <div class="pmb-welcome-option-wrap">
-            <div class="pmb-welcome-option-inner"><h2><?php esc_html_e('Print My Blog Now', 'print-my-blog'); ?></h2>
-            <p><?php printf(
-                esc_html__('Then %1$svisit the Print Now page.%2$s', 'print-my-blog'),
-                    '<a href="' . admin_url(PMB_ADMIN_PAGE_PATH) . '">',
-                    '</a>'
-                    ); ?></p>
+            <div class="pmb-welcome-option-inner">
+                <h2><?php esc_html_e( 'Print My Blog Now for Free', 'print-my-blog' ); ?></h2>
+                <p>
+                    <a class="button button-primary" href="<?php echo  admin_url( PMB_ADMIN_PAGE_PATH );?>">
+                        <?php
+						esc_html_e( 'Use Free Quick Print', 'print-my-blog' );
+                        ?>
+                    </a>
+                </p>
+                <ul class="pmb-ul">
+                    <li><?php esc_html_e('2 clicks to printing', 'print-my-blog');?></li>
+                    <li><?php esc_html_e('No watermark', 'print-my-blog');?></li>
+                    <li><?php esc_html_e('Print Thousands of Pages from your Web Browser', 'print-my-blog');?></li>
+                </ul>
             </div>
         </div>
         <div class="pmb-welcome-option-wrap">
             <div class="pmb-welcome-option-inner">
-            <h2><?php esc_html_e('Let Visitors Print My Blog', 'print-my-blog'); ?></h2>
-            <p><?php printf(
-                esc_html__('Then %1$sconfigure the print buttons on the Settings page%2$s', 'print-my-blog'),
-                '<a href="' . admin_url(PMB_ADMIN_SETTINGS_PAGE_PATH) . '">',
-                '</a>'
-                ); ?></p>
+                <h2><?php esc_html_e( 'Let Visitors Print My Blog for Free', 'print-my-blog' ); ?></h2>
+                <p>
+                    <a class="button button-primary" href="<?php echo admin_url( PMB_ADMIN_SETTINGS_PAGE_PATH ); ?>">
+                    <?php esc_html_e( 'Configure the Print Button Settings', 'print-my-blog' ); ?>
+                    </a>
+                </p>
+                <ul class="pmb-ul">
+                    <li><?php esc_html_e('No Coding Required', 'print-my-blog');?></li>
+                    <li><?php esc_html_e('Highly Customizable', 'print-my-blog');?></li>
+                    <li><?php esc_html_e('Place Print Buttons Anywhere', 'print-my-blog');?></li>
+                </ul>
+            </div>
+        </div>
+        <div class="pmb-welcome-option-wrap pmb-pro-highlight">
+            <div class="pmb-welcome-option-inner">
+                <h2><?php esc_html_e( 'Make Professional Books and Documents', 'print-my-blog' ); ?></h2>
+                <p>
+                    <a class="button button-primary" href="<?php echo admin_url( PMB_ADMIN_PROJECTS_PAGE_PATH );?>">
+                    <?php esc_html_e( 'Try Print My Blog Pro', 'print-my-blog' );
+                        ?>
+                    </a>
+                    <span class="description"><?php esc_html_e('No installation required', 'print-my-blog');?></span>
+                </p>
+                <ul class="pmb-ul">
+                    <li><?php esc_html_e( 'Automatic Table of Contents', 'print-my-blog' ); ?></li>
+                    <li><?php esc_html_e( 'Include any post types, in any order', 'print-my-blog' ); ?></li>
+                    <li><?php esc_html_e( 'Choose and Customize Many Designs, or code your own', 'print-my-blog' ); ?></li>
+                    <li><?php esc_html_e( 'Automatically convert hyperlinks to page references and footnotes', 'print-my-blog' ); ?></li>
+                </ul>
+                <p><?php esc_html_e('', 'print-my-blog');?></p>
             </div>
         </div>
     </div>

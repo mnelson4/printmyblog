@@ -96,3 +96,7 @@
 .pmb-format-design-title{
     padding:8px;
 }
+
+.pmb-ul{
+    list-style:square;
+}
