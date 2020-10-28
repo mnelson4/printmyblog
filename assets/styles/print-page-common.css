@@ -137,3 +137,33 @@ Chrome always puts a pagebreak.*/
     page-break-before: always;
     overflow: hidden;
 }
+
+/*
+* WP Block galleries use display:flex which is great for the screen but very bad for printed, paged media as the
+* content gets cut off after the 1st page. Use ye old block display instead.
+*/
+.pmb-posts .wp-block-gallery, .pmb-posts .block-gallery-grid{
+    overflow:visible;
+    display:block;
+}
+.pmb-posts .wp-block-gallery>ul{
+    display:block;
+}
+.pmb-posts .wp-block-gallery.is-cropped>ul>li{
+    height:300px;
+}
+.pmb-posts .wp-block-gallery.is-cropped img{
+    height:100%
+}
+.pmb-posts .blocks-gallery-grid .blocks-gallery-item{
+    display:inline-block;
+    page-break-inside:avoid;
+    vertical-align:top;
+}
+.pmb-posts .blocks-gallery-grid .blocks-gallery-item figure{
+    display:block;
+}
+.pmb-posts .blocks-gallery-grid .blocks-gallery-item img{
+    margin-right: auto;
+    margin-left: auto;
+}
