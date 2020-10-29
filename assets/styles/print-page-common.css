@@ -207,3 +207,10 @@ height.
     height:100%;
     page-break-inside: avoid;
 }
+/*
+Override the defautl style which adds some padding to the sides, which then makes it overflow
+because it also takes up 100% of the width.
+ */
+.pmb-posts .blocks-gallery-grid .blocks-gallery-item figcaption {
+    padding:40px 0 9px;
+}
