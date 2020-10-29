@@ -152,8 +152,8 @@ class Admin extends BaseController
 
         add_submenu_page(
 	        PMB_ADMIN_PROJECTS_PAGE_SLUG,
-            esc_html__('Projects', 'print-my-blog'),
-            esc_html__('Pro Projects', 'print-my-blog'),
+            esc_html__('Pro Print', 'print-my-blog'),
+            esc_html__('Pro Print', 'print-my-blog'),
             PMB_ADMIN_CAP,
             PMB_ADMIN_PROJECTS_PAGE_SLUG,
             array($this, 'renderProjects')

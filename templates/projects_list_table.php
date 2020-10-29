@@ -8,7 +8,7 @@ pmb_render_template(
 );
 ?>
 <div class="wrap">
-    <h1 class="wp-heading-inline"><?php esc_html_e('Pro Projects', 'event_espresso'); ?></h1>
+    <h1 class="wp-heading-inline"><?php esc_html_e('Pro Print ― Projects', 'event_espresso'); ?></h1>
     <form class="pmb-inline-form" action="<?php echo esc_attr($add_new_url);?>" method="post">
         <button class="page-title-action">Add New</button>
     </form>
