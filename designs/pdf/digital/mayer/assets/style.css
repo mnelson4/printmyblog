@@ -96,11 +96,11 @@
         font-weight:400;
         string-set: part-title content();
     }
-    .pmb-part .entry-content{
+    .pmb-part div.entry-content{
         margin-top:1in;
         columns:2;
     }
-    .pmb-print-page .pmb-single-column .entry-content{
+    .pmb-print-page .pmb-single-column div.entry-content{
         columns:1;
     }
 
