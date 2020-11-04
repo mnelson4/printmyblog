@@ -239,6 +239,13 @@ class DefaultDesignTemplates {
 					'design_form_callback'  => function() {
 						return (new FormSectionProper( [
 							'subsections' => [
+								'page_per_post' => new YesNoInput(
+									[
+										'default' => false,
+										'html_label_text' => __('Each Post Begins on a New Page', 'print-my-blog'),
+										'html_help_text' => __('Whether to force posts to always start on a new page. Doing so makes the page more legible, but uses more paper.','print-my-blog'),
+									]
+								),
 								'post_header_in_columns' => new YesNoInput(
 									[
 										'html_label_text' => __('Show Post Header inside Columns','print-my-blog'),
@@ -251,6 +258,11 @@ class DefaultDesignTemplates {
 								'images_full_column' => new YesNoInput([
 									'html_label_text' => __('Full-Column Images', 'print-my-blog'),
 									'html_help_text' => __('Resizes images to be the full column width (except ones with the CSS class "mayer-no-resize"', 'print-my-blog')
+								]),
+								'no_extra_columns' => new YesNoInput([
+									'html_label_text' => __('Remove Extra Columns', 'print-my-blog'),
+									'default' => true,
+									'html_help_text' => __('Forces your content to only use two columns, regardless of the content itself was divided into more columns (eg using the "Columns" block)', 'print-my-blog')
 								]),
 								'image' => new FormSectionProper([
 									'subsections' => [

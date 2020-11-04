@@ -16,6 +16,12 @@ add_action(
 		if($design->getSetting('images_full_column')){
 			$css .=' figure.wp-caption:not(.mayer-noresize), figure.wp-block-image:not(.mayer-no-resize), img:not(.mayer-no-resize){width:100%;height:auto;}';
 		}
+		if($design->getSetting('page_per_post')){
+			$css .=' article{page-break-before:always}';
+		}
+		if($design->getSetting('no_extra_columns')){
+			$css .=' .pmb-print-page .wp-block-columns{display:block;}';
+		}
 		wp_add_inline_style(
 			'pmb_print_common',
 			$css
