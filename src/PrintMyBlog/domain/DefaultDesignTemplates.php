@@ -262,7 +262,7 @@ class DefaultDesignTemplates {
 								'no_extra_columns' => new YesNoInput([
 									'html_label_text' => __('Remove Extra Columns', 'print-my-blog'),
 									'default' => true,
-									'html_help_text' => __('Forces your content to only use two columns, regardless of the content itself was divided into more columns (eg using the "Columns" block)', 'print-my-blog')
+									'html_help_text' => __('Forces your content to only use two columns, even if the content itself was divided into more columns (eg using the "Columns" block)', 'print-my-blog')
 								]),
 								'image' => new FormSectionProper([
 									'subsections' => [
