@@ -8,7 +8,7 @@ pmb_render_template(
 	[
 		'project' => $project,
 		'page_title' => __('Generate Project', 'print-my-blog'),
-		'show_back' => true
+		'current_step' => $current_step
 	]
 );
 ?>
@@ -18,8 +18,8 @@ foreach($generations as $generation){
 	$generate_link = add_query_arg(
 		[
 			'ID' => $project->getWpPost()->ID,
-			'action' => self::SLUG_ACTION_EDIT_PROJECT,
-			'subaction' => self::SLUG_SUBACTION_PROJECT_GENERATE,
+			'action' => \PrintMyBlog\controllers\Admin::SLUG_ACTION_EDIT_PROJECT,
+			'subaction' => \PrintMyBlog\controllers\Admin::SLUG_SUBACTION_PROJECT_GENERATE,
             'format' => $generation->getFormat()->slug()
 		],
 		admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)

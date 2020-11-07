@@ -4,33 +4,21 @@ use PrintMyBlog\orm\entities\Project;
 /**
  * @var Project $project
  * @var bool $show_back
+ * @var string $current_step
  */
 if($project instanceof Project){
-	$project_url = add_query_arg(
-		[
-			'ID' =>  $project->getWpPost()->ID,
-			'action' => 'edit',
-			'subaction' => 'main'
-		],
-		admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-	);
-} else {
-    $project_url = '';
+    $steps = $project->getProgress()->getSteps();
+    $progress = $project->getProgress()->getStepProgress();
+    foreach($steps as $slug => $display_text){
+        $completed = $progress[$slug] ? true : false;
+        $current = $current_step === $slug ? true : false;
+        ?>
+        <span class="<?php echo esc_attr($completed ? 'pmb-completed' : 'pmb-incomplete');?> <?php echo esc_attr($current ? 'pmb-current-step' : '');?>"><a href=""><?php echo $display_text;?></a></span>
+        <?php
+    }
 }
-pmb_render_template(
-        'partials/breadcrumb.php',
-    [
-            'project' => $project,
-            'project_url' => $project_url
-    ]
-);
 ?>
 <div class="wrap nosubsub">
     <h1><?php echo $page_title;?></h1>
-    <div class="pmb-nav">
-        <?php if($show_back){?>
-            <span><a href="<?php echo esc_attr($project_url);?>">&laquo;<?php esc_html_e('Back', 'print-my-blog');?></a></span>
-        <?php } ?>
-    </div>
     <?php //div will be closed by project_footer.phps
 

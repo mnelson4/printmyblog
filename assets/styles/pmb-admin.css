@@ -100,3 +100,10 @@
 .pmb-ul{
     list-style:square;
 }
+.pmb-incomplete{
+    background-color:gray;
+}
+.pmb-current-step{
+    color:blue;
+    font-weight:bold;
+}

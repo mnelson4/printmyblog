@@ -13,7 +13,7 @@ pmb_render_template(
 	[
 		'project' => $project,
 		'page_title' => __('Edit Project Content', 'print-my-blog'),
-		'show_back' => true
+		'current_step' => $current_step
 	]
 );
 ?>

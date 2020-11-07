@@ -8,7 +8,7 @@ pmb_render_template(
         [
                 'project' => $project,
                 'page_title' => __('Edit Project', 'print-my-blog'),
-                'show_back' => false
+                'current_step' => $current_step
         ]
 );
 ?>

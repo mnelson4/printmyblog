@@ -13,7 +13,7 @@ pmb_render_template(
 	[
 		'project' => $project,
 		'page_title' => sprintf(__('Customize Design: %s', 'print-my-blog'), $design->getWpPost()->post_title),
-		'show_back' => true
+		'current_step' => $current_step
 	]
 );
 ?>

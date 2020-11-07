@@ -27,6 +27,7 @@ use Twine\forms\strategies\layout\TemplateLayout;
 use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
 use WP_Query;
+use const http\Client\Curl\PROXY_HTTP;
 
 /**
  * Class PmbAdmin
@@ -83,6 +84,15 @@ class Admin extends BaseController
 	 * @var TableManager
 	 */
 	protected $table_manager;
+
+	protected $step_to_subaction_mapping = [
+		ProjectProgress::SETUP_STEP => self::SLUG_SUBACTION_PROJECT_SETUP,
+		ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX => self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN,
+		ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX => self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN,
+		ProjectProgress::EDIT_CONTENT_STEP => self::SLUG_SUBACTION_PROJECT_CONTENT,
+		ProjectProgress::EDIT_METADATA_STEP => self::SLUG_SUBACTION_PROJECT_META,
+		ProjectProgress::GENERATE_STEP => self::SLUG_SUBACTION_PROJECT_GENERATE
+	];
 
 	/**
 	 * @param PostFetcher $post_fetcher
@@ -454,7 +464,15 @@ class Admin extends BaseController
 		$designs = $this->design_manager->getAll(new WP_Query($wp_query_args));
 		$chosen_design = $project->getDesignFor($format->slug());
 	    // show them in a template
-	    include(PMB_TEMPLATES_DIR . 'design_choose.php');
+	    $this->renderProjectTemplate(
+	    	'design_choose.php',
+		    [
+		        'project' => $project,
+			    'format' => $format,
+			    'designs' => $designs,
+			    'chosen_design' => $chosen_design
+		    ]
+	    );
     }
 
 	/**
@@ -466,7 +484,7 @@ class Admin extends BaseController
 	    } else {
 	    	$form = $this->getSetupForm($project);
 	    }
-		pmb_render_template(
+		$this->renderProjectTemplate(
 			'project_edit_setup.php',
 			[
 				'form' => $form,
@@ -502,7 +520,15 @@ class Admin extends BaseController
 		    ],
 		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	    );
-    	include(PMB_TEMPLATES_DIR . 'design_customize.php');
+    	$this->renderProjectTemplate(
+    		'design_customize.php',
+	    [
+	    	'form_url' => $form_url,
+		    'form' => $form,
+		    'design' => $design,
+		    'format_slug' => $format_slug,
+		    'project' => $project
+	    ]);
     }
 
     protected function editContent(Project $project)
@@ -545,7 +571,7 @@ class Admin extends BaseController
 		    ],
 		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	    );
-	    echo pmb_render_template(
+	    $this->renderProjectTemplate(
 	    	'project_edit_content.php',
 	    [
 		    'form_url' => $form_url,
@@ -582,7 +608,7 @@ class Admin extends BaseController
 		    ],
 		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	    );
-	    echo pmb_render_template(
+	    $this->renderProjectTemplate(
 	    	'project_edit_metadata.php',
 	    [
 	    	'form_url' => $form_url,
@@ -593,7 +619,73 @@ class Admin extends BaseController
 
     protected function editGenerate(Project $project){
     	$generations = $project->getAllGenerations();
-    	include(PMB_TEMPLATES_DIR . 'project_edit_generate.php');
+	    $this->renderProjectTemplate(
+	    	'project_edit_generate.php',
+	    [
+	    	'project' => $project,
+		    'generations' => $generations
+	    ]);
+    }
+
+    protected function renderProjectTemplate($template_name, $args){
+    	$args['current_step'] = $this->mapSubactionToStep(
+		    isset($_GET['subaction']) ? $_GET['subaction'] : null,
+		    isset($_GET['format']) ? $_GET['format'] : null
+	    );;
+    	echo pmb_render_template($template_name,$args);
+    }
+
+	/**
+	 * @param $step
+	 * @return array {
+	 * @type $subaction string
+	 * @type $format string
+	 * }
+	 */
+    protected function mapStepToSubaction($step){
+	    if(strpos($step,ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX) === 0){
+		    $format = str_replace(ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX, '', $step);
+		    $args['subaction'] = self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN;
+		    $args['format'] = $format;
+	    } elseif(strpos($step, ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX) === 0){
+		    $format = str_replace(ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX, '', $step);
+		    $args['subaction'] = self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN;
+		    $args['format'] = $format;
+	    } else {
+		    switch($step){
+			    case ProjectProgress::EDIT_CONTENT_STEP:
+				    $subaction = self::SLUG_SUBACTION_PROJECT_CONTENT;
+				    break;
+			    case ProjectProgress::EDIT_METADATA_STEP:
+				    $subaction = self::SLUG_SUBACTION_PROJECT_META;
+				    break;
+			    case ProjectProgress::GENERATE_STEP:
+			    default:
+				    $subaction = self::SLUG_SUBACTION_PROJECT_GENERATE;
+		    }
+		    $args['subaction'] = $subaction;
+		    $args['format'] = null;
+	    }
+	    return $args;
+    }
+
+	/**
+	 * @param $subaction
+	 * @param string $format
+	 *
+	 * @return string
+	 */
+    protected function mapSubactionToStep($subaction, $format = null){
+    	$subaction_to_step = array_flip($this->step_to_subaction_mapping);
+		if(isset($subaction_to_step[$subaction])){
+			$step = $subaction_to_step[$subaction];
+			if($format){
+				$step .= $format;
+			}
+		} else {
+			$step = ProjectProgress::SETUP_STEP;
+		}
+		return $step;
     }
 
     /**
@@ -773,28 +865,7 @@ class Admin extends BaseController
 		    'action' => self::SLUG_ACTION_EDIT_PROJECT
 	    ];
 	    $next_step = $project->getProgress()->getNextStep();
-	    if(strpos($next_step,ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX) === 0){
-	    	$format = str_replace(ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX, '', $next_step);
-	    	$args['subaction'] = self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN;
-	    	$args['format'] = $format;
-	    } elseif(strpos($next_step, ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX) === 0){
-		    $format = str_replace(ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX, '', $next_step);
-		    $args['subaction'] = self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN;
-		    $args['format'] = $format;
-	    } else {
-	    	switch($next_step){
-			    case ProjectProgress::EDIT_CONTENT_STEP:
-			        $subaction = self::SLUG_SUBACTION_PROJECT_CONTENT;
-			        break;
-			    case ProjectProgress::EDIT_METADATA_STEP:
-			    	$subaction = self::SLUG_SUBACTION_PROJECT_META;
-			    	break;
-			    case ProjectProgress::GENERATE_STEP:
-			    default:
-			    	$subaction = self::SLUG_SUBACTION_PROJECT_GENERATE;
-		    }
-		    $args['subaction'] = $subaction;
-	    }
+	    $args = array_merge($args, $this->mapStepToSubaction($next_step));
 	    // Redirect to it
 	    wp_redirect(
 		    add_query_arg(
