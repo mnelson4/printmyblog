@@ -100,10 +100,26 @@
 .pmb-ul{
     list-style:square;
 }
-.pmb-incomplete{
-    background-color:gray;
+
+/* progress bar */
+.pmb-progress{
+    padding-left:20px;
+}
+.pmb-progress .pmb-step{
+    margin:0;
+    display:inline-block;
+    padding:5px;
+    /*border:1px solid grey;*/
+    font-size:1.2em;
+}
+.pmb-step:not(:last-child)::after{
+    content:' >'
+}
+.pmb-step.pmb-completed{
+}
+.pmb-inaccessible-step{
+    color:gray;
 }
 .pmb-current-step{
-    color:blue;
     font-weight:bold;
 }
