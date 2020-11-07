@@ -1,5 +1,10 @@
 <?php
 namespace Twine\forms\inputs;
+use Twine\forms\helpers\InputOption;
+use Twine\forms\strategies\display\SelectMultipleDisplay;
+use Twine\forms\strategies\validation\EnumValidation;
+use Twine\forms\strategies\validation\ManyValuedValidation;
+
 /**
  * Select_Multiple_Input
  *
@@ -11,7 +16,7 @@ class SelectMultipleInput extends FormInputWithOptionsBase
 {
 
     /**
-     * @param array | Question_Option[] $answer_options
+     * @param InputOption[] $answer_options
      * @param array $input_settings
      */
     public function __construct($answer_options, $input_settings = array())

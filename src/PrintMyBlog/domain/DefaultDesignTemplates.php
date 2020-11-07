@@ -6,6 +6,7 @@ use Dompdf\Renderer\Text;
 use PrintMyBlog\orm\entities\Design;
 use Twine\forms\base\FormSectionDetails;
 use Twine\forms\base\FormSectionProper;
+use Twine\forms\helpers\InputOption;
 use Twine\forms\inputs\AdminFileUploaderInput;
 use Twine\forms\inputs\CheckboxMultiInput;
 use Twine\forms\inputs\DatepickerInput;
@@ -42,9 +43,9 @@ class DefaultDesignTemplates {
 									'subsections'=> [
 										'internal_links' => new SelectInput(
 											[
-												'remove' => __('Remove', 'print-my-blog'),
-												'parens' => __('Replace with page reference', 'print-my-blog'),
-												'footnote' => __('Replace with footnote', 'print-my-blog') . pmb_pro_only(),
+												'remove' => new InputOption(__('Remove', 'print-my-blog')),
+												'parens' => new InputOption(__('Replace with page reference', 'print-my-blog')),
+												'footnote' => new InputOption(__('Replace with footnote', 'print-my-blog')),
 											],
 											[
 												'default' => pmb_pro() ? 'footnote' : 'parens',
@@ -54,8 +55,8 @@ class DefaultDesignTemplates {
 										),
 										'external_links' => new SelectInput(
 											[
-												'remove' => __('Remove', 'print-my-blog'),
-												'footnote' => __('Replace with footnote', 'print-my-blog') . pmb_pro_only(),
+												'remove' => new InputOption(__('Remove', 'print-my-blog')),
+												'footnote' => new InputOption(__('Replace with footnote', 'print-my-blog')),
 											],
 											[
 												'default' => pmb_pro() ? 'footnote' : 'remove',
@@ -95,9 +96,9 @@ class DefaultDesignTemplates {
 								'image' => new FormSectionProper([
 									'subsections' => [
 										'image_placement' => new SelectInput([
-											'default' => __('Don’t move', 'print-my-blog'),
-											'snap' => __('Snap to the top or bottom of the page', 'print-my-blog'),
-											'snap-unless-fit' => __('Only snap if the image would cause a page break', 'print-my-blog')
+											'default' => new InputOption(__('Don’t move', 'print-my-blog')),
+											'snap' => new InputOption(__('Snap to the top or bottom of the page', 'print-my-blog')),
+											'snap-unless-fit' => new InputOption(__('Only snap if the image would cause a page break', 'print-my-blog'))
 										],
 										[
 											'html_label_text' => __('Image Placement', 'print-my-blog'),
@@ -110,9 +111,9 @@ class DefaultDesignTemplates {
 									'subsections'=> [
 										'internal_links' => new SelectInput(
 											[
-												'remove' => __('Remove', 'print-my-blog'),
-												'parens' => __('Replace with page reference', 'print-my-blog') . pmb_pro_only(),
-												'footnote' => __('Replace with footnote', 'print-my-blog') . pmb_pro_only(),
+												'remove' => new InputOption(__('Remove', 'print-my-blog')),
+												'parens' => new InputOption(__('Replace with page reference', 'print-my-blog')),
+												'footnote' => new InputOption(__('Replace with footnote', 'print-my-blog')),
 											],
 											[
 												'default' => pmb_pro() ? 'parens' : 'remove',
@@ -122,9 +123,9 @@ class DefaultDesignTemplates {
 										),
 										'external_links' => new SelectInput(
 											[
-												'remove' => __('Remove', 'print-my-blog'),
-												'leave' => __('Leave as hyperlink', 'print-my-blog'),
-												'footnote' => __('Replace with footnote', 'print-my-blog') . pmb_pro_only(),
+												'remove' => new InputOption(__('Remove', 'print-my-blog')),
+												'leave' => new InputOption(__('Leave as hyperlink', 'print-my-blog')),
+												'footnote' => new InputOption(__('Replace with footnote', 'print-my-blog')),
 											],
 											[
 												'default' => pmb_pro() ? 'footnote' : 'leave',
@@ -267,9 +268,9 @@ class DefaultDesignTemplates {
 								'image' => new FormSectionProper([
 									'subsections' => [
 										'image_placement' => new SelectInput([
-											'default' => __('Do Not Adjust Image Placement', 'print-my-blog'),
-											'snap' => __('Snap to Page Top or Bottom', 'print-my-blog'),
-											'snap-unless-fit' => __('Intelligent Snap to Page Top or Bottom', 'print-my-blog')
+											'default' => new InputOption(__('Do Not Adjust Image Placement', 'print-my-blog')),
+											'snap' => new InputOption(__('Snap to Page Top or Bottom', 'print-my-blog')),
+											'snap-unless-fit' => new InputOption(__('Intelligent Snap to Page Top or Bottom', 'print-my-blog'))
 										],
 										[
 											'html_label_text' => __('Image Placement', 'print-my-blog'),
@@ -339,11 +340,11 @@ class DefaultDesignTemplates {
 				'subsections' => [
 					'header_content' => new CheckboxMultiInput(
 						[
-							'title' => __('Project Title', 'print-my-blog'),
-							'subtitle' => __('Subtitle', 'print-my-blog'),
-							'url' => __('Site URL', 'print-my-blog'),
-							'date_printed' => __('Date Printed', 'print-my-blog'),
-							'credit_pmb' => __('Credit Print My Blog', 'print-my-blog')
+							'title' => new InputOption(__('Project Title', 'print-my-blog')),
+							'subtitle' => new InputOption(__('Subtitle', 'print-my-blog')),
+							'url' => new InputOption(__('Site URL', 'print-my-blog')),
+							'date_printed' => new InputOption(__('Date Printed', 'print-my-blog')),
+							'credit_pmb' => new InputOption(__('Credit Print My Blog', 'print-my-blog'))
 						],
 						[
 							'default' => [
@@ -357,15 +358,15 @@ class DefaultDesignTemplates {
 					),
 					'post_content' => new CheckboxMultiInput(
 						[
-							'title' => __('Post Title', 'print-my-blog'),
-							'id' => __('ID', 'print-my-blog'),
-							'author' => __('Author', 'print-my-blog'),
-							'url' => __('URL', 'print-my-blog'),
-							'published_date' => __('Published Date', 'print-my-blog'),
-							'categories' => __('Categories and Tags', 'print-my-blog'),
-							'featured_image' => __('Featured Image', 'print-my-blog'),
-							'excerpt' => __('Excerpt', 'print-my-blog'),
-							'content' => __('Content', 'print-my-blog'),
+							'title' => new InputOption(__('Post Title', 'print-my-blog')),
+							'id' => new InputOption(__('ID', 'print-my-blog')),
+							'author' => new InputOption(__('Author', 'print-my-blog')),
+							'url' => new InputOption(__('URL', 'print-my-blog')),
+							'published_date' => new InputOption(__('Published Date', 'print-my-blog')),
+							'categories' => new InputOption(__('Categories and Tags', 'print-my-blog')),
+							'featured_image' => new InputOption(__('Featured Image', 'print-my-blog')),
+							'excerpt' => new InputOption(__('Excerpt', 'print-my-blog')),
+							'content' => new InputOption(__('Content', 'print-my-blog')),
 							//'comments' => __('Comments', 'print-my-blog'),
 						],
 						[

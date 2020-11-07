@@ -1,5 +1,6 @@
 <?php
 namespace Twine\forms\inputs;
+use Twine\forms\helpers\InputOption;
 use Twine\forms\strategies\display\CheckboxDisplay;
 use Twine\forms\strategies\validation\EnumValidation;
 use Twine\forms\strategies\validation\ManyValuedValidation;
@@ -20,7 +21,7 @@ class CheckboxMultiInput extends FormInputWithOptionsBase
 {
 
     /**
-     * @param array $input_settings
+     * @param InputOption $input_settings
      * @param array $answer_options
      */
     public function __construct($answer_options, $input_settings = array())

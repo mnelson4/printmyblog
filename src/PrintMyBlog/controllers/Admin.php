@@ -10,6 +10,7 @@ use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
 use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\entities\FileFormat;
+use PrintMyBlog\entities\ProjectProgress;
 use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\managers\DesignManager;
@@ -17,7 +18,12 @@ use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\orm\managers\ProjectSectionManager;
 use PrintMyBlog\services\FileFormatRegistry;
 use PrintMyBlog\system\CustomPostTypes;
+use Twine\forms\base\FormSectionHtmlFromTemplate;
 use Twine\forms\base\FormSectionProper;
+use Twine\forms\helpers\InputOption;
+use Twine\forms\inputs\RadioButtonInput;
+use Twine\forms\inputs\TextInput;
+use Twine\forms\strategies\layout\TemplateLayout;
 use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
 use WP_Query;
@@ -35,9 +41,9 @@ use WP_Query;
  */
 class Admin extends BaseController
 {
-
+	const SLUG_ACTION_ADD_NEW = 'new';
 	const SLUG_ACTION_EDIT_PROJECT = 'edit';
-	const SLUG_SUBACTION_PROJECT_MAIN = 'main';
+	const SLUG_SUBACTION_PROJECT_SETUP = 'setup';
 	const SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN = 'customize_design';
 	const SLUG_SUBACTION_PROJECT_CHANGE_DESIGN = 'choose_design';
 	const SLUG_SUBACTION_PROJECT_CONTENT = 'content';
@@ -354,7 +360,7 @@ class Admin extends BaseController
 				        ]
 			        );
 			        break;
-		        case self::SLUG_SUBACTION_PROJECT_MAIN:
+		        case self::SLUG_SUBACTION_PROJECT_SETUP:
 		        default:
 		        	wp_enqueue_script('pmb_project_edit_main',
 			        PMB_SCRIPTS_URL . 'project-edit-main.js',
@@ -393,7 +399,9 @@ class Admin extends BaseController
     public function renderProjects()
     {
         $action = isset($_GET['action']) ? $_GET['action'] : null;
-        if($action === self::SLUG_ACTION_EDIT_PROJECT) {
+        if($action === self::SLUG_ACTION_ADD_NEW) {
+        	$this->editSetup();
+        } else if($action === self::SLUG_ACTION_EDIT_PROJECT) {
         	$subaction = isset($_GET['subaction']) ? $_GET['subaction'] : null;
 	        $project = $this->project_manager->getById($_GET['ID']);
         	switch($subaction) {
@@ -412,16 +420,16 @@ class Admin extends BaseController
 		        case self::SLUG_SUBACTION_PROJECT_GENERATE:
 			        $this->editGenerate($project);
 			        break;
-		        case self::SLUG_SUBACTION_PROJECT_MAIN:
+		        case self::SLUG_SUBACTION_PROJECT_SETUP:
 		        default:
-			        $this->editMain($project);
+			        $this->editSetup($project);
 	        }
 
         } else {
 	        $table = new ProjectsListTable();
 	        $add_new_url = add_query_arg(
 		        [
-			        'action' => 'new',
+			        'action' => self::SLUG_ACTION_ADD_NEW,
 		        ],
 		        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	        );
@@ -452,41 +460,19 @@ class Admin extends BaseController
 	/**
 	 * @param $action
 	 */
-    protected function editMain(Project $project){
-		$form_url = add_query_arg(
+    protected function editSetup(Project $project = null){
+	    if( $this->invalid_form instanceof FormSectionProper){
+		    $form = $this->invalid_form;
+	    } else {
+	    	$form = $this->getSetupForm($project);
+	    }
+		pmb_render_template(
+			'project_edit_setup.php',
 			[
-				'action' => 'pmb_save_project_main',
-				'_nonce' => wp_create_nonce( 'pmb-project-edit' ),
-				'ID' => $project->getWpPost()->ID
-			],
-	        admin_url('admin-ajax.php')
+				'form' => $form,
+				'project' => $project
+			]
 		);
-	    $project_content_url = add_query_arg(
-		    [
-			    'ID' => $project->getWpPost()->ID,
-			    'action' => self::SLUG_ACTION_EDIT_PROJECT,
-			    'subaction' => self::SLUG_SUBACTION_PROJECT_CONTENT
-		    ],
-		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-	    );
-	    $project_metadata_url = add_query_arg(
-		    [
-			    'ID' => $project->getWpPost()->ID,
-			    'action' => self::SLUG_ACTION_EDIT_PROJECT,
-			    'subaction' => self::SLUG_SUBACTION_PROJECT_META
-		    ],
-		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-	    );
-	    $project_generate_url = add_query_arg(
-		    [
-			    'ID' => $project->getWpPost()->ID,
-			    'action' => self::SLUG_ACTION_EDIT_PROJECT,
-			    'subaction' => self::SLUG_SUBACTION_PROJECT_GENERATE
-		    ],
-		    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-	    );
-		$formats = $this->file_format_registry->getFormats();
-		include(PMB_TEMPLATES_DIR . 'project_edit_main.php');
     }
 
     protected function editCustomizeDesign(Project $project){
@@ -618,7 +604,7 @@ class Admin extends BaseController
     public function checkFormSubmission()
     {
         $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
-        if($action === 'new'){
+        if($action === self::SLUG_ACTION_ADD_NEW){
         	$this->saveNewProject();
 	        exit;
         }
@@ -626,6 +612,9 @@ class Admin extends BaseController
         	$subaction = isset($_GET['subaction']) ? $_GET['subaction'] : null;
 	        $project = $this->project_manager->getById($_GET['ID']);
         	switch($subaction){
+		        case self::SLUG_SUBACTION_PROJECT_SETUP:
+		        	$this->saveNewProject($project);
+		        	break;
 		        case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
 			        $this->saveProjectChooseDesign($project);
 			        break;
@@ -642,24 +631,6 @@ class Admin extends BaseController
 		        	$this->saveProjectGenerate($project);
 		        	break;
 	        }
-	        if($this->invalid_form instanceof FormSectionProper){
-	        	// did we have validation issues? Don't redirect, just show the invalid form again then.
-		        return;
-	        }
-	        $project_id = isset($_GET['ID']) ? $_GET['ID'] : null;
-
-            // Just redirect back to the editing page.
-            wp_redirect(
-                add_query_arg(
-	                [
-		                'ID' => $project_id,
-		                'action' => self::SLUG_ACTION_EDIT_PROJECT,
-		                'subaction' => 'main'
-	                ],
-	                admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-                )
-            );
-            exit;
         } elseif($action === 'delete'){
         	$this->deleteProjects();
 	        $redirect = admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH);
@@ -668,66 +639,170 @@ class Admin extends BaseController
         }
     }
 
-    protected function saveNewProject()
-    {
-	    // Create a draft project
-
-	    $project_id = wp_insert_post(
-		    [
-			    'post_content' => '',
-			    'post_type' => CustomPostTypes::PROJECT,
-			    'post_status' => 'publish'
-		    ],
-		    true
-	    );
-	    if(is_wp_error($project_id)){
-		    wp_die($project_id->get_error_message());
+	/**
+	 * @param Project|null $project
+	 *
+	 * @return FormSectionProper
+	 * @throws \Twine\forms\helpers\ImproperUsageException
+	 */
+    protected function getSetupForm(Project $project = null){
+	    $formats = $this->file_format_registry->getFormats();
+	    $format_options = [];
+	    foreach($formats as $format){
+		    $format_options[$format->slug()] = new InputOption(
+		    	$format->title(),
+			    $format->desc()
+		    );
 	    }
-	    $project_obj = $this->project_manager->getById($project_id);
-	    $project_obj->setCode();
-	    $project_obj->setFormatsSelected(
-	    	array_map(
-	    		function(FileFormat $format){
-		            return $format->slug();
-			    },
-			    $this->file_format_registry->getFormats()
-		    )
+	    $format_options['all'] = new InputOption(
+	    	__('Both', 'print-my-blog'),
+		    __('A project can be prepared to use both a Digital PDF and a Print-Ready PDF, but it will be more complex. (Eg the design for one format might support different features than the design for the other format.)', 'print-my-blog')
 	    );
-	    // add default sections
-	    // ...after we figure out what they should be.
-	    $title_page = get_page_by_path('pmb-title-page', OBJECT, CustomPostTypes::CONTENT);
-	    $toc_page = get_page_by_path('pmb-toc', OBJECT, CustomPostTypes::CONTENT);
-	    $this->section_manager->setSectionsFor(
-	    	$project_id,
-		    [
-		    	[
-				    $title_page->ID,
-					'just_content',
-				    0,
-				    1,
-				    []
-			    ],
+	    $default_format = null;
+	    if($project instanceof Project){
+		    $formats_preselected = $project->getFormatsSelected();
+		    if(count($formats_preselected) === 1){
+			    $format_preselected = reset($formats_preselected);
+			    $default_format = $format_preselected->slug();
+		    } elseif(count($format_options) > 1){
+			    $default_format = 'all';
+		    }
+	    }
+	    return new FormSectionProper([
+		    'name' => 'pmb-project',
+		    'subsections' => [
+			    'title' => new TextInput([
+				    'html_label_text' => __('Project Title', 'print-my-blog'),
+				    'required' => true,
+				    'default' => $project instanceof Project ? $project->getWpPost()->post_title : '',
+			    ]),
+			    'formats' => new RadioButtonInput(
+				    $format_options,
+				    [
+					    'html_label_text' => __('Format', 'print-my-blog'),
+					    'required' => true,
+					    'default' => $default_format
+				    ]
+			    )
+		    ]
+	    ]);
+	}
+    protected function saveNewProject(Project $project = null)
+    {
+		$form = $this->getSetupForm($project);
+    	$form->receive_form_submission($_REQUEST);
+    	if(! $form->is_valid()){
+		    $this->invalid_form = $form;
+		    return;
+ 	    }
+    	$initialize_steps = false;
+
+    	if(! $project instanceof Project) {
+		    $project_id = wp_insert_post(
 			    [
-					$toc_page->ID,
-				    '',
-				    0,
-				    1,
-				    []
-			    ]
-		    ],
-		    DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER
-	    );
+				    'post_content' => '',
+				    'post_type' => CustomPostTypes::PROJECT,
+				    'post_status' => 'publish'
+			    ],
+			    true
+		    );
+		    if(is_wp_error($project_id)){
+			    wp_die($project_id->get_error_message());
+		    }
+		    $project = $this->project_manager->getById($project_id);
+		    $project->setCode();
+		    $title_page = get_page_by_path('pmb-title-page', OBJECT, CustomPostTypes::CONTENT);
+		    $toc_page = get_page_by_path('pmb-toc', OBJECT, CustomPostTypes::CONTENT);
+		    $this->section_manager->setSectionsFor(
+			    $project_id,
+			    [
+				    [
+					    $title_page->ID,
+					    'just_content',
+					    0,
+					    1,
+					    []
+				    ],
+				    [
+					    $toc_page->ID,
+					    '',
+					    0,
+					    1,
+					    []
+				    ]
+			    ],
+			    DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER
+		    );
+		    $initialize_steps = true;
+	    }
+	    $project->setTitle($form->get_input_value('title'));
+        $formats_to_save = [];
+        if($form->get_input_value('formats') === 'all'){
+            $formats_to_save = array_map(
+	            function(FileFormat $format){
+		            return $format->slug();
+	            },
+	            $this->file_format_registry->getFormats()
+            );
+	    } else {
+            $formats_to_save[] = $form->get_input_value('formats');
+	    }
+        $old_formats = $project->getFormatSlugsSelected();
+	    $project->setFormatsSelected($formats_to_save);
+
+	    if($initialize_steps){
+		    $project->getProgress()->initialize();
+	    } else {
+		    $new_formats = array_diff($formats_to_save, $old_formats);
+		    foreach ( $new_formats as $new_format ) {
+			    $project->getProgress()->markChooseDesignStepComplete( $new_format, false );
+			    $project->getProgress()->markCustomizeDesignStepComplete( $new_format, false );
+		    }
+	    }
+	    $this->markStepCompleteAndRedirectToNextStep($project);
+    }
+
+	/**
+	 *
+	 * @param Project $project
+	 */
+    protected function markStepCompleteAndRedirectToNextStep(Project $project){
+	    $project->getProgress()->markNextStepComplete();
+    	$args = [
+    		'ID' => $project->getWpPost()->ID,
+		    'action' => self::SLUG_ACTION_EDIT_PROJECT
+	    ];
+	    $next_step = $project->getProgress()->getNextStep();
+	    if(strpos($next_step,ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX) === 0){
+	    	$format = str_replace(ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX, '', $next_step);
+	    	$args['subaction'] = self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN;
+	    	$args['format'] = $format;
+	    } elseif(strpos($next_step, ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX) === 0){
+		    $format = str_replace(ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX, '', $next_step);
+		    $args['subaction'] = self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN;
+		    $args['format'] = $format;
+	    } else {
+	    	switch($next_step){
+			    case ProjectProgress::EDIT_CONTENT_STEP:
+			        $subaction = self::SLUG_SUBACTION_PROJECT_CONTENT;
+			        break;
+			    case ProjectProgress::EDIT_METADATA_STEP:
+			    	$subaction = self::SLUG_SUBACTION_PROJECT_META;
+			    	break;
+			    case ProjectProgress::GENERATE_STEP:
+			    default:
+			    	$subaction = self::SLUG_SUBACTION_PROJECT_GENERATE;
+		    }
+		    $args['subaction'] = $subaction;
+	    }
 	    // Redirect to it
 	    wp_redirect(
 		    add_query_arg(
-			    [
-				    'ID' => $project_id,
-				    'action' => self::SLUG_ACTION_EDIT_PROJECT,
-				    'subaction' => self::SLUG_SUBACTION_PROJECT_MAIN
-			    ],
-			    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+		    	$args,
+		        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 		    )
 	    );
+	    exit;
     }
 
 	/**
@@ -765,6 +840,7 @@ class Admin extends BaseController
 			DesignTemplate::IMPLIED_DIVISION_BACK_MATTER,
 			$order
 		);
+		$this->markStepCompleteAndRedirectToNextStep($project);
 	}
 
 	protected function setSectionFromRequest(Project $project, $request_data, $placement, &$order = 1){
@@ -796,20 +872,11 @@ class Admin extends BaseController
         	'design_change',
 	        __('You have customized this design', 'print-my-blog')
         );
-        wp_safe_redirect(
-		    add_query_arg(
-			    [
-				    'ID' => $project->getWpPost()->ID,
-				    'action' => self::SLUG_ACTION_EDIT_PROJECT,
-				    'subaction' => 'main'
-			    ],
-			    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-		    )
-	    );
+        $this->markStepCompleteAndRedirectToNextStep($project);
     }
 
 	protected function saveProjectChooseDesign(Project $project){
-		$design = $this->design_manager->getById((int)$_GET['design']);
+		$design = $this->design_manager->getById((int)$_REQUEST['design']);
 		$format = $this->file_format_registry->getFormat($_GET['format']);
 		if(! $design instanceof Design || ! $format instanceof FileFormat){
 			throw new Exception(
@@ -826,17 +893,8 @@ class Admin extends BaseController
 			'design_change',
 			__('You changed the design', 'print-my-blog')
 		);
-		// send back to main
-		wp_safe_redirect(
-			add_query_arg(
-				[
-					'ID' => $project->getWpPost()->ID,
-					'action' => self::SLUG_ACTION_EDIT_PROJECT,
-					'subaction' => 'main'
-				],
-				admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-			)
-		);
+		$project->getProgress()->markCustomizeDesignStepComplete($format->slug(), false);
+		$this->markStepCompleteAndRedirectToNextStep($project);
 	}
 
 	/**
@@ -863,16 +921,7 @@ class Admin extends BaseController
 				__('You changed projected metadata', 'print-my-blog')
 			);
 		}
-		wp_safe_redirect(
-			add_query_arg(
-				[
-					'ID' => $project->getWpPost()->ID,
-					'action' => self::SLUG_ACTION_EDIT_PROJECT,
-					'subaction' => 'main'
-				],
-				admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-			)
-		);
+		$this->markStepCompleteAndRedirectToNextStep($project);
 	}
 
 	/**
@@ -889,6 +938,7 @@ class Admin extends BaseController
 		$project_generation = $project->getGenerationFor($format);
 		$project_generation->deleteGeneratedFiles();
 		$project_generation->clearDirty();
+		$project->getProgress()->markStepComplete(ProjectProgress::GENERATE_STEP);
 	    $url = add_query_arg(
 		    [
 			    PMB_PRINTPAGE_SLUG => 3,

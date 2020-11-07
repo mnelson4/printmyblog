@@ -22,11 +22,9 @@ class RadioButtonDisplay extends CompoundInputDisplay
     public function display()
     {
         $input = $this->get_input();
-        $input->set_label_sizes();
-        $label_size_class = $input->get_label_size_class();
         $html = '';
         $html_generator = Html::instance();
-        foreach ($input->options() as $value => $display_text) {
+        foreach ($input->options() as $value => $option) {
             $value = $input->get_normalization_strategy()->unnormalize($value);
 
             $html_id = $this->get_sub_input_id($value);
@@ -39,7 +37,7 @@ class RadioButtonDisplay extends CompoundInputDisplay
                     'id' => $html_id . '-lbl',
                     'class' => apply_filters(
                         'FH_RadioButtonDisplay__display__option_label_class',
-                        'ee-radio-label-after' . $label_size_class,
+                        'ee-radio-label-after',
                         $this,
                         $input,
                         $value
@@ -65,8 +63,19 @@ class RadioButtonDisplay extends CompoundInputDisplay
             $html .= $this->_attributes_string($attributes);
 
             $html .= '>&nbsp;';
-            $html .= $display_text;
+            $text = $option->getDisplayText();
+            $help_text = $option->getHelpText();
+
+
+            $html .= $text;
             $html .= $html_generator->nl(-1, 'radio') . '</label>';
+            if($help_text){
+            	$html .= $html_generator->span(
+            		$help_text,
+		            '',
+		            'description'
+	            );
+            }
         }
         $html .= $html_generator->div('', '', 'clear-float');
         $html .= $html_generator->divx();

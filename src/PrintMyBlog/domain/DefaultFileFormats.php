@@ -20,6 +20,7 @@ class DefaultFileFormats {
 				'title' => __('Digital PDF', 'print-my-blog'),
 				'generator' => 'PrintMyBlog\services\generators\PdfGenerator',
 				'default' => 'classic_digital',
+				'desc' => __('PDF file intended for viewing on a computer, tablet or phone, but not necessarily for printing to paper. Usually includes working hyperlinks, ample colors, and other features that require a device.', 'print-my-blog')
 			]
 		);
 		pmb_register_file_format(
@@ -27,7 +28,8 @@ class DefaultFileFormats {
 			[
 				'title' => __('Print-Ready PDF', 'print-my-blog'),
 				'generator' => 'PrintMyBlog\services\generators\PdfGenerator',
-				'default' => 'classic_print'
+				'default' => 'classic_print',
+				'desc' => __('PDF file intended for printing on your home printer or with a printer service. Usually removes hyperlinks, avoids excessive ink use, and are designed for viewing the 2-page spread (using the front and back of a page).')
 			]
 		);
 	}

@@ -1,5 +1,6 @@
 <?php
 namespace PrintMyBlog\controllers\helpers;
+use PrintMyBlog\controllers\Admin;
 use PrintMyBlog\system\CustomPostTypes;
 use WP_List_Table;
 use WP_Post;
@@ -177,7 +178,7 @@ class ProjectsListTable extends WP_List_Table
                 [
                     'ID' => $post->ID,
                     'action' => 'edit',
-	                'subaction' => 'main'
+	                'subaction' => Admin::SLUG_SUBACTION_PROJECT_SETUP
                 ],
                 admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
             ),

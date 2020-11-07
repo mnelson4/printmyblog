@@ -7,6 +7,7 @@ use Exception;
 use PrintMyBlog\domain\DefaultFileFormats;
 use PrintMyBlog\entities\FileFormat;
 use PrintMyBlog\entities\ProjectGeneration;
+use PrintMyBlog\entities\ProjectProgress;
 use PrintMyBlog\factories\ProjectGenerationFactory;
 use PrintMyBlog\helpers\ArgMagician;
 use PrintMyBlog\orm\managers\DesignManager;
@@ -72,6 +73,10 @@ class Project extends PostWrapper{
 	 * @var array|null @see DefaultDesignTemplate::custom_templates for its format
 	 */
 	protected $custom_templates = null;
+	/**
+	 * @var ProjectProgress
+	 */
+	protected $progress;
 
 	/**
 	 * @param ProjectSectionManager $section_manager
@@ -589,5 +594,15 @@ class Project extends PostWrapper{
 			$all_templates[$template_slug] = $title_and_qualifier;
 		}
 		return $all_templates;
+	}
+
+	/**
+	 * @return ProjectProgress
+	 */
+	public function getProgress(){
+		if( ! $this->progress instanceof ProjectProgress) {
+			$this->progress = new ProjectProgress( $this );
+		}
+		return $this->progress;
 	}
 }

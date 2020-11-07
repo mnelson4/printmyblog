@@ -39,7 +39,7 @@ class CheckboxDisplay extends CompoundInputDisplay
         }
         $html_generator = Html::instance();
         $input_raw_value = (array) $input->raw_value();
-        foreach ($input->options() as $value => $display_text) {
+        foreach ($input->options() as $value => $option) {
             $value = $input->get_normalization_strategy()->unnormalize_one($value);
             $html_id = $this->get_sub_input_id($value);
             $html .= $html_generator->nl(0, 'checkbox');
@@ -62,8 +62,12 @@ class CheckboxDisplay extends CompoundInputDisplay
             $html .= ' ' . $this->_input->otherHtmlAttributesString();
             $html .= ' data-question_label="' . $input->html_label_id() . '"';
             $html .= '>&nbsp;';
-            $html .= $display_text;
+            $html .= $option->getDisplayText();
             $html .= $html_generator->nl(-1, 'checkbox') . '</label>';
+            $help_text = $option->getHelpText();
+            if($help_text){
+            	$html .= $html_generator->span($help_text,'', 'description');
+            }
         }
         return $html;
     }

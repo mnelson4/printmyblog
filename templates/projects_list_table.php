@@ -9,9 +9,7 @@ pmb_render_template(
 ?>
 <div class="wrap">
     <h1 class="wp-heading-inline"><?php esc_html_e('Pro Print ― Projects', 'event_espresso'); ?></h1>
-    <form class="pmb-inline-form" action="<?php echo esc_attr($add_new_url);?>" method="post">
-        <button class="page-title-action">Add New</button>
-    </form>
+        <a href="<?php echo esc_attr($add_new_url);?>" class="page-title-action"><?php esc_html_e('Start New Project', 'print-my-blog');?></a>
     <div class="notice notice-success">
         <p>
 			<?php printf(

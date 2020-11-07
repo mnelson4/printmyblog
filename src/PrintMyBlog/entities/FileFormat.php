@@ -22,6 +22,11 @@ class FileFormat {
 	/**
 	 * @var string
 	 */
+	protected $desc;
+
+	/**
+	 * @var string
+	 */
 	protected $default_design_template_slug;
 	/**
 	 * @var DesignTemplate
@@ -43,6 +48,9 @@ class FileFormat {
 	public function __construct($data = []){
 		if(isset($data['title'])){
 			$this->title = $data['title'];
+		}
+		if(isset($data['desc'])){
+			$this->desc = $data['desc'];
 		}
 		if(! isset($data['generator'])){
 			throw new ImproperUsageException(__('No generator class specified for format "%s"', 'print-my-blog'), $this->slug());
@@ -79,6 +87,13 @@ class FileFormat {
 	 */
 	public function slug(){
 		return $this->slug;
+	}
+
+	/**
+	 * @return strings
+	 */
+	public function desc(){
+		return $this->desc;
 	}
 
 	/**
