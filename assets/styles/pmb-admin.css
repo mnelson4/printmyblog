@@ -108,13 +108,15 @@
 .pmb-progress .pmb-step{
     margin:0;
     display:inline-block;
-    padding:5px;
     /*border:1px solid grey;*/
     font-size:1.2em;
 }
 .pmb-step:not(:last-child)::after{
-    content:' >'
+    content:'>';
+    margin-left:5px;
+    margin-right:5px;
 }
+
 .pmb-step.pmb-completed{
 }
 .pmb-inaccessible-step{
@@ -122,4 +124,11 @@
 }
 .pmb-current-step{
     font-weight:bold;
+}
+
+.pmb-project-title{
+    font-style:italic;
+    color:darkgray;
+    margin-top:0px;
+    margin-bottom:1em;
 }

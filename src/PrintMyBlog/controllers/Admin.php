@@ -631,7 +631,12 @@ class Admin extends BaseController
     	$args['current_step'] = $this->mapSubactionToStep(
 		    isset($_GET['subaction']) ? $_GET['subaction'] : null,
 		    isset($_GET['format']) ? $_GET['format'] : null
-	    );;
+	    );
+    	if($args['project'] instanceof Project) {
+		    $args['steps_to_urls'] = $this->mapStepToUrls( $args['project'] );
+	    } else {
+    		$args['steps_to_urls'] = [];
+	    }
     	echo pmb_render_template($template_name,$args);
     }
 
@@ -653,6 +658,9 @@ class Admin extends BaseController
 		    $args['format'] = $format;
 	    } else {
 		    switch($step){
+			    case ProjectProgress::SETUP_STEP:
+			    	$subaction = self::SLUG_SUBACTION_PROJECT_SETUP;
+			    	break;
 			    case ProjectProgress::EDIT_CONTENT_STEP:
 				    $subaction = self::SLUG_SUBACTION_PROJECT_CONTENT;
 				    break;
@@ -667,6 +675,27 @@ class Admin extends BaseController
 		    $args['format'] = null;
 	    }
 	    return $args;
+    }
+
+	/**
+	 * @param Project $project
+	 *
+	 * @return array keys are steps for that project, and values are their URLs.
+	 */
+    protected function mapStepToUrls(Project $project){
+	    $base_url_args = [
+		    'ID' => $project->getWpPost()->ID,
+		    'action' => Admin::SLUG_ACTION_EDIT_PROJECT,
+	    ];
+    	$mapping = [];
+    	foreach($project->getProgress()->getSteps() as $step => $label){
+    		$args = $this->mapStepToSubaction($step);
+    		$mappings[$step] = add_query_arg(
+    			array_merge($base_url_args,$args),
+			    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+		    );
+	    }
+    	return $mappings;
     }
 
 	/**

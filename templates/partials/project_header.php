@@ -1,5 +1,6 @@
 <?php
 
+use PrintMyBlog\controllers\Admin;
 use PrintMyBlog\orm\entities\Project;
 /**
  * @var Project $project
@@ -9,8 +10,8 @@ use PrintMyBlog\orm\entities\Project;
 ?>
 <div id="pmb-wizard-progress" class="pmb-progress">
 <?php
+
 if($project instanceof Project){
-    ?><h1><?php echo $project->getWpPost()->post_title;?></h1><?php
     $steps = $project->getProgress()->getSteps();
     $progress = $project->getProgress()->getStepProgress();
     $next_step = $project->getProgress()->getNextStep();
@@ -19,25 +20,27 @@ if($project instanceof Project){
         $current = $current_step === $slug ? true : false;
         $next = $next_step === $slug ? true : false;
         $accessible = $completed || $next;
-        ?><div class="pmb-step
+        ?><span class="pmb-step
             <?php echo esc_attr($completed ? 'pmb-completed' : 'pmb-incomplete');?>
             <?php echo esc_attr($current ? 'pmb-current-step' : '');?>
             <?php echo esc_attr($next ? 'pmb-next-step' : '');?>
             <?php echo esc_attr($accessible ? 'pmb-accessible-step' : 'pmb-inaccessible-step');?>
-            ">
-        <?php if ($completed || $next){?>
-        <a href="">
+            "><?php if (($completed || $next) && ! $current){
+            ?>
+        <a href="<?php echo esc_attr($steps_to_urls[$slug]);?>">
         <?php }
         echo $display_text;
         if ($completed || $next){
             ?></a><?php
-        }?>
-        </div><?php
+        }?></span><?php
     }
 }
 ?>
 </div>
 <div class="wrap nosubsub">
     <h1><?php echo $page_title;?></h1>
-    <?php //div will be closed by project_footer.phps
+    <?php if ($project){?><h2 class="pmb-project-title"><?php echo $project->getWpPost()->post_title;?></h2>
+    <?php }?>
+    <?php
+    //div will be closed by project_footer.phps
 

@@ -12,8 +12,13 @@ pmb_render_template(
 	'partials/project_header.php',
 	[
 		'project' => $project,
-		'page_title' => sprintf(__('Customize Design: %s', 'print-my-blog'), $design->getWpPost()->post_title),
-		'current_step' => $current_step
+		'page_title' => sprintf(
+		        __('Customize %s Design: %s', 'print-my-blog'),
+                $design->getDesignTemplate()->getFormat()->title(),
+                $design->getWpPost()->post_title
+        ),
+		'current_step' => $current_step,
+		'steps_to_urls' => $steps_to_urls
 	]
 );
 ?>

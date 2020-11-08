@@ -87,7 +87,8 @@ pmb_render_template(
 	[
 		'project' => $project,
 		'page_title' => __('Edit Project Content', 'print-my-blog'),
-		'current_step' => $current_step
+		'current_step' => $current_step,
+		'steps_to_urls' => $steps_to_urls
 	]
 );
 ?>
