@@ -370,23 +370,6 @@ class Admin extends BaseController
 				        ]
 			        );
 			        break;
-		        case self::SLUG_SUBACTION_PROJECT_SETUP:
-		        default:
-		        	wp_enqueue_script('pmb_project_edit_main',
-			        PMB_SCRIPTS_URL . 'project-edit-main.js',
-			        array('jquery', 'jquery-debounce'),
-			        filemtime(PMB_SCRIPTS_DIR . 'project-edit-main.js')
-			        );
-		        	wp_localize_script(
-		        		'pmb_project_edit_main',
-				        'pmb_project_edit',
-				        [
-				        	'translations' => [
-				        		'saved' => __('Saved', 'print-my-blog'),
-						        'error' => __('Error saving. Check your internet connection and try modifying again.','print-my-blog')
-					        ]
-				        ]
-			        );
 	        }
 
 	        // everybody uses the style, right?
@@ -870,7 +853,6 @@ class Admin extends BaseController
 	    }
         $old_formats = $project->getFormatSlugsSelected();
 	    $project->setFormatsSelected($formats_to_save);
-
 	    if($initialize_steps){
 		    $project->getProgress()->initialize();
 	    } else {
@@ -880,15 +862,15 @@ class Admin extends BaseController
 			    $project->getProgress()->markCustomizeDesignStepComplete( $new_format, false );
 		    }
 	    }
-	    $this->markStepCompleteAndRedirectToNextStep($project);
+	    $project->getProgress()->markStepComplete(ProjectProgress::SETUP_STEP);
+	    $this->redirectToNextStep($project);
     }
 
 	/**
 	 *
 	 * @param Project $project
 	 */
-    protected function markStepCompleteAndRedirectToNextStep(Project $project){
-	    $project->getProgress()->markNextStepComplete();
+    protected function redirectToNextStep(Project $project){
     	$args = [
     		'ID' => $project->getWpPost()->ID,
 		    'action' => self::SLUG_ACTION_EDIT_PROJECT
@@ -940,7 +922,8 @@ class Admin extends BaseController
 			DesignTemplate::IMPLIED_DIVISION_BACK_MATTER,
 			$order
 		);
-		$this->markStepCompleteAndRedirectToNextStep($project);
+		$project->getProgress()->markStepComplete(ProjectProgress::EDIT_CONTENT_STEP);
+		$this->redirectToNextStep($project);
 	}
 
 	protected function setSectionFromRequest(Project $project, $request_data, $placement, &$order = 1){
@@ -972,7 +955,8 @@ class Admin extends BaseController
         	'design_change',
 	        __('You have customized this design', 'print-my-blog')
         );
-        $this->markStepCompleteAndRedirectToNextStep($project);
+        $project->getProgress()->markCustomizeDesignStepComplete($design->getDesignTemplate()->getFormatSlug());
+        $this->redirectToNextStep($project);
     }
 
 	protected function saveProjectChooseDesign(Project $project){
@@ -994,7 +978,8 @@ class Admin extends BaseController
 			__('You changed the design', 'print-my-blog')
 		);
 		$project->getProgress()->markCustomizeDesignStepComplete($format->slug(), false);
-		$this->markStepCompleteAndRedirectToNextStep($project);
+		$project->getProgress()->markChooseDesignStepComplete($format->slug());
+		$this->redirectToNextStep($project);
 	}
 
 	/**
@@ -1021,7 +1006,8 @@ class Admin extends BaseController
 				__('You changed projected metadata', 'print-my-blog')
 			);
 		}
-		$this->markStepCompleteAndRedirectToNextStep($project);
+		$project->getProgress()->markStepComplete(ProjectProgress::EDIT_METADATA_STEP);
+		$this->redirectToNextStep($project);
 	}
 
 	/**
@@ -1047,6 +1033,7 @@ class Admin extends BaseController
 		    ],
 		    site_url()
 	    );
+	    $project->getProgress()->markStepComplete(ProjectProgress::GENERATE_STEP);
 	    wp_safe_redirect($url);
 	    exit;
     }
