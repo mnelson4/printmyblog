@@ -132,3 +132,22 @@
     margin-top:0px;
     margin-bottom:1em;
 }
+.pmb-free-pro-header{
+    margin-bottom:20px;
+    padding:10px;
+    opacity:.7;
+    font-size:1.2em;
+}
+.pmb-free-pro-header a{
+    color:white;
+}
+.pmb-free-pro-header span{
+    margin-right:2em;
+}
+.pmb-free-header{
+    background-color:#46b450;
+    color:#ffffdd;
+}
+.pmb-pro-header{
+    background-color:#ffba00;
+}

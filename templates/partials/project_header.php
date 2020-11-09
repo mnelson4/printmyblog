@@ -7,6 +7,7 @@ use PrintMyBlog\orm\entities\Project;
  * @var bool $show_back
  * @var string $current_step
  */
+pmb_render_template('partials/pro_header.php');
 ?>
 <div id="pmb-wizard-progress" class="pmb-progress">
 <?php

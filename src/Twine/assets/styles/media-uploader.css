@@ -6,4 +6,5 @@ input.twine_media_url{
 }
 .twine_media_image{
     max-height:150px;
+    max-width: 400px;
 }
