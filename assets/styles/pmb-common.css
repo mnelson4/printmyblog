@@ -79,3 +79,9 @@ summary.pmb-reveal-options{
         display:none;
     }
 }
+.pmb-print-page .wp-block-columns{
+    display:inline-block;
+}
+.pmb-print-page .wp-block-column{
+    display:inline-block;
+}
