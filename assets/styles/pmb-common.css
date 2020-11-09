@@ -80,7 +80,7 @@ summary.pmb-reveal-options{
     }
 }
 .pmb-print-page .wp-block-columns{
-    display:inline-block;
+    display:block;
 }
 .pmb-print-page .wp-block-column{
     display:inline-block;
