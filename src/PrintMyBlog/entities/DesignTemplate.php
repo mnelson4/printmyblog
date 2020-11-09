@@ -296,6 +296,16 @@ class DesignTemplate {
 		];
 	}
 
+	public function divisionLabelSingular($level){
+		$display = [
+			 __('article', 'print-my-blog'),
+			 __('part', 'print-my-blog'),
+			__('volume', 'print-my-blog'),
+			__('anthology', 'print-my-blog')
+		];
+		return $display[$level];
+	}
+
 	public static function validDivisionsIncludingImplied(){
 		return array_merge(
 			[
