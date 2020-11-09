@@ -370,6 +370,21 @@ class Admin extends BaseController
 				        ]
 			        );
 			        break;
+		        case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
+			        wp_enqueue_script (
+			        	'pmb-choose-design' ,       // handle
+				        PMB_SCRIPTS_URL . 'pmb-design-choose.js'  ,       // source
+				        array('jquery-ui-dialog'),
+			            filemtime(PMB_SCRIPTS_DIR . 'pmb-design-choose.js')
+			        );
+			        // A style available in WP
+			        wp_enqueue_style (  'wp-jquery-ui-dialog');
+		        	wp_enqueue_style(
+		        		'pmb-choose-design',
+				        PMB_STYLES_URL . 'design-choose.css',
+				        [],
+				        filemtime(PMB_STYLES_DIR . 'design-choose.css')
+			        );
 	        }
 
 	        // everybody uses the style, right?
