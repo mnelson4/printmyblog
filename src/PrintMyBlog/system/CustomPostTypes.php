@@ -81,8 +81,8 @@ class CustomPostTypes
 		    // WordPress CPT Options Start
 		    array(
 			    'labels' => array(
-				    'name' => __( 'Pro Print Contents', 'print-my-blog' ) ,
-				    'singular_name' => __( 'Pro Print Content', 'print-my-blog' )
+				    'name' => __( 'Pro Print Materials', 'print-my-blog' ) ,
+				    'singular_name' => __( 'Pro Print Material', 'print-my-blog' )
 			    ),
 			    'has_archive' => true,
 			    'public' => false,
