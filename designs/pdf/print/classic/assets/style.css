@@ -94,7 +94,7 @@
         text-align:center;
     }
     .pmb-posts-header .site-title{
-        font-size:5em;
+        font-size:4em;
     }
     .site-description{
         width:50%;
@@ -130,7 +130,7 @@
 
     /* part styling*/
     .pmb-part h1.pmb-title{
-        font-size:300%;
+        font-size:4em;
         string-set: part-title content();
         string-set: article-title '';
         margin-top:2in;

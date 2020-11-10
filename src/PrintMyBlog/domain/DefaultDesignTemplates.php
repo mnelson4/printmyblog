@@ -390,7 +390,7 @@ class DefaultDesignTemplates {
 					),
 					'font_size' => new TextInput(
 						[
-							'default' => '12pt',
+							'default' => '10pt',
 							'html_label_text' => __('Font Size', 'print-my-blog'),
 							'html_help_text' => sprintf(
 								__('Use any recognized %1$sCSS font-size keyword%2$s (like "large", "medium", "small") or a %3$slength in any units%2$s (eg "14pt", "50%%", or "10px").'),

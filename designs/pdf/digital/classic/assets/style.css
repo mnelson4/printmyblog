@@ -81,7 +81,7 @@
 
     /* part styling*/
     .pmb-part h1.pmb-title{
-        font-size:120%;
+        font-size:5em;
         string-set: part-title content();
         margin-top:2in;
     }
