@@ -37,7 +37,7 @@ class RadioButtonDisplay extends CompoundInputDisplay
                     'id' => $html_id . '-lbl',
                     'class' => apply_filters(
                         'FH_RadioButtonDisplay__display__option_label_class',
-                        'ee-radio-label-after',
+                        'twine-radio-label',
                         $this,
                         $input,
                         $value
@@ -73,7 +73,7 @@ class RadioButtonDisplay extends CompoundInputDisplay
             	$html .= $html_generator->span(
             		$help_text,
 		            '',
-		            'description'
+		            'twine-radio-help description'
 	            );
             }
         }
