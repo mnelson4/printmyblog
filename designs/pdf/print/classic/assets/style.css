@@ -87,6 +87,14 @@
         color:black;
         prince-footnote-policy: keep-with-line;
     }
+    a{
+        color:black;
+        text-decoration:none;
+    }
+    .post-inner p{
+        text-indent:3em;
+        margin:0;
+    }
 
     /* Title Page styles */
     .pmb-posts-header{
@@ -105,10 +113,6 @@
         font-style:italic;
         color:darkgray;
         text-align:center;
-    }
-    a{
-        color:black;
-        text-decoration:none;
     }
 
 
