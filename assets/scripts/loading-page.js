@@ -52,9 +52,10 @@ function PmbProLoadingPage(pmb_instance_vars, translations) {
 			// document_content: document.querySelector('html').innerHTML, // use this page's HTML
 			// document_content: "<h1>Hello world!</h1>",               // or supply HTML directly
 			document_url: this.html_url,            // or use a URL
-			javascript: true,                                        // enable JavaScript processing
+			//javascript: true,                                        // enable JavaScript processing
 			prince_options: {
-			  media: this.media,                                       // use screen styles instead of print styles
+				media: this.media,                                       // use screen styles instead of print styles
+				javascript: true, // use Prince's JS, which is more error tolerant
 			}
 		})
 	}
