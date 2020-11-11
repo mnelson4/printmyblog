@@ -32,6 +32,16 @@ add_action(
 				}
 			/* MIKE STYLE */'
 		);
+		wp_localize_script(
+			'pmb-design',
+			'pmb_design_options',
+			[
+//				'external_links' => $design->getSetting('external_links'),
+//				'internal_links' => $design->getSetting('internal_links'),
+//				'image_size' => $design->getSetting('image_size'),
+				'default_alignment' => $design->getSetting('default_alignment'),
+			]
+		);
 	},
 	10,
 	2

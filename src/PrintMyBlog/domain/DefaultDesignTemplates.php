@@ -180,6 +180,7 @@ class DefaultDesignTemplates {
 											'default' => plugins_url('designs/pdf/digital/buurma/assets/logo.svg', PMB_MAIN_FILE)
 										]
 									),
+									'default_alignment' => $this->getDefaultAlignmentInput()
 								],
 						] ))->merge($this->getGenericDesignForm());
 					},
@@ -411,6 +412,7 @@ class DefaultDesignTemplates {
 									'default' => 500
 								]
 							),
+							'default_alignment' => $this->getDefaultAlignmentInput(),
 						]
 					]),
 					'page' => new FormSectionDetails([
@@ -475,6 +477,23 @@ class DefaultDesignTemplates {
 						]
 					)
 				]
+			]
+		);
+	}
+
+	/**
+	 * @return SelectInput
+	 */
+	private function getDefaultAlignmentInput() {
+		return new SelectInput(
+			[
+				'none' => new InputOption(__('None', 'print-my-blog')),
+				'center' => new InputOption(__('Center', 'print-my-blog'))
+			],
+			[
+				'html_label_text' => __('Default Image Alignment', 'print-my-blog'),
+				'html_help_text' => __('Images normally default to "no alignment", which can look jumbled in printouts. Usually it’s best to automatically switch those to align to the center.', 'print-my-blog'),
+				'default' => 'center'
 			]
 		);
 	}

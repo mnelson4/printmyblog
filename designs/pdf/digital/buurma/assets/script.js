@@ -18,6 +18,9 @@ jQuery(document).ready(function(){
 
     // Pretty up the page
     pmb_add_header_classes();
+    if(pmb_design_options['default_alignment'] === 'center'){
+        pmb_default_align_center();
+    }
     // pmb_remove_hyperlinks();
     pmb_fix_wp_videos();
     pmb_resize_images(400);

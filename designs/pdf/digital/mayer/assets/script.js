@@ -1,6 +1,8 @@
 jQuery(document).ready(function(){
     // Pretty up the page
     pmb_add_header_classes();
+    // There's not enough space for alignnone images to ever look good.
+    pmb_default_align_center();
     // pmb_remove_hyperlinks();
     pmb_fix_wp_videos();
     //pmb_resize_images(4);

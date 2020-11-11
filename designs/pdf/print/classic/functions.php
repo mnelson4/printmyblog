@@ -15,11 +15,12 @@ add_action(
 		);
 		wp_localize_script(
 			'pmb-design',
-			'pmb_classic_options',
+			'pmb_design_options',
 			[
 				'external_links' => $design->getSetting('external_links'),
 				'internal_links' => $design->getSetting('internal_links'),
 				'image_size' => $design->getSetting('image_size'),
+				'default_alignment' => $design->getSetting('default_alignment'),
 			]
 		);
 	},
