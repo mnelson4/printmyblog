@@ -1,5 +1,5 @@
 jQuery(document).ready(function(){
-    // Pretty up the pageit 
+    // Pretty up the pageit
     pmb_add_header_classes();
     pmb_fix_wp_videos();
     pmb_resize_images(pmb_classic_options['image_size']);

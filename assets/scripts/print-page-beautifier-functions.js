@@ -4,6 +4,16 @@ function pmb_dont_float(){
     jQuery('.alignleft').removeClass('alignleft');
 }
 
+/**
+ * Forces all the images with no alignment to instead be aligned in the center.
+ */
+function pmb_default_align_center(){
+    // take care of classic images that had align none on them.
+    jQuery('img.alignnone,figure.alignnone').removeClass('alignnone').addClass('aligncenter');
+    // take care of Gutenberg images
+    jQuery('figure:not(.alignleft,.alignright,.aligncenter,.alignwide,.alignfull)').addClass('aligncenter');
+}
+
 function pmb_add_header_classes(){
     jQuery('.pmb-posts h1').addClass('pmb-header');
     jQuery('.pmb-posts h2').addClass('pmb-header');
