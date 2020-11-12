@@ -61,7 +61,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = 0){
         ?>">
             <span class="pmb-grabbable pmb-project-item-title">
                 <span
-                class="dashicons dashicons-menu"></span>
+                class="dashicons dashicons-move"></span>
                 <span class="pmb-project-item-title-text"><?php echo $title;?></span>
             </span>
             <a
@@ -141,11 +141,17 @@ pmb_render_template(
 	]
 );
 ?>
+    <form id="pmb-filter-form" method="post" action"<?php echo esc_attr( admin_url( 'admin-ajax.php' ));?>">
+
+    </form>
     <form id="pmb-project-form" method="POST" action="<?php echo $form_url;?>">
         <div id="pmb-project-layout" class="pmb-project-layout">
             <div class="pmb-project-layout-inner">
                 <div class="pmb-project-column pmb-project-choices-column">
                     <h2><?php _e('Available Content', 'print-my-blog');?></h2>
+                    <div id="pmb-project-choices-filters">
+
+                    </div>
                     <div id="pmb-project-choices" class="pmb-draggable-area pmb-project-content-available pmb-scrollable-window list-group">
                         <?php
                         foreach($post_options as $post){
