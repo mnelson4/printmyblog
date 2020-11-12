@@ -51,19 +51,18 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = 0){
     }
     ?>
     <div class="list-group-item pmb-project-item" data-id="<?php echo esc_attr($id);?>" data-height="<?php echo esc_attr($height);?>">
-        <div class="pmb-project-item-header">
+        <div class="pmb-project-item-header" title="<?php
+        echo esc_attr(
+	        sprintf(
+		        __('Drag "%s" into your project', 'print-my-blog'),
+		        $title
+	        )
+        );
+        ?>">
             <span class="pmb-grabbable pmb-project-item-title">
                 <span
-                        title="<?php
-		                echo esc_attr(
-			                sprintf(
-				                __('Drag "%s"', 'print-my-blog'),
-				                $title
-			                )
-		                );
-		                ?>"
                 class="dashicons dashicons-menu"></span>
-                <span class=""><?php echo $title;?></span>
+                <span class="pmb-project-item-title-text"><?php echo $title;?></span>
             </span>
             <a
                     href="<?php echo esc_attr($view_url);?>"

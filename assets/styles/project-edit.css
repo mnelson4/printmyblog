@@ -93,6 +93,11 @@
 .pmb-project-item-title{
     flex-grow:1;
 }
+.pmb-project-item-title-text{
+    text-overflow:ellipsis;
+    overflow:hidden;
+    width:200px;
+}
 .pmb-project-item-type-container{
     flex-shrink:0;
 }
