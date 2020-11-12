@@ -100,6 +100,9 @@
     text-align:center;
     float:bottom;
 }
-.pmb-project-choices-column .pmb-remove-item{
+.pmb-project-choices-column .pmb-remove-item,.pmb-project-choices-column .pmb-project-item-template-container{
+    display:none;
+}
+.pmb-project-matters .pmb-add-item{
     display:none;
 }

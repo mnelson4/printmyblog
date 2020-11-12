@@ -53,12 +53,62 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = 0){
     <div class="list-group-item pmb-project-item" data-id="<?php echo esc_attr($id);?>" data-height="<?php echo esc_attr($height);?>">
         <div class="pmb-project-item-header">
             <span class="pmb-grabbable pmb-project-item-title">
-                <span class="dashicons dashicons-menu"></span>
+                <span
+                        title="<?php
+		                echo esc_attr(
+			                sprintf(
+				                __('Drag "%s"', 'print-my-blog'),
+				                $title
+			                )
+		                );
+		                ?>"
+                class="dashicons dashicons-menu"></span>
                 <span class=""><?php echo $title;?></span>
             </span>
-            <a href="<?php echo esc_attr($view_url);?>" target="_blank"><span class="dashicons dashicons-visibility pmb-icon"></span></a>
-            <a href="<?php echo esc_attr($edit_url);?>" target="_blank"><span class="dashicons dashicons-edit pmb-icon"></span></a>
-            <a class="pmb-remove-item"><span class="dashicons dashicons-trash pmb-icon"></span></a>
+            <a
+                    href="<?php echo esc_attr($view_url);?>"
+                    title="<?php
+                    echo esc_attr(
+                            sprintf(
+                                    __('View "%s"', 'print-my-blog'),
+                                    $title
+                            )
+                    );
+                    ?>"
+                    target="_blank"><span class="dashicons dashicons-visibility pmb-icon"></span></a>
+            <a
+                    href="<?php echo esc_attr($edit_url);?>"
+                    title="<?php
+                    echo esc_attr(
+	                    sprintf(
+		                    __('Edit "%s"', 'print-my-blog'),
+		                    $title
+	                    )
+                    );
+                    ?>"
+                    target="_blank"><span class="dashicons dashicons-edit pmb-icon"></span></a>
+            <a
+                    class="pmb-remove-item"
+                    title="<?php
+                    echo esc_attr(
+	                    sprintf(
+		                    __('Remove "%s" from project', 'print-my-blog'),
+		                    $title
+	                    )
+                    );
+                    ?>"
+            ><span class="dashicons dashicons-no-alt pmb-icon"></span></a>
+            <a
+                    class="pmb-add-item"
+                    title="<?php
+			        echo esc_attr(
+				        sprintf(
+					        __('Add "%s" to project', 'print-my-blog'),
+					        $title
+				        )
+			        );
+			        ?>"
+            ><span class="dashicons dashicons-plus-alt2 pmb-icon"></span></a>
             <span class="pmb-project-item-template-container"><?php echo pmb_template_selector($template, $project);?></span>
         </div>
 

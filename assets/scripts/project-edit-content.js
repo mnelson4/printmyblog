@@ -47,6 +47,16 @@ jQuery(document).ready(function(){
 			jQuery(element_to_remove).detach().prependTo('#pmb-project-choices');
 		}
 	});
+	jQuery('.pmb-add-item').click(function(event){
+		var selection = jQuery(event.currentTarget);
+		var parent_draggable_items = selection.parents('.pmb-project-item');
+
+		if(parent_draggable_items.length > 0){
+			var element_to_remove = parent_draggable_items[0];
+			jQuery(element_to_remove).detach().appendTo('#pmb-project-main-matter');
+			element_to_remove.scrollIntoView();
+		}
+	});
 });
 
 /**
