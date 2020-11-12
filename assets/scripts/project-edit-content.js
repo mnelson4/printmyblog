@@ -57,6 +57,18 @@ jQuery(document).ready(function(){
 			element_to_remove.scrollIntoView();
 		}
 	});
+
+	// filter form
+	jQuery('#pmb-filter-form-submit').click(function(event){
+		event.preventDefault();
+		jQuery('#pmb-filter-form').submit();
+	});
+
+	jQuery( ".pmb-date" ).datepicker({
+		dateFormat: 'yy-mm-dd',
+		changeYear: true,
+		changeMonth: true,
+	});
 });
 
 /**

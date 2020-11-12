@@ -10,8 +10,8 @@ use PrintMyBlog\orm\entities\Project;
  * @var $front_matter_sections \PrintMyBlog\orm\entities\ProjectSection[]
  * @var $main_matter_sections \PrintMyBlog\orm\entities\ProjectSection[]
  * @var $back_matter_sections \PrintMyBlog\orm\entities\ProjectSection[]
- *
- *
+ * @var $post_types WP_Post_Type[]
+ * @var $authors WP_User[]
  */
 
 function pmb_template_selector($selected_template, Project $project){
@@ -141,16 +141,96 @@ pmb_render_template(
 	]
 );
 ?>
-    <form id="pmb-filter-form" method="post" action"<?php echo esc_attr( admin_url( 'admin-ajax.php' ));?>">
-
+    <form id="pmb-filter-form" method="get" action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ));?>">
+        <input type="hidden" name="action" value="pmb-post-search">
     </form>
     <form id="pmb-project-form" method="POST" action="<?php echo $form_url;?>">
         <div id="pmb-project-layout" class="pmb-project-layout">
             <div class="pmb-project-layout-inner">
                 <div class="pmb-project-column pmb-project-choices-column">
                     <h2><?php _e('Available Content', 'print-my-blog');?></h2>
-                    <div id="pmb-project-choices-filters">
-
+                    <div class="pmb-project-choices-filters">
+                        <details class="pmb-details">
+                            <summary class="pmb-reveal-options"><?php esc_html_e('Filter and Search', 'print-my-blog');?></summary>
+                            <table class="form-table">
+                                <tr>
+                                    <th><label for="pmb-project-choices-search"><?php esc_html_e('Search', 'print-my-blog');?></th>
+                                    <td><input id="pmb-project-choices-search" type="input" form="pmb-filter-form"></td>
+                                </tr>
+                                <tr>
+                                    <th><label for="pmb-project-choices-post-type"><?php esc_html_e('Post Type', 'print-my-blog');?></label></th>
+                                    <td><select id="pmb-project-choices-post-type" name="post-type" form="pmb-filter-form">
+                                            <?php
+                                            foreach($post_types as $post_type_obj){
+                                                ?><option value="<?php esc_attr($post_type_obj->name);?>"><?php echo $post_type_obj->label;?></option><?php
+                                            }
+                                            ?>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <th><?php esc_html_e('Status','print-my-blog' );?></th>
+                                    <td> <?php
+                                        // status
+                                        $statuses = [
+                                            'draft'    => esc_html__( 'Draft' ),
+                                            'pending'  => esc_html__( 'Pending Review' ),
+                                            'private'  => esc_html__( 'Private' ),
+                                            'password' => esc_html__( 'Password-Protected', 'print-my-blog' ),
+                                            'publish'  => esc_html__( 'Published' ),
+                                            'future'   => esc_html__( 'Scheduled' ),
+                                            'trash'    => esc_html__( 'Trash' )
+                                        ];
+                                        foreach($statuses as $value => $label ){
+                                            ?>
+                                            <input type="checkbox" name="statuses[]" value="<?php echo esc_attr($value);?>" id="<?php echo esc_attr($value);?>-id" <?php echo $value === 'publish' ? 'checked="checked"' : '';?> form="pmb-filter-form">
+                                            <label for="<?php echo esc_attr($value);?>-id"><?php echo $label;?></label><br>
+                                            <?php
+                                        }
+                                        ?></td>
+                                </tr>
+                            <tr>
+                                <th><label for="pmb-project-choices-by"><?php esc_html_e('By', 'print-my-blog'); ?></label></th>
+                                <td>
+                                    <select id="pmb-project-choices-by" class="pmb-author-select" name="pmb-author" form="pmb-filter-form">
+                                        <?php
+                                        foreach($authors as $author){
+                                            ?><option value="<?php echo esc_attr($author->ID);?>"><?php echo $author->display_name;?></option><?php
+                                        }
+                                        ?>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e('Written Between', 'print-my-blog');?></th>
+                                <td><?php printf(
+                                        // translators: 1: "from" date input, 2: "to" date input
+                                        __('%s and %s', 'print-my-blog'),
+                                    '<input id=pmb-from-date" type="text" class="pmb-date" name="dates[from]" form="pmb-filter-form">',
+                                    '<input id=pmb-to-date" type="text" class="pmb-date" name="dates[to]" form="pmb-filter-form">'
+                                ); ?>
+                                </td>
+                            </tr>
+                                <tr>
+                                    <th><label for="pmb-project-choices-order"><?php esc_html_e('Order By', 'print-my-blog');?></label></th>
+                                    <td><select id="pmb-project-choices-order" name="pmb-order" form="pmb-filter-form">
+                                            <?php
+                                            $orderby = [
+                                                'date' => __('Date', 'print-my-blog'),
+                                                'title' => __('Title', 'print-my-blog'),
+                                                'order' => __('Menu Order', 'print-my-blog')
+                                            ];
+                                            foreach($orderby as $value => $display){
+                                                ?><option value="<?php echo esc_attr($value);?>"><?php echo $display;?></option><?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2"><input id="pmb-filter-form-submit" type="submit" for="pmb-filter-form" value="<?php echo esc_attr(_e('Submit', 'print-my-blog'));?>"></th>
+                                </tr>
+                            </table>
+                        </details>
                     </div>
                     <div id="pmb-project-choices" class="pmb-draggable-area pmb-project-content-available pmb-scrollable-window list-group">
                         <?php

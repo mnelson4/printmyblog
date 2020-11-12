@@ -27,6 +27,7 @@ use Twine\forms\strategies\layout\TemplateLayout;
 use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
 use WP_Query;
+use WP_User_Query;
 use const http\Client\Curl\PROXY_HTTP;
 
 /**
@@ -355,9 +356,10 @@ class Admin extends BaseController
 			        wp_enqueue_script(
 				        'pmb_project_edit_content',
 				        PMB_SCRIPTS_URL . 'project-edit-content.js',
-				        array('sortablejs',),
+				        array('sortablejs','jquery-ui-datepicker'),
 				        filemtime(PMB_SCRIPTS_DIR . 'project-edit-content.js')
 			        );
+			        wp_enqueue_style('jquery-ui');
 			        /**
 			         * @var $project Project
 			         */
@@ -579,7 +581,9 @@ class Admin extends BaseController
 		    'post_options' => $post_options,
 		    'project' => $project,
 		    'project_support_front_matter' => $project_support_front_matter,
-	        'project_support_back_matter' => $project_support_back_matter
+	        'project_support_back_matter' => $project_support_back_matter,
+		    'post_types' => $this->post_fetcher->getProjectPostTypes('objects'),
+		    'authors' => get_users(['number' => 10, 'who' => 'authors']),
 	    ]);
     }
 

@@ -42,14 +42,21 @@ class PostFetcher
     }
 
 	/**
+	 * @param string $output passed into `get_post_types`. See @get_post_types
 	 * @return array of all the post types that can be in projects.
 	 */
-    public function getProjectPostTypes(){
-	    $in_search_post_types = get_post_types( array( 'exclude_from_search' => false ) );
+    public function getProjectPostTypes($output = 'names'){
+	    $in_search_post_types = get_post_types( array( 'exclude_from_search' => false ), $output );
 	    unset($in_search_post_types['attachment']);
-	    $in_search_post_types['pmb_content'] = 'pmb_content';
-	    return  array_map( 'esc_sql', $in_search_post_types );
+	    if($output === 'objects'){
+		    $in_search_post_types['pmb_content'] = get_post_type_object('pmb_content');
+	    } else {
+		    $in_search_post_types['pmb_content'] = 'pmb_content';
+		    $in_search_post_types = array_map( 'esc_sql', $in_search_post_types );
+	    }
+	    return  $in_search_post_types;
     }
+
 
 	/**
 	 * Deletes all PMB custom post type posts

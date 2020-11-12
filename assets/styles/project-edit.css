@@ -5,6 +5,7 @@
 
 .pmb-project-layout .pmb-project-column{
     display:inline-block;
+    vertical-align:top;
 }
 .pmb-scrollable-window{
     height:70vh;
