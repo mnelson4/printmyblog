@@ -4,6 +4,7 @@
  */
 
 use PrintMyBlog\orm\entities\Design;
+use PrintMyBlog\orm\entities\Project;
 
 /**
  * @param $post
@@ -100,4 +101,121 @@ function pmb_design_uses($post_content_thing, $default){
 		return $default;
 	}
 	return in_array($post_content_thing, $post_content);
+}
+
+/**
+ * Gets a post item div HTML for the sortable.js sorting area.
+ * @param $posty_row
+ * @param Project $project
+ * @param int $max_nesting
+ */
+function pmb_content_item($posty_row, Project $project, $max_nesting = 0){
+	if($posty_row instanceof \PrintMyBlog\orm\entities\ProjectSection){
+		$id = $posty_row->getPostId();
+		$title = $posty_row->getPostTitle();
+		$template = $posty_row->getTemplate();
+		$height = $posty_row->getHeight();
+		$subs = $posty_row->getCachedSubsections();
+		$depth = $posty_row->getDepth();
+		$edit_url = get_edit_post_link($posty_row->getPostId());
+		$view_url = get_permalink($posty_row->getPostId());
+	} else {
+		$id = $posty_row->ID;
+		$title = $posty_row->post_title;
+		$template = null;
+		$height = 0;
+		$subs = [];
+		$depth = 1;
+		$edit_url = get_edit_post_link($posty_row->ID);
+		$view_url = get_permalink($posty_row->ID);
+	}
+	?>
+	<div class="list-group-item pmb-project-item" data-id="<?php echo esc_attr($id);?>" data-height="<?php echo esc_attr($height);?>">
+		<div class="pmb-project-item-header" title="<?php
+		echo esc_attr(
+			sprintf(
+				__('Drag "%s" into your project', 'print-my-blog'),
+				$title
+			)
+		);
+		?>">
+            <div class="pmb-grabbable pmb-project-item-title">
+                <span
+	                class="dashicons dashicons-move"></span>
+                <span class="pmb-project-item-title-text"><?php echo $title;?></span>
+            </div>
+			<a
+				href="<?php echo esc_attr($view_url);?>"
+				title="<?php
+				echo esc_attr(
+					sprintf(
+						__('View "%s"', 'print-my-blog'),
+						$title
+					)
+				);
+				?>"
+				target="_blank"><span class="dashicons dashicons-visibility pmb-icon"></span></a>
+			<a
+				href="<?php echo esc_attr($edit_url);?>"
+				title="<?php
+				echo esc_attr(
+					sprintf(
+						__('Edit "%s"', 'print-my-blog'),
+						$title
+					)
+				);
+				?>"
+				target="_blank"><span class="dashicons dashicons-edit pmb-icon"></span></a>
+			<a
+				class="pmb-remove-item"
+				title="<?php
+				echo esc_attr(
+					sprintf(
+						__('Remove "%s" from project', 'print-my-blog'),
+						$title
+					)
+				);
+				?>"
+			><span class="dashicons dashicons-no-alt pmb-icon"></span></a>
+			<a
+				class="pmb-add-item"
+				title="<?php
+				echo esc_attr(
+					sprintf(
+						__('Add "%s" to project', 'print-my-blog'),
+						$title
+					)
+				);
+				?>"
+			><span class="dashicons dashicons-plus-alt2 pmb-icon"></span></a>
+			<span class="pmb-project-item-template-container"><?php echo pmb_template_selector($template, $project);?></span>
+		</div>
+
+		<div class="pmb-nested-sortable <?php echo $depth < $max_nesting ? 'pmb-sortable' : 'pmb-sortable-inactive';?> pmb-subs">
+			<?php
+			foreach($subs as $sub){
+				pmb_content_item($sub, $project, $max_nesting);
+			}
+			?>
+		</div>
+
+	</div>
+	<?php
+}
+
+/**
+ * Gets the template options select input HTML
+ * @param $selected_template
+ * @param Project $project
+ *
+ * @return string
+ */
+function pmb_template_selector($selected_template, Project $project){
+	$options = $project->getSectionTemplateOptions();
+	$html = '<select class="pmb-template">';
+	foreach($options as $value => $display_text){
+		$html .= '<option value="' . esc_attr($value) . '" ' . selected($value, $selected_template, false) . '>' . $display_text . '</option>';
+	}
+	$html .= '</select>';
+	return $html;
 }

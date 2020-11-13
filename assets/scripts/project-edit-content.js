@@ -7,20 +7,9 @@ jQuery(document).ready(function(){
 			group:{
 				name: 'shared',
 			},
+			filter: '.no-drag',
 			sort: false,
 		});
-
-	// var sections = document.getElementById('pmb-project-sections');
-	// var sortable_sections = Sortable.create(
-	// 	sections,
-	// 	{
-	// 		group:{
-	// 			name: 'shared',
-	// 		},
-	// 		animation:150,
-	// 		// fallbackOnBody: true,
-	// 		// swapThreshold: 0.65
-	// 	});
 	jQuery('.pmb-sortable').each(function(index, element){
 		pmb_create_sortable_from(element);
 	});
@@ -38,6 +27,39 @@ jQuery(document).ready(function(){
 		}
 		jQuery('#pmb-project-depth').val(depth);
 	});
+
+
+	// filter form
+	jQuery('#pmb-filter-form-submit').click(function(event){
+		event.preventDefault();
+		jQuery(this).parents('details').attr('open',false);
+		pmb_refresh_posts();
+	});
+
+
+	jQuery( ".pmb-date" ).datepicker({
+		dateFormat: 'yy-mm-dd',
+		changeYear: true,
+		changeMonth: true,
+	});
+	pmb_refresh_posts();
+});
+
+function pmb_refresh_posts(){
+	var form = jQuery("#pmb-filter-form");
+	jQuery('#pmb-project-choices').html('<div class="no-drag"><div class="pmb-spinner"></div></div>');
+	jQuery.ajax({
+		type: form.attr('method'),
+		url: form.attr('action'),
+		data: form.serialize(), // serializes the form's elements.
+		success: function(data)
+		{
+			jQuery('#pmb-project-choices').html(data);
+			pmb_setup_callbacks_on_new_options();
+		}
+	});
+}
+function pmb_setup_callbacks_on_new_options(){
 	jQuery('.pmb-remove-item').click(function(event){
 		var selection = jQuery(event.currentTarget);
 		var parent_draggable_items = selection.parents('.pmb-project-item');
@@ -57,19 +79,28 @@ jQuery(document).ready(function(){
 			element_to_remove.scrollIntoView();
 		}
 	});
-
-	// filter form
-	jQuery('#pmb-filter-form-submit').click(function(event){
+	jQuery('.load-more-button').click(function(event){
 		event.preventDefault();
-		jQuery('#pmb-filter-form').submit();
+		var form = jQuery("#pmb-filter-form");
+		var data = form.serialize();
+		var button = jQuery(this);
+		var page = button.attr('data-page');
+		button.prop('class','pmb-spinner');
+		button.html('');
+		data += '&page=' + page;
+		jQuery.ajax({
+			type: form.attr('method'),
+			url: form.attr('action'),
+			data: data, // serializes the form's elements.
+			success: function(data)
+			{
+				button.remove();
+				jQuery('#pmb-project-choices').append(data);
+				pmb_setup_callbacks_on_new_options();
+			}
+		});
 	});
-
-	jQuery( ".pmb-date" ).datepicker({
-		dateFormat: 'yy-mm-dd',
-		changeYear: true,
-		changeMonth: true,
-	});
-});
+}
 
 /**
  * Creates a string of JSON from the data from the sortable items and stuff it into the specified input.

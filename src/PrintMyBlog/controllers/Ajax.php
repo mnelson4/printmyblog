@@ -54,6 +54,7 @@ class Ajax extends BaseController
 	        'handleProjectStatus'
         );
 	    add_action('wp_ajax_pmb_save_project_main', [$this, 'handleSaveProjectMain' ]);
+	    add_action('wp_ajax_pmb_post_search', [$this,'handlePostSearch']);
     }
 
     protected function addUnauthenticatedCallback($ajax_action, $method_name){
@@ -138,5 +139,68 @@ class Ajax extends BaseController
 		} else {
 			wp_send_json_success();
 		}
+	}
+
+	public function handlePostSearch(){
+        $requested_posts = 20;
+    	$query_params = [
+    		'posts_per_page' => $requested_posts,
+		    'ignore_sticky_posts' => true
+	    ];
+    	$project = $this->project_manager->getById($_GET['project']);
+    	if(!empty($_GET['page'])){
+    		$query_params['paged'] = $_GET['page'];
+    		$page = $_GET['page'];
+	    } else {
+    	    $page = 1;
+        }
+    	if(!empty($_GET['pmb-search'])){
+    		$query_params['s'] = $_GET['pmb-search'];
+	    }
+    	if(!empty($_GET['pmb-post-type'])){
+    		$query_params['post_type'] = $_GET['pmb-post-type'];
+	    }
+    	if(!empty($_GET['pmb-status'])){
+    		$query_params['post_status'] = $_GET['pmb-status'];
+	    }
+    	if(!empty($_GET['pmb-author'])){
+    		$query_params['author'] = $_GET['pmb-author'];
+	    }
+    	$date_query = [];
+    	if(!empty($_GET['pmb-date'])){
+		    if(!empty($_GET['pmb-date']['from'])){
+			    $date_query['after'] = $_GET['pmb-date']['from'];
+		    }
+		    if(!empty($_GET['pmb-date']['to'])){
+			    $date_query['before'] = $_GET['pmb-date']['to'];
+		    }
+		    if($date_query){
+			    $date_query['inclusive'] = true;
+			    $query_params['date_query'] = $date_query;
+		    }
+	    }
+
+    	if(!empty($_GET['pmb-order-by'])){
+			$query_params['orderby'] = $_GET['pmb-order-by'];
+	    }
+    	if(!empty($_GET['pmb-order'])){
+    		$query_params['order'] = $_GET['pmb-order'];
+	    }
+    	$posts = get_posts($query_params);
+		foreach($posts as $post){
+			pmb_content_item($post, $project, 0);
+		}
+		if($requested_posts == count($posts)){
+            ?>
+            <div class="pmb-show-more">
+                <div class="load-more-button button no-drag" data-page="<?php echo esc_attr($page + 1);?>"><span class="dashicons dashicons-arrow-down-alt"></span><?php esc_html_e('Load more...', 'print-my-blog');?></div>
+            </div>
+            <?php
+        } elseif(count($posts) === 0 && $page == 1){
+		    ?>
+            <div class="pmb-no-results no-drag"><?php esc_html_e('No results. Try changing your search and filter criteria.', 'print-my-blog');?></div>
+            <?php
+		}
+		exit;
 	}
 }

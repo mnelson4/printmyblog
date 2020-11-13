@@ -533,7 +533,6 @@ class Admin extends BaseController
 
     protected function editContent(Project $project)
     {
-	    $post_options = $this->post_fetcher->fetchPostOptionssForProject();
 	    $project_support_front_matter = $project->supportsDivision(DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER);
 	    if($project_support_front_matter){
 	    	$front_matter_sections = $project->getSections(
@@ -578,7 +577,6 @@ class Admin extends BaseController
 		    'back_matter_sections' => $back_matter_sections,
 		    'sections' => $sections,
 		    'front_matter_sections' => $front_matter_sections,
-		    'post_options' => $post_options,
 		    'project' => $project,
 		    'project_support_front_matter' => $project_support_front_matter,
 	        'project_support_back_matter' => $project_support_back_matter,

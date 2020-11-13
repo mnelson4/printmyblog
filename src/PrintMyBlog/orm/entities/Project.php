@@ -580,7 +580,7 @@ class Project extends PostWrapper{
 		foreach($this->getCustomTemplates() as $template_slug => $template_args){
 			$title = $template_args['title'];
 			$title_and_qualifier = sprintf(
-				__('%1$s (Used by %2$s)', 'print-my-blog'),
+				__('%1$s (%2$s)', 'print-my-blog'),
 				$title,
 				implode(', ',
 					array_map(
