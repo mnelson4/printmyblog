@@ -138,7 +138,7 @@ pmb_render_template(
                     </div>
                 </div>
                 <div class="pmb-project-column pmb-project-matters-wrapper">
-                    <h2><?php esc_html_e('Project Content', 'print-my-blog');?></h2>
+                    <h2><span class="dashicons dashicons-portfolio"></span> <?php esc_html_e('Project Content', 'print-my-blog');?></h2>
                     <div class="pmb-project-matters pmb-scrollable-window">
                         <?php if($project_support_front_matter){
                            ?>
