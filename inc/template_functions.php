@@ -105,7 +105,7 @@ function pmb_design_uses($post_content_thing, $default){
 
 /**
  * Gets a post item div HTML for the sortable.js sorting area.
- * @param $posty_row
+ * @param ProjectSection|WP_Post $posty_row
  * @param Project $project
  * @param int $max_nesting
  */
@@ -113,6 +113,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = 0){
 	if($posty_row instanceof \PrintMyBlog\orm\entities\ProjectSection){
 		$id = $posty_row->getPostId();
 		$title = $posty_row->getPostTitle();
+		$post_type = get_post_type_object(get_post_type($posty_row->getPostId()));
 		$template = $posty_row->getTemplate();
 		$height = $posty_row->getHeight();
 		$subs = $posty_row->getCachedSubsections();
@@ -122,6 +123,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = 0){
 	} else {
 		$id = $posty_row->ID;
 		$title = $posty_row->post_title;
+		$post_type = get_post_type_object($posty_row->post_type);
 		$template = null;
 		$height = 0;
 		$subs = [];
@@ -131,17 +133,17 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = 0){
 	}
 	?>
 	<div class="list-group-item pmb-project-item" data-id="<?php echo esc_attr($id);?>" data-height="<?php echo esc_attr($height);?>">
-		<div class="pmb-project-item-header" title="<?php
+        <div class="pmb-project-item-header" title="<?php
 		echo esc_attr(
 			sprintf(
-				__('Drag "%s" into your project', 'print-my-blog'),
+				__('Drag the %s "%s" into your project', 'print-my-blog'),
+                $post_type->labels->singular_name,
 				$title
 			)
 		);
 		?>">
             <div class="pmb-grabbable pmb-project-item-title">
-                <span
-	                class="dashicons dashicons-move"></span>
+	            <?php echo pmb_post_type_icon_html($post_type);?>
                 <span class="pmb-project-item-title-text"><?php echo $title;?></span>
             </div>
 			<a
@@ -218,4 +220,30 @@ function pmb_template_selector($selected_template, Project $project){
 	}
 	$html .= '</select>';
 	return $html;
+}
+
+/**
+ * @param WP_Post_Type $post_type
+ *
+ * @return string HTML for the post type's icon
+ */
+function pmb_post_type_icon_html(WP_Post_Type $post_type){
+    $icon = $post_type->menu_icon;
+	if ( empty( $icon ) ) {
+	    $icon = 'dashicons-media-default';
+    }
+    $img = '<img src="' . $icon . '" alt="" />';
+	$img_style = '';
+	$img_class = '';
+    if ( 'none' === $icon || 'div' === $icon ) {
+        $img = '<br />';
+    } elseif ( 0 === strpos( $icon, 'data:image/svg+xml;base64,' ) ) {
+        $img       = '<br />';
+        $img_style = ' style="background-image:url(\'' . esc_attr( $icon ) . '\')"';
+        $img_class = ' svg';
+    } elseif ( 0 === strpos( $icon, 'dashicons-' ) ) {
+        $img       = '<br />';
+        $img_class = ' dashicons ' . sanitize_html_class( $icon );
+	}
+    return "<div class='{$img_class}'{$img_style}>{$img}</div>";
 }

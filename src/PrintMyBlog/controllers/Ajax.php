@@ -4,6 +4,7 @@ namespace PrintMyBlog\controllers;
 
 use mnelson4\RestApiDetector\RestApiDetector;
 use mnelson4\RestApiDetector\RestApiDetectorError;
+use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\entities\ProjectGeneration;
 use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\services\FileFormatRegistry;
@@ -33,11 +34,16 @@ class Ajax extends BaseController
 	protected $format_registry;
 
 	/**
+	 * @var PostFetcher
+	 */
+	protected $post_fetcher;
+	/**
 	 * @param ProjectManager $project_manager
 	 */
-	public function inject(ProjectManager $project_manager, FileFormatRegistry $format_registry){
+	public function inject(ProjectManager $project_manager, FileFormatRegistry $format_registry, PostFetcher $post_fetcher){
 		$this->project_manager = $project_manager;
 		$this->format_registry = $format_registry;
+		$this->post_fetcher = $post_fetcher;
 	}
     /**
      * Sets hooks that we'll use in the admin.
@@ -159,7 +165,9 @@ class Ajax extends BaseController
 	    }
     	if(!empty($_GET['pmb-post-type'])){
     		$query_params['post_type'] = $_GET['pmb-post-type'];
-	    }
+	    } else {
+    	    $query_params['post_type'] = $this->post_fetcher->getProjectPostTypes('names');
+        }
     	if(!empty($_GET['pmb-status'])){
     		$query_params['post_status'] = $_GET['pmb-status'];
 	    }

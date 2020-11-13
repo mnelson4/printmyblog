@@ -81,8 +81,8 @@ class CustomPostTypes
 		    // WordPress CPT Options Start
 		    array(
 			    'labels' => array(
-				    'name' => __( 'Pro Print Materials', 'print-my-blog' ) ,
-				    'singular_name' => __( 'Pro Print Material', 'print-my-blog' )
+				    'name' => __( 'Print Materials', 'print-my-blog' ) ,
+				    'singular_name' => __( 'Print Material', 'print-my-blog' )
 			    ),
 			    'has_archive' => true,
 			    'public' => false,
@@ -91,7 +91,8 @@ class CustomPostTypes
 			    'rewrite' => array('slug' => 'pmb'),
 			    'show_in_rest' => true,
 			    'supports' => array('title', 'editor', 'revisions', 'author','thumbnail', 'custom-fields'),
-			    'taxonomies' => array('category', 'post_tag')
+			    'taxonomies' => array('category', 'post_tag'),
+			    'menu_icon' => 'dashicons-media-document'
 		    )
 	    );
     }
