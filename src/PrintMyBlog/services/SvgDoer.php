@@ -21,6 +21,27 @@ class SvgDoer {
 	}
 
 	public function getPmbIconSvgData(){
-		return 'data:image/svg+xml;base64,' . base64_encode($this->getPmbIconSvg());
+		return $this->dataizeAndEncode($this->getPmbIconSvg());
+	}
+
+	/**
+	 * @param $path
+	 * @param $color
+	 *
+	 * @return string|string[]
+	 */
+	public function getSvgDataAsColor($path, $color){
+		$contents = file_get_contents($path);
+		return $this->dataizeAndEncode(str_replace('black', $color, $contents));
+	}
+
+	/**
+	 * Takes the SVG text, encodes it, and prepends it with the magic string to make it work just like an image.
+	 * @param $svg_content
+	 *
+	 * @return string
+	 */
+	protected function dataizeAndEncode($svg_content){
+		return 'data:image/svg+xml;base64,' . base64_encode($svg_content);
 	}
 }

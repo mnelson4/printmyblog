@@ -5,13 +5,15 @@ add_action(
 	'pmb_pdf_generation_start',
 	function(\PrintMyBlog\entities\ProjectGeneration $project_generation, \PrintMyBlog\orm\entities\Design $design){
 		$css = pmb_design_styles($design);
+		$svg_doer = new \PrintMyBlog\services\SvgDoer();
+		$svg_data = $svg_doer->getSvgDataAsColor($design->getDesignTemplate()->getDir() . 'assets/banner.svg', 'blue');
 		wp_add_inline_style(
 			'pmb_print_common',
 			$css . '@page title-page /*body*/{
-					background: url(' . $design->getSetting('title_page_banner'). ') no-repeat,
-						url(' . $design->getSetting('background_embellishment') . ') center center no-repeat,
+					background: url("' . $svg_data. '") no-repeat,
+						url("' . $design->getSetting('background_embellishment') . '") center center no-repeat,
 						linear-gradient(#cce5ff, #e6f2ff);
-					background-size:auto,40%;
+					background-size:100% 100px,40%;
 					@top-right {
 			            content: "' . $design->getSetting('org'). '";
 			            color:white;
