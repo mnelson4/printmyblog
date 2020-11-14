@@ -209,3 +209,14 @@
 .pmb-button-spacer{
     margin:1vh;
 }
+
+.pmb-svg-icon{
+    float: left;
+    width: 13px;
+    height: 13px;
+    margin: 5px .5em 0 0;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 13px auto;
+}

@@ -2,6 +2,8 @@
 
 namespace PrintMyBlog\system;
 
+use PrintMyBlog\services\SvgDoer;
+
 /**
  * Class CustomPostTypes
  *
@@ -17,6 +19,14 @@ class CustomPostTypes
     const PROJECT = 'pmb_project';
     const DESIGN = 'pmb_design';
     const CONTENT = 'pmb_content';
+	/**
+	 * @var SvgDoer
+	 */
+	protected $svg_doer;
+
+	public function inject(SvgDoer $svg_doer){
+    	$this->svg_doer = $svg_doer;
+    }
 
     /**
      * This must not be done before init eh.
@@ -92,7 +102,7 @@ class CustomPostTypes
 			    'show_in_rest' => true,
 			    'supports' => array('title', 'editor', 'revisions', 'author','thumbnail', 'custom-fields'),
 			    'taxonomies' => array('category', 'post_tag'),
-			    'menu_icon' => 'dashicons-media-document'
+			    'menu_icon' => $this->svg_doer->getPmbIconSvgData()//'dashicons-media-document'
 		    )
 	    );
     }

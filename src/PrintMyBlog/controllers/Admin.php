@@ -17,6 +17,7 @@ use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\orm\managers\ProjectSectionManager;
 use PrintMyBlog\services\FileFormatRegistry;
+use PrintMyBlog\services\SvgDoer;
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\forms\base\FormSectionHtmlFromTemplate;
 use Twine\forms\base\FormSectionProper;
@@ -94,6 +95,10 @@ class Admin extends BaseController
 		ProjectProgress::EDIT_METADATA_STEP => self::SLUG_SUBACTION_PROJECT_META,
 		ProjectProgress::GENERATE_STEP => self::SLUG_SUBACTION_PROJECT_GENERATE
 	];
+	/**
+	 * @var SvgDoer
+	 */
+	protected $svg_doer;
 
 	/**
 	 * @param PostFetcher $post_fetcher
@@ -112,7 +117,8 @@ class Admin extends BaseController
 	    ProjectManager $project_manager,
 		FileFormatRegistry $file_format_registry,
 		DesignManager $design_manager,
-		TableManager $table_manager
+		TableManager $table_manager,
+		SvgDoer $svg_doer
     ){
         $this->post_fetcher    = $post_fetcher;
         $this->section_manager = $section_manager;
@@ -120,6 +126,7 @@ class Admin extends BaseController
         $this->file_format_registry = $file_format_registry;
         $this->design_manager = $design_manager;
         $this->table_manager = $table_manager;
+        $this->svg_doer = $svg_doer;
     }
     /**
      * name of the option that just indicates we successfully saved the setttings
@@ -164,7 +171,7 @@ class Admin extends BaseController
                 $this,
                 'renderProjects'
             ),
-            'data:image/svg+xml;base64,' . base64_encode(file_get_contents(PMB_DIR . 'assets/images/menu-icon.svg'))
+            $this->svg_doer->getPmbIconSvgData()
         );
 
         add_submenu_page(

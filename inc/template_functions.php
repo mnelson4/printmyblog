@@ -239,8 +239,8 @@ function pmb_post_type_icon_html(WP_Post_Type $post_type){
         $img = '<br />';
     } elseif ( 0 === strpos( $icon, 'data:image/svg+xml;base64,' ) ) {
         $img       = '<br />';
-        $img_style = ' style="background-image:url(\'' . esc_attr( $icon ) . '\')"';
-        $img_class = ' svg';
+        $img_style = ' style=\'background-image:url("' . esc_attr( $icon ) . '") !important;\'';
+        $img_class = 'pmb-svg-icon svg';
     } elseif ( 0 === strpos( $icon, 'dashicons-' ) ) {
         $img       = '<br />';
         $img_class = ' dashicons ' . sanitize_html_class( $icon );
