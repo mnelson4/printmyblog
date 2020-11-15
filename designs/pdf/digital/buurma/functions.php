@@ -17,7 +17,7 @@ add_action(
 					background: url("' . $svg_data. '") no-repeat,
 						url("' . $design->getSetting('background_embellishment') . '") center center no-repeat,
 						linear-gradient(#cce5ff, #e6f2ff);
-					background-size:100% 100px,40%;
+					background-size:/* banner */100% 150px, /* logo */ 40%, /* gradient */ 40%;
 					@top-right {
 			            content: "' . $design->getSetting('org'). '";
 			            color:white;
