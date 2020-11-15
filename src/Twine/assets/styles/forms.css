@@ -11,4 +11,6 @@ summary.twine-summary{
 .twine-radio-label{
     font-weight:bold;
 }
-.twine-radio-
+.twine-text-input[type=color]{
+    width:40px;
+}

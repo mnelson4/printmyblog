@@ -9,6 +9,7 @@ use Twine\forms\base\FormSectionProper;
 use Twine\forms\helpers\InputOption;
 use Twine\forms\inputs\AdminFileUploaderInput;
 use Twine\forms\inputs\CheckboxMultiInput;
+use Twine\forms\inputs\ColorInput;
 use Twine\forms\inputs\DatepickerInput;
 use Twine\forms\inputs\FloatInput;
 use Twine\forms\inputs\FormInputBase;
@@ -17,6 +18,7 @@ use Twine\forms\inputs\SelectInput;
 use Twine\forms\inputs\TextAreaInput;
 use Twine\forms\inputs\TextInput;
 use Twine\forms\inputs\YesNoInput;
+use Twine\forms\strategies\display\TextInputDisplay;
 
 class DefaultDesignTemplates {
 	public function registerDesignTemplates()
@@ -162,11 +164,18 @@ class DefaultDesignTemplates {
 						return (new FormSectionProper( [
 							'subsections' =>
 								[
-									'title_page_banner' => new AdminFileUploaderInput(
+									'title_page_banner_color' => new ColorInput(
 										[
-											'html_label_text' => __('Title Page Top-Banner', 'print-my-blog'),
-											'html_help_text' => __('Image used as the top of the background on the title page.', 'print-my-blog'),
-											'default' => plugins_url('designs/pdf/digital/buurma/assets/banner.png', PMB_MAIN_FILE)
+											'html_label_text' => __('Title Page Top-Banner Color', 'print-my-blog'),
+											'html_help_text' => __('Image used at the top of the background on the title page.', 'print-my-blog'),
+											'default' => '#02a5fd'
+										]
+									),
+									'background_color' => new ColorInput(
+										[
+											'html_label_text' => __('Background Color', 'print-my-blog'),
+											'html_help_text' => __('Background colors will alternate between this and white.', 'print-my-blog'),
+											'default' => '#82d7ff'
 										]
 									),
 									'org' => new TextInput([

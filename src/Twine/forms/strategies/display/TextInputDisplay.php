@@ -59,7 +59,7 @@ class TextInputDisplay extends DisplayBase
         $input .= ' name="' . $this->_input->html_name() . '"';
         $input .= ' id="' . $this->_input->html_id() . '"';
         $class = $this->_input->required() ? $this->_input->required_css_class() . ' ' . $this->_input->html_class() : $this->_input->html_class();
-        $input .= ' class="' . $class . '"';
+        $input .= ' class="twine-text-input ' . $class . '"';
         // add html5 required
         $input .= $this->_input->required() ? ' required' : '';
         $input .= ' value="' . $this->_input->raw_value_in_form() . '"';

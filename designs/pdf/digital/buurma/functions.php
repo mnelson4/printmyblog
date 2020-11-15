@@ -6,7 +6,11 @@ add_action(
 	function(\PrintMyBlog\entities\ProjectGeneration $project_generation, \PrintMyBlog\orm\entities\Design $design){
 		$css = pmb_design_styles($design);
 		$svg_doer = new \PrintMyBlog\services\SvgDoer();
-		$svg_data = $svg_doer->getSvgDataAsColor($design->getDesignTemplate()->getDir() . 'assets/banner.svg', 'blue');
+		$svg_data = $svg_doer->getSvgDataAsColor(
+			$design->getDesignTemplate()->getDir() . 'assets/banner.svg',
+			$design->getSetting('title_page_banner_color')
+		);
+		$bg_color = $design->getSetting('background_color');
 		wp_add_inline_style(
 			'pmb_print_common',
 			$css . '@page title-page /*body*/{
