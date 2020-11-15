@@ -11,12 +11,15 @@ add_action(
 			$design->getSetting('title_page_banner_color')
 		);
 		$bg_color = $design->getSetting('background_color');
+		$color_guru = new \PrintMyBlog\services\ColorGuru();
 		wp_add_inline_style(
 			'pmb_print_common',
-			$css . '@page title-page /*body*/{
+			$css . '
+					/* BUURMA DESIGN INLINE CSS */
+					@page title-page /*body*/{
 					background: url("' . $svg_data. '") no-repeat,
 						url("' . $design->getSetting('background_embellishment') . '") center center no-repeat,
-						linear-gradient(#cce5ff, #e6f2ff);
+						linear-gradient(' . $color_guru->convertHextToRgba($bg_color,1). ', ' . $color_guru->convertHextToRgba($bg_color, .3). ');
 					background-size:/* banner */100% 150px, /* logo */ 40%, /* gradient */ 40%;
 					@top-right {
 			            content: "' . $design->getSetting('org'). '";
@@ -25,18 +28,17 @@ add_action(
 				}
 				@page front-matter{
 					background: url(' . $design->getSetting('background_embellishment') . ') right bottom/150px no-repeat,
-						linear-gradient(127deg, rgba(230,242,255,1) 0%, rgba(230,242,255,1) 80%, rgba(204,229,255,1) 100%);
+						linear-gradient(127deg, ' . $color_guru->convertHextToRgba($bg_color,.3). ' 0%, ' . $color_guru->convertHextToRgba($bg_color,.3). ' 80%, ' . $color_guru->convertHextToRgba($bg_color,1). ' 100%);
 				}
 				@page main /*article*/{
 					background: url(' . $design->getSetting('background_embellishment') . ') right bottom/150px no-repeat,
-						linear-gradient(127deg, rgba(230,242,255,1) 0%, rgba(230,242,255,1) 80%, rgba(204,229,255,1) 100%);
+						linear-gradient(127deg, ' . $color_guru->convertHextToRgba($bg_color,.3). ' 0%, ' . $color_guru->convertHextToRgba($bg_color,.3). ' 80%, ' . $color_guru->convertHextToRgba($bg_color,1). ' 100%);
 				}
 				@page back-matter{
 					background: url(' . $design->getSetting('background_embellishment') . ') center center no-repeat,
-						linear-gradient(#cce5ff, #e6f2ff);
+						linear-gradient(' . $color_guru->convertHextToRgba($bg_color,1). ', ' . $color_guru->convertHextToRgba($bg_color, .3). ');
 					background-size:80%, 100%;
-				}
-			/* MIKE STYLE */'
+				}'
 		);
 		wp_localize_script(
 			'pmb-design',
