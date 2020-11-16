@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\display;
+
 use Exception;
 use Twine\forms\inputs\FormInputWithOptionsBase;
 
@@ -26,9 +28,9 @@ abstract class CompoundInputDisplay extends DisplayBase
      * @param bool   $add_pound_sign
      * @return string
      */
-    public function get_sub_input_id($option_value, $add_pound_sign = false)
+    public function getSubInputId($option_value, $add_pound_sign = false)
     {
-        return $this->_append_chars($this->_input->html_id($add_pound_sign), '-') . sanitize_key($option_value);
+        return $this->appendChars($this->input->htmlId($add_pound_sign), '-') . sanitize_key($option_value);
     }
 
 
@@ -40,11 +42,11 @@ abstract class CompoundInputDisplay extends DisplayBase
      * @return array
      * @throws \Error
      */
-    public function get_html_input_ids($add_pound_sign = false)
+    public function getHtmlInputIds($add_pound_sign = false)
     {
         $html_input_ids = array();
-        foreach ($this->get_input()->options() as $value => $display) {
-            $html_input_ids[] = $this->get_sub_input_id($value, $add_pound_sign);
+        foreach ($this->getInput()->options() as $value => $display) {
+            $html_input_ids[] = $this->getSubInputId($value, $add_pound_sign);
         }
         return $html_input_ids;
     }
@@ -58,18 +60,18 @@ abstract class CompoundInputDisplay extends DisplayBase
      * @return FormInputWithOptionsBase
      * @throws \Error
      */
-    public function get_input()
+    public function getInput()
     {
-        if (! $this->_input instanceof FormInputWithOptionsBase) {
+        if (! $this->input instanceof FormInputWithOptionsBase) {
             throw new Exception(
-                sprintf(
-                    __(
-                        'Can not use a Compound Input Display Strategy (eg checkbox or radio) with an input that doesn\'t have options',
-                        'event_espresso'
-                    )
+                __(
+                    // phpcs:disable Generic.Files.LineLength.TooLong
+                    'Can not use a Compound Input Display Strategy (eg checkbox or radio) with an input that doesn\'t have options',
+                    // phpcs:enable Generic.Files.LineLength.TooLong
+                    'print-my-blog'
                 )
             );
         }
-        return parent::get_input();
+        return parent::getInput();
     }
 }

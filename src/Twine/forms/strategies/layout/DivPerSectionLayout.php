@@ -1,9 +1,9 @@
 <?php
+
 namespace Twine\forms\strategies\layout;
 
-
 use Exception;
-use Twine\forms\base\FormSectionProper;
+use Twine\forms\base\FormSection;
 use Twine\forms\inputs\FormInputBase;
 use Twine\forms\inputs\FormInputWithOptionsBase;
 use Twine\forms\inputs\HiddenInput;
@@ -28,14 +28,14 @@ class DivPerSectionLayout extends FormSectionLayoutBase
      *
      * @return string
      */
-    public function layout_form_begin()
+    public function layoutFormBegin()
     {
-	    $html_generator = Html::instance();
+        $html_generator = Html::instance();
         return $html_generator->div(
             '',
-            $this->_form_section->html_id(),
-            $this->_form_section->html_class(),
-            $this->_form_section->html_style()
+            $this->Form_section->htmlId(),
+            $this->Form_section->htmlClass(),
+            $this->Form_section->htmlStyle()
         );
     }
 
@@ -48,50 +48,50 @@ class DivPerSectionLayout extends FormSectionLayoutBase
      * @return string
      * @throws Exception
      */
-    public function layout_input($input)
+    public function layoutInput($input)
     {
-	    $html_generator = Html::instance();
+        $html_generator = Html::instance();
         $html = '';
         // set something unique for the id
-        $html_id = (string) $input->html_id() !== ''
-            ? (string) $input->html_id()
+        $html_id = (string) $input->htmlId() !== ''
+            ? (string) $input->htmlId()
             : spl_object_hash($input);
         // and add a generic input type class
         $html_class = sanitize_key(str_replace('_', '-', get_class($input))) . '-dv';
         if ($input instanceof HiddenInput) {
-            $html .= $html_generator->nl() . $input->get_html_for_input();
+            $html .= $html_generator->nl() . $input->getHtmlForInput();
         } elseif ($input instanceof SubmitInput) {
             $html .= $html_generator->div(
-                $input->get_html_for_input(),
+                $input->getHtmlForInput(),
                 $html_id . '-submit-dv',
-                "{$input->html_class()}-submit-dv {$html_class}"
+                "{$input->htmlClass()}-submit-dv {$html_class}"
             );
         } elseif ($input instanceof SelectInput) {
             $html .= $html_generator->div(
-                $html_generator->nl(1) . $input->get_html_for_label() .
-                $html_generator->nl() . $input->get_html_for_errors() .
-                $html_generator->nl() . $input->get_html_for_input() .
-                $html_generator->nl() . $input->get_html_for_help(),
+                $html_generator->nl(1) . $input->getHtmlForLabel() .
+                $html_generator->nl() . $input->getHtmlForErrors() .
+                $html_generator->nl() . $input->getHtmlForInput() .
+                $html_generator->nl() . $input->getHtmlForHelp(),
                 $html_id . '-input-dv',
-                "{$input->html_class()}-input-dv {$html_class}"
+                "{$input->htmlClass()}-input-dv {$html_class}"
             );
         } elseif ($input instanceof FormInputWithOptionsBase) {
             $html .= $html_generator->div(
-                $html_generator->nl() . $this->_display_label_for_option_type_question($input) .
-                $html_generator->nl() . $input->get_html_for_errors() .
-                $html_generator->nl() . $input->get_html_for_input() .
-                $html_generator->nl() . $input->get_html_for_help(),
+                $html_generator->nl() . $this->displayLabelForOptionTypeQuestion($input) .
+                $html_generator->nl() . $input->getHtmlForErrors() .
+                $html_generator->nl() . $input->getHtmlForInput() .
+                $html_generator->nl() . $input->getHtmlForHelp(),
                 $html_id . '-input-dv',
-                "{$input->html_class()}-input-dv {$html_class}"
+                "{$input->htmlClass()}-input-dv {$html_class}"
             );
         } else {
             $html .= $html_generator->div(
-                $html_generator->nl(1) . $input->get_html_for_label() .
-                $html_generator->nl() . $input->get_html_for_errors() .
-                $html_generator->nl() . $input->get_html_for_input() .
-                $html_generator->nl() . $input->get_html_for_help(),
+                $html_generator->nl(1) . $input->getHtmlForLabel() .
+                $html_generator->nl() . $input->getHtmlForErrors() .
+                $html_generator->nl() . $input->getHtmlForInput() .
+                $html_generator->nl() . $input->getHtmlForHelp(),
                 $html_id . '-input-dv',
-                "{$input->html_class()}-input-dv {$html_class}"
+                "{$input->htmlClass()}-input-dv {$html_class}"
             );
         }
         return $html;
@@ -108,26 +108,26 @@ class DivPerSectionLayout extends FormSectionLayoutBase
      * @param FormInputWithOptionsBase $input
      * @return string
      */
-    protected function _display_label_for_option_type_question(FormInputWithOptionsBase $input)
+    protected function displayLabelForOptionTypeQuestion(FormInputWithOptionsBase $input)
     {
-	    $html_generator = Html::instance();
-        if ($input->display_html_label_text()) {
-            $html_label_text = $input->html_label_text();
+        $html_generator = Html::instance();
+        if ($input->displayHtmlLabelText()) {
+            $html_label_text = $input->htmlLabelText();
             $label_html = $html_generator->div(
                 $input->required()
                     ? $html_label_text . $html_generator->span('*', '', 'ee-asterisk')
                     : $html_label_text,
-                $input->html_label_id(),
+                $input->htmlLabelId(),
                 $input->required()
-                    ? 'ee-required-label ' . $input->html_label_class()
-                    : $input->html_label_class(),
-                $input->html_label_style(),
+                    ? 'ee-required-label ' . $input->htmlLabelClass()
+                    : $input->htmlLabelClass(),
+                $input->htmlLabelStyle(),
                 $input->otherHtmlAttributesString()
             );
             // if no content was provided to $html_generator->div() above (ie: an empty label),
             // then we need to close the div manually
             if (empty($html_label_text)) {
-                $label_html .= $html_generator->divx($input->html_label_id(), $input->html_label_class());
+                $label_html .= $html_generator->divx($input->htmlLabelId(), $input->htmlLabelClass());
             }
             return $label_html;
         }
@@ -139,13 +139,13 @@ class DivPerSectionLayout extends FormSectionLayoutBase
     /**
      * Lays out a row for the subsection
      *
-     * @param FormSectionProper $form_section
+     * @param FormSection $form_section
      * @return string
      */
-    public function layout_subsection($form_section)
+    public function layoutSubsection($form_section)
     {
-	    $html_generator = Html::instance();
-        return $html_generator->nl(1) . $form_section->get_html() . $html_generator->nl(-1);
+        $html_generator = Html::instance();
+        return $html_generator->nl(1) . $form_section->getHtml() . $html_generator->nl(-1);
     }
 
 
@@ -155,9 +155,9 @@ class DivPerSectionLayout extends FormSectionLayoutBase
      *
      * @return string
      */
-    public function layout_form_end()
+    public function layoutFormEnd()
     {
-	    $html_generator = Html::instance();
-        return $html_generator->divx($this->_form_section->html_id(), $this->_form_section->html_class());
+        $html_generator = Html::instance();
+        return $html_generator->divx($this->Form_section->htmlId(), $this->Form_section->htmlClass());
     }
 }

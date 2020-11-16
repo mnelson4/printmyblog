@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\display;
+
 /**
  * Class TextInputDisplay
  * Display strategy that handles how to display form inputs that represent basic
@@ -18,7 +20,7 @@ class TextInputDisplay extends DisplayBase
      * The html "type" attribute value. default is "text"
      * @var string
      */
-    protected $_type;
+    protected $type;
 
 
 
@@ -27,7 +29,7 @@ class TextInputDisplay extends DisplayBase
      */
     public function __construct($type = 'text')
     {
-        $this->_type = $type;
+        $this->type = $type;
         parent::__construct();
     }
 
@@ -37,14 +39,15 @@ class TextInputDisplay extends DisplayBase
      * Gets the html "type" attribute's value
      * @return string
      */
-    public function get_type()
+    public function getType()
     {
-        if ($this->_type === 'email'
+        if (
+            $this->type === 'email'
             && ! apply_filters('FH_TextInputDisplay__use_html5_email', false)
         ) {
             return 'text';
         }
-        return $this->_type;
+        return $this->type;
     }
 
 
@@ -55,16 +58,18 @@ class TextInputDisplay extends DisplayBase
      */
     public function display()
     {
-        $input = '<input type="'. $this->get_type() .'"';
-        $input .= ' name="' . $this->_input->html_name() . '"';
-        $input .= ' id="' . $this->_input->html_id() . '"';
-        $class = $this->_input->required() ? $this->_input->required_css_class() . ' ' . $this->_input->html_class() : $this->_input->html_class();
+        $input = '<input type="' . $this->getType() . '"';
+        $input .= ' name="' . $this->input->htmlName() . '"';
+        $input .= ' id="' . $this->input->htmlId() . '"';
+        $class = $this->input->required() ?
+            $this->input->requiredCssClass() . ' ' . $this->input->htmlClass() :
+            $this->input->htmlClass();
         $input .= ' class="twine-text-input ' . $class . '"';
         // add html5 required
-        $input .= $this->_input->required() ? ' required' : '';
-        $input .= ' value="' . $this->_input->raw_value_in_form() . '"';
-        $input .= ' style="' . $this->_input->html_style() . '"';
-        $input .= $this->_input->otherHtmlAttributesString();
+        $input .= $this->input->required() ? ' required' : '';
+        $input .= ' value="' . $this->input->rawValueInForm() . '"';
+        $input .= ' style="' . $this->input->htmlStyle() . '"';
+        $input .= $this->input->otherHtmlAttributesString();
         $input .= '/>';
         return $input;
     }

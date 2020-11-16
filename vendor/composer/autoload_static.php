@@ -6,6 +6,11 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitaa3acace4531482e132095eacb9548bb
 {
+    public static $files = array (
+        '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
+        '9b38cf48e83f5d8f60375221cd213eee' => __DIR__ . '/..' . '/phpstan/phpstan/bootstrap.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'm' => 
         array (
@@ -15,9 +20,14 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         array (
             'Twine\\' => 6,
         ),
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Php73\\' => 23,
+        ),
         'P' => 
         array (
             'PrintMyBlog\\' => 12,
+            'PHPStan\\WordPress\\' => 18,
         ),
     );
 
@@ -30,13 +40,28 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         array (
             0 => __DIR__ . '/../..' . '/src/Twine',
         ),
+        'Symfony\\Polyfill\\Php73\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php73',
+        ),
         'PrintMyBlog\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/PrintMyBlog',
         ),
+        'PHPStan\\WordPress\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src',
+        ),
     );
 
     public static $classMap = array (
+        'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
+        'PHPStan\\WordPress\\Composer\\FixWpStubs' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/Composer/FixWpStubs.php',
+        'PHPStan\\WordPress\\EscSqlDynamicFunctionReturnTypeExtension' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/EscSqlDynamicFunctionReturnTypeExtension.php',
+        'PHPStan\\WordPress\\GetPostDynamicFunctionReturnTypeExtension' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/GetPostDynamicFunctionReturnTypeExtension.php',
+        'PHPStan\\WordPress\\IsWpErrorFunctionTypeSpecifyingExtension' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/IsWpErrorFunctionTypeSpecifyingExtension.php',
+        'PHPStan\\WordPress\\RedirectCanonicalDynamicFunctionReturnTypeExtension' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/RedirectCanonicalDynamicFunctionReturnTypeExtension.php',
+        'PHPStan\\WordPress\\WpThemeMagicPropertiesClassReflectionExtension' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/WpThemeMagicPropertiesClassReflectionExtension.php',
         'PrintMyBlog\\compatibility\\DetectAndActivate' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/DetectAndActivate.php',
         'PrintMyBlog\\compatibility\\plugins\\EasyFootnotes' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/EasyFootnotes.php',
         'PrintMyBlog\\compatibility\\plugins\\LazyLoadingFeaturePlugin' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/LazyLoadingFeaturePlugin.php',
@@ -62,6 +87,7 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'PrintMyBlog\\entities\\DesignTemplate' => __DIR__ . '/../..' . '/src/PrintMyBlog/entities/DesignTemplate.php',
         'PrintMyBlog\\entities\\FileFormat' => __DIR__ . '/../..' . '/src/PrintMyBlog/entities/FileFormat.php',
         'PrintMyBlog\\entities\\ProjectGeneration' => __DIR__ . '/../..' . '/src/PrintMyBlog/entities/ProjectGeneration.php',
+        'PrintMyBlog\\entities\\ProjectProgress' => __DIR__ . '/../..' . '/src/PrintMyBlog/entities/ProjectProgress.php',
         'PrintMyBlog\\exceptions\\TemplateDoesNotExist' => __DIR__ . '/../..' . '/src/PrintMyBlog/exceptions/TemplateDoesNotExist.php',
         'PrintMyBlog\\factories\\FileFormatFactory' => __DIR__ . '/../..' . '/src/PrintMyBlog/factories/FileFormatFactory.php',
         'PrintMyBlog\\factories\\ProjectFileGeneratorFactory' => __DIR__ . '/../..' . '/src/PrintMyBlog/factories/ProjectFileGeneratorFactory.php',
@@ -73,9 +99,11 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'PrintMyBlog\\orm\\managers\\DesignManager' => __DIR__ . '/../..' . '/src/PrintMyBlog/orm/managers/DesignManager.php',
         'PrintMyBlog\\orm\\managers\\ProjectManager' => __DIR__ . '/../..' . '/src/PrintMyBlog/orm/managers/ProjectManager.php',
         'PrintMyBlog\\orm\\managers\\ProjectSectionManager' => __DIR__ . '/../..' . '/src/PrintMyBlog/orm/managers/ProjectSectionManager.php',
+        'PrintMyBlog\\services\\ColorGuru' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/ColorGuru.php',
         'PrintMyBlog\\services\\DesignRegistry' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/DesignRegistry.php',
         'PrintMyBlog\\services\\DesignTemplateRegistry' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/DesignTemplateRegistry.php',
         'PrintMyBlog\\services\\FileFormatRegistry' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/FileFormatRegistry.php',
+        'PrintMyBlog\\services\\SvgDoer' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/SvgDoer.php',
         'PrintMyBlog\\services\\config\\Config' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/config/Config.php',
         'PrintMyBlog\\services\\generators\\PdfGenerator' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/generators/PdfGenerator.php',
         'PrintMyBlog\\services\\generators\\ProjectFileGeneratorBase' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/generators/ProjectFileGeneratorBase.php',
@@ -84,20 +112,23 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'PrintMyBlog\\system\\Context' => __DIR__ . '/../..' . '/src/PrintMyBlog/system/Context.php',
         'PrintMyBlog\\system\\CustomPostTypes' => __DIR__ . '/../..' . '/src/PrintMyBlog/system/CustomPostTypes.php',
         'PrintMyBlog\\system\\Init' => __DIR__ . '/../..' . '/src/PrintMyBlog/system/Init.php',
+        'Symfony\\Polyfill\\Php73\\Php73' => __DIR__ . '/..' . '/symfony/polyfill-php73/Php73.php',
         'Twine\\admin\\news\\DashboardNews' => __DIR__ . '/../..' . '/src/Twine/admin/news/DashboardNews.php',
         'Twine\\compatibility\\CompatibilityBase' => __DIR__ . '/../..' . '/src/Twine/compatibility/CompatibilityBase.php',
         'Twine\\controllers\\BaseController' => __DIR__ . '/../..' . '/src/Twine/controllers/BaseController.php',
+        'Twine\\forms\\base\\FormSection' => __DIR__ . '/../..' . '/src/Twine/forms/base/FormSection.php',
         'Twine\\forms\\base\\FormSectionBase' => __DIR__ . '/../..' . '/src/Twine/forms/base/FormSectionBase.php',
         'Twine\\forms\\base\\FormSectionDetails' => __DIR__ . '/../..' . '/src/Twine/forms/base/FormSectionDetails.php',
         'Twine\\forms\\base\\FormSectionHtml' => __DIR__ . '/../..' . '/src/Twine/forms/base/FormSectionHtml.php',
         'Twine\\forms\\base\\FormSectionHtmlFromTemplate' => __DIR__ . '/../..' . '/src/Twine/forms/base/FormSectionHtmlFromTemplate.php',
-        'Twine\\forms\\base\\FormSectionProper' => __DIR__ . '/../..' . '/src/Twine/forms/base/FormSectionProper.php',
         'Twine\\forms\\base\\FormSectionValidatable' => __DIR__ . '/../..' . '/src/Twine/forms/base/FormSectionValidatable.php',
         'Twine\\forms\\helpers\\ImproperUsageException' => __DIR__ . '/../..' . '/src/Twine/forms/helpers/ImproperUsageException.php',
+        'Twine\\forms\\helpers\\InputOption' => __DIR__ . '/../..' . '/src/Twine/forms/helpers/InputOption.php',
         'Twine\\forms\\helpers\\ValidationError' => __DIR__ . '/../..' . '/src/Twine/forms/helpers/ValidationError.php',
         'Twine\\forms\\inputs\\AdminFileUploaderInput' => __DIR__ . '/../..' . '/src/Twine/forms/inputs/AdminFileUploaderInput.php',
         'Twine\\forms\\inputs\\ButtonInput' => __DIR__ . '/../..' . '/src/Twine/forms/inputs/ButtonInput.php',
         'Twine\\forms\\inputs\\CheckboxMultiInput' => __DIR__ . '/../..' . '/src/Twine/forms/inputs/CheckboxMultiInput.php',
+        'Twine\\forms\\inputs\\ColorInput' => __DIR__ . '/../..' . '/src/Twine/forms/inputs/ColorInput.php',
         'Twine\\forms\\inputs\\DatepickerInput' => __DIR__ . '/../..' . '/src/Twine/forms/inputs/DatepickerInput.php',
         'Twine\\forms\\inputs\\EmailConfirmInput' => __DIR__ . '/../..' . '/src/Twine/forms/inputs/EmailConfirmInput.php',
         'Twine\\forms\\inputs\\EmailInput' => __DIR__ . '/../..' . '/src/Twine/forms/inputs/EmailInput.php',

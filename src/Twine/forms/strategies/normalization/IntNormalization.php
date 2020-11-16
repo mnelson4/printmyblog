@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\normalization;
+
 use Twine\forms\helpers\ValidationError;
 use Twine\forms\strategies\validation\IntValidation;
 
@@ -39,7 +41,7 @@ class IntNormalization extends NormalizationBase
         if (! is_string($value_to_normalize)) {
             throw new ValidationError(
                 sprintf(
-                    __('The value "%s" must be a string submitted for normalization, it was %s', 'event_espresso'),
+                    __('The value "%s" must be a string submitted for normalization, it was %s', 'print-my-blog'),
                     print_r($value_to_normalize, true),
                     gettype($value_to_normalize)
                 )
@@ -66,16 +68,16 @@ class IntNormalization extends NormalizationBase
         // find if this input has a int validation strategy
         // in which case, use its message
         $validation_error_message = null;
-        foreach ($this->_input->get_validation_strategies() as $validation_strategy) {
+        foreach ($this->input->getValidationStrategies() as $validation_strategy) {
             if ($validation_strategy instanceof IntValidation) {
-                $validation_error_message = $validation_strategy->get_validation_error_message();
+                $validation_error_message = $validation_strategy->getValidationErrorMessage();
             }
         }
         // this really shouldn't ever happen because fields with a int normalization strategy
         // should also have a int validation strategy, but in case it doesn't use the default
         if (! $validation_error_message) {
             $default_validation_strategy = new IntValidation();
-            $validation_error_message = $default_validation_strategy->get_validation_error_message();
+            $validation_error_message = $default_validation_strategy->getValidationErrorMessage();
         }
         throw new ValidationError($validation_error_message, 'numeric_only');
     }

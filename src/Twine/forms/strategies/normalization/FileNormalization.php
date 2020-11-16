@@ -1,4 +1,5 @@
 <?php
+
 namespace Twine\forms\strategies\normalization;
 
 use EventEspresso\core\services\request\files\FileSubmissionInterface;
@@ -26,7 +27,7 @@ class FileNormalization extends NormalizationStrategyBase
             return $value_to_normalize;
         } else {
             throw new ValidationError(
-                esc_html__('The file input has an invalid format.', 'event_espresso')
+                esc_html__('The file input has an invalid format.', 'print-my-blog')
             );
         }
     }

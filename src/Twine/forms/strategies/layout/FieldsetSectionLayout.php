@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\layout;
+
 use Twine\helpers\Html;
 
 /**
@@ -19,14 +21,14 @@ class FieldsetSectionLayout extends DivPerSectionLayout
      *
      * @var string
      */
-    protected $_legend_class;
+    protected $legend_class;
 
     /**
      * legend_text
      *
      * @var string
      */
-    protected $_legend_text;
+    protected $legend_text;
 
 
 
@@ -52,18 +54,18 @@ class FieldsetSectionLayout extends DivPerSectionLayout
      *
      * @return string
      */
-    public function layout_form_begin()
+    public function layoutFormBegin()
     {
-	    $html_generator = Html::instance();
+        $html_generator = Html::instance();
         $html = $html_generator->nl(1)
                 . '<fieldset id="'
-                . $this->_form_section->html_id()
+                . $this->Form_section->htmlId()
                 . '" class="'
-                . $this->_form_section->html_class()
+                . $this->Form_section->htmlClass()
                 . '" style="'
-                . $this->_form_section->html_style()
+                . $this->Form_section->htmlStyle()
                 . '">';
-        $html .= '<legend class="' . $this->legend_class() . '">' . $this->legend_text() . '</legend>';
+        $html .= '<legend class="' . $this->legendClass() . '">' . $this->legendText() . '</legend>';
         return $html;
     }
 
@@ -74,9 +76,9 @@ class FieldsetSectionLayout extends DivPerSectionLayout
      *
      * @return string
      */
-    public function layout_form_end()
+    public function layoutFormEnd()
     {
-	    $html_generator = Html::instance();
+        $html_generator = Html::instance();
         return $html_generator->nl(-1) . '</fieldset>';
     }
 
@@ -85,9 +87,9 @@ class FieldsetSectionLayout extends DivPerSectionLayout
     /**
      * @param string $legend_class
      */
-    public function set_legend_class($legend_class)
+    public function setLegendClass($legend_class)
     {
-        $this->_legend_class = $legend_class;
+        $this->legend_class = $legend_class;
     }
 
 
@@ -95,9 +97,9 @@ class FieldsetSectionLayout extends DivPerSectionLayout
     /**
      * @return string
      */
-    public function legend_class()
+    public function legendClass()
     {
-        return $this->_legend_class;
+        return $this->legend_class;
     }
 
 
@@ -105,9 +107,9 @@ class FieldsetSectionLayout extends DivPerSectionLayout
     /**
      * @param string $legend_text
      */
-    public function set_legend_text($legend_text)
+    public function setLegendText($legend_text)
     {
-        $this->_legend_text = $legend_text;
+        $this->legend_text = $legend_text;
     }
 
 
@@ -115,8 +117,8 @@ class FieldsetSectionLayout extends DivPerSectionLayout
     /**
      * @return string
      */
-    public function legend_text()
+    public function legendText()
     {
-        return $this->_legend_text;
+        return $this->legend_text;
     }
 }

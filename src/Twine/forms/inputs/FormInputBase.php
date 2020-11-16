@@ -1,6 +1,8 @@
 <?php
+
 namespace Twine\forms\inputs;
-use Twine\forms\base\FormSectionProper;
+
+use Twine\forms\base\FormSection;
 use Twine\forms\base\FormSectionValidatable;
 use Twine\forms\helpers\ImproperUsageException;
 use Twine\forms\helpers\ValidationError;
@@ -28,42 +30,42 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @var string
      */
-    protected $_html_name;
+    protected $html_name;
 
     /**
      * id for the html label tag
      *
      * @var string
      */
-    protected $_html_label_id;
+    protected $html_label_id;
 
     /**
      * class for teh html label tag
      *
      * @var string
      */
-    protected $_html_label_class;
+    protected $html_label_class;
 
     /**
      * style for teh html label tag
      *
      * @var string
      */
-    protected $_html_label_style;
+    protected $html_label_style;
 
     /**
      * text to be placed in the html label
      *
      * @var string
      */
-    protected $_html_label_text;
+    protected $html_label_text;
 
     /**
      * the full html label. If used, all other html_label_* properties are invalid
      *
      * @var string
      */
-    protected $_html_label;
+    protected $html_label;
 
     /**
      * HTML to use for help text (normally placed below form input), in a span which normally
@@ -71,21 +73,21 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @var string
      */
-    protected $_html_help_text;
+    protected $html_help_text;
 
     /**
      * CSS classes for displaying the help span
      *
      * @var string
      */
-    protected $_html_help_class = 'description';
+    protected $html_help_class = 'description';
 
     /**
      * CSS to put in the style attribute on the help span
      *
      * @var string
      */
-    protected $_html_help_style;
+    protected $html_help_style;
 
     /**
      * Stores whether or not this input's response is required.
@@ -94,14 +96,14 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @var boolean
      */
-    protected $_required;
+    protected $required;
 
     /**
      * css class added to required inputs
      *
      * @var string
      */
-    protected $_required_css_class = 'ee-required';
+    protected $required_css_class = 'ee-required';
 
     /**
      * The raw data submitted for this, like in the $_POST super global.
@@ -109,7 +111,7 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @var mixed string or array
      */
-    protected $_raw_value;
+    protected $raw_value;
 
     /**
      * Value normalized according to the input's normalization strategy.
@@ -118,7 +120,7 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @var mixed
      */
-    protected $_normalized_value;
+    protected $normalized_value;
 
 
     /**
@@ -126,7 +128,7 @@ abstract class FormInputBase extends FormSectionValidatable
      * set_default().
      * @var mixed
      */
-    protected $_default;
+    protected $default;
 
     /**
      * Strategy used for displaying this field.
@@ -134,28 +136,29 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @var DisplayBase
      */
-    private $_display_strategy;
+    private $display_strategy;
 
     /**
      * Gets all the validation strategies used on this field
      *
      * @var ValidationBase[]
      */
-    private $_validation_strategies = array();
+    private $validation_strategies = array();
 
     /**
      * The normalization strategy for this field
      *
      * @var NormalizationBase
      */
-    private $_normalization_strategy;
+    private $normalization_strategy;
 
     /**
      * Whether this input has been disabled or not.
      * If it's disabled while rendering, an extra hidden input is added that indicates it has been knowingly disabled.
      * (Client-side code that wants to dynamically disable it must also add this hidden input).
      * When the form is submitted, if the input is disabled in the PHP formsection, then input is ignored.
-     * If the input is missing from the $_REQUEST data but the hidden input indicating the input is disabled, then the input is again ignored.
+     * If the input is missing from the $_REQUEST data but the hidden input indicating the input is disabled, then the
+     * input is again ignored.
      *
      * @var boolean
      */
@@ -180,11 +183,12 @@ abstract class FormInputBase extends FormSectionValidatable
      * @type DisplayBase       $display          strategy
      * @type NormalizationBase $normalization_strategy
      * @type ValidationBase[]  $validation_strategies
-     * @type boolean                        $ignore_input special argument which can be used to avoid adding any validation strategies,
-     *                                                    and sets the normalization strategy to the Null normalization. This is good
-     *                                                    when you want the input to be totally ignored server-side (like when using
-     *                                                    React.js form inputs)
-     *                                                        }
+     * @type boolean                        $ignore_input special argument which can be used to avoid adding any
+     *                                                    validation strategies, and sets the normalization strategy to
+     *                                                    the Null normalization. This is good when you want the input
+     *                                                    to be totally ignored server-side (like when using React.js
+     *                                                    form inputs)
+     * }
      */
     public function __construct($input_args = array())
     {
@@ -193,13 +197,13 @@ abstract class FormInputBase extends FormSectionValidatable
         if (isset($input_args['validation_strategies'])) {
             foreach ((array) $input_args['validation_strategies'] as $validation_strategy) {
                 if ($validation_strategy instanceof ValidationBase && empty($input_args['ignore_input'])) {
-                    $this->_validation_strategies[ get_class($validation_strategy) ] = $validation_strategy;
+                    $this->validation_strategies[ get_class($validation_strategy) ] = $validation_strategy;
                 }
             }
             unset($input_args['validation_strategies']);
         }
         if (isset($input_args['ignore_input'])) {
-            $this->_validation_strategies = array();
+            $this->validation_strategies = array();
         }
         // loop thru incoming options
         foreach ($input_args as $key => $value) {
@@ -210,27 +214,27 @@ abstract class FormInputBase extends FormSectionValidatable
             }
         }
         // ensure that "required" is set correctly
-        $this->set_required(
-            $this->_required,
+        $this->setRequired(
+            $this->required,
             isset($input_args['required_validation_error_message'])
             ? $input_args['required_validation_error_message']
             : null
         );
         // $this->_html_name_specified = isset( $input_args['html_name'] ) ? TRUE : FALSE;
-        $this->_display_strategy->_construct_finalize($this);
-        foreach ($this->_validation_strategies as $validation_strategy) {
-            $validation_strategy->_construct_finalize($this);
+        $this->display_strategy->constructFinalize($this);
+        foreach ($this->validation_strategies as $validation_strategy) {
+            $validation_strategy->constructFinalize($this);
         }
         if (isset($input_args['ignore_input'])) {
-            $this->_normalization_strategy = new NullNormalization();
+            $this->normalization_strategy = new NullNormalization();
         }
-        if (! $this->_normalization_strategy) {
-                $this->_normalization_strategy = new TextNormalization();
+        if (! $this->normalization_strategy) {
+                $this->normalization_strategy = new TextNormalization();
         }
-        $this->_normalization_strategy->_construct_finalize($this);
+        $this->normalization_strategy->constructFinalize($this);
         // at least we can use the normalization strategy to populate the default
         if (isset($input_args['default'])) {
-            $this->set_default($input_args['default']);
+            $this->setDefault($input_args['default']);
             unset($input_args['default']);
         }
         parent::__construct($input_args);
@@ -244,12 +248,12 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @throws \Error
      */
-    protected function _set_default_html_name_if_empty()
+    protected function setDefaultHtmlNameIfEmpty()
     {
-        if (! $this->_html_name) {
-            $this->_html_name = $this->name();
-            if ($this->_parent_section && $this->_parent_section instanceof FormSectionProper) {
-                $this->_html_name = $this->_parent_section->html_name_prefix() . "[{$this->name()}]";
+        if (! $this->html_name) {
+            $this->html_name = $this->name();
+            if ($this->parent_section && $this->parent_section instanceof FormSection) {
+                $this->html_name = $this->parent_section->htmlNamePrefix() . "[{$this->name()}]";
             }
         }
     }
@@ -261,11 +265,11 @@ abstract class FormInputBase extends FormSectionValidatable
      * @param $name
      * @throws \Error
      */
-    public function _construct_finalize($parent_form_section, $name)
+    public function constructFinalize($parent_form_section, $name)
     {
-        parent::_construct_finalize($parent_form_section, $name);
-        if ($this->_html_label === null && $this->_html_label_text === null) {
-            $this->_html_label_text = ucwords(str_replace("_", " ", $name));
+        parent::constructFinalize($parent_form_section, $name);
+        if ($this->html_label === null && $this->html_label_text === null) {
+            $this->html_label_text = ucwords(str_replace("_", " ", $name));
         }
         do_action('AH_FormInputBase___construct_finalize__end', $this, $parent_form_section, $name);
     }
@@ -278,22 +282,24 @@ abstract class FormInputBase extends FormSectionValidatable
      * @return DisplayBase
      * @throws Error
      */
-    protected function _get_display_strategy()
+    protected function initializeDisplayStrategy()
     {
-        $this->ensure_construct_finalized_called();
-        if (! $this->_display_strategy || ! $this->_display_strategy instanceof DisplayBase) {
+        $this->ensureConstructFinalizedCalled();
+        if (! $this->display_strategy || ! $this->display_strategy instanceof DisplayBase) {
             throw new ImproperUsageException(
                 sprintf(
                     __(
+                        // phpcs:disable Generic.Files.LineLength.TooLong
                         "Cannot get display strategy for form input with name %s and id %s, because it has not been set in the constructor",
-                        "event_espresso"
+                        // phpcs:enable Generic.Files.LineLength.TooLong
+                        "print-my-blog"
                     ),
-                    $this->html_name(),
-                    $this->html_id()
+                    $this->htmlName(),
+                    $this->htmlId()
                 )
             );
         } else {
-            return $this->_display_strategy;
+            return $this->display_strategy;
         }
     }
 
@@ -304,9 +310,9 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @param DisplayBase $strategy
      */
-    protected function _set_display_strategy(DisplayBase $strategy)
+    protected function setDisplayStrategy(DisplayBase $strategy)
     {
-        $this->_display_strategy = $strategy;
+        $this->display_strategy = $strategy;
     }
 
 
@@ -316,9 +322,9 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @param NormalizationBase $strategy
      */
-    protected function _set_normalization_strategy(NormalizationBase $strategy)
+    protected function setNormalizationStrategy(NormalizationBase $strategy)
     {
-        $this->_normalization_strategy = $strategy;
+        $this->normalization_strategy = $strategy;
     }
 
 
@@ -327,9 +333,9 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @return DisplayBase
      */
-    public function get_display_strategy()
+    public function getDisplayStrategy()
     {
-        return $this->_display_strategy;
+        return $this->display_strategy;
     }
 
 
@@ -339,10 +345,10 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @param DisplayBase $display_strategy
      */
-    public function set_display_strategy($display_strategy)
+    public function overwriteDisplayStrategy($display_strategy)
     {
-        $this->_display_strategy = $display_strategy;
-        $this->_display_strategy->_construct_finalize($this);
+        $this->display_strategy = $display_strategy;
+        $this->display_strategy->constructFinalize($this);
     }
 
 
@@ -352,9 +358,9 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @return NormalizationBase
      */
-    public function get_normalization_strategy()
+    public function getNormalizationStrategy()
     {
-        return $this->_normalization_strategy;
+        return $this->normalization_strategy;
     }
 
 
@@ -364,10 +370,10 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @param NormalizationBase $normalization_strategy
      */
-    public function set_normalization_strategy($normalization_strategy)
+    public function overwriteNormalizationStrategy($normalization_strategy)
     {
-        $this->_normalization_strategy = $normalization_strategy;
-        $this->_normalization_strategy->_construct_finalize($this);
+        $this->normalization_strategy = $normalization_strategy;
+        $this->normalization_strategy->constructFinalize($this);
     }
 
 
@@ -377,9 +383,9 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @return ValidationBase[]
      */
-    public function get_validation_strategies()
+    public function getValidationStrategies()
     {
-        return $this->_validation_strategies;
+        return $this->validation_strategies;
     }
 
 
@@ -390,24 +396,14 @@ abstract class FormInputBase extends FormSectionValidatable
      * @param ValidationBase $validation_strategy
      * @return void
      */
-    protected function _add_validation_strategy(ValidationBase $validation_strategy)
+    protected function addValidationStrategy(ValidationBase $validation_strategy)
     {
-        $validation_strategy->_construct_finalize($this);
-        $this->_validation_strategies[] = $validation_strategy;
+        $validation_strategy->constructFinalize($this);
+        $this->validation_strategies[] = $validation_strategy;
     }
 
 
 
-    /**
-     * Adds a new validation strategy onto the form input
-     *
-     * @param ValidationBase $validation_strategy
-     * @return void
-     */
-    public function add_validation_strategy(ValidationBase $validation_strategy)
-    {
-        $this->_add_validation_strategy($validation_strategy);
-    }
 
 
 
@@ -416,13 +412,14 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @param string $validation_strategy_classname
      */
-    public function remove_validation_strategy($validation_strategy_classname)
+    public function removeValidationStrategy($validation_strategy_classname)
     {
-        foreach ($this->_validation_strategies as $key => $validation_strategy) {
-            if ($validation_strategy instanceof $validation_strategy_classname
+        foreach ($this->validation_strategies as $key => $validation_strategy) {
+            if (
+                $validation_strategy instanceof $validation_strategy_classname
                 || is_subclass_of($validation_strategy, $validation_strategy_classname)
             ) {
-                unset($this->_validation_strategies[ $key ]);
+                unset($this->validation_strategies[ $key ]);
             }
         }
     }
@@ -435,12 +432,12 @@ abstract class FormInputBase extends FormSectionValidatable
      * @param array $validation_strategy_classnames
      * @return bool
      */
-    public function has_validation_strategy($validation_strategy_classnames)
+    public function hasValidationStrategy($validation_strategy_classnames)
     {
         $validation_strategy_classnames = is_array($validation_strategy_classnames)
             ? $validation_strategy_classnames
             : array($validation_strategy_classnames);
-        foreach ($this->_validation_strategies as $key => $validation_strategy) {
+        foreach ($this->validation_strategies as $key => $validation_strategy) {
             if (in_array($key, $validation_strategy_classnames)) {
                 return true;
             }
@@ -455,9 +452,9 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @return string
      */
-    public function get_html()
+    public function getHtml()
     {
-        return $this->_parent_section->get_html_for_input($this);
+        return $this->parent_section->getHtmlForInput($this);
     }
 
 
@@ -470,9 +467,9 @@ abstract class FormInputBase extends FormSectionValidatable
      * @return string
      * @throws \Error
      */
-    public function get_html_for_input()
+    public function getHtmlForInput()
     {
-        return $this->_get_display_strategy()->display();
+        return $this->initializeDisplayStrategy()->display();
     }
 
 
@@ -482,9 +479,9 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @return string
      */
-    public function get_html_for_label()
+    public function getHtmlForLabel()
     {
-        return $this->_parent_section->get_layout_strategy()->display_label($this);
+        return $this->parent_section->getLayoutStrategy()->displayLabel($this);
     }
 
 
@@ -495,9 +492,9 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @return string
      */
-    public function get_html_for_errors()
+    public function getHtmlForErrors()
     {
-        return $this->_parent_section->get_layout_strategy()->display_errors($this);
+        return $this->parent_section->getLayoutStrategy()->displayErrors($this);
     }
 
 
@@ -508,9 +505,9 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @return string
      */
-    public function get_html_for_help()
+    public function getHtmlForHelp()
     {
-        return $this->_parent_section->get_layout_strategy()->display_help_text($this);
+        return $this->parent_section->getLayoutStrategy()->displayHelpText($this);
     }
 
 
@@ -521,21 +518,21 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @return boolean
      */
-    protected function _validate()
+    protected function validate()
     {
         if ($this->isDisabled()) {
             return true;
         }
-        foreach ($this->_validation_strategies as $validation_strategy) {
+        foreach ($this->validation_strategies as $validation_strategy) {
             if ($validation_strategy instanceof ValidationBase) {
                 try {
-                    $validation_strategy->validate($this->normalized_value());
+                    $validation_strategy->validate($this->normalizedValue());
                 } catch (ValidationError $e) {
-                    $this->add_validation_error($e);
+                    $this->addValidationError($e);
                 }
             }
         }
-        if ($this->get_validation_errors()) {
+        if ($this->getValidationErrors()) {
             return false;
         } else {
             return true;
@@ -551,7 +548,7 @@ abstract class FormInputBase extends FormSectionValidatable
      * @param string $value
      * @return null|string
      */
-    protected function _sanitize($value)
+    protected function sanitize($value)
     {
         return $value !== null ? stripslashes(html_entity_decode(trim($value))) : null;
     }
@@ -567,33 +564,33 @@ abstract class FormInputBase extends FormSectionValidatable
      * @return boolean whether or not there was an error
      * @throws \Error
      */
-    protected function _normalize($req_data)
+    protected function normalize($req_data)
     {
         // any existing validation errors don't apply so clear them
-        $this->_validation_errors = array();
+        $this->validation_errors = array();
         // if the input is disabled, ignore whatever input was sent in
         if ($this->isDisabled()) {
-            $this->_set_raw_value(null);
-            $this->_set_normalized_value($this->get_default());
+            $this->setRawValue(null);
+            $this->setNormalizedValue($this->getDefault());
             return false;
         }
         try {
-            $raw_input = $this->find_form_data_for_this_section($req_data);
+            $raw_input = $this->findFormDataForThisSection($req_data);
             // super simple sanitization for now
             if (is_array($raw_input)) {
                 $raw_value = array();
                 foreach ($raw_input as $key => $value) {
-                    $raw_value[ $key ] = $this->_sanitize($value);
+                    $raw_value[ $key ] = $this->sanitize($value);
                 }
-                $this->_set_raw_value($raw_value);
+                $this->setRawValue($raw_value);
             } else {
-                $this->_set_raw_value($this->_sanitize($raw_input));
+                $this->setRawValue($this->sanitize($raw_input));
             }
             // we want to mostly leave the input alone in case we need to re-display it to the user
-            $this->_set_normalized_value($this->_normalization_strategy->normalize($this->raw_value()));
+            $this->setNormalizedValue($this->normalization_strategy->normalize($this->rawValue()));
             return false;
         } catch (ValidationError $e) {
-            $this->add_validation_error($e);
+            $this->addValidationError($e);
             return true;
         }
     }
@@ -603,10 +600,10 @@ abstract class FormInputBase extends FormSectionValidatable
     /**
      * @return string
      */
-    public function html_name()
+    public function htmlName()
     {
-        $this->_set_default_html_name_if_empty();
-        return $this->_html_name;
+        $this->setDefaultHtmlNameIfEmpty();
+        return $this->html_name;
     }
 
 
@@ -614,9 +611,9 @@ abstract class FormInputBase extends FormSectionValidatable
     /**
      * @return string
      */
-    public function html_label_id()
+    public function htmlLabelId()
     {
-        return ! empty($this->_html_label_id) ? $this->_html_label_id : $this->html_id() . '-lbl';
+        return ! empty($this->html_label_id) ? $this->html_label_id : $this->htmlId() . '-lbl';
     }
 
 
@@ -624,9 +621,9 @@ abstract class FormInputBase extends FormSectionValidatable
     /**
      * @return string
      */
-    public function html_label_class()
+    public function htmlLabelClass()
     {
-        return $this->_html_label_class;
+        return $this->html_label_class;
     }
 
 
@@ -634,9 +631,9 @@ abstract class FormInputBase extends FormSectionValidatable
     /**
      * @return string
      */
-    public function html_label_style()
+    public function htmlLabelStyle()
     {
-        return $this->_html_label_style;
+        return $this->html_label_style;
     }
 
 
@@ -644,9 +641,9 @@ abstract class FormInputBase extends FormSectionValidatable
     /**
      * @return string
      */
-    public function html_label_text()
+    public function htmlLabelText()
     {
-        return $this->_html_label_text;
+        return $this->html_label_text;
     }
 
 
@@ -654,9 +651,9 @@ abstract class FormInputBase extends FormSectionValidatable
     /**
      * @return string
      */
-    public function html_help_text()
+    public function htmlHelpText()
     {
-        return $this->_html_help_text;
+        return $this->html_help_text;
     }
 
 
@@ -664,9 +661,9 @@ abstract class FormInputBase extends FormSectionValidatable
     /**
      * @return string
      */
-    public function html_help_class()
+    public function htmlHelpClass()
     {
-        return $this->_html_help_class;
+        return $this->html_help_class;
     }
 
 
@@ -674,9 +671,9 @@ abstract class FormInputBase extends FormSectionValidatable
     /**
      * @return string
      */
-    public function html_help_style()
+    public function htmlHelpStyle()
     {
-        return $this->_html_style;
+        return $this->html_style;
     }
 
 
@@ -692,9 +689,9 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @return string
      */
-    public function raw_value()
+    public function rawValue()
     {
-        return $this->_raw_value;
+        return $this->raw_value;
     }
 
 
@@ -705,9 +702,9 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @return string
      */
-    public function raw_value_in_form()
+    public function rawValueInForm()
     {
-        return htmlentities($this->raw_value(), ENT_QUOTES, 'UTF-8');
+        return htmlentities($this->rawValue(), ENT_QUOTES, 'UTF-8');
     }
 
 
@@ -718,9 +715,9 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @return mixed
      */
-    public function normalized_value()
+    public function normalizedValue()
     {
-        return $this->_normalized_value;
+        return $this->normalized_value;
     }
 
 
@@ -732,9 +729,9 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @return string
      */
-    public function pretty_value()
+    public function prettyValue()
     {
-        return $this->_normalized_value;
+        return $this->normalized_value;
     }
 
 
@@ -756,18 +753,18 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @return array
      */
-    public function get_jquery_validation_rules()
+    public function getJqueryValdationRules()
     {
         $jquery_validation_js = array();
         $jquery_validation_rules = array();
-        foreach ($this->get_validation_strategies() as $validation_strategy) {
+        foreach ($this->getValidationStrategies() as $validation_strategy) {
             $jquery_validation_rules = array_replace_recursive(
                 $jquery_validation_rules,
-                $validation_strategy->get_jquery_validation_rule_array()
+                $validation_strategy->getJqueryValidationRuleArray()
             );
         }
         if (! empty($jquery_validation_rules)) {
-            foreach ($this->get_display_strategy()->get_html_input_ids(true) as $html_id_with_pound_sign) {
+            foreach ($this->getDisplayStrategy()->getHtmlInputIds(true) as $html_id_with_pound_sign) {
                 $jquery_validation_js[ $html_id_with_pound_sign ] = $jquery_validation_rules;
             }
         }
@@ -783,11 +780,11 @@ abstract class FormInputBase extends FormSectionValidatable
      * @param mixed $value
      * @return void
      */
-    public function set_default($value)
+    public function setDefault($value)
     {
-        $this->_default = $value;
-        $this->_set_normalized_value($value);
-        $this->_set_raw_value($value);
+        $this->default = $value;
+        $this->setNormalizedValue($value);
+        $this->setRawValue($value);
     }
 
 
@@ -797,9 +794,9 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @param mixed $value
      */
-    protected function _set_normalized_value($value)
+    protected function setNormalizedValue($value)
     {
-        $this->_normalized_value = $value;
+        $this->normalized_value = $value;
     }
 
 
@@ -809,9 +806,9 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @param mixed $value
      */
-    protected function _set_raw_value($value)
+    protected function setRawValue($value)
     {
-        $this->_raw_value = $this->_normalization_strategy->unnormalize($value);
+        $this->raw_value = $this->normalization_strategy->unnormalize($value);
     }
 
 
@@ -822,9 +819,9 @@ abstract class FormInputBase extends FormSectionValidatable
      * @param string $label
      * @return void
      */
-    public function set_html_label_text($label)
+    public function setHtmlLabelText($label)
     {
-        $this->_html_label_text = $label;
+        $this->html_label_text = $label;
     }
 
 
@@ -832,21 +829,21 @@ abstract class FormInputBase extends FormSectionValidatable
     /**
      * Sets whether or not this field is required, and adjusts the validation strategy.
      * If you want to use the ConditionallyRequiredValidation,
-     * please add it as a validation strategy using add_validation_strategy as normal
+     * please add it as a validation strategy using addValidationStrategy as normal
      *
      * @param boolean $required boolean
      * @param string|null    $required_text
      */
-    public function set_required($required = true, $required_text = null)
+    public function setRequired($required = true, $required_text = null)
     {
         $required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
         // whether $required is a string or a boolean, we want to add a required validation strategy
         if ($required) {
-            $this->_add_validation_strategy(new RequiredValidation($required_text));
+            $this->addValidationStrategy(new RequiredValidation($required_text));
         } else {
-            $this->remove_validation_strategy('RequiredValidation');
+            $this->removeValidationStrategy('RequiredValidation');
         }
-        $this->_required = $required;
+        $this->required = $required;
     }
 
 
@@ -858,7 +855,7 @@ abstract class FormInputBase extends FormSectionValidatable
      */
     public function required()
     {
-        return $this->_required;
+        return $this->required;
     }
 
 
@@ -866,9 +863,9 @@ abstract class FormInputBase extends FormSectionValidatable
     /**
      * @param string $required_css_class
      */
-    public function set_required_css_class($required_css_class)
+    public function setRequiredCssClass($required_css_class)
     {
-        $this->_required_css_class = $required_css_class;
+        $this->required_css_class = $required_css_class;
     }
 
 
@@ -876,9 +873,9 @@ abstract class FormInputBase extends FormSectionValidatable
     /**
      * @return string
      */
-    public function required_css_class()
+    public function requiredCssClass()
     {
-        return $this->_required_css_class;
+        return $this->required_css_class;
     }
 
 
@@ -887,11 +884,11 @@ abstract class FormInputBase extends FormSectionValidatable
      * @param bool $add_required
      * @return string
      */
-    public function html_class($add_required = false)
+    public function htmlClass($add_required = false)
     {
         return $add_required && $this->required()
-            ? $this->required_css_class() . ' ' . $this->_html_class
-            : $this->_html_class;
+            ? $this->requiredCssClass() . ' ' . $this->html_class
+            : $this->html_class;
     }
 
 
@@ -900,9 +897,9 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @param string $text
      */
-    public function set_html_help_text($text)
+    public function setHtmlHelpText($text)
     {
-        $this->_html_help_text = $text;
+        $this->html_help_text = $text;
     }
 
 
@@ -920,7 +917,7 @@ abstract class FormInputBase extends FormSectionValidatable
      * @return mixed whatever the raw value of this form section is in the request data
      * @throws \Error
      */
-    public function find_form_data_for_this_section($req_data)
+    public function findFormDataForThisSection($req_data)
     {
         $name_parts = $this->getInputNameParts();
         // now get the value for the input
@@ -942,13 +939,13 @@ abstract class FormInputBase extends FormSectionValidatable
     protected function getInputNameParts()
     {
         // break up the html name by "[]"
-        if (strpos($this->html_name(), '[') !== false) {
-            $before_any_brackets = substr($this->html_name(), 0, strpos($this->html_name(), '['));
+        if (strpos($this->htmlName(), '[') !== false) {
+            $before_any_brackets = substr($this->htmlName(), 0, strpos($this->htmlName(), '['));
         } else {
-            $before_any_brackets = $this->html_name();
+            $before_any_brackets = $this->htmlName();
         }
         // grab all of the segments
-        preg_match_all('~\[([^]]*)\]~', $this->html_name(), $matches);
+        preg_match_all('~\[([^]]*)\]~', $this->htmlName(), $matches);
         if (isset($matches[1]) && is_array($matches[1])) {
             $name_parts = $matches[1];
             array_unshift($name_parts, $before_any_brackets);
@@ -991,12 +988,12 @@ abstract class FormInputBase extends FormSectionValidatable
      * @return boolean
      * @throws \Error
      */
-    public function form_data_present_in($req_data = null)
+    public function formDataPresentIn($req_data = null)
     {
         if ($req_data === null) {
             $req_data = $_POST;
         }
-        $checked_value = $this->find_form_data_for_this_section($req_data);
+        $checked_value = $this->findFormDataForThisSection($req_data);
         if ($checked_value !== null) {
             return true;
         } else {
@@ -1012,9 +1009,9 @@ abstract class FormInputBase extends FormSectionValidatable
      * @param array $form_other_js_data
      * @return array
      */
-    public function get_other_js_data($form_other_js_data = array())
+    public function getOtherJsData($form_other_js_data = array())
     {
-        $form_other_js_data = $this->get_other_js_data_from_strategies($form_other_js_data);
+        $form_other_js_data = $this->getOtherJsDataFromStrategies($form_other_js_data);
         return $form_other_js_data;
     }
 
@@ -1027,11 +1024,11 @@ abstract class FormInputBase extends FormSectionValidatable
      * @param array $form_other_js_data
      * @return array
      */
-    public function get_other_js_data_from_strategies($form_other_js_data = array())
+    public function getOtherJsDataFromStrategies($form_other_js_data = array())
     {
-        $form_other_js_data = $this->get_display_strategy()->get_other_js_data($form_other_js_data);
-        foreach ($this->get_validation_strategies() as $validation_strategy) {
-            $form_other_js_data = $validation_strategy->get_other_js_data($form_other_js_data);
+        $form_other_js_data = $this->getDisplayStrategy()->getOtherJsData($form_other_js_data);
+        foreach ($this->getValidationStrategies() as $validation_strategy) {
+            $form_other_js_data = $validation_strategy->getOtherJsData($form_other_js_data);
         }
         return $form_other_js_data;
     }
@@ -1043,10 +1040,10 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @return void
      */
-    public function enqueue_js()
+    public function enqueueJs()
     {
         // ask our display strategy and validation strategies if they have js to enqueue
-        $this->enqueue_js_from_strategies();
+        $this->enqueueJsFromStrategies();
     }
 
 
@@ -1056,11 +1053,11 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @return void
      */
-    public function enqueue_js_from_strategies()
+    public function enqueueJsFromStrategies()
     {
-        $this->get_display_strategy()->enqueue_js();
-        foreach ($this->get_validation_strategies() as $validation_strategy) {
-            $validation_strategy->enqueue_js();
+        $this->getDisplayStrategy()->enqueueJs();
+        foreach ($this->getValidationStrategies() as $validation_strategy) {
+            $validation_strategy->enqueueJs();
         }
     }
 
@@ -1071,9 +1068,9 @@ abstract class FormInputBase extends FormSectionValidatable
      * changed because of a form submission). If no default was set, this us null.
      * @return mixed
      */
-    public function get_default()
+    public function getDefault()
     {
-        return $this->_default;
+        return $this->default;
     }
 
 
@@ -1087,8 +1084,8 @@ abstract class FormInputBase extends FormSectionValidatable
         $disabled_attribute = ' disabled="disabled"';
         $this->disabled = filter_var($disable, FILTER_VALIDATE_BOOLEAN);
         if ($this->disabled) {
-            $this->addOtherHtmlAttribute('disabled','disabled');
-            $this->_set_normalized_value($this->get_default());
+            $this->addOtherHtmlAttribute('disabled', 'disabled');
+            $this->setNormalizedValue($this->getDefault());
         } else {
             $this->removeOtherHtmlAttribute('disabled');
         }

@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\inputs;
+
 /**
  * SubmitInput
  *
@@ -18,11 +20,11 @@ class SubmitInput extends FormInputBase
     public function __construct($options = array())
     {
         if (empty($options['default'])) {
-            $options['default'] = esc_html__('Submit', 'event_espresso');
+            $options['default'] = esc_html__('Submit', 'print-my-blog');
         }
-        $this->_set_display_strategy(new SubmitInputDisplay());
-        $this->_set_normalization_strategy(new TextNormalization());
-        $this->_add_validation_strategy(new PlaintextValidation());
+        $this->setDisplayStrategy(new SubmitInputDisplay());
+        $this->setNormalizationStrategy(new TextNormalization());
+        $this->addValidationStrategy(new PlaintextValidation());
         parent::__construct($options);
     }
 }

@@ -13,7 +13,7 @@ namespace PrintMyBlog\db;
  */
 class TableManager
 {
-	const SECTIONS_TABLE = 'pmb_project_sections';
+    const SECTIONS_TABLE = 'pmb_project_sections';
 
     /**
      * Ensures PMB's tables exist.
@@ -22,9 +22,9 @@ class TableManager
     {
         global $wpdb;
         $charset_collate = $wpdb->get_charset_collate();
-        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         dbDelta(
-          'CREATE TABLE ' . $wpdb->prefix. self::SECTIONS_TABLE . ' (
+            'CREATE TABLE ' . $wpdb->prefix . self::SECTIONS_TABLE . ' (
                 ID bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
                 project_id bigint(20) UNSIGNED NOT NULL,
                 post_id bigint(20) UNSIGNED NOT NULL DEFAULT \'0\',
@@ -43,7 +43,7 @@ class TableManager
 
     public function dropTables()
     {
-    	global $wpdb;
-    	return $wpdb->query('DROP TABLE ' . $wpdb->prefix . self::SECTIONS_TABLE);
+        global $wpdb;
+        return $wpdb->query('DROP TABLE ' . $wpdb->prefix . self::SECTIONS_TABLE);
     }
 }

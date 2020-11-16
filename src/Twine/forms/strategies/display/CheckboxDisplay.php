@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\display;
+
 use Exception;
 use Twine\helpers\Html;
 
@@ -21,27 +23,29 @@ class CheckboxDisplay extends CompoundInputDisplay
      */
     public function display()
     {
-        $input = $this->get_input();
+        $input = $this->getInput();
         $html = '';
-        if (! is_array($input->raw_value()) && $input->raw_value() !== null) {
+        if (! is_array($input->rawValue()) && $input->rawValue() !== null) {
             throw new Exception(
                 sprintf(
                     esc_html_x(
+                        // phpcs:disable Generic.Files.LineLength.TooLong
                         'Input values for checkboxes should be an array of values, but the value for input "%1$s" is "%2$s". Please verify that the input name is exactly "%3$s"',
                         'Input values for checkboxes should be an array of values, but the value for input "form-input-id" is "form-input-value". Please verify that the input name is exactly "form_input_name[]"',
-                        'event_espresso'
+                        // phpcs:enable Generic.Files.LineLength.TooLong
+                        'print-my-blog'
                     ),
-                    $input->html_id(),
-                    var_export($input->raw_value(), true),
-                    $input->html_name() . '[]'
+                    $input->htmlId(),
+                    var_export($input->rawValue(), true),
+                    $input->htmlName() . '[]'
                 )
             );
         }
         $html_generator = Html::instance();
-        $input_raw_value = (array) $input->raw_value();
+        $input_raw_value = (array) $input->rawValue();
         foreach ($input->options() as $value => $option) {
-            $value = $input->get_normalization_strategy()->unnormalize_one($value);
-            $html_id = $this->get_sub_input_id($value);
+            $value = $input->getNormalizationStrategy()->unnormalizeOne($value);
+            $html_id = $this->getSubInputId($value);
             $html .= $html_generator->nl(0, 'checkbox');
             $html .= '<label for="'
                      . $html_id
@@ -51,22 +55,22 @@ class CheckboxDisplay extends CompoundInputDisplay
                      . '">';
             $html .= $html_generator->nl(1, 'checkbox');
             $html .= '<input type="checkbox"';
-            $html .= ' name="' . $input->html_name() . '[]"';
+            $html .= ' name="' . $input->htmlName() . '[]"';
             $html .= ' id="' . $html_id . '"';
-            $html .= ' class="' . $input->html_class() . '"';
-            $html .= ' style="' . $input->html_style() . '"';
+            $html .= ' class="' . $input->htmlClass() . '"';
+            $html .= ' style="' . $input->htmlStyle() . '"';
             $html .= ' value="' . esc_attr($value) . '"';
             $html .= ! empty($input_raw_value) && in_array($value, $input_raw_value, true)
                 ? ' checked="checked"'
                 : '';
-            $html .= ' ' . $this->_input->otherHtmlAttributesString();
-            $html .= ' data-question_label="' . $input->html_label_id() . '"';
+            $html .= ' ' . $this->input->otherHtmlAttributesString();
+            $html .= ' data-question_label="' . $input->htmlLabelId() . '"';
             $html .= '>&nbsp;';
             $html .= $option->getDisplayText();
             $html .= $html_generator->nl(-1, 'checkbox') . '</label>';
             $help_text = $option->getHelpText();
-            if($help_text){
-            	$html .= $html_generator->span($help_text,'', 'description');
+            if ($help_text) {
+                $html .= $html_generator->span($help_text, '', 'description');
             }
         }
         return $html;

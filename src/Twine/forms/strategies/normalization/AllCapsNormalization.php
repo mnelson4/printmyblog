@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\normalization;
+
 /**
  * AllCapsNormalization
  * Just makes sure the string is all upper case. If the user didn't provide an all

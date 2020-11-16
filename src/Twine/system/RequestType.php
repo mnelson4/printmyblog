@@ -28,10 +28,10 @@ class RequestType
      * @var string|null name of the WP option that's set upon activation.
      */
     protected $activation_option_name;
-    public function inject(VersionHistory $version_history, $activation_option_name = null){
+    public function inject(VersionHistory $version_history, $activation_option_name = null)
+    {
         $this->version_history = $version_history;
         $this->activation_option_name = $activation_option_name;
-
     }
 
 
@@ -44,7 +44,8 @@ class RequestType
     /**
      * @return bool
      */
-    public function shouldCheckDb(){
+    public function shouldCheckDb()
+    {
         return in_array(
             $this->getRequestType(),
             [
@@ -59,22 +60,24 @@ class RequestType
     /**
      * @return bool
      */
-    public function isBrandNewInstall(){
+    public function isBrandNewInstall()
+    {
         return $this->getRequestType() === self::REQUEST_TYPE_NEW_INSTALL;
     }
 
     /**
      * @return string
      */
-    private function detectRequestType(){
+    private function detectRequestType()
+    {
         $previous_version = $this->version_history->previousVersion();
         if ($previous_version === null) {
             return self::REQUEST_TYPE_NEW_INSTALL;
         }
-        if ($previous_version !== PMB_VERSION){
+        if ($previous_version !== PMB_VERSION) {
             return self::REQUEST_TYPE_UPDATE;
         }
-        if(isset($this->activation_option_name) && get_option($this->activation_option_name)){
+        if (isset($this->activation_option_name) && get_option($this->activation_option_name)) {
             return self::REQUEST_TYPE_REACTIVATION;
         }
         return self::REQUEST_TYPE_NORMAL;
@@ -85,8 +88,9 @@ class RequestType
      * @since $VID:$
      * @return string
      */
-    public function getRequestType(){
-        if($this->request_type === null) {
+    public function getRequestType()
+    {
+        if ($this->request_type === null) {
             $this->request_type = $this->detectRequestType();
         }
         return $this->request_type;

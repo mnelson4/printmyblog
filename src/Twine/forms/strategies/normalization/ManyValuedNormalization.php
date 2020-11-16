@@ -1,4 +1,5 @@
 <?php
+
 namespace Twine\forms\strategies\normalization;
 
 /**
@@ -11,7 +12,7 @@ namespace Twine\forms\strategies\normalization;
 class ManyValuedNormalization extends NormalizationBase
 {
 
-    protected $_individual_item_normalization_strategy = array();
+    protected $individual_item_normalization_strategy = array();
 
 
 
@@ -20,7 +21,7 @@ class ManyValuedNormalization extends NormalizationBase
      */
     public function __construct($individual_item_normalization_strategy)
     {
-        $this->_individual_item_normalization_strategy = $individual_item_normalization_strategy;
+        $this->individual_item_normalization_strategy = $individual_item_normalization_strategy;
         parent::__construct();
     }
 
@@ -44,7 +45,7 @@ class ManyValuedNormalization extends NormalizationBase
         }
         $normalized_array_value = array();
         foreach ($items_to_normalize as $key => $individual_item) {
-            $normalized_array_value[ $key ] = $this->normalize_one($individual_item);
+            $normalized_array_value[ $key ] = $this->normalizeOne($individual_item);
         }
         return $normalized_array_value;
     }
@@ -57,9 +58,9 @@ class ManyValuedNormalization extends NormalizationBase
      * @param string $individual_value_to_normalize but definitely NOT an array
      * @return mixed
      */
-    public function normalize_one($individual_value_to_normalize)
+    public function normalizeOne($individual_value_to_normalize)
     {
-        return $this->_individual_item_normalization_strategy->normalize($individual_value_to_normalize);
+        return $this->individual_item_normalization_strategy->normalize($individual_value_to_normalize);
     }
 
 
@@ -80,7 +81,7 @@ class ManyValuedNormalization extends NormalizationBase
         }
         $non_normal_values = array();
         foreach ($normalized_values as $key => $value) {
-            $non_normal_values[ $key ] = $this->unnormalize_one($value);
+            $non_normal_values[ $key ] = $this->unnormalizeOne($value);
         }
         return $non_normal_values;
     }
@@ -93,8 +94,8 @@ class ManyValuedNormalization extends NormalizationBase
      * @param mixed $individual_value_to_unnormalize but certainly NOT an array
      * @return string
      */
-    public function unnormalize_one($individual_value_to_unnormalize)
+    public function unnormalizeOne($individual_value_to_unnormalize)
     {
-        return $this->_individual_item_normalization_strategy->unnormalize($individual_value_to_unnormalize);
+        return $this->individual_item_normalization_strategy->unnormalize($individual_value_to_unnormalize);
     }
 }

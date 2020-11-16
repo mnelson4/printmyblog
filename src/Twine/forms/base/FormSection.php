@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\base;
+
 use EventEspresso\core\exceptions\InvalidDataTypeException;
 use EventEspresso\core\exceptions\InvalidInterfaceException;
 use InvalidArgumentException;
@@ -20,7 +22,7 @@ use Twine\helpers\Array2;
  * before the hook wp_enqueue_scripts is called (so that the form section can enqueue its needed scripts).
  * However, you may output the form (usually by calling get_html) anywhere you like.
  */
-class FormSectionProper extends FormSectionValidatable
+class FormSection extends FormSectionValidatable
 {
 
     const SUBMITTED_FORM_DATA_SSN_KEY = 'submitted_form_data';
@@ -30,35 +32,35 @@ class FormSectionProper extends FormSectionValidatable
      *
      * @var FormSectionValidatable[]
      */
-    protected $_subsections = array();
+    protected $subsections = array();
 
     /**
      * Strategy for laying out the form
      *
      * @var FormSectionLayoutBase
      */
-    protected $_layout_strategy;
+    protected $layout_strategy;
 
     /**
      * Whether or not this form has received and validated a form submission yet
      *
      * @var boolean
      */
-    protected $_received_submission = false;
+    protected $received_submission = false;
 
     /**
      * message displayed to users upon successful form submission
      *
      * @var string
      */
-    protected $_form_submission_success_message = '';
+    protected $form_submission_success_message = '';
 
     /**
      * message displayed to users upon unsuccessful form submission
      *
      * @var string
      */
-    protected $_form_submission_error_message = '';
+    protected $form_submission_error_message = '';
 
     /**
      * @var array like $_REQUEST
@@ -77,14 +79,14 @@ class FormSectionProper extends FormSectionValidatable
      *
      * @var array
      */
-    static protected $_js_localization = array();
+    protected static $js_localization = array();
 
     /**
      * whether or not the form's localized validation JS vars have been set
      *
      * @type boolean
      */
-    static protected $_scripts_localized = false;
+    protected static $scripts_localized = false;
 
 
     /**
@@ -120,23 +122,23 @@ class FormSectionProper extends FormSectionValidatable
             // AND we are going to make sure they're in that specified order
             $reordered_subsections = array();
             foreach ($options_array['include'] as $input_name) {
-                if (isset($this->_subsections[ $input_name ])) {
-                    $reordered_subsections[ $input_name ] = $this->_subsections[ $input_name ];
+                if (isset($this->subsections[ $input_name ])) {
+                    $reordered_subsections[ $input_name ] = $this->subsections[ $input_name ];
                 }
             }
-            $this->_subsections = $reordered_subsections;
+            $this->subsections = $reordered_subsections;
         }
         if (isset($options_array['exclude'])) {
             $exclude            = $options_array['exclude'];
-            $this->_subsections = array_diff_key($this->_subsections, array_flip($exclude));
+            $this->subsections = array_diff_key($this->subsections, array_flip($exclude));
         }
         if (isset($options_array['layout_strategy'])) {
-            $this->_layout_strategy = $options_array['layout_strategy'];
+            $this->layout_strategy = $options_array['layout_strategy'];
         }
-        if (! $this->_layout_strategy) {
-            $this->_layout_strategy = is_admin() ? new AdminTwoColumnLayout() : new TwoColumnLayout();
+        if (! $this->layout_strategy) {
+            $this->layout_strategy = is_admin() ? new AdminTwoColumnLayout() : new TwoColumnLayout();
         }
-        $this->_layout_strategy->_construct_finalize($this);
+        $this->layout_strategy->constructFinalize($this);
         /**
          * Gives other plugins a chance to hook in before construct finalize is called.
          * The form probably doesn't yet have a parent form section.
@@ -144,7 +146,7 @@ class FormSectionProper extends FormSectionValidatable
          * assuming you don't care what the form section's name, HTML ID, or HTML name etc are.
          * Also see AH_FormSectionProper___construct_finalize__end
          *
-         * @param FormSectionProper $this before __construct is done, but all of its logic,
+         * @param FormSection $this before __construct is done, but all of its logic,
          *                                              except maybe calling _construct_finalize has been done
          * @param array                  $options_array options passed into the constructor
          *
@@ -156,58 +158,59 @@ class FormSectionProper extends FormSectionValidatable
             $options_array
         );
         if (isset($options_array['name'])) {
-            $this->_construct_finalize(null, $options_array['name']);
+            $this->constructFinalize(null, $options_array['name']);
         }
     }
 
-	/**
-	 * Merges this form with the other one. Recursively calls merge on conflicting proper subsections.
-	 * @param FormSectionProper $other_form
-	 *
-	 * @return FormSectionProper returns this updated form section
-	 * @throws ImproperUsageException
-	 */
-    public function merge(FormSectionProper $other_form){
-    	foreach($other_form->subsections(false) as $name => $subsection){
-    		if($this->subsection_exists($name)){
-			    if($subsection instanceof FormSectionProper){
-				    $this->get_subsection($name, false)->merge($subsection);
-			    }
-			    // else it's a conflicting input. Leave the original.
-    		} else {
-    			$this->addSubsection($name, $subsection);
-		    }
-	    }
-    	return $this;
+    /**
+     * Merges this form with the other one. Recursively calls merge on conflicting proper subsections.
+     * @param FormSection $other_form
+     *
+     * @return FormSection returns this updated form section
+     * @throws ImproperUsageException
+     */
+    public function merge(FormSection $other_form)
+    {
+        foreach ($other_form->subsections(false) as $name => $subsection) {
+            if ($this->subsectionExists($name)) {
+                if ($subsection instanceof FormSection) {
+                    $this->getSubsection($name, false)->merge($subsection);
+                }
+                // else it's a conflicting input. Leave the original.
+            } else {
+                $this->addSubsection($name, $subsection);
+            }
+        }
+        return $this;
     }
 
 
     /**
      * Finishes construction given the parent form section and this form section's name
      *
-     * @param FormSectionProper $parent_form_section
+     * @param FormSection $parent_form_section
      * @param string                 $name
      *
      * @throws ImproperUsageException
      */
-    public function _construct_finalize($parent_form_section, $name)
+    public function constructFinalize($parent_form_section, $name)
     {
-        parent::_construct_finalize($parent_form_section, $name);
-        $this->_set_default_name_if_empty();
-        $this->_set_default_html_id_if_empty();
-        foreach ($this->_subsections as $subsection_name => $subsection) {
+        parent::constructFinalize($parent_form_section, $name);
+        $this->setDefaultNameIfEmpty();
+        $this->setDefaultHtmlIdIfEmpty();
+        foreach ($this->subsections as $subsection_name => $subsection) {
             if ($subsection instanceof FormSectionBase) {
-                $subsection->_construct_finalize($this, $subsection_name);
+                $subsection->constructFinalize($this, $subsection_name);
             } else {
                 throw new ImproperUsageException(
                     sprintf(
                         esc_html__(
                             'Subsection "%s" is not an instanceof FormSectionBase on form "%s". It is a "%s"',
-                            'event_espresso'
+                            'print-my-blog'
                         ),
                         $subsection_name,
                         get_class($this),
-                        $subsection ? get_class($subsection) : esc_html__('NULL', 'event_espresso')
+                        $subsection ? get_class($subsection) : esc_html__('NULL', 'print-my-blog')
                     )
                 );
             }
@@ -220,8 +223,8 @@ class FormSectionProper extends FormSectionValidatable
          * If you need to modify the form or its subsections before _construct_finalize is called on it (and we've
          * ensured it has a name, HTML IDs, etc
          *
-         * @param FormSectionProper      $this
-         * @param FormSectionProper|null $parent_form_section
+         * @param FormSection      $this
+         * @param FormSection|null $parent_form_section
          * @param string                      $name
          */
         do_action(
@@ -238,9 +241,9 @@ class FormSectionProper extends FormSectionValidatable
      *
      * @return FormSectionLayoutBase
      */
-    public function get_layout_strategy()
+    public function getLayoutStrategy()
     {
-        return $this->_layout_strategy;
+        return $this->layout_strategy;
     }
 
 
@@ -251,9 +254,9 @@ class FormSectionProper extends FormSectionValidatable
      * @param FormInputBase $input
      * @return string
      */
-    public function get_html_for_input($input)
+    public function getHtmlForInput($input)
     {
-        return $this->_layout_strategy->layout_input($input);
+        return $this->layout_strategy->layoutInput($input);
     }
 
 
@@ -265,9 +268,9 @@ class FormSectionProper extends FormSectionValidatable
      * @param null $form_data
      * @return boolean
      */
-    public function was_submitted($form_data = null)
+    public function wasSubmitted($form_data = null)
     {
-        return $this->form_data_present_in($form_data);
+        return $this->formDataPresentIn($form_data);
     }
 
     /**
@@ -278,10 +281,11 @@ class FormSectionProper extends FormSectionValidatable
      */
     protected function getCachedRequest($req_data = null)
     {
-        if ($this->cached_request_data === null
+        if (
+            $this->cached_request_data === null
             || (
-                $req_data !== null &&
-                $req_data !== $this->cached_request_data
+                $req_data !== null
+                && $req_data !== $this->cached_request_data
             )
         ) {
             $req_data = apply_filters(
@@ -326,15 +330,15 @@ class FormSectionProper extends FormSectionValidatable
      * @throws InvalidDataTypeException
      * @throws ImproperUsageException
      */
-    public function receive_form_submission($req_data = null, $validate = true)
+    public function receiveFormSubmission($req_data = null, $validate = true)
     {
         $req_data = $this->getCachedRequest($req_data);
-        $this->_normalize($req_data);
+        $this->normalize($req_data);
         if ($validate) {
-            $this->_validate();
+            $this->validate();
         }
-        if ($this->submission_error_message() === '' && ! $this->is_valid()) {
-            $this->set_submission_error_message();
+        if ($this->submissionErrorMessage() === '' && ! $this->isValid()) {
+            $this->setSubmissionErrorMessage();
         }
         do_action(
             'AH_FormSectionProper__receive_form_submission__end',
@@ -354,40 +358,41 @@ class FormSectionProper extends FormSectionValidatable
      * @param array $default_data
      * @throws ImproperUsageException
      */
-    public function populate_defaults($default_data)
+    public function populateDefaults($default_data)
     {
         foreach ($this->subsections(false) as $subsection_name => $subsection) {
             if (isset($default_data[ $subsection_name ])) {
                 if ($subsection instanceof FormInputBase) {
-                    $subsection->set_default($default_data[ $subsection_name ]);
-                } elseif ( $subsection instanceof FormSectionProper) {
-                    $subsection->populate_defaults($default_data[ $subsection_name ]);
+                    $subsection->setDefault($default_data[ $subsection_name ]);
+                } elseif ($subsection instanceof FormSection) {
+                    $subsection->populateDefaults($default_data[ $subsection_name ]);
                 }
             } else {
-            	// maybe the defaults are for form inputs only? try that
-	            if($subsection instanceof FormSectionProper){
-	            	$subsection->populate_defaults($default_data);
-	            }
+                // maybe the defaults are for form inputs only? try that
+                if ($subsection instanceof FormSection) {
+                    $subsection->populateDefaults($default_data);
+                }
             }
         }
     }
 
-	/**
-	 * Recursively searches through the form for an input with the specified name.
-	 * @param $input_name
-	 *
-	 * @return FormSectionValidatable|null
-	 */
-    public function findSection($input_name){
-    	foreach($this->subsections() as $subsection_name => $subsection_obj){
-    		if($subsection_name === $input_name){
-    			return $subsection_obj;
-		    }
-    		if($subsection_obj instanceof FormSectionProper){
-    			return $subsection_obj->findSection($input_name);
-		    }
-	    }
-    	return null;
+    /**
+     * Recursively searches through the form for an input with the specified name.
+     * @param $input_name
+     *
+     * @return FormSectionValidatable|null
+     */
+    public function findSection($input_name)
+    {
+        foreach ($this->subsections() as $subsection_name => $subsection_obj) {
+            if ($subsection_name === $input_name) {
+                return $subsection_obj;
+            }
+            if ($subsection_obj instanceof FormSection) {
+                return $subsection_obj->findSection($input_name);
+            }
+        }
+        return null;
     }
 
 
@@ -397,9 +402,9 @@ class FormSectionProper extends FormSectionValidatable
      * @param string $name
      * @return boolean
      */
-    public function subsection_exists($name)
+    public function subsectionExists($name)
     {
-        return isset($this->_subsections[ $name ]) ? true : false;
+        return isset($this->subsections[ $name ]) ? true : false;
     }
 
 
@@ -416,12 +421,12 @@ class FormSectionProper extends FormSectionValidatable
      * @return FormSectionBase|null
      * @throws ImproperUsageException
      */
-    public function get_subsection($name, $require_construction_to_be_finalized = true)
+    public function getSubsection($name, $require_construction_to_be_finalized = true)
     {
         if ($require_construction_to_be_finalized) {
-            $this->ensure_construct_finalized_called();
+            $this->ensureConstructFinalizedCalled();
         }
-        return $this->subsection_exists($name) ? $this->_subsections[ $name ] : null;
+        return $this->subsectionExists($name) ? $this->subsections[ $name ] : null;
     }
 
 
@@ -431,7 +436,7 @@ class FormSectionProper extends FormSectionValidatable
      * @return FormSectionValidatable[]
      * @throws ImproperUsageException
      */
-    public function get_validatable_subsections()
+    public function getValidatableSubsections()
     {
         $validatable_subsections = array();
         foreach ($this->subsections() as $name => $obj) {
@@ -457,9 +462,9 @@ class FormSectionProper extends FormSectionValidatable
      * @return FormInputBase
      * @throws ImproperUsageException
      */
-    public function get_input($name, $require_construction_to_be_finalized = true)
+    public function getInput($name, $require_construction_to_be_finalized = true)
     {
-        $subsection = $this->get_subsection(
+        $subsection = $this->getSubsection(
             $name,
             $require_construction_to_be_finalized
         );
@@ -468,11 +473,11 @@ class FormSectionProper extends FormSectionValidatable
                 sprintf(
                     esc_html__(
                         "Subsection '%s' is not an instanceof FormInputBase on form '%s'. It is a '%s'",
-                        'event_espresso'
+                        'print-my-blog'
                     ),
                     $name,
                     get_class($this),
-                    $subsection ? get_class($subsection) : esc_html__('NULL', 'event_espresso')
+                    $subsection ? get_class($subsection) : esc_html__('NULL', 'print-my-blog')
                 )
             );
         }
@@ -492,21 +497,21 @@ class FormSectionProper extends FormSectionValidatable
      *                                                      (realizing that the subsections' html names might not be
      *                                                      set yet, etc.)
      *
-     * @return FormSectionProper
+     * @return FormSection
      * @throws ImproperUsageException
      */
-    public function get_proper_subsection($name, $require_construction_to_be_finalized = true)
+    public function getProperSubsection($name, $require_construction_to_be_finalized = true)
     {
-        $subsection = $this->get_subsection(
+        $subsection = $this->getSubsection(
             $name,
             $require_construction_to_be_finalized
         );
-        if (! $subsection instanceof FormSectionProper) {
+        if (! $subsection instanceof FormSection) {
             throw new ImproperUsageException(
                 sprintf(
                     esc_html__(
                         "Subsection '%'s is not an instanceof FormSectionProper on form '%s'",
-                        'event_espresso'
+                        'print-my-blog'
                     ),
                     $name,
                     get_class($this)
@@ -525,10 +530,10 @@ class FormSectionProper extends FormSectionValidatable
      * @return mixed depending on the input's type and its normalization strategy
      * @throws ImproperUsageException
      */
-    public function get_input_value($name)
+    public function getInputValue($name)
     {
-        $input = $this->get_input($name);
-        return $input->normalized_value();
+        $input = $this->getInput($name);
+        return $input->normalizedValue();
     }
 
 
@@ -538,27 +543,29 @@ class FormSectionProper extends FormSectionValidatable
      * @throws ImproperUsageException
      * @return boolean
      */
-    public function is_valid()
+    public function isValid()
     {
         if ($this->is_valid === null) {
-            if (! $this->has_received_submission()) {
+            if (! $this->hasHeceivedSubmission()) {
                 throw new ImproperUsageException(
                     sprintf(
                         esc_html__(
+                            // phpcs:disable Generic.Files.LineLength.TooLong
                             'You cannot check if a form is valid before receiving the form submission using receive_form_submission',
-                            'event_espresso'
+                            // phpcs:enable Generic.Files.LineLength.TooLong
+                            'print-my-blog'
                         )
                     )
                 );
             }
-            if (! parent::is_valid()) {
+            if (! parent::isValid()) {
                 $this->is_valid = false;
             } else {
                 // ok so no general errors to this entire form section.
                 // so let's check the subsections, but only set errors if that hasn't been done yet
                 $this->is_valid = true;
-                foreach ($this->get_validatable_subsections() as $subsection) {
-                    if (! $subsection->is_valid()) {
+                foreach ($this->getValidatableSubsections() as $subsection) {
+                    if (! $subsection->isValid()) {
                         $this->is_valid = false;
                     }
                 }
@@ -573,12 +580,12 @@ class FormSectionProper extends FormSectionValidatable
      *
      * @return void
      */
-    protected function _set_default_name_if_empty()
+    protected function setDefaultNameIfEmpty()
     {
-        if (! $this->_name) {
+        if (! $this->name) {
             $classname    = get_class($this);
             $default_name = str_replace('', '', $classname);
-            $this->_name  = $default_name;
+            $this->name  = $default_name;
         }
     }
 
@@ -597,10 +604,10 @@ class FormSectionProper extends FormSectionValidatable
      * @throws InvalidDataTypeException
      * @throws ImproperUsageException
      */
-    public function get_html_and_js()
+    public function getHtmlAndJs()
     {
-        $this->enqueue_js();
-        return $this->get_html();
+        $this->enqueueJs();
+        return $this->getHtml();
     }
 
 
@@ -614,10 +621,10 @@ class FormSectionProper extends FormSectionValidatable
      * @throws InvalidDataTypeException
      * @throws ImproperUsageException
      */
-    public function get_html()
+    public function getHtml()
     {
-        $this->ensure_construct_finalized_called();
-        return $this->_layout_strategy->layout_form();
+        $this->ensureConstructFinalizedCalled();
+        return $this->layout_strategy->layoutForm();
     }
 
 
@@ -633,22 +640,22 @@ class FormSectionProper extends FormSectionValidatable
      * @return void
      * @throws ImproperUsageException
      */
-    public function enqueue_js()
+    public function enqueueJs()
     {
-	    // ok so we are definitely going to want the forms JS,
-	    // so enqueue it or remember to enqueue it during wp_enqueue_scripts
-	    if (did_action('wp_enqueue_scripts') || did_action('admin_enqueue_scripts')) {
-		    // ok so they've constructed this object after when they should have.
-		    // just enqueue the generic form scripts and initialize the form immediately in the JS
-		    FormSectionProper::wp_enqueue_scripts(true);
-	    } else {
-		    add_action('wp_enqueue_scripts', array( 'Twine\forms\base\FormSectionProper', 'wp_enqueue_scripts'));
-		    add_action('admin_enqueue_scripts', array( 'Twine\forms\base\FormSectionProper', 'wp_enqueue_scripts'));
-	    }
-	    add_action('wp_footer', array($this, 'ensure_scripts_localized'), 1);
-        $this->_enqueue_and_localize_form_js();
+        // ok so we are definitely going to want the forms JS,
+        // so enqueue it or remember to enqueue it during wp_enqueue_scripts
+        if (did_action('wp_enqueue_scripts') || did_action('admin_enqueue_scripts')) {
+            // ok so they've constructed this object after when they should have.
+            // just enqueue the generic form scripts and initialize the form immediately in the JS
+            FormSection::wpEnqueueScripts(true);
+        } else {
+            add_action('wp_enqueue_scripts', array('Twine\forms\base\FormSection', 'wpEnqueueScripts'));
+            add_action('admin_enqueue_scripts', array('Twine\forms\base\FormSection', 'wpEnqueueScripts'));
+        }
+        add_action('wp_footer', array($this, 'ensureScriptsLocalized'), 1);
+        $this->enqueueAndLocalizeFormJs();
         foreach ($this->subsections() as $subsection) {
-            $subsection->enqueue_js();
+            $subsection->enqueueJs();
         }
     }
 
@@ -665,37 +672,37 @@ class FormSectionProper extends FormSectionValidatable
      *                                                    to be triggered automatically or not
      * @return void
      */
-    public static function wp_enqueue_scripts($init_form_validation_automatically = true)
+    public static function wpEnqueueScripts($init_form_validation_automatically = true)
     {
-    	wp_register_script(
-    		'twine-jquery-validate',
-		    TWINE_SCRIPTS_URL . '/jquery.validate.min.js',
-		    array('jquery'),
-		    filemtime(TWINE_SCRIPTS_DIR . 'jquery.validate.min.js')
-	    );
-	    wp_register_script(
-		    'twine-jquery-validate-additional-methods',
-		    TWINE_SCRIPTS_URL . '/jquery.validate.additional-methods.min.js',
-		    array('jquery'),
-		    filemtime(TWINE_SCRIPTS_DIR . 'jquery.validate.additional-methods.min.js')
-	    );
+        wp_register_script(
+            'twine-jquery-validate',
+            TWINE_SCRIPTS_URL . '/jquery.validate.min.js',
+            array('jquery'),
+            filemtime(TWINE_SCRIPTS_DIR . 'jquery.validate.min.js')
+        );
+        wp_register_script(
+            'twine-jquery-validate-additional-methods',
+            TWINE_SCRIPTS_URL . '/jquery.validate.additional-methods.min.js',
+            array('jquery'),
+            filemtime(TWINE_SCRIPTS_DIR . 'jquery.validate.additional-methods.min.js')
+        );
         wp_enqueue_script(
-            'ee_form_section_validation',
-	        TWINE_SCRIPTS_URL . '/form_section_validation.js',
+            'twine_form_section_validation',
+            TWINE_SCRIPTS_URL . '/form_section_validation.js',
             array('twine-jquery-validate', 'jquery-ui-datepicker', 'twine-jquery-validate-additional-methods'),
             filemtime(TWINE_SCRIPTS_DIR . 'form_section_validation.js'),
             true
         );
         wp_localize_script(
-            'ee_form_section_validation',
-            'ee_form_section_validation_init',
+            'twine_form_section_validation',
+            'twine_form_section_validation_init',
             array('init' => $init_form_validation_automatically ? '1' : '0')
         );
         wp_enqueue_style(
-        	'twine-jquery-ui',
-	        TWINE_STYLES_URL . '/jquery-ui-1.10.3.custom.css',
-	        [],
-	        filemtime(TWINE_STYLES_DIR . 'jquery-ui-1.10.3.custom.css')
+            'twine-jquery-ui',
+            TWINE_STYLES_URL . '/jquery-ui-1.10.3.custom.css',
+            [],
+            filemtime(TWINE_STYLES_DIR . 'jquery-ui-1.10.3.custom.css')
         );
     }
 
@@ -705,21 +712,21 @@ class FormSectionProper extends FormSectionValidatable
      * This needs to be called AFTER we've called $this->_enqueue_jquery_validate_script,
      * but before the wordpress hook wp_loaded
      */
-    public function _enqueue_and_localize_form_js()
+    public function enqueueAndLocalizeFormJs()
     {
-        $this->ensure_construct_finalized_called();
+        $this->ensureConstructFinalizedCalled();
         wp_enqueue_style(
-        	'twine-forms',
-	        TWINE_STYLES_URL . 'forms.css',
-	        [],
-	        filemtime(TWINE_STYLES_DIR . 'forms.css')
+            'twine-forms',
+            TWINE_STYLES_URL . 'forms.css',
+            [],
+            filemtime(TWINE_STYLES_DIR . 'forms.css')
         );
         // actually, we don't want to localize just yet. There may be other forms on the page.
         // so we need to add our form section data to a static variable accessible by all form sections
         // and localize it just before the footer
-        $this->localize_validation_rules();
-        add_action( 'wp_footer', array('Twine\forms\base\FormSectionProper', 'localize_script_for_all_forms'), 2);
-        add_action( 'admin_footer', array('Twine\forms\base\FormSectionProper', 'localize_script_for_all_forms'));
+        $this->localizeValidationRules();
+        add_action('wp_footer', array('Twine\forms\base\FormSection', 'localizeScriptForAllForms'), 2);
+        add_action('admin_footer', array('Twine\forms\base\FormSection', 'localizeScriptForAllForms'));
     }
 
 
@@ -729,18 +736,18 @@ class FormSectionProper extends FormSectionValidatable
      * @param bool $return_for_subsection
      * @return void
      */
-    public function localize_validation_rules($return_for_subsection = false)
+    public function localizeValidationRules($return_for_subsection = false)
     {
         // we only want to localize vars ONCE for the entire form,
         // so if the form section doesn't have a parent, then it must be the top dog
-        if ($return_for_subsection || ! $this->parent_section() ) {
-	        FormSectionProper::$_js_localization['form_data'][ $this->html_id() ] = array(
-                'form_section_id'  => $this->html_id(true),
-                'validation_rules' => $this->get_jquery_validation_rules(),
-                'other_data'       => $this->get_other_js_data(),
-                'errors'           => $this->subsection_validation_errors_by_html_name(),
-	        );
-	        FormSectionProper::$_scripts_localized                                = true;
+        if ($return_for_subsection || ! $this->parentSection()) {
+            FormSection::$js_localization['form_data'][ $this->htmlId() ] = array(
+                'form_section_id'  => $this->htmlId(true),
+                'validation_rules' => $this->getJqueryValdationRules(),
+                'other_data'       => $this->getOtherJsData(),
+                'errors'           => $this->subsectionValidationErrorsByHtmlName(),
+            );
+            FormSection::$scripts_localized                                = true;
         }
     }
 
@@ -753,10 +760,10 @@ class FormSectionProper extends FormSectionValidatable
      * @param array $form_other_js_data
      * @return array
      */
-    public function get_other_js_data($form_other_js_data = array())
+    public function getOtherJsData($form_other_js_data = array())
     {
         foreach ($this->subsections() as $subsection) {
-            $form_other_js_data = $subsection->get_other_js_data($form_other_js_data);
+            $form_other_js_data = $subsection->getOtherJsData($form_other_js_data);
         }
         return $form_other_js_data;
     }
@@ -768,14 +775,14 @@ class FormSectionProper extends FormSectionValidatable
      *
      * @return FormInputBase[]
      */
-    public function inputs_in_subsections()
+    public function inputsInSubsections()
     {
         $inputs = array();
         foreach ($this->subsections() as $subsection) {
             if ($subsection instanceof FormInputBase) {
-                $inputs[ $subsection->html_name() ] = $subsection;
-            } elseif ( $subsection instanceof FormSectionProper) {
-                $inputs += $subsection->inputs_in_subsections();
+                $inputs[ $subsection->htmlName() ] = $subsection;
+            } elseif ($subsection instanceof FormSection) {
+                $inputs += $subsection->inputsInSubsections();
             }
         }
         return $inputs;
@@ -789,13 +796,13 @@ class FormSectionProper extends FormSectionValidatable
      *
      * @return string[]
      */
-    public function subsection_validation_errors_by_html_name()
+    public function subsectionValidationErrorsByHtmlName()
     {
         $inputs = $this->inputs();
         $errors = array();
         foreach ($inputs as $form_input) {
-            if ($form_input instanceof FormInputBase && $form_input->get_validation_errors()) {
-                $errors[ $form_input->html_name() ] = $form_input->get_validation_error_string();
+            if ($form_input instanceof FormInputBase && $form_input->getValidationErrors()) {
+                $errors[ $form_input->htmlName() ] = $form_input->getValidationErrorString();
             }
         }
         return $errors;
@@ -810,18 +817,18 @@ class FormSectionProper extends FormSectionValidatable
      * @throws InvalidInterfaceException
      * @throws InvalidDataTypeException
      */
-    public static function localize_script_for_all_forms()
+    public static function localizeScriptForAllForms()
     {
         // allow inputs and stuff to hook in their JS and stuff here
-        do_action('AH_FormSectionProper__localize_script_for_all_forms__begin' );
-	    FormSectionProper::$_js_localization['localized_error_messages'] = FormSectionProper::_get_localized_error_messages();
+        do_action('AH_FormSectionProper__localize_script_for_all_forms__begin');
+        FormSection::$js_localization['localized_error_messages'] = FormSection::getLocalizedErrorMessages();
         $email_validation_level                                          = 'wp_default';
-	    FormSectionProper::$_js_localization['email_validation_level']   = $email_validation_level;
-        wp_enqueue_script('ee_form_section_validation');
+        FormSection::$js_localization['email_validation_level']   = $email_validation_level;
+        wp_enqueue_script('twine_form_section_validation');
         wp_localize_script(
-            'ee_form_section_validation',
-            'ee_form_section_vars',
-	        FormSectionProper::$_js_localization
+            'twine_form_section_validation',
+            'twine_form_section_vars',
+            FormSection::$js_localization
         );
     }
 
@@ -829,9 +836,10 @@ class FormSectionProper extends FormSectionValidatable
     /**
      * ensure_scripts_localized
      */
-    public function ensure_scripts_localized() {
-	    if (! FormSectionProper::$_scripts_localized) {
-            $this->_enqueue_and_localize_form_js();
+    public function ensureScriptsLocalized()
+    {
+        if (! FormSection::$scripts_localized) {
+            $this->enqueueAndLocalizeFormJs();
         }
     }
 
@@ -842,11 +850,14 @@ class FormSectionProper extends FormSectionValidatable
      *
      * @return array keys are custom validation rules, and values are internationalized strings
      */
-    private static function _get_localized_error_messages()
+    private static function getLocalizedErrorMessages()
     {
         return array(
-            'validUrl' => esc_html__('This is not a valid absolute URL. Eg, http://domain.com/monkey.jpg', 'event_espresso'),
-            'regex'    => esc_html__('Please check your input', 'event_espresso'),
+            'validUrl' => esc_html__(
+                'This is not a valid absolute URL. Eg, http://domain.com/monkey.jpg',
+                'print-my-blog'
+            ),
+            'regex'    => esc_html__('Please check your input', 'print-my-blog'),
         );
     }
 
@@ -854,18 +865,18 @@ class FormSectionProper extends FormSectionValidatable
     /**
      * @return array
      */
-    public static function js_localization()
+    public static function jsLocalization()
     {
-        return self::$_js_localization;
+        return self::$js_localization;
     }
 
 
     /**
      * @return void
      */
-    public static function reset_js_localization()
+    public static function resetJsLocalization()
     {
-        self::$_js_localization = array();
+        self::$js_localization = array();
     }
 
 
@@ -875,13 +886,13 @@ class FormSectionProper extends FormSectionValidatable
      *
      * @return array
      */
-    public function get_jquery_validation_rules()
+    public function getJqueryValdationRules()
     {
         $jquery_validation_rules = array();
-        foreach ($this->get_validatable_subsections() as $subsection) {
+        foreach ($this->getValidatableSubsections() as $subsection) {
             $jquery_validation_rules = array_merge(
                 $jquery_validation_rules,
-                $subsection->get_jquery_validation_rules()
+                $subsection->getJqueryValdationRules()
             );
         }
         return $jquery_validation_rules;
@@ -894,15 +905,15 @@ class FormSectionProper extends FormSectionValidatable
      * @param array $req_data like $_POST
      * @return void
      */
-    protected function _normalize($req_data)
+    protected function normalize($req_data)
     {
-        $this->_received_submission = true;
-        $this->_validation_errors   = array();
-        foreach ($this->get_validatable_subsections() as $subsection) {
+        $this->received_submission = true;
+        $this->validation_errors   = array();
+        foreach ($this->getValidatableSubsections() as $subsection) {
             try {
-                $subsection->_normalize($req_data);
+                $subsection->normalize($req_data);
             } catch (ValidationError $e) {
-                $subsection->add_validation_error($e);
+                $subsection->addValidationError($e);
             }
         }
     }
@@ -917,15 +928,15 @@ class FormSectionProper extends FormSectionValidatable
      * you would be best to override this _validate method,
      * calling parent::_validate() first.
      */
-    protected function _validate()
+    protected function validate()
     {
         // reset the cache of whether this form is valid or not- we're re-validating it now
         $this->is_valid = null;
-        foreach ($this->get_validatable_subsections() as $subsection_name => $subsection) {
+        foreach ($this->getValidatableSubsections() as $subsection_name => $subsection) {
             if (method_exists($this, '_validate_' . $subsection_name)) {
                 call_user_func_array(array($this, '_validate_' . $subsection_name), array($subsection));
             }
-            $subsection->_validate();
+            $subsection->validate();
         }
     }
 
@@ -936,14 +947,14 @@ class FormSectionProper extends FormSectionValidatable
      * @return array
      * @throws ImproperUsageException
      */
-    public function valid_data()
+    public function validData()
     {
         $inputs = array();
         foreach ($this->subsections() as $subsection_name => $subsection) {
-            if ( $subsection instanceof FormSectionProper) {
-                $inputs[ $subsection_name ] = $subsection->valid_data();
+            if ($subsection instanceof FormSection) {
+                $inputs[ $subsection_name ] = $subsection->validData();
             } elseif ($subsection instanceof FormInputBase) {
-                $inputs[ $subsection_name ] = $subsection->normalized_value();
+                $inputs[ $subsection_name ] = $subsection->normalizedValue();
             }
         }
         return $inputs;
@@ -971,14 +982,14 @@ class FormSectionProper extends FormSectionValidatable
     /**
      * Gets all the subsections which are a proper form
      *
-     * @return FormSectionProper[]
+     * @return FormSection[]
      * @throws @throws ImproperUsageException
      */
     public function subforms()
     {
         $form_sections = array();
         foreach ($this->subsections() as $name => $obj) {
-	        if ( $obj instanceof FormSectionProper) {
+            if ($obj instanceof FormSection) {
                 $form_sections[ $name ] = $obj;
             }
         }
@@ -998,15 +1009,15 @@ class FormSectionProper extends FormSectionValidatable
      *                                                      (realizing that the subsections' html names might not be
      *                                                      set yet, etc.)
      *
-     * @return FormSectionProper[]
+     * @return FormSection[]
      * @throws @throws ImproperUsageException
      */
     public function subsections($require_construction_to_be_finalized = true)
     {
         if ($require_construction_to_be_finalized) {
-            $this->ensure_construct_finalized_called();
+            $this->ensureConstructFinalizedCalled();
         }
-        return $this->_subsections;
+        return $this->subsections;
     }
 
 
@@ -1016,7 +1027,7 @@ class FormSectionProper extends FormSectionValidatable
      */
     public function hasSubsections()
     {
-        return ! empty($this->_subsections);
+        return ! empty($this->subsections);
     }
 
 
@@ -1036,9 +1047,9 @@ class FormSectionProper extends FormSectionValidatable
      *                                        the input's normalized value, or an array like the top-level array
      * @throws @throws ImproperUsageException
      */
-    public function input_values($include_subform_inputs = false, $flatten = false)
+    public function inputValues($include_subform_inputs = false, $flatten = false)
     {
-        return $this->_input_values(false, $include_subform_inputs, $flatten);
+        return $this->inputValuesList(false, $include_subform_inputs, $flatten);
     }
 
 
@@ -1060,9 +1071,9 @@ class FormSectionProper extends FormSectionValidatable
      *                                        the input's normalized value, or an array like the top-level array
      * @throws @throws ImproperUsageException
      */
-    public function input_pretty_values($include_subform_inputs = false, $flatten = false)
+    public function inputPrettyValues($include_subform_inputs = false, $flatten = false)
     {
-        return $this->_input_values(true, $include_subform_inputs, $flatten);
+        return $this->inputValuesList(true, $include_subform_inputs, $flatten);
     }
 
 
@@ -1082,16 +1093,16 @@ class FormSectionProper extends FormSectionValidatable
      *                                        the input's normalized value, or an array like the top-level array
      * @throws ImproperUsageException
      */
-    public function _input_values($pretty = false, $include_subform_inputs = false, $flatten = false)
+    public function inputValuesList($pretty = false, $include_subform_inputs = false, $flatten = false)
     {
         $input_values = array();
         foreach ($this->subsections() as $subsection_name => $subsection) {
             if ($subsection instanceof FormInputBase) {
                 $input_values[ $subsection_name ] = $pretty
-                    ? $subsection->pretty_value()
-                    : $subsection->normalized_value();
-            } elseif ( $subsection instanceof FormSectionProper && $include_subform_inputs) {
-                $subform_input_values = $subsection->_input_values(
+                    ? $subsection->prettyValue()
+                    : $subsection->normalizedValue();
+            } elseif ($subsection instanceof FormSection && $include_subform_inputs) {
+                $subform_input_values = $subsection->inputValuesList(
                     $pretty,
                     $include_subform_inputs,
                     $flatten
@@ -1120,26 +1131,26 @@ class FormSectionProper extends FormSectionValidatable
      *                                   the input's normalized value, or an array like the top-level array
      * @throws ImproperUsageException
      */
-    public function submitted_values($include_subforms = false)
+    public function submittedValues($include_subforms = false)
     {
         $submitted_values = array();
         foreach ($this->subsections() as $subsection) {
             if ($subsection instanceof FormInputBase) {
                 // is this input part of an array of inputs?
-                if (strpos($subsection->html_name(), '[') !== false) {
-                    $full_input_name  = Array2::convert_array_values_to_keys(
+                if (strpos($subsection->htmlName(), '[') !== false) {
+                    $full_input_name  = Array2::convertArrayValuesToKeys(
                         explode(
                             '[',
-                            str_replace(']', '', $subsection->html_name())
+                            str_replace(']', '', $subsection->htmlName())
                         ),
-                        $subsection->raw_value()
+                        $subsection->rawValue()
                     );
                     $submitted_values = array_replace_recursive($submitted_values, $full_input_name);
                 } else {
-                    $submitted_values[ $subsection->html_name() ] = $subsection->raw_value();
+                    $submitted_values[ $subsection->htmlName() ] = $subsection->rawValue();
                 }
-            } elseif ( $subsection instanceof FormSectionProper && $include_subforms) {
-                $subform_input_values = $subsection->submitted_values($include_subforms);
+            } elseif ($subsection instanceof FormSection && $include_subforms) {
+                $subform_input_values = $subsection->submittedValues($include_subforms);
                 $submitted_values     = array_replace_recursive($submitted_values, $subform_input_values);
             }
         }
@@ -1154,10 +1165,10 @@ class FormSectionProper extends FormSectionValidatable
      * @return boolean
      * @throws ImproperUsageException
      */
-    public function has_received_submission()
+    public function hasHeceivedSubmission()
     {
-        $this->ensure_construct_finalized_called();
-        return $this->_received_submission;
+        $this->ensureConstructFinalizedCalled();
+        return $this->received_submission;
     }
 
 
@@ -1171,7 +1182,7 @@ class FormSectionProper extends FormSectionValidatable
     public function exclude(array $inputs_to_exclude = array())
     {
         foreach ($inputs_to_exclude as $input_to_exclude_name) {
-            unset($this->_subsections[ $input_to_exclude_name ]);
+            unset($this->subsections[ $input_to_exclude_name ]);
         }
     }
 
@@ -1184,8 +1195,8 @@ class FormSectionProper extends FormSectionValidatable
     public function hide(array $inputs_to_hide = array())
     {
         foreach ($inputs_to_hide as $input_to_hide) {
-            $input = $this->get_input($input_to_hide);
-            $input->set_display_strategy(new HiddenDisplay());
+            $input = $this->getInput($input_to_hide);
+            $input->overwriteDisplayStrategy(new HiddenDisplay());
         }
     }
 
@@ -1211,15 +1222,17 @@ class FormSectionProper extends FormSectionValidatable
      * @return void
      * @throws ImproperUsageException
      */
-    public function add_subsections($new_subsections, $subsection_name_to_target = null, $add_before = true)
+    public function addSubsections($new_subsections, $subsection_name_to_target = null, $add_before = true)
     {
         foreach ($new_subsections as $subsection_name => $subsection) {
             if (! $subsection instanceof FormSectionBase) {
                 throw new ImproperUsageException(
                     sprintf(
                         esc_html__(
+                            // phpcs:disable Generic.Files.LineLength.TooLong
                             "Trying to add a %s as a subsection (it was named '%s') to the form section '%s'. It was removed.",
-                            'event_espresso'
+                            // phpcs:enable Generic.Files.LineLength.TooLong
+                            'print-my-blog'
                         ),
                         get_class($subsection),
                         $subsection_name,
@@ -1229,29 +1242,30 @@ class FormSectionProper extends FormSectionValidatable
                 unset($new_subsections[ $subsection_name ]);
             }
         }
-        $this->_subsections = Array2::insert_into_array(
-            $this->_subsections,
+        $this->subsections = Array2::insertIntoArray(
+            $this->subsections,
             $new_subsections,
             $subsection_name_to_target,
             $add_before
         );
-        if ($this->_construction_finalized) {
-            foreach ($this->_subsections as $name => $subsection) {
-                $subsection->_construct_finalize($this, $name);
+        if ($this->construction_finalized) {
+            foreach ($this->subsections as $name => $subsection) {
+                $subsection->constructFinalize($this, $name);
             }
         }
     }
 
-	/**
-	 * Adds the specified section
-	 * @param string $name
-	 * @param FormSectionBase $form_section
-	 */
-    public function addSubsection($name, FormSectionBase $form_section){
-    	$this->_subsections[$name] = $form_section;
-    	if ($this->_construction_finalized){
-    		$form_section->_construct_finalize($this, $name);
-	    }
+    /**
+     * Adds the specified section
+     * @param string $name
+     * @param FormSectionBase $form_section
+     */
+    public function addSubsection($name, FormSectionBase $form_section)
+    {
+        $this->subsections[$name] = $form_section;
+        if ($this->construction_finalized) {
+            $form_section->constructFinalize($this, $name);
+        }
     }
 
 
@@ -1260,14 +1274,15 @@ class FormSectionProper extends FormSectionValidatable
      * @param bool   $recursive
      * @return bool
      */
-    public function has_subsection($subsection_name, $recursive = false)
+    public function hasSubsection($subsection_name, $recursive = false)
     {
-        foreach ($this->_subsections as $name => $subsection) {
-            if ($name === $subsection_name
+        foreach ($this->subsections as $name => $subsection) {
+            if (
+                $name === $subsection_name
                 || (
-	                $recursive
-	                && $subsection instanceof FormSectionProper
-                    && $subsection->has_subsection($subsection_name, $recursive)
+                    $recursive
+                    && $subsection instanceof FormSection
+                    && $subsection->hasSubsection($subsection_name, $recursive)
                 )
             ) {
                 return true;
@@ -1281,10 +1296,10 @@ class FormSectionProper extends FormSectionValidatable
     /**
      * Just gets all validatable subsections to clean their sensitive data
      */
-    public function clean_sensitive_data()
+    public function cleanSensitiveData()
     {
-        foreach ($this->get_validatable_subsections() as $subsection) {
-            $subsection->clean_sensitive_data();
+        foreach ($this->getValidatableSubsections() as $subsection) {
+            $subsection->cleanSensitiveData();
         }
     }
 
@@ -1294,10 +1309,10 @@ class FormSectionProper extends FormSectionValidatable
      * @param string                           $form_submission_error_message
      * @param FormSectionValidatable $form_section unused
      */
-    public function set_submission_error_message(
+    public function setSubmissionErrorMessage(
         $form_submission_error_message = ''
     ) {
-        $this->_form_submission_error_message = ! empty($form_submission_error_message)
+        $this->form_submission_error_message = ! empty($form_submission_error_message)
             ? $form_submission_error_message
             : $this->getAllValidationErrorsString();
     }
@@ -1310,9 +1325,9 @@ class FormSectionProper extends FormSectionValidatable
      *
      * @return string
      */
-    public function submission_error_message()
+    public function submissionErrorMessage()
     {
-        return $this->_form_submission_error_message;
+        return $this->form_submission_error_message;
     }
 
 
@@ -1320,11 +1335,11 @@ class FormSectionProper extends FormSectionValidatable
      * Sets a message to display if the data submitted to the form was valid.
      * @param string $form_submission_success_message
      */
-    public function set_submission_success_message($form_submission_success_message = '')
+    public function setSubmissionSuccessMessage($form_submission_success_message = '')
     {
-        $this->_form_submission_success_message = ! empty($form_submission_success_message)
+        $this->form_submission_success_message = ! empty($form_submission_success_message)
             ? $form_submission_success_message
-            : esc_html__('Form submitted successfully', 'event_espresso');
+            : esc_html__('Form submitted successfully', 'print-my-blog');
     }
 
 
@@ -1332,9 +1347,9 @@ class FormSectionProper extends FormSectionValidatable
      * Gets a message appropriate for display when the form is correctly submitted
      * @return string
      */
-    public function submission_success_message()
+    public function submissionSuccessMessage()
     {
-        return $this->_form_submission_success_message;
+        return $this->form_submission_success_message;
     }
 
 
@@ -1346,10 +1361,10 @@ class FormSectionProper extends FormSectionValidatable
      *
      * @return string
      */
-    public function html_name_prefix()
+    public function htmlNamePrefix()
     {
-        if ( $this->parent_section() instanceof FormSectionProper) {
-            return $this->parent_section()->html_name_prefix() . '[' . $this->name() . ']';
+        if ($this->parentSection() instanceof FormSection) {
+            return $this->parentSection()->htmlNamePrefix() . '[' . $this->name() . ']';
         }
         return $this->name();
     }
@@ -1365,19 +1380,19 @@ class FormSectionProper extends FormSectionValidatable
      */
     public function name()
     {
-        $this->ensure_construct_finalized_called();
+        $this->ensureConstructFinalizedCalled();
         return parent::name();
     }
 
 
-	/**
-	 * @return FormSectionProper
+    /**
+     * @return FormSection
      * @throws ImproperUsageException
      */
-    public function parent_section()
+    public function parentSection()
     {
-        $this->ensure_construct_finalized_called();
-        return parent::parent_section();
+        $this->ensureConstructFinalizedCalled();
+        return parent::parentSection();
     }
 
 
@@ -1387,10 +1402,10 @@ class FormSectionProper extends FormSectionValidatable
      * @return void
      * @throws ImproperUsageException
      */
-    public function ensure_construct_finalized_called()
+    public function ensureConstructFinalizedCalled()
     {
-        if (! $this->_construction_finalized) {
-            $this->_construct_finalize($this->_parent_section, $this->_name);
+        if (! $this->construction_finalized) {
+            $this->constructFinalize($this->parent_section, $this->name);
         }
     }
 
@@ -1403,16 +1418,16 @@ class FormSectionProper extends FormSectionValidatable
      * @return boolean
      * @throws ImproperUsageException
      */
-    public function form_data_present_in($req_data = null)
+    public function formDataPresentIn($req_data = null)
     {
         $req_data = $this->getCachedRequest($req_data);
         foreach ($this->subsections() as $subsection) {
             if ($subsection instanceof FormInputBase) {
-                if ($subsection->form_data_present_in($req_data)) {
+                if ($subsection->formDataPresentIn($req_data)) {
                     return true;
                 }
-            } elseif ( $subsection instanceof FormSectionProper) {
-                if ($subsection->form_data_present_in($req_data)) {
+            } elseif ($subsection instanceof FormSection) {
+                if ($subsection->formDataPresentIn($req_data)) {
                     return true;
                 }
             }
@@ -1429,14 +1444,14 @@ class FormSectionProper extends FormSectionValidatable
      * @return ValidationError[]
      * @throws ImproperUsageException
      */
-    public function get_validation_errors_accumulated()
+    public function getValidationErrorsAccumulated()
     {
-        $validation_errors = $this->get_validation_errors();
-        foreach ($this->get_validatable_subsections() as $subsection) {
-	        if ( $subsection instanceof FormSectionProper) {
-                $validation_errors_on_this_subsection = $subsection->get_validation_errors_accumulated();
+        $validation_errors = $this->getValidationErrors();
+        foreach ($this->getValidatableSubsections() as $subsection) {
+            if ($subsection instanceof FormSection) {
+                $validation_errors_on_this_subsection = $subsection->getValidationErrorsAccumulated();
             } else {
-                $validation_errors_on_this_subsection = $subsection->get_validation_errors();
+                $validation_errors_on_this_subsection = $subsection->getValidationErrors();
             }
             if ($validation_errors_on_this_subsection) {
                 $validation_errors = array_merge($validation_errors, $validation_errors_on_this_subsection);
@@ -1457,18 +1472,18 @@ class FormSectionProper extends FormSectionValidatable
     {
         $submission_error_messages = array();
         // bad, bad, bad registrant
-        foreach ($this->get_validation_errors_accumulated() as $validation_error) {
+        foreach ($this->getValidationErrorsAccumulated() as $validation_error) {
             if ($validation_error instanceof ValidationError) {
-                $form_section = $validation_error->get_form_section();
+                $form_section = $validation_error->getFormSection();
                 if ($form_section instanceof FormInputBase) {
-                    $label = $validation_error->get_form_section()->html_label_text();
+                    $label = $validation_error->getFormSection()->htmlLabelText();
                 } elseif ($form_section instanceof FormSectionValidatable) {
-                    $label = $validation_error->get_form_section()->name();
+                    $label = $validation_error->getFormSection()->name();
                 } else {
-                    $label = esc_html__('Unknown', 'event_espresso');
+                    $label = esc_html__('Unknown', 'print-my-blog');
                 }
                 $submission_error_messages[] = sprintf(
-                    __('%s : %s', 'event_espresso'),
+                    __('%s : %s', 'print-my-blog'),
                     $label,
                     $validation_error->getMessage()
                 );
@@ -1494,10 +1509,10 @@ class FormSectionProper extends FormSectionValidatable
      * @return FormSectionBase
      * @throws ImproperUsageException
      */
-    public function find_section_from_path($form_section_path)
+    public function findSectionFromPath($form_section_path)
     {
         // check if we can find the input from purely going straight up the tree
-        $input = parent::find_section_from_path($form_section_path);
+        $input = parent::findSectionFromPath($form_section_path);
         if ($input instanceof FormSectionBase) {
             return $input;
         }
@@ -1509,9 +1524,9 @@ class FormSectionProper extends FormSectionValidatable
             $child_section_name = $form_section_path;
             $subpath            = '';
         }
-        $child_section = $this->get_subsection($child_section_name);
+        $child_section = $this->getSubsection($child_section_name);
         if ($child_section instanceof FormSectionBase) {
-            return $child_section->find_section_from_path($subpath);
+            return $child_section->findSectionFromPath($subpath);
         }
         return null;
     }

@@ -1,6 +1,6 @@
 <?php
-namespace Twine\forms\strategies\display;
 
+namespace Twine\forms\strategies\display;
 
 use Twine\forms\strategies\normalization\NormalizationStrategyBase;
 
@@ -19,27 +19,27 @@ class ButtonDisplay extends DisplayBase
      */
     public function display()
     {
-        $default_value = $this->_input->get_default();
-        if ($this->_input->get_normalization_strategy() instanceof NormalizationStrategyBase) {
-            $default_value = $this->_input->get_normalization_strategy()->unnormalize($default_value);
+        $default_value = $this->input->getDefault();
+        if ($this->input->getNormalizationStrategy() instanceof NormalizationStrategyBase) {
+            $default_value = $this->input->getNormalizationStrategy()->unnormalize($default_value);
         }
-        $html = $this->_opening_tag('button');
-        $html .= $this->_attributes_string(
+        $html = $this->openingTag('button');
+        $html .= $this->attributesString(
             array_merge(
-                $this->_standard_attributes_array(),
+                $this->standardAttributesArray(),
                 array(
                     'value' => $default_value,
                 )
             )
         );
-        if ($this->_input instanceof Button_Input) {
-            $button_content = $this->_input->button_content();
+        if ($this->input instanceof Button_Input) {
+            $button_content = $this->input->buttonContent();
         } else {
-            $button_content = $this->_input->get_default();
+            $button_content = $this->input->getDefault();
         }
         $html .= '>';
         $html .= $button_content;
-        $html .= $this->_closing_tag();
+        $html .= $this->closingTag();
         return $html;
     }
 }

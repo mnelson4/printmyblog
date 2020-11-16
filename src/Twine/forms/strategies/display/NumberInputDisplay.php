@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\display;
+
 /**
  * Class NumberInputDisplay
  * Generates an HTML5 number input
@@ -67,7 +69,7 @@ class NumberInputDisplay extends DisplayBase
             sprintf(
                 esc_html__(
                     'The %1$s parameter value for %2$s must be numeric or null, %3$s was passed into the constructor.',
-                    'event_espresso'
+                    'print-my-blog'
                 ),
                 $argument_label,
                 __CLASS__,
@@ -83,14 +85,14 @@ class NumberInputDisplay extends DisplayBase
      */
     public function display()
     {
-        $input = $this->_opening_tag('input');
-        $input .= $this->_attributes_string(
+        $input = $this->openingTag('input');
+        $input .= $this->attributesString(
             array_merge(
-                $this->_standard_attributes_array(),
+                $this->standardAttributesArray(),
                 $this->getNumberInputAttributes()
             )
         );
-        $input .= $this->_close_tag();
+        $input .= $this->closeTag();
         return $input;
     }
 
@@ -103,7 +105,7 @@ class NumberInputDisplay extends DisplayBase
     {
         $attributes = array(
             'type' => 'number',
-            'value' => $this->_input->raw_value_in_form()
+            'value' => $this->input->rawValueInForm()
         );
         if ($this->min !== null) {
             $attributes['min'] = $this->min;

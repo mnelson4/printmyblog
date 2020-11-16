@@ -1,8 +1,9 @@
 <?php
+
 namespace Twine\forms\strategies\layout;
 
 use Twine\forms\base\FormSectionHtml;
-use Twine\forms\base\FormSectionProper;
+use Twine\forms\base\FormSection;
 use Twine\forms\inputs\FormInputBase;
 use Twine\forms\inputs\HiddenInput;
 use Twine\helpers\Html;
@@ -16,15 +17,15 @@ class TwoColumnLayout extends FormSectionLayoutBase
      * @param array $additional_args
      * @return string
      */
-    public function layout_form_begin($additional_args = array())
+    public function layoutFormBegin($additional_args = array())
     {
-    	$html_generator = Html::instance();
-        return $this->display_form_wide_errors()
+        $html_generator = Html::instance();
+        return $this->displayFormWideErrors()
         . $html_generator->table(
             '',
-            $this->_form_section->html_id(),
-            $this->_form_section->html_class(),
-            $this->_form_section->html_style()
+            $this->Form_section->htmlId(),
+            $this->Form_section->htmlClass(),
+            $this->Form_section->htmlStyle()
         ) . $html_generator->tbody();
     }
 
@@ -36,10 +37,10 @@ class TwoColumnLayout extends FormSectionLayoutBase
      * @param array $additional_args
      * @return string
      */
-    public function layout_form_end($additional_args = array())
+    public function layoutFormEnd($additional_args = array())
     {
-    	$html_generator = Html::instance();
-        return $html_generator->tbodyx() . $html_generator->tablex($this->_form_section->html_id());
+        $html_generator = Html::instance();
+        return $html_generator->tbodyx() . $html_generator->tablex($this->Form_section->htmlId());
     }
 
 
@@ -50,21 +51,21 @@ class TwoColumnLayout extends FormSectionLayoutBase
      * @param FormInputBase $input
      * @return string
      */
-    public function layout_input($input)
+    public function layoutInput($input)
     {
         $html = '';
         $html_generator = Html::instance();
         if ($input instanceof HiddenInput) {
-            $html .= $input->get_html_for_input();
+            $html .= $input->getHtmlForInput();
         } else {
-            $html_for_input = $input->get_html_for_input();
-            $html_for_input .= $input->get_html_for_errors() != ''
-                ? $html_generator->nl() . $input->get_html_for_errors()
+            $html_for_input = $input->getHtmlForInput();
+            $html_for_input .= $input->getHtmlForErrors() != ''
+                ? $html_generator->nl() . $input->getHtmlForErrors()
                 : '';
-            $html_for_input .= $input->get_html_for_help() != '' ? $html_generator->nl() . $input->get_html_for_help() : '';
+            $html_for_input .= $input->getHtmlForHelp() != '' ? $html_generator->nl() . $input->getHtmlForHelp() : '';
             $html .= $html_generator->tr(
-	            $html_generator->th($input->get_html_for_label()) .
-	            $html_generator->td($html_for_input)
+                $html_generator->th($input->getHtmlForLabel()) .
+                $html_generator->td($html_for_input)
             );
         }
         return $html;
@@ -78,17 +79,18 @@ class TwoColumnLayout extends FormSectionLayoutBase
      * or DivPerSectionLayout, and create subsections using TwoColumnLayout for everywhere you want the
      * two-column layout, and then other sub-sections can be outside the TwoColumnLayout table.
      *
-     * @param FormSectionProper $form_section
+     * @param FormSection $form_section
      *
      * @return string
     */
-    public function layout_subsection($form_section)
+    public function layoutSubsection($form_section)
     {
-        if ( $form_section instanceof FormSectionProper
+        if (
+            $form_section instanceof FormSection
             || $form_section instanceof FormSectionHtml
         ) {
-	        $html_generator = Html::instance();
-            return $html_generator->no_row($form_section->get_html());
+            $html_generator = Html::instance();
+            return $html_generator->noRow($form_section->getHtml());
         }
         return '';
     }

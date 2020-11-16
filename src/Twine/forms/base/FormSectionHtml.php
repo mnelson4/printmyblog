@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\base;
+
 /**
  * FormSectionHtml
  * HTML to be laid out like a proper subsection
@@ -14,7 +16,7 @@ namespace Twine\forms\base;
 class FormSectionHtml extends FormSectionBase
 {
 
-    protected $_html = '';
+    protected $html = '';
 
 
 
@@ -24,7 +26,7 @@ class FormSectionHtml extends FormSectionBase
      */
     public function __construct($html = '', $options_array = array())
     {
-        $this->_html = $html;
+        $this->html = $html;
         parent::__construct($options_array);
     }
 
@@ -34,9 +36,9 @@ class FormSectionHtml extends FormSectionBase
      * Returns the HTML
      * @return string
      */
-    public function get_html()
+    public function getHtml()
     {
-        return $this->_html;
+        return $this->html;
     }
 }
 

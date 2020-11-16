@@ -1,6 +1,6 @@
 <?php
 /**
- * @var $project_form \Twine\forms\base\FormSectionProper
+ * @var $project_form \Twine\forms\base\FormSection
  * @var $form_url string
  */
 pmb_render_template(
@@ -14,7 +14,7 @@ pmb_render_template(
 );
 ?>
 <form method="POST" action="<?php echo esc_attr($form_url);?>">
-    <?php echo $form->get_html_and_js();?>
+    <?php echo $form->getHtmlAndJs();?>
     <button class="button button-primary pmb-save"><?php esc_html_e('Save', 'print-my-blog');?></button>
 </form>
 <?php pmb_render_template('partials/project_footer.php');

@@ -1,6 +1,8 @@
 <?php
+
 namespace Twine\forms\strategies\layout;
-use Twine\forms\base\FormSectionProper;
+
+use Twine\forms\base\FormSection;
 use Twine\forms\inputs\FormInputBase;
 use Twine\forms\inputs\FormInputWithOptionsBase;
 use Twine\forms\inputs\HiddenInput;
@@ -26,7 +28,7 @@ class NoLayout extends DivPerSectionLayout
      *
      * @var bool
      */
-    protected $_use_break_tags = true;
+    protected $use_break_tags = true;
 
 
 
@@ -38,9 +40,9 @@ class NoLayout extends DivPerSectionLayout
      */
     public function __construct($options = array())
     {
-        $this->_use_break_tags = is_array($options) && isset($options['use_break_tags'])
+        $this->use_break_tags = is_array($options) && isset($options['use_break_tags'])
             ? filter_var($options['use_break_tags'], FILTER_VALIDATE_BOOLEAN)
-            : $this->_use_break_tags;
+            : $this->use_break_tags;
         parent::__construct();
     }
 
@@ -51,9 +53,9 @@ class NoLayout extends DivPerSectionLayout
      *
      * @return string
      */
-    public function layout_form_begin()
+    public function layoutFormBegin()
     {
-	    $html_generator = Html::instance();
+        $html_generator = Html::instance();
         return $html_generator->nl(1);
     }
 
@@ -66,33 +68,33 @@ class NoLayout extends DivPerSectionLayout
      * @return string
      * @throws \Error
      */
-    public function layout_input($input)
+    public function layoutInput($input)
     {
-	    $html_generator = Html::instance();
+        $html_generator = Html::instance();
         $html = '';
         if ($input instanceof HiddenInput) {
-            $html .= $html_generator->nl() . $input->get_html_for_input();
+            $html .= $html_generator->nl() . $input->getHtmlForInput();
         } elseif ($input instanceof SubmitInput) {
             $html .= $this->br();
-            $html .= $input->get_html_for_input();
+            $html .= $input->getHtmlForInput();
         } elseif ($input instanceof SelectInput) {
             $html .= $this->br();
-            $html .= $html_generator->nl(1) . $input->get_html_for_label();
-            $html .= $html_generator->nl() . $input->get_html_for_errors();
-            $html .= $html_generator->nl() . $input->get_html_for_input();
-            $html .= $html_generator->nl() . $input->get_html_for_help();
+            $html .= $html_generator->nl(1) . $input->getHtmlForLabel();
+            $html .= $html_generator->nl() . $input->getHtmlForErrors();
+            $html .= $html_generator->nl() . $input->getHtmlForInput();
+            $html .= $html_generator->nl() . $input->getHtmlForHelp();
             $html .= $this->br();
         } elseif ($input instanceof FormInputWithOptionsBase) {
             $html .= $this->br();
-            $html .= $html_generator->nl() . $input->get_html_for_errors();
-            $html .= $html_generator->nl() . $input->get_html_for_input();
-            $html .= $html_generator->nl() . $input->get_html_for_help();
+            $html .= $html_generator->nl() . $input->getHtmlForErrors();
+            $html .= $html_generator->nl() . $input->getHtmlForInput();
+            $html .= $html_generator->nl() . $input->getHtmlForHelp();
         } else {
             $html .= $this->br();
-            $html .= $html_generator->nl(1) . $input->get_html_for_label();
-            $html .= $html_generator->nl() . $input->get_html_for_errors();
-            $html .= $html_generator->nl() . $input->get_html_for_input();
-            $html .= $html_generator->nl() . $input->get_html_for_help();
+            $html .= $html_generator->nl(1) . $input->getHtmlForLabel();
+            $html .= $html_generator->nl() . $input->getHtmlForErrors();
+            $html .= $html_generator->nl() . $input->getHtmlForInput();
+            $html .= $html_generator->nl() . $input->getHtmlForHelp();
         }
         $html .= $html_generator->nl(-1);
         return $html;
@@ -103,13 +105,13 @@ class NoLayout extends DivPerSectionLayout
     /**
      * Lays out a row for the subsection
      *
-     * @param FormSectionProper $form_section
+     * @param FormSection $form_section
      * @return string
      */
-    public function layout_subsection($form_section)
+    public function layoutSubsection($form_section)
     {
-	    $html_generator = Html::instance();
-        return $html_generator->nl(1) . $form_section->get_html() . $html_generator->nl(-1);
+        $html_generator = Html::instance();
+        return $html_generator->nl(1) . $form_section->getHtml() . $html_generator->nl(-1);
     }
 
 
@@ -119,9 +121,9 @@ class NoLayout extends DivPerSectionLayout
      *
      * @return string
      */
-    public function layout_form_end()
+    public function layoutFormEnd()
     {
-	    $html_generator = Html::instance();
+        $html_generator = Html::instance();
         return $html_generator->nl(-1);
     }
 
@@ -134,7 +136,7 @@ class NoLayout extends DivPerSectionLayout
      */
     protected function br()
     {
-	    $html_generator = Html::instance();
-        return $this->_use_break_tags ? $html_generator->br() : '';
+        $html_generator = Html::instance();
+        return $this->use_break_tags ? $html_generator->br() : '';
     }
 }

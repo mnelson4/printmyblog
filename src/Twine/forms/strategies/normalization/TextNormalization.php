@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\normalization;
+
 /**
  * TextNormalization
  * Really does nothing to the input. It came in a string and we leave it as-such

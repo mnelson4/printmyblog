@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\normalization;
+
 /**
  * NullNormalization
  * Replaces input with null. This is for inputs whose value should be totally ignored server-side

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace PrintMyBlog\factories;
-
 
 use PrintMyBlog\entities\FileFormat;
 use PrintMyBlog\orm\entities\Project;
@@ -13,14 +11,16 @@ use PrintMyBlog\system\Context;
  * @package PrintMyBlog\factories
  * Makes us some ProjectGeneration objects and makes sure their dependencies get injected.
  */
-class ProjectGenerationFactory {
-	public function create(Project $project, FileFormat $format){
-		return Context::instance()->use_new(
-			'PrintMyBlog\entities\ProjectGeneration',
-			[
-				$project,
-				$format
-			]
-		);
-	}
+class ProjectGenerationFactory
+{
+    public function create(Project $project, FileFormat $format)
+    {
+        return Context::instance()->useNew(
+            'PrintMyBlog\entities\ProjectGeneration',
+            [
+                $project,
+                $format
+            ]
+        );
+    }
 }

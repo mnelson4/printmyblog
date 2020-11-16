@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\validation;
+
 /**
  * IntValidation
  *
@@ -16,7 +18,7 @@ class IntValidation extends ValidationBase
     public function __construct($validation_error_message = null)
     {
         if (! $validation_error_message) {
-            $validation_error_message = __("Only digits are allowed.", "event_espresso");
+            $validation_error_message = __("Only digits are allowed.", "print-my-blog");
         }
         parent::__construct($validation_error_message);
     }
@@ -36,14 +38,14 @@ class IntValidation extends ValidationBase
     /**
      * @return array
      */
-    public function get_jquery_validation_rule_array()
+    public function getJqueryValidationRuleArray()
     {
         return array(
-            'number'=>true,
+            'number' => true,
             'step' => 1,
             'messages' => array(
-                'number' => $this->get_validation_error_message(),
-                'step' => $this->get_validation_error_message()
+                'number' => $this->getValidationErrorMessage(),
+                'step' => $this->getValidationErrorMessage()
             )
         );
     }

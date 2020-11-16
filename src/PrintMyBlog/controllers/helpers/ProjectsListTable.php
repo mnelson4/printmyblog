@@ -1,11 +1,15 @@
 <?php
+
 namespace PrintMyBlog\controllers\helpers;
+
 use PrintMyBlog\controllers\Admin;
 use PrintMyBlog\system\CustomPostTypes;
 use WP_List_Table;
 use WP_Post;
 use WP_Query;
 
+// phpcs:disable PSR12.Files.FileHeader.IncorrectOrder
+// phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 /**
  * Class ProjectsListTable
  *
@@ -16,13 +20,10 @@ use WP_Query;
  * @since          $VID:$
  *
  */
-if (!class_exists('WP_List_Table')) {
-    require_once (ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
-}
 
 /** * Create a new table class that will extend the WP_List_Table */
-class ProjectsListTable extends WP_List_Table
 
+class ProjectsListTable extends WP_List_Table
 {
     public function __construct()
     {
@@ -49,11 +50,11 @@ class ProjectsListTable extends WP_List_Table
         );
         $per_page = $this->get_items_per_page('records_per_page', 10);
         $current_page = $this->get_pagenum();
-        $total_items = self::record_count();
+        $total_items = self::recordCount();
         $data = $this->get_records($per_page, $current_page);
         $this->set_pagination_args(
             [
-            	'total_items' => $total_items, //WE have to calculate the total number of items
+                'total_items' => $total_items, //WE have to calculate the total number of items
                 'per_page' => $per_page // WE have to determine how many items to show on a page
             ]
         );
@@ -96,10 +97,10 @@ class ProjectsListTable extends WP_List_Table
         $params = [
             'post_type' => CustomPostTypes::PROJECT,
         ];
-        if(isset($per_page)){
+        if (isset($per_page)) {
             $params['posts_per_page'] = $per_page;
         }
-        if(isset($page_number)){
+        if (isset($page_number)) {
             $params['paged'] = $page_number;
         }
         return new WP_Query(
@@ -109,19 +110,13 @@ class ProjectsListTable extends WP_List_Table
 
     /**
      * Override the parent columns method. Defines the columns to use in your listing table
-     * * @return Array
+     * * @return array
      */
-    function get_columns()
+    public function get_columns()
     {
         $columns = [
             'cb' => '<input type="checkbox" />',
             'ID' => __('ID', 'print-my-blog') ,
-            // 'second_column_name' => __('Second Column Name', 'ux') ,
-            // 'third_column_name' => __('Third Column Name', 'ux') ,
-            // 'fourth_column_name' => __('Fourth Column Name', 'ux') ,
-            // 'fifth_column_name' => __('Fifth Column Name', 'ux') ,
-            // 'sicth_column_name' => __('Sixth Column Name', 'ux') ,
-            // 'created' => __('Date', 'ux')
         ];
         return $columns;
     }
@@ -149,9 +144,9 @@ class ProjectsListTable extends WP_List_Table
 
     protected function get_bulk_actions()
     {
-    	return [
-    		'delete' => __('Delete')
-	    ];
+        return [
+            'delete' => __('Delete')
+        ];
     }
 
     /**
@@ -159,7 +154,7 @@ class ProjectsListTable extends WP_List_Table
      * * @param WP_Post $post
      * * @return string
      */
-    function column_cb($post)
+    public function column_cb($post)
     {
         return sprintf('<input type="checkbox" name="ID[]" value="%s" />', $post->ID);
     }
@@ -169,16 +164,16 @@ class ProjectsListTable extends WP_List_Table
      * * @param WP_Post $post
      * * @return string
      */
-    function column_ID($post)
+    public function column_ID($post)
     {
-    	$title = $post->post_title ? $post->post_title : __('Untitled', 'print-my-blog');
+        $title = $post->post_title ? $post->post_title : __('Untitled', 'print-my-blog');
         return sprintf(
             '<a href="%s" class="btn btn-primary"/>%s</a>',
             add_query_arg(
                 [
                     'ID' => $post->ID,
                     'action' => 'edit',
-	                'subaction' => Admin::SLUG_SUBACTION_PROJECT_SETUP
+                    'subaction' => Admin::SLUG_SUBACTION_PROJECT_SETUP
                 ],
                 admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
             ),
@@ -198,7 +193,7 @@ class ProjectsListTable extends WP_List_Table
      * Returns the count of records in the database.
      * * @return null|string
      */
-    public function record_count()
+    public function recordCount()
     {
         $wp_query = $this->wp_query();
         return $wp_query->post_count;

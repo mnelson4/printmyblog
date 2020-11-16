@@ -22,7 +22,7 @@ abstract class Activation
 
     public function inject(
         RequestType $requestType
-    ){
+    ) {
         $this->request_type = $requestType;
     }
     /**
@@ -32,7 +32,7 @@ abstract class Activation
      */
     public function detectActivation()
     {
-        if($this->request_type->shouldCheckDb()){
+        if ($this->request_type->shouldCheckDb()) {
             $this->install();
         }
     }
@@ -41,5 +41,5 @@ abstract class Activation
     /**
      * Checks the DB and other options are present
      */
-    public abstract function install();
+    abstract public function install();
 }

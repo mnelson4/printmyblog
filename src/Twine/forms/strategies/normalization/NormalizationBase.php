@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\normalization;
+
 use Twine\forms\strategies\FormInputStrategyBase;
 
 /**
@@ -38,7 +40,7 @@ abstract class NormalizationBase extends FormInputStrategyBase
      * @param string $individual_item_to_normalize
      * @return mixed
      */
-    public function normalize_one($individual_item_to_normalize)
+    public function normalizeOne($individual_item_to_normalize)
     {
         return $this->normalize($individual_item_to_normalize);
     }
@@ -63,7 +65,7 @@ abstract class NormalizationBase extends FormInputStrategyBase
      * @param mixed $individual_item_to_unnormalize NOT an array
      * @return string
      */
-    public function unnormalize_one($individual_item_to_unnormalize)
+    public function unnormalizeOne($individual_item_to_unnormalize)
     {
         return $this->unnormalize($individual_item_to_unnormalize);
     }

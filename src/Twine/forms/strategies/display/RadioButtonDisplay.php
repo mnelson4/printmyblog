@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\display;
+
 use Twine\helpers\Html;
 
 /**
@@ -21,17 +23,17 @@ class RadioButtonDisplay extends CompoundInputDisplay
      */
     public function display()
     {
-        $input = $this->get_input();
+        $input = $this->getInput();
         $html = '';
         $html_generator = Html::instance();
         foreach ($input->options() as $value => $option) {
-            $value = $input->get_normalization_strategy()->unnormalize($value);
+            $value = $input->getNormalizationStrategy()->unnormalize($value);
 
-            $html_id = $this->get_sub_input_id($value);
+            $html_id = $this->getSubInputId($value);
             $html .= $html_generator->nl(0, 'radio');
 
-            $html .= $this->_opening_tag('label');
-            $html .= $this->_attributes_string(
+            $html .= $this->openingTag('label');
+            $html .= $this->attributesString(
                 array(
                     'for' => $html_id,
                     'id' => $html_id . '-lbl',
@@ -46,21 +48,21 @@ class RadioButtonDisplay extends CompoundInputDisplay
             );
             $html .= '>';
             $html .= $html_generator->nl(1, 'radio');
-            $html .= $this->_opening_tag('input');
+            $html .= $this->openingTag('input');
             $attributes = array(
                 'id' => $html_id,
-                'name' => $input->html_name(),
-                'class' => $input->html_class(),
-                'style' => $input->html_style(),
+                'name' => $input->htmlName(),
+                'class' => $input->htmlClass(),
+                'style' => $input->htmlStyle(),
                 'type' => 'radio',
                 'value' => $value,
                 0 => $input->otherHtmlAttributesString(),
-                'data-question_label' => $input->html_label_id()
+                'data-question_label' => $input->htmlLabelId()
             );
-            if ($input->raw_value() === $value) {
+            if ($input->rawValue() === $value) {
                 $attributes['checked'] = 'checked';
             }
-            $html .= $this->_attributes_string($attributes);
+            $html .= $this->attributesString($attributes);
 
             $html .= '>&nbsp;';
             $text = $option->getDisplayText();
@@ -69,16 +71,16 @@ class RadioButtonDisplay extends CompoundInputDisplay
 
             $html .= $text;
             $html .= $html_generator->nl(-1, 'radio') . '</label>';
-            if($help_text){
-            	$html .= $html_generator->span(
-            		$help_text,
-		            '',
-		            'twine-radio-help description'
-	            );
+            if ($help_text) {
+                $html .= $html_generator->span(
+                    $help_text,
+                    '',
+                    'twine-radio-help description'
+                );
             }
         }
         $html .= $html_generator->div('', '', 'clear-float');
         $html .= $html_generator->divx();
-        return apply_filters('FH_RadioButtonDisplay__display', $html, $this, $this->_input);
+        return apply_filters('FH_RadioButtonDisplay__display', $html, $this, $this->input);
     }
 }

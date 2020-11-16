@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\validation;
+
 use EventEspresso\core\domain\services\factories\EmailAddressFactory;
 use EventEspresso\core\domain\services\validation\email\EmailValidationException;
 use EventEspresso\core\exceptions\InvalidDataTypeException;
@@ -25,7 +27,7 @@ class EmailValidation extends TextValidation
     public function __construct($validation_error_message = '')
     {
         if (! $validation_error_message) {
-            $validation_error_message = esc_html__('Please enter a valid email address.', 'event_espresso');
+            $validation_error_message = esc_html__('Please enter a valid email address.', 'print-my-blog');
         }
         parent::__construct($validation_error_message);
     }
@@ -44,8 +46,8 @@ class EmailValidation extends TextValidation
      */
     public function validate($normalized_value)
     {
-        if ($normalized_value && ! $this->_validate_email($normalized_value)) {
-            throw new ValidationError($this->get_validation_error_message(), 'required');
+        if ($normalized_value && ! $this->validateEmail($normalized_value)) {
+            throw new ValidationError($this->getValidationErrorMessage(), 'required');
         }
         return true;
     }
@@ -55,9 +57,9 @@ class EmailValidation extends TextValidation
     /**
      * @return array
      */
-    public function get_jquery_validation_rule_array()
+    public function getJqueryValidationRuleArray()
     {
-        return array('email' => true, 'messages' => array('email' => $this->get_validation_error_message()));
+        return array('email' => true, 'messages' => array('email' => $this->getValidationErrorMessage()));
     }
 
 
@@ -69,7 +71,7 @@ class EmailValidation extends TextValidation
      * @param $email
      * @return bool of whether the email is valid or not
      */
-    private function _validate_email($email)
+    private function validateEmail($email)
     {
         return is_email($email);
     }

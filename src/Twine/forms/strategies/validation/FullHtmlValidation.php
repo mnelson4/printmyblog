@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\validation;
+
 use Twine\forms\helpers\ValidationError;
 use Twine\helpers\Html;
 
@@ -24,9 +26,9 @@ class FullHtmlValidation extends ValidationBase
     {
         if (! $validation_error_message) {
             $validation_error_message = sprintf(
-                __('Only the following HTML tags are allowed:%1$s%2$s', "event_espresso"),
+                __('Only the following HTML tags are allowed:%1$s%2$s', "print-my-blog"),
                 '<br />',
-                $this->get_list_of_allowed_tags()
+                $this->getListOfAllowedTags()
             );
         }
         parent::__construct($validation_error_message);
@@ -40,7 +42,7 @@ class FullHtmlValidation extends ValidationBase
      *
      * @return string
      */
-    public function get_list_of_allowed_tags()
+    public function getListOfAllowedTags()
     {
         $tags_we_allow = $this->getAllowedTags();
         ksort($tags_we_allow);
@@ -55,20 +57,20 @@ class FullHtmlValidation extends ValidationBase
      */
     protected function getAllowedTags()
     {
-	    global $allowedtags;
-	    $tags_we_allow['p']=array();
-	    $tags_we_allow = array_merge_recursive(
-		    $allowedtags,
-		    array(
-			    'ol' => array(),
-			    'ul' => array(),
-			    'li' => array(),
-			    'br' => array(),
-			    'p' => array(),
-			    'a' => array('target')
-		    )
-	    );
-	    return apply_filters('Twine\forms\strategies\validation\FullHtmlValidation::getAllowedTags', $tags_we_allow);
+        global $allowedtags;
+        $tags_we_allow['p'] = array();
+        $tags_we_allow = array_merge_recursive(
+            $allowedtags,
+            array(
+                'ol' => array(),
+                'ul' => array(),
+                'li' => array(),
+                'br' => array(),
+                'p' => array(),
+                'a' => array('target')
+            )
+        );
+        return apply_filters('Twine\forms\strategies\validation\FullHtmlValidation::getAllowedTags', $tags_we_allow);
     }
 
 
@@ -81,7 +83,7 @@ class FullHtmlValidation extends ValidationBase
         parent::validate($normalized_value);
         $normalized_value_sans_tags = wp_kses("$normalized_value", $this->getAllowedTags());
         if (strlen($normalized_value) > strlen($normalized_value_sans_tags)) {
-            throw new ValidationError($this->get_validation_error_message(), 'complex_html_tags');
+            throw new ValidationError($this->getValidationErrorMessage(), 'complex_html_tags');
         }
     }
 }

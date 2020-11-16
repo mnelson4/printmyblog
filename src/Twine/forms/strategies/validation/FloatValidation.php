@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\validation;
+
 /**
  * Class FloatValidation
  *
@@ -18,7 +20,10 @@ class FloatValidation extends ValidationBase
     public function __construct($validation_error_message = null)
     {
         if (! $validation_error_message) {
-            $validation_error_message = sprintf(__("Only numeric characters, commas, periods, and spaces, please!", "event_espresso"));
+            $validation_error_message = __(
+                "Only numeric characters, commas, periods, and spaces, please!",
+                "print-my-blog"
+            );
         }
         parent::__construct($validation_error_message);
     }
@@ -39,8 +44,8 @@ class FloatValidation extends ValidationBase
     /**
      * @return array
      */
-    public function get_jquery_validation_rule_array()
+    public function getJqueryValidationRuleArray()
     {
-        return array('number'=>true, 'messages' => array( 'number' => $this->get_validation_error_message() ) );
+        return array('number' => true, 'messages' => array( 'number' => $this->getValidationErrorMessage() ) );
     }
 }

@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\inputs;
+
 use Twine\forms\strategies\display\RadioButtonDisplay;
 use Twine\forms\strategies\validation\EnumValidation;
 
@@ -21,15 +23,15 @@ class RadioButtonInput extends FormInputWithOptionsBase
      */
     public function __construct($answer_options, $input_settings = array())
     {
-        $this->_set_display_strategy(new RadioButtonDisplay());
-        $this->_add_validation_strategy(
+        $this->setDisplayStrategy(new RadioButtonDisplay());
+        $this->addValidationStrategy(
             new EnumValidation(
                 isset($input_settings['validation_error_message'])
                     ? $input_settings['validation_error_message']
                     : null
             )
         );
-        $this->_multiple_selections = false;
+        $this->multiple_selections = false;
         parent::__construct($answer_options, $input_settings);
     }
 }

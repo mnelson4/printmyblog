@@ -246,7 +246,7 @@ class LegacyPrintPage extends BaseController
             array(),
             filemtime(PMB_ASSETS_DIR . 'styles/tiled-gallery.css')
         );
-	    wp_enqueue_style('pmb-plugin-compatibility');
+        wp_enqueue_style('pmb-plugin-compatibility');
 
         $post_type = $this->getFromRequest('post-type', 'post');
         if ($post_type === 'post') {
@@ -441,11 +441,11 @@ class LegacyPrintPage extends BaseController
         }
         ";
         // If it's a multi-column design, remove the margins around "pmb_image"s. They offset the image so that even
-	    // if it takes up the full column width, it's now offset and so spills over onto the other column.
-	    // Removing the margins fixes that. And because "pmb_image"s take up the width, they don't prevent
-	    // the image contained inside them from being centered anyhow. So this seems to be win-win.
-        if($columns > 1){
-        	$css .= "
+        // if it takes up the full column width, it's now offset and so spills over onto the other column.
+        // Removing the margins fixes that. And because "pmb_image"s take up the width, they don't prevent
+        // the image contained inside them from being centered anyhow. So this seems to be win-win.
+        if ($columns > 1) {
+            $css .= "
         	.pmb-image{
         	    margin-left:0;
         	    margin-right:0;

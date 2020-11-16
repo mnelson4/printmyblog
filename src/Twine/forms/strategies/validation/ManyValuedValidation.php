@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\validation;
+
 use Twine\forms\inputs\FormInputBase;
 
 /**
@@ -16,7 +18,7 @@ use Twine\forms\inputs\FormInputBase;
  */
 class ManyValuedValidation extends ValidationBase
 {
-    protected $_individual_item_validation_strategies = array();
+    protected $individual_item_validation_strategies = array();
     /**
      *
      * @param ValidationBase[] $individual_item_validation_strategies (or a single ValidationBase)
@@ -26,7 +28,7 @@ class ManyValuedValidation extends ValidationBase
         if (! is_array($individual_item_validation_strategies)) {
             $individual_item_validation_strategies = array($individual_item_validation_strategies);
         }
-        $this->_individual_item_validation_strategies = $individual_item_validation_strategies;
+        $this->individual_item_validation_strategies = $individual_item_validation_strategies;
         parent::__construct();
     }
 
@@ -45,7 +47,7 @@ class ManyValuedValidation extends ValidationBase
             $items_to_validate = array($normalized_value);
         }
         foreach ($items_to_validate as $individual_item) {
-            foreach ($this->_individual_item_validation_strategies as $validation_strategy) {
+            foreach ($this->individual_item_validation_strategies as $validation_strategy) {
                 if ($validation_strategy instanceof ValidationBase) {
                     $validation_strategy->validate($individual_item);
                 }
@@ -62,12 +64,12 @@ class ManyValuedValidation extends ValidationBase
      *
      * @param FormInputBase $form_input
      */
-    public function _construct_finalize( FormInputBase $form_input)
+    public function constructFinalize(FormInputBase $form_input)
     {
-        parent::_construct_finalize($form_input);
-        foreach ($this->_individual_item_validation_strategies as $item_validation_strategy) {
+        parent::constructFinalize($form_input);
+        foreach ($this->individual_item_validation_strategies as $item_validation_strategy) {
             if ($item_validation_strategy instanceof ValidationBase) {
-                $item_validation_strategy->_construct_finalize($form_input);
+                $item_validation_strategy->constructFinalize($form_input);
             }
         }
     }

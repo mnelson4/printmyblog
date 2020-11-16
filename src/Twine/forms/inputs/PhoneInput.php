@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\inputs;
+
 /**
  *
  * Phone_Input
@@ -19,9 +21,9 @@ class PhoneInput extends TextInput
      */
     public function __construct($options = array())
     {
-        $this->_add_validation_strategy(
+        $this->addValidationStrategy(
             new TextValidation(
-                __('Please enter a valid phone number. Eg 123-456-7890 or 1234567890', 'event_espresso'),
+                __('Please enter a valid phone number. Eg 123-456-7890 or 1234567890', 'print-my-blog'),
                 '~^(([\d]{10})|(^[\d]{3}-[\d]{3}-[\d]{4}))$~'
             )
         );

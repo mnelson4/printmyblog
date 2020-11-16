@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\display;
+
 use Exception;
 use Twine\forms\inputs\FormInputWithOptionsBase;
 use Twine\helpers\Array2;
@@ -27,25 +29,30 @@ class SelectDisplay extends DisplayBase
      */
     public function display()
     {
-        if (! $this->_input instanceof FormInputWithOptionsBase) {
-            throw new Exception(sprintf(__('Cannot use Select Display Strategy with an input that doesn\'t have options', 'event_espresso')));
+        if (! $this->input instanceof FormInputWithOptionsBase) {
+            throw new Exception(
+                __('Cannot use Select Display Strategy with an input that doesn\'t have options', 'print-my-blog')
+            );
         }
-		$html_generator = Html::instance();
+        $html_generator = Html::instance();
         $html = $html_generator->nl(0, 'select');
         $html .= '<select';
-        $html .= $this->_attributes_string(
-            $this->_standard_attributes_array()
+        $html .= $this->attributesString(
+            $this->standardAttributesArray()
         );
         $html .= '>';
 
-        if (Array2::is_multi_dimensional_array($this->_input->options())) {
+        if (Array2::isMultiDimensionalArray($this->input->options())) {
             $html_generator->indent(1, 'optgroup');
-            foreach ($this->_input->options() as $opt_group_label => $opt_group) {
+            foreach ($this->input->options() as $opt_group_label => $opt_group) {
                 if (! empty($opt_group_label)) {
-                    $html .= $html_generator->nl(0, 'optgroup') . '<optgroup label="' . esc_attr($opt_group_label) . '">';
+                    $html .= $html_generator->nl(0, 'optgroup')
+                        . '<optgroup label="'
+                        . esc_attr($opt_group_label)
+                        . '">';
                 }
                 $html_generator->indent(1, 'option');
-                $html .= $this->_display_options($opt_group);
+                $html .= $this->displayOptions($opt_group);
                 $html_generator->indent(-1, 'option');
                 if (! empty($opt_group_label)) {
                     $html .= $html_generator->nl(0, 'optgroup') . '</optgroup>';
@@ -53,10 +60,10 @@ class SelectDisplay extends DisplayBase
             }
             $html_generator->indent(-1, 'optgroup');
         } else {
-            $html.=$this->_display_options($this->_input->options());
+            $html .= $this->displayOptions($this->input->options());
         }
 
-        $html.= $html_generator->nl(0, 'select') . '</select>';
+        $html .= $html_generator->nl(0, 'select') . '</select>';
         return $html;
     }
 
@@ -67,7 +74,7 @@ class SelectDisplay extends DisplayBase
      * @param array $options
      * @return string
      */
-    protected function _display_options($options)
+    protected function displayOptions($options)
     {
         $html = '';
         $html_generator = Html::instance();
@@ -75,9 +82,16 @@ class SelectDisplay extends DisplayBase
         foreach ($options as $value => $display_text) {
             // even if this input uses TextNormalization if one of the array keys is a numeric string, like "123",
             // PHP will have converted it to a PHP integer (eg 123). So we need to make sure it's a string
-            $unnormalized_value = $this->_input->get_normalization_strategy()->unnormalize_one($value);
-            $selected = $this->_check_if_option_selected($unnormalized_value) ? ' selected="selected"' : '';
-            $html.= $html_generator->nl(0, 'option') . '<option value="' . esc_attr($unnormalized_value) . '"' . $selected . '>' . $display_text . '</option>';
+            $unnormalized_value = $this->input->getNormalizationStrategy()->unnormalizeOne($value);
+            $selected = $this->checkIfOptionSelected($unnormalized_value) ? ' selected="selected"' : '';
+            $html .= $html_generator->nl(0, 'option')
+                . '<option value="'
+                . esc_attr($unnormalized_value)
+                . '"'
+                . $selected
+                . '>'
+                . $display_text
+                . '</option>';
         }
         $html_generator->indent(-1, 'option');
         return $html;
@@ -91,8 +105,8 @@ class SelectDisplay extends DisplayBase
      * @param string|int $option_value unnormalized value option (string). How it will appear in the HTML.
      * @return string
      */
-    protected function _check_if_option_selected($option_value)
+    protected function checkIfOptionSelected($option_value)
     {
-        return $option_value === $this->_input->raw_value();
+        return $option_value === $this->input->rawValue();
     }
 }

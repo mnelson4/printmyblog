@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\normalization;
+
 /**
  * SlugNormalization
  * Simply converts the string into a slug. DOes not add any errors if its bad.

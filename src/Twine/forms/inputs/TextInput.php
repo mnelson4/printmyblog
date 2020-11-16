@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\inputs;
+
 use Twine\forms\strategies\display\TextInputDisplay;
 use Twine\forms\strategies\normalization\TextNormalization;
 use Twine\forms\strategies\validation\PlaintextValidation;
@@ -22,21 +24,22 @@ class TextInput extends FormInputBase
      */
     public function __construct($options = array())
     {
-        $this->_set_display_strategy(new TextInputDisplay());
-        $this->_set_normalization_strategy(new TextNormalization());
+        $this->setDisplayStrategy(new TextInputDisplay());
+        $this->setNormalizationStrategy(new TextNormalization());
         parent::__construct($options);
         // if the input hasn't specifically mentioned a more lenient validation strategy,
         // apply plaintext validation strategy
-        if (! $this->has_validation_strategy(
-            array(
+        if (
+            ! $this->hasValidationStrategy(
+                array(
                     'FullHtmlValidation',
                     'SimpleHtmlValidation'
                 )
-        )
+            )
         ) {
             // by default we use the plaintext validation. If you want something else,
             // just remove it after the input is constructed :P using FormInputBase::remove_validation_strategy()
-            $this->_add_validation_strategy(new PlaintextValidation());
+            $this->addValidationStrategy(new PlaintextValidation());
         }
     }
 }

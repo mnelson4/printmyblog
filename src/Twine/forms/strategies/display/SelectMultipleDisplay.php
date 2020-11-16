@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\display;
+
 use Exception;
 use Twine\forms\inputs\FormInputWithOptionsBase;
 use Twine\helpers\Array2;
@@ -25,30 +27,39 @@ class SelectMultipleDisplay extends SelectDisplay
     public function display()
     {
 
-        if (! $this->_input instanceof FormInputWithOptionsBase) {
-            throw new Exception(sprintf(__('Cannot use Select Multiple Display Strategy with an input that doesn\'t have options', "event_espresso")));
+        if (! $this->input instanceof FormInputWithOptionsBase) {
+            throw new Exception(
+                __(
+                    'Cannot use Select Multiple Display Strategy with an input that doesn\'t have options',
+                    "print-my-blog"
+                )
+            );
         }
-		$html_generator = Html::instance();
+        $html_generator = Html::instance();
         $html = $html_generator->nl(0, 'select');
         $html .= '<select multiple';
-        $html .= ' id="' . $this->_input->html_id() . '"';
-        $html .= ' name="' . $this->_input->html_name() . '[]"';
-        $class = $this->_input->required() ? $this->_input->required_css_class() . ' ' . $this->_input->html_class() : $this->_input->html_class();
+        $html .= ' id="' . $this->input->htmlId() . '"';
+        $html .= ' name="' . $this->input->htmlName() . '[]"';
+        $class = $this->input->required() ?
+            $this->input->requiredCssClass() . ' ' . $this->input->htmlClass() :
+            $this->input->htmlClass();
         $html .= ' class="' . $class . '"';
         // add html5 required
-        $html .= $this->_input->required() ? ' required' : '';
-        $html .= ' style="' . $this->_input->html_style() . '"';
-        $html .= ' ' . $this->_input->otherHtmlAttributesString();
+        $html .= $this->input->required() ? ' required' : '';
+        $html .= ' style="' . $this->input->htmlStyle() . '"';
+        $html .= ' ' . $this->input->otherHtmlAttributesString();
         $html .= '>';
 
         $html_generator->indent(1, 'select');
-        if (Array2::is_multi_dimensional_array($this->_input->options())) {
-            throw new Exception(sprintf(__("Select multiple display strategy does not allow for nested arrays of options.", "event_espresso")));
+        if (Array2::isMultiDimensionalArray($this->input->options())) {
+            throw new Exception(
+                __("Select multiple display strategy does not allow for nested arrays of options.", "print-my-blog")
+            );
         } else {
-            $html.=$this->_display_options($this->_input->options());
+            $html .= $this->displayOptions($this->input->options());
         }
 
-        $html.= $html_generator->nl(-1, 'select') . "</select>";
+        $html .= $html_generator->nl(-1, 'select') . "</select>";
         return $html;
     }
 
@@ -59,9 +70,9 @@ class SelectMultipleDisplay extends SelectDisplay
      * @param string|int $value unnormalized value option (string)
      * @return boolean
      */
-    protected function _check_if_option_selected($value)
+    protected function checkIfOptionSelected($value)
     {
-        $selected_options = $this->_input->raw_value();
+        $selected_options = $this->input->rawValue();
         if (empty($selected_options)) {
             return false;
         }

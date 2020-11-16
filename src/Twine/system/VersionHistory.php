@@ -33,7 +33,7 @@ class VersionHistory
         $current_version,
         $previous_version_option_name,
         $version_history_option_name
-    ){
+    ) {
         $this->current_version = $current_version;
         $this->previous_version_option_name = $previous_version_option_name;
         $this->version_history_option_name = $version_history_option_name;
@@ -42,25 +42,28 @@ class VersionHistory
      * Gets the version that was active during the last request
      * @return string|null
      */
-    public function previousVersion(){
+    public function previousVersion()
+    {
         return get_option($this->previous_version_option_name, null);
     }
 
-    public function maybeRecordVersionChange(){
-        if($this->previousVersion() !== $this->current_version){
+    public function maybeRecordVersionChange()
+    {
+        if ($this->previousVersion() !== $this->current_version) {
             $this->recordVersionChange();
         }
     }
-    public function recordVersionChange(){
-        update_option($this->previous_version_option_name,PMB_VERSION);
+    public function recordVersionChange()
+    {
+        update_option($this->previous_version_option_name, PMB_VERSION);
         $previous_versions = get_option($this->version_history_option_name, []);
-        if(is_string($previous_versions)){
-            $previous_versions = json_decode($previous_versions,true);
+        if (is_string($previous_versions)) {
+            $previous_versions = json_decode($previous_versions, true);
         }
-        if(empty($previous_versions)){
+        if (empty($previous_versions)) {
             $previous_versions = [];
         }
-        if(! isset($previous_versions[$this->current_version])){
+        if (! isset($previous_versions[$this->current_version])) {
             $previous_versions[$this->current_version] = [];
         }
         $previous_versions[$this->current_version][] = date('Y-m-d H:i:s');

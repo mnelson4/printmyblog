@@ -16,18 +16,17 @@ use WP_Post_Type;
  */
 class Capabilities
 {
-    public function grant_capabilities()
+    public function grantCapabilities()
     {
-        $post_types = get_post_types([],'objects');
-        foreach($post_types as $post_type){
-            if($post_type instanceof WP_Post_Type && $post_type->name === CustomPostTypes::PROJECT){
+        $post_types = get_post_types([], 'objects');
+        foreach ($post_types as $post_type) {
+            if ($post_type instanceof WP_Post_Type && $post_type->name === CustomPostTypes::PROJECT) {
                 break;
             }
         }
-        $admin_role = get_role( 'administrator' );
-        foreach($post_type->cap as $capability){
-            $admin_role->add_cap($capability,true);
+        $admin_role = get_role('administrator');
+        foreach ($post_type->cap as $capability) {
+            $admin_role->add_cap($capability, true);
         }
-
     }
 }

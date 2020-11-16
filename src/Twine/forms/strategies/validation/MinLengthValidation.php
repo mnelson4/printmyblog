@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\validation;
+
 use Twine\forms\helpers\ValidationError;
 
 /**
@@ -14,11 +16,11 @@ use Twine\forms\helpers\ValidationError;
 class MinLengthValidation extends ValidationBase
 {
 
-    protected $_min_length;
+    protected $min_length;
 
     public function __construct($validation_error_message = null, $min_length = 0)
     {
-        $this->_min_length = $min_length;
+        $this->min_length = $min_length;
         parent::__construct($validation_error_message);
     }
 
@@ -27,19 +29,26 @@ class MinLengthValidation extends ValidationBase
      */
     public function validate($normalized_value)
     {
-        if ($this->_min_length > 0 &&
+        if (
+            $this->min_length > 0 &&
                 $normalized_value &&
                 is_string($normalized_value) &&
-                strlen($normalized_value) < $this->_min_length) {
-            throw new ValidationError($this->get_validation_error_message(), 'minlength');
+                strlen($normalized_value) < $this->min_length
+        ) {
+            throw new ValidationError($this->getValidationErrorMessage(), 'minlength');
         }
     }
 
     /**
      * @return array
      */
-    public function get_jquery_validation_rule_array()
+    public function getJqueryValidationRuleArray()
     {
-        return array( 'minlength'=> $this->_min_length, 'messages' => array( 'minlength' => $this->get_validation_error_message() ) );
+        return array(
+            'minlength' => $this->min_length,
+            'messages' => array(
+                'minlength' => $this->getValidationErrorMessage()
+            )
+        );
     }
 }

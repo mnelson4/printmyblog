@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\base;
+
 /**
  * FormSectionHtml_From_Template
  *

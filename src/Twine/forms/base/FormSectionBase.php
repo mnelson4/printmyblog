@@ -1,28 +1,34 @@
-<?php
+<?php // phpcs:disable PSR1.Files.SideEffects.FoundWithSymbols
+
 namespace Twine\forms\base;
+
 use EventEspresso\core\exceptions\InvalidDataTypeException;
 use EventEspresso\core\libraries\form_sections\strategies\filter\FormHtmlFilter;
 use Exception;
 use Twine\forms\helpers\ImproperUsageException;
 
-if(!defined('TWINE_SCRIPTS_URL')){
-	if(! defined('TWINE_MAIN_FILE')){
-		throw new Exception(
-			__(
-				'In order to use Twine forms, you need to define TWINE_MAIN_FILE to be the main file of your plugin, then put Twine folder inside wp-content/plugins/yourplugin/src/Twine',
-				'twine'
-			)
-		);
-	}
-	$plugin_base_path = dirname(TWINE_MAIN_FILE);
-	$plugin_url = plugin_dir_url(TWINE_MAIN_FILE);
-	// Twine constants
-	define('TWINE_SCRIPTS_URL', $plugin_url . 'src/Twine/assets/scripts/');
-	define('TWINE_STYLES_URL', $plugin_url . 'src/Twine/assets/styles/');
+if (!defined('TWINE_SCRIPTS_URL')) {
+    if (! defined('TWINE_MAIN_FILE')) {
+        throw new Exception(
+            __(
+                // phpcs:disable Generic.Files.LineLength.TooLong
+                'In order to use Twine forms, you need to define TWINE_MAIN_FILE to be the main file of your plugin, then put Twine folder inside wp-content/plugins/yourplugin/src/Twine',
+                // phpcs:enable Generic.Files.LineLength.TooLong
+                'twine'
+            )
+        );
+    }
+    $plugin_base_path = dirname(TWINE_MAIN_FILE);
+    $plugin_url = plugin_dir_url(TWINE_MAIN_FILE);
+    // Twine constants
+    define('TWINE_SCRIPTS_URL', $plugin_url . 'src/Twine/assets/scripts/');
+    define('TWINE_STYLES_URL', $plugin_url . 'src/Twine/assets/styles/');
 
-	define('TWINE_SCRIPTS_DIR', $plugin_base_path . '/src/Twine/assets/scripts/');
-	define('TWINE_STYLES_DIR', $plugin_base_path . '/src/Twine/assets/styles/');
+    define('TWINE_SCRIPTS_DIR', $plugin_base_path . '/src/Twine/assets/scripts/');
+    define('TWINE_STYLES_DIR', $plugin_base_path . '/src/Twine/assets/styles/');
 }
+// phpcs:enable PSR1.Files.SideEffects.FoundWithSymbols
+
 /**
  * FormSectionBase
  * For shared functionality between form sections that are for display-only, and
@@ -39,38 +45,38 @@ abstract class FormSectionBase
      *
      * @var string
      */
-    protected $_name;
+    protected $name;
 
     /**
      * $_html_id
      * @var string
      */
-    protected $_html_id;
+    protected $html_id;
 
     /**
      * $_html_class
      * @var string
      */
-    protected $_html_class;
+    protected $html_class;
 
     /**
      * $_html_style
      * @var string
      */
-    protected $_html_style;
+    protected $html_style;
 
     /**
      * $_other_html_attributes keys are attribute names, values are their values.
      * @var array
      */
-    protected $_other_html_attributes = array();
+    protected $other_html_attributes = array();
 
     /**
      * The form section of which this form section is a part
      *
-     * @var FormSectionProper
+     * @var FormSection
      */
-    protected $_parent_section;
+    protected $parent_section;
 
     /**
      * flag indicating that _construct_finalize has been called.
@@ -79,7 +85,7 @@ abstract class FormSectionBase
      *
      * @var boolean
      */
-    protected $_construction_finalized;
+    protected $construction_finalized;
 
 
     /**
@@ -93,10 +99,9 @@ abstract class FormSectionBase
         // used by display strategies
         // assign incoming values to properties
         foreach ($options_array as $key => $value) {
-            $key = '_' . $key;
             if (property_exists($this, $key) && empty($this->{$key})) {
                 $this->{$key} = $value;
-                if ($key === '_subsections' && ! is_array($value)) {
+                if ($key === 'subsections' && ! is_array($value)) {
                     throw new InvalidDataTypeException($key, $value, 'array');
                 }
             }
@@ -110,12 +115,12 @@ abstract class FormSectionBase
      * @param $name
      * @throws \Error
      */
-    protected function _construct_finalize($parent_form_section, $name)
+    protected function constructFinalize($parent_form_section, $name)
     {
-        $this->_construction_finalized = true;
-        $this->_parent_section = $parent_form_section;
+        $this->construction_finalized = true;
+        $this->parent_section = $parent_form_section;
         if ($name !== null) {
-            $this->_name = $name;
+            $this->name = $name;
         }
     }
 
@@ -127,10 +132,10 @@ abstract class FormSectionBase
      * @return void
      * @throws \Error
      */
-    public function ensure_construct_finalized_called()
+    public function ensureConstructFinalizedCalled()
     {
-        if (! $this->_construction_finalized) {
-            $this->_construct_finalize($this->_parent_section, $this->_name);
+        if (! $this->construction_finalized) {
+            $this->constructFinalize($this->parent_section, $this->name);
         }
     }
 
@@ -141,15 +146,15 @@ abstract class FormSectionBase
      *
      * @throws \Error
      */
-    protected function _set_default_html_id_if_empty()
+    protected function setDefaultHtmlIdIfEmpty()
     {
-        if (! $this->_html_id) {
-            if ($this->_parent_section && $this->_parent_section instanceof FormSectionProper) {
-                $this->_html_id = $this->_parent_section->html_id()
+        if (! $this->html_id) {
+            if ($this->parent_section && $this->parent_section instanceof FormSection) {
+                $this->html_id = $this->parent_section->htmlId()
                                   . '-'
-                                  . $this->_prep_name_for_html_id($this->name());
+                                  . $this->prepNameForHtmlId($this->name());
             } else {
-                $this->_html_id = $this->_prep_name_for_html_id($this->name());
+                $this->html_id = $this->prepNameForHtmlId($this->name());
             }
         }
     }
@@ -162,7 +167,7 @@ abstract class FormSectionBase
      * @param $name
      * @return string
      */
-    private function _prep_name_for_html_id($name)
+    private function prepNameForHtmlId($name)
     {
         return sanitize_key(str_replace(array('&nbsp;', ' ', '_'), '-', $name));
     }
@@ -172,16 +177,16 @@ abstract class FormSectionBase
     /**
      * Returns the HTML, JS, and CSS necessary to display this form section on a page.
      * Note however, it's recommended that you instead call enqueue_js on the "wp_enqueue_scripts" action,
-     * and call get_html when you want to output the html. Calling get_html_and_js after
+     * and call get_html when you want to output the html. Calling getHtmlAndJs after
      * "wp_enqueue_scripts" has already fired seems to work for now, but is contrary
      * to the instructions on https://developer.wordpress.org/reference/functions/wp_enqueue_script/
      * and so might stop working anytime.
      *
      * @return string
      */
-    public function get_html_and_js()
+    public function getHtmlAndJs()
     {
-        return $this->get_html();
+        return $this->getHtml();
     }
 
 
@@ -191,7 +196,7 @@ abstract class FormSectionBase
      *
      * @return string
      */
-    abstract public function get_html();
+    abstract public function getHtml();
 
 
     /**
@@ -199,10 +204,10 @@ abstract class FormSectionBase
      * @return string
      * @throws ImproperUsageException
      */
-    public function html_id($add_pound_sign = false)
+    public function htmlId($add_pound_sign = false)
     {
-        $this->_set_default_html_id_if_empty();
-        return $add_pound_sign ? '#' . $this->_html_id : $this->_html_id;
+        $this->setDefaultHtmlIdIfEmpty();
+        return $add_pound_sign ? '#' . $this->html_id : $this->html_id;
     }
 
 
@@ -210,9 +215,9 @@ abstract class FormSectionBase
     /**
      * @return string
      */
-    public function html_class()
+    public function htmlClass()
     {
-        return $this->_html_class;
+        return $this->html_class;
     }
 
 
@@ -220,9 +225,9 @@ abstract class FormSectionBase
     /**
      * @return string
      */
-    public function html_style()
+    public function htmlStyle()
     {
-        return $this->_html_style;
+        return $this->html_style;
     }
 
 
@@ -230,9 +235,9 @@ abstract class FormSectionBase
     /**
      * @param mixed $html_class
      */
-    public function set_html_class($html_class)
+    public function setHtmlClass($html_class)
     {
-        $this->_html_class = $html_class;
+        $this->html_class = $html_class;
     }
 
 
@@ -240,9 +245,9 @@ abstract class FormSectionBase
     /**
      * @param mixed $html_id
      */
-    public function set_html_id($html_id)
+    public function setHtmlId($html_id)
     {
-        $this->_html_id = $html_id;
+        $this->html_id = $html_id;
     }
 
 
@@ -250,9 +255,9 @@ abstract class FormSectionBase
     /**
      * @param mixed $html_style
      */
-    public function set_html_style($html_style)
+    public function setHtmlStyle($html_style)
     {
-        $this->_html_style = $html_style;
+        $this->html_style = $html_style;
     }
 
 
@@ -260,31 +265,35 @@ abstract class FormSectionBase
     /**
      * @param array $other_html_attributes
      */
-    public function set_other_html_attributes($other_html_attributes)
+    public function setOtherHtmlAttributes($other_html_attributes)
     {
-    	if(! is_array($other_html_attributes)){
-    		throw new ImproperUsageException(get_class($this) . '::set_other_html_attribues should be passed in an array, not a string');
-	    }
-        $this->_other_html_attributes = (array)$other_html_attributes;
+        if (! is_array($other_html_attributes)) {
+            throw new ImproperUsageException(
+                get_class($this) . '::set_other_html_attribues should be passed in an array, not a string'
+            );
+        }
+        $this->other_html_attributes = (array)$other_html_attributes;
     }
 
-	/**
-	 * @param $name
-	 * @param $value optional. Leave blank for standalone attributes like "checked"
-	 */
-    public function addOtherHtmlAttribute($name, $value = null){
-    	if($value === null){
-    		$this->_other_html_attributes[] = $name;
-	    } else{
-		    $this->_other_html_attributes[$name] = $value;
-	    }
+    /**
+     * @param $name
+     * @param $value optional. Leave blank for standalone attributes like "checked"
+     */
+    public function addOtherHtmlAttribute($name, $value = null)
+    {
+        if ($value === null) {
+            $this->other_html_attributes[] = $name;
+        } else {
+            $this->other_html_attributes[$name] = $value;
+        }
     }
 
-	/**
-	 * @param $name
-	 */
-    public function removeOtherHtmlAttribute($name){
-    	unset($this->_other_html_attributes[$name]);
+    /**
+     * @param $name
+     */
+    public function removeOtherHtmlAttribute($name)
+    {
+        unset($this->other_html_attributes[$name]);
     }
 
 
@@ -292,25 +301,26 @@ abstract class FormSectionBase
     /**
      * @return array keys are attribute names, values are their values
      */
-    public function other_html_attributes()
+    public function otherHtmlAttributes()
     {
-        return $this->_other_html_attributes;
+        return $this->other_html_attributes;
     }
 
-	/**
-	 * Gets a string of html attributes
-	 * @return string
-	 */
-    public function otherHtmlAttributesString(){
-    	$keyvaluepairs = [];
-    	foreach($this->other_html_attributes() as $key => $value){
-    		if(is_numeric($key)){
-    			$keyvaluepairs[] = esc_attr($value);
-		    } else{
-			    $keyvaluepairs[] = $key . '="' . esc_attr($value) . '"';
-		    }
-	    }
-    	return ' ' . implode(' ', $keyvaluepairs);
+    /**
+     * Gets a string of html attributes
+     * @return string
+     */
+    public function otherHtmlAttributesString()
+    {
+        $keyvaluepairs = [];
+        foreach ($this->otherHtmlAttributes() as $key => $value) {
+            if (is_numeric($key)) {
+                $keyvaluepairs[] = esc_attr($value);
+            } else {
+                $keyvaluepairs[] = $key . '="' . esc_attr($value) . '"';
+            }
+        }
+        return ' ' . implode(' ', $keyvaluepairs);
     }
 
 
@@ -322,13 +332,15 @@ abstract class FormSectionBase
      */
     public function name()
     {
-        if (! $this->_construction_finalized) {
+        if (! $this->construction_finalized) {
             throw new ImproperUsageException(sprintf(__(
-                'You cannot use the form section\s name until _construct_finalize has been called on it (when we set the name). It was called on a form section of type \'s\'',
-                'event_espresso'
+                // phpcs:disable Generic.Files.LineLength.TooLong
+                'You cannot use the form section\s name until constructFinalize has been called on it (when we set the name). It was called on a form section of type \'s\'',
+                // phpcs:enable Generic.Files.LineLength.TooLong
+                'print-my-blog'
             ), get_class($this)));
         }
-        return $this->_name;
+        return $this->name;
     }
 
 
@@ -336,10 +348,11 @@ abstract class FormSectionBase
     /**
      * Gets the parent section
      *
-     * @return FormSectionProper
+     * @return FormSection
      */
-    public function parent_section() {
-	    return $this->_parent_section;
+    public function parentSection()
+    {
+        return $this->parent_section;
     }
 
 
@@ -351,7 +364,7 @@ abstract class FormSectionBase
      *
      * @return void
      */
-    public function enqueue_js()
+    public function enqueueJs()
     {
         // defaults to enqueue NO js or css
     }
@@ -371,7 +384,7 @@ abstract class FormSectionBase
      * @param array $form_other_js_data
      * @return array
      */
-    public function get_other_js_data($form_other_js_data = array())
+    public function getOtherJsData($form_other_js_data = array())
     {
         return $form_other_js_data;
     }
@@ -394,7 +407,7 @@ abstract class FormSectionBase
      *
      * @return FormSectionBase
      */
-    public function find_section_from_path($form_section_path)
+    public function findSectionFromPath($form_section_path)
     {
         if (strpos($form_section_path, '/') === 0) {
             $form_section_path = substr($form_section_path, strlen('/'));
@@ -403,10 +416,10 @@ abstract class FormSectionBase
             return $this;
         }
         if (strpos($form_section_path, '../') === 0) {
-            $parent = $this->parent_section();
+            $parent = $this->parentSection();
             $form_section_path = substr($form_section_path, strlen('../'));
-            if ( $parent instanceof FormSectionBase) {
-                return $parent->find_section_from_path($form_section_path);
+            if ($parent instanceof FormSectionBase) {
+                return $parent->findSectionFromPath($form_section_path);
             }
             if (empty($form_section_path)) {
                 return $this;

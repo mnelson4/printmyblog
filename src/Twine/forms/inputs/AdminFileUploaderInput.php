@@ -1,4 +1,5 @@
 <?php
+
 namespace Twine\forms\inputs;
 
 use Twine\forms\strategies\display\AdminFileUploaderDisplay;
@@ -22,9 +23,9 @@ class AdminFileUploaderInput extends FormInputBase
      */
     public function __construct($input_settings = array())
     {
-        $this->_set_display_strategy(new AdminFileUploaderDisplay());
-        $this->_set_normalization_strategy(new TextNormalization());
-        $this->_add_validation_strategy(new URLValidation());
+        $this->setDisplayStrategy(new AdminFileUploaderDisplay());
+        $this->setNormalizationStrategy(new TextNormalization());
+        $this->addValidationStrategy(new URLValidation());
         parent::__construct($input_settings);
     }
 }

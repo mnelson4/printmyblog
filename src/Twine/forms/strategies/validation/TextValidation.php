@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\validation;
+
 use Twine\forms\helpers\ValidationError;
 
 /**
@@ -13,7 +15,7 @@ use Twine\forms\helpers\ValidationError;
 class TextValidation extends ValidationBase
 {
 
-    protected $_regex = null;
+    protected $regex = null;
     /**
      *
      * @param string $validation_error_message
@@ -21,7 +23,7 @@ class TextValidation extends ValidationBase
      */
     public function __construct($validation_error_message = null, $regex = null)
     {
-        $this->_regex = $regex;
+        $this->regex = $regex;
         parent::__construct($validation_error_message);
     }
 
@@ -31,9 +33,9 @@ class TextValidation extends ValidationBase
     public function validate($normalized_value)
     {
         $string_normalized_value = (string) $normalized_value;
-        if ($this->_regex &&  $string_normalized_value) {
-            if (! preg_match($this->_regex, $string_normalized_value)) {
-                throw new ValidationError($this->get_validation_error_message(), 'regex');
+        if ($this->regex &&  $string_normalized_value) {
+            if (! preg_match($this->regex, $string_normalized_value)) {
+                throw new ValidationError($this->getValidationErrorMessage(), 'regex');
             }
         }
     }
@@ -41,10 +43,15 @@ class TextValidation extends ValidationBase
     /**
      * @return array
      */
-    public function get_jquery_validation_rule_array()
+    public function getJqueryValidationRuleArray()
     {
-        if ($this->_regex !== null) {
-            return array( 'regex'=> $this->regex_js(), 'messages' => array( 'regex' => $this->get_validation_error_message() ) );
+        if ($this->regex !== null) {
+            return array(
+                'regex' => $this->regexJs(),
+                'messages' => array(
+                    'regex' => $this->getValidationErrorMessage()
+                )
+            );
         } else {
             return array();
         }
@@ -55,11 +62,11 @@ class TextValidation extends ValidationBase
  * javscript does not
  * @return string
  */
-    public function regex_js()
+    public function regexJs()
     {
         // first character must be the delimiter
-        $delimeter = $this->_regex[0];
-        $last_occurence_of_delimieter = strrpos($this->_regex, $delimeter);
-        return substr($this->_regex, 1, $last_occurence_of_delimieter - 1);
+        $delimeter = $this->regex[0];
+        $last_occurence_of_delimieter = strrpos($this->regex, $delimeter);
+        return substr($this->regex, 1, $last_occurence_of_delimieter - 1);
     }
 }

@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\inputs;
+
 use Twine\forms\strategies\display\NumberInputDisplay;
 use Twine\forms\strategies\normalization\IntNormalization;
 use Twine\forms\strategies\validation\IntValidation;
@@ -21,7 +23,7 @@ class IntegerInput extends FormInputBase
      */
     public function __construct($input_settings = array())
     {
-        $this->_set_display_strategy(
+        $this->setDisplayStrategy(
             new NumberInputDisplay(
                 isset($input_settings['min_value'])
                     ? $input_settings['min_value']
@@ -31,14 +33,14 @@ class IntegerInput extends FormInputBase
                     : null
             )
         );
-        $this->_set_normalization_strategy(
+        $this->setNormalizationStrategy(
             new IntNormalization(
                 isset($input_settings['validation_error_message'])
                     ? $input_settings['validation_error_message']
                     : null
             )
         );
-        $this->_add_validation_strategy(
+        $this->addValidationStrategy(
             new IntValidation(
                 isset($input_settings['validation_error_message'])
                     ? $input_settings['validation_error_message']

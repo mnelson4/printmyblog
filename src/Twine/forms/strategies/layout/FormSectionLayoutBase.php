@@ -1,7 +1,9 @@
 <?php
+
 namespace Twine\forms\strategies\layout;
+
 use Twine\forms\base\FormSectionBase;
-use Twine\forms\base\FormSectionProper;
+use Twine\forms\base\FormSection;
 use Twine\forms\inputs\FormInputBase;
 use Twine\forms\strategies\display\HiddenDisplay;
 use Twine\helpers\Html;
@@ -21,9 +23,9 @@ abstract class FormSectionLayoutBase
     /**
      * Form form section to lay out
      *
-     * @var FormSectionProper
+     * @var FormSection
      */
-    protected $_form_section;
+    protected $Form_section;
 
 
 
@@ -39,21 +41,21 @@ abstract class FormSectionLayoutBase
     /**
      * The form section on which this strategy is to perform
      *
-     * @param FormSectionProper $form
+     * @param FormSection $form
      */
-    public function _construct_finalize(FormSectionProper $form)
+    public function constructFinalize(FormSection $form)
     {
-        $this->_form_section = $form;
+        $this->Form_section = $form;
     }
 
 
 
     /**
-     * @return FormSectionProper
+     * @return FormSection
      */
-    public function form_section()
+    public function formSection()
     {
-        return $this->_form_section;
+        return $this->Form_section;
     }
 
 
@@ -68,28 +70,28 @@ abstract class FormSectionLayoutBase
      * @return string HTML for displaying
      * @throws Error
      */
-    public function layout_form()
+    public function layoutForm()
     {
         $html = '';
         // layout_form_begin
         $html .= apply_filters(
-            'FH_FormSectionLayoutBase__layout_form__start__for_' . $this->_form_section->name(),
-            $this->layout_form_begin(),
-            $this->_form_section
+            'FH_FormSectionLayoutBase__layout_form__start__for_' . $this->Form_section->name(),
+            $this->layoutFormBegin(),
+            $this->Form_section
         );
         // layout_form_loop
         $html .= apply_filters(
-            'FH_FormSectionLayoutBase__layout_form__loop__for_' . $this->_form_section->name(),
-            $this->layout_form_loop(),
-            $this->_form_section
+            'FH_FormSectionLayoutBase__layout_form__loop__for_' . $this->Form_section->name(),
+            $this->layoutFormLoop(),
+            $this->Form_section
         );
         // layout_form_end
         $html .= apply_filters(
-            'FH_FormSectionLayoutBase__layout_form__end__for_' . $this->_form_section->name(),
-            $this->layout_form_end(),
-            $this->_form_section
+            'FH_FormSectionLayoutBase__layout_form__end__for_' . $this->Form_section->name(),
+            $this->layoutFormEnd(),
+            $this->Form_section
         );
-        $html = $this->add_form_section_hooks_and_filters($html);
+        $html = $this->addFormSectionHooksAndFilters($html);
         return $html;
     }
 
@@ -99,24 +101,24 @@ abstract class FormSectionLayoutBase
      * @return string
      * @throws Error
      */
-    public function layout_form_loop()
+    public function layoutFormLoop()
     {
         $html = '';
-        foreach ($this->_form_section->subsections() as $name => $subsection) {
-            if ( $subsection instanceof FormInputBase) {
+        foreach ($this->Form_section->subsections() as $name => $subsection) {
+            if ($subsection instanceof FormInputBase) {
                 $html .= apply_filters(
                     'FH_FormSectionLayoutBase__layout_form__loop_for_input_'
-                    . $name . '__in_' . $this->_form_section->name(),
-                    $this->layout_input($subsection),
-                    $this->_form_section,
+                    . $name . '__in_' . $this->Form_section->name(),
+                    $this->layoutInput($subsection),
+                    $this->Form_section,
                     $subsection
                 );
             } elseif ($subsection instanceof FormSectionBase) {
                 $html .= apply_filters(
                     'FH_FormSectionLayoutBase__layout_form__loop_for_non_input_'
-                    . $name . '__in_' . $this->_form_section->name(),
-                    $this->layout_subsection($subsection),
-                    $this->_form_section,
+                    . $name . '__in_' . $this->Form_section->name(),
+                    $this->layoutSubsection($subsection),
+                    $this->Form_section,
                     $subsection
                 );
             }
@@ -131,7 +133,7 @@ abstract class FormSectionLayoutBase
      *
      * @return string
      */
-    abstract public function layout_form_begin();
+    abstract public function layoutFormBegin();
 
 
 
@@ -140,7 +142,7 @@ abstract class FormSectionLayoutBase
      *
      * @return string
      */
-    abstract public function layout_form_end();
+    abstract public function layoutFormEnd();
 
 
 
@@ -156,7 +158,7 @@ abstract class FormSectionLayoutBase
      *
      * @return string html
      */
-    abstract public function layout_input($input);
+    abstract public function layoutInput($input);
 
 
 
@@ -168,7 +170,7 @@ abstract class FormSectionLayoutBase
      * @param FormSectionBase $subsection
      * @return string html
      */
-    abstract public function layout_subsection($subsection);
+    abstract public function layoutSubsection($subsection);
 
 
 
@@ -179,24 +181,24 @@ abstract class FormSectionLayoutBase
      *
      * @return string
      */
-    public function display_label($input)
+    public function displayLabel($input)
     {
-        if ($input->get_display_strategy() instanceof HiddenDisplay) {
+        if ($input->getDisplayStrategy() instanceof HiddenDisplay) {
             return '';
         }
         $class = $input->required()
-            ? 'ee-required-label ' . $input->html_label_class()
-            : $input->html_label_class();
+            ? 'ee-required-label ' . $input->htmlLabelClass()
+            : $input->htmlLabelClass();
         $label_text = $input->required()
-            ? $input->html_label_text() . '<span class="ee-asterisk">*</span>'
-            : $input->html_label_text();
+            ? $input->htmlLabelText() . '<span class="ee-asterisk">*</span>'
+            : $input->htmlLabelText();
         return '<label id="'
-               . $input->html_label_id()
+               . $input->htmlLabelId()
                . '" class="'
                . $class
                . '" style="'
-               . $input->html_label_style()
-               . '" for="' . $input->html_id()
+               . $input->htmlLabelStyle()
+               . '" for="' . $input->htmlId()
                . '">'
                . $label_text
                . '</label>';
@@ -210,14 +212,14 @@ abstract class FormSectionLayoutBase
      * those errors would probably be on the form section, not one of its inputs)
      * @return string
      */
-    public function display_form_wide_errors()
+    public function displayFormWideErrors()
     {
         $html = '';
-        if ($this->_form_section->get_validation_errors()) {
+        if ($this->Form_section->getValidationErrors()) {
             $html .= "<div class='ee-form-wide-errors'>";
             // get all the errors on THIS form section (errors which aren't
             // for specific inputs, but instead for the entire form section)
-            foreach ($this->_form_section->get_validation_errors() as $error) {
+            foreach ($this->Form_section->getValidationErrors() as $error) {
                 $html .= $error->getMessage() . '<br>';
             }
             $html .= '</div>';
@@ -241,13 +243,13 @@ abstract class FormSectionLayoutBase
      *
      * @return string
      */
-    public function display_errors($input)
+    public function displayErrors($input)
     {
-        if ($input->get_validation_errors()) {
+        if ($input->getValidationErrors()) {
             return "<label  id='"
-                   . $input->html_id()
-                   . "-error' class='twine-error' for='{$input->html_name()}'>"
-                   . $input->get_validation_error_string()
+                   . $input->htmlId()
+                   . "-error' class='twine-error' for='{$input->htmlName()}'>"
+                   . $input->getValidationErrorString()
                    . '</label>';
         }
         return '';
@@ -262,19 +264,19 @@ abstract class FormSectionLayoutBase
      *
      * @return string
      */
-    public function display_help_text($input)
+    public function displayHelpText($input)
     {
-        $help_text  = $input->html_help_text();
+        $help_text  = $input->htmlHelpText();
         if ($help_text !== '' && $help_text !== null) {
             $tag = is_admin() ? 'p' : 'span';
             return '<'
                    . $tag
                    . ' id="'
-                   . $input->html_id()
+                   . $input->htmlId()
                    . '-help" class="'
-                   . $input->html_help_class()
+                   . $input->htmlHelpClass()
                    . '" style="'
-                   . $input->html_help_style()
+                   . $input->htmlHelpStyle()
                    . '">'
                    . $help_text
                    . '</'
@@ -292,16 +294,16 @@ abstract class FormSectionLayoutBase
      * @param string $html
      * @return string
      */
-    public function add_form_section_hooks_and_filters($html)
+    public function addFormSectionHooksAndFilters($html)
     {
-	    $html_generator = Html::instance();
+        $html_generator = Html::instance();
         // replace dashes and spaces with underscores
-        $hook_name = str_replace(array('-', ' '), '_', $this->_form_section->html_id());
-        do_action('AH_Form_Section_Layout__' . $hook_name, $this->_form_section);
+        $hook_name = str_replace(array('-', ' '), '_', $this->Form_section->htmlId());
+        do_action('AH_Form_Section_Layout__' . $hook_name, $this->Form_section);
         $html = (string) apply_filters(
             'AF_Form_Section_Layout__' . $hook_name . '__html',
             $html,
-            $this->_form_section
+            $this->Form_section
         );
         $html .= $html_generator->nl() . '<!-- AH_Form_Section_Layout__' . $hook_name . '__html -->';
         $html .= $html_generator->nl() . '<!-- AF_Form_Section_Layout__' . $hook_name . ' -->';

@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\layout;
+
 /**
  * TemplateLayout
  * For very customized layouts, where you provide this class with the location of
@@ -23,17 +25,17 @@ namespace Twine\forms\strategies\layout;
 class TemplateLayout extends DivPerSectionLayout
 {
 
-    protected $_layout_template_file       = null;
+    protected $layout_template_file = null;
 
-    protected $_layout_begin_template_file = null;
+    protected $layout_begin_template_file = null;
 
-    protected $_input_template_file        = null;
+    protected $input_template_file = null;
 
-    protected $_subsection_template_file   = null;
+    protected $subsection_template_file = null;
 
-    protected $_layout_end_template_file   = null;
+    protected $layout_end_template_file = null;
 
-    protected $_template_args              = array();
+    protected $template_args = array();
 
 
 
@@ -71,12 +73,12 @@ class TemplateLayout extends DivPerSectionLayout
      *
      * @return string
      */
-    public function layout_form()
+    public function layoutForm()
     {
-        if ($this->_layout_template_file) {
-        	return $this->renderTemplate($this->_layout_template_file);
+        if ($this->layout_template_file) {
+            return $this->renderTemplate($this->layout_template_file);
         } else {
-            return parent::layout_form();
+            return parent::layoutForm();
         }
     }
 
@@ -87,15 +89,15 @@ class TemplateLayout extends DivPerSectionLayout
      *
      * @return string
      */
-    public function layout_form_begin()
+    public function layoutFormBegin()
     {
-        if ($this->_layout_begin_template_file) {
+        if ($this->layout_begin_template_file) {
             return $this->renderTemplate(
-                $this->_layout_begin_template_file,
-                $this->template_args()
+                $this->layout_begin_template_file,
+                $this->templateArgs()
             );
         } else {
-            return parent::layout_form_begin();
+            return parent::layoutFormBegin();
         }
     }
 
@@ -108,29 +110,30 @@ class TemplateLayout extends DivPerSectionLayout
      * @param FormInputBase $input
      * @return string
      */
-    public function layout_input($input)
+    public function layoutInput($input)
     {
-        if ($this->_input_template_file) {
-            return $this->renderTemplate($this->_input_template_file, array('input' => $input));
+        if ($this->input_template_file) {
+            return $this->renderTemplate($this->input_template_file, array('input' => $input));
         }
-        return parent::layout_input($input);
+        return parent::layoutInput($input);
     }
 
 
 
     /**
-     * If a subsection_template_file was provided upon construction, uses that to layout the subsection. Otherwise uses parent.
+     * If a subsection_template_file was provided upon construction, uses that to layout the subsection. Otherwise uses
+     * parent.
      *
-     * @see DivPerSectionLayout::layout_subsection() for documentation
      * @param FormSectionProper $form_section
      * @return string
+     *@see DivPerSectionLayout::layoutSubsection() for documentation
      */
-    public function layout_subsection($form_section)
+    public function layoutSubsection($form_section)
     {
-        if ($this->_subsection_template_file) {
-            return $this->renderTemplate($this->_subsection_template_file);
+        if ($this->subsection_template_file) {
+            return $this->renderTemplate($this->subsection_template_file);
         }
-        return parent::layout_subsection($form_section);
+        return parent::layoutSubsection($form_section);
     }
 
 
@@ -140,12 +143,12 @@ class TemplateLayout extends DivPerSectionLayout
      *
      * @return string
      */
-    public function layout_form_end()
+    public function layoutFormEnd()
     {
-        if ($this->_layout_end_template_file) {
-            return $this->renderTemplate($this->_layout_end_template_file);
+        if ($this->layout_end_template_file) {
+            return $this->renderTemplate($this->layout_end_template_file);
         } else {
-            return parent::layout_form_end();
+            return parent::layoutFormEnd();
         }
     }
 
@@ -154,9 +157,9 @@ class TemplateLayout extends DivPerSectionLayout
     /**
      * @param array $template_args
      */
-    public function set_template_args($template_args = array())
+    public function setTemplateArgs($template_args = array())
     {
-        $this->_template_args = $template_args;
+        $this->template_args = $template_args;
     }
 
 
@@ -164,9 +167,9 @@ class TemplateLayout extends DivPerSectionLayout
     /**
      * @param array $template_args
      */
-    public function add_template_args($template_args = array())
+    public function addTemplateArgs($template_args = array())
     {
-        $this->_template_args = array_merge_recursive($this->_template_args, $template_args);
+        $this->template_args = array_merge_recursive($this->template_args, $template_args);
     }
 
 
@@ -174,19 +177,21 @@ class TemplateLayout extends DivPerSectionLayout
     /**
      * @return array
      */
-    public function template_args()
+    public function templateArgs()
     {
-        foreach ($this->form_section()->subsections() as $subsection_name => $subsection) {
-            $subsection_name = self::prep_form_subsection_key_name($subsection_name);
+        foreach ($this->formSection()->subsections() as $subsection_name => $subsection) {
+            $subsection_name = self::prepFormSubsectionKeyName($subsection_name);
             if (strpos($subsection_name, '[') !== false) {
                 $sub_name = explode('[', $subsection_name);
-                $this->_template_args[ $sub_name[0] ][ rtrim($sub_name[1], ']') ] = $this->layout_subsection($subsection);
+                $this->template_args[ $sub_name[0] ][ rtrim($sub_name[1], ']') ] = $this->layoutSubsection(
+                    $subsection
+                );
             } else {
-                $this->_template_args[ $subsection_name ] = $this->layout_subsection($subsection);
+                $this->template_args[ $subsection_name ] = $this->layoutSubsection($subsection);
             }
         }
         //      d( $this->_template_args );
-        return $this->_template_args;
+        return $this->template_args;
     }
 
 
@@ -198,7 +203,7 @@ class TemplateLayout extends DivPerSectionLayout
      * @param string $subsection_name
      * @return string
      */
-    public static function prep_form_subsection_key_name($subsection_name = '')
+    public static function prepFormSubsectionKeyName($subsection_name = '')
     {
         $subsection_name = str_replace(array('-', ' '), array('', '_'), $subsection_name);
         return is_numeric(substr($subsection_name, 0, 1)) ? 'form_' . $subsection_name : $subsection_name;
@@ -213,18 +218,19 @@ class TemplateLayout extends DivPerSectionLayout
      * @param string $subsection_name
      * @return string
      */
-    public static function get_subform_name($subsection_name = '')
+    public static function getSubformName($subsection_name = '')
     {
-        return TemplateLayout::prep_form_subsection_key_name($subsection_name);
+        return TemplateLayout::prepFormSubsectionKeyName($subsection_name);
     }
 
-    protected function renderTemplate($filepath, $args = null){
-    	if(! $args){
-    	    $args = $this->template_args();
-	    }
-    	extract($args);
-    	ob_start();
-    	require($filepath);
-    	return ob_get_clean();
-	}
+    protected function renderTemplate($filepath, $args = null)
+    {
+        if (! $args) {
+            $args = $this->templateArgs();
+        }
+        extract($args);
+        ob_start();
+        require($filepath);
+        return ob_get_clean();
+    }
 }

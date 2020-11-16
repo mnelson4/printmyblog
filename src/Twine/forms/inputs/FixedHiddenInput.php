@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\inputs;
+
 /**
  * Fixed_HiddenInput
  *
@@ -19,7 +21,7 @@ class FixedHiddenInput extends HiddenInput
      * @param array $req_data like $_POST
      * @return boolean whether or not there was an error
      */
-    protected function _normalize($req_data)
+    protected function normalize($req_data)
     {
     }
 }

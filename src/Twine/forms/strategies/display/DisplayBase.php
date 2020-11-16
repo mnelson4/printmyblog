@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\display;
+
 use Twine\forms\strategies\FormInputStrategyBase;
 
 /**
@@ -15,9 +17,9 @@ abstract class DisplayBase extends FormInputStrategyBase
 
 
     /**
-     * @var string $_tag
+     * @var string $tag
      */
-    protected $_tag = '';
+    protected $tag = '';
 
 
 
@@ -40,7 +42,7 @@ abstract class DisplayBase extends FormInputStrategyBase
      * @param string $chars  - exact string of characters to remove
      * @return string
      */
-    protected function _remove_chars($string = '', $chars = '-')
+    protected function removeChars($string = '', $chars = '-')
     {
         $char_length = strlen($chars) * -1;
         // if last three characters of string is  " - ", then remove it
@@ -57,9 +59,9 @@ abstract class DisplayBase extends FormInputStrategyBase
      * @param string $chars  - exact string of characters to be added to end of string
      * @return string
      */
-    protected function _append_chars($string = '', $chars = '-')
+    protected function appendChars($string = '', $chars = '-')
     {
-        return $this->_remove_chars($string, $chars) . $chars;
+        return $this->removeChars($string, $chars) . $chars;
     }
 
 
@@ -70,9 +72,9 @@ abstract class DisplayBase extends FormInputStrategyBase
      * @param bool $add_pound_sign
      * @return array
      */
-    public function get_html_input_ids($add_pound_sign = false)
+    public function getHtmlInputIds($add_pound_sign = false)
     {
-        return array($this->get_input()->html_id($add_pound_sign));
+        return array($this->getInput()->htmlId($add_pound_sign));
     }
 
 
@@ -84,7 +86,7 @@ abstract class DisplayBase extends FormInputStrategyBase
      * @param array $other_js_data
      * @return array
      */
-    public function get_other_js_data($other_js_data = array())
+    public function getOtherJsData($other_js_data = array())
     {
         return $other_js_data;
     }
@@ -95,7 +97,7 @@ abstract class DisplayBase extends FormInputStrategyBase
      * Opportunity for this display strategy to call wp_enqueue_script and wp_enqueue_style.
      * This should be called during wp_enqueue_scripts
      */
-    public function enqueue_js()
+    public function enqueueJs()
     {
     }
 
@@ -107,10 +109,10 @@ abstract class DisplayBase extends FormInputStrategyBase
      * @param string $tag
      * @return string
      */
-    protected function _opening_tag($tag)
+    protected function openingTag($tag)
     {
-        $this->_tag = $tag;
-        return "<{$this->_tag}";
+        $this->tag = $tag;
+        return "<{$this->tag}";
     }
 
 
@@ -120,9 +122,9 @@ abstract class DisplayBase extends FormInputStrategyBase
      *
      * @return string
      */
-    protected function _closing_tag()
+    protected function closingTag()
     {
-        return "</{$this->_tag}>";
+        return "</{$this->tag}>";
     }
 
 
@@ -132,7 +134,7 @@ abstract class DisplayBase extends FormInputStrategyBase
      *
      * @return string
      */
-    protected function _close_tag()
+    protected function closeTag()
     {
         return '/>';
     }
@@ -148,15 +150,15 @@ abstract class DisplayBase extends FormInputStrategyBase
      *
      * @return array
      */
-    protected function _standard_attributes_array()
+    protected function standardAttributesArray()
     {
         return array(
-            'name'  => $this->_input->html_name(),
-            'id'    => $this->_input->html_id(),
-            'class' => $this->_input->html_class(true),
-            0       => array('required', $this->_input->required()),
-            1       => $this->_input->otherHtmlAttributesString(),
-            'style' => $this->_input->html_style(),
+            'name'  => $this->input->htmlName(),
+            'id'    => $this->input->htmlId(),
+            'class' => $this->input->htmlClass(true),
+            0       => array('required', $this->input->required()),
+            1       => $this->input->otherHtmlAttributesString(),
+            'style' => $this->input->htmlStyle(),
         );
     }
 
@@ -169,13 +171,13 @@ abstract class DisplayBase extends FormInputStrategyBase
      * @param array $attributes
      * @return string
      */
-    protected function _attributes_string($attributes = array())
+    protected function attributesString($attributes = array())
     {
         $attributes = apply_filters(
             'FH_DisplayBase__attributes_string__attributes',
             $attributes,
             $this,
-            $this->_input
+            $this->input
         );
         $attributes_string = '';
         foreach ($attributes as $attribute => $value) {
@@ -187,9 +189,9 @@ abstract class DisplayBase extends FormInputStrategyBase
                 } else {
                     $attribute = $value;
                 }
-                $attributes_string .= $this->_single_attribute($attribute, $add);
+                $attributes_string .= $this->singleAttribute($attribute, $add);
             } else {
-                $attributes_string .= $this->_attribute($attribute, $value);
+                $attributes_string .= $this->attribute($attribute, $value);
             }
         }
         return $attributes_string;
@@ -205,7 +207,7 @@ abstract class DisplayBase extends FormInputStrategyBase
      * @param string $value
      * @return string
      */
-    protected function _attribute($attribute, $value = '')
+    protected function attribute($attribute, $value = '')
     {
         if ($value === null) {
             return '';
@@ -224,7 +226,7 @@ abstract class DisplayBase extends FormInputStrategyBase
      * @param string $value
      * @return string
      */
-    protected function _data_attribute($attribute, $value = '')
+    protected function dataAttribute($attribute, $value = '')
     {
         if ($value === null) {
             return '';
@@ -242,7 +244,7 @@ abstract class DisplayBase extends FormInputStrategyBase
      * @param boolean $add
      * @return string
      */
-    protected function _single_attribute($attribute, $add = true)
+    protected function singleAttribute($attribute, $add = true)
     {
         return $add ? " {$attribute}" : '';
     }

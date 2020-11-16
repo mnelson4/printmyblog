@@ -1,6 +1,6 @@
 <?php
-namespace Twine\forms\strategies;
 
+namespace Twine\forms\strategies;
 
 use Twine\forms\inputs\FormInputBase;
 
@@ -16,7 +16,7 @@ abstract class FormInputStrategyBase
      *
      * @var FormInputBase
      */
-    protected $_input;
+    protected $input;
 
 
 
@@ -31,9 +31,9 @@ abstract class FormInputStrategyBase
      *
      * @param FormInputBase $form_input
      */
-    public function _construct_finalize(FormInputBase $form_input)
+    public function constructFinalize(FormInputBase $form_input)
     {
-        $this->_input = $form_input;
+        $this->input = $form_input;
     }
 
 
@@ -43,8 +43,8 @@ abstract class FormInputStrategyBase
      *
      * @return FormInputBase
      */
-    public function get_input()
+    public function getInput()
     {
-        return $this->_input;
+        return $this->input;
     }
 }

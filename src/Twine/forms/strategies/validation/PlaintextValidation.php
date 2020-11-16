@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\validation;
+
 use Twine\forms\helpers\ValidationError;
 
 /**
@@ -22,7 +24,7 @@ class PlaintextValidation extends ValidationBase
     public function __construct($validation_error_message = null)
     {
         if (! $validation_error_message) {
-            $validation_error_message = __("HTML tags are not permitted in this field", "event_espresso");
+            $validation_error_message = __("HTML tags are not permitted in this field", "print-my-blog");
         }
         parent::__construct($validation_error_message);
     }
@@ -35,7 +37,7 @@ class PlaintextValidation extends ValidationBase
     {
         $no_tags = wp_strip_all_tags($normalized_value);
         if (strlen($no_tags) < strlen(trim($normalized_value))) {
-            throw new ValidationError($this->get_validation_error_message(), 'no_html_tags');
+            throw new ValidationError($this->getValidationErrorMessage(), 'no_html_tags');
         }
         parent::validate($normalized_value);
     }

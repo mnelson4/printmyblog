@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\inputs;
+
 use Twine\forms\helpers\ImproperUsageException;
 use Twine\forms\helpers\InputOption;
 use Twine\forms\strategies\normalization\BooleanNormalization;
@@ -25,14 +27,14 @@ abstract class FormInputWithOptionsBase extends FormInputBase
      *
      * @var InputOption[]
      */
-    protected $_options = array();
+    protected $options = array();
 
     /**
      * whether to display the html_label_text above the checkbox/radio button options
      *
      * @var boolean
      */
-    protected $_display_html_label_text = true;
+    protected $display_html_label_text = true;
 
     /**
      * whether to allow multiple selections (ie, the value of this input should be an array)
@@ -40,7 +42,7 @@ abstract class FormInputWithOptionsBase extends FormInputBase
      *
      * @var boolean
      */
-    protected $_multiple_selections = false;
+    protected $multiple_selections = false;
 
 
 
@@ -55,9 +57,9 @@ abstract class FormInputWithOptionsBase extends FormInputBase
     public function __construct($answer_options = array(), $input_settings = array())
     {
         if (isset($input_settings['display_html_label_text'])) {
-            $this->set_display_html_label_text($input_settings['display_html_label_text']);
+            $this->setDisplayHtmlLabelText($input_settings['display_html_label_text']);
         }
-        $this->set_select_options($answer_options);
+        $this->setSelectOptions($answer_options);
         parent::__construct($input_settings);
     }
 
@@ -71,27 +73,30 @@ abstract class FormInputWithOptionsBase extends FormInputBase
      *
      * @return void  just has the side-effect of setting the options for this input
      */
-    public function set_select_options( $options = array())
+    public function setSelectOptions($options = array())
     {
-	    $options = (array) $options;
-	    foreach($options as $option){
-	    	if(! $option instanceof InputOption){
-	    		throw new ImproperUsageException(
-	    			sprintf(
-	    				__('A form input of type "%s" was passed in an arrya of non-options. It should be given an object of type "%s"', 'print-my-blog'),
-				        get_class($this),
-					    InputOption::class
-				    )
-			    );
-		    }
-	    }
+        $options = (array) $options;
+        foreach ($options as $option) {
+            if (! $option instanceof InputOption) {
+                throw new ImproperUsageException(
+                    sprintf(
+                        // phpcs:disable Generic.Files.LineLength.TooLong
+                        __('A form input of type "%s" was passed in an arrya of non-options. It should be given an object of type "%s"', 'print-my-blog'),
+                        // phpcs:enable Generic.Files.LineLength.TooLong
+                        get_class($this),
+                        InputOption::class
+                    )
+                );
+            }
+        }
         // get the first item in the select options and check it's type
-        $this->_options = $options;
+        $this->options = $options;
         // d( $this->_options );
-        $select_option_keys = array_keys($this->_options);
+        $select_option_keys = array_keys($this->options);
         // attempt to determine data type for values in order to set normalization type
         // purposefully only
-        if (count($this->_options) === 2
+        if (
+            count($this->options) === 2
             && (
                 (in_array(true, $select_option_keys, true) && in_array(false, $select_option_keys, true))
                 || (in_array(1, $select_option_keys, true) && in_array(0, $select_option_keys, true))
@@ -103,13 +108,15 @@ abstract class FormInputWithOptionsBase extends FormInputBase
             // are ALL the options ints (even if we're using a multi-dimensional array)? If so use int validation
             $all_ints = true;
             array_walk_recursive(
-                $this->_options,
+                $this->options,
                 function ($value, $key) use (&$all_ints) {
                     // is this a top-level key? ignore it
-                    if (! is_array($value)
+                    if (
+                        ! is_array($value)
                         && ! is_int($key)
-                       && $key !== ''
-                       && $key !== null) {
+                        && $key !== ''
+                        && $key !== null
+                    ) {
                         $all_ints = false;
                     }
                 }
@@ -121,10 +128,10 @@ abstract class FormInputWithOptionsBase extends FormInputBase
             }
         }
         // does input type have multiple options ?
-        if ($this->_multiple_selections) {
-            $this->_set_normalization_strategy(new ManyValuedNormalization($normalization));
+        if ($this->multiple_selections) {
+            $this->setNormalizationStrategy(new ManyValuedNormalization($normalization));
         } else {
-            $this->_set_normalization_strategy($normalization);
+            $this->setNormalizationStrategy($normalization);
         }
     }
 
@@ -135,7 +142,7 @@ abstract class FormInputWithOptionsBase extends FormInputBase
      */
     public function options()
     {
-        return $this->_options;
+        return $this->options;
     }
 
 
@@ -144,7 +151,7 @@ abstract class FormInputWithOptionsBase extends FormInputBase
      *
      * @return array
      */
-    public function flat_options()
+    public function flatOptions()
     {
         return $this->options();
     }
@@ -154,11 +161,11 @@ abstract class FormInputWithOptionsBase extends FormInputBase
      *
      * @return string
      */
-    public function pretty_value()
+    public function prettyValue()
     {
-        $options = $this->flat_options();
-        $unnormalized_value_choices = $this->get_normalization_strategy()->unnormalize($this->_normalized_value);
-        if (! $this->_multiple_selections) {
+        $options = $this->flatOptions();
+        $unnormalized_value_choices = $this->getNormalizationStrategy()->unnormalize($this->normalized_value);
+        if (! $this->multiple_selections) {
             $unnormalized_value_choices = array($unnormalized_value_choices);
         }
         $pretty_strings = array();
@@ -166,7 +173,7 @@ abstract class FormInputWithOptionsBase extends FormInputBase
             if (isset($options[ $unnormalized_value_choice ])) {
                 $pretty_strings[] = (string)$options[ $unnormalized_value_choice ];
             } else {
-                $pretty_strings[] = $this->normalized_value();
+                $pretty_strings[] = $this->normalizedValue();
             }
         }
         return implode(', ', $pretty_strings);
@@ -177,9 +184,9 @@ abstract class FormInputWithOptionsBase extends FormInputBase
     /**
      * @return boolean
      */
-    public function display_html_label_text()
+    public function displayHtmlLabelText()
     {
-        return $this->_display_html_label_text;
+        return $this->display_html_label_text;
     }
 
 
@@ -187,8 +194,8 @@ abstract class FormInputWithOptionsBase extends FormInputBase
     /**
      * @param boolean $display_html_label_text
      */
-    public function set_display_html_label_text($display_html_label_text)
+    public function setDisplayHtmlLabelText($display_html_label_text)
     {
-        $this->_display_html_label_text = filter_var($display_html_label_text, FILTER_VALIDATE_BOOLEAN);
+        $this->display_html_label_text = filter_var($display_html_label_text, FILTER_VALIDATE_BOOLEAN);
     }
 }

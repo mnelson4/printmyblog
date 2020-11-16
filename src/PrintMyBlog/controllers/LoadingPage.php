@@ -58,20 +58,20 @@ class LoadingPage extends BaseController
 
     protected function getProjectIdFromRequest()
     {
-    	if(isset($_GET['project'])){
-    		return $_GET['project'];
-	    }
-    	throw new Exception(__('Bad URL. No project specified'), 'print-my-blog');
+        if (isset($_GET['project'])) {
+            return $_GET['project'];
+        }
+        throw new Exception(__('Bad URL. No project specified'), 'print-my-blog');
     }
 
     public function enqueueScripts()
     {
-    	wp_register_script(
-    		'docraptor',
-		    PMB_SCRIPTS_URL . 'docraptor.js',
-		    [],
-		    '1.0.0'
-	    );
+        wp_register_script(
+            'docraptor',
+            PMB_SCRIPTS_URL . 'docraptor.js',
+            [],
+            '1.0.0'
+        );
         wp_enqueue_script(
             'pmb_pro_loading_page',
             PMB_SCRIPTS_URL . 'loading-page.js',
@@ -86,14 +86,14 @@ class LoadingPage extends BaseController
         );
 
         $data = [
-        	'status_url' => add_query_arg(
-        		[
-			        'ID' => $this->getProjectIdFromRequest(),
-			        'action' => 'pmb_project_status',
-			        'format' => $this->getFomatFromRequest(),
-		        ],
-		        admin_url( 'admin-ajax.php' )
-	        ),
+            'status_url' => add_query_arg(
+                [
+                    'ID' => $this->getProjectIdFromRequest(),
+                    'action' => 'pmb_project_status',
+                    'format' => $this->getFomatFromRequest(),
+                ],
+                admin_url('admin-ajax.php')
+            ),
         ];
         $init_error_message = esc_html__(
             'There seems to be an error initializing. Please verify you are using an up-to-date web browser.',
@@ -113,14 +113,15 @@ class LoadingPage extends BaseController
         );
     }
 
-	/**
-	 * @return string
-	 */
-	protected function getFomatFromRequest() {
-    	if(isset($_GET['format'])){
-    		return (string)$_GET['format'];
-	    } else {
-    		return 'digital_pdf';
-	    }
-	}
+    /**
+     * @return string
+     */
+    protected function getFomatFromRequest()
+    {
+        if (isset($_GET['format'])) {
+            return (string)$_GET['format'];
+        } else {
+            return 'digital_pdf';
+        }
+    }
 }

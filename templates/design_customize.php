@@ -1,6 +1,6 @@
 <?php
 /**
- * @var $form \Twine\forms\base\FormSectionProper
+ * @var $form \Twine\forms\base\FormSection
  * @var $form_url string
  * @var $design \PrintMyBlog\orm\entities\Design
  */
@@ -23,7 +23,7 @@ pmb_render_template(
 );
 ?>
 <form method="POST" action="<?php echo esc_attr($form_url);?>">
-    <?php echo $form->get_html_and_js();?>
+    <?php echo $form->getHtmlAndJs();?>
     <button class="button button-primary pmb-save"><?php esc_html_e('Save', 'print-my-blog');?></button>
 <!--    <button id="pmb-save-as" class="button button-primary pmb-save-as">--><?php //esc_html_e('Save As...', 'print-my-blog');?><!--</button>-->
 </form>

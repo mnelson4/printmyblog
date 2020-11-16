@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\inputs;
+
 use Twine\forms\helpers\InputOption;
 use Twine\forms\strategies\display\CheckboxDisplay;
 use Twine\forms\strategies\validation\EnumValidation;
@@ -26,9 +28,19 @@ class CheckboxMultiInput extends FormInputWithOptionsBase
      */
     public function __construct($answer_options, $input_settings = array())
     {
-        $this->_set_display_strategy(new CheckboxDisplay());
-        $this->_add_validation_strategy(new ManyValuedValidation(array( new EnumValidation(isset($input_settings['validation_error_message']) ? $input_settings['validation_error_message'] : null) )));
-        $this->_multiple_selections = true;
+        $this->setDisplayStrategy(new CheckboxDisplay());
+        $this->addValidationStrategy(
+            new ManyValuedValidation(
+                array(
+                    new EnumValidation(
+                        isset($input_settings['validation_error_message'])
+                            ? $input_settings['validation_error_message']
+                            : null
+                    )
+                )
+            )
+        );
+        $this->multiple_selections = true;
         parent::__construct($answer_options, $input_settings);
     }
 }

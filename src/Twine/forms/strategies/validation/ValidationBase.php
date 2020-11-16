@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\validation;
+
 use Twine\forms\strategies\FormInputStrategyBase;
 
 /**
@@ -14,7 +16,7 @@ abstract class ValidationBase extends FormInputStrategyBase
 {
 
 
-    protected $_validation_error_message = '';
+    protected $validation_error_message = '';
 
 
 
@@ -23,8 +25,8 @@ abstract class ValidationBase extends FormInputStrategyBase
      */
     public function __construct($validation_error_message = null)
     {
-        $this->_validation_error_message = $validation_error_message === null
-            ? __('Input invalid', 'event_espresso')
+        $this->validation_error_message = $validation_error_message === null
+            ? __('Input invalid', 'print-my-blog')
             : $validation_error_message;
         parent::__construct();
     }
@@ -68,7 +70,7 @@ abstract class ValidationBase extends FormInputStrategyBase
      *
      * @return array
      */
-    public function get_jquery_validation_rule_array()
+    public function getJqueryValidationRuleArray()
     {
         return array();
     }
@@ -81,9 +83,9 @@ abstract class ValidationBase extends FormInputStrategyBase
      *
      * @return string
      */
-    public function get_validation_error_message()
+    public function getValidationErrorMessage()
     {
-        return $this->_validation_error_message;
+        return $this->validation_error_message;
     }
 
 
@@ -95,7 +97,7 @@ abstract class ValidationBase extends FormInputStrategyBase
      * @param array $other_js_data
      * @return array
      */
-    public function get_other_js_data($other_js_data = array())
+    public function getOtherJsData($other_js_data = array())
     {
         return $other_js_data;
     }
@@ -104,7 +106,7 @@ abstract class ValidationBase extends FormInputStrategyBase
      * Opportunity for this display strategy to call wp_enqueue_script and wp_enqueue_style.
      * This should be called during wp_enqueue_scripts
      */
-    public function enqueue_js()
+    public function enqueueJs()
     {
     }
 }

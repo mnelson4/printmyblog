@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\base;
+
 use Exception;
 use Twine\forms\helpers\ValidationError;
 
@@ -30,7 +32,7 @@ abstract class FormSectionValidatable extends FormSectionBase
      *
      * @var ValidationError[]
      */
-    protected $_validation_errors = array();
+    protected $validation_errors = array();
 
 
 
@@ -41,9 +43,9 @@ abstract class FormSectionValidatable extends FormSectionBase
      *
      * @return ValidationError[]
      */
-    public function get_validation_errors()
+    public function getValidationErrors()
     {
-        return $this->_validation_errors;
+        return $this->validation_errors;
     }
 
 
@@ -54,11 +56,11 @@ abstract class FormSectionValidatable extends FormSectionBase
      *
      * @return string
      */
-    public function get_validation_error_string()
+    public function getValidationErrorString()
     {
         $validation_error_messages = array();
-        if ($this->get_validation_errors()) {
-            foreach ($this->get_validation_errors() as $validation_error) {
+        if ($this->getValidationErrors()) {
+            foreach ($this->getValidationErrors() as $validation_error) {
                 if ($validation_error instanceof ValidationError) {
                     $validation_error_messages[] = $validation_error->getMessage();
                 }
@@ -74,7 +76,7 @@ abstract class FormSectionValidatable extends FormSectionBase
      *
      * @return boolean of whether or not the form section is valid
      */
-    abstract protected function _validate();
+    abstract protected function validate();
 
 
 
@@ -83,9 +85,9 @@ abstract class FormSectionValidatable extends FormSectionBase
      *
      * @return boolean
      */
-    public function is_valid()
+    public function isValid()
     {
-        if (count($this->_validation_errors)) {
+        if (count($this->validation_errors)) {
             return false;
         } else {
             return true;
@@ -100,7 +102,7 @@ abstract class FormSectionValidatable extends FormSectionBase
      * @param array $req_data is the full request data like $_POST
      * @return boolean of whether a normalization error occurred
      */
-    abstract protected function _normalize($req_data);
+    abstract protected function normalize($req_data);
 
 
 
@@ -115,15 +117,15 @@ abstract class FormSectionValidatable extends FormSectionBase
      * @param Exception $previous_exception if there was an exception that caused the error, that exception
      * @return void
      */
-    public function add_validation_error($message_or_object, $error_code = null, $previous_exception = null)
+    public function addValidationError($message_or_object, $error_code = null, $previous_exception = null)
     {
         if ($message_or_object instanceof ValidationError) {
             $validation_error = $message_or_object;
-            $validation_error->set_form_section($this);
+            $validation_error->setFormSection($this);
         } else {
             $validation_error = new ValidationError($message_or_object, $error_code, $this, $previous_exception);
         }
-        $this->_validation_errors[] = $validation_error;
+        $this->validation_errors[] = $validation_error;
     }
 
 
@@ -148,7 +150,7 @@ abstract class FormSectionValidatable extends FormSectionBase
      *
      * @return array
      */
-    abstract public function get_jquery_validation_rules();
+    abstract public function getJqueryValdationRules();
 
 
 
@@ -158,5 +160,5 @@ abstract class FormSectionValidatable extends FormSectionBase
      * @param array $req_data usually $_POST, if null that's what's used
      * @return boolean
      */
-    abstract public function form_data_present_in($req_data = null);
+    abstract public function formDataPresentIn($req_data = null);
 }

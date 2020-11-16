@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\inputs;
+
 /**
  * Month_Input
  *
@@ -20,10 +22,10 @@ class MonthInput extends SelectInput
         $key_begin_range = $january_is_month_1 ? 1 : 0;
         $key_range = range($key_begin_range, $key_begin_range + 11);
         if ($leading_zero) {
-            array_walk($key_range, array( $this, '_zero_pad' ));
+            array_walk($key_range, array( $this, 'zeroPad'));
         }
         $value_range = range(1, 12);
-        array_walk($value_range, array( $this, '_zero_pad' ));
+        array_walk($value_range, array( $this, 'zeroPad'));
         parent::__construct(
             array_combine(
                 $key_range,
@@ -38,7 +40,7 @@ class MonthInput extends SelectInput
      * @param int $input
      * @param mixed $key
      */
-    protected function _zero_pad(&$input, $key)
+    protected function zeroPad(&$input, $key)
     {
         $input = str_pad($input, 2, '0', STR_PAD_LEFT);
     }

@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\validation;
+
 use EventEspresso\core\services\validators\URLValidator;
 use InvalidArgumentException;
 use Twine\forms\helpers\ValidationError;
@@ -53,7 +55,7 @@ class UrlValidation extends ValidationBase
     {
         if ($normalized_value) {
             if (esc_url_raw($normalized_value) !== $normalized_value) {
-                throw new ValidationError($this->get_validation_error_message(), 'invalid_url');
+                throw new ValidationError($this->getValidationErrorMessage(), 'invalid_url');
             }
         }
     }
@@ -63,8 +65,8 @@ class UrlValidation extends ValidationBase
     /**
      * @return array
      */
-    public function get_jquery_validation_rule_array()
+    public function getJqueryValidationRuleArray()
     {
-        return array( 'validUrl'=>true, 'messages' => array( 'validUrl' => $this->get_validation_error_message() ) );
+        return array( 'validUrl' => true, 'messages' => array( 'validUrl' => $this->getValidationErrorMessage() ) );
     }
 }

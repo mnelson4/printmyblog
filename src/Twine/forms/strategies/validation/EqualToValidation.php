@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\validation;
+
 use EventEspresso\core\domain\services\factories\EmailAddressFactory;
 use EventEspresso\core\domain\services\validation\email\EmailValidationException;
 use EventEspresso\core\exceptions\InvalidDataTypeException;
@@ -16,22 +18,22 @@ use EventEspresso\core\exceptions\InvalidInterfaceException;
 class EqualToValidation extends TextValidation
 {
 
-    protected $_compare_to = null;
+    protected $compare_to = null;
 
 
     /**
      * @param string               $validation_error_message
      */
-    public function __construct($validation_error_message = '', $compare_to)
+    public function __construct($validation_error_message = '', $compare_to = '')
     {
         if (! $validation_error_message) {
             $validation_error_message = apply_filters(
                 'FH_EqualToValidation____construct__validation_error_message',
-                esc_html__('Fields do not match.', 'event_espresso')
+                esc_html__('Fields do not match.', 'print-my-blog')
             );
         }
         parent::__construct($validation_error_message);
-        $this->_compare_to = $compare_to;
+        $this->compare_to = $compare_to;
     }
 
 
@@ -53,8 +55,13 @@ class EqualToValidation extends TextValidation
     /**
      * @return array
      */
-    public function get_jquery_validation_rule_array()
+    public function getJqueryValidationRuleArray()
     {
-        return array('equalTo' => $this->_compare_to, 'messages' => array('equalTo' => $this->get_validation_error_message()));
+        return array(
+            'equalTo' => $this->compare_to,
+            'messages' => array(
+                'equalTo' => $this->getValidationErrorMessage()
+            )
+        );
     }
 }

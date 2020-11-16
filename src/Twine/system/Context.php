@@ -19,7 +19,7 @@ abstract class Context
     /**
      * @var Context
      */
-    static $instance;
+    protected static $instance;
 
     const USE_NEW = 'use_new';
     const REUSE = 'reuse';
@@ -42,10 +42,11 @@ abstract class Context
      * @param array $args
      * @return object
      */
-    public function reuse($classname, $args = []){
+    public function reuse($classname, $args = [])
+    {
         $classname = $this->normalizeClassname($classname);
-        if(! isset($this->classes[$classname])){
-            $this->classes[$classname] = $this->instantiate($classname,$args);
+        if (! isset($this->classes[$classname])) {
+            $this->classes[$classname] = $this->instantiate($classname, $args);
         }
         return $this->classes[$classname];
     }
@@ -56,25 +57,27 @@ abstract class Context
      * @param array $args
      * @return object
      */
-    public function use_new($classname, $args = []){
+    public function useNew($classname, $args = [])
+    {
         return $this->instantiate($classname, $args);
     }
 
-    protected function instantiate($classname, $args){
+    protected function instantiate($classname, $args)
+    {
         $classname = $this->normalizeClassname($classname);
         $reflection = new ReflectionClass($classname);
         $obj = $reflection->newInstanceArgs($args);
 
-        if(isset($this->deps[$classname]) && method_exists($obj, 'inject')){
+        if (isset($this->deps[$classname]) && method_exists($obj, 'inject')) {
             $classes_depended_on = $this->deps[$classname];
             $dependency_instances = [];
-            foreach($classes_depended_on as $dependency_classname => $policy){
+            foreach ($classes_depended_on as $dependency_classname => $policy) {
                 // Account for when the dependency isn't a class at all.
-                if(is_int($dependency_classname) && ! is_object($policy)){
+                if (is_int($dependency_classname) && ! is_object($policy)) {
                     $dependency_instance = $policy;
-                } else{
+                } else {
                     $dependency_classname = $this->normalizeClassname($dependency_classname);
-                    if($policy === self::USE_NEW){
+                    if ($policy === self::USE_NEW) {
                         $dependency_instance = $this->instantiate($dependency_classname);
                     } else {
                         $dependency_instance = $this->reuse($dependency_classname);
@@ -83,7 +86,7 @@ abstract class Context
 
                 $dependency_instances[] = $dependency_instance;
             }
-            call_user_func_array([$obj,'inject'],$dependency_instances);
+            call_user_func_array([$obj,'inject'], $dependency_instances);
         }
         return $obj;
     }
@@ -93,8 +96,9 @@ abstract class Context
      * @param $classname
      * @return string
      */
-    protected function normalizeClassname($classname){
-        if($classname[0] === '/'){
+    protected function normalizeClassname($classname)
+    {
+        if ($classname[0] === '/') {
             $classname = substr(1);
         }
         return $classname;
@@ -105,9 +109,10 @@ abstract class Context
      * Wrapper for the global.
      * @return Context
      */
-    public static function instance(){
-        if(! self::$instance instanceof Context){
-            self::$instance = new static;
+    public static function instance()
+    {
+        if (! self::$instance instanceof Context) {
+            self::$instance = new static();
             self::$instance->setDependencies();
         }
         return self::$instance;
@@ -118,5 +123,5 @@ abstract class Context
      * whose keys are classnames dependend on, and values are either self::USE_NEW or self::REUSE.
      * Classes
      */
-    protected abstract function setDependencies();
+    abstract protected function setDependencies();
 }

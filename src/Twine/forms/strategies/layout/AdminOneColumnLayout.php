@@ -1,9 +1,10 @@
 <?php
+
 namespace Twine\forms\strategies\layout;
 
 use Exception;
 use Twine\forms\base\FormSectionHtml;
-use Twine\forms\base\FormSectionProper;
+use Twine\forms\base\FormSection;
 use Twine\forms\inputs\FormInputBase;
 use Twine\forms\inputs\HiddenInput;
 use Twine\forms\strategies\display\AdminFileUploaderDisplay;
@@ -20,14 +21,14 @@ class AdminOneColumnLayout extends FormSectionLayoutBase
      * @param array $additional_args
      * @return string
      */
-    public function layout_form_begin($additional_args = array())
+    public function layoutFormBegin($additional_args = array())
     {
-    	$html_generator = Html::instance();
+        $html_generator = Html::instance();
         return $html_generator->table(
             '',
-            $this->_form_section->html_id(),
-            $this->_form_section->html_class() . ' form-table',
-            $this->_form_section->html_style()
+            $this->Form_section->htmlId(),
+            $this->Form_section->htmlClass() . ' form-table',
+            $this->Form_section->htmlStyle()
         ) . $html_generator->tbody();
     }
 
@@ -38,10 +39,10 @@ class AdminOneColumnLayout extends FormSectionLayoutBase
      * @param array $additional_args
      * @return string
      */
-    public function layout_form_end($additional_args = array())
+    public function layoutFormEnd($additional_args = array())
     {
-	    $html_generator = Html::instance();
-        return $html_generator->tbodyx() . $html_generator->tablex($this->_form_section->html_id());
+        $html_generator = Html::instance();
+        return $html_generator->tbodyx() . $html_generator->tablex($this->Form_section->htmlId());
     }
 
 
@@ -52,31 +53,32 @@ class AdminOneColumnLayout extends FormSectionLayoutBase
      * @return string
      * @throws Exception
      */
-    public function layout_input($input)
+    public function layoutInput($input)
     {
-	    $html_generator = Html::instance();
-        if ($input->get_display_strategy() instanceof TextAreaDisplay
-            || $input->get_display_strategy() instanceof TextInputDisplay
-            || $input->get_display_strategy() instanceof AdminFileUploaderDisplay
+        $html_generator = Html::instance();
+        if (
+            $input->getDisplayStrategy() instanceof TextAreaDisplay
+            || $input->getDisplayStrategy() instanceof TextInputDisplay
+            || $input->getDisplayStrategy() instanceof AdminFileUploaderDisplay
         ) {
-            $input->set_html_class($input->html_class() . ' large-text');
+            $input->setHtmlClass($input->htmlClass() . ' large-text');
         }
-        $input_html = $input->get_html_for_input();
+        $input_html = $input->getHtmlForInput();
         // maybe add errors and help text ?
-        $input_html .= $input->get_html_for_errors() !== ''
-            ? $html_generator->nl() . $input->get_html_for_errors()
+        $input_html .= $input->getHtmlForErrors() !== ''
+            ? $html_generator->nl() . $input->getHtmlForErrors()
             : '';
-        $input_html .= $input->get_html_for_help() !== ''
-            ? $html_generator->nl() . $input->get_html_for_help()
+        $input_html .= $input->getHtmlForHelp() !== ''
+            ? $html_generator->nl() . $input->getHtmlForHelp()
             : '';
         // overriding parent to add wp admin specific things.
         $html = '';
         if ($input instanceof HiddenInput) {
-            $html .= $html_generator->no_row($input->get_html_for_input());
+            $html .= $html_generator->noRow($input->getHtmlForInput());
         } else {
             $html .= $html_generator->tr(
                 $html_generator->td(
-                    $input->get_html_for_label()
+                    $input->getHtmlForLabel()
                     . $html_generator->nl()
                     . $input_html
                 )
@@ -89,17 +91,18 @@ class AdminOneColumnLayout extends FormSectionLayoutBase
     /**
      * Lays out a row for the subsection
      *
-     * @param FormSectionProper $form_section
+     * @param FormSection $form_section
      *
      * @return string
      */
-    public function layout_subsection($form_section)
+    public function layoutSubsection($form_section)
     {
-	    $html_generator = Html::instance();
-        if ( $form_section instanceof FormSectionProper
+        $html_generator = Html::instance();
+        if (
+            $form_section instanceof FormSection
             || $form_section instanceof FormSectionHtml
         ) {
-            return $html_generator->no_row($form_section->get_html());
+            return $html_generator->noRow($form_section->getHtml());
         }
         return '';
     }

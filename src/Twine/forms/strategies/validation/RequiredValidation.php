@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\validation;
+
 use Twine\forms\helpers\ImproperUsageException;
 use Twine\forms\helpers\ValidationError;
 
@@ -23,7 +25,7 @@ class RequiredValidation extends ValidationBase
     public function __construct($validation_error_message = null)
     {
         if (! $validation_error_message) {
-            $validation_error_message = __("This field is required.", "event_espresso");
+            $validation_error_message = __("This field is required.", "print-my-blog");
         }
         parent::__construct($validation_error_message);
     }
@@ -40,11 +42,12 @@ class RequiredValidation extends ValidationBase
      */
     public function validate($normalized_value)
     {
-        if ($normalized_value === ''
+        if (
+            $normalized_value === ''
             || $normalized_value === null
             || $normalized_value === array()
         ) {
-            throw new ValidationError($this->get_validation_error_message(), 'required');
+            throw new ValidationError($this->getValidationErrorMessage(), 'required');
         } else {
             return true;
         }
@@ -56,12 +59,12 @@ class RequiredValidation extends ValidationBase
      * @return array
      * @throws \Error
      */
-    public function get_jquery_validation_rule_array()
+    public function getJqueryValidationRuleArray()
     {
         return array(
-            'required'=> true,
+            'required' => true,
             'messages' => array(
-                'required' => $this->get_validation_error_message()
+                'required' => $this->getValidationErrorMessage()
             )
         );
     }

@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\inputs;
+
 use Twine\forms\strategies\display\NumberInputDisplay;
 use Twine\forms\strategies\normalization\FloatNormalization;
 use Twine\forms\strategies\validation\FloatValidation;
@@ -20,7 +22,7 @@ class FloatInput extends FormInputBase
      */
     public function __construct($input_settings = array())
     {
-        $this->_set_display_strategy(
+        $this->setDisplayStrategy(
             new NumberInputDisplay(
                 isset($input_settings['min_value'])
                     ? $input_settings['min_value']
@@ -33,8 +35,8 @@ class FloatInput extends FormInputBase
                     : null
             )
         );
-        $this->_set_normalization_strategy(new FloatNormalization());
-        $this->_add_validation_strategy(
+        $this->setNormalizationStrategy(new FloatNormalization());
+        $this->addValidationStrategy(
             new FloatValidation(
                 isset($input_settings['validation_error_message'])
                     ? $input_settings['validation_error_message']

@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\display;
+
 use Twine\helpers\Html;
 use WP_Error;
 
@@ -18,16 +20,16 @@ class AdminFileUploaderDisplay extends DisplayBase
     /**
      * Enqueues the JS and CSS needed to display this input
      */
-    public function enqueue_js()
+    public function enqueueJs()
     {
         wp_enqueue_media();
         wp_enqueue_script('media-upload');
-        wp_enqueue_script('pmb-media-uploader', TWINE_SCRIPTS_URL .'media-uploader.js');
+        wp_enqueue_script('pmb-media-uploader', TWINE_SCRIPTS_URL . 'media-uploader.js');
         wp_enqueue_style(
-        	'pmb-media-uploader',
-	        TWINE_STYLES_URL . 'media-uploader.css'
+            'pmb-media-uploader',
+            TWINE_STYLES_URL . 'media-uploader.css'
         );
-        parent::enqueue_js();
+        parent::enqueueJs();
     }
 
 
@@ -39,26 +41,42 @@ class AdminFileUploaderDisplay extends DisplayBase
 
     public function display()
     {
-	    // image uploader
-	    $html_generator = Html::instance();
-	    $html = $html_generator->link('#', __('Choose File', 'twine'), __('click to add an image', 'event_espresso'), '', 'twine_media_upload button');
+        // image uploader
+        $html_generator = Html::instance();
+        $html = $html_generator->link(
+            '#',
+            __('Choose File', 'print-my-blog'),
+            __('click to add an image', 'print-my-blog'),
+            '',
+            'twine_media_upload button'
+        );
         // the actual input
         $html .= '<input type="text" size="34" ';
-        $html .= 'name="' . $this->_input->html_name() . '" ';
-        $html .= $this->_input->html_class() != '' ? 'class="large-text twine_media_url ' . $this->_input->html_class() . '" ' : 'class="large-text twine_media_url" ';
-        $html .= 'value="' . $this->_input->raw_value_in_form() . '" ';
+        $html .= 'name="' . $this->input->htmlName() . '" ';
+        $html .= $this->input->htmlClass() != ''
+            ? 'class="large-text twine_media_url ' . $this->input->htmlClass() . '" '
+            : 'class="large-text twine_media_url" ';
+        $html .= 'value="' . $this->input->rawValueInForm() . '" ';
         $html .= 'placeholder="https://..." ';
-        $html .= $this->_input->otherHtmlAttributesString() . '>';
+        $html .= $this->input->otherHtmlAttributesString() . '>';
 
         // only attempt to show the image if it at least exists
-	    if($this->src_exists($this->_input->raw_value())){
-		    $image = $html_generator->br() . $html_generator->br() . $html_generator->img($this->_input->raw_value(), '', '', "twine_media_image");
-	    } else {
-	    	$image = '';
-	    }
+        if ($this->srcExists($this->input->rawValue())) {
+            $image = $html_generator->br()
+                . $html_generator->br()
+                . $html_generator->img($this->input->rawValue(), '', '', "twine_media_image");
+        } else {
+            $image = '';
+        }
 
         // html string
-        return $html_generator->div($html . $html_generator->nbsp() . $image, '', 'twine_media_uploader_area');
+        return $html_generator->div(
+            $html
+            . $html_generator->nbsp()
+            . $image,
+            '',
+            'twine_media_uploader_area'
+        );
     }
 
 
@@ -69,7 +87,7 @@ class AdminFileUploaderDisplay extends DisplayBase
      * @param string $src
      * @return boolean
      */
-    protected function src_exists($src)
+    protected function srcExists($src)
     {
         $results = wp_remote_head($src);
         if (is_array($results) && ! $results instanceof WP_Error) {

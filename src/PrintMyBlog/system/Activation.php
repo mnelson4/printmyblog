@@ -7,6 +7,7 @@ use PrintMyBlog\domain\DefaultProjectContents;
 use PrintMyBlog\services\DesignRegistry;
 use Twine\system\RequestType;
 use Twine\system\Activation as BaseActivation;
+
 /**
  * Class Activation
  *
@@ -31,22 +32,22 @@ class Activation extends BaseActivation
      * @var Capabilities
      */
     protected $capabilities;
-	/**
-	 * @var DesignRegistry|null
-	 */
-	protected $design_registry;
-	/**
-	 * @var DefaultProjectContents|null
-	 */
-	protected $project_contents;
+    /**
+     * @var DesignRegistry|null
+     */
+    protected $design_registry;
+    /**
+     * @var DefaultProjectContents|null
+     */
+    protected $project_contents;
 
 
-	public function inject(
+    public function inject(
         RequestType $request_type,
         TableManager $table_manager = null,
         Capabilities $capabilities = null,
-		DesignRegistry $design_registry = null,
-		DefaultProjectContents $project_contents = null
+        DesignRegistry $design_registry = null,
+        DefaultProjectContents $project_contents = null
     ) {
         parent::inject($request_type);
         $this->table_manager = $table_manager;
@@ -77,9 +78,10 @@ class Activation extends BaseActivation
     /**
      *
      */
-    public function install(){
+    public function install()
+    {
         $this->table_manager->installTables();
-        $this->capabilities->grant_capabilities();
+        $this->capabilities->grantCapabilities();
         $this->design_registry->createRegisteredDesigns();
         $this->project_contents->addDefaultContents();
     }
@@ -88,7 +90,8 @@ class Activation extends BaseActivation
     /**
      * Redirects
      */
-    public function redirectToActivationPage(){
+    public function redirectToActivationPage()
+    {
         wp_redirect(
             add_query_arg(
                 array(

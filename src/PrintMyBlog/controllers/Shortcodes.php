@@ -24,20 +24,20 @@ class Shortcodes extends BaseController
             [$this, 'printButtons' ]
         );
         add_shortcode(
-        	'pmb_project_title',
-	        [$this,'projectTitle']
+            'pmb_project_title',
+            [$this,'projectTitle']
         );
         add_shortcode(
-        	'pmb_toc',
-	        [$this,'tableOfContents']
+            'pmb_toc',
+            [$this,'tableOfContents']
         );
         add_shortcode(
-        	'pmb_title_page',
-	        [$this,'titlePage']
+            'pmb_title_page',
+            [$this,'titlePage']
         );
         add_shortcode(
-        	'pmb_footnote',
-	        [$this,'footnote']
+            'pmb_footnote',
+            [$this,'footnote']
         );
     }
 	// @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
@@ -51,43 +51,52 @@ class Shortcodes extends BaseController
         );
         return (new PrintButtons())->getHtmlForPrintButtons($atts['ID']);
     }
-    public function projectTitle(){
-    	global $pmb_project;
-    	if($pmb_project instanceof Project){
-    		return $pmb_project->getPublishedTitle();
-	    }
-    	return '<-- pmb there is no project title because this post is not being viewed as part of a project. You should probably not show this post to site visitors by making it private.-->';
+    public function projectTitle()
+    {
+        global $pmb_project;
+        if ($pmb_project instanceof Project) {
+            return $pmb_project->getPublishedTitle();
+        }
+        return '<-- pmb there is no project title because this post is not being viewed as part of a project. '
+        . 'You should probably not show this post to site visitors by making it private.-->';
     }
 
-    public function tableOfContents(){
-    	return '<div  class="pmb-toc">
+    public function tableOfContents()
+    {
+        return '<div  class="pmb-toc">
 	        <ul id="pmb-toc-list" class="pmb-toc-list ">
 	            <!-- Populated dynamically by JS -->
 	        </ul>
 	    </div>';
     }
 
-    public function titlePage(){
-    	global $pmb_project, $pmb_design, $pmb_format;
-    	if($pmb_design instanceof Design
-	       && $pmb_design->getDesignTemplate() instanceof DesignTemplate
-	        && $pmb_design->getDesignTemplate()->supports(DesignTemplate::TEMPLATE_TITLE_PAGE)){
-    		$template_path = $pmb_design->getDesignTemplate()->getTemplatePathToDivision(DesignTemplate::TEMPLATE_TITLE_PAGE);
-    		require($template_path);
-	    } else {
-    		return do_shortcode('<h1>[pmb_project_title]</h1>');
-	    }
+    public function titlePage()
+    {
+        global $pmb_project, $pmb_design, $pmb_format;
+        if (
+            $pmb_design instanceof Design
+            && $pmb_design->getDesignTemplate() instanceof DesignTemplate
+            && $pmb_design->getDesignTemplate()->supports(DesignTemplate::TEMPLATE_TITLE_PAGE)
+        ) {
+            $template_path = $pmb_design->getDesignTemplate()->getTemplatePathToDivision(
+                DesignTemplate::TEMPLATE_TITLE_PAGE
+            );
+            require($template_path);
+        } else {
+            return do_shortcode('<h1>[pmb_project_title]</h1>');
+        }
     }
 
-	/**
-	 * Just wraps the content in a footnote
-	 * @param $atts
-	 * @param $content
-	 * @param $shortcode_tag
-	 *
-	 * @return string
-	 */
-    public function footnote($atts, $content, $shortcode_tag){
-    	return '<span class="pmb-footnote">'. $content . '</span>';
+    /**
+     * Just wraps the content in a footnote
+     * @param $atts
+     * @param $content
+     * @param $shortcode_tag
+     *
+     * @return string
+     */
+    public function footnote($atts, $content, $shortcode_tag)
+    {
+        return '<span class="pmb-footnote">' . $content . '</span>';
     }
 }

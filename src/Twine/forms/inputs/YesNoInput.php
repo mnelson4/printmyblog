@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\inputs;
+
 use Twine\forms\strategies\display\SingleCheckboxDisplay;
 use Twine\forms\strategies\normalization\BooleanNormalization;
 
@@ -18,8 +20,8 @@ class YesNoInput extends FormInputBase
      */
     public function __construct($options = array())
     {
-    	$this->set_normalization_strategy(new BooleanNormalization());
-    	$this->set_display_strategy(new SingleCheckboxDisplay());
+        $this->overwriteNormalizationStrategy(new BooleanNormalization());
+        $this->overwriteDisplayStrategy(new SingleCheckboxDisplay());
         parent::__construct($options);
     }
 }

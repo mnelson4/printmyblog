@@ -4,7 +4,6 @@ namespace PrintMyBlog\system;
 
 use EventEspresso\core\domain\values\Version;
 use PrintMyBlog\compatibility\DetectAndActivate;
-
 use PrintMyBlog\controllers\Admin;
 use PrintMyBlog\controllers\Ajax;
 use PrintMyBlog\controllers\Common;
@@ -56,16 +55,17 @@ class Init
      */
     protected $cpt;
 
-	/**
-	 * @var Context
-	 */
-	protected $context;
+    /**
+     * @var Context
+     */
+    protected $context;
 
     /**
      * Sets up hooks that will initialize the code that will run PMB.
      */
-    public function setHooks(){
-	    $this->context = Context::instance();
+    public function setHooks()
+    {
+        $this->context = Context::instance();
         add_action('init', array($this, 'earlyInit'), 5);
         add_action('init', array($this, 'init'));
         $compatibility_mods_loader = new DetectAndActivate();
@@ -89,102 +89,102 @@ class Init
      */
     public function init()
     {
-    	$this->includes();
-    	$this->defineTerms();
-		$this->setupDbEnvironment();
+        $this->includes();
+        $this->defineTerms();
+        $this->setupDbEnvironment();
         $this->takeActionOnIncomingRequest();
     }
 
-	/**
-	 * Includes files containing functions
-	 */
+    /**
+     * Includes files containing functions
+     */
     protected function includes()
     {
-    	require_once(PMB_DIR . 'inc/internal_functions.php');
-	    require_once(PMB_DIR . 'inc/integration_functions.php');
-	    require_once(PMB_DIR . 'inc/template_functions.php');
-	    require_once(PMB_DIR . 'inc/design_functions.php');
+        require_once(PMB_DIR . 'inc/internal_functions.php');
+        require_once(PMB_DIR . 'inc/integration_functions.php');
+        require_once(PMB_DIR . 'inc/template_functions.php');
+        require_once(PMB_DIR . 'inc/design_functions.php');
     }
 
-	/**
-	 * Just setting up code. Not doing anything yet.
-	 */
+    /**
+     * Just setting up code. Not doing anything yet.
+     */
     protected function defineTerms()
     {
-	    /**
-	     * @var $request_type RequestType
-	     */
-	    $request_type = $this->context->reuse('Twine\system\RequestType');
-	    $request_type->getRequestType();
+        /**
+         * @var $request_type RequestType
+         */
+        $request_type = $this->context->reuse('Twine\system\RequestType');
+        $request_type->getRequestType();
 
-	    /**
-	     * @var $version_history VersionHistory
-	     */
-	    $version_history = $this->context->reuse('Twine\system\VersionHistory');
-	    $version_history->maybeRecordVersionChange();
+        /**
+         * @var $version_history VersionHistory
+         */
+        $version_history = $this->context->reuse('Twine\system\VersionHistory');
+        $version_history->maybeRecordVersionChange();
 
-	    /**
-	     * @var $cpt CustomPostTypes
-	     */
-	    $cpt = $this->context->reuse('PrintMyBlog\system\CustomPostTypes');
-	    $cpt->register();
-	    $this->setUrls();
+        /**
+         * @var $cpt CustomPostTypes
+         */
+        $cpt = $this->context->reuse('PrintMyBlog\system\CustomPostTypes');
+        $cpt->register();
+        $this->setUrls();
 
-	    /**
-	     * @var $default_formats DefaultFileFormats
-	     */
-	    $default_formats = $this->context->reuse('PrintMyBlog\domain\DefaultFileFormats');
-	    $default_formats->registerFileFormats();
+        /**
+         * @var $default_formats DefaultFileFormats
+         */
+        $default_formats = $this->context->reuse('PrintMyBlog\domain\DefaultFileFormats');
+        $default_formats->registerFileFormats();
 
-	    /**
-	     * @var $default_design_templates DefaultDesignTemplates
-	     */
-	    $default_design_templates = $this->context->reuse('PrintMyBlog\domain\DefaultDesignTemplates');
-	    $default_design_templates->registerDesignTemplates();
+        /**
+         * @var $default_design_templates DefaultDesignTemplates
+         */
+        $default_design_templates = $this->context->reuse('PrintMyBlog\domain\DefaultDesignTemplates');
+        $default_design_templates->registerDesignTemplates();
 
-	    /**
-	     * @var $default_designs DefaultDesigns
-	     */
-	    $default_designs = $this->context->reuse('PrintMyBlog\domain\DefaultDesigns');
-	    $default_designs->registerDefaultDesigns();
+        /**
+         * @var $default_designs DefaultDesigns
+         */
+        $default_designs = $this->context->reuse('PrintMyBlog\domain\DefaultDesigns');
+        $default_designs->registerDefaultDesigns();
     }
 
-	/**
-	 * Setting up stuff we assume is in the DB
-	 */
+    /**
+     * Setting up stuff we assume is in the DB
+     */
     protected function setupDbEnvironment()
     {
-	    $activation = $this->context->reuse('PrintMyBlog\system\Activation');
-	    $activation->detectActivation();
+        $activation = $this->context->reuse('PrintMyBlog\system\Activation');
+        $activation->detectActivation();
     }
 
-	/**
-	 * Taking action based on the current request
-	 */
+    /**
+     * Taking action based on the current request
+     */
     protected function takeActionOnIncomingRequest()
     {
-	    if (defined('DOING_AJAX') && DOING_AJAX) {
-		    $ajax = $this->context->reuse( 'PrintMyBlog\controllers\Ajax' );
-		    $ajax->setHooks();
-	    } elseif (is_admin()) {
-		    $admin = $this->context->reuse( 'PrintMyBlog\controllers\Admin' );
-		    $admin->setHooks();
-		    $this->initDashboardNews();
-		    (new ProNotification())->setHooks();
-	    } else {
-		    (new Frontend())->setHooks();
-		    (new LegacyPrintPage())->setHooks();
-		    (new LoadingPage())->setHooks();
-	    }
-	    // These are needed at least during frontend and ajax requests
-	    (new Shortcodes())->setHooks();
+        if (defined('DOING_AJAX') && DOING_AJAX) {
+            $ajax = $this->context->reuse('PrintMyBlog\controllers\Ajax');
+            $ajax->setHooks();
+        } elseif (is_admin()) {
+            $admin = $this->context->reuse('PrintMyBlog\controllers\Admin');
+            $admin->setHooks();
+            $this->initDashboardNews();
+            (new ProNotification())->setHooks();
+        } else {
+            (new Frontend())->setHooks();
+            (new LegacyPrintPage())->setHooks();
+            (new LoadingPage())->setHooks();
+        }
+        // These are needed at least during frontend and ajax requests
+        (new Shortcodes())->setHooks();
 
 
-	    $block_controller = new GutenbergBlock();
-	    $block_controller->setHooks();
+        $block_controller = new GutenbergBlock();
+        $block_controller->setHooks();
 
-	    $common_controller = new Common();
-	    $common_controller->setHooks();
+        $common_controller = new Common();
+        $common_controller->setHooks();
     }
 
     /**

@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\validation;
+
 use Twine\forms\helpers\ValidationError;
 
 /**
@@ -14,13 +16,16 @@ use Twine\forms\helpers\ValidationError;
 class MaxLengthValidation extends ValidationBase
 {
 
-    protected $_max_length;
+    protected $max_length;
 
     public function __construct($validation_error_message = null, $max_length = INF)
     {
-        $this->_max_length = $max_length;
+        $this->max_length = $max_length;
         if ($validation_error_message === null) {
-            $validation_error_message = sprintf(__('Input is too long. Maximum number of characters is %1$s', 'event_espresso'), $max_length);
+            $validation_error_message = sprintf(
+                __('Input is too long. Maximum number of characters is %1$s', 'print-my-blog'),
+                $max_length
+            );
         }
         parent::__construct($validation_error_message);
     }
@@ -30,21 +35,28 @@ class MaxLengthValidation extends ValidationBase
      */
     public function validate($normalized_value)
     {
-        if ($this->_max_length !== INF &&
+        if (
+            $this->max_length !== INF &&
                 $normalized_value &&
                 is_string($normalized_value) &&
-                 strlen($normalized_value) > $this->_max_length) {
-            throw new ValidationError($this->get_validation_error_message(), 'maxlength');
+                 strlen($normalized_value) > $this->max_length
+        ) {
+            throw new ValidationError($this->getValidationErrorMessage(), 'maxlength');
         }
     }
 
     /**
      * @return array
      */
-    public function get_jquery_validation_rule_array()
+    public function getJqueryValidationRuleArray()
     {
-        if ($this->_max_length !== INF) {
-            return array( 'maxlength'=> $this->_max_length, 'messages' => array( 'maxlength' => $this->get_validation_error_message() ) );
+        if ($this->max_length !== INF) {
+            return array(
+                'maxlength' => $this->max_length,
+                'messages' => array(
+                    'maxlength' => $this->getValidationErrorMessage()
+                )
+            );
         } else {
             return array();
         }

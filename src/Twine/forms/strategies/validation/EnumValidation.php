@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\validation;
+
 use Twine\forms\helpers\ImproperUsageException;
 use Twine\forms\helpers\ValidationError;
 use Twine\forms\inputs\FormInputWithOptionsBase;
@@ -26,10 +28,12 @@ class EnumValidation extends ValidationBase
     public function validate($normalized_value)
     {
         parent::validate($normalized_value);
-        if (! $this->_input instanceof FormInputWithOptionsBase) {
-            throw new ImproperUsageException(sprintf(__("Cannot use Enum Validation Strategy with an input that doesn't have options", "event_espresso")));
+        if (! $this->input instanceof FormInputWithOptionsBase) {
+            throw new ImproperUsageException(
+                __("Cannot use Enum Validation Strategy with an input that doesn't have options", "print-my-blog")
+            );
         }
-        $enum_options = $this->_input->flat_options();
+        $enum_options = $this->input->flatOptions();
         if ($normalized_value === true) {
             $normalized_value = 1;
         } elseif ($normalized_value === false) {
@@ -37,7 +41,7 @@ class EnumValidation extends ValidationBase
         }
         if ($normalized_value !== null && ! array_key_exists($normalized_value, $enum_options)) {
             throw new ValidationError(
-                $this->get_validation_error_message(),
+                $this->getValidationErrorMessage(),
                 'invalid_enum_value'
             );
         } else {
@@ -50,13 +54,13 @@ class EnumValidation extends ValidationBase
      * on the allowed options.
      * @return string
      */
-    public function get_validation_error_message()
+    public function getValidationErrorMessage()
     {
-        $parent_validation_error_message = parent::get_validation_error_message();
+        $parent_validation_error_message = parent::getValidationErrorMessage();
         if (! $parent_validation_error_message) {
-            $enum_options = $this->_input instanceof FormInputWithOptionsBase ? $this->_input->flat_options() : '';
+            $enum_options = $this->input instanceof FormInputWithOptionsBase ? $this->input->flatOptions() : '';
             return sprintf(
-                __("This is not allowed option. Allowed options are %s.", "event_espresso"),
+                __("This is not allowed option. Allowed options are %s.", "print-my-blog"),
                 implode(', ', $enum_options)
             );
         } else {

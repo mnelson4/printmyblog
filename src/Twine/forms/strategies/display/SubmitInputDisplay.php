@@ -1,6 +1,6 @@
 <?php
-namespace Twine\forms\strategies\display;
 
+namespace Twine\forms\strategies\display;
 
 /**
  * Class SubmitInputDisplay
@@ -17,24 +17,24 @@ class SubmitInputDisplay extends DisplayBase
      */
     public function display()
     {
-        $default_value = $this->_input->get_default();
-        if ($this->_input->get_normalization_strategy() instanceof NormalizationBase) {
-            $default_value = $this->_input->get_normalization_strategy()->unnormalize($default_value);
+        $default_value = $this->input->getDefault();
+        if ($this->input->getNormalizationStrategy() instanceof NormalizationBase) {
+            $default_value = $this->input->getNormalizationStrategy()->unnormalize($default_value);
         }
-        $html = $this->_opening_tag('input');
-        $html .= $this->_attributes_string(
+        $html = $this->openingTag('input');
+        $html .= $this->attributesString(
             array_merge(
-                $this->_standard_attributes_array(),
+                $this->standardAttributesArray(),
                 array(
                     'type'  => 'submit',
                     'value' => $default_value,
                     // overwrite the standard id with the backwards compatible one
-                    'id' => $this->_input->html_id() . '-submit',
-                    'class' => $this->_input->html_class() . ' ' . $this->_input->button_css_attributes()
+                    'id' => $this->input->htmlId() . '-submit',
+                    'class' => $this->input->htmlClass() . ' ' . $this->input->button_css_attributes()
                 )
             )
         );
-        $html .= $this->_close_tag();
+        $html .= $this->closeTag();
         return $html;
     }
 }

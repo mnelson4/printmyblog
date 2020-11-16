@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\strategies\validation;
+
 use Twine\forms\helpers\ImproperUsageException;
 use Twine\forms\helpers\ValidationError;
 use Twine\forms\inputs\FormInputBase;
@@ -34,9 +36,9 @@ class ConditionallyRequiredValidation extends ValidationBase
     public function __construct($validation_error_message = null, $requirement_conditions = array())
     {
         if (! $validation_error_message) {
-            $validation_error_message = __("This field is required.", "event_espresso");
+            $validation_error_message = __("This field is required.", "print-my-blog");
         }
-        $this->set_requirement_conditions($requirement_conditions);
+        $this->setRequirementConditions($requirement_conditions);
         parent::__construct($validation_error_message);
     }
 
@@ -53,14 +55,15 @@ class ConditionallyRequiredValidation extends ValidationBase
      */
     public function validate($normalized_value)
     {
-        if ((
+        if (
+            (
                 $normalized_value === ''
                 || $normalized_value === null
                 || $normalized_value === array()
             )
-            && $this->_input_is_required_server_side()
+            && $this->inputSsRequiredServerSide()
         ) {
-            throw new ValidationError($this->get_validation_error_message(), 'required');
+            throw new ValidationError($this->getValidationErrorMessage(), 'required');
         } else {
             return true;
         }
@@ -72,12 +75,12 @@ class ConditionallyRequiredValidation extends ValidationBase
      * @return array
      * @throws \Error
      */
-    public function get_jquery_validation_rule_array()
+    public function getJqueryValidationRuleArray()
     {
         return array(
-            'required'=> $this->_get_jquery_requirement_value(),
+            'required' => $this->getJqueryRequirementValue(),
             'messages' => array(
-                'required' => $this->get_validation_error_message()
+                'required' => $this->getValidationErrorMessage()
             )
         );
     }
@@ -91,7 +94,7 @@ class ConditionallyRequiredValidation extends ValidationBase
      *
      * @param array $requirement_conditions
      */
-    public function set_requirement_conditions($requirement_conditions)
+    public function setRequirementConditions($requirement_conditions)
     {
         $this->requirement_conditions = (array) $requirement_conditions;
     }
@@ -101,7 +104,7 @@ class ConditionallyRequiredValidation extends ValidationBase
      * see set_requirement_conditions for a description of how it should be formatted
      * @return array
      */
-    public function get_requirement_conditions()
+    public function getRequirementConditions()
     {
         return $this->requirement_conditions;
     }
@@ -116,50 +119,56 @@ class ConditionallyRequiredValidation extends ValidationBase
      * @return string see http://jqueryvalidation.org/required-method for format
      * @throws \Error
      */
-    protected function _get_jquery_requirement_value()
+    protected function getJqueryRequirementValue()
     {
         $requirement_value = '';
-        $conditions = $this->get_requirement_conditions();
+        $conditions = $this->getRequirementConditions();
         if (! is_array($conditions)) {
             throw new ImproperUsageException(
                 sprintf(
-                    __('Input requirement conditions must be an array. You provided %1$s', 'event_espresso'),
-                    $this->_input->name()
+                    __('Input requirement conditions must be an array. You provided %1$s', 'print-my-blog'),
+                    $this->input->name()
                 )
             );
         }
         if (count($conditions) > 1) {
             throw new ImproperUsageException(
                 sprintf(
-                    __('Required Validation Strategy does not yet support multiple conditions. You should add it! The related input is %1$s', 'event_espresso'),
-                    $this->_input->name()
+                    // phpcs:disable Generic.Files.LineLength.TooLong
+                    __('Required Validation Strategy does not yet support multiple conditions. You should add it! The related input is %1$s', 'print-my-blog'),
+                    // phpcs:enable Generic.Files.LineLength.TooLong
+                    $this->input->name()
                 )
             );
         }
         foreach ($conditions as $input_path => $op_and_value) {
-            $input = $this->_input->find_section_from_path($input_path);
+            $input = $this->input->findSectionFromPath($input_path);
             if (! $input instanceof FormInputBase) {
                 throw new ImproperUsageException(
                     sprintf(
-                        __('Error encountered while setting requirement condition for input %1$s. The path %2$s does not correspond to a valid input', 'event_espresso'),
-                        $this->_input->name(),
+                        // phpcs:disable Generic.Files.LineLength.TooLong
+                        __('Error encountered while setting requirement condition for input %1$s. The path %2$s does not correspond to a valid input', 'print-my-blog'),
+                        // phpcs:enable Generic.Files.LineLength.TooLong
+                        $this->input->name(),
                         $input_path
                     )
                 );
             }
-            list( $op, $value ) = $this->_validate_op_and_value($op_and_value);
+            list( $op, $value ) = $this->validateOpAndValue($op_and_value);
             // ok now the jquery dependency expression depends on the input's display strategy.
-            if (! $input->get_display_strategy() instanceof SelectDisplay) {
+            if (! $input->getDisplayStrategy() instanceof SelectDisplay) {
                 throw new ImproperUsageException(
                     sprintf(
-                        __('Required Validation Strategy can only depend on another input which uses the SelectDisplay, but you specified a field "%1$s" that uses display strategy "%2$s". If you need others, please add support for it! The related input is %3$s', 'event_espresso'),
+                        // phpcs:disable Generic.Files.LineLength.TooLong
+                        __('Required Validation Strategy can only depend on another input which uses the SelectDisplay, but you specified a field "%1$s" that uses display strategy "%2$s". If you need others, please add support for it! The related input is %3$s', 'print-my-blog'),
+                        // phpcs:enable Generic.Files.LineLength.TooLong
                         $input->name(),
-                        get_class($input->get_display_strategy()),
-                        $this->_input->name()
+                        get_class($input->getDisplayStrategy()),
+                        $this->input->name()
                     )
                 );
             }
-            $requirement_value = $input->html_id(true) . ' option[value="' . $value . '"]:selected';
+            $requirement_value = $input->htmlId(true) . ' option[value="' . $value . '"]:selected';
         }
         return $requirement_value;
     }
@@ -174,26 +183,28 @@ class ConditionallyRequiredValidation extends ValidationBase
      * @return boolean
      * @throws \Error
      */
-    protected function _input_is_required_server_side()
+    protected function inputSsRequiredServerSide()
     {
         $meets_all_requirements = true;
-        $conditions = $this->get_requirement_conditions();
+        $conditions = $this->getRequirementConditions();
         foreach ($conditions as $input_path => $op_and_value) {
-            $input = $this->_input->find_section_from_path($input_path);
+            $input = $this->input->findSectionFromPath($input_path);
             if (! $input instanceof FormInputBase) {
                 throw new ImproperUsageException(
                     sprintf(
-                        __('Error encountered while setting requirement condition for input %1$s. The path %2$s does not correspond to a valid input', 'event_espresso'),
-                        $this->_input->name(),
+                        // phpcs:disable Generic.Files.LineLength.TooLong
+                        __('Error encountered while setting requirement condition for input %1$s. The path %2$s does not correspond to a valid input', 'print-my-blog'),
+                        // phpcs:enable Generic.Files.LineLength.TooLong
+                        $this->input->name(),
                         $input_path
                     )
                 );
             }
-            list( $op, $value ) = $this->_validate_op_and_value($op_and_value);
+            list( $op, $value ) = $this->validateOpAndValue($op_and_value);
             switch ($op) {
                 case '=':
                 default:
-                    $meets_all_requirements = $input->normalized_value() === $value;
+                    $meets_all_requirements = $input->normalizedValue() === $value;
             }
             if (! $meets_all_requirements) {
                 break;
@@ -212,23 +223,27 @@ class ConditionallyRequiredValidation extends ValidationBase
      * @return array
      * @throws \Error
      */
-    protected function _validate_op_and_value($op_and_value)
+    protected function validateOpAndValue($op_and_value)
     {
         if (! isset($op_and_value[0], $op_and_value[1])) {
                 throw new ImproperUsageException(
                     sprintf(
-                        __('Required Validation Strategy conditions array\'s value must be an array with two elements: an operator, and a value. It didn\'t. The related input is %1$s', 'event_espresso'),
-                        $this->_input->name()
+                        // phpcs:disable Generic.Files.LineLength.TooLong
+                        __('Required Validation Strategy conditions array\'s value must be an array with two elements: an operator, and a value. It didn\'t. The related input is %1$s', 'print-my-blog'),
+                        // phpcs:enable Generic.Files.LineLength.TooLong
+                        $this->input->name()
                     )
                 );
         }
             $operator = $op_and_value[0];
             $value = (string) $op_and_value[1];
         if ($operator !== '=') {
-	        throw new ImproperUsageException(
+            throw new ImproperUsageException(
                 sprintf(
-                    __('Required Validation Strategy conditions can currently only use the equals operator. If you need others, please add support for it! The related input is %1$s', 'event_espresso'),
-                    $this->_input->name()
+                    // phpcs:disable Generic.Files.LineLength.TooLong
+                    __('Required Validation Strategy conditions can currently only use the equals operator. If you need others, please add support for it! The related input is %1$s', 'print-my-blog'),
+                    // phpcs:enable Generic.Files.LineLength.TooLong
+                    $this->input->name()
                 )
             );
         }

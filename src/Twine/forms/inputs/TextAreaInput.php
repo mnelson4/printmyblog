@@ -1,5 +1,7 @@
 <?php
+
 namespace Twine\forms\inputs;
+
 use Twine\forms\strategies\display\TextAreaDisplay;
 use Twine\forms\strategies\normalization\TextNormalization;
 use Twine\forms\strategies\validation\PlaintextValidation;
@@ -17,40 +19,40 @@ class TextAreaInput extends FormInputBase
 {
 
 
-    protected $_rows = 2;
-    protected $_cols = 20;
+    protected $rows = 2;
+    protected $cols = 20;
 
     /**
      * sets the rows property on this input
      * @param int $rows
      */
-    public function set_rows($rows)
+    public function setRows($rows)
     {
-        $this->_rows = $rows;
+        $this->rows = $rows;
     }
     /**
      * sets the cols html property on this input
      * @param int $cols
      */
-    public function set_cols($cols)
+    public function setCols($cols)
     {
-        $this->_cols = $cols;
+        $this->cols = $cols;
     }
     /**
      *
      * @return int
      */
-    public function get_rows()
+    public function getRows()
     {
-        return $this->_rows;
+        return $this->rows;
     }
     /**
      *
      * @return int
      */
-    public function get_cols()
+    public function getCols()
     {
-        return $this->_cols;
+        return $this->cols;
     }
 
 
@@ -60,24 +62,25 @@ class TextAreaInput extends FormInputBase
      */
     public function __construct($options_array = array())
     {
-        $this->_set_display_strategy(new TextAreaDisplay());
-        $this->_set_normalization_strategy(new TextNormalization());
+        $this->setDisplayStrategy(new TextAreaDisplay());
+        $this->setNormalizationStrategy(new TextNormalization());
         
         
         parent::__construct($options_array);
         
         // if the input hasn't specifically mentioned a more lenient validation strategy,
         // apply plaintext validation strategy
-        if (! $this->has_validation_strategy(
-            array(
+        if (
+            ! $this->hasValidationStrategy(
+                array(
                     'FullHtmlValidation',
                     'SimpleHtmlValidation'
                 )
-        )
+            )
         ) {
             // by default we use the plaintext validation. If you want something else,
             // just remove it after the input is constructed :P using FormInputBase::remove_validation_strategy()
-            $this->_add_validation_strategy(new PlaintextValidation());
+            $this->addValidationStrategy(new PlaintextValidation());
         }
     }
 }
