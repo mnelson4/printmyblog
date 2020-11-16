@@ -1,5 +1,9 @@
 includes:
     - vendor/szepeviktor/phpstan-wordpress/extension.neon
+    - inc/design_functions.php
+    - inc/integration_functions.php
+    - inc/internal_functions.php
+    - inc/template_functions.php
 parameters:
     level: 0
     inferPrivatePropertyTypeFromConstructor: true
