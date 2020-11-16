@@ -20,7 +20,10 @@ add_action(
 					background: url("' . $svg_data. '") no-repeat,
 						url("' . $design->getSetting('background_embellishment') . '") center center no-repeat,
 						linear-gradient(' . $color_guru->convertHextToRgba($bg_color,1). ', ' . $color_guru->convertHextToRgba($bg_color, .3). ');
-					background-size:/* banner */100% 150px, /* logo */ 40%, /* gradient */ 40%;
+					background-size:
+						/* banner */ 100% 150px, 
+						/* logo */ 40%, 
+						/* gradient */ 40%;
 					@top-right {
 			            content: "' . $design->getSetting('org'). '";
 			            color:white;

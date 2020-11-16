@@ -171,7 +171,7 @@ class Admin extends BaseController
                 $this,
                 'renderProjects'
             ),
-            $this->svg_doer->getPmbIconSvgData()
+            $this->svg_doer->getSvgDataAsColor(PMB_DIR . 'assets/images/menu-icon.svg','white')
         );
 
         add_submenu_page(

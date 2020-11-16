@@ -102,7 +102,7 @@ class CustomPostTypes
 			    'show_in_rest' => true,
 			    'supports' => array('title', 'editor', 'revisions', 'author','thumbnail', 'custom-fields'),
 			    'taxonomies' => array('category', 'post_tag'),
-			    'menu_icon' => $this->svg_doer->getPmbIconSvgData()//'dashicons-media-document'
+			    'menu_icon' => $this->svg_doer->getSvgDataAsColor(PMB_DIR . 'assets/images/menu-icon.svg')//'dashicons-media-document'
 		    )
 	    );
     }

@@ -9,20 +9,11 @@ namespace PrintMyBlog\services;
  * @package PrintMyBlog\services
  */
 class SvgDoer {
-	/**
-	 * @var string of SVG XML
-	 */
-	protected $icon_svg_raw;
-	public function getPmbIconSvg(){
-		if(! $this->icon_svg_raw){
-			$this->icon_svg_raw = file_get_contents(PMB_DIR . 'assets/images/menu-icon.svg');
-		}
-		return $this->icon_svg_raw;
-	}
 
-	public function getPmbIconSvgData(){
-		return $this->dataizeAndEncode($this->getPmbIconSvg());
-	}
+	/**
+	 *
+	 */
+	protected $raw_svgs = [];
 
 	/**
 	 * @param $path
@@ -30,9 +21,16 @@ class SvgDoer {
 	 *
 	 * @return string|string[]
 	 */
-	public function getSvgDataAsColor($path, $color){
-		$contents = file_get_contents($path);
-		return $this->dataizeAndEncode(str_replace('black', $color, $contents));
+	public function getSvgDataAsColor($path, $color = ''){
+		if(! isset($this->raw_svgs[$path])){
+			$this->raw_svgs[$path] = file_get_contents($path);
+		}
+		if($color){
+			$updated_svg = str_replace('black', $color, $this->raw_svgs[$path]);
+		} else {
+			$updated_svg = $this->raw_svgs[$path];
+		}
+		return $this->dataizeAndEncode($updated_svg);
 	}
 
 	/**
