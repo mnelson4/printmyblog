@@ -6,11 +6,6 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitaa3acace4531482e132095eacb9548bb
 {
-    public static $files = array (
-        '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
-        '9b38cf48e83f5d8f60375221cd213eee' => __DIR__ . '/..' . '/phpstan/phpstan/bootstrap.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
         'm' => 
         array (
@@ -20,14 +15,9 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         array (
             'Twine\\' => 6,
         ),
-        'S' => 
-        array (
-            'Symfony\\Polyfill\\Php73\\' => 23,
-        ),
         'P' => 
         array (
             'PrintMyBlog\\' => 12,
-            'PHPStan\\WordPress\\' => 18,
         ),
     );
 
@@ -40,28 +30,13 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         array (
             0 => __DIR__ . '/../..' . '/src/Twine',
         ),
-        'Symfony\\Polyfill\\Php73\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php73',
-        ),
         'PrintMyBlog\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/PrintMyBlog',
         ),
-        'PHPStan\\WordPress\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src',
-        ),
     );
 
     public static $classMap = array (
-        'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
-        'PHPStan\\WordPress\\Composer\\FixWpStubs' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/Composer/FixWpStubs.php',
-        'PHPStan\\WordPress\\EscSqlDynamicFunctionReturnTypeExtension' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/EscSqlDynamicFunctionReturnTypeExtension.php',
-        'PHPStan\\WordPress\\GetPostDynamicFunctionReturnTypeExtension' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/GetPostDynamicFunctionReturnTypeExtension.php',
-        'PHPStan\\WordPress\\IsWpErrorFunctionTypeSpecifyingExtension' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/IsWpErrorFunctionTypeSpecifyingExtension.php',
-        'PHPStan\\WordPress\\RedirectCanonicalDynamicFunctionReturnTypeExtension' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/RedirectCanonicalDynamicFunctionReturnTypeExtension.php',
-        'PHPStan\\WordPress\\WpThemeMagicPropertiesClassReflectionExtension' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/WpThemeMagicPropertiesClassReflectionExtension.php',
         'PrintMyBlog\\compatibility\\DetectAndActivate' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/DetectAndActivate.php',
         'PrintMyBlog\\compatibility\\plugins\\EasyFootnotes' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/EasyFootnotes.php',
         'PrintMyBlog\\compatibility\\plugins\\LazyLoadingFeaturePlugin' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/LazyLoadingFeaturePlugin.php',
@@ -112,7 +87,6 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'PrintMyBlog\\system\\Context' => __DIR__ . '/../..' . '/src/PrintMyBlog/system/Context.php',
         'PrintMyBlog\\system\\CustomPostTypes' => __DIR__ . '/../..' . '/src/PrintMyBlog/system/CustomPostTypes.php',
         'PrintMyBlog\\system\\Init' => __DIR__ . '/../..' . '/src/PrintMyBlog/system/Init.php',
-        'Symfony\\Polyfill\\Php73\\Php73' => __DIR__ . '/..' . '/symfony/polyfill-php73/Php73.php',
         'Twine\\admin\\news\\DashboardNews' => __DIR__ . '/../..' . '/src/Twine/admin/news/DashboardNews.php',
         'Twine\\compatibility\\CompatibilityBase' => __DIR__ . '/../..' . '/src/Twine/compatibility/CompatibilityBase.php',
         'Twine\\controllers\\BaseController' => __DIR__ . '/../..' . '/src/Twine/controllers/BaseController.php',
