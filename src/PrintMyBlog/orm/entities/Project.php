@@ -207,9 +207,11 @@ class Project extends PostWrapper
      */
     public function getFormatSlugsSelected()
     {
-        return $this->getPmbMetas(
+        $formats = $this->getPmbMetas(
             self::POSTMETA_FORMAT
         );
+        ksort($formats);
+        return $formats;
     }
 
     /**
@@ -223,7 +225,6 @@ class Project extends PostWrapper
         foreach ($format_slugs as $slug) {
             $formats[$slug] = $this->format_registry->getFormat($slug);
         }
-        ksort($formats);
         return $formats;
     }
 
