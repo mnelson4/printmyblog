@@ -128,9 +128,9 @@ class ProjectsListTable extends WP_List_Table
     public function get_sortable_columns()
     {
         $sortable_columns = array(
-            'title' => array('title',true),
-            'format' => array('format',true),
-            'date' => ['date', true]
+//            'title' => array('title',true),
+//            'format' => array('format',true),
+//            'date' => ['date', true]
             // 'second_column_name' => array('second_column_name',false) ,
             // 'fifth_column_name' => array('fifth_column_name',false) ,
             // 'created' => array('created',false)
