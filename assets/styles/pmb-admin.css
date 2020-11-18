@@ -111,6 +111,12 @@
     /*border:1px solid grey;*/
     font-size:1.2em;
 }
+.pmb-row-actions{
+    white-space: normal;
+}
+.pmb-step{
+    white-space: nowrap;
+}
 .pmb-step:not(:last-child)::after{
     content:'>';
     margin-left:5px;

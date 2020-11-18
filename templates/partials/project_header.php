@@ -6,6 +6,7 @@ use PrintMyBlog\orm\entities\Project;
  * @var Project $project
  * @var bool $show_back
  * @var string $current_step
+ * @var array $steps_to_urls
  */
 pmb_render_template('partials/pro_header.php');
 ?>

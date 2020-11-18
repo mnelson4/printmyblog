@@ -2,6 +2,8 @@
 /**
  * @var $generations \PrintMyBlog\entities\ProjectGeneration[]
  * @var $project \PrintMyBlog\orm\entities\Project
+ * @var $steps_to_urls array
+ * @var $current_step string
  */
 pmb_render_template(
 	'partials/project_header.php',

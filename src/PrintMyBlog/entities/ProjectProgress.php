@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\entities;
 
+use PrintMyBlog\controllers\Admin;
 use PrintMyBlog\orm\entities\Project;
 
 /**
@@ -29,6 +30,15 @@ class ProjectProgress
      * @var string[]
      */
     protected $steps;
+
+    protected $step_to_subaction_mapping = [
+        ProjectProgress::SETUP_STEP => Admin::SLUG_SUBACTION_PROJECT_SETUP,
+        ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX => Admin::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN,
+        ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX => Admin::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN,
+        ProjectProgress::EDIT_CONTENT_STEP => Admin::SLUG_SUBACTION_PROJECT_CONTENT,
+        ProjectProgress::EDIT_METADATA_STEP => Admin::SLUG_SUBACTION_PROJECT_META,
+        ProjectProgress::GENERATE_STEP => Admin::SLUG_SUBACTION_PROJECT_GENERATE
+    ];
 
     /**
      * ProjectProgress constructor.
@@ -144,5 +154,87 @@ class ProjectProgress
             }
         }
         return $step_slug;
+    }
+
+    public function stepsToUrls()
+    {
+        $base_url_args = [
+            'ID' => $this->project->getWpPost()->ID,
+            'action' => Admin::SLUG_ACTION_EDIT_PROJECT,
+        ];
+        $mapping = [];
+        foreach ($this->getSteps() as $step => $label) {
+            $args = $this->mapStepToSubactionArgs($step);
+            $mappings[$step] = add_query_arg(
+                array_merge($base_url_args, $args),
+                admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+            );
+        }
+        return $mappings;
+    }
+    /**
+     * @param $step
+     * @return array {
+     * @type $subaction string
+     * @type $format string
+     * }
+     */
+    public function mapStepToSubactionArgs($step)
+    {
+        if (strpos($step, ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX) === 0) {
+            $format = str_replace(ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX, '', $step);
+            $args['subaction'] = Admin::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN;
+            $args['format'] = $format;
+        } elseif (strpos($step, ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX) === 0) {
+            $format = str_replace(ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX, '', $step);
+            $args['subaction'] = Admin::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN;
+            $args['format'] = $format;
+        } else {
+            switch ($step) {
+                case ProjectProgress::SETUP_STEP:
+                    $subaction = Admin::SLUG_SUBACTION_PROJECT_SETUP;
+                    break;
+                case ProjectProgress::EDIT_CONTENT_STEP:
+                    $subaction = Admin::SLUG_SUBACTION_PROJECT_CONTENT;
+                    break;
+                case ProjectProgress::EDIT_METADATA_STEP:
+                    $subaction = Admin::SLUG_SUBACTION_PROJECT_META;
+                    break;
+                case ProjectProgress::GENERATE_STEP:
+                default:
+                    $subaction = Admin::SLUG_SUBACTION_PROJECT_GENERATE;
+            }
+            $args['subaction'] = $subaction;
+            $args['format'] = null;
+        }
+        return $args;
+    }
+
+    /**
+     * @return array
+     */
+    public function getNextStepPageArgs()
+    {
+        return $this->mapStepToSubactionArgs($this->getNextStep());
+    }
+
+    /**
+     * @param $subaction
+     * @param string $format
+     *
+     * @return string
+     */
+    public function mapSubactionToStep($subaction, $format = null)
+    {
+        $subaction_to_step = array_flip($this->step_to_subaction_mapping);
+        if (isset($subaction_to_step[$subaction])) {
+            $step = $subaction_to_step[$subaction];
+            if ($format) {
+                $step .= $format;
+            }
+        } else {
+            $step = ProjectProgress::SETUP_STEP;
+        }
+        return $step;
     }
 }

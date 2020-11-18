@@ -3,6 +3,7 @@
 namespace PrintMyBlog\orm\entities;
 
 use Exception;
+use PrintMyBlog\controllers\Admin;
 use PrintMyBlog\domain\DefaultFileFormats;
 use PrintMyBlog\entities\FileFormat;
 use PrintMyBlog\entities\ProjectGeneration;

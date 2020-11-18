@@ -2,6 +2,8 @@
 /**
  * @var $project_form \Twine\forms\base\FormSection
  * @var $form_url string
+ * @var $steps_to_urls array
+ * @var $current_step string
  */
 pmb_render_template(
 	'partials/project_header.php',

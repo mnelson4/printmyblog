@@ -45,16 +45,32 @@ class PostWrapperManager
      */
     public function getAll(WP_Query $query = null)
     {
-        if (! $query instanceof WP_Query) {
-            $query = new WP_Query();
-        }
-        $query->set('post_type', $this->cap_slug);
+        $query = $this->setQueryForThisPostType($query);
         $posts = $query->get_posts();
         $wrappers = [];
         foreach ($posts as $post) {
             $wrappers[] = $this->createWrapperAroundPost($post);
         }
         return $wrappers;
+    }
+
+    /**
+     * @param WP_Query $query
+     * @return int
+     */
+    public function count(WP_Query $query)
+    {
+        $query = $this->setQueryForThisPostType($query);
+        return $query->post_count;
+    }
+
+    protected function setQueryForThisPostType(WP_Query $query = null)
+    {
+        if (! $query instanceof WP_Query) {
+            $query = new WP_Query();
+        }
+        $query->set('post_type', $this->cap_slug);
+        return $query;
     }
 
     /**

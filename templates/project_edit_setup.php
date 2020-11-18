@@ -2,6 +2,8 @@
 use PrintMyBlog\controllers\Admin;
 /**
  * @var $form \Twine\forms\base\FormSection
+ * @var $steps_to_urls array
+ * @var $current_step string
  */
 pmb_render_template(
         'partials/project_header.php',

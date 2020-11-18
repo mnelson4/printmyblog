@@ -3,6 +3,9 @@
 namespace PrintMyBlog\controllers\helpers;
 
 use PrintMyBlog\controllers\Admin;
+use PrintMyBlog\orm\entities\Project;
+use PrintMyBlog\orm\managers\ProjectManager;
+use PrintMyBlog\system\Context;
 use PrintMyBlog\system\CustomPostTypes;
 use WP_List_Table;
 use WP_Post;
@@ -25,6 +28,11 @@ use WP_Query;
 
 class ProjectsListTable extends WP_List_Table
 {
+    /**
+     * @var mixed|object
+     */
+    protected $project_manager;
+
     public function __construct()
     {
         parent::__construct(array(
@@ -69,21 +77,7 @@ class ProjectsListTable extends WP_List_Table
      */
     public function get_records($per_page = 10, $page_number = 1)
     {
-        $wp_query = $this->wp_query($per_page, $page_number);
-        return $wp_query->posts;
-        global $wpdb;
-        $sql = "select * from {$wpdb->prefix}pmb_projects";
-        // if (isset($_REQUEST['s'])) {
-        //     $sql.= ' where column1 LIKE "%' . $_REQUEST['s'] . '%" or column2 LIKE "%' . $_REQUEST['s'] . '%"';
-        // }
-        // if (!empty($_REQUEST['orderby'])) {
-        //     $sql.= ' ORDER BY ' . esc_sql($_REQUEST['orderby']);
-        //     $sql.= !empty($_REQUEST['order']) ? ' ' . esc_sql($_REQUEST['order']) : ' ASC';
-        // }
-        // $sql.= " LIMIT $per_page";
-        // $sql.= ' OFFSET ' . ($page_number - 1) * $per_page;
-        $result = $wpdb->get_results($sql, 'ARRAY_A');
-        return $result;
+        return $this->getProjectManager()->getAll($this->wp_query($per_page, $page_number));
     }
 
 
@@ -94,9 +88,7 @@ class ProjectsListTable extends WP_List_Table
      */
     protected function wp_query($per_page = null, $page_number = null)
     {
-        $params = [
-            'post_type' => CustomPostTypes::PROJECT,
-        ];
+        $params = [];
         if (isset($per_page)) {
             $params['posts_per_page'] = $per_page;
         }
@@ -116,7 +108,9 @@ class ProjectsListTable extends WP_List_Table
     {
         $columns = [
             'cb' => '<input type="checkbox" />',
-            'ID' => __('ID', 'print-my-blog') ,
+            'title' => __('Title', 'print-my-blog'),
+            'format' => __('Format', 'print-my-blog'),
+            'date' => __('Date', 'print-my-blog')
         ];
         return $columns;
     }
@@ -134,7 +128,9 @@ class ProjectsListTable extends WP_List_Table
     public function get_sortable_columns()
     {
         $sortable_columns = array(
-            'ID' => array('ID',true) ,
+            'title' => array('title',true),
+            'format' => array('format',true),
+            'date' => ['date', true]
             // 'second_column_name' => array('second_column_name',false) ,
             // 'fifth_column_name' => array('fifth_column_name',false) ,
             // 'created' => array('created',false)
@@ -151,33 +147,77 @@ class ProjectsListTable extends WP_List_Table
 
     /**
      * Render the bulk edit checkbox
-     * * @param WP_Post $post
+     * * @param Project $project
      * * @return string
      */
-    public function column_cb($post)
+    public function column_cb($project)
     {
-        return sprintf('<input type="checkbox" name="ID[]" value="%s" />', $post->ID);
+        return sprintf('<input type="checkbox" name="ID[]" value="%s" />', $project->getWpPost()->ID);
     }
 
     /**
      * Render the bulk edit checkbox
-     * * @param WP_Post $post
+     * * @param Project $project
      * * @return string
      */
-    public function column_ID($post)
+    public function column_title(Project $project)
     {
+        $post = $project->getWpPost();
         $title = $post->post_title ? $post->post_title : __('Untitled', 'print-my-blog');
-        return sprintf(
-            '<a href="%s" class="btn btn-primary"/>%s</a>',
-            add_query_arg(
-                [
-                    'ID' => $post->ID,
-                    'action' => 'edit',
-                    'subaction' => Admin::SLUG_SUBACTION_PROJECT_SETUP
-                ],
-                admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-            ),
+        $steps = $project->getProgress()->getSteps();
+        $progress = $project->getProgress()->getStepProgress();
+        $next_step = $project->getProgress()->getNextStep();
+        $steps_to_urls = $project->getProgress()->stepsToUrls();
+
+        printf(
+            '<strong><a href="%s" class="btn btn-primary"/>%s</a></strong>',
+            $steps_to_urls[$next_step],
             $title
+        );
+
+
+        ?><div class="pmb-row-actions row-actions"><?php
+foreach ($steps as $slug => $display_text) {
+    $completed = $progress[$slug] ? true : false;
+    $next = $next_step === $slug ? true : false;
+    $accessible = $completed || $next;
+    ?> <span class="pmb-step
+    <?php echo esc_attr($completed ? 'pmb-completed' : 'pmb-incomplete');?>
+        <?php echo esc_attr($next ? 'pmb-next-step' : '');?>
+        <?php echo esc_attr($accessible ? 'pmb-accessible-step' : 'pmb-inaccessible-step');?>
+        "><?php if (($completed || $next)) {
+            ?>
+            <a href="<?php echo esc_attr($steps_to_urls[$slug]);?>">
+          <?php }
+          echo $display_text;
+          if ($completed || $next) {
+                ?></a><?php
+          }?></span><?php
+}
+?></div><?php
+    }
+
+    /**
+     * @param Project $project
+     */
+    public function column_format(Project $project)
+    {
+        $names = [];
+        foreach ($project->getFormatsSelected() as $format) {
+            $names[] = $format->title();
+        }
+        return implode(', ', $names);
+    }
+
+    public function column_date(Project $project)
+    {
+        return __('Started', 'print-my-blog') . '<br>' . sprintf(
+        /* translators: 1: Post date, 2: Post time. */
+            __('%1$s at %2$s', 'print-my-blog'),
+            /* translators: Post date format. See https://www.php.net/date */
+            get_the_time(__('Y/m/d'), $project->getWpPost()),
+            /* translators: Post time format. See https://www.php.net/date */
+            get_the_time(__('g:i a'), $project->getWpPost())
         );
     }
 
@@ -195,7 +235,19 @@ class ProjectsListTable extends WP_List_Table
      */
     public function recordCount()
     {
-        $wp_query = $this->wp_query();
-        return $wp_query->post_count;
+        return $this->getProjectManager()->count($this->wp_query());
+    }
+
+    /**
+     * @return ProjectManager
+     */
+    protected function getProjectManager()
+    {
+        if ($this->project_manager === null) {
+            $this->project_manager = Context::instance()->reuse(
+                'PrintMyBlog\orm\managers\ProjectManager'
+            );
+        }
+        return $this->project_manager;
     }
 }

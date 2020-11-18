@@ -4,6 +4,8 @@
  * @var $chosen_design \PrintMyBlog\orm\entities\Design
  * @var $project \PrintMyBlog\orm\entities\Project
  * @var $format \PrintMyBlog\entities\FileFormat
+ * @var $steps_to_urls array
+ * @var $current_step string
  */
 
 use PrintMyBlog\controllers\Admin;

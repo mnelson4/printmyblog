@@ -12,6 +12,8 @@ use PrintMyBlog\orm\entities\Project;
  * @var $back_matter_sections \PrintMyBlog\orm\entities\ProjectSection[]
  * @var $post_types WP_Post_Type[]
  * @var $authors WP_User[]
+ * @var $steps_to_urls array
+ * @var $current_step string
  */
 function pmb_drag_here(){
     // nm don't do anythign for now

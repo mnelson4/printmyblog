@@ -3,6 +3,8 @@
  * @var $form \Twine\forms\base\FormSection
  * @var $form_url string
  * @var $design \PrintMyBlog\orm\entities\Design
+ * @var $steps_to_urls array
+ * @var $current_step string
  */
 // outputs the form for the design
 

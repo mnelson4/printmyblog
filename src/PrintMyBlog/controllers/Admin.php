@@ -88,14 +88,6 @@ class Admin extends BaseController
      */
     protected $table_manager;
 
-    protected $step_to_subaction_mapping = [
-        ProjectProgress::SETUP_STEP => self::SLUG_SUBACTION_PROJECT_SETUP,
-        ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX => self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN,
-        ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX => self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN,
-        ProjectProgress::EDIT_CONTENT_STEP => self::SLUG_SUBACTION_PROJECT_CONTENT,
-        ProjectProgress::EDIT_METADATA_STEP => self::SLUG_SUBACTION_PROJECT_META,
-        ProjectProgress::GENERATE_STEP => self::SLUG_SUBACTION_PROJECT_GENERATE
-    ];
     /**
      * @var SvgDoer
      */
@@ -650,54 +642,18 @@ class Admin extends BaseController
 
     protected function renderProjectTemplate($template_name, $args)
     {
-        $args['current_step'] = $this->mapSubactionToStep(
-            isset($_GET['subaction']) ? $_GET['subaction'] : null,
-            isset($_GET['format']) ? $_GET['format'] : null
-        );
+
         if ($args['project'] instanceof Project) {
             $args['steps_to_urls'] = $this->mapStepToUrls($args['project']);
+            $args['current_step'] = $args['project']->getProgress()->mapSubactionToStep(
+                isset($_GET['subaction']) ? $_GET['subaction'] : null,
+                isset($_GET['format']) ? $_GET['format'] : null
+            );
         } else {
             $args['steps_to_urls'] = [];
+            $args['current_step'] = ProjectProgress::SETUP_STEP;
         }
         echo pmb_render_template($template_name, $args);
-    }
-
-    /**
-     * @param $step
-     * @return array {
-     * @type $subaction string
-     * @type $format string
-     * }
-     */
-    protected function mapStepToSubaction($step)
-    {
-        if (strpos($step, ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX) === 0) {
-            $format = str_replace(ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX, '', $step);
-            $args['subaction'] = self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN;
-            $args['format'] = $format;
-        } elseif (strpos($step, ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX) === 0) {
-            $format = str_replace(ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX, '', $step);
-            $args['subaction'] = self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN;
-            $args['format'] = $format;
-        } else {
-            switch ($step) {
-                case ProjectProgress::SETUP_STEP:
-                    $subaction = self::SLUG_SUBACTION_PROJECT_SETUP;
-                    break;
-                case ProjectProgress::EDIT_CONTENT_STEP:
-                    $subaction = self::SLUG_SUBACTION_PROJECT_CONTENT;
-                    break;
-                case ProjectProgress::EDIT_METADATA_STEP:
-                    $subaction = self::SLUG_SUBACTION_PROJECT_META;
-                    break;
-                case ProjectProgress::GENERATE_STEP:
-                default:
-                    $subaction = self::SLUG_SUBACTION_PROJECT_GENERATE;
-            }
-            $args['subaction'] = $subaction;
-            $args['format'] = null;
-        }
-        return $args;
     }
 
     /**
@@ -713,7 +669,7 @@ class Admin extends BaseController
         ];
         $mapping = [];
         foreach ($project->getProgress()->getSteps() as $step => $label) {
-            $args = $this->mapStepToSubaction($step);
+            $args = $project->getProgress()->mapStepToSubactionArgs($step);
             $mappings[$step] = add_query_arg(
                 array_merge($base_url_args, $args),
                 admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
@@ -722,25 +678,7 @@ class Admin extends BaseController
         return $mappings;
     }
 
-    /**
-     * @param $subaction
-     * @param string $format
-     *
-     * @return string
-     */
-    protected function mapSubactionToStep($subaction, $format = null)
-    {
-        $subaction_to_step = array_flip($this->step_to_subaction_mapping);
-        if (isset($subaction_to_step[$subaction])) {
-            $step = $subaction_to_step[$subaction];
-            if ($format) {
-                $step .= $format;
-            }
-        } else {
-            $step = ProjectProgress::SETUP_STEP;
-        }
-        return $step;
-    }
+
 
     /**
      * Checks if a form was submitted, in which case we'd want to redirect.
@@ -922,7 +860,7 @@ class Admin extends BaseController
             'action' => self::SLUG_ACTION_EDIT_PROJECT
         ];
         $next_step = $project->getProgress()->getNextStep();
-        $args = array_merge($args, $this->mapStepToSubaction($next_step));
+        $args = array_merge($args, $project->getProgress()->mapStepToSubactionArgs($next_step));
         // Redirect to it
         wp_redirect(
             add_query_arg(
@@ -1094,32 +1032,35 @@ class Admin extends BaseController
      */
     protected function makePrintContentsSaySaved()
     {
-    global $pagenow;
-    if ( isset($pagenow) && $pagenow == 'post-new.php'
-        && isset($_GET['post_type']) && $_GET['post_type'] === CustomPostTypes::CONTENT){
-        add_action('admin_print_footer_scripts',[$this,'makePrintContentsSaySavedGutenberg']);
-        add_filter(
-            'gettext',
-            function($translated,$text_domain,$original){
-                if($translated === 'Publish'){
-                    return __('Save', 'print-my-blog');
-                }
-                return $translated;
-            },
-            10,
-            3
-        );
-    }
+        global $pagenow;
+        if (
+            isset($pagenow) && $pagenow == 'post-new.php'
+            && isset($_GET['post_type']) && $_GET['post_type'] === CustomPostTypes::CONTENT
+        ) {
+            add_action('admin_print_footer_scripts', [$this,'makePrintContentsSaySavedGutenberg']);
+            add_filter(
+                'gettext',
+                function ($translated, $text_domain, $original) {
+                    if ($translated === 'Publish') {
+                        return __('Save', 'print-my-blog');
+                    }
+                    return $translated;
+                },
+                10,
+                3
+            );
+        }
     }
 
     /**
      * On the PMB Print Materials CPT Gutenberg new page, change "Publish" button to just be "Save" because the post
      * type isn't publicly visible.
      */
-public function makePrintContentsSaySavedGutenberg(){
-    // we've already checked we're on the right page
-    if ( wp_script_is( 'wp-i18n' ) ) {
-        ?>
+    public function makePrintContentsSaySavedGutenberg()
+    {
+        // we've already checked we're on the right page
+        if (wp_script_is('wp-i18n')) {
+            ?>
         <script>
             // Note: Make sure that `wp.i18n` has already been defined by the time you call `wp.i18n.setLocaleData()`.
             wp.i18n.setLocaleData({
@@ -1129,9 +1070,9 @@ public function makePrintContentsSaySavedGutenberg(){
                 ]
             });
         </script>
-        <?php
+            <?php
+        }
     }
-}
 
     protected function deleteProjects()
     {
