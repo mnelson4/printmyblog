@@ -223,6 +223,7 @@ class Project extends PostWrapper
         foreach ($format_slugs as $slug) {
             $formats[$slug] = $this->format_registry->getFormat($slug);
         }
+        ksort($formats);
         return $formats;
     }
 

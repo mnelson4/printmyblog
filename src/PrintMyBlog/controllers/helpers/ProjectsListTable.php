@@ -177,24 +177,24 @@ class ProjectsListTable extends WP_List_Table
 
 
         ?><div class="pmb-row-actions row-actions"><?php
-foreach ($steps as $slug => $display_text) {
-    $completed = $progress[$slug] ? true : false;
-    $next = $next_step === $slug ? true : false;
-    $accessible = $completed || $next;
-    ?> <span class="pmb-step
-    <?php echo esc_attr($completed ? 'pmb-completed' : 'pmb-incomplete');?>
-        <?php echo esc_attr($next ? 'pmb-next-step' : '');?>
-        <?php echo esc_attr($accessible ? 'pmb-accessible-step' : 'pmb-inaccessible-step');?>
-        "><?php if (($completed || $next)) {
-            ?>
-            <a href="<?php echo esc_attr($steps_to_urls[$slug]);?>">
-          <?php }
-          echo $display_text;
-          if ($completed || $next) {
-                ?></a><?php
-          }?></span><?php
-}
-?></div><?php
+            foreach ($steps as $slug => $display_text) {
+                $completed = $progress[$slug] ? true : false;
+                $next = $next_step === $slug ? true : false;
+                $accessible = $completed || $next;
+                ?> <span class="pmb-step
+                <?php echo esc_attr($completed ? 'pmb-completed' : 'pmb-incomplete');?>
+                    <?php echo esc_attr($next ? 'pmb-next-step' : '');?>
+                    <?php echo esc_attr($accessible ? 'pmb-accessible-step' : 'pmb-inaccessible-step');?>
+                    "><?php if (($completed || $next)) {
+                        ?>
+                        <a href="<?php echo esc_attr($steps_to_urls[$slug]);?>">
+                      <?php }
+                      echo $display_text;
+                      if ($completed || $next) {
+                            ?></a><?php
+                      }?></span><?php
+            }
+            ?></div><?php
     }
 
     /**
