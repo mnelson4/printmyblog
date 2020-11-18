@@ -157,7 +157,7 @@ class Admin extends BaseController
             }
             wp_safe_redirect(admin_url('plugins.php'));
         }
-        add_action('admin_print_footer_scripts',[$this,'modifyPrintMaterialsPublishButton']);
+        $this->makePrintContentsSaySaved();
     }
 
     /**
@@ -1088,23 +1088,50 @@ class Admin extends BaseController
         exit;
     }
 
-    public function modifyPrintMaterialsPublishButton(){
-        global $pagenow;
-        if ( isset($pagenow) && $pagenow == 'post-new.php'
-            && isset($_GET['post_type']) && $_GET['post_type'] === CustomPostTypes::CONTENT
-            && wp_script_is( 'wp-i18n' ) ) {
-            ?>
-            <script>
-                // Note: Make sure that `wp.i18n` has already been defined by the time you call `wp.i18n.setLocaleData()`.
-                wp.i18n.setLocaleData({
-                    'Publish': [
-                        'Save'
-                    ]
-                });
-            </script>
-            <?php
-        }
+    /**
+     * Makes it so the "publish" button on PMB Print Materials pages instead say "Save".
+     * Works for both classic editor and Gutenberg
+     */
+    protected function makePrintContentsSaySaved()
+    {
+    global $pagenow;
+    if ( isset($pagenow) && $pagenow == 'post-new.php'
+        && isset($_GET['post_type']) && $_GET['post_type'] === CustomPostTypes::CONTENT){
+        add_action('admin_print_footer_scripts',[$this,'makePrintContentsSaySavedGutenberg']);
+        add_filter(
+            'gettext',
+            function($translated,$text_domain,$original){
+                if($translated === 'Publish'){
+                    return __('Save', 'print-my-blog');
+                }
+                return $translated;
+            },
+            10,
+            3
+        );
     }
+    }
+
+    /**
+     * On the PMB Print Materials CPT Gutenberg new page, change "Publish" button to just be "Save" because the post
+     * type isn't publicly visible.
+     */
+public function makePrintContentsSaySavedGutenberg(){
+    // we've already checked we're on the right page
+    if ( wp_script_is( 'wp-i18n' ) ) {
+        ?>
+        <script>
+            // Note: Make sure that `wp.i18n` has already been defined by the time you call `wp.i18n.setLocaleData()`.
+            wp.i18n.setLocaleData({
+                'Publish': [
+                    'Save',
+                    'print-my-blog'
+                ]
+            });
+        </script>
+        <?php
+    }
+}
 
     protected function deleteProjects()
     {
