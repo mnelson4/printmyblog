@@ -1,14 +1,11 @@
 includes:
     - vendor/szepeviktor/phpstan-wordpress/extension.neon
-    - inc/design_functions.php
-    - inc/integration_functions.php
-    - inc/internal_functions.php
-    - inc/template_functions.php
 parameters:
     level: 0
     inferPrivatePropertyTypeFromConstructor: true
     paths:
         - src/
+        - inc/
     ignoreErrors:
 #        # Uses func_get_args()
 #        - '#^Function apply_filters(_ref_array)? invoked with [34567] parameters, 2 required\.$#'

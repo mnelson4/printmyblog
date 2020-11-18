@@ -139,6 +139,8 @@ class Admin extends BaseController
      */
     public function setHooks()
     {
+        global $pagenow;
+
         add_action('admin_menu', array($this, 'addToMenu'));
         add_filter('plugin_action_links_' . PMB_BASENAME, array($this, 'pluginPageLinks'));
         add_action('admin_enqueue_scripts', [$this,'enqueueScripts']);
@@ -155,6 +157,7 @@ class Admin extends BaseController
             }
             wp_safe_redirect(admin_url('plugins.php'));
         }
+        add_action('admin_print_footer_scripts',[$this,'modifyPrintMaterialsPublishButton']);
     }
 
     /**
@@ -1083,6 +1086,24 @@ class Admin extends BaseController
         $project->getProgress()->markStepComplete(ProjectProgress::GENERATE_STEP);
         wp_safe_redirect($url);
         exit;
+    }
+
+    public function modifyPrintMaterialsPublishButton(){
+        global $pagenow;
+        if ( isset($pagenow) && $pagenow == 'post-new.php'
+            && isset($_GET['post_type']) && $_GET['post_type'] === CustomPostTypes::CONTENT
+            && wp_script_is( 'wp-i18n' ) ) {
+            ?>
+            <script>
+                // Note: Make sure that `wp.i18n` has already been defined by the time you call `wp.i18n.setLocaleData()`.
+                wp.i18n.setLocaleData({
+                    'Publish': [
+                        'Save'
+                    ]
+                });
+            </script>
+            <?php
+        }
     }
 
     protected function deleteProjects()
