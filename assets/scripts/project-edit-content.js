@@ -120,6 +120,7 @@ function pmb_create_sortable_from(element){
 			group:{
 				name: 'shared',
 			},
+			filter: '.no-drag',
 			animation:150,
 			fallbackOnBody: true,
 			swapThreshold: 0.25,

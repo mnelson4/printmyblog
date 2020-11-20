@@ -13,9 +13,10 @@
     border:1px solid gray;
 }
 .pmb-draggable-area{
-    min-height:200px;
-    padding-bottom:50px;
+    padding-bottom:40px;
+    position:relative;
 }
+
 
 .pmb-grabbable{
     cursor: move; /* fallback if grab cursor is unsupported */
@@ -59,7 +60,6 @@
         border:1px solid gray;
     }
     .pmb-draggable-area{
-        min-height:200px;
         padding-bottom:50px;
     }
 }
@@ -158,6 +158,9 @@
     /*border: 1px dotted gray;*/
     margin: .5em 0 .5em 2em;
 }
+.pmb-sortable-inactive{
+    display:none;
+}
 .pmb-project-item-header{
     display: flex;
     align-items: center;
@@ -179,7 +182,20 @@
 }
 .pmb-drag-here{
     text-align:center;
-    float:bottom;
+    position:absolute;
+    bottom:0;
+    color:gray;
+    right:50%
+}
+.pmb-drag-here-inner{
+    position:relative;
+    right:-50%;
+}
+.pmb-no-caret{
+    cursor:default;
+}
+.pmb-add-section{
+    cursor:pointer;
 }
 .pmb-project-choices-column .pmb-remove-item,.pmb-project-choices-column .pmb-project-item-template-container{
     display:none;

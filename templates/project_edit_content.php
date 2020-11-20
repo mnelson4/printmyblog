@@ -15,15 +15,6 @@ use PrintMyBlog\orm\entities\Project;
  * @var $steps_to_urls array
  * @var $current_step string
  */
-function pmb_drag_here(){
-    // nm don't do anythign for now
-    return;
-    ?>
-    <div class="pmb-help pmb-no-sort pmb-drag-here">
-        <span class="dashicons dashicons-plus-alt"></span> <?php esc_html_e('Drag content here', 'print-my-blog');?>
-    </div>
-    <?php
-}
 pmb_render_template(
 	'partials/project_header.php',
 	[
