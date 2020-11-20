@@ -72,8 +72,7 @@ class DesignTemplate
      */
     protected $supports = array();
     /**
-     * @var array keys are template name (just add ".php", and it's the name of the file in the design's directory.)
-     * Values are arrays too, with the key "title" for the template's title to show
+     * @var SectionTemplate[] keys are slugs
      */
     protected $custom_templates = array();
 
@@ -354,10 +353,22 @@ class DesignTemplate
     }
 
     /**
-     * @return array|mixed
+     * @return SectionTemplate[]
      */
     public function getCustomTemplates()
     {
         return $this->custom_templates;
+    }
+
+    /**
+     * @param $template_name
+     * @return mixed|null
+     */
+    public function getFallbackForCustomTemplate($template_name){
+        if(isset($this->custom_templates[$template_name]) && isset
+            ($this->custom_templates[$template_name]['fallback'])){
+            return $this->custom_templates[$template_name]['fallback'];
+        }
+        return null;
     }
 }

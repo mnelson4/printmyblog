@@ -3,6 +3,7 @@
 namespace PrintMyBlog\domain;
 
 use Dompdf\Renderer\Text;
+use PrintMyBlog\entities\SectionTemplate;
 use PrintMyBlog\orm\entities\Design;
 use Twine\forms\base\FormSectionDetails;
 use Twine\forms\base\FormSection;
@@ -287,9 +288,10 @@ class DefaultDesignTemplates
                         'part'
                     ],
                     'custom_templates' => [
-                        'single_column' => [
-                            'title' => __('Single Column', 'print-my-blog')
-                        ]
+                        'single_column' => new SectionTemplate(
+                            __('Single Column', 'print-my-blog'),
+                            'just_content'
+                        )
                     ],
                     'url' => plugins_url('designs/pdf/digital/mayer', PMB_MAIN_FILE),
                     'design_form_callback'  => function () {
