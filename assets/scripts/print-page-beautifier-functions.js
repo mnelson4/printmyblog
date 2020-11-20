@@ -218,8 +218,9 @@ function PmbToc(){
             var depth = parseInt(selection.attr('data-depth'));
             var height = parseInt(selection.attr('data-height'));
             var title_text = title_element.html();
-            jQuery('#pmb-toc-list').append('<li class="pmb-toc-item pmb-toc-depth-' + depth + ' pmb-toc-height-' + height + '"><a href="#' + id + '">' + title_text + '</a></li>');
-
+            if(title_text){
+                jQuery('#pmb-toc-list').append('<li class="pmb-toc-item pmb-toc-depth-' + depth + ' pmb-toc-height-' + height + '"><a href="#' + id + '">' + title_text + '</a></li>');
+            }
             // find its children
             _this.create_toc_for_depth(selection.siblings('div'),depth + 1);
         });
