@@ -286,11 +286,6 @@ class DefaultDesignTemplates
                         'front_matter',
                         'part'
                     ],
-                    'custom_templates' => [
-                        'single_column' => [
-                            'title' => __('Single Column', 'print-my-blog')
-                        ]
-                    ],
                     'url' => plugins_url('designs/pdf/digital/mayer', PMB_MAIN_FILE),
                     'design_form_callback'  => function () {
                         return (new FormSection([

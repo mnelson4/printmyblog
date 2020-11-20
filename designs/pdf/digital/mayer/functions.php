@@ -8,7 +8,7 @@ add_action(
 		if($design->getSetting('post_header_in_columns')){
 			$css .= ' .pmb-main-matter{columns:2}';
 		} else {
-			$css .= ' div.entry-content{columns:2}';
+			$css .= 'article:not(.pmb-just-content) div.entry-content{columns:2}';
 		}
 		if($design->getSetting('dividing_line')){
 			$css .= ' .entry-content{border-bottom:1px solid gray;}';

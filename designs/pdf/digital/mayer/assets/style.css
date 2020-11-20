@@ -116,6 +116,9 @@
     .mayer-wide{
         column-span: all;
     }
+    .mayer-columns{
+        columns:2;
+    }
     .project-intro{
         background-color:lightgrey;
         font-style:italic;
