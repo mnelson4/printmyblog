@@ -123,7 +123,7 @@ function pmb_create_sortable_from(element){
 			filter: '.no-drag',
 			animation:150,
 			fallbackOnBody: true,
-			swapThreshold: 0.25,
+			swapThreshold: .80,
 			onAdd: function (event) {
 				var nested_level = pmb_count_level(jQuery(event.target));
 				var jquery_obj = jQuery(event.target);

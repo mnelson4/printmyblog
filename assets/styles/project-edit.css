@@ -33,6 +33,9 @@
 .pmb-project-choices-filters .form-table th{
     width:100px;
 }
+.pmb-project-choices-filters-table-wrap{
+    border:1px solid gray;
+}
 .pmb-project-content-available{
     vertical-align:top;
 }
