@@ -186,4 +186,16 @@ pmb_render_template(
         </div>
     </form>
 
+    <div
+            style="display:none" id="pmb-add-print-materials-dialogue"
+            title="<?php esc_html_e('Quick Add Print Material',
+        'print-my-blog');?>"
+    >
+        <div class="pmb-add-print-materials-dialogue-content">
+            <label><?php esc_html_e('Title', 'print-my-blog');?> <input type="text" name="name"></label>
+
+        </div>
+    </div>
+    <form id="pmb-add-rint-materials-dialogue"></form>
+
 <?php pmb_render_template('partials/project_footer.php');

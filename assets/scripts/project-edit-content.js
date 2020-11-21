@@ -100,6 +100,40 @@ function pmb_setup_callbacks_on_new_options(){
 			}
 		});
 	});
+	jQuery(".pmb-add-material").click(function(event) {
+		event.preventDefault();
+		jQuery('#pmb-add-print-materials-dialogue').dialog({
+			'dialogClass'   : 'wp-dialog',
+			'modal'         : true,
+			'autoOpen'      : true,
+			'closeOnEscape' : true,
+			'buttons'       : [
+				{
+					"text": "Create",
+					'class':'button button-primary',
+					'click': function () {
+						// jQuery('#pmb-design-form-' + design_slug).submit()
+					},
+				},
+				{
+					"text" : "Cancel",
+					'class':'button',
+					'click': function() {
+						jQuery(this).dialog('close');
+					}
+				},
+			],
+			'width': "500px",
+			open: function(event, ui)
+			{
+				var _this = jQuery(this);
+				jQuery('.ui-widget-overlay').bind('click', function()
+				{
+					_this.dialog('close');
+				});
+			}
+		})
+	});
 }
 
 /**

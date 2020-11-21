@@ -195,9 +195,13 @@ function pmb_drag_here(){
     ?>
     <div class="pmb-help pmb-no-sort pmb-drag-here no-drag">
         <div class="pmb-drag-here-inner">
-            <span class="pmb-add-section dashicons dashicons-plus-alt"></span> <span class="pmb-no-caret"><?php
+            <a class="pmb-add-material">
+                <span class="pmb-add-section dashicons dashicons-plus-alt"></span>
+                <span
+                    class="pmb-no-caret"><?php
                 esc_html_e('Add Content Here',
                     'print-my-blog');?></span>
+            </a>
         </div>
     </div>
     <?php
