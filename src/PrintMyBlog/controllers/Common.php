@@ -37,30 +37,12 @@ class Common extends BaseController
      */
     public function registerCommonStuff()
     {
-//        wp_register_style(
-//            'jquery-ui-structure',
-//            PMB_ASSETS_URL . 'styles/jquery-ui.structure.min.css',
-//            array(),
-//            '1.11.4'
-//        );
         wp_register_style(
             'jquery-ui',
             PMB_ASSETS_URL . 'styles/libs/jquery-ui/jquery-ui.min.css',
             array(),
             '1.11.4'
         );
-//        wp_register_style(
-//            'jquery-ui-datepicker',
-//            PMB_ASSETS_URL . 'styles/jquery-ui-datepicker.css',
-//            array(),
-//            '1.11.4'
-//        );
-//        wp_register_style(
-//            'jquery-ui',
-//            'https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css',
-//            array(),
-//            '1.8'
-//        );
         wp_register_style(
             'pmb_print_common',
             PMB_ASSETS_URL . 'styles/print-page-common.css',
