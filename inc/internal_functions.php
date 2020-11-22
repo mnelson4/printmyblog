@@ -94,7 +94,7 @@ function pmb_design_preview(\PrintMyBlog\orm\entities\Design $design){
  * @param Project $project
  * @param int $max_nesting
  */
-function pmb_content_item($posty_row, Project $project, $max_nesting = 0){
+function pmb_content_item($posty_row, Project $project, $max_nesting = null){
     if($posty_row instanceof \PrintMyBlog\orm\entities\ProjectSection){
         $id = $posty_row->getPostId();
         $title = $posty_row->getPostTitle();
@@ -115,6 +115,9 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = 0){
         $depth = 1;
         $edit_url = get_edit_post_link($posty_row->ID);
         $view_url = get_permalink($posty_row->ID);
+    }
+    if($max_nesting === null){
+        $max_nesting = $project->getLevelsAllowed();
     }
     ?>
     <div class="list-group-item pmb-project-item" data-id="<?php echo esc_attr($id);?>" data-height="<?php echo esc_attr($height);?>">
@@ -196,11 +199,8 @@ function pmb_drag_here(){
     <div class="pmb-help pmb-no-sort pmb-drag-here no-drag">
         <div class="pmb-drag-here-inner">
             <a class="pmb-add-material">
-                <span class="pmb-add-section dashicons dashicons-plus-alt"></span>
-                <span
-                    class="pmb-no-caret"><?php
-                esc_html_e('Add Content Here',
-                    'print-my-blog');?></span>
+                <?php esc_html_e('Drag or click here', 'print-my-blog');?> <span class="pmb-add-section dashicons
+                dashicons-plus-alt"></span>
             </a>
         </div>
     </div>

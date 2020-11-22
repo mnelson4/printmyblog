@@ -154,7 +154,7 @@ pmb_render_template(
                         <div id="pmb-project-main-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="<?php echo esc_attr($project->getLevelsAllowed());?>">
                             <?php
                             foreach($sections as $post) {
-                                pmb_content_item( $post, $project, $project->getLevelsAllowed() );
+                                pmb_content_item( $post, $project );
                             }
                             pmb_drag_here();
                             ?>
@@ -192,7 +192,10 @@ pmb_render_template(
         'print-my-blog');?>"
     >
         <div class="pmb-add-print-materials-dialogue-content">
-            <label><?php esc_html_e('Title', 'print-my-blog');?> <input type="text" name="name"></label>
+            <label><?php esc_html_e('Title', 'print-my-blog');?> <input type="text" name="title"
+                                                                        id="pmb-print-material-title" ></label>
+            <input type="hidden" name="project" value="<?php echo esc_attr($project->getWpPost()->ID);?>"
+                   id="pmb-print-material-project">
 
         </div>
     </div>

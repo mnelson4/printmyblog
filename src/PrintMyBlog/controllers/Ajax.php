@@ -8,6 +8,7 @@ use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\entities\ProjectGeneration;
 use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\services\FileFormatRegistry;
+use PrintMyBlog\system\CustomPostTypes;
 use Twine\controllers\BaseController;
 use WP_Query;
 use PrintMyBlog\orm\entities\Project;
@@ -65,6 +66,7 @@ class Ajax extends BaseController
         );
         add_action('wp_ajax_pmb_save_project_main', [$this, 'handleSaveProjectMain' ]);
         add_action('wp_ajax_pmb_post_search', [$this,'handlePostSearch']);
+        add_action('wp_ajax_pmb_add_print_material', [$this,'addPrintMaterial']);
     }
 
     protected function addUnauthenticatedCallback($ajax_action, $method_name)
@@ -231,6 +233,28 @@ class Ajax extends BaseController
             </div>
             <?php
         }
+        exit;
+    }
+
+    public function addPrintMaterial(){
+        $title = $_REQUEST['title'];
+        $project_id = $_REQUEST['project'];
+        $project = $this->project_manager->getById($project_id);
+        $post_id = wp_insert_post(
+            [
+                'post_title' => $title,
+                'post_status' => 'publish',
+                'post_type' => CustomPostTypes::CONTENT,
+            ]
+        );
+        $post = get_post($post_id);
+        ob_start();
+        pmb_content_item($post,$project);
+        $html = ob_get_clean();
+        wp_send_json_success([
+            'html' => $html,
+            'post_ID' => $post_id
+        ]);
         exit;
     }
 }

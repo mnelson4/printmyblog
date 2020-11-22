@@ -101,6 +101,7 @@ function pmb_setup_callbacks_on_new_options(){
 		});
 	});
 	jQuery(".pmb-add-material").click(function(event) {
+		var add_button = this;
 		event.preventDefault();
 		jQuery('#pmb-add-print-materials-dialogue').dialog({
 			'dialogClass'   : 'wp-dialog',
@@ -112,7 +113,7 @@ function pmb_setup_callbacks_on_new_options(){
 					"text": "Create",
 					'class':'button button-primary',
 					'click': function () {
-						// jQuery('#pmb-design-form-' + design_slug).submit()
+						pmb_add_print_material_submit(add_button, this);
 					},
 				},
 				{
@@ -133,6 +134,30 @@ function pmb_setup_callbacks_on_new_options(){
 				});
 			}
 		})
+	});
+}
+
+function pmb_add_print_material_submit(add_button, submit_button){
+	jQuery.post(
+		ajaxurl,
+		{
+			'action': 'pmb_add_print_material',
+			'_nonce': _wpnonce.value,
+			'title': jQuery('#pmb-print-material-title').val(),
+			'project': jQuery('#pmb-print-material-project').val()
+		},
+		function(response){
+			var sortable = jQuery(add_button).closest('.pmb-sortable')
+			var new_item = jQuery(response.data.html)
+			new_item.appendTo(sortable);
+			pmb_setup_callbacks_on_new_options();
+			pmb_maybe_add_sortable_to(sortable,new_item);
+			jQuery(submit_button).dialog('close');
+			jQuery('#pmb-print-material-title').val('');
+		},
+		'json'
+	).error(function(){
+		alert('Error Inserting. Please contact support.');
 	});
 }
 
@@ -159,32 +184,36 @@ function pmb_create_sortable_from(element){
 			fallbackOnBody: true,
 			swapThreshold: .80,
 			onAdd: function (event) {
-				var nested_level = pmb_count_level(jQuery(event.target));
-				var jquery_obj = jQuery(event.target);
-
-				var max_levels = jquery_obj.attr('data-max-nesting');
-				// If that target didn't know the max nesting level, ask the root.
-				if( ! max_levels){
-					jquery_obj.parents('.pmb-sortable-root').attr('data-max-nesting');
-				}
-				if(nested_level < max_levels){
-					var sortable_items = jQuery(event.item).children('.pmb-sortable-inactive');
-					if(sortable_items.length){
-						pmb_create_sortable_from(sortable_items[0]);
-						sortable_items.removeClass('pmb-sortable-inactive');
-						sortable_items.addClass('pmb-sortable');
-					}
-				} else {
-					var sortable_items = jQuery(event.item).children('.pmb-sortable');
-					if(sortable_items.length){
-						sortable_items[0].sorter.destroy();
-						sortable_items.removeClass('pmb-sortable');
-						sortable_items.addClass('pmb-sortable-inactive');
-					}
-				}
+				pmb_maybe_add_sortable_to(jQuery(event.target), jQuery(event.item));
 			},
 		});
 	element.sorter = sorter;
+}
+
+function pmb_maybe_add_sortable_to(sortable_selection, item_selection){
+	var nested_level = pmb_count_level(sortable_selection);
+	var jquery_obj = sortable_selection;
+
+	var max_levels = jquery_obj.attr('data-max-nesting');
+	// If that target didn't know the max nesting level, ask the root.
+	if( ! max_levels){
+		jquery_obj.parents('.pmb-sortable-root').attr('data-max-nesting');
+	}
+	if(nested_level < max_levels){
+		var sortable_items = item_selection.children('.pmb-sortable-inactive');
+		if(sortable_items.length){
+			pmb_create_sortable_from(sortable_items[0]);
+			sortable_items.removeClass('pmb-sortable-inactive');
+			sortable_items.addClass('pmb-sortable');
+		}
+	} else {
+		var sortable_items = item_selection.children('.pmb-sortable');
+		if(sortable_items.length){
+			sortable_items[0].sorter.destroy();
+			sortable_items.removeClass('pmb-sortable');
+			sortable_items.addClass('pmb-sortable-inactive');
+		}
+	}
 }
 
 function pmb_get_contents(jquery_obj, current_depth = 1){
@@ -196,6 +225,9 @@ function pmb_get_contents(jquery_obj, current_depth = 1){
 
 	for(var index = 0; index < element.children.length; index++){
 		var child = element.children[index];
+		if(typeof(child.attributes['data-id']) === 'undefined'){
+			continue;
+		}
 		var child_jquery_obj = jQuery(child);
 		var template_jquery_obj = child_jquery_obj.children('.pmb-project-item-header').find('select.pmb-template');
 		var template = template_jquery_obj.val();

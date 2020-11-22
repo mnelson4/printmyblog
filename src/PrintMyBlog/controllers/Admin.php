@@ -362,9 +362,7 @@ class Admin extends BaseController
                         array('sortablejs','jquery-ui-datepicker', 'jquery-ui-dialog'),
                         filemtime(PMB_SCRIPTS_DIR . 'project-edit-content.js')
                     );
-//                    wp_enqueue_style('jquery-ui-datepicker');
                     wp_enqueue_style('jquery-ui');
-//                    wp_enqueue_style('wp-jquery-ui-dialog');
                     /**
                      * @var $project Project
                      */

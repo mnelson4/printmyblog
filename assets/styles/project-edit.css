@@ -194,10 +194,8 @@
     position:relative;
     right:-50%;
 }
-.pmb-no-caret{
-    cursor:default;
-}
-.pmb-add-section{
+
+.pmb-add-material{
     cursor:pointer;
 }
 .pmb-project-choices-column .pmb-remove-item,.pmb-project-choices-column .pmb-project-item-template-container{
