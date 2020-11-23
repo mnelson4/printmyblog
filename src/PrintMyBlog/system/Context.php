@@ -25,7 +25,7 @@ class Context extends BaseContext
     {
         $this->deps = [
             'PrintMyBlog\system\Init' => [
-                'PrintMyBlog\system\Context' => self::REUSE
+                'PrintMyBlog\system\Context' => self::REUSE,
             ],
             'PrintMyBlog\system\Activation' => [
                 'Twine\system\RequestType' => self::REUSE,
@@ -51,7 +51,11 @@ class Context extends BaseContext
                 'PrintMyBlog\orm\managers\DesignManager' => self::REUSE,
                 'PrintMyBlog\db\TableManager' => self::REUSE,
                 'PrintMyBlog\services\SvgDoer' => self::REUSE,
-                'Twine\services\notifications\OneTimeNotificationManager' => self::REUSE
+                'Twine\services\notifications\OneTimeNotificationManager' => self::REUSE,
+            ],
+            'PrintMyBlog\system\PersistentNotices' => [
+                'WPTRT\AdminNotices\Notices' => self::REUSE,
+                'PrintMyBlog\domain\DefaultPersistentNotices' => self::REUSE
             ],
             'PrintMyBlog\controllers\Ajax'  => [
                 'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,

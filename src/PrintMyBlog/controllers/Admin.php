@@ -6,6 +6,7 @@ use Exception;
 use PrintMyBlog\controllers\helpers\ProjectsListTable;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\db\TableManager;
+use PrintMyBlog\domain\DefaultPersistentNotices;
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
 use PrintMyBlog\entities\DesignTemplate;
@@ -32,6 +33,7 @@ use Twine\services\notifications\OneTimeNotificationManager;
 use WP_Query;
 use WP_User_Query;
 
+use WPTRT\AdminNotices\Notices;
 use const http\Client\Curl\PROXY_HTTP;
 
 /**
@@ -139,8 +141,6 @@ class Admin extends BaseController
      */
     public function setHooks()
     {
-        global $pagenow;
-
         add_action('admin_menu', array($this, 'addToMenu'));
         add_filter('plugin_action_links_' . PMB_BASENAME, array($this, 'pluginPageLinks'));
         add_action('admin_enqueue_scripts', [$this,'enqueueScripts']);

@@ -11,6 +11,10 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         array (
             'mnelson4\\' => 9,
         ),
+        'W' => 
+        array (
+            'WPTRT\\' => 6,
+        ),
         'T' => 
         array (
             'Twine\\' => 6,
@@ -25,6 +29,10 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'mnelson4\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/mnelson4',
+        ),
+        'WPTRT\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/WPTRT',
         ),
         'Twine\\' => 
         array (
@@ -54,6 +62,7 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'PrintMyBlog\\domain\\DefaultDesignTemplates' => __DIR__ . '/../..' . '/src/PrintMyBlog/domain/DefaultDesignTemplates.php',
         'PrintMyBlog\\domain\\DefaultDesigns' => __DIR__ . '/../..' . '/src/PrintMyBlog/domain/DefaultDesigns.php',
         'PrintMyBlog\\domain\\DefaultFileFormats' => __DIR__ . '/../..' . '/src/PrintMyBlog/domain/DefaultFileFormats.php',
+        'PrintMyBlog\\domain\\DefaultPersistentNotices' => __DIR__ . '/../..' . '/src/PrintMyBlog/domain/DefaultPersistentNotices.php',
         'PrintMyBlog\\domain\\DefaultProjectContents' => __DIR__ . '/../..' . '/src/PrintMyBlog/domain/DefaultProjectContents.php',
         'PrintMyBlog\\domain\\FrontendPrintSettings' => __DIR__ . '/../..' . '/src/PrintMyBlog/domain/FrontendPrintSettings.php',
         'PrintMyBlog\\domain\\PrintButtons' => __DIR__ . '/../..' . '/src/PrintMyBlog/domain/PrintButtons.php',
@@ -87,9 +96,11 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'PrintMyBlog\\system\\Context' => __DIR__ . '/../..' . '/src/PrintMyBlog/system/Context.php',
         'PrintMyBlog\\system\\CustomPostTypes' => __DIR__ . '/../..' . '/src/PrintMyBlog/system/CustomPostTypes.php',
         'PrintMyBlog\\system\\Init' => __DIR__ . '/../..' . '/src/PrintMyBlog/system/Init.php',
+        'PrintMyBlog\\system\\PersistentNotices' => __DIR__ . '/../..' . '/src/PrintMyBlog/system/PersistentNotices.php',
         'Twine\\admin\\news\\DashboardNews' => __DIR__ . '/../..' . '/src/Twine/admin/news/DashboardNews.php',
         'Twine\\compatibility\\CompatibilityBase' => __DIR__ . '/../..' . '/src/Twine/compatibility/CompatibilityBase.php',
         'Twine\\controllers\\BaseController' => __DIR__ . '/../..' . '/src/Twine/controllers/BaseController.php',
+        'Twine\\entities\\notifications\\OneTimeNotification' => __DIR__ . '/../..' . '/src/Twine/entities/notifications/OneTimeNotification.php',
         'Twine\\forms\\base\\FormSection' => __DIR__ . '/../..' . '/src/Twine/forms/base/FormSection.php',
         'Twine\\forms\\base\\FormSectionBase' => __DIR__ . '/../..' . '/src/Twine/forms/base/FormSectionBase.php',
         'Twine\\forms\\base\\FormSectionDetails' => __DIR__ . '/../..' . '/src/Twine/forms/base/FormSectionDetails.php',
@@ -184,10 +195,14 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'Twine\\services\\filesystem\\File' => __DIR__ . '/../..' . '/src/Twine/services/filesystem/File.php',
         'Twine\\services\\filesystem\\Folder' => __DIR__ . '/../..' . '/src/Twine/services/filesystem/Folder.php',
         'Twine\\services\\filesystem\\ThingOnServer' => __DIR__ . '/../..' . '/src/Twine/services/filesystem/ThingOnServer.php',
+        'Twine\\services\\notifications\\OneTimeNotificationManager' => __DIR__ . '/../..' . '/src/Twine/services/notifications/OneTimeNotificationManager.php',
         'Twine\\system\\Activation' => __DIR__ . '/../..' . '/src/Twine/system/Activation.php',
         'Twine\\system\\Context' => __DIR__ . '/../..' . '/src/Twine/system/Context.php',
         'Twine\\system\\RequestType' => __DIR__ . '/../..' . '/src/Twine/system/RequestType.php',
         'Twine\\system\\VersionHistory' => __DIR__ . '/../..' . '/src/Twine/system/VersionHistory.php',
+        'WPTRT\\AdminNotices\\Dismiss' => __DIR__ . '/../..' . '/src/WPTRT/AdminNotices/Dismiss.php',
+        'WPTRT\\AdminNotices\\Notice' => __DIR__ . '/../..' . '/src/WPTRT/AdminNotices/Notice.php',
+        'WPTRT\\AdminNotices\\Notices' => __DIR__ . '/../..' . '/src/WPTRT/AdminNotices/Notices.php',
         'mnelson4\\RestApiDetector\\RestApiDetector' => __DIR__ . '/../..' . '/src/mnelson4/RestApiDetector.php',
         'mnelson4\\RestApiDetector\\RestApiDetectorError' => __DIR__ . '/../..' . '/src/mnelson4/RestApiDetectorError.php',
     );

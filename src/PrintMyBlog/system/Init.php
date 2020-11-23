@@ -19,6 +19,7 @@ use PrintMyBlog\domain\ProNotification;
 use Twine\admin\news\DashboardNews;
 use Twine\system\RequestType;
 use Twine\system\VersionHistory;
+use WPTRT\AdminNotices\Notices;
 
 /**
  * Class Init
@@ -83,6 +84,8 @@ class Init
         } else {
             define('PMB_REST_PROXY_EXISTS', false);
         }
+        $persistent_notices = $this->context->reuse('WPTRT\AdminNotices\Notices');
+        $persistent_notices->boot();
     }
     /**
      * Sets up PMB's code that will will set other hooks
@@ -163,6 +166,11 @@ class Init
      */
     protected function takeActionOnIncomingRequest()
     {
+        // Persistent notices need to be setup on both admin and ajax requests.
+        if(is_admin()){
+            $persistent_messages = $this->context->reuse('PrintMyBlog\system\PersistentNotices');
+            $persistent_messages->register();
+        }
         if (defined('DOING_AJAX') && DOING_AJAX) {
             $ajax = $this->context->reuse('PrintMyBlog\controllers\Ajax');
             $ajax->setHooks();

@@ -17,7 +17,8 @@
         "psr-4": {
             "mnelson4\\": "src/mnelson4/",
             "PrintMyBlog\\": "src/PrintMyBlog/",
-            "Twine\\": "src/Twine/"
+            "Twine\\": "src/Twine/",
+            "WPTRT\\": "src/WPTRT"
         }
     },
     "scripts": {
