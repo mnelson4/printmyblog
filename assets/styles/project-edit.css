@@ -187,8 +187,13 @@
     text-align:center;
     position:absolute;
     bottom:0;
-    color:gray;
     right:50%
+}
+.pmb-drag-here a{
+    color:gray;
+}
+.pmb-drag-here a:hover{
+    color:#0073aa;
 }
 .pmb-drag-here-inner{
     position:relative;
