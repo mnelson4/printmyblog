@@ -15,7 +15,8 @@ pmb_render_template(
 	]
 );
 ?>
-<p><?php esc_html_e('Ready to see what your project looks like? There is a link below for each of your project’s formats.', 'print-my-blog');?></p>
+<p><?php esc_html_e('Your project is ready to be generated! Use one of the buttons below to generate it, but feel free to use the links above to tweak it.',
+        'print-my-blog');?></p>
 <?php
 foreach($generations as $generation){
 	$generate_link = add_query_arg(

@@ -50,7 +50,8 @@ class Context extends BaseContext
                 'PrintMyBlog\services\FileFormatRegistry'   => self::REUSE,
                 'PrintMyBlog\orm\managers\DesignManager' => self::REUSE,
                 'PrintMyBlog\db\TableManager' => self::REUSE,
-                'PrintMyBlog\services\SvgDoer' => self::REUSE
+                'PrintMyBlog\services\SvgDoer' => self::REUSE,
+                'Twine\services\notifications\OneTimeNotificationManager' => self::REUSE
             ],
             'PrintMyBlog\controllers\Ajax'  => [
                 'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,

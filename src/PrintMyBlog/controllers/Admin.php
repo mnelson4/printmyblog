@@ -19,6 +19,7 @@ use PrintMyBlog\orm\managers\ProjectSectionManager;
 use PrintMyBlog\services\FileFormatRegistry;
 use PrintMyBlog\services\SvgDoer;
 use PrintMyBlog\system\CustomPostTypes;
+use Twine\entities\notifications\OneTimeNotification;
 use Twine\forms\base\FormSectionHtmlFromTemplate;
 use Twine\forms\base\FormSection;
 use Twine\forms\helpers\InputOption;
@@ -27,6 +28,7 @@ use Twine\forms\inputs\TextInput;
 use Twine\forms\strategies\layout\TemplateLayout;
 use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
+use Twine\services\notifications\OneTimeNotificationManager;
 use WP_Query;
 use WP_User_Query;
 
@@ -92,6 +94,10 @@ class Admin extends BaseController
      * @var SvgDoer
      */
     protected $svg_doer;
+    /**
+     * @var OneTimeNotificationManager
+     */
+    protected $notification_manager;
 
     /**
      * @param PostFetcher $post_fetcher
@@ -111,7 +117,8 @@ class Admin extends BaseController
         FileFormatRegistry $file_format_registry,
         DesignManager $design_manager,
         TableManager $table_manager,
-        SvgDoer $svg_doer
+        SvgDoer $svg_doer,
+        OneTimeNotificationManager $notification_manager
     ) {
         $this->post_fetcher    = $post_fetcher;
         $this->section_manager = $section_manager;
@@ -120,6 +127,7 @@ class Admin extends BaseController
         $this->design_manager = $design_manager;
         $this->table_manager = $table_manager;
         $this->svg_doer = $svg_doer;
+        $this->notification_manager = $notification_manager;
     }
     /**
      * name of the option that just indicates we successfully saved the setttings
@@ -150,6 +158,7 @@ class Admin extends BaseController
             wp_safe_redirect(admin_url('plugins.php'));
         }
         $this->makePrintContentsSaySaved();
+        $this->notification_manager->showOneTimeNotifications();
     }
 
     /**
@@ -836,6 +845,13 @@ class Admin extends BaseController
         }
         $old_formats = $project->getFormatSlugsSelected();
         $project->setFormatsSelected($formats_to_save);
+        $this->notification_manager->addTextNotificationForCurrentUser(
+                OneTimeNotification::TYPE_SUCCESS,
+                sprintf(
+                        __('Successfully setup the project "%s".', 'print-my-blog'),
+                    $project->getWpPost()->post_title
+                )
+        );
         if ($initialize_steps) {
             $project->getProgress()->initialize();
         } else {
@@ -843,6 +859,13 @@ class Admin extends BaseController
             foreach ($new_formats as $new_format) {
                 $project->getProgress()->markChooseDesignStepComplete($new_format, false);
                 $project->getProgress()->markCustomizeDesignStepComplete($new_format, false);
+                $this->notification_manager->addTextNotificationForCurrentUser(
+                    OneTimeNotification::TYPE_INFO,
+                    sprintf(
+                        __('You need to choose and customize the design for your %s.', 'print-my-blog'),
+                        $this->file_format_registry->getFormat($new_format)->title()
+                    )
+                );
             }
         }
         $project->getProgress()->markStepComplete(ProjectProgress::SETUP_STEP);
@@ -907,6 +930,10 @@ class Admin extends BaseController
             $order
         );
         $project->getProgress()->markStepComplete(ProjectProgress::EDIT_CONTENT_STEP);
+        $this->notification_manager->addTextNotificationForCurrentUser(
+                OneTimeNotification::TYPE_SUCCESS,
+                __('Updated project content.', 'print-my-blog')
+        );
         $this->redirectToNextStep($project);
     }
 
@@ -941,6 +968,13 @@ class Admin extends BaseController
             __('You have customized this design', 'print-my-blog')
         );
         $project->getProgress()->markCustomizeDesignStepComplete($design->getDesignTemplate()->getFormatSlug());
+        $this->notification_manager->addTextNotificationForCurrentUser(
+                OneTimeNotification::TYPE_SUCCESS,
+                sprintf(
+                        __('The design "%s" has been customized, and its changes will be reflected in all projects that use it.', 'print-my-blog'),
+                    $design->getWpPost()->post_title
+                )
+        );
         $this->redirectToNextStep($project);
     }
 
@@ -965,6 +999,18 @@ class Admin extends BaseController
         );
         $project->getProgress()->markCustomizeDesignStepComplete($format->slug(), false);
         $project->getProgress()->markChooseDesignStepComplete($format->slug());
+        $this->notification_manager->addTextNotificationForCurrentUser(
+                OneTimeNotification::TYPE_SUCCESS,
+                sprintf(
+                        __('Successful chose the design "%1$s" for the %2$s for your project.', 'print-my-blog'),
+                    $design->getWpPost()->post_title,
+                    $format->title()
+                )
+        );
+        $this->notification_manager->addTextNotificationForCurrentUser(
+                OneTimeNotification::TYPE_INFO,
+                __('You may want to customize the design.', 'print-my-blog')
+        );
         $this->redirectToNextStep($project);
     }
 
@@ -994,6 +1040,10 @@ class Admin extends BaseController
             );
         }
         $project->getProgress()->markStepComplete(ProjectProgress::EDIT_METADATA_STEP);
+        $this->notification_manager->addTextNotificationForCurrentUser(
+                OneTimeNotification::TYPE_SUCCESS,
+                __('Project metadata updated.', 'print-my-blog')
+        );
         $this->redirectToNextStep($project);
     }
 
