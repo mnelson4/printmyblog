@@ -65,7 +65,6 @@ class TextAreaInput extends FormInputBase
         $this->setDisplayStrategy(new TextAreaDisplay());
         $this->setNormalizationStrategy(new TextNormalization());
         
-        
         parent::__construct($options_array);
         
         // if the input hasn't specifically mentioned a more lenient validation strategy,

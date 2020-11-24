@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Twine\entities;
 
 use finfo;
