@@ -38,7 +38,9 @@ abstract class Context
     /**
      * Context constructor.
      */
-    public function __construct(){}
+    public function __construct()
+    {
+    }
 
 
     /**
@@ -71,7 +73,7 @@ abstract class Context
     {
         $classname = $this->normalizeClassname($classname);
         $reflection = new ReflectionClass($classname);
-        if($args){
+        if ($args) {
             $obj = $reflection->newInstanceArgs($args);
         } else {
             $obj = $reflection->newInstance();
