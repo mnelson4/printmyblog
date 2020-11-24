@@ -32,8 +32,8 @@ use Twine\controllers\BaseController;
 use Twine\services\notifications\OneTimeNotificationManager;
 use WP_Query;
 use WP_User_Query;
-
 use WPTRT\AdminNotices\Notices;
+
 use const http\Client\Curl\PROXY_HTTP;
 
 /**
@@ -846,11 +846,11 @@ class Admin extends BaseController
         $old_formats = $project->getFormatSlugsSelected();
         $project->setFormatsSelected($formats_to_save);
         $this->notification_manager->addTextNotificationForCurrentUser(
-                OneTimeNotification::TYPE_SUCCESS,
-                sprintf(
-                        __('Successfully setup the project "%s".', 'print-my-blog'),
-                    $project->getWpPost()->post_title
-                )
+            OneTimeNotification::TYPE_SUCCESS,
+            sprintf(
+                __('Successfully setup the project "%s".', 'print-my-blog'),
+                $project->getWpPost()->post_title
+            )
         );
         if ($initialize_steps) {
             $project->getProgress()->initialize();
@@ -931,8 +931,8 @@ class Admin extends BaseController
         );
         $project->getProgress()->markStepComplete(ProjectProgress::EDIT_CONTENT_STEP);
         $this->notification_manager->addTextNotificationForCurrentUser(
-                OneTimeNotification::TYPE_SUCCESS,
-                __('Updated project content.', 'print-my-blog')
+            OneTimeNotification::TYPE_SUCCESS,
+            __('Updated project content.', 'print-my-blog')
         );
         $this->redirectToNextStep($project);
     }
@@ -969,11 +969,13 @@ class Admin extends BaseController
         );
         $project->getProgress()->markCustomizeDesignStepComplete($design->getDesignTemplate()->getFormatSlug());
         $this->notification_manager->addTextNotificationForCurrentUser(
-                OneTimeNotification::TYPE_SUCCESS,
-                sprintf(
-                        __('The design "%s" has been customized, and its changes will be reflected in all projects that use it.', 'print-my-blog'),
-                    $design->getWpPost()->post_title
-                )
+            OneTimeNotification::TYPE_SUCCESS,
+            sprintf(
+                // phpcs:disable Generic.Files.LineLength.TooLong
+                __('The design "%s" has been customized, and its changes will be reflected in all projects that use it.', 'print-my-blog'),
+                // phpcs:enable Generic.Files.LineLength.TooLong
+                $design->getWpPost()->post_title
+            )
         );
         $this->redirectToNextStep($project);
     }
@@ -1000,16 +1002,16 @@ class Admin extends BaseController
         $project->getProgress()->markCustomizeDesignStepComplete($format->slug(), false);
         $project->getProgress()->markChooseDesignStepComplete($format->slug());
         $this->notification_manager->addTextNotificationForCurrentUser(
-                OneTimeNotification::TYPE_SUCCESS,
-                sprintf(
-                        __('Successful chose the design "%1$s" for the %2$s for your project.', 'print-my-blog'),
-                    $design->getWpPost()->post_title,
-                    $format->title()
-                )
+            OneTimeNotification::TYPE_SUCCESS,
+            sprintf(
+                __('Successful chose the design "%1$s" for the %2$s for your project.', 'print-my-blog'),
+                $design->getWpPost()->post_title,
+                $format->title()
+            )
         );
         $this->notification_manager->addTextNotificationForCurrentUser(
-                OneTimeNotification::TYPE_INFO,
-                __('You may want to customize the design.', 'print-my-blog')
+            OneTimeNotification::TYPE_INFO,
+            __('You may want to customize the design.', 'print-my-blog')
         );
         $this->redirectToNextStep($project);
     }
@@ -1041,8 +1043,8 @@ class Admin extends BaseController
         }
         $project->getProgress()->markStepComplete(ProjectProgress::EDIT_METADATA_STEP);
         $this->notification_manager->addTextNotificationForCurrentUser(
-                OneTimeNotification::TYPE_SUCCESS,
-                __('Project metadata updated.', 'print-my-blog')
+            OneTimeNotification::TYPE_SUCCESS,
+            __('Project metadata updated.', 'print-my-blog')
         );
         $this->redirectToNextStep($project);
     }

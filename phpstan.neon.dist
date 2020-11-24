@@ -3,6 +3,10 @@ includes:
 parameters:
     level: 0
     inferPrivatePropertyTypeFromConstructor: true
+    scanDirectories:
+        - inc/
+    scanFiles:
+        - printmyblog.php
     paths:
         - src/
         - inc/

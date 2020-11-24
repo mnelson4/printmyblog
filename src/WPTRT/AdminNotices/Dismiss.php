@@ -16,7 +16,8 @@ namespace WPTRT\AdminNotices;
  *
  * @since 1.0.0
  */
-class Dismiss {
+class Dismiss
+{
 
     /**
      * The notice-ID.
@@ -54,15 +55,16 @@ class Dismiss {
      * @param string $prefix The prefix that will be used for the option/user-meta.
      * @param string $scope  Controls where the dismissal will be saved: user or global.
      */
-    public function __construct( $id, $prefix, $scope = 'global' ) {
+    public function __construct($id, $prefix, $scope = 'global')
+    {
 
         // Set the object properties.
-        $this->id     = sanitize_key( $id );
-        $this->prefix = sanitize_key( $prefix );
-        $this->scope  = ( in_array( $scope, [ 'global', 'user' ], true ) ) ? $scope : 'global';
+        $this->id     = sanitize_key($id);
+        $this->prefix = sanitize_key($prefix);
+        $this->scope  = ( in_array($scope, [ 'global', 'user' ], true) ) ? $scope : 'global';
 
         // Handle AJAX requests to dismiss the notice.
-        add_action( 'wp_ajax_wptrt_dismiss_notice', [ $this, 'ajax_maybe_dismiss_notice' ] );
+        add_action('wp_ajax_wptrt_dismiss_notice', [ $this, 'ajax_maybe_dismiss_notice' ]);
     }
 
     /**
@@ -72,14 +74,15 @@ class Dismiss {
      * @since 1.0
      * @return void
      */
-    public function print_script() {
+    public function print_script()
+    {
 
         // Create a nonce.
-        $nonce = wp_create_nonce( 'wptrt_dismiss_notice_' . $this->id );
+        $nonce = wp_create_nonce('wptrt_dismiss_notice_' . $this->id);
         ?>
         <script>
             window.addEventListener( 'load', function() {
-                var dismissBtn  = document.querySelector( '#wptrt-notice-<?php echo esc_attr( $this->id ); ?> .notice-dismiss' );
+                var dismissBtn  = document.querySelector( '#wptrt-notice-<?php echo esc_attr($this->id); ?> .notice-dismiss' );
 
                 // Add an event listener to the dismiss button.
                 dismissBtn.addEventListener( 'click', function( event ) {
@@ -88,11 +91,11 @@ class Dismiss {
 
                     // Build the data to send in our request.
                     // Data has to be formatted as a string here.
-                    postData += 'id=<?php echo esc_attr( rawurlencode( $this->id ) ); ?>';
+                    postData += 'id=<?php echo esc_attr(rawurlencode($this->id)); ?>';
                     postData += '&action=wptrt_dismiss_notice';
-                    postData += '&nonce=<?php echo esc_html( $nonce ); ?>';
+                    postData += '&nonce=<?php echo esc_html($nonce); ?>';
 
-                    httpRequest.open( 'POST', '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>' );
+                    httpRequest.open( 'POST', '<?php echo esc_url(admin_url('admin-ajax.php')); ?>' );
                     httpRequest.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' )
                     httpRequest.send( postData );
                 });
@@ -108,14 +111,15 @@ class Dismiss {
      * @since 1.0
      * @return bool
      */
-    public function is_dismissed() {
+    public function is_dismissed()
+    {
 
         // Check if the notice has been dismissed when using user-meta.
-        if ( 'user' === $this->scope ) {
-            return ( get_user_meta( get_current_user_id(), "{$this->prefix}_{$this->id}", true ) );
+        if ('user' === $this->scope) {
+            return ( get_user_meta(get_current_user_id(), "{$this->prefix}_{$this->id}", true) );
         }
 
-        return ( get_option( "{$this->prefix}_{$this->id}" ) );
+        return ( get_option("{$this->prefix}_{$this->id}") );
     }
 
     /**
@@ -126,20 +130,21 @@ class Dismiss {
      * @since 1.0
      * @return void
      */
-    public function ajax_maybe_dismiss_notice() {
+    public function ajax_maybe_dismiss_notice()
+    {
 
         // Sanity check: Early exit if we're not on a wptrt_dismiss_notice action.
-        if ( ! isset( $_POST['action'] ) || 'wptrt_dismiss_notice' !== $_POST['action'] ) {
+        if (! isset($_POST['action']) || 'wptrt_dismiss_notice' !== $_POST['action']) {
             return;
         }
 
         // Sanity check: Early exit if the ID of the notice is not the one from this object.
-        if ( ! isset( $_POST['id'] ) || $this->id !== $_POST['id'] ) {
+        if (! isset($_POST['id']) || $this->id !== $_POST['id']) {
             return;
         }
 
         // Security check: Make sure nonce is OK.
-        check_ajax_referer( 'wptrt_dismiss_notice_' . $this->id, 'nonce', true );
+        check_ajax_referer('wptrt_dismiss_notice_' . $this->id, 'nonce', true);
 
         // If we got this far, we need to dismiss the notice.
         $this->dismiss_notice();
@@ -152,11 +157,12 @@ class Dismiss {
      * @since 1.0
      * @return void
      */
-    private function dismiss_notice() {
-        if ( 'user' === $this->scope ) {
-            update_user_meta( get_current_user_id(), "{$this->prefix}_{$this->id}", true );
+    private function dismiss_notice()
+    {
+        if ('user' === $this->scope) {
+            update_user_meta(get_current_user_id(), "{$this->prefix}_{$this->id}", true);
             return;
         }
-        update_option( "{$this->prefix}_{$this->id}", true, false );
+        update_option("{$this->prefix}_{$this->id}", true, false);
     }
 }

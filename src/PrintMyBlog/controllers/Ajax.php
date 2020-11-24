@@ -236,7 +236,8 @@ class Ajax extends BaseController
         exit;
     }
 
-    public function addPrintMaterial(){
+    public function addPrintMaterial()
+    {
         $title = $_REQUEST['title'];
         $project_id = $_REQUEST['project'];
         $project = $this->project_manager->getById($project_id);
@@ -249,7 +250,7 @@ class Ajax extends BaseController
         );
         $post = get_post($post_id);
         ob_start();
-        pmb_content_item($post,$project);
+        pmb_content_item($post, $project);
         $html = ob_get_clean();
         wp_send_json_success([
             'html' => $html,

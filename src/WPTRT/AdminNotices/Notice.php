@@ -20,7 +20,8 @@ namespace WPTRT\AdminNotices;
  *
  * @since 1.0.0
  */
-class Notice {
+class Notice
+{
 
     /**
      * The notice-ID.
@@ -133,16 +134,17 @@ class Notice {
      *                                                        Can contain lowercase latin letters and underscores.
      *                        ].
      */
-    public function __construct( $id, $title, $message, $options = [] ) {
+    public function __construct($id, $title, $message, $options = [])
+    {
 
         // Set the object properties.
         $this->id      = $id;
         $this->title   = $title;
         $this->message = $message;
-        $this->options = wp_parse_args( $options, $this->options );
+        $this->options = wp_parse_args($options, $this->options);
 
         // Sanity check: Early exit if ID or message are empty.
-        if ( ! $this->id || ! $this->message ) {
+        if (! $this->id || ! $this->message) {
             return;
         }
 
@@ -153,10 +155,10 @@ class Notice {
          * @param array $allowed_html The list of allowed HTML tags.
          * @return array
          */
-        $this->allowed_html = apply_filters( 'wptrt_admin_notices_allowed_html', $this->allowed_html );
+        $this->allowed_html = apply_filters('wptrt_admin_notices_allowed_html', $this->allowed_html);
 
         // Instantiate the Dismiss object.
-        $this->dismiss = new Dismiss( $this->id, $this->options['option_prefix'], $this->options['scope'] );
+        $this->dismiss = new Dismiss($this->id, $this->options['option_prefix'], $this->options['scope']);
     }
 
     /**
@@ -166,10 +168,11 @@ class Notice {
      * @since 1.0
      * @return void
      */
-    public function the_notice() {
+    public function the_notice()
+    {
 
         // Early exit if we don't want to show this notice.
-        if ( ! $this->show() ) {
+        if (! $this->show()) {
             return;
         }
 
@@ -179,8 +182,8 @@ class Notice {
         // Print the notice.
         printf(
             '<div id="%1$s" class="%2$s">%3$s</div>',
-            'wptrt-notice-' . esc_attr( $this->id ), // The ID.
-            esc_attr( $this->get_classes() ), // The classes.
+            'wptrt-notice-' . esc_attr($this->id), // The ID.
+            esc_attr($this->get_classes()), // The classes.
             $html // The HTML.
         );
     }
@@ -192,25 +195,26 @@ class Notice {
      * @since 1.0
      * @return bool
      */
-    public function show() {
+    public function show()
+    {
 
         // Don't show if the user doesn't have the required capability.
-        if ( ! current_user_can( $this->options['capability'] ) ) {
+        if (! current_user_can($this->options['capability'])) {
             return false;
         }
 
         // Don't show if we're not on the right screen.
-        if ( ! $this->is_screen() ) {
+        if (! $this->is_screen()) {
             return false;
         }
 
         // Don't show if other query args don't check out
-        if( ! $this->check_query_args()){
+        if (! $this->check_query_args()) {
             return false;
         }
 
         // Don't show if notice has been dismissed.
-        if ( $this->dismiss->is_dismissed() ) {
+        if ($this->dismiss->is_dismissed()) {
             return false;
         }
 
@@ -224,25 +228,26 @@ class Notice {
      * @since 1.0
      * @return string
      */
-    public function get_classes() {
+    public function get_classes()
+    {
         $classes = [
             'notice',
             'is-dismissible',
         ];
 
         // Make sure the defined type is allowed.
-        $this->options['type'] = in_array( $this->options['type'], $this->allowed_types, true ) ? $this->options['type'] : 'info';
+        $this->options['type'] = in_array($this->options['type'], $this->allowed_types, true) ? $this->options['type'] : 'info';
 
         // Add the class for notice-type.
         $classes[] = 'notice-' . $this->options['type'];
 
         // Do we want alt styles?
-        if ( $this->options['alt_style'] ) {
+        if ($this->options['alt_style']) {
             $classes[] = 'notice-alt';
         }
 
         // Combine classes to a string.
-        return implode( ' ', $classes );
+        return implode(' ', $classes);
     }
 
     /**
@@ -252,16 +257,17 @@ class Notice {
      * @since 1.0
      * @return string
      */
-    public function get_title() {
+    public function get_title()
+    {
 
         // Sanity check: Early exit if no title is defined.
-        if ( ! $this->title ) {
+        if (! $this->title) {
             return '';
         }
 
         return sprintf(
             '<h2 class="notice-title">%s</h2>',
-            wp_strip_all_tags( $this->title )
+            wp_strip_all_tags($this->title)
         );
     }
 
@@ -272,7 +278,8 @@ class Notice {
      * @since 1.0
      * @return string
      */
-    public function get_message() {
+    public function get_message()
+    {
         return wpautop($this->message);
     }
 
@@ -283,34 +290,36 @@ class Notice {
      * @since 1.0
      * @return bool
      */
-    private function is_screen() {
+    private function is_screen()
+    {
 
         // If screen is empty we want this shown on all screens.
-        if ( ! $this->options['screens'] || empty( $this->options['screens'] ) ) {
+        if (! $this->options['screens'] || empty($this->options['screens'])) {
             return true;
         }
 
         // Make sure the get_current_screen function exists.
-        if ( ! function_exists( 'get_current_screen' ) ) {
+        if (! function_exists('get_current_screen')) {
             require_once ABSPATH . 'wp-admin/includes/screen.php';
         }
 
         /** @var \WP_Screen $current_screen */
         $current_screen = get_current_screen();
         // Check if we're on one of the defined screens.
-        return ( in_array( $current_screen->id, $this->options['screens'], true ) );
+        return ( in_array($current_screen->id, $this->options['screens'], true) );
     }
 
     /**
      * Checks if the needed other query arguments (eg GET querystring) are set.
      * @return bool
      */
-    private function check_query_args() {
-        if( ! $this->options['query_args'] ||  empty($this->options['query_args'])){
+    private function check_query_args()
+    {
+        if (! $this->options['query_args'] ||  empty($this->options['query_args'])) {
             return true;
         }
-        foreach($this->options['query_args'] as $arg_name => $required_value){
-            if(! isset($_REQUEST[$arg_name]) || $_REQUEST[$arg_name] !== $required_value){
+        foreach ($this->options['query_args'] as $arg_name => $required_value) {
+            if (! isset($_REQUEST[$arg_name]) || $_REQUEST[$arg_name] !== $required_value) {
                 return false;
             }
         }
@@ -320,7 +329,8 @@ class Notice {
     /**
      * @return string
      */
-    public function id(){
+    public function id()
+    {
         return $this->id;
     }
 }

@@ -20,7 +20,8 @@ namespace WPTRT\AdminNotices;
  *
  * @since 1.0.0
  */
-class Notices {
+class Notices
+{
 
     /**
      * An array of notices.
@@ -38,13 +39,14 @@ class Notices {
      * @since 1.0
      * @return void
      */
-    public function boot() {
+    public function boot()
+    {
 
         // Add the notice.
-        add_action( 'admin_notices', [ $this, 'the_notices' ] );
+        add_action('admin_notices', [ $this, 'the_notices' ]);
 
         // Print the script to the footer.
-        add_action( 'admin_footer', [ $this, 'print_scripts' ] );
+        add_action('admin_footer', [ $this, 'print_scripts' ]);
     }
 
     /**
@@ -59,15 +61,17 @@ class Notices {
      *                        See Notice::__constructor() for details.
      * @return void
      */
-    public function add( $id, $title, $message, $options = [] ) {
-        $this->notices[ $id ] = new Notice( $id, $title, $message, $options );
+    public function add($id, $title, $message, $options = [])
+    {
+        $this->notices[ $id ] = new Notice($id, $title, $message, $options);
     }
 
     /**
      * @param $id
      * @param Notice  $notice_obj
      */
-    public function add_notice($notice_obj){
+    public function add_notice($notice_obj)
+    {
         $this->notices[ $notice_obj->id() ] = $notice_obj;
     }
 
@@ -79,8 +83,9 @@ class Notices {
      * @param string $id The unique ID of the notice we want to remove.
      * @return void
      */
-    public function remove( $id ) {
-        unset( $this->notices[ $id ] );
+    public function remove($id)
+    {
+        unset($this->notices[ $id ]);
     }
 
     /**
@@ -91,8 +96,9 @@ class Notices {
      * @param string $id The unique ID of the notice we want to retrieve.
      * @return Notice|null
      */
-    public function get( $id ) {
-        if ( isset( $this->notices[ $id ] ) ) {
+    public function get($id)
+    {
+        if (isset($this->notices[ $id ])) {
             return $this->notices[ $id ];
         }
         return null;
@@ -105,7 +111,8 @@ class Notices {
      * @since 1.0
      * @return array
      */
-    public function get_all() {
+    public function get_all()
+    {
         return $this->notices;
     }
 
@@ -116,10 +123,11 @@ class Notices {
      * @since 1.0
      * @return void
      */
-    public function the_notices() {
+    public function the_notices()
+    {
         $notices = $this->get_all();
 
-        foreach ( $notices as $notice ) {
+        foreach ($notices as $notice) {
             $notice->the_notice();
         }
     }
@@ -131,11 +139,12 @@ class Notices {
      * @since 1.0
      * @return void
      */
-    public function print_scripts() {
+    public function print_scripts()
+    {
         $notices = $this->get_all();
 
-        foreach ( $notices as $notice ) {
-            if ( $notice->show() ) {
+        foreach ($notices as $notice) {
+            if ($notice->show()) {
                 $notice->dismiss->print_script();
             }
         }

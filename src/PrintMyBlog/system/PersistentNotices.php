@@ -1,8 +1,6 @@
 <?php
 
-
 namespace PrintMyBlog\system;
-
 
 use PrintMyBlog\domain\DefaultPersistentNotices;
 use WPTRT\AdminNotices\Notices;
@@ -29,8 +27,9 @@ class PersistentNotices
     /**
      * Gets and shows the persistent admin notices
      */
-    public function register(){
-        foreach($this->default_persistent_notices->getNotices() as $notice){
+    public function register()
+    {
+        foreach ($this->default_persistent_notices->getNotices() as $notice) {
             $this->persistent_notices->add_notice($notice);
         }
         $this->persistent_notices->boot();

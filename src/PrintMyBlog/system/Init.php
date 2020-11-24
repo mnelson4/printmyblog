@@ -167,7 +167,7 @@ class Init
     protected function takeActionOnIncomingRequest()
     {
         // Persistent notices need to be setup on both admin and ajax requests.
-        if(is_admin()){
+        if (is_admin()) {
             $persistent_messages = $this->context->reuse('PrintMyBlog\system\PersistentNotices');
             $persistent_messages->register();
         }
