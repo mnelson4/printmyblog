@@ -15,21 +15,25 @@ class DefaultPersistentNotices
             new Notice(
                 'pmb_pro_notice',
                 __('You are using Print My Blog Free', 'print-my-blog'),
-                '<a class="button button-primary" href="'
+                '<p><a class="button button-primary" href="'
                 . esc_attr(admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH))
                 . '">'
-                . esc_html__('Try the Pro Demo', 'print-my-blog')
-                . '</a>',
+                . esc_html__('Switch to the Pro Demo', 'print-my-blog')
+                . '</a></p><p>'
+                . __('Try all the pro features (table of contents, project organizer, custom post types) without signing up or installing anything. The files will just contain a watermark until purhcase.')
+                . '</p>',
                 $this->getOptionsForScreen( 'print-my-blog_page_print-my-blog-now')
             ),
             new Notice(
                 'pmb_free_notice',
                 __('You are using the Pro Demo', 'print-my-blog'),
-                '<a class="button" href="'
+                '<p><a class="button" href="'
                 . esc_attr(admin_url(PMB_ADMIN_PAGE_PATH))
                 . '">'
-                . esc_html__('Try the Free Tool', 'print-my-blog')
-                . '</a>',
+                . esc_html__('Switch to Free', 'print-my-blog')
+                . '</a></p><p>'
+                . __('It won‘t cost you anything and will help you print thousands of posts or pages at once. It just doesn‘t have quite as many other features.', 'print-my-blog')
+                . '</p>',
                 $this->getOptionsForScreen( 'toplevel_page_print-my-blog-projects')
             ),
             new Notice(
