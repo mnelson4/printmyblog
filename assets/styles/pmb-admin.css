@@ -28,6 +28,21 @@
     margin-top:0;
     margin-bottom:15px;
 }
+
+.pmb-two-column-notice div{
+    display:inline-block;
+    vertical-align: top;
+}
+
+.pmb-image-column{
+    max-width:95%;
+    width:560px;
+    height:315px
+}
+.pmb-text-column{
+    max-width:400px;
+}
+
 .twine-two-column-layout td>label{
     display:block;
 }

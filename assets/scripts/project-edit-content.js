@@ -74,9 +74,10 @@ function pmb_setup_callbacks_on_new_options(){
 		var parent_draggable_items = selection.parents('.pmb-project-item');
 
 		if(parent_draggable_items.length > 0){
-			var element_to_remove = parent_draggable_items[0];
-			jQuery(element_to_remove).detach().appendTo('#pmb-project-main-matter');
-			element_to_remove.scrollIntoView();
+			var element_to_add = parent_draggable_items[0];
+			jQuery(element_to_add).detach().appendTo('#pmb-project-main-matter');
+			element_to_add.scrollIntoView();
+			pmb_maybe_add_sortable_to(jQuery('#pmb-project-main-matter'), jQuery(element_to_add));
 		}
 	});
 	jQuery('.load-more-button').click(function(event){
