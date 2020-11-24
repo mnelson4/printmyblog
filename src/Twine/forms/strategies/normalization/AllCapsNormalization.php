@@ -11,7 +11,7 @@ namespace Twine\forms\strategies\normalization;
  * @subpackage
  * @author                Mike Nelson
  */
-class AllCapsNormalization extends NormalizationStrategyBase
+class AllCapsNormalization extends NormalizationBase
 {
 
     /**

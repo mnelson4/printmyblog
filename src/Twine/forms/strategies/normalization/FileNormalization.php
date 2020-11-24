@@ -3,6 +3,7 @@
 namespace Twine\forms\strategies\normalization;
 
 use EventEspresso\core\services\request\files\FileSubmissionInterface;
+use Twine\forms\helpers\ValidationError;
 
 /**
  * FileNormalization
@@ -12,7 +13,7 @@ use EventEspresso\core\services\request\files\FileSubmissionInterface;
  * @subpackage
  * @author                Mike Nelson
  */
-class FileNormalization extends NormalizationStrategyBase
+class FileNormalization extends NormalizationBase
 {
 
     /**

@@ -102,7 +102,7 @@ abstract class FormSectionBase
             if (property_exists($this, $key) && empty($this->{$key})) {
                 $this->{$key} = $value;
                 if ($key === 'subsections' && ! is_array($value)) {
-                    throw new InvalidDataTypeException($key, $value, 'array');
+                    throw new Exception('Subsections was not an array');
                 }
             }
         }

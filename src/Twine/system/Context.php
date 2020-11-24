@@ -35,6 +35,11 @@ abstract class Context
      */
     protected $deps;
 
+    /**
+     * Context constructor.
+     */
+    public function __construct(){}
+
 
     /**
      *
@@ -62,11 +67,15 @@ abstract class Context
         return $this->instantiate($classname, $args);
     }
 
-    protected function instantiate($classname, $args)
+    protected function instantiate($classname, $args = [])
     {
         $classname = $this->normalizeClassname($classname);
         $reflection = new ReflectionClass($classname);
-        $obj = $reflection->newInstanceArgs($args);
+        if($args){
+            $obj = $reflection->newInstanceArgs($args);
+        } else {
+            $obj = $reflection->newInstance();
+        }
 
         if (isset($this->deps[$classname]) && method_exists($obj, 'inject')) {
             $classes_depended_on = $this->deps[$classname];
@@ -99,7 +108,7 @@ abstract class Context
     protected function normalizeClassname($classname)
     {
         if ($classname[0] === '/') {
-            $classname = substr(1);
+            $classname = substr($classname, 1);
         }
         return $classname;
     }

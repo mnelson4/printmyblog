@@ -24,6 +24,11 @@ class Html
     protected static $instance;
 
     /**
+     * @var int[]
+     */
+    protected $indent;
+
+    /**
      * @return Html
      */
     public static function instance()
@@ -51,7 +56,7 @@ class Html
     protected function __construct()
     {
         // set some initial formatting for table indentation
-        $this->_indent = array(
+        $this->indent = array(
             'none'  => 0,
             'form'  => 0,
             'radio'     => 0,
@@ -818,7 +823,7 @@ class Html
     {
         $html = "\n";
         $this->indent($indent, $tag);
-        for ($x = 0; $x < $this->_indent[ $tag ]; $x++) {
+        for ($x = 0; $x < $this->indent[ $tag ]; $x++) {
             $html .= "\t";
         }
         return $html;
@@ -835,10 +840,10 @@ class Html
      */
     public function indent($indent, $tag = 'none')
     {
-        if (! isset($this->_indent[ $tag ])) {
-            $this->_indent[ $tag ] = 0;
+        if (! isset($this->indent[ $tag ])) {
+            $this->indent[ $tag ] = 0;
         }
-        $this->_indent[ $tag ] += (int) $indent;
-        $this->_indent[ $tag ] = $this->_indent[ $tag ] >= 0 ? $this->_indent[ $tag ] : 0;
+        $this->indent[ $tag ] += (int) $indent;
+        $this->indent[ $tag ] = $this->indent[ $tag ] >= 0 ? $this->indent[ $tag ] : 0;
     }
 }

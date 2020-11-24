@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\orm\entities;
 
+use Exception;
 use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\services\DesignTemplateRegistry;
 use Twine\forms\base\FormSection;

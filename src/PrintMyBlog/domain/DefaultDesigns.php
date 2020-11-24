@@ -3,6 +3,7 @@
 namespace PrintMyBlog\domain;
 
 use PrintMyBlog\entities\DesignTemplate;
+use WP_User;
 
 class DefaultDesigns
 {

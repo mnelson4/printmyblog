@@ -178,4 +178,14 @@ class PdfGenerator extends ProjectFileGeneratorBase
     {
         $this->generateSections($this->project->getFlatSections(1000, 0, false));
     }
+
+
+    /**
+     * Deletes the generated HTML file, if it exists.
+     * @return bool
+     */
+    public function deleteFile()
+    {
+        return $this->getFileWriter()->delete();
+    }
 }

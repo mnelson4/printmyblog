@@ -271,11 +271,7 @@ abstract class ProjectFileGeneratorBase
     }
 
     /**
-     * Deletes the generated HTML file, if it exists.
      * @return bool
      */
-    public function deleteFile()
-    {
-        return $this->getFileWriter()->delete();
-    }
+    abstract public function deleteFile();
 }
