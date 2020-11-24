@@ -61,6 +61,7 @@ return array(
     'Twine\\admin\\news\\DashboardNews' => $baseDir . '/src/Twine/admin/news/DashboardNews.php',
     'Twine\\compatibility\\CompatibilityBase' => $baseDir . '/src/Twine/compatibility/CompatibilityBase.php',
     'Twine\\controllers\\BaseController' => $baseDir . '/src/Twine/controllers/BaseController.php',
+    'Twine\\entities\\FileSubmission' => $baseDir . '/src/Twine/entities/FileSubmission.php',
     'Twine\\entities\\notifications\\OneTimeNotification' => $baseDir . '/src/Twine/entities/notifications/OneTimeNotification.php',
     'Twine\\forms\\base\\FormSection' => $baseDir . '/src/Twine/forms/base/FormSection.php',
     'Twine\\forms\\base\\FormSectionBase' => $baseDir . '/src/Twine/forms/base/FormSectionBase.php',

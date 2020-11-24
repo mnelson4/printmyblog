@@ -100,6 +100,7 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'Twine\\admin\\news\\DashboardNews' => __DIR__ . '/../..' . '/src/Twine/admin/news/DashboardNews.php',
         'Twine\\compatibility\\CompatibilityBase' => __DIR__ . '/../..' . '/src/Twine/compatibility/CompatibilityBase.php',
         'Twine\\controllers\\BaseController' => __DIR__ . '/../..' . '/src/Twine/controllers/BaseController.php',
+        'Twine\\entities\\FileSubmission' => __DIR__ . '/../..' . '/src/Twine/entities/FileSubmission.php',
         'Twine\\entities\\notifications\\OneTimeNotification' => __DIR__ . '/../..' . '/src/Twine/entities/notifications/OneTimeNotification.php',
         'Twine\\forms\\base\\FormSection' => __DIR__ . '/../..' . '/src/Twine/forms/base/FormSection.php',
         'Twine\\forms\\base\\FormSectionBase' => __DIR__ . '/../..' . '/src/Twine/forms/base/FormSectionBase.php',

@@ -2,7 +2,7 @@
 
 namespace Twine\forms\strategies\normalization;
 
-use EventEspresso\core\services\request\files\FileSubmissionInterface;
+use Twine\entities\FileSubmission;
 use Twine\forms\helpers\ValidationError;
 
 /**
@@ -20,11 +20,11 @@ class FileNormalization extends NormalizationBase
      * Keep in mind $value_to_normalize should be a FileSubmissionInterface or null, so this shouldn't really do
      * much (other than NOT convert it to a string or something).
      * @param string $value_to_normalize
-     * @return FileSubmissionInterface
+     * @return FileSubmission
      */
     public function normalize($value_to_normalize)
     {
-        if ($value_to_normalize instanceof FileSubmissionInterface || is_null($value_to_normalize)) {
+        if ($value_to_normalize instanceof FileSubmission || is_null($value_to_normalize)) {
             return $value_to_normalize;
         } else {
             throw new ValidationError(
