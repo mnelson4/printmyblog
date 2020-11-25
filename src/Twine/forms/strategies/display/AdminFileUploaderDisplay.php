@@ -16,7 +16,7 @@ use WP_Error;
  */
 class AdminFileUploaderDisplay extends DisplayBase
 {
-    
+
     /**
      * Enqueues the JS and CSS needed to display this input
      */
