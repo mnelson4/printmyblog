@@ -44,7 +44,7 @@ class FileNormalization extends NormalizationBase
      */
     public function unnormalize($normalized_value)
     {
-        if ($normalized_value instanceof FileSubmissionInterface || is_null($normalized_value)) {
+        if ($normalized_value instanceof FileSubmission || is_null($normalized_value)) {
             // Leave it as the object, it can be treated like a string because it
             // overrides __toString()
             return $normalized_value;

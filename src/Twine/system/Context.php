@@ -38,7 +38,7 @@ abstract class Context
     /**
      * Context constructor.
      */
-    public final function __construct()
+    final public function __construct()
     {
     }
 

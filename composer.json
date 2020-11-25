@@ -23,6 +23,8 @@
     },
     "scripts": {
         "release": "git archive HEAD --format=zip --output ../printmyblog.zip && git tag",
-        "stan": "phpstan analyze"
+        "stan": "phpstan analyze",
+        "phpcs": "phpcs",
+        "phpcbf": "phpcbf"
     }
 }
