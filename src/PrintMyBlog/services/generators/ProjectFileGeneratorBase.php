@@ -169,7 +169,7 @@ abstract class ProjectFileGeneratorBase
         // we want to see what's after "more" tags
         $more = true;
         // Remove all pagebreak blocks and stitch it all back together.
-        $content_ignoring_pages = implode('<br class="pmb-page-break">',$pages);
+        $content_ignoring_pages = implode('<br class="pmb-page-break">', $pages);
         $pages = [$content_ignoring_pages];
         $numpages = 1;
         $multipage = false;
