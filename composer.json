@@ -23,8 +23,7 @@
     },
     "scripts": {
         "release": "git archive HEAD --format=zip --output ../printmyblog.zip && git tag",
-        "stan": "phpstan analyze --debug",
-        "clear-stan": "phpstan clear-result-cache",
+        "phpstan": "phpstan analyze --debug",
         "phpcs": "phpcs",
         "phpcbf": "phpcbf"
     }
