@@ -280,7 +280,7 @@ abstract class FormInputBase extends FormSectionValidatable
      * Returns the strategy for displaying this form input. If none is set, throws an exception.
      *
      * @return DisplayBase
-     * @throws Error
+     * @throws ImproperUsageException
      */
     protected function initializeDisplayStrategy()
     {
