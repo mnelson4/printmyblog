@@ -165,9 +165,13 @@ abstract class ProjectFileGeneratorBase
      */
     protected function setupPostData()
     {
-        global $more;
+        global $more, $multipage, $pages, $numpages;
         // we want to see what's after "more" tags
         $more = true;
+        $content_ignoring_pages = implode('<br class="pmb-page-break">',$pages);
+        $pages = [$content_ignoring_pages];
+        $numpages = 1;
+        $multipage = false;
     }
 
     /**
