@@ -17,8 +17,13 @@ class DefaultDesigns
                 return [
                     'title' => __('Classic Digital PDF', 'print-my-blog'),
                     // phpcs:disable Generic.Files.LineLength.TooLong
-                    'description' => __('Look inspired by Print My Blogs original, containing a quick printout heading and compact design.', 'print-my-blog'),
+                    'quick_description' => esc_html__('A simple but flexible design intended mainly for reading from screens, inspired by Print My Blog Free.', 'print-my-blog'),
                     // phpcs:enable Generic.Files.LineLength.TooLong
+                    'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
+                    'author' => [
+                        'name' => 'Mike Nelson',
+                        'url' => 'https://printmy.blog'
+                    ],
                     'previews' => [
                         [
                             'url' => $design_template->getUrl() . 'assets/preview1.jpg',
@@ -49,6 +54,10 @@ class DefaultDesigns
                     // phpcs:disable Generic.Files.LineLength.TooLong
                     'description' => __('Perfect for editing and reviewing your content! Compact to conserve paper, lots of meta-information, and double-spaced text to allow for editor’s notes.', 'print-my-blog'),
                     // phpcs:enable Generic.Files.LineLength.TooLong
+                    'author' => [
+                        'name' => 'Mike Nelson',
+                        'url' => 'https://printmy.blog'
+                    ],
                     'previews' => [
                         [
                             'url' => $preview_folder_url . '/preview1.jpg',
@@ -96,6 +105,10 @@ class DefaultDesigns
                     // phpcs:disable Generic.Files.LineLength.TooLong
                     'description' => __('Look inspired by Print My Blogs original, containing a quick printout heading and compact design.', 'print-my-blog'),
                     // phpcs:enable Generic.Files.LineLength.TooLong
+                    'author' => [
+                        'name' => 'Mike Nelson',
+                        'url' => 'https://printmy.blog'
+                    ],
                     'previews' => [
                         [
                             'url' => $design_template->getUrl() . 'assets/preview1.jpg',
@@ -129,6 +142,10 @@ class DefaultDesigns
                         'Compact design meant to save paper but still deliver all the content.',
                         'print-my-blog'
                     ),
+                    'author' => [
+                        'name' => 'Mike Nelson',
+                        'url' => 'https://printmy.blog'
+                    ],
                     'previews' => [
                         [
                             'url' => $preview_folder_url . 'preview1.jpg',
@@ -176,7 +193,12 @@ class DefaultDesigns
                 }
                 return [
                     'title' => __('Buurma Whitepaper', 'print-my-blog'),
-                    'description' => __('Digital PDF perfect for a branded whitepaper.', 'print-my-blog'),
+                    'quick_description' => __('Stylized and branded PDF designed mainly for reading from a device, great for organizations', 'print-my-blog'),
+                    'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
+                    'author' => [
+                        'name' => 'Mike Nelson',
+                        'url' => 'https://printmy.blog'
+                    ],
                     'previews' => [
                         [
                             'url' => $design_template->getUrl() . 'assets/preview1.jpg',
@@ -211,7 +233,12 @@ class DefaultDesigns
             function (DesignTemplate $design_template) {
                 return [
                     'title' => __('Mayer Magazine', 'print-my-blog'),
-                    'description' => __('Digital 2-column magazine', 'print-my-blog'),
+                    'quick_description' => __('Digital 2-column magazine inspired by the defunct Zinepal', 'print-my-blog'),
+                    'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
+                    'author' => [
+                        'name' => 'Mike Nelson',
+                        'url' => 'https://printmy.blog'
+                    ],
                     'previews' => [
                         [
                             'url' => $design_template->getUrl() . 'assets/preview1.jpg',

@@ -8,6 +8,7 @@ use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\system\CustomPostTypes;
 use WP_Post;
+use Twine\helpers\Array2;
 
 /**
  * Class DesignRegistry
@@ -67,13 +68,13 @@ class DesignRegistry
      */
     protected function createNewDesign($design_template_slug, $design_slug, $callback)
     {
-        $design_template = $this->design_template_registry->getDesignTemplate($design_template_slug);
-        $args = call_user_func($callback, $design_template);
+        list($design_template, $args) = $this->getTemplateAndArgs($design_template_slug, $callback);
         $design_post_id = wp_insert_post([
             'post_title'   => $args['title'],
             'post_name'    => $design_slug,
             'post_type'    => CustomPostTypes::DESIGN,
             'post_content' => $args['description'],
+            'post_excerpt' => Array2::setOr($args, 'quick_description',''),
             'post_status' => 'publish'
         ]);
         if (! $design_post_id) {
@@ -87,8 +88,42 @@ class DesignRegistry
         /* @var $design Design */
         $design = $this->design_manager->getById($design_post_id);
         $design->setPmbMeta('format', $design_template->getFormatSlug());
-        $design->setPMbMeta('design_template', $design_template->getSlug());
+        $design->setPmbMeta('design_template', $design_template->getSlug());
+        $this->setArgsForDesign($design, $args);
+    }
 
+    /**
+     * @param string $design_template_slug
+     * @param callable $design_slug
+     * @return array containing a DesignTemplate and an array of args
+     * @throws Exception
+     */
+    protected function getTemplateAndArgs($design_template_slug, $callback){
+        $design_template = $this->design_template_registry->getDesignTemplate($design_template_slug);
+        $args = call_user_func($callback, $design_template);
+        return [$design_template, $args];
+    }
+
+    protected function updateDesign(Design $design, $design_template_slug, $callback)
+    {
+        list($design_template, $args) = $this->getTemplateAndArgs($design_template_slug, $callback);
+        wp_update_post(
+            [
+                'ID' => $design->getWpPost()->ID,
+                'post_excerpt' => Array2::setOr($args, 'quick_description',''),
+                'post_content' => $args['description']
+            ]
+        );
+        $this->setArgsForDesign($design, $args);
+    }
+
+    protected function setArgsForDesign(Design $design, $args)
+    {
+        if(isset($args['author'])){
+            foreach($args['author'] as $field => $value){
+                $design->setPmbMeta('author_' . $field, $value);
+            }
+        }
         // Set preview images
         if (isset($args['previews'])) {
             $count = 1;
@@ -117,8 +152,10 @@ class DesignRegistry
         // loop through all the registered designs
         foreach ($this->design_callbacks as $design_template_slug => $designs) {
             foreach ($designs as $design_slug => $args_callback) {
-                $design_post = $this->design_manager->getBySlug($design_slug);
-                if (! $design_post instanceof Design) {
+                $design = $this->design_manager->getBySlug($design_slug);
+                if ( $design instanceof Design) {
+                    $this->updateDesign($design, $design_template_slug, $args_callback);
+                } else {
                     $this->createNewDesign(
                         $design_template_slug,
                         $design_slug,
@@ -127,7 +164,5 @@ class DesignRegistry
                 }
             }
         }
-
-        // and make sure there is a design post for each of them
     }
 }

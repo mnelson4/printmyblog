@@ -131,6 +131,9 @@ class DefaultDesignTemplates
                                                 'remove' => new InputOption(
                                                     __('Remove', 'print-my-blog')
                                                 ),
+                                                'leave' => new InputOption(
+                                                    __('Leave as hyperlink', 'print-my-blog')
+                                                ),
                                                 'parens' => new InputOption(
                                                     __('Replace with page reference', 'print-my-blog')
                                                 ),

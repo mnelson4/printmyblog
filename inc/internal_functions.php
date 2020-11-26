@@ -71,12 +71,24 @@ function pmb_map_section_height_to_division($height){
 }
 
 /**
+ * Renders a PMB template in the template directory
  * @param $template_name
  * @param array $context
  */
 function pmb_render_template($template_name, $context=[]){
-	extract($context);
-	require(PMB_TEMPLATES_DIR . $template_name);
+    echo pmb_get_contents(PMB_TEMPLATES_DIR . $template_name, $context);
+}
+
+/**
+ * Renders any file
+ * @param $filename
+ * @param array $context
+ */
+function pmb_get_contents($filename, $context=[]){
+    extract($context);
+    ob_start();
+    require($filename);
+    return ob_get_clean();
 }
 
 function pmb_design_preview(\PrintMyBlog\orm\entities\Design $design){

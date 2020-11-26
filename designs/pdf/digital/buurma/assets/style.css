@@ -100,20 +100,6 @@
         content: leader('.') target-counter(attr(href), page) !important;
     }
 
-    /* part styling*/
-    .pmb-part{
-        break-before:right;
-        page: part-start;
-    }
-    .pmb-part h1.entry-title{
-        font-size:120%;
-        string-set: part-title content();
-        margin-top:2in;
-    }
-    .pmb-part .entry-content{
-        margin-top:1in;
-    }
-
     /* Article styles */
     .pmb-section h1.entry-title {
         string-set: section-title content();

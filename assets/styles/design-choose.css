@@ -14,7 +14,13 @@
 
 .pmb-design.pmb-active .pmb-design-id-container{
 }
-
+.pmb-details-description{
+    clear:both;
+    padding:1em;
+}
+.pmb-design-quick-description{
+    font-size:1.4em;
+}
 .pmb-design-id-container h2{
     font-size:15px;
     height:18px;
@@ -82,6 +88,9 @@
     display:none;
 }
 
+.pmb-details-content{
+    max-height: 40vh;
+}
 .pmb-details-content .pmb-preview{
     width:400px;
     height:520px;
@@ -112,6 +121,12 @@
 }
 .pmb-details-support-table th{
     vertical-align: top;
+    text-align:left;
+    padding-bottom:2em
+}
+.pmb-details-support-table td{
+    vertical-align:top;
+    padding-left:2em;
 }
 .pmb-details-support-table .pmb-list{
     margin-top:0;

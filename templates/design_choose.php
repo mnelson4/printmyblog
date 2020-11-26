@@ -61,52 +61,71 @@ foreach($designs as $design){
 	    </div>
         <div class="pmb-details-content-container" id="pmb-design-details-<?php echo esc_attr($design->getWpPost()->post_name);?>">
             <div class="pmb-details-content">
-                <?php echo pmb_design_preview($design);?>
-                <h1><?php echo $design->getWpPost()->post_title;?></h1>
-                <table class="pmb-details-support-table">
-                    <tr>
-                        <th><?php esc_html_e('Template', 'print-my-blog');?></th>
-                        <td><?php echo $design->getDesignTemplate()->getTitle();?></td>
-                    </tr>
-                    <tr>
-                        <th><?php esc_html_e('Supports', 'print-my-blog');?></th>
-                        <td>
-                            <ul class="pmb-list"><?php
-		                        if($design->getDesignTemplate()->supports(DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER)){
-			                        echo '<li>' . __('front matter', 'print-my-blog') . '</li>';
-		                        }
-		                        echo '<li>';
-		                        printf(
-			                        _n(
-				                        '%1$s layer of nesting',
-				                        '%1$s layers of nesting',
-				                        $design->getDesignTemplate()->getLevels(),
-				                        'print-my-blog'
-			                        ),
-			                        $design->getDesignTemplate()->getLevels()
-		                        );
-		                        echo ' ';
-		                        if($design->getDesignTemplate()->getLevels() > 0 ){
-			                        for($i=0; $i < $design->getDesignTemplate()->getLevels(); $i++){
-				                        echo '(' . sprintf(
-						                        __('each %1$s can put in a %2$s', 'print-my-blog'),
-						                        $design->getDesignTemplate()->divisionLabelSingular($i),
-						                        $design->getDesignTemplate()->divisionLabelSingular($i+1)
-					                        ) . ')';
-			                        }
-		                        } else {
-			                        echo __('(no parts)', 'print-my-blog');
-		                        }
-		                        echo '</li>';
-		                        if($design->getDesignTemplate()->supports(DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER)){
-			                        echo '<li>' . __('back matter', 'print-my-blog') . '</li>';
-		                        }
-		                        ?>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
-                <?php echo $design->getWpPost()->post_content;?>
+                <div class="pmb-details-preview-and-summary">
+                    <?php echo pmb_design_preview($design);?>
+                    <h1><?php echo $design->getWpPost()->post_title;?></h1>
+                    <p class="pmb-design-quick-description"><?php echo $design->getWpPost()->post_excerpt;?></p>
+                    <table class="pmb-details-support-table">
+                        <tr>
+                            <th><?php esc_html_e('Template', 'print-my-blog');?></th>
+                            <td><?php echo $design->getDesignTemplate()->getTitle();?></td>
+                        </tr>
+                        <?php if($design->getPmbMeta('author_name')){
+                            $author_name = $design->getPmbMeta('author_name');
+                            $author_url = $design->getPmbMeta('author_url');
+                            ?>
+                            <tr>
+                                <th><?php esc_html_e('By', 'print-my-blog');?></th>
+                                <td>
+                                    <a href="<?php echo esc_attr($author_url);?>" target="_blank">
+                                    <?php echo
+                                    $author_name;?></a>
+                                </td>
+                            </tr>
+                           <?php
+                        }?>
+                        <tr>
+                            <th><?php esc_html_e('Supports', 'print-my-blog');?></th>
+                            <td>
+                                <ul class="pmb-list"><?php
+                                    if($design->getDesignTemplate()->supports(DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER)){
+                                        echo '<li>' . __('front matter', 'print-my-blog') . '</li>';
+                                    }
+                                    echo '<li>';
+                                    printf(
+                                        _n(
+                                            '%1$s layer of nesting',
+                                            '%1$s layers of nesting',
+                                            $design->getDesignTemplate()->getLevels(),
+                                            'print-my-blog'
+                                        ),
+                                        $design->getDesignTemplate()->getLevels()
+                                    );
+                                    echo ' ';
+                                    if($design->getDesignTemplate()->getLevels() > 0 ){
+                                        for($i=0; $i < $design->getDesignTemplate()->getLevels(); $i++){
+                                            echo '(' . sprintf(
+                                                    __('each %1$s can put in a %2$s', 'print-my-blog'),
+                                                    $design->getDesignTemplate()->divisionLabelSingular($i),
+                                                    $design->getDesignTemplate()->divisionLabelSingular($i+1)
+                                                ) . ')';
+                                        }
+                                    } else {
+                                        echo __('(no parts)', 'print-my-blog');
+                                    }
+                                    echo '</li>';
+                                    if($design->getDesignTemplate()->supports(DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER)){
+                                        echo '<li>' . __('back matter', 'print-my-blog') . '</li>';
+                                    }
+                                    ?>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="pmb-details-description">
+                    <?php echo $design->getWpPost()->post_content;?>
+                </div>
             </div>
         </div>
 	</div>
