@@ -153,10 +153,21 @@ abstract class ProjectFileGeneratorBase
         $wp_query = $this->setupWpQuery($project_sections);
         while ($wp_query->have_posts()) {
             $wp_query->the_post();
+            $this->setupPostData();
             $this->maybeGenerateDivisionTransition($post);
             $this->generateSection();
         }
         wp_reset_postdata();
+    }
+
+    /**
+     * Setup WordPress post-related globals correctly for PMB
+     */
+    protected function setupPostData()
+    {
+        global $more;
+        // we want to see what's after "more" tags
+        $more = true;
     }
 
     /**
