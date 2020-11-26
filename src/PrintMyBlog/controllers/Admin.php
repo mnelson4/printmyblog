@@ -6,7 +6,6 @@ use Exception;
 use PrintMyBlog\controllers\helpers\ProjectsListTable;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\db\TableManager;
-use PrintMyBlog\domain\DefaultPersistentNotices;
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
 use PrintMyBlog\entities\DesignTemplate;
@@ -21,18 +20,14 @@ use PrintMyBlog\services\FileFormatRegistry;
 use PrintMyBlog\services\SvgDoer;
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\entities\notifications\OneTimeNotification;
-use Twine\forms\base\FormSectionHtmlFromTemplate;
 use Twine\forms\base\FormSection;
 use Twine\forms\helpers\InputOption;
 use Twine\forms\inputs\RadioButtonInput;
 use Twine\forms\inputs\TextInput;
-use Twine\forms\strategies\layout\TemplateLayout;
 use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
 use Twine\services\notifications\OneTimeNotificationManager;
 use WP_Query;
-use WP_User_Query;
-use WPTRT\AdminNotices\Notices;
 
 use const http\Client\Curl\PROXY_HTTP;
 

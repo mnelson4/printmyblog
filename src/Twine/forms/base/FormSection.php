@@ -2,8 +2,6 @@
 
 namespace Twine\forms\base;
 
-use EventEspresso\core\exceptions\InvalidDataTypeException;
-use EventEspresso\core\exceptions\InvalidInterfaceException;
 use InvalidArgumentException;
 use Twine\forms\helpers\ImproperUsageException;
 use Twine\forms\helpers\ValidationError;
@@ -326,8 +324,6 @@ class FormSection extends FormSectionValidatable
      *                             (eg you validated the data then stored it in the DB)
      *                             you may want to skip this step.
      * @throws InvalidArgumentException
-     * @throws InvalidInterfaceException
-     * @throws InvalidDataTypeException
      * @throws ImproperUsageException
      */
     public function receiveFormSubmission($req_data = null, $validate = true)
@@ -600,8 +596,6 @@ class FormSection extends FormSectionValidatable
      * any CSS.
      *
      * @throws InvalidArgumentException
-     * @throws InvalidInterfaceException
-     * @throws InvalidDataTypeException
      * @throws ImproperUsageException
      */
     public function getHtmlAndJs()
@@ -617,8 +611,6 @@ class FormSection extends FormSectionValidatable
      * @param bool $display_previously_submitted_data
      * @return string
      * @throws InvalidArgumentException
-     * @throws InvalidInterfaceException
-     * @throws InvalidDataTypeException
      * @throws ImproperUsageException
      */
     public function getHtml()
@@ -814,8 +806,6 @@ class FormSection extends FormSectionValidatable
      * Should be setup by each form during the _enqueues_and_localize_form_js
      *
      * @throws InvalidArgumentException
-     * @throws InvalidInterfaceException
-     * @throws InvalidDataTypeException
      */
     public static function localizeScriptForAllForms()
     {
