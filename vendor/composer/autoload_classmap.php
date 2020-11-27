@@ -6,15 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
-    'PHPStan\\WordPress\\Composer\\FixWpStubs' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/Composer/FixWpStubs.php',
-    'PHPStan\\WordPress\\EscSqlDynamicFunctionReturnTypeExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/EscSqlDynamicFunctionReturnTypeExtension.php',
-    'PHPStan\\WordPress\\GetPostDynamicFunctionReturnTypeExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/GetPostDynamicFunctionReturnTypeExtension.php',
-    'PHPStan\\WordPress\\GetPostsDynamicFunctionReturnTypeExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/GetPostsDynamicFunctionReturnTypeExtension.php',
-    'PHPStan\\WordPress\\GetTaxonomiesDynamicFunctionReturnTypeExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/GetTaxonomiesDynamicFunctionReturnTypeExtension.php',
-    'PHPStan\\WordPress\\IsWpErrorFunctionTypeSpecifyingExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/IsWpErrorFunctionTypeSpecifyingExtension.php',
-    'PHPStan\\WordPress\\RedirectCanonicalDynamicFunctionReturnTypeExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/RedirectCanonicalDynamicFunctionReturnTypeExtension.php',
-    'PHPStan\\WordPress\\WpThemeMagicPropertiesClassReflectionExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/WpThemeMagicPropertiesClassReflectionExtension.php',
     'PrintMyBlog\\compatibility\\DetectAndActivate' => $baseDir . '/src/PrintMyBlog/compatibility/DetectAndActivate.php',
     'PrintMyBlog\\compatibility\\plugins\\EasyFootnotes' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/EasyFootnotes.php',
     'PrintMyBlog\\compatibility\\plugins\\LazyLoadingFeaturePlugin' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/LazyLoadingFeaturePlugin.php',
@@ -67,7 +58,6 @@ return array(
     'PrintMyBlog\\system\\CustomPostTypes' => $baseDir . '/src/PrintMyBlog/system/CustomPostTypes.php',
     'PrintMyBlog\\system\\Init' => $baseDir . '/src/PrintMyBlog/system/Init.php',
     'PrintMyBlog\\system\\PersistentNotices' => $baseDir . '/src/PrintMyBlog/system/PersistentNotices.php',
-    'Symfony\\Polyfill\\Php73\\Php73' => $vendorDir . '/symfony/polyfill-php73/Php73.php',
     'Twine\\admin\\news\\DashboardNews' => $baseDir . '/src/Twine/admin/news/DashboardNews.php',
     'Twine\\compatibility\\CompatibilityBase' => $baseDir . '/src/Twine/compatibility/CompatibilityBase.php',
     'Twine\\controllers\\BaseController' => $baseDir . '/src/Twine/controllers/BaseController.php',
