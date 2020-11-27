@@ -52,8 +52,9 @@ class DefaultDesigns
                 return [
                     'title' => __('Editorial Review', 'print-my-blog'),
                     // phpcs:disable Generic.Files.LineLength.TooLong
-                    'description' => __('Perfect for editing and reviewing your content! Compact to conserve paper, lots of meta-information, and double-spaced text to allow for editor’s notes.', 'print-my-blog'),
+                    'quick_description' => __('Your writing in an easy-to-review format for editors.', 'print-my-blog'),
                     // phpcs:enable Generic.Files.LineLength.TooLong
+                    'description' => pmb_get_contents($design_template->getDir() . 'descriptions/edit.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
                         'url' => 'https://printmy.blog'
@@ -102,8 +103,8 @@ class DefaultDesigns
             function (DesignTemplate $design_template) {
                 return [
                     'title' => __('Classic Print PDF', 'print-my-blog'),
-                    // phpcs:disable Generic.Files.LineLength.TooLong
-                    'description' => __('Look inspired by Print My Blogs original, containing a quick printout heading and compact design.', 'print-my-blog'),
+                    'quick_description' => __('A simple but flexible design intended for printing, inspired by Print My Blog Free', 'print-my-blog'),
+                    'description' => pmb_get_contents($design_template->getDir() . 'descriptions/classic.php'),
                     // phpcs:enable Generic.Files.LineLength.TooLong
                     'author' => [
                         'name' => 'Mike Nelson',
@@ -138,10 +139,10 @@ class DefaultDesigns
                 $preview_folder_url = PMB_ASSETS_URL . 'images/design_previews/pdf/print/economical/';
                 return [
                     'title' => __('Economical Print PDF', 'print-my-blog'),
-                    'description' => __(
-                        'Compact design meant to save paper but still deliver all the content.',
-                        'print-my-blog'
-                    ),
+                    // phpcs:disable Generic.Files.LineLength.TooLong
+                    'quick_description' => __('Compact design meant to save paper but still deliver all the content.', 'print-my-blog'),
+                    // phpcs:enable Generic.Files.LineLength.TooLong
+                    'description' => pmb_get_contents($design_template->getDir() . 'descriptions/economical.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
                         'url' => 'https://printmy.blog'

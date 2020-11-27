@@ -42,6 +42,11 @@ class DefaultDesignTemplates
                     'design_form_callback'  => function () {
                         return $this->getDefaultDesignForm()->merge(new FormSection([
                             'subsections' => [
+                                'image' => new FormSection([
+                                    'subsections' => [
+                                        'image_placement' => $this->getImageSnapInput()
+                                    ]
+                                ]),
                                 'links' => new FormSection([
                                     'subsections' => [
                                         'internal_links' => new SelectInput(
@@ -106,22 +111,7 @@ class DefaultDesignTemplates
                             'subsections' => [
                                 'image' => new FormSection([
                                     'subsections' => [
-                                        'image_placement' => new SelectInput(
-                                            [
-                                                'default' => new InputOption(__('Don’t move', 'print-my-blog')),
-                                                // phpcs:disable Generic.Files.LineLength.TooLong
-                                                'snap' => new InputOption(__('Snap to the top or bottom of the page', 'print-my-blog')),
-                                                'snap-unless-fit' => new InputOption(__('Only snap if the image would cause a page break', 'print-my-blog'))
-                                                // phpcs:enable Generic.Files.LineLength.TooLong
-                                            ],
-                                            [
-                                                'html_label_text' => __('Image Placement', 'print-my-blog'),
-                                                // phpcs:disable Generic.Files.LineLength.TooLong
-                                                'html_help_text' => __('To reduce whitespace around images, Print My Blog can move images around in your content.', 'print-my-blog'),
-                                                // phpcs:enable Generic.Files.LineLength.TooLong
-                                                'default' => 'snap-unless-fit'
-                                            ]
-                                        )
+                                        'image_placement' => $this->getImageSnapInput()
                                     ]
                                 ]),
                                 'links' => new FormSection([
@@ -328,29 +318,7 @@ class DefaultDesignTemplates
                                 ]),
                                 'image' => new FormSection([
                                     'subsections' => [
-                                        'image_placement' => new SelectInput(
-                                            [
-                                            'default' => new InputOption(
-                                                __('Do Not Adjust Image Placement', 'print-my-blog')
-                                            ),
-                                            'snap' => new InputOption(
-                                                __('Snap to Page Top or Bottom', 'print-my-blog')
-                                            ),
-                                            'snap-unless-fit' => new InputOption(
-                                                __(
-                                                    'Intelligent Snap to Page Top or Bottom',
-                                                    'print-my-blog'
-                                                )
-                                            )
-                                            ],
-                                            [
-                                            'html_label_text' => __('Image Placement', 'print-my-blog'),
-                                            // phpcs:disable Generic.Files.LineLength.TooLong
-                                            'html_help_text' => __('To reduce whitespace around images, Print My Blog can move images around in your content.', 'print-my-blog'),
-                                            // phpcs:enable Generic.Files.LineLength.TooLong
-                                            'default' => 'snap-unless-fit'
-                                            ]
-                                        )
+                                        'image_placement' => $this->getImageSnapInput()
                                     ]
                                 ]),
                             ],
@@ -566,7 +534,7 @@ class DefaultDesignTemplates
     /**
      * @return SelectInput
      */
-    private function getDefaultAlignmentInput()
+    public function getDefaultAlignmentInput()
     {
         return new SelectInput(
             [
@@ -579,6 +547,26 @@ class DefaultDesignTemplates
                 'html_help_text' => __('Images normally default to "no alignment", which can look jumbled in printouts. Usually it’s best to automatically switch those to align to the center.', 'print-my-blog'),
                 // phpcs:enable Generic.Files.LineLength.TooLong
                 'default' => 'center'
+            ]
+        );
+    }
+
+    public function getImageSnapInput()
+    {
+        return new SelectInput(
+            [
+                'default' => new InputOption(__('Don’t move', 'print-my-blog')),
+                // phpcs:disable Generic.Files.LineLength.TooLong
+                'snap' => new InputOption(__('Snap to the top or bottom of the page', 'print-my-blog')),
+                'snap-unless-fit' => new InputOption(__('Only snap if the image would cause a page break', 'print-my-blog'))
+                // phpcs:enable Generic.Files.LineLength.TooLong
+            ],
+            [
+                'html_label_text' => __('Image Placement', 'print-my-blog'),
+                // phpcs:disable Generic.Files.LineLength.TooLong
+                'html_help_text' => __('To reduce whitespace around images, Print My Blog can move images around in your content.', 'print-my-blog'),
+                // phpcs:enable Generic.Files.LineLength.TooLong
+                'default' => 'snap-unless-fit'
             ]
         );
     }
