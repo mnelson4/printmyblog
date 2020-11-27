@@ -22,7 +22,7 @@ class DefaultPersistentNotices
                 . esc_html__('Switch to the Pro Demo', 'print-my-blog')
                 . '</a></p><p>'
                 // phpcs:disable Generic.Files.LineLength.TooLong
-                . __('Try all the pro features (table of contents, project organizer, custom post types) without signing up or installing anything. The files will just contain a watermark until purhcase.')
+                . __('Try all the pro features (table of contents, project organizer, custom post types) without signing up or installing anything. The files will just contain a watermark until purchase.')
                 // phpcs:enable Generic.Files.LineLength.TooLong
                 . '</p>',
                 $this->getOptionsForScreen('print-my-blog_page_print-my-blog-now')
