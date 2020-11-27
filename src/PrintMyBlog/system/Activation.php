@@ -64,7 +64,6 @@ class Activation extends BaseActivation
     {
         parent::detectActivation();
         if ($this->request_type->isBrandNewInstall() && current_user_can(PMB_ADMIN_CAP)) {
-            update_option('pmb_activation', false);
             // Don't redirect if it's a bulk plugin activation
             if (isset($_GET['activate-multi'])) {
                 return;

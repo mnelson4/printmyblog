@@ -78,6 +78,7 @@ class RequestType
             return self::REQUEST_TYPE_UPDATE;
         }
         if (isset($this->activation_option_name) && get_option($this->activation_option_name)) {
+            update_option($this->activation_option_name, false);
             return self::REQUEST_TYPE_REACTIVATION;
         }
         return self::REQUEST_TYPE_NORMAL;
