@@ -90,6 +90,14 @@ class DesignRegistry
         $design->setPmbMeta('format', $design_template->getFormatSlug());
         $design->setPmbMeta('design_template', $design_template->getSlug());
         $this->setArgsForDesign($design, $args);
+        // Set all the settings from the form too, taking into account the defaults set on the design itself.
+        $design_form = $design->getDesignForm();
+        if (isset($args['design_defaults'])) {
+            $design_form->populateDefaults($args['design_defaults']);
+        }
+        foreach ($design_form->inputValues(true, true) as $setting_name => $normalized_value) {
+            $design->setSetting($setting_name, $normalized_value);
+        }
     }
 
     /**
@@ -132,15 +140,6 @@ class DesignRegistry
                 $design->setPmbMeta('preview_' . $count . '_desc', $preview_data['desc']);
                 $count++;
             }
-        }
-
-        // Set all the settings from the form too, taking into account the defaults set on the design itself.
-        $design_form = $design->getDesignForm();
-        if (isset($args['design_defaults'])) {
-            $design_form->populateDefaults($args['design_defaults']);
-        }
-        foreach ($design_form->inputValues(true, true) as $setting_name => $normalized_value) {
-            $design->setSetting($setting_name, $normalized_value);
         }
     }
 
