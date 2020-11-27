@@ -1,5 +1,6 @@
 .pmb-design-browser{
     display:flex;
+    flex-wrap: wrap;
 }
 
 .pmb-design:nth-child(odd){
