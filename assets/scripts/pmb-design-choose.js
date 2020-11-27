@@ -15,11 +15,15 @@ jQuery(function($) {
     $(".pmb-design-details-opener").click(function(event) {
         event.preventDefault();
         var design_slug = event.currentTarget.getAttribute('data-design-slug');
+        var viewportWidth = $(window).width();
+        var viewportHeight = $(window).height();
         jQuery('#pmb-design-details-' + design_slug).dialog({
             'dialogClass'   : 'wp-dialog',
             'modal'         : true,
             'autoOpen'      : true,
             'closeOnEscape' : true,
+            'width':  viewportWidth * .9,
+            'height'        : viewportHeight * .9,
             'buttons'       : [
                 {
                     "text": "Use This Design",
@@ -36,7 +40,6 @@ jQuery(function($) {
                     }
                 },
             ],
-            'width': "80%",
             open: function(event, ui)
             {
                 var _this = $(this);
