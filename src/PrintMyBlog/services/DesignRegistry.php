@@ -74,7 +74,7 @@ class DesignRegistry
             'post_name'    => $design_slug,
             'post_type'    => CustomPostTypes::DESIGN,
             'post_content' => $args['description'],
-            'post_excerpt' => Array2::setOr($args, 'quick_description',''),
+            'post_excerpt' => Array2::setOr($args, 'quick_description', ''),
             'post_status' => 'publish'
         ]);
         if (! $design_post_id) {
@@ -106,7 +106,8 @@ class DesignRegistry
      * @return array containing a DesignTemplate and an array of args
      * @throws Exception
      */
-    protected function getTemplateAndArgs($design_template_slug, $callback){
+    protected function getTemplateAndArgs($design_template_slug, $callback)
+    {
         $design_template = $this->design_template_registry->getDesignTemplate($design_template_slug);
         $args = call_user_func($callback, $design_template);
         return [$design_template, $args];
@@ -118,7 +119,7 @@ class DesignRegistry
         wp_update_post(
             [
                 'ID' => $design->getWpPost()->ID,
-                'post_excerpt' => Array2::setOr($args, 'quick_description',''),
+                'post_excerpt' => Array2::setOr($args, 'quick_description', ''),
                 'post_content' => $args['description']
             ]
         );
@@ -127,8 +128,8 @@ class DesignRegistry
 
     protected function setArgsForDesign(Design $design, $args)
     {
-        if(isset($args['author'])){
-            foreach($args['author'] as $field => $value){
+        if (isset($args['author'])) {
+            foreach ($args['author'] as $field => $value) {
                 $design->setPmbMeta('author_' . $field, $value);
             }
         }
@@ -152,7 +153,7 @@ class DesignRegistry
         foreach ($this->design_callbacks as $design_template_slug => $designs) {
             foreach ($designs as $design_slug => $args_callback) {
                 $design = $this->design_manager->getBySlug($design_slug);
-                if ( $design instanceof Design) {
+                if ($design instanceof Design) {
                     $this->updateDesign($design, $design_template_slug, $args_callback);
                 } else {
                     $this->createNewDesign(

@@ -103,9 +103,10 @@ class DefaultDesigns
             function (DesignTemplate $design_template) {
                 return [
                     'title' => __('Classic Print PDF', 'print-my-blog'),
+                    // phpcs:disable Generic.Files.LineLength.TooLong
                     'quick_description' => __('A simple but flexible design intended for printing, inspired by Print My Blog Free', 'print-my-blog'),
-                    'description' => pmb_get_contents($design_template->getDir() . 'descriptions/classic.php'),
                     // phpcs:enable Generic.Files.LineLength.TooLong
+                    'description' => pmb_get_contents($design_template->getDir() . 'descriptions/classic.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
                         'url' => 'https://printmy.blog'
@@ -194,7 +195,9 @@ class DefaultDesigns
                 }
                 return [
                     'title' => __('Buurma Whitepaper', 'print-my-blog'),
+                    // phpcs:disable Generic.Files.LineLength.TooLong
                     'quick_description' => __('Stylized and branded PDF designed mainly for reading from a device, great for organizations', 'print-my-blog'),
+                    // phpcs:enable Generic.Files.LineLength.TooLong
                     'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
@@ -234,7 +237,9 @@ class DefaultDesigns
             function (DesignTemplate $design_template) {
                 return [
                     'title' => __('Mayer Magazine', 'print-my-blog'),
+                    // phpcs:disable Generic.Files.LineLength.TooLong
                     'quick_description' => __('Digital 2-column magazine inspired by the defunct Zinepal', 'print-my-blog'),
+                    // phpcs:enable Generic.Files.LineLength.TooLong
                     'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',

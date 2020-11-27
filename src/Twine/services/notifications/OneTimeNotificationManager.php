@@ -25,7 +25,7 @@ class OneTimeNotificationManager
         }
         $notification_metas = get_user_meta($wp_user, self::META_KEY, false);
         $notifications = [];
-        if($notification_metas){
+        if ($notification_metas) {
             foreach ($notification_metas as $notice_data) {
                 $notifications[] = new OneTimeNotification($notice_data);
             }
