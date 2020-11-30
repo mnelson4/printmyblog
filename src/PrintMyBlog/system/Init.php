@@ -168,7 +168,7 @@ class Init
     {
         // Persistent notices need to be setup on both admin and ajax requests.
         if (is_admin()) {
-            $persistent_messages = $this->context->reuse('PrintMyBlog\system\PersistentNotices');
+            $persistent_messages = $this->context->reuse('PrintMyBlog\services\PersistentNotices');
             $persistent_messages->register();
         }
         if (defined('DOING_AJAX') && DOING_AJAX) {

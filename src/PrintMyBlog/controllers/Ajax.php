@@ -6,6 +6,7 @@ use mnelson4\RestApiDetector\RestApiDetector;
 use mnelson4\RestApiDetector\RestApiDetectorError;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\entities\ProjectGeneration;
+use PrintMyBlog\entities\ProjectProgress;
 use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\services\FileFormatRegistry;
 use PrintMyBlog\system\CustomPostTypes;
@@ -108,22 +109,20 @@ class Ajax extends BaseController
         /*
          * @var $project Project
          */
-        $project = $this->project_manager->getById($_GET['ID']);
-        $format = $this->format_registry->getFormat($_GET['format']);
+        $project = $this->project_manager->getById($_REQUEST['ID']);
+        $format = $this->format_registry->getFormat($_REQUEST['format']);
         /**
          * @var $project_generation ProjectGeneration
          */
         $project_generation = $project->getGenerationFor($format);
-        // Find if it's already been generated, if so return that.
-        if (! $project_generation->isGenerated()) {
-            $done = $project_generation->generateIntermediaryFile();
-            if ($done) {
-                $url = $project_generation->getGeneratedIntermediaryFileUrl();
-            } else {
-                $url = null;
-            }
-        } else {
+        $project_generation->deleteGeneratedFiles();
+        $project_generation->clearDirty();
+        $project->getProgress()->markStepComplete(ProjectProgress::GENERATE_STEP);
+        $done = $project_generation->generateIntermediaryFile();
+        if ($done) {
             $url = $project_generation->getGeneratedIntermediaryFileUrl();
+        } else {
+            $url = null;
         }
 
         // If we're all done, return the file.

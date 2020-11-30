@@ -1,6 +1,6 @@
 <?php
 
-namespace PrintMyBlog\system;
+namespace PrintMyBlog\services;
 
 use PrintMyBlog\domain\DefaultPersistentNotices;
 use WPTRT\AdminNotices\Notices;

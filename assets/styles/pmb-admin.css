@@ -114,6 +114,7 @@
 
 .pmb-ul{
     list-style:square;
+    padding-left:inherit;
 }
 
 /* progress bar */
@@ -171,4 +172,27 @@
 }
 .pmb-pro-header{
     background-color:#ffba00;
+}
+
+.pmb-middle-important-text{
+    text-align:center;
+    font-size:2em;
+}
+
+/*
+For displaying a series of boxes
+ */
+.pmb-content-boxes{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+}
+
+.pmb-content-boxes .pmb-content-box-wrap{
+    padding:1em;
+    min-width:300px;
+}
+.pmb-content-box-inner{
+    border: 1px solid #e5e5e5;
+    padding:1em;
 }

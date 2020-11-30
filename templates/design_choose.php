@@ -34,11 +34,11 @@ foreach($designs as $design){
 	?>
 	<div class="pmb-design <?php echo $active ? 'pmb-active' : ''?>">
        <div class="pmb-design-details-opener" data-design-slug="<?php echo esc_attr($design->getWpPost()->post_name);?>">
-                <div class="pmb-design-screenshot">
-                <?php echo pmb_design_preview($design);?>
-                </div>
-                <span class="more-details"><?php esc_html_e('Design Details', 'print-my-blog');?></span>
+            <div class="pmb-design-screenshot">
+            <?php echo pmb_design_preview($design);?>
             </div>
+            <span class="more-details"><?php esc_html_e('Design Details', 'print-my-blog');?></span>
+        </div>
 		<div class="pmb-design-id-container">
             <div class="pmb-actions pmb-design-actions">
                 <form method="POST" action="" id="pmb-design-form-<?php echo esc_attr($design->getWpPost()->post_name);?>">

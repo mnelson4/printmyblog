@@ -57,7 +57,7 @@ function PmbProLoadingPage(pmb_instance_vars, translations) {
 				media: this.media,                                       // use screen styles instead of print styles
 				// javascript: true, // use Prince's JS, which is more error tolerant
 			}
-		})
+		});
 	}
 
 	/**

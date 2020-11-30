@@ -67,6 +67,18 @@ class Common extends BaseController
             [],
             '4.0.6'
         );
+        wp_register_script(
+            'pmb-modal',
+            PMB_ASSETS_URL . 'scripts/pmb-modal.js',
+            ['jquery-ui-dialog'],
+            '1.0.0'
+        );
+        wp_register_script(
+            'docraptor',
+            PMB_SCRIPTS_URL . 'docraptor.js',
+            [],
+            '1.0.0'
+        );
         // Enqueue the CSS for compatibility with known troublemaking plugins.
         wp_register_style(
             'pmb-plugin-compatibility',

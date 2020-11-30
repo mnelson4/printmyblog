@@ -27,52 +27,104 @@ foreach($generations as $generation){
             'format' => $generation->getFormat()->slug()
 		],
 		admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-	)
+	);
+	$format_slug = $generation->getFormat()->slug();
 	?>
-	<h2><?php echo $generation->getFormat()->title();?></h2>
-    <?php
-    if($generation->isGenerated()){
-        if($generation->isDirty()){
-            ?>
-            <b>
-                <?php printf(
-                    esc_html__('The file generated %s is out-of-date.', 'print-my-blog'),
-		            date_i18n(get_option('date_format'), $generation->generatedTimestamp())
-                );?>
-            </b>
-            <ul>
-                <?php foreach($generation->getDirtyReasons() as $reason){ ?>
-                <li><?php echo $reason;?></li>
-                <?php } ?>
-            </ul>
-            <br/>
-            <form class="pmb-inline-form" method="POST" action="<?php echo esc_attr($generate_link);?>">
-                <button class="button button-primary"><?php esc_html_e('Regenerate', 'print-my-blog');?></button>
-            </form>
-            <a href="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>" class="button"><?php esc_html_e('Download Out-of-date File', 'print-my-blog');?></a>
-            <?php
+    <div id="pmb-generate-options-for-<?php echo esc_attr($format_slug);?>">
+        <h2><?php echo $generation->getFormat()->title();?></h2>
+        <?php
+        if($generation->isGenerated()){
+            if($generation->isDirty()){
+                ?>
+                <div class="pmb-previous-generation-info">
+                    <b>
+                        <?php printf(
+                            esc_html__('The file generated %s is out-of-date.', 'print-my-blog'),
+                            date_i18n(get_option('date_format'), $generation->generatedTimestamp())
+                        );?>
+                    </b>
+                    <ul>
+                        <?php foreach($generation->getDirtyReasons() as $reason){ ?>
+                        <li><?php echo $reason;?></li>
+                        <?php } ?>
+                    </ul>
+                </div>
+                <br/>
+                <button class="button button-primary pmb-generate" data-format="<?php echo esc_attr($format_slug);
+                ?>"><?php esc_html_e('Regenerate', 'print-my-blog');
+                ?></button>
+                <?php
+            } else {
+                ?>
+                <div class="pmb-previous-generation-info">
+                    <b>
+                        <?php printf(
+                            esc_html__('This file was already generated %s', 'print-my-blog'),
+                            date_i18n(get_option('date_format') . ' ' . get_option('time_format'), $generation->generatedTimeSql())
+                        );?>
+                    </b>
+                </div>
+                <br/>
+                <a class="button pmb-generate" data-format="<?php echo esc_attr($format_slug);?>"><?php esc_html_e('Regenerate Anyway', 'print-my-blog');?></a>
+                <?php
+            }
         } else {
-            ?>
-            <b>
-                <?php printf(
-                    esc_html__('This file was already generated %s', 'print-my-blog'),
-		            date_i18n(get_option('date_format') . ' ' . get_option('time_format'), $generation->generatedTimeSql())
-                );?>
-            </b>
-            <br/>
-            <form class="pmb-inline-form" method="POST" action="<?php echo esc_attr($generate_link);?>">
-                <button class="button"><?php esc_html_e('Regenerate Anyway', 'print-my-blog');?></button>
-            </form>
-            <a href="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>" class="button button-primary"><?php esc_html_e('Download', 'print-my-blog');?></a>
-            <?php
+        ?>
+                <a class="button button-primary pmb-generate" data-format="<?php echo esc_attr($format_slug);?>"><?php
+                    esc_html_e('Generate', 'print-my-blog');
+                ?></a>
+        <?php
         }
-    } else {
-    ?>
-        <form class="pmb-inline-form" method="POST" action="<?php echo esc_attr($generate_link);?>">
-            <button class="button button-primary"><?php esc_html_e('Generate', 'print-my-blog');?></button>
-        </form>
-	<?php
-    }
+        ?>
+        <div class="pmb-after-generation" <?php echo ! $generation->isGenerated() ? 'style="display:none"' : '';?>>
+            <a class="button pmb-download-preview <?php echo $generation->isGenerated() ? 'button-primary' : '';?>"
+            data-format="<?php echo
+            esc_attr
+            ($format_slug);
+            ?>" data-html-url="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"><?php esc_html_e('Download Preview', 'print-my-blog');?></a>
+            <p>
+                <a href="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"
+                class="pmb-view-html"><?php esc_html_e('View Debug HTML',
+                'print-my-blog');?></a>
+            </p>
+            <div class="pmb-download-preview-dialog" style="display:none" id="pmb-download-preview-dialog-<?php echo
+            esc_attr ($format_slug);?>">
+                <div class="pmb-after-download-preview">
+                    <p class="pmb-middle-important-text"><?php esc_html_e('Downloading Watermarked Preview File...', 'print-my-blog');?></p>
+
+                    <div class="pmb-content-boxes">
+                        <div class="pmb-content-box-wrap">
+                            <div class="pmb-content-box-inner">
+                                <h3><?php esc_html_e('Something Not Look Right?', 'print-my-blog'); ?></h3>
+                                <a class="button button-primary" href=""><?php esc_html_e('Let’s Get It Fixed!', 'print-my-blog');?></a>
+                            </div>
+                        </div>
+                        <div class="pmb-content-box-wrap">
+                            <div class="pmb-content-box-inner">
+                                <h3><?php esc_html_e('Looks good?', 'print-my-blog'); ?></h3>
+
+                                <a id="pmb-download-<?php echo esc_attr($format_slug);?>" class="button
+    button-primary disabled pmb-reveal-before-download-actual" data-format="<?php echo
+                                esc_attr ($format_slug);?>"><?php esc_html_e('Download Non-Watermarked File',
+                                        'print-my-blog');?></a>
+                                <p class="description"><?php esc_html_e('Coming soon!', 'print-my-blog');?></p>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="pmb-before-download-dialog" style="display:none" id="pmb-before-download-dialog-<?php echo
+            esc_attr
+            ($generation->getFormat()->slug());?>">
+                <div class="pmb-after-download-actual">
+                    <h2><?php esc_html_e('Downloading File', 'print-my-blog');?></h2>
+                    <p><?php esc_html_e('You have x credits left on your account. They will renew on x', 'print-my-blog');
+                    ?></p>
+                    <p><a href="https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post"><?php esc_html_e('Please leave a review', 'print-my-blog');?></a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php
 }
 pmb_render_template('partials/project_footer.php');
 

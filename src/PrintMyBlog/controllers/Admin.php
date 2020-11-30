@@ -383,7 +383,7 @@ class Admin extends BaseController
                     wp_enqueue_script(
                         'pmb-choose-design',       // handle
                         PMB_SCRIPTS_URL . 'pmb-design-choose.js',       // source
-                        array('jquery-ui-dialog'),
+                        array('pmb-modal'),
                         filemtime(PMB_SCRIPTS_DIR . 'pmb-design-choose.js')
                     );
                     // A style available in WP
@@ -394,6 +394,30 @@ class Admin extends BaseController
                         [],
                         filemtime(PMB_STYLES_DIR . 'design-choose.css')
                     );
+                    break;
+                case self::SLUG_SUBACTION_PROJECT_GENERATE:
+                    wp_enqueue_script(
+                            'pmb-generate',
+                        PMB_SCRIPTS_URL . 'pmb-generate.js',
+                        ['pmb-modal', 'docraptor'],
+                        filemtime(PMB_SCRIPTS_DIR . 'pmb-generate.js')
+                    );
+                    wp_enqueue_style(
+                            'pmb-generate',
+                        PMB_STYLES_URL . 'pmb-generate.css',
+                        [
+                            'wp-jquery-ui-dialog'
+                        ],
+                        filemtime(PMB_STYLES_DIR . 'pmb-generate.css')
+                    );
+                    wp_localize_script(
+                            'pmb-generate',
+                        'pmb_generate',
+                        [
+                                'site_url' => site_url()
+                        ]
+                    );
+                    break;
             }
 
             // everybody uses the style, right?

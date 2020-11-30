@@ -53,7 +53,7 @@ class Context extends BaseContext
                 'PrintMyBlog\services\SvgDoer' => self::REUSE,
                 'Twine\services\notifications\OneTimeNotificationManager' => self::REUSE,
             ],
-            'PrintMyBlog\system\PersistentNotices' => [
+            'PrintMyBlog\services\PersistentNotices' => [
                 'WPTRT\AdminNotices\Notices' => self::REUSE,
                 'PrintMyBlog\domain\DefaultPersistentNotices' => self::REUSE
             ],

@@ -66,12 +66,6 @@ class LoadingPage extends BaseController
 
     public function enqueueScripts()
     {
-        wp_register_script(
-            'docraptor',
-            PMB_SCRIPTS_URL . 'docraptor.js',
-            [],
-            '1.0.0'
-        );
         wp_enqueue_script(
             'pmb_pro_loading_page',
             PMB_SCRIPTS_URL . 'loading-page.js',
