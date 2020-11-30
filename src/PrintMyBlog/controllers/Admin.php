@@ -353,7 +353,7 @@ class Admin extends BaseController
             $this->notification_manager->addTextNotificationForCurrentUser(
                     OneTimeNotification::TYPE_ERROR,
                     sprintf(
-                        __('There was an error sending an email from your website (it was "%1$s"). Please manually send an email to %2$s, with the subject "3$s", with the content:','print-my-blog'),
+                        __('There was an error sending an email from your website (it was "%1$s"). Please manually send an email to %2$s, with the subject "%3$s", with the content:','print-my-blog'),
                         $error->get_error_message(),
                         PMB_SUPPORT_EMAIL,
                         $subject
