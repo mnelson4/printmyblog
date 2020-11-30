@@ -133,8 +133,11 @@ if (defined('PMB_VERSION')) {
     define('PMB_ADMIN_PROJECTS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_PROJECTS_PAGE_SLUG);
     define('PMB_ADMIN_SETTINGS_PAGE_SLUG', 'print-my-blog-settings');
     define('PMB_ADMIN_SETTINGS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_SETTINGS_PAGE_SLUG);
+    define('PMB_ADMIN_HELP_PAGE_SLUG', 'print-my-blog-help');
+    define('PMB_ADMIN_HELP_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_HELP_PAGE_SLUG);
     define('PMB_DESIGNS_DIR', PMB_DIR . 'designs/');
     define('TWINE_MAIN_FILE', PMB_MAIN_FILE);
+    define('PMB_SUPPORT_EMAIL', 'please@printmy.blog');
 
     /**
      * adds a wp-option to indicate that PMB has been activated via the WP admin plugins page.

@@ -41,7 +41,7 @@ class PostWrapperManager
     /**
      * @param WP_Query $query
      *
-     * @return array|PostWrapperManager[]
+     * @return array|PostWrapper[]
      */
     public function getAll(WP_Query $query = null)
     {

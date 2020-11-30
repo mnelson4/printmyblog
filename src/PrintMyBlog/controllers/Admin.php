@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\controllers;
 
+use Dompdf\Renderer\Text;
 use Exception;
 use PrintMyBlog\controllers\helpers\ProjectsListTable;
 use PrintMyBlog\db\PostFetcher;
@@ -16,6 +17,7 @@ use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\orm\managers\ProjectSectionManager;
+use PrintMyBlog\services\DebugInfo;
 use PrintMyBlog\services\FileFormatRegistry;
 use PrintMyBlog\services\SvgDoer;
 use PrintMyBlog\system\CustomPostTypes;
@@ -23,10 +25,12 @@ use Twine\entities\notifications\OneTimeNotification;
 use Twine\forms\base\FormSection;
 use Twine\forms\helpers\InputOption;
 use Twine\forms\inputs\RadioButtonInput;
+use Twine\forms\inputs\TextAreaInput;
 use Twine\forms\inputs\TextInput;
 use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
 use Twine\services\notifications\OneTimeNotificationManager;
+use WP_Error;
 use WP_Query;
 
 use const http\Client\Curl\PROXY_HTTP;
@@ -52,6 +56,7 @@ class Admin extends BaseController
     const SLUG_SUBACTION_PROJECT_CONTENT = 'content';
     const SLUG_SUBACTION_PROJECT_META = 'metadata';
     const SLUG_SUBACTION_PROJECT_GENERATE = 'generate';
+    const SLUG_ACTION_HELP = 'help';
 
     /**
      * @var PostFetcher
@@ -95,6 +100,15 @@ class Admin extends BaseController
      * @var OneTimeNotificationManager
      */
     protected $notification_manager;
+    /**
+     * Somewhere to put the WP_Error emitted by wp_mail in an action (but not returned)
+     * @var WP_Error
+     */
+    protected $wp_error;
+    /**
+     * @var DebugInfo
+     */
+    protected $debug_info;
 
     /**
      * @param PostFetcher $post_fetcher
@@ -115,7 +129,8 @@ class Admin extends BaseController
         DesignManager $design_manager,
         TableManager $table_manager,
         SvgDoer $svg_doer,
-        OneTimeNotificationManager $notification_manager
+        OneTimeNotificationManager $notification_manager,
+        DebugInfo $debug_info
     ) {
         $this->post_fetcher    = $post_fetcher;
         $this->section_manager = $section_manager;
@@ -125,6 +140,7 @@ class Admin extends BaseController
         $this->table_manager = $table_manager;
         $this->svg_doer = $svg_doer;
         $this->notification_manager = $notification_manager;
+        $this->debug_info = $debug_info;
     }
     /**
      * name of the option that just indicates we successfully saved the setttings
@@ -199,6 +215,14 @@ class Admin extends BaseController
             PMB_ADMIN_SETTINGS_PAGE_SLUG,
             array($this,'settingsPage')
         );
+        add_submenu_page(
+                PMB_ADMIN_PROJECTS_PAGE_SLUG,
+            __('Help Me Print My Blog', 'print-my-blog'),
+            __('Help', 'print-my-blog'),
+            PMB_ADMIN_CAP,
+            PMB_ADMIN_HELP_PAGE_SLUG,
+            [$this,'helpPage']
+        );
     }
 
     /**
@@ -270,6 +294,97 @@ class Admin extends BaseController
         $print_options = new PrintOptions();
         $displayer = new FormInputs();
         include(PMB_TEMPLATES_DIR . 'settings_page.php');
+    }
+
+    public function helpPage(){
+        if($this->invalid_form instanceof FormSection){
+            $form = $this->invalid_form;
+        } else {
+            $form = $this->getHelpForm();
+        }
+        pmb_render_template(
+            'help.php',
+            [
+                'form' => $form,
+                'form_url' => admin_url(PMB_ADMIN_HELP_PAGE_PATH)
+            ]
+        );
+    }
+
+    public function sendHelp(){
+        global $current_user;
+        $form = $this->getHelpForm();
+        $form->receiveFormSubmission($_REQUEST);
+        if(! $form->isValid()){
+            $this->invalid_form = $form;
+            return;
+        }
+        // don't translate these strings. They're sent to the dev who speaks English.
+        add_action(
+            'wp_mail_failed',
+            [$this,'sendHelpError'],
+            10
+        );
+
+        $headers = array(
+            'Reply-To: ' . $current_user->display_name. ' <' . $current_user->user_email . '>',
+        );
+        $subject = sprintf('Help for %s', site_url());
+        $message = sprintf('Message:%1$s
+            <br>
+            Data:%2$s',
+            $form->getInputValue('reason'),
+            $form->getInputValue('debug_info')
+        );
+        $success = wp_mail(
+                'please@printmy.blog',
+            $subject,
+            $message,
+            $headers
+        );
+
+        if($success){
+            $this->notification_manager->addTextNotificationForCurrentUser(
+                    OneTimeNotification::TYPE_SUCCESS,
+                __('Email successfully sent. Expect a reply in the next week', 'print-my-blog')
+            );
+        } else {
+            $error = $this->wp_error;
+            $this->notification_manager->addTextNotificationForCurrentUser(
+                    OneTimeNotification::TYPE_ERROR,
+                    sprintf(
+                        __('There was an error sending an email from your website (it was "%1$s"). Please manually send an email to %2$s, with the subject "3$s", with the content:','print-my-blog'),
+                        $error->get_error_message(),
+                        PMB_SUPPORT_EMAIL,
+                        $subject
+                    )
+                    . '<pre>' . $message . '</pre>'
+            );
+        }
+        wp_safe_redirect(
+                admin_url(PMB_ADMIN_HELP_PAGE_PATH)
+        );
+    }
+
+    public function sendHelpError(WP_Error $error){
+        $this->wp_error = $error;
+    }
+
+    protected function getHelpForm(){
+        return new FormSection([
+                'subsections' => [
+                        'reason' => new TextAreaInput([
+                            'html_label_text' => __('Please explain what you did, what you expected, and what went wrong', 'print-my-blog'),
+                            'required' => true,
+                            'html_help_text' => __('Including links to screenshots is appreciated', 'print-my-blog')
+                        ]),
+                        'debug_info' => new TextAreaInput([
+                            'html_label_text' => __('This debug info will also be sent.', 'print-my-blog'),
+                            'disabled' => true,
+                            'default' => $this->debug_info->getDebugInfoString()
+                        ])
+                    ]
+        ]);
     }
 
 
@@ -715,6 +830,10 @@ class Admin extends BaseController
      */
     public function checkFormSubmission()
     {
+        if ($_GET['page'] === PMB_ADMIN_HELP_PAGE_SLUG){
+            $this->sendHelp();
+            exit;
+        }
         $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
         if ($action === self::SLUG_ACTION_ADD_NEW) {
             $this->saveNewProject();

@@ -52,6 +52,7 @@ class Context extends BaseContext
                 'PrintMyBlog\db\TableManager' => self::REUSE,
                 'PrintMyBlog\services\SvgDoer' => self::REUSE,
                 'Twine\services\notifications\OneTimeNotificationManager' => self::REUSE,
+                'PrintMyBlog\services\DebugInfo' => self::REUSE
             ],
             'PrintMyBlog\services\PersistentNotices' => [
                 'WPTRT\AdminNotices\Notices' => self::REUSE,
@@ -101,6 +102,10 @@ class Context extends BaseContext
             ],
             'PrintMyBlog\system\CustomPostTypes' => [
                 'PrintMyBlog\services\SvgDoer' => self::REUSE
+            ],
+            'PrintMyBlog\services\DebugInfo' => [
+                'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
+                'PrintMyBlog\orm\managers\DesignManager' => self::REUSE,
             ]
         ];
     }
