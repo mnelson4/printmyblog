@@ -30,12 +30,16 @@ jQuery(document).ready(function () {
     });
     jQuery('.pmb-download-preview').click(function (event) {
         event.preventDefault();
-        var design_slug = event.currentTarget.getAttribute('data-format');
+        var format = event.currentTarget.getAttribute('data-format');
         pmb_open_modal(
-            '#pmb-download-preview-dialog-' + design_slug,
+            '#pmb-download-preview-dialog-' + format,
         );
         var html_url = event.currentTarget.getAttribute('data-html-url');
-
+        if(format === 'digital_pdf'){
+            var media='screen';
+        } else {
+            var media='print';
+        }
         // delay slightly so they can see the modal window
         setTimeout(
             function () {
@@ -44,11 +48,11 @@ jQuery(document).ready(function () {
                     type: "pdf",
                     // document_content: document.querySelector('html').innerHTML, // use this page's HTML
                     // document_content: "<h1>Hello world!</h1>",               // or supply HTML directly
-                    document_url: this.html_url,            // or use a URL
+                    document_url: html_url,            // or use a URL
                     javascript: true,                                        // Javascript by DocRaptor
                     prince_options: {
                         base_url: pmb_generate.site_url,
-                        media: this.media,                                       // use screen styles instead of print styles
+                        media: media,                                       // use screen styles instead of print styles
                         // javascript: true, // use Prince's JS, which is more error tolerant
                     }
                 });
