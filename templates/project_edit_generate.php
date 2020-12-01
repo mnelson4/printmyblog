@@ -96,7 +96,8 @@ foreach($generations as $generation){
                         <div class="pmb-content-box-wrap">
                             <div class="pmb-content-box-inner">
                                 <h3><?php esc_html_e('Something Not Look Right?', 'print-my-blog'); ?></h3>
-                                <a class="button button-primary" href=""><?php esc_html_e('Let’s Get It Fixed!', 'print-my-blog');?></a>
+                                <a class="button button-primary" href="<?php echo esc_url(admin_url
+                                (PMB_ADMIN_HELP_PAGE_PATH));?>"><?php esc_html_e('Let’s Get It Fixed!', 'print-my-blog');?></a>
                             </div>
                         </div>
                         <div class="pmb-content-box-wrap">

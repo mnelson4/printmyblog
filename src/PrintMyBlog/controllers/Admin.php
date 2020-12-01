@@ -529,7 +529,10 @@ class Admin extends BaseController
                             'pmb-generate',
                         'pmb_generate',
                         [
-                                'site_url' => site_url()
+                            'site_url' => site_url(),
+                            'translations' => [
+                                    'error_generating' => __('There was an error preparing your content. Please visit the Print My Blog Help page.', 'print-my-blog')
+                            ]
                         ]
                     );
                     break;
