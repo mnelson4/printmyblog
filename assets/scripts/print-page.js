@@ -512,6 +512,8 @@ function PmbPrintPage(pmb_instance_vars, translations) {
            jqelement.attr('src',jqelement.attr('data-orig-src'));
            jqelement.attr('srcset',jqelement.attr('data-orig-src'));
         });
+        // Expand all Arconix accordion parts (see https://wordpress.org/plugins/arconix-shortcodes/)
+        jQuery('.arconix-accordion-content').css('display','block');
         jQuery(document).trigger('pmb_wrap_up');
     };
 

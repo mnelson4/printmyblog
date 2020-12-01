@@ -281,6 +281,9 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 
 == Changelog ==
 
+= 2.9.7 December 1, 2020 =
+* Expand all Arconix plugin accordions
+
 = 2.9.6 October 26, 2020 =
 * Make print setup options easier to find
 * Don't require a pagebreak before gallery blocks and let them span multiple pages
