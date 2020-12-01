@@ -1156,7 +1156,7 @@ class Admin extends BaseController
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
-                __('Successful chose the design "%1$s" for the %2$s for your project.', 'print-my-blog'),
+                __('You chose the design "%1$s" for the %2$s of your project.', 'print-my-blog'),
                 $design->getWpPost()->post_title,
                 $format->title()
             )

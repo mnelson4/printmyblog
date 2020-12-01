@@ -246,7 +246,7 @@ class DefaultDesignTemplates
                                 'byline' => new TextAreaInput(
                                     [
                                         'html_label_text' => __('By Line', 'print-my-blog'),
-                                        'html_help_text' => __('List of Aauthors', 'print-my-blog'),
+                                        'html_help_text' => __('List of Authors', 'print-my-blog'),
                                     ]
                                 ),
                                 'date' => new DatepickerInput([
