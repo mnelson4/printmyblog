@@ -216,7 +216,7 @@ class Admin extends BaseController
             array($this,'settingsPage')
         );
         add_submenu_page(
-                PMB_ADMIN_PROJECTS_PAGE_SLUG,
+            PMB_ADMIN_PROJECTS_PAGE_SLUG,
             __('Help Me Print My Blog', 'print-my-blog'),
             __('Help', 'print-my-blog'),
             PMB_ADMIN_CAP,
@@ -296,8 +296,9 @@ class Admin extends BaseController
         include(PMB_TEMPLATES_DIR . 'settings_page.php');
     }
 
-    public function helpPage(){
-        if($this->invalid_form instanceof FormSection){
+    public function helpPage()
+    {
+        if ($this->invalid_form instanceof FormSection) {
             $form = $this->invalid_form;
         } else {
             $form = $this->getHelpForm();
@@ -311,11 +312,12 @@ class Admin extends BaseController
         );
     }
 
-    public function sendHelp(){
+    public function sendHelp()
+    {
         global $current_user;
         $form = $this->getHelpForm();
         $form->receiveFormSubmission($_REQUEST);
-        if(! $form->isValid()){
+        if (! $form->isValid()) {
             $this->invalid_form = $form;
             return;
         }
@@ -327,54 +329,61 @@ class Admin extends BaseController
         );
 
         $headers = array(
-            'Reply-To: ' . $current_user->display_name. ' <' . $current_user->user_email . '>',
+            'Reply-To: ' . $current_user->display_name . ' <' . $current_user->user_email . '>',
         );
         $subject = sprintf('Help for %s', site_url());
-        $message = sprintf('Message:%1$s
+        $message = sprintf(
+            'Message:%1$s
             <br>
             Data:%2$s',
             $form->getInputValue('reason'),
             $form->getInputValue('debug_info')
         );
         $success = wp_mail(
-                'please@printmy.blog',
+            'please@printmy.blog',
             $subject,
             $message,
             $headers
         );
 
-        if($success){
+        if ($success) {
             $this->notification_manager->addTextNotificationForCurrentUser(
-                    OneTimeNotification::TYPE_SUCCESS,
+                OneTimeNotification::TYPE_SUCCESS,
                 __('Email successfully sent. Expect a reply in the next week', 'print-my-blog')
             );
         } else {
             $error = $this->wp_error;
             $this->notification_manager->addTextNotificationForCurrentUser(
-                    OneTimeNotification::TYPE_ERROR,
-                    sprintf(
-                        __('There was an error sending an email from your website (it was "%1$s"). Please manually send an email to %2$s, with the subject "%3$s", with the content:','print-my-blog'),
-                        $error->get_error_message(),
-                        PMB_SUPPORT_EMAIL,
-                        $subject
-                    )
+                OneTimeNotification::TYPE_ERROR,
+                sprintf(
+                        // phpcs:disable Generic.Files.LineLength.TooLong
+                    __('There was an error sending an email from your website (it was "%1$s"). Please manually send an email to %2$s, with the subject "%3$s", with the content:', 'print-my-blog'),
+                    // phpcs:enable Generic.Files.LineLength.TooLong
+                    $error->get_error_message(),
+                    PMB_SUPPORT_EMAIL,
+                    $subject
+                )
                     . '<pre>' . $message . '</pre>'
             );
         }
         wp_safe_redirect(
-                admin_url(PMB_ADMIN_HELP_PAGE_PATH)
+            admin_url(PMB_ADMIN_HELP_PAGE_PATH)
         );
     }
 
-    public function sendHelpError(WP_Error $error){
+    public function sendHelpError(WP_Error $error)
+    {
         $this->wp_error = $error;
     }
 
-    protected function getHelpForm(){
+    protected function getHelpForm()
+    {
         return new FormSection([
                 'subsections' => [
                         'reason' => new TextAreaInput([
+                            // phpcs:disable Generic.Files.LineLength.TooLong
                             'html_label_text' => __('Please explain what you did, what you expected, and what went wrong', 'print-my-blog'),
+                            // phpcs:enable Generic.Files.LineLength.TooLong
                             'required' => true,
                             'html_help_text' => __('Including links to screenshots is appreciated', 'print-my-blog')
                         ]),
@@ -512,26 +521,28 @@ class Admin extends BaseController
                     break;
                 case self::SLUG_SUBACTION_PROJECT_GENERATE:
                     wp_enqueue_script(
-                            'pmb-generate',
+                        'pmb-generate',
                         PMB_SCRIPTS_URL . 'pmb-generate.js',
                         ['pmb-modal', 'docraptor'],
                         filemtime(PMB_SCRIPTS_DIR . 'pmb-generate.js')
                     );
                     wp_enqueue_style(
-                            'pmb-generate',
+                        'pmb-generate',
                         PMB_STYLES_URL . 'pmb-generate.css',
                         [
                             'wp-jquery-ui-dialog'
-                        ],
+                            ],
                         filemtime(PMB_STYLES_DIR . 'pmb-generate.css')
                     );
                     wp_localize_script(
-                            'pmb-generate',
+                        'pmb-generate',
                         'pmb_generate',
                         [
                             'site_url' => site_url(),
                             'translations' => [
+                                    // phpcs:disable Generic.Files.LineLength.TooLong
                                     'error_generating' => __('There was an error preparing your content. Please visit the Print My Blog Help page.', 'print-my-blog')
+                                // phpcs:enable Generic.Files.LineLength.TooLong
                             ]
                         ]
                     );
@@ -833,7 +844,7 @@ class Admin extends BaseController
      */
     public function checkFormSubmission()
     {
-        if ($_GET['page'] === PMB_ADMIN_HELP_PAGE_SLUG){
+        if ($_GET['page'] === PMB_ADMIN_HELP_PAGE_SLUG) {
             $this->sendHelp();
             exit;
         }

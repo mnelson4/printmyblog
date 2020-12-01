@@ -12,7 +12,7 @@ class DefaultPersistentNotices
     public function getNotices()
     {
         // don't show any of these notices on the welcome page, please. Give them a moment.
-        if(isset($_GET['welcome'])){
+        if (isset($_GET['welcome'])) {
             return [];
         }
         return [
