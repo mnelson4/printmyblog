@@ -4,7 +4,7 @@
 </p>
 
 <h2><?php esc_html_e('Features', 'print-my-blog');?></h2>
-<ul>
+<ul class="pmb-list">
     <li><?php esc_html_e('Main matter is divided into two columns, while front matter uses the full page width.', 'print-my-blog');?></li>
     <li><?php esc_html_e('Content can be divided into parts with a special part opening area using the full page width.', 'print-my-blog');
     ?></li>
@@ -25,7 +25,7 @@
     <li>
 </ul>
 <h2><?php esc_html_e('Page Layout', 'print-my-blog');?></h2>
-<ul>
+<ul class="pmb-list">
     <li><?php esc_html_e('Main matter pages fade from white to a color of your choosing in the corner where your logo and page number are shown.', 'print-my-blog');?></li>
     <li><?php esc_html_e('Page numbers in bottom-right corner, and part titles in the top-left. Front-matter’s pages are numbered with Roman numerals', 'print-my-blog');?></li>
     <li></li>

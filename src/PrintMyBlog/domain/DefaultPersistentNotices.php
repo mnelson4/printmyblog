@@ -46,6 +46,14 @@ class DefaultPersistentNotices
                 $this->getOptionsForScreen('toplevel_page_print-my-blog-projects')
             ),
             new Notice(
+                'pmb_choose_design',
+                __('Project Designs are like WordPress Themes', 'print-my-blog'),
+                '<p>' . __('Each has a different look and options that can be customized.', 'print-my-blog') . '</p>'
+                . '<p>' . __('The "Classic" design is the most similar Print My Blog Free, so is a good default option.', 'print-my-blog' ). '</p>'
+                . '<p>' . __('Click on the preview image for more details, and feel free to come back to this page later if you want to try a different design.', 'print-my-blog') . '</p>',
+                $this->getOptionsForProjectSubaction('choose_design')
+            ),
+            new Notice(
                 'pmb_edit_content',
                 __('How to Edit Project Content', 'print-my-blog'),
                 // phpcs:disable Generic.Files.LineLength.TooLong

@@ -3,7 +3,7 @@
         'print-my-blog');?></p>
 
 <h2><?php esc_html_e('Features', 'print-my-blog');?></h2>
-<ul>
+<ul class="pmb-list">
     <li><?php esc_html_e('Easier content editing because there are no nesting parts.', 'print-my-blog');?></li>
     <li><?php esc_html_e('All hyperlinks converted into footnotes', 'print-my-blog');?></li>
     <li><?php esc_html_e('The title page can include your organization’s name, project title, issue number, list of authors, and an introductory paragraph.', 'print-my-blog');?></li>
@@ -12,7 +12,7 @@
     </li>
 </ul>
 <h2><?php esc_html_e('Page Layout', 'print-my-blog');?></h2>
-<ul>
+<ul class="pmb-list">
     <li>
         <?php esc_html_e('The default title page includes a stylized banner (with customizable color) above a colored background featuring a large version of your company logo.', 'print-my-blog');?>
     </li>
@@ -20,5 +20,4 @@
     <li><?php esc_html_e('Page numbers in bottom-right corner, and article titles in the top-right. Front-matter’s pages are numbered with Roman numerals', 'print-my-blog');?></li>
     <li><?php esc_html_e('Each article begins on a new page', 'print-my-blog');?></li>
     <li><?php esc_html_e('Back matter uses your large company logo with background color', 'print-my-blog');?></li>
-    <li></li>
 </ul>
