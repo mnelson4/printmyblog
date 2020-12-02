@@ -40,25 +40,20 @@ jQuery(document).ready(function () {
         } else {
             var media='print';
         }
-        // delay slightly so they can see the modal window
-        setTimeout(
-            function () {
-                DocRaptor.createAndDownloadDoc("YOUR_API_KEY_HERE", {
-                    test: true, // test documents are free, but watermarked
-                    type: "pdf",
-                    // document_content: document.querySelector('html').innerHTML, // use this page's HTML
-                    // document_content: "<h1>Hello world!</h1>",               // or supply HTML directly
-                    document_url: html_url,            // or use a URL
-                    javascript: true,                                        // Javascript by DocRaptor
-                    prince_options: {
-                        base_url: pmb_generate.site_url,
-                        media: media,                                       // use screen styles instead of print styles
-                        // javascript: true, // use Prince's JS, which is more error tolerant
-                    }
-                });
-            },
-            1000
-        );
+        
+        DocRaptor.createAndDownloadDoc("YOUR_API_KEY_HERE", {
+            test: true, // test documents are free, but watermarked
+            type: "pdf",
+            // document_content: document.querySelector('html').innerHTML, // use this page's HTML
+            // document_content: "<h1>Hello world!</h1>",               // or supply HTML directly
+            document_url: html_url,            // or use a URL
+            javascript: true,                                        // Javascript by DocRaptor
+            prince_options: {
+                base_url: pmb_generate.site_url,
+                media: media,                                       // use screen styles instead of print styles
+                // javascript: true, // use Prince's JS, which is more error tolerant
+            }
+        });
 
 
     });
