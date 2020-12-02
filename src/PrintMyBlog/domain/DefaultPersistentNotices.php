@@ -54,6 +54,16 @@ class DefaultPersistentNotices
                 $this->getOptionsForProjectSubaction('choose_design')
             ),
             new Notice(
+                'pmb_customize_design',
+                __('Each Design has Different Options and is Reusable', 'print-my-blog'),
+                // phpcs:disable Generic.Files.LineLength.TooLong
+                '<p>' . __('Below are your chosen design’s customization options.', 'print-my-blog') . '</p>'
+                . '<p>' . __('If you don’t see an option you need, you may want to go back and choose a different design, or ask the design’s author for it.', 'print-my-blog') . '</p>'
+                . '<p>' . __('Note: designs are reused between projects. So customizations to this design will be reused by other projects using this same design', 'print-my-blog') . '</p>',
+                // phpcs:enable Generic.Files.LineLength.TooLong
+                $this->getOptionsForProjectSubaction('customize_design')
+            ),
+            new Notice(
                 'pmb_edit_content',
                 __('How to Edit Project Content', 'print-my-blog'),
                 // phpcs:disable Generic.Files.LineLength.TooLong
@@ -61,14 +71,30 @@ class DefaultPersistentNotices
         frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
                 . '<div class="pmb-text-column">'
                  . '<ol>'
-                 . '<li>' . __('Find content from WordPress you want to add on the left, and add it to your project on the right by dragging', 'print-my-blog') . '</li>'
-                 . '<li>' . __('Front matter, main matter, and back matter are mostly convenient for organizing your content, but your chosen design can style them differently') . '</li>'
+                 . '<li>' . __('Find the articles (posts, pages, other post types) from WordPress you want to add on the left, and add it to your project on the right by dragging', 'print-my-blog') . '</li>'
+                 . '<li>' . __('Place articles in either front matter, main matter, or back matter, according to how you want your project organized. Each design can style them differently (eg front matter is often is numbered with roman numerals)') . '</li>'
                  . '<li>' . __('Nest content inside others to create parts', 'print-my-blog') . '</li>'
                 // phpcs:enable Generic.Files.LineLength.TooLong
                  . '</ol>'
                  . '</div></div>',
                 $this->getOptionsForProjectSubaction('content')
             ),
+            new Notice(
+                'pmb_edit_meta',
+                __('Everything Else About Your Project is Stored Here', 'print-my-blog'),
+                '<p>' . __('Different formats and designs may require other information about your project.', 'print-my-blog') .
+                '</p>'
+                . '<p>' . __('Some examples of metadata are: title page info, file info, or copyright data.', 'print-my-blog') . '</p>'
+                . '<p>' . __('So although your choice of design may affect what metadata is required, it is not shared with other projects.', 'print-my-blog') .
+                    '</p>',
+                $this->getOptionsForProjectSubaction('metadata')
+            ),
+            new Notice(
+                'pmb_print_materials',
+                __('Posts just for Print My Blog', 'print-my-blog'),
+                '<p>' . __('Print My Blog "Print Materials" are like private posts. They aren’t visible to site visitors, but you can use them in your Pro Print Projects.', 'print-my-blog') . '</p>',
+                $this->getOptionsForScreen('edit-pmb_content')
+            )
 
         ];
     }

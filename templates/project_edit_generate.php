@@ -82,11 +82,13 @@ foreach($generations as $generation){
             esc_attr
             ($format_slug);
             ?>" data-html-url="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"><?php esc_html_e('Download Preview', 'print-my-blog');?></a>
-            <p>
                 <a href="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"
-                class="pmb-view-html"><?php esc_html_e('View Debug HTML',
-                'print-my-blog');?></a>
-            </p>
+                class="pmb-view-html"
+                   title="<?php echo esc_attr(__('View HTML', 'print-my-blog'));
+                   ?>"><span  class="dashicons
+                dashicons-html pmb-icon"></span></a>
+                <a href="<?php echo esc_url(admin_url(PMB_ADMIN_HELP_PAGE_PATH));?>" title="<?php echo esc_html__('Get Help', 'print-my-blog');?>"><span class="dashicons
+                dashicons-sos pmb-icon"></span></a>
             <div class="pmb-download-preview-dialog" style="display:none" id="pmb-download-preview-dialog-<?php echo
             esc_attr ($format_slug);?>">
                 <div class="pmb-after-download-preview">

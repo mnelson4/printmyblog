@@ -27,7 +27,7 @@ window.DocRaptor = {
         form.action = "https://docraptor.com/docs";
         form.method = "post";
         form.style.display = "none";
-        form.target = "_blank";
+        //form.target = "_blank";
 
         form.appendChild(makeFormElement("user_credentials", api_key));
 

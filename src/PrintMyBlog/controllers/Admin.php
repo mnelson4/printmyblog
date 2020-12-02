@@ -844,6 +844,7 @@ class Admin extends BaseController
      */
     public function checkFormSubmission()
     {
+
         if ($_GET['page'] === PMB_ADMIN_HELP_PAGE_SLUG) {
             $this->sendHelp();
             exit;
@@ -1151,8 +1152,6 @@ class Admin extends BaseController
             'design_change',
             __('You changed the design', 'print-my-blog')
         );
-        $project->getProgress()->markCustomizeDesignStepComplete($format->slug(), false);
-        $project->getProgress()->markChooseDesignStepComplete($format->slug());
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
@@ -1161,10 +1160,19 @@ class Admin extends BaseController
                 $format->title()
             )
         );
-        $this->notification_manager->addTextNotificationForCurrentUser(
-            OneTimeNotification::TYPE_INFO,
-            __('You may want to customize the design.', 'print-my-blog')
-        );
+        $project->getProgress()->markChooseDesignStepComplete($format->slug());
+        // If they've changed the design, ask them if they want to skip it.
+        if($project->getProgress()->isStepComplete(ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX . $format->slug())){
+            $project->getProgress()->markCustomizeDesignStepComplete($format->slug(), false);
+            $this->notification_manager->addTextNotificationForCurrentUser(
+                OneTimeNotification::TYPE_INFO,
+                __('You may want to customize the design. If not, feel free to jump ahead the next step.', 'print-my-blog')
+            );
+        }
+
+
+
+
         $this->redirectToNextStep($project);
     }
 
