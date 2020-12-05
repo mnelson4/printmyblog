@@ -152,6 +152,54 @@ if (defined('PMB_VERSION')) {
     define('PMB_PRINTPAGE_SLUG', 'print-my-blog');
     require_once('bootstrap.php');
 
+    if ( function_exists( 'pmb_fs' ) ) {
+        pmb_fs()->set_basename( true, __FILE__ );
+    } else {
+        if ( ! function_exists( 'pmb_fs' ) ) {
+            // Create a helper function for easy SDK access.
+            function pmb_fs() {
+                global $pmb_fs;
+
+                if ( ! isset( $pmb_fs ) ) {
+                    // Include Freemius SDK.
+                    require_once dirname(__FILE__) . '/freemius/start.php';
+
+                    $pmb_fs = fs_dynamic_init( array(
+                        'id'                  => '5396',
+                        'slug'                => 'print-my-blog',
+                        'premium_slug'        => 'print-my-blog-pro',
+                        'type'                => 'plugin',
+                        'public_key'          => 'pk_0443e9596f0e906d282bf05b115dd',
+                        'is_premium'          => true,
+                        'premium_suffix'      => 'Pro',
+                        // If your plugin is a serviceware, set this option to false.
+                        'has_premium_version' => true,
+                        'has_addons'          => false,
+                        'has_paid_plans'      => true,
+                        'menu'                => array(
+                            'slug'           => 'print-my-blog-projects',
+                            'first-path'     => 'admin.php?page=print-my-blog-now&welcome=1',
+                            'contact'        => false,
+                            'support'        => false,
+                        ),
+                        // Set the SDK to work in a sandbox mode (for development & testing).
+                        // IMPORTANT: MAKE SURE TO REMOVE SECRET KEY BEFORE DEPLOYMENT.
+                        'secret_key'          => 'sk_[Kb~Wn_ZJQCu$f{qW0f-tPUCw49c!',
+                    ) );
+                }
+
+                return $pmb_fs;
+            }
+
+            // Init Freemius.
+            pmb_fs();
+            // Signal that SDK was initiated.
+            do_action( 'pmb_fs_loaded' );
+        }
+
+        // ... Your plugin's main file logic ...
+    }
+
 	// disable the active theme if generating a PDF.
     // This needs to be done super early
 	if(defined('DOING_AJAX') && isset($_REQUEST['action'], $_REQUEST['format']) && $_REQUEST['action'] === 'pmb_project_status'){
