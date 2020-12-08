@@ -24,9 +24,6 @@ class Context extends BaseContext
     protected function setDependencies()
     {
         $this->deps = [
-            'PrintMyBlog\system\Init' => [
-                'PrintMyBlog\system\Context' => self::REUSE,
-            ],
             'PrintMyBlog\system\Activation' => [
                 'Twine\system\RequestType' => self::REUSE,
                 'PrintMyBlog\db\TableManager' => self::REUSE,

@@ -11,7 +11,7 @@ namespace PrintMyBlog\db;
  * @author         Mike Nelson
  *
  */
-class TableManager
+class TableManager extends \Twine\db\TableManager
 {
     const SECTIONS_TABLE = 'pmb_project_sections';
 
@@ -20,12 +20,9 @@ class TableManager
      */
     public function installTables()
     {
-        global $wpdb;
-        $charset_collate = $wpdb->get_charset_collate();
-        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-        dbDelta(
-            'CREATE TABLE ' . $wpdb->prefix . self::SECTIONS_TABLE . ' (
-                ID bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+        $this->installTable(
+            self::SECTIONS_TABLE,
+               'ID bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
                 project_id bigint(20) UNSIGNED NOT NULL,
                 post_id bigint(20) UNSIGNED NOT NULL DEFAULT \'0\',
                 parent_id bigint(20) UNSIGNED NULL DEFAULT \'0\',
@@ -35,15 +32,12 @@ class TableManager
                 height smallint NOT NULL DEFAULT \'0\',
                 depth smallint NOT NULL DEFAULT \'0\',
                 PRIMARY KEY  (ID),
-                KEY sorted (project_id,placement,section_order)
-            ) ' . $charset_collate . '
-        ;'
+                KEY sorted (project_id,placement,section_order)'
         );
     }
 
     public function dropTables()
     {
-        global $wpdb;
-        return $wpdb->query('DROP TABLE ' . $wpdb->prefix . self::SECTIONS_TABLE);
+        $this->dropTable(self::SECTIONS_TABLE);
     }
 }

@@ -74,7 +74,7 @@ class RequestType
         if ($previous_version === null) {
             return self::REQUEST_TYPE_NEW_INSTALL;
         }
-        if ($previous_version !== PMB_VERSION) {
+        if ($previous_version !== $this->version_history->currentVersion()) {
             return self::REQUEST_TYPE_UPDATE;
         }
         if (isset($this->activation_option_name) && get_option($this->activation_option_name)) {
