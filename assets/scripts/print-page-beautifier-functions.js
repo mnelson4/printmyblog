@@ -1,4 +1,9 @@
-
+/**
+ * Removes content Prince XML and DocRaptor don't know how to handle properly, no "noscript" tags.
+ */
+function pmb_remove_unsupported_content(){
+    jQuery('noscript').remove();
+}
 function pmb_dont_float(){
     jQuery('.alignright').removeClass('alignright');
     jQuery('.alignleft').removeClass('alignleft');
@@ -183,10 +188,6 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
             }
         }
     });
-}
-
-function pmb_populate_toc(){
-
 }
 
 /**

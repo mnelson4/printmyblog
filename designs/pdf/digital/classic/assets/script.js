@@ -1,5 +1,6 @@
 jQuery(document).ready(function(){
     // Pretty up the page
+    pmb_remove_unsupported_content();
     pmb_add_header_classes();
     if(pmb_design_options['default_alignment'] === 'center'){
         pmb_default_align_center();

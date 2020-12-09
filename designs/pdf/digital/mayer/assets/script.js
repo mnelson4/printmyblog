@@ -1,5 +1,6 @@
 jQuery(document).ready(function(){
     // Pretty up the page
+    pmb_remove_unsupported_content();
     pmb_add_header_classes();
     // There's not enough space for alignnone images to ever look good.
     pmb_default_align_center();
