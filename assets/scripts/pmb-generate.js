@@ -48,6 +48,8 @@ jQuery(document).ready(function () {
             // document_content: "<h1>Hello world!</h1>",               // or supply HTML directly
             document_url: html_url,            // or use a URL
             javascript: true,                                        // Javascript by DocRaptor
+            ignore_console_messages: true,
+            ignore_resource_errors:true,
             prince_options: {
                 base_url: pmb_generate.site_url,
                 media: media,                                       // use screen styles instead of print styles

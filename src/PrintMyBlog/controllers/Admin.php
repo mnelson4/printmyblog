@@ -844,7 +844,10 @@ class Admin extends BaseController
      */
     public function checkFormSubmission()
     {
-
+        // Don't bother checking for form submission if the "page" parameter isn't even set.
+        if(! isset($_GET['page'])){
+            return;
+        }
         if ($_GET['page'] === PMB_ADMIN_HELP_PAGE_SLUG) {
             $this->sendHelp();
             exit;
