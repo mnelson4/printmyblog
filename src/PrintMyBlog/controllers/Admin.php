@@ -797,8 +797,8 @@ class Admin extends BaseController
     protected function editGenerate(Project $project)
     {
         $generations = $project->getAllGenerations();
-        $thingy = pmb_fs();
-        $license = $thingy->_get_license();
+        $freemius = pmb_fs();
+        $license = $freemius->_get_license();
         if($license instanceof FS_Plugin_License){
             $license_id = $license->id;
             $license_info = $this->pmb_central->getCreditsInfo($license_id);
