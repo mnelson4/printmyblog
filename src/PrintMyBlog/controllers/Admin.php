@@ -4,6 +4,7 @@ namespace PrintMyBlog\controllers;
 
 use Dompdf\Renderer\Text;
 use Exception;
+use FS_Plugin_License;
 use PrintMyBlog\controllers\helpers\ProjectsListTable;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\db\TableManager;
@@ -19,6 +20,7 @@ use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\orm\managers\ProjectSectionManager;
 use PrintMyBlog\services\DebugInfo;
 use PrintMyBlog\services\FileFormatRegistry;
+use PrintMyBlog\services\PmbCentral;
 use PrintMyBlog\services\SvgDoer;
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\entities\notifications\OneTimeNotification;
@@ -111,6 +113,11 @@ class Admin extends BaseController
     protected $debug_info;
 
     /**
+     * @var PmbCentral
+     */
+    protected $pmb_central;
+
+    /**
      * @param PostFetcher $post_fetcher
      * @param ProjectSectionManager $section_manager
      * @param ProjectManager $project_manager
@@ -130,7 +137,8 @@ class Admin extends BaseController
         TableManager $table_manager,
         SvgDoer $svg_doer,
         OneTimeNotificationManager $notification_manager,
-        DebugInfo $debug_info
+        DebugInfo $debug_info,
+        PmbCentral $pmb_central
     ) {
         $this->post_fetcher    = $post_fetcher;
         $this->section_manager = $section_manager;
@@ -141,6 +149,7 @@ class Admin extends BaseController
         $this->svg_doer = $svg_doer;
         $this->notification_manager = $notification_manager;
         $this->debug_info = $debug_info;
+        $this->pmb_central = $pmb_central;
     }
     /**
      * name of the option that just indicates we successfully saved the setttings
@@ -788,6 +797,12 @@ class Admin extends BaseController
     protected function editGenerate(Project $project)
     {
         $generations = $project->getAllGenerations();
+        $thingy = pmb_fs();
+        $license = $thingy->_get_license();
+        if($license instanceof FS_Plugin_License){
+            $license_id = $license->id;
+            $license_info = $this->pmb_central->getCreditsInfo($license_id);
+        }
         $this->renderProjectTemplate(
             'project_edit_generate.php',
             [
