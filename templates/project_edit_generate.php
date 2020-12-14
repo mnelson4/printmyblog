@@ -4,6 +4,8 @@
  * @var $project \PrintMyBlog\orm\entities\Project
  * @var $steps_to_urls array
  * @var $current_step string
+ * @var $license_info null|array with keys 'expiry_date', 'remaining_credits' and 'plan_credits'
+ * @var $upgrade_url string
  */
 pmb_render_template(
 	'partials/project_header.php',
@@ -15,8 +17,21 @@ pmb_render_template(
 	]
 );
 ?>
+<?php if (is_array($license_info)){
+   ?>
+    <p class="pmb-credit-reminder"><?php
+        printf(
+            esc_html__('You have %1$s/%2$s download credits left which expire on %3$s',
+                'print-my-blog'),
+            $license_info['remaining_credits'],
+            $license_info['plan_credits'],
+            date_i18n(get_option('date_format'),rest_parse_date($license_info['expiry_date'])))
+        ;?></p>
+    <?php
+}?>
 <p><?php esc_html_e('Your project is ready to be generated! Use one of the buttons below to generate it, but feel free to use the links above to tweak it.',
-        'print-my-blog');?></p>
+        'print-my-blog');?>
+</p>
 <?php
 foreach($generations as $generation){
 	$generate_link = add_query_arg(
@@ -105,12 +120,29 @@ foreach($generations as $generation){
                         <div class="pmb-content-box-wrap">
                             <div class="pmb-content-box-inner">
                                 <h3><?php esc_html_e('Looks good?', 'print-my-blog'); ?></h3>
-
-                                <a id="pmb-download-<?php echo esc_attr($format_slug);?>" class="button
-    button-primary disabled pmb-reveal-before-download-actual" data-format="<?php echo
-                                esc_attr ($format_slug);?>"><?php esc_html_e('Download Non-Watermarked File',
-                                        'print-my-blog');?></a>
-                                <p class="description"><?php esc_html_e('Coming soon!', 'print-my-blog');?></p>
+<?php if(! is_array($license_info) ){ ?>
+    <p class="pmb-important"><?php esc_html_e('You do not have an active plan!', 'print-my-blog');?></p>
+    <a href="<?php echo esc_url($upgrade_url);?>" class="button button-primary"><?php esc_html_e('View Plans',
+            'print-my-blog');?></a>
+    <p><?php esc_html_e('Sorry you have no more download credits.', 'print-my-blog');?></p>
+<?php } elseif(! $license_info['remaining_credits']) {?>
+    <a href="<?php echo esc_url($upgrade_url);?>" class="button button-primary"><?php esc_html_e('View Plan Upgrades',
+            'print-my-blog');?></a>
+    <p class="description"><?php esc_html_e('Or stay on your current plan and wait for your plan to renew', 'print-my-blog');
+    ?></p>
+<?php } else { ?>
+    <a href="<?php echo esc_url($upgrade_url);?>" id="pmb-download-<?php echo esc_attr
+    ($format_slug);?>"
+       class="button
+    button-primary pmb-reveal-before-download-actual" data-format="<?php echo
+    esc_attr ($format_slug);?>"><?php esc_html_e('Download Non-Watermarked File',
+            'print-my-blog');?></a>
+    <p class="description"><?php printf(
+            esc_html__('This will use one of your %1$s remaining credits, and is non-refundable.',
+            'print-my-blog'),
+        $license_info['remaining_credits']
+        );?></p>
+<?php } ?>
                             </div>
                         </div>
                 </div>

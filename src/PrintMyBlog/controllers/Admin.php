@@ -797,17 +797,25 @@ class Admin extends BaseController
     protected function editGenerate(Project $project)
     {
         $generations = $project->getAllGenerations();
-        $freemius = pmb_fs();
-        $license = $freemius->_get_license();
-        if($license instanceof FS_Plugin_License){
-            $license_id = $license->id;
-            $license_info = $this->pmb_central->getCreditsInfo($license_id);
+        $license_info = null;
+        if ( pmb_fs()->is__premium_only() ) {
+            $license = pmb_fs()->_get_license();
+            if ($license instanceof FS_Plugin_License) {
+                $license_id = $license->id;
+                $license_info = $this->pmb_central->getCreditsInfo($license_id);
+            }
+            $upgrade_url = pmb_fs()->get_upgrade_url();
+        } else {
+            $upgrade_url = pmb_fs()->get_upgrade_url();
         }
+
         $this->renderProjectTemplate(
             'project_edit_generate.php',
             [
-            'project' => $project,
-            'generations' => $generations
+                'project' => $project,
+                'generations' => $generations,
+                'license_info' => $license_info,
+                'upgrade_url' => $upgrade_url
             ]
         );
     }

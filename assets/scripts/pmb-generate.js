@@ -40,22 +40,53 @@ jQuery(document).ready(function () {
         } else {
             var media='print';
         }
-        
-        DocRaptor.createAndDownloadDoc("YOUR_API_KEY_HERE", {
-            test: true, // test documents are free, but watermarked
-            type: "pdf",
-            // document_content: document.querySelector('html').innerHTML, // use this page's HTML
-            // document_content: "<h1>Hello world!</h1>",               // or supply HTML directly
-            document_url: html_url,            // or use a URL
-            javascript: true,                                        // Javascript by DocRaptor
-            ignore_console_messages: true,
-            ignore_resource_errors:true,
-            prince_options: {
-                base_url: pmb_generate.site_url,
-                media: media,                                       // use screen styles instead of print styles
-                // javascript: true, // use Prince's JS, which is more error tolerant
+        var server_communicator = new PmbAsyncPdfCreation(
+            // false,
+            // 'YOUR_API_KEY_HERE',
+            true,
+            532936,
+            {
+                test: true, // test documents are free, but watermarked
+                type: "pdf",
+                // document_content: document.querySelector('html').innerHTML, // use this page's HTML
+                // document_content: "<h1>Hello world!</h1>",               // or supply HTML directly
+                document_url: html_url,            // or use a URL
+                javascript: true,                                        // Javascript by DocRaptor
+                ignore_console_messages: true,
+                ignore_resource_errors: true,
+                prince_options: {
+                    base_url: pmb_generate.site_url,
+                    media: media,                                       // use screen styles instead of print styles
+                    // javascript: true, // use Prince's JS, which is more error tolerant
+                }
+            },
+            (response) => {
+                console.log(response);
+            },
+            (download_url) => {
+                window.location.href = download_url;
+            },
+            (error_message) => {
+                alert(error_message)
             }
-        });
+        );
+        server_communicator.begin();
+
+        // DocRaptor.createAndDownloadDoc("YOUR_API_KEY_HERE", {
+        //     test: true, // test documents are free, but watermarked
+        //     type: "pdf",
+        //     // document_content: document.querySelector('html').innerHTML, // use this page's HTML
+        //     // document_content: "<h1>Hello world!</h1>",               // or supply HTML directly
+        //     document_url: html_url,            // or use a URL
+        //     javascript: true,                                        // Javascript by DocRaptor
+        //     ignore_console_messages: true,
+        //     ignore_resource_errors:true,
+        //     prince_options: {
+        //         base_url: pmb_generate.site_url,
+        //         media: media,                                       // use screen styles instead of print styles
+        //         // javascript: true, // use Prince's JS, which is more error tolerant
+        //     }
+        // });
 
 
     });
