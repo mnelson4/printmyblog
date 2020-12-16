@@ -44,7 +44,7 @@ jQuery(document).ready(function () {
             // false,
             // 'YOUR_API_KEY_HERE',
             true,
-            532936,
+            pmb_generate.license_id,
             {
                 test: true, // test documents are free, but watermarked
                 type: "pdf",
@@ -64,10 +64,14 @@ jQuery(document).ready(function () {
                 console.log(response);
             },
             (download_url) => {
+                jQuery('#pmb-downloading-test-pdf').hide();
+                jQuery('#pmb-after-download-test-pdf').show();
                 window.location.href = download_url;
             },
             (error_message) => {
-                alert(error_message)
+                jQuery('#pmb-downloading-test-pdf').hide();
+                jQuery('#pmb-error-downloading-test-pdf').show();
+                alert(error_message);
             }
         );
         server_communicator.begin();

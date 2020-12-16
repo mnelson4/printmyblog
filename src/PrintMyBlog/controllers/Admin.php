@@ -543,14 +543,17 @@ class Admin extends BaseController
                             ],
                         filemtime(PMB_STYLES_DIR . 'pmb-generate.css')
                     );
+                    $license_id = pmb_fs()->_get_license()->id;
                     wp_localize_script(
                         'pmb-generate',
                         'pmb_generate',
                         [
                             'site_url' => site_url(),
+                            'license_id' => $license_id,
+                            'test_live' => defined('PMB_TEST_LIVE') && PMB_TEST_LIVE ? true : false,
                             'translations' => [
-                                    // phpcs:disable Generic.Files.LineLength.TooLong
-                                    'error_generating' => __('There was an error preparing your content. Please visit the Print My Blog Help page.', 'print-my-blog')
+                                // phpcs:disable Generic.Files.LineLength.TooLong
+                                'error_generating' => __('There was an error preparing your content. Please visit the Print My Blog Help page.', 'print-my-blog')
                                 // phpcs:enable Generic.Files.LineLength.TooLong
                             ]
                         ]

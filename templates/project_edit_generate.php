@@ -107,45 +107,71 @@ foreach($generations as $generation){
             <div class="pmb-download-preview-dialog" style="display:none" id="pmb-download-preview-dialog-<?php echo
             esc_attr ($format_slug);?>">
                 <div class="pmb-after-download-preview">
-                    <p class="pmb-middle-important-text"><?php esc_html_e('Downloading Watermarked Preview File...', 'print-my-blog');?></p>
+                    <div id="pmb-downloading-test-pdf">
+                        <p class="pmb-middle-important-text"><?php esc_html_e('Downloading Watermarked Preview File...',
+                                'print-my-blog');?></p>
+                        <div class="pmb-spinner-container">
+                            <div class="pmb-spinner"></div>
+                        </div>
+                    </div>
+                    <div id="pmb-success-download-test-pdf">
+                        <p id="pmb-download-status" class="pmb-middle-important-text"><?php esc_html_e('Download Complete',
+                                'print-my-blog');?></p>
+                        <div class="pmb-content-boxes" id="pmb-after-download-test-pdf">
+                            <div class="pmb-content-box-wrap">
+                                <div class="pmb-content-box-inner">
+                                    <h3><?php esc_html_e('Something Not Look Right?', 'print-my-blog'); ?></h3>
+                                    <a class="button button-primary" href="<?php echo esc_url(admin_url
+                                    (PMB_ADMIN_HELP_PAGE_PATH));?>"><?php esc_html_e('Let’s Get It Fixed!', 'print-my-blog');?></a>
+                                </div>
+                            </div>
+                            <div class="pmb-content-box-wrap">
+                                <div class="pmb-content-box-inner">
+                                    <h3><?php esc_html_e('Looks good?', 'print-my-blog'); ?></h3>
+                                    <?php if(! is_array($license_info) ){ ?>
+                                        <p class="pmb-important"><?php esc_html_e('Before you can make a non-watermarked Pro PDF, you need a plan.', 'print-my-blog');?></p>
+                                        <a href="<?php echo esc_url($upgrade_url);?>" class="button button-primary"><?php esc_html_e('View Plans',
+                                                'print-my-blog');?></a>
+                                    <?php } elseif(! $license_info['remaining_credits']) {?>
 
-                    <div class="pmb-content-boxes">
-                        <div class="pmb-content-box-wrap">
-                            <div class="pmb-content-box-inner">
-                                <h3><?php esc_html_e('Something Not Look Right?', 'print-my-blog'); ?></h3>
-                                <a class="button button-primary" href="<?php echo esc_url(admin_url
-                                (PMB_ADMIN_HELP_PAGE_PATH));?>"><?php esc_html_e('Let’s Get It Fixed!', 'print-my-blog');?></a>
-                            </div>
-                        </div>
-                        <div class="pmb-content-box-wrap">
-                            <div class="pmb-content-box-inner">
-                                <h3><?php esc_html_e('Looks good?', 'print-my-blog'); ?></h3>
-<?php if(! is_array($license_info) ){ ?>
-    <p class="pmb-important"><?php esc_html_e('You do not have an active plan!', 'print-my-blog');?></p>
-    <a href="<?php echo esc_url($upgrade_url);?>" class="button button-primary"><?php esc_html_e('View Plans',
-            'print-my-blog');?></a>
-    <p><?php esc_html_e('Sorry you have no more download credits.', 'print-my-blog');?></p>
-<?php } elseif(! $license_info['remaining_credits']) {?>
-    <a href="<?php echo esc_url($upgrade_url);?>" class="button button-primary"><?php esc_html_e('View Plan Upgrades',
-            'print-my-blog');?></a>
-    <p class="description"><?php esc_html_e('Or stay on your current plan and wait for your plan to renew', 'print-my-blog');
-    ?></p>
-<?php } else { ?>
-    <a href="<?php echo esc_url($upgrade_url);?>" id="pmb-download-<?php echo esc_attr
-    ($format_slug);?>"
-       class="button
+                                        <p><?php esc_html_e('Sorry you have no more download credits.', 'print-my-blog');?></p>
+                                        <a href="<?php echo esc_url($upgrade_url);?>" class="button button-primary"><?php esc_html_e('View Plan Upgrades',
+                                                'print-my-blog');?></a>
+                                        <p class="description"><?php esc_html_e('Or stay on your current plan and wait for your plan to renew', 'print-my-blog');
+                                            ?></p>
+                                    <?php } else { ?>
+                                        <a href="<?php echo esc_url($upgrade_url);?>" id="pmb-download-<?php echo esc_attr
+                                        ($format_slug);?>"
+                                           class="button
     button-primary pmb-reveal-before-download-actual" data-format="<?php echo
-    esc_attr ($format_slug);?>"><?php esc_html_e('Download Non-Watermarked File',
-            'print-my-blog');?></a>
-    <p class="description"><?php printf(
-            esc_html__('This will use one of your %1$s remaining credits, and is non-refundable.',
-            'print-my-blog'),
-        $license_info['remaining_credits']
-        );?></p>
-<?php } ?>
+                                        esc_attr ($format_slug);?>"><?php esc_html_e('Download Non-Watermarked File',
+                                                'print-my-blog');?></a>
+                                        <p class="description"><?php printf(
+                                                esc_html__('This will use one of your %1$s remaining credits, and is non-refundable.',
+                                                    'print-my-blog'),
+                                                $license_info['remaining_credits']
+                                            );?></p>
+                                    <?php } ?>
+                                </div>
                             </div>
                         </div>
-                </div>
+                    </div>
+                    <div id="pmb-error-downloading-test-pdf">
+                        <p id="pmb-download-status" class="pmb-middle-important-text"><?php esc_html_e('Download Error 😥',
+                                'print-my-blog');?></p>
+                        <div class="pmb-content-boxes" id="pmb-after-download-test-pdf">
+                            <div class="pmb-content-box-wrap">
+                                <div class="pmb-content-box-inner">
+                                    <h3><?php esc_html_e('We Want to Help!', 'print-my-blog'); ?></h3>
+                                    <a class="button button-primary" href="<?php echo esc_url(admin_url
+                                    (PMB_ADMIN_HELP_PAGE_PATH));?>"><?php esc_html_e('Let’s Get It Fixed!', 'print-my-blog');?></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
             </div>
             <div class="pmb-before-download-dialog" style="display:none" id="pmb-before-download-dialog-<?php echo
             esc_attr
