@@ -550,7 +550,24 @@ class Admin extends BaseController
                         [
                             'site_url' => site_url(),
                             'license_id' => $license_id,
-                            'test_live' => defined('PMB_TEST_LIVE') && PMB_TEST_LIVE ? true : false,
+                            'doc_attrs' => apply_filters(
+                                    '\PrintMyBlog\controllers\Admin::enqueueScripts doc_attrs',
+                                    [
+                                        'test' => defined('PMB_TEST_LIVE') && PMB_TEST_LIVE ? true : false,
+                                        'type' => 'pdf',
+                                        'javascript' => true,                                        // Javascript by
+                    // DocRaptor
+                                        'ignore_console_messages' => true,
+                                        'ignore_resource_errors' => true,
+                                        'prince_options' => [
+                                            'base_url' => site_url(),
+                                            'media' => 'print',                                       // use screen
+                    // styles
+                    // instead of print styles
+                                            // javascript: true, // use Prince's JS, which is more error tolerant
+                                        ]
+                                    ]
+                            ),
                             'translations' => [
                                 // phpcs:disable Generic.Files.LineLength.TooLong
                                 'error_generating' => __('There was an error preparing your content. Please visit the Print My Blog Help page.', 'print-my-blog')

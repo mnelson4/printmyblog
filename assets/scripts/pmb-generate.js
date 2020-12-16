@@ -35,31 +35,23 @@ jQuery(document).ready(function () {
             '#pmb-download-preview-dialog-' + format,
         );
         var html_url = event.currentTarget.getAttribute('data-html-url');
-        if(format === 'digital_pdf'){
-            var media='screen';
+        if (format === 'digital_pdf') {
+            var media = 'screen';
         } else {
-            var media='print';
+            var media = 'print';
         }
+
+        var dynamic_doc_attrs = pmb_generate.doc_attrs;
+        // thiis a test, always override whether its a test request or not.
+        dynamic_doc_attrs.test = true;
+        dynamic_doc_attrs.document_url = html_url;
+        dynamic_doc_attrs.prince_options.media = media;
+
+
         var server_communicator = new PmbAsyncPdfCreation(
-            // false,
-            // 'YOUR_API_KEY_HERE',
-            true,
-            pmb_generate.license_id,
-            {
-                test: true, // test documents are free, but watermarked
-                type: "pdf",
-                // document_content: document.querySelector('html').innerHTML, // use this page's HTML
-                // document_content: "<h1>Hello world!</h1>",               // or supply HTML directly
-                document_url: html_url,            // or use a URL
-                javascript: true,                                        // Javascript by DocRaptor
-                ignore_console_messages: true,
-                ignore_resource_errors: true,
-                prince_options: {
-                    base_url: pmb_generate.site_url,
-                    media: media,                                       // use screen styles instead of print styles
-                    // javascript: true, // use Prince's JS, which is more error tolerant
-                }
-            },
+            false,
+            'YOUR_API_KEY_HERE',
+            dynamic_doc_attrs,
             (response) => {
                 console.log(response);
             },
