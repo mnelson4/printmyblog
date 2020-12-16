@@ -65,7 +65,7 @@ jQuery(document).ready(function () {
             },
             (download_url) => {
                 jQuery('#pmb-downloading-test-pdf').hide();
-                jQuery('#pmb-after-download-test-pdf').show();
+                jQuery('#pmb-success-download-test-pdf').show();
                 window.location.href = download_url;
             },
             (error_message) => {
