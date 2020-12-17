@@ -135,6 +135,11 @@ function pmb_load_avada_lazy_images(){
     });
 }
 
+function pmb_expand_arconix_accordions(){
+    // Expand all Arconix accordion parts (see https://wordpress.org/plugins/arconix-shortcodes/)
+    jQuery('.arconix-accordion-content').css('display','block');
+}
+
 /**
  * Adds the class "pmb-page-ref" onto all hyperlinks to posts/things that are actually in the current project,
  * and a span named "pmb-footnote", with the value of the hyperlink to all the links to external content.
