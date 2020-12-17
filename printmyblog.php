@@ -171,7 +171,6 @@ if (defined('PMB_VERSION')) {
                         'type'                => 'plugin',
                         'public_key'          => 'pk_0443e9596f0e906d282bf05b115dd',
                         'is_premium'          => true,
-                        'premium_suffix'      => 'Pro',
                         // If your plugin is a serviceware, set this option to false.
                         'has_premium_version' => true,
                         'has_addons'          => false,
@@ -182,14 +181,12 @@ if (defined('PMB_VERSION')) {
                             'contact'        => false,
                             'support'        => false,
                         ),
-                        // Set the SDK to work in a sandbox mode (for development & testing).
-                        // IMPORTANT: MAKE SURE TO REMOVE SECRET KEY BEFORE DEPLOYMENT.
-                        'secret_key'          => 'sk_[Kb~Wn_ZJQCu$f{qW0f-tPUCw49c!',
                     ) );
                 }
 
                 return $pmb_fs;
             }
+
 
             // Init Freemius.
             pmb_fs();
