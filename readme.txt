@@ -3,7 +3,7 @@ Contributors: mnelson4
 Tags: print, PDF, backup, eBook, print button, ClassicPress
 Requires at least: 4.6
 Stable tag: trunk
-Tested up to: 5.5
+Tested up to: 5.6
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -280,6 +280,9 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 7. Add the Print My Blog block to add a form visitors can use to select what and how to print your blog.
 
 == Changelog ==
+
+= 2.9.7 December 1, 2020 =
+* Expand all Arconix plugin accordions
 
 = 2.9.6 October 26, 2020 =
 * Make print setup options easier to find
