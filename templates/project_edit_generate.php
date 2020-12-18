@@ -6,6 +6,8 @@
  * @var $current_step string
  * @var $license_info null|array with keys 'expiry_date', 'remaining_credits' and 'plan_credits'
  * @var $upgrade_url string
+ * @var $review_url string
+ * @var $suggest_review boolean
  */
 pmb_render_template(
 	'partials/project_header.php',
@@ -177,9 +179,11 @@ foreach($generations as $generation){
                         </div>
                     </div>
                     <div class="pmb-after-download-actual" id="pmb-after-download-actual-success">
-                        <h2><?php esc_html_e('Live Non-Watermarked Preview PDF Downloaded', 'print-my-blog');?></h2>
+                        <h2><?php esc_html_e('Live Non-Watermarked PDF Downloaded', 'print-my-blog');?></h2>
                         <p><?php esc_html_e('Thank you for using Print My Blog! 😍', 'print-my-blog');?></p>
-                        <p><a href="https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post"><?php esc_html_e('Please leave a review', 'print-my-blog');?></a></p>
+                        <?php if( pmb_fs()->is_premium() && $suggest_review){ ?>
+                        <p><a href="<?php echo esc_url($review_url);?>"><?php esc_html_e('Leave a Review', 'print-my-blog');?></a></p>
+                        <?php } ?>
                     </div>
             </div>
         </div>

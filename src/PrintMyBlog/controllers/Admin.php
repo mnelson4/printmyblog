@@ -52,13 +52,16 @@ class Admin extends BaseController
 {
     const SLUG_ACTION_ADD_NEW = 'new';
     const SLUG_ACTION_EDIT_PROJECT = 'edit';
+    const SLUG_ACTION_REVIEW = 'review';
     const SLUG_SUBACTION_PROJECT_SETUP = 'setup';
     const SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN = 'customize_design';
     const SLUG_SUBACTION_PROJECT_CHANGE_DESIGN = 'choose_design';
     const SLUG_SUBACTION_PROJECT_CONTENT = 'content';
     const SLUG_SUBACTION_PROJECT_META = 'metadata';
     const SLUG_SUBACTION_PROJECT_GENERATE = 'generate';
-    const SLUG_ACTION_HELP = 'help';
+    const REVIEW_OPTION_NAME = 'pmb_review';
+    const SLUG_ACTION_UNINSTALL = 'uninstall';
+
 
     /**
      * @var PostFetcher
@@ -164,22 +167,11 @@ class Admin extends BaseController
         add_action('admin_menu', array($this, 'addToMenu'));
         add_filter('plugin_action_links_' . PMB_BASENAME, array($this, 'pluginPageLinks'));
         add_action('admin_enqueue_scripts', [$this,'enqueueScripts']);
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            add_action('admin_init', [$this, 'checkFormSubmission']);
-        }
-        if (isset($_GET['action']) && $_GET['action'] === 'uninstall') {
-            $this->uninstall();
-            if (current_user_can('activate_plugins')) {
-                if (! function_exists('deactivate_plugins')) {
-                    require_once ABSPATH . 'wp-admin/includes/plugin.php';
-                }
-                deactivate_plugins(PMB_BASENAME, true);
-            }
-            wp_safe_redirect(admin_url('plugins.php'));
-        }
+
         $this->makePrintContentsSaySaved();
         $this->notification_manager->showOneTimeNotifications();
         $this->maybeRefreshCreditCache();
+        $this->earlyResponseHandling();
     }
 
     /**
@@ -449,7 +441,7 @@ class Admin extends BaseController
                 '<a href="'
                 . add_query_arg(
                     [
-                        'action' => 'uninstall'
+                        'action' => self::SLUG_ACTION_UNINSTALL
                     ],
                     admin_url(PMB_ADMIN_PAGE_PATH)
                 )
@@ -836,7 +828,14 @@ class Admin extends BaseController
                 'project' => $project,
                 'generations' => $generations,
                 'license_info' => $license_info,
-                'upgrade_url' => $upgrade_url
+                'upgrade_url' => $upgrade_url,
+                'review_url' => add_query_arg(
+                    [
+                        'action' => self::SLUG_ACTION_REVIEW,
+                    ],
+                    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+                ),
+                'suggest_review' => ! get_option(self::REVIEW_OPTION_NAME,false)
             ]
         );
     }
@@ -896,39 +895,41 @@ class Admin extends BaseController
             $this->sendHelp();
             exit;
         }
-        $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
-        if ($action === self::SLUG_ACTION_ADD_NEW) {
-            $this->saveNewProject();
-            exit;
-        }
-        if ($action === self::SLUG_ACTION_EDIT_PROJECT) {
-            $subaction = isset($_GET['subaction']) ? $_GET['subaction'] : null;
-            $project = $this->project_manager->getById($_GET['ID']);
-            switch ($subaction) {
-                case self::SLUG_SUBACTION_PROJECT_SETUP:
-                    $this->saveNewProject($project);
-                    break;
-                case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
-                    $this->saveProjectChooseDesign($project);
-                    break;
-                case self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN:
-                    $this->saveProjectCustomizeDesign($project);
-                    break;
-                case self::SLUG_SUBACTION_PROJECT_CONTENT:
-                    $this->saveProjectContent($project);
-                    break;
-                case self::SLUG_SUBACTION_PROJECT_META:
-                    $this->saveProjectMetadata($project);
-                    break;
-                case self::SLUG_SUBACTION_PROJECT_GENERATE:
-                    $this->saveProjectGenerate($project);
-                    break;
+        if($_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG) {
+            $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
+            if ($action === self::SLUG_ACTION_ADD_NEW) {
+                $this->saveNewProject();
+                exit;
             }
-        } elseif ($action === 'delete') {
-            $this->deleteProjects();
-            $redirect = admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH);
-            wp_safe_redirect($redirect);
-            exit;
+            if ($action === self::SLUG_ACTION_EDIT_PROJECT) {
+                $subaction = isset($_GET['subaction']) ? $_GET['subaction'] : null;
+                $project = $this->project_manager->getById($_GET['ID']);
+                switch ($subaction) {
+                    case self::SLUG_SUBACTION_PROJECT_SETUP:
+                        $this->saveNewProject($project);
+                        break;
+                    case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
+                        $this->saveProjectChooseDesign($project);
+                        break;
+                    case self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN:
+                        $this->saveProjectCustomizeDesign($project);
+                        break;
+                    case self::SLUG_SUBACTION_PROJECT_CONTENT:
+                        $this->saveProjectContent($project);
+                        break;
+                    case self::SLUG_SUBACTION_PROJECT_META:
+                        $this->saveProjectMetadata($project);
+                        break;
+                    case self::SLUG_SUBACTION_PROJECT_GENERATE:
+                        $this->saveProjectGenerate($project);
+                        break;
+                }
+            } elseif ($action === 'delete') {
+                $this->deleteProjects();
+                $redirect = admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH);
+                wp_safe_redirect($redirect);
+                exit;
+            }
         }
     }
 
@@ -1366,5 +1367,46 @@ class Admin extends BaseController
         if(isset($_GET['page']) && $_GET['page'] === 'print-my-blog-projects-account'){
             $this->pmb_central->getCreditsInfo(pmb_fs()->_get_license()->id, true);
         }
+    }
+
+    /**
+     * Handles responses for PMB requests early on
+     */
+    private function earlyResponseHandling()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            add_action('admin_init', [$this, 'checkFormSubmission']);
+        } elseif($_SERVER['REQUEST_METHOD'] === 'GET'){
+            add_action('admin_init',[$this,'checkSpecialLinks']);
+        }
+    }
+
+    /**
+     * Take special action on GET requests
+     */
+    public function checkSpecialLinks(){
+        if(! isset($_GET['page'])){
+            return;
+        }
+        if($_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG){
+            $action = isset($_GET['action']) ? $_GET['action'] : null;
+            if ( $action === self::SLUG_ACTION_UNINSTALL) {
+                $this->uninstall();
+                if (current_user_can('activate_plugins')) {
+                    if (! function_exists('deactivate_plugins')) {
+                        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+                    }
+                    deactivate_plugins(PMB_BASENAME, true);
+                }
+                wp_safe_redirect(admin_url('plugins.php'));
+            }elseif ($action === self::SLUG_ACTION_REVIEW) {
+                update_option(self::REVIEW_OPTION_NAME, true);
+                wp_redirect(
+                    'https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post'
+                );
+                exit;
+            }
+        }
+
     }
 }
