@@ -23,7 +23,7 @@ pmb_render_template(
         printf(
             esc_html__('You have %1$s/%2$s download credits left which expire on %3$s',
                 'print-my-blog'),
-            $license_info['remaining_credits'],
+            '<span id="pmb-credits-remaining">' . $license_info['remaining_credits'] . '</span>',
             $license_info['plan_credits'],
             date_i18n(get_option('date_format'),rest_parse_date($license_info['expiry_date'])))
         ;?></p>
@@ -140,11 +140,11 @@ foreach($generations as $generation){
                                         <p class="description"><?php esc_html_e('Or stay on your current plan and wait for your plan to renew', 'print-my-blog');
                                             ?></p>
                                     <?php } else { ?>
-                                        <a href="<?php echo esc_url($upgrade_url);?>" id="pmb-download-<?php echo esc_attr
+                                        <a id="pmb-download-<?php echo esc_attr
                                         ($format_slug);?>"
-                                           class="button
-    button-primary pmb-reveal-before-download-actual" data-format="<?php echo
-                                        esc_attr ($format_slug);?>"><?php esc_html_e('Download Non-Watermarked File',
+                                           class="button button-primary pmb-download-live"
+                                           data-format="<?php echo esc_attr ($format_slug);?>"
+                                           data-html-url="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"><?php esc_html_e('Download Non-Watermarked PDF',
                                                 'print-my-blog');?></a>
                                         <p class="description"><?php printf(
                                                 esc_html__('This will use one of your %1$s remaining credits, and is non-refundable.',
@@ -169,19 +169,18 @@ foreach($generations as $generation){
                             </div>
                         </div>
                     </div>
-
-
-
-            </div>
-            <div class="pmb-before-download-dialog" style="display:none" id="pmb-before-download-dialog-<?php echo
-            esc_attr
-            ($generation->getFormat()->slug());?>">
-                <div class="pmb-after-download-actual">
-                    <h2><?php esc_html_e('Downloading File', 'print-my-blog');?></h2>
-                    <p><?php esc_html_e('You have x credits left on your account. They will renew on x', 'print-my-blog');
-                    ?></p>
-                    <p><a href="https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post"><?php esc_html_e('Please leave a review', 'print-my-blog');?></a></p>
-                </div>
+                    <div id="pmb-downloading-live-pdf">
+                        <p class="pmb-middle-important-text"><?php esc_html_e('Downloading Live Non-Watermarked File...',
+                                'print-my-blog');?></p>
+                        <div class="pmb-spinner-container">
+                            <div class="pmb-spinner"></div>
+                        </div>
+                    </div>
+                    <div class="pmb-after-download-actual" id="pmb-after-download-actual-success">
+                        <h2><?php esc_html_e('Live Non-Watermarked Preview PDF Downloaded', 'print-my-blog');?></h2>
+                        <p><?php esc_html_e('Thank you for using Print My Blog! 😍', 'print-my-blog');?></p>
+                        <p><a href="https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post"><?php esc_html_e('Please leave a review', 'print-my-blog');?></a></p>
+                    </div>
             </div>
         </div>
     </div>

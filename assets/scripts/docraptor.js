@@ -112,7 +112,13 @@ function PmbAsyncPdfCreation(
                         // ok we've got a status ID. Let's keep pinging it until its done
                         this.status_id = response.status_id;
                         this.status_url += this.status_id;
-                        this.continue()
+                        // delay slightly before continuing
+                        setTimeout(
+                            () => {
+                                this.continue()
+                            },
+                            1000
+                        );
                     }
                 }
             )
@@ -132,7 +138,12 @@ function PmbAsyncPdfCreation(
                             case 'queued':
                             case 'working':
                                 this.upddate_callback(response);
-                                this.continue();
+                                setTimeout(
+                                    () => {
+                                        this.continue();
+                                    },
+                                    2000
+                                );
                                 break;
                             case 'completed':
                                 this.success_callback(response.download_url);

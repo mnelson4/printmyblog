@@ -179,6 +179,7 @@ class Admin extends BaseController
         }
         $this->makePrintContentsSaySaved();
         $this->notification_manager->showOneTimeNotifications();
+        $this->maybeRefreshCreditCache();
     }
 
     /**
@@ -1354,5 +1355,16 @@ class Admin extends BaseController
         // clear options
         global $wpdb;
         $wpdb->query('DELETE FROM ' . $wpdb->options . ' WHERE option_name LIKE "pmb_%"');
+    }
+
+    /**
+     * We avoid asking PMB central for the credits alloted to a license as much as possible. But on the account page
+     * we make sure to refresh it. This is the page the user arrives at after upgrading or making a purchase, so
+     * the cache often needs to be refreshed here.
+     */
+    public function maybeRefreshCreditCache(){
+        if(isset($_GET['page']) && $_GET['page'] === 'print-my-blog-projects-account'){
+            $this->pmb_central->getCreditsInfo(pmb_fs()->_get_license()->id, true);
+        }
     }
 }
