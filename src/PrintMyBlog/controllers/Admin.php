@@ -542,7 +542,12 @@ class Admin extends BaseController
                         'pmb_generate',
                         [
                             'site_url' => site_url(),
-                            'license_id' => $license_id,
+                            'license_data' => [
+                                'endpoint' => $this->pmb_central->getCentralUrl(),
+                                'license_id' => $license_id,
+                                'install_id' => pmb_fs()->get_site()->id,
+                                'authorization_header' => $this->pmb_central->getSiteAuthorizationHeader(),
+                            ],
                             'doc_attrs' => apply_filters(
                                     '\PrintMyBlog\controllers\Admin::enqueueScripts doc_attrs',
                                     [
@@ -814,8 +819,7 @@ class Admin extends BaseController
         if ( pmb_fs()->is__premium_only() ) {
             $license = pmb_fs()->_get_license();
             if ($license instanceof FS_Plugin_License) {
-                $license_id = $license->id;
-                $license_info = $this->pmb_central->getCreditsInfo($license_id);
+                $license_info = $this->pmb_central->getCreditsInfo();
             }
             $upgrade_url = pmb_fs()->get_upgrade_url();
         } else {
@@ -1365,7 +1369,7 @@ class Admin extends BaseController
      */
     public function maybeRefreshCreditCache(){
         if(isset($_GET['page']) && $_GET['page'] === 'print-my-blog-projects-account'){
-            $this->pmb_central->getCreditsInfo(pmb_fs()->_get_license()->id, true);
+            $this->pmb_central->getCreditsInfo(true);
         }
     }
 

@@ -194,7 +194,7 @@ if (defined('PMB_VERSION')) {
             do_action( 'pmb_fs_loaded' );
         }
 
-        // ... Your plugin's main file logic ...
+
     }
 
 	// disable the active theme if generating a PDF.

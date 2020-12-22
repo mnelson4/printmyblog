@@ -106,7 +106,7 @@ jQuery(document).ready(function () {
 
         var server_communicator = new PmbAsyncPdfCreation(
             true,
-            pmb_generate.license_id,
+            pmb_generate.license_data,
             dynamic_doc_attrs,
             (response) => {
                 console.log(response);

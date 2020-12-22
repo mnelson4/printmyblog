@@ -48,30 +48,29 @@ window.DocRaptor = {
 
 function PmbAsyncPdfCreation(
     use_printmyblog_middleman,
-    authorization_key,
+    authorization_data,
     doc_attrs,
     update_callback,
     success_callback,
     failure_callback
 ) {
     this.use_printmyblog_middleman = use_printmyblog_middleman;
-    this.authorization_key = authorization_key;
+    this.authorization_data = authorization_data;
     this.doc_attrs = doc_attrs;
     this.upddate_callback = update_callback;
     this.success_callback = success_callback;
     this.failure_callback = failure_callback;
 
     if (use_printmyblog_middleman) {
-        // this.base_url = 'http://printmy.test/wp-json/pmb/v1/';
-        this.base_url = 'https://printmy.blog/wp-json/pmb/v1/';
-        this.begin_url = this.base_url + 'accounts/' + authorization_key + '/generate';
+        this.base_url = authorization_data.endpoint;
+        this.begin_url = this.base_url + 'licenses/' + authorization_data.license_id + '/installs/' + authorization_data.install_id + '/generate';
         this.status_url = this.base_url + 'status/';
-        this.authorization_header = '';
+        this.authorization_header = authorization_data.authorization_header;
     } else {
         this.base_url = 'https://docraptor.com/';
         this.begin_url = this.base_url + 'docs';
         this.status_url = this.base_url + 'status/';
-        this.authorization_header = 'Basic ' + btoa(authorization_key + ':');
+        this.authorization_header = 'Basic ' + btoa(authorization_data + ':');
     }
     this.requestSettings = function(data, success_callback){
         var jquery_request_settings = {
@@ -95,7 +94,7 @@ function PmbAsyncPdfCreation(
                 this.error('Commuication error. It was: ' + message);
             }
         };
-        if(! this.use_printmyblog_middleman){
+        if(this.authorization_header){
             jquery_request_settings['headers'] = {
                 'Authorization': this.authorization_header
             };
