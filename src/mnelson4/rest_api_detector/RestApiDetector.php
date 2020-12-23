@@ -1,6 +1,6 @@
 <?php
 
-namespace mnelson4\RestApiDetector;
+namespace mnelson4\rest_api_detector;
 
 use WP_Error;
 

@@ -57,8 +57,8 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'Twine\\compatibility\\CompatibilityBase' => __DIR__ . '/../..' . '/src/Twine/compatibility/CompatibilityBase.php',
         'Twine\\controllers\\BaseController' => __DIR__ . '/../..' . '/src/Twine/controllers/BaseController.php',
         'Twine\\services\\display\\FormInputs' => __DIR__ . '/../..' . '/src/Twine/services/display/FormInputs.php',
-        'mnelson4\\RestApiDetector\\RestApiDetector' => __DIR__ . '/../..' . '/src/mnelson4/RestApiDetector.php',
-        'mnelson4\\RestApiDetector\\RestApiDetectorError' => __DIR__ . '/../..' . '/src/mnelson4/RestApiDetectorError.php',
+        'mnelson4\\rest_api_detector\\RestApiDetector' => __DIR__ . '/../..' . '/src/mnelson4/rest_api_detector/RestApiDetector.php',
+        'mnelson4\\rest_api_detector\\RestApiDetectorError' => __DIR__ . '/../..' . '/src/mnelson4/rest_api_detector/RestApiDetectorError.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

@@ -26,6 +26,6 @@ return array(
     'Twine\\compatibility\\CompatibilityBase' => $baseDir . '/src/Twine/compatibility/CompatibilityBase.php',
     'Twine\\controllers\\BaseController' => $baseDir . '/src/Twine/controllers/BaseController.php',
     'Twine\\services\\display\\FormInputs' => $baseDir . '/src/Twine/services/display/FormInputs.php',
-    'mnelson4\\RestApiDetector\\RestApiDetector' => $baseDir . '/src/mnelson4/RestApiDetector.php',
-    'mnelson4\\RestApiDetector\\RestApiDetectorError' => $baseDir . '/src/mnelson4/RestApiDetectorError.php',
+    'mnelson4\\rest_api_detector\\RestApiDetector' => $baseDir . '/src/mnelson4/rest_api_detector/RestApiDetector.php',
+    'mnelson4\\rest_api_detector\\RestApiDetectorError' => $baseDir . '/src/mnelson4/rest_api_detector/RestApiDetectorError.php',
 );
