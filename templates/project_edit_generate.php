@@ -179,10 +179,14 @@ foreach($generations as $generation){
                         </div>
                     </div>
                     <div class="pmb-after-download-actual" id="pmb-after-download-actual-success">
-                        <h2><?php esc_html_e('Live Non-Watermarked PDF Downloaded', 'print-my-blog');?></h2>
+                        <p class="pmb-middle-important-text"><?php esc_html_e('Live Non-Watermarked PDF Downloaded', 'print-my-blog');?></p>
                         <p><?php esc_html_e('Thank you for using Print My Blog! 😍', 'print-my-blog');?></p>
                         <?php if( pmb_fs()->is_premium() && $suggest_review){ ?>
-                        <p><a href="<?php echo esc_url($review_url);?>"><?php esc_html_e('Leave a Review', 'print-my-blog');?></a></p>
+                        <p><?php printf(
+                                esc_html__('If you’re happy with the results or support, please %1$sleave a review%2$s! Thanks!', 'print-my-blog'),
+                                '<a href="' . esc_url($review_url) . '">',
+                                '</a>'
+                            );?></p>
                         <?php } ?>
                     </div>
             </div>
