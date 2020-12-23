@@ -2,8 +2,8 @@
 
 namespace PrintMyBlog\controllers;
 
-use mnelson4\RestApiDetector\RestApiDetector;
-use mnelson4\RestApiDetector\RestApiDetectorError;
+use mnelson4\rest_api_detector\RestApiDetector;
+use mnelson4\rest_api_detector\RestApiDetectorError;
 use PrintMyBlog\domain\PrintOptions;
 use stdClass;
 use Twine\controllers\BaseController;
@@ -412,6 +412,12 @@ class PmbPrintPage extends BaseController
     {
         $theme = wp_get_theme();
         $slug = $theme->get('TextDomain');
+        $this->loadThemeCompatibilityIfItExists($slug);
+        $this->loadThemeCompatibilityIfItExists($theme->template);
+    }
+
+    protected function loadThemeCompatibilityIfItExists($slug)
+    {
         $theme_slug_path =  'styles/theme-compatibility/' . $slug . '.css';
         if (file_exists(PMB_ASSETS_DIR . $theme_slug_path)) {
             wp_enqueue_style(
@@ -447,11 +453,11 @@ class PmbPrintPage extends BaseController
         }
         ";
         // If it's a multi-column design, remove the margins around "pmb_image"s. They offset the image so that even
-	    // if it takes up the full column width, it's now offset and so spills over onto the other column.
-	    // Removing the margins fixes that. And because "pmb_image"s take up the width, they don't prevent
-	    // the image contained inside them from being centered anyhow. So this seems to be win-win.
-        if($columns > 1){
-        	$css .= "
+        // if it takes up the full column width, it's now offset and so spills over onto the other column.
+        // Removing the margins fixes that. And because "pmb_image"s take up the width, they don't prevent
+        // the image contained inside them from being centered anyhow. So this seems to be win-win.
+        if ($columns > 1) {
+            $css .= "
         	.pmb-image{
         	    margin-left:0;
         	    margin-right:0;

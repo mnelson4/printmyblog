@@ -60,3 +60,13 @@ Hide Google Recaptcha from printouts
 .pmb-posts .grecaptcha-badge{
     display:none !important;
 }
+/**
+ LaText2Html (https://wordpress.org/plugins/latex2html/) strangely thinks it should set the page and body size.
+ Don't let it, or others, do that. See https://wordpress.org/support/topic/losing-all-formatting/
+ */
+@media print{
+    body{
+        height:100% !important;
+        width:100% !important;
+    }
+}

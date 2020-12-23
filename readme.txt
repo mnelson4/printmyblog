@@ -268,6 +268,17 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 <?php echo do_shortcode('[pmb_print_buttons]'); ?>
 `
 
+= How do I customize the printouts made with the Print Buttons? =
+From the Print My Blog Settings page, click "Customize Buttons". From here you can customize:
+* whether print buttons appear by default above or below the post content
+* which print buttons appear (print, PDF, and eBook)
+* the text used on each button (translate them, or just an emoji, or whatever)
+
+Under each format, you can also click "Show Options". These options affect the printout produced by the button. These
+options are the same as when printing out multiple posts simultaneously: you can remove the printout metadata, the post's featured image, etc.
+
+https://youtu.be/uPQ3vqm7A2g
+
 
 == Screenshots ==
 
@@ -280,6 +291,12 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 7. Add the Print My Blog block to add a form visitors can use to select what and how to print your blog.
 
 == Changelog ==
+
+= 2.9.8 December 23, 2020 =
+* Fix pmb-screen-only CSS class
+* Undo LaTex2HTML forcing page dimensions
+* Load theme compatibility files for parent themes too
+* Improve theme compatibility by adding the ID "content" on the PMB main content div
 
 = 2.9.7 December 1, 2020 =
 * Expand all Arconix plugin accordions
