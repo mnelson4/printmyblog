@@ -180,14 +180,20 @@ foreach($generations as $generation){
                     </div>
                     <div class="pmb-after-download-actual" id="pmb-after-download-actual-success">
                         <p class="pmb-middle-important-text"><?php esc_html_e('Live Non-Watermarked PDF Downloaded', 'print-my-blog');?></p>
-                        <p><?php esc_html_e('Thank you for using Print My Blog! 😍', 'print-my-blog');?></p>
-                        <?php if( pmb_fs()->is_premium() && $suggest_review){ ?>
-                        <p><?php printf(
-                                esc_html__('If you’re happy with the results or support, please %1$sleave a review%2$s! Thanks!', 'print-my-blog'),
-                                '<a href="' . esc_url($review_url) . '">',
-                                '</a>'
-                            );?></p>
-                        <?php } ?>
+                        <div class="pmb-content-boxes" id="pmb-after-download-test-pdf">
+                            <div class="pmb-content-box-wrap">
+                                <div class="pmb-content-box-inner">
+                                    <p><?php esc_html_e('Thank you for using Print My Blog! 😍', 'print-my-blog');?></p>
+                                    <?php if( pmb_fs()->is_premium() && $suggest_review){ ?>
+                                                <p><?php printf(
+                                                    esc_html__('If you’re happy with the results or support, please %1$sleave a review%2$s! Thanks!', 'print-my-blog'),
+                                                    '<a href="' . esc_url($review_url) . '">',
+                                                    '</a>'
+                                                );?></p>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
             </div>
         </div>
