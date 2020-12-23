@@ -37,6 +37,9 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
     );
 
     public static $classMap = array (
+        'PrintMyBlog\\compatibility\\DetectAndActivate' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/DetectAndActivate.php',
+        'PrintMyBlog\\compatibility\\plugins\\EasyFootnotes' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/EasyFootnotes.php',
+        'PrintMyBlog\\compatibility\\plugins\\LazyLoadingFeaturePlugin' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/LazyLoadingFeaturePlugin.php',
         'PrintMyBlog\\controllers\\PmbActivation' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/PmbActivation.php',
         'PrintMyBlog\\controllers\\PmbAdmin' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/PmbAdmin.php',
         'PrintMyBlog\\controllers\\PmbAjax' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/PmbAjax.php',
@@ -44,10 +47,16 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'PrintMyBlog\\controllers\\PmbFrontend' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/PmbFrontend.php',
         'PrintMyBlog\\controllers\\PmbGutenbergBlock' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/PmbGutenbergBlock.php',
         'PrintMyBlog\\controllers\\PmbInit' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/PmbInit.php',
+        'PrintMyBlog\\controllers\\PmbPrintPage' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/PmbPrintPage.php',
+        'PrintMyBlog\\controllers\\Shortcodes' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/Shortcodes.php',
         'PrintMyBlog\\domain\\FrontendPrintSettings' => __DIR__ . '/../..' . '/src/PrintMyBlog/domain/FrontendPrintSettings.php',
+        'PrintMyBlog\\domain\\PrintButtons' => __DIR__ . '/../..' . '/src/PrintMyBlog/domain/PrintButtons.php',
         'PrintMyBlog\\domain\\PrintOptions' => __DIR__ . '/../..' . '/src/PrintMyBlog/domain/PrintOptions.php',
+        'PrintMyBlog\\domain\\ProNotification' => __DIR__ . '/../..' . '/src/PrintMyBlog/domain/ProNotification.php',
         'Twine\\admin\\news\\DashboardNews' => __DIR__ . '/../..' . '/src/Twine/admin/news/DashboardNews.php',
+        'Twine\\compatibility\\CompatibilityBase' => __DIR__ . '/../..' . '/src/Twine/compatibility/CompatibilityBase.php',
         'Twine\\controllers\\BaseController' => __DIR__ . '/../..' . '/src/Twine/controllers/BaseController.php',
+        'Twine\\services\\display\\FormInputs' => __DIR__ . '/../..' . '/src/Twine/services/display/FormInputs.php',
         'mnelson4\\RestApiDetector\\RestApiDetector' => __DIR__ . '/../..' . '/src/mnelson4/RestApiDetector.php',
         'mnelson4\\RestApiDetector\\RestApiDetectorError' => __DIR__ . '/../..' . '/src/mnelson4/RestApiDetectorError.php',
     );
