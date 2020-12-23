@@ -45,7 +45,7 @@ jQuery(document).ready(function () {
             var media = 'print';
         }
 
-        var dynamic_doc_attrs = pmb_generate.doc_attrs;
+        var dynamic_doc_attrs = JSON.parse(JSON.stringify(pmb_generate.doc_attrs));
         // this a test, always override whether its a test request or not.
         dynamic_doc_attrs.test = true;
         dynamic_doc_attrs.document_url = html_url;
@@ -86,7 +86,7 @@ jQuery(document).ready(function () {
             var media = 'print';
         }
 
-        var dynamic_doc_attrs = pmb_generate.doc_attrs;
+        var dynamic_doc_attrs = JSON.parse(JSON.stringify(pmb_generate.doc_attrs));
         // this a test, always override whether its a test request or not.
         dynamic_doc_attrs.document_url = html_url;
         dynamic_doc_attrs.prince_options.media = media;
