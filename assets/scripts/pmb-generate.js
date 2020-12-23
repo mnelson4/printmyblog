@@ -89,6 +89,7 @@ jQuery(document).ready(function () {
         // this a test, always override whether its a test request or not.
         dynamic_doc_attrs.document_url = html_url;
         dynamic_doc_attrs.prince_options.media = media;
+        dynamic_doc_attrs.async = true;
 
         // reduce the number of credits immediately because we get charged for using it immediately
         var previous_credits_remaining = parseInt(jQuery('#pmb-credits-remaining').text());

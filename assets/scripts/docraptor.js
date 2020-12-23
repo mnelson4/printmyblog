@@ -94,7 +94,7 @@ function PmbAsyncPdfCreation(
                 this.error('Commuication error. It was: ' + message);
             }
         };
-        if(this.authorization_header){
+        if( this.authorization_header){
             jquery_request_settings['headers'] = {
                 'Authorization': this.authorization_header
             };
