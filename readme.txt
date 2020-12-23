@@ -292,6 +292,12 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 2.9.8 December 23, 2020 =
+* Fix pmb-screen-only CSS class
+* Undo LaTex2HTML forcing page dimensions
+* Load theme compatibility files for parent themes too
+* Improve theme compatibility by adding the ID "content" on the PMB main content div
+
 = 2.9.7 December 1, 2020 =
 * Expand all Arconix plugin accordions
 
