@@ -4,6 +4,7 @@ namespace PrintMyBlog\controllers;
 
 use Dompdf\Renderer\Text;
 use Exception;
+use FS_Plugin_License;
 use PrintMyBlog\controllers\helpers\ProjectsListTable;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\db\TableManager;
@@ -19,6 +20,7 @@ use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\orm\managers\ProjectSectionManager;
 use PrintMyBlog\services\DebugInfo;
 use PrintMyBlog\services\FileFormatRegistry;
+use PrintMyBlog\services\PmbCentral;
 use PrintMyBlog\services\SvgDoer;
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\entities\notifications\OneTimeNotification;
@@ -50,13 +52,16 @@ class Admin extends BaseController
 {
     const SLUG_ACTION_ADD_NEW = 'new';
     const SLUG_ACTION_EDIT_PROJECT = 'edit';
+    const SLUG_ACTION_REVIEW = 'review';
     const SLUG_SUBACTION_PROJECT_SETUP = 'setup';
     const SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN = 'customize_design';
     const SLUG_SUBACTION_PROJECT_CHANGE_DESIGN = 'choose_design';
     const SLUG_SUBACTION_PROJECT_CONTENT = 'content';
     const SLUG_SUBACTION_PROJECT_META = 'metadata';
     const SLUG_SUBACTION_PROJECT_GENERATE = 'generate';
-    const SLUG_ACTION_HELP = 'help';
+    const REVIEW_OPTION_NAME = 'pmb_review';
+    const SLUG_ACTION_UNINSTALL = 'uninstall';
+
 
     /**
      * @var PostFetcher
@@ -111,6 +116,11 @@ class Admin extends BaseController
     protected $debug_info;
 
     /**
+     * @var PmbCentral
+     */
+    protected $pmb_central;
+
+    /**
      * @param PostFetcher $post_fetcher
      * @param ProjectSectionManager $section_manager
      * @param ProjectManager $project_manager
@@ -130,7 +140,8 @@ class Admin extends BaseController
         TableManager $table_manager,
         SvgDoer $svg_doer,
         OneTimeNotificationManager $notification_manager,
-        DebugInfo $debug_info
+        DebugInfo $debug_info,
+        PmbCentral $pmb_central
     ) {
         $this->post_fetcher    = $post_fetcher;
         $this->section_manager = $section_manager;
@@ -141,6 +152,7 @@ class Admin extends BaseController
         $this->svg_doer = $svg_doer;
         $this->notification_manager = $notification_manager;
         $this->debug_info = $debug_info;
+        $this->pmb_central = $pmb_central;
     }
     /**
      * name of the option that just indicates we successfully saved the setttings
@@ -155,21 +167,11 @@ class Admin extends BaseController
         add_action('admin_menu', array($this, 'addToMenu'));
         add_filter('plugin_action_links_' . PMB_BASENAME, array($this, 'pluginPageLinks'));
         add_action('admin_enqueue_scripts', [$this,'enqueueScripts']);
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            add_action('admin_init', [$this, 'checkFormSubmission']);
-        }
-        if (isset($_GET['action']) && $_GET['action'] === 'uninstall') {
-            $this->uninstall();
-            if (current_user_can('activate_plugins')) {
-                if (! function_exists('deactivate_plugins')) {
-                    require_once ABSPATH . 'wp-admin/includes/plugin.php';
-                }
-                deactivate_plugins(PMB_BASENAME, true);
-            }
-            wp_safe_redirect(admin_url('plugins.php'));
-        }
+
         $this->makePrintContentsSaySaved();
         $this->notification_manager->showOneTimeNotifications();
+        $this->maybeRefreshCreditCache();
+        $this->earlyResponseHandling();
     }
 
     /**
@@ -439,7 +441,7 @@ class Admin extends BaseController
                 '<a href="'
                 . add_query_arg(
                     [
-                        'action' => 'uninstall'
+                        'action' => self::SLUG_ACTION_UNINSTALL
                     ],
                     admin_url(PMB_ADMIN_PAGE_PATH)
                 )
@@ -534,14 +536,39 @@ class Admin extends BaseController
                             ],
                         filemtime(PMB_STYLES_DIR . 'pmb-generate.css')
                     );
+                    $license_id = pmb_fs()->_get_license()->id;
                     wp_localize_script(
                         'pmb-generate',
                         'pmb_generate',
                         [
                             'site_url' => site_url(),
+                            'license_data' => [
+                                'endpoint' => $this->pmb_central->getCentralUrl(),
+                                'license_id' => $license_id,
+                                'install_id' => pmb_fs()->get_site()->id,
+                                'authorization_header' => $this->pmb_central->getSiteAuthorizationHeader(),
+                            ],
+                            'doc_attrs' => apply_filters(
+                                    '\PrintMyBlog\controllers\Admin::enqueueScripts doc_attrs',
+                                    [
+                                        'test' => defined('PMB_TEST_LIVE') && PMB_TEST_LIVE ? true : false,
+                                        'type' => 'pdf',
+                                        'javascript' => true,                                        // Javascript by
+                    // DocRaptor
+                                        'ignore_console_messages' => true,
+                                        'ignore_resource_errors' => true,
+                                        'prince_options' => [
+                                            'base_url' => site_url(),
+                                            'media' => 'print',                                       // use screen
+                    // styles
+                    // instead of print styles
+                                            // javascript: true, // use Prince's JS, which is more error tolerant
+                                        ]
+                                    ]
+                            ),
                             'translations' => [
-                                    // phpcs:disable Generic.Files.LineLength.TooLong
-                                    'error_generating' => __('There was an error preparing your content. Please visit the Print My Blog Help page.', 'print-my-blog')
+                                // phpcs:disable Generic.Files.LineLength.TooLong
+                                'error_generating' => __('There was an error preparing your content. Please visit the Print My Blog Help page.', 'print-my-blog')
                                 // phpcs:enable Generic.Files.LineLength.TooLong
                             ]
                         ]
@@ -788,11 +815,31 @@ class Admin extends BaseController
     protected function editGenerate(Project $project)
     {
         $generations = $project->getAllGenerations();
+        $license_info = null;
+        if ( pmb_fs()->is__premium_only() ) {
+            $license = pmb_fs()->_get_license();
+            if ($license instanceof FS_Plugin_License) {
+                $license_info = $this->pmb_central->getCreditsInfo();
+            }
+            $upgrade_url = pmb_fs()->get_upgrade_url();
+        } else {
+            $upgrade_url = pmb_fs()->get_upgrade_url();
+        }
+
         $this->renderProjectTemplate(
             'project_edit_generate.php',
             [
-            'project' => $project,
-            'generations' => $generations
+                'project' => $project,
+                'generations' => $generations,
+                'license_info' => $license_info,
+                'upgrade_url' => $upgrade_url,
+                'review_url' => add_query_arg(
+                    [
+                        'action' => self::SLUG_ACTION_REVIEW,
+                    ],
+                    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+                ),
+                'suggest_review' => ! get_option(self::REVIEW_OPTION_NAME,false)
             ]
         );
     }
@@ -844,44 +891,49 @@ class Admin extends BaseController
      */
     public function checkFormSubmission()
     {
-
+        // Don't bother checking for form submission if the "page" parameter isn't even set.
+        if(! isset($_GET['page'])){
+            return;
+        }
         if ($_GET['page'] === PMB_ADMIN_HELP_PAGE_SLUG) {
             $this->sendHelp();
             exit;
         }
-        $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
-        if ($action === self::SLUG_ACTION_ADD_NEW) {
-            $this->saveNewProject();
-            exit;
-        }
-        if ($action === self::SLUG_ACTION_EDIT_PROJECT) {
-            $subaction = isset($_GET['subaction']) ? $_GET['subaction'] : null;
-            $project = $this->project_manager->getById($_GET['ID']);
-            switch ($subaction) {
-                case self::SLUG_SUBACTION_PROJECT_SETUP:
-                    $this->saveNewProject($project);
-                    break;
-                case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
-                    $this->saveProjectChooseDesign($project);
-                    break;
-                case self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN:
-                    $this->saveProjectCustomizeDesign($project);
-                    break;
-                case self::SLUG_SUBACTION_PROJECT_CONTENT:
-                    $this->saveProjectContent($project);
-                    break;
-                case self::SLUG_SUBACTION_PROJECT_META:
-                    $this->saveProjectMetadata($project);
-                    break;
-                case self::SLUG_SUBACTION_PROJECT_GENERATE:
-                    $this->saveProjectGenerate($project);
-                    break;
+        if($_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG) {
+            $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
+            if ($action === self::SLUG_ACTION_ADD_NEW) {
+                $this->saveNewProject();
+                exit;
             }
-        } elseif ($action === 'delete') {
-            $this->deleteProjects();
-            $redirect = admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH);
-            wp_safe_redirect($redirect);
-            exit;
+            if ($action === self::SLUG_ACTION_EDIT_PROJECT) {
+                $subaction = isset($_GET['subaction']) ? $_GET['subaction'] : null;
+                $project = $this->project_manager->getById($_GET['ID']);
+                switch ($subaction) {
+                    case self::SLUG_SUBACTION_PROJECT_SETUP:
+                        $this->saveNewProject($project);
+                        break;
+                    case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
+                        $this->saveProjectChooseDesign($project);
+                        break;
+                    case self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN:
+                        $this->saveProjectCustomizeDesign($project);
+                        break;
+                    case self::SLUG_SUBACTION_PROJECT_CONTENT:
+                        $this->saveProjectContent($project);
+                        break;
+                    case self::SLUG_SUBACTION_PROJECT_META:
+                        $this->saveProjectMetadata($project);
+                        break;
+                    case self::SLUG_SUBACTION_PROJECT_GENERATE:
+                        $this->saveProjectGenerate($project);
+                        break;
+                }
+            } elseif ($action === 'delete') {
+                $this->deleteProjects();
+                $redirect = admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH);
+                wp_safe_redirect($redirect);
+                exit;
+            }
         }
     }
 
@@ -1308,5 +1360,57 @@ class Admin extends BaseController
         // clear options
         global $wpdb;
         $wpdb->query('DELETE FROM ' . $wpdb->options . ' WHERE option_name LIKE "pmb_%"');
+    }
+
+    /**
+     * We avoid asking PMB central for the credits alloted to a license as much as possible. But on the account page
+     * we make sure to refresh it. This is the page the user arrives at after upgrading or making a purchase, so
+     * the cache often needs to be refreshed here.
+     */
+    public function maybeRefreshCreditCache(){
+        if(isset($_GET['page']) && $_GET['page'] === 'print-my-blog-projects-account'){
+            $this->pmb_central->getCreditsInfo(true);
+        }
+    }
+
+    /**
+     * Handles responses for PMB requests early on
+     */
+    private function earlyResponseHandling()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            add_action('admin_init', [$this, 'checkFormSubmission']);
+        } elseif($_SERVER['REQUEST_METHOD'] === 'GET'){
+            add_action('admin_init',[$this,'checkSpecialLinks']);
+        }
+    }
+
+    /**
+     * Take special action on GET requests
+     */
+    public function checkSpecialLinks(){
+        if(! isset($_GET['page'])){
+            return;
+        }
+        if($_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG){
+            $action = isset($_GET['action']) ? $_GET['action'] : null;
+            if ( $action === self::SLUG_ACTION_UNINSTALL) {
+                $this->uninstall();
+                if (current_user_can('activate_plugins')) {
+                    if (! function_exists('deactivate_plugins')) {
+                        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+                    }
+                    deactivate_plugins(PMB_BASENAME, true);
+                }
+                wp_safe_redirect(admin_url('plugins.php'));
+            }elseif ($action === self::SLUG_ACTION_REVIEW) {
+                update_option(self::REVIEW_OPTION_NAME, true);
+                wp_redirect(
+                    'https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post'
+                );
+                exit;
+            }
+        }
+
     }
 }
