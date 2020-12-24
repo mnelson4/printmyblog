@@ -37,13 +37,21 @@ class DefaultPersistentNotices
                 '<p><a class="button" href="'
                 . esc_attr(admin_url(PMB_ADMIN_PAGE_PATH))
                 . '">'
-                . esc_html__('Switch to Free', 'print-my-blog')
+                . esc_html__('Switch to Free Quick Print', 'print-my-blog')
                 . '</a></p><p>'
                 // phpcs:disable Generic.Files.LineLength.TooLong
-                . __('It won‘t cost you anything and will help you print thousands of posts or pages at once. It just doesn‘t have quite as many other features.', 'print-my-blog')
+                . __('Free Quick Print won‘t cost you anything and will help you print thousands of posts or pages at once. It just doesn‘t have quite as many other features.', 'print-my-blog')
                 // phpcs:enable Generic.Files.LineLength.TooLong
                 . '</p>',
-                $this->getOptionsForScreen('toplevel_page_print-my-blog-projects')
+                array_merge(
+                    $this->getOptionsForScreen('toplevel_page_print-my-blog-projects'),
+                    [
+//                        'query_args' => [
+//                            'subaction' => null,
+//                            'action' => null
+//                        ]
+                    ]
+                )
             ),
             new Notice(
                 'pmb_choose_design',

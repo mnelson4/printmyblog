@@ -319,7 +319,11 @@ class Notice
             return true;
         }
         foreach ($this->options['query_args'] as $arg_name => $required_value) {
-            if (! isset($_REQUEST[$arg_name]) || $_REQUEST[$arg_name] !== $required_value) {
+            if (
+                // if the required value is falsey, fail if it's in the querystring and truey
+                (! $required_value && isset($_REQUEST[$arg_name])) ||
+                // if the required value is truey, make sure it's set in the querystring and matches the expected value
+                ($required_value && (! isset($_REQUEST[$arg_name]) || $_REQUEST[$arg_name] !== $required_value))){
                 return false;
             }
         }
