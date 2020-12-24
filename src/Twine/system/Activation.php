@@ -21,9 +21,9 @@ abstract class Activation
     protected $request_type;
 
     public function inject(
-        RequestType $requestType
+        RequestType $request_type
     ) {
-        $this->request_type = $requestType;
+        $this->request_type = $request_type;
     }
     /**
      * Redirects the user to the blog printing page if the user just activated the plugin and

@@ -9,6 +9,7 @@ use PrintMyBlog\entities\ProjectGeneration;
 use PrintMyBlog\entities\ProjectProgress;
 use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\services\FileFormatRegistry;
+use PrintMyBlog\services\PmbCentral;
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\controllers\BaseController;
 use WP_Query;
@@ -40,16 +41,23 @@ class Ajax extends BaseController
      */
     protected $post_fetcher;
     /**
+     * @var PmbCentral
+     */
+    protected $pmb_central;
+
+    /**
      * @param ProjectManager $project_manager
      */
     public function inject(
         ProjectManager $project_manager,
         FileFormatRegistry $format_registry,
-        PostFetcher $post_fetcher
+        PostFetcher $post_fetcher,
+        PmbCentral $pmb_central
     ) {
         $this->project_manager = $project_manager;
         $this->format_registry = $format_registry;
         $this->post_fetcher = $post_fetcher;
+        $this->pmb_central = $pmb_central;
     }
     /**
      * Sets hooks that we'll use in the admin.
@@ -68,6 +76,7 @@ class Ajax extends BaseController
         add_action('wp_ajax_pmb_save_project_main', [$this, 'handleSaveProjectMain' ]);
         add_action('wp_ajax_pmb_post_search', [$this,'handlePostSearch']);
         add_action('wp_ajax_pmb_add_print_material', [$this,'addPrintMaterial']);
+        add_action('wp_ajax_pmb_reduce_credits',[$this,'reduceCredits']);
     }
 
     protected function addUnauthenticatedCallback($ajax_action, $method_name)
@@ -255,6 +264,14 @@ class Ajax extends BaseController
             'html' => $html,
             'post_ID' => $post_id
         ]);
+        exit;
+    }
+
+    public function reduceCredits(){
+        $updated_credit_info = $this->pmb_central->reduceCredits(pmb_fs()->_get_license()->id);
+        wp_send_json_success(
+                $updated_credit_info
+        );
         exit;
     }
 }
