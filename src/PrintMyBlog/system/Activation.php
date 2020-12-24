@@ -63,14 +63,14 @@ class Activation extends BaseActivation
     public function detectActivation()
     {
         parent::detectActivation();
-        if ($this->request_type->isBrandNewInstall() && current_user_can(PMB_ADMIN_CAP)) {
-            // Don't redirect if it's a bulk plugin activation
-            if (isset($_GET['activate-multi'])) {
-                return;
-            }
-            // @todo Do redirection later if we can.
-            $this->redirectToActivationPage();
-        }
+//        if ($this->request_type->isBrandNewInstall() && current_user_can(PMB_ADMIN_CAP)) {
+//            // Don't redirect if it's a bulk plugin activation
+//            if (isset($_GET['activate-multi'])) {
+//                return;
+//            }
+//            // @todo Do redirection later if we can.
+//            $this->redirectToActivationPage();
+//        }
     }
 
 
@@ -86,19 +86,19 @@ class Activation extends BaseActivation
     }
 
 
-    /**
-     * Redirects
-     */
-    public function redirectToActivationPage()
-    {
-        wp_redirect(
-            add_query_arg(
-                array(
-                    'welcome' => 1
-                ),
-                admin_url(PMB_ADMIN_PAGE_PATH)
-            )
-        );
-        exit;
-    }
+//    /**
+//     * Redirects
+//     */
+//    public function redirectToActivationPage()
+//    {
+//        wp_redirect(
+//            add_query_arg(
+//                array(
+//                    'welcome' => 1
+//                ),
+//                admin_url(PMB_ADMIN_PAGE_PATH)
+//            )
+//        );
+//        exit;
+//    }
 }
