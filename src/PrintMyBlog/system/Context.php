@@ -88,7 +88,8 @@ class Context extends BaseContext
                 'PrintMyBlog\factories\ProjectFileGeneratorFactory' => self::REUSE
             ],
             'PrintMyBlog\services\generators\PdfGenerator' => [
-                'PrintMyBlog\db\PostFetcher' => self::REUSE
+                'PrintMyBlog\db\PostFetcher' => self::REUSE,
+                'PrintMyBlog\compatibility\DetectAndActivate' => self::REUSE
             ],
             'PrintMyBlog\services\FileFormatRegistry' => [
                 'PrintMyBlog\factories\FileFormatFactory' => self::REUSE,

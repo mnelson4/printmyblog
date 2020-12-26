@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\services\generators;
 
+use PrintMyBlog\compatibility\DetectAndActivate;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\orm\entities\Design;
@@ -31,6 +32,10 @@ abstract class ProjectFileGeneratorBase
      * @var PostFetcher
      */
     protected $post_fetcher;
+    /**
+     * @var DetectAndActivate
+     */
+    private $plugin_compatibility;
 
     /**
      * ProjectHtmlGenerator constructor.
@@ -44,9 +49,12 @@ abstract class ProjectFileGeneratorBase
         $this->design = $design;
     }
 
-    public function inject(PostFetcher $post_fetcher)
+    public function inject(
+        PostFetcher $post_fetcher,
+        DetectAndActivate $plugin_compatibility)
     {
         $this->post_fetcher = $post_fetcher;
+        $this->plugin_compatibility = $plugin_compatibility;
     }
 
     /**
@@ -59,6 +67,7 @@ abstract class ProjectFileGeneratorBase
             include($this->getDesignDir() . 'functions.php');
         }
 
+        $this->plugin_compatibility->activateRenderingCompatibilityModes();
         $this->startGenerating();
         // Don't let anything from a previous generation affect this one.
         $this->project_generation->setLastSectionId(null);
