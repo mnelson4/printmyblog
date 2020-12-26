@@ -62,8 +62,6 @@ class Init extends BaseInit
     public function setHooks()
     {
         parent::setHooks();
-        $compatibility_mods_loader = new DetectAndActivate();
-        $compatibility_mods_loader->detectAndActivateCompatibilityMods();
     }
 
 
