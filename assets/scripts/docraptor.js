@@ -91,7 +91,7 @@ function PmbAsyncPdfCreation(
                     var message = text_status;
                 }
                 console.log(jqXhr);
-                this.error('Commuication error. It was: ' + message);
+                this.error('Communication error. It was: ' + message);
             }
         };
         if( this.authorization_header){

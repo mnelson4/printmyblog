@@ -25,7 +25,7 @@ pmb_render_template(
         printf(
             esc_html__('You have %1$s/%2$s download credits left which expire on %3$s',
                 'print-my-blog'),
-            '<span id="pmb-credits-remaining">' . $license_info['remaining_credits'] . '</span>',
+            '<span class="pmb-credits-remaining">' . $license_info['remaining_credits'] . '</span>',
             $license_info['plan_credits'],
             date_i18n(get_option('date_format'),rest_parse_date($license_info['expiry_date'])))
         ;?></p>
@@ -47,7 +47,7 @@ foreach($generations as $generation){
 	);
 	$format_slug = $generation->getFormat()->slug();
 	?>
-    <div id="pmb-generate-options-for-<?php echo esc_attr($format_slug);?>">
+    <div class="pmb-generate-options-for-<?php echo esc_attr($format_slug);?>">
         <h2><?php echo $generation->getFormat()->title();?></h2>
         <?php
         if($generation->isGenerated()){
@@ -106,20 +106,20 @@ foreach($generations as $generation){
                 dashicons-html pmb-icon"></span></a>
                 <a href="<?php echo esc_url(admin_url(PMB_ADMIN_HELP_PAGE_PATH));?>" title="<?php echo esc_html__('Get Help', 'print-my-blog');?>"><span class="dashicons
                 dashicons-sos pmb-icon"></span></a>
-            <div class="pmb-download-preview-dialog" style="display:none" id="pmb-download-preview-dialog-<?php echo
-            esc_attr ($format_slug);?>">
+            <div class="pmb-download-preview-dialog pmb-download-preview-dialog-<?php echo
+            esc_attr ($format_slug);?>" style="display:none">
                 <div class="pmb-after-download-preview">
-                    <div id="pmb-downloading-test-pdf">
+                    <div class="pmb-downloading-test-pdf">
                         <p class="pmb-middle-important-text"><?php esc_html_e('Downloading Watermarked Preview File...',
                                 'print-my-blog');?></p>
                         <div class="pmb-spinner-container">
                             <div class="pmb-spinner"></div>
                         </div>
                     </div>
-                    <div id="pmb-success-download-test-pdf">
-                        <p id="pmb-download-status" class="pmb-middle-important-text"><?php esc_html_e('Download Complete',
+                    <div class="pmb-success-download-test-pdf">
+                        <p class="pmb-download-status" class="pmb-middle-important-text"><?php esc_html_e('Download Complete',
                                 'print-my-blog');?></p>
-                        <div class="pmb-content-boxes" id="pmb-after-download-test-pdf">
+                        <div class="pmb-content-boxes pmb-after-download-test-pdf">
                             <div class="pmb-content-box-wrap">
                                 <div class="pmb-content-box-inner">
                                     <h3><?php esc_html_e('Something Not Look Right?', 'print-my-blog'); ?></h3>
@@ -142,9 +142,9 @@ foreach($generations as $generation){
                                         <p class="description"><?php esc_html_e('Or stay on your current plan and wait for your plan to renew', 'print-my-blog');
                                             ?></p>
                                     <?php } else { ?>
-                                        <a id="pmb-download-<?php echo esc_attr
-                                        ($format_slug);?>"
-                                           class="button button-primary pmb-download-live"
+                                        <a
+                                           class="pmb-download-<?php echo esc_attr
+                                           ($format_slug);?> button button-primary pmb-download-live"
                                            data-format="<?php echo esc_attr ($format_slug);?>"
                                            data-html-url="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"><?php esc_html_e('Download Non-Watermarked PDF',
                                                 'print-my-blog');?></a>
@@ -158,10 +158,10 @@ foreach($generations as $generation){
                             </div>
                         </div>
                     </div>
-                    <div id="pmb-error-downloading-test-pdf">
-                        <p id="pmb-download-status" class="pmb-middle-important-text"><?php esc_html_e('Download Error 😥',
+                    <div class="pmb-error-downloading-test-pdf">
+                        <p class="pmb-download-status pmb-middle-important-text"><?php esc_html_e('Download Error 😥',
                                 'print-my-blog');?></p>
-                        <div class="pmb-content-boxes" id="pmb-after-download-test-pdf">
+                        <div class="pmb-after-download-test-pdf pmb-content-boxes">
                             <div class="pmb-content-box-wrap">
                                 <div class="pmb-content-box-inner">
                                     <h3><?php esc_html_e('We Want to Help!', 'print-my-blog'); ?></h3>
@@ -171,16 +171,16 @@ foreach($generations as $generation){
                             </div>
                         </div>
                     </div>
-                    <div id="pmb-downloading-live-pdf">
+                    <div class="pmb-downloading-live-pdf">
                         <p class="pmb-middle-important-text"><?php esc_html_e('Downloading Live Non-Watermarked File...',
                                 'print-my-blog');?></p>
                         <div class="pmb-spinner-container">
                             <div class="pmb-spinner"></div>
                         </div>
                     </div>
-                    <div class="pmb-after-download-actual" id="pmb-after-download-actual-success">
+                    <div class="pmb-after-download-actual" class="pmb-after-download-actual-success">
                         <p class="pmb-middle-important-text"><?php esc_html_e('Live Non-Watermarked PDF Downloaded', 'print-my-blog');?></p>
-                        <div class="pmb-content-boxes" id="pmb-after-download-test-pdf">
+                        <div class="pmb-content-boxes" class="pmb-after-download-test-pdf">
                             <div class="pmb-content-box-wrap">
                                 <div class="pmb-content-box-inner">
                                     <p><?php esc_html_e('Thank you for using Print My Blog! 😍', 'print-my-blog');?></p>

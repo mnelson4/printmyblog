@@ -3,7 +3,7 @@ jQuery(document).ready(function () {
         event.preventDefault();
         var querystring_args = pmb_get_querystring_vars();
         var format_slug = event.currentTarget.getAttribute('data-format');
-        var format_options_selection = jQuery('#pmb-generate-options-for-' + format_slug);
+        var format_options_selection = jQuery('.pmb-generate-options-for-' + format_slug);
         jQuery.post(
             ajaxurl,
             {
@@ -32,11 +32,11 @@ jQuery(document).ready(function () {
     });
     jQuery('.pmb-download-preview').click(function (event) {
         jQuery('.pmb-after-download-preview>div').hide();
-        jQuery('#pmb-downloading-test-pdf').show();
+        jQuery('.pmb-downloading-test-pdf').show();
         event.preventDefault();
         var format = event.currentTarget.getAttribute('data-format');
         pmb_open_modal(
-            '#pmb-download-preview-dialog-' + format,
+            '.pmb-download-preview-dialog-' + format,
         );
         var html_url = event.currentTarget.getAttribute('data-html-url');
         if (format === 'digital_pdf') {
@@ -61,13 +61,13 @@ jQuery(document).ready(function () {
                 console.log(response);
             },
             (download_url) => {
-                jQuery('#pmb-downloading-test-pdf').hide();
-                jQuery('#pmb-success-download-test-pdf').show();
+                jQuery('.pmb-downloading-test-pdf').hide();
+                jQuery('.pmb-success-download-test-pdf').show();
                 window.location.href = download_url;
             },
             (error_message) => {
-                jQuery('#pmb-downloading-test-pdf').hide();
-                jQuery('#pmb-error-downloading-test-pdf').show();
+                jQuery('.pmb-downloading-test-pdf').hide();
+                jQuery('.pmb-error-downloading-test-pdf').show();
                 alert(error_message);
             }
         );
@@ -75,8 +75,8 @@ jQuery(document).ready(function () {
     });
 
     jQuery('.pmb-download-live').click(function (event) {
-        jQuery('#pmb-success-download-test-pdf').hide();
-        jQuery('#pmb-downloading-live-pdf').show();
+        jQuery('.pmb-success-download-test-pdf').hide();
+        jQuery('.pmb-downloading-live-pdf').show();
         event.preventDefault();
         var format = event.currentTarget.getAttribute('data-format');
         var html_url = event.currentTarget.getAttribute('data-html-url');
@@ -92,8 +92,8 @@ jQuery(document).ready(function () {
         dynamic_doc_attrs.prince_options.media = media;
 
         // reduce the number of credits immediately because we get charged for using it immediately
-        var previous_credits_remaining = parseInt(jQuery('#pmb-credits-remaining').text());
-        jQuery('#pmb-credits-remaining').text(previous_credits_remaining - 1);
+        var previous_credits_remaining = parseInt(jQuery('.pmb-credits-remaining').text());
+        jQuery('.pmb-credits-remaining').text(previous_credits_remaining - 1);
         jQuery.ajax(
             ajaxurl,
             {
@@ -113,13 +113,13 @@ jQuery(document).ready(function () {
                 console.log(response);
             },
             (download_url) => {
-                jQuery('#pmb-downloading-live-pdf').hide();
-                jQuery('#pmb-after-download-actual-success').show();
+                jQuery('.pmb-downloading-live-pdf').hide();
+                jQuery('.pmb-after-download-actual-success').show();
                 window.location.href = download_url;
             },
             (error_message) => {
-                jQuery('#pmb-downloading-live-pdf').hide();
-                jQuery('#pmb-error-downloading-test-pdf').show();
+                jQuery('.pmb-downloading-live-pdf').hide();
+                jQuery('.pmb-error-downloading-test-pdf').show();
                 alert(error_message);
             }
         );
