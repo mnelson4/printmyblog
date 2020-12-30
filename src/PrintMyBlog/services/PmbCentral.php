@@ -102,7 +102,7 @@ class PmbCentral
         if(defined('PMB_CENTRAL_URL')){
             $central_base_url = PMB_CENTRAL_URL;
         } else {
-            $central_base_url = 'https://printmy.blog/wp-json/pmb/v1/';
+            $central_base_url = 'https://printmy.blog/wp-json/pmb/v1';
         }
         return $central_base_url;
     }
