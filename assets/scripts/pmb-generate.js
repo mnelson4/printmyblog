@@ -92,8 +92,8 @@ jQuery(document).ready(function () {
         dynamic_doc_attrs.prince_options.media = media;
 
         // reduce the number of credits immediately because we get charged for using it immediately
-        var previous_credits_remaining = parseInt(jQuery('.pmb-credits-remaining').text());
-        jQuery('.pmb-credits-remaining').text(previous_credits_remaining - 1);
+        var previous_remaining_credits = parseInt(jQuery('.pmb-credits-remaining').text());
+        jQuery('.pmb-credits-remaining').text(previous_remaining_credits - 1);
         jQuery.ajax(
             ajaxurl,
             {

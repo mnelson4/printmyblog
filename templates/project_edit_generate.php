@@ -22,6 +22,7 @@ pmb_render_template(
 <?php if (is_array($license_info)){
    ?>
     <p class="pmb-credit-reminder"><?php
+        var_dump($license_info);
         printf(
             esc_html__('You have %1$s/%2$s download credits left which expire on %3$s',
                 'print-my-blog'),

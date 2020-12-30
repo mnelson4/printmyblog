@@ -92,7 +92,7 @@ class PmbCentral
             $credit_data = $this->getCreditsInfo();
         } else {
             // we already have it cached, just modify it then.
-            $credit_data['credits_remaining']--;
+            $credit_data['remaining_credits']--;
             set_transient($transient_name, $credit_data, rest_parse_date($credit_data['expiry_date']) - current_time('timestamp'));
         }
         return $credit_data;
