@@ -117,7 +117,7 @@ foreach($generations as $generation){
                         </div>
                     </div>
                     <div class="pmb-success-download-test-pdf">
-                        <p class="pmb-download-status" class="pmb-middle-important-text"><?php esc_html_e('Download Complete',
+                        <p class="pmb-middle-important-text pmb-download-status" class="pmb-middle-important-text"><?php esc_html_e('Download Complete',
                                 'print-my-blog');?></p>
                         <div class="pmb-content-boxes pmb-after-download-test-pdf">
                             <div class="pmb-content-box-wrap">
@@ -131,7 +131,7 @@ foreach($generations as $generation){
                                 <div class="pmb-content-box-inner">
                                     <h3><?php esc_html_e('Looks good?', 'print-my-blog'); ?></h3>
                                     <?php if(! is_array($license_info) ){ ?>
-                                        <p class="pmb-important"><?php esc_html_e('Before you can make a non-watermarked Pro PDF, you need a plan.', 'print-my-blog');?></p>
+                                        <p class="pmb-important"><?php esc_html_e('Before you can make a paid PDF, you need a plan.', 'print-my-blog');?></p>
                                         <a href="<?php echo esc_url($upgrade_url);?>" class="button button-primary"><?php esc_html_e('View Plans',
                                                 'print-my-blog');?></a>
                                     <?php } elseif(! $license_info['remaining_credits']) {?>
@@ -146,7 +146,7 @@ foreach($generations as $generation){
                                            class="pmb-download-<?php echo esc_attr
                                            ($format_slug);?> button button-primary pmb-download-live"
                                            data-format="<?php echo esc_attr ($format_slug);?>"
-                                           data-html-url="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"><?php esc_html_e('Download Non-Watermarked PDF',
+                                           data-html-url="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"><?php esc_html_e('Download Paid PDF',
                                                 'print-my-blog');?></a>
                                         <p class="description"><?php printf(
                                                 esc_html__('This will use one of your %1$s remaining credits, and is non-refundable.',
@@ -172,7 +172,7 @@ foreach($generations as $generation){
                         </div>
                     </div>
                     <div class="pmb-downloading-live-pdf">
-                        <p class="pmb-middle-important-text"><?php esc_html_e('Downloading Live Non-Watermarked File...',
+                        <p class="pmb-middle-important-text"><?php esc_html_e('Downloading Paid PDF...',
                                 'print-my-blog');?></p>
                         <div class="pmb-spinner-container">
                             <div class="pmb-spinner"></div>
