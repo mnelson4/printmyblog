@@ -178,8 +178,8 @@ foreach($generations as $generation){
                             <div class="pmb-spinner"></div>
                         </div>
                     </div>
-                    <div class="pmb-after-download-actual" class="pmb-after-download-actual-success">
-                        <p class="pmb-middle-important-text"><?php esc_html_e('Live Non-Watermarked PDF Downloaded', 'print-my-blog');?></p>
+                    <div class="pmb-after-download-actual-success">
+                        <p class="pmb-middle-important-text"><?php esc_html_e('Paid PDF Downloaded', 'print-my-blog');?></p>
                         <div class="pmb-content-boxes" class="pmb-after-download-test-pdf">
                             <div class="pmb-content-box-wrap">
                                 <div class="pmb-content-box-inner">
