@@ -4,6 +4,7 @@
 namespace PrintMyBlog\services;
 
 
+use Exception;
 use WP_Error;
 
 class PmbCentral
@@ -12,20 +13,26 @@ class PmbCentral
      * Asks PMBCentral for info about this license' info.
      * @param boolean $refresh
      * @return array|WP_Error
+     * @throws Exception
      */
     public function getCreditsInfo($refresh = false){
         $license_id = pmb_fs()->_get_license()->id;
+        if(! $license_id){
+            throw new Exception(__('No license ID available', 'print-my-blog'));
+        }
         $install_id = pmb_fs()->get_site()->id;
         $transient_name = $this->getCreditsTransientName();
         $credit_data = false;
-        if( ! $refresh){
+        if( $refresh){
+            delete_transient($transient_name);
+        } else {
             $credit_data = get_transient($transient_name);
         }
 
         if($credit_data === false){
 
 
-            $url = $this->getCentralUrl() . '/licenses/' . $license_id . '/installs/' . $install_id . '/credits';
+            $url = $this->getCentralUrl() . 'licenses/' . $license_id . '/installs/' . $install_id . '/credits';
             if($refresh){
                 $url = add_query_arg(
                     [
@@ -102,7 +109,7 @@ class PmbCentral
         if(defined('PMB_CENTRAL_URL')){
             $central_base_url = PMB_CENTRAL_URL;
         } else {
-            $central_base_url = 'https://printmy.blog/wp-json/pmb/v1';
+            $central_base_url = 'https://printmy.blog/wp-json/pmb/v1/';
         }
         return $central_base_url;
     }

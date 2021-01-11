@@ -825,7 +825,6 @@ class Admin extends BaseController
         } else {
             $upgrade_url = pmb_fs()->get_upgrade_url();
         }
-
         $this->renderProjectTemplate(
             'project_edit_generate.php',
             [
@@ -1369,7 +1368,9 @@ class Admin extends BaseController
      */
     public function maybeRefreshCreditCache(){
         if(isset($_GET['page']) && $_GET['page'] === 'print-my-blog-projects-account'){
-            $this->pmb_central->getCreditsInfo(true);
+            if(pmb_fs()->_get_license() instanceof FS_Plugin_License){
+                $this->pmb_central->getCreditsInfo(true);
+            }
         }
     }
 
