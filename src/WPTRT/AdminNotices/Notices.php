@@ -46,7 +46,18 @@ class Notices
         add_action('admin_notices', [ $this, 'the_notices' ]);
 
         // Print the script to the footer.
-        add_action('admin_footer', [ $this, 'print_scripts' ]);
+        add_action('admin_enqueue_scripts', [ $this, 'enqueue_scripts' ]);
+
+    }
+
+    public function enqueue_scripts(){
+        wp_enqueue_script(
+            'wptrt-dismiss',
+            WPTRT_JS_URL . 'dismiss-notice.js',
+            ['jquery','common'],
+            filemtime(WPTRT_JS_DIR . 'dismiss-notice.js'),
+            true
+        );
     }
 
     /**

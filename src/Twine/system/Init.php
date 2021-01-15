@@ -34,8 +34,6 @@ abstract class Init{
         // defined)
         // and the posts are fetched for the REST API response, except this one (and maybe another).
         add_filter('rest_pre_dispatch', [$compatibility_mods_loader,'activateRenderingCompatibilityModes'], 11);
-		$persistent_notices = $this->context->reuse('WPTRT\AdminNotices\Notices');
-		$persistent_notices->boot();
 	}
 
 	/**

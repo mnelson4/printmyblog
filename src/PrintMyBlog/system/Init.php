@@ -203,6 +203,8 @@ class Init extends BaseInit
         define('PMB_STYLES_DIR', PMB_ASSETS_DIR . 'styles/');
 
         define('PMB_DESIGNS_URL', $plugin_url . 'designs/');
+        define('WPTRT_JS_DIR', PMB_DIR . 'src/WPTRT/AdminNotices/');
+        define('WPTRT_JS_URL', $plugin_url . 'src/WPTRT/AdminNotices/');
     }
 
     protected function initContext()

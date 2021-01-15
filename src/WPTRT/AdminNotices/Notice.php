@@ -181,8 +181,10 @@ class Notice
 
         // Print the notice.
         printf(
-            '<div id="%1$s" class="%2$s">%3$s</div>',
-            'wptrt-notice-' . esc_attr($this->id), // The ID.
+            '<div id="%1$s" data-id="%2$s" data-nonce="%3$s" class="%4$s">%5$s</div>',
+            'wptrt-notice-' . esc_attr($this->id), // The HTML ID.
+            esc_attr($this->id), // The PHP ID
+            esc_attr(wp_create_nonce('wptrt_dismiss_notice_' . $this->id)),
             esc_attr($this->get_classes()), // The classes.
             $html // The HTML.
         );
@@ -231,6 +233,7 @@ class Notice
     public function get_classes()
     {
         $classes = [
+            'wptrt-notice',
             'notice',
             'is-dismissible',
         ];
