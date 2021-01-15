@@ -109,6 +109,7 @@ function pmb_setup_callbacks_on_new_options(){
 			'modal'         : true,
 			'autoOpen'      : true,
 			'closeOnEscape' : true,
+			'closeText' :'',
 			'buttons'       : [
 				{
 					"text": "Create",
