@@ -29,6 +29,7 @@ use Twine\forms\helpers\InputOption;
 use Twine\forms\inputs\RadioButtonInput;
 use Twine\forms\inputs\TextAreaInput;
 use Twine\forms\inputs\TextInput;
+use Twine\forms\inputs\YesNoInput;
 use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
 use Twine\services\notifications\OneTimeNotificationManager;
@@ -337,8 +338,10 @@ class Admin extends BaseController
         $message = sprintf(
             'Message:%1$s
             <br>
-            Data:%2$s',
+            Consent:%2$s,
+            Data:%3$s',
             $form->getInputValue('reason'),
+            $form->getInputValue('consent') ? 'yes' : 'no',
             $form->getInputValue('debug_info')
         );
         $success = wp_mail(
@@ -351,7 +354,7 @@ class Admin extends BaseController
         if ($success) {
             $this->notification_manager->addTextNotificationForCurrentUser(
                 OneTimeNotification::TYPE_SUCCESS,
-                __('Email successfully sent. Expect a reply in the next week', 'print-my-blog')
+                __('Email successfully sent. Expect a reply in the next 1-2 business days.', 'print-my-blog')
             );
         } else {
             $error = $this->wp_error;
@@ -393,6 +396,11 @@ class Admin extends BaseController
                             'html_label_text' => __('This debug info will also be sent.', 'print-my-blog'),
                             'disabled' => true,
                             'default' => $this->debug_info->getDebugInfoString()
+                        ]),
+                        'consent' => new YesNoInput([
+                                'html_label_text' => __('Are you ok with us viewing your most recent generated documents?', 'print-my-blog'),
+                                'default' => true,
+                                'html_help_text' => __('Viewing your most recent generated documents saves a lot of time figuring out what is going wrong. We won’t share your content with anyone else.', 'print-my-blog')
                         ])
                     ]
         ]);

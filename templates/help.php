@@ -5,7 +5,7 @@
  */
 ?>
 <div class="pmb-after-trouble">
-    <h2><?php esc_html_e('Sorry Something’s Not Right!', 'print-my-blog');?></h2>
+    <h2><?php esc_html_e('We’re here to help!', 'print-my-blog');?></h2>
     <form method="POST" action="<?php echo esc_attr($form_url);?>">
     <?php echo $form->getHtmlAndJs();?>
     <div>
