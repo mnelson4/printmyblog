@@ -560,6 +560,8 @@ class Admin extends BaseController
                                         'prince_options' => [
                                             'base_url' => site_url(),
                                             'media' => 'print',                                       // use screen
+                                            'http_timeout' => 60,
+                                            'http_insecure' => true,
                     // styles
                     // instead of print styles
                                             // javascript: true, // use Prince's JS, which is more error tolerant
