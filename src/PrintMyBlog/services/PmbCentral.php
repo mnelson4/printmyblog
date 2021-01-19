@@ -48,8 +48,11 @@ class PmbCentral
                     'headers' => [
                         'Authorization' => $this->getSiteAuthorizationHeader()
                     ]
-                ]);
-            if(! $response instanceof WP_Error){
+                ]
+            );
+            if($response instanceof WP_Error){
+               throw new Exception($response->get_error_message(),$response->get_error_code());
+            } else {
                 $body = wp_remote_retrieve_body($response);
                 $credit_data = json_decode($body, true);
                 if(is_array($credit_data) && isset($credit_data['expiry_date'])){

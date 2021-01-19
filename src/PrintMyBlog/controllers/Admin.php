@@ -837,7 +837,19 @@ class Admin extends BaseController
         if ( pmb_fs()->is__premium_only() ) {
             $license = pmb_fs()->_get_license();
             if ($license instanceof FS_Plugin_License) {
-                $license_info = $this->pmb_central->getCreditsInfo();
+                try{
+                    $license_info = $this->pmb_central->getCreditsInfo();
+                }catch(Exception $e){
+                    $this->notification_manager->addTextNotificationForCurrentUser(
+                        'warning',
+                        sprintf(
+                            __('There was an error communicating with Print My Blog Central. It was %s', 'print-my-blog'),
+                            $e->getMessage()
+                        )
+                    );
+                    $this->notification_manager->showOneTimeNotifications();
+                }
+
             }
             $upgrade_url = pmb_fs()->get_upgrade_url();
         } else {
@@ -1387,7 +1399,18 @@ class Admin extends BaseController
     public function maybeRefreshCreditCache(){
         if(isset($_GET['page']) && $_GET['page'] === 'print-my-blog-projects-account'){
             if(pmb_fs()->_get_license() instanceof FS_Plugin_License){
-                $this->pmb_central->getCreditsInfo(true);
+                try {
+                    $this->pmb_central->getCreditsInfo(true);
+                }catch(Exception $e){
+                    $this->notification_manager->addTextNotificationForCurrentUser(
+                        'warning',
+                        sprintf(
+                            __('There was an error communicating with Print My Blog Central. It was %s', 'print-my-blog'),
+                            $e->getMessage()
+                        )
+                    );
+                    $this->notification_manager->showOneTimeNotifications();
+                }
             }
         }
     }
