@@ -383,6 +383,7 @@ class Admin extends BaseController
 
     protected function getHelpForm()
     {
+        global $current_user;
         return new FormSection([
                 'subsections' => [
                         'reason' => new TextAreaInput([
@@ -392,16 +393,23 @@ class Admin extends BaseController
                             'required' => true,
                             'html_help_text' => __('Including links to screenshots is appreciated', 'print-my-blog')
                         ]),
-                        'debug_info' => new TextAreaInput([
-                            'html_label_text' => __('This debug info will also be sent.', 'print-my-blog'),
-                            'disabled' => true,
-                            'default' => $this->debug_info->getDebugInfoString()
-                        ]),
-                        'consent' => new YesNoInput([
-                                'html_label_text' => __('Are you ok with us viewing your most recent generated documents?', 'print-my-blog'),
-                                'default' => true,
-                                'html_help_text' => __('Viewing your most recent generated documents saves a lot of time figuring out what is going wrong. We won’t share your content with anyone else.', 'print-my-blog')
-                        ])
+                    'name' => new TextInput([
+                        'html_label_text' => __('Your Name', 'print-my-blog'),
+                        'default' => $current_user->user_firstname ? $current_user->user_firstname . ' ' . $current_user->user_lastname :  $current_user->display_name,
+                        'html_help_text' => __('Or pseudonym or something. I’m Mike, hi!', 'print-my-blog')
+                    ]),
+                    'consent' => new YesNoInput([
+                        'html_label_text' => __('Are you ok with us viewing your most recent generated documents?', 'print-my-blog'),
+                        'default' => true,
+                        'html_help_text' => __('Viewing your most recent generated documents saves a lot of time figuring out what is going wrong. We won’t share your content with anyone else.', 'print-my-blog')
+                    ]),
+                    'debug_info' => new TextAreaInput([
+                        'html_label_text' => __('This debug info will also be sent.', 'print-my-blog'),
+                        'disabled' => true,
+                        'default' => $this->debug_info->getDebugInfoString(),
+                        'html_help_text' => __('This is mostly system information, list of active plugins, active theme, and some Print My Blog Pro info like your most recent projects.', 'print-my-blog')
+                    ]),
+
                     ]
         ]);
     }
