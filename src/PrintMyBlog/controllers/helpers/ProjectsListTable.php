@@ -226,7 +226,7 @@ foreach ($steps as $slug => $display_text) {
      */
     public function no_items()
     {
-        _e('Click "Add New" 👆 To Make Your First Project!', 'print-my-blog');
+        _e('Click "Add New Project" 👆 To Make Your First Project!', 'print-my-blog');
     }
 
     /**
