@@ -50,7 +50,7 @@
                     <li><?php esc_html_e( 'Choose and Customize Many Designs, or code your own', 'print-my-blog' ); ?></li>
                     <li><?php esc_html_e( 'Automatically convert hyperlinks to page references and footnotes', 'print-my-blog' ); ?></li>
                 </ul>
-                <p><?php esc_html_e('', 'print-my-blog');?></p>
+                <p><a href="https://printmy.blog/user-guide/pro/getting-started/1-the-basics/" target="_blank"><?php esc_html_e('Read the User Guide', 'print-my-blog');?></a></p>
             </div>
         </div>
     </div>

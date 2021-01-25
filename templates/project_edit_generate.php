@@ -31,9 +31,6 @@ pmb_render_template(
         ;?></p>
     <?php
 }?>
-<p><?php esc_html_e('Your project is ready to be generated! Use one of the buttons below to generate it, but feel free to use the links above to tweak it.',
-        'print-my-blog');?>
-</p>
 <?php
 foreach($generations as $generation){
 	$generate_link = add_query_arg(

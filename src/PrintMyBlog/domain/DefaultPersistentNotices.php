@@ -19,21 +19,25 @@ class DefaultPersistentNotices
 
             new Notice(
                 'pmb_pro_notice',
-                __('You are using Print My Blog Free', 'print-my-blog'),
+                __('You are using Print My Blog Free. Do you want to try Pro?', 'print-my-blog'),
                 '<p><a class="button button-primary" href="'
                 . esc_attr(admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH))
                 . '">'
                 . esc_html__('Switch to the Pro Demo', 'print-my-blog')
                 . '</a></p><p>'
                 // phpcs:disable Generic.Files.LineLength.TooLong
-                . __('Try all the pro features (table of contents, project organizer, custom post types) without signing up or installing anything. The files will just contain a watermark until purchase.')
+                . sprintf(
+                    __('Try all the pro features (table of contents, project organizer, custom post types) without signing up or installing anything. The files will just contain a watermark until purchase. %1$sCheckout the user guide.%2$s'),
+                '<a href="https://printmy.blog/user-guide/pro/getting-started/1-the-basics/" target="_blank">',
+                '</a>'
+                )
                 // phpcs:enable Generic.Files.LineLength.TooLong
                 . '</p>',
                 $this->getOptionsForScreen('print-my-blog_page_print-my-blog-now')
             ),
             new Notice(
                 'pmb_free_notice',
-                __('You are using the Pro Demo', 'print-my-blog'),
+                __('You are using the Pro Demo. Did you want the free option?', 'print-my-blog'),
                 '<p><a class="button" href="'
                 . esc_attr(admin_url(PMB_ADMIN_PAGE_PATH))
                 . '">'
@@ -58,7 +62,10 @@ class DefaultPersistentNotices
                 __('Project Designs are like WordPress Themes', 'print-my-blog'),
                 '<p>' . __('Each has a different look and options that can be customized.', 'print-my-blog') . '</p>'
                 . '<p>' . __('The "Classic" design is the most similar Print My Blog’s Free Quick Print, so it’s a good default choice.', 'print-my-blog' ). '</p>'
-                . '<p>' . __('Click on the preview image for more details, and feel free to come back to this page later if you want to try a different design.', 'print-my-blog') . '</p>',
+                . '<p>' . __('Click on the preview image for more details, and feel free to come back to this page later if you want to try a different design.', 'print-my-blog') . '</p>'
+                . '<p><a href="https://printmy.blog/user-guide/pro/getting-started/4-choose-a-design/" target="_blank">'
+                . __('Read the User Guide', 'print-my-blog')
+                . '</a></p>',
                 $this->getOptionsForProjectSubaction('choose_design')
             ),
             new Notice(
@@ -67,7 +74,10 @@ class DefaultPersistentNotices
                 // phpcs:disable Generic.Files.LineLength.TooLong
                 '<p>' . __('Below are your chosen design’s customization options.', 'print-my-blog') . '</p>'
                 . '<p>' . __('If you don’t see an option you need, you may want to go back and choose a different design, or ask the design’s author for it.', 'print-my-blog') . '</p>'
-                . '<p>' . __('Note: designs are reused between projects. So customizations to this design will be reused by other projects using this same design', 'print-my-blog') . '</p>',
+                . '<p>' . __('Note: designs are reused between projects. So customizations to this design will be reused by other projects using this same design', 'print-my-blog') . '</p>'
+                . '<p><a href="https://printmy.blog/user-guide/pro/getting-started/5-customize-the-design/" target="_blank">'
+                . __('Read the User Guide', 'print-my-blog')
+                . '</a></p>',
                 // phpcs:enable Generic.Files.LineLength.TooLong
                 $this->getOptionsForProjectSubaction('customize_design')
             ),
@@ -84,6 +94,9 @@ class DefaultPersistentNotices
                  . '<li>' . __('Nest content inside others to create parts', 'print-my-blog') . '</li>'
                 // phpcs:enable Generic.Files.LineLength.TooLong
                  . '</ol>'
+                 . '<p><a href="https://printmy.blog/user-guide/pro/getting-started/6-choose-project-content/" target="_blank">'
+                 . __('Read the User Guide', 'print-my-blog')
+                 . '</a></p>'
                  . '</div></div>',
                 $this->getOptionsForProjectSubaction('content')
             ),
@@ -93,9 +106,29 @@ class DefaultPersistentNotices
                 '<p>' . __('Different formats and designs may require other information about your project.', 'print-my-blog') .
                 '</p>'
                 . '<p>' . __('Some examples of metadata are: title page info, file info, or copyright data.', 'print-my-blog') . '</p>'
-                . '<p>' . __('So although your choice of design may affect what metadata is required, it is not shared with other projects.', 'print-my-blog') .
-                    '</p>',
+                . '<p>' . __('So although your choice of design may affect what metadata is required, it is not shared with other projects.', 'print-my-blog')
+                . '</p>'
+                . '<p><a href="https://printmy.blog/user-guide/pro/getting-started/7-enter-project-metadata/" target="_blank">'
+                . __('Read the User Guide', 'print-my-blog')
+                . '</a></p>',
                 $this->getOptionsForProjectSubaction('metadata')
+            ),
+            new Notice(
+                'pmb_generate',
+                __('Preview and Generate Your File', 'print-my-blog'),
+                '<p>' . __('Your project is ready to be generated! Use one of the buttons below to generate it, but feel free to use the links above to tweak it.', 'print-my-blog') .
+                '</p>'
+                . '<p>'
+                . sprintf(
+                    __('Read the User Guide on %1$spreviewing%2$s, %3$supdating%2$s, %4$sgenerating the pro file%2$s, and %5$sgetting help%2$s.', 'print-my-blog'),
+                    '<a href="https://printmy.blog/user-guide/pro/getting-started/8-generate-a-preview-file/" target="_blank">',
+                    '</a>',
+                    '<a href="https://printmy.blog/user-guide/pro/getting-started/9-update-the-project/" target="_blank">',
+                    '<a href="https://printmy.blog/user-guide/pro/getting-started/10-generate-the-paid-pdf/" target="_blank">',
+                    '<a href="https://printmy.blog/user-guide/pro/getting-started/11-getting-help/" target="_blank">'
+                )
+                . '</p>',
+                $this->getOptionsForProjectSubaction('generate')
             ),
             new Notice(
                 'pmb_print_materials',
