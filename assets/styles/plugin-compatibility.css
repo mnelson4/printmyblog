@@ -67,3 +67,9 @@ Hide footer added by user switching add-on.
 .pmb-print-page p#user_switching_switch_on{
     display:none;
 }
+
+/* Show-Hide / Collapse-Expand plugin https://wordpress.org/plugins/show-hidecollapse-expand/
+hide the reveal buttons. Showing them needs to happen in JS though.*/
+.pmb-print-page .bg-showmore-plg-button{
+    display:none;
+}

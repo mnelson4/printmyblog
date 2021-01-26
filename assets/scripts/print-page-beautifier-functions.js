@@ -135,9 +135,11 @@ function pmb_load_avada_lazy_images(){
     });
 }
 
-function pmb_expand_arconix_accordions(){
+function pmb_reveal_dynamic_content(){
     // Expand all Arconix accordion parts (see https://wordpress.org/plugins/arconix-shortcodes/)
     jQuery('.arconix-accordion-content').css('display','block');
+    // Reveal all https://wordpress.org/plugins/show-hidecollapse-expand/ content (the reveal buttons got removed in CSS)
+    jQuery('div[id^="bg-showmore-hidden-"]').css('display','block');
 }
 
 /**
