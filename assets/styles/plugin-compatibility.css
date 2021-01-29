@@ -73,3 +73,6 @@ hide the reveal buttons. Showing them needs to happen in JS though.*/
 .pmb-print-page .bg-showmore-plg-button{
     display:none;
 }
+
+/* Hide TablePress'  "Edit" button https://wordpress.org/plugins/tablepress/*/
+.pmb-print-page .dataTables_wrapper caption{ display:none; }
