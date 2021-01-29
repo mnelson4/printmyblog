@@ -90,7 +90,7 @@ foreach($generations as $generation){
         <?php
         }
         ?>
-        <div class="pmb-after-generation" <?php echo ! $generation->isGenerated() ? 'style="display:none"' : '';?>>
+        <div class="pmb-after-generation" <?php echo ! $generation->isGenerated() || $generation->isDirty() ? 'style="display:none"' : '';?>>
             <a class="button pmb-download-preview <?php echo $generation->isGenerated() ? 'button-primary' : '';?>"
             data-format="<?php echo
             esc_attr
