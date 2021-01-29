@@ -4,6 +4,7 @@ namespace PrintMyBlog\compatibility;
 
 use PrintMyBlog\compatibility\plugins\EasyFootnotes;
 use PrintMyBlog\compatibility\plugins\LazyLoadingFeaturePlugin;
+use PrintMyBlog\compatibility\plugins\TablePress;
 use PrintMyBlog\compatibility\plugins\WpVrView;
 use Twine\compatibility\CompatibilityBase;
 
@@ -37,6 +38,9 @@ class DetectAndActivate
             }
             if(function_exists('vr_creation')){
                 $compatiblity_mods_to_activate[] = new WpVrView();
+            }
+            if(class_exists('TablePress')){
+                $compatiblity_mods_to_activate[] = new TablePress();
             }
             $this->compatibility_mods = $compatiblity_mods_to_activate;
         }
