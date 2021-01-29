@@ -27,8 +27,8 @@ class DefaultPersistentNotices
                 . '</a></p><p>'
                 // phpcs:disable Generic.Files.LineLength.TooLong
                 . sprintf(
-                    __('Try all the pro features (table of contents, project organizer, custom post types) without signing up or installing anything. The files will just contain a watermark until purchase. %1$sCheckout the user guide.%2$s'),
-                '<a href="https://printmy.blog/user-guide/pro/getting-started/1-the-basics/" target="_blank">',
+                    __('Try all the pro features (table of contents, project organizer, custom post types) without signing up or installing anything. The files will just contain a watermark until purchase. %1$sSee full feature comparison.%2$s'),
+                '<a href="https://printmy.blog/free-vs-pro/" target="_blank">',
                 '</a>'
                 )
                 // phpcs:enable Generic.Files.LineLength.TooLong
@@ -44,7 +44,11 @@ class DefaultPersistentNotices
                 . esc_html__('Switch to Free Quick Print', 'print-my-blog')
                 . '</a></p><p>'
                 // phpcs:disable Generic.Files.LineLength.TooLong
-                . __('Free Quick Print won‘t cost you anything and will help you print thousands of posts or pages at once. It just doesn‘t have quite as many other features.', 'print-my-blog')
+                . sprintf(
+                    __('Free Quick Print won‘t cost you anything and will help you print thousands of posts or pages at once. It just doesn‘t have quite as many other features. %1$sSee full feature comparison.%2$s', 'print-my-blog'),
+                    '<a href="https://printmy.blog/free-vs-pro/" target="_blank">',
+                    '</a>'
+                )
                 // phpcs:enable Generic.Files.LineLength.TooLong
                 . '</p>',
                 array_merge(
