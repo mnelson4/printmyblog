@@ -10,7 +10,7 @@
  * Description: Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
  * Author: Michael Nelson
  * Author URI: https://printmy.blog
- * Version: 3.0.0.alpha.022
+ * Version: 3.0.0.alpha.023
  * Requires at least: 4.7
  * Requires PHP: 5.4
  * Text Domain: print-my-blog
@@ -120,7 +120,7 @@ if (defined('PMB_VERSION')) {
 
 }else {
     // it's all good! go for it!
-    define('PMB_VERSION', '3.0.0.alpha.022');
+    define('PMB_VERSION', '3.0.0.alpha.023');
     define('PMB_DIR', wp_normalize_path(__DIR__) . '/');
     define('PMB_MAIN_FILE', __FILE__);
     define('PMB_TEMPLATES_DIR', PMB_DIR . 'templates/');
@@ -200,7 +200,31 @@ if (defined('PMB_VERSION')) {
 	// disable the active theme if generating a PDF.
     // This needs to be done super early
 	if(defined('DOING_AJAX') && isset($_REQUEST['action'], $_REQUEST['format']) && $_REQUEST['action'] === 'pmb_project_status'){
-		add_filter( 'wp_using_themes', '__return_false' );
+		// Find if this project's design for this format uses the theme or not.
+        // This circumvents a ton of our own code which isn't setup at all yet.
+	    $project_id = isset($_REQUEST['ID']) ? $_REQUEST['ID'] : null;
+		if(! $project_id){
+		    return;
+        }
+		$post_object = get_post($project_id);
+		if( ! $post_object){
+		    return;
+        }
+		$format = isset($_REQUEST['format']) ? $_REQUEST['format'] : null;
+		if( ! $format){
+		    return;
+        }
+		$design_id = get_post_meta($project_id, '_pmb_design_for_' . $format, true);
+		if(! $design_id){
+		    return;
+        }
+		$use_theme = get_post_meta($design_id, '_pmb_use_theme',true);
+		if($use_theme){
+		    // ha, they say to use the theme. So don't change anything
+		    return;
+        }
+		// We don't want the theme interfering. Kill it.
+	    add_filter( 'wp_using_themes', '__return_false' );
 		add_filter('template_directory', '__return_false', 100);
 		add_filter('stylesheet_directory', '__return_false', 100);
 	}

@@ -516,6 +516,14 @@ class DefaultDesignTemplates
                                 apply_filters(
                                     'PrintMyBlog\domain\DefaultDesignTemplates->getGenericDesignFormSections',
                                     [
+                                        'use_theme' => new YesNoInput([
+                                            'html_label_text' => __('Apply Website Theme', 'print-my-blog'),
+                                            'html_help_text' => sprintf(
+                                                __('Your theme, "%1$s", can be used in conjunction with your design. Themes are often not intended for print and can conflict with the design, but you may have content that looks broken without the theme. Usually it is recommended to leave this off.', 'print-my-blog'),
+                                                $theme->name
+                                            ),
+                                            'default' => false
+                                        ]),
                                         'custom_css' => new TextAreaInput([
                                             'html_label_text' => __('Custom CSS', 'print-my-blog'),
                                             // phpcs:disable Generic.Files.LineLength.TooLong
