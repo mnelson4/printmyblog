@@ -122,6 +122,12 @@ class Admin extends BaseController
     protected $pmb_central;
 
     /**
+     * The project referenced on this request, if any.
+     * @var Project|null
+     */
+    protected $project;
+
+    /**
      * @param PostFetcher $post_fetcher
      * @param ProjectSectionManager $section_manager
      * @param ProjectManager $project_manager
@@ -509,15 +515,11 @@ class Admin extends BaseController
                         filemtime(PMB_SCRIPTS_DIR . 'project-edit-content.js')
                     );
                     wp_enqueue_style('jquery-ui');
-                    /**
-                     * @var $project Project
-                     */
-                    $project = $this->project_manager->getById($_GET['ID']);
                     wp_localize_script(
                         'pmb_project_edit_content',
                         'pmb_project_edit_content_data',
                         [
-                            'levels' => $project->getLevelsAllowed()
+                            'levels' => $this->project->getLevelsAllowed()
                         ]
                     );
                     break;
@@ -618,26 +620,25 @@ class Admin extends BaseController
             $this->editSetup();
         } elseif ($action === self::SLUG_ACTION_EDIT_PROJECT) {
             $subaction = isset($_GET['subaction']) ? $_GET['subaction'] : null;
-            $project = $this->project_manager->getById($_GET['ID']);
             switch ($subaction) {
                 case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
-                    $this->editChooseDesign($project);
+                    $this->editChooseDesign();
                     break;
                 case self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN:
-                    $this->editCustomizeDesign($project);
+                    $this->editCustomizeDesign();
                     break;
                 case self::SLUG_SUBACTION_PROJECT_CONTENT:
-                    $this->editContent($project);
+                    $this->editContent();
                     break;
                 case self::SLUG_SUBACTION_PROJECT_META:
-                    $this->editMetadata($project);
+                    $this->editMetadata();
                     break;
                 case self::SLUG_SUBACTION_PROJECT_GENERATE:
-                    $this->editGenerate($project);
+                    $this->editGenerate();
                     break;
                 case self::SLUG_SUBACTION_PROJECT_SETUP:
                 default:
-                    $this->editSetup($project);
+                    $this->editSetup();
             }
         } else {
             if (!class_exists('WP_List_Table')) {
@@ -654,7 +655,7 @@ class Admin extends BaseController
         }
     }
 
-    protected function editChooseDesign(Project $project)
+    protected function editChooseDesign()
     {
         // determine the format
         $format = $this->file_format_registry->getFormat($_GET['format']);
@@ -669,12 +670,12 @@ class Admin extends BaseController
             ]
         ];
         $designs = $this->design_manager->getAll(new WP_Query($wp_query_args));
-        $chosen_design = $project->getDesignFor($format->slug());
+        $chosen_design = $this->project->getDesignFor($format->slug());
         // show them in a template
         $this->renderProjectTemplate(
             'design_choose.php',
             [
-                'project' => $project,
+                'project' => $this->project,
                 'format' => $format,
                 'designs' => $designs,
                 'chosen_design' => $chosen_design
@@ -685,30 +686,30 @@ class Admin extends BaseController
     /**
      * @param $action
      */
-    protected function editSetup(Project $project = null)
+    protected function editSetup()
     {
         if ($this->invalid_form instanceof FormSection) {
             $form = $this->invalid_form;
         } else {
-            $form = $this->getSetupForm($project);
+            $form = $this->getSetupForm();
         }
         $this->renderProjectTemplate(
             'project_edit_setup.php',
             [
                 'form' => $form,
-                'project' => $project
+                'project' => $this->project
             ]
         );
     }
 
-    protected function editCustomizeDesign(Project $project)
+    protected function editCustomizeDesign()
     {
         $format_slug = $_GET['format'];
-        $design = $project->getDesignFor($format_slug);
+        $design = $this->project->getDesignFor($format_slug);
         if (! $design instanceof Design) {
             throw new Exception(sprintf(
                 'Could not determine the design for project "%s" for format "%s"',
-                $project->getWpPost()->ID,
+                $this->project->getWpPost()->ID,
                 $format_slug
             ));
         }
@@ -724,7 +725,7 @@ class Admin extends BaseController
                 'action' => self::SLUG_ACTION_EDIT_PROJECT,
                 'subaction' => self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN,
                 '_nonce' => wp_create_nonce('pmb-project-edit'),
-                'ID' => $project->getWpPost()->ID,
+                'ID' => $this->project->getWpPost()->ID,
                 'format' => $format_slug
             ],
             admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
@@ -736,16 +737,16 @@ class Admin extends BaseController
             'form' => $form,
             'design' => $design,
             'format_slug' => $format_slug,
-            'project' => $project
+            'project' => $this->project
             ]
         );
     }
 
-    protected function editContent(Project $project)
+    protected function editContent()
     {
-        $project_support_front_matter = $project->supportsDivision(DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER);
+        $project_support_front_matter = $this->project->supportsDivision(DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER);
         if ($project_support_front_matter) {
-            $front_matter_sections = $project->getSections(
+            $front_matter_sections = $this->project->getSections(
                 1000,
                 0,
                 true,
@@ -754,15 +755,15 @@ class Admin extends BaseController
         } else {
             $front_matter_sections = null;
         }
-        $sections = $project->getSections(
+        $sections = $this->project->getSections(
             1000,
             0,
             true,
             DesignTemplate::IMPLIED_DIVISION_MAIN_MATTER
         );
-        $project_support_back_matter = $project->supportsDivision(DesignTemplate::IMPLIED_DIVISION_BACK_MATTER);
+        $project_support_back_matter = $this->project->supportsDivision(DesignTemplate::IMPLIED_DIVISION_BACK_MATTER);
         if ($project_support_back_matter) {
-            $back_matter_sections = $project->getSections(
+            $back_matter_sections = $this->project->getSections(
                 1000,
                 0,
                 true,
@@ -774,7 +775,7 @@ class Admin extends BaseController
 
         $form_url = add_query_arg(
             [
-                'ID' => $project->getWpPost()->ID,
+                'ID' => $this->project->getWpPost()->ID,
                 'action' => self::SLUG_ACTION_EDIT_PROJECT,
                 'subaction' => self::SLUG_SUBACTION_PROJECT_CONTENT
             ],
@@ -787,7 +788,7 @@ class Admin extends BaseController
             'back_matter_sections' => $back_matter_sections,
             'sections' => $sections,
             'front_matter_sections' => $front_matter_sections,
-            'project' => $project,
+            'project' => $this->project,
             'project_support_front_matter' => $project_support_front_matter,
             'project_support_back_matter' => $project_support_back_matter,
             'post_types' => $this->post_fetcher->getProjectPostTypes('objects'),
@@ -796,16 +797,16 @@ class Admin extends BaseController
         );
     }
 
-    protected function editMetadata(Project $project)
+    protected function editMetadata()
     {
 
         if ($this->invalid_form instanceof FormSection) {
             $form = $this->invalid_form;
         } else {
-            $form = $project->getMetaForm();
+            $form = $this->project->getMetaForm();
             $defaults = [];
             foreach ($form->inputsInSubsections() as $input) {
-                $saved_value = $project->getSetting($input->name());
+                $saved_value = $this->project->getSetting($input->name());
                 if ($saved_value) {
                     $defaults[$input->name()] = $saved_value;
                 }
@@ -814,7 +815,7 @@ class Admin extends BaseController
         }
         $form_url = add_query_arg(
             [
-                'ID' => $project->getWpPost()->ID,
+                'ID' => $this->project->getWpPost()->ID,
                 'action' => self::SLUG_ACTION_EDIT_PROJECT,
                 'subaction' => self::SLUG_SUBACTION_PROJECT_META
             ],
@@ -825,14 +826,14 @@ class Admin extends BaseController
             [
             'form_url' => $form_url,
             'form' => $form,
-            'project' => $project
+            'project' => $this->project
             ]
         );
     }
 
-    protected function editGenerate(Project $project)
+    protected function editGenerate()
     {
-        $generations = $project->getAllGenerations();
+        $generations = $this->project->getAllGenerations();
         $license_info = null;
         if ( pmb_fs()->is__premium_only() ) {
             $license = pmb_fs()->_get_license();
@@ -858,7 +859,7 @@ class Admin extends BaseController
         $this->renderProjectTemplate(
             'project_edit_generate.php',
             [
-                'project' => $project,
+                'project' => $this->project,
                 'generations' => $generations,
                 'license_info' => $license_info,
                 'upgrade_url' => $upgrade_url,
@@ -936,25 +937,24 @@ class Admin extends BaseController
             }
             if ($action === self::SLUG_ACTION_EDIT_PROJECT) {
                 $subaction = isset($_GET['subaction']) ? $_GET['subaction'] : null;
-                $project = $this->project_manager->getById($_GET['ID']);
                 switch ($subaction) {
                     case self::SLUG_SUBACTION_PROJECT_SETUP:
-                        $this->saveNewProject($project);
+                        $this->saveNewProject();
                         break;
                     case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
-                        $this->saveProjectChooseDesign($project);
+                        $this->saveProjectChooseDesign();
                         break;
                     case self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN:
-                        $this->saveProjectCustomizeDesign($project);
+                        $this->saveProjectCustomizeDesign();
                         break;
                     case self::SLUG_SUBACTION_PROJECT_CONTENT:
-                        $this->saveProjectContent($project);
+                        $this->saveProjectContent();
                         break;
                     case self::SLUG_SUBACTION_PROJECT_META:
-                        $this->saveProjectMetadata($project);
+                        $this->saveProjectMetadata();
                         break;
                     case self::SLUG_SUBACTION_PROJECT_GENERATE:
-                        $this->saveProjectGenerate($project);
+                        $this->saveProjectGenerate();
                         break;
                 }
             } elseif ($action === 'delete') {
@@ -972,7 +972,7 @@ class Admin extends BaseController
      * @return FormSection
      * @throws \Twine\forms\helpers\ImproperUsageException
      */
-    protected function getSetupForm(Project $project = null)
+    protected function getSetupForm()
     {
         $formats = $this->file_format_registry->getFormats();
         $format_options = [];
@@ -989,8 +989,8 @@ class Admin extends BaseController
             // phpcs:enable Generic.Files.LineLength.TooLong
         );
         $default_format = null;
-        if ($project instanceof Project) {
-            $formats_preselected = $project->getFormatsSelected();
+        if ($this->project instanceof Project) {
+            $formats_preselected = $this->project->getFormatsSelected();
             if (count($formats_preselected) === 1) {
                 $format_preselected = reset($formats_preselected);
                 $default_format = $format_preselected->slug();
@@ -1004,7 +1004,7 @@ class Admin extends BaseController
                 'title' => new TextInput([
                     'html_label_text' => __('Project Title', 'print-my-blog'),
                     'required' => true,
-                    'default' => $project instanceof Project ? $project->getWpPost()->post_title : '',
+                    'default' => $this->project instanceof Project ? $this->project->getWpPost()->post_title : '',
                 ]),
                 'formats' => new RadioButtonInput(
                     $format_options,
@@ -1017,9 +1017,9 @@ class Admin extends BaseController
             ]
         ]);
     }
-    protected function saveNewProject(Project $project = null)
+    protected function saveNewProject()
     {
-        $form = $this->getSetupForm($project);
+        $form = $this->getSetupForm();
         $form->receiveFormSubmission($_REQUEST);
         if (! $form->isValid()) {
             $this->invalid_form = $form;
@@ -1027,7 +1027,7 @@ class Admin extends BaseController
         }
         $initialize_steps = false;
 
-        if (! $project instanceof Project) {
+        if (! $this->project instanceof Project) {
             $project_id = wp_insert_post(
                 [
                     'post_content' => '',
@@ -1039,8 +1039,8 @@ class Admin extends BaseController
             if (is_wp_error($project_id)) {
                 wp_die($project_id->get_error_message());
             }
-            $project = $this->project_manager->getById($project_id);
-            $project->setCode();
+            $this->project = $this->project_manager->getById($project_id);
+            $this->project->setCode();
             $title_page = get_page_by_path('pmb-title-page', OBJECT, CustomPostTypes::CONTENT);
             $toc_page = get_page_by_path('pmb-toc', OBJECT, CustomPostTypes::CONTENT);
             $this->section_manager->setSectionsFor(
@@ -1065,7 +1065,7 @@ class Admin extends BaseController
             );
             $initialize_steps = true;
         }
-        $project->setTitle($form->getInputValue('title'));
+        $this->project->setTitle($form->getInputValue('title'));
         $formats_to_save = [];
         if ($form->getInputValue('formats') === 'all') {
             $formats_to_save = array_map(
@@ -1077,22 +1077,22 @@ class Admin extends BaseController
         } else {
             $formats_to_save[] = $form->getInputValue('formats');
         }
-        $old_formats = $project->getFormatSlugsSelected();
-        $project->setFormatsSelected($formats_to_save);
+        $old_formats = $this->project->getFormatSlugsSelected();
+        $this->project->setFormatsSelected($formats_to_save);
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
                 __('Successfully setup the project "%s".', 'print-my-blog'),
-                $project->getWpPost()->post_title
+                $this->project->getWpPost()->post_title
             )
         );
         if ($initialize_steps) {
-            $project->getProgress()->initialize();
+            $this->project->getProgress()->initialize();
         } else {
             $new_formats = array_diff($formats_to_save, $old_formats);
             foreach ($new_formats as $new_format) {
-                $project->getProgress()->markChooseDesignStepComplete($new_format, false);
-                $project->getProgress()->markCustomizeDesignStepComplete($new_format, false);
+                $this->project->getProgress()->markChooseDesignStepComplete($new_format, false);
+                $this->project->getProgress()->markCustomizeDesignStepComplete($new_format, false);
                 $this->notification_manager->addTextNotificationForCurrentUser(
                     OneTimeNotification::TYPE_INFO,
                     sprintf(
@@ -1102,8 +1102,8 @@ class Admin extends BaseController
                 );
             }
         }
-        $project->getProgress()->markStepComplete(ProjectProgress::SETUP_STEP);
-        $this->redirectToNextStep($project);
+        $this->project->getProgress()->markStepComplete(ProjectProgress::SETUP_STEP);
+        $this->redirectToNextStep($this->project);
     }
 
     /**
@@ -1132,43 +1132,43 @@ class Admin extends BaseController
      * Saves the project's name and parts etc.
      * @return int project ID
      */
-    protected function saveProjectContent(Project $project)
+    protected function saveProjectContent()
     {
         check_admin_referer('pmb-project-edit');
-        foreach ($project->getAllGenerations() as $project_generation) {
+        foreach ($this->project->getAllGenerations() as $project_generation) {
             $project_generation->addDirtyReason(
                 'content_update',
                 __('The content in your project has changed', 'print-my-blog')
             );
         }
-        $project->setProjectDepth(intval($_POST['pmb-project-depth']));
+        $this->project->setProjectDepth(intval($_POST['pmb-project-depth']));
 
-        $this->section_manager->clearSectionsFor($project->getWpPost()->ID);
+        $this->section_manager->clearSectionsFor($this->project->getWpPost()->ID);
         $order = 1;
         $this->setSectionFromRequest(
-            $project,
+            $this->project,
             'pmb-project-front-matter-data',
             DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER,
             $order
         );
         $this->setSectionFromRequest(
-            $project,
+            $this->project,
             'pmb-project-main-matter-data',
             DesignTemplate::IMPLIED_DIVISION_MAIN_MATTER,
             $order
         );
         $this->setSectionFromRequest(
-            $project,
+            $this->project,
             'pmb-project-back-matter-data',
             DesignTemplate::IMPLIED_DIVISION_BACK_MATTER,
             $order
         );
-        $project->getProgress()->markStepComplete(ProjectProgress::EDIT_CONTENT_STEP);
+        $this->project->getProgress()->markStepComplete(ProjectProgress::EDIT_CONTENT_STEP);
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
             __('Updated project content.', 'print-my-blog')
         );
-        $this->redirectToNextStep($project);
+        $this->redirectToNextStep($this->project);
     }
 
     protected function setSectionFromRequest(Project $project, $request_data, $placement, &$order = 1)
@@ -1185,9 +1185,9 @@ class Admin extends BaseController
         }
     }
 
-    protected function saveProjectCustomizeDesign(Project $project)
+    protected function saveProjectCustomizeDesign()
     {
-        $design = $project->getDesignFor($_GET['format']);
+        $design = $this->project->getDesignFor($_GET['format']);
         $design_form = $design->getDesignTemplate()->getDesignFormTemplate();
         $design_form->receiveFormSubmission($_REQUEST);
         if (! $design_form->isValid()) {
@@ -1196,12 +1196,12 @@ class Admin extends BaseController
         foreach ($design_form->inputValues(true, true) as $setting_name => $normalized_value) {
             $design->setSetting($setting_name, $normalized_value);
         }
-        $project_generation = $project->getGenerationFor($_GET['format']);
+        $project_generation = $this->project->getGenerationFor($_GET['format']);
         $project_generation->addDirtyReason(
             'design_change',
             __('You have customized this design', 'print-my-blog')
         );
-        $project->getProgress()->markCustomizeDesignStepComplete($design->getDesignTemplate()->getFormatSlug());
+        $this->project->getProgress()->markCustomizeDesignStepComplete($design->getDesignTemplate()->getFormatSlug());
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
@@ -1211,10 +1211,10 @@ class Admin extends BaseController
                 $design->getWpPost()->post_title
             )
         );
-        $this->redirectToNextStep($project);
+        $this->redirectToNextStep($this->project);
     }
 
-    protected function saveProjectChooseDesign(Project $project)
+    protected function saveProjectChooseDesign()
     {
         $design = $this->design_manager->getById((int)$_REQUEST['design']);
         $format = $this->file_format_registry->getFormat($_GET['format']);
@@ -1227,8 +1227,8 @@ class Admin extends BaseController
                 )
             );
         }
-        $project->setDesignFor($format, $design);
-        $project_generation = $project->getGenerationFor($format);
+        $this->project->setDesignFor($format, $design);
+        $project_generation = $this->project->getGenerationFor($format);
         $project_generation->addDirtyReason(
             'design_change',
             __('You changed the design', 'print-my-blog')
@@ -1241,10 +1241,10 @@ class Admin extends BaseController
                 $format->title()
             )
         );
-        $project->getProgress()->markChooseDesignStepComplete($format->slug());
+        $this->project->getProgress()->markChooseDesignStepComplete($format->slug());
         // If they've changed the design, ask them if they want to skip it.
-        if($project->getProgress()->isStepComplete(ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX . $format->slug())){
-            $project->getProgress()->markCustomizeDesignStepComplete($format->slug(), false);
+        if($this->project->getProgress()->isStepComplete(ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX . $format->slug())){
+            $this->project->getProgress()->markCustomizeDesignStepComplete($format->slug(), false);
             $this->notification_manager->addTextNotificationForCurrentUser(
                 OneTimeNotification::TYPE_INFO,
                 __('You may want to customize the design. If not, feel free to jump ahead the next step.', 'print-my-blog')
@@ -1254,7 +1254,7 @@ class Admin extends BaseController
 
 
 
-        $this->redirectToNextStep($project);
+        $this->redirectToNextStep($this->project);
     }
 
     /**
@@ -1264,30 +1264,30 @@ class Admin extends BaseController
      * @return FormSection
      * @throws \Twine\forms\helpers\ImproperUsageException
      */
-    protected function saveProjectMetadata(Project $project)
+    protected function saveProjectMetadata()
     {
-        $form = $project->getMetaForm();
+        $form = $this->project->getMetaForm();
         $form->receiveFormSubmission($_REQUEST);
         if (! $form->isValid()) {
             $this->invalid_form = $form;
             return;
         }
         foreach ($form->inputValues(true, true) as $setting_name => $normalized_value) {
-            $project->setSetting($setting_name, $normalized_value);
+            $this->project->setSetting($setting_name, $normalized_value);
         }
-        $project_generations = $project->getAllGenerations();
+        $project_generations = $this->project->getAllGenerations();
         foreach ($project_generations as $generation) {
             $generation->addDirtyReason(
                 'metadata',
                 __('You changed projected metadata', 'print-my-blog')
             );
         }
-        $project->getProgress()->markStepComplete(ProjectProgress::EDIT_METADATA_STEP);
+        $this->project->getProgress()->markStepComplete(ProjectProgress::EDIT_METADATA_STEP);
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
             __('Project metadata updated.', 'print-my-blog')
         );
-        $this->redirectToNextStep($project);
+        $this->redirectToNextStep($this->project);
     }
 
     /**
@@ -1296,25 +1296,25 @@ class Admin extends BaseController
      *
      * @throws Exception
      */
-    protected function saveProjectGenerate(Project $project)
+    protected function saveProjectGenerate()
     {
         $format = $this->file_format_registry->getFormat($_GET['format']);
         if (! $format instanceof FileFormat) {
             throw new Exception(__('There is no file format with the slug "%s"', 'print-my-blog'), $_GET['format']);
         }
-        $project_generation = $project->getGenerationFor($format);
+        $project_generation = $this->project->getGenerationFor($format);
         $project_generation->deleteGeneratedFiles();
         $project_generation->clearDirty();
-        $project->getProgress()->markStepComplete(ProjectProgress::GENERATE_STEP);
+        $this->project->getProgress()->markStepComplete(ProjectProgress::GENERATE_STEP);
         $url = add_query_arg(
             [
                 PMB_PRINTPAGE_SLUG => 3,
-                'project' => $project->getWpPost()->ID,
+                'project' => $this->project->getWpPost()->ID,
                 'format' => $format->slug()
             ],
             site_url()
         );
-        $project->getProgress()->markStepComplete(ProjectProgress::GENERATE_STEP);
+        $this->project->getProgress()->markStepComplete(ProjectProgress::GENERATE_STEP);
         wp_safe_redirect($url);
         exit;
     }
@@ -1420,6 +1420,7 @@ class Admin extends BaseController
      */
     private function earlyResponseHandling()
     {
+        $this->checkProjectEditPage();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             add_action('admin_init', [$this, 'checkFormSubmission']);
         } elseif($_SERVER['REQUEST_METHOD'] === 'GET'){
@@ -1453,6 +1454,21 @@ class Admin extends BaseController
                 exit;
             }
         }
-
+    }
+    public function checkProjectEditPage()
+    {
+        if (!isset($_GET['page'])) {
+            return;
+        }
+        if ($_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG &&
+            isset($_GET['action']) &&
+            $_GET['action'] === self::SLUG_ACTION_EDIT_PROJECT) {
+            $project = $this->project_manager->getById($_GET['ID']);
+            if (!$project) {
+                wp_safe_redirect(admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH));
+                exit;
+            }
+            $this->project = $project;
+        }
     }
 }

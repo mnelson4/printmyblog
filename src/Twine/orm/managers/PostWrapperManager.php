@@ -16,11 +16,14 @@ class PostWrapperManager
     /**
      * @param $post_id
      *
-     * @return PostWrapper
+     * @return PostWrapper|null
      */
     public function getById($post_id)
     {
         $wp_post = get_post($post_id);
+        if(! $wp_post){
+            return null;
+        }
         $post_wrapper = $this->createWrapperAroundPost($wp_post);
         return $post_wrapper;
     }

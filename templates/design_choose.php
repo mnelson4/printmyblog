@@ -2,7 +2,7 @@
 /**
  * @var $designs \PrintMyBlog\orm\entities\Design[]
  * @var $chosen_design \PrintMyBlog\orm\entities\Design
- * @var $project \PrintMyBlog\orm\entities\Project
+ * @var $project \PrintMyBlog\orm\entities\Project|null
  * @var $format \PrintMyBlog\entities\FileFormat
  * @var $steps_to_urls array
  * @var $current_step string
