@@ -4,14 +4,21 @@
 add_action(
 	'pmb_pdf_generation_start',
 	function(\PrintMyBlog\entities\ProjectGeneration $project_generation, \PrintMyBlog\orm\entities\Design $design){
+	    $css = pmb_design_styles($design)
+            . "body{font-size:" . $design->getSetting('font_size') . ";}
+			@page{
+				size: " . $design->getSetting('page_width') . ' ' . $design->getSetting('page_height')
+			."}
+			";
+	    if($design->getPmbMeta('paragraph_indent')){
+	        $css .= ' .pmb-article .post-inner p{
+                        text-indent:3em;
+                        margin:0;
+                    }';
+        }
 		wp_add_inline_style(
 			'pmb_print_common',
-			pmb_design_styles($design)
-			. "body{font-size:" . $design->getSetting('font_size') . ";}
-			@page{
-				size: " . $design->getSetting('page_width') . ' ' . $design->getSetting('page_height') . "}
-			}
-			"
+			$css
 		);
 		wp_localize_script(
 			'pmb-design',

@@ -47,6 +47,11 @@ class DefaultDesignTemplates
                                         'image_placement' => $this->getImageSnapInput()
                                     ]
                                 ]),
+                                'paragraph_indent' => new YesNoInput([
+                                    'default' => true,
+                                    'html_label_text' => __('Paragraph Indent', 'print-my-blog'),
+                                    'html_help_text' => __('Indent the first line of each new paragraph instead of adding a paragraph break.', 'print-my-blog')
+                                ]),
                                 'links' => new FormSection([
                                     'subsections' => [
                                         'internal_links' => new SelectInput(
