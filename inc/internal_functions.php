@@ -128,6 +128,10 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
         $edit_url = get_edit_post_link($posty_row->ID);
         $view_url = get_permalink($posty_row->ID);
     }
+    // if the post type is no longer registered, the plugin that added it probably got removed, so hide this item.
+    if(! $post_type){
+        return;
+    }
     if($max_nesting === null){
         $max_nesting = $project->getLevelsAllowed();
     }
