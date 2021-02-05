@@ -83,7 +83,8 @@
 
 
     body{
-        background-color:white;
+        background-color:white !important;
+        background:white !important;
         color:black;
         prince-footnote-policy: keep-with-line;
     }

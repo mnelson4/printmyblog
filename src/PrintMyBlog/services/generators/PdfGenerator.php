@@ -19,8 +19,10 @@ class PdfGenerator extends ProjectFileGeneratorBase
      */
     protected $file_writer;
 
-    protected function startGenerating()
-    {
+    /**
+     * Enqueues themes and styles we'll use on this AJAX request.
+     */
+    public function enqueueStylesAndScripts(){
         wp_enqueue_style('pmb_print_common');
         wp_enqueue_style('pmb-plugin-compatibility');
         wp_enqueue_script('pmb-beautifier-functions');
@@ -31,7 +33,8 @@ class PdfGenerator extends ProjectFileGeneratorBase
                 'pmb-design',
                 $this->getDesignAssetsUrl() . 'style.css',
                 ['pmb_print_common', 'pmb-plugin-compatibility'],
-                filemtime($style_file)
+                filemtime($style_file),
+                null
             );
         }
         if (file_exists($script_file)) {
@@ -42,9 +45,12 @@ class PdfGenerator extends ProjectFileGeneratorBase
                 filemtime($script_file)
             );
         }
-//      if(! $this->design->getPmbMeta('use_theme')){
-//          add_filter('wp_enqueue_scripts', [$this,'remove_theme_style'],20);
-//      }
+    }
+
+    protected function startGenerating()
+    {
+        // Try to get enqueued after the theme, if we're doing that, so we get precedence.
+        add_action('wp_enqueue_scripts', [$this,'enqueueStylesAndScripts'], 1000);
         do_action('pmb_pdf_generation_start', $this->project_generation, $this->design);
         $this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT);
     }
