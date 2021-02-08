@@ -51,13 +51,22 @@ class Notices
     }
 
     public function enqueue_scripts(){
-        wp_enqueue_script(
-            'wptrt-dismiss',
-            WPTRT_JS_URL . 'dismiss-notice.js',
-            ['jquery','common'],
-            filemtime(WPTRT_JS_DIR . 'dismiss-notice.js'),
-            true
-        );
+        // Only enqueue the script if there's anything notices to show.
+        $show = false;
+        foreach($this->get_all() as $notice){
+            if($notice->show()){
+                $show = true;
+            }
+        }
+        if($show){
+            wp_enqueue_script(
+                'wptrt-dismiss',
+                WPTRT_JS_URL . 'dismiss-notice.js',
+                ['jquery','common'],
+                filemtime(WPTRT_JS_DIR . 'dismiss-notice.js'),
+                true
+            );
+        }
     }
 
     /**
@@ -120,7 +129,7 @@ class Notices
      *
      * @access public
      * @since 1.0
-     * @return array
+     * @return Notice[]
      */
     public function get_all()
     {
