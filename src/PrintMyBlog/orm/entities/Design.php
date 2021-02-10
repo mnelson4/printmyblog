@@ -138,4 +138,23 @@ class Design extends PostWrapper
             'desc' => $this->getPmbMeta('preview_' . $index . '_desc')
         ];
     }
+
+    /**
+     * Returns true if this is the default slug for its design template.
+     * @return bool
+     */
+    public function isDefault(){
+        return $this->getWpPost()->post_name == $this->getDesignTemplate()->getDefaultDesignSlug();
+    }
+
+    /**
+     * If this is the default design, returns true.
+     * @return Design|null|bool
+     */
+    public function getCustomizationOf(){
+        if($this->isDefault()){
+            return true;
+        }
+        return $this->getDesignTemplate()->getDefaultDesign();
+    }
 }

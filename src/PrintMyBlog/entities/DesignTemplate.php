@@ -4,6 +4,8 @@ namespace PrintMyBlog\entities;
 
 use Exception;
 use PrintMyBlog\exceptions\TemplateDoesNotExist;
+use PrintMyBlog\orm\entities\Design;
+use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\services\FileFormatRegistry;
 use Twine\forms\base\FormSection;
 
@@ -63,6 +65,10 @@ class DesignTemplate
      */
     protected $file_format_registry;
     /**
+     * @var DesignManager
+     */
+    protected $design_manager;
+    /**
      * @var FileFormat
      */
     protected $format;
@@ -107,9 +113,10 @@ class DesignTemplate
         $this->project_form_callback = $args['project_form_callback'];
     }
 
-    public function inject(FileFormatRegistry $file_format_registry)
+    public function inject(FileFormatRegistry $file_format_registry, DesignManager $design_manager)
     {
         $this->file_format_registry = $file_format_registry;
+        $this->design_manager = $design_manager;
     }
     /**
      * @return string
@@ -359,5 +366,13 @@ class DesignTemplate
     public function getCustomTemplates()
     {
         return $this->custom_templates;
+    }
+
+    /**
+     * Gets the default design object
+     * @return Design|null
+     */
+    public function getDefaultDesign(){
+        return $this->design_manager->getBySlug($this->getDefaultDesignSlug());
     }
 }

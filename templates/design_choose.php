@@ -30,6 +30,9 @@ pmb_render_template(
 <?php
 // List all designs
 foreach($designs as $design){
+    /**
+    * @var $design \PrintMyBlog\orm\entities\Design
+     */
 	$active = $design->getWpPost()->ID === $chosen_design->getWpPost()->ID;
 	?>
 	<div class="pmb-design <?php echo $active ? 'pmb-active' : ''?>">
@@ -66,10 +69,12 @@ foreach($designs as $design){
                     <h1><?php echo $design->getWpPost()->post_title;?></h1>
                     <p class="pmb-design-quick-description"><?php echo $design->getWpPost()->post_excerpt;?></p>
                     <table class="pmb-details-support-table">
-                        <tr>
-                            <th><?php esc_html_e('Template', 'print-my-blog');?></th>
-                            <td><?php echo $design->getDesignTemplate()->getTitle();?></td>
-                        </tr>
+                        <?php if (! $design->isDefault()){?>
+                            <tr>
+                                <th><?php esc_html_e('Customization Of', 'print-my-blog');?></th>
+                                <td><?php echo $design->getCustomizationOf()->getWpPost()->post_title;?></td>
+                            </tr>
+                        <?php }?>
                         <?php if($design->getPmbMeta('author_name')){
                             $author_name = $design->getPmbMeta('author_name');
                             $author_url = $design->getPmbMeta('author_url');

@@ -78,6 +78,7 @@ class Context extends BaseContext
             ],
             'PrintMyBlog\entities\DesignTemplate' => [
                 'PrintMyBlog\services\FileFormatRegistry' => self::REUSE,
+                'PrintMyBlog\orm\managers\DesignManager' => self::REUSE
             ],
             'PrintMyBlog\services\config\Config' => [
                 'PrintMyBlog\services\FileFormatRegistry' => self::REUSE,
