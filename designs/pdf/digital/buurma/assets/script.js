@@ -7,12 +7,17 @@ jQuery(document).ready(function(){
     }
     // pmb_remove_hyperlinks();
     pmb_fix_wp_videos();
-    pmb_resize_images(400);
     pmb_convert_youtube_videos_to_images();
     pmb_load_avada_lazy_images();
     pmb_reveal_dynamic_content();
     pmb_replace_internal_links_with_page_refs_and_footnotes('footnote', 'footnote_ref');
     new PmbToc();
+
+});
+
+// wait until the images are loaded to try to resize them.
+jQuery(window).on("load", function() {
+    pmb_resize_images(400);
     jQuery(document).trigger('pmb_wrap_up');
 });
 
