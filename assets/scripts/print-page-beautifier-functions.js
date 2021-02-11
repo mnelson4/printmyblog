@@ -82,8 +82,8 @@ function pmb_resize_images(desired_max_height) {
         var big_images_without_figures = jQuery('.pmb-posts img').filter(function() {
             var element = jQuery(this);
             // If there's no figure, and the image is big enough, include it.
-            if(element.parent('figure').length === 0
-                && element.parent('div.wp-caption').length === 0
+            if(element.parents('figure').length === 0
+                && element.parents('div.wp-caption').length === 0
                 && element.height() > wrap_threshold){
                 return true;
             }
