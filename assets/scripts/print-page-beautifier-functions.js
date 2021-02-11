@@ -73,6 +73,10 @@ function pmb_resize_images(desired_max_height) {
         var big_images = jQuery('.pmb-posts img:not(.emoji, div.tiled-gallery img, img.fg-image, img.size-thumbnail)').filter(function(){
             // only wrap images bigger than the desired maximum height in pixels.
             var element = jQuery(this);
+            // ignore images in columns. If they get moved by prince-snap they can disappear
+            if(element.parents('.wp-block-columns')){
+                return false;
+            }
             return element.height() > desired_max_height;
         });
         // Images that are bigger than this will get wrapped in a 'pmb-image' div or figure in order to avoid
@@ -81,6 +85,10 @@ function pmb_resize_images(desired_max_height) {
         // Keep track of images that are already wrapped in a caption. We don't need to wrap them in a div.
         var big_images_without_figures = jQuery('.pmb-posts img').filter(function() {
             var element = jQuery(this);
+            // ignore images in columns. If they get moved by prince-snap they can disappear
+            if(element.parents('.wp-block-columns')){
+                return false;
+            }
             // If there's no figure, and the image is big enough, include it.
             if(element.parents('figure').length === 0
                 && element.parents('div.wp-caption').length === 0
@@ -91,6 +99,10 @@ function pmb_resize_images(desired_max_height) {
         });
         var figures_containing_a_big_image = jQuery('figure.wp-caption, figure.wp-block-image, div.wp-caption').filter(function(){
             var element = jQuery(this);
+            // ignore images in columns. If they get moved by prince-snap they can disappear
+            if(element.parents('.wp-block-columns')){
+                return false;
+            }
             // If there's a figure and the figure is big enough, include it.
             if(element.find('img').length && element.height() > wrap_threshold){
                 return true;
