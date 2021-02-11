@@ -74,7 +74,7 @@ function pmb_resize_images(desired_max_height) {
             // only wrap images bigger than the desired maximum height in pixels.
             var element = jQuery(this);
             // ignore images in columns. If they get moved by prince-snap they can disappear
-            if(element.parents('.wp-block-columns')){
+            if(element.parents('.wp-block-columns').length !== 0){
                 return false;
             }
             return element.height() > desired_max_height;
@@ -86,7 +86,7 @@ function pmb_resize_images(desired_max_height) {
         var big_images_without_figures = jQuery('.pmb-posts img').filter(function() {
             var element = jQuery(this);
             // ignore images in columns. If they get moved by prince-snap they can disappear
-            if(element.parents('.wp-block-columns')){
+            if(element.parents('.wp-block-columns').length !== 0){
                 return false;
             }
             // If there's no figure, and the image is big enough, include it.
@@ -100,7 +100,7 @@ function pmb_resize_images(desired_max_height) {
         var figures_containing_a_big_image = jQuery('figure.wp-caption, figure.wp-block-image, div.wp-caption').filter(function(){
             var element = jQuery(this);
             // ignore images in columns. If they get moved by prince-snap they can disappear
-            if(element.parents('.wp-block-columns')){
+            if(element.parents('.wp-block-columns').length !== 0){
                 return false;
             }
             // If there's a figure and the figure is big enough, include it.
