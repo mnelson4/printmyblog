@@ -575,6 +575,7 @@ class Admin extends BaseController
                     // DocRaptor
                                         'ignore_console_messages' => true,
                                         'ignore_resource_errors' => true,
+                                        'pipeline' => 9,
                                         'prince_options' => [
                                             'base_url' => site_url(),
                                             'media' => 'print',                                       // use screen
