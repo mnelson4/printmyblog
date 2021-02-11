@@ -71,7 +71,7 @@ foreach($designs as $design){
                     <table class="pmb-details-support-table">
                         <?php if (! $design->isDefault()){?>
                             <tr>
-                                <th><?php esc_html_e('Customization Of', 'print-my-blog');?></th>
+                                <th><?php esc_html_e('Customization of', 'print-my-blog');?></th>
                                 <td><?php echo $design->getCustomizationOf()->getWpPost()->post_title;?></td>
                             </tr>
                         <?php }?>
