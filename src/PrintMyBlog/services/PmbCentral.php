@@ -47,7 +47,8 @@ class PmbCentral
                 [
                     'headers' => [
                         'Authorization' => $this->getSiteAuthorizationHeader()
-                    ]
+                    ],
+                    'timeout' => 20
                 ]
             );
             if($response instanceof WP_Error){
