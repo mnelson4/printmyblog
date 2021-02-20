@@ -31,12 +31,14 @@ function pmb_convert_url_to_anchor($url){
 /**
  * @param string $relative_filepath filepath relative to the current design's templates directory
  * @global Design $pmb_design
+ * @global Project $pmb_project
+ * @global \PrintMyBlog\entities\ProjectGeneration $pmb_project_generation
  */
 function pmb_include_design_template($relative_filepath){
 	/**
 	 * @var $pmb_design Design
 	 */
-	global $pmb_design;
+	global $pmb_project, $pmb_design, $pmb_project_generation;
 	require($pmb_design->getDesignTemplate()->getTemplatePathToDivision($relative_filepath));
 }
 

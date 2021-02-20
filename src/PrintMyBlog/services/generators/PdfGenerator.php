@@ -4,6 +4,7 @@ namespace PrintMyBlog\services\generators;
 
 use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\orm\entities\Design;
+use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;
 use Twine\services\filesystem\File;
 
@@ -47,6 +48,10 @@ class PdfGenerator extends ProjectFileGeneratorBase
         }
     }
 
+    /**
+     * @global Project $pmb_project
+     * @global Design $pmb_design
+     */
     protected function startGenerating()
     {
         // Try to get enqueued after the theme, if we're doing that, so we get precedence.
