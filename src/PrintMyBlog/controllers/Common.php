@@ -49,6 +49,12 @@ class Common extends BaseController
             array(),
             filemtime(PMB_ASSETS_DIR . 'styles/print-page-common.css')
         );
+        wp_register_style(
+            'pmb_pro_page',
+            PMB_ASSETS_URL . 'styles/pmb-pro-page.css',
+            array(),
+            filemtime(PMB_ASSETS_DIR . 'styles/pmb-pro-page.css')
+        );
         wp_register_script(
             'jquery-debounce',
             PMB_ASSETS_URL . 'scripts/libs/jquery.debounce-1.1.min.js',

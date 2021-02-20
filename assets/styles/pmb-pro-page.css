@@ -1,0 +1,9 @@
+/**
+Styles generic to all PDF projects
+ */
+
+.pmb-depth-0 .pmb-title{prince-bookmark-level: 1}
+.pmb-depth-1 .pmb-title{prince-bookmark-level: 2}
+.pmb-depth-2 .pmb-title{prince-bookmark-level: 3}
+.pmb-depth-3 .pmb-title{prince-bookmark-level: 4}
+.pmb-depth-4 .pmb-title{prince-bookmark-level: 5}

@@ -25,6 +25,7 @@ class PdfGenerator extends ProjectFileGeneratorBase
      */
     public function enqueueStylesAndScripts(){
         wp_enqueue_style('pmb_print_common');
+        wp_enqueue_style('pmb_pro_page');
         wp_enqueue_style('pmb-plugin-compatibility');
         wp_enqueue_script('pmb-beautifier-functions');
         $style_file = $this->getDesignDir() . 'assets/style.css';
