@@ -192,6 +192,7 @@ foreach($generations as $generation){
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
