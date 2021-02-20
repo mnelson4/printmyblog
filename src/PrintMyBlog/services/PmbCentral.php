@@ -51,7 +51,7 @@ class PmbCentral
                 ]
             );
             if($response instanceof WP_Error){
-               throw new Exception($response->get_error_message(),$response->get_error_code());
+               throw new Exception($response->get_error_message(),(int)$response->get_error_code());
             } else {
                 $body = wp_remote_retrieve_body($response);
                 $credit_data = json_decode($body, true);

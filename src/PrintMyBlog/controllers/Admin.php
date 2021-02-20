@@ -566,13 +566,14 @@ class Admin extends BaseController
                                 'install_id' => pmb_fs()->get_site()->id,
                                 'authorization_header' => $this->pmb_central->getSiteAuthorizationHeader(),
                             ],
+
                             'doc_attrs' => apply_filters(
                                     '\PrintMyBlog\controllers\Admin::enqueueScripts doc_attrs',
                                     [
                                         'test' => defined('PMB_TEST_LIVE') && PMB_TEST_LIVE ? true : false,
                                         'type' => 'pdf',
-                                        'javascript' => true,                                        // Javascript by
-                    // DocRaptor
+                                        'javascript' => true, // Javascript by DocRaptor
+                                        'name' => $this->project->getPublishedTitle(),
                                         'ignore_console_messages' => true,
                                         'ignore_resource_errors' => true,
                                         'pipeline' => 9,
