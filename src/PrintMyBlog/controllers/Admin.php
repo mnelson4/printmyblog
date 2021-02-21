@@ -590,7 +590,8 @@ class Admin extends BaseController
                             ),
                             'translations' => [
                                 // phpcs:disable Generic.Files.LineLength.TooLong
-                                'error_generating' => __('There was an error preparing your content. Please visit the Print My Blog Help page.', 'print-my-blog')
+                                'error_generating' => __('There was an error preparing your content. Please visit the Print My Blog Help page.', 'print-my-blog'),
+                                'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public? Please visit the Print My Blog Help page.', 'print-my-blog')
                                 // phpcs:enable Generic.Files.LineLength.TooLong
                             ]
                         ]

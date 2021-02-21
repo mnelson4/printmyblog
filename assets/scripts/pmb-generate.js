@@ -68,6 +68,9 @@ jQuery(document).ready(function () {
             (error_message) => {
                 jQuery('.pmb-downloading-test-pdf').hide();
                 jQuery('.pmb-error-downloading-test-pdf').show();
+                if(error_message === 'Socket error downloading document content from supplied url.'){
+                    error_message = pmb_generate.translations.socket_error;
+                }
                 alert(error_message);
             }
         );
