@@ -74,7 +74,7 @@ foreach($generations as $generation){
                     <b>
                         <?php printf(
                             esc_html__('This file was already generated %s', 'print-my-blog'),
-                            date_i18n(get_option('date_format') . ' ' . get_option('time_format'), $generation->generatedTimeSql())
+                            date_i18n(get_option('date_format') . ' ' . get_option('time_format'), $generation->generatedTimestamp())
                         );?>
                     </b>
                 </div>
