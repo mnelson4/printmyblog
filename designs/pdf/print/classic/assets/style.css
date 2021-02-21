@@ -160,6 +160,7 @@
         float:footnote;
         text-align:left;
         font-size:80%;
+        margin-left:0;
     }
     .excerpt{
         width:80%;

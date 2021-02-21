@@ -131,5 +131,6 @@
     .pmb-posts span.pmb-footnote{
         float:footnote;
         text-align:left;
+        margin-left:0;
     }
 }
