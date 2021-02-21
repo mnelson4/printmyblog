@@ -70,3 +70,8 @@ Hide Google Recaptcha from printouts
         width:100% !important;
     }
 }
+
+/* Place NextGen gallery https://wordpress.org/plugins/nextgen-gallery/ items side-by-side */
+.ngg-gallery-thumbnail-box {
+    display:inline-block;
+}

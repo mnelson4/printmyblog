@@ -67,7 +67,7 @@ div.pmb-post-header{
 .pmb-image{
     page-break-inside:avoid;
 }
-.pmb-image img{
+.pmb-posts .pmb-image img{
     width: auto;
     height: auto;
     display: block;
