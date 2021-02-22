@@ -37,6 +37,8 @@ class DefaultDesigns
                     'design_defaults' => [
                         'use_title' => true,
                         'image_size' => 800,
+                        'font_style' => 'times',
+                        'header_font_style' => 'arial'
                     ],
                     'project_defaults' => [
                         'title' => get_bloginfo('name')
@@ -126,6 +128,8 @@ class DefaultDesigns
                     'design_defaults' => [
                         'use_title' => true,
                         'image_size' => 400,
+                        'font_style' => 'times',
+                        'header_font_style' => 'palatino linotype'
                     ],
                     'project_defaults' => [
                         'title' => get_bloginfo('name')

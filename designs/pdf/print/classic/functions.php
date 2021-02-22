@@ -15,7 +15,13 @@ add_action(
 function pmb_enqueue_classic_script(){
     global $pmb_design;
     $css = pmb_design_styles($pmb_design)
-        . "body{font-size:" . $pmb_design->getSetting('font_size') . ";}
+        . "body{
+                font-size:" . $pmb_design->getSetting('font_size') . ";
+                font-family:" . $pmb_design->getSetting('font_style') . ";
+           }
+           h1,h2,h3,h4,h5,h6{
+                font-family:" . $pmb_design->getSetting('header_font_style') . ";
+           }     
 			@page{
 				size: " . $pmb_design->getSetting('page_width') . ' ' . $pmb_design->getSetting('page_height')
         ."}
