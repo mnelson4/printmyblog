@@ -4,6 +4,7 @@ function pmb_open_modal(content_selector, extra_args)
     var viewportHeight = jQuery(window).height();
     var args = {
         'dialogClass'   : 'wp-dialog',
+        'draggable'     : false,
         'modal'         : true,
         'autoOpen'      : true,
         'closeOnEscape' : true,

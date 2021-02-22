@@ -23,8 +23,9 @@ figure{
 }
 
 /* Make captions line up nicely with the image they're for. Yes a design may want to override these */
-figure.wp-block-image {
+figure.wp-block-image, .wp-block-image figure {
     display: table;
+    page-break-inside:avoid;
 }
 
 .wp-block-image figcaption {
