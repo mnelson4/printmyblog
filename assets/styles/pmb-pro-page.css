@@ -12,11 +12,6 @@ Styles generic to all PDF projects
 figure{
     margin-bottom:1em;
 }
-figcaption{
-    text-align:center;
-    font-style:italic;
-    font-size:.9em;
-}
 
 .alignleft{
     float:left;

@@ -172,4 +172,21 @@
     img, div.wp-caption{
         max-width:100%;
     }
+
+    figcaption{
+        color: #555;
+        text-align:center;
+        font-style:italic;
+        margin-top:0.5em;
+    }
+
+    /* Make captions line up nicely with the image they're for */
+    .wp-block-image .alignleft, .wp-block-image .alignright, .wp-block-image .aligncenter {
+        display: table;
+    }
+
+    .wp-block-image .alignleft > figcaption, .wp-block-image .alignright > figcaption, .wp-block-image .aligncenter > figcaption {
+        display: table-caption;
+        caption-side: bottom;
+    }
 }
