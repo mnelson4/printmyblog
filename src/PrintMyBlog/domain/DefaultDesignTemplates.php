@@ -453,8 +453,8 @@ class DefaultDesignTemplates
                     ]),
                     'header_font_style' => new FontInput([
                         'default' => 'arial',
-                        'html_label_text' => __('Arial', 'print-my-blog'),
-                        'html_help_text' => __('Default font for headers', 'print-my-blog')
+                        'html_label_text' => __('Header Font Style', 'print-my-blog'),
+                        'html_help_text' => __('Default font for header tags', 'print-my-blog')
                     ]),
                     'font_size' => new TextInput(
                         [
