@@ -7,3 +7,20 @@ Styles generic to all PDF projects
 .pmb-depth-2 .pmb-title{prince-bookmark-level: 3}
 .pmb-depth-3 .pmb-title{prince-bookmark-level: 4}
 .pmb-depth-4 .pmb-title{prince-bookmark-level: 5}
+
+/* Browsers basically have this set as the default, but not Prince*/
+figure{
+    margin-bottom:1em;
+}
+figcaption{
+    text-align:center;
+    font-style:italic;
+    font-size:.9em;
+}
+
+.alignleft{
+    float:left;
+}
+.alignright{
+    float:right;
+}
