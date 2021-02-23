@@ -35,7 +35,7 @@
 
 					if(pmb_design_uses('url',false)){
 						?>
-                        <div><span class="pmb-url"><a href="<?php echo esc_attr(get_the_permalink());?>"><?php the_permalink();?></a></span></div>
+                    <div><span class="pmb-url"><a class="pmb-leave-link" href="<?php echo esc_url(get_permalink());?>"><?php echo get_permalink();?></a></span></div>
 						<?php
 					}?>
                 </div>

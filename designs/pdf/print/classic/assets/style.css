@@ -162,6 +162,11 @@
         font-size:80%;
         margin-left:0;
     }
+
+    .entry-meta{
+        margin-bottom:1em;
+    }
+
     .excerpt{
         width:80%;
         margin-left:auto;

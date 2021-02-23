@@ -110,6 +110,10 @@
     span.pmb-footnote a{
         color:blue;
     }
+
+    .entry-meta{
+        margin-bottom:1em;
+    }
     .excerpt{
         width:80%;
         margin-left:auto;

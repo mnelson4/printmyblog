@@ -163,7 +163,7 @@ function pmb_reveal_dynamic_content(){
  */
 function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_policy, internal_link_policy)
 {
-    jQuery('.pmb-section a[href]').each(function(index){
+    jQuery('.pmb-section a[href]:not(.pmb-leave-link)').each(function(index){
         var a = jQuery(this);
         // ignore invisible hyperlinks
         if(! a.text().trim()){
