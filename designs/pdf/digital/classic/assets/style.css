@@ -110,6 +110,13 @@
     span.pmb-footnote a{
         color:blue;
     }
+    .excerpt{
+        width:80%;
+        margin-left:auto;
+        margin-right:auto;
+        size:1.5em;
+        font-style:italic;
+    }
     img, div.wp-caption{
         max-width:100%;
     }

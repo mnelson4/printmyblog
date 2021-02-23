@@ -417,9 +417,11 @@ class DefaultDesignTemplates
                             'title' => new InputOption(__('Post Title', 'print-my-blog')),
                             'id' => new InputOption(__('ID', 'print-my-blog')),
                             'author' => new InputOption(__('Author', 'print-my-blog')),
-                            'url' => new InputOption(__('URL', 'print-my-blog')),
                             'published_date' => new InputOption(__('Published Date', 'print-my-blog')),
                             'categories' => new InputOption(__('Categories and Tags', 'print-my-blog')),
+                            'url' => new InputOption(__('URL', 'print-my-blog')),
+
+
                             'featured_image' => new InputOption(__('Featured Image', 'print-my-blog')),
                             'excerpt' => new InputOption(__('Excerpt', 'print-my-blog')),
                             'content' => new InputOption(__('Content', 'print-my-blog')),
