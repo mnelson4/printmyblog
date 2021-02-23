@@ -34,6 +34,7 @@ class DefaultDesignTemplates
                     'dir'                   => PMB_DESIGNS_DIR . 'pdf/print/classic',
                     'url' => plugins_url('designs/pdf/print/classic', PMB_MAIN_FILE),
                     'default' => 'classic_print',
+                    'docs' => 'https://printmy.blog/user-guide/pdf-design/classic-print-pdf-and-variations/',
                     'supports' => [
                         'front_matter',
                         'part',
@@ -106,6 +107,7 @@ class DefaultDesignTemplates
                     'default' => 'classic_digital',
                     'dir'             => PMB_DESIGNS_DIR . 'pdf/digital/classic/',
                     'url' => plugins_url('designs/pdf/digital/classic', PMB_MAIN_FILE),
+                    'docs' => 'https://printmy.blog/user-guide/pdf-design/classic-digital-pdf-settings/',
                     'supports' => [
                         'front_matter',
                         'back_matter',
@@ -185,6 +187,7 @@ class DefaultDesignTemplates
                     'dir'             => PMB_DESIGNS_DIR . 'pdf/digital/buurma/',
                     'default' => 'buurma',
                     'url' => plugins_url('designs/pdf/digital/buurma', PMB_MAIN_FILE),
+                    'docs' => 'https://printmy.blog/user-guide/pdf-design/buurma-whitepaper-digital-pdf/',
                     'supports' => [
                         'front_matter',
                         'back_matter',
@@ -281,6 +284,7 @@ class DefaultDesignTemplates
                     'format'          => 'digital_pdf',
                     'dir'             => PMB_DESIGNS_DIR . 'pdf/digital/mayer/',
                     'default' => 'mayer',
+                    'docs' => 'https://printmy.blog/user-guide/pdf-design/mayer-magazine-digital-pdf/',
                     'supports' => [
                         'front_matter',
                         'part'

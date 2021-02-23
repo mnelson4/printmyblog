@@ -82,6 +82,10 @@ class DesignTemplate
      * Values are arrays too, with the key "title" for the template's title to show
      */
     protected $custom_templates = array();
+    /**
+     * @var string
+     */
+    protected $docs;
 
     /**
      * DesignTemplate constructor.
@@ -93,6 +97,7 @@ class DesignTemplate
      * @type string dir
      * @type callable design_form_callback
      * @type callable project_form_callback
+     * @type string docs
      * }
      */
     public function __construct($slug, $args)
@@ -103,6 +108,9 @@ class DesignTemplate
         $this->dir                   = (string)$args['dir'];
         $this->default_design_slug   = (string)$args['default'];
         $this->url                   = (string)$args['url'];
+        if(isset($args['docs'])){
+            $this->docs = (string)$args['docs'];
+        }
         if (isset($args['supports'])) {
             $this->supports = (array)$args['supports'];
         }
@@ -374,5 +382,21 @@ class DesignTemplate
      */
     public function getDefaultDesign(){
         return $this->design_manager->getBySlug($this->getDefaultDesignSlug());
+    }
+
+    /**
+     * @return string
+     */
+    public function getDocs()
+    {
+        return $this->docs;
+    }
+
+    /**
+     * @param string $docs
+     */
+    public function setDocs($docs)
+    {
+        $this->docs = $docs;
     }
 }

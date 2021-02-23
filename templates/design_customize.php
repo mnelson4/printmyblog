@@ -24,6 +24,7 @@ pmb_render_template(
 	]
 );
 ?>
+<div class="pmb-right-help"><span class="dashicons dashicons-admin-site-alt3"></span><a target="_blank" href="<?php echo esc_url($design->getDesignTemplate()->getDocs());?>"><?php printf(esc_html__('Read %s Documentation Online', 'print-my-blog'), $design->getDesignTemplate()->getTitle());?></a></div>
 <form method="POST" action="<?php echo esc_attr($form_url);?>">
     <?php echo $form->getHtmlAndJs();?>
     <button class="button button-primary pmb-save"><?php esc_html_e('Save', 'print-my-blog');?></button>

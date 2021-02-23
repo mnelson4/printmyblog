@@ -201,3 +201,6 @@ For displaying a series of boxes
 .pmb-row-actions .pmb-step:not(:last-child)::after{
     content:' ';
 }
+.pmb-right-help{
+    float:right;
+}

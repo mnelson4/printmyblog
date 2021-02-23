@@ -126,6 +126,9 @@ foreach($designs as $design){
                                 </ul>
                             </td>
                         </tr>
+                        <tr>
+                            <th colspan="2"><span class="dashicons dashicons-admin-site-alt3"></span><a target="_blank" href="<?php echo esc_url($design->getDesignTemplate()->getDocs());?>"><?php printf(esc_html__('Read %s Documentation Online', 'print-my-blog'), $design->getDesignTemplate()->getTitle());?></a></th>
+                        </tr>
                     </table>
                 </div>
                 <div class="pmb-details-description">
