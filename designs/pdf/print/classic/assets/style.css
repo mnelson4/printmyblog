@@ -133,7 +133,6 @@
     .pmb-part h1.pmb-title{
         font-size:4em;
         string-set: part-title content();
-        string-set: article-title '';
         margin-top:2in;
     }
     .pmb-part .entry-content{
