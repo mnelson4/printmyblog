@@ -126,7 +126,7 @@
         margin-left:1em;
     }
     .pmb-toc-list a::after {
-        content: leader('.') target-counter(attr(href), page) !important;
+        content: leader('.') target-counter(attr(href), page, lower-roman) !important;
     }
 
     /* part styling*/
