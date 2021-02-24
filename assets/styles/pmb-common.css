@@ -65,7 +65,6 @@ summary.pmb-reveal-options{
     padding: 5px;
     margin: 5px;
 }
-}
 .pmb-print-this-page .wp-block-button__link{
     /* Prevent the default block styling from adding unnecesary space above these buttons*/
     margin-top:0 !important;

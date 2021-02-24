@@ -237,9 +237,16 @@ function PmbToc(){
             }
             var depth = parseInt(selection.attr('data-depth'));
             var height = parseInt(selection.attr('data-height'));
+            if(selection.hasClass('pmb-front_matter_article')){
+                var matter_class = 'pmb-toc-front';
+            } else if(selection.hasClass('pmb-back_matter_article')){
+                var matter_class = 'pmb-toc-back';
+            } else {
+                var matter_class = 'pmb-toc-main';
+            }
             var title_text = title_element.html();
             if(title_text){
-                jQuery('#pmb-toc-list').append('<li class="pmb-toc-item pmb-toc-depth-' + depth + ' pmb-toc-height-' + height + '"><a href="#' + id + '">' + title_text + '</a></li>');
+                jQuery('#pmb-toc-list').append('<li class="pmb-toc-item pmb-toc-depth-' + depth + ' pmb-toc-height-' + height + ' '  + matter_class + '"><a href="#' + id + '">' + title_text + '</a></li>');
             }
             // find its children
             _this.create_toc_for_depth(selection.siblings('div'),depth + 1);
