@@ -70,7 +70,7 @@ function pmb_resize_images(desired_max_height) {
         jQuery('.pmb-posts img:not(.emoji)').remove();
         wp_block_galleries.remove();
     } else{
-        var big_images = jQuery('.pmb-posts img:not(.emoji, div.tiled-gallery img, img.fg-image, img.size-thumbnail, .pmb-dont-resize)').filter(function(){
+        var big_images_in_figures = jQuery('.pmb-posts figure:not(.pmb-dont-resize) img:not(.emoji, div.tiled-gallery img, img.fg-image, img.size-thumbnail)').filter(function(){
             // only wrap images bigger than the desired maximum height in pixels.
             var element = jQuery(this);
             // ignore images in columns. If they get moved by prince-snap they can disappear
@@ -114,7 +114,7 @@ function pmb_resize_images(desired_max_height) {
             'width':'auto'
         });
         big_images_without_figures.wrap('<div class="pmb-image"></div>');
-        big_images.each(function () {
+        big_images_in_figures.each(function () {
             var obj = jQuery(this);
             // Modify the CSS here. We could have written CSS rules but the selector worked slightly differently
             // in CSS compared to jQuery.
