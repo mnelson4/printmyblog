@@ -128,7 +128,7 @@
     .pmb-toc-list a.pmb-toc-front::after {
         content: leader('.') target-counter(attr(href), page, lower-roman) !important;
     }
-    .pmb-toc-list a::not(.pmb-toc-front)::after {
+    .pmb-toc-list a:not(.pmb-toc-front)::after {
         content: leader('.') target-counter(attr(href), page) !important;
     }
 
