@@ -505,7 +505,7 @@ class DefaultDesignTemplates
                                     '<a href="https://www.w3schools.com/CSSref/css_units.asp">',
                                     '</a>'
                                 ),
-                                'default' => '210mm'
+                                'default' => '8.5in'
                             ]),
                             'page_height' => new TextInput([
                                 'html_label_text' => __('Page Height', 'print-my-blog'),
@@ -514,7 +514,7 @@ class DefaultDesignTemplates
                                     '<a href="https://www.w3schools.com/CSSref/css_units.asp">',
                                     '</a>'
                                 ),
-                                'default' => '297mm'
+                                'default' => '11in'
                             ]),
                         ]
                     ])
