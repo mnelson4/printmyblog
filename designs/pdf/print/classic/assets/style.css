@@ -125,10 +125,10 @@
     .pmb-toc-item.pmb-toc-depth-1{
         margin-left:1em;
     }
-    .pmb-toc-list a.pmb-toc-front::after {
+    .pmb-toc-list .pmb-toc-list-item.pmb-toc-front a::after {
         content: leader('.') target-counter(attr(href), page, lower-roman) !important;
     }
-    .pmb-toc-list a:not(.pmb-toc-front)::after {
+    .pmb-toc-list .pmb-toc-list-item:not(.pmb-toc-front) a::after {
         content: leader('.') target-counter(attr(href), page) !important;
     }
 
