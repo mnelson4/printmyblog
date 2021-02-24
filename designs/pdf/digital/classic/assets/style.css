@@ -75,7 +75,10 @@
     .pmb-toc-item.pmb-toc-depth-1{
         margin-left:1em;
     }
-    .pmb-toc-list a::after {
+    .pmb-toc-list .pmb-toc-item.pmb-toc-front a::after {
+        content: leader('.') target-counter(attr(href), page, lower-roman) !important;
+    }
+    .pmb-toc-list .pmb-toc-item:not(.pmb-toc-front) a::after {
         content: leader('.') target-counter(attr(href), page) !important;
     }
 

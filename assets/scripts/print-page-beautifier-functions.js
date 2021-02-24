@@ -64,13 +64,13 @@ function pmb_resize_images(desired_max_height) {
     // page breaks inside them. Images that are part of a gallery, or are pretty small and inline, also shouldn't be shrunk.
     // So first let's determine how tall the user requested the tallest image could be. Anything bigger than that
     // needs to be wrapped in a div (or figure) and resized.
-    var wp_block_galleries = jQuery('.pmb-posts .wp-block-gallery');
+    var wp_block_galleries = jQuery('.pmb-posts .wp-block-gallery:not(.pmb-dont-resize)');
     if(desired_max_height === 0){
         // Remove all images, except emojis.
         jQuery('.pmb-posts img:not(.emoji)').remove();
         wp_block_galleries.remove();
     } else{
-        var big_images = jQuery('.pmb-posts img:not(.emoji, div.tiled-gallery img, img.fg-image, img.size-thumbnail)').filter(function(){
+        var big_images = jQuery('.pmb-posts img:not(.emoji, div.tiled-gallery img, img.fg-image, img.size-thumbnail, .pmb-dont-resize)').filter(function(){
             // only wrap images bigger than the desired maximum height in pixels.
             var element = jQuery(this);
             // ignore images in columns. If they get moved by prince-snap they can disappear
@@ -83,7 +83,7 @@ function pmb_resize_images(desired_max_height) {
         // pagebreaks inside them
         var wrap_threshold = 300;
         // Keep track of images that are already wrapped in a caption. We don't need to wrap them in a div.
-        var big_images_without_figures = jQuery('.pmb-posts img').filter(function() {
+        var big_images_without_figures = jQuery('.pmb-posts img:not(.pmb-dont-resize)').filter(function() {
             var element = jQuery(this);
             // ignore images in columns. If they get moved by prince-snap they can disappear
             if(element.parents('.wp-block-columns').length !== 0){
