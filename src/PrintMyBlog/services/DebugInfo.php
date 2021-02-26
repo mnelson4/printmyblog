@@ -30,12 +30,12 @@ class DebugInfo
     /**
      * @return string
      */
-    public function getDebugInfoString()
+    public function getDebugInfoString($pretty = true)
     {
         if (! defined('JSON_PRETTY_PRINT')) {
             define('JSON_PRETTY_PRINT', 128);
         }
-        return wp_json_encode($this->getDebugInfo(), JSON_PRETTY_PRINT);
+        return wp_unslash(wp_json_encode($this->getDebugInfo(), $pretty ? JSON_PRETTY_PRINT : null));
     }
 
     /**
@@ -48,7 +48,25 @@ class DebugInfo
         $all_debug_core_info = WP_Debug_Data::debug_data();
 
         $plugins_active = $all_debug_core_info['wp-plugins-active']['fields'];
+        $simplified_plugin_data = [];
+        foreach($plugins_active as $plugin_slug => $plugin_info){
+            $version = str_replace('Version ', '', $plugin_info['value']);
+            $unnecessary_auto_updates_string_location = strpos($version,'| Auto-updates');
+            if($unnecessary_auto_updates_string_location !== false){
+                $version = substr($version,0,$unnecessary_auto_updates_string_location);
+            }
+            $simplified_plugin_data[$plugin_slug] = $version;
+        }
         $active_theme = $all_debug_core_info['wp-active-theme']['fields'];
+        $simplified_theme_data = [];
+        $simplified_theme_data = [
+            'name' => $active_theme['name']['value'],
+            'version' => $active_theme['version']['value'],
+            'author' => $active_theme['author']['value'],
+            'author_website' => $active_theme['author_website']['value'],
+            'parent_theme' => $active_theme['parent_theme']['value'],
+            'theme_features' => $active_theme['theme_features']['value']
+        ];
         $is_ssl                 = is_ssl();
         $is_multisite           = is_multisite();
         $blog_public            = get_option('blog_public');
@@ -79,16 +97,15 @@ class DebugInfo
             'language' => $language,
             'public' => $blog_public,
             'environment_type' => $environment_type,
-            'plugins_active' => $plugins_active,
-            'active_theme' => $active_theme,
+            'plugins_active' => $simplified_plugin_data,
+            'active_theme' => $simplified_theme_data,
             'debug' => $debug,
             'post_max_size' => $post_max_size,
             'upload_max_size' => $upload_max_filesize,
             'effective_max_size' => $effective,
             'ssl' => $is_ssl,
             'multisite' => $is_multisite,
-            'projects' => $this->getProjectData(),
-            'designs' => $this->getDesignData()
+            'projects' => $this->getProjectData()
         ];
     }
 
@@ -100,44 +117,105 @@ class DebugInfo
         $projects = $this->project_manager->getAll(
             new \WP_Query([
                 'order' => 'DESC',
-                'posts_per_page' => 10
+                'orderby' => 'modified',
+                'posts_per_page' => 1
             ])
         );
         $project_datas = [];
         foreach ($projects as $project) {
             $project_data = [
                 'title' => $project->getWpPost()->post_title,
+                'generations' => [],
+                'meta' => [],
+                'designs' => []
             ];
-
+            foreach($project->getDesigns() as $format => $design){
+                $project_data['designs'][$format] = $this->simplifyDesignData($design);
+            }
             foreach ($project->getAllGenerations() as $generation) {
                 // phpcs:disable Generic.Files.LineLength.TooLong
                 $project_data['generations'][$generation->getFormat()->slug()] = $generation->getGeneratedIntermediaryFileUrl();
                 // phpcs:enable Generic.Files.LineLength.TooLong
             }
-            $project_data['meta'] = get_post_meta($project->getWpPost()->ID);
+            $project_data['meta'] = $this->simplifyProjectMeta($this->simpifyMetadata(get_post_meta($project->getWpPost()->ID)));
             $project_datas[] = $project_data;
         }
         return $project_datas;
     }
-    protected function getDesignData()
-    {
 
-        /**
-         * @var $designs Design[]
-         */
-        $designs = $this->design_manager->getAll(
-            new \WP_Query([
-                'posts_per_page' => 10
-            ])
+    protected function simplifyProjectMeta($project_meta){
+        $metas = array_diff_key(
+            $project_meta,
+            array_flip([
+                    '_pmb_pmb_code',
+                    '_wp_old_slug',
+                    '_pmb_format',
+                    '_pmb_progress_setup',
+                    '_pmb_levels_used'
+                ]
+            )
         );
-        $design_datas = [];
-        foreach ($designs as $design) {
-            $design_datas[] = [
+        $starters_to_ignore = [
+            '_pmb_progress_',
+            '_pmb_design_for',
+            '_pmb_dirty_',
+            '_pmb_last_section_',
+            '_pmb_generated_'
+        ];
+        $final_metas = [];
+        foreach($metas as $key => $value){
+            $ok = true;
+            foreach($starters_to_ignore as $starter_to_ignore){
+                if(strpos(
+                    $key,
+                    $starter_to_ignore
+                ) === 0){
+                    $ok = false;
+                    break;
+                }
+            }
+            if($ok){
+                $final_metas[$key] = $value;
+            }
+        }
+        return $final_metas;
+    }
+
+    protected function simplifyDesignData(Design $design)
+    {
+            return [
                 'title' => $design->getWpPost()->ID,
                 'template' => $design->getDesignTemplate()->getTitle(),
-                'meta' => get_post_meta($design->getWpPost()->ID)
+                'meta' => array_diff_key(
+                    $this->simpifyMetadata(get_post_meta($design->getWpPost()->ID)),
+                    array_flip(
+                        [
+                            '_pmb_format',
+                            '_pmb_design_template',
+                            '_pmb_preview_1_url',
+                            '_pmb_preview_1_desc',
+                            '_pmb_preview_2_url',
+                            '_pmb_preview_2_desc',
+                            '_pmb_author_name',
+                            '_pmb_author_url'
+                        ]
+                    )
+                )
             ];
+    }
+
+    /**
+     * Make it look pretty so it's easy to find info in it.
+     * @param $metadata
+     * @return array
+     */
+    protected function simpifyMetadata($metadata){
+        $simplified_metas = [];
+        foreach($metadata as $meta_key => $meta_values){
+            $value = reset($meta_values);
+            // if it's serialized data, it'd be nice to show it as JSON instead
+            $simplified_metas[$meta_key] = maybe_unserialize($value);
         }
-        return $design_datas;
+        return $simplified_metas;
     }
 }

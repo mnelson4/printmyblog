@@ -25,7 +25,9 @@ use PrintMyBlog\services\SvgDoer;
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\entities\notifications\OneTimeNotification;
 use Twine\forms\base\FormSection;
+use Twine\forms\base\FormSectionHtml;
 use Twine\forms\helpers\InputOption;
+use Twine\forms\inputs\HiddenInput;
 use Twine\forms\inputs\RadioButtonInput;
 use Twine\forms\inputs\TextAreaInput;
 use Twine\forms\inputs\TextInput;
@@ -307,16 +309,29 @@ class Admin extends BaseController
 
     public function helpPage()
     {
+
         if ($this->invalid_form instanceof FormSection) {
             $form = $this->invalid_form;
         } else {
-            $form = $this->getHelpForm();
+            if(pmb_fs()->is_plan__premium_only('founding_members')){
+                $form = $this->getEmailHelpForm();
+                $form_url = admin_url(PMB_ADMIN_HELP_PAGE_PATH);
+                $method = 'POST';
+                $button_text = esc_html__('Email Print My Blog Support', 'print-my-blog');
+            } else {
+                $form = $this->getGithubHelpForm();
+                $form_url = 'https://github.com/mnelson4/printmyblog/issues/new';
+                $method = 'GET';
+                $button_text = esc_html__('Report Issue on GitHub', 'print-my-blog');
+            }
         }
         pmb_render_template(
             'help.php',
             [
                 'form' => $form,
-                'form_url' => admin_url(PMB_ADMIN_HELP_PAGE_PATH)
+                'form_url' => $form_url,
+                'form_method' => $method,
+                'button_text' => $button_text
             ]
         );
     }
@@ -324,7 +339,7 @@ class Admin extends BaseController
     public function sendHelp()
     {
         global $current_user;
-        $form = $this->getHelpForm();
+        $form = $this->getEmailHelpForm();
         $form->receiveFormSubmission($_REQUEST);
         if (! $form->isValid()) {
             $this->invalid_form = $form;
@@ -387,36 +402,59 @@ class Admin extends BaseController
         $this->wp_error = $error;
     }
 
-    protected function getHelpForm()
+    protected function getEmailHelpForm()
     {
         global $current_user;
         return new FormSection([
-                'subsections' => [
-                        'reason' => new TextAreaInput([
-                            // phpcs:disable Generic.Files.LineLength.TooLong
-                            'html_label_text' => __('Please explain what you did, what you expected, and what went wrong', 'print-my-blog'),
-                            // phpcs:enable Generic.Files.LineLength.TooLong
-                            'required' => true,
-                            'html_help_text' => __('Including links to screenshots is appreciated', 'print-my-blog')
-                        ]),
-                    'name' => new TextInput([
-                        'html_label_text' => __('Your Name', 'print-my-blog'),
-                        'default' => $current_user->user_firstname ? $current_user->user_firstname . ' ' . $current_user->user_lastname :  $current_user->display_name,
-                        'html_help_text' => __('Or pseudonym or something. I’m Mike, hi!', 'print-my-blog')
+            'subsections' => [
+                    'reason' => new TextAreaInput([
+                        // phpcs:disable Generic.Files.LineLength.TooLong
+                        'html_label_text' => __('Please explain what you did, what you expected, and what went wrong', 'print-my-blog'),
+                        // phpcs:enable Generic.Files.LineLength.TooLong
+                        'required' => true,
+                        'html_help_text' => __('Including links to screenshots is appreciated', 'print-my-blog')
                     ]),
-                    'consent' => new YesNoInput([
-                        'html_label_text' => __('Are you ok with us viewing your most recent generated documents?', 'print-my-blog'),
-                        'default' => true,
-                        'html_help_text' => __('Viewing your most recent generated documents saves a lot of time figuring out what is going wrong. We won’t share your content with anyone else.', 'print-my-blog')
-                    ]),
-                    'debug_info' => new TextAreaInput([
-                        'html_label_text' => __('This debug info will also be sent.', 'print-my-blog'),
-                        'disabled' => true,
-                        'default' => $this->debug_info->getDebugInfoString(),
-                        'html_help_text' => __('This is mostly system information, list of active plugins, active theme, and some Print My Blog Pro info like your most recent projects.', 'print-my-blog')
-                    ]),
+                'name' => new TextInput([
+                    'html_label_text' => __('Your Name', 'print-my-blog'),
+                    'default' => $current_user->user_firstname ? $current_user->user_firstname . ' ' . $current_user->user_lastname :  $current_user->display_name,
+                ]),
+                'consent' => new YesNoInput([
+                    'html_label_text' => __('Are you ok with us viewing your most recent generated documents?', 'print-my-blog'),
+                    'default' => true,
+                    'html_help_text' => __('Viewing your most recent generated documents saves a lot of time figuring out what is going wrong. We won’t share your content with anyone else.', 'print-my-blog')
+                ]),
+                'debug_info' => new TextAreaInput([
+                    'html_label_text' => __('This debug info will also be sent.', 'print-my-blog'),
+                    'disabled' => true,
+                    'default' => $this->debug_info->getDebugInfoString(),
+                    'html_help_text' => __('This is mostly system information, list of active plugins, active theme, and some Print My Blog Pro info like your most recent projects.', 'print-my-blog')
+                ]),
+            ]
+        ]);
+    }
 
-                    ]
+    protected function getGithubHelpForm(){
+        return new FormSection([
+                'subsections' => [
+                        'explanatory_text' => new FormSectionHtml(
+                                '<h2>' . __('Support for your plan is offered on GitHub', 'print-my-blog') . '</h2>' .
+                            '<p>' . __('GitHub is a public forum to share your issues with the developer and other users.', 'print-my-blog') . '</p>' .
+                            '<p>' . sprintf(
+                                    __('You will need a GitHub account. If prefer to use email support please %1$spurchase a license that offers email support.%2$s', 'print-my-blog'),
+                                '<a href="' . esc_url(pmb_fs()->get_upgrade_url()) . '">',
+                                '</a>'
+                            )
+                            . '</p>'
+                        ),
+                        'body' => new HiddenInput([
+                                'default' => '** Please describe what you were doing, what you expected to happen, and what the problem was. ** 
+
+```
+' . substr($this->debug_info->getDebugInfoString(false), 0, 5000) . '
+```',
+                                'html_name' => 'body'
+                        ])
+                ]
         ]);
     }
 
@@ -1138,6 +1176,8 @@ class Admin extends BaseController
     protected function saveProjectContent()
     {
         check_admin_referer('pmb-project-edit');
+
+        $this->updateProjectModifiedDate();
         foreach ($this->project->getAllGenerations() as $project_generation) {
             $project_generation->addDirtyReason(
                 'content_update',
@@ -1174,6 +1214,18 @@ class Admin extends BaseController
         $this->redirectToNextStep($this->project);
     }
 
+    /**
+     * It's nice to know which project the user worked on last, but many steps don't actually affect the project post
+     * directly (only meta or other related data). This can help to make sure the project post's modified_date still
+     * gets updated. Not needed if already calling wp_update_post() with other data.
+     */
+    protected function updateProjectModifiedDate(){
+        // update the post's modified date!
+        wp_update_post([
+            'ID' => $this->project->getWpPost()->ID
+        ]);
+    }
+
     protected function setSectionFromRequest(Project $project, $request_data, $placement, &$order = 1)
     {
         $section_data = stripslashes($_POST[$request_data]);
@@ -1190,6 +1242,7 @@ class Admin extends BaseController
 
     protected function saveProjectCustomizeDesign()
     {
+        $this->updateProjectModifiedDate();
         $design = $this->project->getDesignFor($_GET['format']);
         $design_form = $design->getDesignTemplate()->getDesignFormTemplate();
         $design_form->receiveFormSubmission($_REQUEST);
@@ -1219,6 +1272,7 @@ class Admin extends BaseController
 
     protected function saveProjectChooseDesign()
     {
+        $this->updateProjectModifiedDate();
         $design = $this->design_manager->getById((int)$_REQUEST['design']);
         $format = $this->file_format_registry->getFormat($_GET['format']);
         if (! $design instanceof Design || ! $format instanceof FileFormat) {
@@ -1269,6 +1323,7 @@ class Admin extends BaseController
      */
     protected function saveProjectMetadata()
     {
+        $this->updateProjectModifiedDate();
         $form = $this->project->getMetaForm();
         $form->receiveFormSubmission($_REQUEST);
         if (! $form->isValid()) {
@@ -1301,6 +1356,7 @@ class Admin extends BaseController
      */
     protected function saveProjectGenerate()
     {
+        $this->updateProjectModifiedDate();
         $format = $this->file_format_registry->getFormat($_GET['format']);
         if (! $format instanceof FileFormat) {
             throw new Exception(__('There is no file format with the slug "%s"', 'print-my-blog'), $_GET['format']);

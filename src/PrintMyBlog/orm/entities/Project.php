@@ -306,7 +306,7 @@ class Project extends PostWrapper
     /**
      * Gets an the chosen designs for the chosen formats.
      * Keys are format slugs, values are design slugs.
-     * @return array
+     * @return Design[]
      */
     public function getDesigns()
     {
