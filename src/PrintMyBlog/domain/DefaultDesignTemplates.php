@@ -530,6 +530,13 @@ class DefaultDesignTemplates
     public function getGenericDesignForm()
     {
         $theme = wp_get_theme();
+        $use_theme_help_text = sprintf(
+            __('Your theme, "%1$s", can be used in conjunction with your design. Themes are often not intended for print and can conflict with the design, but you may have content that looks broken without the theme.', 'print-my-blog'),
+            $theme->name
+        );
+        if(! pmb_fs()->is_plan__premium_only('business')){
+            $use_theme_help_text = __('Note: this option is only supported for the business license.', 'print-my-blog') . '<br>' . $use_theme_help_text;
+        }
 
         return new FormSection(
             [
@@ -542,10 +549,7 @@ class DefaultDesignTemplates
                                     [
                                         'use_theme' => new YesNoInput([
                                             'html_label_text' => __('Apply Website Theme', 'print-my-blog'),
-                                            'html_help_text' => sprintf(
-                                                __('Your theme, "%1$s", can be used in conjunction with your design. Themes are often not intended for print and can conflict with the design, but you may have content that looks broken without the theme. Usually it is recommended to leave this off.', 'print-my-blog'),
-                                                $theme->name
-                                            ),
+                                            'html_help_text' => $use_theme_help_text,
                                             'default' => false
                                         ]),
                                         'custom_css' => new TextAreaInput([
