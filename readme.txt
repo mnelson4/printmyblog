@@ -291,6 +291,8 @@ https://youtu.be/uPQ3vqm7A2g
 7. Add the Print My Blog block to add a form visitors can use to select what and how to print your blog.
 
 == Changelog ==
+= 2.9.9 March 1, 2020 =
+* [Improve NextGen gallery display](https://wordpress.org/support/topic/gallery-thumbnails-are-put-one-per-line/)
 
 = 2.9.8 December 23, 2020 =
 * Fix pmb-screen-only CSS class
