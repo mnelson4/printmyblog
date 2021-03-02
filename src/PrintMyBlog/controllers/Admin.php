@@ -598,6 +598,7 @@ class Admin extends BaseController
                         'pmb_generate',
                         [
                             'site_url' => site_url(),
+                            'use_pmb_central_for_previews' => pmb_fs()->is_plan__premium_only('business') ? 1 : 0,
                             'license_data' => [
                                 'endpoint' => $this->pmb_central->getCentralUrl(),
                                 'license_id' => $license_id,

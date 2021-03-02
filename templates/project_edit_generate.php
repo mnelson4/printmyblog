@@ -64,8 +64,8 @@ foreach($generations as $generation){
                     </ul>
                 </div>
                 <br/>
-                <button class="button button-primary pmb-generate" data-format="<?php echo esc_attr($format_slug);
-                ?>"><?php esc_html_e('Regenerate', 'print-my-blog');
+                <button
+                        class="button button-primary pmb-generate" data-format="<?php echo esc_attr($format_slug);?>"><?php esc_html_e('Regenerate', 'print-my-blog');
                 ?></button>
                 <?php
             } else {
@@ -92,10 +92,10 @@ foreach($generations as $generation){
         ?>
         <div class="pmb-after-generation" <?php echo ! $generation->isGenerated() || $generation->isDirty() ? 'style="display:none"' : '';?>>
             <a class="button pmb-download-preview <?php echo $generation->isGenerated() ? 'button-primary' : '';?>"
-            data-format="<?php echo
-            esc_attr
-            ($format_slug);
-            ?>" data-html-url="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"><?php esc_html_e('Download Preview', 'print-my-blog');?></a>
+                data-format="<?php echo esc_attr($format_slug);?>"
+                data-html-url="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"
+                data-preview="1">
+                <?php esc_html_e('Download Preview', 'print-my-blog');?></a>
                 <a href="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"
                 class="pmb-view-html"
                    title="<?php echo esc_attr(__('View HTML', 'print-my-blog'));
@@ -143,8 +143,9 @@ foreach($generations as $generation){
                                            class="pmb-download-<?php echo esc_attr
                                            ($format_slug);?> button button-primary pmb-download-live"
                                            data-format="<?php echo esc_attr ($format_slug);?>"
-                                           data-html-url="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"><?php esc_html_e('Download Paid PDF',
-                                                'print-my-blog');?></a>
+                                           data-html-url="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"
+                                           data-preview="0">
+                                            <?php esc_html_e('Download Paid PDF','print-my-blog');?></a>
                                         <p class="description"><?php printf(
                                                 esc_html__('This will use one of your %1$s remaining credits, and is non-refundable.',
                                                     'print-my-blog'),

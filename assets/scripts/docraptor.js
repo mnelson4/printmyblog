@@ -56,6 +56,7 @@ function PmbAsyncPdfCreation(
 ) {
     this.use_printmyblog_middleman = use_printmyblog_middleman;
     this.authorization_data = authorization_data;
+    doc_attrs['async'] = true;
     this.doc_attrs = doc_attrs;
     this.upddate_callback = update_callback;
     this.success_callback = success_callback;

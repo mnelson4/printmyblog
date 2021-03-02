@@ -38,28 +38,8 @@ jQuery(document).ready(function () {
         pmb_open_modal(
             '.pmb-download-preview-dialog-' + format,
         );
-        var html_url = event.currentTarget.getAttribute('data-html-url');
-        if (format === 'digital_pdf') {
-            var media = 'screen';
-        } else {
-            var media = 'print';
-        }
-
-        var dynamic_doc_attrs = JSON.parse(JSON.stringify(pmb_generate.doc_attrs));
-        // this a test, always override whether its a test request or not.
-        dynamic_doc_attrs.test = true;
-        dynamic_doc_attrs.document_url = html_url;
-        dynamic_doc_attrs.prince_options.media = media;
-        dynamic_doc_attrs.async = true;
-
-
-        var server_communicator = new PmbAsyncPdfCreation(
-            false,
-            'YOUR_API_KEY_HERE',
-            dynamic_doc_attrs,
-            (response) => {
-                console.log(response);
-            },
+        pmb_generate_doc(
+            event.currentTarget,
             (download_url) => {
                 jQuery('.pmb-downloading-test-pdf').hide();
                 jQuery('.pmb-success-download-test-pdf').show();
@@ -74,48 +54,28 @@ jQuery(document).ready(function () {
                 alert(error_message);
             }
         );
-        server_communicator.begin();
     });
 
     jQuery('.pmb-download-live').click(function (event) {
         jQuery('.pmb-success-download-test-pdf').hide();
         jQuery('.pmb-downloading-live-pdf').show();
         event.preventDefault();
-        var format = event.currentTarget.getAttribute('data-format');
-        var html_url = event.currentTarget.getAttribute('data-html-url');
-        if (format === 'digital_pdf') {
-            var media = 'screen';
-        } else {
-            var media = 'print';
-        }
 
-        var dynamic_doc_attrs = JSON.parse(JSON.stringify(pmb_generate.doc_attrs));
-        // this a test, always override whether its a test request or not.
-        dynamic_doc_attrs.document_url = html_url;
-        dynamic_doc_attrs.prince_options.media = media;
-
-        // reduce the number of credits immediately because we get charged for using it immediately
-        var previous_remaining_credits = parseInt(jQuery('.pmb-credits-remaining').text());
-        jQuery('.pmb-credits-remaining').text(previous_remaining_credits - 1);
-        jQuery.ajax(
-            ajaxurl,
-            {
-                'method': 'POST',
-                'data':{
-                    'action':'pmb_reduce_credits'
-                }
-            }
-        );
-
-
-        var server_communicator = new PmbAsyncPdfCreation(
-            true,
-            pmb_generate.license_data,
-            dynamic_doc_attrs,
-            (response) => {
-                console.log(response);
-            },
+        pmb_generate_doc(
+            event.currentTarget,
             (download_url) => {
+                // ok! reduce credits then
+                var previous_remaining_credits = parseInt(jQuery('.pmb-credits-remaining').text());
+                jQuery('.pmb-credits-remaining').text(previous_remaining_credits - 1);
+                jQuery.ajax(
+                    ajaxurl,
+                    {
+                        'method': 'POST',
+                        'data':{
+                            'action':'pmb_reduce_credits'
+                        }
+                    }
+                );
                 jQuery('.pmb-downloading-live-pdf').hide();
                 jQuery('.pmb-after-download-actual-success').show();
                 window.location.href = download_url;
@@ -123,12 +83,52 @@ jQuery(document).ready(function () {
             (error_message) => {
                 jQuery('.pmb-downloading-live-pdf').hide();
                 jQuery('.pmb-error-downloading-test-pdf').show();
+                if(error_message === 'Socket error downloading document content from supplied url.'){
+                    error_message = pmb_generate.translations.socket_error;
+                }
                 alert(error_message);
             }
         );
-        server_communicator.begin();
     });
 });
+
+function pmb_generate_doc(currentTarget, success_callback, failure_callback){
+    var format = currentTarget.getAttribute('data-format');
+    var html_url = currentTarget.getAttribute('data-html-url');
+    var is_preview = currentTarget.getAttribute('data-preview');
+    var use_middleman = is_preview && pmb_generate.use_pmb_central_for_previews;
+    if(use_middleman){
+        var authorization_data = pmb_generate.license_data;
+    } else {
+        var authorization_data = 'YOUR_API_KEY_HERE';
+    }
+    if (format === 'digital_pdf') {
+        var media = 'screen';
+    } else {
+        var media = 'print';
+    }
+
+    var dynamic_doc_attrs = JSON.parse(JSON.stringify(pmb_generate.doc_attrs));
+    // if this a preview, always override whether its a test request or not.
+    if(is_preview){
+        dynamic_doc_attrs.test = true;
+    }
+    dynamic_doc_attrs.document_url = html_url;
+    dynamic_doc_attrs.prince_options.media = media;
+
+
+    var server_communicator = new PmbAsyncPdfCreation(
+        use_middleman,
+        authorization_data,
+        dynamic_doc_attrs,
+        (response) => {
+            console.log(response);
+        },
+        success_callback,
+        failure_callback
+    );
+    server_communicator.begin();
+}
 
 
 
