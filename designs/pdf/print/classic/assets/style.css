@@ -114,6 +114,9 @@
 
 
     /* toc */
+    #pmb-toc-wrapper{
+        break-before: right;
+    }
     .pmb-toc-list li{
         list-style:none;
     }
@@ -133,6 +136,12 @@
     }
 
     /* part styling*/
+    .pmb-part-wrapper{
+        break-before:right;
+    }
+    .pmb-back_matter_article-wrapper{
+        break-before:right;
+    }
     .pmb-part h1.pmb-title{
         font-size:4em;
         string-set: part-title content();
