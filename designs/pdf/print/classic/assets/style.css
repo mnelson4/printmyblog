@@ -136,12 +136,6 @@
     }
 
     /* part styling*/
-    .pmb-part-wrapper{
-        break-before:right;
-    }
-    .pmb-back_matter_article-wrapper{
-        break-before:right;
-    }
     .pmb-part h1.pmb-title{
         font-size:4em;
         string-set: part-title content();
@@ -161,6 +155,12 @@
 
     .pmb-section-wrapper:not(.pmb-first-section-wrapper){
         break-before:page;
+    }
+    div.pmb-part-wrapper.pmb-section-wrapper{
+        break-before:right;
+    }
+    div.pmb-back_matter_article-wrapper.pmb-section-wrapper{
+        break-before:right;
     }
 
 
