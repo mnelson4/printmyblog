@@ -275,12 +275,12 @@ Eg, this here's how to change the button's text color to black and background co
 2. On the left, under "Appearance", click "Customize"
 3. On the left, under Additional CSS" add the the following code:
 
-``
+`
 div.pmb-print-this-page a{
     color:black;
     background-color:white;
 }
-``
+`
 
 = How do I customize the printouts made with the Print Buttons? =
 From the Print My Blog Settings page, click "Customize Buttons". From here you can customize:
