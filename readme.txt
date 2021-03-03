@@ -267,6 +267,20 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 `
 <?php echo do_shortcode('[pmb_print_buttons]'); ?>
 `
+= How do I change the color of the print buttons? =
+The print button's color is determined by your theme. But if you can't change the button colors using your theme's settings, you can change it with some custom CSS.
+Eg, this here's how to change the button's text color to black and background color to white:
+
+1. Go to wp-admin on your website
+2. On the left, under "Appearance", click "Customize"
+3. On the left, under Additional CSS" add the the following code:
+
+``
+div.pmb-print-this-page a{
+    color:black;
+    background-color:white;
+}
+``
 
 = How do I customize the printouts made with the Print Buttons? =
 From the Print My Blog Settings page, click "Customize Buttons". From here you can customize:
