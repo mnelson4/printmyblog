@@ -77,7 +77,7 @@ pmb_render_template(
                                         }
                                         ?></td>
                                 </tr>
-                                <?php foreach(get_taxonomies(array('show_in_rest' => true), 'objects') as $taxonomy){
+                                <?php foreach(get_taxonomies(array('show_in_rest' => true, 'show_ui' => true), 'objects') as $taxonomy){
                                     /**
                                      * @var $taxonomy WP_Taxonomy
                                      */
