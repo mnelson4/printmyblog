@@ -37,6 +37,7 @@
 
 
     .pmb-back-matter {
+        display:block;
         page:back-matter;
     }
 
@@ -65,7 +66,7 @@
 
     @page back-matter:verso {
         @top {
-            content: string(article-title, first-except);
+            content: normal;
         }
         @bottom-left {
             content: counter(page)
@@ -74,7 +75,7 @@
 
     @page back-matter:recto {
         @top {
-            content: string(article-title, first-except)
+            content: normal;
         }
         @bottom-right {
             content: counter(page)
