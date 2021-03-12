@@ -43,7 +43,57 @@ jQuery(document).ready(function(){
 		changeMonth: true,
 	});
 	pmb_refresh_posts();
+	pmb_init_taxonomy_filters();
 });
+
+function pmb_init_taxonomy_filters(){
+	jQuery('.pmb-taxonomies-select').each(function(index, element){
+		var rest_base_attr = element.attributes['data-rest-base'];
+		jQuery(element).select2({
+			width: 'resolve',
+			ajax: {
+				url: pmb_project_edit_content_data.default_rest_url + '/' + rest_base_attr.value,
+				dataType: 'json',
+				// Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+				data: (params) => {
+					var query = {
+						_envelope:1,
+					};
+					if(params.term){
+						query.search=params.term;
+					}
+					if(params.page){
+						query.page=params.page;
+					}
+					if(this.proxy_for){
+						query.proxy_for = this.proxy_for;
+					}
+					return query;
+				},
+				processResults: (data, params) => {
+					const current_page = params.page || 1;
+					let prepared_data = {
+						results: [],
+						pagination:{
+							more:data.headers['X-WP-TotalPages'] > current_page
+						}
+					};
+					for(var i=0; i<data.body.length; i++){
+						let term = data.body[i];
+						prepared_data.results.push({
+							id:term.id,
+							text: term.name
+						});
+					}
+					return prepared_data;
+				},
+				beforeSend: function ( xhr ) {
+					xhr.setRequestHeader( 'X-WP-Nonce', wpApiSettings.nonce );
+				},
+			}
+		});
+	});
+}
 
 function pmb_refresh_posts(){
 	var form = jQuery("#pmb-filter-form");

@@ -191,6 +191,19 @@ class Ajax extends BaseController
         if (!empty($_GET['pmb-status'])) {
             $query_params['post_status'] = $_GET['pmb-status'];
         }
+        if(!empty($_GET['taxonomies'])){
+            $tax_query = [];
+            foreach($_GET['taxonomies'] as $taxonomy => $ids){
+                $tax_query[] = [
+                        'taxonomy' => $taxonomy,
+                        'field' => 'term_id',
+                        'terms' => $ids
+                ];
+            }
+            if(! empty($tax_query)){
+                $query_params['tax_query'] = $tax_query;
+            }
+        }
         if (!empty($_GET['pmb-author'])) {
             $query_params['author'] = $_GET['pmb-author'];
         }

@@ -549,15 +549,17 @@ class Admin extends BaseController
                     wp_enqueue_script(
                         'pmb_project_edit_content',
                         PMB_SCRIPTS_URL . 'project-edit-content.js',
-                        array('sortablejs','jquery-ui-datepicker', 'jquery-ui-dialog'),
+                        array('sortablejs','jquery-ui-datepicker', 'jquery-ui-dialog','pmb-select2','wp-api',),
                         filemtime(PMB_SCRIPTS_DIR . 'project-edit-content.js')
                     );
                     wp_enqueue_style('jquery-ui');
+                    wp_enqueue_style('pmb-select2');
                     wp_localize_script(
                         'pmb_project_edit_content',
                         'pmb_project_edit_content_data',
                         [
-                            'levels' => $this->project->getLevelsAllowed()
+                            'levels' => $this->project->getLevelsAllowed(),
+                            'default_rest_url' => function_exists('rest_url') ? rest_url('/wp/v2') : '',
                         ]
                     );
                     break;
