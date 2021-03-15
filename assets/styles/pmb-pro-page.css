@@ -29,6 +29,11 @@ figure{
     text-align:center;
 }
 
+/* Featured images should be a block so they can be centered */
+.pmb-featured-image{
+    display:block;
+}
+
 /* Make captions line up nicely with floated images. Yes a design may want to override these */
 .wp-block-image figure {
     display: table;

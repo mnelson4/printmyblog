@@ -43,7 +43,7 @@
         </header><!-- .entry-header -->
 		<?php
 		if (pmb_design_uses('featured_image',true) && has_post_thumbnail() ) {
-			the_post_thumbnail('full');
+			the_post_thumbnail('full',['class' => 'alignnone pmb-featured-image']);
 		}
 		if(pmb_design_uses('excerpt',false)){
 			?>
