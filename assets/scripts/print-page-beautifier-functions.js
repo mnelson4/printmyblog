@@ -113,9 +113,8 @@ function pmb_resize_images(desired_max_height) {
         figures_containing_a_big_image.css({
             'width':'auto'
         });
-        big_images_without_figures.wrap('<div class="pmb-image"></div>');
-        big_images_in_figures.each(function () {
-            var obj = jQuery(this);
+        pmb_force_resize_image = function (index, element) {
+            var obj = jQuery(element);
             // Modify the CSS here. We could have written CSS rules but the selector worked slightly differently
             // in CSS compared to jQuery.
             // Let's make the image smaller and centered
@@ -124,7 +123,9 @@ function pmb_resize_images(desired_max_height) {
                 'max-width:': '100%',
                 'width':'auto',
             });
-        });
+        };
+        big_images_without_figures.wrap('<div class="pmb-image"></div>').each(pmb_force_resize_image);
+        big_images_in_figures.each(pmb_force_resize_image);
         wp_block_galleries.each(function(){
             var obj = jQuery(this);
             // Galleries can't be resized by height (they just cut off
