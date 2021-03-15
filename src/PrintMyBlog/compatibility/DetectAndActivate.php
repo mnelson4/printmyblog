@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\compatibility;
 
+use PrintMyBlog\compatibility\plugins\CoBlocks;
 use PrintMyBlog\compatibility\plugins\EasyFootnotes;
 use PrintMyBlog\compatibility\plugins\LazyLoadingFeaturePlugin;
 use PrintMyBlog\compatibility\plugins\TablePress;
@@ -41,6 +42,9 @@ class DetectAndActivate
             }
             if(class_exists('TablePress')){
                 $compatiblity_mods_to_activate[] = new TablePress();
+            }
+            if(class_exists('CoBlocks')){
+                $compatiblity_mods_to_activate[] = new CoBlocks();
             }
             $this->compatibility_mods = $compatiblity_mods_to_activate;
         }
