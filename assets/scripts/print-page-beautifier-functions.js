@@ -124,7 +124,8 @@ function pmb_resize_images(desired_max_height) {
                 'width':'auto',
             });
         };
-        big_images_without_figures.wrap('<div class="pmb-image"></div>').each(pmb_force_resize_image);
+        big_images_without_figures.wrap('<div class="pmb-image"></div>');
+        big_images_without_figures.each(pmb_force_resize_image);
         big_images_in_figures.each(pmb_force_resize_image);
         wp_block_galleries.each(function(){
             var obj = jQuery(this);
