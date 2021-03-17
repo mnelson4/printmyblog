@@ -125,6 +125,7 @@
         float:footnote;
         text-align:left;
         font-size:80%;
+        font-weight:normal;
     }
     span.pmb-footnote a{
         color:blue;

@@ -135,5 +135,6 @@
         float:footnote;
         text-align:left;
         margin-left:0;
+        font-weight:normal;
     }
 }
