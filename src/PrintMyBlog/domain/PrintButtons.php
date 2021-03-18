@@ -59,7 +59,7 @@ class PrintButtons
                 site_url()
             );
             $html .= sprintf(
-                ' <a href="%s" class="button button-secondary wp-block-button__link">%s</a>',
+                ' <a href="%s" class="button button-secondary wp-block-button__link" target="_blank">%s</a>',
                 esc_url($url),
                 esc_html($pmb_print_settings->getFrontendLabel($slug))
             );
