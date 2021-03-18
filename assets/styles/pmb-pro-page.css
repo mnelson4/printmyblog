@@ -52,3 +52,42 @@ figcaption{
     font-style:italic;
     margin-top:0.5em;
 }
+
+/* Column blocks*/
+.wp-block-columns{
+    page-break-inside:avoid;
+}
+.wp-block-columns>.wp-block-column{
+    display:inline-block;
+}
+.wp-block-columns.has-2-columns>.wp-block-column{
+    width:49vw;
+}
+.wp-block-columns.has-3-columns>.wp-block-column{
+    width:32vw;
+}
+.wp-block-columns.has-4-columns>.wp-block-column{
+    width:24vw;
+}
+
+/* Block galleries */
+.pmb-posts .wp-block-gallery{
+    page-break-inside:avoid;
+    list-style-type:none;
+}
+.pmb-posts .wp-block-gallery>.blocks-gallery-grid>.blocks-gallery-item{
+    display:inline-block;
+}
+.pmb-posts .wp-block-gallery.columns-1>.blocks-gallery-grid>.blocks-gallery-item{
+    width:99vw;
+}
+.pmb-posts .wp-block-gallery.columns-2>.blocks-gallery-grid>.blocks-gallery-item{
+    width:49vw;
+}
+.pmb-posts .wp-block-gallery.columns-3>.blocks-gallery-grid>.blocks-gallery-item{
+    width:32vw;
+}
+.wp-block-gallery.is-cropped>.blocks-gallery-item img{
+    height:100%;
+    object-fit:cover;
+}
