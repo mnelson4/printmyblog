@@ -95,8 +95,8 @@ jQuery(document).ready(function () {
 function pmb_generate_doc(currentTarget, success_callback, failure_callback){
     var format = currentTarget.getAttribute('data-format');
     var html_url = currentTarget.getAttribute('data-html-url');
-    var is_preview = currentTarget.getAttribute('data-preview');
-    var use_middleman = is_preview && pmb_generate.use_pmb_central_for_previews;
+    var is_preview = parseInt(currentTarget.getAttribute('data-preview'));
+    var use_middleman = parseInt(pmb_generate.use_pmb_central_for_previews) || ! is_preview;
     if(use_middleman){
         var authorization_data = pmb_generate.license_data;
     } else {
