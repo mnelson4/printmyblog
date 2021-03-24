@@ -41,6 +41,7 @@ class DefaultDesignTemplates
                         'part',
                         'just_content',
                         'back_matter',
+                        'middle_content'
                     ],
                     'design_form_callback'  => function () {
                         return $this->getDefaultDesignForm()->merge(new FormSection([
@@ -114,6 +115,7 @@ class DefaultDesignTemplates
                         'back_matter',
                         'just_content',
                         'part',
+                        'middle_content'
                     ],
                     'design_form_callback'  => function () {
                         return $this->getDefaultDesignForm()->merge(new FormSection([
@@ -193,6 +195,7 @@ class DefaultDesignTemplates
                         'front_matter',
                         'back_matter',
                         'just_content',
+                        'middle_content'
                     ],
                     'design_form_callback'  => function () {
                         return (new FormSection([
