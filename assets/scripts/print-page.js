@@ -503,6 +503,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
         }
         pmb_load_avada_lazy_images();
+        pmb_reveal_dynamic_content();
         jQuery(document).trigger('pmb_wrap_up');
 
     };

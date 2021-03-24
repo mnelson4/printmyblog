@@ -4,6 +4,7 @@
  */
 
 use PrintMyBlog\entities\DesignTemplate;
+use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;
 
 /**
@@ -70,12 +71,24 @@ function pmb_map_section_height_to_division($height){
 }
 
 /**
+ * Renders a PMB template in the template directory
  * @param $template_name
  * @param array $context
  */
 function pmb_render_template($template_name, $context=[]){
-	extract($context);
-	require(PMB_TEMPLATES_DIR . $template_name);
+    echo pmb_get_contents(PMB_TEMPLATES_DIR . $template_name, $context);
+}
+
+/**
+ * Renders any file
+ * @param $filename
+ * @param array $context
+ */
+function pmb_get_contents($filename, $context=[]){
+    extract($context);
+    ob_start();
+    require($filename);
+    return ob_get_clean();
 }
 
 function pmb_design_preview(\PrintMyBlog\orm\entities\Design $design){
@@ -85,4 +98,127 @@ function pmb_design_preview(\PrintMyBlog\orm\entities\Design $design){
 			'design' => $design
 		]
 	);
+}
+
+/**
+ * Gets a post item div HTML for the sortable.js sorting area.
+ * @param ProjectSection|WP_Post $posty_row
+ * @param Project $project
+ * @param int $max_nesting
+ */
+function pmb_content_item($posty_row, Project $project, $max_nesting = null){
+    if($posty_row instanceof \PrintMyBlog\orm\entities\ProjectSection){
+        $id = $posty_row->getPostId();
+        $title = $posty_row->getPostTitle();
+        $post_type = get_post_type_object(get_post_type($posty_row->getPostId()));
+        $template = $posty_row->getTemplate();
+        $height = $posty_row->getHeight();
+        $subs = $posty_row->getCachedSubsections();
+        $depth = $posty_row->getDepth();
+        $edit_url = get_edit_post_link($posty_row->getPostId());
+        $view_url = get_permalink($posty_row->getPostId());
+    } else {
+        $id = $posty_row->ID;
+        $title = $posty_row->post_title;
+        $post_type = get_post_type_object($posty_row->post_type);
+        $template = null;
+        $height = 0;
+        $subs = [];
+        $depth = 1;
+        $edit_url = get_edit_post_link($posty_row->ID);
+        $view_url = get_permalink($posty_row->ID);
+    }
+    // if the post type is no longer registered, the plugin that added it probably got removed, so hide this item.
+    if(! $post_type){
+        return;
+    }
+    if($max_nesting === null){
+        $max_nesting = $project->getLevelsAllowed();
+    }
+    ?>
+    <div class="list-group-item pmb-project-item" data-id="<?php echo esc_attr($id);?>" data-height="<?php echo esc_attr($height);?>">
+        <div class="pmb-project-item-header" title="<?php
+        echo esc_attr(
+            sprintf(
+                __('Drag the %s "%s" into your project', 'print-my-blog'),
+                $post_type->labels->singular_name,
+                $title
+            )
+        );
+        ?>">
+            <div class="pmb-grabbable pmb-project-item-title">
+                <?php echo pmb_post_type_icon_html($post_type);?>
+                <span class="pmb-project-item-title-text"><?php echo $title;?></span>
+            </div>
+            <a
+                href="<?php echo esc_attr($view_url);?>"
+                title="<?php
+                echo esc_attr(
+                    sprintf(
+                        __('View "%s"', 'print-my-blog'),
+                        $title
+                    )
+                );
+                ?>"
+                target="_blank"><span class="dashicons dashicons-visibility pmb-icon"></span></a>
+            <a
+                href="<?php echo esc_attr($edit_url);?>"
+                title="<?php
+                echo esc_attr(
+                    sprintf(
+                        __('Edit "%s"', 'print-my-blog'),
+                        $title
+                    )
+                );
+                ?>"
+                target="_blank"><span class="dashicons dashicons-edit pmb-icon"></span></a>
+            <a
+                class="pmb-remove-item"
+                title="<?php
+                echo esc_attr(
+                    sprintf(
+                        __('Remove "%s" from project', 'print-my-blog'),
+                        $title
+                    )
+                );
+                ?>"
+            ><span class="dashicons dashicons-no-alt pmb-icon"></span></a>
+            <a
+                class="pmb-add-item"
+                title="<?php
+                echo esc_attr(
+                    sprintf(
+                        __('Add "%s" to project', 'print-my-blog'),
+                        $title
+                    )
+                );
+                ?>"
+            ><span class="dashicons dashicons-plus-alt2 pmb-icon"></span></a>
+            <span class="pmb-project-item-template-container"><?php echo pmb_template_selector($template, $project);?></span>
+        </div>
+
+        <div class="pmb-nested-sortable pmb-draggable-area <?php echo $depth < $max_nesting ? 'pmb-sortable' : 'pmb-sortable-inactive';?> pmb-subs">
+            <?php
+            foreach($subs as $sub){
+                pmb_content_item($sub, $project, $max_nesting);
+            }
+            pmb_drag_here();
+            ?>
+        </div>
+
+    </div>
+    <?php
+}
+
+function pmb_drag_here(){
+    ?>
+    <div class="pmb-help pmb-no-sort pmb-drag-here no-drag">
+        <div class="pmb-drag-here-inner">
+            <a class="pmb-add-material">
+                <?php esc_html_e('Drag or click here', 'print-my-blog');?> <span class="pmb-add-section dashicons
+                dashicons-plus-alt"></span>
+            </a>
+        </div>
+    </div>
+    <?php
 }

@@ -4,6 +4,8 @@ namespace PrintMyBlog\entities;
 
 use Exception;
 use PrintMyBlog\exceptions\TemplateDoesNotExist;
+use PrintMyBlog\orm\entities\Design;
+use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\services\FileFormatRegistry;
 use Twine\forms\base\FormSection;
 
@@ -63,6 +65,10 @@ class DesignTemplate
      */
     protected $file_format_registry;
     /**
+     * @var DesignManager
+     */
+    protected $design_manager;
+    /**
      * @var FileFormat
      */
     protected $format;
@@ -75,6 +81,10 @@ class DesignTemplate
      * @var SectionTemplate[] keys are slugs
      */
     protected $custom_templates = array();
+    /**
+     * @var string
+     */
+    protected $docs;
 
     /**
      * DesignTemplate constructor.
@@ -86,6 +96,7 @@ class DesignTemplate
      * @type string dir
      * @type callable design_form_callback
      * @type callable project_form_callback
+     * @type string docs
      * }
      */
     public function __construct($slug, $args)
@@ -96,6 +107,9 @@ class DesignTemplate
         $this->dir                   = (string)$args['dir'];
         $this->default_design_slug   = (string)$args['default'];
         $this->url                   = (string)$args['url'];
+        if(isset($args['docs'])){
+            $this->docs = (string)$args['docs'];
+        }
         if (isset($args['supports'])) {
             $this->supports = (array)$args['supports'];
         }
@@ -106,9 +120,10 @@ class DesignTemplate
         $this->project_form_callback = $args['project_form_callback'];
     }
 
-    public function inject(FileFormatRegistry $file_format_registry)
+    public function inject(FileFormatRegistry $file_format_registry, DesignManager $design_manager)
     {
         $this->file_format_registry = $file_format_registry;
+        $this->design_manager = $design_manager;
     }
     /**
      * @return string
@@ -364,11 +379,36 @@ class DesignTemplate
      * @param $template_name
      * @return mixed|null
      */
-    public function getFallbackForCustomTemplate($template_name){
-        if(isset($this->custom_templates[$template_name]) && isset
-            ($this->custom_templates[$template_name]['fallback'])){
+    public function getFallbackForCustomTemplate($template_name)
+    {
+        if (isset($this->custom_templates[$template_name]) && isset
+            ($this->custom_templates[$template_name]['fallback'])) {
             return $this->custom_templates[$template_name]['fallback'];
         }
         return null;
+    }
+
+    /**
+     * Gets the default design object
+     * @return Design|null
+     */
+    public function getDefaultDesign(){
+        return $this->design_manager->getBySlug($this->getDefaultDesignSlug());
+    }
+
+    /**
+     * @return string
+     */
+    public function getDocs()
+    {
+        return $this->docs;
+    }
+
+    /**
+     * @param string $docs
+     */
+    public function setDocs($docs)
+    {
+        $this->docs = $docs;
     }
 }

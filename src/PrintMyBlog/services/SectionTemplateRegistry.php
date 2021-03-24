@@ -24,14 +24,7 @@ class SectionTemplateRegistry
      */
     public function get($slug){
         if(! isset($this->instances[$slug])){
-            $this->instances[$slug] = Context::instance()->useNew(
-                'PrintMyBlog\entities\SectionTemplate',
-                [
-                    $slug,
-                    call_user_func($this->callbacks[$slug])
-                ]
-            );
-            $this->instances[$slug]->constructFinalize($slug);
+            $this->instances[$slug] = $this->createNew($slug, $this->callbacks[$slug]);
         }
         return $this->instances[$slug];
     }
@@ -43,5 +36,21 @@ class SectionTemplateRegistry
             }
         }
         return $this->instances;
+    }
+
+    /**
+     * @param $slug
+     * @param $args_callback see PrintMyBlog\entities\SectionTemplate::__construct to see what should be passed in
+     * @return object
+     */
+    protected function createNew($slug, $args_callback){
+        $template = Context::instance()->useNew(
+            'PrintMyBlog\entities\SectionTemplate',
+            [
+                call_user_func($args_callback)
+            ]
+        );
+        $template->constructFinalize($slug);
+        return $template;
     }
 }

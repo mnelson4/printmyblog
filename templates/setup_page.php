@@ -95,6 +95,7 @@ pmb_render_template('partials/free_header.php');
                         <label><input class="pmb-post-type" type="radio" name="post-type" value="post" checked="checked"><?php esc_html_e('Posts', 'print-my-blog');?></label>
                         <br>
                         <label><input class="pmb-post-type" type="radio" name="post-type" value="page"><?php esc_html_e('Pages', 'print-my-blog');?></label>
+
                     </td>
                 </tr>
                 <tr>

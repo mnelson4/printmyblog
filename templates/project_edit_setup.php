@@ -4,6 +4,7 @@ use PrintMyBlog\controllers\Admin;
  * @var $form \Twine\forms\base\FormSection
  * @var $steps_to_urls array
  * @var $current_step string
+ * @var $project \PrintMyBlog\orm\entities\Project|null
  */
 pmb_render_template(
         'partials/project_header.php',

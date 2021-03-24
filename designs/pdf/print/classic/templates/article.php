@@ -35,7 +35,7 @@
 
                 if(pmb_design_uses('url', false)){
 	                ?>
-                    <div><span class="pmb-url"><?php the_permalink();?></span></div>
+                    <div><span class="pmb-url"><a class="pmb-leave-link" href="<?php echo esc_url(get_permalink());?>"><?php echo get_permalink();?></a></span></div>
 	                <?php
                 }?>
             </div>
@@ -43,7 +43,7 @@
     </header><!-- .entry-header -->
 	<?php
 	if (pmb_design_uses('featured_image',true) && has_post_thumbnail() ) {
-		the_post_thumbnail('full');
+        the_post_thumbnail('full',['class' => 'alignnone pmb-featured-image']);
 	}
 	if(pmb_design_uses('excerpt',false)){
 	    ?>

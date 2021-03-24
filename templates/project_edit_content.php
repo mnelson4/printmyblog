@@ -15,15 +15,6 @@ use PrintMyBlog\orm\entities\Project;
  * @var $steps_to_urls array
  * @var $current_step string
  */
-function pmb_drag_here(){
-    // nm don't do anythign for now
-    return;
-    ?>
-    <div class="pmb-help pmb-no-sort pmb-drag-here">
-        <span class="dashicons dashicons-plus-alt"></span> <?php esc_html_e('Drag content here', 'print-my-blog');?>
-    </div>
-    <?php
-}
 pmb_render_template(
 	'partials/project_header.php',
 	[
@@ -45,6 +36,9 @@ pmb_render_template(
                     <h2><span class="dashicons dashicons-search"></span><?php _e('Select Content', 'print-my-blog');?></h2>
                     <div class="pmb-project-choices-filters">
                         <div class="pmb-project-choices-filters-table-wrap">
+                            <div class="pmb-button-spacer">
+                                <input id="pmb-filter-form-submit" type="submit" for="pmb-filter-form" class="button button-secondary" value="<?php echo esc_attr(_e('Search & Apply Filters', 'print-my-blog'));?>">
+                            </div>
                             <table class="form-table">
                                 <tr>
                                     <th><label for="pmb-project-choices-search"><?php esc_html_e('Search', 'print-my-blog');?></th>
@@ -83,29 +77,43 @@ pmb_render_template(
                                         }
                                         ?></td>
                                 </tr>
-                            <tr>
-                                <th><label for="pmb-project-choices-by"><?php esc_html_e('By', 'print-my-blog'); ?></label></th>
-                                <td>
-                                    <select id="pmb-project-choices-by" class="pmb-author-select" name="pmb-author" form="pmb-filter-form">
-                                        <option value=""></option>
-                                        <?php
-                                        foreach($authors as $author){
-                                            ?><option value="<?php echo esc_attr($author->ID);?>"><?php echo $author->display_name;?></option><?php
-                                        }
-                                        ?>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><?php esc_html_e('Written Between', 'print-my-blog');?></th>
-                                <td><?php printf(
-                                        // translators: 1: "from" date input, 2: "to" date input
-                                        __('%s and %s', 'print-my-blog'),
-                                    '<input id=pmb-from-date" type="text" class="pmb-date" name="pmb-date[from]" form="pmb-filter-form">',
-                                    '<input id=pmb-to-date" type="text" class="pmb-date" name="pmb-date[to]" form="pmb-filter-form">'
-                                ); ?>
-                                </td>
-                            </tr>
+                                <?php foreach(get_taxonomies(array('show_in_rest' => true, 'show_ui' => true), 'objects') as $taxonomy){
+                                    /**
+                                     * @var $taxonomy WP_Taxonomy
+                                     */
+                                    ?>
+                                    <tr>
+                                        <th><label for="pmb-project-choices-by"><?php echo $taxonomy->label; ?></label></th>
+                                        <td>
+                                            <select id="pmb-taxonomy-<?php echo esc_attr($taxonomy->name);?>" class="pmb-taxonomies-select" name="taxonomies[<?php echo esc_attr($taxonomy->name);?>][]" multiple="multiple"data-rest-base="<?php echo esc_attr($taxonomy->rest_base);?>" form="pmb-filter-form"></select>
+                                        </td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+                                <tr>
+                                    <th><label for="pmb-project-choices-by"><?php esc_html_e('By', 'print-my-blog'); ?></label></th>
+                                    <td>
+                                        <select id="pmb-project-choices-by" class="pmb-author-select" name="pmb-author" form="pmb-filter-form">
+                                            <option value=""></option>
+                                            <?php
+                                            foreach($authors as $author){
+                                                ?><option value="<?php echo esc_attr($author->ID);?>"><?php echo $author->display_name;?></option><?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><?php esc_html_e('Written Between', 'print-my-blog');?></th>
+                                    <td><?php printf(
+                                            // translators: 1: "from" date input, 2: "to" date input
+                                            __('%s and %s', 'print-my-blog'),
+                                        '<input id=pmb-from-date" type="text" class="pmb-date" name="pmb-date[from]" form="pmb-filter-form">',
+                                        '<input id=pmb-to-date" type="text" class="pmb-date" name="pmb-date[to]" form="pmb-filter-form">'
+                                    ); ?>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <th><label for="pmb-project-choices-order-by"><?php esc_html_e('Order By', 'print-my-blog');?></label></th>
                                     <td><select id="pmb-project-choices-order-by" name="pmb-order-by" form="pmb-filter-form">
@@ -131,9 +139,6 @@ pmb_render_template(
                                 </tr>
                             </table>
                         </div>
-                        <div class="pmb-button-spacer">
-                            <input id="pmb-filter-form-submit" type="submit" for="pmb-filter-form" class="button button-secondary" value="<?php echo esc_attr(_e('Search', 'print-my-blog'));?>">
-                        </div>
                     </div>
                     <div id="pmb-project-choices" class="pmb-draggable-area pmb-project-content-available pmb-scrollable-window list-group">
                         <div class="no-drag"><div class="pmb-spinner"></div></div>
@@ -157,13 +162,28 @@ pmb_render_template(
                         <?php
                         }?>
                         <h2>
-                            <?php _e('Main Content', 'print-my-blog');?>
-                            <span class="pmb-help"><?php printf(__('Project designs support %d layers of nested divisions.','print-my-blog'), $project->getLevelsAllowed());?></span>
+                            <?php _e('Main Matter', 'print-my-blog');?>
+                            <span class="pmb-help">
+                            <?php
+                            $all_designs = $project->getDesignsSelected();
+                            $a_design = reset($all_designs);
+                            if($project->getLevelsAllowed() > 0 ){
+                                $division_descriptions = [];
+			                        for($i=0; $i < $project->getLevelsAllowed(); $i++){
+                                        $division_descriptions[]=  sprintf(
+						                        __('each %1$s can put in a %2$s', 'print-my-blog'),
+                                                $a_design->getDesignTemplate()->divisionLabelSingular($i),
+                                                $a_design->getDesignTemplate()->divisionLabelSingular($i+1)
+					                        );
+			                        }
+			                        echo implode(', ', $division_descriptions);
+		                        }
+                            ?></span>
                         </h2>
                         <div id="pmb-project-main-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="<?php echo esc_attr($project->getLevelsAllowed());?>">
                             <?php
                             foreach($sections as $post) {
-                                pmb_content_item( $post, $project, $project->getLevelsAllowed() );
+                                pmb_content_item( $post, $project );
                             }
                             pmb_drag_here();
                             ?>
@@ -194,5 +214,20 @@ pmb_render_template(
             <button class="button-primary button" id="pmb-save" name="pmb-save" value="save"><?php esc_html_e('Save', 'print-my-blog'); ?></button>
         </div>
     </form>
+
+    <div
+            style="display:none" id="pmb-add-print-materials-dialogue"
+            title="<?php esc_html_e('Quick Add Print Material',
+        'print-my-blog');?>"
+    >
+        <div class="pmb-add-print-materials-dialogue-content">
+            <label><?php esc_html_e('Title', 'print-my-blog');?> <input type="text" name="title"
+                                                                        id="pmb-print-material-title" ></label>
+            <input type="hidden" name="project" value="<?php echo esc_attr($project->getWpPost()->ID);?>"
+                   id="pmb-print-material-project">
+
+        </div>
+    </div>
+    <form id="pmb-add-rint-materials-dialogue"></form>
 
 <?php pmb_render_template('partials/project_footer.php');

@@ -188,6 +188,7 @@ abstract class FormInputBase extends FormSectionValidatable
      *                                                    the Null normalization. This is good when you want the input
      *                                                    to be totally ignored server-side (like when using React.js
      *                                                    form inputs)
+     * @type boolean                        $disabled whether to disabled this input or not
      * }
      */
     public function __construct($input_args = array())
@@ -237,6 +238,10 @@ abstract class FormInputBase extends FormSectionValidatable
             $this->setDefault($input_args['default']);
             unset($input_args['default']);
         }
+        if (isset($input_args['disabled'])) {
+            $this->disable(true);
+            unset($input_args['disabled']);
+        }
         parent::__construct($input_args);
     }
 
@@ -280,7 +285,7 @@ abstract class FormInputBase extends FormSectionValidatable
      * Returns the strategy for displaying this form input. If none is set, throws an exception.
      *
      * @return DisplayBase
-     * @throws Error
+     * @throws ImproperUsageException
      */
     protected function initializeDisplayStrategy()
     {
@@ -1081,7 +1086,6 @@ abstract class FormInputBase extends FormSectionValidatable
      */
     public function disable($disable = true)
     {
-        $disabled_attribute = ' disabled="disabled"';
         $this->disabled = filter_var($disable, FILTER_VALIDATE_BOOLEAN);
         if ($this->disabled) {
             $this->addOtherHtmlAttribute('disabled', 'disabled');

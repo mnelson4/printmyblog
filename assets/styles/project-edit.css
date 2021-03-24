@@ -13,9 +13,10 @@
     border:1px solid gray;
 }
 .pmb-draggable-area{
-    min-height:200px;
-    padding-bottom:50px;
+    padding-bottom:40px;
+    position:relative;
 }
+
 
 .pmb-grabbable{
     cursor: move; /* fallback if grab cursor is unsupported */
@@ -31,6 +32,9 @@
 }
 .pmb-project-choices-filters .form-table th{
     width:100px;
+}
+.pmb-project-choices-filters-table-wrap{
+    border:1px solid gray;
 }
 .pmb-project-content-available{
     vertical-align:top;
@@ -59,7 +63,6 @@
         border:1px solid gray;
     }
     .pmb-draggable-area{
-        min-height:200px;
         padding-bottom:50px;
     }
 }
@@ -158,6 +161,9 @@
     /*border: 1px dotted gray;*/
     margin: .5em 0 .5em 2em;
 }
+.pmb-sortable-inactive{
+    display:none;
+}
 .pmb-project-item-header{
     display: flex;
     align-items: center;
@@ -169,7 +175,7 @@
     overflow:hidden;
     white-space: nowrap;
     width:250px;
-    min-width: 250px
+    min-width: 230px
 }
 .pmb-project-item-title-text{
 
@@ -179,7 +185,23 @@
 }
 .pmb-drag-here{
     text-align:center;
-    float:bottom;
+    position:absolute;
+    bottom:0;
+    right:50%
+}
+.pmb-drag-here a{
+    color:gray;
+}
+.pmb-drag-here a:hover{
+    color:#0073aa;
+}
+.pmb-drag-here-inner{
+    position:relative;
+    right:-50%;
+}
+
+.pmb-add-material{
+    cursor:pointer;
 }
 .pmb-project-choices-column .pmb-remove-item,.pmb-project-choices-column .pmb-project-item-template-container{
     display:none;

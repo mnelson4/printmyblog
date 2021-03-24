@@ -7,7 +7,7 @@
         "php": ">=5.4"
     },
     "require-dev": {
-        "szepeviktor/phpstan-wordpress": "^0.5.0",
+        "szepeviktor/phpstan-wordpress": "^0.7.0",
         "squizlabs/php_codesniffer": "^3.5.4"
     },
     "config": {
@@ -17,10 +17,14 @@
         "psr-4": {
             "mnelson4\\": "src/mnelson4/",
             "PrintMyBlog\\": "src/PrintMyBlog/",
-            "Twine\\": "src/Twine/"
+            "Twine\\": "src/Twine/",
+            "WPTRT\\": "src/WPTRT"
         }
     },
     "scripts": {
-        "release": "git archive HEAD --format=zip --output ../printmyblog.zip && git tag"
+        "release": "git archive HEAD --format=zip --output ../printmyblog.zip && git tag",
+        "phpstan": "phpstan analyze --debug",
+        "phpcs": "phpcs",
+        "phpcbf": "phpcbf"
     }
 }

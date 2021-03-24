@@ -43,6 +43,22 @@
         }
     }
 
+    .pmb-back-matter {
+        display: block;
+        page: back;
+    }
+    @page back-matter {
+        @top-left {
+            content: normal;
+        }
+        @top-right {
+            content: normal;
+        }
+        @bottom-right {
+            content: counter(page)
+        }
+    }
+
     /* Title Page styles */
     .pmb-posts-header{
         margin-top:2in;
@@ -75,7 +91,10 @@
     .pmb-toc-item.pmb-toc-depth-1{
         margin-left:1em;
     }
-    .pmb-toc-list a::after {
+    .pmb-toc-list .pmb-toc-item.pmb-toc-front a::after {
+        content: leader('.') target-counter(attr(href), page, lower-roman) !important;
+    }
+    .pmb-toc-list .pmb-toc-item:not(.pmb-toc-front) a::after {
         content: leader('.') target-counter(attr(href), page) !important;
     }
 
@@ -106,9 +125,21 @@
         float:footnote;
         text-align:left;
         font-size:80%;
+        font-weight:normal;
     }
     span.pmb-footnote a{
         color:blue;
+    }
+
+    .entry-meta{
+        margin-bottom:1em;
+    }
+    .excerpt{
+        width:80%;
+        margin-left:auto;
+        margin-right:auto;
+        size:1.5em;
+        font-style:italic;
     }
     img, div.wp-caption{
         max-width:100%;

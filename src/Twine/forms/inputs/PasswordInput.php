@@ -2,6 +2,9 @@
 
 namespace Twine\forms\inputs;
 
+use Twine\forms\strategies\display\TextInputDisplay;
+use Twine\forms\strategies\normalization\TextNormalization;
+
 /**
  * Password_Input
  *

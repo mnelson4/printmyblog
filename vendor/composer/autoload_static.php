@@ -11,6 +11,10 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         array (
             'mnelson4\\' => 9,
         ),
+        'W' => 
+        array (
+            'WPTRT\\' => 6,
+        ),
         'T' => 
         array (
             'Twine\\' => 6,
@@ -26,6 +30,10 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         array (
             0 => __DIR__ . '/../..' . '/src/mnelson4',
         ),
+        'WPTRT\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/WPTRT',
+        ),
         'Twine\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/Twine',
@@ -40,13 +48,13 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'PrintMyBlog\\compatibility\\DetectAndActivate' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/DetectAndActivate.php',
         'PrintMyBlog\\compatibility\\plugins\\EasyFootnotes' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/EasyFootnotes.php',
         'PrintMyBlog\\compatibility\\plugins\\LazyLoadingFeaturePlugin' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/LazyLoadingFeaturePlugin.php',
+        'PrintMyBlog\\compatibility\\plugins\\WpVrView' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/WpVrView.php',
         'PrintMyBlog\\controllers\\Admin' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/Admin.php',
         'PrintMyBlog\\controllers\\Ajax' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/Ajax.php',
         'PrintMyBlog\\controllers\\Common' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/Common.php',
         'PrintMyBlog\\controllers\\Frontend' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/Frontend.php',
         'PrintMyBlog\\controllers\\GutenbergBlock' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/GutenbergBlock.php',
         'PrintMyBlog\\controllers\\LegacyPrintPage' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/LegacyPrintPage.php',
-        'PrintMyBlog\\controllers\\LoadingPage' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/LoadingPage.php',
         'PrintMyBlog\\controllers\\Shortcodes' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/Shortcodes.php',
         'PrintMyBlog\\controllers\\helpers\\ProjectsListTable' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/helpers/ProjectsListTable.php',
         'PrintMyBlog\\db\\PostFetcher' => __DIR__ . '/../..' . '/src/PrintMyBlog/db/PostFetcher.php',
@@ -54,6 +62,7 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'PrintMyBlog\\domain\\DefaultDesignTemplates' => __DIR__ . '/../..' . '/src/PrintMyBlog/domain/DefaultDesignTemplates.php',
         'PrintMyBlog\\domain\\DefaultDesigns' => __DIR__ . '/../..' . '/src/PrintMyBlog/domain/DefaultDesigns.php',
         'PrintMyBlog\\domain\\DefaultFileFormats' => __DIR__ . '/../..' . '/src/PrintMyBlog/domain/DefaultFileFormats.php',
+        'PrintMyBlog\\domain\\DefaultPersistentNotices' => __DIR__ . '/../..' . '/src/PrintMyBlog/domain/DefaultPersistentNotices.php',
         'PrintMyBlog\\domain\\DefaultProjectContents' => __DIR__ . '/../..' . '/src/PrintMyBlog/domain/DefaultProjectContents.php',
         'PrintMyBlog\\domain\\FrontendPrintSettings' => __DIR__ . '/../..' . '/src/PrintMyBlog/domain/FrontendPrintSettings.php',
         'PrintMyBlog\\domain\\PrintButtons' => __DIR__ . '/../..' . '/src/PrintMyBlog/domain/PrintButtons.php',
@@ -75,9 +84,12 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'PrintMyBlog\\orm\\managers\\ProjectManager' => __DIR__ . '/../..' . '/src/PrintMyBlog/orm/managers/ProjectManager.php',
         'PrintMyBlog\\orm\\managers\\ProjectSectionManager' => __DIR__ . '/../..' . '/src/PrintMyBlog/orm/managers/ProjectSectionManager.php',
         'PrintMyBlog\\services\\ColorGuru' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/ColorGuru.php',
+        'PrintMyBlog\\services\\DebugInfo' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/DebugInfo.php',
         'PrintMyBlog\\services\\DesignRegistry' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/DesignRegistry.php',
         'PrintMyBlog\\services\\DesignTemplateRegistry' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/DesignTemplateRegistry.php',
         'PrintMyBlog\\services\\FileFormatRegistry' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/FileFormatRegistry.php',
+        'PrintMyBlog\\services\\PersistentNotices' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/PersistentNotices.php',
+        'PrintMyBlog\\services\\PmbCentral' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/PmbCentral.php',
         'PrintMyBlog\\services\\SvgDoer' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/SvgDoer.php',
         'PrintMyBlog\\services\\config\\Config' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/config/Config.php',
         'PrintMyBlog\\services\\generators\\PdfGenerator' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/generators/PdfGenerator.php',
@@ -90,6 +102,9 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'Twine\\admin\\news\\DashboardNews' => __DIR__ . '/../..' . '/src/Twine/admin/news/DashboardNews.php',
         'Twine\\compatibility\\CompatibilityBase' => __DIR__ . '/../..' . '/src/Twine/compatibility/CompatibilityBase.php',
         'Twine\\controllers\\BaseController' => __DIR__ . '/../..' . '/src/Twine/controllers/BaseController.php',
+        'Twine\\db\\TableManager' => __DIR__ . '/../..' . '/src/Twine/db/TableManager.php',
+        'Twine\\entities\\FileSubmission' => __DIR__ . '/../..' . '/src/Twine/entities/FileSubmission.php',
+        'Twine\\entities\\notifications\\OneTimeNotification' => __DIR__ . '/../..' . '/src/Twine/entities/notifications/OneTimeNotification.php',
         'Twine\\forms\\base\\FormSection' => __DIR__ . '/../..' . '/src/Twine/forms/base/FormSection.php',
         'Twine\\forms\\base\\FormSectionBase' => __DIR__ . '/../..' . '/src/Twine/forms/base/FormSectionBase.php',
         'Twine\\forms\\base\\FormSectionDetails' => __DIR__ . '/../..' . '/src/Twine/forms/base/FormSectionDetails.php',
@@ -184,10 +199,15 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'Twine\\services\\filesystem\\File' => __DIR__ . '/../..' . '/src/Twine/services/filesystem/File.php',
         'Twine\\services\\filesystem\\Folder' => __DIR__ . '/../..' . '/src/Twine/services/filesystem/Folder.php',
         'Twine\\services\\filesystem\\ThingOnServer' => __DIR__ . '/../..' . '/src/Twine/services/filesystem/ThingOnServer.php',
+        'Twine\\services\\notifications\\OneTimeNotificationManager' => __DIR__ . '/../..' . '/src/Twine/services/notifications/OneTimeNotificationManager.php',
         'Twine\\system\\Activation' => __DIR__ . '/../..' . '/src/Twine/system/Activation.php',
         'Twine\\system\\Context' => __DIR__ . '/../..' . '/src/Twine/system/Context.php',
+        'Twine\\system\\Init' => __DIR__ . '/../..' . '/src/Twine/system/Init.php',
         'Twine\\system\\RequestType' => __DIR__ . '/../..' . '/src/Twine/system/RequestType.php',
         'Twine\\system\\VersionHistory' => __DIR__ . '/../..' . '/src/Twine/system/VersionHistory.php',
+        'WPTRT\\AdminNotices\\Dismiss' => __DIR__ . '/../..' . '/src/WPTRT/AdminNotices/Dismiss.php',
+        'WPTRT\\AdminNotices\\Notice' => __DIR__ . '/../..' . '/src/WPTRT/AdminNotices/Notice.php',
+        'WPTRT\\AdminNotices\\Notices' => __DIR__ . '/../..' . '/src/WPTRT/AdminNotices/Notices.php',
         'mnelson4\\RestApiDetector\\RestApiDetector' => __DIR__ . '/../..' . '/src/mnelson4/RestApiDetector.php',
         'mnelson4\\RestApiDetector\\RestApiDetectorError' => __DIR__ . '/../..' . '/src/mnelson4/RestApiDetectorError.php',
     );

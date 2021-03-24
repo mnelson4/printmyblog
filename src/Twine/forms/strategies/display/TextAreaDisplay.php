@@ -2,6 +2,9 @@
 
 namespace Twine\forms\strategies\display;
 
+use Twine\forms\inputs\TextAreaInput;
+use Twine\forms\strategies\validation\FullHtmlValidation;
+
 class TextAreaDisplay extends DisplayBase
 {
     /**
@@ -12,7 +15,7 @@ class TextAreaDisplay extends DisplayBase
     {
         $input = $this->input;
         $raw_value = maybe_serialize($input->rawValue());
-        if ($input instanceof Text_Area_Input) {
+        if ($input instanceof TextAreaInput) {
             $rows = $input->getRows();
             $cols = $input->getCols();
         } else {
@@ -30,8 +33,7 @@ class TextAreaDisplay extends DisplayBase
         $html .= '</textarea>';
         foreach ($this->input->getValidationStrategies() as $validation_strategy) {
             if (
-                $validation_strategy instanceof SimpleHtmlValidation
-                || $validation_strategy instanceof FullHtmlValidation
+                $validation_strategy instanceof FullHtmlValidation
             ) {
                 $html .= sprintf(
                     __('%1$s(allowed tags: %2$s)%3$s', 'print-my-blog'),

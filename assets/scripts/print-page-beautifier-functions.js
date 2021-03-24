@@ -1,4 +1,9 @@
-
+/**
+ * Removes content Prince XML and DocRaptor don't know how to handle properly, no "noscript" tags.
+ */
+function pmb_remove_unsupported_content(){
+    jQuery('noscript').remove();
+}
 function pmb_dont_float(){
     jQuery('.alignright').removeClass('alignright');
     jQuery('.alignleft').removeClass('alignleft');
@@ -59,33 +64,45 @@ function pmb_resize_images(desired_max_height) {
     // page breaks inside them. Images that are part of a gallery, or are pretty small and inline, also shouldn't be shrunk.
     // So first let's determine how tall the user requested the tallest image could be. Anything bigger than that
     // needs to be wrapped in a div (or figure) and resized.
-    var wp_block_galleries = jQuery('.pmb-posts .wp-block-gallery');
+    var wp_block_galleries = jQuery('.pmb-posts .wp-block-gallery:not(.pmb-dont-resize)');
     if(desired_max_height === 0){
         // Remove all images, except emojis.
         jQuery('.pmb-posts img:not(.emoji)').remove();
         wp_block_galleries.remove();
     } else{
-        var big_images = jQuery('.pmb-posts img:not(.emoji, div.tiled-gallery img, img.fg-image, img.size-thumbnail)').filter(function(){
+        var big_images_in_figures = jQuery('.pmb-posts figure:not(.pmb-dont-resize) img:not(.emoji, div.tiled-gallery img, img.fg-image, img.size-thumbnail)').filter(function(){
             // only wrap images bigger than the desired maximum height in pixels.
             var element = jQuery(this);
+            // ignore images in columns. If they get moved by prince-snap they can disappear
+            if(element.parents('.wp-block-columns').length !== 0){
+                return false;
+            }
             return element.height() > desired_max_height;
         });
         // Images that are bigger than this will get wrapped in a 'pmb-image' div or figure in order to avoid
         // pagebreaks inside them
         var wrap_threshold = 300;
         // Keep track of images that are already wrapped in a caption. We don't need to wrap them in a div.
-        var big_images_without_figures = jQuery('.pmb-posts img').filter(function() {
+        var big_images_without_figures = jQuery('.pmb-posts img:not(.pmb-dont-resize)').filter(function() {
             var element = jQuery(this);
+            // ignore images in columns. If they get moved by prince-snap they can disappear
+            if(element.parents('.wp-block-columns').length !== 0){
+                return false;
+            }
             // If there's no figure, and the image is big enough, include it.
-            if(element.parent('figure').length === 0
-                && element.parent('div.wp-caption').length === 0
+            if(element.parents('figure').length === 0
+                && element.parents('div.wp-caption').length === 0
                 && element.height() > wrap_threshold){
                 return true;
             }
             return false;
         });
-        var figures_containing_a_big_image = jQuery('figure.wp-caption, figure.wp-block-image, div.wp-caption').filter(function(){
+        var figures_containing_a_big_image = jQuery('figure.wp-caption:not(.pmb-dont-resize), figure.wp-block-image:not(.pmb-dont-resize), div.wp-caption:not(.pmb-dont-resize)').filter(function(){
             var element = jQuery(this);
+            // ignore images in columns. If they get moved by prince-snap they can disappear
+            if(element.parents('.wp-block-columns').length !== 0){
+                return false;
+            }
             // If there's a figure and the figure is big enough, include it.
             if(element.find('img').length && element.height() > wrap_threshold){
                 return true;
@@ -96,9 +113,8 @@ function pmb_resize_images(desired_max_height) {
         figures_containing_a_big_image.css({
             'width':'auto'
         });
-        big_images_without_figures.wrap('<div class="pmb-image"></div>');
-        big_images.each(function () {
-            var obj = jQuery(this);
+        pmb_force_resize_image = function (index, element) {
+            var obj = jQuery(element);
             // Modify the CSS here. We could have written CSS rules but the selector worked slightly differently
             // in CSS compared to jQuery.
             // Let's make the image smaller and centered
@@ -107,7 +123,10 @@ function pmb_resize_images(desired_max_height) {
                 'max-width:': '100%',
                 'width':'auto',
             });
-        });
+        };
+        big_images_without_figures.wrap('<div class="pmb-image"></div>');
+        big_images_without_figures.each(pmb_force_resize_image);
+        big_images_in_figures.each(pmb_force_resize_image);
         wp_block_galleries.each(function(){
             var obj = jQuery(this);
             // Galleries can't be resized by height (they just cut off
@@ -130,6 +149,13 @@ function pmb_load_avada_lazy_images(){
     });
 }
 
+function pmb_reveal_dynamic_content(){
+    // Expand all Arconix accordion parts (see https://wordpress.org/plugins/arconix-shortcodes/)
+    jQuery('.arconix-accordion-content').css('display','block');
+    // Reveal all https://wordpress.org/plugins/show-hidecollapse-expand/ content (the reveal buttons got removed in CSS)
+    jQuery('div[id^="bg-showmore-hidden-"]').css('display','block');
+}
+
 /**
  * Adds the class "pmb-page-ref" onto all hyperlinks to posts/things that are actually in the current project,
  * and a span named "pmb-footnote", with the value of the hyperlink to all the links to external content.
@@ -139,7 +165,7 @@ function pmb_load_avada_lazy_images(){
  */
 function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_policy, internal_link_policy)
 {
-    jQuery('.pmb-section a[href]').each(function(index){
+    jQuery('.pmb-section a[href]:not(.pmb-leave-link)').each(function(index){
         var a = jQuery(this);
         // ignore invisible hyperlinks
         if(! a.text().trim()){
@@ -185,10 +211,6 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
     });
 }
 
-function pmb_populate_toc(){
-
-}
-
 /**
  * Creates a table of contents from the content generated by the shortcode pmb_toc
  * @constructor
@@ -217,9 +239,17 @@ function PmbToc(){
             }
             var depth = parseInt(selection.attr('data-depth'));
             var height = parseInt(selection.attr('data-height'));
+            if(selection.hasClass('pmb-front_matter_article')){
+                var matter_class = 'pmb-toc-front';
+            } else if(selection.hasClass('pmb-back_matter_article')){
+                var matter_class = 'pmb-toc-back';
+            } else {
+                var matter_class = 'pmb-toc-main';
+            }
             var title_text = title_element.html();
-            jQuery('#pmb-toc-list').append('<li class="pmb-toc-item pmb-toc-depth-' + depth + ' pmb-toc-height-' + height + '"><a href="#' + id + '">' + title_text + '</a></li>');
-
+            if(title_text){
+                jQuery('#pmb-toc-list').append('<li class="pmb-toc-item pmb-toc-depth-' + depth + ' pmb-toc-height-' + height + ' '  + matter_class + '"><a href="#' + id + '">' + title_text + '</a></li>');
+            }
             // find its children
             _this.create_toc_for_depth(selection.siblings('div'),depth + 1);
         });

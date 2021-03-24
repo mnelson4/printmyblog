@@ -43,7 +43,57 @@ jQuery(document).ready(function(){
 		changeMonth: true,
 	});
 	pmb_refresh_posts();
+	pmb_init_taxonomy_filters();
 });
+
+function pmb_init_taxonomy_filters(){
+	jQuery('.pmb-taxonomies-select').each(function(index, element){
+		var rest_base_attr = element.attributes['data-rest-base'];
+		jQuery(element).select2({
+			width: 'resolve',
+			ajax: {
+				url: pmb_project_edit_content_data.default_rest_url + '/' + rest_base_attr.value,
+				dataType: 'json',
+				// Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+				data: (params) => {
+					var query = {
+						_envelope:1,
+					};
+					if(params.term){
+						query.search=params.term;
+					}
+					if(params.page){
+						query.page=params.page;
+					}
+					if(this.proxy_for){
+						query.proxy_for = this.proxy_for;
+					}
+					return query;
+				},
+				processResults: (data, params) => {
+					const current_page = params.page || 1;
+					let prepared_data = {
+						results: [],
+						pagination:{
+							more:data.headers['X-WP-TotalPages'] > current_page
+						}
+					};
+					for(var i=0; i<data.body.length; i++){
+						let term = data.body[i];
+						prepared_data.results.push({
+							id:term.id,
+							text: term.name
+						});
+					}
+					return prepared_data;
+				},
+				beforeSend: function ( xhr ) {
+					xhr.setRequestHeader( 'X-WP-Nonce', wpApiSettings.nonce );
+				},
+			}
+		});
+	});
+}
 
 function pmb_refresh_posts(){
 	var form = jQuery("#pmb-filter-form");
@@ -74,9 +124,10 @@ function pmb_setup_callbacks_on_new_options(){
 		var parent_draggable_items = selection.parents('.pmb-project-item');
 
 		if(parent_draggable_items.length > 0){
-			var element_to_remove = parent_draggable_items[0];
-			jQuery(element_to_remove).detach().appendTo('#pmb-project-main-matter');
-			element_to_remove.scrollIntoView();
+			var element_to_add = parent_draggable_items[0];
+			jQuery(element_to_add).detach().appendTo('#pmb-project-main-matter');
+			element_to_add.scrollIntoView();
+			pmb_maybe_add_sortable_to(jQuery('#pmb-project-main-matter'), jQuery(element_to_add));
 		}
 	});
 	jQuery('.load-more-button').click(function(event){
@@ -100,6 +151,66 @@ function pmb_setup_callbacks_on_new_options(){
 			}
 		});
 	});
+	jQuery(".pmb-add-material").click(function(event) {
+		var add_button = this;
+		event.preventDefault();
+		jQuery('#pmb-add-print-materials-dialogue').dialog({
+			'dialogClass'   : 'wp-dialog',
+			'modal'         : true,
+			'autoOpen'      : true,
+			'closeOnEscape' : true,
+			'closeText' :'',
+			'buttons'       : [
+				{
+					"text": "Create",
+					'class':'button button-primary',
+					'click': function () {
+						pmb_add_print_material_submit(add_button, this);
+					},
+				},
+				{
+					"text" : "Cancel",
+					'class':'button',
+					'click': function() {
+						jQuery(this).dialog('close');
+					}
+				},
+			],
+			'width': "500px",
+			open: function(event, ui)
+			{
+				var _this = jQuery(this);
+				jQuery('.ui-widget-overlay').bind('click', function()
+				{
+					_this.dialog('close');
+				});
+			}
+		})
+	});
+}
+
+function pmb_add_print_material_submit(add_button, submit_button){
+	jQuery.post(
+		ajaxurl,
+		{
+			'action': 'pmb_add_print_material',
+			'_nonce': _wpnonce.value,
+			'title': jQuery('#pmb-print-material-title').val(),
+			'project': jQuery('#pmb-print-material-project').val()
+		},
+		function(response){
+			var sortable = jQuery(add_button).closest('.pmb-sortable')
+			var new_item = jQuery(response.data.html)
+			new_item.appendTo(sortable);
+			pmb_setup_callbacks_on_new_options();
+			pmb_maybe_add_sortable_to(sortable,new_item);
+			jQuery(submit_button).dialog('close');
+			jQuery('#pmb-print-material-title').val('');
+		},
+		'json'
+	).error(function(){
+		alert('Error Inserting. Please contact support.');
+	});
 }
 
 /**
@@ -120,36 +231,41 @@ function pmb_create_sortable_from(element){
 			group:{
 				name: 'shared',
 			},
+			filter: '.no-drag',
 			animation:150,
 			fallbackOnBody: true,
-			swapThreshold: 0.25,
+			swapThreshold: .80,
 			onAdd: function (event) {
-				var nested_level = pmb_count_level(jQuery(event.target));
-				var jquery_obj = jQuery(event.target);
-
-				var max_levels = jquery_obj.attr('data-max-nesting');
-				// If that target didn't know the max nesting level, ask the root.
-				if( ! max_levels){
-					jquery_obj.parents('.pmb-sortable-root').attr('data-max-nesting');
-				}
-				if(nested_level < max_levels){
-					var sortable_items = jQuery(event.item).children('.pmb-sortable-inactive');
-					if(sortable_items.length){
-						pmb_create_sortable_from(sortable_items[0]);
-						sortable_items.removeClass('pmb-sortable-inactive');
-						sortable_items.addClass('pmb-sortable');
-					}
-				} else {
-					var sortable_items = jQuery(event.item).children('.pmb-sortable');
-					if(sortable_items.length){
-						sortable_items[0].sorter.destroy();
-						sortable_items.removeClass('pmb-sortable');
-						sortable_items.addClass('pmb-sortable-inactive');
-					}
-				}
+				pmb_maybe_add_sortable_to(jQuery(event.target), jQuery(event.item));
 			},
 		});
 	element.sorter = sorter;
+}
+
+function pmb_maybe_add_sortable_to(sortable_selection, item_selection){
+	var nested_level = pmb_count_level(sortable_selection);
+	var jquery_obj = sortable_selection;
+
+	var max_levels = jquery_obj.attr('data-max-nesting');
+	// If that target didn't know the max nesting level, ask the root.
+	if( ! max_levels){
+		jquery_obj.parents('.pmb-sortable-root').attr('data-max-nesting');
+	}
+	if(nested_level < max_levels){
+		var sortable_items = item_selection.children('.pmb-sortable-inactive');
+		if(sortable_items.length){
+			pmb_create_sortable_from(sortable_items[0]);
+			sortable_items.removeClass('pmb-sortable-inactive');
+			sortable_items.addClass('pmb-sortable');
+		}
+	} else {
+		var sortable_items = item_selection.children('.pmb-sortable');
+		if(sortable_items.length){
+			sortable_items[0].sorter.destroy();
+			sortable_items.removeClass('pmb-sortable');
+			sortable_items.addClass('pmb-sortable-inactive');
+		}
+	}
 }
 
 function pmb_get_contents(jquery_obj, current_depth = 1){
@@ -161,6 +277,9 @@ function pmb_get_contents(jquery_obj, current_depth = 1){
 
 	for(var index = 0; index < element.children.length; index++){
 		var child = element.children[index];
+		if(typeof(child.attributes['data-id']) === 'undefined'){
+			continue;
+		}
 		var child_jquery_obj = jQuery(child);
 		var template_jquery_obj = child_jquery_obj.children('.pmb-project-item-header').find('select.pmb-template');
 		var template = template_jquery_obj.val();

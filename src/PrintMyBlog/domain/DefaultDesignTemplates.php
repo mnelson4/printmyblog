@@ -13,6 +13,7 @@ use Twine\forms\inputs\CheckboxMultiInput;
 use Twine\forms\inputs\ColorInput;
 use Twine\forms\inputs\DatepickerInput;
 use Twine\forms\inputs\FloatInput;
+use Twine\forms\inputs\FontInput;
 use Twine\forms\inputs\FormInputBase;
 use Twine\forms\inputs\IntegerInput;
 use Twine\forms\inputs\SelectInput;
@@ -34,6 +35,7 @@ class DefaultDesignTemplates
                     'dir'                   => PMB_DESIGNS_DIR . 'pdf/print/classic',
                     'url' => plugins_url('designs/pdf/print/classic', PMB_MAIN_FILE),
                     'default' => 'classic_print',
+                    'docs' => 'https://printmy.blog/user-guide/pdf-design/classic-print-pdf-and-variations/',
                     'supports' => [
                         'front_matter',
                         'part',
@@ -43,6 +45,16 @@ class DefaultDesignTemplates
                     'design_form_callback'  => function () {
                         return $this->getDefaultDesignForm()->merge(new FormSection([
                             'subsections' => [
+                                'image' => new FormSection([
+                                    'subsections' => [
+                                        'image_placement' => $this->getImageSnapInput()
+                                    ]
+                                ]),
+                                'paragraph_indent' => new YesNoInput([
+                                    'default' => true,
+                                    'html_label_text' => __('Paragraph Indent', 'print-my-blog'),
+                                    'html_help_text' => __('Indent the first line of each new paragraph instead of adding a paragraph break.', 'print-my-blog')
+                                ]),
                                 'links' => new FormSection([
                                     'subsections' => [
                                         'internal_links' => new SelectInput(
@@ -96,6 +108,7 @@ class DefaultDesignTemplates
                     'default' => 'classic_digital',
                     'dir'             => PMB_DESIGNS_DIR . 'pdf/digital/classic/',
                     'url' => plugins_url('designs/pdf/digital/classic', PMB_MAIN_FILE),
+                    'docs' => 'https://printmy.blog/user-guide/pdf-design/classic-digital-pdf-settings/',
                     'supports' => [
                         'front_matter',
                         'back_matter',
@@ -107,22 +120,7 @@ class DefaultDesignTemplates
                             'subsections' => [
                                 'image' => new FormSection([
                                     'subsections' => [
-                                        'image_placement' => new SelectInput(
-                                            [
-                                                'default' => new InputOption(__('Don’t move', 'print-my-blog')),
-                                                // phpcs:disable Generic.Files.LineLength.TooLong
-                                                'snap' => new InputOption(__('Snap to the top or bottom of the page', 'print-my-blog')),
-                                                'snap-unless-fit' => new InputOption(__('Only snap if the image would cause a page break', 'print-my-blog'))
-                                                // phpcs:enable Generic.Files.LineLength.TooLong
-                                            ],
-                                            [
-                                                'html_label_text' => __('Image Placement', 'print-my-blog'),
-                                                // phpcs:disable Generic.Files.LineLength.TooLong
-                                                'html_help_text' => __('To reduce whitespace around images, Print My Blog can move images around in your content.', 'print-my-blog'),
-                                                // phpcs:enable Generic.Files.LineLength.TooLong
-                                                'default' => 'snap-unless-fit'
-                                            ]
-                                        )
+                                        'image_placement' => $this->getImageSnapInput()
                                     ]
                                 ]),
                                 'links' => new FormSection([
@@ -131,6 +129,9 @@ class DefaultDesignTemplates
                                             [
                                                 'remove' => new InputOption(
                                                     __('Remove', 'print-my-blog')
+                                                ),
+                                                'leave' => new InputOption(
+                                                    __('Leave as hyperlink', 'print-my-blog')
                                                 ),
                                                 'parens' => new InputOption(
                                                     __('Replace with page reference', 'print-my-blog')
@@ -187,6 +188,7 @@ class DefaultDesignTemplates
                     'dir'             => PMB_DESIGNS_DIR . 'pdf/digital/buurma/',
                     'default' => 'buurma',
                     'url' => plugins_url('designs/pdf/digital/buurma', PMB_MAIN_FILE),
+                    'docs' => 'https://printmy.blog/user-guide/pdf-design/buurma-whitepaper-digital-pdf/',
                     'supports' => [
                         'front_matter',
                         'back_matter',
@@ -254,7 +256,7 @@ class DefaultDesignTemplates
                                 'byline' => new TextAreaInput(
                                     [
                                         'html_label_text' => __('By Line', 'print-my-blog'),
-                                        'html_help_text' => __('List of Aauthors', 'print-my-blog'),
+                                        'html_help_text' => __('List of Authors', 'print-my-blog'),
                                     ]
                                 ),
                                 'date' => new DatepickerInput([
@@ -283,15 +285,10 @@ class DefaultDesignTemplates
                     'format'          => 'digital_pdf',
                     'dir'             => PMB_DESIGNS_DIR . 'pdf/digital/mayer/',
                     'default' => 'mayer',
+                    'docs' => 'https://printmy.blog/user-guide/pdf-design/mayer-magazine-digital-pdf/',
                     'supports' => [
                         'front_matter',
                         'part'
-                    ],
-                    'custom_templates' => [
-                        'single_column' => new SectionTemplate(
-                            __('Single Column', 'print-my-blog'),
-                            'just_content'
-                        )
                     ],
                     'url' => plugins_url('designs/pdf/digital/mayer', PMB_MAIN_FILE),
                     'design_form_callback'  => function () {
@@ -332,29 +329,7 @@ class DefaultDesignTemplates
                                 ]),
                                 'image' => new FormSection([
                                     'subsections' => [
-                                        'image_placement' => new SelectInput(
-                                            [
-                                            'default' => new InputOption(
-                                                __('Do Not Adjust Image Placement', 'print-my-blog')
-                                            ),
-                                            'snap' => new InputOption(
-                                                __('Snap to Page Top or Bottom', 'print-my-blog')
-                                            ),
-                                            'snap-unless-fit' => new InputOption(
-                                                __(
-                                                    'Intelligent Snap to Page Top or Bottom',
-                                                    'print-my-blog'
-                                                )
-                                            )
-                                            ],
-                                            [
-                                            'html_label_text' => __('Image Placement', 'print-my-blog'),
-                                            // phpcs:disable Generic.Files.LineLength.TooLong
-                                            'html_help_text' => __('To reduce whitespace around images, Print My Blog can move images around in your content.', 'print-my-blog'),
-                                            // phpcs:enable Generic.Files.LineLength.TooLong
-                                            'default' => 'snap-unless-fit'
-                                            ]
-                                        )
+                                        'image_placement' => $this->getImageSnapInput()
                                     ]
                                 ]),
                             ],
@@ -447,9 +422,11 @@ class DefaultDesignTemplates
                             'title' => new InputOption(__('Post Title', 'print-my-blog')),
                             'id' => new InputOption(__('ID', 'print-my-blog')),
                             'author' => new InputOption(__('Author', 'print-my-blog')),
-                            'url' => new InputOption(__('URL', 'print-my-blog')),
                             'published_date' => new InputOption(__('Published Date', 'print-my-blog')),
                             'categories' => new InputOption(__('Categories and Tags', 'print-my-blog')),
+                            'url' => new InputOption(__('URL', 'print-my-blog')),
+
+
                             'featured_image' => new InputOption(__('Featured Image', 'print-my-blog')),
                             'excerpt' => new InputOption(__('Excerpt', 'print-my-blog')),
                             'content' => new InputOption(__('Content', 'print-my-blog')),
@@ -476,6 +453,16 @@ class DefaultDesignTemplates
                             // phpcs:enable Generic.Files.LineLength.TooLong
                         ]
                     ),
+                    'font_style' => new FontInput([
+                        'default' => 'times new roman',
+                        'html_label_text' => __('Font', 'print-my-blog'),
+                        'html_help_text' => __('Default font used in paragraphs, bulleted lists, tables, etc.')
+                    ]),
+                    'header_font_style' => new FontInput([
+                        'default' => 'arial',
+                        'html_label_text' => __('Header Font', 'print-my-blog'),
+                        'html_help_text' => __('Default font for header tags', 'print-my-blog')
+                    ]),
                     'font_size' => new TextInput(
                         [
                             'default' => '10pt',
@@ -490,6 +477,8 @@ class DefaultDesignTemplates
                             )
                         ]
                     ),
+
+
                     'image' => new FormSection([
                         'subsections' => [
                             'image_size' => new IntegerInput(
@@ -517,7 +506,7 @@ class DefaultDesignTemplates
                                     '<a href="https://www.w3schools.com/CSSref/css_units.asp">',
                                     '</a>'
                                 ),
-                                'default' => '210mm'
+                                'default' => '8.5in'
                             ]),
                             'page_height' => new TextInput([
                                 'html_label_text' => __('Page Height', 'print-my-blog'),
@@ -526,7 +515,7 @@ class DefaultDesignTemplates
                                     '<a href="https://www.w3schools.com/CSSref/css_units.asp">',
                                     '</a>'
                                 ),
-                                'default' => '297mm'
+                                'default' => '11in'
                             ]),
                         ]
                     ])
@@ -542,6 +531,13 @@ class DefaultDesignTemplates
     public function getGenericDesignForm()
     {
         $theme = wp_get_theme();
+        $use_theme_help_text = sprintf(
+            __('Your theme, "%1$s", can be used in conjunction with your design. Themes are often not intended for print and can conflict with the design, but you may have content that looks broken without the theme.', 'print-my-blog'),
+            $theme->name
+        );
+        if(! pmb_fs()->is_plan__premium_only('business')){
+            $use_theme_help_text = __('Note: this option is only supported for the business license.', 'print-my-blog') . '<br>' . $use_theme_help_text;
+        }
 
         return new FormSection(
             [
@@ -552,6 +548,11 @@ class DefaultDesignTemplates
                                 apply_filters(
                                     'PrintMyBlog\domain\DefaultDesignTemplates->getGenericDesignFormSections',
                                     [
+                                        'use_theme' => new YesNoInput([
+                                            'html_label_text' => __('Apply Website Theme', 'print-my-blog'),
+                                            'html_help_text' => $use_theme_help_text,
+                                            'default' => false
+                                        ]),
                                         'custom_css' => new TextAreaInput([
                                             'html_label_text' => __('Custom CSS', 'print-my-blog'),
                                             // phpcs:disable Generic.Files.LineLength.TooLong
@@ -570,7 +571,7 @@ class DefaultDesignTemplates
     /**
      * @return SelectInput
      */
-    private function getDefaultAlignmentInput()
+    public function getDefaultAlignmentInput()
     {
         return new SelectInput(
             [
@@ -583,6 +584,26 @@ class DefaultDesignTemplates
                 'html_help_text' => __('Images normally default to "no alignment", which can look jumbled in printouts. Usually it’s best to automatically switch those to align to the center.', 'print-my-blog'),
                 // phpcs:enable Generic.Files.LineLength.TooLong
                 'default' => 'center'
+            ]
+        );
+    }
+
+    public function getImageSnapInput()
+    {
+        return new SelectInput(
+            [
+                'default' => new InputOption(__('Don’t move', 'print-my-blog')),
+                // phpcs:disable Generic.Files.LineLength.TooLong
+                'snap' => new InputOption(__('Snap to the top or bottom of the page', 'print-my-blog')),
+                'snap-unless-fit' => new InputOption(__('Only snap if the image would cause a page break', 'print-my-blog'))
+                // phpcs:enable Generic.Files.LineLength.TooLong
+            ],
+            [
+                'html_label_text' => __('Image Placement', 'print-my-blog'),
+                // phpcs:disable Generic.Files.LineLength.TooLong
+                'html_help_text' => __('To reduce whitespace around images, Print My Blog can move images around in your content.', 'print-my-blog'),
+                // phpcs:enable Generic.Files.LineLength.TooLong
+                'default' => 'snap-unless-fit'
             ]
         );
     }

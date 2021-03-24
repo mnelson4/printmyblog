@@ -101,7 +101,7 @@ abstract class ValidationBase extends FormInputStrategyBase
     {
         return $other_js_data;
     }
-    
+
     /**
      * Opportunity for this display strategy to call wp_enqueue_script and wp_enqueue_style.
      * This should be called during wp_enqueue_scripts

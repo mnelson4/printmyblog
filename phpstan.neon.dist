@@ -3,9 +3,15 @@ includes:
 parameters:
     level: 0
     inferPrivatePropertyTypeFromConstructor: true
+    scanDirectories:
+        - inc/
+    scanFiles:
+        - printmyblog.php
     paths:
         - src/
         - inc/
+    bootstrapFiles:
+        - phpstan-bootstrap.php
     ignoreErrors:
 #        # Uses func_get_args()
 #        - '#^Function apply_filters(_ref_array)? invoked with [34567] parameters, 2 required\.$#'

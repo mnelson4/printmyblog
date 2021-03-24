@@ -6,8 +6,11 @@ use mnelson4\RestApiDetector\RestApiDetector;
 use mnelson4\RestApiDetector\RestApiDetectorError;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\entities\ProjectGeneration;
+use PrintMyBlog\entities\ProjectProgress;
 use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\services\FileFormatRegistry;
+use PrintMyBlog\services\PmbCentral;
+use PrintMyBlog\system\CustomPostTypes;
 use Twine\controllers\BaseController;
 use WP_Query;
 use PrintMyBlog\orm\entities\Project;
@@ -38,16 +41,23 @@ class Ajax extends BaseController
      */
     protected $post_fetcher;
     /**
+     * @var PmbCentral
+     */
+    protected $pmb_central;
+
+    /**
      * @param ProjectManager $project_manager
      */
     public function inject(
         ProjectManager $project_manager,
         FileFormatRegistry $format_registry,
-        PostFetcher $post_fetcher
+        PostFetcher $post_fetcher,
+        PmbCentral $pmb_central
     ) {
         $this->project_manager = $project_manager;
         $this->format_registry = $format_registry;
         $this->post_fetcher = $post_fetcher;
+        $this->pmb_central = $pmb_central;
     }
     /**
      * Sets hooks that we'll use in the admin.
@@ -65,6 +75,8 @@ class Ajax extends BaseController
         );
         add_action('wp_ajax_pmb_save_project_main', [$this, 'handleSaveProjectMain' ]);
         add_action('wp_ajax_pmb_post_search', [$this,'handlePostSearch']);
+        add_action('wp_ajax_pmb_add_print_material', [$this,'addPrintMaterial']);
+        add_action('wp_ajax_pmb_reduce_credits',[$this,'reduceCredits']);
     }
 
     protected function addUnauthenticatedCallback($ajax_action, $method_name)
@@ -106,22 +118,20 @@ class Ajax extends BaseController
         /*
          * @var $project Project
          */
-        $project = $this->project_manager->getById($_GET['ID']);
-        $format = $this->format_registry->getFormat($_GET['format']);
+        $project = $this->project_manager->getById($_REQUEST['ID']);
+        $format = $this->format_registry->getFormat($_REQUEST['format']);
         /**
          * @var $project_generation ProjectGeneration
          */
         $project_generation = $project->getGenerationFor($format);
-        // Find if it's already been generated, if so return that.
-        if (! $project_generation->isGenerated()) {
-            $done = $project_generation->generateIntermediaryFile();
-            if ($done) {
-                $url = $project_generation->getGeneratedIntermediaryFileUrl();
-            } else {
-                $url = null;
-            }
-        } else {
+        $project_generation->deleteGeneratedFiles();
+        $project_generation->clearDirty();
+        $project->getProgress()->markStepComplete(ProjectProgress::GENERATE_STEP);
+        $done = $project_generation->generateIntermediaryFile();
+        if ($done) {
             $url = $project_generation->getGeneratedIntermediaryFileUrl();
+        } else {
+            $url = null;
         }
 
         // If we're all done, return the file.
@@ -181,6 +191,19 @@ class Ajax extends BaseController
         if (!empty($_GET['pmb-status'])) {
             $query_params['post_status'] = $_GET['pmb-status'];
         }
+        if(!empty($_GET['taxonomies'])){
+            $tax_query = [];
+            foreach($_GET['taxonomies'] as $taxonomy => $ids){
+                $tax_query[] = [
+                        'taxonomy' => $taxonomy,
+                        'field' => 'term_id',
+                        'terms' => $ids
+                ];
+            }
+            if(! empty($tax_query)){
+                $query_params['tax_query'] = $tax_query;
+            }
+        }
         if (!empty($_GET['pmb-author'])) {
             $query_params['author'] = $_GET['pmb-author'];
         }
@@ -231,6 +254,37 @@ class Ajax extends BaseController
             </div>
             <?php
         }
+        exit;
+    }
+
+    public function addPrintMaterial()
+    {
+        $title = $_REQUEST['title'];
+        $project_id = $_REQUEST['project'];
+        $project = $this->project_manager->getById($project_id);
+        $post_id = wp_insert_post(
+            [
+                'post_title' => $title,
+                'post_status' => 'publish',
+                'post_type' => CustomPostTypes::CONTENT,
+            ]
+        );
+        $post = get_post($post_id);
+        ob_start();
+        pmb_content_item($post, $project);
+        $html = ob_get_clean();
+        wp_send_json_success([
+            'html' => $html,
+            'post_ID' => $post_id
+        ]);
+        exit;
+    }
+
+    public function reduceCredits(){
+        $updated_credit_info = $this->pmb_central->reduceCredits(pmb_fs()->_get_license()->id);
+        wp_send_json_success(
+                $updated_credit_info
+        );
         exit;
     }
 }

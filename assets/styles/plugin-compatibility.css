@@ -67,3 +67,19 @@ Hide footer added by user switching add-on.
 .pmb-print-page p#user_switching_switch_on{
     display:none;
 }
+
+/* Show-Hide / Collapse-Expand plugin https://wordpress.org/plugins/show-hidecollapse-expand/
+hide the reveal buttons. Showing them needs to happen in JS though.*/
+.pmb-print-page .bg-showmore-plg-button{
+    display:none;
+}
+
+/* Hide TablePress'  "Edit" button https://wordpress.org/plugins/tablepress/*/
+.pmb-print-page .dataTables_wrapper caption{ display:none; }
+.pmb-print-page .dataTables_wrapper .dataTables_info{ display:none;}
+
+/* Hide TopBar https://wordpress.org/plugins/top-bar/ from printouts.
+Use !important to override the inline style set by the plugin*/
+#tpbr_topbar{
+    display:none !important;
+}

@@ -9,13 +9,20 @@ class SectionTemplate
     protected $title;
     protected $fallback;
     protected $slug;
-    public function __construct($title,$fallback){
-        $this->title = $title;
-        $this->fallback = $fallback;
+    public function __construct($data){
+        if(isset($data['title'])){
+            $this->title = $data['title'];
+        }
+        if(isset($data['fallback'])){
+            $this->fallback = $data['fallback'];
+        }
     }
 
     public function constructFinalize($slug){
         $this->slug = $slug;
+        if(! $this->title){
+            $this->title = $slug;
+        }
     }
 
     /**

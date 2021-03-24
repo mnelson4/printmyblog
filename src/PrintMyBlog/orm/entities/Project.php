@@ -108,13 +108,15 @@ class Project extends PostWrapper
      */
     public function setTitle($title)
     {
+        $post = $this->getWpPost();
+        $post->post_title = $title;
         return wp_update_post(
             [
-                'ID' => $this->getWpPost()->ID,
+                'ID' => $post->ID,
                 'post_title' => $title,
                 'post_name' => wp_unique_post_slug(
                     $title,
-                    $this->getWpPost()->ID,
+                    $post->ID,
                     'publish',
                     'pmb_project',
                     0
@@ -304,7 +306,7 @@ class Project extends PostWrapper
     /**
      * Gets an the chosen designs for the chosen formats.
      * Keys are format slugs, values are design slugs.
-     * @return array
+     * @return Design[]
      */
     public function getDesigns()
     {

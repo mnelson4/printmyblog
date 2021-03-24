@@ -55,7 +55,7 @@ class VersionHistory
     }
     public function recordVersionChange()
     {
-        update_option($this->previous_version_option_name, PMB_VERSION);
+        update_option($this->previous_version_option_name, $this->current_version);
         $previous_versions = get_option($this->version_history_option_name, []);
         if (is_string($previous_versions)) {
             $previous_versions = json_decode($previous_versions, true);
@@ -68,5 +68,13 @@ class VersionHistory
         }
         $previous_versions[$this->current_version][] = date('Y-m-d H:i:s');
         update_option($this->version_history_option_name, wp_json_encode($previous_versions));
+    }
+
+	/**
+	 * Gets the version on the current request from the PHP code
+	 * @return string
+	 */
+    public function currentVersion(){
+    	return $this->current_version;
     }
 }

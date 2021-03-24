@@ -96,22 +96,11 @@
     .pmb-toc-item.pmb-toc-depth-2{
         margin-left:1em;
     }
-    .pmb-toc-list a::after {
+    .pmb-toc-list .pmb-toc-item.pmb-toc-front a::after {
+        content: leader('.') target-counter(attr(href), page, lower-roman) !important;
+    }
+    .pmb-toc-list .pmb-toc-item:not(.pmb-toc-front) a::after {
         content: leader('.') target-counter(attr(href), page) !important;
-    }
-
-    /* part styling*/
-    .pmb-part{
-        break-before:right;
-        page: part-start;
-    }
-    .pmb-part h1.entry-title{
-        font-size:120%;
-        string-set: part-title content();
-        margin-top:2in;
-    }
-    .pmb-part .entry-content{
-        margin-top:1in;
     }
 
     /* Article styles */
@@ -130,5 +119,7 @@
     .pmb-posts span.pmb-footnote{
         float:footnote;
         text-align:left;
+        margin-left:0;
+        font-weight:normal;
     }
 }

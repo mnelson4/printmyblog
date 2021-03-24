@@ -9,7 +9,7 @@ pmb_render_template(
 	'partials/project_header.php',
 	[
 		'project' => $project,
-		'page_title' => __('Edit Project Content', 'print-my-blog'),
+		'page_title' => __('Edit Project Metadata', 'print-my-blog'),
 		'current_step' => $current_step,
 		'steps_to_urls' => $steps_to_urls
 	]

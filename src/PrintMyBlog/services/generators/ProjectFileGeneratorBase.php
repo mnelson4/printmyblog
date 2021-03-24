@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\services\generators;
 
+use PrintMyBlog\compatibility\DetectAndActivate;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\orm\entities\Design;
@@ -31,6 +32,10 @@ abstract class ProjectFileGeneratorBase
      * @var PostFetcher
      */
     protected $post_fetcher;
+    /**
+     * @var DetectAndActivate
+     */
+    private $plugin_compatibility;
 
     /**
      * ProjectHtmlGenerator constructor.
@@ -44,9 +49,12 @@ abstract class ProjectFileGeneratorBase
         $this->design = $design;
     }
 
-    public function inject(PostFetcher $post_fetcher)
+    public function inject(
+        PostFetcher $post_fetcher,
+        DetectAndActivate $plugin_compatibility)
     {
         $this->post_fetcher = $post_fetcher;
+        $this->plugin_compatibility = $plugin_compatibility;
     }
 
     /**
@@ -59,6 +67,7 @@ abstract class ProjectFileGeneratorBase
             include($this->getDesignDir() . 'functions.php');
         }
 
+        $this->plugin_compatibility->activateRenderingCompatibilityModes();
         $this->startGenerating();
         // Don't let anything from a previous generation affect this one.
         $this->project_generation->setLastSectionId(null);
@@ -153,10 +162,26 @@ abstract class ProjectFileGeneratorBase
         $wp_query = $this->setupWpQuery($project_sections);
         while ($wp_query->have_posts()) {
             $wp_query->the_post();
+            $this->setupPostData();
             $this->maybeGenerateDivisionTransition($post);
             $this->generateSection();
         }
         wp_reset_postdata();
+    }
+
+    /**
+     * Setup WordPress post-related globals correctly for PMB
+     */
+    protected function setupPostData()
+    {
+        global $more, $multipage, $pages, $numpages;
+        // we want to see what's after "more" tags
+        $more = true;
+        // Remove all pagebreak blocks and stitch it all back together.
+        $content_ignoring_pages = implode('<br class="pmb-page-break">', $pages);
+        $pages = [$content_ignoring_pages];
+        $numpages = 1;
+        $multipage = false;
     }
 
     /**
@@ -271,11 +296,7 @@ abstract class ProjectFileGeneratorBase
     }
 
     /**
-     * Deletes the generated HTML file, if it exists.
      * @return bool
      */
-    public function deleteFile()
-    {
-        return $this->getFileWriter()->delete();
-    }
+    abstract public function deleteFile();
 }

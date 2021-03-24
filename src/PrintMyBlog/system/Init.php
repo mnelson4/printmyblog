@@ -10,16 +10,17 @@ use PrintMyBlog\controllers\Common;
 use PrintMyBlog\controllers\Frontend;
 use PrintMyBlog\controllers\GutenbergBlock;
 use PrintMyBlog\controllers\LegacyPrintPage;
-use PrintMyBlog\controllers\LoadingPage;
 use PrintMyBlog\controllers\Shortcodes;
 use PrintMyBlog\domain\DefaultDesigns;
 use PrintMyBlog\domain\DefaultDesignTemplates;
 use PrintMyBlog\domain\DefaultFileFormats;
 use PrintMyBlog\domain\ProNotification;
 use Twine\admin\news\DashboardNews;
+use PrintMyBlog\system\Context;
 use Twine\system\RequestType;
 use Twine\system\VersionHistory;
-
+use WPTRT\AdminNotices\Notices;
+use Twine\system\Init as BaseInit;
 /**
  * Class Init
  *
@@ -32,7 +33,7 @@ use Twine\system\VersionHistory;
  * @since          3.0.0
  *
  */
-class Init
+class Init extends BaseInit
 {
 
     /**
@@ -56,20 +57,11 @@ class Init
     protected $cpt;
 
     /**
-     * @var Context
-     */
-    protected $context;
-
-    /**
      * Sets up hooks that will initialize the code that will run PMB.
      */
     public function setHooks()
     {
-        $this->context = Context::instance();
-        add_action('init', array($this, 'earlyInit'), 5);
-        add_action('init', array($this, 'init'));
-        $compatibility_mods_loader = new DetectAndActivate();
-        $compatibility_mods_loader->detectAndActivateCompatibilityMods();
+        parent::setHooks();
     }
 
 
@@ -83,16 +75,7 @@ class Init
         } else {
             define('PMB_REST_PROXY_EXISTS', false);
         }
-    }
-    /**
-     * Sets up PMB's code that will will set other hooks
-     */
-    public function init()
-    {
-        $this->includes();
-        $this->defineTerms();
-        $this->setupDbEnvironment();
-        $this->takeActionOnIncomingRequest();
+        parent::earlyInit();
     }
 
     /**
@@ -109,20 +92,8 @@ class Init
     /**
      * Just setting up code. Not doing anything yet.
      */
-    protected function defineTerms()
+    protected function registerStuff()
     {
-        /**
-         * @var $request_type RequestType
-         */
-        $request_type = $this->context->reuse('Twine\system\RequestType');
-        $request_type->getRequestType();
-
-        /**
-         * @var $version_history VersionHistory
-         */
-        $version_history = $this->context->reuse('Twine\system\VersionHistory');
-        $version_history->maybeRecordVersionChange();
-
         /**
          * @var $cpt CustomPostTypes
          */
@@ -163,6 +134,11 @@ class Init
      */
     protected function takeActionOnIncomingRequest()
     {
+        // Persistent notices need to be setup on both admin and ajax requests.
+        if (is_admin()) {
+            $persistent_messages = $this->context->reuse('PrintMyBlog\services\PersistentNotices');
+            $persistent_messages->register();
+        }
         if (defined('DOING_AJAX') && DOING_AJAX) {
             $ajax = $this->context->reuse('PrintMyBlog\controllers\Ajax');
             $ajax->setHooks();
@@ -174,7 +150,6 @@ class Init
         } else {
             (new Frontend())->setHooks();
             (new LegacyPrintPage())->setHooks();
-            (new LoadingPage())->setHooks();
         }
         // These are needed at least during frontend and ajax requests
         (new Shortcodes())->setHooks();
@@ -228,5 +203,12 @@ class Init
         define('PMB_STYLES_DIR', PMB_ASSETS_DIR . 'styles/');
 
         define('PMB_DESIGNS_URL', $plugin_url . 'designs/');
+        define('WPTRT_JS_DIR', PMB_DIR . 'src/WPTRT/AdminNotices/');
+        define('WPTRT_JS_URL', $plugin_url . 'src/WPTRT/AdminNotices/');
+    }
+
+    protected function initContext()
+    {
+        return Context::instance();
     }
 }

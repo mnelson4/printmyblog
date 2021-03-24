@@ -156,6 +156,19 @@ class ProjectProgress
         return $step_slug;
     }
 
+    /**
+     * Indicates whether this step was already complete or not.
+     * @param $step_name
+     * @return bool|null
+     */
+    public function isStepComplete($step_name){
+        $steps = $this->getStepProgress();
+        if(isset($steps[$step_name])){
+            return (bool)$steps[$step_name];
+        }
+        return null;
+    }
+
     public function stepsToUrls()
     {
         $base_url_args = [

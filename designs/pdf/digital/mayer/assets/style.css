@@ -78,7 +78,10 @@
     .pmb-toc-item.pmb-toc-depth-1{
         margin-left:1em;
     }
-    .pmb-toc-list a::after {
+    .pmb-toc-list .pmb-toc-item.pmb-toc-front a::after {
+        content: leader('.') target-counter(attr(href), page, lower-roman) !important;
+    }
+    .pmb-toc-list .pmb-toc-item:not(.pmb-toc-front) a::after {
         content: leader('.') target-counter(attr(href), page) !important;
     }
 
@@ -116,6 +119,9 @@
     .mayer-wide{
         column-span: all;
     }
+    .mayer-columns{
+        columns:2;
+    }
     .project-intro{
         background-color:lightgrey;
         font-style:italic;
@@ -128,5 +134,7 @@
     .pmb-posts span.pmb-footnote{
         float:footnote;
         text-align:left;
+        margin-left:0;
+        font-weight:normal;
     }
 }

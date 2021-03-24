@@ -35,6 +35,10 @@ class FileFormat
      * @var DesignTemplateRegistry
      */
     protected $design_template_registry;
+    /**
+     * @var mixed
+     */
+    protected $generator;
 
     /**
      * ProjectFormat constructor.

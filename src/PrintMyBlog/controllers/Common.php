@@ -39,15 +39,21 @@ class Common extends BaseController
     {
         wp_register_style(
             'jquery-ui',
-            'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css',
+            PMB_ASSETS_URL . 'styles/libs/jquery-ui/jquery-ui.min.css',
             array(),
-            '1.8'
+            '1.11.4'
         );
         wp_register_style(
             'pmb_print_common',
             PMB_ASSETS_URL . 'styles/print-page-common.css',
             array(),
             filemtime(PMB_ASSETS_DIR . 'styles/print-page-common.css')
+        );
+        wp_register_style(
+            'pmb_pro_page',
+            PMB_ASSETS_URL . 'styles/pmb-pro-page.css',
+            array(),
+            filemtime(PMB_ASSETS_DIR . 'styles/pmb-pro-page.css')
         );
         wp_register_script(
             'jquery-debounce',
@@ -66,6 +72,18 @@ class Common extends BaseController
             PMB_ASSETS_URL . 'styles/libs/select2.css',
             [],
             '4.0.6'
+        );
+        wp_register_script(
+            'pmb-modal',
+            PMB_ASSETS_URL . 'scripts/pmb-modal.js',
+            ['jquery-ui-dialog'],
+            '1.0.0'
+        );
+        wp_register_script(
+            'docraptor',
+            PMB_SCRIPTS_URL . 'docraptor.js',
+            [],
+            '1.0.0'
         );
         // Enqueue the CSS for compatibility with known troublemaking plugins.
         wp_register_style(

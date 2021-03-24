@@ -2,6 +2,8 @@
 
 namespace Twine\forms\strategies\display;
 
+use Twine\forms\strategies\normalization\NormalizationBase;
+
 /**
  * Class SubmitInputDisplay
  * Description
@@ -30,7 +32,7 @@ class SubmitInputDisplay extends DisplayBase
                     'value' => $default_value,
                     // overwrite the standard id with the backwards compatible one
                     'id' => $this->input->htmlId() . '-submit',
-                    'class' => $this->input->htmlClass() . ' ' . $this->input->button_css_attributes()
+                    'class' => $this->input->htmlClass()
                 )
             )
         );

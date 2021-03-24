@@ -2,6 +2,8 @@
 
 namespace Twine\forms\strategies\display;
 
+use InvalidArgumentException;
+
 /**
  * Class NumberInputDisplay
  * Generates an HTML5 number input

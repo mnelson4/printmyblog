@@ -1,0 +1,97 @@
+/**
+Styles generic to all PDF projects
+ */
+
+.pmb-depth-0 .pmb-title{prince-bookmark-level: 1}
+.pmb-depth-1 .pmb-title{prince-bookmark-level: 2}
+.pmb-depth-2 .pmb-title{prince-bookmark-level: 3}
+.pmb-depth-3 .pmb-title{prince-bookmark-level: 4}
+.pmb-depth-4 .pmb-title{prince-bookmark-level: 5}
+
+/* Browsers basically have this set as the default, but not Prince*/
+figure{
+    margin-bottom:1em;
+}
+
+.alignleft{
+    float:left;
+    margin-right:1em;
+}
+.alignright{
+    float:right;
+    margin-left:1em;
+}
+.aligncenter{
+    margin-left:auto;
+    margin-right:auto;
+}
+.has-text-align-center{
+    text-align:center;
+}
+
+/* Featured images should be a block so they can be centered */
+.pmb-featured-image{
+    display:block;
+}
+
+/* Make captions line up nicely with floated images. Yes a design may want to override these */
+.wp-block-image figure {
+    display: table;
+    page-break-inside:avoid;
+}
+
+.wp-block-image figure > figcaption {
+    display: table-caption;
+    caption-side: bottom;
+}
+
+/* Make image captions look a bit different*/
+figcaption{
+    color: #555;
+    text-align:center;
+    font-style:italic;
+    margin-top:0.5em;
+}
+
+/* Column blocks*/
+.wp-block-columns{
+    page-break-inside:avoid;
+}
+.wp-block-columns>.wp-block-column{
+    display:inline-block;
+    vertical-align:top;
+}
+.wp-block-columns.has-2-columns>.wp-block-column{
+    /*width:49vw;*/
+    width:80mm !important;
+}
+.wp-block-columns.has-3-columns>.wp-block-column{
+    /*width:32vw;*/
+    width:50mm !important;
+}
+.wp-block-columns.has-4-columns>.wp-block-column{
+    /*width:24vw;*/
+    width:40mm !important;
+}
+
+/* Block galleries */
+.pmb-posts .wp-block-gallery{
+    page-break-inside:avoid;
+    list-style-type:none;
+}
+.pmb-posts .wp-block-gallery>.blocks-gallery-grid>.blocks-gallery-item{
+    display:inline-block;
+}
+.pmb-posts .wp-block-gallery.columns-1>.blocks-gallery-grid>.blocks-gallery-item{
+    width:99vw;
+}
+.pmb-posts .wp-block-gallery.columns-2>.blocks-gallery-grid>.blocks-gallery-item{
+    width:49vw;
+}
+.pmb-posts .wp-block-gallery.columns-3>.blocks-gallery-grid>.blocks-gallery-item{
+    width:32vw;
+}
+.wp-block-gallery.is-cropped>.blocks-gallery-item img{
+    height:100%;
+    object-fit:cover;
+}

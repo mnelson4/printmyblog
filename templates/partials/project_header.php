@@ -3,7 +3,7 @@
 use PrintMyBlog\controllers\Admin;
 use PrintMyBlog\orm\entities\Project;
 /**
- * @var Project $project
+ * @var Project|null $project
  * @var bool $show_back
  * @var string $current_step
  * @var array $steps_to_urls

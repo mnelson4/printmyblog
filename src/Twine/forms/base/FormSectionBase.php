@@ -2,8 +2,6 @@
 
 namespace Twine\forms\base;
 
-use EventEspresso\core\exceptions\InvalidDataTypeException;
-use EventEspresso\core\libraries\form_sections\strategies\filter\FormHtmlFilter;
 use Exception;
 use Twine\forms\helpers\ImproperUsageException;
 
@@ -92,7 +90,6 @@ abstract class FormSectionBase
      * @param array $options_array {
      * @type        $name          string the name for this form section, if you want to explicitly define it
      *                             }
-     * @throws InvalidDataTypeException
      */
     public function __construct($options_array = array())
     {
@@ -102,7 +99,7 @@ abstract class FormSectionBase
             if (property_exists($this, $key) && empty($this->{$key})) {
                 $this->{$key} = $value;
                 if ($key === 'subsections' && ! is_array($value)) {
-                    throw new InvalidDataTypeException($key, $value, 'array');
+                    throw new Exception('Subsections was not an array');
                 }
             }
         }

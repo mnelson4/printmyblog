@@ -68,7 +68,7 @@ abstract class FormInputWithOptionsBase extends FormInputBase
     /**
      * Sets the allowed options for this input. Also has the side-effect of
      * updating the normalization strategy to match the keys provided in the array
-     *
+     * @throws ImproperUsageException
      * @param InputOption[] $options
      *
      * @return void  just has the side-effect of setting the options for this input

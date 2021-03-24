@@ -37,6 +37,7 @@
 
 
     .pmb-back-matter {
+        display:block;
         page:back-matter;
     }
 
@@ -65,7 +66,7 @@
 
     @page back-matter:verso {
         @top {
-            content: string(article-title, first-except);
+            content: normal;
         }
         @bottom-left {
             content: counter(page)
@@ -74,7 +75,7 @@
 
     @page back-matter:recto {
         @top {
-            content: string(article-title, first-except)
+            content: normal;
         }
         @bottom-right {
             content: counter(page)
@@ -83,17 +84,14 @@
 
 
     body{
-        background-color:white;
+        background-color:white !important;
+        background:white !important;
         color:black;
         prince-footnote-policy: keep-with-line;
     }
     a{
         color:black;
         text-decoration:none;
-    }
-    .pmb-article .post-inner p{
-        text-indent:3em;
-        margin:0;
     }
 
     /* Title Page styles */
@@ -117,6 +115,9 @@
 
 
     /* toc */
+    #pmb-toc-wrapper{
+        break-before: right;
+    }
     .pmb-toc-list li{
         list-style:none;
     }
@@ -128,7 +129,10 @@
     .pmb-toc-item.pmb-toc-depth-1{
         margin-left:1em;
     }
-    .pmb-toc-list a::after {
+    .pmb-toc-list .pmb-toc-item.pmb-toc-front a::after {
+        content: leader('.') target-counter(attr(href), page, lower-roman) !important;
+    }
+    .pmb-toc-list .pmb-toc-item:not(.pmb-toc-front) a::after {
         content: leader('.') target-counter(attr(href), page) !important;
     }
 
@@ -136,7 +140,6 @@
     .pmb-part h1.pmb-title{
         font-size:4em;
         string-set: part-title content();
-        string-set: article-title '';
         margin-top:2in;
     }
     .pmb-part .entry-content{
@@ -154,6 +157,12 @@
     .pmb-section-wrapper:not(.pmb-first-section-wrapper){
         break-before:page;
     }
+    div.pmb-part-wrapper.pmb-section-wrapper{
+        break-before:right;
+    }
+    div.pmb-back_matter_article-wrapper.pmb-section-wrapper{
+        break-before:right;
+    }
 
 
     a.pmb-page-ref[href]::after{
@@ -163,7 +172,14 @@
         float:footnote;
         text-align:left;
         font-size:80%;
+        margin-left:0;
+        font-weight:normal;
     }
+
+    .entry-meta{
+        margin-bottom:1em;
+    }
+
     .excerpt{
         width:80%;
         margin-left:auto;

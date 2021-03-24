@@ -47,7 +47,7 @@ class ButtonInput extends FormInputBase
     {
         $this->button_content = $new_content;
     }
-    
+
     /**
      * Gets the button content
      * @return string

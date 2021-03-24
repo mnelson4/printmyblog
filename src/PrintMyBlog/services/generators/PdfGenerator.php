@@ -4,6 +4,7 @@ namespace PrintMyBlog\services\generators;
 
 use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\orm\entities\Design;
+use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;
 use Twine\services\filesystem\File;
 
@@ -19,9 +20,12 @@ class PdfGenerator extends ProjectFileGeneratorBase
      */
     protected $file_writer;
 
-    protected function startGenerating()
-    {
+    /**
+     * Enqueues themes and styles we'll use on this AJAX request.
+     */
+    public function enqueueStylesAndScripts(){
         wp_enqueue_style('pmb_print_common');
+        wp_enqueue_style('pmb_pro_page');
         wp_enqueue_style('pmb-plugin-compatibility');
         wp_enqueue_script('pmb-beautifier-functions');
         $style_file = $this->getDesignDir() . 'assets/style.css';
@@ -31,7 +35,8 @@ class PdfGenerator extends ProjectFileGeneratorBase
                 'pmb-design',
                 $this->getDesignAssetsUrl() . 'style.css',
                 ['pmb_print_common', 'pmb-plugin-compatibility'],
-                filemtime($style_file)
+                filemtime($style_file),
+                null
             );
         }
         if (file_exists($script_file)) {
@@ -42,9 +47,16 @@ class PdfGenerator extends ProjectFileGeneratorBase
                 filemtime($script_file)
             );
         }
-//      if(! $this->design->getPmbMeta('use_theme')){
-//          add_filter('wp_enqueue_scripts', [$this,'remove_theme_style'],20);
-//      }
+    }
+
+    /**
+     * @global Project $pmb_project
+     * @global Design $pmb_design
+     */
+    protected function startGenerating()
+    {
+        // Try to get enqueued after the theme, if we're doing that, so we get precedence.
+        add_action('wp_enqueue_scripts', [$this,'enqueueStylesAndScripts'], 1000);
         do_action('pmb_pdf_generation_start', $this->project_generation, $this->design);
         $this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT);
     }
@@ -180,5 +192,15 @@ class PdfGenerator extends ProjectFileGeneratorBase
     protected function generateMainMatter()
     {
         $this->generateSections($this->project->getFlatSections(1000, 0, false));
+    }
+
+
+    /**
+     * Deletes the generated HTML file, if it exists.
+     * @return bool
+     */
+    public function deleteFile()
+    {
+        return $this->getFileWriter()->delete();
     }
 }

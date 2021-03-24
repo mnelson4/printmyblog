@@ -34,7 +34,7 @@ class MonthInput extends SelectInput
             $input_settings
         );
     }
-    
+
     /**
      * Changes int 1 to 01, etc. Useful with array_walk
      * @param int $input
