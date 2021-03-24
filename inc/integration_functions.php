@@ -62,7 +62,7 @@ function pmb_register_section_template($slug, $section_template_args_callback){
      * @var $section_template_registry PrintMyBlog\services\SectionTemplateRegistry
      */
     $section_template_registry = Context::instance()->reuse(
-        'PrintMyBLog\services\SectionTemplateRegistry'
+        'PrintMyBlog\services\SectionTemplateRegistry'
     );
     $section_template_registry->register($slug, $section_template_args_callback);
 }

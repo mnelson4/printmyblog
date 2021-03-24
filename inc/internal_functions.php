@@ -150,6 +150,10 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
                 <?php echo pmb_post_type_icon_html($post_type);?>
                 <span class="pmb-project-item-title-text"><?php echo $title;?></span>
             </div>
+            <?php
+            // only show the viewing button if it will work
+            if($post_type->public){
+                ?>
             <a
                 href="<?php echo esc_attr($view_url);?>"
                 title="<?php
@@ -161,6 +165,9 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
                 );
                 ?>"
                 target="_blank"><span class="dashicons dashicons-visibility pmb-icon"></span></a>
+            <?php
+            }
+            ?>
             <a
                 href="<?php echo esc_attr($edit_url);?>"
                 title="<?php

@@ -7,6 +7,7 @@ use PrintMyBlog\exceptions\TemplateDoesNotExist;
 use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\services\FileFormatRegistry;
+use PrintMyBlog\services\SectionTemplateRegistry;
 use Twine\forms\base\FormSection;
 
 class DesignTemplate
@@ -85,6 +86,10 @@ class DesignTemplate
      * @var string
      */
     protected $docs;
+    /**
+     * @var SectionTemplateRegistry
+     */
+    private $section_template_registry;
 
     /**
      * DesignTemplate constructor.
@@ -120,10 +125,11 @@ class DesignTemplate
         $this->project_form_callback = $args['project_form_callback'];
     }
 
-    public function inject(FileFormatRegistry $file_format_registry, DesignManager $design_manager)
+    public function inject(FileFormatRegistry $file_format_registry, DesignManager $design_manager, SectionTemplateRegistry $section_template_registry)
     {
         $this->file_format_registry = $file_format_registry;
         $this->design_manager = $design_manager;
+        $this->section_template_registry = $section_template_registry;
     }
     /**
      * @return string
@@ -368,11 +374,20 @@ class DesignTemplate
     }
 
     /**
-     * @return SectionTemplate[]
+     * @return string[]
      */
     public function getCustomTemplates()
     {
         return $this->custom_templates;
+    }
+
+    /**
+     * Adds the template to the list of custom template slugs used by this design template.
+     * It is assumed this custom template has already been registered with pmb_register_section_template()
+     * @param $custom_template_slug
+     */
+    public function addCustomTemplate($custom_template_slug){
+        $this->custom_templates[] = $custom_template_slug;
     }
 
     /**
@@ -385,6 +400,23 @@ class DesignTemplate
             ($this->custom_templates[$template_name]['fallback'])) {
             return $this->custom_templates[$template_name]['fallback'];
         }
+        return null;
+    }
+
+    /**
+     * Tell us the slug of the section template you want to use, and we'll tell you the slug of the closest
+     * available template for this design template. It might be what you requested, or one of its fallbacks.
+     * @param string $desired_template_slug
+     * @return string template slug or null if unresolvable
+     */
+    public function resolveSectionTemplateToUse($desired_template_slug){
+        do {
+            if ($this->supports($desired_template_slug)) {
+                return $desired_template_slug;
+            }
+            $section_template = $this->section_template_registry->get($desired_template_slug);
+            $desired_template_slug = $section_template->fallbackSlug();
+        }while($desired_template_slug);
         return null;
     }
 

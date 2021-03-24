@@ -33,9 +33,10 @@ class SectionTemplate
     }
 
     /**
+     * Returns the slug of the section template to fallback to
      * @return string
      */
-    public function fallback(){
+    public function fallbackSlug(){
         return $this->fallback;
     }
 

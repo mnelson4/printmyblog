@@ -603,8 +603,7 @@ class Project extends PostWrapper
     public function getSectionTemplateOptions()
     {
         $all_templates = [
-                '' => __('Default Template', 'print-my-blog'),
-                'just_content' => __('Just Content', 'print-my-blog')
+                '' => __('Default Template', 'print-my-blog')
             ];
         foreach ($this->getCustomTemplates() as $template_slug => $template_args) {
             $title = $template_args['title'];

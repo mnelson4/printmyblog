@@ -14,6 +14,7 @@ use PrintMyBlog\controllers\Shortcodes;
 use PrintMyBlog\domain\DefaultDesigns;
 use PrintMyBlog\domain\DefaultDesignTemplates;
 use PrintMyBlog\domain\DefaultFileFormats;
+use PrintMyBlog\domain\DefaultSectionTemplates;
 use PrintMyBlog\domain\ProNotification;
 use Twine\admin\news\DashboardNews;
 use PrintMyBlog\system\Context;
@@ -118,6 +119,12 @@ class Init extends BaseInit
          */
         $default_designs = $this->context->reuse('PrintMyBlog\domain\DefaultDesigns');
         $default_designs->registerDefaultDesigns();
+
+        /**
+         * @var $default_section_templates DefaultSectionTemplates
+         */
+        $default_section_templates = $this->context->reuse('PrintMyBlog\domain\DefaultSectionTemplates');
+        $default_section_templates->registerDefaultSectionTemplates();
     }
 
     /**
