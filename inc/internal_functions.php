@@ -201,7 +201,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
                 );
                 ?>"
             ><span class="dashicons dashicons-plus-alt2 pmb-icon"></span></a>
-            <span class="pmb-project-item-template-container"><?php echo pmb_template_selector($template, $project);?></span>
+            <span class="pmb-project-item-template-container"><?php echo pmb_section_template_selector($template, $project);?></span>
         </div>
 
         <div class="pmb-nested-sortable pmb-draggable-area <?php echo $depth < $max_nesting ? 'pmb-sortable' : 'pmb-sortable-inactive';?> pmb-subs">

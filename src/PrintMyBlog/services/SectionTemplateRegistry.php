@@ -14,8 +14,21 @@ class SectionTemplateRegistry
      * @var SectionTemplate[]
      */
     protected $instances;
-    public function register($slug, $callback){
+    /**
+     * @var DesignTemplateRegistry
+     */
+    private $design_template_registry;
+
+    public function inject(DesignTemplateRegistry $design_template_registry){
+        $this->design_template_registry = $design_template_registry;
+    }
+
+    public function register($slug, $design_templates, $callback){
         $this->callbacks[$slug] = $callback;
+        foreach($design_templates as $design_template_slug){
+            $design = $this->design_template_registry->getDesignTemplate($design_template_slug);
+            $design->addCustomTemplate($slug);
+        }
     }
 
     /**

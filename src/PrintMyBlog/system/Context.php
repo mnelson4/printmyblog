@@ -68,6 +68,7 @@ class Context extends BaseContext
                 'PrintMyBlog\orm\managers\DesignManager' => self::REUSE,
                 'PrintMyBlog\services\config\Config' => self::REUSE,
                 'PrintMyBlog\factories\ProjectGenerationFactory' => self::REUSE,
+                'PrintMyBlog\services\SectionTemplateRegistry' => self::REUSE
             ],
             'PrintMyBlog\services\DesignRegistry' => [
                 'PrintMyBlog\orm\managers\DesignManager' => self::REUSE,
@@ -108,7 +109,10 @@ class Context extends BaseContext
             'PrintMyBlog\services\DebugInfo' => [
                 'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
                 'PrintMyBlog\orm\managers\DesignManager' => self::REUSE,
-            ]
+            ],
+            'PrintMyBlog\services\SectionTemplateRegistry' => [
+                'PrintMyBlog\services\DesignTemplateRegistry' => self::REUSE
+            ],
         ];
     }
 }

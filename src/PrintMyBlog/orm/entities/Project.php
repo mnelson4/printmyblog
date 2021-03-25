@@ -8,6 +8,7 @@ use PrintMyBlog\domain\DefaultFileFormats;
 use PrintMyBlog\entities\FileFormat;
 use PrintMyBlog\entities\ProjectGeneration;
 use PrintMyBlog\entities\ProjectProgress;
+use PrintMyBlog\entities\SectionTemplate;
 use PrintMyBlog\factories\ProjectGenerationFactory;
 use PrintMyBlog\helpers\ArgMagician;
 use PrintMyBlog\orm\managers\DesignManager;
@@ -15,6 +16,7 @@ use PrintMyBlog\orm\managers\ProjectSectionManager;
 use PrintMyBlog\services\config\Config;
 use PrintMyBlog\services\FileFormatRegistry;
 use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
+use PrintMyBlog\services\SectionTemplateRegistry;
 use Twine\forms\base\FormSection;
 use Twine\forms\inputs\FormInputBase;
 use Twine\orm\entities\PostWrapper;
@@ -71,13 +73,17 @@ class Project extends PostWrapper
      */
     protected $meta_form;
     /**
-     * @var array|null @see DefaultDesignTemplate::custom_templates for its format
+     * @var SectionTemplate[]
      */
     protected $custom_templates = null;
     /**
      * @var ProjectProgress
      */
     protected $progress;
+    /**
+     * @var SectionTemplateRegistry
+     */
+    private $section_template_registry;
 
     /**
      * @param ProjectSectionManager $section_manager
@@ -91,13 +97,15 @@ class Project extends PostWrapper
         FileFormatRegistry $format_manager,
         DesignManager $design_manager,
         Config $config,
-        ProjectGenerationFactory $project_generation_factory
+        ProjectGenerationFactory $project_generation_factory,
+        SectionTemplateRegistry $section_template_registry
     ) {
         $this->section_manager    = $section_manager;
         $this->format_registry = $format_manager;
         $this->design_manager  = $design_manager;
         $this->config          = $config;
         $this->project_generation_factory = $project_generation_factory;
+        $this->section_template_registry = $section_template_registry;
     }
 
     /**
@@ -583,12 +591,9 @@ class Project extends PostWrapper
             foreach ($this->getFormatsSelected() as $format) {
                 $design           = $this->getDesignFor($format);
                 $design_templates = $design->getDesignTemplate()->getCustomTemplates();
-                foreach ($design_templates as $template_slug => $template_args) {
+                foreach ($design_templates as $template_slug) {
                     if (! isset($templates[ $template_slug ])) {
-                        $templates[ $template_slug ] = $template_args;
-                    }
-                    if (! isset($templates[ $template_slug ]['used_by'])) {
-                        $templates[ $template_slug ]['used_by'][ $design->getWpPost()->post_name ] = $design;
+                        $templates[ $template_slug ] = $this->section_template_registry->get($template_slug);
                     }
                 }
             }
@@ -605,22 +610,9 @@ class Project extends PostWrapper
         $all_templates = [
                 '' => __('Default Template', 'print-my-blog')
             ];
-        foreach ($this->getCustomTemplates() as $template_slug => $template_args) {
-            $title = $template_args['title'];
-            $title_and_qualifier = sprintf(
-                __('%1$s (%2$s)', 'print-my-blog'),
-                $title,
-                implode(
-                    ', ',
-                    array_map(
-                        function (Design $design) {
-                            return $design->getWpPost()->post_title;
-                        },
-                        $template_args['used_by']
-                    )
-                )
-            );
-            $all_templates[$template_slug] = $title_and_qualifier;
+        foreach ($this->getCustomTemplates() as $template_slug => $section_template) {
+            $title = $section_template->title();
+            $all_templates[$template_slug] = $title;
         }
         return $all_templates;
     }

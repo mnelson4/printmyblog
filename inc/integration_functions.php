@@ -55,14 +55,15 @@ function pmb_register_design($design_template_slug, $design_slug, $design_args_c
 
 /**
  * @param $slug
+ * @param string[] $design_templates
  * @param $section_template_args_callback see
  */
-function pmb_register_section_template($slug, $section_template_args_callback){
+function pmb_register_section_template($slug, $design_templates, $section_template_args_callback){
     /**
      * @var $section_template_registry PrintMyBlog\services\SectionTemplateRegistry
      */
     $section_template_registry = Context::instance()->reuse(
         'PrintMyBlog\services\SectionTemplateRegistry'
     );
-    $section_template_registry->register($slug, $section_template_args_callback);
+    $section_template_registry->register($slug, $design_templates, $section_template_args_callback);
 }

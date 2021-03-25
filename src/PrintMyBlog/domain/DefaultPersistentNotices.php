@@ -128,9 +128,10 @@ class DefaultPersistentNotices
                 '</p>'
                 . '<p>'
                 . sprintf(
-                    __('Read the User Guide on how your data is secured, %1$spreviewing%2$s, %3$supdating%2$s, %4$sgenerating the pro file%2$s, and %5$sgetting help%2$s.', 'print-my-blog'),
-                    '<a href="https://printmy.blog/user-guide/pro/getting-started/8-generate-a-preview-file/" target="_blank">',
+                    __('Read the User Guide on %1$show your data is secured%2$s, %3$spreviewing%2$s, %4$supdating%2$s, %5$sgenerating the pro file%2$s, and %6$sgetting help%2$s.', 'print-my-blog'),
+                    '<a href="https://printmy.blog/user-guide/getting-started/privacy-and-pmb-pro/" target="_blank">',
                     '</a>',
+                    '<a href="https://printmy.blog/user-guide/pro/getting-started/8-generate-a-preview-file/" target="_blank">',
                     '<a href="https://printmy.blog/user-guide/pro/getting-started/9-update-the-project/" target="_blank">',
                     '<a href="https://printmy.blog/user-guide/pro/getting-started/10-generate-the-paid-pdf/" target="_blank">',
                     '<a href="https://printmy.blog/user-guide/pro/getting-started/11-getting-help/" target="_blank">'

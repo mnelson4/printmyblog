@@ -114,7 +114,7 @@ function pmb_design_uses($post_content_thing, $default){
  *
  * @return string
  */
-function pmb_template_selector($selected_template, Project $project){
+function pmb_section_template_selector($selected_template, Project $project){
 	$options = $project->getSectionTemplateOptions();
 	$html = '<select class="pmb-template">';
 	foreach($options as $value => $display_text){
