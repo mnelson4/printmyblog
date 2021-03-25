@@ -391,23 +391,10 @@ class DesignTemplate
     }
 
     /**
-     * @param $template_name
-     * @return mixed|null
-     */
-    public function getFallbackForCustomTemplate($template_name)
-    {
-        if (isset($this->custom_templates[$template_name]) && isset
-            ($this->custom_templates[$template_name]['fallback'])) {
-            return $this->custom_templates[$template_name]['fallback'];
-        }
-        return null;
-    }
-
-    /**
      * Tell us the slug of the section template you want to use, and we'll tell you the slug of the closest
      * available template for this design template. It might be what you requested, or one of its fallbacks.
      * @param string $desired_template_slug
-     * @return string template slug or null if unresolvable
+     * @return string template slug or empty string if we should use the default
      */
     public function resolveSectionTemplateToUse($desired_template_slug){
         do {
@@ -417,7 +404,7 @@ class DesignTemplate
             $section_template = $this->section_template_registry->get($desired_template_slug);
             $desired_template_slug = $section_template->fallbackSlug();
         }while($desired_template_slug);
-        return null;
+        return '';
     }
 
     /**

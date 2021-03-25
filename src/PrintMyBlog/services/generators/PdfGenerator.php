@@ -70,9 +70,7 @@ class PdfGenerator extends ProjectFileGeneratorBase
         if ($post->pmb_section instanceof ProjectSection) {
             $this->project_generation->setLastSection($post->pmb_section);
             $template = $post->pmb_section->getTemplate();
-            if(! $this->design->getDesignTemplate()->supports($template)){
-
-            }
+            $template = $this->design->getDesignTemplate()->resolveSectionTemplateToUse($template);
             if ($template) {
                 $this->writeDesignTemplateInDivision($template);
             } else {
