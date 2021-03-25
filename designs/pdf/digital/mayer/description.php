@@ -10,10 +10,8 @@
     ?></li>
 
     <li><?php esc_html_e('The title page can include a title and preamble. Other content can immediately follow, without needing a page break.', 'print-my-blog');?></li>
-    <li>
-        <?php esc_html_e('Each article includes just its title and content, and an optional dividing line to help distinguish between articles.',
-            'print-my-blog');?>
-    </li>
+    <li><?php esc_html_e('Each article includes just its title and content, and an optional dividing line to help distinguish between articles.',
+            'print-my-blog');?></li>
     <li><?php esc_html_e('If your content is already divided into columns, optionally automatically remove them to improve the layout.', 'print-my-blog');?></li>
     <li><?php esc_html_e('Optionally begin each post on a new page, or be shown immediately following the previous one.', 'print-my-blog');?></li>
     <li><?php esc_html_e('Optionally have each article title take up the full page width, or show them inside columns.',
