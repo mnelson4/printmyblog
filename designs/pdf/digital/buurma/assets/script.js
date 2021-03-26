@@ -12,7 +12,7 @@ jQuery(document).ready(function(){
     pmb_reveal_dynamic_content();
     pmb_replace_internal_links_with_page_refs_and_footnotes('footnote', 'footnote_ref');
     new PmbToc();
-
+    jQuery(document).trigger('pmb_wrap_up');
 });
 
 // wait until the images are loaded to try to resize them.
