@@ -16,11 +16,6 @@ use ReflectionClass;
  */
 abstract class Context
 {
-    /**
-     * @var Context
-     */
-    protected static $instance;
-
     const USE_NEW = 'use_new';
     const REUSE = 'reuse';
 
@@ -122,11 +117,11 @@ abstract class Context
      */
     public static function instance()
     {
-        if (! self::$instance instanceof Context) {
-            self::$instance = new static();
-            self::$instance->setDependencies();
+        if (! static::$instance instanceof Context) {
+            static::$instance = new static();
+            static::$instance->setDependencies();
         }
-        return self::$instance;
+        return static::$instance;
     }
 
     /**

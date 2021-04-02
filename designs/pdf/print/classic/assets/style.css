@@ -1,3 +1,11 @@
+/*
+Generic stuff.
+Ask PDF viewers to display pages side-by-side by default.
+*/
+@prince-pdf {
+    -prince-pdf-page-layout: two-column-right;
+}
+
 /* pagination */
 @media print, screen {
     .pmb-front-matter {
@@ -171,9 +179,9 @@
     span.pmb-footnote{
         float:footnote;
         text-align:left;
-        font-size:80%;
         margin-left:0;
         font-weight:normal;
+        text-indent:0;
     }
 
     .entry-meta{

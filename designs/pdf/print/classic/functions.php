@@ -19,6 +19,10 @@ function pmb_enqueue_classic_script(){
                 font-size:" . $pmb_design->getSetting('font_size') . ";
                 font-family:" . $pmb_design->getSetting('font_style') . ";
            }
+           span.pmb-footnote{
+                font-family:" . $pmb_design->getSetting('font_style') . ";
+                font-size: calc(" . $pmb_design->getSetting('font_size') . " * 3 / 2);
+           }
            h1,h2,h3,h4,h5,h6{
                 font-family:" . $pmb_design->getSetting('header_font_style') . ";
            }     

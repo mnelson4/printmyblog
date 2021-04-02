@@ -16,6 +16,12 @@ use Twine\system\Context as BaseContext;
  */
 class Context extends BaseContext
 {
+
+    /**
+     * @var Context
+     */
+    protected static $instance;
+
     /**
      * Sets the dependencies in the context. Keys are classnames, values are an array
      * whose keys are classnames dependend on, and values are either self::USE_NEW or self::REUSE.
