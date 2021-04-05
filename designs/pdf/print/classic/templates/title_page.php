@@ -17,6 +17,11 @@
         <p class="site-description pmb-subtitle"><?php echo $pmb_project->getSetting('subtitle'); ?></p>
 		<?php
 	}
+    if (in_array('byline',$pmb_design->getSetting('header_content'))) {
+        ?>
+            <h2 class="project-byline"><?php echo $pmb_project->getPmbMeta('byline'); ?></h2>
+        <?php
+    }
 	if(in_array('url', $pmb_design->getSetting('header_content'))){
 		$url_text = $pmb_project->getSetting('url');
 		$true_url = esc_url_raw($url_text) === $url_text;

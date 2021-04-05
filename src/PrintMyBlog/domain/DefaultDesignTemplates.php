@@ -338,6 +338,9 @@ class DefaultDesignTemplates
                                 'html_display_text' => __('Title', 'print-my-blog'),
                             ]
                         );
+                        $sections['byline'] = new TextInput([
+                            'html_display_text' => __('Author', 'print-my-blog')
+                        ]);
                         $sections['cover_preamble'] = new TextAreaInput([
                             'html_label_text' => __('Coverpage Preamble', 'print-my-blog'),
                             'html_help_text' => __(
@@ -359,28 +362,31 @@ class DefaultDesignTemplates
         $sections = [];
         $header_content = $design->getSetting('header_content');
         if (in_array('title', $header_content)) {
-            $sections['title'] = new TextInput(
-                [
-                    'html_label_text' => __('Title', 'print-my-blog'),
-                    // phpcs:disable Generic.Files.LineLength.TooLong
-                    'html_help_text' => __('Title used inside the generated files (often the same as your project, but not necessarily.)', 'print-my-blog'),
-                    // phpcs:enable Generic.Files.LineLength.TooLong
-                ]
-            );
+            $sections['title'] = new TextInput([
+                'html_label_text' => __('Title', 'print-my-blog'),
+                // phpcs:disable Generic.Files.LineLength.TooLong
+                'html_help_text' => __('Title used inside the generated files (often the same as your project, but not necessarily.)', 'print-my-blog'),
+                // phpcs:enable Generic.Files.LineLength.TooLong
+            ]);
         }
         if (in_array('subtitle', $header_content)) {
-            $sections['subtitle'] = new TextInput();
+            $sections['subtitle'] = new TextInput([
+                'html_label_text' => __('Subtitle', 'print-my-blog')
+            ]);
+        }
+        if (in_array('byline', $header_content)) {
+            $sections['byline'] = new TextInput([
+                'html_label_text' => __('Author(s)', 'print-my-blog')
+            ]);
         }
         if (in_array('url', $header_content)) {
-            $sections['url'] = new TextInput(
-                [
+            $sections['url'] = new TextInput([
                     'default' => site_url(),
                     'html_label_text' => __('Source Location', 'print-my-blog'),
                     // phpcs:disable Generic.Files.LineLength.TooLong
                     'html_help_text' => __('Shown on the title page under the subtitle. Could be your website’s URL, or anything else you like.', 'print-my-blog')
                     // phpcs:enable Generic.Files.LineLength.TooLong
-                ]
-            );
+            ]);
         }
         return new FormSection([
             'subsections' => $sections
@@ -400,6 +406,7 @@ class DefaultDesignTemplates
                         [
                             'title' => new InputOption(__('Project Title', 'print-my-blog')),
                             'subtitle' => new InputOption(__('Subtitle', 'print-my-blog')),
+                            'byline' => new InputOption(__('Author', 'print-my-blog')),
                             'url' => new InputOption(__('Site URL', 'print-my-blog')),
                             'date_printed' => new InputOption(__('Date Printed', 'print-my-blog')),
                             'credit_pmb' => new InputOption(__('Credit Print My Blog', 'print-my-blog'))

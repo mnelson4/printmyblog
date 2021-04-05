@@ -36,6 +36,10 @@ class Shortcodes extends BaseController
             [$this,'titlePage']
         );
         add_shortcode(
+            'pmb_byline',
+            [$this, 'pmbByline']
+        );
+        add_shortcode(
             'pmb_footnote',
             [$this,'footnote']
         );
@@ -85,6 +89,15 @@ class Shortcodes extends BaseController
         } else {
             return do_shortcode('<h1>[pmb_project_title]</h1>');
         }
+    }
+
+    public function pmbByline(){
+        global $pmb_project;
+        if ($pmb_project instanceof Project) {
+            return $pmb_project->getPmbMeta('byline');
+        }
+        return '<-- pmb there is no project byline because this post is not being viewed as part of a project. '
+            . 'You should probably not show this post to site visitors by making it private.-->';
     }
 
     /**
