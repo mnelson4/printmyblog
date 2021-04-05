@@ -37,5 +37,17 @@ class DefaultSectionTemplates
                 ];
             }
         );
+        pmb_register_section_template(
+            'single_column',
+            [
+                'mayer'
+            ],
+            function(){
+                return [
+                    'title' => __('Single Column', 'print-my-blog'),
+                    'fallback' => ''
+                ];
+            }
+        );
     }
 }
