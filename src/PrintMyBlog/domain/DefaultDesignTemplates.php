@@ -252,8 +252,8 @@ class DefaultDesignTemplates
                                 ),
                                 'byline' => new TextAreaInput(
                                     [
-                                        'html_label_text' => __('By Line', 'print-my-blog'),
-                                        'html_help_text' => __('List of Authors', 'print-my-blog'),
+                                        'html_label_text' => __('ByLine', 'print-my-blog'),
+                                        'html_help_text' => __('Project Author(s)', 'print-my-blog'),
                                     ]
                                 ),
                                 'date' => new DatepickerInput([
@@ -339,7 +339,8 @@ class DefaultDesignTemplates
                             ]
                         );
                         $sections['byline'] = new TextInput([
-                            'html_display_text' => __('Author', 'print-my-blog')
+                            'html_display_text' => __('Byline', 'print-my-blog'),
+                            'html_help_text' => __('Project author(s)', 'print-my-blog')
                         ]);
                         $sections['cover_preamble'] = new TextAreaInput([
                             'html_label_text' => __('Coverpage Preamble', 'print-my-blog'),
@@ -376,7 +377,8 @@ class DefaultDesignTemplates
         }
         if (in_array('byline', $header_content)) {
             $sections['byline'] = new TextInput([
-                'html_label_text' => __('Author(s)', 'print-my-blog')
+                'html_label_text' => __('Author(s)', 'print-my-blog'),
+                'html_help_text' => __('Project author(s)', 'print-my-blog')
             ]);
         }
         if (in_array('url', $header_content)) {
@@ -406,7 +408,7 @@ class DefaultDesignTemplates
                         [
                             'title' => new InputOption(__('Project Title', 'print-my-blog')),
                             'subtitle' => new InputOption(__('Subtitle', 'print-my-blog')),
-                            'byline' => new InputOption(__('Author', 'print-my-blog')),
+                            'byline' => new InputOption(__('Byline', 'print-my-blog')),
                             'url' => new InputOption(__('Site URL', 'print-my-blog')),
                             'date_printed' => new InputOption(__('Date Printed', 'print-my-blog')),
                             'credit_pmb' => new InputOption(__('Credit Print My Blog', 'print-my-blog'))
