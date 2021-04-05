@@ -171,6 +171,7 @@ if (defined('PMB_VERSION')) {
                         'type'                => 'plugin',
                         'public_key'          => 'pk_0443e9596f0e906d282bf05b115dd',
                         'is_premium'          => true,
+                        'premium_suffix'      => 'Pro',
                         // If your plugin is a serviceware, set this option to false.
                         'has_premium_version' => true,
                         'has_addons'          => false,
