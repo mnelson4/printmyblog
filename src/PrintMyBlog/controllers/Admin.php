@@ -5,6 +5,7 @@ namespace PrintMyBlog\controllers;
 use Dompdf\Renderer\Text;
 use Exception;
 use FS_Plugin_License;
+use FS_Site;
 use PrintMyBlog\controllers\helpers\ProjectsListTable;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\db\TableManager;
@@ -594,7 +595,8 @@ class Admin extends BaseController
                             ],
                         filemtime(PMB_STYLES_DIR . 'pmb-generate.css')
                     );
-                    $license_id = pmb_fs()->_get_license()->id;
+                    $license = pmb_fs()->_get_license();
+                    $site = pmb_fs()->get_site();
                     wp_localize_script(
                         'pmb-generate',
                         'pmb_generate',
@@ -603,8 +605,8 @@ class Admin extends BaseController
                             'use_pmb_central_for_previews' => pmb_fs()->is_plan__premium_only('business') ? 1 : 0,
                             'license_data' => [
                                 'endpoint' => $this->pmb_central->getCentralUrl(),
-                                'license_id' => $license_id,
-                                'install_id' => pmb_fs()->get_site()->id,
+                                'license_id' => $license instanceof FS_Plugin_License ? $license->id : '',
+                                'install_id' => $site instanceof FS_Site ? $site->id : '',
                                 'authorization_header' => $this->pmb_central->getSiteAuthorizationHeader(),
                             ],
 
