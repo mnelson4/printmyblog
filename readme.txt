@@ -281,6 +281,10 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 
 == Changelog ==
 
+= 3.0.0, April 5, 2021=
+* Add "Byline" as a project meta which appears in all title pages
+* Add CSS classes "pmb-float-top" and "pmb-float-bottom"
+
 = 2.9.7 December 1, 2020 =
 * Expand all Arconix plugin accordions
 
