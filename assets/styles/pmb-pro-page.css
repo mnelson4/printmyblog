@@ -111,3 +111,10 @@ figcaption{
     transform: translate(-50%, -50%);
     /*border: 1px dotted green;*/
 }
+
+.pmb-float-top{
+    float:top;
+}
+.pmb-float-bottom{
+    float:bottom;
+}
