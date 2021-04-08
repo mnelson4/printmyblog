@@ -49,10 +49,15 @@ class DefaultDesignTemplates
                                         'image_placement' => $this->getImageSnapInput()
                                     ]
                                 ]),
-                                'paragraph_indent' => new YesNoInput([
-                                    'default' => true,
-                                    'html_label_text' => __('Paragraph Indent', 'print-my-blog'),
-                                    'html_help_text' => __('Indent the first line of each new paragraph instead of adding a paragraph break.', 'print-my-blog')
+                                'fonts' => new FormSectionDetails([
+                                    'html_summary' => __('Font Settings', 'print-my-blog'),
+                                    'subsections' => [
+                                        'paragraph_indent' => new YesNoInput([
+                                            'default' => true,
+                                            'html_label_text' => __('Paragraph Indent', 'print-my-blog'),
+                                            'html_help_text' => __('Indent the first line of each new paragraph instead of adding a paragraph break.', 'print-my-blog')
+                                        ]),
+                                    ]
                                 ]),
                                 'links' => new FormSection([
                                     'subsections' => [
@@ -459,47 +464,51 @@ class DefaultDesignTemplates
                             // phpcs:enable Generic.Files.LineLength.TooLong
                         ]
                     ),
-                    'font_style' => new FontInput([
-                        'default' => 'times new roman',
-                        'html_label_text' => __('Font', 'print-my-blog'),
-                        'html_help_text' => __('Default font used in paragraphs, bulleted lists, tables, etc.')
-                    ]),
-                    'header_font_style' => new FontInput([
-                        'default' => 'arial',
-                        'html_label_text' => __('Header Font', 'print-my-blog'),
-                        'html_help_text' => __('Default font for header tags', 'print-my-blog')
-                    ]),
-                    'main_header_font_size' => new TextInput(
-                        [
-                            'default' => '4em',
-                            'html_label_text' => __('Title page and Part Header Font Size', 'print-my-blog'),
-                            'html_help_text' => sprintf(
-                            // phpcs:disable Generic.Files.LineLength.TooLong
-                                __('Font size used for the default title page’s and part’s header (all other headers’ sizes are derived from the main font size). Use any recognized %1$sCSS font-size keyword%2$s (like "large", "medium", "small") or a %3$slength in any units%2$s (eg "14pt", "50%%", or "10px").'),
-                                // phpcs:enable Generic.Files.LineLength.TooLong
-                                '<a href="https://www.w3schools.com/cssref/pr_font_font-size.asp" target="_blank">',
-                                '</a>',
-                                '<a href="https://www.w3schools.com/cssref/css_units.asp" target="_blank">'
-                            )
+                    'fonts' => new FormSectionDetails([
+                        'html_summary' => __('Font Settings', 'print-my-blog'),
+                        'subsections' => [
+                            'font_style' => new FontInput([
+                                'default' => 'times new roman',
+                                'html_label_text' => __('Font', 'print-my-blog'),
+                                'html_help_text' => __('Default font used in paragraphs, bulleted lists, tables, etc.')
+                            ]),
+                            'header_font_style' => new FontInput([
+                                'default' => 'arial',
+                                'html_label_text' => __('Header Font', 'print-my-blog'),
+                                'html_help_text' => __('Default font for header tags', 'print-my-blog')
+                            ]),
+                            'main_header_font_size' => new TextInput(
+                                [
+                                    'default' => '4em',
+                                    'html_label_text' => __('Title page and Part Header Font Size', 'print-my-blog'),
+                                    'html_help_text' => sprintf(
+                                    // phpcs:disable Generic.Files.LineLength.TooLong
+                                        __('Font size used for the default title page’s and part’s header (all other headers’ sizes are derived from the main font size). Use any recognized %1$sCSS font-size keyword%2$s (like "large", "medium", "small") or a %3$slength in any units%2$s (eg "14pt", "50%%", or "10px").'),
+                                        // phpcs:enable Generic.Files.LineLength.TooLong
+                                        '<a href="https://www.w3schools.com/cssref/pr_font_font-size.asp" target="_blank">',
+                                        '</a>',
+                                        '<a href="https://www.w3schools.com/cssref/css_units.asp" target="_blank">'
+                                    )
+                                ]
+                            ),
+                            'font_size' => new TextInput(
+                                [
+                                    'default' => '10pt',
+                                    'html_label_text' => __('Font Size', 'print-my-blog'),
+                                    'html_help_text' => sprintf(
+                                    // phpcs:disable Generic.Files.LineLength.TooLong
+                                        __('Use any recognized %1$sCSS font-size keyword%2$s (like "large", "medium", "small") or a %3$slength in any units%2$s (eg "14pt", "50%%", or "10px").'),
+                                        // phpcs:enable Generic.Files.LineLength.TooLong
+                                        '<a href="https://www.w3schools.com/cssref/pr_font_font-size.asp" target="_blank">',
+                                        '</a>',
+                                        '<a href="https://www.w3schools.com/cssref/css_units.asp" target="_blank">'
+                                    )
+                                ]
+                            ),
                         ]
-                    ),
-                    'font_size' => new TextInput(
-                        [
-                            'default' => '10pt',
-                            'html_label_text' => __('Font Size', 'print-my-blog'),
-                            'html_help_text' => sprintf(
-                                // phpcs:disable Generic.Files.LineLength.TooLong
-                                __('Use any recognized %1$sCSS font-size keyword%2$s (like "large", "medium", "small") or a %3$slength in any units%2$s (eg "14pt", "50%%", or "10px").'),
-                                // phpcs:enable Generic.Files.LineLength.TooLong
-                                '<a href="https://www.w3schools.com/cssref/pr_font_font-size.asp" target="_blank">',
-                                '</a>',
-                                '<a href="https://www.w3schools.com/cssref/css_units.asp" target="_blank">'
-                            )
-                        ]
-                    ),
-
-
-                    'image' => new FormSection([
+                    ]),
+                    'image' => new FormSectionDetails([
+                        'html_summary' => __('Image Settings', 'print-my-blog'),
                         'subsections' => [
                             'image_size' => new IntegerInput(
                                 [
@@ -517,7 +526,7 @@ class DefaultDesignTemplates
                         ]
                     ]),
                     'page' => new FormSectionDetails([
-                        'html_summary' => __('Page Options', 'print-my-blog'),
+                        'html_summary' => __('Page Settings', 'print-my-blog'),
                         'subsections' => [
                             'page_width' => new TextInput([
                                 'html_label_text' => __('Page Width', 'print-my-blog'),
