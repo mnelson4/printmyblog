@@ -280,12 +280,13 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 7. Add the Print My Blog block to add a form visitors can use to select what and how to print your blog.
 
 == Changelog ==
-= 3.0.1 April 8, 2021=
+
+= 3.0.1 April 8, 2021 =
 * Don't put roman numeral on first page of front matter of Classic Digital PDF design
 * Bugfix: don't make all print-ready PDFs use double-spaced lines
 * Add Digital/Print-Ready Classic design setting "Title page and Part Header Font Size" and reorganize settings into hidden sections
 
-= 3.0.0 April 5, 2021=
+= 3.0.0 April 5, 2021 =
 * Add "Byline" as a project meta which appears in all title pages
 * Add CSS classes "pmb-float-top" and "pmb-float-bottom"
 
