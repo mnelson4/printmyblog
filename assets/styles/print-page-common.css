@@ -214,3 +214,12 @@ because it also takes up 100% of the width.
 .pmb-posts .blocks-gallery-grid .blocks-gallery-item figcaption {
     padding:40px 0 9px;
 }
+
+/* Prevent MailChimp overlay from appearing overtop of everything. I think its from a MailChimp code snippet, not a
+plugin. First saw it on https://nancyradford.com */
+.mc-modal-bg{
+    display:none !important;
+}
+.mc-modal{
+    display:none !important;
+}

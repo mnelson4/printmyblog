@@ -280,6 +280,9 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 7. Add the Print My Blog block to add a form visitors can use to select what and how to print your blog.
 
 == Changelog ==
+= 3.0.2 April 8, 2021 =
+* Integration: Hide MailChimp pop-up form in printouts
+* Bugfix: Avoid Javascript error if there is a bad link
 
 = 3.0.1 April 8, 2021 =
 * Don't put roman numeral on first page of front matter of Classic Digital PDF design

@@ -172,7 +172,13 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
             return;
         }
         var id_from_href = '#' + a.attr('href').replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g,'\\$1');
-        if(jQuery(id_from_href).length > 0){
+        try{
+            var matching_elements = jQuery(id_from_href).length;
+        }catch(exception){
+            // somehow the query didn't work. Remove this link then.
+            a.contents().unwrap();
+        }
+        if( matching_elements > 0){
             // internal
             switch(internal_link_policy){
                 case 'parens':
