@@ -467,16 +467,6 @@ class DefaultDesignTemplates
                     'fonts' => new FormSectionDetails([
                         'html_summary' => __('Font Settings', 'print-my-blog'),
                         'subsections' => [
-                            'font_style' => new FontInput([
-                                'default' => 'times new roman',
-                                'html_label_text' => __('Font', 'print-my-blog'),
-                                'html_help_text' => __('Default font used in paragraphs, bulleted lists, tables, etc.')
-                            ]),
-                            'header_font_style' => new FontInput([
-                                'default' => 'arial',
-                                'html_label_text' => __('Header Font', 'print-my-blog'),
-                                'html_help_text' => __('Default font for header tags', 'print-my-blog')
-                            ]),
                             'main_header_font_size' => new TextInput(
                                 [
                                     'default' => '4em',
@@ -491,6 +481,11 @@ class DefaultDesignTemplates
                                     )
                                 ]
                             ),
+                            'header_font_style' => new FontInput([
+                                'default' => 'arial',
+                                'html_label_text' => __('Header Font', 'print-my-blog'),
+                                'html_help_text' => __('Default font for header tags', 'print-my-blog')
+                            ]),
                             'font_size' => new TextInput(
                                 [
                                     'default' => '10pt',
@@ -505,6 +500,11 @@ class DefaultDesignTemplates
                                     )
                                 ]
                             ),
+                            'font_style' => new FontInput([
+                                'default' => 'times new roman',
+                                'html_label_text' => __('Font', 'print-my-blog'),
+                                'html_help_text' => __('Default font used in paragraphs, bulleted lists, tables, etc.')
+                            ]),
                         ]
                     ]),
                     'image' => new FormSectionDetails([
