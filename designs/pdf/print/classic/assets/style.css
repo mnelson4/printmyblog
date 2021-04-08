@@ -104,11 +104,8 @@ Ask PDF viewers to display pages side-by-side by default.
 
     /* Title Page styles */
     .pmb-posts-header{
-        margin-top:2in;
+        margin-top:20vh;
         text-align:center;
-    }
-    .pmb-posts-header .site-title{
-        font-size:4em;
     }
     .site-description{
         width:50%;
@@ -146,12 +143,11 @@ Ask PDF viewers to display pages side-by-side by default.
 
     /* part styling*/
     .pmb-part h1.pmb-title{
-        font-size:4em;
         string-set: part-title content();
-        margin-top:2in;
+        margin-top:20vh;
     }
     .pmb-part .entry-content{
-        margin-top:2in;
+        margin-top:10vh;
         width:50%;
         margin-right:auto;
         margin-left:auto;

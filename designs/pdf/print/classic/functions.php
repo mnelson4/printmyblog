@@ -19,6 +19,12 @@ function pmb_enqueue_classic_script(){
                 font-size:" . $pmb_design->getSetting('font_size') . ";
                 font-family:" . $pmb_design->getSetting('font_style') . ";
            }
+           .pmb-posts-header .site-title{
+                font-size:" . $pmb_design->getSetting('main_header_font_size'). ";
+            }
+           .pmb-part h1.pmb-title{
+                font-size:" . $pmb_design->getSetting('main_header_font_size'). ";
+            }
            span.pmb-footnote{
                 font-family:" . $pmb_design->getSetting('font_style') . ";
                 font-size: calc(" . $pmb_design->getSetting('font_size') . " * 2 / 3);

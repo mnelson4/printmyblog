@@ -67,11 +67,8 @@
 
     /* Title Page styles */
     .pmb-posts-header{
-        margin-top:2in;
+        margin-top:20vh;
         text-align:center;
-    }
-    .pmb-posts-header .site-title{
-        font-size:5em;
     }
     .site-description{
         width:50%;
@@ -106,12 +103,11 @@
 
     /* part styling*/
     .pmb-part h1.pmb-title{
-        font-size:5em;
         string-set: part-title content();
-        margin-top:2in;
+        margin-top:20vh;
     }
     .pmb-part .entry-content{
-        margin-top:1in;
+        margin-top:10vh;
     }
 
     /* Article styles */
