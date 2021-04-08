@@ -89,7 +89,7 @@ class Design extends PostWrapper
     {
         if (! $this->design_form instanceof FormSection) {
             $design_template = $this->getDesignTemplate();
-            $this->design_form = clone $design_template->getDesignFormTemplate();
+            $this->design_form = $design_template->getNewDesignFormTemplate();
             $defaults = [];
             foreach ($this->design_form->inputsInSubsections() as $input) {
                 $saved_default = $this->getSetting($input->name());

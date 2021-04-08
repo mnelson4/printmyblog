@@ -205,12 +205,21 @@ class DesignTemplate
     public function getDesignFormTemplate()
     {
         if (! $this->design_form instanceof FormSection) {
-            $this->design_form = call_user_func($this->design_form_callback);
-            if (! $this->design_form instanceof FormSection) {
-                throw new Exception('No Design form was specified for design template ' . $this->slug);
-            }
+            $this->design_form = $this->getNewDesignFormTemplate();
         }
         return $this->design_form;
+    }
+
+    /**
+     * @return FormSection
+     * @throws Exception
+     */
+    public function getNewDesignFormTemplate(){
+        $form = call_user_func($this->design_form_callback);
+        if (! $form instanceof FormSection) {
+            throw new Exception('No Design form was specified for design template ' . $this->slug);
+        }
+        return $form;
     }
 
     /**
