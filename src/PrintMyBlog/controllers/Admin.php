@@ -504,7 +504,7 @@ class Admin extends BaseController
                     [
                         'action' => self::SLUG_ACTION_UNINSTALL
                     ],
-                    admin_url(PMB_ADMIN_PAGE_PATH)
+                    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
                 )
                 . '" id="pmb-uninstall" class="pmb-uninstall">'
                 . esc_html__('Delete All Data', 'print-my-blog')
