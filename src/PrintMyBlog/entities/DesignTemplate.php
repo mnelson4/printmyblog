@@ -406,13 +406,14 @@ class DesignTemplate
      * @return string template slug or empty string if we should use the default
      */
     public function resolveSectionTemplateToUse($desired_template_slug){
-        do {
+        while($desired_template_slug){
             if ($this->supports($desired_template_slug)) {
                 return $desired_template_slug;
             }
+
             $section_template = $this->section_template_registry->get($desired_template_slug);
             $desired_template_slug = $section_template->fallbackSlug();
-        }while($desired_template_slug);
+        }
         return '';
     }
 
