@@ -83,3 +83,10 @@ Use !important to override the inline style set by the plugin*/
 #tpbr_topbar{
     display:none !important;
 }
+
+/**
+Hide Google Recaptcha v3 from printouts. Like when using Contact Form 7
+ */
+.grecaptcha-badge{
+    display:none !important;
+}
