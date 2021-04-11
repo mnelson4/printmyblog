@@ -127,16 +127,16 @@ function pmb_resize_images(desired_max_height) {
         big_images_without_figures.wrap('<div class="pmb-image"></div>');
         big_images_without_figures.each(pmb_force_resize_image);
         big_images_in_figures.each(pmb_force_resize_image);
-        wp_block_galleries.each(function(){
-            var obj = jQuery(this);
-            // Galleries can't be resized by height (they just cut off
-            // content underneath the set height). Need to use width.
-            obj.css({
-                'max-width': (desired_max_height * 1.25),
-                'margin-right':'auto',
-                'margin-left':'auto'
-            });
-        })
+        // wp_block_galleries.each(function(){
+        //     var obj = jQuery(this);
+        //     // Galleries can't be resized by height (they just cut off
+        //     // content underneath the set height). Need to use width.
+        //     obj.css({
+        //         'max-width': (desired_max_height * 1.25),
+        //         'margin-right':'auto',
+        //         'margin-left':'auto'
+        //     });
+        // });
     }
 }
 

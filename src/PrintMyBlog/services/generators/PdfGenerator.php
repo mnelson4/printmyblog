@@ -58,6 +58,7 @@ class PdfGenerator extends ProjectFileGeneratorBase
         // Try to get enqueued after the theme, if we're doing that, so we get precedence.
         add_action('wp_enqueue_scripts', [$this,'enqueueStylesAndScripts'], 1000);
         do_action('pmb_pdf_generation_start', $this->project_generation, $this->design);
+        add_filter('should_load_block_editor_scripts_and_styles', '__return_true');
         $this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT);
     }
 
