@@ -154,6 +154,16 @@ function pmb_reveal_dynamic_content(){
     jQuery('.arconix-accordion-content').css('display','block');
     // Reveal all https://wordpress.org/plugins/show-hidecollapse-expand/ content (the reveal buttons got removed in CSS)
     jQuery('div[id^="bg-showmore-hidden-"]').css('display','block');
+    // Change canvases to regular images please! Helpful if someone is using chart.js or something else that
+    // creates canvases
+    setTimeout(function(){
+        var canvases = jQuery('canvas').each(function(index){
+            var chartImage = this.toDataURL();
+            jQuery(this).after('<div class="pmb-image"><img src="' + chartImage + '"></div>');
+            jQuery(this).remove();
+        })
+    },
+    2000);
 }
 
 /**

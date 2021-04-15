@@ -90,3 +90,10 @@ Hide Google Recaptcha v3 from printouts. Like when using Contact Form 7
 .grecaptcha-badge{
     display:none !important;
 }
+
+/**
+Hide CSS Hero's floating icon, SimpleBackToTop's icon
+ */
+#csshero-very-first-trigger, .sbttBacktotop{
+    display: none !important;
+}

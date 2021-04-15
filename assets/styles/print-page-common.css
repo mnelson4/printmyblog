@@ -18,6 +18,11 @@ div.pmb-post-header{
     display: block;
     margin-left: auto;
     margin-right: auto;
+    /*
+    If the image is big, browsers automatically don't let it overflow, but Prince does. Tell Prince to keep it
+    within the page width
+    */
+    max-width:100%;
 }
 .pmb-header{
     page-break-inside:avoid;
