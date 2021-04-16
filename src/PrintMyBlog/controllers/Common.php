@@ -51,9 +51,15 @@ class Common extends BaseController
         );
         wp_register_style(
             'pmb_pro_page',
-            PMB_ASSETS_URL . 'styles/pmb-pro-page.css',
+            PMB_ASSETS_URL . 'styles/pmb-pro-print-page.css',
             array(),
-            filemtime(PMB_ASSETS_DIR . 'styles/pmb-pro-page.css')
+            filemtime(PMB_ASSETS_DIR . 'styles/pmb-pro-print-page.css')
+        );
+        wp_register_script(
+            'pmb_pro_page',
+            PMB_ASSETS_URL . 'scripts/pmb-pro-print-page.js',
+            array('docraptor', 'jquery'),
+            filemtime(PMB_ASSETS_DIR . 'scripts/pmb-pro-print-page.js')
         );
         wp_register_script(
             'jquery-debounce',

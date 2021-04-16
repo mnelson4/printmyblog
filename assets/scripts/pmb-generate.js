@@ -102,11 +102,6 @@ function pmb_generate_doc(currentTarget, success_callback, failure_callback){
     } else {
         var authorization_data = 'YOUR_API_KEY_HERE';
     }
-    if (format === 'digital_pdf') {
-        var media = 'screen';
-    } else {
-        var media = 'print';
-    }
 
     var dynamic_doc_attrs = JSON.parse(JSON.stringify(pmb_generate.doc_attrs));
     // if this a preview, always override whether its a test request or not.
@@ -114,7 +109,6 @@ function pmb_generate_doc(currentTarget, success_callback, failure_callback){
         dynamic_doc_attrs.test = true;
     }
     dynamic_doc_attrs.document_url = html_url;
-    dynamic_doc_attrs.prince_options.media = media;
 
 
     var server_communicator = new PmbAsyncPdfCreation(

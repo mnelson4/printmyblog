@@ -1,4 +1,78 @@
 /**
+Stylesl for the print window
+ */
+@media not print{
+    .pmb-pro-print-window{
+        border:1px solid lightgray;
+        border-radius: 5px;
+        margin:5px;
+        padding-bottom:10px;
+        font-family:arial;
+        font-size:14px;
+    }
+    .pmb-pro-print-window-topbar{
+        display:flex;
+        justify-content:space-evenly;
+        padding-top: 5px;
+        padding-bottom:10px;
+        border-bottom:1px solid lightgray;
+    }
+    .pmb-pro-window-topbar-left{
+        text-align:left;
+    }
+    .pmb-pro-window-title{
+        flex-grow:1;
+        text-align:center;
+    }
+    .pmb-pro-window-title h1{
+        margin-top:0;
+        color:gray;
+    }
+    .pmb-pro-window-topbar-right{
+        text-align:right;
+    }
+    .pmb-pro-window-button{
+        border:1px solid lightgray;
+        background-color:white;
+        padding:5px;
+        border-radius:2px;
+        color: black;
+        text-decoration: none;
+        vertical-align: middle;
+        font-size: 18px;
+        margin:0;
+        cursor:pointer;
+    }
+    .pmb-pro-print-window-content{
+        padding-top:10px;
+    }
+    .pmb-pro-print-window-options{
+        display:flex;
+        justify-content:space-evenly;
+        flex-wrap:wrap;
+    }
+    .pmb-pro-print-window-options .pmb-print-option{
+        border:1px solid gray;
+        border-radius:5px;
+        padding:5px;
+        text-align:center;
+        width:400px;
+    }
+    .pmb-pro-print-window-options .pmb-print-option h2{
+        text-align:center;
+        margin-top:5px;
+    }
+}
+@media print{
+    .pmb-pro-print-window{
+        display:none;
+    }
+}
+
+
+
+
+/**
 Styles generic to all PDF projects
  */
 
