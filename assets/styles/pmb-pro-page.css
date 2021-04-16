@@ -12,6 +12,10 @@ Styles generic to all PDF projects
 figure{
     margin-bottom:1em;
 }
+/* Don't let images be taller than the page */
+img, div.wp-caption{
+    max-height:100vh;
+}
 
 .alignleft{
     float:left;
