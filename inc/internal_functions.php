@@ -11,25 +11,45 @@ use PrintMyBlog\orm\entities\ProjectSection;
  * Returns a string that says this feature only works with Print My Blog Pro.
  * @return string
  */
-function pmb_pro_only(){
-	return ' ' . __('(Pro)', 'print-my-blog');
+function pmb_pro_only($explanation = ''){
+    if(false && pmb_fs()->is_premium()){
+        return '';
+    }
+    $hover_text = __('Only works with Pro', 'print-my-blog');
+    if($explanation){
+        $hover_text .= "\n" . $explanation;
+    }
+	return '<span title="' . $hover_text . '" class="dashicons dashicons-star-filled pmb-pro-only"></span>';
+
+}
+
+/**
+ * Echoes out that this feature only works with pro
+ */
+function pmb_pro_only_e($explanation = ''){
+    echo pmb_pro_only($explanation);
 }
 
 /**
  * Returns a string that says this feature works best with Print My Blog Pro.
  * @return string
  */
-function pmb_pro_best(){
-	return ' ' . __('*Best with Pro*', 'print-my-blog');
+function pmb_pro_best($explanation = ''){
+    if(false && pmb_fs()->is_premium()){
+        return '';
+    }
+    $hover_text = __('Works best with Pro', 'print-my-blog');
+    if($explanation){
+        $hover_text .= "\n" . $explanation;
+    }
+    return '<span title="' . $hover_text  . '" class="dashicons dashicons-star-half pmb-pro-best"></span>';
 }
 
 /**
- * Whether or not this is the pro version.
- * @todo BETA replace with Freemius magic
- * @return bool
+ * Echoes out this feature works best with pro.
  */
-function pmb_pro(){
-	return defined('PMB_PRO');
+function pmb_pro_best_e($explanation = ''){
+    echo pmb_pro_best($explanation);
 }
 
 /**

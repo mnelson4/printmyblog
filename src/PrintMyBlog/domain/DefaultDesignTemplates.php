@@ -70,8 +70,8 @@ class DefaultDesignTemplates
                                                 // phpcs:enable Generic.Files.LineLength.TooLong
                                             ],
                                             [
-                                                'default' => pmb_pro() ? 'footnote' : 'parens',
-                                                'html_label_text' => __('Internal Hyperlinks', 'print-my-blog'),
+                                                'default' => pmb_fs()->is_premium() ? 'footnote' : 'parens',
+                                                'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') . pmb_pro_only(__('Footnotes and page references require Pro', 'print-my-blog')),
                                                 // phpcs:disable Generic.Files.LineLength.TooLong
                                                 'html_help_text' => __('How to display hyperlinks to content included in this project.', 'print-my-blog')
                                                 // phpcs:enable Generic.Files.LineLength.TooLong
@@ -85,8 +85,8 @@ class DefaultDesignTemplates
                                                 ),
                                             ],
                                             [
-                                                'default' => pmb_pro() ? 'footnote' : 'remove',
-                                                'html_label_text' => __('External Hyperlinks', 'print-my-blog'),
+                                                'default' => pmb_fs()->is_premium() ? 'footnote' : 'remove',
+                                                'html_label_text' => __('External Hyperlinks', 'print-my-blog') . pmb_pro_only(__('Footnotes require Pro', 'print-my-blog')),
                                                 // phpcs:disable Generic.Files.LineLength.TooLong
                                                 'html_help_text' => __('How to display hyperlinks to content not included in this project.', 'print-my-blog')
                                                 // phpcs:enable Generic.Files.LineLength.TooLong
@@ -144,8 +144,8 @@ class DefaultDesignTemplates
                                                 ),
                                             ],
                                             [
-                                                'default' => pmb_pro() ? 'parens' : 'remove',
-                                                'html_label_text' => __('Internal Hyperlinks', 'print-my-blog'),
+                                                'default' => pmb_fs()->is_premium() ? 'parens' : 'remove',
+                                                'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') .pmb_pro_best(__('Footnotes and page references require Pro', 'print-my-blog')),
                                                 'html_help_text' => __(
                                                     'How to display hyperlinks to content included in this project.',
                                                     'print-my-blog'
@@ -161,8 +161,8 @@ class DefaultDesignTemplates
                                                 ),
                                             ],
                                             [
-                                                'default' => pmb_pro() ? 'footnote' : 'leave',
-                                                'html_label_text' => __('External Hyperlinks', 'print-my-blog'),
+                                                'default' => pmb_fs()->is_premium() ? 'footnote' : 'leave',
+                                                'html_label_text' => __('External Hyperlinks', 'print-my-blog') . pmb_pro_best(__('Footnotes require Pro', 'print-my-blog')),
                                                 'html_help_text' => __(
                                                     // phpcs:disable Generic.Files.LineLength.TooLong
                                                     'How to display hyperlinks to content not included in this project.',
@@ -529,7 +529,7 @@ class DefaultDesignTemplates
                         'html_summary' => __('Page Settings', 'print-my-blog'),
                         'subsections' => [
                             'page_width' => new TextInput([
-                                'html_label_text' => __('Page Width', 'print-my-blog'),
+                                'html_label_text' => __('Page Width', 'print-my-blog') . pmb_pro_best(__('Not supported by some browsers', 'print-my-blog')),
                                 'html_help_text' => sprintf(
                                     __('Use standard %1$sCSS units%2$s', 'print-my-blog'),
                                     '<a href="https://www.w3schools.com/CSSref/css_units.asp">',
@@ -538,7 +538,7 @@ class DefaultDesignTemplates
                                 'default' => '8.5in'
                             ]),
                             'page_height' => new TextInput([
-                                'html_label_text' => __('Page Height', 'print-my-blog'),
+                                'html_label_text' => __('Page Height', 'print-my-blog') . pmb_pro_best(__('Not supported by some browsers', 'print-my-blog')),
                                 'html_help_text' => sprintf(
                                     __('Use standard %1$sCSS units%2$s', 'print-my-blog'),
                                     '<a href="https://www.w3schools.com/CSSref/css_units.asp">',
@@ -628,7 +628,8 @@ class DefaultDesignTemplates
                 // phpcs:enable Generic.Files.LineLength.TooLong
             ],
             [
-                'html_label_text' => __('Image Placement', 'print-my-blog'),
+                // translators: 1: "Best with Pro"
+                'html_label_text' => __('Image Placement', 'print-my-blog') . pmb_pro_only(),
                 // phpcs:disable Generic.Files.LineLength.TooLong
                 'html_help_text' => __('To reduce whitespace around images, Print My Blog can move images around in your content.', 'print-my-blog'),
                 // phpcs:enable Generic.Files.LineLength.TooLong
