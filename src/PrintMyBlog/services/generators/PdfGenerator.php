@@ -2,10 +2,15 @@
 
 namespace PrintMyBlog\services\generators;
 
+use Exception;
+use FS_Plugin_License;
+use FS_Site;
 use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;
+use PrintMyBlog\services\PmbCentral;
+use PrintMyBlog\system\Context;
 use Twine\services\filesystem\File;
 
 /**
@@ -21,6 +26,11 @@ class PdfGenerator extends ProjectFileGeneratorBase
     protected $file_writer;
 
     /**
+     * @var PmbCentral
+     */
+    protected $pmb_central;
+
+    /**
      * Enqueues themes and styles we'll use on this AJAX request.
      */
     public function enqueueStylesAndScripts(){
@@ -28,6 +38,8 @@ class PdfGenerator extends ProjectFileGeneratorBase
         wp_enqueue_style('pmb_pro_page');
         wp_enqueue_style('pmb-plugin-compatibility');
         wp_enqueue_script('pmb-beautifier-functions');
+        wp_enqueue_script('pmb_pro_page');
+        wp_enqueue_script('pmb_general');
         $style_file = $this->getDesignDir() . 'assets/style.css';
         $script_file = $this->getDesignDir() . 'assets/script.js';
         if (file_exists($style_file)) {
@@ -47,6 +59,50 @@ class PdfGenerator extends ProjectFileGeneratorBase
                 filemtime($script_file)
             );
         }
+        $license = pmb_fs()->_get_license();
+        $site = pmb_fs()->get_site();
+        wp_localize_script(
+            'pmb_pro_page',
+            'pmb_pro',
+            [
+                'site_url' => site_url(),
+                'use_pmb_central_for_previews' => pmb_fs()->is_plan__premium_only('business') ? 1 : 0,
+                'license_data' => [
+                    'endpoint' => $this->getPmbCentral()->getCentralUrl(),
+                    'license_id' => $license instanceof FS_Plugin_License ? $license->id : '',
+                    'install_id' => $site instanceof FS_Site ? $site->id : '',
+                    'authorization_header' => $this->getPmbCentral()->getSiteAuthorizationHeader(),
+                ],
+
+                'doc_attrs' => apply_filters(
+                    '\PrintMyBlog\controllers\Admin::enqueueScripts doc_attrs',
+                    [
+                        'test' => defined('PMB_TEST_LIVE') && PMB_TEST_LIVE ? true : false,
+                        'type' => 'pdf',
+                        'javascript' => false, // Javascript by web browser
+                        'name' => $this->project->getPublishedTitle(),
+                        'ignore_console_messages' => true,
+                        'ignore_resource_errors' => true,
+                        'pipeline' => 9,
+                        'prince_options' => [
+                            'base_url' => site_url(),
+                            'media' => 'print',                                       // use screen
+                            'http_timeout' => 60,
+                            'http_insecure' => true,
+                            // styles
+                            // instead of print styles
+                            // javascript: true, // use Prince's JS, which is more error tolerant
+                        ]
+                    ]
+                ),
+                'translations' => [
+                    // phpcs:disable Generic.Files.LineLength.TooLong
+                    'error_generating' => __('There was an error preparing your content. Please visit the Print My Blog Help page.', 'print-my-blog'),
+                    'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public? Please visit the Print My Blog Help page.', 'print-my-blog')
+                    // phpcs:enable Generic.Files.LineLength.TooLong
+                ]
+            ]
+        );
     }
 
     /**
@@ -91,11 +147,12 @@ class PdfGenerator extends ProjectFileGeneratorBase
 
     /**
      * @param string $template_file
+     * @param array $context
      */
-    protected function writeTemplateToFile($template_file)
+    protected function writeTemplateToFile($template_file, $context = [])
     {
         $this->getFileWriter()->write(
-            '<!-- pmb template: ' . $template_file . '-->' . $this->getHtmlFrom($template_file)
+            '<!-- pmb template: ' . $template_file . '-->' . $this->getHtmlFrom($template_file, $context)
         );
     }
 
@@ -111,16 +168,25 @@ class PdfGenerator extends ProjectFileGeneratorBase
     }
 
     /**
+     * @return PmbCentral
+     */
+    protected function getPmbCentral(){
+        return Context::instance()->reuse('PrintMyBlog\services\PmbCentral');
+    }
+
+    /**
      * @param $division
      * @param bool $beginning whether to show the beginning, or end, of this division.
+     * @param array $context
      */
-    protected function writeDesignTemplateInDivision($division, $beginning = true)
+    protected function writeDesignTemplateInDivision($division, $beginning = true, $context = [])
     {
         $this->writeTemplateToFile(
             $this->design->getDesignTemplate()->getTemplatePathToDivision(
                 $division,
                 $beginning
-            )
+            ),
+            $context
         );
     }
 
@@ -205,6 +271,12 @@ class PdfGenerator extends ProjectFileGeneratorBase
     }
 
     public function addPrintWindowToPage(){
-        $this->getFileWriter()->write(pmb_get_contents(PMB_TEMPLATES_DIR . 'partials/pro_print_page_window.php'));
+        if ( pmb_fs()->is__premium_only() ) {
+            $license = pmb_fs()->_get_license();
+            if ($license instanceof FS_Plugin_License) {
+                $license_info = $this->getPmbCentral()->getCreditsInfo();
+            }
+        }
+        $this->getFileWriter()->write(pmb_get_contents(PMB_TEMPLATES_DIR . 'partials/pro_print_page_window.php', ['license_info' => $license_info]));
     }
 }

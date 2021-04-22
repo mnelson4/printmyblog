@@ -103,7 +103,9 @@ function PmbAsyncPdfCreation(
         return jquery_request_settings;
     }
     this.begin = function(){
-        this.doc_attrs['document_url'] += '?uniqueness=' + (Math.round(Math.random() * 100000 ))
+        if(typeof this.doc_attrs['document_url'] !== 'undefined'){
+            this.doc_attrs['document_url'] += '?uniqueness=' + (Math.round(Math.random() * 100000 ))
+        }
         jQuery.ajax(
             this.begin_url,
             this.requestSettings(

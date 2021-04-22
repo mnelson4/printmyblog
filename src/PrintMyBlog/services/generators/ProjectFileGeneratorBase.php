@@ -9,6 +9,7 @@ use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\entities\ProjectGeneration;
 use PrintMyBlog\orm\entities\ProjectSection;
+use PrintMyBlog\services\PmbCentral;
 use stdClass;
 use WP_Post;
 use WP_Query;
@@ -238,13 +239,14 @@ abstract class ProjectFileGeneratorBase
      *
      * @param $template_file
      *
-     * @param array $template_variables to be used in the template.
+     * @param array $context to be used in the template.
      *
      * @return false|string
      */
-    protected function getHtmlFrom($template_file)
+    protected function getHtmlFrom($template_file, $context = [])
     {
         global $post, $pmb_project, $pmb_design, $pmb_project_generation;
+        extract($context);
         $pmb_project = $this->project;
         $pmb_design = $this->design;
         $pmb_project_generation = $this->project_generation;

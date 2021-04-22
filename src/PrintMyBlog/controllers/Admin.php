@@ -517,6 +517,7 @@ class Admin extends BaseController
 
     public function enqueueScripts($hook)
     {
+        wp_enqueue_script('pmb_general');
         wp_enqueue_style(
             'pmb_admin',
             PMB_STYLES_URL . 'pmb-admin.css',

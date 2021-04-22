@@ -37,6 +37,12 @@ class Common extends BaseController
      */
     public function registerCommonStuff()
     {
+        wp_register_script(
+            'pmb_general',
+            PMB_SCRIPTS_URL . 'pmb-general.js',
+            ['jquery'],
+            filemtime(PMB_SCRIPTS_DIR . 'pmb-general.js')
+        );
         wp_register_style(
             'jquery-ui',
             PMB_ASSETS_URL . 'styles/libs/jquery-ui/jquery-ui.min.css',
