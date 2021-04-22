@@ -62,11 +62,16 @@
                             <button class="pmb-pro-window-button pmb-download-live pmb-pro-disabled" title="<?php echo esc_attr(__('You must first download the Test PDF', 'print-my-blog'));?>">
                                 <?php _e('Download Paid PDF', 'print-my-blog'); ?>
                             </button>
-                           <p class="description"><?php printf(
+                           <p class="description pmb-pro-description"><?php printf(
                                     esc_html__('Downloading the Paid PDF will use one of your %1$s remaining credits, and is non-refundable.',
                                         'print-my-blog'),
                                     $license_info['remaining_credits']
-                                );?></p>
+                                );?>
+                           </p>
+                            <div class="pmb-pro-after-pro">
+                                <p><?php esc_html_e('One credit was used to generate the file.', 'print-my-blog');?></p>
+                                <a class="pmb-pro-window-button" href="javascript:history.back();"><?php esc_html_e('Return to Generate Page', 'print-my-blog');?></a>
+                            </div>
                         <?php }
                     } ?>
                 </div>

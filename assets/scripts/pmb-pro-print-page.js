@@ -72,6 +72,8 @@ function pmb_generate_live_doc(jqelement) {
                     }
                 }
             );
+            jQuery('.pmb-pro-description').hide();
+            jQuery('.pmb-pro-after-pro').show();
         },
         (error_message) => {
             // jQuery('.pmb-downloading-live-pdf').hide();

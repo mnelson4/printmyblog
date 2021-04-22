@@ -77,6 +77,10 @@ Stylesl for the print window
         margin-right:auto;
         text-align:left;
     }
+    .pmb-pro-after-pro{
+        display:none;
+        margin-bottom:20px;
+    }
 }
 @media print{
     .pmb-pro-print-window{
