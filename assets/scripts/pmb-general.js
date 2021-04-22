@@ -10,7 +10,7 @@ jQuery(document).ready(function(){
  */
 function pmb_doing_button(jqelement){
     var current_html = jqelement.html();
-    jqelement.html(current_html + '<div class="pmb-spinner-container"><div class="pmb-spinner"></div></div>')
+    jqelement.append('<div class="pmb-spinner-container"><div class="pmb-spinner"></div></div>')
     jqelement.addClass('pmb-pro-disabled');
 }
 

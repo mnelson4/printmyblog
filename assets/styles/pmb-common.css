@@ -8,6 +8,9 @@
     width: 16px;
     height: 16px;
 }
+.pmb-spinner-container {
+    display:inline-block;
+}
 
 .pmb-hidden-initially{
     display:none;

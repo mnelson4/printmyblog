@@ -69,14 +69,8 @@
                                 );?></p>
                         <?php }
                     } ?>
-
                 </div>
             </div>
-        </div>
-        <div class="pmb-print-ready pmb-print-instructions">
-
-        </div>
-        <div class="pmb-posts-placeholder pmb-extra-content">
         </div>
     </div>
 </div>

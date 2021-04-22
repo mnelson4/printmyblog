@@ -63,6 +63,15 @@ function pmb_generate_live_doc(jqelement) {
         (download_url) => {
             pmb_stop_doing_button(jqelement);
             window.location.href = download_url;
+            jQuery.ajax(
+                ajaxurl,
+                {
+                    'method': 'POST',
+                    'data':{
+                        'action':'pmb_reduce_credits'
+                    }
+                }
+            );
         },
         (error_message) => {
             // jQuery('.pmb-downloading-live-pdf').hide();

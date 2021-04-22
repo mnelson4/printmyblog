@@ -126,6 +126,11 @@ class ProjectGeneration
         return $this->getPostMetaForFormat(self::POSTMETA_GENERATED);
     }
 
+    /**
+     * Gets a timestamp showing when this file was generated.
+     * @return int
+     * @throws \Exception
+     */
     public function generatedTimestamp()
     {
         $d = new DateTime($this->generatedTimeSql());
@@ -240,6 +245,10 @@ class ProjectGeneration
     public function isDirty()
     {
         return (bool)$this->getDirtyReasons();
+    }
+
+    public function isOld(){
+        return $this->generatedTimestamp() < current_time('timestamp') - DAY_IN_SECONDS;
     }
 
     /**

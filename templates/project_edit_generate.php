@@ -48,7 +48,7 @@ foreach($generations as $generation){
         <h2><?php echo $generation->getFormat()->title();?></h2>
         <?php
         if($generation->isGenerated()){
-            if($generation->isDirty()){
+            if($generation->isDirty() || $generation->isOld()){
                 ?>
                 <div class="pmb-previous-generation-info">
                     <b>
@@ -65,7 +65,7 @@ foreach($generations as $generation){
                 </div>
                 <br/>
                 <button
-                        class="button button-primary pmb-generate" data-format="<?php echo esc_attr($format_slug);?>"><?php esc_html_e('Regenerate', 'print-my-blog');
+                        class="button button-primary pmb-generate pmb_spin_on_click" data-format="<?php echo esc_attr($format_slug);?>"><?php esc_html_e('Regenerate', 'print-my-blog');
                 ?></button>
                 <?php
             } else {
@@ -79,124 +79,23 @@ foreach($generations as $generation){
                     </b>
                 </div>
                 <br/>
-                <a class="button pmb-generate" data-format="<?php echo esc_attr($format_slug);?>"><?php esc_html_e('Regenerate Anyway', 'print-my-blog');?></a>
+                <button class="button pmb-generate pmb_spin_on_click" data-format="<?php echo esc_attr($format_slug);?>"><?php esc_html_e('Regenerate Anyway', 'print-my-blog');?></button>
                 <?php
             }
         } else {
         ?>
-                <a class="button button-primary pmb-generate" data-format="<?php echo esc_attr($format_slug);?>"><?php
+                <a class="button button-primary pmb-generate pmb_spin_on_click" data-format="<?php echo esc_attr($format_slug);?>"><?php
                     esc_html_e('Generate', 'print-my-blog');
                 ?></a>
         <?php
         }
         ?>
         <div class="pmb-after-generation" <?php echo ! $generation->isGenerated() || $generation->isDirty() ? 'style="display:none"' : '';?>>
-            <a class="button pmb-download-preview <?php echo $generation->isGenerated() ? 'button-primary' : '';?>"
-                data-format="<?php echo esc_attr($format_slug);?>"
-                data-html-url="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"
-                data-preview="1">
-                <?php esc_html_e('Download Preview', 'print-my-blog');?></a>
-                <a href="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"
-                class="pmb-view-html"
-                   title="<?php echo esc_attr(__('View HTML', 'print-my-blog'));
-                   ?>"><span  class="dashicons
-                dashicons-html pmb-icon"></span></a>
-                <a href="<?php echo esc_url(admin_url(PMB_ADMIN_HELP_PAGE_PATH));?>" title="<?php echo esc_html__('Get Help', 'print-my-blog');?>"><span class="dashicons
-                dashicons-sos pmb-icon"></span></a>
-            <div class="pmb-download-preview-dialog pmb-download-preview-dialog-<?php echo
-            esc_attr ($format_slug);?>" style="display:none">
-                <div class="pmb-after-download-preview">
-                    <div class="pmb-downloading-test-pdf">
-                        <p class="pmb-middle-important-text"><?php esc_html_e('Downloading Watermarked Preview File...',
-                                'print-my-blog');?></p>
-                        <div class="pmb-spinner-container">
-                            <div class="pmb-spinner"></div>
-                        </div>
-                    </div>
-                    <div class="pmb-success-download-test-pdf">
-                        <p class="pmb-middle-important-text pmb-download-status" class="pmb-middle-important-text"><?php esc_html_e('Download Complete',
-                                'print-my-blog');?></p>
-                        <div class="pmb-content-boxes pmb-after-download-test-pdf">
-                            <div class="pmb-content-box-wrap">
-                                <div class="pmb-content-box-inner">
-                                    <h3><?php esc_html_e('Something Not Look Right?', 'print-my-blog'); ?></h3>
-                                    <a class="button button-primary" href="<?php echo esc_url(admin_url
-                                    (PMB_ADMIN_HELP_PAGE_PATH));?>"><?php esc_html_e('Let’s Get It Fixed!', 'print-my-blog');?></a>
-                                </div>
-                            </div>
-                            <div class="pmb-content-box-wrap">
-                                <div class="pmb-content-box-inner">
-                                    <h3><?php esc_html_e('Looks good?', 'print-my-blog'); ?></h3>
-                                    <?php if(! is_array($license_info) ){ ?>
-                                        <p class="pmb-important"><?php esc_html_e('Before you can make a paid PDF, you need a plan.', 'print-my-blog');?></p>
-                                        <a href="<?php echo esc_url($upgrade_url);?>" class="button button-primary"><?php esc_html_e('View Plans',
-                                                'print-my-blog');?></a>
-                                    <?php } elseif(! $license_info['remaining_credits']) {?>
-
-                                        <p><?php esc_html_e('Sorry you have no more download credits.', 'print-my-blog');?></p>
-                                        <a href="<?php echo esc_url($upgrade_url);?>" class="button button-primary"><?php esc_html_e('View Plan Upgrades',
-                                                'print-my-blog');?></a>
-                                        <p class="description"><?php esc_html_e('Or stay on your current plan and wait for your plan to renew', 'print-my-blog');
-                                            ?></p>
-                                    <?php } else { ?>
-                                        <a
-                                           class="pmb-download-<?php echo esc_attr
-                                           ($format_slug);?> button button-primary pmb-download-live"
-                                           data-format="<?php echo esc_attr ($format_slug);?>"
-                                           data-html-url="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"
-                                           data-preview="0">
-                                            <?php esc_html_e('Download Paid PDF','print-my-blog');?></a>
-                                        <p class="description"><?php printf(
-                                                esc_html__('This will use one of your %1$s remaining credits, and is non-refundable.',
-                                                    'print-my-blog'),
-                                                $license_info['remaining_credits']
-                                            );?></p>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pmb-error-downloading-test-pdf">
-                        <p class="pmb-download-status pmb-middle-important-text"><?php esc_html_e('Download Error 😥',
-                                'print-my-blog');?></p>
-                        <div class="pmb-after-download-test-pdf pmb-content-boxes">
-                            <div class="pmb-content-box-wrap">
-                                <div class="pmb-content-box-inner">
-                                    <h3><?php esc_html_e('We Want to Help!', 'print-my-blog'); ?></h3>
-                                    <a class="button button-primary" href="<?php echo esc_url(admin_url
-                                    (PMB_ADMIN_HELP_PAGE_PATH));?>"><?php esc_html_e('Let’s Get It Fixed!', 'print-my-blog');?></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pmb-downloading-live-pdf">
-                        <p class="pmb-middle-important-text"><?php esc_html_e('Downloading Paid PDF...',
-                                'print-my-blog');?></p>
-                        <div class="pmb-spinner-container">
-                            <div class="pmb-spinner"></div>
-                        </div>
-                    </div>
-                    <div class="pmb-after-download-actual-success">
-                        <p class="pmb-middle-important-text"><?php esc_html_e('Paid PDF Downloaded', 'print-my-blog');?></p>
-                        <div class="pmb-content-boxes" class="pmb-after-download-test-pdf">
-                            <div class="pmb-content-box-wrap">
-                                <div class="pmb-content-box-inner">
-                                    <p><?php esc_html_e('Thank you for using Print My Blog! 😍', 'print-my-blog');?></p>
-                                    <?php if( pmb_fs()->is_premium() && $suggest_review){ ?>
-                                                <p><?php printf(
-                                                    esc_html__('If you’re happy with the results or support, please %1$sleave a review%2$s! Thanks!', 'print-my-blog'),
-                                                    '<a href="' . esc_url($review_url) . '">',
-                                                    '</a>'
-                                                );?></p>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <a class="button button-primary" href="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"><?php printf(__('View %s', 'print-my-blog'), $generation->getFormat()->title());?></a>
         </div>
     </div>
+    <br>
+    <a href="<?php echo esc_url(admin_url(PMB_ADMIN_HELP_PAGE_PATH));?>"><?php esc_html_e('Something not right? We’re happy to help!', 'print-my-blog');?></a>
 <?php
 }
 pmb_render_template('partials/project_footer.php');
