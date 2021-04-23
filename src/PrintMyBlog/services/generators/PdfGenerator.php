@@ -115,8 +115,8 @@ class PdfGenerator extends ProjectFileGeneratorBase
         add_action('wp_enqueue_scripts', [$this,'enqueueStylesAndScripts'], 1000);
         do_action('pmb_pdf_generation_start', $this->project_generation, $this->design);
         add_filter('should_load_block_editor_scripts_and_styles', '__return_true');
-        $this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT);
         add_action('pmb_pro_print_window', [$this,'addPrintWindowToPage']);
+        $this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT);
     }
 
 
@@ -270,6 +270,11 @@ class PdfGenerator extends ProjectFileGeneratorBase
         return $this->getFileWriter()->delete();
     }
 
+    /**
+     * Writes out the PMB Pro print "window" which appears at the top of pro print pages.
+     * Echoes, instead of using `$this->file_writer`, because this is a callback on an action called inside the template HTML.
+     * @throws Exception
+     */
     public function addPrintWindowToPage(){
         if ( pmb_fs()->is__premium_only() ) {
             $license = pmb_fs()->_get_license();
@@ -277,6 +282,6 @@ class PdfGenerator extends ProjectFileGeneratorBase
                 $license_info = $this->getPmbCentral()->getCreditsInfo();
             }
         }
-        $this->getFileWriter()->write(pmb_get_contents(PMB_TEMPLATES_DIR . 'partials/pro_print_page_window.php', ['license_info' => $license_info]));
+        echo pmb_get_contents(PMB_TEMPLATES_DIR . 'partials/pro_print_page_window.php', ['license_info' => $license_info]);
     }
 }
