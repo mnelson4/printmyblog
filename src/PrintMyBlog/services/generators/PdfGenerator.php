@@ -115,8 +115,8 @@ class PdfGenerator extends ProjectFileGeneratorBase
         add_action('wp_enqueue_scripts', [$this,'enqueueStylesAndScripts'], 1000);
         do_action('pmb_pdf_generation_start', $this->project_generation, $this->design);
         add_filter('should_load_block_editor_scripts_and_styles', '__return_true');
-        add_action('pmb_pro_print_window', [$this,'addPrintWindowToPage']);
         $this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT);
+        add_action('pmb_pro_print_window', [$this,'addPrintWindowToPage']);
     }
 
 
