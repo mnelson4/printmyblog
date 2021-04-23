@@ -83,7 +83,7 @@ Stylesl for the print window
     }
 }
 @media print{
-    .pmb-pro-print-window{
+    .pmb-pro-print-window-wrapper{
         display:none;
     }
 }
@@ -214,4 +214,9 @@ figcaption{
 }
 .pmb-float-bottom{
     float:bottom;
+}
+
+/* Remove accessibility divs which add extra pages (sorry they're not usable when printed anyway)*/
+.a11y-speak-intro-text, .a11y-speak-region{
+    display:none !important;
 }
