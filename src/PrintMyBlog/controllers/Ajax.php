@@ -77,6 +77,7 @@ class Ajax extends BaseController
         add_action('wp_ajax_pmb_post_search', [$this,'handlePostSearch']);
         add_action('wp_ajax_pmb_add_print_material', [$this,'addPrintMaterial']);
         add_action('wp_ajax_pmb_reduce_credits',[$this,'reduceCredits']);
+        add_action('wp_ajax_pmb_report_error', [$this,'reportError']);
     }
 
     protected function addUnauthenticatedCallback($ajax_action, $method_name)
@@ -285,6 +286,37 @@ class Ajax extends BaseController
         wp_send_json_success(
                 $updated_credit_info
         );
+        exit;
+    }
+
+    public function reportError(){
+        $project_id = (int)$_REQUEST['project_id'];
+        $format = sanitize_key($_REQUEST['format']);
+        $error_message = esc_html($_REQUEST['error']);
+        $project = $this->project_manager->getById($project_id);
+        if(! $project){
+            wp_send_json_error(
+                    [
+                            'error' => 'Could not find project with ID ' . $project_id
+                    ]
+            );
+            exit;
+        }
+        $generation = $project->getGenerationFor($format);
+        if(! $generation instanceof ProjectGeneration){
+            wp_send_json_error(
+                    [
+                            'error' => sprintf(
+                                'Could not find project generation for project %d on format %s',
+                                $project_id,
+                                $format
+                            )
+                    ]
+            );
+            exit;
+        }
+        $generation->setLastError($error_message);
+        wp_send_json_success();
         exit;
     }
 }

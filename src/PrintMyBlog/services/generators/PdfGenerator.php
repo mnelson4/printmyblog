@@ -73,7 +73,9 @@ class PdfGenerator extends ProjectFileGeneratorBase
                     'install_id' => $site instanceof FS_Site ? $site->id : '',
                     'authorization_header' => $this->getPmbCentral()->getSiteAuthorizationHeader(),
                 ],
-
+                'ajaxurl' => admin_url( 'admin-ajax.php' ),
+                'project_id' => $this->project->getWpPost()->ID,
+                'format' => $this->project_generation->getFormat()->slug(),
                 'doc_attrs' => apply_filters(
                     '\PrintMyBlog\controllers\Admin::enqueueScripts doc_attrs',
                     [
@@ -86,12 +88,9 @@ class PdfGenerator extends ProjectFileGeneratorBase
                         'pipeline' => 9,
                         'prince_options' => [
                             'base_url' => site_url(),
-                            'media' => 'print',                                       // use screen
+                            'media' => 'print',
                             'http_timeout' => 60,
                             'http_insecure' => true,
-                            // styles
-                            // instead of print styles
-                            // javascript: true, // use Prince's JS, which is more error tolerant
                         ]
                     ]
                 ),

@@ -48,6 +48,18 @@ function pmb_generate_test_doc(jqelement) {
                 error_message = pmb_generate.translations.socket_error;
             }
             pmb_stop_doing_button(jqelement);
+            jQuery.ajax(
+                pmb_pro.ajaxurl,
+                {
+                    'method': 'POST',
+                    'data':{
+                        'action':'pmb_report_error',
+                        'error': error_message,
+                        'project_id': pmb_pro.project_id,
+                        'format': pmb_pro.format
+                    }
+                }
+            );
             alert(error_message);
         }
     );
@@ -64,7 +76,7 @@ function pmb_generate_live_doc(jqelement) {
             pmb_stop_doing_button(jqelement);
             window.location.href = download_url;
             jQuery.ajax(
-                ajaxurl,
+                pmb_pro.ajaxurl,
                 {
                     'method': 'POST',
                     'data':{
@@ -82,6 +94,18 @@ function pmb_generate_live_doc(jqelement) {
                 error_message = pmb_generate.translations.socket_error;
             }
             pmb_stop_doing_button(jqelement);
+            jQuery.ajax(
+                pmb_pro.ajaxurl,
+                {
+                    'method': 'POST',
+                    'data':{
+                        'action':'pmb_report_error',
+                        'error': error_message,
+                        'project_id': pmb_pro.project_id,
+                        'format': pmb_pro.format
+                    }
+                }
+            );
             alert(error_message);
         }
     );

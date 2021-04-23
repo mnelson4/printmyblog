@@ -25,6 +25,7 @@ class ProjectGeneration
     const POSTMETA_DIRTY = '_pmb_dirty_';
     const POSTMETA_LAST_DIVISION = '_pmb_last_section_type_';
     const POSTMETA_LAST_SECTION_ID = '_pmb_last_section_';
+    const POSTMETA_ERROR = '_pmb_error_';
     /**
      * @var Project
      */
@@ -77,7 +78,7 @@ class ProjectGeneration
     }
 
     /**
-     * Avoids a bit of repetion, when getting, with always appending the format for all the options saved for this
+     * Avoids a bit of repetition, when getting, with always appending the format for all the options saved for this
      * project-meta combo.
      * @param string $key to which the format's slug will automatically get appended.
      *
@@ -340,5 +341,20 @@ class ProjectGeneration
     {
         $this->last_section = $section;
         return $this->setLastSectionId($section->getId());
+    }
+
+    /**
+     * @param string $error_message
+     */
+    public function setLastError($error_message){
+        $this->setPostMetaForFormat(self::POSTMETA_ERROR, $error_message);
+    }
+
+    /**
+     * Gets a string of text from the last error concerning this project generation
+     * @return string
+     */
+    public function getLastError(){
+        return (string)$this->getPostMetaForFormat(self::POSTMETA_ERROR);
     }
 }
