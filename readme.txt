@@ -280,6 +280,10 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 7. Add the Print My Blog block to add a form visitors can use to select what and how to print your blog.
 
 == Changelog ==
+= 3.1.0 April 24, 2021 =
+* Bugfix: improved integration with built-in galleries and gallery plugins by using browser-based Javascript rendering
+* Improvement: add button to print PMB Pro projects from the browser and clarify which features are supported
+
 = 3.0.2 April 8, 2021 =
 * Integration: Hide MailChimp pop-up form in printouts
 * Bugfix: Avoid Javascript error if there is a bad link

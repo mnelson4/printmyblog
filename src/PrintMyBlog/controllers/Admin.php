@@ -524,7 +524,7 @@ class Admin extends BaseController
             [],
             filemtime(PMB_STYLES_DIR . 'pmb-admin.css')
         );
-        if(false &&  pmb_fs()->is_premium()){
+        if(pmb_fs()->is_premium()){
             // Paid users don't need to be reminded what's pro and what's not
             wp_add_inline_style(
                 'pmb_admin',

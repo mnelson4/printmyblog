@@ -12,7 +12,7 @@ use PrintMyBlog\orm\entities\ProjectSection;
  * @return string
  */
 function pmb_pro_only($explanation = ''){
-    if(false && pmb_fs()->is_premium()){
+    if(pmb_fs()->is_premium()){
         return '';
     }
     $hover_text = __('Only works with Pro', 'print-my-blog');
@@ -35,7 +35,7 @@ function pmb_pro_only_e($explanation = ''){
  * @return string
  */
 function pmb_pro_best($explanation = ''){
-    if(false && pmb_fs()->is_premium()){
+    if(pmb_fs()->is_premium()){
         return '';
     }
     $hover_text = __('Works best with Pro', 'print-my-blog');
