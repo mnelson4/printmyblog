@@ -90,12 +90,13 @@ foreach($generations as $generation){
         <?php
         }
         ?>
-        <div class="pmb-after-generation" <?php echo ! $generation->isGenerated() || $generation->isDirty() ? 'style="display:none"' : '';?>>
+        <div class="pmb-after-generation" <?php echo ! $generation->isGenerated() || $generation->isDirty() || $generation->isOld() ? 'style="display:none"' : '';?>>
             <a class="button button-primary" href="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"><?php printf(__('View %s', 'print-my-blog'), $generation->getFormat()->title());?></a>
         </div>
     </div>
     <br>
-    <a href="<?php echo esc_url(admin_url(PMB_ADMIN_HELP_PAGE_PATH));?>"><?php esc_html_e('Something not right? We’re happy to help!', 'print-my-blog');?></a>
+    <a href="<?php echo esc_url(admin_url(PMB_ADMIN_HELP_PAGE_PATH));?>"><span class="pmb-spinner-container"><span class="dashicons
+                dashicons-sos pmb-icon"></span></span> <?php esc_html_e('Something not right? We’re happy to help!', 'print-my-blog');?></a>
 <?php
 }
 pmb_render_template('partials/project_footer.php');
