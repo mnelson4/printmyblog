@@ -237,3 +237,10 @@ because it also takes up 100% of the width.
 .pmb-posts .blocks-gallery-grid .blocks-gallery-item figcaption {
     padding:40px 0 9px;
 }
+
+.pmb-print-page .wp-block-columns{
+    display:block;
+}
+.pmb-print-page .wp-block-column{
+    display:inline-block;
+}
