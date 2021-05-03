@@ -124,4 +124,5 @@ jQuery(document).ready(function(){
             pmb_doing_button(jqelement);
         }
     });
+    jQuery('.pmb-screen-only').remove();
 })
