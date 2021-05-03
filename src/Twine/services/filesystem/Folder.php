@@ -51,6 +51,7 @@ class Folder extends ThingOnServer
             $this->parentFolder()->ensureExists();
             mkdir($this->getPath());
             chmod($this->getPath(), 0777);
+            $this->exists = true;
             $this->secure();
         }
     }
