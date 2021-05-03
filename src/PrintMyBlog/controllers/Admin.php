@@ -484,19 +484,6 @@ class Admin extends BaseController
     public function pluginPageLinks($links)
     {
         $links = array_merge(
-            array(
-                '<a href="'
-            . admin_url(PMB_ADMIN_PAGE_PATH)
-            . '">'
-            . esc_html__('Print Now', 'print-my-blog')
-            . '</a>',
-
-            '<a href="'
-            . admin_url(PMB_ADMIN_SETTINGS_PAGE_PATH)
-            . '">'
-            . esc_html__('Settings', 'print-my-blog')
-            . '</a>'
-            ),
             $links,
             [
                 '<a href="'
