@@ -61,8 +61,8 @@
 
 
     /* Title Page styles */
-    .pmb-title-page{
-        margin-top:1in;
+    .pmb-title-page .project-title{
+        padding-top:1in;
     }
     .buurma-issue{
         float:right;

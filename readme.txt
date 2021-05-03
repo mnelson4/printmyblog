@@ -280,7 +280,7 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 7. Add the Print My Blog block to add a form visitors can use to select what and how to print your blog.
 
 == Changelog ==
-= 3.1.1 April 30, 2021=
+= 3.1.1 April 30, 2021 =
 * Improvement: use flexbox for WP column blocks in pro again (they're handled much better since 3.1.0)
 
 = 3.1.0 April 24, 2021 =
