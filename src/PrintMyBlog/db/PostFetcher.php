@@ -73,7 +73,7 @@ class PostFetcher
         return $wpdb->query(
             'DELETE posts, postmetas FROM '
             . $wpdb->posts
-            . ' AS posts INNER JOIN '
+            . ' AS posts LEFT JOIN '
             . $wpdb->postmeta
             . ' AS postmetas ON posts.ID=postmetas.post_id WHERE posts.post_type IN ("'
             . implode('","', $this->custom_post_types->getPostTypes())
