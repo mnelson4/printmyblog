@@ -171,7 +171,7 @@ pmb_render_template(
                                 $division_descriptions = [];
 			                        for($i=0; $i < $project->getLevelsAllowed(); $i++){
                                         $division_descriptions[]=  sprintf(
-						                        __('each %1$s can put in a %2$s', 'print-my-blog'),
+						                        __('each %1$s can be put in a %2$s', 'print-my-blog'),
                                                 $a_design->getDesignTemplate()->divisionLabelSingular($i),
                                                 $a_design->getDesignTemplate()->divisionLabelSingular($i+1)
 					                        );
