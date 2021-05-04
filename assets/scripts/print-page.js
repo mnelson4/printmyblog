@@ -672,10 +672,32 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
     this.getPrettyDate = function(iso_date)
     {
-        let ld = luxon.DateTime.fromJSDate(new Date(iso_date));
-        let format = {month: 'long', day: 'numeric', year: 'numeric'};
-        ld.setLocale(this.locale);
-        return ld.toLocaleString(format);
+        var dateParser = /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/;
+        var match = iso_date.match(dateParser);
+        var date = new Date(
+            match[1],  // year
+            match[2]-1,  // monthIndex
+            match[3],  // day
+            match[4],  // hours
+            match[5],  // minutes
+            match[6]  //seconds
+        );
+        var months = [
+            'January', 'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ];
+        // before we used luxon, which theoretically would have translated the strings but no luck
+        // and it took up a quarter megabyte. So just hardcoding English for now.
+        return months[date.getMonth()] + ' ' + date.getDay() + ', '  + date.getFullYear();
     };
 
     /**

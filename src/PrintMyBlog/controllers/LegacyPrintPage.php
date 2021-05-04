@@ -220,16 +220,10 @@ class LegacyPrintPage extends BaseController
     {
         //phpcs:enable
         do_action('PrintMyBlog\controllers\PmbPrintPage->enqueueScripts');
-        wp_register_script(
-            'luxon',
-            PMB_ASSETS_URL . 'scripts/luxon.min.js',
-            array(),
-            filemtime(PMB_ASSETS_DIR . 'scripts/luxon.min.js')
-        );
         wp_enqueue_script(
             'pmb_print_page',
             PMB_ASSETS_URL . 'scripts/print-page.js',
-            array('jquery', 'wp-api', 'luxon', 'pmb-beautifier-functions'),
+            array('jquery', 'wp-api', 'pmb-beautifier-functions'),
             filemtime(PMB_ASSETS_DIR . 'scripts/print-page.js')
         );
         wp_enqueue_style(
