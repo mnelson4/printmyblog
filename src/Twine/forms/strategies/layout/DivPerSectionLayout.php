@@ -115,11 +115,11 @@ class DivPerSectionLayout extends FormSectionLayoutBase
             $html_label_text = $input->htmlLabelText();
             $label_html = $html_generator->div(
                 $input->required()
-                    ? $html_label_text . $html_generator->span('*', '', 'ee-asterisk')
+                    ? $html_label_text . $html_generator->span('*', '', 'twine-asterisk')
                     : $html_label_text,
                 $input->htmlLabelId(),
                 $input->required()
-                    ? 'ee-required-label ' . $input->htmlLabelClass()
+                    ? 'twine-required-label ' . $input->htmlLabelClass()
                     : $input->htmlLabelClass(),
                 $input->htmlLabelStyle(),
                 $input->otherHtmlAttributesString()

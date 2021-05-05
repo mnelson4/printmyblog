@@ -103,7 +103,7 @@ abstract class FormInputBase extends FormSectionValidatable
      *
      * @var string
      */
-    protected $required_css_class = 'ee-required';
+    protected $required_css_class = 'twine-required';
 
     /**
      * The raw data submitted for this, like in the $_POST super global.
@@ -208,10 +208,8 @@ abstract class FormInputBase extends FormSectionValidatable
         }
         // loop thru incoming options
         foreach ($input_args as $key => $value) {
-            // add underscore to $key to match property names
-            $_key = '_' . $key;
-            if (property_exists($this, $_key)) {
-                $this->{$_key} = $value;
+            if (property_exists($this, $key)) {
+                $this->{$key} = $value;
             }
         }
         // ensure that "required" is set correctly

@@ -187,10 +187,10 @@ abstract class FormSectionLayoutBase
             return '';
         }
         $class = $input->required()
-            ? 'ee-required-label ' . $input->htmlLabelClass()
+            ? 'twine-required-label ' . $input->htmlLabelClass()
             : $input->htmlLabelClass();
         $label_text = $input->required()
-            ? $input->htmlLabelText() . '<span class="ee-asterisk">*</span>'
+            ? $input->htmlLabelText() . '<span class="twine-asterisk">*</span>'
             : $input->htmlLabelText();
         return '<label id="'
                . $input->htmlLabelId()
@@ -216,7 +216,7 @@ abstract class FormSectionLayoutBase
     {
         $html = '';
         if ($this->Form_section->getValidationErrors()) {
-            $html .= "<div class='ee-form-wide-errors'>";
+            $html .= "<div class='twine-form-wide-errors'>";
             // get all the errors on THIS form section (errors which aren't
             // for specific inputs, but instead for the entire form section)
             foreach ($this->Form_section->getValidationErrors() as $error) {

@@ -14,3 +14,7 @@ summary.twine-summary{
 .twine-text-input[type=color]{
     width:40px;
 }
+.twine-form .error{
+    color:red;
+    font-weight:normal;
+}

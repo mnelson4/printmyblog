@@ -51,7 +51,7 @@ class CheckboxDisplay extends CompoundInputDisplay
                      . $html_id
                      . '" id="'
                      . $html_id
-                     . '-lbl" class="ee-checkbox-label-after'
+                     . '-lbl" class="twine-checkbox-label-after'
                      . '">';
             $html .= $html_generator->nl(1, 'checkbox');
             $html .= '<input type="checkbox"';

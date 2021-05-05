@@ -521,35 +521,3 @@ jQuery(document).ready(function($){
 		TWINE_FORM_VALIDATION.initialize( twine_form_section_vars.form_data );
 	}
 });
-
-// example  twine_form_section_vars
-//var twine_form_section_vars = {
-//	"form_data":{
-//		"ee-single-page-checkout-dv":{
-//			"form_section_id":"#ee-single-page-checkout-dv",
-//			"validation_rules":[],
-//			"errors":[]
-//		},
-//		"ee-spco-attendee_information-reg-step-form":{
-//			"form_section_id":"#ee-spco-attendee_information-reg-step-form",
-//			"validation_rules":{
-//				"#ee_reg_qstn-1-9694e9fa065278f0aca66280b6be7f7a-fname":{
-//					"required":true
-//				},
-//				"#ee_reg_qstn-1-9694e9fa065278f0aca66280b6be7f7a-lname":{
-//					"required":true
-//				},
-//				"#ee_reg_qstn-1-9694e9fa065278f0aca66280b6be7f7a-email":{
-//					"required":true
-//				},
-//				"#ee_reg_qstn-1-9694e9fa065278f0aca66280b6be7f7a-country":{
-//					"required":true
-//				}
-//			},
-//			"errors":[]
-//		}
-//	},
-//	"localized_error_messages":{
-//		"validUrl":"This is not a valid absolute URL. Eg, http:\/\/domain.com\/monkey.jpg"
-//	}
-//};

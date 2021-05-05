@@ -161,6 +161,14 @@ class FormSection extends FormSectionValidatable
     }
 
     /**
+     * @return string
+     */
+    public function htmlClass()
+    {
+        return $this->html_class . ' twine-form';
+    }
+
+    /**
      * Merges this form with the other one. Recursively calls merge on conflicting proper subsections.
      * @param FormSection $other_form
      *

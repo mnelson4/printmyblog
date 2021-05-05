@@ -37,7 +37,7 @@ class TextAreaDisplay extends DisplayBase
             ) {
                 $html .= sprintf(
                     __('%1$s(allowed tags: %2$s)%3$s', 'print-my-blog'),
-                    '<p class="ee-question-desc">',
+                    '<p class="twine-question-desc">',
                     $validation_strategy->getListOfAllowedTags(),
                     '</p>'
                 );

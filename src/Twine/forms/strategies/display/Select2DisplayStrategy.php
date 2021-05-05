@@ -109,13 +109,13 @@ class Select2Display extends SelectDisplay
     }
 
     /**
-     * Overrides standard attributes array to add the CSS class "ee-select2"
+     * Overrides standard attributes array to add the CSS class "twine-select2"
      * @return array
      */
     protected function standardAttributesArray()
     {
         $standard_attributes = parent::standardAttributesArray();
-        $standard_attributes['class'] .= ' ee-select2';
+        $standard_attributes['class'] .= ' twine-select2';
         return $standard_attributes;
     }
 }

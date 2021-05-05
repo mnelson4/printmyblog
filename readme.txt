@@ -282,6 +282,7 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 == Changelog ==
 = 3.1.2 May 4, 2021 =
 * Improvement: removed a few unused JS and CSS files
+* Bugfix: require answering the format question during project setup (which otherwise led to a fatal error on the next step)
 
 = 3.1.1 April 30, 2021 =
 * Improvement: use flexbox for WP column blocks in pro again (they're handled much better since 3.1.0)
