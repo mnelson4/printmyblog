@@ -2,6 +2,7 @@
 
 namespace Twine\system;
 
+use Exception;
 use ReflectionClass;
 
 /**
@@ -117,6 +118,7 @@ abstract class Context
      */
     public static function instance()
     {
+        /** @phpstan-ignore-next-line */
         if (! static::$instance instanceof Context) {
             static::$instance = new static();
             static::$instance->setDependencies();

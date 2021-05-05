@@ -9,9 +9,7 @@ if (!defined('TWINE_SCRIPTS_URL')) {
     if (! defined('TWINE_MAIN_FILE')) {
         throw new Exception(
             __(
-                // phpcs:disable Generic.Files.LineLength.TooLong
                 'In order to use Twine forms, you need to define TWINE_MAIN_FILE to be the main file of your plugin, then put Twine folder inside wp-content/plugins/yourplugin/src/Twine',
-                // phpcs:enable Generic.Files.LineLength.TooLong
                 'twine'
             )
         );
@@ -331,9 +329,7 @@ abstract class FormSectionBase
     {
         if (! $this->construction_finalized) {
             throw new ImproperUsageException(sprintf(__(
-                // phpcs:disable Generic.Files.LineLength.TooLong
                 'You cannot use the form section\s name until constructFinalize has been called on it (when we set the name). It was called on a form section of type \'s\'',
-                // phpcs:enable Generic.Files.LineLength.TooLong
                 'print-my-blog'
             ), get_class($this)));
         }

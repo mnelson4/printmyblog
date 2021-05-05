@@ -42,7 +42,7 @@ class OneTimeNotificationManager
         $notifications = $this->getOneTimeNotificationsFor($current_user);
         if (doing_action('admin_notices') || did_action('admin_notices')) {
             $this->displayNotifications($notifications);
-        }  else {
+        } else {
             add_action('admin_notices', [$this,'displayNotificationsLater']);
             $this->cached_notifications = $notifications;
         }

@@ -91,7 +91,8 @@ class Shortcodes extends BaseController
         }
     }
 
-    public function pmbByline(){
+    public function pmbByline()
+    {
         global $pmb_project;
         if ($pmb_project instanceof Project) {
             return $pmb_project->getPmbMeta('byline');

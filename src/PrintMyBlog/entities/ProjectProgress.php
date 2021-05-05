@@ -161,9 +161,10 @@ class ProjectProgress
      * @param $step_name
      * @return bool|null
      */
-    public function isStepComplete($step_name){
+    public function isStepComplete($step_name)
+    {
         $steps = $this->getStepProgress();
-        if(isset($steps[$step_name])){
+        if (isset($steps[$step_name])) {
             return (bool)$steps[$step_name];
         }
         return null;

@@ -29,10 +29,8 @@ class CheckboxDisplay extends CompoundInputDisplay
             throw new Exception(
                 sprintf(
                     esc_html_x(
-                        // phpcs:disable Generic.Files.LineLength.TooLong
                         'Input values for checkboxes should be an array of values, but the value for input "%1$s" is "%2$s". Please verify that the input name is exactly "%3$s"',
                         'Input values for checkboxes should be an array of values, but the value for input "form-input-id" is "form-input-value". Please verify that the input name is exactly "form_input_name[]"',
-                        // phpcs:enable Generic.Files.LineLength.TooLong
                         'print-my-blog'
                     ),
                     $input->htmlId(),

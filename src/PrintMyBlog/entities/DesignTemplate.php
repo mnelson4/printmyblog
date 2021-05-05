@@ -112,7 +112,7 @@ class DesignTemplate
         $this->dir                   = (string)$args['dir'];
         $this->default_design_slug   = (string)$args['default'];
         $this->url                   = (string)$args['url'];
-        if(isset($args['docs'])){
+        if (isset($args['docs'])) {
             $this->docs = (string)$args['docs'];
         }
         if (isset($args['supports'])) {
@@ -214,7 +214,8 @@ class DesignTemplate
      * @return FormSection
      * @throws Exception
      */
-    public function getNewDesignFormTemplate(){
+    public function getNewDesignFormTemplate()
+    {
         $form = call_user_func($this->design_form_callback);
         if (! $form instanceof FormSection) {
             throw new Exception('No Design form was specified for design template ' . $this->slug);
@@ -395,7 +396,8 @@ class DesignTemplate
      * It is assumed this custom template has already been registered with pmb_register_section_template()
      * @param $custom_template_slug
      */
-    public function addCustomTemplate($custom_template_slug){
+    public function addCustomTemplate($custom_template_slug)
+    {
         $this->custom_templates[] = $custom_template_slug;
     }
 
@@ -405,8 +407,9 @@ class DesignTemplate
      * @param string $desired_template_slug
      * @return string template slug or empty string if we should use the default
      */
-    public function resolveSectionTemplateToUse($desired_template_slug){
-        while($desired_template_slug){
+    public function resolveSectionTemplateToUse($desired_template_slug)
+    {
+        while ($desired_template_slug) {
             if ($this->supports($desired_template_slug)) {
                 return $desired_template_slug;
             }
@@ -421,7 +424,8 @@ class DesignTemplate
      * Gets the default design object
      * @return Design|null
      */
-    public function getDefaultDesign(){
+    public function getDefaultDesign()
+    {
         return $this->design_manager->getBySlug($this->getDefaultDesignSlug());
     }
 

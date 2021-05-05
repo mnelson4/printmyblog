@@ -16,12 +16,16 @@ abstract class CompatibilityBase
     /**
      * Set hooks for compatibility with PMB for any request.
      */
-    public function setHooks(){}
+    public function setHooks()
+    {
+    }
 
     /**
      * Sets hooks to modify a PMB request
      */
-    public function setRenderingHooks(){}
+    public function setRenderingHooks()
+    {
+    }
 }
 // End of file Base.php
 // Location: Twine\compatibility/Base.php

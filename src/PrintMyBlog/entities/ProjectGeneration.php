@@ -248,7 +248,8 @@ class ProjectGeneration
         return (bool)$this->getDirtyReasons();
     }
 
-    public function isOld(){
+    public function isOld()
+    {
         return $this->generatedTimestamp() < current_time('timestamp') - DAY_IN_SECONDS;
     }
 
@@ -346,7 +347,8 @@ class ProjectGeneration
     /**
      * @param string $error_message
      */
-    public function setLastError($error_message){
+    public function setLastError($error_message)
+    {
         $this->setPostMetaForFormat(self::POSTMETA_ERROR, $error_message);
     }
 
@@ -354,7 +356,8 @@ class ProjectGeneration
      * Gets a string of text from the last error concerning this project generation
      * @return string
      */
-    public function getLastError(){
+    public function getLastError()
+    {
         return (string)$this->getPostMetaForFormat(self::POSTMETA_ERROR);
     }
 }

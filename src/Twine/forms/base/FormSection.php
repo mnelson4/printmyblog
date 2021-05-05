@@ -554,9 +554,7 @@ class FormSection extends FormSectionValidatable
                 throw new ImproperUsageException(
                     sprintf(
                         esc_html__(
-                            // phpcs:disable Generic.Files.LineLength.TooLong
                             'You cannot check if a form is valid before receiving the form submission using receive_form_submission',
-                            // phpcs:enable Generic.Files.LineLength.TooLong
                             'print-my-blog'
                         )
                     )
@@ -1227,9 +1225,7 @@ class FormSection extends FormSectionValidatable
                 throw new ImproperUsageException(
                     sprintf(
                         esc_html__(
-                            // phpcs:disable Generic.Files.LineLength.TooLong
                             "Trying to add a %s as a subsection (it was named '%s') to the form section '%s'. It was removed.",
-                            // phpcs:enable Generic.Files.LineLength.TooLong
                             'print-my-blog'
                         ),
                         get_class($subsection),

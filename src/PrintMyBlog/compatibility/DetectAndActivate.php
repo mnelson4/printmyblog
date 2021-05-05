@@ -26,8 +26,9 @@ class DetectAndActivate
     /**
      * @return CompatibilityBase[]
      */
-    protected function getCompatibilityMods(){
-        if($this->compatibility_mods === null){
+    protected function getCompatibilityMods()
+    {
+        if ($this->compatibility_mods === null) {
             /**
              * @var $compatiblity_mods_to_activate CompatibilityBase[]
              */
@@ -37,13 +38,13 @@ class DetectAndActivate
             if (class_exists('easyFootnotes')) {
                 $compatiblity_mods_to_activate[] = new EasyFootnotes();
             }
-            if(function_exists('vr_creation')){
+            if (function_exists('vr_creation')) {
                 $compatiblity_mods_to_activate[] = new WpVrView();
             }
-            if(class_exists('TablePress')){
+            if (class_exists('TablePress')) {
                 $compatiblity_mods_to_activate[] = new TablePress();
             }
-            if(class_exists('CoBlocks')){
+            if (class_exists('CoBlocks')) {
                 $compatiblity_mods_to_activate[] = new CoBlocks();
             }
             $this->compatibility_mods = $compatiblity_mods_to_activate;
@@ -61,8 +62,9 @@ class DetectAndActivate
         }
     }
 
-    public function activateRenderingCompatibilityModes(){
-        foreach($this->getCompatibilityMods() as $compatibilityMod){
+    public function activateRenderingCompatibilityModes()
+    {
+        foreach ($this->getCompatibilityMods() as $compatibilityMod) {
             $compatibilityMod->setRenderingHooks();
         }
     }

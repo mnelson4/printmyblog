@@ -33,7 +33,8 @@ class PdfGenerator extends ProjectFileGeneratorBase
     /**
      * Enqueues themes and styles we'll use on this AJAX request.
      */
-    public function enqueueStylesAndScripts(){
+    public function enqueueStylesAndScripts()
+    {
         wp_enqueue_style('pmb_print_common');
         wp_enqueue_style('pmb_pro_page');
         wp_enqueue_style('pmb-plugin-compatibility');
@@ -73,7 +74,7 @@ class PdfGenerator extends ProjectFileGeneratorBase
                     'install_id' => $site instanceof FS_Site ? $site->id : '',
                     'authorization_header' => $this->getPmbCentral()->getSiteAuthorizationHeader(),
                 ],
-                'ajaxurl' => admin_url( 'admin-ajax.php' ),
+                'ajaxurl' => admin_url('admin-ajax.php'),
                 'project_id' => $this->project->getWpPost()->ID,
                 'format' => $this->project_generation->getFormat()->slug(),
                 'doc_attrs' => apply_filters(
@@ -95,11 +96,9 @@ class PdfGenerator extends ProjectFileGeneratorBase
                     ]
                 ),
                 'translations' => [
-                    // phpcs:disable Generic.Files.LineLength.TooLong
                     'error_generating' => __('There was an error preparing your content. Please visit the Print My Blog Help page.', 'print-my-blog'),
                     'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public? Please visit the Print My Blog Help page.', 'print-my-blog')
-                    // phpcs:enable Generic.Files.LineLength.TooLong
-                ]
+                    ]
             ]
         );
     }
@@ -169,7 +168,8 @@ class PdfGenerator extends ProjectFileGeneratorBase
     /**
      * @return PmbCentral
      */
-    protected function getPmbCentral(){
+    protected function getPmbCentral()
+    {
         return Context::instance()->reuse('PrintMyBlog\services\PmbCentral');
     }
 
@@ -274,8 +274,9 @@ class PdfGenerator extends ProjectFileGeneratorBase
      * Echoes, instead of using `$this->file_writer`, because this is a callback on an action called inside the template HTML.
      * @throws Exception
      */
-    public function addPrintWindowToPage(){
-        if ( pmb_fs()->is__premium_only() ) {
+    public function addPrintWindowToPage()
+    {
+        if (pmb_fs()->is__premium_only()) {
             $license = pmb_fs()->_get_license();
             if ($license instanceof FS_Plugin_License) {
                 $license_info = $this->getPmbCentral()->getCreditsInfo();

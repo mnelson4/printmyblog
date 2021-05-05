@@ -65,9 +65,7 @@ abstract class CompoundInputDisplay extends DisplayBase
         if (! $this->input instanceof FormInputWithOptionsBase) {
             throw new Exception(
                 __(
-                    // phpcs:disable Generic.Files.LineLength.TooLong
                     'Can not use a Compound Input Display Strategy (eg checkbox or radio) with an input that doesn\'t have options',
-                    // phpcs:enable Generic.Files.LineLength.TooLong
                     'print-my-blog'
                 )
             );

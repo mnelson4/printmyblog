@@ -1,12 +1,11 @@
 <?php
 
-
 namespace PrintMyBlog\domain;
-
 
 class DefaultSectionTemplates
 {
-    public function registerDefaultSectionTemplates(){
+    public function registerDefaultSectionTemplates()
+    {
         pmb_register_section_template(
             'just_content',
             [
@@ -15,7 +14,7 @@ class DefaultSectionTemplates
                 'mayer',
                 'classic_print'
             ],
-            function() {
+            function () {
                 return [
                     'title' => __('Fullpage Content', 'print-my-blog'),
                     'fallback' => 'article',
@@ -30,7 +29,7 @@ class DefaultSectionTemplates
                 'mayer',
                 'classic_print'
             ],
-            function() {
+            function () {
                 return [
                     'title' => __('Centered Content', 'print-my-blog'),
                     'fallback' => 'just_content'
@@ -42,7 +41,7 @@ class DefaultSectionTemplates
             [
                 'mayer'
             ],
-            function(){
+            function () {
                 return [
                     'title' => __('Single Column', 'print-my-blog'),
                     'fallback' => ''

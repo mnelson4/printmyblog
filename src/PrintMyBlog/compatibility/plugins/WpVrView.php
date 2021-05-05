@@ -22,7 +22,8 @@ class WpVrView extends CompatibilityBase
     {
     }
 
-    public function setRenderingHooks(){
+    public function setRenderingHooks()
+    {
         // Their shortcode becomes a simple iFrame that has JS that doesn't work in Prince XML.
         // So replace their shortcode with our own thing.
         remove_shortcode('vrview');
@@ -68,13 +69,24 @@ class WpVrView extends CompatibilityBase
 
         //==================================================================
         // MODIFIED FROM ORIGINAL because original just used plugin_dir_url(__FILE__) from WP VR View's main file
-        $iframe_url = plugin_dir_url(dirname(dirname(PMB_MAIN_FILE)) . '/wp-vr-view/wp-vrview.php' ) . "asset/index.html?" . $video_url . $img_url . $stereo . $pimg_url;
+        $iframe_url = plugin_dir_url(dirname(dirname(PMB_MAIN_FILE))
+                . '/wp-vr-view/wp-vrview.php')
+            . "asset/index.html?"
+            . $video_url
+            . $img_url
+            . $stereo
+            . $pimg_url;
 
         // turn it into a link instead of an iframe here
         $html = '<div class="pmb-wp-vr-view-wrapper"><a href="' . $iframe_url . '">';
 
         if (isset($a['pimg']) && $a['pimg']) {
-            $html .= '<img class="wp-vr-view pmb-video-preview" style="max-width:' . $a['width'] . ';max-height:' . $a['height'] . '" src="' . esc_url($a['pimg']) . '">';
+            $html .= '<img class="wp-vr-view pmb-video-preview" style="max-width:'
+                . $a['width']
+                . ';max-height:'
+                . $a['height']
+                . '" src="'
+                . esc_url($a['pimg']) . '">';
         } else {
             $html .= '<p>' . __('360 Image Available', 'print-my-blog') . '</p>';
         }

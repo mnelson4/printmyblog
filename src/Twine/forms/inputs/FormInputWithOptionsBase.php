@@ -80,9 +80,7 @@ abstract class FormInputWithOptionsBase extends FormInputBase
             if (! $option instanceof InputOption) {
                 throw new ImproperUsageException(
                     sprintf(
-                        // phpcs:disable Generic.Files.LineLength.TooLong
                         __('A form input of type "%s" was passed in an arrya of non-options. It should be given an object of type "%s"', 'print-my-blog'),
-                        // phpcs:enable Generic.Files.LineLength.TooLong
                         get_class($this),
                         InputOption::class
                     )

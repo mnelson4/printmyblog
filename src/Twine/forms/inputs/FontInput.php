@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Twine\forms\inputs;
-
 
 use Twine\forms\helpers\InputOption;
 

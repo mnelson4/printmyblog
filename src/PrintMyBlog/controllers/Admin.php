@@ -313,8 +313,11 @@ class Admin extends BaseController
 
         if ($this->invalid_form instanceof FormSection) {
             $form = $this->invalid_form;
+            $form_url = '';
+            $method = 'GET';
+            $button_text = '';
         } else {
-            if(pmb_fs()->is_plan__premium_only('founding_members')){
+            if (pmb_fs()->is_plan__premium_only('founding_members')) {
                 $form = $this->getEmailHelpForm();
                 $form_url = admin_url(PMB_ADMIN_HELP_PAGE_PATH);
                 $method = 'POST';
@@ -383,9 +386,7 @@ class Admin extends BaseController
             $this->notification_manager->addTextNotificationForCurrentUser(
                 OneTimeNotification::TYPE_ERROR,
                 sprintf(
-                        // phpcs:disable Generic.Files.LineLength.TooLong
                     __('There was an error sending an email from your website (it was "%1$s"). Please manually send an email to %2$s, with the subject "%3$s", with the content:', 'print-my-blog'),
-                    // phpcs:enable Generic.Files.LineLength.TooLong
                     $error->get_error_message(),
                     PMB_SUPPORT_EMAIL,
                     $subject
@@ -409,46 +410,48 @@ class Admin extends BaseController
         return new FormSection([
             'subsections' => [
                     'reason' => new TextAreaInput([
-                        // phpcs:disable Generic.Files.LineLength.TooLong
                         'html_label_text' => __('Please explain what you did, what you expected, and what went wrong', 'print-my-blog'),
-                        // phpcs:enable Generic.Files.LineLength.TooLong
                         'required' => true,
                         'html_help_text' => __('Including links to screenshots is appreciated', 'print-my-blog')
                     ]),
                 'name' => new TextInput([
                     'html_label_text' => __('Your Name', 'print-my-blog'),
-                    'default' => $current_user->user_firstname ? $current_user->user_firstname . ' ' . $current_user->user_lastname :  $current_user->display_name,
-                ]),
+                    'default' => $current_user->user_firstname
+                        ? $current_user->user_firstname . ' ' . $current_user->user_lastname
+                        :  $current_user->display_name,
+                    ]),
                 'consent' => new YesNoInput([
                     'html_label_text' => __('Are you ok with us viewing your most recent generated documents?', 'print-my-blog'),
                     'default' => true,
                     'html_help_text' => __('Viewing your most recent generated documents saves a lot of time figuring out what is going wrong. We won’t share your content with anyone else.', 'print-my-blog')
-                ]),
+                    ]),
                 'debug_info' => new TextAreaInput([
                     'html_label_text' => __('This debug info will also be sent.', 'print-my-blog'),
                     'disabled' => true,
                     'default' => $this->debug_info->getDebugInfoString(),
                     'html_help_text' => __('This is mostly system information, list of active plugins, active theme, and some Print My Blog Pro info like your most recent projects.', 'print-my-blog')
-                ]),
+                    ]),
             ]
         ]);
     }
 
-    protected function getGithubHelpForm(){
+    protected function getGithubHelpForm()
+    {
         return new FormSection([
                 'subsections' => [
                         'explanatory_text' => new FormSectionHtml(
-                                '<h2>' . __('Support for your plan is offered on GitHub', 'print-my-blog') . '</h2>' .
+                            '<h2>' . __('Support for your plan is offered on GitHub', 'print-my-blog') . '</h2>' .
                             '<p>' . __('GitHub is a public forum to share your issues with the developer and other users.', 'print-my-blog') . '</p>' .
                             '<p>' . sprintf(
-                                    __('You will need a GitHub account. If prefer to use email support please %1$spurchase a license that offers email support.%2$s', 'print-my-blog'),
+                                __('You will need a GitHub account. If prefer to use email support please %1$spurchase a license that offers email support.%2$s', 'print-my-blog'),
                                 '<a href="' . esc_url(pmb_fs()->get_upgrade_url()) . '">',
                                 '</a>'
                             )
                             . '</p>'
                         ),
                         'body' => new HiddenInput([
-                                'default' => '** Please describe what you were doing, what you expected to happen, and what the problem was. ** 
+                                'default' => '** Please describe what you were doing, what you expected to happen, and what the problem was. **
+                                 
 
 ```
 ' . substr($this->debug_info->getDebugInfoString(false), 0, 5000) . '
@@ -511,7 +514,7 @@ class Admin extends BaseController
             [],
             filemtime(PMB_STYLES_DIR . 'pmb-admin.css')
         );
-        if(pmb_fs()->is_premium()){
+        if (pmb_fs()->is_premium()) {
             // Paid users don't need to be reminded what's pro and what's not
             wp_add_inline_style(
                 'pmb_admin',
@@ -606,8 +609,8 @@ class Admin extends BaseController
                             ],
 
                             'doc_attrs' => apply_filters(
-                                    '\PrintMyBlog\controllers\Admin::enqueueScripts doc_attrs',
-                                    [
+                                '\PrintMyBlog\controllers\Admin::enqueueScripts doc_attrs',
+                                [
                                         'test' => defined('PMB_TEST_LIVE') && PMB_TEST_LIVE ? true : false,
                                         'type' => 'pdf',
                                         'javascript' => true, // Javascript by DocRaptor
@@ -620,18 +623,16 @@ class Admin extends BaseController
                                             'media' => 'print',                                       // use screen
                                             'http_timeout' => 60,
                                             'http_insecure' => true,
-                    // styles
-                    // instead of print styles
+                                // styles
+                                // instead of print styles
                                             // javascript: true, // use Prince's JS, which is more error tolerant
                                         ]
                                     ]
                             ),
                             'translations' => [
-                                // phpcs:disable Generic.Files.LineLength.TooLong
                                 'error_generating' => __('There was an error preparing your content. Please visit the Print My Blog Help page.', 'print-my-blog'),
                                 'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public? Please visit the Print My Blog Help page.', 'print-my-blog')
-                                // phpcs:enable Generic.Files.LineLength.TooLong
-                            ]
+                                ]
                         ]
                     );
                     break;
@@ -876,12 +877,12 @@ class Admin extends BaseController
     {
         $generations = $this->project->getAllGenerations();
         $license_info = null;
-        if ( pmb_fs()->is__premium_only() ) {
+        if (pmb_fs()->is__premium_only()) {
             $license = pmb_fs()->_get_license();
             if ($license instanceof FS_Plugin_License) {
-                try{
+                try {
                     $license_info = $this->pmb_central->getCreditsInfo();
-                }catch(Exception $e){
+                } catch (Exception $e) {
                     $this->notification_manager->addTextNotificationForCurrentUser(
                         'warning',
                         sprintf(
@@ -891,7 +892,6 @@ class Admin extends BaseController
                     );
                     $this->notification_manager->showOneTimeNotifications();
                 }
-
             }
             $upgrade_url = pmb_fs()->get_upgrade_url();
         } else {
@@ -910,7 +910,7 @@ class Admin extends BaseController
                     ],
                     admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
                 ),
-                'suggest_review' => ! get_option(self::REVIEW_OPTION_NAME,false)
+                'suggest_review' => ! get_option(self::REVIEW_OPTION_NAME, false)
             ]
         );
     }
@@ -963,14 +963,14 @@ class Admin extends BaseController
     public function checkFormSubmission()
     {
         // Don't bother checking for form submission if the "page" parameter isn't even set.
-        if(! isset($_GET['page'])){
+        if (! isset($_GET['page'])) {
             return;
         }
         if ($_GET['page'] === PMB_ADMIN_HELP_PAGE_SLUG) {
             $this->sendHelp();
             exit;
         }
-        if($_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG) {
+        if ($_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG) {
             $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
             if ($action === self::SLUG_ACTION_ADD_NEW) {
                 $this->saveNewProject();
@@ -1025,9 +1025,7 @@ class Admin extends BaseController
         }
         $format_options['all'] = new InputOption(
             __('Both', 'print-my-blog'),
-            // phpcs:disable Generic.Files.LineLength.TooLong
             __('A project can be prepared to use both a Digital PDF and a Print-Ready PDF, but it will be more complex. (Eg the design for one format might support different features than the design for the other format.)', 'print-my-blog')
-            // phpcs:enable Generic.Files.LineLength.TooLong
         );
         $default_format = null;
         if ($this->project instanceof Project) {
@@ -1219,7 +1217,8 @@ class Admin extends BaseController
      * directly (only meta or other related data). This can help to make sure the project post's modified_date still
      * gets updated. Not needed if already calling wp_update_post() with other data.
      */
-    protected function updateProjectModifiedDate(){
+    protected function updateProjectModifiedDate()
+    {
         // update the post's modified date!
         wp_update_post([
             'ID' => $this->project->getWpPost()->ID
@@ -1261,9 +1260,7 @@ class Admin extends BaseController
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
-                // phpcs:disable Generic.Files.LineLength.TooLong
                 __('The design "%s" has been customized, and its changes will be reflected in all projects that use it.', 'print-my-blog'),
-                // phpcs:enable Generic.Files.LineLength.TooLong
                 $design->getWpPost()->post_title
             )
         );
@@ -1300,7 +1297,7 @@ class Admin extends BaseController
         );
         $this->project->getProgress()->markChooseDesignStepComplete($format->slug());
         // If they've changed the design, ask them if they want to skip it.
-        if($this->project->getProgress()->isStepComplete(ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX . $format->slug())){
+        if ($this->project->getProgress()->isStepComplete(ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX . $format->slug())) {
             $this->project->getProgress()->markCustomizeDesignStepComplete($format->slug(), false);
             $this->notification_manager->addTextNotificationForCurrentUser(
                 OneTimeNotification::TYPE_INFO,
@@ -1455,12 +1452,13 @@ class Admin extends BaseController
      * we make sure to refresh it. This is the page the user arrives at after upgrading or making a purchase, so
      * the cache often needs to be refreshed here.
      */
-    public function maybeRefreshCreditCache(){
-        if(isset($_GET['page']) && $_GET['page'] === 'print-my-blog-projects-account'){
-            if(pmb_fs()->_get_license() instanceof FS_Plugin_License){
+    public function maybeRefreshCreditCache()
+    {
+        if (isset($_GET['page']) && $_GET['page'] === 'print-my-blog-projects-account') {
+            if (pmb_fs()->_get_license() instanceof FS_Plugin_License) {
                 try {
                     $this->pmb_central->getCreditsInfo(true);
-                }catch(Exception $e){
+                } catch (Exception $e) {
                     $this->notification_manager->addTextNotificationForCurrentUser(
                         'warning',
                         sprintf(
@@ -1482,21 +1480,22 @@ class Admin extends BaseController
         $this->checkProjectEditPage();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             add_action('admin_init', [$this, 'checkFormSubmission']);
-        } elseif($_SERVER['REQUEST_METHOD'] === 'GET'){
-            add_action('admin_init',[$this,'checkSpecialLinks']);
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            add_action('admin_init', [$this,'checkSpecialLinks']);
         }
     }
 
     /**
      * Take special action on GET requests
      */
-    public function checkSpecialLinks(){
-        if(! isset($_GET['page'])){
+    public function checkSpecialLinks()
+    {
+        if (! isset($_GET['page'])) {
             return;
         }
-        if($_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG){
+        if ($_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG) {
             $action = isset($_GET['action']) ? $_GET['action'] : null;
-            if ( $action === self::SLUG_ACTION_UNINSTALL) {
+            if ($action === self::SLUG_ACTION_UNINSTALL) {
                 $this->uninstall();
                 if (current_user_can('activate_plugins')) {
                     if (! function_exists('deactivate_plugins')) {
@@ -1505,7 +1504,7 @@ class Admin extends BaseController
                     deactivate_plugins(PMB_BASENAME, true);
                 }
                 wp_safe_redirect(admin_url('plugins.php'));
-            }elseif ($action === self::SLUG_ACTION_REVIEW) {
+            } elseif ($action === self::SLUG_ACTION_REVIEW) {
                 update_option(self::REVIEW_OPTION_NAME, true);
                 wp_redirect(
                     'https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post'
@@ -1519,9 +1518,11 @@ class Admin extends BaseController
         if (!isset($_GET['page'])) {
             return;
         }
-        if ($_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG &&
+        if (
+            $_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG &&
             isset($_GET['action']) &&
-            $_GET['action'] === self::SLUG_ACTION_EDIT_PROJECT) {
+            $_GET['action'] === self::SLUG_ACTION_EDIT_PROJECT
+        ) {
             $project = $this->project_manager->getById($_GET['ID']);
             if (!$project) {
                 wp_safe_redirect(admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH));

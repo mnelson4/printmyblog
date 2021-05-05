@@ -134,9 +134,7 @@ class ConditionallyRequiredValidation extends ValidationBase
         if (count($conditions) > 1) {
             throw new ImproperUsageException(
                 sprintf(
-                    // phpcs:disable Generic.Files.LineLength.TooLong
                     __('Required Validation Strategy does not yet support multiple conditions. You should add it! The related input is %1$s', 'print-my-blog'),
-                    // phpcs:enable Generic.Files.LineLength.TooLong
                     $this->input->name()
                 )
             );
@@ -146,9 +144,7 @@ class ConditionallyRequiredValidation extends ValidationBase
             if (! $input instanceof FormInputBase) {
                 throw new ImproperUsageException(
                     sprintf(
-                        // phpcs:disable Generic.Files.LineLength.TooLong
                         __('Error encountered while setting requirement condition for input %1$s. The path %2$s does not correspond to a valid input', 'print-my-blog'),
-                        // phpcs:enable Generic.Files.LineLength.TooLong
                         $this->input->name(),
                         $input_path
                     )
@@ -159,9 +155,7 @@ class ConditionallyRequiredValidation extends ValidationBase
             if (! $input->getDisplayStrategy() instanceof SelectDisplay) {
                 throw new ImproperUsageException(
                     sprintf(
-                        // phpcs:disable Generic.Files.LineLength.TooLong
                         __('Required Validation Strategy can only depend on another input which uses the SelectDisplay, but you specified a field "%1$s" that uses display strategy "%2$s". If you need others, please add support for it! The related input is %3$s', 'print-my-blog'),
-                        // phpcs:enable Generic.Files.LineLength.TooLong
                         $input->name(),
                         get_class($input->getDisplayStrategy()),
                         $this->input->name()
@@ -192,9 +186,7 @@ class ConditionallyRequiredValidation extends ValidationBase
             if (! $input instanceof FormInputBase) {
                 throw new ImproperUsageException(
                     sprintf(
-                        // phpcs:disable Generic.Files.LineLength.TooLong
                         __('Error encountered while setting requirement condition for input %1$s. The path %2$s does not correspond to a valid input', 'print-my-blog'),
-                        // phpcs:enable Generic.Files.LineLength.TooLong
                         $this->input->name(),
                         $input_path
                     )
@@ -228,9 +220,7 @@ class ConditionallyRequiredValidation extends ValidationBase
         if (! isset($op_and_value[0], $op_and_value[1])) {
                 throw new ImproperUsageException(
                     sprintf(
-                        // phpcs:disable Generic.Files.LineLength.TooLong
                         __('Required Validation Strategy conditions array\'s value must be an array with two elements: an operator, and a value. It didn\'t. The related input is %1$s', 'print-my-blog'),
-                        // phpcs:enable Generic.Files.LineLength.TooLong
                         $this->input->name()
                     )
                 );
@@ -240,9 +230,7 @@ class ConditionallyRequiredValidation extends ValidationBase
         if ($operator !== '=') {
             throw new ImproperUsageException(
                 sprintf(
-                    // phpcs:disable Generic.Files.LineLength.TooLong
                     __('Required Validation Strategy conditions can currently only use the equals operator. If you need others, please add support for it! The related input is %1$s', 'print-my-blog'),
-                    // phpcs:enable Generic.Files.LineLength.TooLong
                     $this->input->name()
                 )
             );

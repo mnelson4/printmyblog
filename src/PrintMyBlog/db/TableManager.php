@@ -22,7 +22,7 @@ class TableManager extends \Twine\db\TableManager
     {
         $this->installTable(
             self::SECTIONS_TABLE,
-               'ID bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+            'ID bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
                 project_id bigint(20) UNSIGNED NOT NULL,
                 post_id bigint(20) UNSIGNED NOT NULL DEFAULT \'0\',
                 parent_id bigint(20) UNSIGNED NULL DEFAULT \'0\',

@@ -76,7 +76,7 @@ class Ajax extends BaseController
         add_action('wp_ajax_pmb_save_project_main', [$this, 'handleSaveProjectMain' ]);
         add_action('wp_ajax_pmb_post_search', [$this,'handlePostSearch']);
         add_action('wp_ajax_pmb_add_print_material', [$this,'addPrintMaterial']);
-        add_action('wp_ajax_pmb_reduce_credits',[$this,'reduceCredits']);
+        add_action('wp_ajax_pmb_reduce_credits', [$this,'reduceCredits']);
         add_action('wp_ajax_pmb_report_error', [$this,'reportError']);
     }
 
@@ -192,16 +192,16 @@ class Ajax extends BaseController
         if (!empty($_GET['pmb-status'])) {
             $query_params['post_status'] = $_GET['pmb-status'];
         }
-        if(!empty($_GET['taxonomies'])){
+        if (!empty($_GET['taxonomies'])) {
             $tax_query = [];
-            foreach($_GET['taxonomies'] as $taxonomy => $ids){
+            foreach ($_GET['taxonomies'] as $taxonomy => $ids) {
                 $tax_query[] = [
                         'taxonomy' => $taxonomy,
                         'field' => 'term_id',
                         'terms' => $ids
                 ];
             }
-            if(! empty($tax_query)){
+            if (! empty($tax_query)) {
                 $query_params['tax_query'] = $tax_query;
             }
         }
@@ -281,31 +281,33 @@ class Ajax extends BaseController
         exit;
     }
 
-    public function reduceCredits(){
+    public function reduceCredits()
+    {
         $updated_credit_info = $this->pmb_central->reduceCredits(pmb_fs()->_get_license()->id);
         wp_send_json_success(
-                $updated_credit_info
+            $updated_credit_info
         );
         exit;
     }
 
-    public function reportError(){
+    public function reportError()
+    {
         $project_id = (int)$_REQUEST['project_id'];
         $format = sanitize_key($_REQUEST['format']);
         $error_message = esc_html($_REQUEST['error']);
         $project = $this->project_manager->getById($project_id);
-        if(! $project){
+        if (! $project) {
             wp_send_json_error(
-                    [
+                [
                             'error' => 'Could not find project with ID ' . $project_id
                     ]
             );
             exit;
         }
         $generation = $project->getGenerationFor($format);
-        if(! $generation instanceof ProjectGeneration){
+        if (! $generation instanceof ProjectGeneration) {
             wp_send_json_error(
-                    [
+                [
                             'error' => sprintf(
                                 'Could not find project generation for project %d on format %s',
                                 $project_id,

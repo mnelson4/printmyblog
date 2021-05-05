@@ -13,5 +13,6 @@
     <!--<arg name="standard" value="PSR12"/>-->
     <rule ref="PSR12">
         <exclude name="PSR12.Properties.ConstantVisibility.NotFound"/>
+        <exclude name="Generic.Files.LineLength.TooLong"/>
     </rule>
 </ruleset>

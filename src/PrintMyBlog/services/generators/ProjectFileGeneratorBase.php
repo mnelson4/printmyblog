@@ -52,8 +52,8 @@ abstract class ProjectFileGeneratorBase
 
     public function inject(
         PostFetcher $post_fetcher,
-        DetectAndActivate $plugin_compatibility)
-    {
+        DetectAndActivate $plugin_compatibility
+    ) {
         $this->post_fetcher = $post_fetcher;
         $this->plugin_compatibility = $plugin_compatibility;
     }

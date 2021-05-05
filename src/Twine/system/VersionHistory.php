@@ -70,11 +70,12 @@ class VersionHistory
         update_option($this->version_history_option_name, wp_json_encode($previous_versions));
     }
 
-	/**
-	 * Gets the version on the current request from the PHP code
-	 * @return string
-	 */
-    public function currentVersion(){
-    	return $this->current_version;
+    /**
+     * Gets the version on the current request from the PHP code
+     * @return string
+     */
+    public function currentVersion()
+    {
+        return $this->current_version;
     }
 }

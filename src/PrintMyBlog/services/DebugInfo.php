@@ -49,11 +49,11 @@ class DebugInfo
 
         $plugins_active = $all_debug_core_info['wp-plugins-active']['fields'];
         $simplified_plugin_data = [];
-        foreach($plugins_active as $plugin_slug => $plugin_info){
+        foreach ($plugins_active as $plugin_slug => $plugin_info) {
             $version = str_replace('Version ', '', $plugin_info['value']);
-            $unnecessary_auto_updates_string_location = strpos($version,'| Auto-updates');
-            if($unnecessary_auto_updates_string_location !== false){
-                $version = substr($version,0,$unnecessary_auto_updates_string_location);
+            $unnecessary_auto_updates_string_location = strpos($version, '| Auto-updates');
+            if ($unnecessary_auto_updates_string_location !== false) {
+                $version = substr($version, 0, $unnecessary_auto_updates_string_location);
             }
             $simplified_plugin_data[$plugin_slug] = $version;
         }
@@ -129,13 +129,11 @@ class DebugInfo
                 'meta' => [],
                 'designs' => []
             ];
-            foreach($project->getDesigns() as $format => $design){
+            foreach ($project->getDesigns() as $format => $design) {
                 $project_data['designs'][$format] = $this->simplifyDesignData($design);
             }
             foreach ($project->getAllGenerations() as $generation) {
-                // phpcs:disable Generic.Files.LineLength.TooLong
                 $project_data['generations'][$generation->getFormat()->slug()] = $generation->getGeneratedIntermediaryFileUrl();
-                // phpcs:enable Generic.Files.LineLength.TooLong
             }
             $project_data['meta'] = $this->simplifyProjectMeta($this->simpifyMetadata(get_post_meta($project->getWpPost()->ID)));
             $project_datas[] = $project_data;
@@ -143,7 +141,8 @@ class DebugInfo
         return $project_datas;
     }
 
-    protected function simplifyProjectMeta($project_meta){
+    protected function simplifyProjectMeta($project_meta)
+    {
         $metas = array_diff_key(
             $project_meta,
             array_flip([
@@ -152,8 +151,7 @@ class DebugInfo
                     '_pmb_format',
                     '_pmb_progress_setup',
                     '_pmb_levels_used'
-                ]
-            )
+                ])
         );
         $starters_to_ignore = [
             '_pmb_progress_',
@@ -163,18 +161,20 @@ class DebugInfo
             '_pmb_generated_'
         ];
         $final_metas = [];
-        foreach($metas as $key => $value){
+        foreach ($metas as $key => $value) {
             $ok = true;
-            foreach($starters_to_ignore as $starter_to_ignore){
-                if(strpos(
-                    $key,
-                    $starter_to_ignore
-                ) === 0){
+            foreach ($starters_to_ignore as $starter_to_ignore) {
+                if (
+                    strpos(
+                        $key,
+                        $starter_to_ignore
+                    ) === 0
+                ) {
                     $ok = false;
                     break;
                 }
             }
-            if($ok){
+            if ($ok) {
                 $final_metas[$key] = $value;
             }
         }
@@ -209,9 +209,10 @@ class DebugInfo
      * @param $metadata
      * @return array
      */
-    protected function simpifyMetadata($metadata){
+    protected function simpifyMetadata($metadata)
+    {
         $simplified_metas = [];
-        foreach($metadata as $meta_key => $meta_values){
+        foreach ($metadata as $meta_key => $meta_values) {
             $value = reset($meta_values);
             // if it's serialized data, it'd be nice to show it as JSON instead
             $simplified_metas[$meta_key] = maybe_unserialize($value);

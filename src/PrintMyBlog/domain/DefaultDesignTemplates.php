@@ -64,18 +64,14 @@ class DefaultDesignTemplates
                                         'internal_links' => new SelectInput(
                                             [
                                                 'remove' => new InputOption(__('Remove', 'print-my-blog')),
-                                                // phpcs:disable Generic.Files.LineLength.TooLong
                                                 'parens' => new InputOption(__('Replace with page reference', 'print-my-blog')),
                                                 'footnote' => new InputOption(__('Replace with footnote', 'print-my-blog')),
-                                                // phpcs:enable Generic.Files.LineLength.TooLong
-                                            ],
+                                                ],
                                             [
                                                 'default' => pmb_fs()->is_premium() ? 'footnote' : 'parens',
                                                 'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') . pmb_pro_only(__('Footnotes and page references require Pro', 'print-my-blog')),
-                                                // phpcs:disable Generic.Files.LineLength.TooLong
                                                 'html_help_text' => __('How to display hyperlinks to content included in this project.', 'print-my-blog')
-                                                // phpcs:enable Generic.Files.LineLength.TooLong
-                                            ]
+                                                ]
                                         ),
                                         'external_links' => new SelectInput(
                                             [
@@ -87,10 +83,8 @@ class DefaultDesignTemplates
                                             [
                                                 'default' => pmb_fs()->is_premium() ? 'footnote' : 'remove',
                                                 'html_label_text' => __('External Hyperlinks', 'print-my-blog') . pmb_pro_only(__('Footnotes require Pro', 'print-my-blog')),
-                                                // phpcs:disable Generic.Files.LineLength.TooLong
                                                 'html_help_text' => __('How to display hyperlinks to content not included in this project.', 'print-my-blog')
-                                                // phpcs:enable Generic.Files.LineLength.TooLong
-                                            ]
+                                                ]
                                         )
                                     ]
                                 ])
@@ -145,7 +139,7 @@ class DefaultDesignTemplates
                                             ],
                                             [
                                                 'default' => pmb_fs()->is_premium() ? 'parens' : 'remove',
-                                                'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') .pmb_pro_best(__('Footnotes and page references require Pro', 'print-my-blog')),
+                                                'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') . pmb_pro_best(__('Footnotes and page references require Pro', 'print-my-blog')),
                                                 'html_help_text' => __(
                                                     'How to display hyperlinks to content included in this project.',
                                                     'print-my-blog'
@@ -164,9 +158,7 @@ class DefaultDesignTemplates
                                                 'default' => pmb_fs()->is_premium() ? 'footnote' : 'leave',
                                                 'html_label_text' => __('External Hyperlinks', 'print-my-blog') . pmb_pro_best(__('Footnotes require Pro', 'print-my-blog')),
                                                 'html_help_text' => __(
-                                                    // phpcs:disable Generic.Files.LineLength.TooLong
                                                     'How to display hyperlinks to content not included in this project.',
-                                                    // phpcs:enable Generic.Files.LineLength.TooLong
                                                     'print-my-blog'
                                                 )
                                             ]
@@ -203,9 +195,7 @@ class DefaultDesignTemplates
                                     'title_page_banner_color' => new ColorInput(
                                         [
                                             'html_label_text' => __('Title Page Top-Banner Color', 'print-my-blog'),
-                                            // phpcs:disable Generic.Files.LineLength.TooLong
                                             'html_help_text' => __('Image used at the top of the background on the title page.', 'print-my-blog'),
-                                            // phpcs:enable Generic.Files.LineLength.TooLong
                                             'default' => '#02a5fd'
                                         ]
                                     ),
@@ -213,9 +203,7 @@ class DefaultDesignTemplates
                                         [
                                             'html_label_text' => __('Background Color', 'print-my-blog'),
                                             'html_help_text' => __(
-                                                // phpcs:disable Generic.Files.LineLength.TooLong
                                                 'A gradient between this color and white will be used in the page backgrounds',
-                                                // phpcs:enable Generic.Files.LineLength.TooLong
                                                 'print-my-blog'
                                             ),
                                             'default' => '#82d7ff'
@@ -231,11 +219,9 @@ class DefaultDesignTemplates
                                     'background_embellishment' => new AdminFileUploaderInput(
                                         [
                                             'html_label_text' => __('Background Embellishment', 'print-my-blog'),
-                                            // phpcs:disable Generic.Files.LineLength.TooLong
                                             'html_help_text' => __('Faded image used as a full-page background on the title page, and next to the page number on numbered pages.', 'print-my-blog'),
                                             'default' => plugins_url('designs/pdf/digital/buurma/assets/logo.svg', PMB_MAIN_FILE)
-                                            // phpcs:enable Generic.Files.LineLength.TooLong
-                                        ]
+                                            ]
                                     ),
                                     'default_alignment' => $this->getDefaultAlignmentInput()
                                 ],
@@ -268,10 +254,8 @@ class DefaultDesignTemplates
                                 'cover_preamble' => new TextAreaInput(
                                     [
                                         'html_label_text' => __('Coverpage Preamble', 'print-my-blog'),
-                                        // phpcs:disable Generic.Files.LineLength.TooLong
                                         'html_help_text' => __('Explanatory text that appears at the bottom of the cover page', 'print-my-blog')
-                                        // phpcs:enable Generic.Files.LineLength.TooLong
-                                    ]
+                                        ]
                                 )
                             ]
                         ]);
@@ -300,35 +284,27 @@ class DefaultDesignTemplates
                                     [
                                         'default' => false,
                                         'html_label_text' => __('Each Post Begins on a New Page', 'print-my-blog'),
-                                        // phpcs:disable Generic.Files.LineLength.TooLong
                                         'html_help_text' => __('Whether to force posts to always start on a new page. Doing so makes the page more legible, but uses more paper.', 'print-my-blog'),
-                                        // phpcs:enable Generic.Files.LineLength.TooLong
-                                    ]
+                                        ]
                                 ),
                                 'post_header_in_columns' => new YesNoInput(
                                     [
                                         'html_label_text' => __('Show Post Header inside Columns', 'print-my-blog'),
-                                        // phpcs:disable Generic.Files.LineLength.TooLong
                                         'html_help_text' => __('Check this to make post header information, like title, date, author, etc, appear inside columns; uncheck this to have it take up the full page width', 'print-my-blog')
-                                        // phpcs:enable Generic.Files.LineLength.TooLong
-                                    ]
+                                        ]
                                 ),
                                 'dividing_line' => new YesNoInput([
                                     'html_label_text' => __('Show a Dividing Line Between Posts', 'print-my-blog'),
                                 ]),
                                 'images_full_column' => new YesNoInput([
                                     'html_label_text' => __('Full-Column Images', 'print-my-blog'),
-                                    // phpcs:disable Generic.Files.LineLength.TooLong
                                     'html_help_text' => __('Resizes images to be the full column width (except ones with the CSS class "mayer-no-resize"', 'print-my-blog')
-                                    // phpcs:enable Generic.Files.LineLength.TooLong
-                                ]),
+                                    ]),
                                 'no_extra_columns' => new YesNoInput([
                                     'html_label_text' => __('Remove Extra Columns', 'print-my-blog'),
                                     'default' => true,
-                                    // phpcs:disable Generic.Files.LineLength.TooLong
                                     'html_help_text' => __('Forces your content to only use two columns, even if the content itself was divided into more columns (eg using the "Columns" block)', 'print-my-blog')
-                                    // phpcs:enable Generic.Files.LineLength.TooLong
-                                ]),
+                                    ]),
                                 'image' => new FormSection([
                                     'subsections' => [
                                         'image_placement' => $this->getImageSnapInput()
@@ -370,10 +346,8 @@ class DefaultDesignTemplates
         if (in_array('title', $header_content)) {
             $sections['title'] = new TextInput([
                 'html_label_text' => __('Title', 'print-my-blog'),
-                // phpcs:disable Generic.Files.LineLength.TooLong
                 'html_help_text' => __('Title used inside the generated files (often the same as your project, but not necessarily.)', 'print-my-blog'),
-                // phpcs:enable Generic.Files.LineLength.TooLong
-            ]);
+                ]);
         }
         if (in_array('subtitle', $header_content)) {
             $sections['subtitle'] = new TextInput([
@@ -390,10 +364,8 @@ class DefaultDesignTemplates
             $sections['url'] = new TextInput([
                     'default' => site_url(),
                     'html_label_text' => __('Source Location', 'print-my-blog'),
-                    // phpcs:disable Generic.Files.LineLength.TooLong
                     'html_help_text' => __('Shown on the title page under the subtitle. Could be your website’s URL, or anything else you like.', 'print-my-blog')
-                    // phpcs:enable Generic.Files.LineLength.TooLong
-            ]);
+                    ]);
         }
         return new FormSection([
             'subsections' => $sections
@@ -459,10 +431,8 @@ class DefaultDesignTemplates
                         [
                             'default' => true,
                             'html_label_text' => __('Each Post Begins on a New Page', 'print-my-blog'),
-                            // phpcs:disable Generic.Files.LineLength.TooLong
                             'html_help_text' => __('Whether to force posts to always start on a new page. Doing so makes the page more legible, but uses more paper.', 'print-my-blog'),
-                            // phpcs:enable Generic.Files.LineLength.TooLong
-                        ]
+                            ]
                     ),
                     'fonts' => new FormSectionDetails([
                         'html_summary' => __('Font Settings', 'print-my-blog'),
@@ -472,9 +442,7 @@ class DefaultDesignTemplates
                                     'default' => '4em',
                                     'html_label_text' => __('Title page and Part Header Font Size', 'print-my-blog'),
                                     'html_help_text' => sprintf(
-                                    // phpcs:disable Generic.Files.LineLength.TooLong
                                         __('Font size used for the default title page’s and part’s header (all other headers’ sizes are derived from the main font size). Use any recognized %1$sCSS font-size keyword%2$s (like "large", "medium", "small") or a %3$slength in any units%2$s (eg "14pt", "50%%", or "10px").'),
-                                        // phpcs:enable Generic.Files.LineLength.TooLong
                                         '<a href="https://www.w3schools.com/cssref/pr_font_font-size.asp" target="_blank">',
                                         '</a>',
                                         '<a href="https://www.w3schools.com/cssref/css_units.asp" target="_blank">'
@@ -491,9 +459,7 @@ class DefaultDesignTemplates
                                     'default' => '10pt',
                                     'html_label_text' => __('Font Size', 'print-my-blog'),
                                     'html_help_text' => sprintf(
-                                    // phpcs:disable Generic.Files.LineLength.TooLong
                                         __('Use any recognized %1$sCSS font-size keyword%2$s (like "large", "medium", "small") or a %3$slength in any units%2$s (eg "14pt", "50%%", or "10px").'),
-                                        // phpcs:enable Generic.Files.LineLength.TooLong
                                         '<a href="https://www.w3schools.com/cssref/pr_font_font-size.asp" target="_blank">',
                                         '</a>',
                                         '<a href="https://www.w3schools.com/cssref/css_units.asp" target="_blank">'
@@ -564,7 +530,7 @@ class DefaultDesignTemplates
             __('Your theme, "%1$s", can be used in conjunction with your design. Themes are often not intended for print and can conflict with the design, but you may have content that looks broken without the theme.', 'print-my-blog'),
             $theme->name
         );
-        if(! pmb_fs()->is_plan__premium_only('business')){
+        if (! pmb_fs()->is_plan__premium_only('business')) {
             $use_theme_help_text = __('Note: this option is only supported for the business license.', 'print-my-blog') . '<br>' . $use_theme_help_text;
         }
 
@@ -584,10 +550,8 @@ class DefaultDesignTemplates
                                         ]),
                                         'custom_css' => new TextAreaInput([
                                             'html_label_text' => __('Custom CSS', 'print-my-blog'),
-                                            // phpcs:disable Generic.Files.LineLength.TooLong
                                             'html_help_text'  => __('Styles to be applied only when printing projects using this design.', 'print-my-blog')
-                                            // phpcs:enable Generic.Files.LineLength.TooLong
-                                        ])
+                                            ])
                                     ]
                                 )
                         ]
@@ -609,9 +573,7 @@ class DefaultDesignTemplates
             ],
             [
                 'html_label_text' => __('Default Image Alignment', 'print-my-blog'),
-                // phpcs:disable Generic.Files.LineLength.TooLong
                 'html_help_text' => __('Images normally default to "no alignment", which can look jumbled in printouts. Usually it’s best to automatically switch those to align to the center.', 'print-my-blog'),
-                // phpcs:enable Generic.Files.LineLength.TooLong
                 'default' => 'center'
             ]
         );
@@ -622,17 +584,13 @@ class DefaultDesignTemplates
         return new SelectInput(
             [
                 'default' => new InputOption(__('Don’t move', 'print-my-blog')),
-                // phpcs:disable Generic.Files.LineLength.TooLong
                 'snap' => new InputOption(__('Snap to the top or bottom of the page', 'print-my-blog')),
                 'snap-unless-fit' => new InputOption(__('Only snap if the image would cause a page break', 'print-my-blog'))
-                // phpcs:enable Generic.Files.LineLength.TooLong
-            ],
+                ],
             [
                 // translators: 1: "Best with Pro"
                 'html_label_text' => __('Image Placement', 'print-my-blog') . pmb_pro_only(),
-                // phpcs:disable Generic.Files.LineLength.TooLong
                 'html_help_text' => __('To reduce whitespace around images, Print My Blog can move images around in your content.', 'print-my-blog'),
-                // phpcs:enable Generic.Files.LineLength.TooLong
                 'default' => 'snap-unless-fit'
             ]
         );

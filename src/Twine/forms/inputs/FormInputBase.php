@@ -292,9 +292,7 @@ abstract class FormInputBase extends FormSectionValidatable
             throw new ImproperUsageException(
                 sprintf(
                     __(
-                        // phpcs:disable Generic.Files.LineLength.TooLong
                         "Cannot get display strategy for form input with name %s and id %s, because it has not been set in the constructor",
-                        // phpcs:enable Generic.Files.LineLength.TooLong
                         "print-my-blog"
                     ),
                     $this->htmlName(),

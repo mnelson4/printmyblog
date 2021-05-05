@@ -16,9 +16,7 @@ class DefaultDesigns
             function (DesignTemplate $design_template) {
                 return [
                     'title' => __('Classic Digital PDF', 'print-my-blog'),
-                    // phpcs:disable Generic.Files.LineLength.TooLong
                     'quick_description' => esc_html__('A simple but flexible design intended mainly for reading from screens, inspired by Print My Blog Free.', 'print-my-blog'),
-                    // phpcs:enable Generic.Files.LineLength.TooLong
                     'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
@@ -53,9 +51,7 @@ class DefaultDesigns
                 $preview_folder_url = PMB_ASSETS_URL . '/images/design_previews/pdf/print/edit/';
                 return [
                     'title' => __('Editorial Review', 'print-my-blog'),
-                    // phpcs:disable Generic.Files.LineLength.TooLong
                     'quick_description' => __('Your writing in an easy-to-review format for editors.', 'print-my-blog'),
-                    // phpcs:enable Generic.Files.LineLength.TooLong
                     'description' => pmb_get_contents($design_template->getDir() . 'descriptions/edit.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
@@ -105,9 +101,7 @@ class DefaultDesigns
             function (DesignTemplate $design_template) {
                 return [
                     'title' => __('Classic Print PDF', 'print-my-blog'),
-                    // phpcs:disable Generic.Files.LineLength.TooLong
                     'quick_description' => __('A simple but flexible design intended for printing, inspired by Print My Blog Free', 'print-my-blog'),
-                    // phpcs:enable Generic.Files.LineLength.TooLong
                     'description' => pmb_get_contents($design_template->getDir() . 'descriptions/classic.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
@@ -120,10 +114,8 @@ class DefaultDesigns
                         ],
                         [
                             'url' => $design_template->getUrl() . 'assets/preview2.jpg',
-                            // phpcs:disable Generic.Files.LineLength.TooLong
                             'desc' => __('Main matter, showing external hyperlinks automatically converted into footnotes. Page numbers are always on the bottom-outside corner, and each article’s title is shown at the top of right pages.', 'print-my-blog')
-                            // phpcs:enable Generic.Files.LineLength.TooLong
-                        ],
+                            ],
                     ],
                     'design_defaults' => [
                         'use_title' => true,
@@ -144,9 +136,7 @@ class DefaultDesigns
                 $preview_folder_url = PMB_ASSETS_URL . 'images/design_previews/pdf/print/economical/';
                 return [
                     'title' => __('Economical Print PDF', 'print-my-blog'),
-                    // phpcs:disable Generic.Files.LineLength.TooLong
                     'quick_description' => __('Compact design meant to save paper but still deliver all the content.', 'print-my-blog'),
-                    // phpcs:enable Generic.Files.LineLength.TooLong
                     'description' => pmb_get_contents($design_template->getDir() . 'descriptions/economical.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
@@ -199,9 +189,7 @@ class DefaultDesigns
                 }
                 return [
                     'title' => __('Buurma Whitepaper', 'print-my-blog'),
-                    // phpcs:disable Generic.Files.LineLength.TooLong
                     'quick_description' => __('Stylized and branded PDF designed mainly for reading from a device, great for organizations', 'print-my-blog'),
-                    // phpcs:enable Generic.Files.LineLength.TooLong
                     'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
@@ -210,16 +198,12 @@ class DefaultDesigns
                     'previews' => [
                         [
                             'url' => $design_template->getUrl() . 'assets/preview1.jpg',
-                            // phpcs:disable Generic.Files.LineLength.TooLong
                             'desc' => __('Title page, showing a stylzed upper margin for a company name, background gradient and logo, among other things.', 'print-my-blog'),
-                            // phpcs:enable Generic.Files.LineLength.TooLong
-                        ],
+                            ],
                         [
                             'url' => $design_template->getUrl() . 'assets/preview2.jpg',
-                            // phpcs:disable Generic.Files.LineLength.TooLong
                             'desc' => __('Main matter, showing working hyperlinks (which also each get an automatic footnote), and page number and logo in bottom-right corner.', 'print-my-blog')
-                            // phpcs:enable Generic.Files.LineLength.TooLong
-                        ]
+                            ]
 
                     ],
                     'design_defaults' => [
@@ -228,10 +212,8 @@ class DefaultDesigns
                         'title' => get_bloginfo('name'),
                         'byline' => $name,
                         'issue' => __('Issue 01', 'print-my-blog'),
-                        // phpcs:disable Generic.Files.LineLength.TooLong
                         'cover_preamble' => __('Text explaining the purpose of the paper and gives a brief summary of it, so folks know they’re reading the right thing.', 'print-my-blog')
-                        // phpcs:enable Generic.Files.LineLength.TooLong
-                    ]
+                        ]
                 ];
             }
         );
@@ -241,9 +223,7 @@ class DefaultDesigns
             function (DesignTemplate $design_template) {
                 return [
                     'title' => __('Mayer Magazine', 'print-my-blog'),
-                    // phpcs:disable Generic.Files.LineLength.TooLong
                     'quick_description' => __('Digital 2-column magazine inspired by the defunct Zinepal', 'print-my-blog'),
-                    // phpcs:enable Generic.Files.LineLength.TooLong
                     'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
