@@ -9,44 +9,43 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://www.paypal.com/paypalme2/cmljnelson/20
 
-Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
+Offline publishing for you, your site visitors, and the world outside WordPress.
 
 == Description ==
 
-**Make printing your blog easy and impressive. For you & your visitors. One post or thousands.**
+**Offline publishing for you, site visitors, and the world outside WordPress.**
 
-Print My Blog lets you easily print your entire blog to paper, PDF, or eBook. You can also automatically add print buttons to help your visitors print your blog.
+Print My Blog makes WordPress content useful outside of your website, like in print, PDFS, and other formats. It has 3 main features:
 
-Why would I want to print my blog?
+1. Quick Print: print thousands of posts in a few clicks
+2. Print Buttons: let site visitors print individual posts
+3. Pro Print: make professional-quality books and documents
+
+Each of which takes your WordPress content and optimizes it for print, PDF, and eBook by:
+* removing ink guzzlers like site logo, sidebars and footer
+* avoiding page breaks inside images, between images and captions, and even right after headers
+* allowing you to use other plugins in your printed output
+
+Read more about each...
+
+[](http://coderisk.com/wp/plugin/print-my-blog/RIPS-Bs3Z7ec5hQ)
+= Quick Print =
+
+Quick Print lets you easily print your entire blog to paper, PDF, or eBook.
 
 * **Print your blog** to read offline.
 * **Create a paper backup** (book or printout) to read when your blog is taken offline.
 * **Create a PDF, ePub, or MOBI file** as a human-readable, portable backup. Send it to friends, store it in the cloud or a hard drive, or even archive it with a historical organization.
 * **Copy your entire Blog** for quick pasting into another program like Microsoft Word or Google Docs
 
-Why would visitors want to print my blog?
-
-* **Share** your content with friends offline
-* **Save** it for reading later
-* **Improve long reads** by converting a portion of your blog to eBook or PDF
-
-[](http://coderisk.com/wp/plugin/print-my-blog/RIPS-Bs3Z7ec5hQ)
-
-**Give your story life outside your blog!**
-
 https://youtu.be/shOjx-Ijung
 
-https://www.youtube.com/watch?v=rvSo9NCOIX0
+**Quick Print Features**
 
-= Features =
-
-* loads all your blog’s posts into a single web page so you can print them from your web browser (to paper, PDF, ePub, or anything your web browser supports) or copy-and-paste them into another program (although the other program likely won’t format it as nicely)
+* Loads all your blog’s posts into a single web page so you can print them from your web browser (to paper, PDF, ePub, or anything your web browser supports) or copy-and-paste them into another program (although the other program likely won’t format it as nicely)
 * supports printing thousands of blog posts in one click (the record is over 3000 posts)
 * prints posts and pages
-* does not print ink-guzzlers like site logo, sidebar widgets, or footer
-* avoids page breaks inside images, between images and captions, and even right after headers; generally makes the content print-ready
 * uses your theme’s and plugins’ styles (so Gutenberg and page builders are supported)
-* growing support for plugin and theme shortcodes and Gutenberg blocks
 * print your entire blog, or filter by author, date, status (eg draft, pending, private, password-protected, trashed, etc), category, and tags
 * optionally prints comments
 * optionally places each post on a new page
@@ -58,25 +57,84 @@ https://www.youtube.com/watch?v=rvSo9NCOIX0
 * order posts by date, or pages by the "order" attribute
 * place the “Print My Blog” Gutenberg block on a page and allow site visitors to print your blog too
 * no watermark in print-out, and attribution optional,
-* [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation) compliant (no data is collected about your visitors)
+* [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation) compliant (no data is collected about you or your visitors)
 * free, open-source software, so you can use it for whatever you like without fear of changing terms of use,
 customize it to fit your needs (although we'd curious to hear what you've done with it), and even redistribute it. There is no lengthy legal document describing how you're giving up your rights by using this software!
 
-Want more? [Tell us what matters to you on GitHub](https://github.com/mnelson4/printmyblog/issues).
+= Print Buttons =
+You can also automatically add print buttons to help your visitors print your blog.
 
-= Example Use-Cases =
+* **Share** your content with friends offline
+* **Save** it for reading later
+* **Improve long reads** by converting a portion of your blog to eBook or PDF
 
-**Time to prune your website’s content?** You can print it, annotate and sort through a physical stack of paper. Alternatively, scrape content from your WordPress blog, then copy and paste it into a Word document or Google Doc for tweaking.
+https://www.youtube.com/watch?v=rvSo9NCOIX0
 
-**Want a share a post before it’s posted?** Send a draft PDF or printout to someone for review.
+**Print Button Features**
 
-**Disconnecting offline for a bit?** Print your blog to paper, or even an ePub file to read from your Kindle or phone.
+* prints individual posts and/or pages just like Quick Print (eg omits the theme's header, sidebars, and footer, etc.)
+* display on all posts and/or pages, or specific ones using the shortcode `[pmb_print_buttons]`
+* enable buttons for print, PDF, and/or eBook
+* customize print output settings for each (using the same print settings from Quick Print)
+* place buttons above or below content, or somewhere in-between using the shortcode `[pmb_print_buttons]`
+* customize print button text (eg "Print", "Imprimir", or just a print emoji like 🖨)
+* buttons use theme's design
 
-**Shutting down your site?** In addition to making a regular backup (which can only be read by recreating your entire site, which may be difficult as the software it requires gets more dated), make a PDF backup of it.
+= Pro Print =
+Replace Google Docs and Microsoft Word with WordPress! Turn existing posts, pages, and custom post types —or write all new print materials— into professional-looking documents that are ready to share with customers and the world.
+Use your browser to print Pro Print projects for free, but some features (like automatic page references, footnotes, and full control of page margins) require printing using our Pro Print Service for a subscription fee.
 
-**Wonder what will happen to your blog’s stories after your gone?** Your blog might not be online forever, but you can use Print My Blog to distribute readable copies of it to those you care about.
+Example uses:
+* **white paper**. Share an in-depth analysis of a topic on your website and in print
+* **printed version of entire website or blog**. Print it all, except ink guzzlers like site heading, sidebars, footers and pop-ups. Use your own printer or send to a printing service lulu.com
+* **book from select content**. Add a title page, introduction, table of contents, and pick existing content from your site to make a book. Sell it on Amazon KDP. Like that, you're an author!
+* **new book from scratch**. Write new print-only materials that never appear on your website. Leverage WordPress' great editors and other plugins.
+* **lead magnets**. Compile content on a subject into a PDF and grant access after users signup for your email list
+* **members-only content**. Combine with Restrict Content Pro or other plugins to only allow access to select downloadable PDFs of your content
+* **printed course materials**. Create a course using an LMS (learning management system) plugin, and use Print My Blog for learners to print
+* **event brochure**. Let event attendees print a useful copy of your event's details to take with them
+* **printed user manual**. And digital user manual on the website
+* **product brochure**. Use WooCommerce or other WordPress e-commerce plugins to make content accessible to those who would rather not browse online
+* **monthly magazine or newspaper**. Reuse the same design and blog post content to create a digital or print magazine to send to your email subscribers.
+* **research paper**. Put your research on your website and print it with a consistent design
+* **restaurant menu**. Optimized for display on your website, and to look great in print.
 
-Check out some of the reviews to see pretty exciting uses for Print My Blog.
+**Pro Print Features**
+* saveable projects
+* create digital and print-ready PDFs
+* select posts, pages, print materials (posts intended only for use in Pro Print) and most custom post types (eg products from WooCommerce)
+* search and filter for posts based on post type, status, categories, tags, custom taxonomies, author, and publish date
+* drag-and-drop reordering of content (and add new print materials on-the-fly)
+* organize posts into parts
+* add front and back matter (usually numbered with roman numerals with Pro Print Service)
+* select from a variety of pre-built designs (similar to WordPress Themes, but for Pro Print)
+* customize designs (each has different settings and can have custom CSS) and can be saved for future projects
+* Theme Designers will feel at home creating a custom design using HTML, CSS, and even Javascript
+* better integration with plugins than Quick Print (especially those using Javascript)
+* save project metadata (like title, extra cover page content, categories etc)
+* automatic table of contents (with page references using Pro Print Service)
+* automatically replace hyperlinks to included content with page references (Pro Print Service only)
+* automatically replace hyperlinks to external content with footnotes (Pro Print Service only)
+* automatically move images to avoid spanning a pagebreak and unsightly whitespace (Pro Print Service only)
+* choose article templates (eg "Content Only" or "Centered Content")
+* choose fonts, font sizes, page sizes and lots more
+* optionally apply your active theme's CSS (this is optional and because themes usually aren't designed for print, support for this requires payment)
+
+Some designs have features like:
+* roman numerals for front matter
+* page numbers always in bottom-right corner
+* page numbers appearing in outside corners
+* running titles (an article's title appears in the top margin on subsequent pages)
+* background colors, even with gradients and choosable logos
+* two-column layout
+
+Read more about Print My Blog Pro Print in our [extensive user guide](https://printmy.blog/user-guide/).
+
+Ready to purchase the Pro Print Service? Here's the [pricing page](https://printmy.blog/pricing/), but you can also just try the free version and then make the purchase using the plugin from Print My Blog's Pricing page.
+
+**Give your story life outside your blog!**
+
+Want more? [Tell us what matters to you on GitHub](https://github.com/mnelson4/printmyblog/issues). Thanks to a revenue stream through optional payments, this is actively supported and improved.
 
 = Our Mission =
 
@@ -87,14 +145,10 @@ Your website might not be around forever, nor might WordPress. But by printing i
 
 If this doesn't meet your needs, there are good paid and free alternatives.
 
-**Alternatives for printing your entire blog**
-
-[printmy.blog](https://printmy.blog/now) we run a hosted version of this same plugin, so you can print your blog without even installing this. Especially useful for WordPress**.com** users, or those who can't install the plugin on their site.
-(Its free, but won't use your blog's styles).
-[MPL - Publisher](https://wordpress.org/plugins/mpl-publisher/) is another free eBook creator / PDF converter plugin you can use to self-publish a book. To be honest probably the best alternative right now.
+**Alternatives to Quick Print**
+[printmy.blog](https://printmy.blog/now) we run a hosted version of this same plugin, so you can print your blog without even installing this. Especially useful for WordPress**.com** users, or those who can't install the plugin on their site. (Its free like Quick Print, but won't use your blog's styles).
 [Anthologize](https://wordpress.org/plugins/anthologize/) is another great plugin for customizing your blog's content before exporting to an e-book format. Also free.
 [bloxp](http://www.bloxp.com/) converts your blog into an e-book with any type of blog (not just WordPress). Fewer, but different, options. Supported by donations.
-[PressBooks](https://pressbooks.com/) is a good eBook maker. Begin creating or import content for free, and can pay to export to PDF and other formats.
 [Blog To HTML](https://wordpress.org/plugins/blog-to-html/) is actually very similar to Print My Blog. It allows you to export your blog to HTML for eBook creation.
 [blogbooker](https://blogbooker.com/) prints a book, or creates a PDF, from your blog using their pre-made styles. Paid service.
 [blog2print](https://www.blog2print.com/) ditto, but temporarily requests your username and password. Paid service.
@@ -105,6 +159,10 @@ If this doesn't meet your needs, there are good paid and free alternatives.
 [WP-Print](https://wordpress.org/plugins/wp-print/) printouts quite customizable. Requires editing theme files. Does not use theme’s styles.
 [Print-o-Matic](https://wordpress.org/plugins/print-o-matic/) add print buttons with a shortcode. Customizable and can work with theme’s and plugin’s styles.
 
+**Alternatives to Pro Print**
+[MPL - Publisher](https://wordpress.org/plugins/mpl-publisher/) is another free eBook creator / PDF converter plugin you can use to self-publish a book. To be honest probably the best alternative right now. There's both free and paid versions.
+[PressBooks](https://pressbooks.com/) is a good paid, hosted alternative. Begin creating or import content for free, and can pay to export to PDF and other formats.
+[Designrr](https://designrr.io/) is great for creating short documents, but is a fully paid option.
 
 = Contributing =
 
@@ -114,16 +172,16 @@ If you find it useful, please:
 * [translate it into your language using WordPress' GlotPress]((https://translate.wordpress.org/projects/wp-plugins/print-my-blog))
 * report bugs and suggest features on [GitHub](https://github.com/mnelson4/printmyblog) or [WordPress Support Forum]((https://wordpress.org/support/plugin/print-my-blog))
 
-Best Wishes Preserving Your Blog!
+Best Wishes Publishing for Print with WordPress!
 
 == Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/print-my-blog` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
 
-**To Print Your Blog**
+**To Print Your Blog using Quick Print**
 
-1. Under the "Print My Blog" menu item, click "Print Now."
+1. Under the "Print My Blog" menu item, click "Quick Print."
 1. Select the format you want, and click "Prepare Print Page."
 1. When you see the "Print" button appear, click it. Your blog will be printed from your browser.
 
@@ -132,6 +190,11 @@ Best Wishes Preserving Your Blog!
 1. Under the "Print My Blog" menu item, click "Settings."
 1. Beside "Show print buttons on:", check "Posts" and/or "Pages"
 1. Click "Save Settings"
+
+**To Print with Pro Print**
+
+Under "Print My Blog", click "Pro Print"
+Follow the instructions presented, or refer to our [user guide](https://printmy.blog/user-guide/).
 
 **To Add a Print Form for Visitors**
 
@@ -142,7 +205,9 @@ Best Wishes Preserving Your Blog!
 
 == Frequently Asked Questions ==
 
-= How do I create a PDF using Print My Blog? =
+= How do I create a PDF using Quick Print? =
+*Use Pro Print and the Pro Print Service. However, your browser can still make pretty good PDFs for free.*
+
 This plugin just puts the content onto a single web page so your browser can print it or create a PDF from it. Because your browser is what creates the PDF, it depends on the browser. Check out the instructions that apply to you:
 
 Google Chrome
@@ -155,7 +220,11 @@ https://youtu.be/ekwg2a1FPV0
 
 Note: images may be missing from very large PDFs. See the FAQ "My PDFs are missing images" below for help.
 
+If you use Pro Print, you can download the PDF using our print service.
+
 = How do I remove the headers and footers from printouts? =
+*One option is to upgrade for the Pro Print service, which adds more professional-looking content to the margins (like just page numbers, running headers, and logos).*
+
 You probably don't want the site's title, date, and URL appearing in printouts. Here is how to remove it for various browsers:
 
 Google Chrome (for paper and PDF)
@@ -179,6 +248,8 @@ Note: if your printout has many images, dotEpub warns you it will replace them w
 
 Once the eBook has been generated, you can read it from your computer (here's instructions on how to [read ePubs](https://www.wikihow.com/Open-EPUB-Files) and [MOBI files](https://www.howtogeek.com/360419/what-is-a-mobi-file/)), or a phone or tablet.
 
+*Pro Print for ePub files is still in the works.*
+
 = Some images aren't appearing =
 
 Print My Blog can work too fast for some webservers, meaning the webservers refuse to load all the content, most noticeably some images.
@@ -187,10 +258,13 @@ down to show Troubleshooting options, and increase "Post Rendering Wait-Time" (e
 value you need to in order to get all the images to load).
 
 = My PDFs are missing images =
+*This is usually a problem with browsers, which our Pro Print service, so far, hasn't experienced. So you may want to use Pro Print with the Pro Print Service.*
+
 If your print-page has hundreds of images, browsers may generate PDFs that are missing images at the end.
 To fix this, just retry generate the PDF. Each time the browser will fetch more images. Continue re-generating the PDF until the images at the end are included.
 
 = The Print Page says "There seems to be an error initializing...", or is stuck on "Loading Content", or I can't filter by categories or terms from the print setup page=
+*This isn't a problem for Pro Print (even when printing using your browser for free.) If you'd rather use Quick Print, keep reading...*
 
 A plugin has probably disabled the WP REST API, which Print My Blog uses for loading data.
 
@@ -225,6 +299,9 @@ https://www.youtube.com/watch?v=IMBxCp7AVPE&feature=youtu.be
 [Add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-print-only". See the above question for more details.
 
 = How do I show or hide background colors in the printout? =
+* In Pro Print, the background colors are dictated by your project's design, which might be easily customizable. Go to your project's "Customize Design" step and see what settings are available. You can also switch to a different design on the "Choose Design" step, or add some custom CSS to your design (`body{background-color:black;}`).*
+
+If you're using Quick Print, the background colors are controlled by your WordPress theme and the browser.
 
 Your theme may use different styles when printed, including setting the background to white in order to conserve ink.
 
@@ -272,12 +349,13 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 == Screenshots ==
 
 1. Print My Blog removes junk that doesn’t belong in a printout— like ink-guzzling logos, menus, search-bars, sidebars, footer widgets, etc.
-2. Print Setup page, show basic options. You can setup your entire blog for printing within a few seconds.
-3. Or you can use the more advanced Post Selection options to only include specific posts...
-4. ...and customize what content gets included and how its formatted.
-5. Optionally add print buttons to your posts for use by site visitors.
-6. Setting up the print buttons is really simple.
-7. Add the Print My Blog block to add a form visitors can use to select what and how to print your blog.
+2. Quick Print Setup page. Start printing right away, or customize which posts to print and how to print them.
+3. Print Button settings page. Select whether to show on posts or pages and save. Or customize the buttons' and printout appearance.
+4. Print Buttons on a post. Notice how much clutter is removed from the printout!
+5. Pro Print project organizer. Search for content, drag-and-drop it into your project, organize in front matter, back matter, and parts.
+6. Pro Print print-ready PDF table of contents. Notice the page references and how the content is grouped into 3 parts.
+7. Pro Print print-ready PDF page spread. Notice the running head of the article title (yellow), the graphs generated via a plugin using Javascript (green), the external hyperlinks converted to footnotes (blue), and the page numbers are on the outside of each page (pink).
+8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
 = 3.1.2 May 4, 2021 =

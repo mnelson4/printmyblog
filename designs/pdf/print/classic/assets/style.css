@@ -101,6 +101,9 @@ Ask PDF viewers to display pages side-by-side by default.
         color:black;
         text-decoration:none;
     }
+    .blocks-gallery-grid .blocks-gallery-image figcaption a, .blocks-gallery-grid .blocks-gallery-item figcaption a, .wp-block-gallery .blocks-gallery-image figcaption a, .wp-block-gallery .blocks-gallery-item figcaption a{
+        color:white;
+    }
 
     /* Title Page styles */
     .pmb-posts-header{

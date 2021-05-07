@@ -39,10 +39,10 @@ class DefaultPersistentNotices
                 '<p><a class="button" href="'
                 . esc_attr(admin_url(PMB_ADMIN_PAGE_PATH))
                 . '">'
-                . esc_html__('Switch to Free Quick Print', 'print-my-blog')
+                . esc_html__('Switch to Quick Print', 'print-my-blog')
                 . '</a></p><p>'
                 . sprintf(
-                    __('Free Quick Print won‘t cost you anything and will help you print thousands of posts or pages at once. It just doesn‘t have quite as many other features. %1$sSee full feature comparison.%2$s', 'print-my-blog'),
+                    __('Quick Print won‘t cost you anything and will help you print thousands of posts or pages at once. It just doesn‘t have quite as many other features. %1$sSee full feature comparison.%2$s', 'print-my-blog'),
                     '<a href="https://printmy.blog/free-vs-pro/" target="_blank">',
                     '</a>'
                 )
@@ -61,7 +61,7 @@ class DefaultPersistentNotices
                 'pmb_choose_design',
                 __('Project Designs are like WordPress Themes', 'print-my-blog'),
                 '<p>' . __('Each has a different look and options that can be customized.', 'print-my-blog') . '</p>'
-                . '<p>' . __('The "Classic" design is the most similar Print My Blog’s Free Quick Print, so it’s a good default choice.', 'print-my-blog') . '</p>'
+                . '<p>' . __('The "Classic" design is the most similar Print My Blog’s Quick Print, so it’s a good default choice.', 'print-my-blog') . '</p>'
                 . '<p>' . __('Click on the preview image for more details, and feel free to come back to this page later if you want to try a different design.', 'print-my-blog') . '</p>'
                 . '<p><a href="https://printmy.blog/user-guide/pro/getting-started/4-choose-a-design/" target="_blank">'
                 . __('Read the User Guide', 'print-my-blog')

@@ -9,7 +9,7 @@ use PrintMyBlog\services\display\FormInputs;
 pmb_render_template('partials/free_header.php');
 ?>
 <div class="wrap nosubsub">
-<h1><?php esc_html_e('Print My Blog - Free Quick Print','print-my-blog' );?></h1>
+<h1><?php esc_html_e('Print My Blog - Quick Print','print-my-blog' );?></h1>
     <p><?php esc_html_e('Configure how you’d like the blog to be printed, or just use our recommended defaults.', 'print-my-blog'); ?></p>
     <form action="<?php echo site_url();?>" method="get">
         <?php if(PMB_REST_PROXY_EXISTS){?>

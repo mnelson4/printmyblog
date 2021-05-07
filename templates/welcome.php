@@ -8,7 +8,7 @@
                 <p>
                     <a class="button button-primary" href="<?php echo  admin_url( PMB_ADMIN_PAGE_PATH );?>">
                         <?php
-						esc_html_e( 'Use Free Quick Print', 'print-my-blog' );
+						esc_html_e( 'Use Quick Print', 'print-my-blog' );
                         ?>
                     </a>
                 </p>
