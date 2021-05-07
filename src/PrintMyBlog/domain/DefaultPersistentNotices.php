@@ -19,31 +19,32 @@ class DefaultPersistentNotices
 
             new Notice(
                 'pmb_pro_notice',
-                __('You are using Print My Blog Free. Do you want to try Pro?', 'print-my-blog'),
-                '<p><a class="button button-primary" href="'
-                . esc_attr(admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH))
-                . '">'
-                . esc_html__('Switch to the Pro Demo', 'print-my-blog')
-                . '</a></p><p>'
+                __('About Quick Print', 'print-my-blog'),
+                '<p>'
                 . sprintf(
-                    __('Try all the pro features (table of contents, project organizer, custom post types) without signing up or installing anything. The files will just contain a watermark until purchase. %1$sSee full feature comparison.%2$s'),
-                    '<a href="https://printmy.blog/free-vs-pro/" target="_blank">',
-                    '</a>'
+                    __('This is the quick-and-easy option, best for making printouts for your own records. For something more professional and full-featured, use %1$sPro Print%2$s. It has free and paid options. %3$sSee full feature comparison.%2$s'),
+                    '<a href="'
+                    . esc_attr(admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH))
+                    . '">',
+                    '</a>',
+                    '<a href="https://printmy.blog/free-vs-pro/" target="_blank">'
                 )
                 . '</p>',
                 $this->getOptionsForScreen('print-my-blog_page_print-my-blog-now')
             ),
             new Notice(
                 'pmb_free_notice',
-                __('You are using the Pro Demo. Did you want the free option?', 'print-my-blog'),
-                '<p><a class="button" href="'
-                . esc_attr(admin_url(PMB_ADMIN_PAGE_PATH))
-                . '">'
-                . esc_html__('Switch to Quick Print', 'print-my-blog')
-                . '</a></p><p>'
+                __('About Pro Print', 'print-my-blog'),
+                '<p>'
                 . sprintf(
-                    __('Quick Print won‘t cost you anything and will help you print thousands of posts or pages at once. It just doesn‘t have quite as many other features. %1$sSee full feature comparison.%2$s', 'print-my-blog'),
+                    __('Pro Print is the best way to make professional-quality documents. You will be able to print them for free using your browser, or upgrade to use Print My Blog Pro\'s full features. %1$sSee full feature comparison.%2$s', 'print-my-blog'),
                     '<a href="https://printmy.blog/free-vs-pro/" target="_blank">',
+                    '</a>'
+                )
+                . '</p><p>'
+                . sprintf(
+                    __('If you just want something quick, use %1$sQuick Print%2$s instead.', 'print-my-blog'),
+                    '<a href="' . esc_attr(admin_url(PMB_ADMIN_PAGE_PATH)) . '">',
                     '</a>'
                 )
                 . '</p>',
