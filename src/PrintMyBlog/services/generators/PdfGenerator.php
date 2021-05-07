@@ -72,7 +72,7 @@ class PdfGenerator extends ProjectFileGeneratorBase
                     'endpoint' => $this->getPmbCentral()->getCentralUrl(),
                     'license_id' => $license instanceof FS_Plugin_License ? $license->id : '',
                     'install_id' => $site instanceof FS_Site ? $site->id : '',
-                    'authorization_header' => $this->getPmbCentral()->getSiteAuthorizationHeader(),
+                    'authorization_header' => $site instanceof FS_Site ? $this->getPmbCentral()->getSiteAuthorizationHeader() : '',
                 ],
                 'ajaxurl' => admin_url('admin-ajax.php'),
                 'project_id' => $this->project->getWpPost()->ID,

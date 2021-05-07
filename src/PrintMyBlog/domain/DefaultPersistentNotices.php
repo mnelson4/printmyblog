@@ -51,10 +51,10 @@ class DefaultPersistentNotices
                 array_merge(
                     $this->getOptionsForScreen('toplevel_page_print-my-blog-projects'),
                     [
-                    //                        'query_args' => [
-                    //                            'subaction' => null,
-                    //                            'action' => null
-                    //                        ]
+                                            'query_args' => [
+                                                'subaction' => null,
+                                                'action' => null
+                                            ]
                     ]
                 )
             ),
@@ -112,20 +112,15 @@ class DefaultPersistentNotices
             ),
             new Notice(
                 'pmb_generate',
-                __('Preview and Generate Your File', 'print-my-blog'),
-                '<p>' . sprintf(
-                    __('Your project is ready to be generated! Clicking "Download Preview" will %1$ssend your project data to printmy.blog and docraptor.com%2$s for converting into a watermarked PDF. ', 'print-my-blog'),
-                    '<a href="https://printmy.blog/user-guide/getting-started/privacy-and-pmb-pro/" target="_blank">',
-                    '</a>'
-                ) .
+                __('Generate and View Your File', 'print-my-blog'),
+                '<p>' .
+                    __('Your project is ready to be generated! Clicking "Generate" will compile your content into a document. Then click "view".', 'print-my-blog') .
                 '</p>'
                 . '<p>'
                 . sprintf(
-                    __('Read the User Guide on %1$show your data is secured%2$s, %3$spreviewing%2$s, %4$supdating%2$s, %5$sgenerating the pro file%2$s, and %6$sgetting help%2$s.', 'print-my-blog'),
-                    '<a href="https://printmy.blog/user-guide/getting-started/privacy-and-pmb-pro/" target="_blank">',
-                    '</a>',
-                    '<a href="https://printmy.blog/user-guide/pro/getting-started/8-generate-a-preview-file/" target="_blank">',
+                    __('Read the User Guide on %1$supdating%2$s, %3$sgenerating the pro file%2$s, and %4$sgetting help%2$s.', 'print-my-blog'),
                     '<a href="https://printmy.blog/user-guide/pro/getting-started/9-update-the-project/" target="_blank">',
+                    '</a>',
                     '<a href="https://printmy.blog/user-guide/pro/getting-started/10-generate-the-paid-pdf/" target="_blank">',
                     '<a href="https://printmy.blog/user-guide/pro/getting-started/11-getting-help/" target="_blank">'
                 )

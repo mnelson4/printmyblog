@@ -605,7 +605,7 @@ class Admin extends BaseController
                                 'endpoint' => $this->pmb_central->getCentralUrl(),
                                 'license_id' => $license instanceof FS_Plugin_License ? $license->id : '',
                                 'install_id' => $site instanceof FS_Site ? $site->id : '',
-                                'authorization_header' => $this->pmb_central->getSiteAuthorizationHeader(),
+                                'authorization_header' =>  $site instanceof FS_Site ? $this->pmb_central->getSiteAuthorizationHeader() : '',
                             ],
 
                             'doc_attrs' => apply_filters(

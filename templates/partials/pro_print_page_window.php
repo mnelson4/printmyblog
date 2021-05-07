@@ -13,7 +13,7 @@
                     <?php esc_html_e('Back', 'print-my-blog'); ?>
                 </a>
             </div>
-            <div class="pmb-pro-window-title"><h1><?php esc_html_e('Print My Blog Pro', 'print-my-blog');?></h1></div>
+            <div class="pmb-pro-window-title"><h1><?php esc_html_e('Print My Blog — Pro Print', 'print-my-blog');?></h1></div>
             <div class="pmb-pro-window-topbar-right">
                 <a class="pmb-pro-window-button" href="<?php echo esc_url(admin_url(PMB_ADMIN_HELP_PAGE_PATH));?>" title="Get Help">
                     <span class="pmb-spinner-container"><span class="dashicons
@@ -28,26 +28,20 @@
                     <a class="pmb-pro-window-button" onclick="window.print()">
                         <?php _e('Print with Browser', 'print-my-blog'); ?>
                     </a>
-                    <p><?php esc_html_e('Totally free, but limited to features supported by your browser.', 'print-my-blog');?></p>
+                    <p><?php esc_html_e('Limited to features supported by your browser.', 'print-my-blog');?></p>
                 </div>
                 <div class="pmb-print-option pmb-big-option">
+                    <h2><?php esc_html_e('Pro Print Service', 'print-my-blog');?></h2>
                     <?php if(! is_array($license_info) ){ ?>
-                        <h2><?php esc_html_e('Pro Demo', 'print-my-blog');?></h2>
+
                         <button class="pmb-pro-window-button pmb-download-test">
                             <?php _e('Download Test PDF', 'print-my-blog'); ?>
                         </button>
                         <a class="pmb-pro-window-button" href="<?php echo esc_url(pmb_fs()->get_upgrade_url());?>" >
                             <?php _e('Purchase Subscription', 'print-my-blog'); ?>
                         </a>
-                        <p><?php esc_html_e('Supports Pro features like:', 'print-my-blog');?></p>
-                        <ul>
-                            <li><?php esc_html_e('Table of contents with page numbers', 'print-my-blog');?></li>
-                            <li><?php esc_html_e('Customizing page headers and footers', 'print-my-blog');?></li>
-                            <li><?php esc_html_e('Convert hyperlinks to page references and footnotes', 'print-my-blog');?></li>
-                            <li><?php esc_html_e('Intelligent realigning of images', 'print-my-blog');?></li>
-                        </ul>
+                        <p><a href="https://printmy.blog/free-vs-pro/" target="_blank"><?php esc_html_e('Feature Comparison List', 'print-my-blog');?></a></p>
                     <?php } else {?>
-                    <h2><?php esc_html_e('Pro', 'print-my-blog');?></h2>
                     <button class="pmb-pro-window-button pmb-download-test">
                         <?php _e('Download Test PDF', 'print-my-blog'); ?>
                     </button>
@@ -75,6 +69,8 @@
                             </div>
                         <?php }
                     } ?>
+                    <p class="pmb-help"><a href="https://printmy.blog/user-guide/getting-started/privacy-and-pmb-pro/" target="_blank"><?php
+                            _e('Read how your data handled', 'print-my-blog');?></a></p>
                 </div>
             </div>
         </div>
