@@ -1,5 +1,5 @@
 <div class="wrap nosubsub pmb-welcome">
-    <h1>🎉<?php esc_html_e( 'Let’s make it easy to print your blog!', 'print-my-blog' ); ?>🎉</h1>
+    <h1>🎉<?php esc_html_e( 'Welcome to Print My Blog 3!', 'print-my-blog' ); ?>🎉</h1>
     <p class="pmb-middle-important-text"><?php esc_html_e( 'What would you like to do?', 'print-my-blog' ); ?></p>
     <div class="pmb-content-boxes">
         <div class="pmb-content-box-wrap">
@@ -39,14 +39,15 @@
                 <h2><?php esc_html_e( 'Make Professional Books and Documents', 'print-my-blog' ); ?></h2>
                 <p>
                     <a class="button button-primary" href="<?php echo admin_url( PMB_ADMIN_PROJECTS_PAGE_PATH );?>">
-                    <?php esc_html_e( 'Try Print My Blog Pro', 'print-my-blog' );
+                    <?php esc_html_e( 'Use Pro Print', 'print-my-blog' );
                         ?>
                     </a>
-                    <span class="description"><?php esc_html_e('No installation required', 'print-my-blog');?></span>
+                    <span class="description"><?php esc_html_e('Free, with Paid Options', 'print-my-blog');?></span>
                 </p>
                 <ul class="pmb-ul">
-                    <li><?php esc_html_e( 'Automatic Table of Contents', 'print-my-blog' ); ?></li>
+                    <li><?php esc_html_e( 'Drag-and-drop content into projects', 'print-my-blog' ); ?></li>
                     <li><?php esc_html_e( 'Include any post types, in any order', 'print-my-blog' ); ?></li>
+                    <li><?php esc_html_e( 'Automatic Table of Contents', 'print-my-blog' ); ?></li>
                     <li><?php esc_html_e( 'Choose and Customize Many Designs, or code your own', 'print-my-blog' ); ?></li>
                     <li><?php esc_html_e( 'Automatically convert hyperlinks to page references and footnotes', 'print-my-blog' ); ?></li>
                 </ul>
