@@ -90,7 +90,7 @@ pmb_render_template('partials/free_header.php');
             <table class="form-table">
                 <tbody>
                 <tr>
-                    <th scope="row"><?php esc_html_e('Post Selection','print-my-blog' );?></th>
+                    <th scope="row"><?php esc_html_e('Post Selection','print-my-blog' ); pmb_pro_better_e(__('Support for custom post types, and projects combining posts with pages, is a feature of Pro Print', 'print-my-blog'));?></th>
                     <td>
                         <label><input class="pmb-post-type" type="radio" name="post-type" value="post" checked="checked"><?php esc_html_e('Posts', 'print-my-blog');?></label>
                         <br>
@@ -99,7 +99,7 @@ pmb_render_template('partials/free_header.php');
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row"><?php esc_html_e('Order', 'print-my-blog'); ?></th>
+                    <th scope="row"><?php esc_html_e('Order', 'print-my-blog'); pmb_pro_better_e(__('Pro Print supports drag-and-drop ordering of content.', 'print-my-blog'));?></th>
                     <td>
                         <div id="pmb-order-by-date">
                             <p><?php esc_html_e('Posts will be ordered:', 'print-my-blog'); ?></p>
@@ -164,7 +164,7 @@ pmb_render_template('partials/free_header.php');
                 </tbody>
             </table>
 
-            <?php include('partials/display_options.php'); ?>
+            <?php pmb_render_template('partials/display_options.php',['print_options' => $print_options, 'displayer' => $displayer, 'upsells' => true]); ?>
 
         </details>
         <input type="hidden" name="<?php echo PMB_PRINTPAGE_SLUG;?>" value="1">

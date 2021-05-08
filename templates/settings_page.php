@@ -74,7 +74,7 @@ use PrintMyBlog\domain\FrontendPrintSettings;
                             <?php
                             $displayer->setInputPrefixes(['print_options',$slug,]);
                             $displayer->setNewValues($settings->getPrintOptionsAndValues($slug));
-                            include('partials/display_options.php');?>
+                            pmb_render_template('partials/display_options.php',['print_options' => $print_options, 'displayer' => $displayer, 'upsells' => false]);?>
                         </details>
                     </td>
                 </tr>

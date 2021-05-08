@@ -14,7 +14,7 @@ namespace PrintMyBlog\domain;
  */
 class PrintOptions
 {
-    public function headerContentOptions()
+    public function headerContentOptions($upsells = false)
     {
         return [
             'show_site_title' => [
@@ -100,7 +100,7 @@ class PrintOptions
         ];
     }
 
-    public function pageLayoutOptions()
+    public function pageLayoutOptions( $upsells = false)
     {
         return [
             'post_page_break' => [
@@ -123,7 +123,7 @@ class PrintOptions
                 //phpcs:enable
             ],
             'font_size' => [
-                'label' => esc_html__('Font Size', 'print-my-blog'),
+                'label' => esc_html__('Font Size', 'print-my-blog') . ($upsells ? pmb_pro_better(__('Pro Print lets you specify header and text size and font', 'print-my-blog')) : ''),
                 'default' => 'normal',
                 'options' => [
                     'tiny' => esc_html__('Tiny (1/2 size)', 'print-my-blog'),
@@ -147,7 +147,7 @@ class PrintOptions
                 //phpcs:enable
             ],
             'links' => [
-                'label' => esc_html__('Include Hyperlinks', 'print-my-blog'),
+                'label' => esc_html__('Include Hyperlinks', 'print-my-blog') . ($upsells ? pmb_pro_better(__('Pro Print with Pro Print Service supports changing hyperlinks to page references or footnotes', 'print-my-blog')) : ''),
                 'default' => 'include',
                 'options' => [
                     'include' => esc_html__('Include', 'print-my-blog'),

@@ -11,11 +11,11 @@ use PrintMyBlog\orm\entities\ProjectSection;
  * Returns a string that says this feature only works with Print My Blog Pro.
  * @return string
  */
-function pmb_pro_only($explanation = ''){
-    if(pmb_fs()->is_premium()){
+function pmb_pro_print_service_only($explanation = ''){
+    if(apply_filters('pmb_pro_only__is_premium',pmb_fs()->is_premium())){
         return '';
     }
-    $hover_text = __('Only works with Pro', 'print-my-blog');
+    $hover_text = __('Only works with Pro Print Service', 'print-my-blog');
     if($explanation){
         $hover_text .= "\n" . $explanation;
     }
@@ -26,19 +26,19 @@ function pmb_pro_only($explanation = ''){
 /**
  * Echoes out that this feature only works with pro
  */
-function pmb_pro_only_e($explanation = ''){
-    echo pmb_pro_only($explanation);
+function pmb_pro_print_service_only_e($explanation = ''){
+    echo pmb_pro_print_service_only($explanation);
 }
 
 /**
  * Returns a string that says this feature works best with Print My Blog Pro.
  * @return string
  */
-function pmb_pro_best($explanation = ''){
-    if(pmb_fs()->is_premium()){
+function pmb_pro_print_service_best($explanation = ''){
+    if(apply_filters('pmb_pro_only__is_premium',pmb_fs()->is_premium())){
         return '';
     }
-    $hover_text = __('Works best with Pro', 'print-my-blog');
+    $hover_text = __('Works better with Pro Print Service', 'print-my-blog');
     if($explanation){
         $hover_text .= "\n" . $explanation;
     }
@@ -46,11 +46,32 @@ function pmb_pro_best($explanation = ''){
 }
 
 /**
- * Echoes out this feature works best with pro.
+ * Echoes out this feature works best with pro print service.
  */
-function pmb_pro_best_e($explanation = ''){
-    echo pmb_pro_best($explanation);
+function pmb_pro_print_service_best_e($explanation = ''){
+    echo pmb_pro_print_service_best($explanation);
 }
+
+/**
+ * Echoes out that there's a better feature in Pro Print
+ * @param string $explanation
+ */
+function pmb_pro_better_e($explanation = ''){
+    echo pmb_pro_better($explanation);
+}
+/**
+ * To tell folks about features of Pro Print not available for Quick print
+ * @param string $explanation
+ * @return string
+ */
+function pmb_pro_better($explanation = ''){
+    $hover_text = __('More Advanced Features in Pro', 'print-my-blog');
+    if($explanation){
+        $hover_text .= "\n" . $explanation;
+    }
+    return '<span title="' . $hover_text  . '" class="dashicons dashicons-superhero"></span>';
+}
+
 
 /**
  * Maps
