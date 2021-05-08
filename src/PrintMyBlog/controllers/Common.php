@@ -40,7 +40,7 @@ class Common extends BaseController
         wp_register_script(
             'pmb_general',
             PMB_SCRIPTS_URL . 'pmb-general.js',
-            ['jquery'],
+            ['jquery', 'wp-pointer'],
             filemtime(PMB_SCRIPTS_DIR . 'pmb-general.js')
         );
         wp_register_style(

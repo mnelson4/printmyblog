@@ -19,7 +19,7 @@ function pmb_pro_print_service_only($explanation = ''){
     if($explanation){
         $hover_text .= "\n" . $explanation;
     }
-	return '<span title="' . $hover_text . '" class="dashicons dashicons-star-filled pmb-pro-only"></span>';
+	return '<span data-help="' . $hover_text . '" class="dashicons dashicons-star-filled pmb-pro-only pmb_help"></span>';
 
 }
 

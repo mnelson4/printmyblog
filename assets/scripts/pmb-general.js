@@ -2,6 +2,24 @@ jQuery(document).ready(function(){
     jQuery('.pmb_spin_on_click').on('click', function() {
         pmb_doing_button(jQuery(this));
     });
+    jQuery('.pmb_help[data-help]').hover(function() {
+        var that = jQuery(this),
+            help = '<p>' + that.attr('data-help') + '</p>',
+            options = {
+                content: help,
+                position: {
+                    edge: isRtl ? 'right' : 'left',
+                    align: 'center',
+                    of: that
+                },
+                document: {body: that}
+            };
+
+        var pointer = that.pointer(options).pointer('open');
+        that.closest('.pmb_form_row, p').mouseleave(function () {
+            pointer.pointer('close');
+        });
+    });
 });
 
 /**
