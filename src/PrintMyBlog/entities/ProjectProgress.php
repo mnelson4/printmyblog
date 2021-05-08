@@ -90,7 +90,7 @@ class ProjectProgress
             }
             $steps[self::EDIT_CONTENT_STEP] = __('Edit Content', 'print-my-blog');
             $steps[self::EDIT_METADATA_STEP] = __('Edit Metadata', 'print-my-blog');
-            $steps[self::GENERATE_STEP] = __('Generate File', 'print-my-blog');
+            $steps[self::GENERATE_STEP] = __('Generate Print Page', 'print-my-blog');
             $this->steps = $steps;
         }
         return $this->steps;

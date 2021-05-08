@@ -91,7 +91,7 @@ foreach($generations as $generation){
         }
         ?>
         <div class="pmb-after-generation" <?php echo ! $generation->isGenerated() || $generation->isDirty() || $generation->isOld() ? 'style="display:none"' : '';?>>
-            <a class="button button-primary" href="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"><?php printf(__('View %s', 'print-my-blog'), $generation->getFormat()->title());?></a>
+            <a class="button button-primary" href="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"><?php printf(__('View %s Print Page', 'print-my-blog'), $generation->getFormat()->title());?></a>
         </div>
     </div>
     <br>
