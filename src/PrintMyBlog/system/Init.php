@@ -15,7 +15,6 @@ use PrintMyBlog\domain\DefaultDesigns;
 use PrintMyBlog\domain\DefaultDesignTemplates;
 use PrintMyBlog\domain\DefaultFileFormats;
 use PrintMyBlog\domain\DefaultSectionTemplates;
-use PrintMyBlog\domain\ProNotification;
 use Twine\admin\news\DashboardNews;
 use PrintMyBlog\system\Context;
 use Twine\system\RequestType;
@@ -154,7 +153,6 @@ class Init extends BaseInit
             $admin = $this->context->reuse('PrintMyBlog\controllers\Admin');
             $admin->setHooks();
             $this->initDashboardNews();
-            (new ProNotification())->setHooks();
         } else {
             (new Frontend())->setHooks();
             (new LegacyPrintPage())->setHooks();
