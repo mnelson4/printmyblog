@@ -57,10 +57,8 @@ function pmb_enqueue_buurma_script(){
         'pmb-design',
         'pmb_design_options',
         [
-//				'external_links' => $pmb_design->getSetting('external_links'),
-//				'internal_links' => $pmb_design->getSetting('internal_links'),
-//				'image_size' => $pmb_design->getSetting('image_size'),
             'default_alignment' => $pmb_design->getSetting('default_alignment'),
+            'footnote_text' => $pmb_design->getSetting('footnote_text')
         ]
     );
 }

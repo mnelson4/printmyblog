@@ -171,10 +171,6 @@ Ask PDF viewers to display pages side-by-side by default.
         break-before:right;
     }
 
-
-    a.pmb-page-ref[href]::after{
-        content: " (see page " target-counter(attr(href), page) ")";
-    }
     span.pmb-footnote{
         float:footnote;
         text-align:left;

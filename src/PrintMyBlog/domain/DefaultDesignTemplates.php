@@ -21,6 +21,7 @@ use Twine\forms\inputs\TextAreaInput;
 use Twine\forms\inputs\TextInput;
 use Twine\forms\inputs\YesNoInput;
 use Twine\forms\strategies\display\TextInputDisplay;
+use Twine\forms\strategies\validation\TextValidation;
 
 class DefaultDesignTemplates
 {
@@ -59,7 +60,8 @@ class DefaultDesignTemplates
                                         ]),
                                     ]
                                 ]),
-                                'links' => new FormSection([
+                                'links' => new FormSectionDetails([
+                                    'html_summary' => __('Link, Page Reference, and Footnote Settings', 'print-my-blog'),
                                     'subsections' => [
                                         'internal_links' => new SelectInput(
                                             [
@@ -71,8 +73,9 @@ class DefaultDesignTemplates
                                                 'default' => pmb_fs()->is_premium() ? 'footnote' : 'parens',
                                                 'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') . pmb_pro_print_service_only(__('Footnotes and page references only work with Pro Print Service', 'print-my-blog')),
                                                 'html_help_text' => __('How to display hyperlinks to content included in this project.', 'print-my-blog')
-                                                ]
+                                            ]
                                         ),
+                                        'page_reference_text' => $this->getPageReferenceTextInput(),
                                         'external_links' => new SelectInput(
                                             [
                                                 'remove' => new InputOption(__('Remove', 'print-my-blog')),
@@ -85,7 +88,8 @@ class DefaultDesignTemplates
                                                 'html_label_text' => __('External Hyperlinks', 'print-my-blog') . pmb_pro_print_service_only(__('Footnotes require Pro', 'print-my-blog')),
                                                 'html_help_text' => __('How to display hyperlinks to content not included in this project.', 'print-my-blog')
                                                 ]
-                                        )
+                                        ),
+                                        'footnote_text' => $this->getFootnoteTextInput()
                                     ]
                                 ])
                             ]
@@ -120,7 +124,8 @@ class DefaultDesignTemplates
                                         'image_placement' => $this->getImageSnapInput()
                                     ]
                                 ]),
-                                'links' => new FormSection([
+                                'links' => new FormSectionDetails([
+                                    'html_summary' => __('Link, Page Reference, and Footnote Settings', 'print-my-blog'),
                                     'subsections' => [
                                         'internal_links' => new SelectInput(
                                             [
@@ -146,6 +151,7 @@ class DefaultDesignTemplates
                                                 )
                                             ]
                                         ),
+                                        'page_reference_text' => $this->getPageReferenceTextInput(),
                                         'external_links' => new SelectInput(
                                             [
                                                 'remove' => new InputOption(__('Remove', 'print-my-blog')),
@@ -162,7 +168,8 @@ class DefaultDesignTemplates
                                                     'print-my-blog'
                                                 )
                                             ]
-                                        )
+                                        ),
+                                        'footnote_text' => $this->getFootnoteTextInput()
                                     ]
                                 ])
                             ],
@@ -223,7 +230,8 @@ class DefaultDesignTemplates
                                             'default' => plugins_url('designs/pdf/digital/buurma/assets/logo.svg', PMB_MAIN_FILE)
                                             ]
                                     ),
-                                    'default_alignment' => $this->getDefaultAlignmentInput()
+                                    'default_alignment' => $this->getDefaultAlignmentInput(),
+                                    'footnote_text' => $this->getFootnoteTextInput()
                                 ],
                         ]))->merge($this->getGenericDesignForm());
                     },
@@ -537,28 +545,48 @@ class DefaultDesignTemplates
         return new FormSection(
             [
                 'subsections' => [
-                    'generic_sections' => new FormSection(
-                        [
-                            'subsections' =>
-                                apply_filters(
-                                    'PrintMyBlog\domain\DefaultDesignTemplates->getGenericDesignFormSections',
-                                    [
-                                        'use_theme' => new YesNoInput([
-                                            'html_label_text' => __('Apply Website Theme', 'print-my-blog'),
-                                            'html_help_text' => $use_theme_help_text,
-                                            'default' => false
-                                        ]),
-                                        'custom_css' => new TextAreaInput([
-                                            'html_label_text' => __('Custom CSS', 'print-my-blog'),
-                                            'html_help_text'  => __('Styles to be applied only when printing projects using this design.', 'print-my-blog')
-                                            ])
-                                    ]
-                                )
-                        ]
-                    )
+                    'generic_sections' => new FormSection([
+                        'subsections' =>
+                            apply_filters(
+                                'PrintMyBlog\domain\DefaultDesignTemplates->getGenericDesignFormSections',
+                                [
+                                    'use_theme' => new YesNoInput([
+                                        'html_label_text' => __('Apply Website Theme', 'print-my-blog'),
+                                        'html_help_text' => $use_theme_help_text,
+                                        'default' => false
+                                    ]),
+                                    'custom_css' => new TextAreaInput([
+                                        'html_label_text' => __('Custom CSS', 'print-my-blog'),
+                                        'html_help_text'  => __('Styles to be applied only when printing projects using this design.', 'print-my-blog')
+                                        ])
+                                ]
+                            )
+                    ])
                 ]
             ]
         );
+    }
+
+    public function getPageReferenceTextInput(){
+        return new TextInput([
+                    'html_label_text' => __('Page Reference Text', 'print-my-blog'),
+                    'html_help_text' => __('Text to use when replacing a hyperlink with a page reference. "%s" will be replaced with the page number.', 'print-my-blog'),
+                    'default' => __('(see page %s)', 'print-my-blog'),
+                    'validation_strategies' => [
+                        new TextValidation(__('You must include "%s" in the page reference text so we know where to put the page number.', 'print-my-blog'), '~.*\%s.*~')
+                    ]
+                ]);
+    }
+
+    public function getFootnoteTextInput(){
+        return new TextInput([
+            'html_label_text' => __('Footnote Text', 'print-my-blog'),
+            'html_help_text' => __('Text to use when replacing a hyperlink with a foonote. "%s" will be replaced with the URL', 'print-my-blog'),
+            'default' => __('See %s.', 'print-my-blog'),
+            'validation_strategies' => [
+                new TextValidation(__('You must include "%s" in the footnote text so we know where to put the URL.', 'print-my-blog'), '~.*\%s.*~')
+            ]
+        ]);
     }
 
     /**

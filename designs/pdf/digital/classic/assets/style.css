@@ -119,10 +119,6 @@
         break-before:page;
     }
 
-
-    a.pmb-page-ref[href]::after{
-        content: " (see page " target-counter(attr(href), page) ")";
-    }
     span.pmb-footnote{
         float:footnote;
         text-align:left;

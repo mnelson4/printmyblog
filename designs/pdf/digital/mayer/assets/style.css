@@ -126,11 +126,6 @@
         background-color:lightgrey;
         font-style:italic;
     }
-
-
-    .pmb-posts a.pmb-page-ref[href]::after{
-        content: " (see page " target-counter(attr(href), page) ")";
-    }
     .pmb-posts span.pmb-footnote{
         float:footnote;
         text-align:left;
