@@ -6,4 +6,4 @@
 /phpcs.xml export-ignore
 /phpstan.neon.dist export-ignore
 /README.md export-ignore
-
+*.po export-ignore
