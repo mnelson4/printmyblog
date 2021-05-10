@@ -567,7 +567,8 @@ class DefaultDesignTemplates
         );
     }
 
-    public function getPageReferenceTextInput(){
+    public function getPageReferenceTextInput()
+    {
         return new TextInput([
                     'html_label_text' => __('Page Reference Text', 'print-my-blog'),
                     'html_help_text' => __('Text to use when replacing a hyperlink with a page reference. "%s" will be replaced with the page number.', 'print-my-blog'),
@@ -578,7 +579,8 @@ class DefaultDesignTemplates
                 ]);
     }
 
-    public function getFootnoteTextInput(){
+    public function getFootnoteTextInput()
+    {
         return new TextInput([
             'html_label_text' => __('Footnote Text', 'print-my-blog'),
             'html_help_text' => __('Text to use when replacing a hyperlink with a foonote. "%s" will be replaced with the URL', 'print-my-blog'),

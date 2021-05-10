@@ -100,7 +100,7 @@ class PrintOptions
         ];
     }
 
-    public function pageLayoutOptions( $upsells = false)
+    public function pageLayoutOptions($upsells = false)
     {
         return [
             'post_page_break' => [

@@ -69,7 +69,7 @@ class PmbCentral
     public function getSiteSignature()
     {
         $site = pmb_fs()->get_site();
-        if(! $site){
+        if (! $site) {
             throw new Exception(__('There is no site registered with Freemius', 'print-my-blog'));
         }
         $site_private_key = pmb_fs()->get_site()->secret_key;
