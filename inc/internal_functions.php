@@ -15,11 +15,15 @@ function pmb_pro_print_service_only($explanation = ''){
     if(apply_filters('pmb_pro_only__is_premium',pmb_fs()->is_premium())){
         return '';
     }
-    $hover_text = __('Only works with Pro Print Service', 'print-my-blog');
+    $hover_text = sprintf(
+            __('Only works with %1$sPro Print Service%2$s', 'print-my-blog'),
+        '<a href="' . pmb_fs()->get_upgrade_url() . '">',
+        '</a>'
+    );
     if($explanation){
-        $hover_text .= "\n" . $explanation;
+        $hover_text .= "<br>" . $explanation;
     }
-	return '<span data-help="' . $hover_text . '" class="dashicons dashicons-star-filled pmb-pro-only pmb_help"></span>';
+	return '<span data-help="' . esc_attr($hover_text) . '" class="dashicons dashicons-star-filled pmb-pro-only pmb-hover"></span>';
 
 }
 
@@ -38,11 +42,15 @@ function pmb_pro_print_service_best($explanation = ''){
     if(apply_filters('pmb_pro_only__is_premium',pmb_fs()->is_premium())){
         return '';
     }
-    $hover_text = __('Works better with Pro Print Service', 'print-my-blog');
+    $hover_text = sprintf(
+            __('Works better with %1$sPro Print Service%2$s', 'print-my-blog'),
+            '<a href="' . pmb_fs()->get_upgrade_url() . '">',
+           '</a>'
+    );
     if($explanation){
-        $hover_text .= "\n" . $explanation;
+        $hover_text .= "<br>" . $explanation;
     }
-    return '<span title="' . $hover_text  . '" class="dashicons dashicons-star-half pmb-pro-best"></span>';
+    return '<span data-help="' . esc_attr($hover_text)  . '" class="dashicons dashicons-star-half pmb-pro-best pmb-hover"></span>';
 }
 
 /**
@@ -65,11 +73,15 @@ function pmb_pro_better_e($explanation = ''){
  * @return string
  */
 function pmb_pro_better($explanation = ''){
-    $hover_text = __('More Advanced Features in Pro', 'print-my-blog');
+    $hover_text = sprintf(
+            __('More Advanced Features in %1$sPro Print%2$s', 'print-my-blog'),
+        '<a href="'. admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH) . '">',
+        '</a>'
+    );
     if($explanation){
-        $hover_text .= "\n" . $explanation;
+        $hover_text .= "<br>" . $explanation;
     }
-    return '<span title="' . $hover_text  . '" class="dashicons dashicons-superhero"></span>';
+    return '<span data-help="' . esc_attr($hover_text)  . '" class="dashicons dashicons-superhero pmb-hover"></span>';
 }
 
 
@@ -260,7 +272,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
 
 function pmb_drag_here(){
     ?>
-    <div class="pmb-help pmb-no-sort pmb-drag-here no-drag">
+    <div class="pmb-hover pmb-no-sort pmb-drag-here no-drag">
         <div class="pmb-drag-here-inner">
             <a class="pmb-add-material">
                 <?php esc_html_e('Drag or click here', 'print-my-blog');?> <span class="pmb-add-section dashicons

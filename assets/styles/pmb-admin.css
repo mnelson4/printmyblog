@@ -204,3 +204,9 @@ For displaying a series of boxes
 .pmb-right-help{
     float:right;
 }
+.pmb-hover .wp-pointer-buttons {
+    display: none;
+}
+.pmb-hover .wp-pointer-content{
+    text-align:left;
+}
