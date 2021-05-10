@@ -5,7 +5,7 @@
 <ul class="pmb-list">
     <li><?php esc_html_e('Supports nesting articles (like posts and pages) into “parts”', 'print-my-blog');?></li>
     <li><?php esc_html_e('External hyperlinks (links to web pages not in the project) can be automatically converted to footnotes, left in-place, or removed', 'print-my-blog'); ?><?php pmb_pro_print_service_best_e(__('Footnotes only work with Pro', 'print-my-blog'));?></li>
-    <li><?php esc_html_e('Internal hyperlinks (links to content included in the project) can be automatically converted to to footnotes, inline page references, left in-place, or removed', 'print-my-blog');?><?php pmb_pro_print_service_best_e(__('Footnotes and page references only work with Pro', 'print-my-blog'));?></li>
+    <li><?php esc_html_e('Internal hyperlinks (links to content included in the project) can be automatically converted to to footnotes, inline page references, left in-place, or removed', 'print-my-blog');?><?php pmb_pro_print_service_best_e(__('Footnotes and page references only work with Pro Print Service', 'print-my-blog'));?></li>
     <li><?php esc_html_e('The default title page can include: Project Title, Subtitle, Site URL, Date Printed, Credit to Print My Blog', 'print-my-blog');?></li>
     <li><?php esc_html_e('Each article can include: Title, ID, Author, URL, Date Published, Categories and Tags, Featured Image, Excerpt, Content', 'print-my-blog');?></li>
     <li><?php esc_html_e('Limit image size by setting maximum height', 'print-my-blog');?></li>

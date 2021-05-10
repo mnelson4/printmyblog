@@ -69,7 +69,7 @@ class DefaultDesignTemplates
                                                 ],
                                             [
                                                 'default' => pmb_fs()->is_premium() ? 'footnote' : 'parens',
-                                                'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') . pmb_pro_print_service_only(__('Footnotes and page references require Pro', 'print-my-blog')),
+                                                'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') . pmb_pro_print_service_only(__('Footnotes and page references only work with Pro Print Service', 'print-my-blog')),
                                                 'html_help_text' => __('How to display hyperlinks to content included in this project.', 'print-my-blog')
                                                 ]
                                         ),
@@ -139,7 +139,7 @@ class DefaultDesignTemplates
                                             ],
                                             [
                                                 'default' => pmb_fs()->is_premium() ? 'parens' : 'remove',
-                                                'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') . pmb_pro_print_service_best(__('Footnotes and page references require Pro', 'print-my-blog')),
+                                                'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') . pmb_pro_print_service_best(__('Footnotes and page references only work with Pro Print Service', 'print-my-blog')),
                                                 'html_help_text' => __(
                                                     'How to display hyperlinks to content included in this project.',
                                                     'print-my-blog'

@@ -16,7 +16,7 @@ jQuery(document).ready(function(){
             };
 
         var pointer = that.pointer(options).pointer('open');
-        that.closest('tr, p').mouseleave(function () {
+        that.closest('.pmb-hover').mouseleave(function () {
             pointer.pointer('close');
         });
     });

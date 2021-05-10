@@ -15,15 +15,15 @@ function pmb_pro_print_service_only($explanation = ''){
     if(apply_filters('pmb_pro_only__is_premium',pmb_fs()->is_premium())){
         return '';
     }
-    $hover_text = sprintf(
+    $hover_text = '<b>' . sprintf(
             __('Only works with %1$sPro Print Service%2$s', 'print-my-blog'),
         '<a href="' . pmb_fs()->get_upgrade_url() . '">',
         '</a>'
-    );
+    ) . '</b>';
     if($explanation){
         $hover_text .= "<br>" . $explanation;
     }
-	return '<span data-help="' . esc_attr($hover_text) . '" class="dashicons dashicons-star-filled pmb-pro-only pmb-hover"></span>';
+	return '<span data-help="' . esc_attr($hover_text) . '" class="dashicons dashicons-superhero pmb-pro-only pmb-hover"></span>';
 
 }
 
@@ -42,15 +42,15 @@ function pmb_pro_print_service_best($explanation = ''){
     if(apply_filters('pmb_pro_only__is_premium',pmb_fs()->is_premium())){
         return '';
     }
-    $hover_text = sprintf(
+    $hover_text = '<b>' . sprintf(
             __('Works better with %1$sPro Print Service%2$s', 'print-my-blog'),
             '<a href="' . pmb_fs()->get_upgrade_url() . '">',
            '</a>'
-    );
+    ) . '</b>';
     if($explanation){
         $hover_text .= "<br>" . $explanation;
     }
-    return '<span data-help="' . esc_attr($hover_text)  . '" class="dashicons dashicons-star-half pmb-pro-best pmb-hover"></span>';
+    return '<span data-help="' . esc_attr($hover_text)  . '" class="dashicons dashicons-superhero pmb-pro-best pmb-hover"></span>';
 }
 
 /**
@@ -73,11 +73,11 @@ function pmb_pro_better_e($explanation = ''){
  * @return string
  */
 function pmb_pro_better($explanation = ''){
-    $hover_text = sprintf(
+    $hover_text = '<b>' . sprintf(
             __('More Advanced Features in %1$sPro Print%2$s', 'print-my-blog'),
         '<a href="'. admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH) . '">',
         '</a>'
-    );
+    ) . '</b>';
     if($explanation){
         $hover_text .= "<br>" . $explanation;
     }
