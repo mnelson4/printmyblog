@@ -162,7 +162,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
             } else { // default: print
                 ?>
                 <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print', 'print-my-blog'); ?>"/>
-                <div class="pmb-small-instructions"><?php esc_html_e('Use your browser to print.', 'event_espresso'); ?></div>
+                <div class="pmb-small-instructions"><?php esc_html_e('Use your browser to print.', 'print-my-blog'); ?></div>
                 <?php
             }
             ?>

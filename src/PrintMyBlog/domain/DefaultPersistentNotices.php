@@ -22,7 +22,7 @@ class DefaultPersistentNotices
                 __('About Quick Print', 'print-my-blog'),
                 '<p>'
                 . sprintf(
-                    __('This is the quick-and-easy option, best for making printouts for your own records. For something more professional and full-featured, use %1$sPro Print%2$s. It has free and paid options. %3$sSee full feature comparison.%2$s'),
+                    __('This is the quick-and-easy option, best for making printouts for your own records. For something more professional and full-featured, use %1$sPro Print%2$s. It has free and paid options. %3$sSee full feature comparison.%2$s', 'print-my-blog'),
                     '<a href="'
                     . esc_attr(admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH))
                     . '">',

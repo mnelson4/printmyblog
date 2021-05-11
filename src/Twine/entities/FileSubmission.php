@@ -67,7 +67,7 @@ class FileSubmission
             throw new InvalidArgumentException(
                 sprintf(
                 // @codingStandardsIgnoreStart
-                    esc_html__('The scheme ("%1$s") on the temporary file ("%2$s") indicates is located elsewhere, that’s not ok!', 'event_espresso'),
+                    esc_html__('The scheme ("%1$s") on the temporary file ("%2$s") indicates is located elsewhere, that’s not ok!', 'print-my-blog'),
                     // @codingStandardsIgnoreEnd
                     $scheme,
                     $tmp_file

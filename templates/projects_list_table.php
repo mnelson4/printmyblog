@@ -4,7 +4,7 @@ pmb_render_template(
 );
 ?>
 <div class="wrap">
-    <h1 class="wp-heading-inline"><?php esc_html_e('Pro Print ― Projects', 'event_espresso'); ?></h1>
+    <h1 class="wp-heading-inline"><?php esc_html_e('Pro Print ― Projects', 'print-my-blog'); ?></h1>
         <a href="<?php echo esc_attr($add_new_url);?>" class="page-title-action"><?php esc_html_e('Add New Project', 'print-my-blog');?></a>
     <div id="poststuff">
         <div id="post-body" class="metabox-holder columns-2">

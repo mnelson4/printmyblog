@@ -16,7 +16,7 @@ use PrintMyBlog\services\display\FormInputs;
     <tr>
         <th scope="row">
             <label ><?php esc_html_e('Header Content to Print','print-my-blog' ); $upsells ? pmb_pro_better_e(__('Pro Print supports full-page title pages, custom title pages, or no title page', 'print-my-blog')) : null?></label>
-            <p class="description"><?php esc_html_e('Appears at the top of the first page.', 'event_espresso'); ?></p>
+            <p class="description"><?php esc_html_e('Appears at the top of the first page.', 'print-my-blog'); ?></p>
         </th>
         <td>
             <?php
