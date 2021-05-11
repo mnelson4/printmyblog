@@ -86,6 +86,11 @@ class FormSection extends FormSectionValidatable
      */
     protected static $scripts_localized = false;
 
+    /**
+     * @var bool
+     */
+    protected $use_nonce = true;
+
 
     /**
      * when constructing a proper form section, calls _construct_finalize on children
@@ -103,6 +108,7 @@ class FormSection extends FormSectionValidatable
      *                                 items from that list of inclusions)
      * @type          $layout_strategy FormSectionLayoutBase strategy for laying out the form
      *                                 } @see FormSectionValidatable::__construct()
+     * @type          $use_nonce whether or not to use a nonce on this form. Defaults to true.
      * @throws ImproperUsageException
      */
     public function __construct($options_array = array())
@@ -903,6 +909,9 @@ class FormSection extends FormSectionValidatable
      */
     protected function normalize($req_data)
     {
+        if($this->useNonce()) {
+            check_admin_referer($this->name(), $this->name() . '_nonce');
+        }
         $this->received_submission = true;
         $this->validation_errors   = array();
         foreach ($this->getValidatableSubsections() as $subsection) {
@@ -1523,5 +1532,14 @@ class FormSection extends FormSectionValidatable
             return $child_section->findSectionFromPath($subpath);
         }
         return null;
+    }
+
+    /**
+     * Declares whether or not to use a nonce on this form.
+     * Note each sub-form has an independent value for this.
+     * @return bool
+     */
+    public function useNonce(){
+        return $this->use_nonce;
     }
 }
