@@ -21,7 +21,7 @@ function pmb_hover_help($explanation = '', $extra_css_classes = ''){
  * @return string
  */
 function pmb_pro_print_service_only($explanation = ''){
-    if(apply_filters('pmb_pro_only__is_premium',pmb_fs()->is_premium())){
+    if(apply_filters('pmb_pro_only__is_premium',pmb_fs()->is_plan__premium_only('hobbyist'))){
         return '';
     }
     $hover_text = '<b>' . sprintf(
@@ -47,7 +47,7 @@ function pmb_pro_print_service_only_e($explanation = ''){
  * @return string
  */
 function pmb_pro_print_service_best($explanation = ''){
-    if(apply_filters('pmb_pro_only__is_premium',pmb_fs()->is_premium())){
+    if(apply_filters('pmb_pro_only__is_premium',pmb_fs()->is_plan__premium_only('hobbyist'))){
         return '';
     }
     $hover_text = '<b>' . sprintf(
