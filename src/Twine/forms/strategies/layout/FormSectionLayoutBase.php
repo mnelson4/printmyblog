@@ -92,7 +92,7 @@ abstract class FormSectionLayoutBase
             $this->Form_section
         );
         $html = $this->addFormSectionHooksAndFilters($html);
-        if($this->formSection()->useNonce()){
+        if ($this->formSection()->useNonce()) {
             $html .= wp_nonce_field($this->formSection()->name(), $this->formSection()->name() . '_nonce');
         }
         return $html;

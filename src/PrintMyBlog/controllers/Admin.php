@@ -260,7 +260,7 @@ class Admin extends BaseController
     {
         $settings = new FrontendPrintSettings(new PrintOptions());
         $settings->load();
-        if (Array2::setOr($_SERVER,'REQUEST_METHOD','') === 'POST') {
+        if (Array2::setOr($_SERVER, 'REQUEST_METHOD', '') === 'POST') {
             check_admin_referer('pmb-settings');
             // Ok save those settings!
             if (isset($_POST['pmb-reset'])) {
@@ -1183,7 +1183,7 @@ class Admin extends BaseController
                 __('The content in your project has changed', 'print-my-blog')
             );
         }
-        $this->project->setProjectDepth(intval(Array2::setOr($_POST,'pmb-project-depth',0)));
+        $this->project->setProjectDepth(intval(Array2::setOr($_POST, 'pmb-project-depth', 0)));
 
         $this->section_manager->clearSectionsFor($this->project->getWpPost()->ID);
         $order = 1;
@@ -1228,7 +1228,7 @@ class Admin extends BaseController
 
     protected function setSectionFromRequest(Project $project, $request_data, $placement, &$order = 1)
     {
-        $section_data = stripslashes(Array2::setOr($_POST, $request_data,''));
+        $section_data = stripslashes(Array2::setOr($_POST, $request_data, ''));
         $sections = json_decode($section_data);
         if ($section_data) {
             $this->section_manager->setSectionsFor(
@@ -1271,13 +1271,13 @@ class Admin extends BaseController
     protected function saveProjectChooseDesign()
     {
         $this->updateProjectModifiedDate();
-        $design = $this->design_manager->getById((int)Array2::setOr($_REQUEST,'design',''));
-        $format = $this->file_format_registry->getFormat(Array2::setOr($_GET,'format',''));
+        $design = $this->design_manager->getById((int)Array2::setOr($_REQUEST, 'design', ''));
+        $format = $this->file_format_registry->getFormat(Array2::setOr($_GET, 'format', ''));
         if (! $design instanceof Design || ! $format instanceof FileFormat) {
             throw new Exception(
                 sprintf(
                     __('An invalid design (%s) or format provided(%s)', 'print-my-blog'),
-                    Array2::setOr($_GET,'design',''),
+                    Array2::setOr($_GET, 'design', ''),
                     Array2::setOr($_GET, 'format', '')
                 )
             );
@@ -1355,9 +1355,9 @@ class Admin extends BaseController
     protected function saveProjectGenerate()
     {
         $this->updateProjectModifiedDate();
-        $format = $this->file_format_registry->getFormat(Array2::setOr($_GET,'format',''));
+        $format = $this->file_format_registry->getFormat(Array2::setOr($_GET, 'format', ''));
         if (! $format instanceof FileFormat) {
-            throw new Exception(__('There is no file format with the slug "%s"', 'print-my-blog'), Array2::setOr($_GET,'format',''));
+            throw new Exception(__('There is no file format with the slug "%s"', 'print-my-blog'), Array2::setOr($_GET, 'format', ''));
         }
         $project_generation = $this->project->getGenerationFor($format);
         $project_generation->deleteGeneratedFiles();
@@ -1427,11 +1427,11 @@ class Admin extends BaseController
     protected function deleteProjects()
     {
         // In our file that handles the request, verify the nonce.
-        $nonce = esc_attr(Array2::setOr($_REQUEST, '_wpnonce',''));
+        $nonce = esc_attr(Array2::setOr($_REQUEST, '_wpnonce', ''));
         if (!wp_verify_nonce($nonce, 'bulk-projects')) {
             die('The request has expired. Please refresh the previous page and try again.');
         } else {
-            $this->project_manager->deleteProjects(Array2::setOr($_POST,'ID',''));
+            $this->project_manager->deleteProjects(Array2::setOr($_POST, 'ID', ''));
         }
     }
 
@@ -1479,9 +1479,9 @@ class Admin extends BaseController
     private function earlyResponseHandling()
     {
         $this->checkProjectEditPage();
-        if (Array2::setOr($_SERVER,'REQUEST_METHOD','') == 'POST') {
+        if (Array2::setOr($_SERVER, 'REQUEST_METHOD', '') == 'POST') {
             add_action('admin_init', [$this, 'checkFormSubmission']);
-        } elseif (Array2::setOr($_SERVER,'REQUEST_METHOD','') === 'GET') {
+        } elseif (Array2::setOr($_SERVER, 'REQUEST_METHOD', '') === 'GET') {
             add_action('admin_init', [$this,'checkSpecialLinks']);
         }
     }

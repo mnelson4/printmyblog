@@ -541,7 +541,7 @@ class DefaultDesignTemplates
         if (! pmb_fs()->is_plan__premium_only('business')) {
             $use_theme_help_text = __('Note: this option is only supported for the business license.', 'print-my-blog') . '<br>' . $use_theme_help_text;
         }
-        if( pmb_fs()->is_plan__premium_only('hobby')){
+        if (pmb_fs()->is_plan__premium_only('hobby')) {
             $powered_by_in_pro_service = false;
         } else {
             $powered_by_in_pro_service = true;

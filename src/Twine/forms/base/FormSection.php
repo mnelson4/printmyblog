@@ -909,7 +909,7 @@ class FormSection extends FormSectionValidatable
      */
     protected function normalize($req_data)
     {
-        if($this->useNonce()) {
+        if ($this->useNonce()) {
             check_admin_referer($this->name(), $this->name() . '_nonce');
         }
         $this->received_submission = true;
@@ -1539,7 +1539,8 @@ class FormSection extends FormSectionValidatable
      * Note each sub-form has an independent value for this.
      * @return bool
      */
-    public function useNonce(){
+    public function useNonce()
+    {
         return $this->use_nonce;
     }
 }

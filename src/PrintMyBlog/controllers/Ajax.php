@@ -120,7 +120,7 @@ class Ajax extends BaseController
         /*
          * @var $project Project
          */
-        $project = $this->project_manager->getById(Array2::setOr($_REQUEST,'ID',''));
+        $project = $this->project_manager->getById(Array2::setOr($_REQUEST, 'ID', ''));
         $format = $this->format_registry->getFormat(Array2::setOr($_REQUEST, 'format', ''));
         /**
          * @var $project_generation ProjectGeneration
@@ -149,7 +149,7 @@ class Ajax extends BaseController
     public function handleSaveProjectMain()
     {
         // Get the ID
-        $project_id = Array2::setOr($_REQUEST,'ID','');
+        $project_id = Array2::setOr($_REQUEST, 'ID', '');
         // Check permission
         if (
                 check_admin_referer('pmb-project-edit')
@@ -157,8 +157,8 @@ class Ajax extends BaseController
         ) {
             // Save it
             $project = $this->project_manager->getById($project_id);
-            $success = $project->setTitle(Array2::setOr($_REQUEST,'pmb_title',''));
-            $project->setFormatsSelected(Array2::setOr($_REQUEST,'pmb_format',''));
+            $success = $project->setTitle(Array2::setOr($_REQUEST, 'pmb_title', ''));
+            $project->setFormatsSelected(Array2::setOr($_REQUEST, 'pmb_format', ''));
         }
         // Say it worked
         if (is_wp_error($success)) {
@@ -175,7 +175,7 @@ class Ajax extends BaseController
             'posts_per_page' => $requested_posts,
             'ignore_sticky_posts' => true
         ];
-        $project = $this->project_manager->getById(Array2::setOr($_GET,'project',0));
+        $project = $this->project_manager->getById(Array2::setOr($_GET, 'project', 0));
         if (!empty($_GET['page'])) {
             $query_params['paged'] = $_GET['page'];
             $page = $_GET['page'];
@@ -261,8 +261,8 @@ class Ajax extends BaseController
 
     public function addPrintMaterial()
     {
-        $title = Array2::setOr($_REQUEST,'title','');
-        $project_id = Array2::setOr($_REQUEST,'project','');
+        $title = Array2::setOr($_REQUEST, 'title', '');
+        $project_id = Array2::setOr($_REQUEST, 'project', '');
         $project = $this->project_manager->getById($project_id);
         $post_id = wp_insert_post(
             [
@@ -293,9 +293,9 @@ class Ajax extends BaseController
 
     public function reportError()
     {
-        $project_id = (int)Array2::setOr($_REQUEST,'project_id','');
-        $format = sanitize_key(Array2::setOr($_REQUEST,'format',''));
-        $error_message = esc_html(Array2::setOr($_REQUEST, 'error',''));
+        $project_id = (int)Array2::setOr($_REQUEST, 'project_id', '');
+        $format = sanitize_key(Array2::setOr($_REQUEST, 'format', ''));
+        $error_message = esc_html(Array2::setOr($_REQUEST, 'error', ''));
         $project = $this->project_manager->getById($project_id);
         if (! $project) {
             wp_send_json_error(
