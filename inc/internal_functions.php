@@ -8,6 +8,15 @@ use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;
 
 /**
+ * Adds an icon which has explanatory text when hovered over.
+ * @param string $explanation
+ * @param string $extra_css_classes
+ * @return string HTML
+ */
+function pmb_hover_help($explanation = '', $extra_css_classes = ''){
+    return '<span data-help="' . esc_attr($explanation) . '" class="dashicons dashicons-superhero pmb-hover ' . $extra_css_classes . '"></span>';
+}
+/**
  * Returns a string that says this feature only works with Print My Blog Pro.
  * @return string
  */
@@ -23,8 +32,7 @@ function pmb_pro_print_service_only($explanation = ''){
     if($explanation){
         $hover_text .= "<br>" . $explanation;
     }
-	return '<span data-help="' . esc_attr($hover_text) . '" class="dashicons dashicons-superhero pmb-pro-only pmb-hover"></span>';
-
+	return pmb_hover_help($hover_text, 'pmb-pro-only');
 }
 
 /**
@@ -50,7 +58,7 @@ function pmb_pro_print_service_best($explanation = ''){
     if($explanation){
         $hover_text .= "<br>" . $explanation;
     }
-    return '<span data-help="' . esc_attr($hover_text)  . '" class="dashicons dashicons-superhero pmb-pro-best pmb-hover"></span>';
+    return pmb_hover_help($hover_text,  'pmb-pro-best');
 }
 
 /**
@@ -81,7 +89,7 @@ function pmb_pro_better($explanation = ''){
     if($explanation){
         $hover_text .= "<br>" . $explanation;
     }
-    return '<span data-help="' . esc_attr($hover_text)  . '" class="dashicons dashicons-superhero pmb-hover"></span>';
+    return pmb_hover_help($hover_text);
 }
 
 

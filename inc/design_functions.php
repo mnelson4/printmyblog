@@ -24,5 +24,15 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design){
     $css .= '.pmb-posts a.pmb-page-ref[href]::after{
         content: "' . sprintf($design->getSetting('page_reference_text'),'" target-counter(attr(href), page) "') . '";
     }';
+	// instruct PMB print service to add "powered by" for free users and cheap plans
+    if($design->getSetting('powered_by') || ! pmb_fs()->is_plan__premium_only('hobby')){
+        $css .= '@page:first{
+            @bottom{
+                content:\'Powered by Print My Blog Pro & WordPress\';
+                color:gray;
+                font-style:italic;
+            }
+        }';
+    }
 	return $css;
 }

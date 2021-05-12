@@ -541,7 +541,11 @@ class DefaultDesignTemplates
         if (! pmb_fs()->is_plan__premium_only('business')) {
             $use_theme_help_text = __('Note: this option is only supported for the business license.', 'print-my-blog') . '<br>' . $use_theme_help_text;
         }
-
+        if( pmb_fs()->is_plan__premium_only('hobby')){
+            $powered_by_in_pro_service = false;
+        } else {
+            $powered_by_in_pro_service = true;
+        }
         return new FormSection(
             [
                 'subsections' => [
@@ -558,7 +562,13 @@ class DefaultDesignTemplates
                                     'custom_css' => new TextAreaInput([
                                         'html_label_text' => __('Custom CSS', 'print-my-blog'),
                                         'html_help_text'  => __('Styles to be applied only when printing projects using this design.', 'print-my-blog')
-                                        ])
+                                        ]),
+                                    'powered_by' => new YesNoInput([
+                                        'html_label_text' => __('Add "Powered By" when using Pro Print Service', 'print-my-blog') . ( $powered_by_in_pro_service ? pmb_hover_help(__('Only added when using the Pro Print Service for Free and Hobbyist users. In compliance with WordPress.org guidelines, not added when printing from your browser.', 'print-my-blog')) : ''),
+                                        'html_help_text' => __('Instructs the Pro Print Service to add "Powered by Print My Blog Pro & WordPress" in the footer of the first page. Does not appear when printing using your browser.', 'print-my-blog'),
+                                        'default' => true,
+                                        'disabled' => $powered_by_in_pro_service
+                                    ])
                                 ]
                             )
                     ])

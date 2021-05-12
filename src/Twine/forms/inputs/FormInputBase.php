@@ -236,7 +236,7 @@ abstract class FormInputBase extends FormSectionValidatable
             $this->setDefault($input_args['default']);
             unset($input_args['default']);
         }
-        if (isset($input_args['disabled'])) {
+        if (isset($input_args['disabled']) && $input_args['disabled']) {
             $this->disable(true);
             unset($input_args['disabled']);
         }
