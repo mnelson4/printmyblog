@@ -172,16 +172,23 @@ function pmb_reveal_dynamic_content(){
  * @param external_link_policy string can be 'footnote', 'leave', 'remove'
  * @param internal_link_policy string can be 'parens' "(see page 12)", 'footnote' "[1]...See page 12", 'leave'
  * (leaves hyperlink to the page), 'remove' (removes the hyperlink altogether)
- * @param footnote_text string
+ * @param internal_footnote_text string
+ * @param external_footnote_text string
  */
-function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_policy, internal_link_policy, footnote_text)
+function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_policy, internal_link_policy, external_footnote_text, internal_footnote_text)
 {
-    if(typeof(footnote_text) === 'undefined'){
-        footnote_text = 'See %s';
+    if(typeof(external_footnote_text) === 'undefined'){
+        external_footnote_text = 'See %s';
     }
-    var position_of_s = footnote_text.search('%s');
-    var pre_footnote = footnote_text.substr(0,position_of_s );
-    var post_footnote = footnote_text.substr(position_of_s + 2);
+    var position_of_s = internal_footnote_text.search('%s');
+    var pre_internal_footnote = internal_footnote_text.substr(0,position_of_s );
+    var post_internal_footnote = internal_footnote_text.substr(position_of_s + 2);
+
+    var position_of_s = external_footnote_text.search('%s');
+    var pre_external_footnote = external_footnote_text.substr(0,position_of_s );
+    var post_external_footnote = external_footnote_text.substr(position_of_s + 2);
+
+
     jQuery('.pmb-section a[href]:not(.pmb-leave-link)').each(function(index){
         var a = jQuery(this);
         // ignore invisible hyperlinks
@@ -202,10 +209,10 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
                     a.addClass('pmb-page-ref');
                     a.attr('href','#' + a.attr('href'));
                     break;
-                case 'foonote':
+                case 'footnote':
                     // only add the footnote if the link isn't just the URL spelled out.
                     if(a.attr('href') !== a.html().trim()) {
-                        a.after('<span class="pmb-footnote">' + pre_footnote  + a.attr('href') + post_footnote + '</span>');
+                        a.after('<span class="pmb-footnote">' + pre_internal_footnote  + a.attr('href') + post_internal_footnote + '</span>');
                     }
                     break;
                 case 'leave':
@@ -222,7 +229,7 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
                 case 'footnote':
                     // only add the footnote if the link isn't just the URL spelled out.
                     if(a.attr('href') !== a.html().trim()){
-                        a.after('<span class="pmb-footnote">' + pre_footnote  + a.attr('href') + post_footnote + '</span>');
+                        a.after('<span class="pmb-footnote">' + pre_external_footnote  + a.attr('href') + post_external_footnote + '</span>');
                     }
                 break;
                 case 'remove':

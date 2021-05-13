@@ -54,7 +54,8 @@ function pmb_enqueue_classic_script(){
             'internal_links' => $pmb_design->getSetting('internal_links'),
             'image_size' => $pmb_design->getSetting('image_size'),
             'default_alignment' => $pmb_design->getSetting('default_alignment'),
-            'footnote_text' => $pmb_design->getSetting('footnote_text')
+            'internal_footnote_text' => $pmb_design->getSetting('internal_footnote_text'),
+            'external_footnote_text' => $pmb_design->getSetting('footnote_text')
         ]
     );
 }

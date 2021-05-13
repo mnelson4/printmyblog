@@ -17,6 +17,7 @@ use Twine\forms\inputs\FontInput;
 use Twine\forms\inputs\FormInputBase;
 use Twine\forms\inputs\IntegerInput;
 use Twine\forms\inputs\SelectInput;
+use Twine\forms\inputs\SelectRevealInput;
 use Twine\forms\inputs\TextAreaInput;
 use Twine\forms\inputs\TextInput;
 use Twine\forms\inputs\YesNoInput;
@@ -63,33 +64,54 @@ class DefaultDesignTemplates
                                 'links' => new FormSectionDetails([
                                     'html_summary' => __('Link, Page Reference, and Footnote Settings', 'print-my-blog'),
                                     'subsections' => [
-                                        'internal_links' => new SelectInput(
-                                            [
-                                                'remove' => new InputOption(__('Remove', 'print-my-blog')),
-                                                'parens' => new InputOption(__('Replace with page reference', 'print-my-blog')),
-                                                'footnote' => new InputOption(__('Replace with footnote', 'print-my-blog')),
-                                                ],
-                                            [
-                                                'default' => pmb_fs()->is_premium() ? 'footnote' : 'parens',
-                                                'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') . pmb_pro_print_service_only(__('Footnotes and page references only work with Pro Print Service', 'print-my-blog')),
-                                                'html_help_text' => __('How to display hyperlinks to content included in this project.', 'print-my-blog')
-                                            ]
-                                        ),
-                                        'page_reference_text' => $this->getPageReferenceTextInput(),
-                                        'external_links' => new SelectInput(
-                                            [
-                                                'remove' => new InputOption(__('Remove', 'print-my-blog')),
-                                                'footnote' => new InputOption(
-                                                    __('Replace with footnote', 'print-my-blog')
+                                        'internal' => new FormSection([
+                                            'subsections' => [
+                                                'internal_links' => new SelectRevealInput(
+                                                    [
+                                                        'remove' => new InputOption(__('Remove', 'print-my-blog')),
+                                                        'parens' => new InputOption(__('Replace with page reference', 'print-my-blog')),
+                                                        'footnote' => new InputOption(__('Replace with footnote', 'print-my-blog')),
+                                                    ],
+                                                    [
+                                                        'default' => pmb_fs()->is_premium() ? 'footnote' : 'parens',
+                                                        'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') . pmb_pro_print_service_only(__('Footnotes and page references only work with Pro Print Service', 'print-my-blog')),
+                                                        'html_help_text' => __('How to display hyperlinks to content included in this project.', 'print-my-blog')
+                                                    ]
                                                 ),
-                                            ],
-                                            [
-                                                'default' => pmb_fs()->is_premium() ? 'footnote' : 'remove',
-                                                'html_label_text' => __('External Hyperlinks', 'print-my-blog') . pmb_pro_print_service_only(__('Footnotes require Pro', 'print-my-blog')),
-                                                'html_help_text' => __('How to display hyperlinks to content not included in this project.', 'print-my-blog')
-                                                ]
-                                        ),
-                                        'footnote_text' => $this->getFootnoteTextInput()
+                                                'parens' => new FormSection([
+                                                    'subsections' => [
+                                                        'page_reference_text' => $this->getPageReferenceTextInput(),
+                                                    ]
+                                                ]),
+                                                'footnote' => new FormSection([
+                                                    'subsections' => [
+                                                        'internal_footnote_text' => $this->getInternalFootnoteTextInput()
+                                                    ]
+                                                ])
+                                            ]
+                                        ]),
+                                        'external' => new FormSection([
+                                            'subsections' => [
+                                                'external_links' => new SelectRevealInput(
+                                                    [
+                                                        'remove' => new InputOption(__('Remove', 'print-my-blog')),
+                                                        'footnote' => new InputOption(
+                                                            __('Replace with footnote', 'print-my-blog')
+                                                        ),
+                                                    ],
+                                                    [
+                                                        'default' => pmb_fs()->is_premium() ? 'footnote' : 'remove',
+                                                        'html_label_text' => __('External Hyperlinks', 'print-my-blog') . pmb_pro_print_service_only(__('Footnotes require Pro', 'print-my-blog')),
+                                                        'html_help_text' => __('How to display hyperlinks to content not included in this project.', 'print-my-blog')
+                                                    ]
+                                                ),
+                                                'footnote' => new FormSection([
+                                                    'subsections' => [
+                                                        'footnote_text' => $this->getExternalFootnoteTextInput()
+                                                    ]
+                                                ])
+                                            ]
+                                        ])
                                     ]
                                 ])
                             ]
@@ -127,49 +149,71 @@ class DefaultDesignTemplates
                                 'links' => new FormSectionDetails([
                                     'html_summary' => __('Link, Page Reference, and Footnote Settings', 'print-my-blog'),
                                     'subsections' => [
-                                        'internal_links' => new SelectInput(
-                                            [
-                                                'remove' => new InputOption(
-                                                    __('Remove', 'print-my-blog')
+
+                                        'internal' => new FormSection([
+                                            'subsections' => [
+                                                'internal_links' => new SelectRevealInput(
+                                                    [
+                                                        'remove' => new InputOption(
+                                                            __('Remove', 'print-my-blog')
+                                                        ),
+                                                        'leave' => new InputOption(
+                                                            __('Leave as hyperlink', 'print-my-blog')
+                                                        ),
+                                                        'parens' => new InputOption(
+                                                            __('Replace with page reference', 'print-my-blog')
+                                                        ),
+                                                        'footnote' => new InputOption(
+                                                            __('Replace with footnote', 'print-my-blog')
+                                                        ),
+                                                    ],
+                                                    [
+                                                        'default' => pmb_fs()->is_premium() ? 'parens' : 'remove',
+                                                        'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') . pmb_pro_print_service_best(__('Footnotes and page references only work with Pro Print Service', 'print-my-blog')),
+                                                        'html_help_text' => __(
+                                                            'How to display hyperlinks to content included in this project.',
+                                                            'print-my-blog'
+                                                        )
+                                                    ]
                                                 ),
-                                                'leave' => new InputOption(
-                                                    __('Leave as hyperlink', 'print-my-blog')
-                                                ),
-                                                'parens' => new InputOption(
-                                                    __('Replace with page reference', 'print-my-blog')
-                                                ),
-                                                'footnote' => new InputOption(
-                                                    __('Replace with footnote', 'print-my-blog')
-                                                ),
-                                            ],
-                                            [
-                                                'default' => pmb_fs()->is_premium() ? 'parens' : 'remove',
-                                                'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') . pmb_pro_print_service_best(__('Footnotes and page references only work with Pro Print Service', 'print-my-blog')),
-                                                'html_help_text' => __(
-                                                    'How to display hyperlinks to content included in this project.',
-                                                    'print-my-blog'
-                                                )
+                                                'parens' => new FormSection([
+                                                    'subsections' => [
+                                                        'page_reference_text' => $this->getPageReferenceTextInput(),
+                                                    ]
+                                                ]),
+                                                'footnote' => new FormSection([
+                                                    'subsections' => [
+                                                        'internal_footnote_text' => $this->getInternalFootnoteTextInput()
+                                                    ]
+                                                ])
                                             ]
-                                        ),
-                                        'page_reference_text' => $this->getPageReferenceTextInput(),
-                                        'external_links' => new SelectInput(
-                                            [
-                                                'remove' => new InputOption(__('Remove', 'print-my-blog')),
-                                                'leave' => new InputOption(__('Leave as hyperlink', 'print-my-blog')),
-                                                'footnote' => new InputOption(
-                                                    __('Replace with footnote', 'print-my-blog')
+                                        ]),
+                                        'external' => new FormSection([
+                                            'subsections' => [
+                                                'external_links' => new SelectRevealInput(
+                                                    [
+                                                        'remove' => new InputOption(__('Remove', 'print-my-blog')),
+                                                        'leave' => new InputOption(__('Leave as hyperlink', 'print-my-blog')),
+                                                        'footnote' => new InputOption(
+                                                            __('Replace with footnote', 'print-my-blog')
+                                                        ),
+                                                    ],
+                                                    [
+                                                        'default' => pmb_fs()->is_premium() ? 'footnote' : 'leave',
+                                                        'html_label_text' => __('External Hyperlinks', 'print-my-blog') . pmb_pro_print_service_best(__('Footnotes require Pro', 'print-my-blog')),
+                                                        'html_help_text' => __(
+                                                            'How to display hyperlinks to content not included in this project.',
+                                                            'print-my-blog'
+                                                        )
+                                                    ]
                                                 ),
-                                            ],
-                                            [
-                                                'default' => pmb_fs()->is_premium() ? 'footnote' : 'leave',
-                                                'html_label_text' => __('External Hyperlinks', 'print-my-blog') . pmb_pro_print_service_best(__('Footnotes require Pro', 'print-my-blog')),
-                                                'html_help_text' => __(
-                                                    'How to display hyperlinks to content not included in this project.',
-                                                    'print-my-blog'
-                                                )
+                                                'footnote' => new FormSection([
+                                                    'subsections' => [
+                                                        'footnote_text' => $this->getExternalFootnoteTextInput()
+                                                    ]
+                                                ])
                                             ]
-                                        ),
-                                        'footnote_text' => $this->getFootnoteTextInput()
+                                        ])
                                     ]
                                 ])
                             ],
@@ -231,7 +275,8 @@ class DefaultDesignTemplates
                                             ]
                                     ),
                                     'default_alignment' => $this->getDefaultAlignmentInput(),
-                                    'footnote_text' => $this->getFootnoteTextInput()
+                                    'internal_footnote_text' => $this->getInternalFootnoteTextInput(),
+                                    'footnote_text' => $this->getExternalFootnoteTextInput()
                                 ],
                         ]))->merge($this->getGenericDesignForm());
                     },
@@ -589,11 +634,23 @@ class DefaultDesignTemplates
                 ]);
     }
 
-    public function getFootnoteTextInput()
+    public function getInternalFootnoteTextInput(){
+        return new TextInput([
+            'html_label_text' => __('Internal Footnote Text', 'print-my-blog'),
+            'html_help_text' => __('Text to use when replacing a hyperlink with a footnote. "%s" will be replaced with the page number.', 'print-my-blog'),
+            'default' => __('See page %s.', 'print-my-blog'),
+            'validation_strategies' => [
+                new TextValidation(__('You must include "%s" in the footnote text so we know where to put the URL.', 'print-my-blog'), '~.*\%s.*~')
+            ]
+        ]);
+    }
+
+
+    public function getExternalFootnoteTextInput()
     {
         return new TextInput([
-            'html_label_text' => __('Footnote Text', 'print-my-blog'),
-            'html_help_text' => __('Text to use when replacing a hyperlink with a foonote. "%s" will be replaced with the URL', 'print-my-blog'),
+            'html_label_text' => __('External Footnote Text', 'print-my-blog'),
+            'html_help_text' => __('Text to use when replacing a hyperlink with a footnote. "%s" will be replaced with the URL', 'print-my-blog'),
             'default' => __('See %s.', 'print-my-blog'),
             'validation_strategies' => [
                 new TextValidation(__('You must include "%s" in the footnote text so we know where to put the URL.', 'print-my-blog'), '~.*\%s.*~')
