@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Twine\db\migrations;
-
 
 use Twine\system\RequestType;
 use Twine\system\VersionHistory;
@@ -34,7 +32,8 @@ abstract class MigrationManagerBase
      */
     protected $applicable_migrations;
 
-    public function inject(RequestType $request_type, VersionHistory $version_history, $option_prefix){
+    public function inject(RequestType $request_type, VersionHistory $version_history, $option_prefix)
+    {
         $this->request_type = $request_type;
         $this->version_history = $version_history;
         $this->option_prefix = $option_prefix;
@@ -43,9 +42,10 @@ abstract class MigrationManagerBase
     /**
      * Performs any quick migrations and remembers so they don't get ran again.
      */
-    public function migrate(){
+    public function migrate()
+    {
         $migrations = $this->getMigrationsToRun();
-        foreach($migrations as $migration){
+        foreach ($migrations as $migration) {
             $migration->perform();
         }
         $this->rememberMigrationsRan($migrations);
@@ -55,7 +55,8 @@ abstract class MigrationManagerBase
      * Gets all the migrations that should be run.
      * @return MigrationBase[]
      */
-    protected function getMigrationsToRun(){
+    protected function getMigrationsToRun()
+    {
         return (array)array_diff_key(
             $this->getApplicableMigrations(),
             $this->getMigrationsRan()
@@ -65,22 +66,25 @@ abstract class MigrationManagerBase
     /**
      * @param array $applicable_migrations keys must be the version migrated to.
      */
-    protected function rememberMigrationsRan($applicable_migrations){
+    protected function rememberMigrationsRan($applicable_migrations)
+    {
         $migrations_ran = $this->getMigrationsRan();
-        foreach($applicable_migrations as $version => $migration){
+        foreach ($applicable_migrations as $version => $migration) {
             $migrations_ran[$version] = current_time('mysql');
         }
-        update_option($this->getOptionName(),$migrations_ran,false);
+        update_option($this->getOptionName(), $migrations_ran, false);
     }
 
     /**
      * @return array keys are migration versions, values are MySQL datetimes of when they were run
      */
-    protected function getMigrationsRan(){
-        return get_option($this->getOptionName(),[]);
+    protected function getMigrationsRan()
+    {
+        return get_option($this->getOptionName(), []);
     }
 
-    protected function getOptionName(){
+    protected function getOptionName()
+    {
         return $this->option_prefix . 'migrations';
     }
 
@@ -88,19 +92,22 @@ abstract class MigrationManagerBase
      * Gets all the migrations that should run
      * @return MigrationBase[]
      */
-    protected function getApplicableMigrations(){
-        if($this->applicable_migrations === null){
+    protected function getApplicableMigrations()
+    {
+        if ($this->applicable_migrations === null) {
             $this->applicable_migrations = [];
             $current_version = $this->version_history->currentVersion();
             $previous_version = $this->version_history->previousVersion();
             // If this is a brand new install, we shouldn't need to do any migrations right?
-            if($previous_version === null){
+            if ($previous_version === null) {
                 return [];
             }
-            foreach($this->getMigrationInfos() as $version => $migration_class){
-                if(version_compare($current_version, $version, '<=')
-                && version_compare($version, $previous_version, '>')){
-                    $this->applicable_migrations[$version] = new $migration_class;
+            foreach ($this->getMigrationInfos() as $version => $migration_class) {
+                if (
+                    version_compare($current_version, $version, '<=')
+                    && version_compare($version, $previous_version, '>')
+                ) {
+                    $this->applicable_migrations[$version] = new $migration_class();
                 }
             }
         }
@@ -110,11 +117,12 @@ abstract class MigrationManagerBase
     /**
      * @return MigrationBase[]|null
      */
-    public function allMigrations(){
-        if($this->migrations === null){
+    public function allMigrations()
+    {
+        if ($this->migrations === null) {
             $migration_infos = $this->getMigrationInfos();
-            foreach($migration_infos as $version => $classname){
-                $this->migrations[$version] = new $classname;
+            foreach ($migration_infos as $version => $classname) {
+                $this->migrations[$version] = new $classname();
             }
         }
         return $this->migrations;
@@ -124,5 +132,5 @@ abstract class MigrationManagerBase
      * Gets the versions and classes of all migrations. Does not return actua;ly MigrationBases.
      * @return array Keys are the versions, values are classnames.
      */
-    public abstract function getMigrationInfos();
+    abstract public function getMigrationInfos();
 }

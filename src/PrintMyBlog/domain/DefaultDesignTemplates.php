@@ -634,7 +634,8 @@ class DefaultDesignTemplates
                 ]);
     }
 
-    public function getInternalFootnoteTextInput(){
+    public function getInternalFootnoteTextInput()
+    {
         return new TextInput([
             'html_label_text' => __('Internal Footnote Text', 'print-my-blog'),
             'html_help_text' => __('Text to use when replacing a hyperlink with a footnote. "%s" will be replaced with the page number.', 'print-my-blog'),

@@ -32,12 +32,12 @@ abstract class Activation
      */
     public function detectActivation()
     {
-         if ( $this->request_type->shouldCheckDb()) {
+        if ($this->request_type->shouldCheckDb()) {
             $this->install();
-         }
-         if($this->request_type->getRequestType() === RequestType::REQUEST_TYPE_UPDATE){
-             $this->upgrade();
-         }
+        }
+        if ($this->request_type->getRequestType() === RequestType::REQUEST_TYPE_UPDATE) {
+            $this->upgrade();
+        }
     }
 
 

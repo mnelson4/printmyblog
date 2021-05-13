@@ -107,8 +107,7 @@ class CustomPostTypes
                 'menu_icon' => $this->svg_doer->getSvgDataAsColor(PMB_DIR . 'assets/images/menu-icon.svg')
             )
         );
-        add_filter( 'wp_insert_post_data', [$this,'makePrintMaterialsAlwaysPrivate'] );
-
+        add_filter('wp_insert_post_data', [$this,'makePrintMaterialsAlwaysPrivate']);
     }
 
     /**
@@ -117,8 +116,9 @@ class CustomPostTypes
      * @param $post
      * @return mixed
      */
-    function makePrintMaterialsAlwaysPrivate( $post ) {
-        if( $post['post_type'] == self::CONTENT ) {
+    public function makePrintMaterialsAlwaysPrivate($post)
+    {
+        if ($post['post_type'] == self::CONTENT) {
             $post['post_status'] = 'private';
         }
         return $post;

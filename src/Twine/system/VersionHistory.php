@@ -51,7 +51,7 @@ class VersionHistory
      */
     public function previousVersion()
     {
-        if($this->previous_version === false){
+        if ($this->previous_version === false) {
             $this->previous_version = get_option($this->previous_version_option_name, null);
         }
         return $this->previous_version;
