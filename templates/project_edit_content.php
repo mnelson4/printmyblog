@@ -71,7 +71,7 @@ pmb_render_template(
                                         ];
                                         foreach($statuses as $value => $label ){
                                             ?>
-                                            <input type="checkbox" name="pmb-status[]" value="<?php echo esc_attr($value);?>" id="<?php echo esc_attr($value);?>-id" <?php echo $value === 'publish' ? 'checked="checked"' : '';?> form="pmb-filter-form">
+                                            <input type="checkbox" name="pmb-status[]" value="<?php echo esc_attr($value);?>" id="<?php echo esc_attr($value);?>-id" <?php echo in_array($value, ['publish', 'private']) ? 'checked="checked"' : '';?> form="pmb-filter-form">
                                             <label for="<?php echo esc_attr($value);?>-id"><?php echo $label;?></label><br>
                                             <?php
                                         }

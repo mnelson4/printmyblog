@@ -267,7 +267,7 @@ class Ajax extends BaseController
         $post_id = wp_insert_post(
             [
                 'post_title' => $title,
-                'post_status' => 'publish',
+                'post_status' => 'private',
                 'post_type' => CustomPostTypes::CONTENT,
             ]
         );

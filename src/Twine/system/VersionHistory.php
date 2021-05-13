@@ -14,11 +14,18 @@ namespace Twine\system;
  */
 class VersionHistory
 {
+    /**
+     * Begins as 'false' which indicates its not initialized yet. Once initialized it will be a string
+     * or null (to indicate brand new install)
+     * @var string
+     */
+    protected $previous_version = false;
 
     /**
      * @var string
      */
     protected $current_version;
+
     /**
      * @var string
      */
@@ -44,7 +51,10 @@ class VersionHistory
      */
     public function previousVersion()
     {
-        return get_option($this->previous_version_option_name, null);
+        if($this->previous_version === false){
+            $this->previous_version = get_option($this->previous_version_option_name, null);
+        }
+        return $this->previous_version;
     }
 
     public function maybeRecordVersionChange()

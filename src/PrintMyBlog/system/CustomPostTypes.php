@@ -97,7 +97,7 @@ class CustomPostTypes
                     'singular_name' => __('Print Material', 'print-my-blog')
                 ),
                 'has_archive' => true,
-                'public' => false,
+                'public' => true,
                 'show_ui' => true,
                 'show_in_menu' => PMB_ADMIN_PROJECTS_PAGE_SLUG,
                 'rewrite' => array('slug' => 'pmb'),
@@ -107,6 +107,21 @@ class CustomPostTypes
                 'menu_icon' => $this->svg_doer->getSvgDataAsColor(PMB_DIR . 'assets/images/menu-icon.svg')
             )
         );
+        add_filter( 'wp_insert_post_data', [$this,'makePrintMaterialsAlwaysPrivate'] );
+
+    }
+
+    /**
+     * We wanted print materials to not be public... but then again, we want them to have URLs for easy linking
+     * and to appear in link searches. So instead we just make them all private
+     * @param $post
+     * @return mixed
+     */
+    function makePrintMaterialsAlwaysPrivate( $post ) {
+        if( $post['post_type'] == self::CONTENT ) {
+            $post['post_status'] = 'private';
+        }
+        return $post;
     }
 
     public function mapMetaCap($caps, $cap, $user_id, $args, $cap_slug)

@@ -32,8 +32,9 @@ abstract class Activation
      */
     public function detectActivation()
     {
-        if ($this->request_type->shouldCheckDb()) {
+         if ( $this->request_type->shouldCheckDb()) {
             $this->install();
+            $this->upgrade();
         }
     }
 
@@ -42,4 +43,9 @@ abstract class Activation
      * Checks the DB and other options are present
      */
     abstract public function install();
+
+    /**
+     * Perform any migrations when there is an update
+     */
+    abstract public function upgrade();
 }

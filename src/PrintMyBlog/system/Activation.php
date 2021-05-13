@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\system;
 
+use PrintMyBlog\db\migrations\MigrationManager;
 use PrintMyBlog\db\TableManager;
 use PrintMyBlog\domain\DefaultProjectContents;
 use PrintMyBlog\services\DesignRegistry;
@@ -40,6 +41,10 @@ class Activation extends BaseActivation
      * @var DefaultProjectContents|null
      */
     protected $project_contents;
+    /**
+     * @var MigrationManager
+     */
+    private $migration_manager;
 
 
     public function inject(
@@ -47,13 +52,15 @@ class Activation extends BaseActivation
         TableManager $table_manager = null,
         Capabilities $capabilities = null,
         DesignRegistry $design_registry = null,
-        DefaultProjectContents $project_contents = null
+        DefaultProjectContents $project_contents = null,
+        MigrationManager $migration_manager = null
     ) {
         parent::inject($request_type);
         $this->table_manager = $table_manager;
         $this->capabilities = $capabilities;
         $this->design_registry = $design_registry;
         $this->project_contents = $project_contents;
+        $this->migration_manager = $migration_manager;
     }
     /**
      * Redirects the user to the blog printing page if the user just activated the plugin and
@@ -83,6 +90,11 @@ class Activation extends BaseActivation
         $this->capabilities->grantCapabilities();
         $this->design_registry->createRegisteredDesigns();
         $this->project_contents->addDefaultContents();
+    }
+
+    public function upgrade()
+    {
+        $this->migration_manager->migrate();
     }
 
 
