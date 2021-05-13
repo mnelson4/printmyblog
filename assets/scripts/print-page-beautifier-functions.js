@@ -177,13 +177,16 @@ function pmb_reveal_dynamic_content(){
  */
 function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_policy, internal_link_policy, external_footnote_text, internal_footnote_text)
 {
-    if(typeof(external_footnote_text) === 'undefined'){
-        external_footnote_text = 'See %s';
+    if(typeof(internal_footnote_text) === 'undefined'){
+        internal_footnote_text = 'See page %s';
     }
     var position_of_s = internal_footnote_text.search('%s');
     var pre_internal_footnote = internal_footnote_text.substr(0,position_of_s );
     var post_internal_footnote = internal_footnote_text.substr(position_of_s + 2);
 
+    if(typeof(external_footnote_text) === 'undefined'){
+        external_footnote_text = 'See %s';
+    }
     var position_of_s = external_footnote_text.search('%s');
     var pre_external_footnote = external_footnote_text.substr(0,position_of_s );
     var post_external_footnote = external_footnote_text.substr(position_of_s + 2);
