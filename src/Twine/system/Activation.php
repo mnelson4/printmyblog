@@ -34,8 +34,10 @@ abstract class Activation
     {
          if ( $this->request_type->shouldCheckDb()) {
             $this->install();
-            $this->upgrade();
-        }
+         }
+         if($this->request_type->getRequestType() === RequestType::REQUEST_TYPE_UPDATE){
+             $this->upgrade();
+         }
     }
 
 

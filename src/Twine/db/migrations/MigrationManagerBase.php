@@ -93,6 +93,10 @@ abstract class MigrationManagerBase
             $this->applicable_migrations = [];
             $current_version = $this->version_history->currentVersion();
             $previous_version = $this->version_history->previousVersion();
+            // If this is a brand new install, we shouldn't need to do any migrations right?
+            if($previous_version === null){
+                return [];
+            }
             foreach($this->getMigrationInfos() as $version => $migration_class){
                 if(version_compare($current_version, $version, '<=')
                 && version_compare($version, $previous_version, '>')){

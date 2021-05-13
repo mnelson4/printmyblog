@@ -15,7 +15,7 @@ class DefaultProjectContents
             if (! $post instanceof WP_Post) {
                 $postargs['post_type'] = CustomPostTypes::CONTENT;
                 $postargs['post_name'] = $slug;
-                $postargs['post_status'] = 'publish';
+                $postargs['post_status'] = 'private';
                 $result = wp_insert_post($postargs, true);
                 if ($result instanceof WP_Error) {
                     // record and show the error somehow
