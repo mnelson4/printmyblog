@@ -70,7 +70,7 @@
                         <?php }
                     } ?>
                     <p class="pmb-help"><a href="https://printmy.blog/user-guide/getting-started/privacy-and-pmb-pro/" target="_blank"><?php
-                            _e('Read how your data handled', 'print-my-blog');?></a></p>
+                            _e('Read how your data is handled', 'print-my-blog');?></a></p>
                 </div>
             </div>
         </div>
