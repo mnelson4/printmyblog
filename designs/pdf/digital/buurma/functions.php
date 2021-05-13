@@ -59,7 +59,7 @@ function pmb_enqueue_buurma_script(){
         [
             'default_alignment' => $pmb_design->getSetting('default_alignment'),
             'internal_footnote_text' => $pmb_design->getSetting('internal_footnote_text'),
-            'external_footnote_text' => $pmb_design->getSetting('external_footnote_text')
+            'external_footnote_text' => $pmb_design->getSetting('footnote_text')
         ]
     );
 }
