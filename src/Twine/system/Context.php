@@ -4,6 +4,7 @@ namespace Twine\system;
 
 use Exception;
 use ReflectionClass;
+use ReflectionException;
 
 /**
  * Class Context
@@ -69,15 +70,29 @@ abstract class Context
     {
         $classname = $this->normalizeClassname($classname);
         $reflection = new ReflectionClass($classname);
-        if ($args) {
+        // use the "inject" method if it exists, otherwise fallback to using the constructor
+        try{
+            // this throws a ReflectionException if the method doesn't exist eh
+            $reflection->getMethod('inject');
             $obj = $reflection->newInstanceArgs($args);
-        } else {
-            $obj = $reflection->newInstance();
+            call_user_func_array([$obj,'inject'], $this->getDependencies($classname));
+        } catch(ReflectionException $e){
+            $combined_constructor_args = array_merge($args, $this->getDependencies($classname));
+            $obj = $reflection->newInstanceArgs($combined_constructor_args);
         }
+        return $obj;
+    }
 
-        if (isset($this->deps[$classname]) && method_exists($obj, 'inject')) {
+    /**
+     * @param $classname
+     *
+     * @return array of whatever dependencies were declared for this classname in the setDependencies method
+     */
+    protected function getDependencies($classname){
+        $dependency_instances = [];
+        if (isset($this->deps[$classname])) {
             $classes_depended_on = $this->deps[$classname];
-            $dependency_instances = [];
+
             foreach ($classes_depended_on as $dependency_classname => $policy) {
                 // Account for when the dependency isn't a class at all.
                 if (is_int($dependency_classname) && ! is_object($policy)) {
@@ -93,9 +108,8 @@ abstract class Context
 
                 $dependency_instances[] = $dependency_instance;
             }
-            call_user_func_array([$obj,'inject'], $dependency_instances);
         }
-        return $obj;
+        return $dependency_instances;
     }
 
     /**
