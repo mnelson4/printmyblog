@@ -97,3 +97,11 @@ Hide CSS Hero's floating icon, SimpleBackToTop's icon
 #csshero-very-first-trigger, .sbttBacktotop{
     display: none !important;
 }
+
+/**
+Lifter LMS
+Hide stuff that doesn't make sense in print
+ */
+.llms-course-navigation, .llms-lesson-button-wrapper{
+    display:none;
+}

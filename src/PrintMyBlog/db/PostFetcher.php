@@ -53,13 +53,26 @@ class PostFetcher
     {
         $in_search_post_types = get_post_types(array( 'exclude_from_search' => false ), $output);
         unset($in_search_post_types['attachment']);
-        if ($output === 'objects') {
-            $in_search_post_types['pmb_content'] = get_post_type_object('pmb_content');
-        } else {
-            $in_search_post_types['pmb_content'] = 'pmb_content';
-            $in_search_post_types = array_map('esc_sql', $in_search_post_types);
+        foreach($this->otherPostTypesToInclude() as $post_type){
+            if(! post_type_exists($post_type)){
+                continue;
+            }
+            if ($output === 'objects') {
+                $in_search_post_types[$post_type] = get_post_type_object($post_type);
+            } else {
+                $in_search_post_types[$post_type] = esc_sql($post_type);
+            }
         }
+
         return  $in_search_post_types;
+    }
+
+    protected function otherPostTypesToInclude(){
+        return [
+            'stm-lessons', // from MasterStudy LMS
+            'lesson', // LifterLMS
+            'section', //
+        ];
     }
 
 

@@ -146,6 +146,8 @@ abstract class ProjectFileGeneratorBase
             }
         }
         $query->posts = $ordered_posts;
+        $query->post_count = count($ordered_posts);
+        $query->found_posts = count($ordered_posts);
     }
 
     /**
@@ -201,6 +203,7 @@ abstract class ProjectFileGeneratorBase
         // Fetch some of its posts at the same time...
         $query = new WP_Query(
             [
+                'post_status' => 'any',
                 'post__in' => $post_ids,
                 'showposts' => count($post_ids),
                 'post_type' => $this->post_fetcher->getProjectPostTypes()
