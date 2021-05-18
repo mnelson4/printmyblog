@@ -7,9 +7,9 @@ Tested up to: 5.6
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Donate link: https://www.paypal.com/paypalme2/cmljnelson/20
+Donate link: https://printmy.blog/pricing/
 
-Offline publishing for you, your site visitors, and the world outside WordPress.
+Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
 == Description ==
 
@@ -22,6 +22,7 @@ Print My Blog makes WordPress content useful outside of your website, like in pr
 3. Pro Print: make professional-quality books and documents
 
 Each of which takes your WordPress content and optimizes it for print, PDF, and eBook by:
+
 * removing ink guzzlers like site logo, sidebars and footer
 * avoiding page breaks inside images, between images and captions, and even right after headers
 * allowing you to use other plugins in your printed output
@@ -100,6 +101,7 @@ Example uses:
 * **restaurant menu**. Optimized for display on your website, and to look great in print.
 
 **Pro Print Features**
+
 * saveable projects
 * create digital and print-ready PDFs
 * select posts, pages, print materials (posts intended only for use in Pro Print) and most custom post types (eg products from WooCommerce)
@@ -121,6 +123,7 @@ Example uses:
 * optionally apply your active theme's CSS (this is optional and because themes usually aren't designed for print, support for this requires payment)
 
 Some designs have features like:
+
 * roman numerals for front matter
 * page numbers always in bottom-right corner
 * page numbers appearing in outside corners
@@ -137,9 +140,8 @@ Ready to purchase the Pro Print Service? Here's the [pricing page](https://print
 Want more? [Tell us what matters to you on GitHub](https://github.com/mnelson4/printmyblog/issues). Thanks to a revenue stream through optional payments, this is actively supported and improved.
 
 = Our Mission =
-
-Besides just converting your blog to a different format, the plugin’s mission is to preserve your blog for decades to come in a low-tech format.
-Your website might not be around forever, nor might WordPress. But by printing it, there’s hope your blog’s ideas and stories can live on.
+1. Preserve your blog for decades to come in a low-tech format.
+2. Make WordPress an alternative to Microsoft Word and Google Docs for publishing documents.
 
 = Alternatives to Print My Blog =
 
@@ -204,6 +206,9 @@ Follow the instructions presented, or refer to our [user guide](https://printmy.
 1. You may want to add a link to the page in a menu, widget, or footer
 
 == Frequently Asked Questions ==
+
+= Can I use PMB Pro Print for Free? =
+Yes, you can use PMB's Pro Print for free (it's included in this plugin) to create projects, and can print or make PDFs with them using your web browser. Your web browser will not, however, support all the features that Pro Print is capable of (eg adding page references, footnotes, and fully controlling page margins).
 
 = How do I create a PDF using Quick Print? =
 *Use Pro Print and the Pro Print Service. However, your browser can still make pretty good PDFs for free.*
