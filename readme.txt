@@ -368,6 +368,10 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+= 3.2.4 May 17, 2021 =
+* Fixed a bug when using the same article twice in a project
+* Don't use theme's custom CSS in projects (unless using the theme)
+
 = 3.2.3 May 13, 2021 =
 * Print Materials now have permalinks and appear in link searches (like private posts)
 

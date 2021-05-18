@@ -71,12 +71,12 @@ abstract class Context
         $classname = $this->normalizeClassname($classname);
         $reflection = new ReflectionClass($classname);
         // use the "inject" method if it exists, otherwise fallback to using the constructor
-        try{
+        try {
             // this throws a ReflectionException if the method doesn't exist eh
             $reflection->getMethod('inject');
             $obj = $reflection->newInstanceArgs($args);
             call_user_func_array([$obj,'inject'], $this->getDependencies($classname));
-        } catch(ReflectionException $e){
+        } catch (ReflectionException $e) {
             $combined_constructor_args = array_merge($args, $this->getDependencies($classname));
             $obj = $reflection->newInstanceArgs($combined_constructor_args);
         }
@@ -88,7 +88,8 @@ abstract class Context
      *
      * @return array of whatever dependencies were declared for this classname in the setDependencies method
      */
-    protected function getDependencies($classname){
+    protected function getDependencies($classname)
+    {
         $dependency_instances = [];
         if (isset($this->deps[$classname])) {
             $classes_depended_on = $this->deps[$classname];

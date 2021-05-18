@@ -53,8 +53,8 @@ class PostFetcher
     {
         $in_search_post_types = get_post_types(array( 'exclude_from_search' => false ), $output);
         unset($in_search_post_types['attachment']);
-        foreach($this->otherPostTypesToInclude() as $post_type){
-            if(! post_type_exists($post_type)){
+        foreach ($this->otherPostTypesToInclude() as $post_type) {
+            if (! post_type_exists($post_type)) {
                 continue;
             }
             if ($output === 'objects') {
@@ -67,7 +67,8 @@ class PostFetcher
         return  $in_search_post_types;
     }
 
-    protected function otherPostTypesToInclude(){
+    protected function otherPostTypesToInclude()
+    {
         return [
             'stm-lessons', // from MasterStudy LMS
             'lesson', // LifterLMS
