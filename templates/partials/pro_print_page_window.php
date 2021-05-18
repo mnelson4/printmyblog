@@ -29,6 +29,7 @@
                         <?php _e('Print with Browser', 'print-my-blog'); ?>
                     </a>
                     <p><?php esc_html_e('Limited to features supported by your browser.', 'print-my-blog');?></p>
+                    <p><a target="_blank" href="https://printmy.blog/free-vs-pro/"><?php esc_html_e('Compare printing with your browser vs Pro Print Service', 'print-my-blog');?></a></p>
                 </div>
                 <div class="pmb-print-option pmb-big-option">
                     <h2><?php esc_html_e('Pro Print Service', 'print-my-blog');?></h2>
