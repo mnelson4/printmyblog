@@ -108,7 +108,7 @@ class CustomPostTypes
             )
         );
         add_filter('wp_insert_post_data', [$this,'makePrintMaterialsAlwaysPrivate']);
-//        add_filter('rest_post_search_query',[$this,'includePrivatePrintMaterialsInSearch'], 10, 2);
+        add_filter('rest_post_search_query',[$this,'includePrivatePrintMaterialsInSearch'], 10, 2);
     }
 
     /**
