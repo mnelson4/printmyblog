@@ -207,8 +207,13 @@ Follow the instructions presented, or refer to our [user guide](https://printmy.
 
 == Frequently Asked Questions ==
 
-= Can I use PMB Pro Print for Free? =
+= Can I use Pro Print for Free? =
 Yes, you can use PMB's Pro Print for free (it's included in this plugin) to create projects, and can print or make PDFs with them using your web browser. Your web browser will not, however, support all the features that Pro Print is capable of (eg adding page references, footnotes, and fully controlling page margins).
+
+So, PMB Pro Print is free, but it's best when used with our Pro Print Service which is paid.
+
+= I have a question about Pro Print =
+You're in luck, we have an [entire use guide](https://printmy.blog/user-guide/) that walks you through the first project, then onto customizations, and even through making your own custom designs in HTML, CSS, and Javascript (with a bit of PHP). These FAQs are mostly about Quick Print and Print Buttons.
 
 = How do I create a PDF using Quick Print? =
 *Use Pro Print and the Pro Print Service. However, your browser can still make pretty good PDFs for free.*

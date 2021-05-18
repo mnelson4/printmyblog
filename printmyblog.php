@@ -228,5 +228,9 @@ if (defined('PMB_VERSION')) {
 	    add_filter( 'wp_using_themes', '__return_false' );
 		add_filter('template_directory', '__return_false', 100);
 		add_filter('stylesheet_directory', '__return_false', 100);
+		add_action('init',function(){
+            remove_action( 'wp_head', 'wp_custom_css_cb', 11 );
+            remove_action( 'wp_head', 'wp_custom_css_cb', 101 );
+        });
 	}
 }
