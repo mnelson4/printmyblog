@@ -1230,7 +1230,7 @@ class Admin extends BaseController
     {
         $section_data = stripslashes(Array2::setOr($_POST, $request_data, ''));
         $sections = json_decode($section_data);
-        if ($section_data) {
+        if (is_array($sections)) {
             $this->section_manager->setSectionsFor(
                 $project->getWpPost()->ID,
                 $sections,

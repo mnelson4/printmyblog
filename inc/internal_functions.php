@@ -197,7 +197,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
         $max_nesting = $project->getLevelsAllowed();
     }
     ?>
-    <div class="list-group-item pmb-project-item" data-id="<?php echo esc_attr($id);?>" data-height="<?php echo esc_attr($height);?>">
+    <div class="list-group-item pmb-project-item" data-id="<?php echo esc_attr($id);?>">
         <div class="pmb-project-item-header" title="<?php
         echo esc_attr(
             sprintf(

@@ -8,7 +8,7 @@ use PrintMyBlog\system\Context;
 
 class ProjectFileGeneratorFactory
 {
-    public function create($classname, ProjectGeneration $project_generation, Design $design)
+    public function create($classname, ProjectGeneration $project_generation, Design $design = null)
     {
         return Context::instance()->useNew(
             $classname,

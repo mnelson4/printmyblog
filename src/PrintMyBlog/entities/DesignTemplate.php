@@ -75,7 +75,7 @@ class DesignTemplate
     protected $format;
     /**
      * @var array strings indicating support for various features. Eg 'front_matter', 'back_matter', 'part', 'volume',
-     * 'anthology', 'just_content', etc.
+     * 'anthology', etc.
      */
     protected $supports = array();
     /**

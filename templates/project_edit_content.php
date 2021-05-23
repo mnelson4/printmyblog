@@ -109,8 +109,8 @@ pmb_render_template(
                                     <td><?php printf(
                                             // translators: 1: "from" date input, 2: "to" date input
                                             __('%s and %s', 'print-my-blog'),
-                                        '<input id=pmb-from-date" type="text" class="pmb-date" name="pmb-date[from]" form="pmb-filter-form">',
-                                        '<input id=pmb-to-date" type="text" class="pmb-date" name="pmb-date[to]" form="pmb-filter-form">'
+                                        '<input id="pmb-from-date" type="text" class="pmb-date" name="pmb-date[from]" form="pmb-filter-form">',
+                                        '<input id="pmb-to-date" type="text" class="pmb-date" name="pmb-date[to]" form="pmb-filter-form">'
                                     ); ?>
                                     </td>
                                 </tr>

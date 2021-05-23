@@ -272,5 +272,6 @@ class DefaultDesigns
                 ];
             }
         );
+        do_action('pmb_register_designs');
     }
 }

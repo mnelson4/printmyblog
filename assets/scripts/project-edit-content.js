@@ -249,10 +249,10 @@ function pmb_maybe_add_sortable_to(sortable_selection, item_selection){
 	var max_levels = jquery_obj.attr('data-max-nesting');
 	// If that target didn't know the max nesting level, ask the root.
 	if( ! max_levels){
-		jquery_obj.parents('.pmb-sortable-root').attr('data-max-nesting');
+		max_levels = jquery_obj.parents('.pmb-sortable-root').attr('data-max-nesting');
 	}
-	if(nested_level < max_levels){
-		var sortable_items = item_selection.children('.pmb-sortable-inactive');
+	if(nested_level <= max_levels){
+		var sortable_items = item_selection.children('.pmb-sortable-inactive, .pmb-sortable');
 		if(sortable_items.length){
 			pmb_create_sortable_from(sortable_items[0]);
 			sortable_items.removeClass('pmb-sortable-inactive');
@@ -261,7 +261,9 @@ function pmb_maybe_add_sortable_to(sortable_selection, item_selection){
 	} else {
 		var sortable_items = item_selection.children('.pmb-sortable');
 		if(sortable_items.length){
-			sortable_items[0].sorter.destroy();
+			if(typeof sortable_items[0].sorter !== 'undefined'){
+				sortable_items[0].sorter.destroy();
+			}
 			sortable_items.removeClass('pmb-sortable');
 			sortable_items.addClass('pmb-sortable-inactive');
 		}
@@ -285,9 +287,9 @@ function pmb_get_contents(jquery_obj, current_depth = 1){
 		var template = template_jquery_obj.val();
 		var subs = child_jquery_obj.children('.pmb-subs ');
 		items.push([
-			child.attributes['data-id'].nodeValue, // post ID
+			child_jquery_obj.data('id'),//child.attributes['data-id'].nodeValue, // post ID
 			template, // desired template
-			child.attributes['data-height'].nodeValue, // node height
+			child_jquery_obj.data('height'),//child.attributes['data-height'].nodeValue, // node height
 			current_depth, // node depth
 			pmb_get_contents(subs, current_depth + 1) // sub-items
 		]);
@@ -305,9 +307,14 @@ function pmb_update_heights(jquery_obj){
 		return true;
 	});
 	leaf_nodes.each(function(index, element){
-		element.setAttribute('data-height', 0);
+		jQuery(element).data('height', 0);
+		var height_to_set = 0;
 		jQuery(element).parents('.pmb-project-item').each(function(index, element){
-			element.setAttribute('data-height',index+1);
+			height_to_set++;
+			var parent = jQuery(element);
+			if(parent.data('height') === undefined || parent.data('height') < height_to_set){
+				parent.data('height', height_to_set);//.setAttribute('data-height',++height_to_set);
+			}
 		});
 		// var parent_item = element.parentElement.parentElement;
 		// parent_item.setAttribute('data-height', 1);
