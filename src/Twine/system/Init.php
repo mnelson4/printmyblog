@@ -18,9 +18,16 @@ abstract class Init
 
     public function setHooks()
     {
-        $this->context = $this->initContext();
-        add_action('init', array($this, 'earlyInit'), 5);
-        add_action('init', array($this, 'init'));
+        add_action('plugins_loaded', array($this,'pluginsLoaded'));
+    }
+
+    public function pluginsLoaded(){
+        // prevent loading any PMB until they've ever registered or opted-out of Freemius
+        if(pmb_fs()->is_anonymous() || pmb_fs()->is_registered()){
+            $this->context = $this->initContext();
+            add_action('init', array($this, 'earlyInit'), 5);
+            add_action('init', array($this, 'init'));
+        }
     }
 
     /**

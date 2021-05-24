@@ -21,6 +21,7 @@ use Twine\system\RequestType;
 use Twine\system\VersionHistory;
 use WPTRT\AdminNotices\Notices;
 use Twine\system\Init as BaseInit;
+use \pmb_fs;
 
 /**
  * Class Init
@@ -56,14 +57,6 @@ class Init extends BaseInit
      * @var CustomPostTypes
      */
     protected $cpt;
-
-    /**
-     * Sets up hooks that will initialize the code that will run PMB.
-     */
-    public function setHooks()
-    {
-        parent::setHooks();
-    }
 
 
     /**
