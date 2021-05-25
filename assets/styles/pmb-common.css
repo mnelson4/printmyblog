@@ -81,4 +81,10 @@ summary.pmb-reveal-options{
         display:none;
     }
 }
+.pmb-party{
+    border:2px dashed red;
+    padding:.5em;
+    margin:.5em;
+    text-align:center;
+}
 

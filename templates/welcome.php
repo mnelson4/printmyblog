@@ -1,5 +1,5 @@
 <div class="wrap nosubsub pmb-welcome">
-    <h1>🎉<?php esc_html_e( 'Welcome to Print My Blog 3!', 'print-my-blog' ); ?>🎉</h1>
+    <h1>🎉<?php esc_html_e( 'Welcome to Print My Blog!', 'print-my-blog' ); ?>🎉</h1>
     <p class="pmb-middle-important-text"><?php esc_html_e( 'What would you like to do?', 'print-my-blog' ); ?></p>
     <div class="pmb-content-boxes">
         <div class="pmb-content-box-wrap">
@@ -42,8 +42,9 @@
                     <?php esc_html_e( 'Use Pro Print', 'print-my-blog' );
                         ?>
                     </a>
-                    <span class="description"><?php esc_html_e('Free, with Paid Options', 'print-my-blog');?></span>
+                    <span class="description"><?php esc_html_e('Free and Paid Options', 'print-my-blog');?></span>
                 </p>
+                <div class="pmb-party"><?php printf(__('Use promocode "%s" until June 18th for 50%% off any lifetime license', 'print-my-blog'), 'release');?></div>
                 <ul class="pmb-ul">
                     <li><?php esc_html_e( 'Drag-and-drop content into projects', 'print-my-blog' ); ?></li>
                     <li><?php esc_html_e( 'Include any post types, in any order', 'print-my-blog' ); ?></li>

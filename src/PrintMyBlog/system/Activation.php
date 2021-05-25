@@ -87,8 +87,7 @@ class Activation extends BaseActivation
                 wp_redirect(
                     add_query_arg(
                         array(
-                            'welcome' => 1,
-                            'upgrade' => 1
+                            'upgrade_to_3' => 1
                         ),
                         admin_url(PMB_ADMIN_PAGE_PATH)
                     )

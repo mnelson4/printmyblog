@@ -210,3 +210,15 @@ For displaying a series of boxes
 .pmb-hover .wp-pointer-content{
     text-align:left;
 }
+.pmb-constrained-content{
+    max-width:800px;
+    margin:0 auto;
+}
+.wrap .pmb-big-header{
+    font-size:3em;
+    text-align:center;
+    margin-bottom:1em;
+}
+.pmb-row{
+    padding-bottom:1em;
+}

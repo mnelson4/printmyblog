@@ -251,7 +251,7 @@ function pmb_maybe_add_sortable_to(sortable_selection, item_selection){
 	if( ! max_levels){
 		max_levels = jquery_obj.parents('.pmb-sortable-root').attr('data-max-nesting');
 	}
-	if(nested_level <= max_levels){
+	if(nested_level < max_levels){
 		var sortable_items = item_selection.children('.pmb-sortable-inactive, .pmb-sortable');
 		if(sortable_items.length){
 			pmb_create_sortable_from(sortable_items[0]);

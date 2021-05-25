@@ -473,6 +473,9 @@ class Admin extends BaseController
 
         if (isset($_GET['welcome'])) {
             include(PMB_TEMPLATES_DIR . 'welcome.php');
+        }
+        else if (isset($_GET['upgrade_to_3'])){
+            include(PMB_TEMPLATES_DIR . 'upgrade_to_3.php');
         } else {
             $print_options = new PrintOptions();
             $displayer = new FormInputs();
@@ -522,7 +525,7 @@ class Admin extends BaseController
                 '.pmb-pro-only, .pmb-pro-best{display:none;}'
             );
         }
-        if (isset($_GET['welcome'])) {
+        if (isset($_GET['welcome']) || isset($_GET['upgrade_to_3'])) {
             wp_enqueue_style(
                 'pmb_welcome',
                 PMB_ASSETS_URL . 'styles/welcome.css',
