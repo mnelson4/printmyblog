@@ -373,6 +373,7 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 * Released new Pro Print features (print for free with browser, but some features only supported by Pro Print Service). Previous versions 3.0.0 to 3.2.4 were released to Founding Members only, so the previous release on WordPress.org before this was 2.9.7). See [printmy.blog](https://printmy.blog) for more info, pricing, and user manual.
 * "Print Now" renamed "Quick Print", but otherwise the same. The old print buttons (configured on the Print My Blog > Settings page) are also unchanged.
 * Removed dashboard notice for Print My Blog Pro (because it's released! This is it.)
+* Added French, German, and Spanish translations
 
 = 3.2.4 May 17, 2021 =
 * Fixed a bug when using the same article twice in a project
