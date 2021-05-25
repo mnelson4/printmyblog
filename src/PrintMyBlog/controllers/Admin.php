@@ -518,7 +518,7 @@ class Admin extends BaseController
             [],
             filemtime(PMB_STYLES_DIR . 'pmb-admin.css')
         );
-        if (apply_filters('pmb_pro_only__is_premium', pmb_fs()->is_plan__premium_only('hobbyist'))) {
+        if (pmb_fs()->is_plan__premium_only('hobbyist')) {
             // Paid users don't need to be reminded what's pro and what's not
             wp_add_inline_style(
                 'pmb_admin',
@@ -599,12 +599,16 @@ class Admin extends BaseController
                     );
                     $license = pmb_fs()->_get_license();
                     $site = pmb_fs()->get_site();
+                    $use_pmb_central = 0;
+                    if(pmb_fs()->is_plan__premium_only('business')){
+                        $use_pmb_central = 1;
+                    }
                     wp_localize_script(
                         'pmb-generate',
                         'pmb_generate',
                         [
                             'site_url' => site_url(),
-                            'use_pmb_central_for_previews' => pmb_fs()->is_plan__premium_only('business') ? 1 : 0,
+                            'use_pmb_central_for_previews' => $use_pmb_central,
                             'license_data' => [
                                 'endpoint' => $this->pmb_central->getCentralUrl(),
                                 'license_id' => $license instanceof FS_Plugin_License ? $license->id : '',

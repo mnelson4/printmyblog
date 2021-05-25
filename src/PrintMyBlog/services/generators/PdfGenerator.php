@@ -63,12 +63,16 @@ class PdfGenerator extends ProjectFileGeneratorBase
         }
         $license = pmb_fs()->_get_license();
         $site = pmb_fs()->get_site();
+        $use_pmb_central = 0;
+        if(pmb_fs()->is_plan__premium_only('business')){
+            $use_pmb_central = 1;
+        }
         wp_localize_script(
             'pmb_pro_page',
             'pmb_pro',
             [
                 'site_url' => site_url(),
-                'use_pmb_central_for_previews' => pmb_fs()->is_plan__premium_only('business') ? 1 : 0,
+                'use_pmb_central_for_previews' => $use_pmb_central,
                 'license_data' => [
                     'endpoint' => $this->getPmbCentral()->getCentralUrl(),
                     'license_id' => $license instanceof FS_Plugin_License ? $license->id : '',

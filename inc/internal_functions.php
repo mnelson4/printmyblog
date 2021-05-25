@@ -21,22 +21,19 @@ function pmb_hover_help($explanation = '', $extra_css_classes = ''){
  * @return string
  */
 function pmb_pro_print_service_only($explanation = ''){
-    $show = true;
     if(pmb_fs()->is_plan__premium_only('hobbyist')){
-        $show = false;
-    }
-    if(apply_filters('pmb_pro_only__is_premium',$show)){
         return '';
+    } else {
+        $hover_text = '<b>' . sprintf(
+                __('Only works with %1$sPro Print Service%2$s', 'print-my-blog'),
+                '<a href="' . pmb_fs()->get_upgrade_url() . '">',
+                '</a>'
+            ) . '</b>';
+        if ($explanation) {
+            $hover_text .= "<br>" . $explanation;
+        }
+        return pmb_hover_help($hover_text, 'pmb-pro-only');
     }
-    $hover_text = '<b>' . sprintf(
-            __('Only works with %1$sPro Print Service%2$s', 'print-my-blog'),
-        '<a href="' . pmb_fs()->get_upgrade_url() . '">',
-        '</a>'
-    ) . '</b>';
-    if($explanation){
-        $hover_text .= "<br>" . $explanation;
-    }
-	return pmb_hover_help($hover_text, 'pmb-pro-only');
 }
 
 /**
@@ -51,22 +48,19 @@ function pmb_pro_print_service_only_e($explanation = ''){
  * @return string
  */
 function pmb_pro_print_service_best($explanation = ''){
-    $show = true;
     if(pmb_fs()->is_plan__premium_only('hobbyist')){
-        $show = false;
-    }
-    if(apply_filters('pmb_pro_only__is_premium',$show)){
         return '';
+    } else {
+        $hover_text = '<b>' . sprintf(
+                __('Works better with %1$sPro Print Service%2$s', 'print-my-blog'),
+                '<a href="' . pmb_fs()->get_upgrade_url() . '">',
+                '</a>'
+            ) . '</b>';
+        if ($explanation) {
+            $hover_text .= "<br>" . $explanation;
+        }
+        return pmb_hover_help($hover_text, 'pmb-pro-best');
     }
-    $hover_text = '<b>' . sprintf(
-            __('Works better with %1$sPro Print Service%2$s', 'print-my-blog'),
-            '<a href="' . pmb_fs()->get_upgrade_url() . '">',
-           '</a>'
-    ) . '</b>';
-    if($explanation){
-        $hover_text .= "<br>" . $explanation;
-    }
-    return pmb_hover_help($hover_text,  'pmb-pro-best');
 }
 
 /**

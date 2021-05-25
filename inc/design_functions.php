@@ -28,7 +28,11 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design){
         content: target-counter(attr(href), page);
     }';
 	// instruct PMB print service to add "powered by" for free users and cheap plans
-    if($design->getSetting('powered_by') || ! pmb_fs()->is_plan__premium_only('hobby')){
+    $show_powered_by = true;
+    if(pmb_fs()->is_plan__premium_only('hobby')){
+        $show_powered_by = false;
+    }
+    if($design->getSetting('powered_by') || $show_powered_by){
         $css .= '@page:first{
             @bottom{
                 content:\'Powered by Print My Blog Pro & WordPress\';
