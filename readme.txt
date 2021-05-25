@@ -8,6 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
+Stable tag: 3.3.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -370,7 +371,8 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 == Changelog ==
 = 3.3.0 May 25, 2021 =
 * Introduces Freemius integration for selling Print My Blog Pro (plugin zip file about 2MB now, sorry, but I hope the often-requested improvements and having an actual business model will compensate for that)
-* Released new Pro Print features (print for free with browser, but some features only supported by Pro Print Service). Previous versions 3.0.0 to 3.2.4 were released to Founding Members only, so the previous release on WordPress.org before this was 2.9.7). See [printmy.blog](https://printmy.blog) for more info, pricing, and user manual.
+* Introduces Pro Print to WordPress.org. Free features include: saveable projects, drag-and-drop project organizer, custom post type support, customizable title page, table of contents. Features requiring Pro Print Service: page references, footnotes, clean page numbering and running headers, automatic adjustments of image position, and others. See [printmy.blog](https://printmy.blog) for more info, pricing, and user manual.
+* FYI Previous versions on WordPress.org was 2.9.7; version 3.0.0 to 3.2.4 were released to Founding Members only separately.
 * "Print Now" renamed "Quick Print", but otherwise the same. The old print buttons (configured on the Print My Blog > Settings page) are also unchanged.
 * Removed dashboard notice for Print My Blog Pro (because it's released! This is it.)
 * Added French, German, and Spanish translations
