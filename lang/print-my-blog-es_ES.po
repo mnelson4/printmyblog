@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2021-05-25 14:06-0700\n"
-"PO-Revision-Date: 2021-05-25 14:07-0700\n"
+"POT-Creation-Date: 2021-05-25 14:54-0700\n"
+"PO-Revision-Date: 2021-05-25 14:55-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -1802,7 +1802,7 @@ msgstr ""
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:79
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:95
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:109
-#: templates/welcome.php:55
+#: templates/welcome.php:54
 msgid "Read the User Guide"
 msgstr "Lea la Guía del usuario"
 
@@ -2619,11 +2619,11 @@ msgstr "Las etiquetas HTML no están permitidas en este campo"
 msgid "Input invalid"
 msgstr "Entrada inválida"
 
-#: src/mnelson4/RestApiDetector.php:153
+#: src/mnelson4/rest_api_detector/RestApiDetector.php:153
 msgid "The WordPress site has an error in its REST API data."
 msgstr "El sitio de WordPress tiene un error en sus datos de la API de REST."
 
-#: src/mnelson4/RestApiDetector.php:171
+#: src/mnelson4/rest_api_detector/RestApiDetector.php:171
 msgid "The WordPress site responded with an unexpected response."
 msgstr "El sitio de WordPress respondió con una respuesta inesperada."
 
@@ -3437,7 +3437,7 @@ msgstr ""
 "utilicen su navegador web de forma gratuita, o el nuevo servicio de "
 "impresión Pro de pago."
 
-#: templates/upgrade_to_3.php:10 templates/welcome.php:51
+#: templates/upgrade_to_3.php:10 templates/welcome.php:50
 msgid "Automatic Table of Contents"
 msgstr "Tabla automática de contenidos"
 
@@ -3555,20 +3555,24 @@ msgstr ""
 "Utilice el código promocional \"%s\" durante 50%% de descuento en cualquier "
 "licencia de por vida hasta el 18 de junio"
 
-#: templates/upgrade_to_3.php:87
+#: templates/upgrade_to_3.php:82 templates/welcome.php:55
+msgid "Buy Now"
+msgstr "Comprar ahora"
+
+#: templates/upgrade_to_3.php:88
 msgid "Try Pro Print Now"
 msgstr "Pro impresión"
 
-#: templates/upgrade_to_3.php:88
+#: templates/upgrade_to_3.php:89
 msgid "Learn More on printmy.blog"
 msgstr "Más información sobre printmy.blog"
 
-#: templates/upgrade_to_3.php:92
+#: templates/upgrade_to_3.php:93
 #, php-format
 msgid "Please %1$slet me know%2$s if you have any questions!"
 msgstr "Por favor, %1$s déjame saber%2$s si tienes alguna pregunta!"
 
-#: templates/upgrade_to_3.php:93
+#: templates/upgrade_to_3.php:94
 msgid "Best wishes, Mike Nelson, Print My Blog Developer"
 msgstr "Mis mejores deseos, Mike Nelson, Print My Blog Developer"
 
@@ -3632,30 +3636,30 @@ msgstr "Usar pro impresión"
 msgid "Free and Paid Options"
 msgstr "Gratis, con opciones de pago"
 
-#: templates/welcome.php:47
+#: templates/welcome.php:48
+msgid "Drag-and-drop content into projects"
+msgstr "Arrastrar y soltar contenido en proyectos"
+
+#: templates/welcome.php:49
+msgid "Include any post types, in any order"
+msgstr "Incluir cualquier tipo de publicación, en cualquier orden"
+
+#: templates/welcome.php:51
+msgid "Choose and Customize Many Designs, or code your own"
+msgstr "Elija y personalice muchos diseños, o codice sus propios"
+
+#: templates/welcome.php:52
+msgid "Automatically convert hyperlinks to page references and footnotes"
+msgstr ""
+"Convertir automáticamente hipervínculos en referencias de página y notas al "
+"pie"
+
+#: templates/welcome.php:55
 #, php-format
 msgid "Use promocode \"%s\" until June 18th for 50%% off any lifetime license"
 msgstr ""
 "Utilice el código promocional \"%s\" hasta el 18 de junio para el 50%% de "
 "descuento en cualquier licencia de por vida"
-
-#: templates/welcome.php:49
-msgid "Drag-and-drop content into projects"
-msgstr "Arrastrar y soltar contenido en proyectos"
-
-#: templates/welcome.php:50
-msgid "Include any post types, in any order"
-msgstr "Incluir cualquier tipo de publicación, en cualquier orden"
-
-#: templates/welcome.php:52
-msgid "Choose and Customize Many Designs, or code your own"
-msgstr "Elija y personalice muchos diseños, o codice sus propios"
-
-#: templates/welcome.php:53
-msgid "Automatically convert hyperlinks to page references and footnotes"
-msgstr ""
-"Convertir automáticamente hipervínculos en referencias de página y notas al "
-"pie"
 
 #. Plugin URI of the plugin/theme
 #. Author URI of the plugin/theme

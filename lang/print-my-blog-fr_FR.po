@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2021-05-25 14:08-0700\n"
-"PO-Revision-Date: 2021-05-25 14:09-0700\n"
+"POT-Creation-Date: 2021-05-25 14:54-0700\n"
+"PO-Revision-Date: 2021-05-25 14:55-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -1826,7 +1826,7 @@ msgstr ""
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:79
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:95
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:109
-#: templates/welcome.php:55
+#: templates/welcome.php:54
 msgid "Read the User Guide"
 msgstr "Lire le guide de l’utilisateur"
 
@@ -2640,11 +2640,11 @@ msgstr "Les balises HTML ne sont pas autorisées dans ce domaine"
 msgid "Input invalid"
 msgstr "Entrée invalide  "
 
-#: src/mnelson4/RestApiDetector.php:153
+#: src/mnelson4/rest_api_detector/RestApiDetector.php:153
 msgid "The WordPress site has an error in its REST API data."
 msgstr "Le site WordPress a une erreur dans ses données D’API REST."
 
-#: src/mnelson4/RestApiDetector.php:171
+#: src/mnelson4/rest_api_detector/RestApiDetector.php:171
 msgid "The WordPress site responded with an unexpected response."
 msgstr "Le site WordPress a répondu par une réponse inattendue."
 
@@ -3458,7 +3458,7 @@ msgstr ""
 "en utilisant votre navigateur Web gratuitement, ou le nouveau service "
 "d’impression Pro payant."
 
-#: templates/upgrade_to_3.php:10 templates/welcome.php:51
+#: templates/upgrade_to_3.php:10 templates/welcome.php:50
 msgid "Automatic Table of Contents"
 msgstr "Table automatique des matières"
 
@@ -3578,20 +3578,24 @@ msgstr ""
 "Utilisez le code promo « %s » pendant 50%% toute licence à vie jusqu’au 18 "
 "juin"
 
-#: templates/upgrade_to_3.php:87
+#: templates/upgrade_to_3.php:82 templates/welcome.php:55
+msgid "Buy Now"
+msgstr "Acheter maintenant"
+
+#: templates/upgrade_to_3.php:88
 msgid "Try Pro Print Now"
 msgstr "Impression Pro"
 
-#: templates/upgrade_to_3.php:88
+#: templates/upgrade_to_3.php:89
 msgid "Learn More on printmy.blog"
 msgstr "En savoir plus sur printmy.blog"
 
-#: templates/upgrade_to_3.php:92
+#: templates/upgrade_to_3.php:93
 #, php-format
 msgid "Please %1$slet me know%2$s if you have any questions!"
 msgstr "S'%1$s s’il vous plaît %2$s-moi savoir%2$s si vous avez des questions!"
 
-#: templates/upgrade_to_3.php:93
+#: templates/upgrade_to_3.php:94
 msgid "Best wishes, Mike Nelson, Print My Blog Developer"
 msgstr "Meilleurs voeux, Mike Nelson, Print My Blog Developer"
 
@@ -3655,29 +3659,29 @@ msgstr "Utiliser Pro Print"
 msgid "Free and Paid Options"
 msgstr "Gratuit, avec options payantes"
 
-#: templates/welcome.php:47
-#, php-format
-msgid "Use promocode \"%s\" until June 18th for 50%% off any lifetime license"
-msgstr ""
-"Utilisez le code promo « %s » jusqu’au 18 juin pour 50%% toute licence à vie"
-
-#: templates/welcome.php:49
+#: templates/welcome.php:48
 msgid "Drag-and-drop content into projects"
 msgstr "Glisser-déposer le contenu dans les projets"
 
-#: templates/welcome.php:50
+#: templates/welcome.php:49
 msgid "Include any post types, in any order"
 msgstr "Inclure tous les types de postes, dans n’importe quel ordre"
 
-#: templates/welcome.php:52
+#: templates/welcome.php:51
 msgid "Choose and Customize Many Designs, or code your own"
 msgstr "Choisissez et personnalisez de nombreux designs ou codez vos propres"
 
-#: templates/welcome.php:53
+#: templates/welcome.php:52
 msgid "Automatically convert hyperlinks to page references and footnotes"
 msgstr ""
 "Convertir automatiquement les hyperliens en références de page et notes de "
 "bas de page"
+
+#: templates/welcome.php:55
+#, php-format
+msgid "Use promocode \"%s\" until June 18th for 50%% off any lifetime license"
+msgstr ""
+"Utilisez le code promo « %s » jusqu’au 18 juin pour 50%% toute licence à vie"
 
 #. Plugin URI of the plugin/theme
 #. Author URI of the plugin/theme
