@@ -402,6 +402,16 @@ class DesignTemplate
     }
 
     /**
+     * Indicates whether or not this custom section template is supported by this design template
+     * @param string $custom_template_slug
+     * @return bool
+     */
+    public function supportsCustomTemplate($custom_template_slug){
+        $supported_custom_templates = $this->getCustomTemplates();
+        return in_array($custom_template_slug, $supported_custom_templates);
+    }
+
+    /**
      * Tell us the slug of the section template you want to use, and we'll tell you the slug of the closest
      * available template for this design template. It might be what you requested, or one of its fallbacks.
      * @param string $desired_template_slug
@@ -410,7 +420,7 @@ class DesignTemplate
     public function resolveSectionTemplateToUse($desired_template_slug)
     {
         while ($desired_template_slug) {
-            if ($this->supports($desired_template_slug)) {
+            if ($this->supports($desired_template_slug) || $this->supportsCustomTemplate($desired_template_slug)) {
                 return $desired_template_slug;
             }
 
