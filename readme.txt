@@ -16,7 +16,7 @@ Make printing your blog easy and impressive. For you & your visitors. One post o
 
 **Offline publishing for you, site visitors, and the world outside WordPress.**
 
-Print My Blog makes WordPress content useful outside of your website, like in print, PDFS, and other formats. It has 3 main features:
+Print My Blog makes WordPress content useful outside of your website, like in print, PDFs, and other formats. It has 3 main features:
 
 1. Quick Print: print thousands of posts in a few clicks
 2. Print Buttons: let site visitors print individual posts
@@ -87,6 +87,7 @@ Replace Google Docs and Microsoft Word with WordPress! Turn existing posts, page
 Use your browser to print Pro Print projects for free, but some features (like automatic page references, footnotes, and full control of page margins) require printing using our Pro Print Service for a subscription fee.
 
 Example uses:
+
 * **white paper**. Share an in-depth analysis of a topic on your website and in print
 * **printed version of entire website or blog**. Print it all, except ink guzzlers like site heading, sidebars, footers and pop-ups. Use your own printer or send to a printing service lulu.com
 * **book from select content**. Add a title page, introduction, table of contents, and pick existing content from your site to make a book. Sell it on Amazon KDP. Like that, you're an author!

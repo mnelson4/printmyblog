@@ -7,3 +7,4 @@
 /phpstan.neon.dist export-ignore
 /README.md export-ignore
 *.po export-ignore
+/phpstan-bootstrap.php
