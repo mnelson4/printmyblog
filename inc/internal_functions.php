@@ -17,11 +17,15 @@ function pmb_hover_help($explanation = '', $extra_css_classes = ''){
     return '<span data-help="' . esc_attr($explanation) . '" class="dashicons dashicons-superhero pmb-hover ' . $extra_css_classes . '"></span>';
 }
 /**
- * Returns a string that says this feature only works with Print My Blog Pro.
+ * Returns a string that says this feature only works with Pro Print Service (not supported by browsers).
  * @return string
  */
 function pmb_pro_print_service_only($explanation = ''){
-    if(apply_filters('pmb_pro_only__is_premium',pmb_fs()->is_plan__premium_only('hobbyist'))){
+    $show = true;
+    if(pmb_fs()->is_plan__premium_only('hobbyist')){
+        $show = false;
+    }
+    if(apply_filters('pmb_pro_only__is_premium',$show)){
         return '';
     }
     $hover_text = '<b>' . sprintf(
@@ -36,7 +40,7 @@ function pmb_pro_print_service_only($explanation = ''){
 }
 
 /**
- * Echoes out that this feature only works with pro
+ * Echoes out that this feature only works with pro print service (not supported by browsers)
  */
 function pmb_pro_print_service_only_e($explanation = ''){
     echo pmb_pro_print_service_only($explanation);
@@ -47,7 +51,11 @@ function pmb_pro_print_service_only_e($explanation = ''){
  * @return string
  */
 function pmb_pro_print_service_best($explanation = ''){
-    if(apply_filters('pmb_pro_only__is_premium',pmb_fs()->is_plan__premium_only('hobbyist'))){
+    $show = true;
+    if(pmb_fs()->is_plan__premium_only('hobbyist')){
+        $show = false;
+    }
+    if(apply_filters('pmb_pro_only__is_premium',$show)){
         return '';
     }
     $hover_text = '<b>' . sprintf(
