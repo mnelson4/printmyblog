@@ -79,7 +79,7 @@
 
             <div class="pmb-party pmb-center" style="padding:2em; margin-bottom:2em;">
                 <h2><?php printf(__('Use promocode "%s" for 50%% off any lifetime license until June 18th', 'print-my-blog'), 'release');?></h2>
-                <a class="button" href="<?php echo esc_attr(pmb_fs()->get_upgrade_url());?>"><?php esc_html_e('Buy Now', 'print-my-blog');?></a>
+                <a class="button" href="<?php echo esc_attr(pmb_fs()->get_upgrade_url(WP_FS__PERIOD_LIFETIME));?>"><?php esc_html_e('Buy Now', 'print-my-blog');?></a>
             </div>
         </div>
     </div>
