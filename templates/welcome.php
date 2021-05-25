@@ -44,7 +44,6 @@
                     </a>
                     <span class="description"><?php esc_html_e('Free and Paid Options', 'print-my-blog');?></span>
                 </p>
-                <div class="pmb-party"><?php printf(__('Use promocode "%s" until June 18th for 50%% off any lifetime license', 'print-my-blog'), 'release');?></div>
                 <ul class="pmb-ul">
                     <li><?php esc_html_e( 'Drag-and-drop content into projects', 'print-my-blog' ); ?></li>
                     <li><?php esc_html_e( 'Include any post types, in any order', 'print-my-blog' ); ?></li>
@@ -52,7 +51,9 @@
                     <li><?php esc_html_e( 'Choose and Customize Many Designs, or code your own', 'print-my-blog' ); ?></li>
                     <li><?php esc_html_e( 'Automatically convert hyperlinks to page references and footnotes', 'print-my-blog' ); ?></li>
                 </ul>
-                <p><a href="https://printmy.blog/user-guide/pro/getting-started/1-the-basics/" target="_blank"><?php esc_html_e('Read the User Guide', 'print-my-blog');?></a></p>
+                <p><a href="https://printmy.blog/user-guide/pro/getting-started/1-the-basics/" target="_blank"><?php esc_html_e('Read the User Guide', 'print-my-blog');?></a> </p>
+                <div class="pmb-party"><?php printf(__('Use promocode "%s" until June 18th for 50%% off any lifetime license', 'print-my-blog'), 'release');?><br><a class="button" href="<?php echo esc_attr(pmb_fs()->get_upgrade_url());?>"><?php esc_html_e('Buy Now', 'print-my-blog');?></a></div>
+
             </div>
         </div>
     </div>
