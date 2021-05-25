@@ -368,6 +368,12 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+= 3.3.0 May 25, 2021 =
+* Introduces Freemius integration for selling Print My Blog Pro (plugin zip file about 2MB now, sorry, but I hope the often-requested improvements and having an actual business model will compensate for that)
+* Released new Pro Print features (print for free with browser, but some features only supported by Pro Print Service). Previous versions 3.0.0 to 3.2.4 were released to Founding Members only, so the previous release on WordPress.org before this was 2.9.7). See [printmy.blog](https://printmy.blog) for more info, pricing, and user manual.
+* "Print Now" renamed "Quick Print", but otherwise the same. The old print buttons (configured on the Print My Blog > Settings page) are also unchanged.
+* Removed dashboard notice for Print My Blog Pro (because it's released! This is it.)
+
 = 3.2.4 May 17, 2021 =
 * Fixed a bug when using the same article twice in a project
 * Don't use theme's custom CSS in projects (unless using the theme)
