@@ -25,7 +25,15 @@ class Frontend extends BaseController
     {
         add_filter(
             'the_content',
-            array($this, 'addPrintButton')
+            array($this, 'addPrintButton'),
+            /**
+             * Allows changing the priority of the print buttons to place them above or below other content
+             * automatically added.
+             */
+            apply_filters(
+                'PrintMyBlog\controllers\PmbFrontend->setHooks $priority',
+                10
+            )
         );
     }
     public function addPrintButton($content)

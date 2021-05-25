@@ -22,19 +22,19 @@
 
 /* If users add the CSS class "pmb-print-only" we want it to be hidden on the frontend... */
 .pmb-print-only{
-    display:none;
+    display:none !important;
 }
 /* ...but not when printing with Print My Blog...*/
 .pmb-posts .pmb-print-only{
-    display:block;
+    display:block !important;
 }
 /* ...or when viewing from the editor */
 .block-editor .pmb-print-only{
-    display:block;
+    display:block !important;
 }
 /* And when they add the CSS class "pmb-screen-only", hide it while printing with Print My Blog */
 .pmb-posts .pmb-screen-only{
-    display:none;
+    display:none !important;
 }
 details.pmb-details{
     margin-top:1em;

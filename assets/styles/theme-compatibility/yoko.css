@@ -1,0 +1,4 @@
+/* Don't indent post content, give it the full width */
+#content .entry-content{
+    width:100% !important;
+}

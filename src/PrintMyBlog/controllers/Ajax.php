@@ -2,8 +2,8 @@
 
 namespace PrintMyBlog\controllers;
 
-use mnelson4\RestApiDetector\RestApiDetector;
-use mnelson4\RestApiDetector\RestApiDetectorError;
+use mnelson4\rest_api_detector\RestApiDetector;
+use mnelson4\rest_api_detector\RestApiDetectorError;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\entities\ProjectGeneration;
 use PrintMyBlog\entities\ProjectProgress;

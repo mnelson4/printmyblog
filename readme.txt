@@ -3,7 +3,7 @@ Contributors: mnelson4
 Tags: print, PDF, backup, eBook, print button, ClassicPress
 Requires at least: 4.6
 Stable tag: trunk
-Tested up to: 5.6
+Tested up to: 5.7
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -355,6 +355,31 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 `
 <?php echo do_shortcode('[pmb_print_buttons]'); ?>
 `
+= How do I change the color of the print buttons? =
+The print button's color is determined by your theme. But if you can't change the button colors using your theme's settings, you can change it with some custom CSS.
+Eg, this here's how to change the button's text color to black and background color to white:
+
+1. Go to wp-admin on your website
+2. On the left, under "Appearance", click "Customize"
+3. On the left, under Additional CSS" add the the following code:
+
+`
+div.pmb-print-this-page a{
+    color:black;
+    background-color:white;
+}
+`
+
+= How do I customize the printouts made with the Print Buttons? =
+From the Print My Blog Settings page, click "Customize Buttons". From here you can customize:
+* whether print buttons appear by default above or below the post content
+* which print buttons appear (print, PDF, and eBook)
+* the text used on each button (translate them, or just an emoji, or whatever)
+
+Under each format, you can also click "Show Options". These options affect the printout produced by the button. These
+options are the same as when printing out multiple posts simultaneously: you can remove the printout metadata, the post's featured image, etc.
+
+https://youtu.be/uPQ3vqm7A2g
 
 
 == Screenshots ==
@@ -369,10 +394,11 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+
 = 3.3.0 May 25, 2021 =
 * Introduces Freemius integration for selling Print My Blog Pro (plugin zip file about 2MB now, sorry, but I hope the often-requested improvements and having an actual business model will compensate for that)
 * Introduces Pro Print to WordPress.org. Free features include: saveable projects, drag-and-drop project organizer, custom post type support, customizable title page, table of contents. Features requiring Pro Print Service: page references, footnotes, clean page numbering and running headers, automatic adjustments of image position, and others. See [printmy.blog](https://printmy.blog) for more info, pricing, and user manual.
-* FYI Previous versions on WordPress.org was 2.9.7; version 3.0.0 to 3.2.4 were released to Founding Members only separately.
+* FYI Previous versions on WordPress.org was 2.9.9; version 3.0.0 to 3.2.4 were released to Founding Members only separately.
 * "Print Now" renamed "Quick Print", but otherwise the same. The old print buttons (configured on the Print My Blog > Settings page) are also unchanged.
 * Removed dashboard notice for Print My Blog Pro (because it's released! This is it.)
 * Added French, German, and Spanish translations
@@ -418,6 +444,15 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 = 3.0.0 April 5, 2021 =
 * Add "Byline" as a project meta which appears in all title pages
 * Add CSS classes "pmb-float-top" and "pmb-float-bottom"
+
+= 2.9.9 March 1, 2020 =
+* [Improve NextGen gallery display](https://wordpress.org/support/topic/gallery-thumbnails-are-put-one-per-line/)
+
+= 2.9.8 December 23, 2020 =
+* Fix pmb-screen-only CSS class
+* Undo LaTex2HTML forcing page dimensions
+* Load theme compatibility files for parent themes too
+* Improve theme compatibility by adding the ID "content" on the PMB main content div
 
 = 2.9.7 December 1, 2020 =
 * Expand all Arconix plugin accordions

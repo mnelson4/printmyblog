@@ -2,8 +2,8 @@
 
 namespace PrintMyBlog\controllers;
 
-use mnelson4\RestApiDetector\RestApiDetector;
-use mnelson4\RestApiDetector\RestApiDetectorError;
+use mnelson4\rest_api_detector\RestApiDetector;
+use mnelson4\rest_api_detector\RestApiDetectorError;
 use PrintMyBlog\domain\PrintOptions;
 use stdClass;
 use Twine\controllers\BaseController;
@@ -400,6 +400,12 @@ class LegacyPrintPage extends BaseController
     {
         $theme = wp_get_theme();
         $slug = $theme->get('TextDomain');
+        $this->loadThemeCompatibilityIfItExists($slug);
+        $this->loadThemeCompatibilityIfItExists($theme->template);
+    }
+
+    protected function loadThemeCompatibilityIfItExists($slug)
+    {
         $theme_slug_path =  'styles/theme-compatibility/' . $slug . '.css';
         if (file_exists(PMB_ASSETS_DIR . $theme_slug_path)) {
             wp_enqueue_style(
