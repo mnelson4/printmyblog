@@ -265,6 +265,14 @@ class DesignTemplate
     {
         // add an underscore to the transition if its not the article template.
         if (! $this->templateFileExists($division, $beginning, false) && $use_fallback) {
+            // check if it's a custom template and has a filepath. In that case, use it
+            // find out if the template is custom, if so ask it for its filepath
+            if($this->supportsCustomTemplate($division)){
+                $section_template = $this->section_template_registry->get($division);
+                if($section_template instanceof SectionTemplate && $section_template->hasFilepath()){
+                    return $section_template->getFilepath();
+                }
+            }
             if (! $this->getFormat()->getDefaultDesignTemplate()->templateFileExists($division, $beginning, false)) {
                 throw new TemplateDoesNotExist($this->calculateTemplatePathToDivision($division, $beginning));
             }

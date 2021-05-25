@@ -6,6 +6,7 @@ use Exception;
 use FS_Plugin_License;
 use FS_Site;
 use PrintMyBlog\entities\DesignTemplate;
+use PrintMyBlog\entities\SectionTemplate;
 use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;

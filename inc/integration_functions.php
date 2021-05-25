@@ -81,7 +81,7 @@ function pmb_register_design($design_template_slug, $design_slug, $design_args_c
 /**
  * @param $slug
  * @param string[] $design_templates
- * @param $section_template_args_callback see
+ * @param callback $section_template_args_callback see \PrintMyBlog\entities\SectionTemplate::__construct()
  */
 function pmb_register_section_template($slug, $design_templates, $section_template_args_callback){
     /**

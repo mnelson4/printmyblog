@@ -10,6 +10,7 @@ use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\entities\ProjectGeneration;
 use PrintMyBlog\orm\entities\ProjectSection;
 use PrintMyBlog\services\PmbCentral;
+use PrintMyBlog\services\SectionTemplateRegistry;
 use stdClass;
 use WP_Post;
 use WP_Query;
@@ -37,6 +38,10 @@ abstract class ProjectFileGeneratorBase
      * @var DetectAndActivate
      */
     private $plugin_compatibility;
+    /**
+     * @var SectionTemplateRegistry
+     */
+    protected $section_template_registry;
 
     /**
      * ProjectHtmlGenerator constructor.
