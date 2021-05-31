@@ -395,6 +395,8 @@ https://youtu.be/uPQ3vqm7A2g
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+= 3.3.1 June 1, 2021 =
+* [Bugfix](https://wordpress.org/support/topic/pmb_content-sitemap-xml/): remove "pmb_content" from sitemap
 
 = 3.3.0 May 25, 2021 =
 * Introduces Freemius integration for selling Print My Blog Pro (plugin zip file about 2MB now, sorry, but I hope the often-requested improvements and having an actual business model will compensate for that)
