@@ -7,6 +7,7 @@ use PrintMyBlog\compatibility\plugins\EasyFootnotes;
 use PrintMyBlog\compatibility\plugins\LazyLoadingFeaturePlugin;
 use PrintMyBlog\compatibility\plugins\TablePress;
 use PrintMyBlog\compatibility\plugins\WpVrView;
+use PrintMyBlog\compatibility\plugins\YoastSeo;
 use Twine\compatibility\CompatibilityBase;
 
 /**
@@ -46,6 +47,9 @@ class DetectAndActivate
             }
             if (class_exists('CoBlocks')) {
                 $compatiblity_mods_to_activate[] = new CoBlocks();
+            }
+            if (class_exists('WPSEO_Sitemaps')){
+                $compatiblity_mods_to_activate[] = new YoastSeo();
             }
             $this->compatibility_mods = $compatiblity_mods_to_activate;
         }
