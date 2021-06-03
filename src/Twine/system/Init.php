@@ -27,6 +27,8 @@ abstract class Init
             $this->context = $this->initContext();
             add_action('init', array($this, 'earlyInit'), 5);
             add_action('init', array($this, 'init'));
+        } else {
+            add_action('init', array($this,'minimalInit'));
         }
     }
 
@@ -53,6 +55,14 @@ abstract class Init
         $this->registerStuff();
         $this->setupDbEnvironment();
         $this->takeActionOnIncomingRequest();
+    }
+
+    /**
+     * Initializes a minimal set of features, for before Freemius has been opted-into. Eg frontend stuff taht should still work
+     * even before they've opted in or out of Freemius
+     */
+    public function minimalInit(){
+
     }
 
     /**

@@ -73,6 +73,35 @@ class Init extends BaseInit
     }
 
     /**
+     * Just get the frontend print buttons and frontend stuff working
+     */
+    public function minimalInit(){
+        define('PMB_REST_PROXY_EXISTS', false);
+        
+        $this->includes();
+
+        load_plugin_textdomain('print-my-blog', false, PMB_DIRNAME . '/lang');
+        $this->setUrls();
+
+        if (defined('DOING_AJAX') && DOING_AJAX) {
+            $ajax = $this->context->reuse('PrintMyBlog\controllers\Ajax');
+            $ajax->setHooks();
+        } elseif (! is_admin()) {
+            (new Frontend())->setHooks();
+            (new LegacyPrintPage())->setHooks();
+        }
+        // These are needed at least during frontend and ajax requests
+        (new Shortcodes())->setHooks();
+
+
+        $block_controller = new GutenbergBlock();
+        $block_controller->setHooks();
+
+        $common_controller = new Common();
+        $common_controller->setHooks();
+    }
+
+    /**
      * Includes files containing functions
      */
     protected function includes()
