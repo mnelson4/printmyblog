@@ -77,7 +77,7 @@ class Init extends BaseInit
      */
     public function minimalInit(){
         define('PMB_REST_PROXY_EXISTS', false);
-        
+
         $this->includes();
 
         load_plugin_textdomain('print-my-blog', false, PMB_DIRNAME . '/lang');
@@ -86,7 +86,12 @@ class Init extends BaseInit
         if (defined('DOING_AJAX') && DOING_AJAX) {
             $ajax = $this->context->reuse('PrintMyBlog\controllers\Ajax');
             $ajax->setHooks();
-        } elseif (! is_admin()) {
+        } elseif (is_admin()) {
+
+            $admin = $this->context->reuse('PrintMyBlog\controllers\Admin');
+            $admin->setHooks();
+            $this->initDashboardNews();
+        } else {
             (new Frontend())->setHooks();
             (new LegacyPrintPage())->setHooks();
         }

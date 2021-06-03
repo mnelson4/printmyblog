@@ -397,6 +397,7 @@ https://youtu.be/uPQ3vqm7A2g
 == Changelog ==
 = 3.3.1 June 1, 2021 =
 * [Bugfix](https://wordpress.org/support/topic/pmb_content-sitemap-xml/): remove "pmb_content" from sitemap
+* [Bugfix](https://wordpress.org/support/topic/shortcode-not-working-after-update-2/): initialize shortcode and print buttons before opting in or out of Freemius
 
 = 3.3.0 May 25, 2021 =
 * Introduces Freemius integration for selling Print My Blog Pro (plugin zip file about 2MB now, sorry, but I hope the often-requested improvements and having an actual business model will compensate for that)
