@@ -12,6 +12,7 @@ return array(
     'PrintMyBlog\\compatibility\\plugins\\LazyLoadingFeaturePlugin' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/LazyLoadingFeaturePlugin.php',
     'PrintMyBlog\\compatibility\\plugins\\TablePress' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/TablePress.php',
     'PrintMyBlog\\compatibility\\plugins\\WpVrView' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/WpVrView.php',
+    'PrintMyBlog\\compatibility\\plugins\\YoastSeo' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/YoastSeo.php',
     'PrintMyBlog\\controllers\\Admin' => $baseDir . '/src/PrintMyBlog/controllers/Admin.php',
     'PrintMyBlog\\controllers\\Ajax' => $baseDir . '/src/PrintMyBlog/controllers/Ajax.php',
     'PrintMyBlog\\controllers\\Common' => $baseDir . '/src/PrintMyBlog/controllers/Common.php',

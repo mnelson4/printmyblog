@@ -51,6 +51,7 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'PrintMyBlog\\compatibility\\plugins\\LazyLoadingFeaturePlugin' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/LazyLoadingFeaturePlugin.php',
         'PrintMyBlog\\compatibility\\plugins\\TablePress' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/TablePress.php',
         'PrintMyBlog\\compatibility\\plugins\\WpVrView' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/WpVrView.php',
+        'PrintMyBlog\\compatibility\\plugins\\YoastSeo' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/YoastSeo.php',
         'PrintMyBlog\\controllers\\Admin' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/Admin.php',
         'PrintMyBlog\\controllers\\Ajax' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/Ajax.php',
         'PrintMyBlog\\controllers\\Common' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/Common.php',
