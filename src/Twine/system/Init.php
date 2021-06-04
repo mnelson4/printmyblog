@@ -21,10 +21,11 @@ abstract class Init
         add_action('plugins_loaded', array($this,'pluginsLoaded'));
     }
 
-    public function pluginsLoaded(){
+    public function pluginsLoaded()
+    {
         // prevent loading any PMB until they've ever registered or opted-out of Freemius
         $this->context = $this->initContext();
-        if(pmb_fs()->is_anonymous() || pmb_fs()->is_registered()){
+        if (pmb_fs()->is_anonymous() || pmb_fs()->is_registered()) {
             add_action('init', array($this, 'earlyInit'), 5);
             add_action('init', array($this, 'init'));
         } else {
@@ -63,8 +64,8 @@ abstract class Init
      * This is really only helpful when migrating from pmb 2 to 3 (not so much new activations) because pmb 2 users
      * expect their print buttons to keep working after upgrading to 3 and before opting it or out of Freemius
      */
-    public function minimalInit(){
-
+    public function minimalInit()
+    {
     }
 
     /**

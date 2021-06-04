@@ -35,7 +35,7 @@ class SectionTemplate
         if (isset($data['fallback'])) {
             $this->fallback = $data['fallback'];
         }
-        if(isset($data['filepath'])){
+        if (isset($data['filepath'])) {
             $this->filepath = $data['filepath'];
         }
     }
@@ -73,7 +73,8 @@ class SectionTemplate
     /**
      * @return string
      */
-    public function getFilepath(){
+    public function getFilepath()
+    {
         return $this->filepath;
     }
 
@@ -81,7 +82,8 @@ class SectionTemplate
      * Returns true if the section template has a filepath defined.
      * @return bool
      */
-    public function hasFilepath(){
+    public function hasFilepath()
+    {
         return (bool)$this->filepath;
     }
 }

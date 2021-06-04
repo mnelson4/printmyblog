@@ -83,7 +83,7 @@ class Activation extends BaseActivation
         //on an upgrade, activation indicator will be false
         // so if previous version isnt set, and its not an activation it must be an upgrade
         parent::detectActivation();
-        if($activation_indicator === '' && $this->version_history->previousVersion() === null){
+        if ($activation_indicator === '' && $this->version_history->previousVersion() === null) {
                 wp_redirect(
                     add_query_arg(
                         array(
@@ -94,7 +94,6 @@ class Activation extends BaseActivation
                 );
                 exit;
         }
-
     }
 
 

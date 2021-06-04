@@ -473,8 +473,7 @@ class Admin extends BaseController
 
         if (isset($_GET['welcome'])) {
             include(PMB_TEMPLATES_DIR . 'welcome.php');
-        }
-        else if (isset($_GET['upgrade_to_3'])){
+        } elseif (isset($_GET['upgrade_to_3'])) {
             include(PMB_TEMPLATES_DIR . 'upgrade_to_3.php');
         } else {
             $print_options = new PrintOptions();
@@ -600,7 +599,7 @@ class Admin extends BaseController
                     $license = pmb_fs()->_get_license();
                     $site = pmb_fs()->get_site();
                     $use_pmb_central = 0;
-                    if(pmb_fs()->is_plan__premium_only('business')){
+                    if (pmb_fs()->is_plan__premium_only('business')) {
                         $use_pmb_central = 1;
                     }
                     wp_localize_script(

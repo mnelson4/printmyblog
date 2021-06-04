@@ -243,7 +243,7 @@ class ProjectSectionManager
         foreach ($sections_data as $section_data) {
             $post_id = $section_data[0];
             $template = $section_data[1];
-            $height = Array2::setOr($section_data,2,0);
+            $height = Array2::setOr($section_data, 2, 0);
             $depth = $section_data[3];
             $subsections = $section_data[4];
             $success = $wpdb->insert(

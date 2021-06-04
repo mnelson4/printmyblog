@@ -267,9 +267,9 @@ class DesignTemplate
         if (! $this->templateFileExists($division, $beginning, false) && $use_fallback) {
             // check if it's a custom template and has a filepath. In that case, use it
             // find out if the template is custom, if so ask it for its filepath
-            if($this->supportsCustomTemplate($division)){
+            if ($this->supportsCustomTemplate($division)) {
                 $section_template = $this->section_template_registry->get($division);
-                if($section_template instanceof SectionTemplate && $section_template->hasFilepath()){
+                if ($section_template instanceof SectionTemplate && $section_template->hasFilepath()) {
                     return $section_template->getFilepath();
                 }
             }
@@ -414,7 +414,8 @@ class DesignTemplate
      * @param string $custom_template_slug
      * @return bool
      */
-    public function supportsCustomTemplate($custom_template_slug){
+    public function supportsCustomTemplate($custom_template_slug)
+    {
         $supported_custom_templates = $this->getCustomTemplates();
         return in_array($custom_template_slug, $supported_custom_templates);
     }

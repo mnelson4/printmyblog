@@ -108,7 +108,7 @@ class CustomPostTypes
             )
         );
         add_filter('wp_insert_post_data', [$this,'makePrintMaterialsAlwaysPrivate']);
-        add_filter('rest_post_search_query',[$this,'includePrivatePrintMaterialsInSearch'], 10, 2);
+        add_filter('rest_post_search_query', [$this,'includePrivatePrintMaterialsInSearch'], 10, 2);
     }
 
     /**
@@ -130,9 +130,10 @@ class CustomPostTypes
      * @param array $query_args to pass into WP_Query
      * @param \WP_REST_Request $request
      */
-    public function includePrivatePrintMaterialsInSearch($query_args, $request){
+    public function includePrivatePrintMaterialsInSearch($query_args, $request)
+    {
         global $current_user;
-        if($current_user instanceof \WP_User && $current_user->ID && current_user_can('read_private_posts')){
+        if ($current_user instanceof \WP_User && $current_user->ID && current_user_can('read_private_posts')) {
             $query_args['post_status'] = ['publish', 'private'];
         }
         return $query_args;

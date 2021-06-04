@@ -48,7 +48,7 @@ class DetectAndActivate
             if (class_exists('CoBlocks')) {
                 $compatiblity_mods_to_activate[] = new CoBlocks();
             }
-            if (class_exists('WPSEO_Sitemaps')){
+            if (class_exists('WPSEO_Sitemaps')) {
                 $compatiblity_mods_to_activate[] = new YoastSeo();
             }
             $this->compatibility_mods = $compatiblity_mods_to_activate;

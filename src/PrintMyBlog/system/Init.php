@@ -21,7 +21,7 @@ use Twine\system\RequestType;
 use Twine\system\VersionHistory;
 use WPTRT\AdminNotices\Notices;
 use Twine\system\Init as BaseInit;
-use \pmb_fs;
+use pmb_fs;
 
 /**
  * Class Init
@@ -75,7 +75,8 @@ class Init extends BaseInit
     /**
      * Just get the frontend print buttons and frontend stuff working
      */
-    public function minimalInit(){
+    public function minimalInit()
+    {
         define('PMB_REST_PROXY_EXISTS', false);
 
         $this->includes();
@@ -87,7 +88,6 @@ class Init extends BaseInit
             $ajax = $this->context->reuse('PrintMyBlog\controllers\Ajax');
             $ajax->setHooks();
         } elseif (is_admin()) {
-
             $admin = $this->context->reuse('PrintMyBlog\controllers\Admin');
             $admin->setHooks();
             $this->initDashboardNews();

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace PrintMyBlog\compatibility\plugins;
-
 
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\compatibility\CompatibilityBase;
@@ -15,7 +13,7 @@ class YoastSeo extends CompatibilityBase
     public function setHooks()
     {
         // remove pmb content from sitemap
-        add_filter('wpseo_sitemap_index_links',[$this,'removePmbContentFromSitemap']);
+        add_filter('wpseo_sitemap_index_links', [$this,'removePmbContentFromSitemap']);
     }
 
     /**
@@ -23,9 +21,10 @@ class YoastSeo extends CompatibilityBase
      * @param array $links
      * @return array
      */
-    public function removePmbContentFromSitemap($links){
-        foreach($links as $key => $link_data){
-            if(strstr($link_data['loc'],CustomPostTypes::CONTENT) !== false ){
+    public function removePmbContentFromSitemap($links)
+    {
+        foreach ($links as $key => $link_data) {
+            if (strstr($link_data['loc'], CustomPostTypes::CONTENT) !== false) {
                 unset($links[$key]);
             }
         }
