@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.3.1
+Stable tag: 3.3.2
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -395,6 +395,9 @@ https://youtu.be/uPQ3vqm7A2g
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+= 3.3.2 xxx =
+* Bugfix: fix Pro filtering by custom taxonomies
+
 = 3.3.1 June 1, 2021 =
 * [Bugfix](https://wordpress.org/support/topic/pmb_content-sitemap-xml/): remove "pmb_content" from sitemap
 * [Bugfix](https://wordpress.org/support/topic/shortcode-not-working-after-update-2/): initialize shortcode and print buttons before opting in or out of Freemius

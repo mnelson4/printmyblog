@@ -78,6 +78,7 @@ pmb_render_template(
                                         ?></td>
                                 </tr>
                                 <?php foreach(get_taxonomies(array('show_in_rest' => true, 'show_ui' => true), 'objects') as $taxonomy){
+                                    $rest_base = $taxonomy->rest_base ? $taxonomy->rest_base : $taxonomy->name;
                                     /**
                                      * @var $taxonomy WP_Taxonomy
                                      */
@@ -85,7 +86,7 @@ pmb_render_template(
                                     <tr>
                                         <th><label for="pmb-project-choices-by"><?php echo $taxonomy->label; ?></label></th>
                                         <td>
-                                            <select id="pmb-taxonomy-<?php echo esc_attr($taxonomy->name);?>" class="pmb-taxonomies-select" name="taxonomies[<?php echo esc_attr($taxonomy->name);?>][]" multiple="multiple"data-rest-base="<?php echo esc_attr($taxonomy->rest_base);?>" form="pmb-filter-form"></select>
+                                            <select id="pmb-taxonomy-<?php echo esc_attr($taxonomy->name);?>" class="pmb-taxonomies-select" name="taxonomies[<?php echo esc_attr($taxonomy->name);?>][]" multiple="multiple"data-rest-base="<?php echo esc_attr($rest_base);?>" form="pmb-filter-form"></select>
                                         </td>
                                     </tr>
                                 <?php
