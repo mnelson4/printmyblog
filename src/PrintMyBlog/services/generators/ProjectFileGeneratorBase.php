@@ -263,10 +263,12 @@ abstract class ProjectFileGeneratorBase
         // if Oxygen page builder is active, clear ALL buffers. It starts a buffer and then clears it in the footer
         // somehow resulting in the HTML head getting echoed into the JSON response instead of being added to the top
         // of the print page). Avoid all that by clearing its buffer immediately.
-        if(apply_filters(
-            '\PrintMyBlog\services\generators\ProjectFileGeneratorBase::getHtmlFrom clean_multiple_buffers',
-            defined('CT_VERSION')
-        )){
+        if (
+            apply_filters(
+                'PrintMyBlog\services\generators\ProjectFileGeneratorBase::getHtmlFrom clean_multiple_buffers',
+                defined('CT_VERSION')
+            )
+        ) {
             $str = $this->ob_get_all_clean();
         } else {
             $str = ob_get_clean();
@@ -279,10 +281,11 @@ abstract class ProjectFileGeneratorBase
      * Gets and cleans ALL buffers (like wp_ob_end_flush_all but gets instead of flushing)
      * @return string
      */
-    protected function ob_get_all_clean(){
+    protected function ob_get_all_clean()
+    {
         $output = '';
         $levels = ob_get_level();
-        for ( $i = 0; $i < $levels; $i++ ) {
+        for ($i = 0; $i < $levels; $i++) {
             $output .= ob_get_clean();
         }
         return $output;
