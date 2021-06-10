@@ -395,8 +395,9 @@ https://youtu.be/uPQ3vqm7A2g
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
-= 3.3.2 xxx =
+= 3.3.2 June 10, 2021 =
 * Bugfix: fix Pro filtering by custom taxonomies
+* Bugfix: fix error generating print page when Oxygen page builder is active
 
 = 3.3.1 June 1, 2021 =
 * [Bugfix](https://wordpress.org/support/topic/pmb_content-sitemap-xml/): remove "pmb_content" from sitemap

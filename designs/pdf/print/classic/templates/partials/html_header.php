@@ -13,5 +13,6 @@
     <title><?php echo $pmb_project->getPublishedTitle();?></title>
 	<?php
 	// @todo: we should instead render this after we've fetched all the posts and found all the scripts they depend on
-	wp_head();?>
+	wp_head();
+	?>
 </head>
