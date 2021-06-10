@@ -116,12 +116,20 @@ class PdfGenerator extends ProjectFileGeneratorBase
     {
         // Try to get enqueued after the theme, if we're doing that, so we get precedence.
         add_action('wp_enqueue_scripts', [$this,'enqueueStylesAndScripts'], 1000);
+        add_action('wp_head',[$this,'addBaseTag']);
         do_action('pmb_pdf_generation_start', $this->project_generation, $this->design);
         add_filter('should_load_block_editor_scripts_and_styles', '__return_true');
         add_action('pmb_pro_print_window', [$this,'addPrintWindowToPage']);
         $this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT);
     }
 
+    /**
+     * Adds a "base" tag to the head which tells DocRaptor how to resolve relative links. See
+     * https://help.docraptor.com/en/articles/2154806-file-system-access-is-not-allowed-error-message
+     */
+    public function addBaseTag(){
+        echo '<base href="' . esc_url(site_url()) . '" target="_blank">';
+    }
 
 
     protected function generateSection()
