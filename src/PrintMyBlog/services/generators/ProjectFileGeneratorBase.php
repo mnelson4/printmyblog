@@ -269,7 +269,7 @@ abstract class ProjectFileGeneratorBase
                 defined('CT_VERSION')
             )
         ) {
-            $str = $this->ob_get_all_clean();
+            $str = $this->obGetAllClean();
         } else {
             $str = ob_get_clean();
         }
@@ -281,7 +281,7 @@ abstract class ProjectFileGeneratorBase
      * Gets and cleans ALL buffers (like wp_ob_end_flush_all but gets instead of flushing)
      * @return string
      */
-    protected function ob_get_all_clean()
+    protected function obGetAllClean()
     {
         $output = '';
         $levels = ob_get_level();
