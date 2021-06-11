@@ -116,7 +116,15 @@ class PdfGenerator extends ProjectFileGeneratorBase
     {
         // Try to get enqueued after the theme, if we're doing that, so we get precedence.
         add_action('wp_enqueue_scripts', [$this,'enqueueStylesAndScripts'], 1000);
-        add_action('wp_head', [$this,'addBaseTag']);
+
+        // Add the "base" tag so relative links work. But if Oxygen pagebuilder is active, we need to use a different hook.
+        // (because Oxygen puts everything from wp_head in the footer)
+        if(defined('CT_VERSION')){
+            add_action('oxygen_enqueue_frontend_scripts',[$this,'addBaseTag']);
+        } else {
+            add_action('wp_head', [$this,'addBaseTag']);
+        }
+
         do_action('pmb_pdf_generation_start', $this->project_generation, $this->design);
         add_filter('should_load_block_editor_scripts_and_styles', '__return_true');
         add_action('pmb_pro_print_window', [$this,'addPrintWindowToPage']);
