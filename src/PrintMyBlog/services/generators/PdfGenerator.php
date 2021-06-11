@@ -304,6 +304,6 @@ class PdfGenerator extends ProjectFileGeneratorBase
                 $license_info = $this->getPmbCentral()->getCreditsInfo();
             }
         }
-        echo pmb_get_contents(PMB_TEMPLATES_DIR . 'partials/pro_print_page_window.php', ['license_info' => $license_info]);
+        echo pmb_get_contents(PMB_TEMPLATES_DIR . 'partials/pro_print_page_window.php', ['license_info' => $license_info, 'project' => $this->project]);
     }
 }

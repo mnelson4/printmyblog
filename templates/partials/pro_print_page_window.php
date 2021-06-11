@@ -1,14 +1,23 @@
 <?php
 /**
 * @var $license_info array
+ * @var $project PrintMyBlog\orm\entities\Project
  */
+$generate_url = add_query_arg(
+    [
+        'ID' => $project->getWpPost()->ID,
+        'action' => \PrintMyBlog\controllers\Admin::SLUG_ACTION_EDIT_PROJECT,
+        'subaction' => \PrintMyBlog\entities\ProjectProgress::GENERATE_STEP
+    ],
+    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+);
 ?>
 <!-- Print My Blog Version <?php echo PMB_VERSION;?>-->
 <div class="pmb-pro-print-window-wrapper">
     <div class="pmb-pro-print-window">
         <div class="pmb-pro-print-window-topbar">
             <div class="pmb-pro-window-topbar-left">
-                <a  class="pmb-pro-window-button" href="javascript:history.back();">
+                <a  class="pmb-pro-window-button" href="<?php echo esc_url($generate_url);?>">
                     <span class="pmb-spinner-container"><span class="dashicons dashicons-arrow-left-alt"></span></span>
                     <?php esc_html_e('Back', 'print-my-blog'); ?>
                 </a>
