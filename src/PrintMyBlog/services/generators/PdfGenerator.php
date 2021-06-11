@@ -119,8 +119,8 @@ class PdfGenerator extends ProjectFileGeneratorBase
 
         // Add the "base" tag so relative links work. But if Oxygen pagebuilder is active, we need to use a different hook.
         // (because Oxygen puts everything from wp_head in the footer)
-        if(defined('CT_VERSION')){
-            add_action('oxygen_enqueue_frontend_scripts',[$this,'addBaseTag']);
+        if (defined('CT_VERSION')) {
+            add_action('oxygen_enqueue_frontend_scripts', [$this,'addBaseTag']);
         } else {
             add_action('wp_head', [$this,'addBaseTag']);
         }
