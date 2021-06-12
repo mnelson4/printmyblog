@@ -126,15 +126,16 @@ pmb_render_template(
                                                 'relevance' => __('Search Relevance', 'print-my-blog'),
                                                 'ID' => __('Post ID', 'print-my-blog'),
                                             ];
+                                            $default = 'ID';
                                             foreach($orderby as $value => $display){
-                                                ?><option value="<?php echo esc_attr($value);?>"><?php echo $display;?></option><?php
+                                                ?><option value="<?php echo esc_attr($value);?>" <?php echo $value === $default ? 'selected' : '';?> ><?php echo $display;?></option><?php
                                             }
                                             ?>
                                         </select>
                                         <br>
                                         <select name="pmb-order" form="pmb-filter-form">
                                             <option value="ASC"><?php esc_html_e('Ascending', 'print-my-blog');?></option>
-                                            <option value="DESC"><?php esc_html_e('Descending', 'print-my-blog');?></option>
+                                            <option value="DESC" selected><?php esc_html_e('Descending', 'print-my-blog');?></option>
                                         </select>
                                     </td>
                                 </tr>
