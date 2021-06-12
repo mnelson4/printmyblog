@@ -113,13 +113,14 @@ class CustomPostTypes
 
     /**
      * We wanted print materials to not be public... but then again, we want them to have URLs for easy linking
-     * and to appear in link searches. So instead we just make them all private
+     * and to appear in link searches. So instead we just make them all private...
+     * unless they're a draft or trashed, in which case we leave them alone.
      * @param $post
      * @return mixed
      */
     public function makePrintMaterialsAlwaysPrivate($post)
     {
-        if ($post['post_type'] == self::CONTENT) {
+        if ($post['post_type'] == self::CONTENT && $post['post_status'] === 'publish') {
             $post['post_status'] = 'private';
         }
         return $post;
