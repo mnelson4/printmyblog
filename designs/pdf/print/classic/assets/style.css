@@ -167,7 +167,7 @@ Ask PDF viewers to display pages side-by-side by default.
     div.pmb-part-wrapper.pmb-section-wrapper{
         break-before:right;
     }
-    div.pmb-back_matter_article-wrapper.pmb-section-wrapper{
+    div.pmb-back-matter{
         break-before:right;
     }
 
