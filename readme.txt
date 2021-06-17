@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.3.5
+Stable tag: 3.3.6
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -396,11 +396,13 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.3.5 June 17, 2021 =
+= 3.3.6 June 17, 2021 =
+* Bugfix: don't show article title in header of new parts
+
+= 3.3.5 June 12, 2021 =
 * Enhancement: Pro Print defaults to showing most recent posts first (rather than alphabetically)
 * Bugfix: allow Print Materials to be trashed and deleted
 * Bugfix: don't break right on all back matter in Classic Print PDF
-* Bugfix: don't show article title in header of new parts
 
 = 3.3.4 June 11, 2021 =
 * Bugfix: fix integration with Oxygen pagebuilder by getting it to add `<base>` tag to the header too
