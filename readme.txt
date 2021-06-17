@@ -396,7 +396,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.3.5 xxx, 2021 =
+= 3.3.5 June 17, 2021 =
 * Enhancement: Pro Print defaults to showing most recent posts first (rather than alphabetically)
 * Bugfix: allow Print Materials to be trashed and deleted
 * Bugfix: don't break right on all back matter in Classic Print PDF
