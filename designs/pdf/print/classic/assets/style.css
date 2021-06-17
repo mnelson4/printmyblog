@@ -33,6 +33,10 @@ Ask PDF viewers to display pages side-by-side by default.
         }
     }
 
+    .pmb-main-matter {
+        display: block;
+        page: main-matter;
+    }
 
     @page main-matter {
         counter-reset: footnote;
@@ -41,17 +45,6 @@ Ask PDF viewers to display pages side-by-side by default.
             border-top: solid black thin;
             padding-top: 8pt;
         }
-    }
-
-
-    .pmb-back-matter {
-        display:block;
-        page:back-matter;
-    }
-
-    .pmb-main-matter {
-        display: block;
-        page: main-matter;
     }
 
     @page main-matter:verso {
@@ -72,6 +65,26 @@ Ask PDF viewers to display pages side-by-side by default.
         }
     }
 
+    .pmb-part{
+        page:part;
+        -prince-page-group: start;
+    }
+
+    @page part{
+        @top{
+            content:normal;
+        }
+        /* Don't show "Powered by" here again */
+        @bottom{
+            content:"";
+        }
+    }
+
+    .pmb-back-matter {
+        display:block;
+        page:back-matter;
+    }
+
     @page back-matter:verso {
         @top {
             content: normal;
@@ -87,6 +100,12 @@ Ask PDF viewers to display pages side-by-side by default.
         }
         @bottom-right {
             content: counter(page)
+        }
+    }
+
+    @page:blank {
+        @top {
+            content: normal;
         }
     }
 

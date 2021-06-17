@@ -49,6 +49,23 @@
         }
     }
 
+    .pmb-part{
+        page:part;
+        -prince-page-group: start;
+    }
+    @page part{
+        @top-right{
+            content:normal;
+        }
+        @bottom-left{
+            content: "party!";
+        }
+        /* Don't show "Powered by" here again */
+        @bottom{
+            content:"";
+        }
+    }
+
     .pmb-back-matter {
         display: block;
         page: back;
