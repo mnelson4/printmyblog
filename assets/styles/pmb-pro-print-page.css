@@ -172,26 +172,22 @@ figcaption{
 }
 
 /*!* Block galleries *!*/
-/*.pmb-posts .wp-block-gallery{*/
-/*    page-break-inside:avoid;*/
-/*    list-style-type:none;*/
-/*}*/
-/*.pmb-posts .wp-block-gallery>.blocks-gallery-grid>.blocks-gallery-item{*/
-/*    display:inline-block;*/
-/*}*/
-/*.pmb-posts .wp-block-gallery.columns-1>.blocks-gallery-grid>.blocks-gallery-item{*/
-/*    width:99vw;*/
-/*}*/
-/*.pmb-posts .wp-block-gallery.columns-2>.blocks-gallery-grid>.blocks-gallery-item{*/
-/*    width:49vw;*/
-/*}*/
-/*.pmb-posts .wp-block-gallery.columns-3>.blocks-gallery-grid>.blocks-gallery-item{*/
-/*    width:32vw;*/
-/*}*/
-/*.wp-block-gallery.is-cropped>.blocks-gallery-item img{*/
-/*    height:100%;*/
-/*    object-fit:cover;*/
-/*}*/
+/*
+Set block gallery image sizes because otherwise Prince interprets the floating property differently.
+The gallery always takes up the whole page height because the image height is 100%
+*/
+.wp-block-gallery.is-cropped.columns-4 .blocks-gallery-item img {
+    height:25vw !important;
+}
+.wp-block-gallery.is-cropped.columns-3 .blocks-gallery-item img {
+    height:30vw !important;
+}
+.wp-block-gallery.is-cropped.columns-2 .blocks-gallery-item img {
+    height:40vw !important;
+}
+.wp-block-gallery.is-cropped.columns-1 .blocks-gallery-item img {
+    height:50vw !important;
+}
 
 /* Centered content styles */
 .pmb-center-content .post-inner{

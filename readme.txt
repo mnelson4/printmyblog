@@ -398,6 +398,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.3.7 xxx =
 * Bugfix: fix footnote numbers in front and back matter
+* Bugfix: fix cropped block galleries so they don't take up the full page height
 
 = 3.3.6 June 17, 2021 =
 * Bugfix: don't show article title in header of new parts
