@@ -57,9 +57,6 @@
         @top-right{
             content:normal;
         }
-        @bottom-left{
-            content: "party!";
-        }
         /* Don't show "Powered by" here again */
         @bottom{
             content:"";

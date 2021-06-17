@@ -78,6 +78,9 @@ Ask PDF viewers to display pages side-by-side by default.
         @bottom{
             content:"";
         }
+        @bottom-right{
+            content:counter(page);
+        }
     }
 
     .pmb-back-matter {
