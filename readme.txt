@@ -400,6 +400,7 @@ https://youtu.be/uPQ3vqm7A2g
 * Enhancement: Pro Print defaults to showing most recent posts first (rather than alphabetically)
 * Bugfix: allow Print Materials to be trashed and deleted
 * Bugfix: don't break right on all back matter in Classic Print PDF
+* Bugfix: don't show article title in header of new parts
 
 = 3.3.4 June 11, 2021 =
 * Bugfix: fix integration with Oxygen pagebuilder by getting it to add `<base>` tag to the header too
