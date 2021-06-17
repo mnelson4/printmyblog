@@ -396,7 +396,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.3.7 xxx =
+= 3.3.7 June 17, 2021  =
 * Bugfix: fix footnote numbers in front and back matter
 * Bugfix: fix cropped block galleries so they don't take up the full page height
 
