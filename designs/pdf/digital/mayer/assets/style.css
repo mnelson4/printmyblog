@@ -13,7 +13,7 @@
     }
 
 
-    @page main-matter{
+    @page{
         counter-reset: footnote;
 
         @footnotes {

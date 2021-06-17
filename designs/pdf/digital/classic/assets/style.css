@@ -18,15 +18,13 @@
         }
     }
 
-
-    @page main-matter{
+    @page {
         counter-reset: footnote;
-
         @footnotes {
             border-top: solid black thin;
             padding-top: 8pt;
         }
-}
+    }
     body{
         prince-footnote-policy: keep-with-line;
     }

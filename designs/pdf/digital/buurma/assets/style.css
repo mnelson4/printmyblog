@@ -1,5 +1,13 @@
 /* pagination */
 @media print, screen {
+    @page{
+        counter-reset: footnote;
+
+        @footnotes {
+            border-top: solid black thin;
+            padding-top: 8pt;
+        }
+    }
     .pmb-title-page{
         page:title-page;
     }
@@ -25,12 +33,6 @@
         counter-reset: page 1
     }
     @page main {
-        counter-reset: footnote;
-
-        @footnotes {
-            border-top: solid black thin;
-            padding-top: 8pt;
-        }
         @bottom-right {
             content: counter(page)
         }

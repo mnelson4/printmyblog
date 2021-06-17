@@ -38,7 +38,7 @@ Ask PDF viewers to display pages side-by-side by default.
         page: main-matter;
     }
 
-    @page main-matter {
+    @page{
         counter-reset: footnote;
 
         @footnotes {
