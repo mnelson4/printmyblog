@@ -396,8 +396,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.3.8 xxx =
+= 3.3.8 June 18m 2021 =
 * Add support for back matter to Mayer Magazine
+* Remove promocode notice
 
 = 3.3.7 June 17, 2021  =
 * Bugfix: fix footnote numbers in front and back matter

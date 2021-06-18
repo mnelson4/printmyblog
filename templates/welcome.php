@@ -52,7 +52,6 @@
                     <li><?php esc_html_e( 'Automatically convert hyperlinks to page references and footnotes', 'print-my-blog' ); ?></li>
                 </ul>
                 <p><a href="https://printmy.blog/user-guide/pro/getting-started/1-the-basics/" target="_blank"><?php esc_html_e('Read the User Guide', 'print-my-blog');?></a> </p>
-                <div class="pmb-party"><?php printf(__('Use promocode "%s" until June 18th for 50%% off any lifetime license', 'print-my-blog'), 'release');?><br><a class="button" href="<?php echo esc_attr(pmb_fs()->get_upgrade_url(WP_FS__PERIOD_LIFETIME));?>"><?php esc_html_e('Buy Now', 'print-my-blog');?></a></div>
 
             </div>
         </div>
