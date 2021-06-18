@@ -327,7 +327,8 @@ class DefaultDesignTemplates
                     'docs' => 'https://printmy.blog/user-guide/pdf-design/mayer-magazine-digital-pdf/',
                     'supports' => [
                         'front_matter',
-                        'part'
+                        'part',
+                        'back_matter',
                     ],
                     'url' => plugins_url('designs/pdf/digital/mayer', PMB_MAIN_FILE),
                     'design_form_callback'  => function () {
