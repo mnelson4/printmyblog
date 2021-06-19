@@ -90,7 +90,7 @@ pmb_render_template('partials/free_header.php');
             <table class="form-table">
                 <tbody>
                 <tr>
-                    <th scope="row"><?php esc_html_e('Post Selection','print-my-blog' ); pmb_pro_better_e(__('Print Print supports custom post types, combining posts with pages, and print-only materials', 'print-my-blog'));?></th>
+                    <th scope="row"><?php esc_html_e('Post Selection','print-my-blog' ); pmb_pro_better_e(__('Pro Print supports custom post types, combining posts with pages, and print-only materials', 'print-my-blog'));?></th>
                     <td>
                         <label><input class="pmb-post-type" type="radio" name="post-type" value="post" checked="checked"><?php esc_html_e('Posts', 'print-my-blog');?></label>
                         <br>
@@ -142,7 +142,7 @@ pmb_render_template('partials/free_header.php');
                 ?>
                 </tbody>
             </table>
-            <h2><?php esc_html_e('Filters', 'print-my-blog');?> <div style="display:inline-block" id="pmb-categories-spinner"><div class="pmb-spinner"></div></div></h2>
+            <h2><?php esc_html_e('Filters', 'print-my-blog');?> <?php pmb_pro_better_e(__('Pro Print supports filtering by custom taxonomies.', 'print-my-blog'));?> <div style="display:inline-block" id="pmb-categories-spinner"><div class="pmb-spinner"></div></div></h2>
             <table class="form-table">
                 <tbody id="pmb-dynamic-categories">
                 </tbody>
