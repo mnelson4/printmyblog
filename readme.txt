@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.3.8
+Stable tag: 3.3.9
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -396,7 +396,10 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.3.8 June 18m 2021 =
+= 3.3.9 June 18, 2021 =
+* Remove left margin on leftmost print button
+
+= 3.3.8 June 18, 2021 =
 * Add support for back matter to Mayer Magazine
 * Remove promocode notice
 
