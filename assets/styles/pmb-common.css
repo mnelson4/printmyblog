@@ -58,7 +58,7 @@ summary.pmb-reveal-options{
     display:flex;
     justify-content:flex-end;
 }
-.pmb-print-this-page .button{
+.pmb-print-this-page .button:not(:first-of-type){
     /* Keep buttons spaced apart a bit */
     margin-left:1em;
 }
