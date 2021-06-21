@@ -21,7 +21,7 @@ class GoogleLanguageTranslator extends CompatibilityBase
         wp_add_inline_style(
             'google-language-translator',
             '@media print{
-                .goog-te-banner-frame, #glt-translate-trigger{
+                .skiptranslate, .goog-te-banner-frame, #glt-translate-trigger{
                     display:none;
                 }
             }
