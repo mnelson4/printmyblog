@@ -4,6 +4,7 @@ namespace PrintMyBlog\compatibility;
 
 use PrintMyBlog\compatibility\plugins\CoBlocks;
 use PrintMyBlog\compatibility\plugins\EasyFootnotes;
+use PrintMyBlog\compatibility\plugins\GoogleLanguageTranslator;
 use PrintMyBlog\compatibility\plugins\LazyLoadingFeaturePlugin;
 use PrintMyBlog\compatibility\plugins\TablePress;
 use PrintMyBlog\compatibility\plugins\WpVrView;
@@ -50,6 +51,9 @@ class DetectAndActivate
             }
             if (class_exists('WPSEO_Sitemaps')) {
                 $compatiblity_mods_to_activate[] = new YoastSeo();
+            }
+            if (class_exists('google_language_translator')) {
+                $compatiblity_mods_to_activate[] = new GoogleLanguageTranslator();
             }
             $this->compatibility_mods = $compatiblity_mods_to_activate;
         }
