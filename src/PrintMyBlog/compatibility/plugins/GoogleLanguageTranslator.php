@@ -16,7 +16,8 @@ class GoogleLanguageTranslator extends CompatibilityBase
     /**
      * Add a few styles to prevent Google Translator stuff from appearing in the printout
      */
-    public function enqueueStyles(){
+    public function enqueueStyles()
+    {
         wp_add_inline_style(
             'google-language-translator',
             '@media print{
