@@ -60,9 +60,19 @@ class DesignRegistry
      * @param string $design_slug
      * @param callable $callback that returns an array of the following format {
      *
-     * @type string $title,
-     * @type string $description
-     * @type string $featured_image
+     * @type string $title will become the post title
+     * @type string $quick_description will become the excerpt
+     * @type string $description will become the post content
+     * @type array $author {
+     * @type string $name author name
+     * @type string $url author URL
+     * }
+     * @type array[] $previews each sub-array has{
+     * @type string $url of the preview image
+     * @type string $desc description of the preview image
+     * }
+     * @type array $design_defaults which will be sent to design form via \Twine\forms\base\FormSection::populateDefaults
+     * @type array $project_defaults which will also be sent to the project metadata form via \Twine\forms\base\FormSection::populateDefaults
      *
      *}
      */

@@ -94,14 +94,18 @@ class DesignTemplate
     /**
      * DesignTemplate constructor.
      *
-     * @param $slug
+     * @param $slug unique string identifying this design template
      * @param $args {
-     * @type string title
-     * @type string format
-     * @type string dir
-     * @type callable design_form_callback
-     * @type callable project_form_callback
-     * @type string docs
+     * @type string title sometimes shown to users
+     * @type string format "print_pdf" or "digital_pdf"
+     * @type string dir directory of the design (folder that ocntains its `functions.php`)
+     * @type callable design_form_callback returns \Twine\forms\base\FormSection to use on the "Customize Design" step
+     * @type callable project_form_callback returns a \Twine\forms\base\FormSection that will be merged with that of
+     * other designs used for the project on the "Edit Metadata" step.
+     * @type string docs URL of documentation
+     * @type string[] $supports can include 'front_matter', 'back_matter','part','volume','anthology'
+     * @type string[] $custom_templates includes slugs of custom templates registered with pmb_register_section_template()
+     * @type string $default_design_slug string of the default design that uses this design template
      * }
      */
     public function __construct($slug, $args)
