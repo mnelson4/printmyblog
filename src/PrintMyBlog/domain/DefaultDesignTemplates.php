@@ -466,6 +466,7 @@ class DefaultDesignTemplates
 
                             'featured_image' => new InputOption(__('Featured Image', 'print-my-blog')),
                             'excerpt' => new InputOption(__('Excerpt', 'print-my-blog')),
+                            'meta' => new InputOption(__('Custom Fields', 'print-my-blog')),
                             'content' => new InputOption(__('Content', 'print-my-blog')),
                             //'comments' => __('Comments', 'print-my-blog'),
                         ],

@@ -52,7 +52,13 @@
 		}
 		?>
 		<?php
-		if(pmb_design_uses('content',true))pmb_include_design_template( 'partials/content' );
+        if(pmb_design_uses('meta',false)){
+            the_meta();
+        }
+
+		if(pmb_design_uses('content',true)){
+		    pmb_include_design_template( 'partials/content' );
+        }
 		?>
     </article>
 <?php // if(in_array('comments',$post_content))pmb_include_design_template('partials/comments');?>

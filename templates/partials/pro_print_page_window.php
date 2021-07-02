@@ -50,9 +50,6 @@ $generate_url = add_query_arg(
                         <a class="pmb-pro-window-button" href="<?php echo esc_url(pmb_fs()->get_upgrade_url());?>" >
                             <?php _e('Purchase Subscription', 'print-my-blog'); ?>
                         </a>
-                        <?php if(pmb_fs()->is_free_plan()){?>
-                        <div class="pmb-party"><?php printf(__('Don\'t forget to use promocode "%s" until June 18th for 50%% off any lifetime license', 'print-my-blog'), 'release');?></div>
-                        <?php } ?>
                         <p><a href="https://printmy.blog/free-vs-pro/" target="_blank"><?php esc_html_e('Feature Comparison List', 'print-my-blog');?></a></p>
                     <?php } else {?>
                     <button class="pmb-pro-window-button pmb-download-test">
