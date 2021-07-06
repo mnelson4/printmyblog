@@ -17,6 +17,10 @@
     position:relative;
 }
 
+.pmb-selected{
+    background: #ECF6FD;
+}
+
 
 .pmb-grabbable{
     cursor: move; /* fallback if grab cursor is unsupported */

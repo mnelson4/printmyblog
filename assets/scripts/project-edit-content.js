@@ -9,6 +9,10 @@ jQuery(document).ready(function(){
 			},
 			filter: '.no-drag',
 			sort: false,
+			multiDrag: true,
+			selectedClass: "pmb-selected",
+			animation: 150,
+			multiDragKey: 'CTRL'
 		});
 	jQuery('.pmb-sortable').each(function(index, element){
 		pmb_create_sortable_from(element);
@@ -236,13 +240,29 @@ function pmb_create_sortable_from(element){
 			fallbackOnBody: true,
 			swapThreshold: .80,
 			onAdd: function (event) {
-				pmb_maybe_add_sortable_to(jQuery(event.target), jQuery(event.item));
+				var items = [];
+				if(event.items.length){
+					items = event.items;
+				} else {
+					items = [event.item];
+				}
+				pmb_maybe_add_sortable_to(jQuery(event.target), jQuery(items));
 			},
+			multiDrag: true,
+			selectedClass: "pmb-selected",
+			animation: 150,
+			multiDragKey: 'CTRL'
 		});
 	element.sorter = sorter;
 }
 
-function pmb_maybe_add_sortable_to(sortable_selection, item_selection){
+function pmb_maybe_add_sortable_to(sortable_selection, item_selections){
+	for(var i=0; i<item_selections.length;i++){
+		pmb_maybe_add_sortable_to_item(sortable_selection, jQuery(item_selections[i]));
+	}
+}
+
+function pmb_maybe_add_sortable_to_item(sortable_selection, item_selection){
 	var nested_level = pmb_count_level(sortable_selection);
 	var jquery_obj = sortable_selection;
 
