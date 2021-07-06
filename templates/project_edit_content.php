@@ -142,8 +142,11 @@ pmb_render_template(
                             </table>
                         </div>
                     </div>
-                    <div id="pmb-project-choices" class="pmb-draggable-area pmb-project-content-available pmb-scrollable-window list-group">
+                    <div class="pmb-project-content-available list-group">
+                    <div id="pmb-project-choices" class="pmb-draggable-area pmb-scrollable-window">
                         <div class="no-drag"><div class="pmb-spinner"></div></div>
+                    </div>
+                    <div class="pmb-comment">Use <em>CTRL</em> or <em>SHIFT</em> to select and drag multiple items</div>
                     </div>
                 </div>
                 <div class="pmb-project-column pmb-project-matters-wrapper">
