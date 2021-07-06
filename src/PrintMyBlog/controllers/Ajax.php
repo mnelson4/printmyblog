@@ -170,7 +170,7 @@ class Ajax extends BaseController
 
     public function handlePostSearch()
     {
-        $requested_posts = 20;
+        $requested_posts = 50;
         $query_params = [
             'posts_per_page' => $requested_posts,
             'ignore_sticky_posts' => true
