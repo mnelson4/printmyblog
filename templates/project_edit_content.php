@@ -146,7 +146,7 @@ pmb_render_template(
                     <div id="pmb-project-choices" class="pmb-draggable-area pmb-scrollable-window">
                         <div class="no-drag"><div class="pmb-spinner"></div></div>
                     </div>
-                    <div class="pmb-comment">Use <em>CTRL</em> or <em>SHIFT</em> to select and drag multiple items</div>
+                    <div class="pmb-comment"><?php _e('Use <em>CTRL</em> or <em>SHIFT</em> to select and drag multiple items', 'print-my-blog');?></div>
                     </div>
                 </div>
                 <div class="pmb-project-column pmb-project-matters-wrapper">
