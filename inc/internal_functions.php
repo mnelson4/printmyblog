@@ -248,29 +248,6 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
                     <span class="pmb-project-item-template-container"><?php echo pmb_section_template_selector($template, $project);?></span>
                 </div>
             </div>
-
-            <a
-                class="pmb-remove-item"
-                title="<?php
-                echo esc_attr(
-                    sprintf(
-                        __('Remove "%s" from project', 'print-my-blog'),
-                        $title
-                    )
-                );
-                ?>"
-            ><span class="dashicons dashicons-no-alt pmb-icon"></span></a>
-            <a
-                class="pmb-add-item"
-                title="<?php
-                echo esc_attr(
-                    sprintf(
-                        __('Add "%s" to project', 'print-my-blog'),
-                        $title
-                    )
-                );
-                ?>"
-            ><span class="dashicons dashicons-plus-alt2 pmb-icon"></span></a>
         </div>
 
         <div class="pmb-nested-sortable pmb-draggable-area <?php echo $depth < $max_nesting ? 'pmb-sortable' : 'pmb-sortable-inactive';?> pmb-subs">
