@@ -191,6 +191,8 @@ function pmb_setup_callbacks_on_new_options(){
 			}
 		})
 	});
+	// function from pmb-general.js
+	pmb_setup_item_options();
 }
 
 function pmb_add_print_material_submit(add_button, submit_button){
@@ -347,4 +349,21 @@ function pmb_update_heights(jquery_obj){
 
 function pmb_count_level(jquery_obj){
 	return jquery_obj.parents('.pmb-sortable').length;
+}
+
+function pmb_setup_item_options(){
+	jQuery('.pmb-project-item-header').hover(function(){
+		var that = jQuery(this);
+		jQuery('.pmb-project-item-options').css('display','none');
+		var options_area = that.children('.pmb-project-item-options');
+		options_area.css('display','block');
+		that.mouseleave( function(e) {
+			if(e.target.tagName.toLowerCase() != "select") {
+				options_area.css('display','none');
+			}
+		});
+		// that.mouseleave(function () {
+		// 	options_area.css('display','none');
+		// });
+	})
 }
