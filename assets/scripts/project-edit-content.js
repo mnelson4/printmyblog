@@ -60,6 +60,8 @@ jQuery(document).ready(function(){
 
 		if(selected_items.length > 0){
 			selected_items.detach().appendTo('#pmb-project-main-matter');
+			// move the new items above the "drag or click here" area
+			pmb_move(selected_items,'up');
 			pmb_maybe_add_sortable_to(jQuery('#pmb-project-main-matter'), selected_items);
 		} else {
 			alert('Please select an item to add to the project');
@@ -182,8 +184,17 @@ function pmb_move(jquery_selection, direction){
 		}
 		jquery_selection.each(function(index,item){
 			var jquery_item = jQuery(item);
+			var jquery_has_nested_items = jquery_item.find('.pmb-project-item');
 			var prev_item = jquery_item.prev();
-			jquery_item.detach().insertBefore(prev_item);
+			var prev_nested_draggable_area = prev_item.find('.pmb-draggable-area');
+			// nest it if the item being moved has no children and the destination supports it
+			if(jquery_has_nested_items.length !== 0 || prev_nested_draggable_area.length === 0){
+				jquery_item.detach().insertBefore(prev_item);
+			} else {
+				//add it just before the "drag-or-click here" element
+				jquery_item.detach().insertBefore(prev_nested_draggable_area.first().children('.pmb-drag-here'));
+				pmb_maybe_add_sortable_to(prev_nested_draggable_area, jquery_item);
+			}
 		});
 	} else {
 		var last_item = jquery_selection.last();
@@ -201,8 +212,16 @@ function pmb_move(jquery_selection, direction){
 		}
 		jQuery(jquery_selection.get().reverse()).each(function(index,item){
 			var jquery_item = jQuery(item);
+			var jquery_has_nested_items = jquery_item.find('.pmb-project-item');
 			var next_item = jquery_item.next();
-			jquery_item.detach().insertAfter(next_item);
+			var nested_draggable_area = next_item.find('.pmb-draggable-area');
+			// nest it if the item being moved has no children and the destination supports it
+			if(jquery_has_nested_items.length !== 0 || nested_draggable_area.length === 0){
+				jquery_item.detach().insertAfter(next_item);
+			} else {
+				jquery_item.detach().prependTo(nested_draggable_area.first());
+				pmb_maybe_add_sortable_to(nested_draggable_area, jquery_item);
+			}
 		});
 	}
 
@@ -339,6 +358,11 @@ function pmb_create_sortable_from(element){
 	element.sorter = sorter;
 }
 
+/**
+ *
+ * @param sortable_selection sortable they were added to
+ * @param item_selections new items being added
+ */
 function pmb_maybe_add_sortable_to(sortable_selection, item_selections){
 	for(var i=0; i<item_selections.length;i++){
 		pmb_maybe_add_sortable_to_item(sortable_selection, jQuery(item_selections[i]));
