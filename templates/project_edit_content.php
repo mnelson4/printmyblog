@@ -153,22 +153,24 @@ pmb_render_template(
                 <div class="pmb-actions-column">
                     <button id="pmb-add-item" title="<?php
                     echo esc_attr(
-                        sprintf(
-                            __('Add selected items to project', 'print-my-blog'),
-                            $title
-                        )
+                            __('Add selected items to project', 'print-my-blog')
                     );
-                    ?>">&gt;</button>
+                    ?>"><span class="dashicons dashicons-arrow-right-alt2"></span></button>
                     <button id="pmb-remove-item" title="<?php
                     echo esc_attr(
-                        sprintf(
-                            __('Remove selected items', 'print-my-blog'),
-                            $title
-                        )
+                            __('Remove selected items', 'print-my-blog')
                     );
-                    ?>">x</button>
-                    <button id="pmb-move-up">^</button>
-                    <button id="pmb-move-down">v</button>
+                    ?>"><span class="dashicons dashicons-no-alt"></span></button>
+                    <button id="pmb-move-up" title="<?php
+                    echo esc_attr(
+                            __('Move selected items up', 'print-my-blog')
+                    );
+                    ?>"><span class="dashicons dashicons-arrow-up-alt2"></span></button>
+                    <button id="pmb-move-down" title="<?php
+                    echo esc_attr(
+                            __('Move selected items down', 'print-my-blog')
+                    );
+                    ?>"><span class="dashicons dashicons-arrow-down-alt2"></span></button>
                 </div>
                 <div class="pmb-project-column pmb-project-matters-wrapper">
                     <h2 class="pmb-snug-header"><span class="dashicons dashicons-portfolio"></span> <?php esc_html_e('Project Content', 'print-my-blog');?></h2>

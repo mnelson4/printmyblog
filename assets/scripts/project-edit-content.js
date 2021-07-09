@@ -62,7 +62,7 @@ jQuery(document).ready(function(){
 			selected_items.detach().appendTo('#pmb-project-main-matter');
 			pmb_maybe_add_sortable_to(jQuery('#pmb-project-main-matter'), selected_items);
 		} else {
-			alert('Please select an item to move');
+			alert('Please select an item to add to the project');
 		}
 	});
 

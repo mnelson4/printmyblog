@@ -25,9 +25,9 @@
     border-radius:2px;
     background:#fff;
     cursor:pointer;
-    padding:5px 10px;
     color:#333;
     font-size:12px;
+    padding:15px;
 }
 .pmb-scrollable-window{
     overflow-y:auto;
