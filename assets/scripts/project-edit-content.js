@@ -170,57 +170,64 @@ function pmb_move_selected_items(direction){
  */
 function pmb_move(jquery_selection, direction){
 	if(direction === 'up'){
-		var first_item = jquery_selection.first();
-		if(first_item.is('.pmb-project-item:first-child')){
-			// if not nested, don't move any further
-			var parent_items = first_item.parents('pmb-project-item');
-			if(parent_items.length == 0 ){
-				return;
-			}
-			// if nested, keep going
-			//pmb_move_item(first_item, parent_items.first()
-
-			return;
-		}
+		// var first_item = jquery_selection.first();
+		// if(first_item.is('.pmb-project-item:first-child')){
+		// 	// if not nested, don't move any further
+		// 	var parent_items = first_item.parents('pmb-project-item');
+		// 	if(parent_items.length == 0 ){
+		// 		return;
+		// 	}
+		// 	// if nested, keep going
+		//
+		// 	return;
+		// }
 		jquery_selection.each(function(index,item){
 			var jquery_item = jQuery(item);
-			var jquery_has_nested_items = jquery_item.find('.pmb-project-item');
-			var prev_item = jquery_item.prev();
-			var prev_nested_draggable_area = prev_item.find('.pmb-draggable-area');
-			// nest it if the item being moved has no children and the destination supports it
-			if(jquery_has_nested_items.length !== 0 || prev_nested_draggable_area.length === 0){
-				jquery_item.detach().insertBefore(prev_item);
+			if(jquery_item.is('.pmb-project-item:first-child')){
+				// if it's the first item already, check if we can move it up into a parent sortable
+				var parent_items = jquery_item.parents('.pmb-project-item');
+				if(parent_items.length !== 0 ){
+					// it can be placed in a parent
+					jquery_item.insertBefore(parent_items.first());
+					pmb_maybe_add_sortable_to(parent_items.first().parents().first(), jquery_item);
+				}
 			} else {
-				//add it just before the "drag-or-click here" element
-				jquery_item.detach().insertBefore(prev_nested_draggable_area.first().children('.pmb-drag-here'));
-				pmb_maybe_add_sortable_to(prev_nested_draggable_area, jquery_item);
+					var jquery_has_nested_items = jquery_item.find('.pmb-project-item');
+					var prev_item = jquery_item.prev();
+					var prev_nested_draggable_area = prev_item.find('.pmb-draggable-area:not(.pmb-sortable-inactive)');
+					// nest it if the item being moved has no children and the destination supports it
+					if(jquery_has_nested_items.length !== 0 || prev_nested_draggable_area.length === 0){
+						jquery_item.detach().insertBefore(prev_item);
+					} else {
+						//add it just before the "drag-or-click here" element
+						jquery_item.detach().insertBefore(prev_nested_draggable_area.first().children('.pmb-drag-here'));
+						pmb_maybe_add_sortable_to(prev_nested_draggable_area, jquery_item);
+					}
 			}
+
 		});
 	} else {
-		var last_item = jquery_selection.last();
-		// move down
-		if(last_item.is('.pmb-project-item:last-child')){
-			// if not nested, don't move any further
-			var parent_items = last_item.parents('pmb-project-item');
-			if(parent_items.length == 0 ){
-				return;
-			}
-			// if nested, keep going
-			//pmb_move_item(first_item, parent_items.first()
-
-			return;
-		}
 		jQuery(jquery_selection.get().reverse()).each(function(index,item){
 			var jquery_item = jQuery(item);
-			var jquery_has_nested_items = jquery_item.find('.pmb-project-item');
-			var next_item = jquery_item.next();
-			var nested_draggable_area = next_item.find('.pmb-draggable-area');
-			// nest it if the item being moved has no children and the destination supports it
-			if(jquery_has_nested_items.length !== 0 || nested_draggable_area.length === 0){
-				jquery_item.detach().insertAfter(next_item);
+			if(jquery_item.is('.pmb-project-item:nth-last-child(2)')){
+				// if it's the first item already, check if we can move it up into a parent sortable
+				var parent_items = jquery_item.parents('.pmb-project-item');
+				if(parent_items.length !== 0 ){
+					// it can be placed in a parent
+					jquery_item.insertAfter(parent_items.first());
+					pmb_maybe_add_sortable_to(parent_items.first().parents().first(), jquery_item);
+				}
 			} else {
-				jquery_item.detach().prependTo(nested_draggable_area.first());
-				pmb_maybe_add_sortable_to(nested_draggable_area, jquery_item);
+				var jquery_has_nested_items = jquery_item.find('.pmb-project-item');
+				var next_item = jquery_item.next();
+				var nested_draggable_area = next_item.find('.pmb-draggable-area:not(.pmb-sortable-inactive)');
+				// nest it if the item being moved has no children and the destination supports it
+				if (jquery_has_nested_items.length !== 0 || nested_draggable_area.length === 0) {
+					jquery_item.detach().insertAfter(next_item);
+				} else {
+					jquery_item.detach().prependTo(nested_draggable_area.first());
+					pmb_maybe_add_sortable_to(nested_draggable_area, jquery_item);
+				}
 			}
 		});
 	}
