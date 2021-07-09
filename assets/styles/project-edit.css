@@ -41,6 +41,9 @@
 .pmb-selected{
     background: #ECF6FD;
 }
+.pmb-selected .pmb-project-item-options{
+    background: #ECF6FD;
+}
 
 .pmb-project-choices-column>h2{
     flex-grow:0;

@@ -265,7 +265,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
 
 function pmb_drag_here(){
     ?>
-    <div class="pmb-hover pmb-no-sort pmb-drag-here no-drag">
+    <div class="pmb-no-sort pmb-drag-here no-drag">
         <div class="pmb-drag-here-inner">
             <a class="pmb-add-material">
                 <?php esc_html_e('Drag or click here', 'print-my-blog');?> <span class="pmb-add-section dashicons

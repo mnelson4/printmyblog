@@ -48,6 +48,41 @@ jQuery(document).ready(function(){
 	});
 	pmb_refresh_posts();
 	pmb_init_taxonomy_filters();
+	jQuery('#pmb-move-up').click(function(){
+		pmb_move_selected_items('up');
+	});
+	jQuery('#pmb-move-down').click(function(){
+		pmb_move_selected_items('down');
+	});
+	jQuery('#pmb-add-item').click(function(event){
+
+		var selected_items = jQuery('#pmb-project-choices .pmb-selected');
+
+		if(selected_items.length > 0){
+			selected_items.detach().appendTo('#pmb-project-main-matter');
+			pmb_maybe_add_sortable_to(jQuery('#pmb-project-main-matter'), selected_items);
+		} else {
+			alert('Please select an item to move');
+		}
+	});
+
+	jQuery('#pmb-remove-item').click(function(event){
+		var selected_items = jQuery('.pmb-selected');
+
+		if(selected_items.length > 0){
+			selected_items.remove();
+		} else {
+			alert('Please select an item to remove');
+		}
+	});
+	// prevent submitting the form
+	jQuery('.pmb-actions-column button').click(function(){
+		event.preventDefault();
+	});
+	// prevent sortable JS's multidrag from deselecting when clicking these buttons
+	jQuery('.pmb-actions-column button').on('pointerup mouseup touchend', function(event){
+		event.stopPropagation();
+	});
 });
 
 function pmb_init_taxonomy_filters(){
@@ -114,46 +149,72 @@ function pmb_refresh_posts(){
 	});
 }
 
+/**
+ *
+ * @param direction 'up' or 'down'
+ */
+function pmb_move_selected_items(direction){
+	var selected = jQuery('.pmb-selected');
+	if(selected.length === 0){
+		alert('Please select an item to move');
+	}
+	pmb_move(selected, direction);
+}
+
+/**
+ *
+ * @param jquery_selection jQuery
+ * @param direction 'up' or 'down'
+ */
+function pmb_move(jquery_selection, direction){
+	if(direction === 'up'){
+		var first_item = jquery_selection.first();
+		if(first_item.is('.pmb-project-item:first-child')){
+			// if not nested, don't move any further
+			var parent_items = first_item.parents('pmb-project-item');
+			if(parent_items.length == 0 ){
+				return;
+			}
+			// if nested, keep going
+			//pmb_move_item(first_item, parent_items.first()
+
+			return;
+		}
+		jquery_selection.each(function(index,item){
+			var jquery_item = jQuery(item);
+			var prev_item = jquery_item.prev();
+			jquery_item.detach().insertBefore(prev_item);
+		});
+	} else {
+		var last_item = jquery_selection.last();
+		// move down
+		if(last_item.is('.pmb-project-item:last-child')){
+			// if not nested, don't move any further
+			var parent_items = last_item.parents('pmb-project-item');
+			if(parent_items.length == 0 ){
+				return;
+			}
+			// if nested, keep going
+			//pmb_move_item(first_item, parent_items.first()
+
+			return;
+		}
+		jQuery(jquery_selection.get().reverse()).each(function(index,item){
+			var jquery_item = jQuery(item);
+			var next_item = jquery_item.next();
+			jquery_item.detach().insertAfter(next_item);
+		});
+	}
+
+}
+
+function pmb_move_into(jquery_selection_to_move, jquery_selection_to_move_into, direction){
+	if(direction === 'up'){
+		// look for any children
+	}
+}
+
 function pmb_setup_callbacks_on_new_options(){
-	jQuery('.pmb-remove-item').click(function(event){
-		var selection = jQuery(event.currentTarget);
-		var parent_draggable_items = selection.parents('.pmb-project-item');
-
-		if(parent_draggable_items.length > 0){
-			var element_to_remove = parent_draggable_items[0];
-			jQuery(element_to_remove).detach().prependTo('#pmb-project-choices');
-		}
-	});
-	jQuery('#pmb-add-item').click(function(event){
-
-		var selected_items = jQuery('#pmb-project-choices .pmb-selected');
-
-		if(selected_items.length > 0){
-			selected_items.detach().appendTo('#pmb-project-main-matter');
-			pmb_maybe_add_sortable_to(jQuery('#pmb-project-main-matter'), selected_items);
-		} else {
-			alert('Please select an item to move');
-		}
-	});
-
-	jQuery('#pmb-remove-item').click(function(event){
-		var selected_items = jQuery('.pmb-selected');
-
-		if(selected_items.length > 0){
-			selected_items.remove();
-		} else {
-			alert('Please select an item to remove');
-		}
-	});
-	jQuery('#pmb-remove-item')
-	// prevent submitting the form
-	jQuery('.pmb-actions-column button').click(function(){
-		event.preventDefault();
-	});
-	// prevent sortable JS's multidrag from deselecting when clicking these buttons
-	jQuery('.pmb-actions-column button').on('pointerup mouseup touchend', function(event){
-		event.stopPropagation();
-	});
 	jQuery('.load-more-button').click(function(event){
 		event.preventDefault();
 		var form = jQuery("#pmb-filter-form");

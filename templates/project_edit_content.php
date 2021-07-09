@@ -150,7 +150,8 @@ pmb_render_template(
 
                     </div>
                 </div>
-                <div class="pmb-actions-column"><button id="pmb-add-item" title="<?php
+                <div class="pmb-actions-column">
+                    <button id="pmb-add-item" title="<?php
                     echo esc_attr(
                         sprintf(
                             __('Add selected items to project', 'print-my-blog'),
@@ -165,7 +166,10 @@ pmb_render_template(
                             $title
                         )
                     );
-                    ?>">x</button><button>^</button><button>v</button></div>
+                    ?>">x</button>
+                    <button id="pmb-move-up">^</button>
+                    <button id="pmb-move-down">v</button>
+                </div>
                 <div class="pmb-project-column pmb-project-matters-wrapper">
                     <h2 class="pmb-snug-header"><span class="dashicons dashicons-portfolio"></span> <?php esc_html_e('Project Content', 'print-my-blog');?></h2>
                     <div class="pmb-project-matters pmb-scrollable-window">
