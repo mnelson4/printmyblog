@@ -124,19 +124,36 @@ function pmb_setup_callbacks_on_new_options(){
 			jQuery(element_to_remove).detach().prependTo('#pmb-project-choices');
 		}
 	});
-	jQuery('#pmb-add-item').on('pointerup mouseup touchend', function(event){
-		event.stopPropagation();
+	jQuery('#pmb-add-item').click(function(event){
+
 		var selected_items = jQuery('#pmb-project-choices .pmb-selected');
 
 		if(selected_items.length > 0){
 			selected_items.detach().appendTo('#pmb-project-main-matter');
 			pmb_maybe_add_sortable_to(jQuery('#pmb-project-main-matter'), selected_items);
+		} else {
+			alert('Please select an item to move');
 		}
 	});
+
+	jQuery('#pmb-remove-item').click(function(event){
+		var selected_items = jQuery('.pmb-selected');
+
+		if(selected_items.length > 0){
+			selected_items.remove();
+		} else {
+			alert('Please select an item to remove');
+		}
+	});
+	jQuery('#pmb-remove-item')
 	// prevent submitting the form
 	jQuery('.pmb-actions-column button').click(function(){
 		event.preventDefault();
-	})
+	});
+	// prevent sortable JS's multidrag from deselecting when clicking these buttons
+	jQuery('.pmb-actions-column button').on('pointerup mouseup touchend', function(event){
+		event.stopPropagation();
+	});
 	jQuery('.load-more-button').click(function(event){
 		event.preventDefault();
 		var form = jQuery("#pmb-filter-form");
