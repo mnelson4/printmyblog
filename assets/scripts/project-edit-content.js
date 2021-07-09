@@ -113,6 +113,7 @@ function pmb_refresh_posts(){
 		}
 	});
 }
+
 function pmb_setup_callbacks_on_new_options(){
 	jQuery('.pmb-remove-item').click(function(event){
 		var selection = jQuery(event.currentTarget);
@@ -123,17 +124,19 @@ function pmb_setup_callbacks_on_new_options(){
 			jQuery(element_to_remove).detach().prependTo('#pmb-project-choices');
 		}
 	});
-	jQuery('.pmb-add-item').click(function(event){
-		var selection = jQuery(event.currentTarget);
-		var parent_draggable_items = selection.parents('.pmb-project-item');
+	jQuery('#pmb-add-item').on('pointerup mouseup touchend', function(event){
+		event.stopPropagation();
+		var selected_items = jQuery('#pmb-project-choices .pmb-selected');
 
-		if(parent_draggable_items.length > 0){
-			var element_to_add = parent_draggable_items[0];
-			jQuery(element_to_add).detach().appendTo('#pmb-project-main-matter');
-			element_to_add.scrollIntoView();
-			pmb_maybe_add_sortable_to(jQuery('#pmb-project-main-matter'), jQuery(element_to_add));
+		if(selected_items.length > 0){
+			selected_items.detach().appendTo('#pmb-project-main-matter');
+			pmb_maybe_add_sortable_to(jQuery('#pmb-project-main-matter'), selected_items);
 		}
 	});
+	// prevent submitting the form
+	jQuery('.pmb-actions-column button').click(function(){
+		event.preventDefault();
+	})
 	jQuery('.load-more-button').click(function(event){
 		event.preventDefault();
 		var form = jQuery("#pmb-filter-form");

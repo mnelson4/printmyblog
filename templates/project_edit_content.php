@@ -150,7 +150,7 @@ pmb_render_template(
 
                     </div>
                 </div>
-                <div class="pmb-actions-column"><button>&gt;</button><button>x</button><button>^</button><button>v</button></div>
+                <div class="pmb-actions-column"><button id="pmb-add-item">&gt;</button><button>x</button><button>^</button><button>v</button></div>
                 <div class="pmb-project-column pmb-project-matters-wrapper">
                     <h2 class="pmb-snug-header"><span class="dashicons dashicons-portfolio"></span> <?php esc_html_e('Project Content', 'print-my-blog');?></h2>
                     <div class="pmb-project-matters pmb-scrollable-window">
