@@ -1,14 +1,35 @@
-.pmb-project-layout{
-    margin-left:auto;
-    margin-right:auto;
+.pmb-project-layout-inner{
+    display:flex;
+    align-items:center;
 }
 
 .pmb-project-layout .pmb-project-column{
-    display:inline-block;
-    vertical-align:top;
+    flex:1 1 0;
+    align-self:stretch;
+    height:90vh;
+    display:flex;
+    flex-direction:column;
+}
+.pmb-project-layout .pmb-actions-column{
+    flex:0 0 auto;
+    flex-direction:column;
+    margin:0 10px;
+    display:flex;
+    align-self:stretch;
+    justify-content: center;
+    height:90vh;
+}
+.pmb-actions-column button{
+    margin-bottom:5px;
+    border:1px solid #ccc;
+    border-radius:2px;
+    background:#fff;
+    cursor:pointer;
+    padding:5px 10px;
+    color:#333;
+    font-size:12px;
 }
 .pmb-scrollable-window{
-    height:90vh;
     overflow-y:auto;
     border:1px solid gray;
 }
@@ -19,6 +40,27 @@
 
 .pmb-selected{
     background: #ECF6FD;
+}
+
+.pmb-project-choices-column>h2{
+    flex-grow:0;
+}
+.pmb-project-choices-column .pmb-project-choices-filters{
+    flex-grow:1;
+}
+.pmb-project-choices-column .pmb-project-content-available{
+    flex-grow:2;
+    overflow-y:auto;
+}
+.pmb-project-matters{
+    flex-grow:1;
+}
+
+.pmb-inline-header{
+    display:inline-block;
+}
+.pmb-snug-header{
+    margin-bottom:5px;
 }
 
 
@@ -43,79 +85,9 @@
 .pmb-project-content-available{
     vertical-align:top;
 }
-/* wide screen, show filters as a separate column*/
-@media (min-width:1700px){
-    .pmb-project-column{
-        margin-right:50px;
-    }
-    .pmb-project-choices-filters{
-        display:inline-block;
-        width:400px;
-        /*background-color:lightgreen;*/
-    }
-    .pmb-project-content-available{
-        display:inline-block;
-        width:400px;
-    }
-    .pmb-project-matters-wrapper{
-        display:inline-block;
-        max-width:600px;
-    }
-    .pmb-scrollable-window{
-        height:70vh;
-        overflow-y:auto;
-        border:1px solid gray;
-    }
-    .pmb-draggable-area{
-        padding-bottom:50px;
-    }
-}
-/* show filters above post options but make it scrollable*/
-@media (max-width:1699px) and (min-width:1101px){
-    .pmb-project-column{
-        margin-right:50px;
-    }
-    .pmb-project-choices-column{
-        width:40%;
-    }
-    .pmb-project-choices-filters{
-        display:inline-block;
-        /*background-color:yellow;*/
-    }
-    .pmb-project-choices-filters .pmb-project-choices-filters-table-wrap{
-        height:40vh;
-        overflow-y:scroll;
-    }
-    .pmb-project-content-available{
-        height:40vh;
-    }
-    .pmb-project-matters-wrapper{
-        width:45%;
-    }
-}
-/* stack everything*/
-@media (max-width:1100px){
-    .pmb-project-column{
-        width:95%;
-    }
-    .pmb-project-choices-filters .pmb-project-choices-filters-table-wrap{
-        height:200px;
-        overflow-y:scroll;
-    }
-    .pmb-project-choices-filters{
-        display:inline-block;
-        /*background-color:pink;*/
-        width:100%;
-    }
-    .pmb-project-content-available{
-        display:block;
-        height:30vh;
-    }
-    .pmb-project-matters-wrapper{
-        display:block;
-    }
-}
 
+.pmb-project-choices-filters {
+}
 
 .pmb-project-item{
     padding: 5px 0px 5px 10px;
@@ -123,6 +95,7 @@
     border:1px solid #ddd;
     position:relative;
     display:block;
+    margin-left:20px
 }
 .form-group{
     margin-bottom: 15px;
@@ -178,8 +151,8 @@
     text-overflow:ellipsis;
     overflow:hidden;
     white-space: nowrap;
-    width:250px;
-    min-width: 230px
+    width:200px;
+    min-width: 150px
 }
 .pmb-project-item-title-text{
 

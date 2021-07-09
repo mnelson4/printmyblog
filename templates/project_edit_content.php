@@ -33,8 +33,9 @@ pmb_render_template(
         <div id="pmb-project-layout" class="pmb-project-layout">
             <div class="pmb-project-layout-inner">
                 <div class="pmb-project-column pmb-project-choices-column">
-                    <h2><span class="dashicons dashicons-search"></span><?php _e('Select Content', 'print-my-blog');?></h2>
-                    <div class="pmb-project-choices-filters">
+                    <div class="pmb-project-choices-text"><h2 class="pmb-inline-header pmb-snug-header"><span class="dashicons dashicons-search"></span><?php _e('Select Content', 'print-my-blog');?></h2>
+                            <span class="pmb-comment"><?php _e('Use <em>CTRL</em> or <em>SHIFT</em> to select and drag multiple items', 'print-my-blog');?></span></div>
+                    <div class="pmb-project-choices-filters pmb-scrollable-window">
                         <div class="pmb-project-choices-filters-table-wrap">
                             <div class="pmb-button-spacer">
                                 <input id="pmb-filter-form-submit" type="submit" for="pmb-filter-form" class="button button-secondary" value="<?php echo esc_attr(_e('Search & Apply Filters', 'print-my-blog'));?>">
@@ -142,15 +143,16 @@ pmb_render_template(
                             </table>
                         </div>
                     </div>
-                    <div class="pmb-project-content-available list-group">
-                    <div id="pmb-project-choices" class="pmb-draggable-area pmb-scrollable-window">
+                    <div class="pmb-project-content-available list-group pmb-scrollable-window">
+                    <div id="pmb-project-choices" class="pmb-draggable-area pmb-project-choices " style="height:1000px">
                         <div class="no-drag"><div class="pmb-spinner"></div></div>
                     </div>
-                    <div class="pmb-comment"><?php _e('Use <em>CTRL</em> or <em>SHIFT</em> to select and drag multiple items', 'print-my-blog');?></div>
+
                     </div>
                 </div>
+                <div class="pmb-actions-column"><button>&gt;</button><button>x</button><button>^</button><button>v</button></div>
                 <div class="pmb-project-column pmb-project-matters-wrapper">
-                    <h2><span class="dashicons dashicons-portfolio"></span> <?php esc_html_e('Project Content', 'print-my-blog');?></h2>
+                    <h2 class="pmb-snug-header"><span class="dashicons dashicons-portfolio"></span> <?php esc_html_e('Project Content', 'print-my-blog');?></h2>
                     <div class="pmb-project-matters pmb-scrollable-window">
                         <?php if($project_support_front_matter){
                            ?>
