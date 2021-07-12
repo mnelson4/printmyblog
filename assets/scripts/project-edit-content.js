@@ -35,10 +35,16 @@ jQuery(document).ready(function(){
 
 	// filter form
 	jQuery('.pmb-hide-filters').click(function(event){
-		event.preventDefault();
-		jQuery(this).parents('details').attr('open',false);
 		pmb_refresh_posts();
 	});
+	jQuery('#pmb-project-choices-search').keyup(
+		jQuery.debounce(
+			1000,
+			() => {
+				pmb_refresh_posts();
+			}
+		)
+	);
 	pmb_refresh_posts();
 	jQuery('#pmb-move-up').click(function(){
 		pmb_move_selected_items('up');

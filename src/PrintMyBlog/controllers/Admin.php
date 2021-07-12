@@ -551,7 +551,7 @@ class Admin extends BaseController
                     wp_enqueue_script(
                         'pmb_project_edit_content',
                         PMB_SCRIPTS_URL . 'project-edit-content.js',
-                        array('sortablejs','jquery-ui-datepicker', 'jquery-ui-dialog','pmb-select2','wp-api',),
+                        array('sortablejs','jquery-ui-datepicker', 'jquery-ui-dialog','pmb-select2','wp-api','jquery-debounce'),
                         filemtime(PMB_SCRIPTS_DIR . 'project-edit-content.js')
                     );
                     wp_enqueue_style('jquery-ui');
