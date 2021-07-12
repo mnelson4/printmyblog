@@ -61,6 +61,7 @@ jQuery(document).ready(function(){
 			// move the new items above the "drag or click here" area
 			pmb_move(selected_items,'up');
 			pmb_maybe_add_sortable_to(jQuery('#pmb-project-main-matter'), selected_items);
+			jQuery('#pmb-project-main-matter').scrollTo(selected_items);
 		} else {
 			alert('Please select an item to add to the project');
 		}
