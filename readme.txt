@@ -397,8 +397,10 @@ https://youtu.be/uPQ3vqm7A2g
 == Changelog ==
 
 = 3.4.0 xxxxx =
+* Content editing page redesign (select all, move buttons, improved design)
 * Add integration with Google Language Translator plugin
 * Allow showing custom fields (postmeta) in classic designs
+
 
 = 3.3.9 June 18, 2021 =
 * Remove left margin on leftmost print button
