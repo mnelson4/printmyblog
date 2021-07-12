@@ -99,11 +99,18 @@ jQuery(document).ready(function(){
 		jQuery('.pmb-filters-closed-flex').css('display','flex');
 		jQuery('.pmb-filters-opened').css('display','none');
 	})
+	jQuery('#pmb-load-all').click(function(){
+		pmb_load_all();
+	})
 	jQuery('#pmb-select-all').click(function(){
-		jQuery('#pmb-project-choices .pmb-project-item').addClass('pmb-selected');
+		jQuery('#pmb-project-choices .pmb-project-item').each(function(index,element){
+			Sortable.utils.select(element);
+		});
 	});
 	jQuery('#pmb-deselect-all').click(function(){
-		jQuery('#pmb-project-choices .pmb-project-item').removeClass('pmb-selected');
+		jQuery('.pmb-project-item.pmb-selected').each(function(index,element){
+			Sortable.utils.deselect(element);
+		});
 	});
 });
 
@@ -260,28 +267,61 @@ function pmb_move_into(jquery_selection_to_move, jquery_selection_to_move_into, 
 	}
 }
 
-function pmb_setup_callbacks_on_new_options(){
-	jQuery('.load-more-button').click(function(event){
-		event.preventDefault();
-		var form = jQuery("#pmb-filter-form");
-		var data = form.serialize();
-		var button = jQuery(this);
-		var page = button.attr('data-page');
-		button.prop('class','pmb-spinner');
-		button.html('');
-		data += '&page=' + page;
-		jQuery.ajax({
-			type: form.attr('method'),
-			url: form.attr('action'),
-			data: data, // serializes the form's elements.
-			success: function(data)
-			{
-				button.remove();
-				jQuery('#pmb-project-choices').append(data);
+/**
+ * Loads more posts from the website for selectin content
+ */
+function pmb_load_more(page, load_more){
+	if(typeof(load_more) === 'undefined'){
+		load_more = false;
+	}
+	var form = jQuery("#pmb-filter-form");
+	var data = form.serialize();
+	data += '&page=' + page;
+	jQuery.ajax({
+		type: form.attr('method'),
+		url: form.attr('action'),
+		data: data, // serializes the form's elements.
+		success: function(data)
+		{
+			jQuery('.pmb-show-more').remove();
+			jQuery('#pmb-project-choices').append(data);
+			var load_more_button = jQuery('.pmb-show-more');
+			if(load_more_button.length !== 0 && load_more){
+				pmb_load_more(++page, true);
+			} else {
 				pmb_setup_callbacks_on_new_options();
 			}
-		});
+		}
 	});
+}
+
+function pmb_load_all(){
+	var button = jQuery('.load-more-button');
+	button.prop('class','pmb-spinner');
+	button.html('');
+	jQuery('#pmb-project-choices .pmb-project-item').remove();
+	var page = 1;
+	pmb_load_more(1, true);
+}
+
+
+function pmb_setup_callbacks_on_new_options(){
+	// enable or disable the load more button, depending on whether there's any more to load
+	var load_more_button = jQuery('.load-more-button');
+	if(load_more_button.length === 0){
+		jQuery('#pmb-load-all').addClass('disabled');
+	} else {
+		jQuery('#pmb-load-all').removeClass('disabled');
+		load_more_button.click(function(event){
+			event.preventDefault();
+			var button = jQuery(this);
+			var page = button.attr('data-page');
+			button.prop('class','pmb-spinner');
+			button.html('');
+			pmb_load_more(page);
+		});
+	}
+
 	jQuery(".pmb-add-material").click(function(event) {
 		var add_button = this;
 		event.preventDefault();
