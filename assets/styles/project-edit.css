@@ -134,6 +134,9 @@
     z-index:1;
     padding:5px;
 }
+.pmb-project-item-options-inner a{
+    margin-right:7px;
+}
 .form-group{
     margin-bottom: 15px;
 }
