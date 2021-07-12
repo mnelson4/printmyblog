@@ -85,6 +85,7 @@ jQuery(document).ready(function(){
 	});
 	jQuery('#pmb-expand-filters').click(function(){
 		jQuery('.pmb-filters-closed').css('display','none');
+		jQuery('.pmb-filters-closed-flex').css('display','none');
 		jQuery('.pmb-filters-opened').css('display','block');
 		jQuery( ".pmb-date" ).datepicker({
 			dateFormat: 'yy-mm-dd',
@@ -95,8 +96,15 @@ jQuery(document).ready(function(){
 	});
 	jQuery('.pmb-hide-filters').click(function(){
 		jQuery('.pmb-filters-closed').css('display','block');
+		jQuery('.pmb-filters-closed-flex').css('display','flex');
 		jQuery('.pmb-filters-opened').css('display','none');
 	})
+	jQuery('#pmb-select-all').click(function(){
+		jQuery('#pmb-project-choices .pmb-project-item').addClass('pmb-selected');
+	});
+	jQuery('#pmb-deselect-all').click(function(){
+		jQuery('#pmb-project-choices .pmb-project-item').removeClass('pmb-selected');
+	});
 });
 
 function pmb_init_taxonomy_filters(){

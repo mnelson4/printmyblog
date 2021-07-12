@@ -62,8 +62,7 @@
 .wp-core-ui .button.pmb-filters-opened, .pmb-filters-opened{
     display:none;
 }
-.pmb-filters-closed{
-}
+
 .pmb-project-choices-column .pmb-project-choices-filters{
     flex-grow:1;
     display:none;
@@ -78,6 +77,13 @@
 .pmb-project-choices-column .pmb-project-content-available{
     flex-grow:2;
     overflow-y:auto;
+}
+.pmb-project-content-available-options{
+    display:flex;
+}
+.pmb-project-content-available-options .button{
+    flex-grow:1;
+    text-align:center;
 }
 .pmb-project-matters{
     flex-grow:1;

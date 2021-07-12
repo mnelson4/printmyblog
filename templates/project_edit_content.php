@@ -149,6 +149,11 @@ pmb_render_template(
                         <div class="pmb-filters-apply-bar pmb-filters-opened">
                             <a class="button pmb-hide-filters" id="pmb-filter-form-submit"><?php esc_html_e('Search & Apply Filters', 'print-my-blog');?></a>
                         </div>
+                        <div class="pmb-project-content-available-options pmb-filters-closed-flex">
+                            <a class="button" id="pmb-load-all"><?php esc_html_e('Load All', 'print-my-blog');?></a>
+                            <a class="button" id="pmb-select-all"><?php esc_html_e('Select All', 'print-my-blog');?></a>
+                            <a class="button" id="pmb-deselect-all"><?php esc_html_e('Deselect All', 'print-my-blog');?></a>
+                        </div>
                     </div>
                 </div>
                 <div class="pmb-actions-column">
