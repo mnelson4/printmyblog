@@ -34,20 +34,12 @@ jQuery(document).ready(function(){
 
 
 	// filter form
-	jQuery('#pmb-filter-form-submit').click(function(event){
+	jQuery('.pmb-hide-filters').click(function(event){
 		event.preventDefault();
 		jQuery(this).parents('details').attr('open',false);
 		pmb_refresh_posts();
 	});
-
-
-	jQuery( ".pmb-date" ).datepicker({
-		dateFormat: 'yy-mm-dd',
-		changeYear: true,
-		changeMonth: true,
-	});
 	pmb_refresh_posts();
-	pmb_init_taxonomy_filters();
 	jQuery('#pmb-move-up').click(function(){
 		pmb_move_selected_items('up');
 	});
@@ -85,6 +77,20 @@ jQuery(document).ready(function(){
 	jQuery('.pmb-actions-column button').on('pointerup mouseup touchend', function(event){
 		event.stopPropagation();
 	});
+	jQuery('#pmb-expand-filters').click(function(){
+		jQuery('.pmb-filters-closed').css('display','none');
+		jQuery('.pmb-filters-opened').css('display','block');
+		jQuery( ".pmb-date" ).datepicker({
+			dateFormat: 'yy-mm-dd',
+			changeYear: true,
+			changeMonth: true,
+		});
+		pmb_init_taxonomy_filters();
+	});
+	jQuery('.pmb-hide-filters').click(function(){
+		jQuery('.pmb-filters-closed').css('display','block');
+		jQuery('.pmb-filters-opened').css('display','none');
+	})
 });
 
 function pmb_init_taxonomy_filters(){

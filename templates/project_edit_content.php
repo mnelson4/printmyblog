@@ -35,17 +35,14 @@ pmb_render_template(
                 <div class="pmb-project-column pmb-project-choices-column">
                     <div class="pmb-project-choices-text"><h2 class="pmb-inline-header pmb-snug-header"><span class="dashicons dashicons-search"></span><?php _e('Select Content', 'print-my-blog');?></h2>
                             <span class="pmb-comment"><?php _e('Use <em>CTRL</em> or <em>SHIFT</em> to select and drag multiple items', 'print-my-blog');?></span></div>
-                    <div class="pmb-project-choices-filters pmb-scrollable-window">
+                    <div class="pmb-search-bar">
+                        <input id="pmb-project-choices-search" class="pmb-search-input" type="text" name="pmb-search" form="pmb-filter-form" placeholder="<?php echo esc_attr(__('Search Posts, Pages, Custom Post Types...', 'print-my-blog'));?>">
+                        <a id="pmb-expand-filters" class="pmb-expand-filters button pmb-filters-closed"><?php esc_html_e('Show Filters', 'print-my-blog');?><span class="dashicons dashicons-filter pmb-icon"></span></a>
+                        <a id="pmb-hide-filters" class="pmb-hide-filters button pmb-filters-opened"><?php esc_html_e('Hide Filters', 'print-my-blog');?><span class="dashicons dashicons-filter pmb-icon"></span></a>
+                    </div>
+                    <div class="pmb-project-choices-filters pmb-scrollable-window pmb-filters-opened">
                         <div class="pmb-project-choices-filters-table-wrap">
-                            <div class="pmb-button-spacer">
-                                <input id="pmb-filter-form-submit" type="submit" for="pmb-filter-form" class="button button-secondary" value="<?php echo esc_attr(_e('Search & Apply Filters', 'print-my-blog'));?>">
-                            </div>
                             <table class="form-table">
-                                <tr>
-                                    <th><label for="pmb-project-choices-search"><?php esc_html_e('Search', 'print-my-blog');?></th>
-                                    <td><input id="pmb-project-choices-search" type="text" name="pmb-search" form="pmb-filter-form"></td>
-                                </tr>
-                                <tr>
                                     <th><label for="pmb-project-choices-post-type"><?php esc_html_e('Post Type', 'print-my-blog');?></label></th>
                                     <td>
                                         <select id="pmb-project-choices-post-type" name="pmb-post-type" form="pmb-filter-form">
@@ -143,11 +140,15 @@ pmb_render_template(
                             </table>
                         </div>
                     </div>
-                    <div class="pmb-project-content-available list-group pmb-scrollable-window">
-                    <div id="pmb-project-choices" class="pmb-draggable-area pmb-project-choices " style="height:1000px">
-                        <div class="no-drag"><div class="pmb-spinner"></div></div>
+                    <div class="pmb-project-content-available list-group pmb-scrollable-window pmb-filters-closed">
+                        <div id="pmb-project-choices" class="pmb-draggable-area pmb-project-choices">
+                            <div class="no-drag"><div class="pmb-spinner"></div></div>
+                        </div>
                     </div>
-
+                    <div class="pmb-column-options">
+                        <div class="pmb-filters-apply-bar pmb-filters-opened">
+                            <a class="button pmb-hide-filters" id="pmb-filter-form-submit"><?php esc_html_e('Search & Apply Filters', 'print-my-blog');?></a>
+                        </div>
                     </div>
                 </div>
                 <div class="pmb-actions-column">
@@ -239,7 +240,7 @@ pmb_render_template(
         </div>
         <?php wp_nonce_field( 'pmb-project-edit' );?>
         <div class="pmb-button-spacer">
-            <button class="button-primary button" id="pmb-save" name="pmb-save" value="save"><?php esc_html_e('Save', 'print-my-blog'); ?></button>
+            <button class="button-primary button" id="pmb-save" name="pmb-save" value="save"><?php esc_html_e('Save Project Contents', 'print-my-blog'); ?></button>
         </div>
     </form>
 
@@ -256,6 +257,5 @@ pmb_render_template(
 
         </div>
     </div>
-    <form id="pmb-add-rint-materials-dialogue"></form>
 
 <?php pmb_render_template('partials/project_footer.php');
