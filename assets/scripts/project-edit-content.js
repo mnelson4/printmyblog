@@ -210,6 +210,7 @@ function pmb_move(jquery_selection, direction){
 		// }
 		jquery_selection.each(function(index,item){
 			var jquery_item = jQuery(item);
+			var jquery_has_nested_items = jquery_item.find('.pmb-project-item');
 			if(jquery_item.is('.pmb-project-item:first-child')){
 				// if it's the first item already, check if we can move it up into a parent sortable
 				var parent_items = jquery_item.parents('.pmb-project-item');
@@ -217,9 +218,14 @@ function pmb_move(jquery_selection, direction){
 					// it can be placed in a parent
 					jquery_item.insertBefore(parent_items.first());
 					pmb_maybe_add_sortable_to(parent_items.first().parents().first(), jquery_item);
+				} else if(jquery_has_nested_items.length === 0 && jquery_item.is('#pmb-project-back-matter .pmb-project-item')){
+					// if we're in the backmatter, move to main matter
+					jquery_item.detach().insertBefore(jQuery('#pmb-project-main-matter').children('.pmb-drag-here'));
+				} else if(jquery_has_nested_items.length === 0 && jquery_item.is('#pmb-project-main-matter .pmb-project-item')){
+					// if we're in main matter, move to front matter
+					jquery_item.detach().insertBefore(jQuery('#pmb-project-front-matter').children('.pmb-drag-here'));
 				}
 			} else {
-					var jquery_has_nested_items = jquery_item.find('.pmb-project-item');
 					var prev_item = jquery_item.prev();
 					var prev_nested_draggable_area = prev_item.find('.pmb-draggable-area:not(.pmb-sortable-inactive)');
 					// nest it if the item being moved has no children and the destination supports it
@@ -236,6 +242,7 @@ function pmb_move(jquery_selection, direction){
 	} else {
 		jQuery(jquery_selection.get().reverse()).each(function(index,item){
 			var jquery_item = jQuery(item);
+			var jquery_has_nested_items = jquery_item.find('.pmb-project-item');
 			if(jquery_item.is('.pmb-project-item:nth-last-child(2)')){
 				// if it's the first item already, check if we can move it up into a parent sortable
 				var parent_items = jquery_item.parents('.pmb-project-item');
@@ -243,9 +250,14 @@ function pmb_move(jquery_selection, direction){
 					// it can be placed in a parent
 					jquery_item.insertAfter(parent_items.first());
 					pmb_maybe_add_sortable_to(parent_items.first().parents().first(), jquery_item);
+				} else if(jquery_has_nested_items.length === 0 && jquery_item.is('#pmb-project-front-matter .pmb-project-item')){
+					// if we're in the backmatter, move to main matter
+					jquery_item.detach().prependTo(jQuery('#pmb-project-main-matter'));
+				} else if(jquery_has_nested_items.length === 0 && jquery_item.is('#pmb-project-main-matter .pmb-project-item')){
+					// if we're in main matter, move to front matter
+					jquery_item.detach().prependTo(jQuery('#pmb-project-back-matter'));
 				}
 			} else {
-				var jquery_has_nested_items = jquery_item.find('.pmb-project-item');
 				var next_item = jquery_item.next();
 				var nested_draggable_area = next_item.find('.pmb-draggable-area:not(.pmb-sortable-inactive)');
 				// nest it if the item being moved has no children and the destination supports it
@@ -258,7 +270,7 @@ function pmb_move(jquery_selection, direction){
 			}
 		});
 	}
-
+	jQuery('.pmb-project-matters').scrollTo(jquery_selection);
 }
 
 function pmb_move_into(jquery_selection_to_move, jquery_selection_to_move_into, direction){
@@ -534,8 +546,10 @@ function pmb_setup_item_options(){
 				options_area.css('display','none');
 			}
 		});
-		// that.mouseleave(function () {
-		// 	options_area.css('display','none');
-		// });
 	})
 }
+// https://stackoverflow.com/a/18927969/1493883
+jQuery.fn.scrollTo = function(elem) {
+	jQuery(this).scrollTop(jQuery(this).scrollTop() - jQuery(this).offset().top + jQuery(elem).offset().top - 100);
+	return this;
+};
