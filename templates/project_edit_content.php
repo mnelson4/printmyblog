@@ -114,6 +114,12 @@ pmb_render_template(
                                     </td>
                                 </tr>
                                 <tr>
+                                    <th><label for="pmb-show-included"><?php esc_html_e('Show Included Content?', 'print-my-blog');?></label></th>
+                                    <td><input type="checkbox" form="pmb-filter-form" name="pmb-show-included" id="pmb-show-included">
+                                        <p class="pmb-help"><?php esc_html_e('Show content already added to project', 'print-my-blog');?></p>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <th><label for="pmb-project-choices-order-by"><?php esc_html_e('Order By', 'print-my-blog');?></label></th>
                                     <td><select id="pmb-project-choices-order-by" name="pmb-order-by" form="pmb-filter-form">
                                             <?php

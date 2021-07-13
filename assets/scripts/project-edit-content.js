@@ -164,18 +164,14 @@ function pmb_init_taxonomy_filters(){
 }
 
 function pmb_refresh_posts(){
-	var form = jQuery("#pmb-filter-form");
 	jQuery('#pmb-project-choices').html('<div class="no-drag"><div class="pmb-spinner"></div></div>');
-	jQuery.ajax({
-		type: form.attr('method'),
-		url: form.attr('action'),
-		data: form.serialize(), // serializes the form's elements.
-		success: function(data)
-		{
+	pmb_request_content(
+		null,
+		function(data){
 			jQuery('#pmb-project-choices').html(data);
 			pmb_setup_callbacks_on_new_options();
 		}
-	});
+	);
 }
 
 /**
@@ -287,16 +283,11 @@ function pmb_load_more(page, load_more){
 	if(typeof(load_more) === 'undefined'){
 		load_more = false;
 	}
-	var form = jQuery("#pmb-filter-form");
-	var data = form.serialize();
-	data += '&page=' + page;
-	jQuery.ajax({
-		type: form.attr('method'),
-		url: form.attr('action'),
-		data: data, // serializes the form's elements.
-		success: function(data)
+	pmb_request_content(
+		{'page':page},
+		function(data)
 		{
-			jQuery('.pmb-show-more').remove();
+			jQuery('.pmb-show-more').remove()
 			jQuery('#pmb-project-choices').append(data);
 			var load_more_button = jQuery('.pmb-show-more');
 			if(load_more_button.length !== 0 && load_more){
@@ -304,7 +295,32 @@ function pmb_load_more(page, load_more){
 			} else {
 				pmb_setup_callbacks_on_new_options();
 			}
+		},
+	);
+}
+
+function pmb_request_content(extra_params, callback){
+	var form = jQuery("#pmb-filter-form");
+	var data = form.serialize();
+	if(! jQuery('#pmb-show-included').is(':checked')){
+		var exclude = [];
+		jQuery('.pmb-project-matters .pmb-project-item').each(function(index, element) {
+			exclude.push(jQuery(element).attr('data-id'));
+		});
+		data += '&exclude=' + exclude.join(',');
+	}
+
+	if(typeof(extra_params) === 'object'){
+		for(var key in extra_params){
+			data += '&' + key + '=' + extra_params[key];
 		}
+	}
+
+	jQuery.ajax({
+		type: form.attr('method'),
+		url: form.attr('action'),
+		data: data, // serializes the form's elements.
+		success: callback
 	});
 }
 
