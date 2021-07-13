@@ -562,6 +562,12 @@ class Admin extends BaseController
                         [
                             'levels' => $this->project->getLevelsAllowed(),
                             'default_rest_url' => function_exists('rest_url') ? rest_url('/wp/v2') : '',
+                            'translations' => [
+                                'cant_add' => __('Please select items to add to the project', 'print-my-blog'),
+                                'cant_remove' => __('Please select items to remove', 'print-my-blog'),
+                                'cant_move' => __('Please select items to move', 'print-my-blog'),
+                                'insert_error' => __('Error inserting. Please use the PMB help page to get help', 'print-my-blog')
+                            ]
                         ]
                     );
                     break;

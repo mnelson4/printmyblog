@@ -1,4 +1,3 @@
-// alert('ye');
 jQuery(document).ready(function(){
 	var choices = document.getElementById('pmb-project-choices');
 	var sortable_choices = Sortable.create(
@@ -63,7 +62,7 @@ jQuery(document).ready(function(){
 			pmb_maybe_add_sortable_to(jQuery('#pmb-project-main-matter'), selected_items);
 			jQuery('#pmb-project-main-matter').scrollTo(selected_items);
 		} else {
-			alert('Please select an item to add to the project');
+			alert(pmb_project_edit_content_data.translations.cant_add);
 		}
 	});
 
@@ -73,7 +72,7 @@ jQuery(document).ready(function(){
 		if(selected_items.length > 0){
 			selected_items.remove();
 		} else {
-			alert('Please select an item to remove');
+			alert(pmb_project_edit_content_data.translations.cant_remove);
 		}
 	});
 	// prevent submitting the form
@@ -186,9 +185,10 @@ function pmb_refresh_posts(){
 function pmb_move_selected_items(direction){
 	var selected = jQuery('.pmb-selected');
 	if(selected.length === 0){
-		alert('Please select an item to move');
+		alert(pmb_project_edit_content_data.translations.cant_move);
+	} else {
+		pmb_move(selected, direction);
 	}
-	pmb_move(selected, direction);
 }
 
 /**
@@ -395,7 +395,7 @@ function pmb_add_print_material_submit(add_button, submit_button){
 		},
 		'json'
 	).error(function(){
-		alert('Error Inserting. Please contact support.');
+		alert(pmb_project_edit_content_data.translations.insert_error);
 	});
 }
 
