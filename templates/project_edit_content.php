@@ -163,22 +163,22 @@ pmb_render_template(
                     </div>
                 </div>
                 <div class="pmb-actions-column">
-                    <button id="pmb-add-item" title="<?php
+                    <button id="pmb-add-item" class="button" title="<?php
                     echo esc_attr(
                             __('Add selected items to project', 'print-my-blog')
                     );
-                    ?>"><span class="dashicons dashicons-arrow-right-alt2"></span></button>
-                    <button id="pmb-remove-item" title="<?php
+                    ?>"></span><span class="dashicons dashicons-plus"></span></button>
+                    <button id="pmb-remove-item" class="button" title="<?php
                     echo esc_attr(
                             __('Remove selected items', 'print-my-blog')
                     );
                     ?>"><span class="dashicons dashicons-no-alt"></span></button>
-                    <button id="pmb-move-up" title="<?php
+                    <button id="pmb-move-up" class="button" title="<?php
                     echo esc_attr(
                             __('Move selected items up', 'print-my-blog')
                     );
                     ?>"><span class="dashicons dashicons-arrow-up-alt2"></span></button>
-                    <button id="pmb-move-down" title="<?php
+                    <button id="pmb-move-down" class="button" title="<?php
                     echo esc_attr(
                             __('Move selected items down', 'print-my-blog')
                     );

@@ -24,15 +24,14 @@
     margin-left:20px;
 }
 
-.pmb-actions-column button{
+.wp-core-ui .pmb-actions-column button{
     margin-bottom:5px;
-    border:1px solid #ccc;
     border-radius:2px;
     background:#fff;
     cursor:pointer;
-    color:#333;
     font-size:12px;
     padding:15px;
+    line-height:1;
 }
 .pmb-scrollable-window{
     overflow-y:auto;
@@ -128,7 +127,7 @@
     border:1px solid #ddd;
     position:relative;
     display:block;
-    margin-left:20px
+    margin-right:20px
 }
 .pmb-project-item-options{
     display:none;
@@ -234,6 +233,7 @@
 .wp-core-ui .pmb-show-more div.load-more-button{
     display:block;
     text-align:center;
+    margin-right:20px;
 }
 .pmb-no-results{
     padding:8px;
@@ -263,4 +263,19 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 13px auto;
+}
+@media (max-width: 766px){
+    .pmb-project-layout .pmb-actions-column{
+        display: flex;
+        position: fixed;
+        right: 0;
+        z-index: 10;
+        height:auto;
+        bottom:0;
+        flex-direction:row;
+    }
+
+    .pmb-project-layout .pmb-project-layout-inner{
+        flex-direction:column;
+    }
 }
