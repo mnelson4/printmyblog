@@ -19,6 +19,11 @@
     justify-content: center;
     height:80vh;
 }
+
+.pmb-project-column h2{
+    margin-left:20px;
+}
+
 .pmb-actions-column button{
     margin-bottom:5px;
     border:1px solid #ccc;
