@@ -589,8 +589,10 @@ function pmb_show_hide_actions(){
 	var selected_items = jQuery('.pmb-selected').length;
 	if(selected_items){
 		jQuery('.pmb-actions-column').css('visibility','visible');
+		jQuery('#pmb-use-ctrl-key').css('visibility','visible');
 	} else {
 		jQuery('.pmb-actions-column').css('visibility','hidden');
+		jQuery('#pmb-use-ctrl-key').css('visibility','hidden');
 	}
 }
 // https://stackoverflow.com/a/18927969/1493883

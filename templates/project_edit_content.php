@@ -34,7 +34,7 @@ pmb_render_template(
             <div class="pmb-project-layout-inner">
                 <div class="pmb-project-column pmb-project-choices-column">
                     <div class="pmb-project-choices-text"><h2 class="pmb-inline-header pmb-snug-header"><span class="dashicons dashicons-search"></span><?php _e('Select Content', 'print-my-blog');?></h2>
-                            <span class="pmb-comment"><?php _e('Use <em>CTRL</em> or <em>SHIFT</em> to select and drag multiple items', 'print-my-blog');?></span></div>
+                            <span id="pmb-use-ctrl-key" class="pmb-comment pmb-use-ctrl-key"><?php _e('Use <em>CTRL</em> or <em>SHIFT</em> to select and drag multiple items', 'print-my-blog');?></span></div>
                     <div class="pmb-search-bar">
                         <input id="pmb-project-choices-search" class="pmb-search-input" type="text" name="pmb-search" form="pmb-filter-form" placeholder="<?php echo esc_attr(__('Search Posts, Pages, Custom Post Types...', 'print-my-blog'));?>">
                         <a id="pmb-expand-filters" class="pmb-expand-filters button pmb-filters-closed"><?php esc_html_e('Show Filters', 'print-my-blog');?><span class="dashicons dashicons-filter pmb-icon"></span></a>

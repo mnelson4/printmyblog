@@ -178,6 +178,9 @@
 .pmb-comment{
     margin-left:1em;
 }
+.pmb-use-ctrl-key{
+    visibility:hidden;
+}
 
 .pmb-project-content-chosen .pmb-nested-sortable{
     /*border: 1px dotted gray;*/

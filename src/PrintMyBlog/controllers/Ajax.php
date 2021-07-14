@@ -245,7 +245,7 @@ class Ajax extends BaseController
                         class="load-more-button button no-drag"
                         data-page="<?php echo esc_attr($page + 1);?>"><span
                             class="dashicons dashicons-arrow-down-alt"></span>
-                    <?php esc_html_e('Load more...', 'print-my-blog');?>
+                    <?php esc_html_e('Show more...', 'print-my-blog');?>
                 </div>
             </div>
             <?php
