@@ -11,7 +11,14 @@ jQuery(document).ready(function(){
 			multiDrag: true,
 			selectedClass: "pmb-selected",
 			animation: 150,
-			multiDragKey: 'CTRL'
+			multiDragKey: 'CTRL',
+			onSelect: function(/**Event*/evt) {
+				pmb_show_hide_actions();
+			},
+			// Called when an item is deselected
+			onDeselect: function(/**Event*/evt) {
+				pmb_show_hide_actions();
+			},
 		});
 	jQuery('.pmb-sortable').each(function(index, element){
 		pmb_create_sortable_from(element);
@@ -448,6 +455,13 @@ function pmb_create_sortable_from(element){
 				}
 				pmb_maybe_add_sortable_to(jQuery(event.target), jQuery(items));
 			},
+			onSelect: function(/**Event*/evt) {
+				pmb_show_hide_actions();
+			},
+			// Called when an item is deselected
+			onDeselect: function(/**Event*/evt) {
+				pmb_show_hide_actions();
+			},
 			multiDrag: true,
 			selectedClass: "pmb-selected",
 			animation: 150,
@@ -568,7 +582,15 @@ function pmb_setup_item_options(){
 	});
 	jQuery('.pmb-project-choices-column .pmb-project-item-header').dblclick(function(){
 		pmb_add(jQuery(this).closest('.pmb-project-item'));
-	})
+	});
+}
+function pmb_show_hide_actions(){
+	var selected_items = jQuery('.pmb-selected').length;
+	if(selected_items){
+		jQuery('.pmb-actions-column').css('visibility','visible');
+	} else {
+		jQuery('.pmb-actions-column').css('visibility','hidden');
+	}
 }
 // https://stackoverflow.com/a/18927969/1493883
 jQuery.fn.scrollTo = function(elem) {

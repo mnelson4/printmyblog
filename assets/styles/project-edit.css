@@ -18,6 +18,7 @@
     align-self:stretch;
     justify-content: center;
     height:80vh;
+    visibility: hidden;
 }
 
 .pmb-project-column h2{
