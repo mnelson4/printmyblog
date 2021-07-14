@@ -74,6 +74,7 @@ jQuery(document).ready(function(){
 
 		if(selected_items.length > 0){
 			selected_items.remove();
+			pmb_show_hide_actions();
 		} else {
 			alert(pmb_project_edit_content_data.translations.cant_remove);
 		}
