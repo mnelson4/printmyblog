@@ -33,8 +33,8 @@ pmb_render_template(
         <div id="pmb-project-layout" class="pmb-project-layout">
             <div class="pmb-project-layout-inner">
                 <div class="pmb-project-column pmb-project-choices-column">
-                    <div class="pmb-project-choices-text"><h2 class="pmb-inline-header pmb-snug-header"><span class="dashicons dashicons-search"></span><?php _e('Select Content', 'print-my-blog');?></h2>
-                            <span id="pmb-use-ctrl-key" class="pmb-comment pmb-use-ctrl-key"><?php _e('Use <em>CTRL</em> or <em>SHIFT</em> to select and drag multiple items', 'print-my-blog');?></span></div>
+                    <div class="pmb-project-choices-text"><h2 class="pmb-inline-header pmb-snug-header"><span class="dashicons dashicons-search"></span><?php _e('Available Content', 'print-my-blog');?></h2>
+                            <span id="pmb-use-ctrl-key" class="pmb-comment pmb-use-ctrl-key"><?php _e('Use <em>CTRL</em> or <em>SHIFT</em> to select multiple items', 'print-my-blog');?></span></div>
                     <div class="pmb-search-bar">
                         <input id="pmb-project-choices-search" class="pmb-search-input" type="text" name="pmb-search" form="pmb-filter-form" placeholder="<?php echo esc_attr(__('Search Posts, Pages, Custom Post Types...', 'print-my-blog'));?>">
                         <a id="pmb-expand-filters" class="pmb-expand-filters button pmb-filters-closed"><?php esc_html_e('Show Filters', 'print-my-blog');?><span class="dashicons dashicons-filter pmb-icon"></span></a>
@@ -156,7 +156,7 @@ pmb_render_template(
                             <a class="button pmb-hide-filters" id="pmb-filter-form-submit"><?php esc_html_e('Search & Apply Filters', 'print-my-blog');?></a>
                         </div>
                         <div class="pmb-project-content-available-options pmb-filters-closed-flex">
-                            <a class="button" id="pmb-load-all"><?php esc_html_e('Load All', 'print-my-blog');?></a>
+                            <a class="button" id="pmb-load-all"><?php esc_html_e('Show All', 'print-my-blog');?></a>
                             <a class="button" id="pmb-select-all"><?php esc_html_e('Select All', 'print-my-blog');?></a>
                             <a class="button" id="pmb-deselect-all"><?php esc_html_e('Deselect All', 'print-my-blog');?></a>
                         </div>
@@ -185,7 +185,7 @@ pmb_render_template(
                     ?>"><span class="dashicons dashicons-arrow-down-alt2"></span></button>
                 </div>
                 <div class="pmb-project-column pmb-project-matters-wrapper">
-                    <h2 class="pmb-snug-header"><span class="dashicons dashicons-portfolio"></span> <?php esc_html_e('Project Content', 'print-my-blog');?></h2>
+                    <h2 class="pmb-snug-header"><span class="dashicons dashicons-portfolio"></span> <?php esc_html_e('Chosen Project Content', 'print-my-blog');?></h2>
                     <div class="pmb-project-matters pmb-scrollable-window">
                         <?php if($project_support_front_matter){
                            ?>

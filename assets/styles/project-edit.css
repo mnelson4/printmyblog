@@ -21,10 +21,6 @@
     visibility: hidden;
 }
 
-.pmb-project-column h2{
-    margin-left:20px;
-}
-
 .wp-core-ui .pmb-actions-column button{
     margin-bottom:5px;
     border-radius:2px;

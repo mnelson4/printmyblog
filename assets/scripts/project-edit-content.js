@@ -8,6 +8,7 @@ jQuery(document).ready(function(){
 			},
 			filter: '.no-drag',
 			sort: false,
+			forceFallback: true,
 			multiDrag: true,
 			selectedClass: "pmb-selected",
 			animation: 150,
@@ -110,11 +111,13 @@ jQuery(document).ready(function(){
 		jQuery('#pmb-project-choices .pmb-project-item').each(function(index,element){
 			Sortable.utils.select(element);
 		});
+		pmb_show_hide_actions();
 	});
 	jQuery('#pmb-deselect-all').click(function(){
 		jQuery('.pmb-project-item.pmb-selected').each(function(index,element){
 			Sortable.utils.deselect(element);
 		});
+		pmb_show_hide_actions();
 	});
 });
 function pmb_add(selected_items) {
@@ -447,6 +450,7 @@ function pmb_create_sortable_from(element){
 			animation:150,
 			fallbackOnBody: true,
 			swapThreshold: .80,
+			forceFallback: true,
 			onAdd: function (event) {
 				var items = [];
 				if(event.items.length){
