@@ -113,6 +113,21 @@ jQuery(document).ready(function(){
 		});
 		pmb_show_hide_actions();
 	});
+	jQuery(document).keyup(function(e) {
+		// console.log(e.which);
+		var selected = jQuery('.pmb-selected');
+		if(e.which == 8 || e.which == 46){
+			if(selected.length){
+				pmb_remove(selected);
+			}
+		} else if(e.which == 40){
+			pmb_move(selected,'down')
+		} else if(e.which == 38){
+			pmb_move(selected,'up')
+		} else if(e.which == 39){
+			pmb_add(selected);
+		}
+	});
 });
 
 function pmb_remove(selected_items){
