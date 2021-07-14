@@ -56,11 +56,7 @@ jQuery(document).ready(function(){
 		var selected_items = jQuery('#pmb-project-choices .pmb-selected');
 
 		if(selected_items.length > 0){
-			selected_items.detach().appendTo('#pmb-project-main-matter');
-			// move the new items above the "drag or click here" area
-			pmb_move(selected_items,'up');
-			pmb_maybe_add_sortable_to(jQuery('#pmb-project-main-matter'), selected_items);
-			jQuery('#pmb-project-main-matter').scrollTo(selected_items);
+			pmb_add(selected_items);
 		} else {
 			alert(pmb_project_edit_content_data.translations.cant_add);
 		}
@@ -113,7 +109,13 @@ jQuery(document).ready(function(){
 		});
 	});
 });
-
+function pmb_add(selected_items) {
+	selected_items.detach().appendTo('#pmb-project-main-matter');
+	// move the new items above the "drag or click here" area
+	pmb_move(selected_items,'up');
+	pmb_maybe_add_sortable_to(jQuery('#pmb-project-main-matter'), selected_items);
+	jQuery('#pmb-project-main-matter').scrollTo(selected_items);
+}
 function pmb_init_taxonomy_filters(){
 	jQuery('.pmb-taxonomies-select').each(function(index, element){
 		var rest_base_attr = element.attributes['data-rest-base'];
@@ -563,6 +565,9 @@ function pmb_setup_item_options(){
 				options_area.css('display','none');
 			}
 		});
+	});
+	jQuery('.pmb-project-choices-column .pmb-project-item-header').dblclick(function(){
+		pmb_add(jQuery(this).closest('.pmb-project-item'));
 	})
 }
 // https://stackoverflow.com/a/18927969/1493883

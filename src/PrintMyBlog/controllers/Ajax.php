@@ -222,10 +222,10 @@ class Ajax extends BaseController
                 $query_params['date_query'] = $date_query;
             }
         }
-        if(!empty($_GET['exclude'])){
+        if (!empty($_GET['exclude'])) {
             $query_params['exclude'] = array_map(
-                    'intval',
-                    explode(',',$_GET['exclude'])
+                'intval',
+                explode(',', $_GET['exclude'])
             );
         }
         if (!empty($_GET['pmb-order-by'])) {
