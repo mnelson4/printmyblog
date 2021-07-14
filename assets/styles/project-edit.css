@@ -221,7 +221,7 @@
 .pmb-add-material{
     cursor:pointer;
 }
-.pmb-project-choices-column .pmb-remove-item,.pmb-project-choices-column .pmb-project-item-template-container{
+.pmb-project-choices-column .pmb-project-item-template-container{
     display:none;
 }
 .pmb-template{

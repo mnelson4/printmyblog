@@ -72,13 +72,7 @@ jQuery(document).ready(function(){
 
 	jQuery('#pmb-remove-item').click(function(event){
 		var selected_items = jQuery('.pmb-selected');
-
-		if(selected_items.length > 0){
-			selected_items.remove();
-			pmb_show_hide_actions();
-		} else {
-			alert(pmb_project_edit_content_data.translations.cant_remove);
-		}
+		pmb_remove(selected_items);
 	});
 	// prevent submitting the form
 	jQuery('.pmb-actions-column button').click(function(){
@@ -120,6 +114,15 @@ jQuery(document).ready(function(){
 		pmb_show_hide_actions();
 	});
 });
+
+function pmb_remove(selected_items){
+	if(selected_items.length > 0){
+		selected_items.remove();
+		pmb_show_hide_actions();
+	} else {
+		alert(pmb_project_edit_content_data.translations.cant_remove);
+	}
+}
 function pmb_add(selected_items) {
 	selected_items.detach().appendTo('#pmb-project-main-matter');
 	// move the new items above the "drag or click here" area
@@ -587,6 +590,17 @@ function pmb_setup_item_options(){
 	});
 	jQuery('.pmb-project-choices-column .pmb-project-item-header').dblclick(function(){
 		pmb_add(jQuery(this).closest('.pmb-project-item'));
+	});
+	jQuery('.pmb-add-item').click(function(event){
+		var selection = jQuery(event.currentTarget);
+		var parent_draggable_items = selection.parents('.pmb-project-item');
+		pmb_add(parent_draggable_items);
+	});
+
+	jQuery('.pmb-remove-item').click(function(event){
+		var selection = jQuery(event.currentTarget);
+		var parent_draggable_items = selection.parents('.pmb-project-item');
+		pmb_remove(parent_draggable_items);
 	});
 }
 function pmb_show_hide_actions(){

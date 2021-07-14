@@ -245,6 +245,26 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
                     );
                     ?>"
                     target="_blank"><span class="dashicons dashicons-edit pmb-icon"></span></a>
+                    <a
+                            title="<?php
+                            echo esc_attr(
+                                sprintf(
+                                    __('Add "%s" to project', 'print-my-blog'),
+                                    $title
+                                )
+                            );
+                            ?>"
+                            target="_blank" class="pmb-add-item"><span class="dashicons dashicons-plus pmb-icon"></span></a>
+                    <a
+                            title="<?php
+                            echo esc_attr(
+                                sprintf(
+                                    __('Remove "%s"', 'print-my-blog'),
+                                    $title
+                                )
+                            );
+                            ?>"
+                            target="_blank"><span class="dashicons dashicons-no-alt pmb-icon pmb-remove-item"></span></a>
                     <span class="pmb-project-item-template-container"><?php echo pmb_section_template_selector($template, $project);?></span>
                 </div>
             </div>
