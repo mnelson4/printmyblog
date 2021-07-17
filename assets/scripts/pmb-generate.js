@@ -14,15 +14,7 @@ jQuery(document).ready(function () {
             (response) => {
                 // could fetch more, but for now it all just happens in one request
                 if (typeof (response) === 'object' && typeof (response.url) === 'string') {
-                    // setup the buttons to send the HTML to DocRaptor or PmbCentral
-                    var preview_button = format_options_selection.find('.pmb-download-preview');
-                    preview_button.attr('data-html-url', response.url);
-                    preview_button.addClass('button-primary');
-                    format_options_selection.find('.pmb-download-live').attr('data-html-url', response.url);
-                    format_options_selection.find('.pmb-after-generation').show();
-                    format_options_selection.find('.pmb-generate').hide();
-                    format_options_selection.find('.pmb-view-html').attr('href', response.url);
-                    format_options_selection.find('.pmb-previous-generation-info').hide();
+                    window.location.href = response.url;
                 }
             },
             'json').fail((event) => {
