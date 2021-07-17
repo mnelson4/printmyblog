@@ -98,14 +98,8 @@ jQuery(document).ready(function(){
 		jQuery('.pmb-filters-closed-flex').css('display','flex');
 		jQuery('.pmb-filters-opened').css('display','none');
 	})
-	jQuery('#pmb-load-all').click(function(){
-		pmb_load_all();
-	})
 	jQuery('#pmb-select-all').click(function(){
-		jQuery('#pmb-project-choices .pmb-project-item').each(function(index,element){
-			Sortable.utils.select(element);
-		});
-		pmb_show_hide_actions();
+		pmb_load_all();
 	});
 	jQuery('#pmb-deselect-all').click(function(){
 		jQuery('.pmb-project-item.pmb-selected').each(function(index,element){
@@ -310,9 +304,9 @@ function pmb_move_into(jquery_selection_to_move, jquery_selection_to_move_into, 
 /**
  * Loads more posts from the website for selectin content
  */
-function pmb_load_more(page, load_more){
-	if(typeof(load_more) === 'undefined'){
-		load_more = false;
+function pmb_load_more(page, select_all){
+	if(typeof(select_all) === 'undefined'){
+		select_all = false;
 	}
 	pmb_request_content(
 		{'page':page},
@@ -321,13 +315,27 @@ function pmb_load_more(page, load_more){
 			jQuery('.pmb-show-more').remove()
 			jQuery('#pmb-project-choices').append(data);
 			var load_more_button = jQuery('.pmb-show-more');
-			if(load_more_button.length !== 0 && load_more){
-				pmb_load_more(++page, true);
+			if(select_all){
+				// check if we need to load more
+				if(load_more_button.length === 0){
+					pmb_select_all();
+				} else {
+					pmb_load_more(++page, true);
+				}
 			} else {
 				pmb_setup_callbacks_on_new_options();
 			}
 		},
 	);
+}
+
+function pmb_select_all(){
+	pmb_setup_callbacks_on_new_options();
+	jQuery('#pmb-project-choices .pmb-project-item').each(function(index,element){
+		Sortable.utils.select(element);
+	});
+	pmb_show_hide_actions();
+	jQuery('#pmb-select-all .pmb-spinner-container').remove();
 }
 
 function pmb_request_content(extra_params, callback){
@@ -357,21 +365,22 @@ function pmb_request_content(extra_params, callback){
 
 function pmb_load_all(){
 	var button = jQuery('.load-more-button');
-	button.prop('class','pmb-spinner');
-	button.html('');
-	jQuery('#pmb-project-choices .pmb-project-item').remove();
-	var page = 1;
-	pmb_load_more(1, true);
+	if(button.length === 0){
+		pmb_select_all();
+	} else {
+		button.prop('class','pmb-spinner');
+		button.html('');
+		var page = button.attr('data-page');
+		pmb_load_more(page, true);
+	}
+
 }
 
 
 function pmb_setup_callbacks_on_new_options(){
 	// enable or disable the load more button, depending on whether there's any more to load
 	var load_more_button = jQuery('.load-more-button');
-	if(load_more_button.length === 0){
-		jQuery('#pmb-load-all').addClass('disabled');
-	} else {
-		jQuery('#pmb-load-all').removeClass('disabled');
+	if(load_more_button.length !== 0){
 		load_more_button.click(function(event){
 			event.preventDefault();
 			var button = jQuery(this);
