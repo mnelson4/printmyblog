@@ -137,7 +137,7 @@ class PdfGenerator extends ProjectFileGeneratorBase
      */
     public function addBaseTag()
     {
-        echo '<base href="' . esc_url(site_url()) . '" target="_blank">';
+        echo '<base href="' . esc_url(site_url()) . '">';
     }
 
 
