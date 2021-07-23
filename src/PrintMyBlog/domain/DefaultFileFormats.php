@@ -6,7 +6,8 @@ use PrintMyBlog\entities\FileFormat;
 
 class DefaultFileFormats
 {
-
+    const DIGITAL_PDF = 'digital_pdf';
+    const PRINT_PDF = 'print_pdf';
 
     /**
      * @return FileFormat[]
@@ -14,7 +15,7 @@ class DefaultFileFormats
     public function registerFileFormats()
     {
         pmb_register_file_format(
-            'digital_pdf',
+            self::DIGITAL_PDF,
             [
                 'title' => __('Digital PDF', 'print-my-blog'),
                 'dashicon' => 'dashicons-tablet',
@@ -24,7 +25,7 @@ class DefaultFileFormats
                 ]
         );
         pmb_register_file_format(
-            'print_pdf',
+            self::PRINT_PDF,
             [
                 'title' => __('Print-Ready PDF', 'print-my-blog'),
                 'dashicon' => 'dashicons-book-alt',

@@ -9,6 +9,7 @@ use FS_Site;
 use PrintMyBlog\controllers\helpers\ProjectsListTable;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\db\TableManager;
+use PrintMyBlog\domain\DefaultFileFormats;
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
 use PrintMyBlog\entities\DesignTemplate;
@@ -1049,6 +1050,8 @@ class Admin extends BaseController
             } elseif (count($format_options) > 1) {
                 $default_format = 'all';
             }
+        } else {
+            $default_format = DefaultFileFormats::DIGITAL_PDF;
         }
         return new FormSection([
             'name' => 'pmb-project',
