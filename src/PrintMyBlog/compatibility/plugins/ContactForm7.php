@@ -19,7 +19,13 @@ class ContactForm7 extends CompatibilityBase
     {
         wp_add_inline_script(
             'pmb_pro_page',
-            'jQuery(document).ready(function(){jQuery(".grecaptcha-badge").parent().hide();});'
+            '
+            // Hide Google Recaptchas parent div because it adds an extra page to PDFs
+            jQuery(document).ready(function(){
+                setTimeout(function(){
+                    jQuery(".grecaptcha-badge").parent().hide()
+                }, 1000);
+            });'
         );
     }
 }
