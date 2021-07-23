@@ -46,7 +46,8 @@ foreach($designs as $design){
             <div class="pmb-actions pmb-design-actions">
                 <form method="POST" action="" id="pmb-design-form-<?php echo esc_attr($design->getWpPost()->post_name);?>">
                     <input type="hidden" name="design" value="<?php echo esc_attr($design->getWpPost()->ID);?>">
-                    <button class="button button-primary"><?php esc_html_e('Use This Design', 'print-my-blog');?></button>
+                    <button class="button button-primary pmb-choose-design" value="choose" name="submit-button"><?php esc_html_e('Use This Design', 'print-my-blog');?></button>
+                    <button class="button button-primary pmb-customize-design" value="customize" name="submit-button"><?php esc_html_e('Customize', 'print-my-blog');?></button>
                 </form>
             </div>
 			<h2>

@@ -1312,9 +1312,16 @@ class Admin extends BaseController
             )
         );
         $this->project->getProgress()->markChooseDesignStepComplete($format->slug());
+        $button_pressed = Array2::setOr($_REQUEST, 'submit-button', 'customize');
+        if($button_pressed === 'choose'){
+            // skip customizing
+            $this->project->getProgress()->markCustomizeDesignStepComplete($format->slug());
+        } else {
+            // make sure they customize the design (especially if its a new choice)
+            $this->project->getProgress()->markCustomizeDesignStepComplete($format->slug(), false);
+        }
         // If they've changed the design, ask them if they want to skip it.
         if ($this->project->getProgress()->isStepComplete(ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX . $format->slug())) {
-            $this->project->getProgress()->markCustomizeDesignStepComplete($format->slug(), false);
             $this->notification_manager->addTextNotificationForCurrentUser(
                 OneTimeNotification::TYPE_INFO,
                 __('You may want to customize the design. If not, feel free to jump ahead the next step.', 'print-my-blog')

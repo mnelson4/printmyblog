@@ -23,7 +23,14 @@ jQuery(function($) {
                         "text": "Use This Design",
                         'class':'button button-primary',
                         'click': function () {
-                            $('#pmb-design-form-' + design_slug).submit()
+                            $('#pmb-design-form-' + design_slug + ' .pmb-choose-design').click()
+                        },
+                    },
+                    {
+                        "text": "Customize",
+                        'class':'button button-primary',
+                        'click': function () {
+                            $('#pmb-design-form-' + design_slug + ' .pmb-customize-design').click()
                         },
                     }
                 ]
