@@ -233,7 +233,6 @@
 .wp-core-ui .pmb-show-more div.load-more-button{
     display:block;
     text-align:center;
-    margin-right:20px;
 }
 .pmb-no-results{
     padding:8px;
@@ -277,5 +276,14 @@
 
     .pmb-project-layout .pmb-project-layout-inner{
         flex-direction:column;
+    }
+    /* On mobile devices, leave a little room to scroll through items*/
+    .pmb-project-item, .wp-core-ui .button.load-more-button{
+        margin-right:20px;
+    }
+}
+@media (min-width: 766px){
+    .pmb-project-choices-column{
+        max-width:500px;
     }
 }
