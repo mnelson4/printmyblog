@@ -223,15 +223,13 @@ pmb_render_template(
                             <?php
                             $all_designs = $project->getDesignsSelected();
                             $a_design = reset($all_designs);
-                            if($project->getLevelsAllowed() > 0 ){
-                                $division_descriptions = [];
-			                        for($i=0; $i < $project->getLevelsAllowed(); $i++){
-                                        $division_descriptions[]=  sprintf(
-                                            __('Each %1$s can be put in a %2$s.', 'print-my-blog'),
-                                            $a_design->getDesignTemplate()->divisionLabelSingular($i),
-                                            $a_design->getDesignTemplate()->divisionLabelSingular($i+1)
-                                        );
-                                }
+                            $division_descriptions = [];
+                            for($i=0; $i < $project->getLevelsAllowed(); $i++){
+                                $division_descriptions[]=  sprintf(
+                                    __('Each %1$s can be put in a %2$s.', 'print-my-blog'),
+                                    $a_design->getDesignTemplate()->divisionLabelSingular($i),
+                                    $a_design->getDesignTemplate()->divisionLabelSingular($i+1)
+                                );
                             }
                             echo pmb_hover_help(
                                     sprintf(
