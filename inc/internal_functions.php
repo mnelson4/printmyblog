@@ -8,12 +8,21 @@ use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;
 
 /**
+ * Adds a help icon with text
+ * @param string $explanation
+ * @return string
+ */
+function pmb_hover_help($explanation = ''){
+    return '<span data-help="' . esc_attr($explanation) . '" class="dashicons dashicons-info pmb-hover"></span>';
+}
+
+/**
  * Adds an icon which has explanatory text when hovered over.
  * @param string $explanation
  * @param string $extra_css_classes
  * @return string HTML
  */
-function pmb_hover_help($explanation = '', $extra_css_classes = ''){
+function pmb_hover_tip($explanation = '', $extra_css_classes = ''){
     return '<span data-help="' . esc_attr($explanation) . '" class="dashicons dashicons-superhero pmb-hover ' . $extra_css_classes . '"></span>';
 }
 /**
@@ -32,7 +41,7 @@ function pmb_pro_print_service_only($explanation = ''){
         if ($explanation) {
             $hover_text .= "<br>" . $explanation;
         }
-        return pmb_hover_help($hover_text, 'pmb-pro-only');
+        return pmb_hover_tip($hover_text, 'pmb-pro-only');
     }
 }
 
@@ -59,7 +68,7 @@ function pmb_pro_print_service_best($explanation = ''){
         if ($explanation) {
             $hover_text .= "<br>" . $explanation;
         }
-        return pmb_hover_help($hover_text, 'pmb-pro-best');
+        return pmb_hover_tip($hover_text, 'pmb-pro-best');
     }
 }
 
@@ -91,7 +100,7 @@ function pmb_pro_better($explanation = ''){
     if($explanation){
         $hover_text .= "<br>" . $explanation;
     }
-    return pmb_hover_help($hover_text);
+    return pmb_hover_tip($hover_text);
 }
 
 

@@ -33,7 +33,16 @@ pmb_render_template(
         <div id="pmb-project-layout" class="pmb-project-layout">
             <div class="pmb-project-layout-inner">
                 <div class="pmb-project-column pmb-project-choices-column">
-                    <div class="pmb-project-choices-text"><h2 class="pmb-inline-header pmb-snug-header"><span class="dashicons dashicons-search"></span><?php _e('Available Content', 'print-my-blog');?></h2>
+                    <div class="pmb-project-choices-text"><h2 class="pmb-inline-header pmb-snug-header"><span class="dashicons dashicons-search"></span><?php _e('Available Content', 'print-my-blog');?>
+                        <?php
+                        echo pmb_hover_help(
+                                sprintf(
+                                __('Select content from your website, then move it into your project. %1$sRead more%2$s.'),
+                                '<a href="https://printmy.blog/user-guide/getting-started/6-choose-project-content/" target="_blank">',
+                                '</a>'
+                            )
+                        );
+                        ?></h2>
                             <span id="pmb-use-ctrl-key" class="pmb-comment pmb-use-ctrl-key"><?php _e('Use <em>CTRL</em> or <em>SHIFT</em> to select multiple items', 'print-my-blog');?></span></div>
                     <div class="pmb-search-bar">
                         <input id="pmb-project-choices-search" class="pmb-search-input" type="text" name="pmb-search" form="pmb-filter-form" placeholder="<?php echo esc_attr(__('Search Posts, Pages, Custom Post Types...', 'print-my-blog'));?>">
@@ -188,7 +197,16 @@ pmb_render_template(
                     <div class="pmb-project-matters pmb-scrollable-window">
                         <?php if($project_support_front_matter){
                            ?>
-                            <h2><?php esc_html_e('Front Matter', 'print-my-blog');?></h2>
+                            <h2><?php esc_html_e('Front Matter', 'print-my-blog');?> <?php
+                                echo pmb_hover_help(
+                                    sprintf(
+                                        __('Preliminary content like a title page, copyright page and introduction. %1$sRead more%2$s', 'print_my_blog'),
+                                        '<a href="https://printmy.blog/user-guide/getting-started/6-choose-project-content/" target="_blank">',
+                                        '</a>'
+                                    ),
+                                    'dashicons-info'
+                                );
+                            ?></h2>
                             <div id="pmb-project-front-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="0">
 	                            <?php
 	                            foreach($front_matter_sections as $post) {
@@ -202,7 +220,6 @@ pmb_render_template(
                         }?>
                         <h2>
                             <?php _e('Main Matter', 'print-my-blog');?>
-                            <span class="pmb-help">
                             <?php
                             $all_designs = $project->getDesignsSelected();
                             $a_design = reset($all_designs);
@@ -210,14 +227,21 @@ pmb_render_template(
                                 $division_descriptions = [];
 			                        for($i=0; $i < $project->getLevelsAllowed(); $i++){
                                         $division_descriptions[]=  sprintf(
-						                        __('each %1$s can be put in a %2$s', 'print-my-blog'),
-                                                $a_design->getDesignTemplate()->divisionLabelSingular($i),
-                                                $a_design->getDesignTemplate()->divisionLabelSingular($i+1)
-					                        );
-			                        }
-			                        echo implode(', ', $division_descriptions);
-		                        }
-                            ?></span>
+                                            __('Each %1$s can be put in a %2$s.', 'print-my-blog'),
+                                            $a_design->getDesignTemplate()->divisionLabelSingular($i),
+                                            $a_design->getDesignTemplate()->divisionLabelSingular($i+1)
+                                        );
+                                }
+                            }
+                            echo pmb_hover_help(
+                                    sprintf(
+                                            __('The main contents of your document or book, like chapters or articles. %1$s %2$sRead more%3$s', 'print-my-blog'),
+                                        implode(', ', $division_descriptions),
+                                        '<a href="https://printmy.blog/user-guide/getting-started/6-choose-project-content/" target="_blank">',
+                                        '</a>'
+                                    )
+                            )
+                            ?>
                         </h2>
                         <div id="pmb-project-main-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="<?php echo esc_attr($project->getLevelsAllowed());?>">
                             <?php
@@ -229,7 +253,16 @@ pmb_render_template(
                         </div>
 	                    <?php if($project_support_back_matter){
 		                    ?>
-                            <h2><?php esc_html_e('Back Matter', 'print-my-blog');?></h2>
+                            <h2><?php esc_html_e('Back Matter', 'print-my-blog');?>
+                            <?php
+                                echo pmb_hover_help(
+                                    sprintf(
+                                            __('Supplemental content like "About the author", glossary, and "Further reading". %1$sRead more.%2$s'),
+                                        '<a href="https://printmy.blog/user-guide/getting-started/6-choose-project-content/" target="_blank">',
+                                        '</a>'
+                                    )
+                            );
+                            ?></h2>
                             <div id="pmb-project-back-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="0">
 			                    <?php
 			                    foreach($back_matter_sections as $post) {
