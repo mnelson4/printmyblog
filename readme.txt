@@ -401,6 +401,7 @@ https://youtu.be/uPQ3vqm7A2g
 * Content Editing defaults to not show content already in projecti
 * Add integration with Google Language Translator plugin
 * Allow showing custom fields (postmeta) in classic designs
+* Pro Print show password-protected posts completely
 
 
 = 3.3.9 June 18, 2021 =

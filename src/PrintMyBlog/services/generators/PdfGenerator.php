@@ -114,6 +114,7 @@ class PdfGenerator extends ProjectFileGeneratorBase
      */
     protected function startGenerating()
     {
+        parent::startGenerating();
         // Try to get enqueued after the theme, if we're doing that, so we get precedence.
         add_action('wp_enqueue_scripts', [$this,'enqueueStylesAndScripts'], 1000);
 
