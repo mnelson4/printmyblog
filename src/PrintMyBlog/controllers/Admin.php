@@ -1060,6 +1060,9 @@ class Admin extends BaseController
                     'html_label_text' => __('Project Title', 'print-my-blog'),
                     'required' => true,
                     'default' => $this->project instanceof Project ? $this->project->getWpPost()->post_title : '',
+                    'other_html_attributes' => [
+                            'autofocus'
+                    ]
                 ]),
                 'formats' => new RadioButtonInput(
                     $format_options,

@@ -87,6 +87,7 @@ abstract class FormSectionBase
     /**
      * @param array $options_array {
      * @type        $name          string the name for this form section, if you want to explicitly define it
+     * @type        $other_html_attributes array of other HTML attributes (keys can either be the name of attributes, or numeric)
      *                             }
      */
     public function __construct($options_array = array())
