@@ -283,7 +283,7 @@ pmb_render_template(
         </div>
         <?php wp_nonce_field( 'pmb-project-edit' );?>
         <div class="pmb-button-spacer">
-            <button class="button-primary button" id="pmb-save" name="pmb-save" value="save"><?php esc_html_e('Save Project Contents', 'print-my-blog'); ?></button>
+            <button class="button-primary button" id="pmb-save" name="pmb-save" value="save"><?php esc_html_e('Save & Proceed', 'print-my-blog'); ?></button>
         </div>
     </form>
 

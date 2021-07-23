@@ -17,6 +17,6 @@ pmb_render_template(
 ?>
 <form method="POST" action="<?php echo esc_attr($form_url);?>">
     <?php echo $form->getHtmlAndJs();?>
-    <button class="button button-primary pmb-save"><?php esc_html_e('Save', 'print-my-blog');?></button>
+    <button class="button button-primary pmb-save"><?php esc_html_e('Save & Proceed', 'print-my-blog');?></button>
 </form>
 <?php pmb_render_template('partials/project_footer.php');
