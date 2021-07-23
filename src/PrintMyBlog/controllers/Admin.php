@@ -1316,7 +1316,7 @@ class Admin extends BaseController
         );
         $this->project->getProgress()->markChooseDesignStepComplete($format->slug());
         $button_pressed = Array2::setOr($_REQUEST, 'submit-button', 'customize');
-        if($button_pressed === 'choose'){
+        if ($button_pressed === 'choose') {
             // skip customizing
             $this->project->getProgress()->markCustomizeDesignStepComplete($format->slug());
         } else {

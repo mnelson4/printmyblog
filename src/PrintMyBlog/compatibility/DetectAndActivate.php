@@ -56,7 +56,7 @@ class DetectAndActivate
             if (class_exists('google_language_translator')) {
                 $compatiblity_mods_to_activate[] = new GoogleLanguageTranslator();
             }
-            if (defined('WPCF7_VERSION')){
+            if (defined('WPCF7_VERSION')) {
                 $compatiblity_mods_to_activate[] = new ContactForm7();
             }
             $this->compatibility_mods = $compatiblity_mods_to_activate;

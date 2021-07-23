@@ -68,6 +68,9 @@
     flex-grow:1;
     display:none;
 }
+.pmb-project-choices-filters-table-wrap{
+    padding:10px;
+}
 .pmb-filters-apply-bar .button {
     width: 100%;
     text-align: center;

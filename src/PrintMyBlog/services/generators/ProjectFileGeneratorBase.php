@@ -96,7 +96,8 @@ abstract class ProjectFileGeneratorBase
      * @global Project $pmb_project
      * @global Design $pmb_design
      */
-    protected function startGenerating(){
+    protected function startGenerating()
+    {
         // show protected posts' bodies as normal.
         add_filter('post_password_required', '__return_false');
     }
