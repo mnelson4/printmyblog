@@ -3,6 +3,7 @@
 namespace PrintMyBlog\compatibility;
 
 use PrintMyBlog\compatibility\plugins\CoBlocks;
+use PrintMyBlog\compatibility\plugins\ContactForm7;
 use PrintMyBlog\compatibility\plugins\EasyFootnotes;
 use PrintMyBlog\compatibility\plugins\GoogleLanguageTranslator;
 use PrintMyBlog\compatibility\plugins\LazyLoadingFeaturePlugin;
@@ -54,6 +55,9 @@ class DetectAndActivate
             }
             if (class_exists('google_language_translator')) {
                 $compatiblity_mods_to_activate[] = new GoogleLanguageTranslator();
+            }
+            if (defined('WPCF7_VERSION')){
+                $compatiblity_mods_to_activate[] = new ContactForm7();
             }
             $this->compatibility_mods = $compatiblity_mods_to_activate;
         }
