@@ -135,7 +135,6 @@ function pmb_remove(selected_items){
 function pmb_add(selected_items) {
 	selected_items.detach().appendTo('#pmb-project-main-matter');
 	// move the new items above the "drag or click here" area
-	pmb_move(selected_items,'up');
 	pmb_maybe_add_sortable_to(jQuery('#pmb-project-main-matter'), selected_items);
 	jQuery('#pmb-project-main-matter').scrollTo(selected_items);
 }
@@ -508,9 +507,18 @@ function pmb_create_sortable_from(element){
  * @param item_selections new items being added
  */
 function pmb_maybe_add_sortable_to(sortable_selection, item_selections){
+	pmb_ensure_drag_here_at_bottom();
 	for(var i=0; i<item_selections.length;i++){
 		pmb_maybe_add_sortable_to_item(sortable_selection, jQuery(item_selections[i]));
 	}
+}
+
+function pmb_ensure_drag_here_at_bottom(){
+	jQuery('.pmb-drag-here').each(function(){
+		var element = jQuery(this);
+		var parent = element.parent();
+		element.detach().appendTo(parent);
+	})
 }
 
 function pmb_maybe_add_sortable_to_item(sortable_selection, item_selection){
