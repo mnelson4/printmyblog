@@ -201,7 +201,7 @@ pmb_render_template(
                                 echo pmb_hover_help(
                                     sprintf(
                                         __('Preliminary content like a title page, copyright page and introduction. %1$sRead more%2$s', 'print_my_blog'),
-                                        '<a href="https://printmy.blog/user-guide/getting-started/6-choose-project-content/" target="_blank">',
+                                        '<a href="https://printmy.blog/user-guide/getting-started/6-choose-project-content/#front-matter" target="_blank">',
                                         '</a>'
                                     ),
                                     'dashicons-info'
@@ -235,7 +235,7 @@ pmb_render_template(
                                     sprintf(
                                             __('The main contents of your document or book, like chapters or articles. %1$s %2$sRead more%3$s', 'print-my-blog'),
                                         implode(', ', $division_descriptions),
-                                        '<a href="https://printmy.blog/user-guide/getting-started/6-choose-project-content/" target="_blank">',
+                                        '<a href="https://printmy.blog/user-guide/getting-started/6-choose-project-content/#main-matter" target="_blank">',
                                         '</a>'
                                     )
                             )
@@ -256,7 +256,7 @@ pmb_render_template(
                                 echo pmb_hover_help(
                                     sprintf(
                                             __('Supplemental content like "About the author", glossary, and "Further reading". %1$sRead more.%2$s'),
-                                        '<a href="https://printmy.blog/user-guide/getting-started/6-choose-project-content/" target="_blank">',
+                                        '<a href="https://printmy.blog/user-guide/getting-started/6-choose-project-content/#back-matter" target="_blank">',
                                         '</a>'
                                     )
                             );
