@@ -81,9 +81,9 @@ class DefaultPersistentNotices
                 $this->getOptionsForProjectSubaction('customize_design')
             ),
             new Notice(
-                'pmb_edit_content',
+                'pmb_edit_content2',
                 __('How to Edit Project Content', 'print-my-blog'),
-                '<div class="pmb-two-column-notice"><div class="pmb-image-column"><iframe style="width:100%" height="315" src="https://www.youtube.com/embed/wVVvmv2bqqk" 
+                '<div class="pmb-two-column-notice"><div class="pmb-image-column"><iframe style="width:100%" height="315" src="https://www.youtube.com/embed/un7EnpDG2qs" 
         frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
                 . '<div class="pmb-text-column">'
                  . '<ol>'
