@@ -63,7 +63,7 @@
     text-decoration:none;
 }
 /* Icons in H1s need some tweaking */
-h1 .pmb-icon{
+h1 .pmb-icon, .pmb-search-bar .pmb-icon{
     font-size: 25px;
     margin-right: 5px;
     margin-top: 5px;
