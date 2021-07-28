@@ -86,6 +86,8 @@ https://www.youtube.com/watch?v=rvSo9NCOIX0
 Replace Google Docs and Microsoft Word with WordPress! Turn existing posts, pages, and custom post types —or write all new print materials— into professional-looking documents that are ready to share with customers and the world.
 Use your browser to print Pro Print projects for free, but some features (like automatic page references, footnotes, and full control of page margins) require printing using our Pro Print Service for a subscription fee.
 
+https://youtu.be/-RzrbnCbbLw
+
 Example uses:
 
 * **white paper**. Share an in-depth analysis of a topic on your website and in print
