@@ -15,8 +15,8 @@ pmb_render_template(
 	[
 		'project' => $project,
 		'page_title' => sprintf(
-		        __('Customize %s Design: %s', 'print-my-blog'),
-                $design->getDesignTemplate()->getFormat()->title(),
+            __('Customize %s Design: %s', 'print-my-blog'),
+                $design->getDesignTemplate()->getFormat()->coloredTitleAndIcon(),
                 $design->getWpPost()->post_title
         ),
 		'current_step' => $current_step,

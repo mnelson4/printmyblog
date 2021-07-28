@@ -1033,7 +1033,7 @@ class Admin extends BaseController
         $format_options = [];
         foreach ($formats as $format) {
             $format_options[$format->slug()] = new InputOption(
-                $format->title(),
+                $format->coloredTitleAndIcon(),
                 $format->desc()
             );
         }

@@ -45,7 +45,7 @@ foreach($generations as $generation){
 	$format_slug = $generation->getFormat()->slug();
 	?>
     <div class="pmb-generate-options-for-<?php echo esc_attr($format_slug);?>">
-        <h2><?php echo $generation->getFormat()->title();?></h2>
+        <h2><?php echo $generation->getFormat()->coloredTitleAndIcon();?></h2>
         <?php
         if($generation->isGenerated()){
             if($generation->isDirty() || $generation->isOld()){
@@ -96,7 +96,7 @@ foreach($generations as $generation){
     </div>
     <br>
     <a href="<?php echo esc_url(admin_url(PMB_ADMIN_HELP_PAGE_PATH));?>"><span class="pmb-spinner-container"><span class="dashicons
-                dashicons-sos pmb-icon"></span></span> <?php esc_html_e('Something not right? We’re happy to help!', 'print-my-blog');?></a>
+                dashicons-sos"></span></span> <?php esc_html_e('Something not right? We’re happy to help!', 'print-my-blog');?></a>
 <?php
 }
 pmb_render_template('partials/project_footer.php');

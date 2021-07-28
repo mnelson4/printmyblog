@@ -8,9 +8,6 @@ summary.twine-summary{
     margin-bottom:20px;
     display:block;
 }
-.twine-radio-label{
-    font-weight:bold;
-}
 .twine-text-input[type=color]{
     width:40px;
 }

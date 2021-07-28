@@ -16,8 +16,8 @@ pmb_render_template(
 	[
 		'project' => $project,
 		'page_title' => sprintf(
-		        __('Choose %s Design', 'print-my-blog'),
-		        $format->title()
+		        __('Choose Design: %s', 'print-my-blog'),
+		        $format->coloredTitleAndIcon()
         ),
 		'current_step' => $current_step,
         'steps_to_urls' => $steps_to_urls

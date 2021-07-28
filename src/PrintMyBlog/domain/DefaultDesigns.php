@@ -16,7 +16,7 @@ class DefaultDesigns
             function (DesignTemplate $design_template) {
                 return [
                     'title' => __('Classic Digital PDF', 'print-my-blog'),
-                    'quick_description' => esc_html__('A simple but flexible design intended mainly for reading from screens, inspired by Print My Blog Free.', 'print-my-blog'),
+                    'quick_description' => esc_html__('A simple but flexible design intended mainly for reading from screens, inspired by Print My Blog Quick Print.', 'print-my-blog'),
                     'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
@@ -101,7 +101,7 @@ class DefaultDesigns
             function (DesignTemplate $design_template) {
                 return [
                     'title' => __('Classic Print PDF', 'print-my-blog'),
-                    'quick_description' => __('A simple but flexible design intended for printing, inspired by Print My Blog Free', 'print-my-blog'),
+                    'quick_description' => __('A simple but flexible design intended for printing, inspired by Print My Blog Quick Print', 'print-my-blog'),
                     'description' => pmb_get_contents($design_template->getDir() . 'descriptions/classic.php'),
                     'author' => [
                         'name' => 'Mike Nelson',

@@ -61,9 +61,22 @@
 }
 .pmb-icon{
     text-decoration:none;
+}
+/* Icons in H1s need some tweaking */
+h1 .pmb-icon{
+    font-size: 25px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.pmb-clickable{
     cursor:pointer;
-    vertical-align: middle;
-    font-size:25px;
+}
+
+.pmb-emphasis{
+    font-weight:600;
+    padding:5px;
+    border-radius:5px;
 }
 
 .pmb-breadcrumb{

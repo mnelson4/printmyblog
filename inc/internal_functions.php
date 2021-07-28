@@ -239,7 +239,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
                                     )
                                 );
                                 ?>"
-                                target="_blank"><span class="dashicons dashicons-visibility pmb-icon"></span></a>
+                                target="_blank"><span class="dashicons dashicons-visibility pmb-icon pmb-clickable"></span></a>
                         <?php
                     }
                     ?>
@@ -253,7 +253,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
                         )
                     );
                     ?>"
-                    target="_blank"><span class="dashicons dashicons-edit pmb-icon"></span></a>
+                    target="_blank"><span class="dashicons dashicons-edit pmb-icon pmb-clickable"></span></a>
                     <a
                             title="<?php
                             echo esc_attr(
@@ -263,7 +263,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
                                 )
                             );
                             ?>"
-                            target="_blank" class="pmb-add-item"><span class="dashicons dashicons-plus pmb-icon"></span></a>
+                            target="_blank" class="pmb-add-item"><span class="dashicons dashicons-plus pmb-icon pmb-clickable"></span></a>
                     <a
                             title="<?php
                             echo esc_attr(
@@ -273,7 +273,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
                                 )
                             );
                             ?>"
-                            target="_blank"><span class="dashicons dashicons-no-alt pmb-icon pmb-remove-item"></span></a>
+                            target="_blank"><span class="dashicons dashicons-no-alt pmb-icon pmb-remove-item pmb-clickable"></span></a>
                     <span class="pmb-project-item-template-container"><?php echo pmb_section_template_selector($template, $project);?></span>
                 </div>
             </div>

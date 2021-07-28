@@ -41,6 +41,15 @@ class FileFormat
     protected $generator;
 
     /**
+     * @var string dashicon used for format. See https://developer.wordpress.org/resource/dashicons/
+     */
+    protected $icon;
+    /**
+     * @var mixed
+     */
+    protected $color;
+
+    /**
      * ProjectFormat constructor.
      *
      * @param string title
@@ -66,6 +75,15 @@ class FileFormat
             $this->default_design_template_slug = (string)$data['default'];
         }
         $this->generator = $data['generator'];
+        if(isset($data['icon'])){
+            $this->icon = $data['icon'];
+        }
+        if(isset($data['color'])){
+            $this->color = $data['color'];
+        } else {
+            $this->color = 'black';
+        }
+
     }
 
     public function inject(DesignTemplateRegistry $design_template_registry)
@@ -76,6 +94,20 @@ class FileFormat
     public function title()
     {
         return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function titleAndIcon(){
+        return $this->title() . '<span class="pmb-icon dashicons ' . $this->icon() . '"></span>';
+    }
+
+    /**
+     * @return string
+     */
+    public function coloredTitleAndIcon(){
+        return '<span class="pmb-emphasis" style="background-color:' . $this->color() . '">' . $this->titleAndIcon() . '</span>';
     }
 
     /**
@@ -136,5 +168,19 @@ class FileFormat
             );
         }
         return $this->default_design_template;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function icon(){
+        return $this->icon;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function color(){
+        return $this->color;
     }
 }
