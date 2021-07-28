@@ -3,7 +3,7 @@ Contributors: mnelson4
 Tags: print, PDF, backup, eBook, print button, ClassicPress
 Requires at least: 4.6
 Stable tag: trunk
-Tested up to: 5.7
+Tested up to: 5.8
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -396,13 +396,14 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.4.0 xxxxx =
+= 3.4.0 July 28, 2021 =
 * Content editing page redesign (select all, move buttons, improved design)
-* Content Editing defaults to not show content already in projecti
+* Content Editing defaults to not show content already in project
+* "Choose Design" step now has a "Customize" button to customize the design, and "Choose Design" to skip customizing it
 * Add integration with Google Language Translator plugin
 * Allow showing custom fields (postmeta) in classic designs
 * Pro Print show password-protected posts completely
-
+* Color-code formats to help identify when choosing or customizing the digital or print PDF formats
 
 = 3.3.9 June 18, 2021 =
 * Remove left margin on leftmost print button
