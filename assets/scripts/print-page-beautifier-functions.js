@@ -267,7 +267,7 @@ function PmbToc(){
             var title_element = jQuery(element).find('.pmb-title');
             var id = selection.attr('id');
             // if it's a PMB-core section, like title page or TOC, don't show it.
-            if(id.indexOf('pmb-') !== -1){
+            if(id.indexOf('/pmb-') !== -1){
                 return;
             }
             var depth = parseInt(selection.attr('data-depth'));
