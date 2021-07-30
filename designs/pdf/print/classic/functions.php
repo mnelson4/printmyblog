@@ -42,6 +42,12 @@ function pmb_enqueue_classic_script(){
                         margin:0;
                     }';
     }
+    // if we're removing images, figures in image blocks become crazy tall because they're display:table-caption.
+    // but set them just to a regular block and they look fine.
+    if($pmb_design->getPmbMeta('image_size') == 0){
+        $css .= '.wp-block-image figure > figcaption{ display:block;}';
+    }
+
     wp_add_inline_style(
         'pmb_print_common',
         $css
