@@ -523,7 +523,8 @@ class Project extends PostWrapper
      * @return string
      * @since 3.4.1
      */
-    public function renderSetting($setting_name){
+    public function renderSetting($setting_name)
+    {
         return do_shortcode($this->getSetting($setting_name));
     }
 
@@ -532,7 +533,8 @@ class Project extends PostWrapper
      * @param string $setting_name
      * @since 3.4.1
      */
-    public function echoSetting($setting_name){
+    public function echoSetting($setting_name)
+    {
         echo $this->renderSetting($setting_name);
     }
 
@@ -601,7 +603,8 @@ class Project extends PostWrapper
      * @return string
      * @since 3.4.1
      */
-    public function renderPublishedTitle(){
+    public function renderPublishedTitle()
+    {
         return do_shortcode($this->getPublishedTitle());
     }
 
@@ -609,7 +612,8 @@ class Project extends PostWrapper
      * Echoes the rendered title.
      * @since 3.4.1
      */
-    public function echoPublishedTitle(){
+    public function echoPublishedTitle()
+    {
         echo $this->renderPublishedTitle();
     }
     /**
