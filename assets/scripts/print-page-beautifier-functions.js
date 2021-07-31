@@ -215,7 +215,8 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
                 case 'footnote':
                     // only add the footnote if the link isn't just the URL spelled out.
                     if(a.attr('href') !== a.html().trim()) {
-                        a.after('<span class="pmb-footnote">' + pre_internal_footnote  + '<a class="pmb-page-num" href="#' + a.attr('href') + '"></a>' + post_internal_footnote + '</span>');
+                        a.attr('href','#' + a.attr('href'));
+                        a.after('<span class="pmb-footnote">' + pre_internal_footnote  + '<a class="pmb-page-num" href="' + a.attr('href') + '"></a>' + post_internal_footnote + '</span>');
                     }
                     break;
                 case 'leave':
