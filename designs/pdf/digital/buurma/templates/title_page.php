@@ -6,10 +6,10 @@
  */
 ?>
 <div class="pmb-title-page">
-    <span class="buurma-issue"><?php echo $pmb_project->getSetting('issue');?></span>
-        <h1 class="project-title"><?php echo $pmb_project->getPublishedTitle(); ?></h1>
+    <span class="buurma-issue"><?php $pmb_project->echoSetting('issue');?></span>
+        <h1 class="project-title"><?php $pmb_project->echoPublishedTitle(); ?></h1>
 
-        <h2 class="project-byline"><?php echo $pmb_project->getSetting('byline'); ?></h2>
-        <span class="project-date"><?php echo $pmb_project->getSetting('date');?></span>
-    <div class="project-description"><?php echo $pmb_project->getSetting('cover_preamble');?></div>
+        <h2 class="project-byline"><?php $pmb_project->echoSetting('byline'); ?></h2>
+        <span class="project-date"><?php $pmb_project->echoSetting('date');?></span>
+    <div class="project-description"><?php $pmb_project->echoSetting('cover_preamble');?></div>
 </div>

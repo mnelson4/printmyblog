@@ -9,17 +9,17 @@
 	<?php
     if (in_array('title',$pmb_design->getSetting('header_content'))) {
         ?>
-        <h1 class="site-title"><?php echo $pmb_project->getPublishedTitle(); ?></h1>
+        <h1 class="site-title"><?php $pmb_project->echoPublishedTitle(); ?></h1>
 	    <?php
     }
     if (in_array('subtitle',$pmb_design->getSetting('header_content'))) {
         ?>
-        <p class="site-description pmb-subtitle"><?php echo $pmb_project->getSetting('subtitle'); ?></p>
+        <p class="site-description pmb-subtitle"><?php $pmb_project->echoSetting('subtitle'); ?></p>
 	    <?php
     }
     if (in_array('byline',$pmb_design->getSetting('header_content'))) {
         ?>
-    <h2 class="project-byline"><?php echo $pmb_project->getPmbMeta('byline'); ?></h2>
+    <h2 class="project-byline"><?php $pmb_project->echoSetting('byline'); ?></h2>
     <?php
     }
     if(in_array('url', $pmb_design->getSetting('header_content'))){

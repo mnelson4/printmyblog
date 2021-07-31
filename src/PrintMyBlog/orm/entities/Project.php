@@ -518,6 +518,25 @@ class Project extends PostWrapper
     }
 
     /**
+     * Does any shortcodes on a setting's value
+     * @param string $setting_name
+     * @return string
+     * @since 3.4.1
+     */
+    public function renderSetting($setting_name){
+        return do_shortcode($this->getSetting($setting_name));
+    }
+
+    /**
+     * Echoes the rendered project's setting
+     * @param string $setting_name
+     * @since 3.4.1
+     */
+    public function echoSetting($setting_name){
+        echo $this->renderSetting($setting_name);
+    }
+
+    /**
      * @param $setting_name string
      * @param $value mixed
      */
@@ -577,6 +596,22 @@ class Project extends PostWrapper
         return $this->getWpPost()->post_title;
     }
 
+    /**
+     * Renders any shortcodes in the title and returns it.
+     * @return string
+     * @since 3.4.1
+     */
+    public function renderPublishedTitle(){
+        return do_shortcode($this->getPublishedTitle());
+    }
+
+    /**
+     * Echoes the rendered title.
+     * @since 3.4.1
+     */
+    public function echoPublishedTitle(){
+        echo $this->renderPublishedTitle();
+    }
     /**
      *
      * @return array keys are template names, values are arrays with keys:{
