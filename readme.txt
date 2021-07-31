@@ -402,6 +402,7 @@ https://youtu.be/uPQ3vqm7A2g
 * Bugfix: only exclude items starting with "pmb-" from the table of contents
 * Bugfix: if removing images from PMB Pro by setting image size to 0, avoid having captions becoming super tall columns
 * Feature: render shortcodes in title page content (eg title, subtitle, coverpage preamble, etc)
+* Bugfix: fix page references and footnotes in front and back matter by adding a wrapping all project content in a div with CSS class "pmb-project-content"
 
 = 3.4.0 July 28, 2021 =
 * Content editing page redesign (select all, move buttons, improved design)
