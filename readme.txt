@@ -398,7 +398,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.4.1 July 30, 2021 =
+= 3.4.1 August 2, 2021 =
 * Bugfix: only exclude items starting with "pmb-" from the table of contents
 * Bugfix: if removing images from PMB Pro by setting image size to 0, avoid having captions becoming super tall columns
 * Feature: render shortcodes in title page content (eg title, subtitle, coverpage preamble, etc)
