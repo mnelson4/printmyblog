@@ -198,7 +198,7 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
         if(! a.text().trim()){
             return;
         }
-        var id_from_href = '#' + a.attr('href').replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g,'\\$1');
+        var id_from_href = '#' + a.attr('href').replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g,'\\$1').replace('%','-');
         try{
             var matching_elements = jQuery(id_from_href).length;
         }catch(exception){

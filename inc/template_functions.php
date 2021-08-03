@@ -86,7 +86,7 @@ function pmb_section_wrapper_id(){
  * Echoes out the ID attribute to use on the section.
  */
 function pmb_section_id(){
-	echo 'id="' . esc_attr(get_the_permalink()) . '"';
+	echo 'id="' . esc_attr(str_replace('%','-',get_the_permalink())) . '"';
 }
 
 /**
