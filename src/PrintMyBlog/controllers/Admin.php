@@ -445,7 +445,7 @@ class Admin extends BaseController
                             '<h2>' . __('Support for your plan is offered on GitHub', 'print-my-blog') . '</h2>' .
                             '<p>' . __('GitHub is a public forum to share your issues with the developer and other users.', 'print-my-blog') . '</p>' .
                             '<p>' . sprintf(
-                                __('You will need a GitHub account. If prefer to use email support please %1$spurchase a license that offers email support.%2$s', 'print-my-blog'),
+                                __('You will need a GitHub account. If you prefer to use email support please %1$spurchase a license that offers email support.%2$s', 'print-my-blog'),
                                 '<a href="' . esc_url(pmb_fs()->get_upgrade_url()) . '">',
                                 '</a>'
                             )
