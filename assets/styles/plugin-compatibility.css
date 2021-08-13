@@ -110,9 +110,12 @@ Hide stuff that doesn't make sense in print
  Don't let it, or others, do that. See https://wordpress.org/support/topic/losing-all-formatting/
  */
 @media print{
-    body{
-        height:100% !important;
-        width:100% !important;
+    body {
+        height: 100% !important;
+        width: initial% !important;
+    }
+    @page {
+        size: initial;
     }
 }
 
