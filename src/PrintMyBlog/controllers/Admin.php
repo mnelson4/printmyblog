@@ -927,7 +927,7 @@ class Admin extends BaseController
                             'action' => self::SLUG_ACTION_REVIEW,
                         ],
                         admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-                        ),
+                    ),
                     self::SLUG_ACTION_REVIEW
                 ),
                 'suggest_review' => ! get_option(self::REVIEW_OPTION_NAME, false)
