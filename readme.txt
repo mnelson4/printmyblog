@@ -399,7 +399,7 @@ https://youtu.be/uPQ3vqm7A2g
 == Changelog ==
 = 3.4.2 August 16, 2021 =
 * [Bugfix](https://wordpress.org/support/topic/print-pdf-like-cutted/): some themes overflowed the page
-* Security Fix: prevent access to uninstall from unauthenticated users
+* Security Fix: prevent access to uninstall from unauthenticated users. @props WPScan for responsible disclosure
 
 = 3.4.1 August 2, 2021 =
 * Bugfix: only exclude items starting with "pmb-" from the table of contents
