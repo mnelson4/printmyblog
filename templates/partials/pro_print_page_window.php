@@ -62,7 +62,7 @@ $generate_url = add_query_arg(
                             </button>
                             <p><?php esc_html_e('Sorry you have no more download credits for this month.', 'print-my-blog');?></p>
                             <p><?php esc_html_e('Please upgrade your plan for more credits per month. If you have a yearlong subscription and this is the first time, feel free to contact us and ask for a one-time increase to your credits.', 'print-my-blog');?></p>
-                            ?></p>
+                            </p>
                         <?php } else { ?>
                             <button class="pmb-pro-window-button pmb-download-live pmb-pro-disabled" title="<?php echo esc_attr(__('Please download the Test PDF before the Paid PDF', 'print-my-blog'));?>">
                                 <?php _e('Download Paid PDF', 'print-my-blog'); ?>

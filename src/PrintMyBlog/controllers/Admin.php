@@ -494,11 +494,14 @@ class Admin extends BaseController
             $links,
             [
                 '<a href="'
-                . add_query_arg(
-                    [
-                        'action' => self::SLUG_ACTION_UNINSTALL
-                    ],
-                    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+                . wp_nonce_url(
+                    add_query_arg(
+                        [
+                            'action' => self::SLUG_ACTION_UNINSTALL,
+                        ],
+                        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+                    ),
+                    self::SLUG_ACTION_UNINSTALL
                 )
                 . '" id="pmb-uninstall" class="pmb-uninstall">'
                 . esc_html__('Delete All Data', 'print-my-blog')
@@ -918,11 +921,14 @@ class Admin extends BaseController
                 'generations' => $generations,
                 'license_info' => $license_info,
                 'upgrade_url' => $upgrade_url,
-                'review_url' => add_query_arg(
-                    [
-                        'action' => self::SLUG_ACTION_REVIEW,
-                    ],
-                    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+                'review_url' => wp_nonce_url(
+                    add_query_arg(
+                        [
+                            'action' => self::SLUG_ACTION_REVIEW,
+                        ],
+                        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+                        ),
+                    self::SLUG_ACTION_REVIEW
                 ),
                 'suggest_review' => ! get_option(self::REVIEW_OPTION_NAME, false)
             ]
@@ -1460,6 +1466,9 @@ class Admin extends BaseController
         }
     }
 
+    /**
+     * Deletes plugin data. No security checks here.
+     */
     protected function uninstall()
     {
         // clear custom table
@@ -1522,6 +1531,7 @@ class Admin extends BaseController
         if ($_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG) {
             $action = isset($_GET['action']) ? $_GET['action'] : null;
             if ($action === self::SLUG_ACTION_UNINSTALL) {
+                check_admin_referer(self::SLUG_ACTION_UNINSTALL);
                 $this->uninstall();
                 if (current_user_can('activate_plugins')) {
                     if (! function_exists('deactivate_plugins')) {
@@ -1531,6 +1541,7 @@ class Admin extends BaseController
                 }
                 wp_safe_redirect(admin_url('plugins.php'));
             } elseif ($action === self::SLUG_ACTION_REVIEW) {
+                check_admin_referer(self::SLUG_ACTION_REVIEW);
                 update_option(self::REVIEW_OPTION_NAME, true);
                 wp_redirect(
                     'https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post'
