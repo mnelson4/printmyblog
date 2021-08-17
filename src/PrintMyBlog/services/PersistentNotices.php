@@ -3,7 +3,7 @@
 namespace PrintMyBlog\services;
 
 use PrintMyBlog\domain\DefaultPersistentNotices;
-use WPTRT\AdminNotices\Notices;
+use mnelson4\AdminNotices\Notices;
 
 class PersistentNotices
 {

@@ -2,14 +2,14 @@
 /**
  * Handles dismissing admin notices.
  *
- * @package   WPTRT/admin-notices
- * @author    WPTRT <themes@wordpress.org>
- * @copyright 2019 WPTRT
+ * @package   mnelson4/admin-notices
+ * @author    mnelson4 <themes@wordpress.org>
+ * @copyright 2019 mnelson4
  * @license   https://www.gnu.org/licenses/gpl-2.0.html GPL-2.0-or-later
- * @link      https://github.com/WPTRT/admin-notices
+ * @link      https://github.com/mnelson4/admin-notices
  */
 
-namespace WPTRT\AdminNotices;
+namespace mnelson4\AdminNotices;
 
 /**
  * The Dismiss class, responsible for dismissing and checking the status of admin notices.

@@ -2,7 +2,7 @@
 
 namespace PrintMyBlog\domain;
 
-use WPTRT\AdminNotices\Notice;
+use mnelson4\AdminNotices\Notice;
 
 class DefaultPersistentNotices
 {

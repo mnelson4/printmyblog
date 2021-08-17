@@ -61,7 +61,7 @@ class Context extends BaseContext
                 'PrintMyBlog\services\PmbCentral' => self::REUSE
             ],
             'PrintMyBlog\services\PersistentNotices' => [
-                'WPTRT\AdminNotices\Notices' => self::REUSE,
+                'mnelson4\AdminNotices\Notices' => self::REUSE,
                 'PrintMyBlog\domain\DefaultPersistentNotices' => self::REUSE
             ],
             'PrintMyBlog\controllers\Ajax'  => [

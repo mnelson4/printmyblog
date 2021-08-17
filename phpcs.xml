@@ -5,7 +5,7 @@
     <file>src/</file>
     <exclude-pattern>src/Twine/admin/news/DashboardNews.php</exclude-pattern>
     <exclude-pattern>src/Twine/assets/*</exclude-pattern>
-    <exclude-pattern>src/WPTRT/*</exclude-pattern>
+    <exclude-pattern>src/mnelson4/AdminNotices\*</exclude-pattern>
 
     <arg name="colors" />
     <arg name="parallel" value="4"/>

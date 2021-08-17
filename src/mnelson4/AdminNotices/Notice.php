@@ -4,14 +4,14 @@
  *
  * Creates an admin notice with consistent styling.
  *
- * @package   WPTRT/admin-notices
- * @author    WPTRT <themes@wordpress.org>
- * @copyright 2019 WPTRT
+ * @package   mnelson4/admin-notices
+ * @author    mnelson4 <themes@wordpress.org>
+ * @copyright 2019 mnelson4
  * @license   https://www.gnu.org/licenses/gpl-2.0.html GPL-2.0-or-later
- * @link      https://github.com/WPTRT/admin-notices
+ * @link      https://github.com/mnelson4/admin-notices
  */
 
-namespace WPTRT\AdminNotices;
+namespace mnelson4\AdminNotices;
 
 /**
  * The Admin_Notice class, responsible for creating admin notices.
@@ -51,11 +51,11 @@ class Notice
     private $title;
 
     /**
-     * An instance of the \WPTRT\AdminNotices\Dismiss object.
+     * An instance of the \mnelson4\AdminNotices\Dismiss object.
      *
      * @access public
      * @since 1.0
-     * @var \WPTRT\AdminNotices\Dismiss
+     * @var \mnelson4\AdminNotices\Dismiss
      */
     public $dismiss;
 

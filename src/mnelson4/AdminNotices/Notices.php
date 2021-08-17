@@ -4,14 +4,14 @@
  *
  * Handles creating Notices and printing them.
  *
- * @package   WPTRT/admin-notices
- * @author    WPTRT <themes@wordpress.org>
- * @copyright 2019 WPTRT
+ * @package   mnelson4/admin-notices
+ * @author    mnelson4 <themes@wordpress.org>
+ * @copyright 2019 mnelson4
  * @license   https://www.gnu.org/licenses/gpl-2.0.html GPL-2.0-or-later
- * @link      https://github.com/WPTRT/admin-notices
+ * @link      https://github.com/mnelson4/admin-notices
  */
 
-namespace WPTRT\AdminNotices;
+namespace mnelson4\AdminNotices;
 
 /**
  * The Admin_Notice class, responsible for creating admin notices.
@@ -61,9 +61,9 @@ class Notices
         if($show){
             wp_enqueue_script(
                 'wptrt-dismiss',
-                WPTRT_JS_URL . 'dismiss-notice.js',
+                mnelson4_JS_URL . 'dismiss-notice.js',
                 ['jquery','common'],
-                filemtime(WPTRT_JS_DIR . 'dismiss-notice.js'),
+                filemtime(mnelson4_JS_DIR . 'dismiss-notice.js'),
                 true
             );
         }

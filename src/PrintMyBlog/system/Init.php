@@ -19,7 +19,7 @@ use Twine\admin\news\DashboardNews;
 use PrintMyBlog\system\Context;
 use Twine\system\RequestType;
 use Twine\system\VersionHistory;
-use WPTRT\AdminNotices\Notices;
+use mnelson4\AdminNotices\Notices;
 use Twine\system\Init as BaseInit;
 use pmb_fs;
 
@@ -237,8 +237,8 @@ class Init extends BaseInit
         define('PMB_STYLES_DIR', PMB_ASSETS_DIR . 'styles/');
 
         define('PMB_DESIGNS_URL', $plugin_url . 'designs/');
-        define('WPTRT_JS_DIR', PMB_DIR . 'src/WPTRT/AdminNotices/');
-        define('WPTRT_JS_URL', $plugin_url . 'src/WPTRT/AdminNotices/');
+        define('mnelson4_JS_DIR', PMB_DIR . 'src/mnelson4/AdminNotices/');
+        define('mnelson4_JS_URL', $plugin_url . 'src/mnelson4/AdminNotices/');
     }
 
     protected function initContext()
