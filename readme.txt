@@ -401,6 +401,7 @@ https://youtu.be/uPQ3vqm7A2g
 * Bugfix: don't add footnotes when URL already spelled out
 * Bugfix: only add section titles to PDF table of contents
 * [Bugfix](https://wordpress.org/support/topic/critical-error-after-activating-plug-in/): avoid conflict with other plugins/themes using WPTRT/admin_notices
+* Feature: snapping images now also snaps tables to improve layout
 
 = 3.4.2 August 16, 2021 =
 * [Bugfix](https://wordpress.org/support/topic/print-pdf-like-cutted/): some themes overflowed the page
