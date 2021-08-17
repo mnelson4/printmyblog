@@ -397,6 +397,10 @@ https://youtu.be/uPQ3vqm7A2g
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+= 3.4.3 August xx, 2021 =
+* Bugfix: don't add footnotes when URL already spelled out
+* Bugfix: only add section titles to PDF table of contents
+
 = 3.4.2 August 16, 2021 =
 * [Bugfix](https://wordpress.org/support/topic/print-pdf-like-cutted/): some themes overflowed the page
 * Security Fix: prevent access to uninstall from unauthenticated users. @props WPScan for responsible disclosure

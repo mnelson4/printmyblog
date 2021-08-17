@@ -232,7 +232,10 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
             switch(external_link_policy){
                 case 'footnote':
                     // only add the footnote if the link isn't just the URL spelled out.
-                    if(a.attr('href') !== a.html().trim()){
+                    var link_text = a.html().trim();
+                    var href = a.attr('href');
+                    var matches = [href, href.replace('https://',''), href.replace('http://',''), href.replace('//',''), href.replace('mailto:','')];
+                    if(matches.indexOf(link_text) === -1){
                         a.after('<span class="pmb-footnote">' + pre_external_footnote  + a.attr('href') + post_external_footnote + '</span>');
                     }
                 break;
