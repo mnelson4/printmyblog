@@ -685,12 +685,12 @@ class DefaultDesignTemplates
             [
                 'default' => new InputOption(__('Don’t move', 'print-my-blog')),
                 'snap' => new InputOption(__('Snap to the top or bottom of the page', 'print-my-blog')),
-                'snap-unless-fit' => new InputOption(__('Only snap if the image would cause a page break', 'print-my-blog'))
+                'snap-unless-fit' => new InputOption(__('Only snap if it would otherwise cause a page break', 'print-my-blog'))
                 ],
             [
                 // translators: 1: "Best with Pro"
                 'html_label_text' => __('Image Placement', 'print-my-blog') . pmb_pro_print_service_only(),
-                'html_help_text' => __('To reduce whitespace around images, Print My Blog can move images around in your content.', 'print-my-blog'),
+                'html_help_text' => __('To reduce whitespace around images, galleries, and tables, Print My Blog can move around in your content.', 'print-my-blog'),
                 'default' => 'snap-unless-fit'
             ]
         );
