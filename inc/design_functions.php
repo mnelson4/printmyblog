@@ -7,7 +7,7 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design){
 	$css = $design->getSetting('custom_css');
 
 	// image placement CSS
-	$selector = '.pmb-image, .wp-block-gallery';
+	$selector = '.pmb-image, .wp-block-gallery, table';
 	switch($design->getPmbMeta('image_placement')){
 		case 'snap':
 			$css .= $selector . '{float:prince-snap;}';
