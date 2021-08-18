@@ -101,11 +101,11 @@ Just add bookmarks to section titles, not sub-headings
 h1,h2,h3,h4,h5,h6{
     prince-bookmark-level:none;
 }
-.pmb-depth-0 h1.pmb-title{prince-bookmark-level: 1}
-.pmb-depth-1 h1.pmb-title{prince-bookmark-level: 2}
-.pmb-depth-2 h1.pmb-title{prince-bookmark-level: 3}
-.pmb-depth-3 h1.pmb-title{prince-bookmark-level: 4}
-.pmb-depth-4 h1.pmb-title{prince-bookmark-level: 5}
+.pmb-depth-0:not([id*='/pmb-']) h1.pmb-title{prince-bookmark-level: 1}
+.pmb-depth-1:not([id*='/pmb-']) h1.pmb-title{prince-bookmark-level: 2}
+.pmb-depth-2:not([id*='/pmb-']) h1.pmb-title{prince-bookmark-level: 3}
+.pmb-depth-3:not([id*='/pmb-']) h1.pmb-title{prince-bookmark-level: 4}
+.pmb-depth-4:not([id*='/pmb-']) h1.pmb-title{prince-bookmark-level: 5}
 
 /* Browsers basically have this set as the default, but not Prince*/
 figure{
