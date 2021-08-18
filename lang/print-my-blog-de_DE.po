@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2021-07-28 12:08-0700\n"
-"PO-Revision-Date: 2021-07-28 12:10-0700\n"
+"POT-Creation-Date: 2021-08-17 20:11-0700\n"
+"PO-Revision-Date: 2021-08-17 20:11-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -668,35 +668,35 @@ msgstr ""
 #: src/PrintMyBlog/controllers/Admin.php:448
 #, php-format
 msgid ""
-"You will need a GitHub account. If prefer to use email support please "
+"You will need a GitHub account. If you prefer to use email support please "
 "%1$spurchase a license that offers email support.%2$s"
 msgstr ""
 "Sie benötigen ein GitHub-Konto. Wenn Sie es vorziehen, E-Mail-Support zu "
 "verwenden, %1$skaufen Sie eine Lizenz, die E-Mail-Support bietet. %2$s"
 
-#: src/PrintMyBlog/controllers/Admin.php:504
+#: src/PrintMyBlog/controllers/Admin.php:507
 msgid "Delete All Data"
 msgstr "Löschen aller Daten"
 
-#: src/PrintMyBlog/controllers/Admin.php:567
+#: src/PrintMyBlog/controllers/Admin.php:570
 msgid "Please select items to add to the project"
 msgstr "Wählen Sie elemente aus, die dem Projekt hinzugefügt werden sollen."
 
-#: src/PrintMyBlog/controllers/Admin.php:568
+#: src/PrintMyBlog/controllers/Admin.php:571
 msgid "Please select items to remove"
 msgstr "Bitte wählen Sie die zu entfernensen Elemente aus"
 
-#: src/PrintMyBlog/controllers/Admin.php:569
+#: src/PrintMyBlog/controllers/Admin.php:572
 msgid "Please select items to move"
 msgstr "Bitte wählen Sie die zu verschiebensobjekten Elemente aus"
 
-#: src/PrintMyBlog/controllers/Admin.php:570
+#: src/PrintMyBlog/controllers/Admin.php:573
 msgid "Error inserting. Please use the PMB help page to get help"
 msgstr ""
 "Fehler beim Einfügen. Bitte verwenden Sie die PMB-Hilfeseite, um Hilfe zu "
 "erhalten"
 
-#: src/PrintMyBlog/controllers/Admin.php:647
+#: src/PrintMyBlog/controllers/Admin.php:650
 #: src/PrintMyBlog/services/generators/PdfGenerator.php:104
 msgid ""
 "There was an error preparing your content. Please visit the Print My Blog "
@@ -705,7 +705,7 @@ msgstr ""
 "Beim Vorbereiten DesInhalts ist ein Fehler aufgetreten. Bitte besuchen Sie "
 "die Seite \"Mein Blog drucken\"."
 
-#: src/PrintMyBlog/controllers/Admin.php:648
+#: src/PrintMyBlog/controllers/Admin.php:651
 #: src/PrintMyBlog/services/generators/PdfGenerator.php:105
 msgid ""
 "Your project could not be accessed in order to generate the file. Maybe your "
@@ -715,19 +715,19 @@ msgstr ""
 "Vielleicht ist Ihre Website nicht öffentlich? Bitte besuchen Sie die Seite "
 "\"Mein Blog drucken\"."
 
-#: src/PrintMyBlog/controllers/Admin.php:903
-#: src/PrintMyBlog/controllers/Admin.php:1491
+#: src/PrintMyBlog/controllers/Admin.php:906
+#: src/PrintMyBlog/controllers/Admin.php:1500
 #, php-format
 msgid "There was an error communicating with Print My Blog Central. It was %s"
 msgstr ""
 "Bei der Kommunikation mit Print My Blog Central ist ein Fehler aufgetreten. "
 "Es war %s"
 
-#: src/PrintMyBlog/controllers/Admin.php:1041
+#: src/PrintMyBlog/controllers/Admin.php:1047
 msgid "Both"
 msgstr "Beide"
 
-#: src/PrintMyBlog/controllers/Admin.php:1042
+#: src/PrintMyBlog/controllers/Admin.php:1048
 msgid ""
 "A project can be prepared to use both a Digital PDF and a Print-Ready PDF, "
 "but it will be more complex. (Eg the design for one format might support "
@@ -738,40 +738,40 @@ msgstr ""
 "(Z. B. das Design für ein Format unterstützt möglicherweise andere Features "
 "als das Design für das andere Format.)"
 
-#: src/PrintMyBlog/controllers/Admin.php:1060
+#: src/PrintMyBlog/controllers/Admin.php:1066
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:440
 msgid "Project Title"
 msgstr "Projekttitel"
 
-#: src/PrintMyBlog/controllers/Admin.php:1070
+#: src/PrintMyBlog/controllers/Admin.php:1076
 #: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:112
 #: templates/setup_page.php:39
 msgid "Format"
 msgstr "Format"
 
-#: src/PrintMyBlog/controllers/Admin.php:1143
+#: src/PrintMyBlog/controllers/Admin.php:1149
 #, php-format
 msgid "Successfully setup the project \"%s\"."
 msgstr "Das Projekt \"%s\" wurde erfolgreich eingerichtet."
 
-#: src/PrintMyBlog/controllers/Admin.php:1157
+#: src/PrintMyBlog/controllers/Admin.php:1163
 #, php-format
 msgid "You need to choose and customize the design for your %s."
 msgstr "Sie müssen das Design für Ihre %s auswählen und anpassen."
 
-#: src/PrintMyBlog/controllers/Admin.php:1201
+#: src/PrintMyBlog/controllers/Admin.php:1207
 msgid "The content in your project has changed"
 msgstr "Der Inhalt in Ihrem Projekt hat sich geändert"
 
-#: src/PrintMyBlog/controllers/Admin.php:1229
+#: src/PrintMyBlog/controllers/Admin.php:1235
 msgid "Updated project content."
 msgstr "Aktualisierter Projektinhalt."
 
-#: src/PrintMyBlog/controllers/Admin.php:1276
+#: src/PrintMyBlog/controllers/Admin.php:1282
 msgid "You have customized this design"
 msgstr "Sie haben dieses Design angepasst"
 
-#: src/PrintMyBlog/controllers/Admin.php:1282
+#: src/PrintMyBlog/controllers/Admin.php:1288
 #, php-format
 msgid ""
 "The design \"%s\" has been customized, and its changes will be reflected in "
@@ -780,21 +780,21 @@ msgstr ""
 "Das Design \"%s\" wurde angepasst, und seine Änderungen werden in allen "
 "Projekten widergespiegelt, die es verwenden."
 
-#: src/PrintMyBlog/controllers/Admin.php:1297
+#: src/PrintMyBlog/controllers/Admin.php:1303
 #, php-format
 msgid "An invalid design (%s) or format provided(%s)"
 msgstr "Ein ungültiges Design (%s) oder format bereitgestellt (%s)"
 
-#: src/PrintMyBlog/controllers/Admin.php:1307
+#: src/PrintMyBlog/controllers/Admin.php:1313
 msgid "You changed the design"
 msgstr "Sie haben das Design geändert"
 
-#: src/PrintMyBlog/controllers/Admin.php:1312
+#: src/PrintMyBlog/controllers/Admin.php:1318
 #, php-format
 msgid "You chose the design \"%1$s\" for the %2$s of your project."
 msgstr "Sie haben den Entwurf \"%1$s\" für die %2$s Ihres Projekts ausgewählt."
 
-#: src/PrintMyBlog/controllers/Admin.php:1330
+#: src/PrintMyBlog/controllers/Admin.php:1336
 msgid ""
 "You may want to customize the design. If not, feel free to jump ahead the "
 "next step."
@@ -802,20 +802,20 @@ msgstr ""
 "Sie können das Design anpassen. Wenn nicht, fühlen Sie sich frei, den "
 "nächsten Schritt vorwärts zu springen."
 
-#: src/PrintMyBlog/controllers/Admin.php:1363
+#: src/PrintMyBlog/controllers/Admin.php:1369
 msgid "You changed projected metadata"
 msgstr "Sie haben projizierte Metadaten geändert"
 
-#: src/PrintMyBlog/controllers/Admin.php:1369
+#: src/PrintMyBlog/controllers/Admin.php:1375
 msgid "Project metadata updated."
 msgstr "Projektmetadaten aktualisiert."
 
-#: src/PrintMyBlog/controllers/Admin.php:1385
+#: src/PrintMyBlog/controllers/Admin.php:1391
 #, php-format
 msgid "There is no file format with the slug \"%s\""
 msgstr "Es gibt kein Dateiformat mit der Schnecke \"%s\""
 
-#: src/PrintMyBlog/controllers/Admin.php:1420
+#: src/PrintMyBlog/controllers/Admin.php:1426
 msgid "Save"
 msgstr "Speichern"
 
@@ -1575,7 +1575,7 @@ msgid "Snap to the top or bottom of the page"
 msgstr "Fangen am oberen oder unteren Rand der Seite"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:688
-msgid "Only snap if the image would cause a page break"
+msgid "Only snap if it would otherwise cause a page break"
 msgstr "Fangen Sie nur, wenn das Bild einen Seitenumbruch verursachen würde"
 
 #. translators: 1: "Best with Pro"
@@ -1585,8 +1585,8 @@ msgstr "Bildplatzierung"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:693
 msgid ""
-"To reduce whitespace around images, Print My Blog can move images around in "
-"your content."
+"To reduce whitespace around images, galleries, and tables, Print My Blog can "
+"move around in your content."
 msgstr ""
 "Um Leerzeichen um Bilder zu reduzieren, kann \"Mein Blog drucken\" Bilder in "
 "Ihren Inhalten verschieben."
@@ -2221,7 +2221,7 @@ msgstr "Generieren der Druckseite"
 msgid "Template file \"%s\" should exist but doesn't."
 msgstr "Die Vorlagendatei \"%s\" sollte vorhanden sein, tut es aber nicht."
 
-#: src/PrintMyBlog/orm/entities/Project.php:611
+#: src/PrintMyBlog/orm/entities/Project.php:650
 msgid "Default Template"
 msgstr "Standard-Template"
 
