@@ -202,13 +202,13 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
         try{
             var matching_elements = jQuery(id_from_href).length;
             if( matching_elements === 0){
-                matching_elements = jQuery(a.attr('href'));
+                matching_elements = jQuery(a.attr('href')).length;
             }
         }catch(exception){
             // somehow the query didn't work. Remove this link then.
             a.contents().unwrap();
         }
-        if( matching_elements.size() > 0){
+        if( matching_elements > 0){
             // internal
             switch(internal_link_policy){
                 case 'parens':
