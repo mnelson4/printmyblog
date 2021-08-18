@@ -8,7 +8,9 @@ $baseDir = dirname($vendorDir);
 return array(
     'PrintMyBlog\\compatibility\\DetectAndActivate' => $baseDir . '/src/PrintMyBlog/compatibility/DetectAndActivate.php',
     'PrintMyBlog\\compatibility\\plugins\\CoBlocks' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/CoBlocks.php',
+    'PrintMyBlog\\compatibility\\plugins\\ContactForm7' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/ContactForm7.php',
     'PrintMyBlog\\compatibility\\plugins\\EasyFootnotes' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/EasyFootnotes.php',
+    'PrintMyBlog\\compatibility\\plugins\\GoogleLanguageTranslator' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/GoogleLanguageTranslator.php',
     'PrintMyBlog\\compatibility\\plugins\\LazyLoadingFeaturePlugin' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/LazyLoadingFeaturePlugin.php',
     'PrintMyBlog\\compatibility\\plugins\\TablePress' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/TablePress.php',
     'PrintMyBlog\\compatibility\\plugins\\WpVrView' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/WpVrView.php',
@@ -177,9 +179,9 @@ return array(
     'Twine\\system\\Init' => $baseDir . '/src/Twine/system/Init.php',
     'Twine\\system\\RequestType' => $baseDir . '/src/Twine/system/RequestType.php',
     'Twine\\system\\VersionHistory' => $baseDir . '/src/Twine/system/VersionHistory.php',
-    'WPTRT\\AdminNotices\\Dismiss' => $baseDir . '/src/WPTRT/AdminNotices/Dismiss.php',
-    'WPTRT\\AdminNotices\\Notice' => $baseDir . '/src/WPTRT/AdminNotices/Notice.php',
-    'WPTRT\\AdminNotices\\Notices' => $baseDir . '/src/WPTRT/AdminNotices/Notices.php',
+    'mnelson4\\AdminNotices\\Dismiss' => $baseDir . '/src/mnelson4/AdminNotices/Dismiss.php',
+    'mnelson4\\AdminNotices\\Notice' => $baseDir . '/src/mnelson4/AdminNotices/Notice.php',
+    'mnelson4\\AdminNotices\\Notices' => $baseDir . '/src/mnelson4/AdminNotices/Notices.php',
     'mnelson4\\rest_api_detector\\RestApiDetector' => $baseDir . '/src/mnelson4/rest_api_detector/RestApiDetector.php',
     'mnelson4\\rest_api_detector\\RestApiDetectorError' => $baseDir . '/src/mnelson4/rest_api_detector/RestApiDetectorError.php',
 );

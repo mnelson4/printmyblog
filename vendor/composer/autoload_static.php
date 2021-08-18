@@ -11,10 +11,6 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         array (
             'mnelson4\\' => 9,
         ),
-        'W' => 
-        array (
-            'WPTRT\\' => 6,
-        ),
         'T' => 
         array (
             'Twine\\' => 6,
@@ -30,10 +26,6 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         array (
             0 => __DIR__ . '/../..' . '/src/mnelson4',
         ),
-        'WPTRT\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/WPTRT',
-        ),
         'Twine\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/Twine',
@@ -47,7 +39,9 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
     public static $classMap = array (
         'PrintMyBlog\\compatibility\\DetectAndActivate' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/DetectAndActivate.php',
         'PrintMyBlog\\compatibility\\plugins\\CoBlocks' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/CoBlocks.php',
+        'PrintMyBlog\\compatibility\\plugins\\ContactForm7' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/ContactForm7.php',
         'PrintMyBlog\\compatibility\\plugins\\EasyFootnotes' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/EasyFootnotes.php',
+        'PrintMyBlog\\compatibility\\plugins\\GoogleLanguageTranslator' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/GoogleLanguageTranslator.php',
         'PrintMyBlog\\compatibility\\plugins\\LazyLoadingFeaturePlugin' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/LazyLoadingFeaturePlugin.php',
         'PrintMyBlog\\compatibility\\plugins\\TablePress' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/TablePress.php',
         'PrintMyBlog\\compatibility\\plugins\\WpVrView' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/WpVrView.php',
@@ -216,9 +210,9 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'Twine\\system\\Init' => __DIR__ . '/../..' . '/src/Twine/system/Init.php',
         'Twine\\system\\RequestType' => __DIR__ . '/../..' . '/src/Twine/system/RequestType.php',
         'Twine\\system\\VersionHistory' => __DIR__ . '/../..' . '/src/Twine/system/VersionHistory.php',
-        'WPTRT\\AdminNotices\\Dismiss' => __DIR__ . '/../..' . '/src/WPTRT/AdminNotices/Dismiss.php',
-        'WPTRT\\AdminNotices\\Notice' => __DIR__ . '/../..' . '/src/WPTRT/AdminNotices/Notice.php',
-        'WPTRT\\AdminNotices\\Notices' => __DIR__ . '/../..' . '/src/WPTRT/AdminNotices/Notices.php',
+        'mnelson4\\AdminNotices\\Dismiss' => __DIR__ . '/../..' . '/src/mnelson4/AdminNotices/Dismiss.php',
+        'mnelson4\\AdminNotices\\Notice' => __DIR__ . '/../..' . '/src/mnelson4/AdminNotices/Notice.php',
+        'mnelson4\\AdminNotices\\Notices' => __DIR__ . '/../..' . '/src/mnelson4/AdminNotices/Notices.php',
         'mnelson4\\rest_api_detector\\RestApiDetector' => __DIR__ . '/../..' . '/src/mnelson4/rest_api_detector/RestApiDetector.php',
         'mnelson4\\rest_api_detector\\RestApiDetectorError' => __DIR__ . '/../..' . '/src/mnelson4/rest_api_detector/RestApiDetectorError.php',
     );
