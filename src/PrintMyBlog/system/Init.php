@@ -237,8 +237,8 @@ class Init extends BaseInit
         define('PMB_STYLES_DIR', PMB_ASSETS_DIR . 'styles/');
 
         define('PMB_DESIGNS_URL', $plugin_url . 'designs/');
-        define('mnelson4_JS_DIR', PMB_DIR . 'src/mnelson4/AdminNotices/');
-        define('mnelson4_JS_URL', $plugin_url . 'src/mnelson4/AdminNotices/');
+        define('MNELSON4_JS_DIR', PMB_DIR . 'src/mnelson4/AdminNotices/');
+        define('MNELSON4_JS_URL', $plugin_url . 'src/mnelson4/AdminNotices/');
     }
 
     protected function initContext()

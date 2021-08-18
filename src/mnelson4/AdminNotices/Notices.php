@@ -61,9 +61,9 @@ class Notices
         if($show){
             wp_enqueue_script(
                 'wptrt-dismiss',
-                mnelson4_JS_URL . 'dismiss-notice.js',
+                MNELSON4_JS_URL . 'dismiss-notice.js',
                 ['jquery','common'],
-                filemtime(mnelson4_JS_DIR . 'dismiss-notice.js'),
+                filemtime(MNELSON4_JS_DIR . 'dismiss-notice.js'),
                 true
             );
         }
