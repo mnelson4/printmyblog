@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2021-08-17 20:11-0700\n"
-"PO-Revision-Date: 2021-08-17 20:12-0700\n"
+"POT-Creation-Date: 2021-08-19 16:09-0700\n"
+"PO-Revision-Date: 2021-08-19 16:10-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -3525,11 +3525,11 @@ msgid "Prepare Print-Page"
 msgstr "Preparar la página de impresión"
 
 #: templates/upgrade_to_3.php:2
-msgid "It's finally here..."
+msgid "It’s finally here..."
 msgstr "Por fin está aquí..."
 
 #: templates/upgrade_to_3.php:3
-msgid "Print My Blog – Pro Print"
+msgid "Print My Blog – Pro Print!"
 msgstr "Imprimir mi blog — Pro Print"
 
 #: templates/upgrade_to_3.php:4

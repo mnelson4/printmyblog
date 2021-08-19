@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2021-08-17 20:11-0700\n"
+"POT-Creation-Date: 2021-08-19 16:09-0700\n"
 "PO-Revision-Date: 2021-05-25 13:59-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3122,11 +3122,11 @@ msgid "Prepare Print-Page"
 msgstr ""
 
 #: templates/upgrade_to_3.php:2
-msgid "It's finally here..."
+msgid "It’s finally here..."
 msgstr ""
 
 #: templates/upgrade_to_3.php:3
-msgid "Print My Blog – Pro Print"
+msgid "Print My Blog – Pro Print!"
 msgstr ""
 
 #: templates/upgrade_to_3.php:4

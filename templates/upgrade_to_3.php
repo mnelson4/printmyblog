@@ -1,6 +1,6 @@
 <div class="wrap nosubsub">
-    <p class="pmb-center"><?php esc_html_e('It\'s finally here...', 'print-my-blog');?></p>
-    <h1 class="pmb-big-header">🎉<?php esc_html_e( 'Print My Blog – Pro Print', 'print-my-blog' ); ?>🎉</h1>
+    <p class="pmb-center"><?php esc_html_e('It’s finally here...', 'print-my-blog');?></p>
+    <h1 class="pmb-big-header">🎉<?php esc_html_e( 'Print My Blog – Pro Print!', 'print-my-blog' ); ?>🎉</h1>
     <p class="pmb-center"><?php esc_html_e('The old features are still here: "Print Now" was just renamed "Quick Print", and the Print Buttons are still available under "Settings".', 'print-my-blog');?></p>
     <p class="pmb-center"><?php esc_html_e('Pro Print makes more functional and visually-appealing PDFs using your web browser for free, or the new paid Pro Print Service.', 'print-my-blog');?></p>
 
