@@ -94,18 +94,6 @@ class Activation extends BaseActivation
                 );
                 exit;
         }
-    }
-
-
-    /**
-     *
-     */
-    public function install()
-    {
-        $this->table_manager->installTables();
-        $this->capabilities->grantCapabilities();
-        $this->design_registry->createRegisteredDesigns();
-        $this->project_contents->addDefaultContents();
         // while pmb_fs() declares anonymous mode, this is needed to send users to welcome page
         if(
             in_array(
@@ -118,6 +106,18 @@ class Activation extends BaseActivation
         ){
             $this->redirectToActivationPage();
         }
+    }
+
+
+    /**
+     *
+     */
+    public function install()
+    {
+        $this->table_manager->installTables();
+        $this->capabilities->grantCapabilities();
+        $this->design_registry->createRegisteredDesigns();
+        $this->project_contents->addDefaultContents();
     }
 
     public function upgrade()
