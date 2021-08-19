@@ -106,6 +106,18 @@ class Activation extends BaseActivation
         $this->capabilities->grantCapabilities();
         $this->design_registry->createRegisteredDesigns();
         $this->project_contents->addDefaultContents();
+        // while pmb_fs() declares anonymous mode, this is needed to send users to welcome page
+        if(
+            in_array(
+                $this->request_type->getRequestType(),
+                array(
+                    RequestType::REQUEST_TYPE_NEW_INSTALL,
+                    RequestType::REQUEST_TYPE_REACTIVATION
+                )
+            )
+        ){
+            $this->redirectToActivationPage();
+        }
     }
 
     public function upgrade()
@@ -114,19 +126,19 @@ class Activation extends BaseActivation
     }
 
 
-//    /**
-//     * Redirects
-//     */
-//    public function redirectToActivationPage()
-//    {
-//        wp_redirect(
-//            add_query_arg(
-//                array(
-//                    'welcome' => 1
-//                ),
-//                admin_url(PMB_ADMIN_PAGE_PATH)
-//            )
-//        );
-//        exit;
-//    }
+    /**
+     * Redirects
+     */
+    public function redirectToActivationPage()
+    {
+        wp_redirect(
+            add_query_arg(
+                array(
+                    'welcome' => 1
+                ),
+                admin_url(PMB_ADMIN_PAGE_PATH)
+            )
+        );
+        exit;
+    }
 }

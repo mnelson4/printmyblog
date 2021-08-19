@@ -181,7 +181,8 @@ if (defined('PMB_VERSION')) {
                             'first-path'     => 'admin.php?page=print-my-blog-now&welcome=1',
                             'contact'        => false,
                             'support'        => false,
-                        )
+                        ),
+                        'anonymous_mode' => true // experiment to see if this improves adoption
                     ) );
                 }
 
