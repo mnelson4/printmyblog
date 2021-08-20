@@ -85,7 +85,7 @@ class Activation extends BaseActivation
         parent::detectActivation();
         // Temporarily for new installs, do an experiment where they won't even be asked to opt in.
         // This prevents asking them later when I will probably start asking again.
-        if($this->request_type->getRequestType() === RequestType::REQUEST_TYPE_NEW_INSTALL){
+        if ($this->request_type->getRequestType() === RequestType::REQUEST_TYPE_NEW_INSTALL) {
             pmb_fs()->skip_connection([get_current_blog_id()]);
         }
         if ($activation_indicator === '' && $this->version_history->previousVersion() === null) {
@@ -100,7 +100,7 @@ class Activation extends BaseActivation
                 exit;
         }
         // while pmb_fs() declares anonymous mode, this is needed to send users to welcome page
-        if(
+        if (
             in_array(
                 $this->request_type->getRequestType(),
                 array(
@@ -108,7 +108,7 @@ class Activation extends BaseActivation
                     RequestType::REQUEST_TYPE_REACTIVATION
                 )
             )
-        ){
+        ) {
             $this->redirectToActivationPage();
         }
     }
