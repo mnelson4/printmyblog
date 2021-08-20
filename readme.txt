@@ -398,9 +398,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= XXXXXXXXXXX =
+= 3.4.5 August 20, 2021 =
 * Bugfix: don't add the table of contents page to the PDF table of contents
-* Enhancement: don't ask for Freemius data collection
+* Enhancement: temporarily don't ask for Freemius data collection
 
 = 3.4.4 August 17, 2021 =
 * Bugfix: fix anchor links (eg "#figure-2" which links to an element with ID "figure-2")
