@@ -697,7 +697,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         ];
         // before we used luxon, which theoretically would have translated the strings but no luck
         // and it took up a quarter megabyte. So just hardcoding English for now.
-        return months[date.getMonth()] + ' ' + date.getDay() + ', '  + date.getFullYear();
+        return months[date.getMonth()] + ' ' + date.getDate() + ', '  + date.getFullYear();
     };
 
     /**
