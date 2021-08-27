@@ -202,7 +202,8 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
         var id_url = '#' + a.attr('href');
         try{
             var matching_elements = jQuery(id_selector).length;
-            if( matching_elements === 0){
+            // if that doesn't point to any internal posts, and it's an anchor link, then just use it as an anchor link
+            if( matching_elements === 0 && a.attr('href')[0] === '#'){
                 id_selector = id_url = a.attr('href');
                 matching_elements = jQuery(id_selector).length;
             }
