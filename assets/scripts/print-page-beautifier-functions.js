@@ -198,12 +198,14 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
         if(! a.text().trim()){
             return;
         }
-        var id_from_href = '#' + a.attr('href').replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g,'\\$1').replace('%','-');
+        var id_selector = '#' + a.attr('href').replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g,'\\$1').replace('%','-');
+        var id_url = '#' + a.attr('href');
         try{
-            var matching_elements = jQuery(id_from_href).length;
-            if( matching_elements === 0){
-                id_from_href = a.attr('href');
-                matching_elements = jQuery(id_from_href).length;
+            var matching_elements = jQuery(id_selector).length;
+            // if that doesn't point to any internal posts, and it's an anchor link, then just use it as an anchor link
+            if( matching_elements === 0 && a.attr('href')[0] === '#'){
+                id_selector = id_url = a.attr('href');
+                matching_elements = jQuery(id_selector).length;
             }
         }catch(exception){
             // somehow the query didn't work. Remove this link then.
@@ -214,17 +216,17 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
             switch(internal_link_policy){
                 case 'parens':
                     a.addClass('pmb-page-ref');
-                    a.attr('href',id_from_href);
+                    a.attr('href',id_url);
                     break;
                 case 'footnote':
                     // only add the footnote if the link isn't just the URL spelled out.
                     if(a.attr('href') !== a.html().trim()) {
-                        a.attr('href',id_from_href);
+                        a.attr('href',id_url);
                         a.after('<span class="pmb-footnote">' + pre_internal_footnote  + '<a class="pmb-page-num" href="' + a.attr('href') + '"></a>' + post_internal_footnote + '</span>');
                     }
                     break;
                 case 'leave':
-                    a.attr('href',id_from_href);
+                    a.attr('href',id_url);
                     break;
                 case 'remove':
                     a.contents().unwrap();
