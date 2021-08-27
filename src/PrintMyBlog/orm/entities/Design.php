@@ -4,6 +4,7 @@ namespace PrintMyBlog\orm\entities;
 
 use Exception;
 use PrintMyBlog\entities\DesignTemplate;
+use PrintMyBlog\exceptions\DesignTemplateDoesNotExist;
 use PrintMyBlog\services\DesignTemplateRegistry;
 use Twine\forms\base\FormSection;
 use Twine\forms\inputs\FormInputBase;
@@ -47,6 +48,18 @@ class Design extends PostWrapper
             );
         }
         return $this->design_template;
+    }
+
+    /**
+     * @return bool
+     */
+    public function designTemplateExists(){
+        try{
+            $this->getDesignTemplate();
+            return true;
+        }catch(DesignTemplateDoesNotExist $e){
+            return false;
+        }
     }
 
     public function getSetting($setting_name)

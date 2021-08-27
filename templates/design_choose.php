@@ -30,6 +30,9 @@ pmb_render_template(
 <?php
 // List all designs
 foreach($designs as $design){
+    if(! $design->designTemplateExists()){
+        continue;
+    }
     /**
     * @var $design \PrintMyBlog\orm\entities\Design
      */
