@@ -542,94 +542,95 @@ class Admin extends BaseController
             wp_enqueue_style('pmb-setup-page');
         } elseif (
             $hook === 'toplevel_page_print-my-blog-projects'
-                 && isset($_GET['action'])
-                && $_GET['action'] === self::SLUG_ACTION_EDIT_PROJECT
         ) {
-            switch (isset($_GET['subaction']) ? $_GET['subaction'] : null) {
-                case self::SLUG_SUBACTION_PROJECT_CONTENT:
-                    wp_register_script(
-                        'sortablejs',
-                        PMB_SCRIPTS_URL . 'libs/Sortable.min.js',
-                        array(),
-                        '1.10.2'
-                    );
+            if ( isset($_GET['action'])
+                && $_GET['action'] === self::SLUG_ACTION_EDIT_PROJECT
+            ) {
+                switch (isset($_GET['subaction']) ? $_GET['subaction'] : null) {
+                    case self::SLUG_SUBACTION_PROJECT_CONTENT:
+                        wp_register_script(
+                            'sortablejs',
+                            PMB_SCRIPTS_URL . 'libs/Sortable.min.js',
+                            array(),
+                            '1.10.2'
+                        );
 
-                    wp_enqueue_script(
-                        'pmb_project_edit_content',
-                        PMB_SCRIPTS_URL . 'project-edit-content.js',
-                        array('sortablejs','jquery-ui-datepicker', 'jquery-ui-dialog','pmb-select2','wp-api','jquery-debounce'),
-                        filemtime(PMB_SCRIPTS_DIR . 'project-edit-content.js')
-                    );
-                    wp_enqueue_style('jquery-ui');
-                    wp_enqueue_style('pmb-select2');
-                    wp_localize_script(
-                        'pmb_project_edit_content',
-                        'pmb_project_edit_content_data',
-                        [
-                            'levels' => $this->project->getLevelsAllowed(),
-                            'default_rest_url' => function_exists('rest_url') ? rest_url('/wp/v2') : '',
-                            'translations' => [
-                                'cant_add' => __('Please select items to add to the project', 'print-my-blog'),
-                                'cant_remove' => __('Please select items to remove', 'print-my-blog'),
-                                'cant_move' => __('Please select items to move', 'print-my-blog'),
-                                'insert_error' => __('Error inserting. Please use the PMB help page to get help', 'print-my-blog')
+                        wp_enqueue_script(
+                            'pmb_project_edit_content',
+                            PMB_SCRIPTS_URL . 'project-edit-content.js',
+                            array('sortablejs','jquery-ui-datepicker', 'jquery-ui-dialog','pmb-select2','wp-api','jquery-debounce'),
+                            filemtime(PMB_SCRIPTS_DIR . 'project-edit-content.js')
+                        );
+                        wp_enqueue_style('jquery-ui');
+                        wp_enqueue_style('pmb-select2');
+                        wp_localize_script(
+                            'pmb_project_edit_content',
+                            'pmb_project_edit_content_data',
+                            [
+                                'levels' => $this->project->getLevelsAllowed(),
+                                'default_rest_url' => function_exists('rest_url') ? rest_url('/wp/v2') : '',
+                                'translations' => [
+                                    'cant_add' => __('Please select items to add to the project', 'print-my-blog'),
+                                    'cant_remove' => __('Please select items to remove', 'print-my-blog'),
+                                    'cant_move' => __('Please select items to move', 'print-my-blog'),
+                                    'insert_error' => __('Error inserting. Please use the PMB help page to get help', 'print-my-blog')
+                                ]
                             ]
-                        ]
-                    );
-                    break;
-                case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
-                    wp_enqueue_script(
-                        'pmb-choose-design',       // handle
-                        PMB_SCRIPTS_URL . 'pmb-design-choose.js',       // source
-                        array('pmb-modal'),
-                        filemtime(PMB_SCRIPTS_DIR . 'pmb-design-choose.js')
-                    );
-                    // A style available in WP
-                    wp_enqueue_style('wp-jquery-ui-dialog');
-                    wp_enqueue_style(
-                        'pmb-choose-design',
-                        PMB_STYLES_URL . 'design-choose.css',
-                        [],
-                        filemtime(PMB_STYLES_DIR . 'design-choose.css')
-                    );
-                    break;
-                case self::SLUG_SUBACTION_PROJECT_GENERATE:
-                    wp_enqueue_script(
-                        'pmb-generate',
-                        PMB_SCRIPTS_URL . 'pmb-generate.js',
-                        ['pmb-modal', 'docraptor'],
-                        filemtime(PMB_SCRIPTS_DIR . 'pmb-generate.js')
-                    );
-                    wp_enqueue_style(
-                        'pmb-generate',
-                        PMB_STYLES_URL . 'pmb-generate.css',
-                        [
-                            'wp-jquery-ui-dialog'
+                        );
+                        break;
+                    case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
+                        wp_enqueue_script(
+                            'pmb-choose-design',       // handle
+                            PMB_SCRIPTS_URL . 'pmb-design-choose.js',       // source
+                            array('pmb-modal'),
+                            filemtime(PMB_SCRIPTS_DIR . 'pmb-design-choose.js')
+                        );
+                        // A style available in WP
+                        wp_enqueue_style('wp-jquery-ui-dialog');
+                        wp_enqueue_style(
+                            'pmb-choose-design',
+                            PMB_STYLES_URL . 'design-choose.css',
+                            [],
+                            filemtime(PMB_STYLES_DIR . 'design-choose.css')
+                        );
+                        break;
+                    case self::SLUG_SUBACTION_PROJECT_GENERATE:
+                        wp_enqueue_script(
+                            'pmb-generate',
+                            PMB_SCRIPTS_URL . 'pmb-generate.js',
+                            ['pmb-modal', 'docraptor'],
+                            filemtime(PMB_SCRIPTS_DIR . 'pmb-generate.js')
+                        );
+                        wp_enqueue_style(
+                            'pmb-generate',
+                            PMB_STYLES_URL . 'pmb-generate.css',
+                            [
+                                'wp-jquery-ui-dialog'
                             ],
-                        filemtime(PMB_STYLES_DIR . 'pmb-generate.css')
-                    );
-                    $license = pmb_fs()->_get_license();
-                    $site = pmb_fs()->get_site();
-                    $use_pmb_central = 0;
-                    if (pmb_fs()->is_plan__premium_only('business')) {
-                        $use_pmb_central = 1;
-                    }
-                    wp_localize_script(
-                        'pmb-generate',
-                        'pmb_generate',
-                        [
-                            'site_url' => site_url(),
-                            'use_pmb_central_for_previews' => $use_pmb_central,
-                            'license_data' => [
-                                'endpoint' => $this->pmb_central->getCentralUrl(),
-                                'license_id' => $license instanceof FS_Plugin_License ? $license->id : '',
-                                'install_id' => $site instanceof FS_Site ? $site->id : '',
-                                'authorization_header' =>  $site instanceof FS_Site ? $this->pmb_central->getSiteAuthorizationHeader() : '',
-                            ],
+                            filemtime(PMB_STYLES_DIR . 'pmb-generate.css')
+                        );
+                        $license = pmb_fs()->_get_license();
+                        $site = pmb_fs()->get_site();
+                        $use_pmb_central = 0;
+                        if (pmb_fs()->is_plan__premium_only('business')) {
+                            $use_pmb_central = 1;
+                        }
+                        wp_localize_script(
+                            'pmb-generate',
+                            'pmb_generate',
+                            [
+                                'site_url' => site_url(),
+                                'use_pmb_central_for_previews' => $use_pmb_central,
+                                'license_data' => [
+                                    'endpoint' => $this->pmb_central->getCentralUrl(),
+                                    'license_id' => $license instanceof FS_Plugin_License ? $license->id : '',
+                                    'install_id' => $site instanceof FS_Site ? $site->id : '',
+                                    'authorization_header' =>  $site instanceof FS_Site ? $this->pmb_central->getSiteAuthorizationHeader() : '',
+                                ],
 
-                            'doc_attrs' => apply_filters(
-                                '\PrintMyBlog\controllers\Admin::enqueueScripts doc_attrs',
-                                [
+                                'doc_attrs' => apply_filters(
+                                    '\PrintMyBlog\controllers\Admin::enqueueScripts doc_attrs',
+                                    [
                                         'test' => defined('PMB_TEST_LIVE') && PMB_TEST_LIVE ? true : false,
                                         'type' => 'pdf',
                                         'javascript' => true, // Javascript by DocRaptor
@@ -642,28 +643,46 @@ class Admin extends BaseController
                                             'media' => 'print',                                       // use screen
                                             'http_timeout' => 60,
                                             'http_insecure' => true,
-                                // styles
-                                // instead of print styles
+                                            // styles
+                                            // instead of print styles
                                             // javascript: true, // use Prince's JS, which is more error tolerant
                                         ]
                                     ]
-                            ),
-                            'translations' => [
-                                'error_generating' => __('There was an error preparing your content. Please visit the Print My Blog Help page.', 'print-my-blog'),
-                                'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public? Please visit the Print My Blog Help page.', 'print-my-blog')
+                                ),
+                                'translations' => [
+                                    'error_generating' => __('There was an error preparing your content. Please visit the Print My Blog Help page.', 'print-my-blog'),
+                                    'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public? Please visit the Print My Blog Help page.', 'print-my-blog')
                                 ]
-                        ]
-                    );
-                    break;
-            }
+                            ]
+                        );
+                        break;
+                }
 
-            // everybody uses the style, right?
-            wp_enqueue_style(
-                'pmb_project_edit',
-                PMB_STYLES_URL . 'project-edit.css',
-                array(),
-                filemtime(PMB_STYLES_DIR . 'project-edit.css')
-            );
+                // everybody uses the style, right?
+                wp_enqueue_style(
+                    'pmb_project_edit',
+                    PMB_STYLES_URL . 'project-edit.css',
+                    array(),
+                    filemtime(PMB_STYLES_DIR . 'project-edit.css')
+                );
+            } else {
+                // projects list table
+                wp_enqueue_script(
+                    'pmb-projects-list',       // handle
+                    PMB_SCRIPTS_URL . 'pmb-projects-list.js',       // source
+                    array('jquery'),
+                    filemtime(PMB_SCRIPTS_DIR . 'pmb-projects-list.js')
+                );
+                wp_localize_script(
+                    'pmb-projects-list',
+                    'pmb_data',
+                    [
+                        'translations' => [
+                            'confirm_duplicate' => __('Are you sure you want to duplicate this project?', 'print-my-blog')
+                        ]
+                    ]
+                );
+            }
         } elseif ($hook === 'plugins.php') {
             wp_enqueue_script(
                 'pmb-plugins-page',
@@ -1470,7 +1489,15 @@ class Admin extends BaseController
 
     protected function duplicate(){
         check_admin_referer(self::SLUG_ACTION_EDIT_PROJECT);
-        $this->project->duplicate();
+        $new_project = $this->project->duplicate();
+        $this->notification_manager->addTextNotificationForCurrentUser(
+                OneTimeNotification::TYPE_SUCCESS,
+                sprintf(
+                        // @translators: 1: the name of the new project.
+                        __('Project successfully duplicated. It is titled "%1$s".', 'print-my-blog'),
+                    $new_project->getWpPost()->post_title
+                )
+        );
     }
 
     /**

@@ -81,7 +81,7 @@ class OneTimeNotificationManager
     /**
      * Adds a one-time notification for any user.
      * @param $wp_user
-     * @param $type
+     * @param string $type constants on \Twine\entities\notifications\OneTimeNotification
      * @param $html
      */
     public function addHtmlNotification($wp_user, $type, $html)
@@ -101,7 +101,7 @@ class OneTimeNotificationManager
 
     /**
      * Adds a one-time notification for the curren tuser
-     * @param $type
+     * @param string $type constants on \Twine\entities\notifications\OneTimeNotification
      * @param string $html
      */
     public function addHtmlNotificationForCurrentUser($type, $html)
@@ -111,7 +111,7 @@ class OneTimeNotificationManager
     }
 
     /**
-     * @param string $type
+     * @param string $type constants on \Twine\entities\notifications\OneTimeNotification
      * @param string $text
      */
     public function addTextNotificationForCurrentUser($type, $text)

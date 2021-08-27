@@ -194,7 +194,7 @@ foreach ($steps as $slug => $display_text) {
                             ?></a><?php
                       }?></span><?php
 }
-        ?> <span><a href="<?php
+        ?> <span><a class="pmb-duplicate" href="<?php
         echo esc_url(wp_nonce_url(
             add_query_arg(
                 [

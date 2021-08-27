@@ -704,7 +704,6 @@ class Project extends PostWrapper
             $new_id = $wpdb->insert_id;
             $section_map[$section_row->ID] = $new_id;
         }
+        return new Project($new_post);
     }
-
-
 }
