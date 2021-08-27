@@ -75,6 +75,32 @@ class ProjectSectionManager
         $include_post_title = false,
         $placement = null
     ) {
+        return $this->createObjsFromRows($this->getFlatSectionRowsFor(
+            $project_id,
+                $limit,
+                $offset,
+                $include_post_title,
+                $placement
+            )
+        );
+    }
+
+    /**
+     * Gets an array of stdClass for all the rows from the project section table that belong to the project.
+     * @param $project_id
+     * @param int $limit
+     * @param int $offset
+     * @param bool $include_post_title
+     * @param null $placement
+     * @return stdClass[]
+     */
+    public function getFlatSectionRowsFor(
+        $project_id,
+        $limit = 20,
+        $offset = 0,
+        $include_post_title = false,
+        $placement = null
+    ){
         global $wpdb;
 
         $select_sql = $this->defaultSelection();
@@ -90,16 +116,14 @@ class ProjectSectionManager
         if ($placement) {
             $where_sql .= $wpdb->prepare(' AND placement=%s', $placement);
         }
-        return $this->createObjsFromRows(
-            $wpdb->get_results(
-                $wpdb->prepare(
-                    $select_sql . $this->defaultFrom()
-                        . $join_sql . $where_sql .
-                      ' ORDER BY section_order ASC
-	                  limit %d, %d',
-                    $offset,
-                    $limit
-                )
+        return $wpdb->get_results(
+            $wpdb->prepare(
+                $select_sql . $this->defaultFrom()
+                . $join_sql . $where_sql .
+                ' ORDER BY section_order ASC
+                  limit %d, %d',
+                $offset,
+                $limit
             )
         );
     }
@@ -124,7 +148,7 @@ class ProjectSectionManager
     }
 
     /**
-     * @param $rows
+     * @param stdClass[] $rows
      *
      * @return ProjectSection[]
      */

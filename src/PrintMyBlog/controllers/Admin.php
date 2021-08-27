@@ -65,8 +65,10 @@ class Admin extends BaseController
     const SLUG_SUBACTION_PROJECT_CONTENT = 'content';
     const SLUG_SUBACTION_PROJECT_META = 'metadata';
     const SLUG_SUBACTION_PROJECT_GENERATE = 'generate';
+    const SLUG_SUBACTION_PROJECT_DUPLICATE = 'duplicate';
     const REVIEW_OPTION_NAME = 'pmb_review';
     const SLUG_ACTION_UNINSTALL = 'uninstall';
+
 
 
     /**
@@ -1466,6 +1468,11 @@ class Admin extends BaseController
         }
     }
 
+    protected function duplicate(){
+        check_admin_referer(self::SLUG_ACTION_EDIT_PROJECT);
+        $this->project->duplicate();
+    }
+
     /**
      * Deletes plugin data. No security checks here.
      */
@@ -1547,6 +1554,14 @@ class Admin extends BaseController
                     'https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post'
                 );
                 exit;
+            } elseif ($action === self::SLUG_ACTION_EDIT_PROJECT){
+                $subsection = Array2::setOr($_GET,'subaction',null);
+                if($subsection === self::SLUG_SUBACTION_PROJECT_DUPLICATE){
+                    $this->duplicate();
+                    $redirect = admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH);
+                    wp_safe_redirect($redirect);
+                    exit;
+                }
             }
         }
     }

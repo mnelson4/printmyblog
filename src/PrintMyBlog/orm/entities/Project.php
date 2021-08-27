@@ -4,6 +4,7 @@ namespace PrintMyBlog\orm\entities;
 
 use Exception;
 use PrintMyBlog\controllers\Admin;
+use PrintMyBlog\db\TableManager;
 use PrintMyBlog\domain\DefaultFileFormats;
 use PrintMyBlog\entities\FileFormat;
 use PrintMyBlog\entities\ProjectGeneration;
@@ -666,4 +667,44 @@ class Project extends PostWrapper
         }
         return $this->progress;
     }
+
+    /**
+     * Creates a new project with all the same postmeta, sections, etc.
+     * @return Project
+     */
+    public function duplicate(){
+        global $wpdb;
+        $new_post = $this->duplicatePost();
+        // keys are old section IDs, values are their new values
+        $section_map = [0 => 0];
+        foreach($this->section_manager->getFlatSectionRowsFor($this->getWpPost()->ID, 100000) as $section_row){
+            $wpdb->insert(
+                $wpdb->prefix . TableManager::SECTIONS_TABLE,
+                [
+                    'project_id' => $new_post->ID,
+                    'post_id' => $section_row->post_id,
+                    'parent_id' => $section_map[$section_row->parent_id],
+                    'section_order' => $section_row->section_order,
+                    'template' => $section_row->template,
+                    'placement' => $section_row->placement,
+                    'height' => $section_row->height,
+                    'depth' => $section_row->depth
+                ],
+                [
+                    '%d',//project_id
+                    '%d',//post_id
+                    '%d',//parent_id
+                    '%d',//section_order
+                    '%s',//template
+                    '%s',//placement
+                    '%d',//height
+                    '%d',//depth
+                ]
+            );
+            $new_id = $wpdb->insert_id;
+            $section_map[$section_row->ID] = $new_id;
+        }
+    }
+
+
 }

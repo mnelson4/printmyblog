@@ -194,7 +194,19 @@ foreach ($steps as $slug => $display_text) {
                             ?></a><?php
                       }?></span><?php
 }
-?></div><?php
+        ?> <span><a href="<?php
+        echo esc_url(wp_nonce_url(
+            add_query_arg(
+                [
+                    'action' => Admin::SLUG_ACTION_EDIT_PROJECT,
+                    'subaction' => Admin::SLUG_SUBACTION_PROJECT_DUPLICATE,
+                    'ID' => $post->ID
+                ],
+                admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+            ),
+            Admin::SLUG_ACTION_EDIT_PROJECT
+        ));
+        ?>"><?php esc_html_e('Duplicate', 'print-my-blog');?></a></span><?php
     }
 
     /**
