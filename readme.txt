@@ -398,6 +398,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.4.8 xxxx =
+* Bugfix: fix showing errors communicating with PMB
+
 = 3.4.7 August 27, 2021 =
 * Bugfix: fix external links and internal link footnotes (regression in 3.4.4)
 * Bugfix: fix nested subsections when moving sections between front, main, and back matter
