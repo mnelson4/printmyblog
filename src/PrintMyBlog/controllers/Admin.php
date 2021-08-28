@@ -15,6 +15,7 @@ use PrintMyBlog\domain\PrintOptions;
 use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\entities\FileFormat;
 use PrintMyBlog\entities\ProjectProgress;
+use PrintMyBlog\exceptions\DesignTemplateDoesNotExist;
 use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\managers\DesignManager;
@@ -700,25 +701,39 @@ class Admin extends BaseController
             $this->editSetup();
         } elseif ($action === self::SLUG_ACTION_EDIT_PROJECT) {
             $subaction = isset($_GET['subaction']) ? $_GET['subaction'] : null;
-            switch ($subaction) {
-                case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
-                    $this->editChooseDesign();
-                    break;
-                case self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN:
-                    $this->editCustomizeDesign();
-                    break;
-                case self::SLUG_SUBACTION_PROJECT_CONTENT:
-                    $this->editContent();
-                    break;
-                case self::SLUG_SUBACTION_PROJECT_META:
-                    $this->editMetadata();
-                    break;
-                case self::SLUG_SUBACTION_PROJECT_GENERATE:
-                    $this->editGenerate();
-                    break;
-                case self::SLUG_SUBACTION_PROJECT_SETUP:
-                default:
-                    $this->editSetup();
+            try {
+                switch ($subaction) {
+                    case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
+                        $this->editChooseDesign();
+                        break;
+                    case self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN:
+                        $this->editCustomizeDesign();
+                        break;
+                    case self::SLUG_SUBACTION_PROJECT_CONTENT:
+                        $this->editContent();
+                        break;
+                    case self::SLUG_SUBACTION_PROJECT_META:
+                        $this->editMetadata();
+                        break;
+                    case self::SLUG_SUBACTION_PROJECT_GENERATE:
+                        $this->editGenerate();
+                        break;
+                    case self::SLUG_SUBACTION_PROJECT_SETUP:
+                    default:
+                        $this->editSetup();
+                }
+            } catch (DesignTemplateDoesNotExist $e) {
+                $this->notification_manager->addTextNotificationForCurrentUser(
+                    OneTimeNotification::TYPE_ERROR,
+                    $e->getMessage()
+                );
+                $this->notification_manager->showOneTimeNotifications();
+                foreach ($this->file_format_registry->getFormats() as $format) {
+                    $this->project->setDesignFor($format->slug(), null);
+                }
+                $this->project->getProgress()->initialize();
+                $this->project->getProgress()->markStepComplete(ProjectProgress::SETUP_STEP);
+                $this->editSetup();
             }
         } else {
             if (!class_exists('WP_List_Table')) {
@@ -913,6 +928,10 @@ class Admin extends BaseController
 
     protected function editGenerate()
     {
+        //check the design templates still exist
+        foreach ($this->project->getDesigns() as $design) {
+            $design->getDesignTemplate();
+        }
         $generations = $this->project->getAllGenerations();
         $license_info = null;
         if (pmb_fs()->is__premium_only()) {

@@ -50,6 +50,9 @@ class ProjectProgress
         $this->project = $project;
     }
 
+    /**
+     * Sets the project to its initial state.
+     */
     public function initialize()
     {
         $steps = array_keys($this->getSteps());

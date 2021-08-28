@@ -300,9 +300,14 @@ class PdfGenerator extends ProjectFileGeneratorBase
     public function addPrintWindowToPage()
     {
         if (pmb_fs()->is__premium_only()) {
-            $license = pmb_fs()->_get_license();
-            if ($license instanceof FS_Plugin_License) {
-                $license_info = $this->getPmbCentral()->getCreditsInfo();
+            try {
+                $license = pmb_fs()->_get_license();
+                if ($license instanceof FS_Plugin_License) {
+                    $license_info = $this->getPmbCentral()->getCreditsInfo();
+                }
+            } catch (Exception $e) {
+                // error retrieving credits info. We should have warned the user about this earlier.
+                // This probably means their subscription isn't good anymore. Treat it like they have none.
             }
         }
         echo pmb_get_contents(PMB_TEMPLATES_DIR . 'partials/pro_print_page_window.php', ['license_info' => $license_info, 'project' => $this->project]);

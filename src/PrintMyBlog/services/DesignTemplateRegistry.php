@@ -4,6 +4,7 @@ namespace PrintMyBlog\services;
 
 use Exception;
 use PrintMyBlog\entities\DesignTemplate;
+use PrintMyBlog\exceptions\DesignTemplateDoesNotExist;
 use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\system\Context;
 
@@ -37,7 +38,7 @@ class DesignTemplateRegistry
     {
         if (! isset($this->design_templates[$slug])) {
             if (! isset($this->design_template_callbacks[$slug])) {
-                throw new Exception('There is no callback for the design template "' . $slug . '"');
+                throw new DesignTemplateDoesNotExist($slug);
             }
             $this->design_templates[$slug] = Context::instance()->useNew(
                 'PrintMyBlog\entities\DesignTemplate',
@@ -48,7 +49,7 @@ class DesignTemplateRegistry
             );
         }
         if (! $this->design_templates[$slug] instanceof DesignTemplate) {
-            throw new Exception('Did not find a proper DesignTemplate for slug "' . $slug . '"');
+            throw new DesignTemplateDoesNotExist($slug);
         }
         return $this->design_templates[$slug];
     }

@@ -53,6 +53,9 @@ class PmbCentral
             } else {
                 $body = wp_remote_retrieve_body($response);
                 $credit_data = json_decode($body, true);
+                if (isset($credit_data['code'], $credit_data['message'])) {
+                    throw new Exception($credit_data['message'], $credit_data['code']);
+                }
                 if (is_array($credit_data) && isset($credit_data['expiry_date'])) {
                     $time_to_expire = rest_parse_date($credit_data['expiry_date']) - current_time('timestamp');
                     set_transient($transient_name, $credit_data, $time_to_expire);
