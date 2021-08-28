@@ -194,7 +194,7 @@ foreach ($steps as $slug => $display_text) {
                             ?></a><?php
                       }?></span><?php
 }
-        ?> <span><a class="pmb-duplicate" href="<?php
+?> <span><a class="pmb-duplicate" href="<?php
         echo esc_url(wp_nonce_url(
             add_query_arg(
                 [
@@ -206,7 +206,7 @@ foreach ($steps as $slug => $display_text) {
             ),
             Admin::SLUG_ACTION_EDIT_PROJECT
         ));
-        ?>"><?php esc_html_e('Duplicate', 'print-my-blog');?></a></span><?php
+                                        ?>"><?php esc_html_e('Duplicate', 'print-my-blog');?></a></span><?php
     }
 
     /**

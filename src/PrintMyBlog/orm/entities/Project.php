@@ -672,12 +672,13 @@ class Project extends PostWrapper
      * Creates a new project with all the same postmeta, sections, etc.
      * @return Project
      */
-    public function duplicate(){
+    public function duplicate()
+    {
         global $wpdb;
         $new_post = $this->duplicatePost();
         // keys are old section IDs, values are their new values
         $section_map = [0 => 0];
-        foreach($this->section_manager->getFlatSectionRowsFor($this->getWpPost()->ID, 100000) as $section_row){
+        foreach ($this->section_manager->getFlatSectionRowsFor($this->getWpPost()->ID, 100000) as $section_row) {
             $wpdb->insert(
                 $wpdb->prefix . TableManager::SECTIONS_TABLE,
                 [

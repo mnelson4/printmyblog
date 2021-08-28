@@ -77,12 +77,11 @@ class ProjectSectionManager
     ) {
         return $this->createObjsFromRows($this->getFlatSectionRowsFor(
             $project_id,
-                $limit,
-                $offset,
-                $include_post_title,
-                $placement
-            )
-        );
+            $limit,
+            $offset,
+            $include_post_title,
+            $placement
+        ));
     }
 
     /**
@@ -100,7 +99,7 @@ class ProjectSectionManager
         $offset = 0,
         $include_post_title = false,
         $placement = null
-    ){
+    ) {
         global $wpdb;
 
         $select_sql = $this->defaultSelection();

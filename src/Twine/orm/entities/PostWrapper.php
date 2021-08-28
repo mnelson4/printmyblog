@@ -165,7 +165,8 @@ class PostWrapper
      * Creates a new post from the underlying post
      * @return WP_Post
      */
-    protected function duplicatePost(){
+    protected function duplicatePost()
+    {
         $post = $this->getWpPost();
         $current_user = wp_get_current_user();
         $new_post_author = $current_user->ID;
@@ -188,31 +189,29 @@ class PostWrapper
         );
 
         // insert the post by wp_insert_post() function
-        $new_post_id = wp_insert_post( $args );
+        $new_post_id = wp_insert_post($args);
 
         /*
          * get all current post terms ad set them to the new post draft
          */
-        $taxonomies = get_object_taxonomies( get_post_type( $post ) ); // returns array of taxonomy names for post type, ex array("category", "post_tag");
-        if( $taxonomies ) {
-            foreach ( $taxonomies as $taxonomy ) {
-                $post_terms = wp_get_object_terms( $post->ID, $taxonomy, array( 'fields' => 'slugs' ) );
-                wp_set_object_terms( $new_post_id, $post_terms, $taxonomy, false );
+        $taxonomies = get_object_taxonomies(get_post_type($post)); // returns array of taxonomy names for post type, ex array("category", "post_tag");
+        if ($taxonomies) {
+            foreach ($taxonomies as $taxonomy) {
+                $post_terms = wp_get_object_terms($post->ID, $taxonomy, array( 'fields' => 'slugs' ));
+                wp_set_object_terms($new_post_id, $post_terms, $taxonomy, false);
             }
         }
 
         // duplicate all post meta
-        $post_meta = get_post_meta( $post->ID );
-        if( $post_meta ) {
-
-            foreach ( $post_meta as $meta_key => $meta_values ) {
-
-                if( '_wp_old_slug' == $meta_key ) { // do nothing for this meta key
+        $post_meta = get_post_meta($post->ID);
+        if ($post_meta) {
+            foreach ($post_meta as $meta_key => $meta_values) {
+                if ('_wp_old_slug' == $meta_key) { // do nothing for this meta key
                     continue;
                 }
 
-                foreach ( $meta_values as $meta_value ) {
-                    add_post_meta( $new_post_id, $meta_key, $meta_value );
+                foreach ($meta_values as $meta_value) {
+                    add_post_meta($new_post_id, $meta_key, $meta_value);
                 }
             }
         }
