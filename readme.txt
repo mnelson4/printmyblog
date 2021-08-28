@@ -398,6 +398,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.5.0 xxxx =
+* Feature: duplicate projects
+
 = 3.4.8 xxxx =
 * Bugfix: fix showing errors communicating with PMB
 * Bugfix: avoid fatal error when a custom design was deactivated
