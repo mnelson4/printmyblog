@@ -701,13 +701,13 @@ class Admin extends BaseController
                     default:
                         $this->editSetup();
                 }
-            }catch(DesignTemplateDoesNotExist $e){
+            } catch (DesignTemplateDoesNotExist $e) {
                 $this->notification_manager->addTextNotificationForCurrentUser(
                     OneTimeNotification::TYPE_ERROR,
                     $e->getMessage()
                 );
                 $this->notification_manager->showOneTimeNotifications();
-                foreach($this->file_format_registry->getFormats() as $format){
+                foreach ($this->file_format_registry->getFormats() as $format) {
                     $this->project->setDesignFor($format->slug(), null);
                 }
                 $this->project->getProgress()->initialize();
@@ -908,7 +908,7 @@ class Admin extends BaseController
     protected function editGenerate()
     {
         //check the design templates still exist
-        foreach($this->project->getDesigns() as $design){
+        foreach ($this->project->getDesigns() as $design) {
             $design->getDesignTemplate();
         }
         $generations = $this->project->getAllGenerations();

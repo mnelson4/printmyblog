@@ -53,11 +53,12 @@ class Design extends PostWrapper
     /**
      * @return bool
      */
-    public function designTemplateExists(){
-        try{
+    public function designTemplateExists()
+    {
+        try {
             $this->getDesignTemplate();
             return true;
-        }catch(DesignTemplateDoesNotExist $e){
+        } catch (DesignTemplateDoesNotExist $e) {
             return false;
         }
     }

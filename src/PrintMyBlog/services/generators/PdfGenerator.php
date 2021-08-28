@@ -305,7 +305,7 @@ class PdfGenerator extends ProjectFileGeneratorBase
                 if ($license instanceof FS_Plugin_License) {
                     $license_info = $this->getPmbCentral()->getCreditsInfo();
                 }
-            }catch(Exception $e){
+            } catch (Exception $e) {
                 // error retrieving credits info. We should have warned the user about this earlier.
                 // This probably means their subscription isn't good anymore. Treat it like they have none.
             }
