@@ -142,7 +142,9 @@ class Activation extends BaseActivation
                     'welcome' => 1
                 ),
                 admin_url(PMB_ADMIN_PAGE_PATH)
-            )
+            ),
+            303 // "See Other". Use this instead of 302 because browsers sometimes cache 302s meaning
+            // when folks activate a different plugin, the browser might redirect them to the PMB activation page again
         );
         exit;
     }
