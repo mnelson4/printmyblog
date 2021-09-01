@@ -401,6 +401,7 @@ https://youtu.be/uPQ3vqm7A2g
 = 3.5.0 xxxx =
 * Feature: duplicate projects
 * Bugfix: avoid sometimes redirecting to PMB welcome screen when activating other plugins
+* Bugfix: when removing an item from a project, don't remove its parent items too
 
 = 3.4.8 xxxx =
 * Bugfix: fix showing errors communicating with PMB

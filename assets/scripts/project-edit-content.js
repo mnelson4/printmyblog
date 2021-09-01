@@ -111,14 +111,18 @@ jQuery(document).ready(function(){
 		// console.log(e.which);
 		var selected = jQuery('.pmb-selected');
 		if(e.which == 8 || e.which == 46){
+			// delete or backspace
 			if(selected.length){
 				pmb_remove(selected);
 			}
 		} else if(e.which == 40){
+			// down arrow
 			pmb_move(selected,'down')
 		} else if(e.which == 38){
+			// up arrow
 			pmb_move(selected,'up')
 		} else if(e.which == 39){
+			// right arrow
 			pmb_add(selected);
 		}
 	});
@@ -635,7 +639,7 @@ function pmb_setup_item_options(){
 
 	jQuery('.pmb-remove-item').click(function(event){
 		var selection = jQuery(event.currentTarget);
-		var parent_draggable_items = selection.parents('.pmb-project-item');
+		var parent_draggable_items = selection.closest('.pmb-project-item');
 		pmb_remove(parent_draggable_items);
 	});
 }
