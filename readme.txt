@@ -402,6 +402,7 @@ https://youtu.be/uPQ3vqm7A2g
 * Feature: duplicate projects
 * Bugfix: avoid sometimes redirecting to PMB welcome screen when activating other plugins
 * Bugfix: when removing an item from a project, don't remove its parent items too
+* Bugfix: remove hyperlinks and images referring to items from the local filesystem
 
 = 3.4.8 xxxx =
 * Bugfix: fix showing errors communicating with PMB
