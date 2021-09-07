@@ -406,6 +406,7 @@ https://youtu.be/uPQ3vqm7A2g
 = 3.4.8 xxxx =
 * Bugfix: fix showing errors communicating with PMB
 * Bugfix: avoid fatal error when a custom design was deactivated
+* Bugfix: avoid gray background in print pages introduced in WordPress 5.8
 
 = 3.4.7 August 27, 2021 =
 * Bugfix: fix external links and internal link footnotes (regression in 3.4.4)

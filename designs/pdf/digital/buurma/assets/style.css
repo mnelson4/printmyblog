@@ -39,6 +39,7 @@
     }
     body{
         prince-footnote-policy: keep-with-line;
+        background:rgba(0,0,0,0);/* fix for how WP 5.8 suddenly sets the background color to gray */
     }
 
     .pmb-back-matter{
