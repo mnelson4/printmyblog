@@ -2,7 +2,12 @@
  * Removes content Prince XML and DocRaptor don't know how to handle properly, no "noscript" tags.
  */
 function pmb_remove_unsupported_content(){
+    // remove "noscripts" because we actually executed Javascript in the browser, then turn JS off for DocRaptor
+    // (but Javascript was executed, so no need to do noscript tags)
     jQuery('noscript').remove();
+    // remove all the broken images and links etc
+    jQuery('[src^="file:"]').remove();
+    jQuery('[href^="file:"]').contents().unwrap();
 }
 function pmb_dont_float(){
     jQuery('.alignright').removeClass('alignright');
