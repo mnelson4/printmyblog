@@ -195,6 +195,13 @@ The gallery always takes up the whole page height because the image height is 10
     height:50vw !important;
 }
 
+/* Make the figures inside block galleries inline blocks instead of flex items
+otherwise Prince allots them no height and they overflow into content beneath. */
+.wp-block-gallery .blocks-gallery-item figure{
+    display: inline-block;
+    margin:auto; /* Override block CSS setting it to 0 which un-centers them. */
+}
+
 /* Centered content styles */
 .pmb-center-content .post-inner{
     height:100vh;
