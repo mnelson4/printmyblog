@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2021-08-19 16:10-0700\n"
-"PO-Revision-Date: 2021-08-19 16:10-0700\n"
+"POT-Creation-Date: 2021-09-10 15:23-0700\n"
+"PO-Revision-Date: 2021-09-10 15:24-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -556,66 +556,66 @@ msgid "360 Image Available"
 msgstr "360 Image disponible"
 
 #. Plugin Name of the plugin/theme
-#: src/PrintMyBlog/controllers/Admin.php:196
-#: src/PrintMyBlog/controllers/Admin.php:197
+#: src/PrintMyBlog/controllers/Admin.php:199
+#: src/PrintMyBlog/controllers/Admin.php:200
 #: src/PrintMyBlog/system/Init.php:210 templates/partials/breadcrumb.php:10
 msgid "Print My Blog"
 msgstr "Print My Blog"
 
-#: src/PrintMyBlog/controllers/Admin.php:209
-#: src/PrintMyBlog/controllers/Admin.php:210
+#: src/PrintMyBlog/controllers/Admin.php:212
+#: src/PrintMyBlog/controllers/Admin.php:213
 #: templates/partials/breadcrumb.php:15
 msgid "Pro Print"
 msgstr "Impression Pro"
 
-#: src/PrintMyBlog/controllers/Admin.php:218
+#: src/PrintMyBlog/controllers/Admin.php:221
 msgid "Print My Blog – Quick Print"
 msgstr "Imprimer mon blog - Quick Print"
 
-#: src/PrintMyBlog/controllers/Admin.php:219
+#: src/PrintMyBlog/controllers/Admin.php:222
 msgid "Quick Print"
 msgstr "Impression rapide"
 
-#: src/PrintMyBlog/controllers/Admin.php:226
+#: src/PrintMyBlog/controllers/Admin.php:229
 msgid "Print My Blog Settings"
 msgstr "Imprimer mes paramètres blog"
 
-#: src/PrintMyBlog/controllers/Admin.php:227
+#: src/PrintMyBlog/controllers/Admin.php:230
 msgid "Settings"
 msgstr "Paramètres"
 
-#: src/PrintMyBlog/controllers/Admin.php:234 templates/help.php:10
+#: src/PrintMyBlog/controllers/Admin.php:237 templates/help.php:10
 msgid "Help Me Print My Blog"
 msgstr "Aidez-moi à imprimer mon blog"
 
-#: src/PrintMyBlog/controllers/Admin.php:235
+#: src/PrintMyBlog/controllers/Admin.php:238
 msgid "Help"
 msgstr "Aide"
 
-#: src/PrintMyBlog/controllers/Admin.php:296
+#: src/PrintMyBlog/controllers/Admin.php:299
 msgid "Settings Saved!"
 msgstr "Réglages enregistrés !"
 
-#: src/PrintMyBlog/controllers/Admin.php:301
+#: src/PrintMyBlog/controllers/Admin.php:304
 #, php-format
 msgid "You should see the changes on your %1$slatest post%2$s."
 msgstr "Vous devriez voir les modifications sur votre %1$s post%2$s."
 
-#: src/PrintMyBlog/controllers/Admin.php:326
+#: src/PrintMyBlog/controllers/Admin.php:329
 msgid "Email Print My Blog Support"
 msgstr "E-mail Imprimer mon support blog"
 
-#: src/PrintMyBlog/controllers/Admin.php:331
+#: src/PrintMyBlog/controllers/Admin.php:334
 msgid "Report Issue on GitHub"
 msgstr "Numéro du rapport sur GitHub"
 
-#: src/PrintMyBlog/controllers/Admin.php:384
+#: src/PrintMyBlog/controllers/Admin.php:387
 msgid "Email successfully sent. Expect a reply in the next 1-2 business days."
 msgstr ""
 "E-mail envoyé avec succès. Attendez-vous à une réponse dans les 1-2 "
 "prochains jours ouvrables."
 
-#: src/PrintMyBlog/controllers/Admin.php:391
+#: src/PrintMyBlog/controllers/Admin.php:394
 #, php-format
 msgid ""
 "There was an error sending an email from your website (it was \"%1$s\"). "
@@ -626,27 +626,27 @@ msgstr ""
 "%1$s »). S’il vous plaît envoyer manuellement un %2$s à la %3$s, avec le "
 "sujet « %3$s », avec le contenu:"
 
-#: src/PrintMyBlog/controllers/Admin.php:415
+#: src/PrintMyBlog/controllers/Admin.php:418
 msgid "Please explain what you did, what you expected, and what went wrong"
 msgstr ""
 "S’il vous plaît expliquer ce que vous avez fait, ce que vous attendiez, et "
 "ce qui s’est mal passé"
 
-#: src/PrintMyBlog/controllers/Admin.php:417
+#: src/PrintMyBlog/controllers/Admin.php:420
 msgid "Including links to screenshots is appreciated"
 msgstr "Y compris les liens vers des captures d’écran est apprécié"
 
-#: src/PrintMyBlog/controllers/Admin.php:420
+#: src/PrintMyBlog/controllers/Admin.php:423
 msgid "Your Name"
 msgstr "Votre nom"
 
-#: src/PrintMyBlog/controllers/Admin.php:426
+#: src/PrintMyBlog/controllers/Admin.php:429
 msgid "Are you ok with us viewing your most recent generated documents?"
 msgstr ""
 "Êtes-vous d’accord avec nous pour voir vos documents les plus récents "
 "générés?"
 
-#: src/PrintMyBlog/controllers/Admin.php:428
+#: src/PrintMyBlog/controllers/Admin.php:431
 msgid ""
 "Viewing your most recent generated documents saves a lot of time figuring "
 "out what is going wrong. We won’t share your content with anyone else."
@@ -655,11 +655,11 @@ msgstr ""
 "de temps pour comprendre ce qui ne va pas. Nous ne partagerons votre contenu "
 "avec personne d’autre."
 
-#: src/PrintMyBlog/controllers/Admin.php:431
+#: src/PrintMyBlog/controllers/Admin.php:434
 msgid "This debug info will also be sent."
 msgstr "Cette info de débogage sera également envoyée."
 
-#: src/PrintMyBlog/controllers/Admin.php:434
+#: src/PrintMyBlog/controllers/Admin.php:437
 msgid ""
 "This is mostly system information, list of active plugins, active theme, and "
 "some Print My Blog Pro info like your most recent projects."
@@ -668,11 +668,11 @@ msgstr ""
 "thème actif, et quelques informations Imprimer mon blog Pro comme vos "
 "projets les plus récents."
 
-#: src/PrintMyBlog/controllers/Admin.php:445
+#: src/PrintMyBlog/controllers/Admin.php:448
 msgid "Support for your plan is offered on GitHub"
 msgstr "Le support de votre plan est offert sur GitHub"
 
-#: src/PrintMyBlog/controllers/Admin.php:446
+#: src/PrintMyBlog/controllers/Admin.php:449
 msgid ""
 "GitHub is a public forum to share your issues with the developer and other "
 "users."
@@ -680,7 +680,7 @@ msgstr ""
 "GitHub est un forum public pour partager vos problèmes avec le développeur "
 "et d’autres utilisateurs."
 
-#: src/PrintMyBlog/controllers/Admin.php:448
+#: src/PrintMyBlog/controllers/Admin.php:451
 #, php-format
 msgid ""
 "You will need a GitHub account. If you prefer to use email support please "
@@ -689,29 +689,29 @@ msgstr ""
 "Vous aurez besoin d’un compte GitHub. Si vous préférez utiliser le support e-"
 "mail s%1$spourchase une licence qui offre un support e-mail. %2$s"
 
-#: src/PrintMyBlog/controllers/Admin.php:507
+#: src/PrintMyBlog/controllers/Admin.php:510
 msgid "Delete All Data"
 msgstr "Effacer toutes les données"
 
-#: src/PrintMyBlog/controllers/Admin.php:570
+#: src/PrintMyBlog/controllers/Admin.php:575
 msgid "Please select items to add to the project"
 msgstr "Veuillez sélectionner les éléments à ajouter au projet"
 
-#: src/PrintMyBlog/controllers/Admin.php:571
+#: src/PrintMyBlog/controllers/Admin.php:576
 msgid "Please select items to remove"
 msgstr "Veuillez sélectionner les éléments à supprimer"
 
-#: src/PrintMyBlog/controllers/Admin.php:572
+#: src/PrintMyBlog/controllers/Admin.php:577
 msgid "Please select items to move"
 msgstr "Veuillez sélectionner les éléments à déplacer"
 
-#: src/PrintMyBlog/controllers/Admin.php:573
+#: src/PrintMyBlog/controllers/Admin.php:578
 msgid "Error inserting. Please use the PMB help page to get help"
 msgstr ""
 "Erreur d’insertion. Veuillez utiliser la page d’aide PMB pour obtenir de "
 "l’aide"
 
-#: src/PrintMyBlog/controllers/Admin.php:650
+#: src/PrintMyBlog/controllers/Admin.php:655
 #: src/PrintMyBlog/services/generators/PdfGenerator.php:104
 msgid ""
 "There was an error preparing your content. Please visit the Print My Blog "
@@ -720,7 +720,7 @@ msgstr ""
 "Il y a eu une erreur préparant votre contenu. S’il vous plaît visitez la "
 "page d’aide Imprimer mon blog."
 
-#: src/PrintMyBlog/controllers/Admin.php:651
+#: src/PrintMyBlog/controllers/Admin.php:656
 #: src/PrintMyBlog/services/generators/PdfGenerator.php:105
 msgid ""
 "Your project could not be accessed in order to generate the file. Maybe your "
@@ -730,19 +730,23 @@ msgstr ""
 "que votre site n’est pas public? S’il vous plaît visitez la page d’aide "
 "Imprimer mon blog."
 
-#: src/PrintMyBlog/controllers/Admin.php:906
-#: src/PrintMyBlog/controllers/Admin.php:1500
+#: src/PrintMyBlog/controllers/Admin.php:683
+msgid "Are you sure you want to duplicate this project?"
+msgstr "Etes-vous sûr de vouloir réinitialiser les paramètres en défaut ?"
+
+#: src/PrintMyBlog/controllers/Admin.php:947
+#: src/PrintMyBlog/controllers/Admin.php:1555
 #, php-format
 msgid "There was an error communicating with Print My Blog Central. It was %s"
 msgstr ""
 "Il y avait une erreur de communication avec Imprimer mon blog central. "
 "C’était %s"
 
-#: src/PrintMyBlog/controllers/Admin.php:1047
+#: src/PrintMyBlog/controllers/Admin.php:1088
 msgid "Both"
 msgstr "Les deux"
 
-#: src/PrintMyBlog/controllers/Admin.php:1048
+#: src/PrintMyBlog/controllers/Admin.php:1089
 msgid ""
 "A project can be prepared to use both a Digital PDF and a Print-Ready PDF, "
 "but it will be more complex. (Eg the design for one format might support "
@@ -753,40 +757,40 @@ msgstr ""
 "d’un format peut prendre en charge des fonctionnalités différentes de celles "
 "de l’autre format.)"
 
-#: src/PrintMyBlog/controllers/Admin.php:1066
+#: src/PrintMyBlog/controllers/Admin.php:1107
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:440
 msgid "Project Title"
 msgstr "Titre du projet"
 
-#: src/PrintMyBlog/controllers/Admin.php:1076
+#: src/PrintMyBlog/controllers/Admin.php:1117
 #: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:112
 #: templates/setup_page.php:39
 msgid "Format"
 msgstr "Format"
 
-#: src/PrintMyBlog/controllers/Admin.php:1149
+#: src/PrintMyBlog/controllers/Admin.php:1190
 #, php-format
 msgid "Successfully setup the project \"%s\"."
 msgstr "Mise en place réussie du projet « %s »."
 
-#: src/PrintMyBlog/controllers/Admin.php:1163
+#: src/PrintMyBlog/controllers/Admin.php:1204
 #, php-format
 msgid "You need to choose and customize the design for your %s."
 msgstr "Vous devez choisir et personnaliser la conception de votre %s."
 
-#: src/PrintMyBlog/controllers/Admin.php:1207
+#: src/PrintMyBlog/controllers/Admin.php:1248
 msgid "The content in your project has changed"
 msgstr "Le contenu de votre projet a changé"
 
-#: src/PrintMyBlog/controllers/Admin.php:1235
+#: src/PrintMyBlog/controllers/Admin.php:1276
 msgid "Updated project content."
 msgstr "Mise à jour du contenu du projet."
 
-#: src/PrintMyBlog/controllers/Admin.php:1282
+#: src/PrintMyBlog/controllers/Admin.php:1323
 msgid "You have customized this design"
 msgstr "Vous avez personnalisé cette conception"
 
-#: src/PrintMyBlog/controllers/Admin.php:1288
+#: src/PrintMyBlog/controllers/Admin.php:1329
 #, php-format
 msgid ""
 "The design \"%s\" has been customized, and its changes will be reflected in "
@@ -795,21 +799,21 @@ msgstr ""
 "La conception « %s » a été personnalisée, et ses changements seront reflétés "
 "dans tous les projets qui l’utilisent."
 
-#: src/PrintMyBlog/controllers/Admin.php:1303
+#: src/PrintMyBlog/controllers/Admin.php:1344
 #, php-format
 msgid "An invalid design (%s) or format provided(%s)"
 msgstr "Une conception (%s) ou un format non valide fourni (%s)"
 
-#: src/PrintMyBlog/controllers/Admin.php:1313
+#: src/PrintMyBlog/controllers/Admin.php:1354
 msgid "You changed the design"
 msgstr "Vous avez changé la conception"
 
-#: src/PrintMyBlog/controllers/Admin.php:1318
+#: src/PrintMyBlog/controllers/Admin.php:1359
 #, php-format
 msgid "You chose the design \"%1$s\" for the %2$s of your project."
 msgstr "Vous avez choisi le design « %1$s » pour la %2$s de votre projet."
 
-#: src/PrintMyBlog/controllers/Admin.php:1336
+#: src/PrintMyBlog/controllers/Admin.php:1377
 msgid ""
 "You may want to customize the design. If not, feel free to jump ahead the "
 "next step."
@@ -817,22 +821,28 @@ msgstr ""
 "Vous pouvez personnaliser la conception. Sinon, n’hésitez pas à passer à "
 "l’étape suivante."
 
-#: src/PrintMyBlog/controllers/Admin.php:1369
+#: src/PrintMyBlog/controllers/Admin.php:1410
 msgid "You changed projected metadata"
 msgstr "Vous avez modifié les métadonnées projetées"
 
-#: src/PrintMyBlog/controllers/Admin.php:1375
+#: src/PrintMyBlog/controllers/Admin.php:1416
 msgid "Project metadata updated."
 msgstr "Mise à jour des métadonnées du projet."
 
-#: src/PrintMyBlog/controllers/Admin.php:1391
+#: src/PrintMyBlog/controllers/Admin.php:1432
 #, php-format
 msgid "There is no file format with the slug \"%s\""
 msgstr "Il n’y a pas de format de fichier avec la limace « %s »"
 
-#: src/PrintMyBlog/controllers/Admin.php:1426
+#: src/PrintMyBlog/controllers/Admin.php:1467
 msgid "Save"
 msgstr "Sauvegarder"
+
+#. translators: 1: the name of the new project.
+#: src/PrintMyBlog/controllers/Admin.php:1518
+#, php-format
+msgid "Project successfully duplicated. It is titled \"%1$s\"."
+msgstr "Projet dupliqué avec succès. Il s’intitule « %1$s »."
 
 #: src/PrintMyBlog/controllers/Ajax.php:248
 msgid "Show more..."
@@ -938,7 +948,7 @@ msgid "ID:"
 msgstr "ID :"
 
 #: src/PrintMyBlog/controllers/LegacyPrintPage.php:355
-#: templates/design_choose.php:84 templates/project_edit_content.php:103
+#: templates/design_choose.php:87 templates/project_edit_content.php:103
 msgid "By"
 msgstr "Par"
 
@@ -985,27 +995,36 @@ msgstr "Supprimer"
 msgid "Untitled"
 msgstr "Sans titre"
 
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:212
 #: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:214
+msgid "Duplicate"
+msgstr "Dupliquer"
+
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:216
+msgid "Feature included in Professional and Business licenses"
+msgstr "Fonctionnalité incluse dans les licences Professional et Business"
+
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:237
 msgid "Started"
 msgstr "Commencé"
 
 #. translators: 1: Post date, 2: Post time.
-#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:216
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:239
 #, php-format
 msgid "%1$s at %2$s"
 msgstr "%1$s à %2$s"
 
 #. translators: Post date format. See https://www.php.net/date
-#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:218
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:241
 msgid "Y/m/d"
 msgstr "d/m/Y"
 
 #. translators: Post time format. See https://www.php.net/date
-#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:220
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:243
 msgid "g:i a"
 msgstr "g:i a"
 
-#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:229
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:252
 msgid "Click \"Add New Project\" 👆 To Make Your First Project!"
 msgstr ""
 "Cliquez sur « Ajouter un nouveau projet » 👆 pour faire votre premier projet!"
@@ -2215,38 +2234,51 @@ msgstr "anthologie"
 msgid "No generator class specified for format \"%s\""
 msgstr "Aucune classe de générateur spécifiée pour le format « %s »"
 
-#: src/PrintMyBlog/entities/ProjectProgress.php:78
+#: src/PrintMyBlog/entities/ProjectProgress.php:81
 msgid "Setup"
 msgstr "Configuration"
 
-#: src/PrintMyBlog/entities/ProjectProgress.php:83
+#: src/PrintMyBlog/entities/ProjectProgress.php:86
 #, php-format
 msgid "Choose %s Design"
 msgstr "Choisissez %s design"
 
-#: src/PrintMyBlog/entities/ProjectProgress.php:87
+#: src/PrintMyBlog/entities/ProjectProgress.php:90
 #, php-format
 msgid "Customize %s Design"
 msgstr "Personnaliser %s design"
 
-#: src/PrintMyBlog/entities/ProjectProgress.php:91
+#: src/PrintMyBlog/entities/ProjectProgress.php:94
 msgid "Edit Content"
 msgstr "Modifier le contenu"
 
-#: src/PrintMyBlog/entities/ProjectProgress.php:92
+#: src/PrintMyBlog/entities/ProjectProgress.php:95
 msgid "Edit Metadata"
 msgstr "Éditer les métadonnées"
 
-#: src/PrintMyBlog/entities/ProjectProgress.php:93
+#: src/PrintMyBlog/entities/ProjectProgress.php:96
 msgid "Generate Print Page"
 msgstr "Générer la page d’impression"
+
+#: src/PrintMyBlog/exceptions/DesignTemplateDoesNotExist.php:11
+#, php-format
+msgid ""
+"The design with slug \"%s\" should exist but doesn't. Check the plugin that "
+"added that design is still active (and if it required a subscription, that "
+"the subscription is still up-to-date). For now, please choose a different "
+"design."
+msgstr ""
+"Le design avec slug « %s » devrait exister mais ne existe pas. Vérifiez que "
+"le plugin qui a ajouté que la conception est toujours actif (et s’il "
+"nécessitait un abonnement, que l’abonnement est toujours à jour). Pour "
+"l’instant, veuillez choisir un design différent."
 
 #: src/PrintMyBlog/exceptions/TemplateDoesNotExist.php:13
 #, php-format
 msgid "Template file \"%s\" should exist but doesn't."
 msgstr "Fichier modèle « %s » devrait exister, mais ne fonctionne pas."
 
-#: src/PrintMyBlog/orm/entities/Project.php:650
+#: src/PrintMyBlog/orm/entities/Project.php:651
 msgid "Default Template"
 msgstr "Modèle par défaut"
 
@@ -2254,7 +2286,7 @@ msgstr "Modèle par défaut"
 msgid "No license ID available"
 msgstr "Aucun id de licence disponible"
 
-#: src/PrintMyBlog/services/PmbCentral.php:73
+#: src/PrintMyBlog/services/PmbCentral.php:76
 msgid "There is no site registered with Freemius"
 msgstr "Il n’y a pas de site enregistré auprès de Freemius"
 
@@ -2663,6 +2695,12 @@ msgstr "Les balises HTML ne sont pas autorisées dans ce domaine"
 msgid "Input invalid"
 msgstr "Entrée invalide  "
 
+#. translators: 1: the name of the original post being duplicated
+#: src/Twine/orm/entities/PostWrapper.php:185
+#, php-format
+msgid "%s (copy)"
+msgstr "%s (Copie)"
+
 #: src/mnelson4/rest_api_detector/RestApiDetector.php:153
 msgid "The WordPress site has an error in its REST API data."
 msgstr "Le site WordPress a une erreur dans ses données D’API REST."
@@ -2676,51 +2714,51 @@ msgstr "Le site WordPress a répondu par une réponse inattendue."
 msgid "Choose Design: %s"
 msgstr "Choisissez %s design"
 
-#: templates/design_choose.php:43
+#: templates/design_choose.php:46
 msgid "Design Details"
 msgstr "Détails de conception"
 
-#: templates/design_choose.php:49
+#: templates/design_choose.php:52
 msgid "Use This Design"
 msgstr "Utilisez cette conception"
 
-#: templates/design_choose.php:50
+#: templates/design_choose.php:53
 msgid "Customize"
 msgstr "Personnaliser"
 
-#: templates/design_choose.php:75
+#: templates/design_choose.php:78
 msgid "Customization of"
 msgstr "Personnalisation de"
 
-#: templates/design_choose.php:94
+#: templates/design_choose.php:97
 msgid "Supports"
 msgstr "Supports"
 
-#: templates/design_choose.php:98
+#: templates/design_choose.php:101
 msgid "front matter"
 msgstr "matière avant"
 
-#: templates/design_choose.php:103
+#: templates/design_choose.php:106
 #, php-format
 msgid "%1$s layer of nesting"
 msgid_plural "%1$s layers of nesting"
 msgstr[0] "%1$s couche de nidification"
 msgstr[1] "%1$s couches de nidification"
 
-#: templates/design_choose.php:114
+#: templates/design_choose.php:117
 #, php-format
 msgid "each %1$s can put in a %2$s"
 msgstr "chaque %1$s peut mettre dans un %2$s"
 
-#: templates/design_choose.php:120
+#: templates/design_choose.php:123
 msgid "(no parts)"
 msgstr "(pas de pièces)"
 
-#: templates/design_choose.php:124
+#: templates/design_choose.php:127
 msgid "back matter"
 msgstr "matière de retour"
 
-#: templates/design_choose.php:131 templates/design_customize.php:27
+#: templates/design_choose.php:134 templates/design_customize.php:27
 #, php-format
 msgid "Read %s Documentation Online"
 msgstr "Lire %s documentation en ligne"
