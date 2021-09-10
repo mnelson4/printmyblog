@@ -39,7 +39,7 @@
     }
     body{
         prince-footnote-policy: keep-with-line;
-        background:rgba(0,0,0,0);/* fix for how WP 5.8 suddenly sets the background color to gray */
+        background:rgba(0,0,0,0);/* override how sometimes admin's CSS gets enqueued on ajax and sets the background color to gray. See https://core.trac.wordpress.org/ticket/53741 */
     }
 
     .pmb-back-matter{
