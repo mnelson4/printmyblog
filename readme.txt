@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.4.7
+Stable tag: 3.5.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -398,16 +398,15 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.5.0 xxxx =
-* Feature: duplicate projects
+= 3.5.0 September 10, 2021 =
+* Feature: duplicate projects for Professional and Business licenses
 * Bugfix: avoid sometimes redirecting to PMB welcome screen when activating other plugins
 * Bugfix: when removing an item from a project, don't remove its parent items too
 * Bugfix: remove hyperlinks and images referring to items from the local filesystem
-
-= 3.4.8 xxxx =
 * Bugfix: fix showing errors communicating with PMB
 * Bugfix: avoid fatal error when a custom design was deactivated
-* Bugfix: avoid gray background in print pages introduced in WordPress 5.8
+* Bugfix: avoid gray background in print pages introduced in WordPress 5.8 and when used with certain plugins like WooCommerce and YARPP
+* Bugfix: avoid block galleries overflowing into subsequent text
 
 = 3.4.7 August 27, 2021 =
 * Bugfix: fix external links and internal link footnotes (regression in 3.4.4)
