@@ -120,5 +120,8 @@
         text-align:left;
         margin-left:0;
         font-weight:normal;
+        text-indent:0;
+        font-size:1rem;
+        font-family:Times;
     }
 }
