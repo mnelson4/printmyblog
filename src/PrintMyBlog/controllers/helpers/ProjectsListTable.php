@@ -177,14 +177,14 @@ class ProjectsListTable extends WP_List_Table
 
 
         ?><div class="pmb-row-actions row-actions"><?php
-        foreach ($steps as $slug => $display_text) {
-            $completed = $progress[$slug] ? true : false;
-            $next = $next_step === $slug ? true : false;
-            $accessible = $completed || $next;
-            ?> <span class="pmb-step
-            <?php echo esc_attr($completed ? 'pmb-completed' : 'pmb-incomplete');?>
-                <?php echo esc_attr($next ? 'pmb-next-step' : '');?>
-                <?php echo esc_attr($accessible ? 'pmb-accessible-step' : 'pmb-inaccessible-step');?>
+foreach ($steps as $slug => $display_text) {
+    $completed = $progress[$slug] ? true : false;
+    $next = $next_step === $slug ? true : false;
+    $accessible = $completed || $next;
+    ?> <span class="pmb-step
+    <?php echo esc_attr($completed ? 'pmb-completed' : 'pmb-incomplete');?>
+        <?php echo esc_attr($next ? 'pmb-next-step' : '');?>
+        <?php echo esc_attr($accessible ? 'pmb-accessible-step' : 'pmb-inaccessible-step');?>
                             "><?php if (($completed || $next)) {
                                 ?>
                                 <a href="<?php echo esc_attr($steps_to_urls[$slug]);?>">
@@ -193,32 +193,31 @@ class ProjectsListTable extends WP_List_Table
                               if ($completed || $next) {
                                     ?></a><?php
                               }?></span><?php
-        }
-        ?><span>| &nbsp; <?php
+}
+?><span class="pmb-dont-break-phrase">| &nbsp; <?php
         // only show duplicate feature for Professional and Business licenses
-        if(pmb_fs()->is_plan__premium_only('founding_members')){
-            ?><a class="pmb-duplicate" href="<?php
-        echo esc_url(wp_nonce_url(
-            add_query_arg(
-                [
-                    'action' => Admin::SLUG_ACTION_EDIT_PROJECT,
-                    'subaction' => Admin::SLUG_SUBACTION_PROJECT_DUPLICATE,
-                    'ID' => $post->ID
-                ],
-                admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-            ),
-            Admin::SLUG_ACTION_EDIT_PROJECT
-        ));
+if (pmb_fs()->is_plan__premium_only('founding_members')) {
+    ?><a class="pmb-duplicate" href="<?php
+echo esc_url(wp_nonce_url(
+    add_query_arg(
+        [
+            'action' => Admin::SLUG_ACTION_EDIT_PROJECT,
+            'subaction' => Admin::SLUG_SUBACTION_PROJECT_DUPLICATE,
+            'ID' => $post->ID
+        ],
+        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+    ),
+    Admin::SLUG_ACTION_EDIT_PROJECT
+));
                                         ?>"><?php esc_html_e('Duplicate', 'print-my-blog');?></a><?php
-        } else {
-             esc_html_e('Duplicate', 'print-my-blog');
-            echo pmb_hover_tip(__('Feature included in Professional and Business licenses', 'print-my-blog'));
-        }
-        ?>
+} else {
+     esc_html_e('Duplicate', 'print-my-blog');
+     echo '&nbsp;';
+    echo pmb_hover_tip(__('Feature included in Professional and Business licenses', 'print-my-blog'));
+}
+?>
         </span>
         <?php
-
-
     }
 
     /**

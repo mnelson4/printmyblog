@@ -235,3 +235,6 @@ For displaying a series of boxes
 .pmb-row{
     padding-bottom:1em;
 }
+.pmb-dont-break-phrase{
+    white-space:nowrap;
+}
