@@ -25,6 +25,7 @@ use PrintMyBlog\services\DebugInfo;
 use PrintMyBlog\services\FileFormatRegistry;
 use PrintMyBlog\services\PmbCentral;
 use PrintMyBlog\services\SvgDoer;
+use PrintMyBlog\system\Context;
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\entities\notifications\OneTimeNotification;
 use Twine\forms\base\FormSection;
@@ -262,13 +263,12 @@ class Admin extends BaseController
 
     public function settingsPage()
     {
-        $settings = new FrontendPrintSettings(new PrintOptions());
-        $settings->load();
+        $settings = Context::instance()->reuse('PrintMyBlog\domain\FrontendPrintSettings');
         if (Array2::setOr($_SERVER, 'REQUEST_METHOD', '') === 'POST') {
             check_admin_referer('pmb-settings');
             // Ok save those settings!
             if (isset($_POST['pmb-reset'])) {
-                $settings = new FrontendPrintSettings(new PrintOptions());
+                $settings = Context::instance()->useNew('PrintMyBlog\domain\FrontendPrintSettings', [null,false]);
             } else {
                 $settings->setShowButtons(isset($_POST['show_buttons']));
                 $settings->setShowButtonsPages(isset($_POST['show_buttons_pages']));

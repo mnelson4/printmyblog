@@ -6,6 +6,7 @@ use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintButtons;
 use PrintMyBlog\domain\PrintNowSettings;
 use PrintMyBlog\domain\PrintOptions;
+use PrintMyBlog\system\Context;
 use Twine\controllers\BaseController;
 use WP_Post;
 
@@ -38,15 +39,11 @@ class Frontend extends BaseController
     }
     public function addPrintButton($content)
     {
-        global $post, $pmb_print_settings;
+        global $post;
         if (! $post instanceof WP_Post || ! in_array($post->post_type, ['post','page'])) {
             return $content;
         }
-        // We can use this filter a lot, so just load the print settings object once.
-        if (! $pmb_print_settings instanceof FrontendPrintSettings) {
-            $pmb_print_settings = new FrontendPrintSettings(new PrintOptions());
-            $pmb_print_settings->load();
-        }
+        $pmb_print_settings = Context::instance()->reuse('PrintMyBlog\domain\FrontendPrintSettings');
 
         $postmeta_override = get_post_meta($post->ID, 'pmb_buttons', true);
         $active_post_types = $pmb_print_settings->activePostTypes();
@@ -76,7 +73,7 @@ class Frontend extends BaseController
                 $postmeta_override
             )
         ) {
-            $html = (new PrintButtons())->getHtmlForPrintButtons($post);
+            $html = Context::instance()->reuse('PrintMyBlog\domain\PrintButtons')->getHtmlForPrintButtons($post);
             $add_to_top = apply_filters(
                 '\PrintMyBlog\controllers\PmbFrontend->addPrintButton $add_to_top',
                 $pmb_print_settings->showButtonsAbove(),

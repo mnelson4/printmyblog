@@ -125,7 +125,16 @@ class Context extends BaseContext
                 'Twine\system\RequestType' => self::REUSE,
                 'Twine\system\VersionHistory' => self::REUSE,
                 'pmb_'
-            ]
+            ],
+            'PrintMyBlog\domain\PrintButtons' => [
+                'PrintMyBlog\domain\FrontendPrintSettings' => self::REUSE
+            ],
+            'PrintMyBlog\domain\FrontendPrintSettings' => [
+                'PrintMyBlog\domain\PrintOptions' => self::REUSE,
+            ],
+            'PrintMyBlog\domain\PrintPageUrlGenerator' => [
+                'PrintMyBlog\domain\FrontendPrintSettings' => self::REUSE
+            ],
         ];
     }
 }

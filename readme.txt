@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.5.0
+Stable tag: 3.6.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -81,6 +81,7 @@ https://www.youtube.com/watch?v=rvSo9NCOIX0
 * place buttons above or below content, or somewhere in-between using the shortcode `[pmb_print_buttons]`
 * customize print button text (eg "Print", "Imprimir", or just a print emoji like 🖨)
 * buttons use theme's design
+* make more seamless integration with your design or content using the shortcode `[pmb_print_page_url]` to just get the URL of the print page ([see this FAQ for more details](https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20show%20the%20print%20buttons%20on%20posts%20or%20pages%3F))
 
 = Pro Print =
 Replace Google Docs and Microsoft Word with WordPress! Turn existing posts, pages, and custom post types —or write all new print materials— into professional-looking documents that are ready to share with customers and the world.
@@ -196,6 +197,8 @@ Best Wishes Publishing for Print with WordPress!
 1. Under the "Print My Blog" menu item, click "Settings."
 1. Beside "Show print buttons on:", check "Posts" and/or "Pages"
 1. Click "Save Settings"
+
+Also [see this FAQ](https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20show%20the%20print%20buttons%20on%20posts%20or%20pages%3F) for more options to show the print buttons using shortcodes and postmeta.
 
 **To Print with Pro Print**
 
@@ -351,6 +354,7 @@ https://www.youtube.com/watch?v=mWD8kDrhWMs
 
 **Using a Shortcode**
 You can add print buttons directly into your posts and pages by using the shortcode `[pmb_print_buttons]`. You can also supply it with the ID of a different post or page like so: `[pmb_print_buttons ID=123]`.
+You can alternatively use the shortcode `[pmb_print_page_url]` to just get the URL of the print page for more advanced integrations. You can supply it with the ID of a different post, and the `format` (defaults to "print", but also accepts "pdf" or "ebook"), and whether to `add_protocol` (ie, whether to add "http://" or "https://" to the start of the URL, in case it was already added, defaults to adding it), like so: `[pmb_print_page_url format="pdf" add_protocol=0]` will produce the URL of the print page for a PDF but not add the "https://" onto the start of the URL.
 
 **Editing Your Theme's Template Files**
 If you'd like to add the print buttons somewhere in your theme's template files, add the following PHP code anywhere inside the loop:
@@ -358,6 +362,11 @@ If you'd like to add the print buttons somewhere in your theme's template files,
 `
 <?php echo do_shortcode('[pmb_print_buttons]'); ?>
 `
+or
+`
+<a href="<?php echo esc_url(do_shortcode('[pmb_print_page_url]')); ?>">View Print-Ready Version of Page</a>
+`
+
 = How do I change the color of the print buttons? =
 The print button's color is determined by your theme. But if you can't change the button colors using your theme's settings, you can change it with some custom CSS.
 Eg, this here's how to change the button's text color to black and background color to white:
@@ -397,6 +406,9 @@ https://youtu.be/uPQ3vqm7A2g
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+
+= 3.6.0 September 15, 2021 =
+* Feature: introduce shortcode [pmb_print_page_url] for just returning the URL of the print page (for advanced integration of print buttons)
 
 = 3.5.0 September 10, 2021 =
 * Feature: duplicate projects for Professional and Business licenses

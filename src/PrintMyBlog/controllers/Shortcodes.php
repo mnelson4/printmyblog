@@ -6,6 +6,7 @@ use PrintMyBlog\domain\PrintButtons;
 use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
+use PrintMyBlog\system\Context;
 use Twine\controllers\BaseController;
 
 /**
@@ -22,6 +23,10 @@ class Shortcodes extends BaseController
         add_shortcode(
             'pmb_print_buttons',
             [$this, 'printButtons' ]
+        );
+        add_shortcode(
+            'pmb_print_page_url',
+            [$this, 'printPageUrl']
         );
         add_shortcode(
             'pmb_project_title',
@@ -45,6 +50,31 @@ class Shortcodes extends BaseController
         );
     }
 	// @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+
+    /**
+     * @param $atts
+     * @return string|string[]
+     */
+    public function printPageUrl($atts){
+        $atts = shortcode_atts(
+            [
+                'ID' => null,
+                'format' => 'print',
+                'add_protocol' => true
+            ],
+            $atts
+        );
+        $url = Context::instance()->reuse('PrintMyBlog\domain\PrintPageUrlGenerator',[$atts['ID']])->getUrl($atts['format']);
+        // remove the starting "http://" and "https://" because, if used in an anchor link, those get added automatically
+        if(! $atts['add_protocol']){
+            $url = str_replace(
+                ['http://','https://','://'],
+                '',
+                $url
+            );
+        }
+        return $url;
+    }
     public function printButtons($atts)
     {
         $atts = shortcode_atts(
@@ -53,7 +83,7 @@ class Shortcodes extends BaseController
             ],
             $atts
         );
-        return (new PrintButtons())->getHtmlForPrintButtons($atts['ID']);
+        return Context::instance()->reuse('PrintMyBlog\domain\PrintButtons')->getHtmlForPrintButtons($atts['ID']);
     }
     public function projectTitle()
     {

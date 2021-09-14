@@ -33,9 +33,20 @@ class FrontendPrintSettings
      */
     protected $print_options;
 
-    public function __construct(PrintOptions $print_options)
+    public function inject(PrintOptions $printOptions){
+        $this->print_options = $printOptions;
+    }
+
+    /**
+     * FrontendPrintSettings constructor.
+     * @param PrintOptions|null $print_options optional. This is injected since PMB 3.6.0
+     * @param bool $load_from_db
+     */
+    public function __construct(PrintOptions $print_options = null, $load_from_db = true)
     {
-        $this->print_options = $print_options;
+        if(isset($print_options) && $print_options instanceof PrintOptions){
+            $this->print_options = $print_options;
+        }
         $this->formats = array(
             'print' => array(
                 'admin_label' => esc_html__('Print', 'print-my-blog'),
@@ -71,6 +82,9 @@ class FrontendPrintSettings
         }
         // Initialize the settings with the defaults.
         $this->settings = $this->defaultSettings();
+        if($load_from_db){
+            $this->load();
+        }
     }
 
     /**
@@ -102,6 +116,18 @@ class FrontendPrintSettings
     public function formats()
     {
         return $this->formats;
+    }
+
+    /**
+     * @param $format_slug
+     * @return array
+     * @throws Exception if there is an invalid format
+     */
+    public function formatSettings($format_slug){
+        if(! isset($this->formats[$format_slug])){
+            throw new Exception(sprintf(__('Invalid format "%s".', 'print-my-blog'), $format_slug));
+        }
+        return $this->formats[$format_slug];
     }
 
     /**
@@ -309,7 +335,7 @@ class FrontendPrintSettings
 
     /**
      * Loads settings from the database. If none are set, uses the defaults.
-     * @since $VID:$
+     * Called during construction by default since 3.6.0
      */
     public function load()
     {
