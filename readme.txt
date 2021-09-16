@@ -408,7 +408,7 @@ https://youtu.be/uPQ3vqm7A2g
 == Changelog ==
 
 = 3.6.0 September 15, 2021 =
-* Feature: introduce shortcode [pmb_print_page_url] for just returning the URL of the print page (for advanced integration of print buttons)
+* Feature: introduce shortcode `[pmb_print_page_url]` for just returning the URL of the print page (for advanced integration of print buttons)
 
 = 3.5.0 September 10, 2021 =
 * Feature: duplicate projects for Professional and Business licenses
