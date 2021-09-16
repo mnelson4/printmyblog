@@ -354,7 +354,7 @@ https://www.youtube.com/watch?v=mWD8kDrhWMs
 
 **Using a Shortcode**
 You can add print buttons directly into your posts and pages by using the shortcode `[pmb_print_buttons]`. You can also supply it with the ID of a different post or page like so: `[pmb_print_buttons ID=123]`.
-You can alternatively use the shortcode `[pmb_print_page_url]` to just get the URL of the print page for more advanced integrations. You can supply it with the ID of a different post, and the `format` (defaults to "print", but also accepts "pdf" or "ebook"), and whether to `add_protocol` (ie, whether to add "http://" or "https://" to the start of the URL, in case it was already added, defaults to adding it), like so: `[pmb_print_page_url format="pdf" add_protocol=0]` will produce the URL of the print page for a PDF but not add the "https://" onto the start of the URL.
+You can alternatively use the shortcode `[pmb_print_page_url]` to just get the URL of the print page for more advanced integrations. You can supply it with the ID of a different post, and the `format` (defaults to "print", but also accepts "pdf" or "ebook"), and whether to `add_protocol` (ie, by default, the URL begins with "http://" or "https://", but setting this to `0` will prevent that, in case it was already added), like so: `[pmb_print_page_url format="pdf" add_protocol=0]` will produce the URL of the print page for a PDF but not add the "https://" onto the start of the URL.
 
 **Editing Your Theme's Template Files**
 If you'd like to add the print buttons somewhere in your theme's template files, add the following PHP code anywhere inside the loop:
