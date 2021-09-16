@@ -1,8 +1,6 @@
 <?php
 
-
 namespace PrintMyBlog\domain;
-
 
 use Exception;
 
@@ -37,7 +35,8 @@ class PrintPageUrlGenerator
      * Gets the basic URL parameters as an array for teh print page
      * @return array
      */
-    public function getBaseArgs(){
+    public function getBaseArgs()
+    {
         $base_args = [
             'print-my-blog' => '1',
             'post-type' => $this->post->post_type,
@@ -59,7 +58,8 @@ class PrintPageUrlGenerator
      * @return string URL
      * @throws Exception
      */
-    public function getUrl($slug = 'print' ){
+    public function getUrl($slug = 'print')
+    {
         $args = array_merge(
             $this->getBaseArgs(),
             $this->print_settings->getPrintOptionsAndValues($slug)

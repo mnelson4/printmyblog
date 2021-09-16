@@ -15,7 +15,8 @@ class PrintButtons
     /**
      * @param FrontendPrintSettings $printSettings
      */
-    public function inject(FrontendPrintSettings $printSettings){
+    public function inject(FrontendPrintSettings $printSettings)
+    {
         $this->print_settings = $printSettings;
     }
     public function getHtmlForPrintButtons($post = null)

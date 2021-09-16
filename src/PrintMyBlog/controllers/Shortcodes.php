@@ -55,7 +55,8 @@ class Shortcodes extends BaseController
      * @param $atts
      * @return string|string[]
      */
-    public function printPageUrl($atts){
+    public function printPageUrl($atts)
+    {
         $atts = shortcode_atts(
             [
                 'ID' => null,
@@ -64,9 +65,9 @@ class Shortcodes extends BaseController
             ],
             $atts
         );
-        $url = Context::instance()->reuse('PrintMyBlog\domain\PrintPageUrlGenerator',[$atts['ID']])->getUrl($atts['format']);
+        $url = Context::instance()->reuse('PrintMyBlog\domain\PrintPageUrlGenerator', [$atts['ID']])->getUrl($atts['format']);
         // remove the starting "http://" and "https://" because, if used in an anchor link, those get added automatically
-        if(! $atts['add_protocol']){
+        if (! $atts['add_protocol']) {
             $url = str_replace(
                 ['http://','https://','://'],
                 '',

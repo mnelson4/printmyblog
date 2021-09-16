@@ -33,7 +33,8 @@ class FrontendPrintSettings
      */
     protected $print_options;
 
-    public function inject(PrintOptions $printOptions){
+    public function inject(PrintOptions $printOptions)
+    {
         $this->print_options = $printOptions;
     }
 
@@ -44,7 +45,7 @@ class FrontendPrintSettings
      */
     public function __construct(PrintOptions $print_options = null, $load_from_db = true)
     {
-        if(isset($print_options) && $print_options instanceof PrintOptions){
+        if (isset($print_options) && $print_options instanceof PrintOptions) {
             $this->print_options = $print_options;
         }
         $this->formats = array(
@@ -82,7 +83,7 @@ class FrontendPrintSettings
         }
         // Initialize the settings with the defaults.
         $this->settings = $this->defaultSettings();
-        if($load_from_db){
+        if ($load_from_db) {
             $this->load();
         }
     }
@@ -123,8 +124,9 @@ class FrontendPrintSettings
      * @return array
      * @throws Exception if there is an invalid format
      */
-    public function formatSettings($format_slug){
-        if(! isset($this->formats[$format_slug])){
+    public function formatSettings($format_slug)
+    {
+        if (! isset($this->formats[$format_slug])) {
             throw new Exception(sprintf(__('Invalid format "%s".', 'print-my-blog'), $format_slug));
         }
         return $this->formats[$format_slug];
