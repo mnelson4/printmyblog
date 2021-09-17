@@ -101,12 +101,7 @@ jQuery(document).ready(function(){
 	jQuery('#pmb-select-all').click(function(){
 		pmb_load_all();
 	});
-	jQuery('#pmb-deselect-all').click(function(){
-		jQuery('.pmb-project-item.pmb-selected').each(function(index,element){
-			Sortable.utils.deselect(element);
-		});
-		pmb_show_hide_actions();
-	});
+	jQuery('#pmb-deselect-all').click(pmb_deselect_all);
 	jQuery(document).keyup(function(e) {
 		// console.log(e.which);
 		var selected = jQuery('.pmb-selected');
@@ -127,6 +122,16 @@ jQuery(document).ready(function(){
 		}
 	});
 });
+
+/**
+ * Makes nothing selected.
+ */
+function pmb_deselect_all(){
+	jQuery('.pmb-project-item.pmb-selected').each(function(index,element){
+		Sortable.utils.deselect(element);
+	});
+	pmb_show_hide_actions();
+}
 
 function pmb_remove(selected_items){
 	if(selected_items.length > 0){
@@ -401,6 +406,7 @@ function pmb_setup_callbacks_on_new_options(){
 	jQuery(".pmb-add-material").click(function(event) {
 		var add_button = this;
 		event.preventDefault();
+		pmb_deselect_all();
 		jQuery('#pmb-add-print-materials-dialogue').dialog({
 			'dialogClass'   : 'wp-dialog',
 			'modal'         : true,
