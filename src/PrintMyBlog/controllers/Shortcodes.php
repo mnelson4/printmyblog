@@ -65,6 +65,12 @@ class Shortcodes extends BaseController
             ],
             $atts
         );
+        // if it was put in a URL, the most likely place to put this shortcode, the quotes became HTML entities which
+        // need to be removed
+        foreach ($atts as $key => $val) {
+            $atts[$key] = str_replace('"', '', html_entity_decode($val, ENT_COMPAT));
+        }
+
         $url = Context::instance()->reuse('PrintMyBlog\domain\PrintPageUrlGenerator', [$atts['ID']])->getUrl($atts['format']);
         // remove the starting "http://" and "https://" because, if used in an anchor link, those get added automatically
         if (! $atts['add_protocol']) {
