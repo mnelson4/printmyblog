@@ -223,7 +223,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
                 <span class="pmb-project-item-title-text"><?php echo $title;?></span>
             </div>
 
-            <div class="pmb-project-item-options">
+            <div class="pmb-project-item-options no-drag">
                 <div class="pmb-project-item-options-inner">
                     <?php
                     // only show the viewing button if it will work
@@ -263,7 +263,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
                                 )
                             );
                             ?>"
-                            target="_blank" class="pmb-add-item"><span class="dashicons dashicons-plus pmb-icon pmb-clickable"></span></a>
+                            class="pmb-add-item" href="#pmb-content-item-<?php echo esc_attr($id);?>"><span class="dashicons dashicons-plus pmb-icon pmb-clickable"></span></a>
                     <a
                             title="<?php
                             echo esc_attr(
