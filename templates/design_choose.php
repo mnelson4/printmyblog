@@ -43,14 +43,14 @@ foreach($designs as $design){
             <div class="pmb-design-screenshot">
             <?php echo pmb_design_preview($design);?>
             </div>
-            <span class="more-details"><?php esc_html_e('Design Details', 'print-my-blog');?></span>
+            <button class="more-details" aria-label="<?php echo esc_attr(sprintf(esc_html__('View details of Design "%s"', 'print-my-blog'), $design->getWpPost()->post_title));?>"><?php esc_html_e('Design Details', 'print-my-blog');?></button>
         </div>
 		<div class="pmb-design-id-container">
             <div class="pmb-actions pmb-design-actions">
                 <form method="POST" action="" id="pmb-design-form-<?php echo esc_attr($design->getWpPost()->post_name);?>">
                     <input type="hidden" name="design" value="<?php echo esc_attr($design->getWpPost()->ID);?>">
-                    <button class="button button-primary pmb-choose-design" value="choose" name="submit-button"><?php esc_html_e('Use This Design', 'print-my-blog');?></button>
-                    <button class="button button-primary pmb-customize-design" value="customize" name="submit-button"><?php esc_html_e('Customize', 'print-my-blog');?></button>
+                    <button class="button button-primary pmb-choose-design" value="choose" name="submit-button" aria-label="<?php echo esc_attr(sprintf(esc_html__('Use the Design "%s"', 'print-my-blog'), $design->getWpPost()->post_title));?>"><?php esc_html_e('Use This Design', 'print-my-blog');?></button>
+                    <button class="button button-primary pmb-customize-design" value="customize" name="submit-button" aria-label="<?php echo esc_attr(sprintf(esc_html__('Use and Customize the Design "%s"', 'print-my-blog'), $design->getWpPost()->post_title));?>"><?php esc_html_e('Customize', 'print-my-blog');?></button>
                 </form>
             </div>
 			<h2>
