@@ -240,9 +240,10 @@ class Ajax extends BaseController
         }
         if ($requested_posts == count($posts)) {
             ?>
-            <div class="pmb-show-more">
+            <div class="pmb-show-more" >
                 <div
                         class="load-more-button button no-drag"
+                        tabindex="0" id="pmb-load-more"
                         data-page="<?php echo esc_attr($page + 1);?>"><span
                             class="dashicons dashicons-arrow-down-alt"></span>
                     <?php esc_html_e('Show more...', 'print-my-blog');?>
