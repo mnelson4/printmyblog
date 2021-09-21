@@ -208,7 +208,7 @@ class Admin extends BaseController
             $this->svg_doer->getSvgDataAsColor(PMB_DIR . 'assets/images/menu-icon.svg', 'white')
         );
 
-        add_submenu_page(
+        $projects_page = add_submenu_page(
             PMB_ADMIN_PROJECTS_PAGE_SLUG,
             esc_html__('Pro Print', 'print-my-blog'),
             esc_html__('Pro Print', 'print-my-blog'),
@@ -216,6 +216,7 @@ class Admin extends BaseController
             PMB_ADMIN_PROJECTS_PAGE_SLUG,
             array($this, 'renderProjects')
         );
+        add_action( 'load-'.$projects_page, [$this, 'addHelpTab'] );
         $this->hackSubmenuContentIntoRightSpot();
         add_submenu_page(
             PMB_ADMIN_PROJECTS_PAGE_SLUG,
@@ -241,6 +242,20 @@ class Admin extends BaseController
             PMB_ADMIN_HELP_PAGE_SLUG,
             [$this,'helpPage']
         );
+    }
+
+    public function addHelpTab(){
+        $screen = get_current_screen();
+        if(isset($_GET['page'], $_GET['action'], $_GET['subaction'])
+            && $_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG
+            && $_GET['action'] === self::SLUG_ACTION_EDIT_PROJECT
+            && $_GET['subaction'] === self::SLUG_SUBACTION_PROJECT_CONTENT){
+            $screen->add_help_tab( array(
+                'id'    => 'my_help_tab',
+                'title' => __('Keyboard Accessibility', 'print-my-blog'),
+                'content'   => pmb_get_contents(PMB_TEMPLATES_DIR . 'project_edit_content_help_tab.php'),
+            ) );
+        }
     }
 
     /**
