@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2021-09-10 15:22-0700\n"
+"POT-Creation-Date: 2021-09-20 22:15-0700\n"
 "PO-Revision-Date: 2021-05-25 13:59-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -451,64 +451,68 @@ msgid "360 Image Available"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-#: src/PrintMyBlog/controllers/Admin.php:199
 #: src/PrintMyBlog/controllers/Admin.php:200
+#: src/PrintMyBlog/controllers/Admin.php:201
 #: src/PrintMyBlog/system/Init.php:210 templates/partials/breadcrumb.php:10
 msgid "Print My Blog"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:212
 #: src/PrintMyBlog/controllers/Admin.php:213
+#: src/PrintMyBlog/controllers/Admin.php:214
 #: templates/partials/breadcrumb.php:15
 msgid "Pro Print"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:221
+#: src/PrintMyBlog/controllers/Admin.php:223
 msgid "Print My Blog – Quick Print"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:222
+#: src/PrintMyBlog/controllers/Admin.php:224
 msgid "Quick Print"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:229
+#: src/PrintMyBlog/controllers/Admin.php:231
 msgid "Print My Blog Settings"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:230
+#: src/PrintMyBlog/controllers/Admin.php:232
 msgid "Settings"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:237 templates/help.php:10
+#: src/PrintMyBlog/controllers/Admin.php:239 templates/help.php:10
 msgid "Help Me Print My Blog"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:238
+#: src/PrintMyBlog/controllers/Admin.php:240
 msgid "Help"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:299
+#: src/PrintMyBlog/controllers/Admin.php:258
+msgid "Keyboard Accessibility"
+msgstr ""
+
+#: src/PrintMyBlog/controllers/Admin.php:317
 msgid "Settings Saved!"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:304
+#: src/PrintMyBlog/controllers/Admin.php:322
 #, php-format
 msgid "You should see the changes on your %1$slatest post%2$s."
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:329
+#: src/PrintMyBlog/controllers/Admin.php:347
 msgid "Email Print My Blog Support"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:334
+#: src/PrintMyBlog/controllers/Admin.php:352
 msgid "Report Issue on GitHub"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:387
+#: src/PrintMyBlog/controllers/Admin.php:405
 msgid "Email successfully sent. Expect a reply in the next 1-2 business days."
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:394
+#: src/PrintMyBlog/controllers/Admin.php:412
 #, php-format
 msgid ""
 "There was an error sending an email from your website (it was \"%1$s\"). "
@@ -516,198 +520,198 @@ msgid ""
 "content:"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:418
+#: src/PrintMyBlog/controllers/Admin.php:436
 msgid "Please explain what you did, what you expected, and what went wrong"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:420
+#: src/PrintMyBlog/controllers/Admin.php:438
 msgid "Including links to screenshots is appreciated"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:423
+#: src/PrintMyBlog/controllers/Admin.php:441
 msgid "Your Name"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:429
+#: src/PrintMyBlog/controllers/Admin.php:447
 msgid "Are you ok with us viewing your most recent generated documents?"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:431
+#: src/PrintMyBlog/controllers/Admin.php:449
 msgid ""
 "Viewing your most recent generated documents saves a lot of time figuring "
 "out what is going wrong. We won’t share your content with anyone else."
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:434
+#: src/PrintMyBlog/controllers/Admin.php:452
 msgid "This debug info will also be sent."
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:437
+#: src/PrintMyBlog/controllers/Admin.php:455
 msgid ""
 "This is mostly system information, list of active plugins, active theme, and "
 "some Print My Blog Pro info like your most recent projects."
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:448
+#: src/PrintMyBlog/controllers/Admin.php:466
 msgid "Support for your plan is offered on GitHub"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:449
+#: src/PrintMyBlog/controllers/Admin.php:467
 msgid ""
 "GitHub is a public forum to share your issues with the developer and other "
 "users."
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:451
+#: src/PrintMyBlog/controllers/Admin.php:469
 #, php-format
 msgid ""
 "You will need a GitHub account. If you prefer to use email support please "
 "%1$spurchase a license that offers email support.%2$s"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:510
+#: src/PrintMyBlog/controllers/Admin.php:528
 msgid "Delete All Data"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:575
+#: src/PrintMyBlog/controllers/Admin.php:593
 msgid "Please select items to add to the project"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:576
+#: src/PrintMyBlog/controllers/Admin.php:594
 msgid "Please select items to remove"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:577
+#: src/PrintMyBlog/controllers/Admin.php:595
 msgid "Please select items to move"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:578
+#: src/PrintMyBlog/controllers/Admin.php:596
 msgid "Error inserting. Please use the PMB help page to get help"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:655
+#: src/PrintMyBlog/controllers/Admin.php:673
 #: src/PrintMyBlog/services/generators/PdfGenerator.php:104
 msgid ""
 "There was an error preparing your content. Please visit the Print My Blog "
 "Help page."
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:656
+#: src/PrintMyBlog/controllers/Admin.php:674
 #: src/PrintMyBlog/services/generators/PdfGenerator.php:105
 msgid ""
 "Your project could not be accessed in order to generate the file. Maybe your "
 "website is not public? Please visit the Print My Blog Help page."
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:683
+#: src/PrintMyBlog/controllers/Admin.php:701
 msgid "Are you sure you want to duplicate this project?"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:947
-#: src/PrintMyBlog/controllers/Admin.php:1555
+#: src/PrintMyBlog/controllers/Admin.php:965
+#: src/PrintMyBlog/controllers/Admin.php:1573
 #, php-format
 msgid "There was an error communicating with Print My Blog Central. It was %s"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:1088
+#: src/PrintMyBlog/controllers/Admin.php:1106
 msgid "Both"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:1089
+#: src/PrintMyBlog/controllers/Admin.php:1107
 msgid ""
 "A project can be prepared to use both a Digital PDF and a Print-Ready PDF, "
 "but it will be more complex. (Eg the design for one format might support "
 "different features than the design for the other format.)"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:1107
+#: src/PrintMyBlog/controllers/Admin.php:1125
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:440
 msgid "Project Title"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:1117
+#: src/PrintMyBlog/controllers/Admin.php:1135
 #: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:112
 #: templates/setup_page.php:39
 msgid "Format"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:1190
+#: src/PrintMyBlog/controllers/Admin.php:1208
 #, php-format
 msgid "Successfully setup the project \"%s\"."
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:1204
+#: src/PrintMyBlog/controllers/Admin.php:1222
 #, php-format
 msgid "You need to choose and customize the design for your %s."
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:1248
+#: src/PrintMyBlog/controllers/Admin.php:1266
 msgid "The content in your project has changed"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:1276
+#: src/PrintMyBlog/controllers/Admin.php:1294
 msgid "Updated project content."
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:1323
+#: src/PrintMyBlog/controllers/Admin.php:1341
 msgid "You have customized this design"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:1329
+#: src/PrintMyBlog/controllers/Admin.php:1347
 #, php-format
 msgid ""
 "The design \"%s\" has been customized, and its changes will be reflected in "
 "all projects that use it."
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:1344
+#: src/PrintMyBlog/controllers/Admin.php:1362
 #, php-format
 msgid "An invalid design (%s) or format provided(%s)"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:1354
+#: src/PrintMyBlog/controllers/Admin.php:1372
 msgid "You changed the design"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:1359
+#: src/PrintMyBlog/controllers/Admin.php:1377
 #, php-format
 msgid "You chose the design \"%1$s\" for the %2$s of your project."
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:1377
+#: src/PrintMyBlog/controllers/Admin.php:1395
 msgid ""
 "You may want to customize the design. If not, feel free to jump ahead the "
 "next step."
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:1410
+#: src/PrintMyBlog/controllers/Admin.php:1428
 msgid "You changed projected metadata"
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:1416
+#: src/PrintMyBlog/controllers/Admin.php:1434
 msgid "Project metadata updated."
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:1432
+#: src/PrintMyBlog/controllers/Admin.php:1450
 #, php-format
 msgid "There is no file format with the slug \"%s\""
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Admin.php:1467
+#: src/PrintMyBlog/controllers/Admin.php:1485
 msgid "Save"
 msgstr ""
 
 #. translators: 1: the name of the new project.
-#: src/PrintMyBlog/controllers/Admin.php:1518
+#: src/PrintMyBlog/controllers/Admin.php:1536
 #, php-format
 msgid "Project successfully duplicated. It is titled \"%1$s\"."
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Ajax.php:248
+#: src/PrintMyBlog/controllers/Ajax.php:249
 msgid "Show more..."
 msgstr ""
 
-#: src/PrintMyBlog/controllers/Ajax.php:257
+#: src/PrintMyBlog/controllers/Ajax.php:258
 msgid "No results. Try changing your search and filter criteria."
 msgstr ""
 
@@ -1714,29 +1718,34 @@ msgstr ""
 msgid "Single Column"
 msgstr ""
 
-#: src/PrintMyBlog/domain/FrontendPrintSettings.php:41
+#: src/PrintMyBlog/domain/FrontendPrintSettings.php:53
 #: templates/print_page.php:164
 msgid "Print"
 msgstr ""
 
-#: src/PrintMyBlog/domain/FrontendPrintSettings.php:42
+#: src/PrintMyBlog/domain/FrontendPrintSettings.php:54
 msgid "Print 🖨"
 msgstr ""
 
-#: src/PrintMyBlog/domain/FrontendPrintSettings.php:45
+#: src/PrintMyBlog/domain/FrontendPrintSettings.php:57
 msgid "PDF"
 msgstr ""
 
-#: src/PrintMyBlog/domain/FrontendPrintSettings.php:46
+#: src/PrintMyBlog/domain/FrontendPrintSettings.php:58
 msgid "PDF 📄"
 msgstr ""
 
-#: src/PrintMyBlog/domain/FrontendPrintSettings.php:49
+#: src/PrintMyBlog/domain/FrontendPrintSettings.php:61
 msgid "eBook"
 msgstr ""
 
-#: src/PrintMyBlog/domain/FrontendPrintSettings.php:50
+#: src/PrintMyBlog/domain/FrontendPrintSettings.php:62
 msgid "eBook 📱"
+msgstr ""
+
+#: src/PrintMyBlog/domain/FrontendPrintSettings.php:130
+#, php-format
+msgid "Invalid format \"%s\"."
 msgstr ""
 
 #: src/PrintMyBlog/domain/PrintOptions.php:21
@@ -2897,6 +2906,38 @@ msgstr ""
 
 #: templates/project_edit_content.php:290
 msgid "Quick Add Print Material"
+msgstr ""
+
+#: templates/project_edit_content_help_tab.php:1
+msgid "How to Edit Project Content Using Only Your Keyboard"
+msgstr ""
+
+#: templates/project_edit_content_help_tab.php:2
+msgid ""
+"Use <b>tab</b> key to focus on the searchbox, other buttons, and the project "
+"items. "
+msgstr ""
+
+#: templates/project_edit_content_help_tab.php:3
+msgid ""
+"Once a project item has focus, press <b>spacebar</b> to toggle selecting it. "
+"Select more items in the same way."
+msgstr ""
+
+#: templates/project_edit_content_help_tab.php:4
+msgid ""
+"Once items are selected, press <b>enter</b> to add them to the project's "
+"main matter."
+msgstr ""
+
+#: templates/project_edit_content_help_tab.php:5
+msgid ""
+"Press <b>up</b> or <b>down</b> keys to move the selected items up or down in "
+"the project."
+msgstr ""
+
+#: templates/project_edit_content_help_tab.php:6
+msgid "Press escape to unselect everything."
 msgstr ""
 
 #: templates/project_edit_generate.php:16
