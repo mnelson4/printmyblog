@@ -105,6 +105,7 @@ jQuery(document).ready(function(){
 	jQuery(document).keyup(function(e) {
 		// console.log(e.which);
 		var selected = jQuery('.pmb-selected');
+		var target = jQuery(e.target);
 		if(e.which == 8 || e.which == 46){
 			// delete or backspace
 			if(selected.length){
@@ -116,11 +117,28 @@ jQuery(document).ready(function(){
 		} else if(e.which == 38){
 			// up arrow
 			pmb_move(selected,'up')
-		} else if(e.which == 39){
-			// right arrow
+		} else if(e.which == 39 || (e.which == 13 && target.hasClass('pmb-project-item'))){
+			// right arrow or enter
 			pmb_add(selected);
+		} else if(e.which == 32 && target.hasClass('pmb-project-item')){
+			// spacebar
+			if(target.hasClass('pmb-selected')){
+				Sortable.utils.deselect(e.target);
+			} else {
+				Sortable.utils.select(e.target);
+			}
+			pmb_show_hide_actions();
+		} else if(e.which == 27){
+			pmb_deselect_all();
 		}
 	});
+	jQuery(document).keydown(function(e){
+		var target = jQuery(e.target);
+		if((target.hasClass('pmb-project-item') && e.which == 32) || [38, 39].indexOf(e.which) !== -1){
+			// spcacebar
+			e.preventDefault();
+		}
+	})
 });
 
 /**

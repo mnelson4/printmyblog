@@ -287,3 +287,8 @@
         max-width:500px;
     }
 }
+.pmb-project-item:focus-within{
+    color: #043959;
+    box-shadow: 0 0 0 1px #4f94d4, 0 0 2px 1px rgba(79, 148, 212, 0.8);
+    outline: 1px solid transparent;
+}
