@@ -273,7 +273,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
                                 )
                             );
                             ?>"
-                            target="_blank"><span class="dashicons dashicons-no-alt pmb-icon pmb-remove-item pmb-clickable"></span></a>
+                            tabindex="0"><span class="dashicons dashicons-no-alt pmb-icon pmb-remove-item pmb-clickable"></span></a>
                     <span class="pmb-project-item-template-container"><?php echo pmb_section_template_selector($template, $project);?></span>
                 </div>
             </div>

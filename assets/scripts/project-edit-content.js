@@ -124,8 +124,10 @@ jQuery(document).ready(function(){
 			// spacebar
 			if(target.hasClass('pmb-selected')){
 				Sortable.utils.deselect(e.target);
+				target.find('.pmb-project-item-options').removeClass('pmb-show-options');
 			} else {
 				Sortable.utils.select(e.target);
+				target.find('.pmb-project-item-options').addClass('pmb-show-options');
 			}
 			pmb_show_hide_actions();
 		} else if(e.which == 27){
@@ -148,6 +150,7 @@ function pmb_deselect_all(){
 	jQuery('.pmb-project-item.pmb-selected').each(function(index,element){
 		Sortable.utils.deselect(element);
 	});
+	jQuery('.pmb-project-item-options.pmb-show-options').removeClass('pmb-show-options');
 	pmb_show_hide_actions();
 }
 
@@ -643,12 +646,11 @@ function pmb_count_level(jquery_obj){
 function pmb_setup_item_options(){
 	jQuery('.pmb-project-item-header').hover(function(){
 		var that = jQuery(this);
-		jQuery('.pmb-project-item-options').css('display','none');
 		var options_area = that.children('.pmb-project-item-options');
-		options_area.css('display','block');
+		options_area.addClass('pmb-show-options')
 		that.mouseleave( function(e) {
 			if(e.target.tagName.toLowerCase() != "select") {
-				options_area.css('display','none');
+				options_area.removeClass('pmb-show-options');
 			}
 		});
 	});

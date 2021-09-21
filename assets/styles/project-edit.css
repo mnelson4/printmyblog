@@ -221,6 +221,12 @@
 .pmb-add-material{
     cursor:pointer;
 }
+.pmb-project-item-options{
+    display:none;
+}
+.pmb-project-item-options.pmb-show-options{
+    display:block;
+}
 .pmb-add-material:link{
     text-decoration: none;
 }

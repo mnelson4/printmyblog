@@ -112,6 +112,16 @@ function pmb_generate_live_doc(jqelement) {
 }
 
 jQuery(document).ready(function(){
+    var input = document.getElementById("pmb-print-with-browser");
+    input.addEventListener("keyup", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            document.getElementById("pmb-print-with-browser").click();
+        }
+    });
     jQuery('.pmb-download-test').click(function(event){
         var jqelement = jQuery(event.currentTarget);
         pmb_generate_test_doc(jqelement);
