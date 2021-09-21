@@ -65,7 +65,7 @@ foreach($generations as $generation){
                 </div>
                 <br/>
                 <button
-                        class="button button-primary pmb-generate pmb_spin_on_click" data-format="<?php echo esc_attr($format_slug);?>"><?php esc_html_e('Regenerate', 'print-my-blog');
+                        class="button button-primary pmb-generate pmb_spin_on_click" data-format="<?php echo esc_attr($format_slug);?>" aria-label="<?php echo esc_attr(sprintf(esc_html__('Regenerate %s', 'print-my-blog'), $generation->getFormat()->title()));?>"><?php esc_html_e('Regenerate', 'print-my-blog');
                 ?></button>
                 <?php
             } else {
@@ -79,12 +79,12 @@ foreach($generations as $generation){
                     </b>
                 </div>
                 <br/>
-                <button class="button pmb-generate pmb_spin_on_click" data-format="<?php echo esc_attr($format_slug);?>"><?php esc_html_e('Regenerate Anyway', 'print-my-blog');?></button>
+                <button class="button pmb-generate pmb_spin_on_click" data-format="<?php echo esc_attr($format_slug);?>" aria-label="<?php echo esc_attr(sprintf(esc_html__('Regenerate %s Anyway', 'print-my-blog'), $generation->getFormat()->title()));?>"><?php esc_html_e('Regenerate Anyway', 'print-my-blog');?></button>
                 <?php
             }
         } else {
         ?>
-                <a class="button button-primary pmb-generate pmb_spin_on_click" data-format="<?php echo esc_attr($format_slug);?>"><?php
+                <a class="button button-primary pmb-generate pmb_spin_on_click" data-format="<?php echo esc_attr($format_slug);?>" aria-label="<?php echo esc_attr(sprintf(esc_html__('Generate %s', 'print-my-blog'), $generation->getFormat()->title()));?>"><?php
                     esc_html_e('Generate', 'print-my-blog');
                 ?></a>
         <?php

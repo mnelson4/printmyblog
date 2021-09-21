@@ -43,7 +43,8 @@ class RadioButtonDisplay extends CompoundInputDisplay
                         $this,
                         $input,
                         $value
-                    )
+                    ),
+                    'aria-label' => sprintf(__('%1$s: %2$s', 'print-my-blog'), strip_tags($input->htmlLabelText()), strip_tags($option->getDisplayText()))
                 )
             );
             $html .= '>';
