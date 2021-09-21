@@ -221,6 +221,9 @@
 .pmb-add-material{
     cursor:pointer;
 }
+.pmb-add-material:link{
+    text-decoration: none;
+}
 .pmb-project-choices-column .pmb-project-item-template-container{
     display:none;
 }

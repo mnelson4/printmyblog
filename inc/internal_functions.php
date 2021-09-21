@@ -296,7 +296,7 @@ function pmb_drag_here(){
     ?>
     <div class="pmb-no-sort pmb-drag-here no-drag">
         <div class="pmb-drag-here-inner">
-            <a class="pmb-add-material">
+            <a class="pmb-add-material" href="#ui-id-1">
                 <?php esc_html_e('Drag or click here', 'print-my-blog');?> <span class="pmb-add-section dashicons
                 dashicons-plus-alt"></span>
             </a>
