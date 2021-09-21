@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.6.1
+Stable tag: 3.6.2
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -407,7 +407,10 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.6.1 September 27, 2021 =
+= 3.6.2 September 20, 2021 =
+* Enhancement: made content editor more keyboard-accessible
+
+= 3.6.1 September 17, 2021 =
 * Bugfix: deselect previously-selected items when adding print materials to a project (to avoid accidentally manipulating them etc)
 * Bugfix: fix readme error in example using new shortcode `[pmb_print_page_url format=pdf]` (don't put quotes around the format)
 
