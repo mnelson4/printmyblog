@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.6.2
+Stable tag: 3.7.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -406,6 +406,9 @@ https://youtu.be/uPQ3vqm7A2g
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+
+= 3.7.0 September 21, 2021 =
+* Feature: add shortcode `pmb_web_only_text` to hide text from printouts and `pmb_web_only_blocks` to hide entire blocks (paragraphs, images, and any other block) from printouts. Corresponding shortcodes `pmb_print_only_text` and `pmb_print_only_blocks` were introduced.
 
 = 3.6.2 September 20, 2021 =
 * Enhancement: made content editor more keyboard-accessible
