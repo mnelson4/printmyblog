@@ -296,6 +296,9 @@ This is often done by a security plugin.
 
 There may be text, images, and other stuff that looks great when viewed from a screen, but doesn't make sense to have in the printout. Eg, related posts, share buttons, etc.
 To remove them from printouts, [add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-screen-only".
+Alternatively, you can use the shortcodes `[pmb_web_only_text]...text, text, text...[/pmb_web_only_text]` and `[pmb_web_only_blocks]...paragraphs, images, other blocks...[/pmb_web_only_blocks]`.
+
+https://www.youtube.com/watch?v=xxNBkGafH_A
 
 If you're handy writing CSS, add some additional CSS to your theme that uses the "pmb-print-page" class which is added to the `body` tag of the print page.
 
@@ -312,8 +315,11 @@ Also, if it's content automatically added by a plugin or theme, please let us kn
 https://www.youtube.com/watch?v=IMBxCp7AVPE&feature=youtu.be
 
 = How do I make post content only appear in the printout? =
+Use the shortcodes `[pmb_print_only_text]...text, text, text...[/pmb_print_only_text]` and `[pmb_print_only_blocks]...paragraphs, images, other blocks...[/pmb_print_only_blocks]`.
 
-[Add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-print-only". See the above question for more details.
+https://www.youtube.com/watch?v=xxNBkGafH_A
+
+[Alternatively, add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-print-only". See the above question for more details.
 
 = How do I show or hide background colors in the printout? =
 * In Pro Print, the background colors are dictated by your project's design, which might be easily customizable. Go to your project's "Customize Design" step and see what settings are available. You can also switch to a different design on the "Choose Design" step, or add some custom CSS to your design (`body{background-color:black;}`).*
