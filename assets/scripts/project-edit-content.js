@@ -44,11 +44,15 @@ jQuery(document).ready(function(){
 	jQuery('.pmb-hide-filters').click(function(event){
 		pmb_refresh_posts();
 	});
+	var pmb_inputting_search = false;
 	jQuery('#pmb-project-choices-search').keyup(
 		jQuery.debounce(
 			1000,
-			() => {
-				pmb_refresh_posts();
+			function(e){
+				// don't do it on tab
+				if(e.keyCode != 9){
+					pmb_refresh_posts();
+				}
 			}
 		)
 	);
