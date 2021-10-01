@@ -415,6 +415,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.7.0 September 21, 2021 =
 * Feature: add shortcode `pmb_web_only_text` to hide text from printouts and `pmb_web_only_blocks` to hide entire blocks (paragraphs, images, and any other block) from printouts. Corresponding shortcodes `pmb_print_only_text` and `pmb_print_only_blocks` were introduced.
+* Feature: add CSS classes to control page breaks in printouts: `pmb-no-break-before` (avoids pagebreaks before a block), `pmb-no-break` (avoids pagebreaks inside a block, eg a paragraph), `pmb-no-break-after` (avoids pagebreaks after a block), `pmb-break-before` (always add a pagebreak before the block), `pmb-break-after` (always add a pagebreak after the block)
 
 = 3.6.2 September 20, 2021 =
 * Enhancement: made content editor more keyboard-accessible
