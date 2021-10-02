@@ -73,7 +73,8 @@ class Shortcodes extends BaseController
      * @param $content
      * @return string
      */
-    public function webOnlyText($atts, $content){
+    public function webOnlyText($atts, $content)
+    {
         return '<span class="pmb-screen-only">' . $content . '</span>';
     }
 
@@ -83,7 +84,8 @@ class Shortcodes extends BaseController
      * @param $content
      * @return string
      */
-    public function webOnlyBlocks($atts, $content){
+    public function webOnlyBlocks($atts, $content)
+    {
         return '<div class="pmb-screen-only">' . $content . '</div>';
     }
 
@@ -93,7 +95,8 @@ class Shortcodes extends BaseController
      * @param $content
      * @return string
      */
-    public function printOnlyText($atts, $content){
+    public function printOnlyText($atts, $content)
+    {
         return '<span class="pmb-print-only">' . $content . '</span>';
     }
 
@@ -103,7 +106,8 @@ class Shortcodes extends BaseController
      * @param $content
      * @return string
      */
-    public function printOnlyBlocks($atts, $content){
+    public function printOnlyBlocks($atts, $content)
+    {
         return '<div class="pmb-print-only">' . $content . '</div>';
     }
     /**
