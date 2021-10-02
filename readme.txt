@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.6.3
+Stable tag: 3.7.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -296,6 +296,9 @@ This is often done by a security plugin.
 
 There may be text, images, and other stuff that looks great when viewed from a screen, but doesn't make sense to have in the printout. Eg, related posts, share buttons, etc.
 To remove them from printouts, [add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-screen-only".
+Alternatively, you can use the shortcodes `[pmb_web_only_text]...text, text, text...[/pmb_web_only_text]` and `[pmb_web_only_blocks]...paragraphs, images, other blocks...[/pmb_web_only_blocks]`.
+
+https://www.youtube.com/watch?v=xxNBkGafH_A
 
 If you're handy writing CSS, add some additional CSS to your theme that uses the "pmb-print-page" class which is added to the `body` tag of the print page.
 
@@ -312,8 +315,11 @@ Also, if it's content automatically added by a plugin or theme, please let us kn
 https://www.youtube.com/watch?v=IMBxCp7AVPE&feature=youtu.be
 
 = How do I make post content only appear in the printout? =
+Use the shortcodes `[pmb_print_only_text]...text, text, text...[/pmb_print_only_text]` and `[pmb_print_only_blocks]...paragraphs, images, other blocks...[/pmb_print_only_blocks]`.
 
-[Add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-print-only". See the above question for more details.
+https://www.youtube.com/watch?v=xxNBkGafH_A
+
+[Alternatively, add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-print-only". See the above question for more details.
 
 = How do I show or hide background colors in the printout? =
 * In Pro Print, the background colors are dictated by your project's design, which might be easily customizable. Go to your project's "Customize Design" step and see what settings are available. You can also switch to a different design on the "Choose Design" step, or add some custom CSS to your design (`body{background-color:black;}`).*
@@ -406,7 +412,12 @@ https://youtu.be/uPQ3vqm7A2g
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
-= 3.6.3 September 26, 2021 =
+
+
+= 3.7.0 October 1, 2021 =
+* Feature: add shortcode `pmb_web_only_text` to hide text from printouts and `pmb_web_only_blocks` to hide entire blocks (paragraphs, images, and any other block) from printouts. Also, the corresponding shortcodes `pmb_print_only_text` and `pmb_print_only_blocks` were introduced.
+* Feature: add CSS classes to control page breaks in printouts: `pmb-no-break-before` (avoids pagebreaks before a block), `pmb-no-break` (avoids pagebreaks inside a block, eg a paragraph), `pmb-no-break-after` (avoids pagebreaks after a block), `pmb-break-before` (always add a pagebreak before the block), `pmb-break-after` (always add a pagebreak after the block)
+* Feature: add CSS class `pmb-dont-snap` to prevent a block (eg image) from snapping, even if the design specifies it should.
 * Bugfix: on post editor page, don't refresh available content when pressing tab
 
 = 3.6.2 September 20, 2021 =

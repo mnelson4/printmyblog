@@ -2,12 +2,55 @@
 * Styles which should be reusable by all print-page designs.
 */
 
+/**
+ * CSS classes intended for use by content writers.
+ */
+
+/**
+ * Always place this item on a new page
+ */
+.pmb-page-break, .pmb-break-before{
+    page-break-before: always;
+}
+
+/**
+ * This item is always the last item on a page
+ */
+.pmb-break-after{
+    page-break-after:always;
+}
+
+/**
+ * Avoid pagebreaks inside this item (paragraph, table, list, etc)
+ */
+.pmb-no-break{
+    page-break-inside:avoid;
+}
+
+/**
+ * Avoid pagebreaks before this item (image, paragraph, etc).
+ * Eg, use on a paragraph to make sure it stays with the previous paragraph or block.
+ */
+.pmb-no-break-before{
+    page-break-before: avoid;
+}
+
+/**
+ * Avoid pagebreaks after this item (image, paragraph, etc)
+ * Eg, use on a paragraph to make sure what follows stays on the same page.
+ */
+.pmb-no-break-after{
+    page-break-after: avoid;
+}
+
+/**
+ * Styles used by PMB on all print pages, but not intended for direct use by content writers.
+ */
+
 div.pmb-post-header{
     page-break-inside:avoid;
 }
-.pmb-page-break{
-    page-break-before: always;
-}
+
 /* On the print-page, try to avoid page breaks in the middle of images*/
 .pmb-image{
     page-break-inside:avoid;
@@ -128,11 +171,6 @@ won't switch to a pointer when they hover over it; and it won't be centered anym
     /* In case the theme made the input display:block, use margins to center it.*/
     margin-left:auto;
     margin-right:auto;
-}
-
-.pmb-no-break{
-    page-break-inside:avoid;
-    display:block;
 }
 
 /* Prevent MailChimp overlay from appearing overtop of everything. I think its from a MailChimp code snippet, not a

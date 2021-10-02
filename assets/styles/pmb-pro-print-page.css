@@ -1,5 +1,19 @@
 /**
-Stylesl for the print window
+Styles for the print window
+ */
+
+/**
+ * Styles intended for use by content writers.
+ */
+.pmb-float-top{
+    float:top;
+}
+.pmb-float-bottom{
+    float:bottom;
+}
+
+/**
+ * Styles used internally
  */
 @media not print{
     .pmb-pro-print-window{
@@ -216,13 +230,6 @@ otherwise Prince allots them no height and they overflow into content beneath. *
     left:50%;
     transform: translate(-50%, -50%);
     /*border: 1px dotted green;*/
-}
-
-.pmb-float-top{
-    float:top;
-}
-.pmb-float-bottom{
-    float:bottom;
 }
 
 /* Remove accessibility divs which add extra pages (sorry they're not usable when printed anyway)*/

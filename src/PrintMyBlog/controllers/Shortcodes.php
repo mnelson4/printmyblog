@@ -48,9 +48,68 @@ class Shortcodes extends BaseController
             'pmb_footnote',
             [$this,'footnote']
         );
+        add_shortcode(
+            'pmb_web_only_text',
+            [$this,'webOnlyText']
+        );
+        add_shortcode(
+            'pmb_web_only_blocks',
+            [$this, 'webOnlyBlocks']
+        );
+        add_shortcode(
+            'pmb_print_only_text',
+            [$this, 'printOnlyText']
+        );
+        add_shortcode(
+            'pmb_print_only_blocks',
+            [$this, 'printOnlyBlocks']
+        );
     }
 	// @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 
+    /**
+     * Adds a span whose contents will only be shown in the screen
+     * @param $atts
+     * @param $content
+     * @return string
+     */
+    public function webOnlyText($atts, $content)
+    {
+        return '<span class="pmb-screen-only">' . $content . '</span>';
+    }
+
+    /**
+     * Adds a div whose contents will only be shown on the screen
+     * @param $atts
+     * @param $content
+     * @return string
+     */
+    public function webOnlyBlocks($atts, $content)
+    {
+        return '<div class="pmb-screen-only">' . $content . '</div>';
+    }
+
+    /**
+     * Adds a span whose contents will only be shown in the screen
+     * @param $atts
+     * @param $content
+     * @return string
+     */
+    public function printOnlyText($atts, $content)
+    {
+        return '<span class="pmb-print-only">' . $content . '</span>';
+    }
+
+    /**
+     * Adds a div whose contents will only be shown on the screen
+     * @param $atts
+     * @param $content
+     * @return string
+     */
+    public function printOnlyBlocks($atts, $content)
+    {
+        return '<div class="pmb-print-only">' . $content . '</div>';
+    }
     /**
      * @param $atts
      * @return string|string[]

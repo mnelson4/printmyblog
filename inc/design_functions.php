@@ -4,16 +4,47 @@
  * @return string CSS to include in the style
  */
 function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design){
-	$css = $design->getSetting('custom_css');
+	$css = '/* PMB design styles for ' . $design->getWpPost()->post_title. '*/' . $design->getSetting('custom_css');
 
 	// image placement CSS
-	$selector = '.pmb-image, .wp-block-gallery, .wp-block-table';
+    // identify everything that could get snapped...
+    $selectors_to_snap = [
+        // Anything we mark as a pmb-image is candidate for snapping
+        '.pmb-image',
+
+        // Gutenberg
+        '.wp-block-image', // Gutenberg image block. With or without caption
+        '.wp-block-gallery', // Gutenberg gallery
+        '.wp-block-table', /// Gutenberg table
+
+        // Classic Editor
+        'img[class*=wp-image-]', // Classic Editor image
+        '.wp-caption', // Classic Editor image with caption
+        '.gallery', // Classic Editor gallery
+    ];
+
+    // ...and some exceptions
+    $selectors_to_not_snap = [
+        '.pmb-dont-snap', // PMB CSS class to make exceptions to not snap, even if everything else is getting snapped
+        '.emoji', // emojis are tiny inline images. Never snap them
+        'figure img', // don't snap images inside figures (ie, image-and-caption-combos). We snap the figure itself.
+        '.wp-caption img', // don't snap images inside a Classic Editor image caption. We snap the caption wrapper itself.
+        '.pmb-image img', // we snap the "pmg-image" wrapper, if there is one, not the image it wraps
+
+        // various galleries, which get snapped as a unit
+        'div.tiled-gallery img', // Jetpack's tiled gallery's images
+        'img.fg-image', // FooGallery's images
+    ];
+	foreach($selectors_to_snap as $key => $selector){
+	    $selectors_to_snap[$key] = $selector . ':not(' . implode(', ', $selectors_to_not_snap) . ')';
+    }
+	$combined_selector = implode(', ', $selectors_to_snap);
 	switch($design->getPmbMeta('image_placement')){
 		case 'snap':
-			$css .= $selector . '{float:prince-snap;}';
+			$css .= $combined_selector . '{float:prince-snap;}';
 			break;
 		case 'snap-unless-fit':
-			$css .= $selector . '{float:prince-snap unless-fit;}';
+			$css .= $combined_selector . '{float:prince-snap unless-fit;}';
 			break;
 		case 'default':
 		default:
