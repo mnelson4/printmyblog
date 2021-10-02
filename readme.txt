@@ -413,6 +413,8 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.7.1 October 2, 2021 =
+* Bugfix: Mayer Magazine was letting images sometimes overflow their column, prevent that.
 
 = 3.7.0 October 1, 2021 =
 * Feature: add shortcode `pmb_web_only_text` to hide text from printouts and `pmb_web_only_blocks` to hide entire blocks (paragraphs, images, and any other block) from printouts. Also, the corresponding shortcodes `pmb_print_only_text` and `pmb_print_only_blocks` were introduced.
