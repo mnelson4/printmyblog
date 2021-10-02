@@ -180,15 +180,15 @@ figcaption{
 }
 .wp-block-columns.has-2-columns>.wp-block-column{
     /*width:49vw;*/
-    width:80mm !important;
+    width:80mm;
 }
 .wp-block-columns.has-3-columns>.wp-block-column{
     /*width:32vw;*/
-    width:50mm !important;
+    width:50mm;
 }
 .wp-block-columns.has-4-columns>.wp-block-column{
     /*width:24vw;*/
-    width:40mm !important;
+    width:40mm;
 }
 
 /*!* Block galleries *!*/

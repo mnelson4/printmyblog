@@ -14,6 +14,8 @@
 
 
     @page{
+        margin-left:1.5em;
+        margin-right:1.5em;
         counter-reset: footnote;
 
         @footnotes {
@@ -89,6 +91,53 @@
     img, figure{
         max-width:100%;
     }
+    /**
+     * avoid margins for block columns
+     */
+    .wp-block-column:not(:first-child){
+        margin-left:0;
+    }
+    .wp-block-columns>.wp-block-column{
+        width:100% !important;
+    }
+    /**
+     * Make numbered and bulleted lists align more nicely
+     */
+    ul, ol{
+        display: table;
+        margin-left: 0;
+        padding-left: 0;
+        list-style: none;
+    }
+    li{
+        display: table-row;
+    }
+    li::before{
+
+        display: table-cell;
+        padding-right: 0.4em;
+    }
+    /* Unordered lists get a bullet */
+    ul>li::before{
+        content: "•";
+    }
+    /* Ordered lists get a number */
+    ol{
+        counter-reset:table-ol;
+    }
+    ol>li{
+        counter-increment: table-ol
+    }
+    ol>li::before{
+        content: counter(table-ol) ".";
+    }
+    /* Justify content looks way better when there are columns */
+    .post-content p, .post-content li{
+        text-justify:inter-character;
+        text-align:justify;
+    }
+
+
 
     /* part styling*/
     .pmb-part{
