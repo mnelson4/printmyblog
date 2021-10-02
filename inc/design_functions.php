@@ -15,7 +15,7 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design){
         '.wp-block-table', /// Gutenberg table
 
         // Classic Editor
-        'img', // Classic Editor image
+        'img[class*=wp-image-]', // Classic Editor image
         'figure.wp-caption', // Classic Editor image with caption
         '.gallery', // Classic Editor gallery
     ];
