@@ -660,9 +660,12 @@ function pmb_count_level(jquery_obj){
 function pmb_setup_item_options(){
 	jQuery('.pmb-project-item-header').hover(function(){
 		var that = jQuery(this);
+		// ensure no other options areas are showing
+		jQuery('.pmb-project-item-options').removeClass('pmb-show-options');
 		var options_area = that.children('.pmb-project-item-options');
 		options_area.addClass('pmb-show-options')
 		that.mouseleave( function(e) {
+			// don't hide when using the select dropdown
 			if(e.target.tagName.toLowerCase() != "select") {
 				options_area.removeClass('pmb-show-options');
 			}
