@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.7.0
+Stable tag: 3.7.1
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -413,8 +413,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.7.1 October 2, 2021 =
+= 3.7.1 October 7, 2021 =
 * Enhancement: styling improvements to Mayer Magazine (justified text, aligned lists, smaller side page margins)
+* Enhacnement: improved styling of title page in Classic Print and Digital PDF Designs
 * Bugfix: fix changing project section templates
 
 = 3.7.0 October 1, 2021 =
