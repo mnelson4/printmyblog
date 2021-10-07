@@ -410,7 +410,7 @@ class DefaultDesignTemplates
         }
         if (in_array('byline', $header_content)) {
             $sections['byline'] = new TextInput([
-                'html_label_text' => __('Author(s)', 'print-my-blog'),
+                'html_label_text' => __('Byline', 'print-my-blog'),
                 'html_help_text' => __('Project author(s)', 'print-my-blog')
             ]);
         }

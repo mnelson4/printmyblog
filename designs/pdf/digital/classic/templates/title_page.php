@@ -14,7 +14,7 @@
     }
     if (in_array('subtitle',$pmb_design->getSetting('header_content'))) {
         ?>
-        <p class="site-description pmb-subtitle"><?php $pmb_project->echoSetting('subtitle'); ?></p>
+        <h2 class="site-description pmb-subtitle"><?php $pmb_project->echoSetting('subtitle'); ?></h2>
 	    <?php
     }
     if (in_array('byline',$pmb_design->getSetting('header_content'))) {
@@ -22,6 +22,7 @@
     <h2 class="project-byline"><?php $pmb_project->echoSetting('byline'); ?></h2>
     <?php
     }
+    ?><div class="pmb-title-page-meta"><?php
     if(in_array('url', $pmb_design->getSetting('header_content'))){
         $url_text = $pmb_project->getSetting('url');
         $true_url = esc_url_raw($url_text) === $url_text;
@@ -70,3 +71,4 @@
 			);
 		}
 		?></p>
+    </div>

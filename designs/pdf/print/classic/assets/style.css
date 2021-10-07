@@ -142,6 +142,12 @@ Ask PDF viewers to display pages side-by-side by default.
         color:darkgray;
         text-align:center;
     }
+    .project-byline{
+        margin-top:4em;
+    }
+    .pmb-title-page-meta{
+        float:bottom;
+    }
 
 
     /* toc */
