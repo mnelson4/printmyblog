@@ -64,13 +64,13 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design){
         $show_powered_by = false;
     }
     if($design->getSetting('powered_by') || $show_powered_by){
-        $css .= '@page:first{
+        $css .= "@page:first{
             @bottom{
-                content:\'Powered by Print My Blog Pro & WordPress\';
+                content:'" . esc_html__('Powered by Print My Blog Pro & WordPress', 'print-my-blog') . "'';
                 color:gray;
                 font-style:italic;
             }
-        }';
+        }";
     }
 	return $css;
 }
