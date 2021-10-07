@@ -47,27 +47,11 @@
 		<?php
 		//give it some space
 		echo ' ';
-		if (in_array('date_printed',$pmb_design->getSetting('header_content')) &&
-		    in_array('credit_pmb',$pmb_design->getSetting('header_content'))) {
-
-			printf(
-			// translators: 1: date, 2: opening link tag, 3: closing link tag
-				esc_html__('Printed on %1$s using %2$sPrint My Blog%3$s', 'print-my-blog'),
-				date_i18n(get_option('date_format')),
-				'<a href="https://printmy.blog" class="pmb-leave-link">',
-				'</a>'
-			);
-		} elseif (in_array('date_printed',$pmb_design->getSetting('header_content'))) {
+		if (in_array('date_printed',$pmb_design->getSetting('header_content'))) {
 			// translators: 1: date
 			printf(
 				esc_html__('Printed on %1$s', 'print-my-blog'),
 				date_i18n(get_option('date_format'))
-			);
-		} elseif (in_array('credit_pmb',$pmb_design->getSetting('header_content'))) {
-			printf(
-				esc_html__('Printed using %1$sPrint My Blog%2$s', 'print-my-blog'),
-				'<a href="https://printmy.blog" class="pmb-leave-link">',
-				'</a>'
 			);
 		}
 		?></p>

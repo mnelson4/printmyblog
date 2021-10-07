@@ -442,7 +442,6 @@ class DefaultDesignTemplates
                             'byline' => new InputOption(__('Byline', 'print-my-blog')),
                             'url' => new InputOption(__('Site URL', 'print-my-blog')),
                             'date_printed' => new InputOption(__('Date Printed', 'print-my-blog')),
-                            'credit_pmb' => new InputOption(__('Credit Print My Blog', 'print-my-blog'))
                         ],
                         [
                             'default' => [
