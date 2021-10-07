@@ -118,7 +118,7 @@
         padding-right: 0.4em;
     }
     /* Unordered lists get a bullet */
-    ul>li::before{
+    ul>li:not(.blocks-gallery-item)::before{
         content: "•";
     }
     /* Ordered lists get a number */
@@ -130,11 +130,6 @@
     }
     ol>li::before{
         content: counter(table-ol) ".";
-    }
-    /* Justify content looks way better when there are columns */
-    .post-content p, .post-content li{
-        text-justify:inter-character;
-        text-align:justify;
     }
 
 
@@ -151,6 +146,11 @@
     .pmb-part div.entry-content{
         margin-top:1in;
         columns:2;
+    }
+    /* Justify content looks way better when there are columns */
+    .pmb-part div.entry-content p, .pmb-part div.entry-content li{
+        text-justify:inter-character;
+        text-align:justify;
     }
     .pmb-print-page .pmb-single-column div.entry-content{
         columns:1;

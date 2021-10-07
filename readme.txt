@@ -415,6 +415,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.7.2 October 7, 2021 =
 * Enhancement: further improved styling of title page in Classic Print and Digital PDF Designs
+* Enhancement: removed the "Credit Print My Blog" title page option as it's usually redundant, credit can also be given in the footer
 
 = 3.7.1 October 7, 2021 =
 * Enhancement: styling improvements to Mayer Magazine (justified text, aligned lists, smaller side page margins)
