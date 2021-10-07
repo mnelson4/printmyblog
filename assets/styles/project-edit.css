@@ -210,6 +210,7 @@
     bottom:0;
     left:0;
     right:0;
+    padding:8px;
 }
 .pmb-drag-here a{
     color:gray;
@@ -223,9 +224,22 @@
 }
 .pmb-project-item-options{
     display:none;
+    background:transparent;
+}
+.pmb-project-item-options-buttons{
+    background:#F0F0F1;
+    display:inline-block;
+}
+.pmb-selected .pmb-project-item-options-buttons{
+    background:#ECF6FD;
 }
 .pmb-project-item-options.pmb-show-options{
     display:block;
+}
+.pmb-project-item-options-buttons .dashicons{
+    font-size:25px;
+    height:30px;
+    width:40px;
 }
 .pmb-add-material:link{
     text-decoration: none;
@@ -251,9 +265,6 @@
 }
 .pmb-project-choices-filters select{
     width:90%;
-}
-.no-drag{
-    padding:8px;
 }
 .pmb-button-spacer{
     margin:1vh;

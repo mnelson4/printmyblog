@@ -223,57 +223,59 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
                 <span class="pmb-project-item-title-text"><?php echo $title;?></span>
             </div>
 
-            <div class="pmb-project-item-options no-drag">
+            <div class="pmb-project-item-options">
                 <div class="pmb-project-item-options-inner">
-                    <?php
-                    // only show the viewing button if it will work
-                    if($post_type->public){
+                    <div class="pmb-project-item-options-buttons no-drag">
+                        <?php
+                        // only show the viewing button if it will work
+                        if($post_type->public){
+                            ?>
+                            <a
+                                    href="<?php echo esc_attr($view_url);?>"
+                                    title="<?php
+                                    echo esc_attr(
+                                        sprintf(
+                                            __('View "%s"', 'print-my-blog'),
+                                            $title
+                                        )
+                                    );
+                                    ?>"
+                                    target="_blank"><span class="dashicons dashicons-visibility pmb-icon pmb-clickable"></span></a>
+                            <?php
+                        }
                         ?>
                         <a
-                                href="<?php echo esc_attr($view_url);?>"
+                        href="<?php echo esc_attr($edit_url);?>"
+                        title="<?php
+                        echo esc_attr(
+                            sprintf(
+                                __('Edit "%s"', 'print-my-blog'),
+                                $title
+                            )
+                        );
+                        ?>"
+                        target="_blank"><span class="dashicons dashicons-edit pmb-icon pmb-clickable"></span></a>
+                        <a
                                 title="<?php
                                 echo esc_attr(
                                     sprintf(
-                                        __('View "%s"', 'print-my-blog'),
+                                        __('Add "%s" to project', 'print-my-blog'),
                                         $title
                                     )
                                 );
                                 ?>"
-                                target="_blank"><span class="dashicons dashicons-visibility pmb-icon pmb-clickable"></span></a>
-                        <?php
-                    }
-                    ?>
-                    <a
-                    href="<?php echo esc_attr($edit_url);?>"
-                    title="<?php
-                    echo esc_attr(
-                        sprintf(
-                            __('Edit "%s"', 'print-my-blog'),
-                            $title
-                        )
-                    );
-                    ?>"
-                    target="_blank"><span class="dashicons dashicons-edit pmb-icon pmb-clickable"></span></a>
-                    <a
-                            title="<?php
-                            echo esc_attr(
-                                sprintf(
-                                    __('Add "%s" to project', 'print-my-blog'),
-                                    $title
-                                )
-                            );
-                            ?>"
-                            class="pmb-add-item" href="#pmb-content-item-<?php echo esc_attr($id);?>"><span class="dashicons dashicons-plus pmb-icon pmb-clickable"></span></a>
-                    <a
-                            title="<?php
-                            echo esc_attr(
-                                sprintf(
-                                    __('Remove "%s"', 'print-my-blog'),
-                                    $title
-                                )
-                            );
-                            ?>"
-                            tabindex="0"><span class="dashicons dashicons-no-alt pmb-icon pmb-remove-item pmb-clickable"></span></a>
+                                class="pmb-add-item" href="#pmb-content-item-<?php echo esc_attr($id);?>"><span class="dashicons dashicons-plus pmb-icon pmb-clickable"></span></a>
+                        <a
+                                title="<?php
+                                echo esc_attr(
+                                    sprintf(
+                                        __('Remove "%s"', 'print-my-blog'),
+                                        $title
+                                    )
+                                );
+                                ?>"
+                                tabindex="0"><span class="dashicons dashicons-no-alt pmb-icon pmb-remove-item pmb-clickable"></span></a>
+                    </div>
                     <span class="pmb-project-item-template-container"><?php echo pmb_section_template_selector($template, $project);?></span>
                 </div>
             </div>
