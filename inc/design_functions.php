@@ -66,7 +66,7 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design){
     if($design->getSetting('powered_by') || $show_powered_by){
         $css .= "@page:first{
             @bottom{
-                content:'" . esc_html__('Powered by Print My Blog Pro & WordPress', 'print-my-blog') . "';
+                content:'" . strip_tags(__('Powered by Print My Blog Pro & WordPress', 'print-my-blog')) . "';
                 color:gray;
                 font-style:italic;
             }
