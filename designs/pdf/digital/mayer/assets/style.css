@@ -69,6 +69,11 @@
     .pmb-toc-list{
         column-span:all;
     }
+    .pmb-toc{
+        width:80%;
+        margin-left:auto;
+        margin-right:auto;
+    }
     .pmb-toc-list li{
         list-style:none;
     }
@@ -113,12 +118,11 @@
         display: table-row;
     }
     li::before{
-
         display: table-cell;
         padding-right: 0.4em;
     }
     /* Unordered lists get a bullet */
-    ul>li:not(.blocks-gallery-item)::before{
+    ul>li:not(.blocks-gallery-item, .pmb-toc-item)::before{
         content: "•";
     }
     /* Ordered lists get a number */
