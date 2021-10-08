@@ -69,8 +69,10 @@
     .pmb-toc-list{
         column-span:all;
         padding-left:0;
+        width:100%;
     }
-    .pmb-toc{
+    .pmb-toc-list{
+        width:80vw;
         margin-left:auto;
         margin-right:auto;
     }

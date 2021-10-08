@@ -21,7 +21,7 @@ function pmb_enqueue_mayer_script(){
         $css .= 'article:not(.pmb-just-content) div.entry-content{columns:2}';
     }
     if($pmb_design->getSetting('dividing_line')){
-        $css .= ' .entry-content{border-bottom:1px solid gray;box-decoration-break: slice;}';
+        $css .= '.pmb-main-matter .entry-content{border-bottom:1px solid gray;box-decoration-break: slice;}';
     }
     if($pmb_design->getSetting('images_full_column')){
         $css .=' figure.wp-caption:not(.mayer-noresize), figure.wp-block-image:not(.mayer-no-resize), .pmb-posts .pmb-image img:not(.mayer-no-resize), img:not(.mayer-no-resize){width:100%;height:auto;}';
