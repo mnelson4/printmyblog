@@ -413,7 +413,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.7.3 October 7, 2021 =
+= 3.7.3 October 8, 2021 =
 * Enhancement: Mayer Magazine styling improvements, such as revert special list styling changes to Mayer Magazine (they looked bad with like galleries), improving alignment of the table of contents, and don't show the dividing line in front matter
 
 = 3.7.2 October 7, 2021 =
