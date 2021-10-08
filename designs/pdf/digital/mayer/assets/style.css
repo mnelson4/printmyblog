@@ -105,36 +105,6 @@
     .wp-block-columns>.wp-block-column{
         width:100% !important;
     }
-    /**
-     * Make numbered and bulleted lists align more nicely
-     */
-    ul, ol{
-        display: table;
-        margin-left: 0;
-        padding-left: 0;
-        list-style: none;
-    }
-    li{
-        display: table-row;
-    }
-    li::before{
-        display: table-cell;
-        padding-right: 0.4em;
-    }
-    /* Unordered lists get a bullet */
-    ul>li:not(.blocks-gallery-item, .pmb-toc-item)::before{
-        content: "•";
-    }
-    /* Ordered lists get a number */
-    ol{
-        counter-reset:table-ol;
-    }
-    ol>li{
-        counter-increment: table-ol
-    }
-    ol>li::before{
-        content: counter(table-ol) ".";
-    }
 
 
 
@@ -152,7 +122,8 @@
         columns:2;
     }
     /* Justify content looks way better when there are columns */
-    .pmb-part div.entry-content p, .pmb-part div.entry-content li{
+    article:not(.pmb-just-content) div.entry-content p,
+    article:not(.pmb-just-content) div.entry-content li{
         text-justify:inter-character;
         text-align:justify;
     }
