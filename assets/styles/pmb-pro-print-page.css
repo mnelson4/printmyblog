@@ -196,16 +196,16 @@ figcaption{
 Set block gallery image sizes because otherwise Prince interprets the floating property differently.
 The gallery always takes up the whole page height because the image height is 100%
 */
-.wp-block-gallery.is-cropped.columns-4 .blocks-gallery-item img {
+.wp-block-gallery.is-cropped.columns-4 .blocks-gallery-item img:not(.emoji) {
     height:25vw !important;
 }
-.wp-block-gallery.is-cropped.columns-3 .blocks-gallery-item img {
+.wp-block-gallery.is-cropped.columns-3 .blocks-gallery-item img:not(.emoji) {
     height:30vw !important;
 }
-.wp-block-gallery.is-cropped.columns-2 .blocks-gallery-item img {
+.wp-block-gallery.is-cropped.columns-2 .blocks-gallery-item img:not(.emoji) {
     height:40vw !important;
 }
-.wp-block-gallery.is-cropped.columns-1 .blocks-gallery-item img {
+.wp-block-gallery.is-cropped.columns-1 .blocks-gallery-item img:not(.emoji) {
     height:50vw !important;
 }
 
