@@ -116,6 +116,11 @@ class Ajax extends BaseController
      */
     public function handleProjectStatus()
     {
+        // report errors please
+        if(defined('WP_DEBUG_DISPLAY') && WP_DEBUG_DISPLAY){
+            error_reporting(E_ALL);
+            ini_set("display_errors", 1);
+        }
         // Find project by ID.
         /*
          * @var $project Project

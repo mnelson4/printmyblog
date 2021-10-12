@@ -299,6 +299,7 @@ class PdfGenerator extends ProjectFileGeneratorBase
      */
     public function addPrintWindowToPage()
     {
+        $license_info = null;
         if (pmb_fs()->is__premium_only()) {
             try {
                 $license = pmb_fs()->_get_license();

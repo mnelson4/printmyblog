@@ -415,6 +415,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.7.4 xxx =
 * Bugfix: prevent emojis in gallery image descriptions from breaking layout
+* Bugfix: if WP_DEBUG_DISPLAY setting is on, show warnings when generating print-page
 
 = 3.7.3 October 8, 2021 =
 * Enhancement: Mayer Magazine styling improvements, such as revert special list styling changes to Mayer Magazine (they looked bad with like galleries), improving alignment of the table of contents, and don't show the dividing line in front matter

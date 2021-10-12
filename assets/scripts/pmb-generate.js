@@ -4,20 +4,35 @@ jQuery(document).ready(function () {
         var querystring_args = pmb_get_querystring_vars();
         var format_slug = event.currentTarget.getAttribute('data-format');
         var format_options_selection = jQuery('.pmb-generate-options-for-' + format_slug);
-        jQuery.post(
-            ajaxurl,
-            {
+        jQuery.ajax({
+            url:ajaxurl,
+            method:'POST',
+            data:{
                 action: 'pmb_project_status',
                 ID: querystring_args['ID'],
                 format: format_slug,
             },
-            (response) => {
+            dataType:'json',
+            success:(response) => {
                 // could fetch more, but for now it all just happens in one request
                 if (typeof (response) === 'object' && typeof (response.url) === 'string') {
                     window.location.href = response.url;
                 }
             },
-            'json').fail((event) => {
+            converters: pmb_jquery_ajax_converters,
+        }).fail((jqXhr, text_message, text_status) => {
+                jQuery.ajax(
+                    ajaxurl,
+                    {
+                        'method': 'POST',
+                        'data':{
+                            'action':'pmb_report_error',
+                            'error': 'error generating. Status:' + text_status + ', message: ' + text_message + ', raw response: ' + jqXhr.responseText,
+                            'project_id': querystring_args['ID'],
+                            'format': format_slug
+                        }
+                    }
+                );
                 alert(pmb_generate.translations.error_generating);
             }
         );
