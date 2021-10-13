@@ -11,8 +11,16 @@ use WP_Query;
 
 class PostWrapperManager
 {
-    protected $class_to_instantiate;
-    protected $cap_slug;
+    /**
+     * @var string sub-classes of this should use their own subclass of PostWrapper
+     */
+    protected $class_to_instantiate = 'Twine\orm\entities\PostWrapper';
+
+    /**
+     * @var string singular slug
+     */
+    protected $cap_slug = 'post';
+
     /**
      * @param $post_id
      *
@@ -101,7 +109,7 @@ class PostWrapperManager
     {
         foreach ($ids as $id) {
             $post = get_post($id);
-            if (! current_user_can('delete_' . $this->cap_slug, $post)) {
+            if (! current_user_can('delete_' . $this->cap_slug . 's', $post)) {
                 continue;
             }
             $project = $this->createWrapperAroundPost($post);

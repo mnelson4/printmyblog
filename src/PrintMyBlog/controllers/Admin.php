@@ -37,6 +37,7 @@ use Twine\forms\inputs\TextAreaInput;
 use Twine\forms\inputs\TextInput;
 use Twine\forms\inputs\YesNoInput;
 use Twine\helpers\Array2;
+use Twine\orm\managers\PostWrapperManager;
 use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
 use Twine\services\notifications\OneTimeNotificationManager;
@@ -61,6 +62,7 @@ class Admin extends BaseController
     const SLUG_ACTION_ADD_NEW = 'new';
     const SLUG_ACTION_EDIT_PROJECT = 'edit';
     const SLUG_ACTION_REVIEW = 'review';
+    const SLUG_ACTION_DUPLICATE_PRINT_MATERIAL = 'duplicate_print_material';
     const SLUG_SUBACTION_PROJECT_SETUP = 'setup';
     const SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN = 'customize_design';
     const SLUG_SUBACTION_PROJECT_CHANGE_DESIGN = 'choose_design';
@@ -135,6 +137,10 @@ class Admin extends BaseController
      * @var Project|null
      */
     protected $project;
+    /**
+     * @var PostWrapperManager
+     */
+    protected $post_manager;
 
     /**
      * @param PostFetcher $post_fetcher
@@ -157,7 +163,8 @@ class Admin extends BaseController
         SvgDoer $svg_doer,
         OneTimeNotificationManager $notification_manager,
         DebugInfo $debug_info,
-        PmbCentral $pmb_central
+        PmbCentral $pmb_central,
+        PostWrapperManager $post_manager
     ) {
         $this->post_fetcher    = $post_fetcher;
         $this->section_manager = $section_manager;
@@ -169,6 +176,7 @@ class Admin extends BaseController
         $this->notification_manager = $notification_manager;
         $this->debug_info = $debug_info;
         $this->pmb_central = $pmb_central;
+        $this->post_manager = $post_manager;
     }
     /**
      * name of the option that just indicates we successfully saved the setttings
@@ -183,6 +191,9 @@ class Admin extends BaseController
         add_action('admin_menu', array($this, 'addToMenu'));
         add_filter('plugin_action_links_' . PMB_BASENAME, array($this, 'pluginPageLinks'));
         add_action('admin_enqueue_scripts', [$this,'enqueueScripts']);
+
+        add_filter('post_row_actions', [ $this, 'postAdminRowActions'], 10, 2);
+        add_filter('page_row_actions', [ $this, 'postAdminRowActions'], 10, 2);
 
         $this->makePrintContentsSaySaved();
         $this->notification_manager->showOneTimeNotifications();
@@ -1540,6 +1551,33 @@ class Admin extends BaseController
     }
 
     /**
+     * Duplicates a post (any type) to be a print material and redirects to it.
+     */
+    protected function duplicatePrintMaterial()
+    {
+        check_admin_referer(self::SLUG_ACTION_DUPLICATE_PRINT_MATERIAL);
+        $post_id = Array2::setOr($_GET, 'ID', 0);
+        $wrapped_post = $this->post_manager->getById($post_id);
+        $new_post = $wrapped_post->duplicatePost(
+                [
+                    'post_title' => sprintf(__('%s (print material)', 'print-my-blog'), $wrapped_post->getWpPost()->post_title),
+                    'post_type' => CustomPostTypes::CONTENT,
+                    'post_status' => 'private'
+                ]
+        );
+        // add a postmeta that sets this to use the same post title as before
+        add_post_meta(
+            $new_post->ID,
+            'pmb_title',
+            $wrapped_post->getWpPost()->post_title
+        );
+        wp_safe_redirect(
+            get_edit_post_link($new_post->ID, 'not_display')
+        );
+        exit;
+    }
+
+    /**
      * Deletes plugin data. No security checks here.
      */
     protected function uninstall()
@@ -1628,6 +1666,9 @@ class Admin extends BaseController
                     wp_safe_redirect($redirect);
                     exit;
                 }
+            } elseif ($action === self::SLUG_ACTION_DUPLICATE_PRINT_MATERIAL) {
+                $this->duplicatePrintMaterial();
+                exit;
             }
         }
     }
@@ -1648,5 +1689,33 @@ class Admin extends BaseController
             }
             $this->project = $project;
         }
+    }
+
+    /**
+     * @param $actions
+     * @param $post
+     */
+    public function postAdminRowActions($actions, $post)
+    {
+        if (! $post instanceof \WP_Post || ! current_user_can('publish_' . CustomPostTypes::CONTENTS) || ! is_array($actions)) {
+            return $actions;
+        }
+        $url = wp_nonce_url(
+            add_query_arg(
+                [
+                    'action' => self::SLUG_ACTION_DUPLICATE_PRINT_MATERIAL,
+                    'ID' => $post->ID
+                ],
+                admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+            ),
+            self::SLUG_ACTION_DUPLICATE_PRINT_MATERIAL
+        );
+        $actions['pmb_new_print_material'] = '<a href="' . esc_url($url) . '" alt="'
+            . esc_attr(sprintf(\__('New print material from &#8220;%s&#8221;', 'print-my-blog'), $post->post_title))
+            . '">' .
+            esc_html__('New Print Material', 'print-my-blog')
+            . '</a>';
+
+        return $actions;
     }
 }

@@ -93,7 +93,16 @@ function pmb_section_id(){
  * Echoes out the section's title and makes sure to add the CSS class PMB expects (especially important for finding the table of contents.)
  */
 function pmb_the_title(){
-	the_title('<h1 class="pmb-title">','</h1>');
+    $post = get_post();
+    if($post instanceof WP_Post){
+        $title_from_meta = get_post_meta($post->ID, 'pmb_title',true);
+        if($title_from_meta){
+            $title =  $title_from_meta;
+        } else {
+            $title = get_the_title($post);
+        }
+    }
+	return '<h1 class="pmb-title">' . $title . '</h1>';
 }
 
 function pmb_design_uses($post_content_thing, $default){

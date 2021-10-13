@@ -3,6 +3,7 @@
 namespace PrintMyBlog\db;
 
 use PrintMyBlog\system\CustomPostTypes;
+use Twine\orm\managers\PostWrapperManager;
 use WP_Query;
 
 /**

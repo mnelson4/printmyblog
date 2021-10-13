@@ -30,7 +30,7 @@
                     <?php
                 }
                 if(pmb_design_uses('categories', false)){
-                    echo strip_tags(get_the_category(','));
+                    echo strip_tags(get_the_category_list(','));
                 }
 
                 if(pmb_design_uses('url', false)){

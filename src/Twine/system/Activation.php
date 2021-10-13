@@ -42,7 +42,7 @@ abstract class Activation
 
 
     /**
-     * Checks the DB and other options are present
+     * Checks the DB and other options are present. Actually done on upgrades too.
      */
     abstract public function install();
 

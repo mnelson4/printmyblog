@@ -17,8 +17,11 @@ use PrintMyBlog\services\SvgDoer;
 class CustomPostTypes
 {
     const PROJECT = 'pmb_project';
+    const PROJECTS = 'pmb_projects';
     const DESIGN = 'pmb_design';
+    const DESIGNS = 'pmb_designs';
     const CONTENT = 'pmb_content';
+    const CONTENTS = 'pmb_contents';
     /**
      * @var SvgDoer
      */
@@ -52,15 +55,7 @@ class CustomPostTypes
                 ),
             ]
         );
-        $cap_slug = 'pmb_project';
-        add_filter(
-            'map_meta_cap',
-            function ($caps, $cap, $user_id, $args) use ($cap_slug) {
-                return $this->mapMetaCap($caps, $cap, $user_id, $args, $cap_slug);
-            },
-            10,
-            4
-        );
+        $this->setupMapMetaCaps(self::PROJECT);
 
         register_post_type(
             self::DESIGN,
@@ -78,15 +73,7 @@ class CustomPostTypes
                 ),
             ]
         );
-        $cap_slug = 'pmb_design';
-        add_filter(
-            'map_meta_cap',
-            function ($caps, $cap, $user_id, $args) use ($cap_slug) {
-                return $this->mapMetaCap($caps, $cap, $user_id, $args, $cap_slug);
-            },
-            10,
-            4
-        );
+        $this->setupMapMetaCaps(self::DESIGN);
 
         register_post_type(
             self::CONTENT,
@@ -104,11 +91,38 @@ class CustomPostTypes
                 'show_in_rest' => true,
                 'supports' => array('title', 'editor', 'revisions', 'author','thumbnail', 'custom-fields'),
                 'taxonomies' => array('category', 'post_tag'),
-                'menu_icon' => $this->svg_doer->getSvgDataAsColor(PMB_DIR . 'assets/images/menu-icon.svg')
+                'menu_icon' => $this->svg_doer->getSvgDataAsColor(PMB_DIR . 'assets/images/menu-icon.svg'),
+                'capability_type' => self::CONTENT,
+                'capabilities' => array(
+                    'publish_posts' => 'publish_' . self::CONTENTS,
+                    'edit_posts' => 'edit_' . self::CONTENTS,
+                    'edit_others_posts' => 'edit_' . self::CONTENTS,
+                    'delete_posts' => 'delete_' . self::CONTENTS,
+                    'delete_others_posts' => 'delete_' . self::CONTENTS,
+                    'read_private_posts' => 'read_private_' . self::CONTENTS,
+                ),
             )
         );
+        $this->setupMapMetaCaps(self::CONTENT);
+
         add_filter('wp_insert_post_data', [$this,'makePrintMaterialsAlwaysPrivate']);
         add_filter('rest_post_search_query', [$this,'includePrivatePrintMaterialsInSearch'], 10, 2);
+    }
+
+    /**
+     * Sets up the filter to map meta caps
+     * @param string $cap_slug
+     */
+    private function setupMapMetaCaps($cap_slug)
+    {
+        add_filter(
+            'map_meta_cap',
+            function ($caps, $cap, $user_id, $args) use ($cap_slug) {
+                return $this->mapMetaCap($caps, $cap, $user_id, $args, $cap_slug);
+            },
+            10,
+            4
+        );
     }
 
     /**

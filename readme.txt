@@ -413,7 +413,8 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.7.4 xxx =
+= 3.8.0 xxx =
+* Feature: PMB Print Materials now have their own capabilities
 * Bugfix: prevent emojis in gallery image descriptions from breaking layout
 * Bugfix: if WP_DEBUG_DISPLAY setting is on, show warnings when generating print-page
 

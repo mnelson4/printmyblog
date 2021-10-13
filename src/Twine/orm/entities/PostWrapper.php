@@ -163,29 +163,33 @@ class PostWrapper
 
     /**
      * Creates a new post from the underlying post
+     * @param array $args_override args to override from their defaults when inserting
      * @return WP_Post
      */
-    protected function duplicatePost()
+    public function duplicatePost($args_override = [])
     {
         $post = $this->getWpPost();
         $current_user = wp_get_current_user();
         $new_post_author = $current_user->ID;
 
-        $args = array(
-            'comment_status' => $post->comment_status,
-            'ping_status'    => $post->ping_status,
-            'post_author'    => $new_post_author,
-            'post_content'   => $post->post_content,
-            'post_excerpt'   => $post->post_excerpt,
-            'post_name'      => $post->post_name,
-            'post_parent'    => $post->post_parent,
-            'post_password'  => $post->post_password,
-            'post_status'    => $post->post_status,
-            // @translators: 1: the name of the original post being duplicated
-            'post_title'     => sprintf(__('%s (copy)', 'print-my-blog'), $post->post_title),
-            'post_type'      => $post->post_type,
-            'to_ping'        => $post->to_ping,
-            'menu_order'     => $post->menu_order
+        $args = array_merge(
+            array(
+                'comment_status' => $post->comment_status,
+                'ping_status'    => $post->ping_status,
+                'post_author'    => $new_post_author,
+                'post_content'   => $post->post_content,
+                'post_excerpt'   => $post->post_excerpt,
+                'post_name'      => $post->post_name,
+                'post_parent'    => $post->post_parent,
+                'post_password'  => $post->post_password,
+                'post_status'    => $post->post_status,
+                // @translators: 1: the name of the original post being duplicated
+                'post_title'     => sprintf(__('%s (copy)', 'print-my-blog'), $post->post_title),
+                'post_type'      => $post->post_type,
+                'to_ping'        => $post->to_ping,
+                'menu_order'     => $post->menu_order
+            ),
+            $args_override
         );
 
         // insert the post by wp_insert_post() function

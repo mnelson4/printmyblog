@@ -115,7 +115,7 @@ class Activation extends BaseActivation
 
 
     /**
-     *
+     * Sets up DB and stuff. Also re-checked on updates.
      */
     public function install()
     {
