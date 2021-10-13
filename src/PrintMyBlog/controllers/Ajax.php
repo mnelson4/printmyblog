@@ -13,6 +13,7 @@ use PrintMyBlog\services\PmbCentral;
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\controllers\BaseController;
 use Twine\helpers\Array2;
+use Twine\orm\managers\PostWrapperManager;
 use WP_Query;
 use PrintMyBlog\orm\entities\Project;
 
@@ -45,6 +46,10 @@ class Ajax extends BaseController
      * @var PmbCentral
      */
     protected $pmb_central;
+    /**
+     * @var PostWrapperManager
+     */
+    protected $post_manager;
 
     /**
      * @param ProjectManager $project_manager
@@ -53,12 +58,14 @@ class Ajax extends BaseController
         ProjectManager $project_manager,
         FileFormatRegistry $format_registry,
         PostFetcher $post_fetcher,
-        PmbCentral $pmb_central
+        PmbCentral $pmb_central,
+        PostWrapperManager $post_manager
     ) {
         $this->project_manager = $project_manager;
         $this->format_registry = $format_registry;
         $this->post_fetcher = $post_fetcher;
         $this->pmb_central = $pmb_central;
+        $this->post_manager = $post_manager;
     }
     /**
      * Sets hooks that we'll use in the admin.
@@ -79,6 +86,7 @@ class Ajax extends BaseController
         add_action('wp_ajax_pmb_add_print_material', [$this,'addPrintMaterial']);
         add_action('wp_ajax_pmb_reduce_credits', [$this,'reduceCredits']);
         add_action('wp_ajax_pmb_report_error', [$this,'reportError']);
+        add_action('wp_ajax_pmb_duplicate_print_material',[$this,'duplicatePrintMaterial']);
     }
 
     protected function addUnauthenticatedCallback($ajax_action, $method_name)
@@ -289,6 +297,36 @@ class Ajax extends BaseController
         wp_send_json_success([
             'html' => $html,
             'post_ID' => $post_id
+        ]);
+        exit;
+    }
+
+    public function duplicatePrintMaterial()
+    {
+        $post_id = Array2::setOr($_REQUEST, 'id', '');
+        $project_id = Array2::setOr($_REQUEST, 'project', 0);
+        $project = $this->project_manager->getById($project_id);
+        $wrapped_post = $this->post_manager->getById($post_id);
+        $new_post = $wrapped_post->duplicatePost(
+            [
+                'post_title' => sprintf(__('%s (print material)', 'print-my-blog'), $wrapped_post->getWpPost()->post_title),
+                'post_type' => CustomPostTypes::CONTENT,
+                'post_status' => 'private'
+            ]
+        );
+        // add a postmeta that sets this to use the same post title as before
+        add_post_meta(
+            $new_post->ID,
+            'pmb_title',
+            $wrapped_post->getWpPost()->post_title
+        );
+
+        ob_start();
+        pmb_content_item($new_post, $project);
+        $html = ob_get_clean();
+        wp_send_json_success([
+            'html' => $html,
+            'post_ID' => $new_post->ID
         ]);
         exit;
     }

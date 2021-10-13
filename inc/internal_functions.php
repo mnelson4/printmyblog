@@ -3,6 +3,7 @@
  * Functions used internally by Print My Blog that other devs probably won't need.
  */
 
+use PrintMyBlog\controllers\Admin;
 use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;
@@ -187,8 +188,6 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
         $height = $posty_row->getHeight();
         $subs = $posty_row->getCachedSubsections();
         $depth = $posty_row->getDepth();
-        $edit_url = get_edit_post_link($posty_row->getPostId());
-        $view_url = get_permalink($posty_row->getPostId());
     } else {
         $id = $posty_row->ID;
         $title = $posty_row->post_title;
@@ -197,9 +196,20 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
         $height = 0;
         $subs = [];
         $depth = 1;
-        $edit_url = get_edit_post_link($posty_row->ID);
-        $view_url = get_permalink($posty_row->ID);
+
     }
+    $edit_url = get_edit_post_link($id);
+    $view_url = get_permalink($id);
+    $duplicate_url = wp_nonce_url(
+        add_query_arg(
+            [
+                'action' => Admin::SLUG_ACTION_DUPLICATE_PRINT_MATERIAL,
+                'ID' => $id
+            ],
+            admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+        ),
+        Admin::SLUG_ACTION_DUPLICATE_PRINT_MATERIAL
+    );
     // if the post type is no longer registered, the plugin that added it probably got removed, so hide this item.
     if(! $post_type){
         return;
@@ -245,16 +255,35 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
                         }
                         ?>
                         <a
-                        href="<?php echo esc_attr($edit_url);?>"
-                        title="<?php
-                        echo esc_attr(
-                            sprintf(
-                                __('Edit "%s"', 'print-my-blog'),
-                                $title
-                            )
-                        );
-                        ?>"
-                        target="_blank"><span class="dashicons dashicons-edit pmb-icon pmb-clickable"></span></a>
+                            href="<?php echo esc_attr($edit_url);?>"
+                            title="<?php
+                            echo esc_attr(
+                                sprintf(
+                                    __('Edit "%s"', 'print-my-blog'),
+                                    $title
+                                )
+                            );
+                            ?>"
+                            target="_blank"><span class="dashicons dashicons-edit pmb-icon pmb-clickable"></span></a>
+                        <?php
+                        if(pmb_fs()->is_plan__premium_only('founding_members')){
+                            ?><a
+                            title="<?php
+                            echo esc_attr(
+                                sprintf(
+                                    __('Copy "%s" to New Print Material', 'print-my-blog'),
+                                    $title
+                                )
+                            );
+                            ?>"
+                            data-id="<?php echo esc_attr($id);?>" class="pmb-duplicate-post-button" tabindex="0"><span class="dashicons dashicons-admin-page pmb-icon pmb-clickable"></span></a>
+                            <?php
+                        } else {
+                            ?>
+                            <span tabindex="0" class="dashicons dashicons-admin-page pmb-icon pmb-disabled-icon" title="<?php echo esc_attr(esc_html__('Upgrade to Professional License for one-click copying to Print Materials for customization.', 'print-my-blog'));?>"></span>
+                            <?php
+                        }
+                        ?>
                         <a
                                 title="<?php
                                 echo esc_attr(

@@ -70,6 +70,7 @@ class Context extends BaseContext
                 'PrintMyBlog\services\FileFormatRegistry' => self::REUSE,
                 'PrintMyBlog\db\PostFetcher' => self::REUSE,
                 'PrintMyBlog\services\PmbCentral' => self::REUSE,
+                'Twine\orm\managers\PostWrapperManager' => self::REUSE
             ],
             'PrintMyBlog\orm\entities\Project'          => [
                 'PrintMyBlog\orm\managers\ProjectSectionManager'             => self::REUSE,

@@ -685,6 +685,39 @@ function pmb_setup_item_options(){
 		var parent_draggable_items = selection.closest('.pmb-project-item');
 		pmb_remove(parent_draggable_items);
 	});
+	jQuery('.pmb-duplicate-post-button').click(function(event){
+		var clicked_jq_obj = jQuery(event.currentTarget);
+		var id = clicked_jq_obj.data('id');
+		jQuery.post(
+			ajaxurl,
+			{
+				'action': 'pmb_duplicate_print_material',
+				'_nonce': _wpnonce.value,
+				'id': id,
+				'project': jQuery('#pmb-print-material-project').val()
+			},
+			function(response){
+				var sortable = jQuery(clicked_jq_obj).closest('.pmb-sortable')
+				var clicked_item = jQuery(clicked_jq_obj).closest('.pmb-project-item')
+				var new_item = jQuery(response.data.html)
+				new_item.insertAfter(clicked_item);
+				pmb_setup_callbacks_on_new_options();
+				pmb_maybe_add_sortable_to(sortable,new_item);
+			},
+			'json'
+		).error(function(){
+			alert(pmb_project_edit_content_data.translations.duplicate_error);
+		});
+	});
+	jQuery('.pmb-duplicate-post-button').keypress(function(event) {
+		// Number 13 is the "Enter" key on the keyboard
+		if (event.keyCode === 13 || event.keyCore === 32) {
+			// Cancel the default action, if needed
+			event.preventDefault();
+			// Trigger the button element with a click
+			event.currentTarget.click();
+		}
+	});
 }
 function pmb_show_hide_actions(){
 	var selected_items = jQuery('.pmb-selected').length;

@@ -192,8 +192,10 @@ class Admin extends BaseController
         add_filter('plugin_action_links_' . PMB_BASENAME, array($this, 'pluginPageLinks'));
         add_action('admin_enqueue_scripts', [$this,'enqueueScripts']);
 
-        add_filter('post_row_actions', [ $this, 'postAdminRowActions'], 10, 2);
-        add_filter('page_row_actions', [ $this, 'postAdminRowActions'], 10, 2);
+        if (pmb_fs()->is_plan__premium_only('founding_members')) {
+            add_filter('post_row_actions', [$this, 'postAdminRowActions'], 10, 2);
+            add_filter('page_row_actions', [$this, 'postAdminRowActions'], 10, 2);
+        }
 
         $this->makePrintContentsSaySaved();
         $this->notification_manager->showOneTimeNotifications();
@@ -604,7 +606,8 @@ class Admin extends BaseController
                                     'cant_add' => __('Please select items to add to the project', 'print-my-blog'),
                                     'cant_remove' => __('Please select items to remove', 'print-my-blog'),
                                     'cant_move' => __('Please select items to move', 'print-my-blog'),
-                                    'insert_error' => __('Error inserting. Please use the PMB help page to get help', 'print-my-blog')
+                                    'insert_error' => __('Error inserting. Please use the PMB help page to get help', 'print-my-blog'),
+                                    'duplicate_error' => __('Error creating new print material. Please use the PMB help page to get help.', 'print-my-blog'),
                                 ]
                             ]
                         );
@@ -1711,9 +1714,9 @@ class Admin extends BaseController
             self::SLUG_ACTION_DUPLICATE_PRINT_MATERIAL
         );
         $actions['pmb_new_print_material'] = '<a href="' . esc_url($url) . '" alt="'
-            . esc_attr(sprintf(\__('New print material from &#8220;%s&#8221;', 'print-my-blog'), $post->post_title))
+            . esc_attr(sprintf(\__('Copy "%s" to New Print Material', 'print-my-blog'), $post->post_title))
             . '">' .
-            esc_html__('New Print Material', 'print-my-blog')
+            esc_html__('Copy to Print Material', 'print-my-blog')
             . '</a>';
 
         return $actions;
