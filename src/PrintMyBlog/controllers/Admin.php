@@ -1563,16 +1563,10 @@ class Admin extends BaseController
         $wrapped_post = $this->post_manager->getById($post_id);
         $new_post = $wrapped_post->duplicatePost(
                 [
-                    'post_title' => sprintf(__('%s (print material)', 'print-my-blog'), $wrapped_post->getWpPost()->post_title),
+                    'post_title' => $wrapped_post->getWpPost()->post_title),
                     'post_type' => CustomPostTypes::CONTENT,
                     'post_status' => 'private'
                 ]
-        );
-        // add a postmeta that sets this to use the same post title as before
-        add_post_meta(
-            $new_post->ID,
-            'pmb_title',
-            $wrapped_post->getWpPost()->post_title
         );
         wp_safe_redirect(
             get_edit_post_link($new_post->ID, 'not_display')

@@ -102,7 +102,7 @@ function pmb_the_title(){
             $title = get_the_title($post);
         }
     }
-	return '<h1 class="pmb-title">' . $title . '</h1>';
+	echo '<h1 class="pmb-title">' . $title . '</h1>';
 }
 
 function pmb_design_uses($post_content_thing, $default){
