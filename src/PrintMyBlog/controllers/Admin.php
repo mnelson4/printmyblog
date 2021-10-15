@@ -1563,7 +1563,7 @@ class Admin extends BaseController
         $wrapped_post = $this->post_manager->getById($post_id);
         $new_post = $wrapped_post->duplicatePost(
                 [
-                    'post_title' => $wrapped_post->getWpPost()->post_title),
+                    'post_title' => $wrapped_post->getWpPost()->post_title,
                     'post_type' => CustomPostTypes::CONTENT,
                     'post_status' => 'private'
                 ]
