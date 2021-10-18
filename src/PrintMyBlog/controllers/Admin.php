@@ -1127,8 +1127,8 @@ class Admin extends BaseController
             $default_format = DefaultFileFormats::DIGITAL_PDF;
         }
         return apply_filters(
-                '\PrintMyBlog\controllers\Admin::getSetupForm',
-                new FormSection([
+            '\PrintMyBlog\controllers\Admin::getSetupForm',
+            new FormSection([
                 'name' => 'pmb-project',
                 'subsections' => [
                     'title' => new TextInput([
@@ -1148,7 +1148,7 @@ class Admin extends BaseController
                         ]
                     )
                 ]
-            ]),
+                ]),
             $this->project
         );
     }

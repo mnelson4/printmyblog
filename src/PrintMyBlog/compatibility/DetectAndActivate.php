@@ -60,7 +60,7 @@ class DetectAndActivate
             if (defined('WPCF7_VERSION')) {
                 $compatiblity_mods_to_activate[] = new ContactForm7();
             }
-            if(defined('ICL_SITEPRESS_VERSION')) {
+            if (defined('ICL_SITEPRESS_VERSION')) {
                 $compatiblity_mods_to_activate[] = new Wpml();
             }
             $this->compatibility_mods = $compatiblity_mods_to_activate;
