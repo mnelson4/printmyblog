@@ -228,7 +228,7 @@ class Ajax extends BaseController
             }
         }
         if (!empty($_GET['exclude'])) {
-            $query_params['exclude'] = array_map(
+            $query_params['post__not_in'] = array_map(
                 'intval',
                 explode(',', $_GET['exclude'])
             );

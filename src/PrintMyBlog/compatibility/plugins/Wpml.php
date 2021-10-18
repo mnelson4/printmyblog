@@ -126,9 +126,12 @@ class Wpml extends CompatibilityBase
     public function setupWpQueryWithWpml($wp_query){
         // remove WPML's default WP_Query filtering from WPML_Query_Filter
         // which assumes we only want items of the same language as the current post
-        global $wpml_query_filter;
+        global $wpml_query_filter, $sitepress;
         remove_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10 );
         remove_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10 );
+        // and don't let WPML parse the query, they turn the IDs of translated posts into their un-translated
+        // equivalents, which we don't want when excluding posts.
+        remove_action( 'parse_query', array( $sitepress, 'parse_query' ) );
 
         // setup our filters
         $wp_query['suppress_filters'] = false;
@@ -184,9 +187,10 @@ class Wpml extends CompatibilityBase
      * @return mixed
      */
     public function doneWpQuery($posts){
-        global $wpml_query_filter;
+        global $wpml_query_filter, $sitepress;
         add_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10, 2 );
         add_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10, 2 );
+        add_action( 'parse_query', array( $sitepress, 'parse_query' ) );
         return $posts;
     }
 
