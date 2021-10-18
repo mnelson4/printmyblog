@@ -639,6 +639,14 @@ class Admin extends BaseController
                             'pmb-generate',
                             'pmb_generate',
                             [
+                                'generate_ajax_data' => apply_filters(
+                                    '\PrintMyBlog\controllers\Admin->enqueueScripts generate generate_ajax_data',
+                                    [
+                                        'action' => 'pmb_project_status',
+                                        'ID' => $this->project->getWpPost()->ID,
+                                    ],
+                                    $this->project
+                                ),
                                 'site_url' => site_url(),
                                 'use_pmb_central_for_previews' => $use_pmb_central,
                                 'license_data' => [
@@ -1118,27 +1126,31 @@ class Admin extends BaseController
         } else {
             $default_format = DefaultFileFormats::DIGITAL_PDF;
         }
-        return new FormSection([
-            'name' => 'pmb-project',
-            'subsections' => [
-                'title' => new TextInput([
-                    'html_label_text' => __('Project Title', 'print-my-blog'),
-                    'required' => true,
-                    'default' => $this->project instanceof Project ? $this->project->getWpPost()->post_title : '',
-                    'other_html_attributes' => [
-                            'autofocus'
-                    ]
-                ]),
-                'formats' => new RadioButtonInput(
-                    $format_options,
-                    [
-                        'html_label_text' => __('Format', 'print-my-blog'),
+        return apply_filters(
+                '\PrintMyBlog\controllers\Admin::getSetupForm',
+                new FormSection([
+                'name' => 'pmb-project',
+                'subsections' => [
+                    'title' => new TextInput([
+                        'html_label_text' => __('Project Title', 'print-my-blog'),
                         'required' => true,
-                        'default' => $default_format
-                    ]
-                )
-            ]
-        ]);
+                        'default' => $this->project instanceof Project ? $this->project->getWpPost()->post_title : '',
+                        'other_html_attributes' => [
+                                'autofocus'
+                        ]
+                    ]),
+                    'formats' => new RadioButtonInput(
+                        $format_options,
+                        [
+                            'html_label_text' => __('Format', 'print-my-blog'),
+                            'required' => true,
+                            'default' => $default_format
+                        ]
+                    )
+                ]
+            ]),
+            $this->project
+        );
     }
     protected function saveNewProject()
     {
@@ -1226,6 +1238,7 @@ class Admin extends BaseController
             }
         }
         $this->project->getProgress()->markStepComplete(ProjectProgress::SETUP_STEP);
+        do_action('\PrintMyBlog\controllers\Admin->saveNewProject', $this->project, $form);
         $this->redirectToNextStep($this->project);
     }
 
