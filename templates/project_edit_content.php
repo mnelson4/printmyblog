@@ -52,6 +52,8 @@ pmb_render_template(
                     <div class="pmb-project-choices-filters pmb-scrollable-window pmb-filters-opened" id="pmb-filters">
                         <div class="pmb-project-choices-filters-table-wrap">
                             <table class="form-table">
+                                <?php do_action('pmb__project_edit_content__filters_top', $project);?>
+                                <tr>
                                     <th><label for="pmb-project-choices-post-type"><?php esc_html_e('Post Type', 'print-my-blog');?></label></th>
                                     <td>
                                         <select id="pmb-project-choices-post-type" name="pmb-post-type" form="pmb-filter-form">

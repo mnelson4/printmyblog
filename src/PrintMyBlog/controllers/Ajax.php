@@ -239,7 +239,7 @@ class Ajax extends BaseController
         if (!empty($_GET['pmb-order'])) {
             $query_params['order'] = $_GET['pmb-order'];
         }
-        $posts = get_posts($query_params);
+        $posts = get_posts(apply_filters('\PrintMyBlog\controllers\Ajax->handlePostSearch $query_params', $query_params));
         foreach ($posts as $post) {
             pmb_content_item($post, $project, 0);
         }
