@@ -1,0 +1,11 @@
+<wpml-config>
+    <custom-types>
+        <custom-type translate="0">pmb_project</custom-type>
+        <custom-type translate="0">pmb_design</custom-type>
+        <custom-type translate="1" display-as-translated="1">pmb_content</custom-type>
+    </custom-types>
+<!--    <custom-fields>-->
+<!--        <custom-field action="translate">_pmb_internal_footnote_text</custom-field>-->
+<!--        <custom-field action="translate">_pmb_footnote_text</custom-field>-->
+<!--    </custom-fields>-->
+</wpml-config>
