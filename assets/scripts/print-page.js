@@ -717,7 +717,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             }
 
             if(featured_media_url !== null) {
-                return '<div class="single-featured-image-header"><img src="' + featured_media_url + '" class="wp-post-image"/></div>';
+                return '<div class="pmb-image single-featured-image-header"><img src="' + featured_media_url + '" class="wp-post-image"/></div>';
             }
         }
         return '';
