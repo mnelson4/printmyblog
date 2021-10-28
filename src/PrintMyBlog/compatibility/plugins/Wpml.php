@@ -3,6 +3,7 @@
 namespace PrintMyBlog\compatibility\plugins;
 
 use PrintMyBlog\orm\entities\Project;
+use PrintMyBlog\orm\entities\ProjectSection;
 use Twine\forms\base\FormSection;
 use Twine\forms\helpers\InputOption;
 use Twine\forms\inputs\SelectInput;
@@ -32,6 +33,9 @@ class Wpml extends CompatibilityBase
             10,
             2
         );
+
+        // translate posts when generating a project
+        add_filter('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->sortPostsAndAttachSections $sections', [$this, 'sortTranslatedPosts'], 10, 1);
     }
 
     /**
@@ -210,5 +214,16 @@ class Wpml extends CompatibilityBase
             $data['lang'] = $selected_language;
         }
         return $data;
+    }
+
+    /**
+     * @param ProjectSection[] $sections
+     * @return ProjectSection[] with the post IDs updated to their translations
+     */
+    public function sortTranslatedPosts($sections){
+        foreach($sections as $section){
+            $section->setPostId(icl_object_id($section->getPostId()));
+        }
+        return $sections;
     }
 }

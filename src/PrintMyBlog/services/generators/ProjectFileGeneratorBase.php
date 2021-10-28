@@ -146,11 +146,13 @@ abstract class ProjectFileGeneratorBase
     {
         $ordered_posts = [];
         $unordered_posts = $query->posts;
-        foreach ($sections as $section) {
-            foreach ($unordered_posts as $post) {
-                if ($section->getPostId() == $post->ID) {
-                    $post->pmb_section = $section;
-                    $ordered_posts[] = $post;
+
+        foreach ($unordered_posts as $post_from_wp_query) {
+            foreach (apply_filters('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->sortPostsAndAttachSections $sections', $sections, $this, $unordered_posts) as $section) {
+                $post_id_from_section = $section->getPostId();
+                if ( $post_id_from_section == $post_from_wp_query->ID) {
+                    $post_from_wp_query->pmb_section = $section;
+                    $ordered_posts[] = $post_from_wp_query;
                 }
             }
         }
