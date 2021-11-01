@@ -6,8 +6,11 @@ use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;
 use PrintMyBlog\orm\managers\ProjectManager;
 use Twine\forms\base\FormSection;
+use Twine\forms\base\FormSectionHtml;
 use Twine\forms\helpers\InputOption;
 use Twine\forms\inputs\SelectInput;
+use Twine\forms\inputs\SelectRevealInput;
+use Twine\helpers\Html;
 use wpml_get_active_languages;
 use Twine\compatibility\CompatibilityBase;
 
@@ -26,7 +29,6 @@ class Wpml extends CompatibilityBase
      */
     public function setHooks()
     {
-        add_filter('\PrintMyBlog\controllers\Admin::getSetupForm', [$this,'addLanguageOnSetup'], 10, 2);
         add_action('\PrintMyBlog\controllers\Admin->saveNewProject', [$this,'saveProjectLanguage'], 10, 2);
 
         // add a filter for language on the content editing page
@@ -57,48 +59,6 @@ class Wpml extends CompatibilityBase
     protected function getProjectLanguage($project)
     {
         return $project instanceof Project ? $project->getPmbMeta('lang') : '';
-    }
-
-    /**
-     * Adds language on the setup step
-     * @param FormSection $setup_form
-     * @param Project|null $project
-     * @return FormSection
-     * @throws \Twine\forms\helpers\ImproperUsageException
-     */
-    public function addLanguageOnSetup(FormSection $setup_form, Project $project = null)
-    {
-        global $sitepress;
-        $languages_data = wpml_get_active_languages();
-        $default_language_details = $sitepress->get_language_details($sitepress->get_default_language());
-
-        $language_options = [
-                '' => new InputOption(
-                    sprintf(
-                        esc_html__('Default language (currently %s)', 'sitepress'),
-                        $default_language_details['display_name']
-                    )
-                )
-        ];
-        foreach ($languages_data as $code => $language_data) {
-            $language_options[$code] = new InputOption($language_data['display_name']);
-        }
-
-        $setup_form->addSubsections(
-            [
-                'lang' => new SelectInput(
-                    $language_options,
-                    [
-                        'html_label_text' => __('Language', 'sitepress'),
-                        'html_help_text' => __('Used for generated content and default filters', 'print-my-blog'),
-                        'default' => $this->getProjectLanguage($project),
-                        ]
-                )
-                ],
-            'title',
-            false
-        );
-        return $setup_form;
     }
 
     /**
@@ -255,20 +215,83 @@ class Wpml extends CompatibilityBase
         $pmb_project = $pmb_wpml_original_project;
     }
 
+    /**
+     * Add a language switcher and a div for each language.
+     * When the language is switched, unless it's the default language, provide translation options for it and its design
+     * @param Project $project
+     * @param $generations
+     */
     public function addTranslationOptions(Project $project, $generations){
-        $languages = wpml_get_active_languages();
-        $post_status_display = new \WPML_Post_Status_Display($languages);
+
 
         global $sitepress;
-        $default_language = $sitepress->get_default_language();
-        foreach($languages as $language_code => $language_data){
-            if($language_code === $default_language){
+        $languages_data = wpml_get_active_languages();
+        $post_status_display = new \WPML_Post_Status_Display($languages_data);
+        $default_language_code = $sitepress->get_default_language();
+        $default_language_details = $sitepress->get_language_details($default_language_code);
+
+        $language_options = [
+            '' => new InputOption(
+                sprintf(
+                    esc_html__('Default language (currently %s)', 'sitepress'),
+                    $default_language_details['display_name']
+                )
+            )
+        ];
+
+        $form_sections = [];
+        foreach ($languages_data as $language_code => $language_data) {
+            if($language_code === $default_language_code){
                 continue;
             }
-            echo $post_status_display->get_status_html($project->getWpPost()->ID, $language_code);
-//            $language_data['display_name']
-//            var_dump($sitepress->get_object_id($project->getWpPost()->ID, 'post', false,'fr'));
+            $html_helper = Html::instance();
+            $design_translations_html = '';
+            foreach($project->getDesignsSelected() as $design){
+                $design_translations_html .= $html_helper->div(
+                        sprintf(
+                                __('Translate %s Design', 'print-my-blog'),
+                            $design->getWpPost()->post_title
+                        )
+                        . $post_status_display->get_status_html($design->getWpPost()->ID, $language_code)
+                );
+            }
+            $form_sections[$language_code] = new FormSection(
+                [
+                    'subsections' => [
+                        'html' => new FormSectionHtml(
+                            $html_helper->h2(sprintf(__('%s Translations', 'print-my-blog'), $language_data['display_name']))
+                            . $html_helper->div(
+                                    __('Translate Project Meta', 'print-my-blog')
+                                    . $post_status_display->get_status_html($project->getWpPost()->ID, $language_code)
+                            )
+                            . $design_translations_html
+                        )
+                    ]
+                ]
+            );
+
+            $language_options[$language_code] = new InputOption($language_data['display_name']);
         }
+        $form_sections = array_merge(
+            [
+                'choose_language' => new SelectRevealInput(
+                    $language_options,
+                    [
+                        'html_label_text' => __('Language', 'sitepress'),
+                        'default' => $this->getProjectLanguage($project),
+                    ]
+                )
+            ],
+            $form_sections
+        );
+
+        $form = new FormSection(
+            [
+                    'name' => 'pmb-language-chooser',
+                    'subsections' => $form_sections
+            ]
+        );
+        echo $form->getHtmlAndJs();
 
     }
 }
