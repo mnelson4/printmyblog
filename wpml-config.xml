@@ -43,5 +43,11 @@
         <custom-field action="copy">_pmb_no_extra_columns</custom-field>
         <custom-field action="copy">_pmb_header_content</custom-field>
         <custom-field action="copy">_pmb_post_content</custom-field>
+        <custom-field action="copy">_pmb_paragraph_indent</custom-field>
+        <custom-field action="copy">_pmb_dividing_line</custom-field>
+
+
+
+
     </custom-fields>
 </wpml-config>

@@ -10,6 +10,7 @@ use Twine\forms\base\FormSectionHtml;
 use Twine\forms\helpers\InputOption;
 use Twine\forms\inputs\SelectInput;
 use Twine\forms\inputs\SelectRevealInput;
+use Twine\helpers\Array2;
 use Twine\helpers\Html;
 use wpml_get_active_languages;
 use Twine\compatibility\CompatibilityBase;
@@ -29,8 +30,6 @@ class Wpml extends CompatibilityBase
      */
     public function setHooks()
     {
-        add_action('\PrintMyBlog\controllers\Admin->saveNewProject', [$this,'saveProjectLanguage'], 10, 2);
-
         // add a filter for language on the content editing page
         add_action('pmb__project_edit_content__filters_top', [$this, 'addLanguageFilter'], 1);
 
@@ -50,7 +49,7 @@ class Wpml extends CompatibilityBase
         add_action('project_edit_generate__under_header', [$this,'addTranslationOptions'], 10, 2);
         add_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom before_ob_start', [$this,'setTranslatedProject']);
         add_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom after_get_clean', [$this,'unsetTranslatedProject']);
-
+        add_action('wp_ajax_pmb_update_project_lang', [$this,'handleAjaxUpdateProjectLanguage']);
     }
 
     /**
@@ -62,17 +61,6 @@ class Wpml extends CompatibilityBase
     }
 
     /**
-     * Remember which language was selected on the project
-     * @param Project $project
-     * @param FormSection $setup_form
-     * @throws \Twine\forms\helpers\ImproperUsageException
-     */
-    public function saveProjectLanguage(Project $project, FormSection $setup_form)
-    {
-        $project->setPmbMeta('lang', $setup_form->getInputValue('lang'));
-    }
-
-    /**
      * @param Project|null $project
      * Outputs the HTML for the language picker. Uses directly HTML because this form needed to be very custom-made.
      *
@@ -80,7 +68,7 @@ class Wpml extends CompatibilityBase
     public function addLanguageFilter(Project $project = null)
     {
         $languages = wpml_get_active_languages();
-        $project_language = $this->getProjectLanguage($project);
+        $project_language = wpml_get_default_language()
         ?>
         <tr>
             <th><label for="pmb-project-choices-language"><?php esc_html_e('Language', 'sitepress');?></label></th>
@@ -288,10 +276,57 @@ class Wpml extends CompatibilityBase
         $form = new FormSection(
             [
                     'name' => 'pmb-language-chooser',
-                    'subsections' => $form_sections
+                    'subsections' => $form_sections,
+                    'enqueue_scripts_callback' => function(){
+                    wp_add_inline_script(
+                            'twine_form_section_validation',
+                        "
+                        // when the language is changed, change the parameter for generating the project.
+                        jQuery(document).ready(function(){
+                            jQuery('#pmb-language-chooser-choose-language').change(function(event){
+                                var new_lang = jQuery('#pmb-language-chooser-choose-language').val();
+                                pmb_generate.generate_ajax_data.lang = new_lang;
+                                var data = {
+                                    'action':'pmb_update_project_lang',
+                                    '_nonce': pmb_generate.generate_ajax_data._nonce,
+                                    'project_id':pmb_generate.generate_ajax_data.ID,
+                                    'new_lang': new_lang
+                                };
+                                jQuery.ajax({
+                                    url:ajaxurl,
+                                    method:'POST',
+                                    data:data,
+                                    success:function(){
+                                        // alert('success');
+                                    }
+                                });
+                            });
+                        });"
+                    );
+                }
             ]
         );
         echo $form->getHtmlAndJs();
+    }
 
+    public function handleAjaxUpdateProjectLanguage(){
+        if(! check_ajax_referer('pmb-project-edit', '_nonce')){
+            wp_send_json_error('please refresh the page');
+        }
+        $project_id = (int)Array2::setOr($_REQUEST,'project_id',null);
+        $language_code = Array2::setOr($_REQUEST, 'new_lang', null);
+        if(! $project_id){
+            wp_send_json_error( 'oups no project id');
+        }
+        if(! current_user_can('edit_pmb_project', $project_id)){
+            wp_send_json_error('Oups you don\'t have permission to edit a project');
+        }
+        $project = $this->project_manager->getById($project_id);
+        if(! $project instanceof Project){
+            wp_send_json_error('oups no such project');
+        }
+        $project->setPmbMeta('lang', $language_code);
+        wp_send_json_success();
+        exit;
     }
 }
