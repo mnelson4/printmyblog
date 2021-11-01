@@ -18,6 +18,7 @@ pmb_render_template(
 		'steps_to_urls' => $steps_to_urls
 	]
 );
+do_action('project_edit_generate__under_header', $project, $generations);
 ?>
 <?php if (is_array($license_info)){
    ?>

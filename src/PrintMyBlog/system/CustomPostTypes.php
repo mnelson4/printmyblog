@@ -39,8 +39,6 @@ class CustomPostTypes
             [
                 'label' => esc_html__('Projects', 'print-my-blog'),
                 'description' => esc_html__('Projects for printing with Print My Blog', 'print-my-blog'),
-                // 'show_in_menu' => true,
-                // 'show_ui' => true,
                 'capability_type' => 'pmb_project',
                 'capabilities' => array(
                     'publish_posts' => 'publish_pmb_projects',

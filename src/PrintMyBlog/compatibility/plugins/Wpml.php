@@ -4,6 +4,7 @@ namespace PrintMyBlog\compatibility\plugins;
 
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;
+use PrintMyBlog\orm\managers\ProjectManager;
 use Twine\forms\base\FormSection;
 use Twine\forms\helpers\InputOption;
 use Twine\forms\inputs\SelectInput;
@@ -12,6 +13,14 @@ use Twine\compatibility\CompatibilityBase;
 
 class Wpml extends CompatibilityBase
 {
+    /**
+     * @var ProjectManager
+     */
+    private $project_manager;
+
+    public function inject(ProjectManager $project_manager){
+        $this->project_manager = $project_manager;
+    }
     /**
      * Set hooks for compatibility with PMB for any request.
      */
@@ -36,6 +45,10 @@ class Wpml extends CompatibilityBase
 
         // translate posts when generating a project
         add_filter('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->sortPostsAndAttachSections $sections', [$this, 'sortTranslatedPosts'], 10, 1);
+        add_action('project_edit_generate__under_header', [$this,'addTranslationOptions'], 10, 2);
+        add_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom before_ob_start', [$this,'setTranslatedProject']);
+        add_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom after_get_clean', [$this,'unsetTranslatedProject']);
+
     }
 
     /**
@@ -222,8 +235,40 @@ class Wpml extends CompatibilityBase
      */
     public function sortTranslatedPosts($sections){
         foreach($sections as $section){
-            $section->setPostId(icl_object_id($section->getPostId()));
+            $section->setPostId(wpml_object_id_filter($section->getPostId()));
         }
         return $sections;
+    }
+
+    /**
+     * @param $project_id
+     * @return int|null
+     */
+    public function setTranslatedProject(){
+        global $pmb_project, $pmb_wpml_original_project;
+        $pmb_wpml_original_project = $pmb_project;
+        $pmb_project = $this->project_manager->getById(wpml_object_id_filter($pmb_project->getWpPost()->ID));
+    }
+
+    public function unsetTranslatedProject(){
+        global $pmb_project, $pmb_wpml_original_project;
+        $pmb_project = $pmb_wpml_original_project;
+    }
+
+    public function addTranslationOptions(Project $project, $generations){
+        $languages = wpml_get_active_languages();
+        $post_status_display = new \WPML_Post_Status_Display($languages);
+
+        global $sitepress;
+        $default_language = $sitepress->get_default_language();
+        foreach($languages as $language_code => $language_data){
+            if($language_code === $default_language){
+                continue;
+            }
+            echo $post_status_display->get_status_html($project->getWpPost()->ID, $language_code);
+//            $language_data['display_name']
+//            var_dump($sitepress->get_object_id($project->getWpPost()->ID, 'post', false,'fr'));
+        }
+
     }
 }

@@ -98,6 +98,7 @@ abstract class ProjectFileGeneratorBase
      */
     protected function startGenerating()
     {
+        do_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->startGenerating', $this);
         // show protected posts' bodies as normal.
         add_filter('post_password_required', '__return_false');
     }
@@ -264,6 +265,7 @@ abstract class ProjectFileGeneratorBase
         $pmb_project = $this->project;
         $pmb_design = $this->design;
         $pmb_project_generation = $this->project_generation;
+        do_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom before_ob_start');
         ob_start();
         include($template_file);
         // if Oxygen page builder is active, clear ALL buffers. It starts a buffer and then clears it in the footer
@@ -279,6 +281,7 @@ abstract class ProjectFileGeneratorBase
         } else {
             $str = ob_get_clean();
         }
+        do_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom after_get_clean');
 
         return $str;
     }
