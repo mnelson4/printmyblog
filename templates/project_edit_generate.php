@@ -47,49 +47,10 @@ foreach($generations as $generation){
 	?>
     <div class="pmb-generate-options-for-<?php echo esc_attr($format_slug);?>">
         <h2><?php echo $generation->getFormat()->coloredTitleAndIcon();?></h2>
+        <a class="button button-primary pmb-generate pmb_spin_on_click" data-format="<?php echo esc_attr($format_slug);?>" aria-label="<?php echo esc_attr(sprintf(esc_html__('Generate %s', 'print-my-blog'), $generation->getFormat()->title()));?>"><?php
+            esc_html_e('Generate', 'print-my-blog');
+        ?></a>
         <?php
-        if($generation->isGenerated()){
-            if($generation->isDirty() || $generation->isOld()){
-                ?>
-                <div class="pmb-previous-generation-info">
-                    <b>
-                        <?php printf(
-                            esc_html__('The file generated %s is out-of-date.', 'print-my-blog'),
-                            date_i18n(get_option('date_format'), $generation->generatedTimestamp())
-                        );?>
-                    </b>
-                    <ul>
-                        <?php foreach($generation->getDirtyReasons() as $reason){ ?>
-                        <li><?php echo $reason;?></li>
-                        <?php } ?>
-                    </ul>
-                </div>
-                <br/>
-                <button
-                        class="button button-primary pmb-generate pmb_spin_on_click" data-format="<?php echo esc_attr($format_slug);?>" aria-label="<?php echo esc_attr(sprintf(esc_html__('Regenerate %s', 'print-my-blog'), $generation->getFormat()->title()));?>"><?php esc_html_e('Regenerate', 'print-my-blog');
-                ?></button>
-                <?php
-            } else {
-                ?>
-                <div class="pmb-previous-generation-info">
-                    <b>
-                        <?php printf(
-                            esc_html__('This file was already generated %s', 'print-my-blog'),
-                            date_i18n(get_option('date_format') . ' ' . get_option('time_format'), $generation->generatedTimestamp())
-                        );?>
-                    </b>
-                </div>
-                <br/>
-                <button class="button pmb-generate pmb_spin_on_click" data-format="<?php echo esc_attr($format_slug);?>" aria-label="<?php echo esc_attr(sprintf(esc_html__('Regenerate %s Anyway', 'print-my-blog'), $generation->getFormat()->title()));?>"><?php esc_html_e('Regenerate Anyway', 'print-my-blog');?></button>
-                <?php
-            }
-        } else {
-        ?>
-                <a class="button button-primary pmb-generate pmb_spin_on_click" data-format="<?php echo esc_attr($format_slug);?>" aria-label="<?php echo esc_attr(sprintf(esc_html__('Generate %s', 'print-my-blog'), $generation->getFormat()->title()));?>"><?php
-                    esc_html_e('Generate', 'print-my-blog');
-                ?></a>
-        <?php
-        }
         ?>
         <div class="pmb-after-generation" <?php echo ! $generation->isGenerated() || $generation->isDirty() || $generation->isOld() ? 'style="display:none"' : '';?>>
             <a class="button button-primary" href="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"><?php printf(__('View %s Print Page', 'print-my-blog'), $generation->getFormat()->title());?></a>
