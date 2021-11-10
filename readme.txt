@@ -417,6 +417,7 @@ https://youtu.be/uPQ3vqm7A2g
 * Bugfix: prevent emojis in gallery image descriptions from breaking layout
 * Bugfix: if WP_DEBUG_DISPLAY setting is on, show warnings when generating print-page
 * Enhancement: Quick Print prevents featured images from being too big
+* Enhancement: improve Mayer Magazine intro text styling (add some padding and left-justify text)
 
 = 3.7.3 October 8, 2021 =
 * Enhancement: Mayer Magazine styling improvements, such as revert special list styling changes to Mayer Magazine (they looked bad with like galleries), improving alignment of the table of contents, and don't show the dividing line in front matter

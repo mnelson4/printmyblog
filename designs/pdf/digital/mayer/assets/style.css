@@ -63,6 +63,10 @@
     .pmb-posts-header .project-title{
         font-size:5em;
     }
+    .project-intro{
+        padding:1em;
+        text-align:initial;
+    }
 
 
     /* toc */
