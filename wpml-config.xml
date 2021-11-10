@@ -1,7 +1,7 @@
 <wpml-config>
     <custom-types>
         <custom-type translate="1" display-as-translated="1">pmb_project</custom-type>
-        <custom-type translate="0">pmb_design</custom-type>
+        <custom-type translate="1" display-as-translated="1">pmb_design</custom-type>
         <custom-type translate="1" display-as-translated="1">pmb_content</custom-type>
     </custom-types>
     <custom-fields>
@@ -20,9 +20,9 @@
         <custom-field action="translate">_pmb_page_reference_text</custom-field>
         <custom-field action="translate">_pmb_org</custom-field>
         <custom-field action="translate">_pmb_page_reference_text</custom-field>
-        <custom-field action="translate">_pmb_external_links</custom-field>
-        <custom-field action="translate">_pmb_internal_links</custom-field>
 
+        <custom-field action="copy">_pmb_external_links</custom-field>
+        <custom-field action="copy">_pmb_internal_links</custom-field>
         <custom-field action="copy">_pmb_image_placement</custom-field>
         <custom-field action="copy">_pmb_image_size</custom-field>
         <custom-field action="copy">_pmb_main_header_font_size</custom-field>
@@ -45,6 +45,7 @@
         <custom-field action="copy">_pmb_post_content</custom-field>
         <custom-field action="copy">_pmb_paragraph_indent</custom-field>
         <custom-field action="copy">_pmb_dividing_line</custom-field>
+<!--        _pmb_format-->
 
 
 

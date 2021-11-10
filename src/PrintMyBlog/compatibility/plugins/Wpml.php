@@ -4,6 +4,7 @@ namespace PrintMyBlog\compatibility\plugins;
 
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;
+use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\orm\managers\ProjectManager;
 use Twine\forms\base\FormSection;
 use Twine\forms\base\FormSectionHtml;
@@ -21,9 +22,14 @@ class Wpml extends CompatibilityBase
      * @var ProjectManager
      */
     private $project_manager;
+    /**
+     * @var DesignManager
+     */
+    private $design_manager;
 
-    public function inject(ProjectManager $project_manager){
+    public function inject(ProjectManager $project_manager, DesignManager $design_manager){
         $this->project_manager = $project_manager;
+        $this->design_manager = $design_manager;
     }
     /**
      * Set hooks for compatibility with PMB for any request.
@@ -193,14 +199,17 @@ class Wpml extends CompatibilityBase
      * @return int|null
      */
     public function setTranslatedProject(){
-        global $pmb_project, $pmb_wpml_original_project;
+        global $pmb_project, $pmb_wpml_original_project, $pmb_design, $pmb_wpml_original_design;
         $pmb_wpml_original_project = $pmb_project;
+        $pmb_wpml_original_design = $pmb_design;
         $pmb_project = $this->project_manager->getById(wpml_object_id_filter($pmb_project->getWpPost()->ID));
+        $pmb_design = $this->design_manager->getById(wpml_object_id_filter($pmb_design->getWpPost()->ID));
     }
 
     public function unsetTranslatedProject(){
-        global $pmb_project, $pmb_wpml_original_project;
+        global $pmb_project, $pmb_wpml_original_project, $pmb_design, $pmb_wpml_original_design;
         $pmb_project = $pmb_wpml_original_project;
+        $pmb_design = $pmb_wpml_original_design;
     }
 
     /**
