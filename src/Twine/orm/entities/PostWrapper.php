@@ -2,6 +2,7 @@
 
 namespace Twine\orm\entities;
 
+use PrintMyBlog\system\CustomPostTypes;
 use WP_Post;
 
 class PostWrapper
@@ -162,7 +163,22 @@ class PostWrapper
     }
 
     /**
-     * Creates a new post from the underlying post
+     * Duplicates this post as a new print material.
+     *
+     * @param array $args_override
+     * @return WP_Post
+     */
+    public function duplicateAsPrintMaterial($args_override = []){
+        return $this->duplicatePost(
+            [
+                'post_title' => sprintf(__('%s (print material)', 'print-my-blog'), $this->getWpPost()->post_title),
+                'post_type' => CustomPostTypes::CONTENT,
+                'post_status' => 'private'
+            ]
+        );
+    }
+    /**
+     * Creates a new post from the wrapped post
      * @param array $args_override args to override from their defaults when inserting
      * @return WP_Post
      */

@@ -1561,13 +1561,7 @@ class Admin extends BaseController
         check_admin_referer(self::SLUG_ACTION_DUPLICATE_PRINT_MATERIAL);
         $post_id = Array2::setOr($_GET, 'ID', 0);
         $wrapped_post = $this->post_manager->getById($post_id);
-        $new_post = $wrapped_post->duplicatePost(
-                [
-                    'post_title' => $wrapped_post->getWpPost()->post_title,
-                    'post_type' => CustomPostTypes::CONTENT,
-                    'post_status' => 'private'
-                ]
-        );
+        $new_post = $wrapped_post->duplicateAsPrintMaterial();
         wp_safe_redirect(
             get_edit_post_link($new_post->ID, 'not_display')
         );

@@ -307,14 +307,7 @@ class Ajax extends BaseController
         $project_id = Array2::setOr($_REQUEST, 'project', 0);
         $project = $this->project_manager->getById($project_id);
         $wrapped_post = $this->post_manager->getById($post_id);
-        $new_post = $wrapped_post->duplicatePost(
-            [
-                'post_title' => $wrapped_post->getWpPost()->post_title,
-                'post_type' => CustomPostTypes::CONTENT,
-                'post_status' => 'private'
-            ]
-        );
-
+        $new_post = $wrapped_post->duplicateAsPrintMaterial();
         ob_start();
         pmb_content_item($new_post, $project);
         $html = ob_get_clean();
