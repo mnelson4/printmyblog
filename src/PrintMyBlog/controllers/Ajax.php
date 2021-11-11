@@ -86,7 +86,7 @@ class Ajax extends BaseController
         add_action('wp_ajax_pmb_add_print_material', [$this,'addPrintMaterial']);
         add_action('wp_ajax_pmb_reduce_credits', [$this,'reduceCredits']);
         add_action('wp_ajax_pmb_report_error', [$this,'reportError']);
-        add_action('wp_ajax_pmb_duplicate_print_material',[$this,'duplicatePrintMaterial']);
+        add_action('wp_ajax_pmb_duplicate_print_material', [$this,'duplicatePrintMaterial']);
     }
 
     protected function addUnauthenticatedCallback($ajax_action, $method_name)

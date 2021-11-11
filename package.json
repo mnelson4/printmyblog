@@ -1,0 +1,21 @@
+{
+  "name": "print-my-blog",
+  "version": "0.0.0",
+  "description": "Print, PDF, and eBook WordPress Converter plugin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mnelson4/printmyblog.git"
+  },
+  "scripts": {
+    "start": "wp-scripts start",
+    "build": "wp-scripts build"
+  },
+  "license": "GPL-2.0+",
+  "bugs": {
+    "url": "git+https://github.com/mnelson4/printmyblog/issues"
+  },
+  "homepage": "git+https://github.com/mnelson4/printmyblog",
+  "devDependencies": {
+    "@wordpress/scripts": "^2.4.4"
+  }
+}

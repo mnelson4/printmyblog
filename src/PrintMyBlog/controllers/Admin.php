@@ -192,9 +192,11 @@ class Admin extends BaseController
         add_filter('plugin_action_links_' . PMB_BASENAME, array($this, 'pluginPageLinks'));
         add_action('admin_enqueue_scripts', [$this,'enqueueScripts']);
 
-        if (pmb_fs()->is_plan__premium_only('founding_members')) {
+        if (true || pmb_fs()->is_plan__premium_only('founding_members')) {
             add_filter('post_row_actions', [$this, 'postAdminRowActions'], 10, 2);
             add_filter('page_row_actions', [$this, 'postAdminRowActions'], 10, 2);
+            add_action( 'post_submitbox_misc_actions', array( $this, 'addDuplicateAsPrintMaterialToClassicEditor') );
+            add_action( 'enqueue_block_editor_assets', array( $this, 'addDuplicateAsPrintMaterialToGutenberg' ) );
         }
 
         $this->makePrintContentsSaySaved();
@@ -1691,6 +1693,30 @@ class Admin extends BaseController
         if (! $post instanceof \WP_Post || ! current_user_can('publish_' . CustomPostTypes::CONTENTS) || ! is_array($actions)) {
             return $actions;
         }
+        $actions['pmb_new_print_material'] = '<a href="' . esc_url($this->getDuplicatePostAsPrintMaterialUrl($post)) . '" alt="'
+            . esc_attr(sprintf(\__('Copy "%s" to New Print Material', 'print-my-blog'), $post->post_title))
+            . '">' .
+            esc_html__('Copy to Print Material', 'print-my-blog')
+            . '</a>';
+        return $actions;
+    }
+
+    /**
+     * Adds a button to duplicate the post inside the publish metabox
+     */
+    public function addDuplicateAsPrintMaterialToClassicEditor(){
+        global $post;
+?><div>
+        <a href="<?php echo esc_url($this->getDuplicatePostAsPrintMaterialUrl($post));?>" style="float:right;margin:10px" class="button button-secondary" style=""><?php esc_html_e('Copy to Print Material', 'print-my-blog');?></a>
+    </div>
+<?php
+    }
+
+    /**
+     * @param $post
+     * @return string
+     */
+    protected function getDuplicatePostAsPrintMaterialUrl($post){
         $url = wp_nonce_url(
             add_query_arg(
                 [
@@ -1701,12 +1727,10 @@ class Admin extends BaseController
             ),
             self::SLUG_ACTION_DUPLICATE_PRINT_MATERIAL
         );
-        $actions['pmb_new_print_material'] = '<a href="' . esc_url($url) . '" alt="'
-            . esc_attr(sprintf(\__('Copy "%s" to New Print Material', 'print-my-blog'), $post->post_title))
-            . '">' .
-            esc_html__('Copy to Print Material', 'print-my-blog')
-            . '</a>';
+        return $url;
+    }
 
-        return $actions;
+    public function addDuplicateAsPrintMaterialToGutenberg(){
+        die('addDuplicateAsPrintMaterialToGutenberg');
     }
 }

@@ -168,7 +168,8 @@ class PostWrapper
      * @param array $args_override
      * @return WP_Post
      */
-    public function duplicateAsPrintMaterial($args_override = []){
+    public function duplicateAsPrintMaterial($args_override = [])
+    {
         return $this->duplicatePost(
             [
                 'post_title' => sprintf(__('%s (print material)', 'print-my-blog'), $this->getWpPost()->post_title),
