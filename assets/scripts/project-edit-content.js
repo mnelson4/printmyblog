@@ -685,6 +685,9 @@ function pmb_setup_item_options(){
 		var parent_draggable_items = selection.closest('.pmb-project-item');
 		pmb_remove(parent_draggable_items);
 	});
+	// remove any previous listeners for the post duplicating button
+	jQuery('.pmb-duplicate-post-button').off();
+	// ok now setup the post duplicating buttons
 	jQuery('.pmb-duplicate-post-button').click(function(event){
 		var clicked_jq_obj = jQuery(event.currentTarget);
 		var id = clicked_jq_obj.data('id');

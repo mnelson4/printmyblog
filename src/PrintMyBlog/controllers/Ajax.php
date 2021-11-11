@@ -301,6 +301,9 @@ class Ajax extends BaseController
         exit;
     }
 
+    /**
+     * Handles a request to duplicate a post as a print material and then returns the HTML of the row in the content-editing step.
+     */
     public function duplicatePrintMaterial()
     {
         $post_id = Array2::setOr($_REQUEST, 'id', '');
