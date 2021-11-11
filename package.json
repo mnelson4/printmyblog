@@ -16,6 +16,6 @@
   },
   "homepage": "git+https://github.com/mnelson4/printmyblog",
   "devDependencies": {
-    "@wordpress/scripts": "^2.4.4"
+    "@wordpress/scripts": "^19.0.0"
   }
 }
