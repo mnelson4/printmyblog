@@ -266,7 +266,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
                             ?>"
                             target="_blank"><span class="dashicons dashicons-edit pmb-icon pmb-clickable"></span></a>
                         <?php
-                        if(true || pmb_fs()->is_plan__premium_only('founding_members')){
+                        if(pmb_fs()->is_plan__premium_only('founding_members')){
                             ?><a
                             title="<?php
                             echo esc_attr(
