@@ -57,12 +57,7 @@ class PostWrapperManager
     public function getAll(WP_Query $query = null)
     {
         $query = $this->setQueryForThisPostType($query);
-        $posts = $query->get_posts();
-        $wrappers = [];
-        foreach ($posts as $post) {
-            $wrappers[] = $this->createWrapperAroundPost($post);
-        }
-        return $wrappers;
+        return $this->createWrapperAroundPosts($query->get_posts());
     }
 
     /**
@@ -84,6 +79,17 @@ class PostWrapperManager
         return $query;
     }
 
+    /**
+     * @param WP_Post[] $posts
+     * @return PostWrapper[]
+     */
+    protected function createWrapperAroundPosts($posts){
+        $wrapped_posts = [];
+        foreach($posts as $post){
+            $wrapped_posts[] = $this->createWrapperAroundPost($post);
+        }
+        return $wrapped_posts;
+    }
     /**
      * @param WP_Post $post
      *
@@ -117,5 +123,28 @@ class PostWrapperManager
                 $project->delete();
             }
         }
+    }
+
+    /**
+     * @param $meta_key
+     * @param $meta_value
+     * @param int $count
+     * @return PostWrapper[]
+     */
+    public function getByPostMeta($meta_key, $meta_value, $count = -1){
+        $args = array(
+            'posts_per_page'   => $count,
+            'orderby'          => 'ID',
+            'order'            => 'DESC',
+            'post_status'      => 'any',
+            'post_type' => 'any',
+            'meta_query' => array(
+                array(
+                    'key'     => $meta_key,
+                    'value'   => $meta_value
+                ),
+            ),
+        );
+        return $this->createWrapperAroundPosts(get_posts($args));
     }
 }

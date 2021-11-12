@@ -175,15 +175,19 @@ class PostWrapper
                 'post_title' => sprintf(__('%s (print material)', 'print-my-blog'), $this->getWpPost()->post_title),
                 'post_type' => CustomPostTypes::CONTENT,
                 'post_status' => 'private'
+            ],
+            [
+                '_pmb_original_post' => $this->getWpPost()->ID
             ]
         );
     }
     /**
      * Creates a new post from the wrapped post
      * @param array $args_override args to override from their defaults when inserting
+     * @param array $new_post_metas keys are meta keys, values are their values
      * @return WP_Post
      */
-    public function duplicatePost($args_override = [])
+    public function duplicatePost($args_override = [], $new_post_metas = [])
     {
         $post = $this->getWpPost();
         $current_user = wp_get_current_user();
@@ -224,9 +228,9 @@ class PostWrapper
         }
 
         // duplicate all post meta
-        $post_meta = get_post_meta($post->ID);
-        if ($post_meta) {
-            foreach ($post_meta as $meta_key => $meta_values) {
+        $old_post_meta = get_post_meta($post->ID);
+        if ($old_post_meta) {
+            foreach ($old_post_meta as $meta_key => $meta_values) {
                 if ('_wp_old_slug' == $meta_key) { // do nothing for this meta key
                     continue;
                 }
@@ -236,6 +240,11 @@ class PostWrapper
                 }
             }
         }
+
+        foreach($new_post_metas as $meta_key => $meta_value){
+            add_post_meta($new_post_id,$meta_key, $meta_value);
+        }
+
         return get_post($new_post_id);
     }
 }

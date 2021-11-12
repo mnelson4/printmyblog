@@ -42,6 +42,7 @@ use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
 use Twine\services\notifications\OneTimeNotificationManager;
 use WP_Error;
+use WP_Post;
 use WP_Query;
 
 use const http\Client\Curl\PROXY_HTTP;
@@ -192,7 +193,7 @@ class Admin extends BaseController
         add_filter('plugin_action_links_' . PMB_BASENAME, array($this, 'pluginPageLinks'));
         add_action('admin_enqueue_scripts', [$this,'enqueueScripts']);
 
-        if (pmb_fs()->is_plan__premium_only('founding_members')) {
+        if (true || pmb_fs()->is_plan__premium_only('founding_members')) {
             add_filter('post_row_actions', [$this, 'postAdminRowActions'], 10, 2);
             add_filter('page_row_actions', [$this, 'postAdminRowActions'], 10, 2);
             add_action( 'post_submitbox_misc_actions', array( $this, 'addDuplicateAsPrintMaterialToClassicEditor') );
@@ -1686,18 +1687,49 @@ class Admin extends BaseController
 
     /**
      * @param $actions
-     * @param $post
+     * @param WP_Post $post
      */
     public function postAdminRowActions($actions, $post)
     {
-        if (! $post instanceof \WP_Post || ! current_user_can('publish_' . CustomPostTypes::CONTENTS) || ! is_array($actions)) {
+        if (! $post instanceof WP_Post || ! current_user_can('publish_' . CustomPostTypes::CONTENTS) || ! is_array($actions)) {
             return $actions;
         }
-        $actions['pmb_new_print_material'] = '<a href="' . esc_url($this->getDuplicatePostAsPrintMaterialUrl($post)) . '" alt="'
-            . esc_attr(sprintf(\__('Copy "%s" to New Print Material', 'print-my-blog'), $post->post_title))
-            . '">' .
-            esc_html__('Copy to Print Material', 'print-my-blog')
-            . '</a>';
+        if($post->post_type === CustomPostTypes::CONTENT){
+            $original_id = get_post_meta($post->ID, '_pmb_original_post', true);
+            if($original_id){
+                $html = '<a href="' . esc_url(get_edit_post_link($original_id)) . '" alt="'
+                    . esc_attr(sprintf(\__('Edit Original "%s"', 'print-my-blog'), $post->post_title))
+                    . '">' .
+                    esc_html__('Edit Original', 'print-my-blog')
+                    . '</a>';
+            } else {
+                $html = '';
+            }
+        } else {
+            $print_material = null;
+            $print_materials = $this->post_manager->getByPostMeta('_pmb_original_post', (string)$post->ID, 1);
+            if($print_materials){
+                $print_material = reset($print_materials);
+            }
+            if($print_material){
+                $html = '<a href="' . esc_url(get_edit_post_link($print_material->getWpPost()->ID)) . '" alt="'
+                    . esc_attr(sprintf(\__('Edit Print Material of "%s"', 'print-my-blog'), $print_material->getWpPost()->post_title))
+                    . '">' .
+                    esc_html__('Edit Print Material', 'print-my-blog')
+                    . '</a>';
+            } else {
+                $html = '<a href="' . esc_url($this->getDuplicatePostAsPrintMaterialUrl($post)) . '" alt="'
+                . esc_attr(sprintf(\__('Copy "%s" to New Print Material', 'print-my-blog'), $post->post_title))
+                . '">' .
+                esc_html__('Copy to Print Material', 'print-my-blog')
+                . '</a>';
+            }
+
+        }
+        if($html) {
+            $actions['pmb_new_print_material'] = $html;
+        }
+
         return $actions;
     }
 
