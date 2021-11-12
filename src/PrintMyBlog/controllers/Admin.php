@@ -192,7 +192,7 @@ class Admin extends BaseController
         add_filter('plugin_action_links_' . PMB_BASENAME, array($this, 'pluginPageLinks'));
         add_action('admin_enqueue_scripts', [$this,'enqueueScripts']);
 
-        if (true || pmb_fs()->is_plan__premium_only('founding_members')) {
+        if (pmb_fs()->is_plan__premium_only('founding_members')) {
             add_filter('post_row_actions', [$this, 'postAdminRowActions'], 10, 2);
             add_filter('page_row_actions', [$this, 'postAdminRowActions'], 10, 2);
             add_action( 'post_submitbox_misc_actions', array( $this, 'addDuplicateAsPrintMaterialToClassicEditor') );
@@ -1702,7 +1702,7 @@ class Admin extends BaseController
     }
 
     /**
-     * Adds a button to duplicate the post inside the publish metabox
+     * Adds a button to duplicate the post inside the publish metabox.
      */
     public function addDuplicateAsPrintMaterialToClassicEditor(){
         global $post;
@@ -1713,7 +1713,9 @@ class Admin extends BaseController
     }
 
     /**
-     * @param $post
+     * Gets the URL to the admin action which makes a duplicate print material of the given post.
+     *
+     * @param WP_Post $post
      * @return string
      */
     protected function getDuplicatePostAsPrintMaterialUrl($post){
@@ -1730,7 +1732,23 @@ class Admin extends BaseController
         return $url;
     }
 
+    /**
+     * To add the duplicate print material button to the Gutenberg block editor, we need to add it via JS
+     */
     public function addDuplicateAsPrintMaterialToGutenberg(){
-        die('addDuplicateAsPrintMaterialToGutenberg');
+        global $post;
+        wp_enqueue_script(
+            'pmb_blockeditor',
+            PMB_SCRIPTS_URL . 'build/editor.js',
+            array( 'wp-components', 'wp-edit-post', 'wp-element', 'wp-i18n', 'wp-plugins' ),
+            filemtime(PMB_SCRIPTS_DIR . 'build/editor.js')
+        );
+        wp_localize_script(
+            'pmb_blockeditor',
+            'pmbBlockEditor',
+            [
+                'html' => '<a href="' . $this->getDuplicatePostAsPrintMaterialUrl($post) . '" class="button button-secondary">' . esc_html__('Copy to Print Material', 'print-my-blog') . '</a>',
+            ]
+        );
     }
 }
