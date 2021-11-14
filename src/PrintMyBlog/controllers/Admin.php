@@ -1729,12 +1729,13 @@ class Admin extends BaseController
             $original_id = get_post_meta($post->ID, '_pmb_original_post', true);
             $post_type = get_post_type_object(get_post_type($original_id));
             $type_label = '';
-            if($post_type instanceof WP_Post_Type && $post_type->labels->singular_name){
+            if($post_type instanceof WP_Post_Type && isset($post_type->labels, $post_type->labels->singular_name)){
                 $type_label = $post_type->labels->singular_name;
             }
             if($original_id){
-                $html = '<a href="' . esc_url(get_edit_post_link($original_id)) . '" alt="'
-                    . esc_attr(sprintf(\__('Go to Original %s', 'print-my-blog'), $type_label))
+                $html = '<a href="' . esc_url(get_edit_post_link($original_id)) . '" title="'
+                    // translators: 1 post type label, 2: post title
+                    . esc_attr(sprintf(__('Go to the %1$s "%2$s" was copied from.', 'print-my-blog'), $type_label, $post->post_title))
                     . '"'
                     . '>' .
                     sprintf(esc_html__('Go to Original %s', 'print-my-blog'), $type_label)
@@ -1749,15 +1750,16 @@ class Admin extends BaseController
                 $print_material = reset($print_materials);
             }
             if($print_material){
-                $html = '<a href="' . esc_url(get_edit_post_link($print_material->getWpPost()->ID)) . '" alt="'
-                    . esc_attr(sprintf(\__('Go to Print Material of "%s"', 'print-my-blog'), $print_material->getWpPost()->post_title))
+                $html = '<a href="' . esc_url(get_edit_post_link($print_material->getWpPost()->ID)) . '" title="'
+                    // translators: 1: post title
+                    . esc_attr(sprintf(__('Go to Print Material "%s" was created from.', 'print-my-blog'), $print_material->getWpPost()->post_title))
                     . '"'
                     . '>' .
                     esc_html__('Go to Print Material', 'print-my-blog')
                     . '</a>';
             } else {
-                $html = '<a href="' . esc_url($this->getDuplicatePostAsPrintMaterialUrl($post)) . '" alt="'
-                    . esc_attr(sprintf(\__('Copy "%s" to New Print Material', 'print-my-blog'), $post->post_title))
+                $html = '<a href="' . esc_url($this->getDuplicatePostAsPrintMaterialUrl($post)) . '" title="'
+                    . esc_attr(sprintf(__('Copy "%s" to New Print Material for a Print My Blog project', 'print-my-blog'), $post->post_title))
                     . '"'
                     . $css_attr
                     . '>' .
@@ -1804,7 +1806,9 @@ class Admin extends BaseController
             'pmb_blockeditor',
             'pmbBlockEditor',
             [
-                'html' => $this->getDuplicateAsPrintMaterialHtml('button button-secondary')
+                // add HTML entities because wp_localize_script calls html_entities_decode which messes up the
+                // quotes inside the title attributes on the HTML elements
+                'html' => htmlentities( $this->getDuplicateAsPrintMaterialHtml('button button-secondary'), ENT_QUOTES, 'UTF-8' )
             ]
         );
     }
