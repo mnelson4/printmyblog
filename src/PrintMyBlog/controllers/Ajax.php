@@ -10,10 +10,12 @@ use PrintMyBlog\entities\ProjectProgress;
 use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\services\FileFormatRegistry;
 use PrintMyBlog\services\PmbCentral;
+use PrintMyBlog\system\Context;
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\controllers\BaseController;
 use Twine\helpers\Array2;
 use Twine\orm\managers\PostWrapperManager;
+use WP_Post_Type;
 use WP_Query;
 use PrintMyBlog\orm\entities\Project;
 
@@ -310,13 +312,20 @@ class Ajax extends BaseController
         $project_id = Array2::setOr($_REQUEST, 'project', 0);
         $project = $this->project_manager->getById($project_id);
         $wrapped_post = $this->post_manager->getById($post_id);
-        $new_post = $wrapped_post->duplicateAsPrintMaterial();
+        // check if a duplicate was already made
+        $print_materials = $this->post_manager->getByPostMeta('_pmb_original_post', (string)$post_id, 1);
+        if($print_materials){
+            $print_material = reset($print_materials);
+            $print_material_post = $print_material->getWpPost();
+        } else {
+            $print_material_post = $wrapped_post->duplicateAsPrintMaterial();
+        }
         ob_start();
-        pmb_content_item($new_post, $project);
+        pmb_content_item($print_material_post, $project);
         $html = ob_get_clean();
         wp_send_json_success([
             'html' => $html,
-            'post_ID' => $new_post->ID
+            'post_ID' => $print_material->ID
         ]);
         exit;
     }

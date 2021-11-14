@@ -7,6 +7,8 @@ use PrintMyBlog\controllers\Admin;
 use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;
+use PrintMyBlog\system\Context;
+use PrintMyBlog\system\CustomPostTypes;
 
 /**
  * Adds a help icon with text
@@ -266,18 +268,29 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
                             ?>"
                             target="_blank"><span class="dashicons dashicons-edit pmb-icon pmb-clickable"></span></a>
                         <?php
-                        if(pmb_fs()->is_plan__premium_only('founding_members')){
-                            ?><a
-                            title="<?php
-                            echo esc_attr(
-                                sprintf(
-                                    __('Copy "%s" to New Print Material', 'print-my-blog'),
-                                    $title
-                                )
-                            );
-                            ?>"
-                            data-id="<?php echo esc_attr($id);?>" class="pmb-duplicate-post-button" tabindex="0"><span class="dashicons dashicons-admin-page pmb-icon pmb-clickable"></span></a>
-                            <?php
+                        if(true || pmb_fs()->is_plan__premium_only('founding_members')){
+                            $label = '';
+                            if($post_type->name !== CustomPostTypes::CONTENT){
+                                $print_material = null;
+                                $print_materials = Context::instance()->reuse('Twine\orm\managers\PostWrapperManager')->getByPostMeta('_pmb_original_post', (string)$id, 1);
+                                if($print_materials){
+                                    $print_material = reset($print_materials);
+                                }
+                                if($print_material){
+                                    // translators: 1: post title
+                                    $label = sprintf(__('Replace "%s" with the existing Print Material for customizing.', 'print-my-blog'), $print_material->getWpPost()->post_title);
+                                } else {
+                                    $label = sprintf(__('Replace "%s" with a New Print Material for customizing', 'print-my-blog'), $title);
+                                }
+                            }
+                            if($label){
+                                ?><a
+                                title="<?php
+                                echo esc_attr($label);
+                                ?>"
+                                data-id="<?php echo esc_attr($id);?>" class="pmb-duplicate-post-button" tabindex="0"><span class="dashicons dashicons-update pmb-icon pmb-clickable"></span></a><?php
+
+                                }
                         } else {
                             ?>
                             <span tabindex="0" class="dashicons dashicons-admin-page pmb-icon pmb-disabled-icon" title="<?php echo esc_attr(esc_html__('Upgrade to Professional License for one-click copying to Print Materials for customization.', 'print-my-blog'));?>"></span>

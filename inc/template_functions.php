@@ -136,9 +136,11 @@ function pmb_section_template_selector($selected_template, Project $project){
 /**
  * @param WP_Post_Type $post_type
  *
+ * @param string $extra_css_classes
+ * @param string $extra_attrs
  * @return string HTML for the post type's icon
  */
-function pmb_post_type_icon_html(WP_Post_Type $post_type){
+function pmb_post_type_icon_html(WP_Post_Type $post_type, $extra_css_classes = '', $extra_attrs = ''){
     $icon = $post_type->menu_icon;
 	if ( empty( $icon ) ) {
 	    $icon = 'dashicons-media-default';
@@ -156,5 +158,5 @@ function pmb_post_type_icon_html(WP_Post_Type $post_type){
         $img       = '<br />';
         $img_class = ' dashicons ' . sanitize_html_class( $icon );
 	}
-    return "<div class='{$img_class}'{$img_style}>{$img}</div>";
+    return "<div class='{$img_class} " . esc_attr($extra_css_classes). "'{$img_style} {$extra_attrs}>{$img}</div>";
 }

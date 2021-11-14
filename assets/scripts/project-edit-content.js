@@ -703,7 +703,8 @@ function pmb_setup_item_options(){
 				var sortable = jQuery(clicked_jq_obj).closest('.pmb-sortable')
 				var clicked_item = jQuery(clicked_jq_obj).closest('.pmb-project-item')
 				var new_item = jQuery(response.data.html)
-				new_item.insertAfter(clicked_item);
+				clicked_item.replaceWith(new_item);
+				// new_item.insertAfter(clicked_item);
 				pmb_setup_callbacks_on_new_options();
 				pmb_maybe_add_sortable_to(sortable,new_item);
 			},
