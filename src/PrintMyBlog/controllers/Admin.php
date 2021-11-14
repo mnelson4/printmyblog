@@ -43,6 +43,7 @@ use Twine\controllers\BaseController;
 use Twine\services\notifications\OneTimeNotificationManager;
 use WP_Error;
 use WP_Post;
+use WP_Post_Type;
 use WP_Query;
 
 use const http\Client\Curl\PROXY_HTTP;
@@ -1694,13 +1695,49 @@ class Admin extends BaseController
         if (! $post instanceof WP_Post || ! current_user_can('publish_' . CustomPostTypes::CONTENTS) || ! is_array($actions)) {
             return $actions;
         }
+        $html = $this->getDuplicateAsPrintMaterialHtml();
+        if($html) {
+            $actions['pmb_new_print_material'] = $html;
+        }
+
+        return $actions;
+    }
+
+    /**
+     * Adds a button to duplicate the post inside the publish metabox.
+     */
+    public function addDuplicateAsPrintMaterialToClassicEditor(){
+        ?><div><?php
+        echo $this->getDuplicatePostAsPrintMaterialUrl('button button-secondary');
+        ?></div><?php
+    }
+
+    /**
+     * Get the HTML for link to either duplicate as a print material, or edit the related print material
+     * that was already created, or edit the original
+     * @param string $css_class to add to the link
+     * @return string
+     */
+    protected function getDuplicateAsPrintMaterialHtml($css_class = ''){
+        global $post;
+        if($css_class){
+            $css_attr = ' class="' . esc_attr($css_class) . '" ';
+        } else {
+            $css_attr = '';
+        }
         if($post->post_type === CustomPostTypes::CONTENT){
             $original_id = get_post_meta($post->ID, '_pmb_original_post', true);
+            $post_type = get_post_type_object(get_post_type($original_id));
+            $type_label = '';
+            if($post_type instanceof WP_Post_Type && $post_type->labels->singular_name){
+                $type_label = $post_type->labels->singular_name;
+            }
             if($original_id){
                 $html = '<a href="' . esc_url(get_edit_post_link($original_id)) . '" alt="'
-                    . esc_attr(sprintf(\__('Edit Original "%s"', 'print-my-blog'), $post->post_title))
-                    . '">' .
-                    esc_html__('Edit Original', 'print-my-blog')
+                    . esc_attr(sprintf(\__('Go to Original %s', 'print-my-blog'), $type_label))
+                    . '"'
+                    . '>' .
+                    sprintf(esc_html__('Go to Original %s', 'print-my-blog'), $type_label)
                     . '</a>';
             } else {
                 $html = '';
@@ -1713,35 +1750,23 @@ class Admin extends BaseController
             }
             if($print_material){
                 $html = '<a href="' . esc_url(get_edit_post_link($print_material->getWpPost()->ID)) . '" alt="'
-                    . esc_attr(sprintf(\__('Edit Print Material of "%s"', 'print-my-blog'), $print_material->getWpPost()->post_title))
-                    . '">' .
-                    esc_html__('Edit Print Material', 'print-my-blog')
+                    . esc_attr(sprintf(\__('Go to Print Material of "%s"', 'print-my-blog'), $print_material->getWpPost()->post_title))
+                    . '"'
+                    . '>' .
+                    esc_html__('Go to Print Material', 'print-my-blog')
                     . '</a>';
             } else {
                 $html = '<a href="' . esc_url($this->getDuplicatePostAsPrintMaterialUrl($post)) . '" alt="'
-                . esc_attr(sprintf(\__('Copy "%s" to New Print Material', 'print-my-blog'), $post->post_title))
-                . '">' .
-                esc_html__('Copy to Print Material', 'print-my-blog')
-                . '</a>';
+                    . esc_attr(sprintf(\__('Copy "%s" to New Print Material', 'print-my-blog'), $post->post_title))
+                    . '"'
+                    . $css_attr
+                    . '>' .
+                    esc_html__('Copy to Print Material', 'print-my-blog')
+                    . '</a>';
             }
 
         }
-        if($html) {
-            $actions['pmb_new_print_material'] = $html;
-        }
-
-        return $actions;
-    }
-
-    /**
-     * Adds a button to duplicate the post inside the publish metabox.
-     */
-    public function addDuplicateAsPrintMaterialToClassicEditor(){
-        global $post;
-?><div>
-        <a href="<?php echo esc_url($this->getDuplicatePostAsPrintMaterialUrl($post));?>" style="float:right;margin:10px" class="button button-secondary" style=""><?php esc_html_e('Copy to Print Material', 'print-my-blog');?></a>
-    </div>
-<?php
+        return $html;
     }
 
     /**
@@ -1779,7 +1804,7 @@ class Admin extends BaseController
             'pmb_blockeditor',
             'pmbBlockEditor',
             [
-                'html' => '<a href="' . $this->getDuplicatePostAsPrintMaterialUrl($post) . '" class="button button-secondary">' . esc_html__('Copy to Print Material', 'print-my-blog') . '</a>',
+                'html' => $this->getDuplicateAsPrintMaterialHtml('button button-secondary')
             ]
         );
     }
