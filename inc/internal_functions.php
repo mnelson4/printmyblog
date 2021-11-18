@@ -268,7 +268,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
                             ?>"
                             target="_blank"><span class="dashicons dashicons-edit pmb-icon pmb-clickable"></span></a>
                         <?php
-                        if(true || pmb_fs()->is_plan__premium_only('founding_members')){
+                        if(pmb_fs()->is_plan__premium_only('founding_members')){
                             $label = '';
                             if($post_type->name !== CustomPostTypes::CONTENT){
                                 $print_material = null;
@@ -292,9 +292,11 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
 
                                 }
                         } else {
-                            ?>
-                            <span tabindex="0" class="dashicons dashicons-admin-page pmb-icon pmb-disabled-icon" title="<?php echo esc_attr(esc_html__('Upgrade to Professional License for one-click copying to Print Materials for customization.', 'print-my-blog'));?>"></span>
-                            <?php
+                            if($post_type->name !== CustomPostTypes::CONTENT){
+                                ?>
+                                <span tabindex="0" class="dashicons dashicons-update pmb-icon pmb-disabled-icon" title="<?php echo esc_attr(esc_html__('Upgrade to Professional License for one-click copying to Print Materials for customization.', 'print-my-blog'));?>"></span>
+                                <?php
+                            }
                         }
                         ?>
                         <a
