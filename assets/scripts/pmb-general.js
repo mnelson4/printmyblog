@@ -77,7 +77,7 @@ var pmb_jquery_ajax_converters = {
                 // Chop off the character that made this look like it could be valid JSON, and then continue iterating...
                 new_result = new_result.substring(1);
             }
-        }while(start_of_json !== false);
+        }while(start_of_json !== false && new_result.length);
         // Never found any valid JSON. Throw the error.
         throw "No JSON found in AJAX response using custom JSON parser.";
     }
