@@ -189,7 +189,11 @@ class Wpml extends CompatibilityBase
      */
     public function sortTranslatedPosts($sections){
         foreach($sections as $section){
-            $section->setPostId(wpml_object_id_filter($section->getPostId()));
+            $translated_post_id = wpml_object_id_filter($section->getPostId());
+            // if we couldn't find the translated version, use the original language
+            if($translated_post_id){
+                $section->setPostId($translated_post_id);
+            }
         }
         return $sections;
     }

@@ -11,14 +11,14 @@
         <custom-field action="translate">_pmb_byline</custom-field>
         <custom-field action="translate">_pmb_cover_preamble</custom-field>
 
-        <!-- designn metas -->
+        <!-- design metas -->
         <custom-field action="translate">_pmb_internal_footnote_text</custom-field>
         <custom-field action="translate">_pmb_footnote_text</custom-field>
         <custom-field action="translate">_pmb_page_reference_text</custom-field>
         <custom-field action="translate">_pmb_org</custom-field>
 
 
-        <!-- all metas that start with _pmb_ -->
+        <!-- all metas that start with _pmb_ that aren't for translating. Easiest fetched from the DB of an existing site. -->
         <custom-field action="copy">_pmb_author_name</custom-field>
         <custom-field action="copy">_pmb_author_url</custom-field>
         <custom-field action="copy">_pmb_background_embellishment</custom-field>

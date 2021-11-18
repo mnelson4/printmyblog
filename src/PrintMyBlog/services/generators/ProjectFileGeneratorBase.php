@@ -148,12 +148,22 @@ abstract class ProjectFileGeneratorBase
         $ordered_posts = [];
         $unordered_posts = $query->posts;
         foreach (apply_filters('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->sortPostsAndAttachSections $sections', $sections, $this, $unordered_posts) as $section) {
-            foreach ($unordered_posts as $post_from_wp_query) {
+            $found = false;
+            $post = null;
+            foreach ($unordered_posts as $post) {
                 $post_id_from_section = $section->getPostId();
-                if ( $post_id_from_section == $post_from_wp_query->ID) {
-                    $post_from_wp_query->pmb_section = $section;
-                    $ordered_posts[] = $post_from_wp_query;
+                if ( $post_id_from_section == $post->ID) {
+                    $found = true;
+                    break;
                 }
+            }
+            // if the post is somehow missing from the query results, fix that. Especially helpful if a section was added via the filter.
+            if(! $found){
+                $post = get_post($section->getPostId());
+            }
+            if($post){
+                $post->pmb_section = $section;
+                $ordered_posts[] = $post;
             }
         }
         $query->posts = $ordered_posts;
