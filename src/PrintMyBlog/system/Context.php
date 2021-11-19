@@ -137,6 +137,9 @@ class Context extends BaseContext
             'PrintMyBlog\domain\PrintPageUrlGenerator' => [
                 'PrintMyBlog\domain\FrontendPrintSettings' => self::REUSE
             ],
+            'PrintMyBlog\system\Capabilities' => [
+                'PrintMyBlog\system\CustomPostTypes' => self::REUSE
+            ]
         ];
     }
 }
