@@ -216,6 +216,13 @@ otherwise Prince allots them no height and they overflow into content beneath. *
     margin:auto; /* Override block CSS setting it to 0 which un-centers them. */
 }
 
+/**
+ Makes sure gallery images don't overflow their cell
+ */
+.blocks-gallery-grid .blocks-gallery-item figure, .wp-block-gallery .blocks-gallery-item figure{
+    max-width:100%;
+}
+
 /* Centered content styles */
 .pmb-center-content .post-inner{
     height:100vh;
