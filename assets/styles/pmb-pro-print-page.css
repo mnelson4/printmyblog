@@ -237,6 +237,7 @@ otherwise Prince allots them no height and they overflow into content beneath. *
     left:50%;
     transform: translate(-50%, -50%);
     /*border: 1px dotted green;*/
+    width:100%;
 }
 
 /* Remove accessibility divs which add extra pages (sorry they're not usable when printed anyway)*/

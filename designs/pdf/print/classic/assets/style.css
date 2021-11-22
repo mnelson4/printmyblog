@@ -65,6 +65,12 @@ Ask PDF viewers to display pages side-by-side by default.
         }
     }
 
+    @page main-matter:blank{
+        @top{
+            content:normal;
+        }
+    }
+
     .pmb-part{
         page:part;
         -prince-page-group: start;
