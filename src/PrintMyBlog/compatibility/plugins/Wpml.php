@@ -6,6 +6,7 @@ use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;
 use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\orm\managers\ProjectManager;
+use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
 use Twine\forms\base\FormSection;
 use Twine\forms\base\FormSectionHtml;
 use Twine\forms\helpers\InputOption;
@@ -39,7 +40,7 @@ class Wpml extends CompatibilityBase
         // add a filter for language on the content editing page
         add_action('pmb__project_edit_content__filters_top', [$this, 'addLanguageFilter'], 1);
 
-        // change the WP_Query to only include the selected language
+        // change the WP_Query to only include the selected language on Ajax requests
         add_filter('\PrintMyBlog\controllers\Ajax->handlePostSearch $query_params', [$this,'setupWpQueryWithWpml']);
 
         // change the print page's language according to the project
@@ -51,7 +52,7 @@ class Wpml extends CompatibilityBase
         );
 
         // translate posts when generating a project
-        add_filter('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->sortPostsAndAttachSections $sections', [$this, 'sortTranslatedPosts'], 10, 1);
+        add_filter('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->sortPostsAndAttachSections $sections', [$this, 'sortTranslatedPosts'], 10, 2);
         add_action('project_edit_generate__under_header', [$this,'addTranslationOptions'], 10, 2);
         add_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom before_ob_start', [$this,'setTranslatedProject']);
         add_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom after_get_clean', [$this,'unsetTranslatedProject']);
@@ -94,7 +95,7 @@ class Wpml extends CompatibilityBase
     }
 
     /**
-     * Tell WP_Query to use filters, and add some so we only select posts of the requested language.
+     * Tell WP_Query to use filters, and add some so we only select posts of the requested language on Ajax requests searching for posts.
      * @param $wp_query
      * @return mixed
      */
@@ -187,7 +188,16 @@ class Wpml extends CompatibilityBase
      * @param ProjectSection[] $sections
      * @return ProjectSection[] with the post IDs updated to their translations
      */
-    public function sortTranslatedPosts($sections){
+    public function sortTranslatedPosts($sections, ProjectFileGeneratorBase $project_file_generator){
+        $project = $project_file_generator->getProject();
+
+        // if we're using the site's default language for the project, use the posts in whatever language they selected
+        // on the content editing step. This is primarily for backward compatibility, and maybe for projects with
+        // multiple languages in the future too.
+        $project_language = $project->getPmbMeta('lang');
+        if($project_language === ''){
+            return $sections;
+        }
         foreach($sections as $section){
             $translated_post_id = wpml_object_id_filter($section->getPostId());
             // if we couldn't find the translated version, use the original language
@@ -223,8 +233,6 @@ class Wpml extends CompatibilityBase
      * @param $generations
      */
     public function addTranslationOptions(Project $project, $generations){
-
-
         global $sitepress;
         $languages_data = wpml_get_active_languages();
         $post_status_display = new \WPML_Post_Status_Display($languages_data);

@@ -64,6 +64,13 @@ abstract class ProjectFileGeneratorBase
     }
 
     /**
+     * @return Project
+     */
+    public function getProject(){
+        return $this->project;
+    }
+
+    /**
      * @return bool whether complete or not
      */
     public function generateHtmlFile()
