@@ -21,7 +21,8 @@ class Capabilities
      */
     private $custom_post_types;
 
-    public function inject(CustomPostTypes $custom_post_types){
+    public function inject(CustomPostTypes $custom_post_types)
+    {
         $this->custom_post_types = $custom_post_types;
     }
     public function grantCapabilities()
@@ -29,7 +30,7 @@ class Capabilities
         $post_types = get_post_types([], 'objects');
         $pmb_post_types = $this->custom_post_types->getPostTypes();
         foreach ($post_types as $post_type) {
-            if ($post_type instanceof WP_Post_Type && in_array( $post_type->name, $pmb_post_types)) {
+            if ($post_type instanceof WP_Post_Type && in_array($post_type->name, $pmb_post_types)) {
                 $this->grantCapsForCPT($post_type);
             }
         }
@@ -40,7 +41,8 @@ class Capabilities
      * @param $post_type
      * @param string $role
      */
-    public function grantCapsForCPT($post_type, $role = 'administrator'){
+    public function grantCapsForCPT($post_type, $role = 'administrator')
+    {
         $role = get_role($role);
         foreach ($post_type->cap as $capability) {
             $role->add_cap($capability, true);

@@ -241,8 +241,8 @@ class PostWrapper
             }
         }
 
-        foreach($new_post_metas as $meta_key => $meta_value){
-            add_post_meta($new_post_id,$meta_key, $meta_value);
+        foreach ($new_post_metas as $meta_key => $meta_value) {
+            add_post_meta($new_post_id, $meta_key, $meta_value);
         }
 
         return get_post($new_post_id);

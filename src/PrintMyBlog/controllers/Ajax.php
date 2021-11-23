@@ -315,7 +315,7 @@ class Ajax extends BaseController
         $wrapped_post = $this->post_manager->getById($post_id);
         // check if a duplicate was already made
         $print_materials = $this->post_manager->getByPostMeta('_pmb_original_post', (string)$post_id, 1);
-        if($print_materials){
+        if ($print_materials) {
             $print_material = reset($print_materials);
             $print_material_post = $print_material->getWpPost();
         } else {

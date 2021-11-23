@@ -197,8 +197,8 @@ class Admin extends BaseController
         if (pmb_fs()->is_plan__premium_only('founding_members')) {
             add_filter('post_row_actions', [$this, 'postAdminRowActions'], 10, 2);
             add_filter('page_row_actions', [$this, 'postAdminRowActions'], 10, 2);
-            add_action( 'post_submitbox_misc_actions', array( $this, 'addDuplicateAsPrintMaterialToClassicEditor') );
-            add_action( 'enqueue_block_editor_assets', array( $this, 'addDuplicateAsPrintMaterialToGutenberg' ) );
+            add_action('post_submitbox_misc_actions', array( $this, 'addDuplicateAsPrintMaterialToClassicEditor'));
+            add_action('enqueue_block_editor_assets', array( $this, 'addDuplicateAsPrintMaterialToGutenberg' ));
         }
 
         $this->makePrintContentsSaySaved();
@@ -1700,7 +1700,7 @@ class Admin extends BaseController
             return $actions;
         }
         $html = $this->getDuplicateAsPrintMaterialHtml();
-        if($html) {
+        if ($html) {
             $actions['pmb_new_print_material'] = $html;
         }
 
@@ -1710,10 +1710,11 @@ class Admin extends BaseController
     /**
      * Adds a button to duplicate the post inside the publish metabox.
      */
-    public function addDuplicateAsPrintMaterialToClassicEditor(){
+    public function addDuplicateAsPrintMaterialToClassicEditor()
+    {
         ?><div><?php
         echo $this->getDuplicatePostAsPrintMaterialUrl('button button-secondary');
-        ?></div><?php
+?></div><?php
     }
 
     /**
@@ -1722,21 +1723,22 @@ class Admin extends BaseController
      * @param string $css_class to add to the link
      * @return string
      */
-    protected function getDuplicateAsPrintMaterialHtml($css_class = ''){
+    protected function getDuplicateAsPrintMaterialHtml($css_class = '')
+    {
         global $post;
-        if($css_class){
+        if ($css_class) {
             $css_attr = ' class="' . esc_attr($css_class) . '" ';
         } else {
             $css_attr = '';
         }
-        if($post->post_type === CustomPostTypes::CONTENT){
+        if ($post->post_type === CustomPostTypes::CONTENT) {
             $original_id = get_post_meta($post->ID, '_pmb_original_post', true);
             $post_type = get_post_type_object(get_post_type($original_id));
             $type_label = '';
-            if($post_type instanceof WP_Post_Type && isset($post_type->labels, $post_type->labels->singular_name)){
+            if ($post_type instanceof WP_Post_Type && isset($post_type->labels, $post_type->labels->singular_name)) {
                 $type_label = $post_type->labels->singular_name;
             }
-            if($original_id){
+            if ($original_id) {
                 $html = '<a href="' . esc_url(get_edit_post_link($original_id)) . '" title="'
                     // translators: 1 post type label, 2: post title
                     . esc_attr(sprintf(__('Go to the %1$s "%2$s" was copied from.', 'print-my-blog'), $type_label, $post->post_title))
@@ -1750,10 +1752,10 @@ class Admin extends BaseController
         } else {
             $print_material = null;
             $print_materials = $this->post_manager->getByPostMeta('_pmb_original_post', (string)$post->ID, 1);
-            if($print_materials){
+            if ($print_materials) {
                 $print_material = reset($print_materials);
             }
-            if($print_material){
+            if ($print_material) {
                 $html = '<a href="' . esc_url(get_edit_post_link($print_material->getWpPost()->ID)) . '" title="'
                     // translators: 1: post title
                     . esc_attr(sprintf(__('Go to Print Material "%s" was created from.', 'print-my-blog'), $print_material->getWpPost()->post_title))
@@ -1780,7 +1782,8 @@ class Admin extends BaseController
      * @param WP_Post $post
      * @return string
      */
-    protected function getDuplicatePostAsPrintMaterialUrl($post){
+    protected function getDuplicatePostAsPrintMaterialUrl($post)
+    {
         $url = wp_nonce_url(
             add_query_arg(
                 [
@@ -1797,7 +1800,8 @@ class Admin extends BaseController
     /**
      * To add the duplicate print material button to the Gutenberg block editor, we need to add it via JS
      */
-    public function addDuplicateAsPrintMaterialToGutenberg(){
+    public function addDuplicateAsPrintMaterialToGutenberg()
+    {
         global $post;
         wp_enqueue_script(
             'pmb_blockeditor',
@@ -1811,7 +1815,7 @@ class Admin extends BaseController
             [
                 // add HTML entities because wp_localize_script calls html_entities_decode which messes up the
                 // quotes inside the title attributes on the HTML elements
-                'html' => htmlentities( $this->getDuplicateAsPrintMaterialHtml('button button-secondary'), ENT_QUOTES, 'UTF-8' )
+                'html' => htmlentities($this->getDuplicateAsPrintMaterialHtml('button button-secondary'), ENT_QUOTES, 'UTF-8')
             ]
         );
     }

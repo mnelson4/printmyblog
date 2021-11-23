@@ -83,9 +83,10 @@ class PostWrapperManager
      * @param WP_Post[] $posts
      * @return PostWrapper[]
      */
-    protected function createWrapperAroundPosts($posts){
+    protected function createWrapperAroundPosts($posts)
+    {
         $wrapped_posts = [];
-        foreach($posts as $post){
+        foreach ($posts as $post) {
             $wrapped_posts[] = $this->createWrapperAroundPost($post);
         }
         return $wrapped_posts;
@@ -131,7 +132,8 @@ class PostWrapperManager
      * @param int $count
      * @return PostWrapper[]
      */
-    public function getByPostMeta($meta_key, $meta_value, $count = -1){
+    public function getByPostMeta($meta_key, $meta_value, $count = -1)
+    {
         $args = array(
             'posts_per_page'   => $count,
             'orderby'          => 'ID',
