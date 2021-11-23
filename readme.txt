@@ -144,9 +144,17 @@ Ready to purchase the Pro Print Service? Here's the [pricing page](https://print
 
 Want more? [Tell us what matters to you on GitHub](https://github.com/mnelson4/printmyblog/issues). Thanks to a revenue stream through optional payments, this is actively supported and improved.
 
-= Compatible Plugins =
+= Plugin Compatibility Highlights =
 
-* [WPML](https://wpml.org) allowing you to quickly translate projects, and add print buttons different languages
+PMB strives to be compatible with all plugins. But here are some that are especially noteworthy:
+
+* [BasePress](https://printmy.blog/2021/06/14/making-a-user-manual-for-web-pdf-print-with-wordpress/) for creating a user manual on both the web and print
+* [MathJax-LaTeX](https://wordpress.org/plugins/mathjax-latex/) and [WP Quick LaTeX](https://wordpress.org/plugins/wp-quicklatex/) for mathematical formulas
+* [Translate WordPress with GTranslate](https://wordpress.org/plugins/gtranslate/) for quick and automatic translating of projects
+* [TablePress](https://wordpress.org/plugins/tablepress/) makes tables look good in print too, even when they span multiple pages
+* [WPML](https://wpml.org) for more advanced translating of projects, and add print buttons different languages. [Read Translating Projects with WPML Plugin](https://printmy.blog/user-guide/design-layout/translating-projects-with-wpml-plugin/)
+
+If you are delighted how PMB worked with another plugin, or had trouble, please let us know!
 
 = Our Mission =
 1. Preserve your blog for decades to come in a low-tech format.

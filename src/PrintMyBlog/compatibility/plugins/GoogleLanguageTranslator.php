@@ -4,6 +4,7 @@ namespace PrintMyBlog\compatibility\plugins;
 
 use Twine\compatibility\CompatibilityBase;
 
+// plugin: https://wordpress.org/plugins/gtranslate/
 class GoogleLanguageTranslator extends CompatibilityBase
 {
     public function setRenderingHooks()
@@ -24,8 +25,7 @@ class GoogleLanguageTranslator extends CompatibilityBase
                 .skiptranslate, .goog-te-banner-frame, #glt-translate-trigger, .goog-te-spinner-pos{
                     display:none;
                 }
-            }
-            /* all mike base*/'
+            }'
         );
     }
 }

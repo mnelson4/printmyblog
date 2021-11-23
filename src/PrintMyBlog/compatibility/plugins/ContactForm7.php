@@ -13,7 +13,7 @@ class ContactForm7 extends CompatibilityBase
     }
 
     /**
-     * Remove the coblcoks animation script as it has an error in DocRaptor
+     * Hide the Google Recaptcha floater
      */
     public function hideGoogleCaptchaBadge()
     {

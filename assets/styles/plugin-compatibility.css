@@ -25,7 +25,7 @@
 
 /*
 * PowerPress https://wordpress.org/plugins/powerpress/
-* Don't show the play button as it doesn't work; insetad link to it.
+* Don't show the play button as it doesn't work; instead link to it.
  */
 .pmb-posts .powerpress_player{
     display:none;
