@@ -380,7 +380,7 @@ class Wpml extends CompatibilityBase
             if ($status === 10) {
                 ?>
                 <img src="<?php echo esc_url($sitepress->get_flag_url($language_code));?>"
-                     title="<?php echo esc_attr(sprintf(__('Translated into %s', 'print-my-blog'), $language_data['display_name']));?>" width="18" height="12">
+                     title="<?php echo esc_attr(sprintf(__('"%s" is fully translated into %s', 'print-my-blog'), $title, $language_data['display_name']));?>" width="18" height="12">
                 <?php
             }
             ?>
