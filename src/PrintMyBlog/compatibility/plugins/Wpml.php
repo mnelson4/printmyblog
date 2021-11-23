@@ -270,7 +270,7 @@ class Wpml extends CompatibilityBase
                         'html' => new FormSectionHtml(
                             $html_helper->h2(sprintf(__('%s Translations', 'print-my-blog'), $language_data['display_name']))
                             . $html_helper->div(
-                                    __('Translate Project Meta', 'print-my-blog')
+                                    __('Translate Project Metadata', 'print-my-blog')
                                     . $post_status_display->get_status_html($project->getWpPost()->ID, $language_code)
                             )
                             . $design_translations_html
