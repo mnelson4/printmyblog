@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.7.4
+Stable tag: 3.8.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -413,7 +413,10 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.7.4 xxx =
+= 3.8.0 xxx =
+* Feature: WPML integration. See https://printmy.blog/2021/11/23/introducing-wpml-integration-for-print-my-blog/
+* Bugfix: if there is a fatal error generating the print page, avoid runaway JS trying to parse the error response
+
 * Bugfix: prevent emojis in gallery image descriptions from breaking layout
 * Bugfix: if WP_DEBUG_DISPLAY setting is on, show warnings when generating print-page
 * Enhancement: Quick Print prevents featured images from being too big
