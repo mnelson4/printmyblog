@@ -373,7 +373,6 @@ class Wpml extends CompatibilityBase
         global $sitepress;
         $languages_data = wpml_get_active_languages();
         $post_status_display = new \WPML_Post_Status_Display($languages_data);
-        $default_language_code = $sitepress->get_default_language();
 
         foreach ($languages_data as $language_code => $language_data) {
             list( $text, $link, $trid, $css_class, $status ) = $post_status_display->get_status_data($post_id, $language_code);
