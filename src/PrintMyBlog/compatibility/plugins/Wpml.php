@@ -51,6 +51,9 @@ class Wpml extends CompatibilityBase
             2
         );
 
+        // add translation options directly to project editing page
+        add_action('pmb_content_items__project-item-title end', [$this,'showTranslationsOnProjectItems'], 10, 6);
+
         // translate posts when generating a project
         add_filter('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->sortPostsAndAttachSections $sections', [$this, 'sortTranslatedPosts'], 10, 2);
         add_action('project_edit_generate__under_header', [$this,'addTranslationOptions'], 10, 2);
@@ -349,5 +352,32 @@ class Wpml extends CompatibilityBase
         $project->setPmbMeta('lang', $language_code);
         wp_send_json_success();
         exit;
+    }
+
+    /**
+     * @param $post_id
+     * @param $title
+     * @param $post_type
+     * @param $template
+     * @param $subs
+     * @param $depth
+     */
+    public function showTranslationsOnProjectItems($post_id, $title, $post_type, $template, $subs, $depth){
+        global $sitepress;
+        $languages_data = wpml_get_active_languages();
+        $post_status_display = new \WPML_Post_Status_Display($languages_data);
+        $default_language_code = $sitepress->get_default_language();
+
+        foreach ($languages_data as $language_code => $language_data) {
+            list( $text, $link, $trid, $css_class, $status ) = $post_status_display->get_status_data( $post_id, $language_code );
+            if($status === 10){
+                ?>
+                <img src="<?php echo esc_url( $sitepress->get_flag_url( $language_code ) );?>"
+                     title="<?php echo esc_attr(sprintf(__('Translated into %s', 'print-my-blog'), $language_data['display_name']));?>" width="18" height="12">
+                <?php
+            }
+            ?>
+            <?php
+        }
     }
 }
