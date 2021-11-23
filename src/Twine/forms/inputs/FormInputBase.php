@@ -1045,6 +1045,7 @@ abstract class FormInputBase extends FormSectionValidatable
     {
         // ask our display strategy and validation strategies if they have js to enqueue
         $this->enqueueJsFromStrategies();
+        parent::enqueueJs();
     }
 
 

@@ -8,8 +8,10 @@ use PrintMyBlog\compatibility\plugins\EasyFootnotes;
 use PrintMyBlog\compatibility\plugins\GoogleLanguageTranslator;
 use PrintMyBlog\compatibility\plugins\LazyLoadingFeaturePlugin;
 use PrintMyBlog\compatibility\plugins\TablePress;
+use PrintMyBlog\compatibility\plugins\Wpml;
 use PrintMyBlog\compatibility\plugins\WpVrView;
 use PrintMyBlog\compatibility\plugins\YoastSeo;
+use PrintMyBlog\system\Context;
 use Twine\compatibility\CompatibilityBase;
 
 /**
@@ -58,6 +60,9 @@ class DetectAndActivate
             }
             if (defined('WPCF7_VERSION')) {
                 $compatiblity_mods_to_activate[] = new ContactForm7();
+            }
+            if (defined('ICL_SITEPRESS_VERSION')) {
+                $compatiblity_mods_to_activate[] = Context::instance()->reuse('PrintMyBlog\compatibility\plugins\Wpml');
             }
             $this->compatibility_mods = $compatiblity_mods_to_activate;
         }

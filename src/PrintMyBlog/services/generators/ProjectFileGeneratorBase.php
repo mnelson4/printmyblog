@@ -64,6 +64,13 @@ abstract class ProjectFileGeneratorBase
     }
 
     /**
+     * @return Project
+     */
+    public function getProject(){
+        return $this->project;
+    }
+
+    /**
      * @return bool whether complete or not
      */
     public function generateHtmlFile()
@@ -98,6 +105,7 @@ abstract class ProjectFileGeneratorBase
      */
     protected function startGenerating()
     {
+        do_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->startGenerating', $this);
         // show protected posts' bodies as normal.
         add_filter('post_password_required', '__return_false');
     }
@@ -146,12 +154,23 @@ abstract class ProjectFileGeneratorBase
     {
         $ordered_posts = [];
         $unordered_posts = $query->posts;
-        foreach ($sections as $section) {
+        foreach (apply_filters('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->sortPostsAndAttachSections $sections', $sections, $this, $unordered_posts) as $section) {
+            $found = false;
+            $post = null;
             foreach ($unordered_posts as $post) {
-                if ($section->getPostId() == $post->ID) {
-                    $post->pmb_section = $section;
-                    $ordered_posts[] = $post;
+                $post_id_from_section = $section->getPostId();
+                if ( $post_id_from_section == $post->ID) {
+                    $found = true;
+                    break;
                 }
+            }
+            // if the post is somehow missing from the query results, fix that. Especially helpful if a section was added via the filter.
+            if(! $found){
+                $post = get_post($section->getPostId());
+            }
+            if($post){
+                $post->pmb_section = $section;
+                $ordered_posts[] = $post;
             }
         }
         $query->posts = $ordered_posts;
@@ -262,6 +281,7 @@ abstract class ProjectFileGeneratorBase
         $pmb_project = $this->project;
         $pmb_design = $this->design;
         $pmb_project_generation = $this->project_generation;
+        do_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom before_ob_start');
         ob_start();
         include($template_file);
         // if Oxygen page builder is active, clear ALL buffers. It starts a buffer and then clears it in the footer
@@ -277,6 +297,7 @@ abstract class ProjectFileGeneratorBase
         } else {
             $str = ob_get_clean();
         }
+        do_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom after_get_clean');
 
         return $str;
     }

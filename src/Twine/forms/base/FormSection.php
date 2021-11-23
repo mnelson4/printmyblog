@@ -661,6 +661,7 @@ class FormSection extends FormSectionValidatable
         foreach ($this->subsections() as $subsection) {
             $subsection->enqueueJs();
         }
+        parent::enqueueJs();;
     }
 
 

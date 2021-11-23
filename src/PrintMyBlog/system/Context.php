@@ -135,6 +135,10 @@ class Context extends BaseContext
             'PrintMyBlog\domain\PrintPageUrlGenerator' => [
                 'PrintMyBlog\domain\FrontendPrintSettings' => self::REUSE
             ],
+            'PrintMyBlog\compatibility\plugins\Wpml' => [
+                'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
+                'PrintMyBlog\orm\managers\DesignManager' => self::REUSE
+            ]
         ];
     }
 }
