@@ -112,7 +112,7 @@ Hide stuff that doesn't make sense in print
 @media print{
     body {
         height: 100% !important;
-        width: initial% !important;
+        width: initial !important;
     }
     @page {
         size: initial;
@@ -122,4 +122,11 @@ Hide stuff that doesn't make sense in print
 /* Place NextGen gallery https://wordpress.org/plugins/nextgen-gallery/ items side-by-side */
 .ngg-gallery-thumbnail-box {
     display:inline-block;
+}
+
+/*
+Hide WPML language selectors
+ */
+.wpml-ls{
+    display:none;
 }

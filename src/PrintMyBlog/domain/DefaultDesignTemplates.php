@@ -289,11 +289,6 @@ class DefaultDesignTemplates
                                         'html_help_text' => __('Text that appears at the top-right of the cover'),
                                     ]
                                 ),
-                                'title' => new TextInput(
-                                    [
-                                        'html_label_text' => __('Title', 'print-my-blog'),
-                                    ]
-                                ),
                                 'byline' => new TextAreaInput(
                                     [
                                         'html_label_text' => __('ByLine', 'print-my-blog'),
@@ -368,11 +363,6 @@ class DefaultDesignTemplates
                         ]))->merge($this->getGenericDesignForm());
                     },
                     'project_form_callback' => function (Design $design) {
-                        $sections['title'] = new TextInput(
-                            [
-                                'html_display_text' => __('Title', 'print-my-blog'),
-                            ]
-                        );
                         $sections['byline'] = new TextInput([
                             'html_display_text' => __('Byline', 'print-my-blog'),
                             'html_help_text' => __('Project author(s)', 'print-my-blog')
@@ -397,12 +387,6 @@ class DefaultDesignTemplates
     {
         $sections = [];
         $header_content = $design->getSetting('header_content');
-        if (in_array('title', $header_content)) {
-            $sections['title'] = new TextInput([
-                'html_label_text' => __('Title', 'print-my-blog'),
-                'html_help_text' => __('Title used inside the generated files (often the same as your project, but not necessarily.)', 'print-my-blog'),
-                ]);
-        }
         if (in_array('subtitle', $header_content)) {
             $sections['subtitle'] = new TextInput([
                 'html_label_text' => __('Subtitle', 'print-my-blog')

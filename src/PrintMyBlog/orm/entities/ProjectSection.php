@@ -60,6 +60,11 @@ class ProjectSection
         return (int)$this->post_id;
     }
 
+    public function setPostId($new_post_id)
+    {
+        $this->post_id = $new_post_id;
+    }
+
     /**
      * @return string
      */

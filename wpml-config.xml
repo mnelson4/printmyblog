@@ -1,0 +1,80 @@
+<wpml-config>
+    <custom-types>
+        <custom-type translate="1" display-as-translated="1">pmb_project</custom-type>
+        <custom-type translate="1" display-as-translated="1">pmb_design</custom-type>
+        <custom-type translate="1" display-as-translated="1">pmb_content</custom-type>
+    </custom-types>
+    <custom-fields>
+        <!-- project metas from /src/PrintMyBlog/domain/DefaultDesignTemplates.php-->
+        <custom-field action="translate">_pmb_subtitle</custom-field>
+        <custom-field action="translate">_pmb_issue</custom-field>
+        <custom-field action="translate">_pmb_byline</custom-field>
+        <custom-field action="translate">_pmb_cover_preamble</custom-field>
+
+        <!-- design metas -->
+        <custom-field action="translate">_pmb_internal_footnote_text</custom-field>
+        <custom-field action="translate">_pmb_footnote_text</custom-field>
+        <custom-field action="translate">_pmb_page_reference_text</custom-field>
+        <custom-field action="translate">_pmb_org</custom-field>
+
+
+        <!-- all metas that start with _pmb_ that aren't for translating. Easiest fetched from the DB of an existing site. -->
+        <custom-field action="copy">_pmb_author_name</custom-field>
+        <custom-field action="copy">_pmb_author_url</custom-field>
+        <custom-field action="copy">_pmb_background_embellishment</custom-field>
+        <custom-field action="copy">_pmb_background_color</custom-field>
+        <custom-field action="copy">_pmb_custom_css</custom-field>
+        <custom-field action="copy">_pmb_date</custom-field>
+        <custom-field action="copy">_pmb_default_alignment</custom-field>
+        <custom-field action="copy">_pmb_design_for_digital_pdf</custom-field>
+        <custom-field action="copy">_pmb_design_for_print_pdf</custom-field>
+        <custom-field action="copy">_pmb_design_template</custom-field>
+        <custom-field action="copy">_pmb_dirty_digital_pdf</custom-field>
+        <custom-field action="copy">_pmb_dividing_line</custom-field>
+        <custom-field action="copy">_pmb_error_print_pdf</custom-field>
+        <custom-field action="copy">_pmb_external_links</custom-field>
+        <custom-field action="copy">_pmb_font_size</custom-field>
+        <custom-field action="copy">_pmb_font_style</custom-field>
+        <custom-field action="copy">_pmb_format</custom-field>
+        <custom-field action="copy">_pmb_generated_digital_pdf</custom-field>
+        <custom-field action="copy">_pmb_generated_print_pdf</custom-field>
+        <custom-field action="copy">_pmb_header_content</custom-field>
+        <custom-field action="copy">_pmb_header_font_style</custom-field>
+        <custom-field action="copy">_pmb_image_placement</custom-field>
+        <custom-field action="copy">_pmb_image_size</custom-field>
+        <custom-field action="copy">_pmb_images_full_column</custom-field>
+        <custom-field action="copy">_pmb_internal_links</custom-field>
+        <custom-field action="copy">_pmb_lang</custom-field>
+        <custom-field action="copy">_pmb_last_section_digital_pdf</custom-field>
+        <custom-field action="copy">_pmb_last_section_print_pdf</custom-field>
+        <custom-field action="copy">_pmb_levels_used</custom-field>
+        <custom-field action="copy">_pmb_main_header_font_size</custom-field>
+        <custom-field action="copy">_pmb_no_extra_columns</custom-field>
+        <custom-field action="copy">_pmb_original_post</custom-field>
+        <custom-field action="copy">_pmb_page_height</custom-field>
+        <custom-field action="copy">_pmb_page_per_post</custom-field>
+        <custom-field action="copy">_pmb_page_width</custom-field>
+        <custom-field action="copy">_pmb_paragraph_indent</custom-field>
+        <custom-field action="copy">_pmb_pmb_code</custom-field>
+        <custom-field action="copy">_pmb_post_content</custom-field>
+        <custom-field action="copy">_pmb_post_header_in_columns</custom-field>
+        <custom-field action="copy">_pmb_powered_by</custom-field>
+        <custom-field action="copy">_pmb_preview_1_desc</custom-field>
+        <custom-field action="copy">_pmb_preview_1_url</custom-field>
+        <custom-field action="copy">_pmb_preview_2_desc</custom-field>
+        <custom-field action="copy">_pmb_preview_2_url</custom-field>
+        <custom-field action="copy">_pmb_progress_choose_digital_pdf</custom-field>
+        <custom-field action="copy">_pmb_progress_choose_print_pdf</custom-field>
+        <custom-field action="copy">_pmb_progress_customize_digital_pdf</custom-field>
+        <custom-field action="copy">_pmb_progress_customize_print_pdf</custom-field>
+        <custom-field action="copy">_pmb_progress_edit_content</custom-field>
+        <custom-field action="copy">_pmb_progress_edit_metdata</custom-field>
+        <custom-field action="copy">_pmb_progress_generate</custom-field>
+        <custom-field action="copy">_pmb_progress_setup</custom-field>
+        <custom-field action="copy">_pmb_title</custom-field>
+        <custom-field action="copy">_pmb_title_page_banner_color</custom-field>
+        <custom-field action="copy">_pmb_url</custom-field>
+        <custom-field action="copy">_pmb_use_theme</custom-field>
+        <custom-field action="copy">pmb_buttons</custom-field>
+    </custom-fields>
+</wpml-config>

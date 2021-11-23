@@ -163,6 +163,7 @@ class PdfGenerator extends ProjectFileGeneratorBase
     protected function finishGenerating()
     {
         $this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT, false);
+        do_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->finishGenerating', $this);
     }
 
 

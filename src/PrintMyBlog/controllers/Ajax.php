@@ -238,7 +238,7 @@ class Ajax extends BaseController
             }
         }
         if (!empty($_GET['exclude'])) {
-            $query_params['exclude'] = array_map(
+            $query_params['post__not_in'] = array_map(
                 'intval',
                 explode(',', $_GET['exclude'])
             );
@@ -249,7 +249,8 @@ class Ajax extends BaseController
         if (!empty($_GET['pmb-order'])) {
             $query_params['order'] = $_GET['pmb-order'];
         }
-        $posts = get_posts($query_params);
+        $posts = get_posts(apply_filters('\PrintMyBlog\controllers\Ajax->handlePostSearch $query_params', $query_params));
+        $posts = apply_filters('\PrintMyBlog\controllers\Ajax->handlePostSearch $posts', $posts, $query_params);
         foreach ($posts as $post) {
             pmb_content_item($post, $project, 0);
         }

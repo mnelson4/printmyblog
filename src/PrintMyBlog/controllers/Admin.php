@@ -657,6 +657,15 @@ class Admin extends BaseController
                             'pmb-generate',
                             'pmb_generate',
                             [
+                                'generate_ajax_data' => apply_filters(
+                                    '\PrintMyBlog\controllers\Admin->enqueueScripts generate generate_ajax_data',
+                                    [
+                                        'action' => 'pmb_project_status',
+                                        'ID' => $this->project->getWpPost()->ID,
+                                        '_nonce' => wp_create_nonce('pmb-project-edit'),
+                                    ],
+                                    $this->project
+                                ),
                                 'site_url' => site_url(),
                                 'use_pmb_central_for_previews' => $use_pmb_central,
                                 'license_data' => [
@@ -1136,27 +1145,31 @@ class Admin extends BaseController
         } else {
             $default_format = DefaultFileFormats::DIGITAL_PDF;
         }
-        return new FormSection([
-            'name' => 'pmb-project',
-            'subsections' => [
-                'title' => new TextInput([
-                    'html_label_text' => __('Project Title', 'print-my-blog'),
-                    'required' => true,
-                    'default' => $this->project instanceof Project ? $this->project->getWpPost()->post_title : '',
-                    'other_html_attributes' => [
-                            'autofocus'
-                    ]
-                ]),
-                'formats' => new RadioButtonInput(
-                    $format_options,
-                    [
-                        'html_label_text' => __('Format', 'print-my-blog'),
+        return apply_filters(
+            '\PrintMyBlog\controllers\Admin::getSetupForm',
+            new FormSection([
+                'name' => 'pmb-project',
+                'subsections' => [
+                    'title' => new TextInput([
+                        'html_label_text' => __('Project Title', 'print-my-blog'),
                         'required' => true,
-                        'default' => $default_format
-                    ]
-                )
-            ]
-        ]);
+                        'default' => $this->project instanceof Project ? $this->project->getWpPost()->post_title : '',
+                        'other_html_attributes' => [
+                                'autofocus'
+                        ]
+                    ]),
+                    'formats' => new RadioButtonInput(
+                        $format_options,
+                        [
+                            'html_label_text' => __('Format', 'print-my-blog'),
+                            'required' => true,
+                            'default' => $default_format
+                        ]
+                    )
+                ]
+                ]),
+            $this->project
+        );
     }
     protected function saveNewProject()
     {
@@ -1244,6 +1257,7 @@ class Admin extends BaseController
             }
         }
         $this->project->getProgress()->markStepComplete(ProjectProgress::SETUP_STEP);
+        do_action('\PrintMyBlog\controllers\Admin->saveNewProject', $this->project, $form);
         $this->redirectToNextStep($this->project);
     }
 
@@ -1406,16 +1420,6 @@ class Admin extends BaseController
             // make sure they customize the design (especially if its a new choice)
             $this->project->getProgress()->markCustomizeDesignStepComplete($format->slug(), false);
         }
-        // If they've changed the design, ask them if they want to skip it.
-        if ($this->project->getProgress()->isStepComplete(ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX . $format->slug())) {
-            $this->notification_manager->addTextNotificationForCurrentUser(
-                OneTimeNotification::TYPE_INFO,
-                __('You may want to customize the design. If not, feel free to jump ahead the next step.', 'print-my-blog')
-            );
-        }
-
-
-
 
         $this->redirectToNextStep($this->project);
     }

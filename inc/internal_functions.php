@@ -233,6 +233,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null){
             <div class="pmb-grabbable pmb-project-item-title">
                 <?php echo pmb_post_type_icon_html($post_type);?>
                 <span class="pmb-project-item-title-text"><?php echo $title;?></span>
+                <?php do_action('pmb_content_items__project-item-title end',$id, $title, $post_type, $template, $subs, $depth);?>
             </div>
 
             <div class="pmb-project-item-options">

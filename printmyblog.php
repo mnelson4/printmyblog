@@ -139,6 +139,11 @@ if (defined('PMB_VERSION')) {
     define('TWINE_MAIN_FILE', PMB_MAIN_FILE);
     define('PMB_SUPPORT_EMAIL', 'please@printmy.blog');
 
+    /* WPML support */
+    if(! defined('WPML_LOAD_API_SUPPORT')){
+        define('WPML_LOAD_API_SUPPORT',true);
+    }
+
     /**
      * adds a wp-option to indicate that PMB has been activated via the WP admin plugins page.
      * This can be used to do initial plugin installation or redirect the user to the setup page.

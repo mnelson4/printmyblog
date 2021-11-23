@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.7.4
+Stable tag: 3.8.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -414,9 +414,14 @@ https://youtu.be/uPQ3vqm7A2g
 == Changelog ==
 
 = 3.8.0 xxx =
-* Feature: PMB Print Materials now have their own capabilities
+* Feature: WPML integration. See https://printmy.blog/2021/11/23/introducing-wpml-integration-for-print-my-blog/
+* Feature: Quick creation of Print Materials from other posts for customization in projects. Pro only.
+* Feature: PMB Print Materials now have their own capabilities which can be granted to users and roles
+* Bugfix: if there is a fatal error generating the print page, avoid runaway JS trying to parse the error response
 * Bugfix: prevent emojis in gallery image descriptions from breaking layout
 * Bugfix: if WP_DEBUG_DISPLAY setting is on, show warnings when generating print-page
+* Enhancement: Quick Print prevents featured images from being too big
+* Enhancement: improve Mayer Magazine intro text styling (add some padding and left-justify text)
 
 = 3.7.3 October 8, 2021 =
 * Enhancement: Mayer Magazine styling improvements, such as revert special list styling changes to Mayer Magazine (they looked bad with like galleries), improving alignment of the table of contents, and don't show the dividing line in front matter

@@ -83,12 +83,26 @@ abstract class FormSectionBase
      */
     protected $construction_finalized;
 
+    /**
+     * Callable which gets called when scripts and styles are enqueued
+     * @var null|callable
+     */
+    protected $enqueue_scripts_callback = null;
 
     /**
      * @param array $options_array {
      * @type        $name          string the name for this form section, if you want to explicitly define it
      * @type        $other_html_attributes array of other HTML attributes (keys can either be the name of attributes, or numeric)
      *                             }
+     * You can also set any property of this class using the $options_array.
+     * Eg, there is a property enqueue_scripts_callback, which is a callback for enqueueing scripts. To use it,
+     * pass an $options_array like this:
+     * [
+     *     'enequeue_scripts_callback' => function(){
+     *          // enqueue scripts needed by this form
+     *          ...
+     *     }
+     * ]
      */
     public function __construct($options_array = array())
     {
@@ -361,6 +375,9 @@ abstract class FormSectionBase
     public function enqueueJs()
     {
         // defaults to enqueue NO js or css
+        if (is_callable($this->enqueue_scripts_callback)) {
+            call_user_func($this->enqueue_scripts_callback);
+        }
     }
 
 

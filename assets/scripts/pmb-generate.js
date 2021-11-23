@@ -4,14 +4,12 @@ jQuery(document).ready(function () {
         var querystring_args = pmb_get_querystring_vars();
         var format_slug = event.currentTarget.getAttribute('data-format');
         var format_options_selection = jQuery('.pmb-generate-options-for-' + format_slug);
+        var data = pmb_generate.generate_ajax_data;
+        data.format = format_slug;
         jQuery.ajax({
             url:ajaxurl,
             method:'POST',
-            data:{
-                action: 'pmb_project_status',
-                ID: querystring_args['ID'],
-                format: format_slug,
-            },
+            data:data,
             dataType:'json',
             success:(response) => {
                 // could fetch more, but for now it all just happens in one request
