@@ -28,7 +28,8 @@ class Wpml extends CompatibilityBase
      */
     private $design_manager;
 
-    public function inject(ProjectManager $project_manager, DesignManager $design_manager){
+    public function inject(ProjectManager $project_manager, DesignManager $design_manager)
+    {
         $this->project_manager = $project_manager;
         $this->design_manager = $design_manager;
     }
@@ -191,20 +192,21 @@ class Wpml extends CompatibilityBase
      * @param ProjectSection[] $sections
      * @return ProjectSection[] with the post IDs updated to their translations
      */
-    public function sortTranslatedPosts($sections, ProjectFileGeneratorBase $project_file_generator){
+    public function sortTranslatedPosts($sections, ProjectFileGeneratorBase $project_file_generator)
+    {
         $project = $project_file_generator->getProject();
 
         // if we're using the site's default language for the project, use the posts in whatever language they selected
         // on the content editing step. This is primarily for backward compatibility, and maybe for projects with
         // multiple languages in the future too.
         $project_language = $project->getPmbMeta('lang');
-        if($project_language === ''){
+        if ($project_language === '') {
             return $sections;
         }
-        foreach($sections as $section){
+        foreach ($sections as $section) {
             $translated_post_id = wpml_object_id_filter($section->getPostId());
             // if we couldn't find the translated version, use the original language
-            if($translated_post_id){
+            if ($translated_post_id) {
                 $section->setPostId($translated_post_id);
             }
         }
@@ -215,7 +217,8 @@ class Wpml extends CompatibilityBase
      * @param $project_id
      * @return int|null
      */
-    public function setTranslatedProject(){
+    public function setTranslatedProject()
+    {
         global $pmb_project, $pmb_wpml_original_project, $pmb_design, $pmb_wpml_original_design;
         $pmb_wpml_original_project = $pmb_project;
         $pmb_wpml_original_design = $pmb_design;
@@ -223,7 +226,8 @@ class Wpml extends CompatibilityBase
         $pmb_design = $this->design_manager->getById(wpml_object_id_filter($pmb_design->getWpPost()->ID));
     }
 
-    public function unsetTranslatedProject(){
+    public function unsetTranslatedProject()
+    {
         global $pmb_project, $pmb_wpml_original_project, $pmb_design, $pmb_wpml_original_design;
         $pmb_project = $pmb_wpml_original_project;
         $pmb_design = $pmb_wpml_original_design;
@@ -235,7 +239,8 @@ class Wpml extends CompatibilityBase
      * @param Project $project
      * @param $generations
      */
-    public function addTranslationOptions(Project $project, $generations){
+    public function addTranslationOptions(Project $project, $generations)
+    {
         global $sitepress;
         $languages_data = wpml_get_active_languages();
         $post_status_display = new \WPML_Post_Status_Display($languages_data);
@@ -253,17 +258,17 @@ class Wpml extends CompatibilityBase
 
         $form_sections = [];
         foreach ($languages_data as $language_code => $language_data) {
-            if($language_code === $default_language_code){
+            if ($language_code === $default_language_code) {
                 continue;
             }
             $html_helper = Html::instance();
             $design_translations_html = '';
-            foreach($project->getDesignsSelected() as $design){
+            foreach ($project->getDesignsSelected() as $design) {
                 $design_translations_html .= $html_helper->div(
-                        sprintf(
-                                __('Translate %s Design', 'print-my-blog'),
-                            $design->getWpPost()->post_title
-                        )
+                    sprintf(
+                        __('Translate %s Design', 'print-my-blog'),
+                        $design->getWpPost()->post_title
+                    )
                         . $post_status_display->get_status_html($design->getWpPost()->ID, $language_code)
                 );
             }
@@ -273,7 +278,7 @@ class Wpml extends CompatibilityBase
                         'html' => new FormSectionHtml(
                             $html_helper->h2(sprintf(__('%s Translations', 'print-my-blog'), $language_data['display_name']))
                             . $html_helper->div(
-                                    __('Translate Project Metadata', 'print-my-blog')
+                                __('Translate Project Metadata', 'print-my-blog')
                                     . $post_status_display->get_status_html($project->getWpPost()->ID, $language_code)
                             )
                             . $design_translations_html
@@ -301,10 +306,10 @@ class Wpml extends CompatibilityBase
             [
                     'name' => 'pmb-language-chooser',
                     'subsections' => $form_sections,
-                    'enqueue_scripts_callback' => function(){
-                    wp_add_inline_script(
+                    'enqueue_scripts_callback' => function () {
+                        wp_add_inline_script(
                             'twine_form_section_validation',
-                        "
+                            "
                         // when the language is changed, change the parameter for generating the project.
                         jQuery(document).ready(function(){
                             jQuery('#pmb-language-chooser-choose-language').change(function(event){
@@ -326,27 +331,28 @@ class Wpml extends CompatibilityBase
                                 });
                             });
                         });"
-                    );
-                }
+                        );
+                    }
             ]
         );
         echo $form->getHtmlAndJs();
     }
 
-    public function handleAjaxUpdateProjectLanguage(){
-        if(! check_ajax_referer('pmb-project-edit', '_nonce')){
+    public function handleAjaxUpdateProjectLanguage()
+    {
+        if (! check_ajax_referer('pmb-project-edit', '_nonce')) {
             wp_send_json_error('please refresh the page');
         }
-        $project_id = (int)Array2::setOr($_REQUEST,'project_id',null);
+        $project_id = (int)Array2::setOr($_REQUEST, 'project_id', null);
         $language_code = Array2::setOr($_REQUEST, 'new_lang', null);
-        if(! $project_id){
-            wp_send_json_error( 'oups no project id');
+        if (! $project_id) {
+            wp_send_json_error('oups no project id');
         }
-        if(! current_user_can('edit_pmb_project', $project_id)){
+        if (! current_user_can('edit_pmb_project', $project_id)) {
             wp_send_json_error('Oups you don\'t have permission to edit a project');
         }
         $project = $this->project_manager->getById($project_id);
-        if(! $project instanceof Project){
+        if (! $project instanceof Project) {
             wp_send_json_error('oups no such project');
         }
         $project->setPmbMeta('lang', $language_code);
@@ -362,17 +368,18 @@ class Wpml extends CompatibilityBase
      * @param $subs
      * @param $depth
      */
-    public function showTranslationsOnProjectItems($post_id, $title, $post_type, $template, $subs, $depth){
+    public function showTranslationsOnProjectItems($post_id, $title, $post_type, $template, $subs, $depth)
+    {
         global $sitepress;
         $languages_data = wpml_get_active_languages();
         $post_status_display = new \WPML_Post_Status_Display($languages_data);
         $default_language_code = $sitepress->get_default_language();
 
         foreach ($languages_data as $language_code => $language_data) {
-            list( $text, $link, $trid, $css_class, $status ) = $post_status_display->get_status_data( $post_id, $language_code );
-            if($status === 10){
+            list( $text, $link, $trid, $css_class, $status ) = $post_status_display->get_status_data($post_id, $language_code);
+            if ($status === 10) {
                 ?>
-                <img src="<?php echo esc_url( $sitepress->get_flag_url( $language_code ) );?>"
+                <img src="<?php echo esc_url($sitepress->get_flag_url($language_code));?>"
                      title="<?php echo esc_attr(sprintf(__('Translated into %s', 'print-my-blog'), $language_data['display_name']));?>" width="18" height="12">
                 <?php
             }

@@ -66,7 +66,8 @@ abstract class ProjectFileGeneratorBase
     /**
      * @return Project
      */
-    public function getProject(){
+    public function getProject()
+    {
         return $this->project;
     }
 
@@ -159,16 +160,16 @@ abstract class ProjectFileGeneratorBase
             $post = null;
             foreach ($unordered_posts as $post) {
                 $post_id_from_section = $section->getPostId();
-                if ( $post_id_from_section == $post->ID) {
+                if ($post_id_from_section == $post->ID) {
                     $found = true;
                     break;
                 }
             }
             // if the post is somehow missing from the query results, fix that. Especially helpful if a section was added via the filter.
-            if(! $found){
+            if (! $found) {
                 $post = get_post($section->getPostId());
             }
-            if($post){
+            if ($post) {
                 $post->pmb_section = $section;
                 $ordered_posts[] = $post;
             }

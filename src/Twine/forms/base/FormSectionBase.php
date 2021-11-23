@@ -375,7 +375,7 @@ abstract class FormSectionBase
     public function enqueueJs()
     {
         // defaults to enqueue NO js or css
-        if(is_callable($this->enqueue_scripts_callback)){
+        if (is_callable($this->enqueue_scripts_callback)) {
             call_user_func($this->enqueue_scripts_callback);
         }
     }
