@@ -79,11 +79,17 @@ class DetectAndActivate
         }
     }
 
-    public function activateRenderingCompatibilityModes()
+    /**
+     * Using a filter as an action to initiate our callbacks
+     * @param $pre_dispatch_result
+     * @return mixed
+     */
+    public function activateRenderingCompatibilityModes($pre_dispatch_result)
     {
         foreach ($this->getCompatibilityMods() as $compatibilityMod) {
             $compatibilityMod->setRenderingHooks();
         }
+        return $pre_dispatch_result;
     }
 }
 // End of file DetectAndActivate.php
