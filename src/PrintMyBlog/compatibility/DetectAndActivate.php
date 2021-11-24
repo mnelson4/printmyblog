@@ -84,7 +84,7 @@ class DetectAndActivate
      * @param $pre_dispatch_result
      * @return mixed
      */
-    public function activateRenderingCompatibilityModes($pre_dispatch_result)
+    public function activateRenderingCompatibilityModes($pre_dispatch_result = '')
     {
         foreach ($this->getCompatibilityMods() as $compatibilityMod) {
             $compatibilityMod->setRenderingHooks();
