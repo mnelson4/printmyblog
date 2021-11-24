@@ -7,6 +7,7 @@ use PrintMyBlog\orm\entities\ProjectSection;
 use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
+use SitePress;
 use Twine\forms\base\FormSection;
 use Twine\forms\base\FormSectionHtml;
 use Twine\forms\helpers\InputOption;
@@ -16,6 +17,7 @@ use Twine\helpers\Array2;
 use Twine\helpers\Html;
 use wpml_get_active_languages;
 use Twine\compatibility\CompatibilityBase;
+use WPML_Post_Status_Display;
 
 class Wpml extends CompatibilityBase
 {
@@ -78,6 +80,10 @@ class Wpml extends CompatibilityBase
      */
     public function addLanguageFilter(Project $project = null)
     {
+        if(! function_exists('wpml_get_active_languages') || ! function_exists('wpml_get_default_language')){
+            error_log('PMB WPML integration was trying to run but the functions wpml_get_active_languages and wpml_get_default_language were not defined.');
+            return;
+        }
         $languages = wpml_get_active_languages();
         $project_language = wpml_get_default_language()
         ?>
@@ -194,6 +200,10 @@ class Wpml extends CompatibilityBase
      */
     public function sortTranslatedPosts($sections, ProjectFileGeneratorBase $project_file_generator)
     {
+        if(! function_exists('wpml_object_id_filter')){
+            error_log('PMB WPML integration was trying to run but the function wpml_object_id_filter was not defined.');
+            return $sections;
+        }
         $project = $project_file_generator->getProject();
 
         // if we're using the site's default language for the project, use the posts in whatever language they selected
@@ -242,8 +252,12 @@ class Wpml extends CompatibilityBase
     public function addTranslationOptions(Project $project, $generations)
     {
         global $sitepress;
+        if(! function_exists('wpml_get_active_languages') || ! $sitepress instanceof SitePress || ! class_exists('\WPML_Post_Status_Display')){
+            error_log('PMB WPML integration was trying to run but the function wpml_get_active_languages was not defined, the $sitepress global was not set, or the class WPML_Post_Status_Display was not defined.');
+            return;
+        }
         $languages_data = wpml_get_active_languages();
-        $post_status_display = new \WPML_Post_Status_Display($languages_data);
+        $post_status_display = new WPML_Post_Status_Display($languages_data);
         $default_language_code = $sitepress->get_default_language();
         $default_language_details = $sitepress->get_language_details($default_language_code);
 
@@ -371,8 +385,12 @@ class Wpml extends CompatibilityBase
     public function showTranslationsOnProjectItems($post_id, $title, $post_type, $template, $subs, $depth)
     {
         global $sitepress;
+        if(! function_exists('wpml_get_active_languages') || ! $sitepress instanceof SitePress || ! class_exists('\WPML_Post_Status_Display')){
+            error_log('PMB WPML integration was trying to run but the function wpml_get_active_languages was not defined, the $sitepress global was not set, or the class WPML_Post_Status_Display was not defined.');
+            return;
+        }
         $languages_data = wpml_get_active_languages();
-        $post_status_display = new \WPML_Post_Status_Display($languages_data);
+        $post_status_display = new WPML_Post_Status_Display($languages_data);
 
         foreach ($languages_data as $language_code => $language_data) {
             list( $text, $link, $trid, $css_class, $status ) = $post_status_display->get_status_data($post_id, $language_code);
