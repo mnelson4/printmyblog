@@ -433,7 +433,7 @@ https://youtu.be/uPQ3vqm7A2g
 == Changelog ==
 
 = 3.8.0 November 24, 2021 =
-* Feature: WPML integration for projects. [Blog Post](https://printmy.blog/2021/11/23/introducing-wpml-integration-for-print-my-blog/)
+* Feature: WPML integration for projects. [Blog Post](https://printmy.blog/2021/11/24/introducing-wpml-integration-for-print-my-blog/)
 * Feature: Quick creation of Print Materials from other posts for customization in projects. Pro only. [Video](https://www.youtube.com/watch?v=_nkVlWDwybw)
 * Feature: PMB Print Materials now have their own capabilities which can be granted to users and roles
 * Bugfix: don't show print buttons in widget areas on archive pages and others using multiple buttons. [Video](https://youtu.be/tLI1AAnxi-c)
