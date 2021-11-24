@@ -427,7 +427,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.8.0 xxx =
 * Feature: WPML integration for projects. See https://printmy.blog/2021/11/23/introducing-wpml-integration-for-print-my-blog/
-* Feature: Quick creation of Print Materials from other posts for customization in projects. Pro only.
+* Feature: Quick creation of Print Materials from other posts for customization in projects. Pro only. See https://www.youtube.com/watch?v=_nkVlWDwybw
 * Feature: PMB Print Materials now have their own capabilities which can be granted to users and roles
 * Bugfix: print buttons print correct language when WPML is active
 * Bugfix: if there is a fatal error generating the print page, avoid runaway JS trying to parse the error response
