@@ -28,14 +28,17 @@ class PrintButtons
      */
     public function getHtmlForPrintButtons($post = null)
     {
+        if(! is_singular()){
+            return '<!-- PMB print buttons is only displayed on a single post/page URLs-->';
+        }
         if(is_int($post) || is_string($post)){
             $post = get_post($post);
         }
         if(! $post instanceof WP_Post){
             $post = get_post();
         }
-        if(! $post instanceof WP_Post || ! $post->ID || ! in_array($post->post_type, ['post', 'page'])){
-            return '<!-- PMB print buttons is only displayed on a single post/page URLs-->';
+        if((! $post instanceof WP_Post || ! $post->ID || ! in_array($post->post_type, ['post', 'page']))){
+            return '<!-- PMB print buttons are not displayed because there is no valid post of post type "post" or "page"-->';
         }
         /**
          * @var $url_generator PrintPageUrlGenerator
