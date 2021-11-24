@@ -370,9 +370,12 @@ https://www.youtube.com/watch?v=Ehep6GO5J6c
 
 https://www.youtube.com/watch?v=mWD8kDrhWMs
 
-**Using a Shortcode**
+**Using a Shortcode in the Post Body**
 You can add print buttons directly into your posts and pages by using the shortcode `[pmb_print_buttons]`. You can also supply it with the ID of a different post or page like so: `[pmb_print_buttons ID=123]`.
 You can alternatively use the shortcode `[pmb_print_page_url]` to just get the URL of the print page for more advanced integrations. You can supply it with the ID of a different post, and the `format` (defaults to "print", but also accepts "pdf" or "ebook"), and whether to `add_protocol` (ie, by default, the URL begins with "http://" or "https://", but setting this to `0` will prevent that, in case it was already added), like so: `[pmb_print_page_url format=pdf add_protocol=0]` will produce the URL of the print page for a PDF but not add the "https://" onto the start of the URL.
+
+**In a Widget (eg sidebar or footer) using a Shortcode**
+Alternatively, you can add the print buttons to a widget. In the WordPress admin dashboard, under the "Appearance" menu item, click "Widgets". Add a shortcode widget and add `[pmb_print_buttons]` like mentioned previously. The print buttons will only appear on single posts (eg not on an archive page).
 
 **Editing Your Theme's Template Files**
 If you'd like to add the print buttons somewhere in your theme's template files, add the following PHP code anywhere inside the loop:
@@ -430,6 +433,7 @@ https://youtu.be/uPQ3vqm7A2g
 * Feature: Quick creation of Print Materials from other posts for customization in projects. Pro only. See https://www.youtube.com/watch?v=_nkVlWDwybw
 * Feature: PMB Print Materials now have their own capabilities which can be granted to users and roles
 * Bugfix: fix a bug whereby PMB prevented the new widgets page from saving
+* Bugfix: don't show print buttons in widget areas on archive pages and others using multiple buttons
 * Bugfix: print buttons print correct language when WPML is active
 * Bugfix: if there is a fatal error generating the print page, avoid runaway JS trying to parse the error response
 * Bugfix: prevent emojis in gallery image descriptions from breaking layout

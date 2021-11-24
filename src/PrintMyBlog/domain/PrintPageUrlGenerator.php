@@ -3,6 +3,7 @@
 namespace PrintMyBlog\domain;
 
 use Exception;
+use WP_Post;
 
 class PrintPageUrlGenerator
 {
