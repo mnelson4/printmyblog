@@ -80,7 +80,7 @@ class Wpml extends CompatibilityBase
      */
     public function addLanguageFilter(Project $project = null)
     {
-        if(! function_exists('wpml_get_active_languages') || ! function_exists('wpml_get_default_language')){
+        if (! function_exists('wpml_get_active_languages') || ! function_exists('wpml_get_default_language')) {
             error_log('PMB WPML integration was trying to run but the functions wpml_get_active_languages and wpml_get_default_language were not defined.');
             return;
         }
@@ -200,7 +200,7 @@ class Wpml extends CompatibilityBase
      */
     public function sortTranslatedPosts($sections, ProjectFileGeneratorBase $project_file_generator)
     {
-        if(! function_exists('wpml_object_id_filter')){
+        if (! function_exists('wpml_object_id_filter')) {
             error_log('PMB WPML integration was trying to run but the function wpml_object_id_filter was not defined.');
             return $sections;
         }
@@ -252,7 +252,7 @@ class Wpml extends CompatibilityBase
     public function addTranslationOptions(Project $project, $generations)
     {
         global $sitepress;
-        if(! function_exists('wpml_get_active_languages') || ! $sitepress instanceof SitePress || ! class_exists('\WPML_Post_Status_Display')){
+        if (! function_exists('wpml_get_active_languages') || ! $sitepress instanceof SitePress || ! class_exists('\WPML_Post_Status_Display')) {
             error_log('PMB WPML integration was trying to run but the function wpml_get_active_languages was not defined, the $sitepress global was not set, or the class WPML_Post_Status_Display was not defined.');
             return;
         }
@@ -385,7 +385,7 @@ class Wpml extends CompatibilityBase
     public function showTranslationsOnProjectItems($post_id, $title, $post_type, $template, $subs, $depth)
     {
         global $sitepress;
-        if(! function_exists('wpml_get_active_languages') || ! $sitepress instanceof SitePress || ! class_exists('\WPML_Post_Status_Display')){
+        if (! function_exists('wpml_get_active_languages') || ! $sitepress instanceof SitePress || ! class_exists('\WPML_Post_Status_Display')) {
             error_log('PMB WPML integration was trying to run but the function wpml_get_active_languages was not defined, the $sitepress global was not set, or the class WPML_Post_Status_Display was not defined.');
             return;
         }
