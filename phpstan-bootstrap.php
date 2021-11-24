@@ -15,6 +15,7 @@ if(! function_exists('wpml_get_active_languages')){
     }
 
     class WPML_Post_Status_Display{
+        function __construct(){}
         function get_status_html(){}
     }
 }
