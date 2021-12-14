@@ -13,7 +13,7 @@ module.exports = {
     ...{
         // Add any overrides to the default here.
         entry:{
-            editor: path.resolve( process.cwd(), 'assets/scripts/src', 'index.js')
+            editor: path.resolve( process.cwd(), 'assets/scripts/src/editor', 'index.js')
         },
         output:{
             path: path.resolve(__dirname, 'assets/scripts/build'),

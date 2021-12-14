@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "wp-scripts start",
-    "build": "wp-scripts build"
+    "build": "wp-scripts build",
+    "browserify": "browserify"
   },
   "license": "GPL-2.0+",
   "bugs": {
