@@ -9,7 +9,7 @@
  * Description: Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
  * Author: Michael Nelson
  * Author URI: https://printmy.blog
- * Version: 3.8.2
+ * Version: 3.8.3
  * Requires at least: 4.7
  * Requires PHP: 5.4
  * Text Domain: print-my-blog
