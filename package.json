@@ -17,5 +17,8 @@
   "homepage": "git+https://github.com/mnelson4/printmyblog",
   "devDependencies": {
     "@wordpress/scripts": "^19.0.0"
+  },
+  "dependencies": {
+    "epub-gen": "^0.1.0"
   }
 }
