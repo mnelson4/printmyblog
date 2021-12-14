@@ -639,6 +639,12 @@ class Admin extends BaseController
                             ['pmb-modal', 'docraptor'],
                             filemtime(PMB_SCRIPTS_DIR . 'pmb-generate.js')
                         );
+                        wp_enqueue_script(
+                                'pmb-epub',
+                            PMB_SCRIPTS_URL . 'build/epub-generator.js',
+                            [],
+                            filemtime(PMB_SCRIPTS_DIR . 'build/epub-generator.js')
+                        );
                         wp_enqueue_style(
                             'pmb-generate',
                             PMB_STYLES_URL . 'pmb-generate.css',
