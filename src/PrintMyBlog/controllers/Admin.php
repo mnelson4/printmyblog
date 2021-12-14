@@ -641,9 +641,9 @@ class Admin extends BaseController
                         );
                         wp_register_script(
                                 'epub-gen-memory',
-                            PMB_SCRIPTS_URL . 'libs/epub-gen-memory.min.js',
+                            PMB_SCRIPTS_URL . 'libs/epub-gen-memory__premium_only.min.js',
                             [],
-                            filemtime(PMB_SCRIPTS_DIR . 'libs/epub-gen-memory.min.js')
+                            filemtime(PMB_SCRIPTS_DIR . 'libs/epub-gen-memory__premium_only.min.js')
                         );
                         wp_enqueue_script(
                                 'pmb-epub',
