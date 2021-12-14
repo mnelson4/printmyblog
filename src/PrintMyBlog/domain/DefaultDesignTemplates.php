@@ -44,7 +44,7 @@ class DefaultDesignTemplates
                         'back_matter',
                     ],
                     'design_form_callback'  => function () {
-                        return $this->getDefaultDesignForm()->merge(new FormSection([
+                        return $this->getDefaultDesignForm()->merge($this->getDefaultPdfDesignForm())->merge(new FormSection([
                             'subsections' => [
                                 'image' => new FormSection([
                                     'subsections' => [
@@ -139,7 +139,7 @@ class DefaultDesignTemplates
                         'part',
                     ],
                     'design_form_callback'  => function () {
-                        return $this->getDefaultDesignForm()->merge(new FormSection([
+                        return $this->getDefaultDesignForm()->merge($this->getDefaultProjectForm())->merge(new FormSection([
                             'subsections' => [
                                 'image' => new FormSection([
                                     'subsections' => [
@@ -381,6 +381,48 @@ class DefaultDesignTemplates
                 ];
             }
         );
+
+        pmb_register_design_template(
+            'basic_epub',
+            function () {
+                return [
+                    'title'                 => __('Basic ePub', 'print-my-blog'),
+                    'format'                => 'epub',
+                    'dir'                   => PMB_DESIGNS_DIR . 'epub/basic',
+                    'url' => plugins_url('designs/epub/basic', PMB_MAIN_FILE),
+                    'default' => 'basic_epub',
+                    'docs' => '', // https://printmy.blog/user-guide/pdf-design/classic-print-pdf-and-variations/',
+                    'supports' => [
+                        'front_matter',
+                        'part',
+                        'back_matter',
+                    ],
+                    'design_form_callback'  => function () {
+                        return $this->getDefaultDesignForm()->merge($this->getGenericDesignForm());
+                    },
+                    'project_form_callback' => function (Design $design) {
+                        return new FormSection(
+                            [
+                                'subsections' => [
+                                    'description' => new TextAreaInput(
+                                        [
+                                            'html_label_text' => __('Description', 'print-my-blog'),
+                                        ]
+                                    ),
+                                    'cover' => new AdminFileUploaderInput(
+                                        [
+                                            'html_label_text' => __('Cover Image', 'print-my-blog'),
+                                            'html_help_text' => __('Cover image used on file (does not necessarily appear inside project', 'print-my-blog'),
+                                            'default' => plugins_url('assets/images/icon-128x128.jpg', PMB_MAIN_FILE)
+                                        ]
+                                    ),
+                                ]
+                            ]
+                        );
+                    }
+                ];
+            }
+        );
     }
 
     public function getDefaultProjectForm(Design $design)
@@ -464,13 +506,27 @@ class DefaultDesignTemplates
                             'html_label_text' => __('Post Content'),
                             'html_help_text' => __('Content from each post to print.', 'print-my-blog')
                         ]
-                    ),
+                    )
+                ]
+            ]
+        );
+    }
+
+    /**
+     * Gets a form specific to classic PDFs
+     * @return FormSection
+     * @throws \Twine\forms\helpers\ImproperUsageException
+     */
+    protected function getDefaultPdfDesignForm(){
+        return new FormSection(
+            [
+                'subsections' => [
                     'page_per_post' => new YesNoInput(
                         [
                             'default' => true,
                             'html_label_text' => __('Each Post Begins on a New Page', 'print-my-blog'),
                             'html_help_text' => __('Whether to force posts to always start on a new page. Doing so makes the page more legible, but uses more paper.', 'print-my-blog'),
-                            ]
+                        ]
                     ),
                     'fonts' => new FormSectionDetails([
                         'html_summary' => __('Font Settings', 'print-my-blog'),

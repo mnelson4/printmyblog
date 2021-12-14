@@ -8,6 +8,7 @@ class DefaultFileFormats
 {
     const DIGITAL_PDF = 'digital_pdf';
     const PRINT_PDF = 'print_pdf';
+    const EPUB = 'epub';
 
     /**
      * @return FileFormat[]
@@ -18,7 +19,7 @@ class DefaultFileFormats
             self::DIGITAL_PDF,
             [
                 'title' => __('Digital PDF', 'print-my-blog'),
-                'icon' => 'dashicons-tablet',
+                'icon' => 'dashicons-desktop',
                 'generator' => 'PrintMyBlog\services\generators\PdfGenerator',
                 'default' => 'classic_digital',
                 'desc' => __('PDF file intended for viewing on a computer, tablet or phone, but not necessarily for printing to paper. Usually includes working hyperlinks, ample colors, and other features that require a device.', 'print-my-blog'),
@@ -36,5 +37,18 @@ class DefaultFileFormats
                 'color' => '#B5F2B5'
                 ]
         );
+//        if(pmb_fs()->is_plan__premium_only('founding_members')) {
+            pmb_register_file_format(
+                self::EPUB,
+                [
+                    'title' => __('e-Book (ePub)', 'print-my-blog'),
+                    'icon' => 'dashicons-tablet',
+                    'generator' => 'PrintMyBlog\services\generators\EpubGenerator',
+                    'default' => 'basic_epub',
+                    'desc' => __('ePub file especially good for reading on mobile devices and for selling as e-books on marketplaces like Amazon.com', 'print-my-blog'),
+                    'color' => '#ffcc00'
+                ]
+            );
+//        }
     }
 }

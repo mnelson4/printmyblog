@@ -272,6 +272,61 @@ class DefaultDesigns
                 ];
             }
         );
+
+        pmb_register_design(
+            'basic_epub',
+            'basic_epub',
+            function (DesignTemplate $design_template) {
+                return [
+                    'title' => __('Basic ePub', 'print-my-blog'),
+                    'quick_description' => __('Simple ePub for using when uploading as an eBook to Amazon and other epub marketplaces', 'print-my-blog'),
+                    'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
+                    'author' => [
+                        'name' => 'Mike Nelson',
+                        'url' => 'https://printmy.blog'
+                    ],
+                    'previews' => [
+                        [
+                            'url' => $design_template->getUrl() . 'assets/preview1.jpg',
+                            'desc' => __(
+                                'Title page and table of contents both fit on the first page.',
+                                'print-my-blog'
+                            )
+                        ],
+                        [
+                            'url' => $design_template->getUrl() . 'assets/preview2.jpg',
+                            'desc' => __(
+                                'Two column layout which compactly shows content and images.',
+                                'print-my-blog'
+                            )
+                        ]
+                    ],
+                    'design_defaults' => [
+                        'header_content' => [
+                            'title',
+                            'subtitle',
+                            'url',
+                            'date_printed',
+                        ],
+                        'post_content' => [
+                            'title',
+                            'id',
+                            'author',
+                            'url',
+                            'published_date',
+                            'categories',
+                            'featured_image',
+                            'excerpt',
+                            'content',
+                        ],
+                    ],
+                    'project_defaults' => [
+                    ]
+                ];
+            }
+        );
+
+
         do_action('pmb_register_designs');
     }
 }

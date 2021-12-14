@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.8.3
+Stable tag: 3.9.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -432,7 +432,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.8.3 xxxx =
+= 3.9.0 xxxx =
 * Add epub
 
 = 3.8.2 November 24, 2021 =
