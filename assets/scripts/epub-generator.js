@@ -14,8 +14,5 @@ const chapters = [{
 const epub = epubGen.default;
 (async () => {
     const content = await epub({ title: 'test', verbose: true }, chapters);
-    link.href = await blobToBase64(content);
-
-    const content2 = await epub({ title: 'test', verbose: true, version: 2 }, chapters);
-    link2.href = await blobToBase64(content2);
+    download_link.href = await blobToBase64(content);
 })();

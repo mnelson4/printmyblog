@@ -12,6 +12,7 @@ use PrintMyBlog\orm\entities\ProjectSection;
 use PrintMyBlog\services\PmbCentral;
 use PrintMyBlog\services\SectionTemplateRegistry;
 use stdClass;
+use Twine\services\filesystem\File;
 use WP_Post;
 use WP_Query;
 
@@ -21,6 +22,7 @@ abstract class ProjectFileGeneratorBase
      * @var Project
      */
     protected $project;
+
     /**
      * @var ProjectGeneration
      */
@@ -30,14 +32,17 @@ abstract class ProjectFileGeneratorBase
      * @var Design
      */
     protected $design;
+
     /**
      * @var PostFetcher
      */
     protected $post_fetcher;
+
     /**
      * @var DetectAndActivate
      */
     private $plugin_compatibility;
+
     /**
      * @var SectionTemplateRegistry
      */

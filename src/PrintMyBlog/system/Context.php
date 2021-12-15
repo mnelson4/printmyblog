@@ -104,6 +104,10 @@ class Context extends BaseContext
                 'PrintMyBlog\db\PostFetcher' => self::REUSE,
                 'PrintMyBlog\compatibility\DetectAndActivate' => self::REUSE
             ],
+            'PrintMyBlog\services\generators\EpubGenerator' => [
+                'PrintMyBlog\db\PostFetcher' => self::REUSE,
+                'PrintMyBlog\compatibility\DetectAndActivate' => self::REUSE
+            ],
             'PrintMyBlog\services\FileFormatRegistry' => [
                 'PrintMyBlog\factories\FileFormatFactory' => self::REUSE,
             ],

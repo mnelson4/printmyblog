@@ -20,8 +20,6 @@ pmb_render_template(
 );
 do_action('project_edit_generate__under_header', $project, $generations);
 ?>
-    <a id="link" download="test.epub">Download</a>
-    <a id="link2" download="test.epub">Download 2</a>
 <?php if (is_array($license_info)){
    ?>
     <p class="pmb-credit-reminder"><?php

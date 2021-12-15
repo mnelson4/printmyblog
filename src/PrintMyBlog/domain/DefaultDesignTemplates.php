@@ -139,7 +139,7 @@ class DefaultDesignTemplates
                         'part',
                     ],
                     'design_form_callback'  => function () {
-                        return $this->getDefaultDesignForm()->merge($this->getDefaultProjectForm())->merge(new FormSection([
+                        return $this->getDefaultDesignForm()->merge($this->getDefaultPdfDesignForm())->merge(new FormSection([
                             'subsections' => [
                                 'image' => new FormSection([
                                     'subsections' => [
