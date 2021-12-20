@@ -19,7 +19,7 @@ jQuery(document).ready(function(){
     });
     const epub = epubGen.default;
     (async () => {
-        const content = await epub({ title: 'test', verbose: true }, sections);
+        const content = await epub(epub_options, sections);
         download_link.href = await blobToBase64(content);
     })();
 });
