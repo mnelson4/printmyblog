@@ -27,7 +27,7 @@ class EpubGenerator extends HtmlBaseGenerator
         wp_enqueue_script(
             'pmb-epub',
             PMB_SCRIPTS_URL . 'epub-generator.js',
-            ['epub-gen-memory'],
+            ['epub-gen-memory','jquery'],
             filemtime(PMB_SCRIPTS_DIR . 'epub-generator.js')
         );
     }
