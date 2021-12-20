@@ -15,6 +15,7 @@ jQuery(document).ready(function(){
     }
     var sections = [];
     var found_toc = false;
+    var toc_title_found = null;
     jQuery('.pmb-section').each(function(index,element){
         var chapter_data = {content:element.outerHTML, beforeToc: ! found_toc};
 
@@ -30,12 +31,16 @@ jQuery(document).ready(function(){
         }
         if(element.id.indexOf('pmb-toc') !== -1){
             found_toc = true;
+            toc_title_found = section_title.text();
             // don't add the TOC page to the book. epub-gen-memory.js adds it automatically
             return;
         }
         sections.push(chapter_data);
     });
     epub_options.tocInTOC = found_toc;
+    if(found_toc){
+        epub_options.tocTitle = toc_title_found;
+    }
 
     const epub = epubGen.default;
     (async () => {
