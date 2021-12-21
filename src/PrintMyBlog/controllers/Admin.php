@@ -1209,17 +1209,7 @@ class Admin extends BaseController
             $initialize_steps = true;
         }
         $this->project->setTitle($form->getInputValue('title'));
-        $formats_to_save = [];
-        if ($form->getInputValue('formats') === 'all') {
-            $formats_to_save = array_map(
-                function (FileFormat $format) {
-                    return $format->slug();
-                },
-                $this->file_format_registry->getFormats()
-            );
-        } else {
-            $formats_to_save[] = $form->getInputValue('formats');
-        }
+        $formats_to_save = $form->getInputValue('formats');
         $old_formats = $this->project->getFormatSlugsSelected();
         $this->project->setFormatsSelected($formats_to_save);
         $this->notification_manager->addTextNotificationForCurrentUser(
