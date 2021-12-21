@@ -1,3 +1,9 @@
+/**
+ * @var pmb_epub object
+ * @param blob
+ * @returns {Promise<unknown>}
+ */
+
 function blobToBase64(blob) {
     return new Promise((resolve, _) => {
         const reader = new FileReader();
@@ -7,7 +13,7 @@ function blobToBase64(blob) {
 }
 jQuery(document).ready(function(){
     var epub_options = {
-        title: 'test',
+        title: pmb_epub.title,
         verbose: true,
         ignoreFailedDownloads:true,
         prependChapterTitles:false,

@@ -44,10 +44,16 @@ class FileFormat
      * @var string dashicon used for format. See https://developer.wordpress.org/resource/dashicons/
      */
     protected $icon;
+
     /**
      * @var mixed
      */
     protected $color;
+
+    /**
+     * @var string
+     */
+    protected $extension;
 
     /**
      * ProjectFormat constructor.
@@ -82,6 +88,11 @@ class FileFormat
             $this->color = $data['color'];
         } else {
             $this->color = 'black';
+        }
+        if(isset($data['extension'])){
+            $this->extension = $data['extension'];
+        } else {
+            $this->extension = 'pdf';
         }
     }
 
@@ -185,5 +196,12 @@ class FileFormat
     public function color()
     {
         return $this->color;
+    }
+
+    /**
+     * @return string
+     */
+    public function extension(){
+        return $this->extension;
     }
 }

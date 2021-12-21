@@ -164,7 +164,22 @@ class ProjectGeneration
     {
         $upload_dir_info = wp_upload_dir();
         return $upload_dir_info['baseurl'] . '/pmb/generated/' . $this->project->code() . '/' . $this->format->slug()
-               . '/' . urlencode($this->project->getWpPost()->post_name) . '.html?uniqueness=' . current_time('timestamp');
+               . '/' . urlencode($this->getFileName()) . '.html?uniqueness=' . current_time('timestamp');
+    }
+
+    /**
+     * The name of the file (minus extension)
+     * @return string
+     */
+    protected function getFileName(){
+        return $this->project->getWpPost()->post_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileNameWithExtension(){
+        return $this->getFileName() . '.' . $this->format->extension();
     }
 
     public function generatedFileUrl()

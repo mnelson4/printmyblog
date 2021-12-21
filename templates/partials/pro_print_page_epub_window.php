@@ -1,3 +1,8 @@
+<?php
+/**
+* @var $project_generation \PrintMyBlog\entities\ProjectGeneration
+ */
+?>
 <!-- Print My Blog Version <?php echo PMB_VERSION;?>-->
 <div class="pmb-pro-print-window-wrapper">
     <div class="pmb-pro-print-window">
@@ -19,7 +24,7 @@
             <div class="pmb-pro-print-window-options">
                 <div class="pmb-print-option pmb-big-option">
                     <h2><?php esc_html_e('ePub Generator', 'print-my-blog');?></h2>
-                    <a class="pmb-pro-window-button" id="download_link" download="test.epub"><?php esc_html_e('Download ePub', 'print-my-blog');?></a>
+                    <a class="pmb-pro-window-button" id="download_link" download="<?php echo esc_attr($project_generation->getFileNameWithExtension());?>"><?php esc_html_e('Download ePub', 'print-my-blog');?></a>
                 </div>
             </div>
         </div>

@@ -13,7 +13,7 @@ class EpubGenerator extends HtmlBaseGenerator
      */
     public function addPrintWindowToPage()
     {
-        echo pmb_get_contents(PMB_TEMPLATES_DIR . 'partials/pro_print_page_epub_window.php', ['project' => $this->project, 'generate_url' => $this->getUrlBackToGenerateStep()]);
+        echo pmb_get_contents(PMB_TEMPLATES_DIR . 'partials/pro_print_page_epub_window.php', ['project' => $this->project, 'project_generation' => $this->project_generation, 'generate_url' => $this->getUrlBackToGenerateStep()]);
     }
 
     public function enqueueStylesAndScripts()
@@ -29,6 +29,13 @@ class EpubGenerator extends HtmlBaseGenerator
             PMB_SCRIPTS_URL . 'epub-generator.js',
             ['epub-gen-memory','jquery'],
             filemtime(PMB_SCRIPTS_DIR . 'epub-generator.js')
+        );
+        wp_localize_script(
+            'pmb-epub',
+            'pmb_epub',
+            [
+                'title' => $this->project->getPublishedTitle(),
+            ]
         );
     }
 }
