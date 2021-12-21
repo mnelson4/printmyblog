@@ -20,6 +20,7 @@ use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
 use PrintMyBlog\services\SectionTemplateRegistry;
 use Twine\forms\base\FormSection;
 use Twine\forms\inputs\FormInputBase;
+use Twine\forms\inputs\TextInput;
 use Twine\orm\entities\PostWrapper;
 use WP_Post;
 use WP_Query;
@@ -480,7 +481,15 @@ class Project extends PostWrapper
                 $forms[] = $this->getDesignFor($format)->getProjectForm();
             }
             $project_form = new FormSection(
-                [ 'name' => 'pmb_project' ]
+                [
+                    'name' => 'pmb_project',
+                    'subsections' => [
+                        'post_title' => new TextInput(
+                            [
+                                'html_label_text' => __('Project Title', 'print-my-blog'),
+                            ]
+                        )
+                    ]]
             );
 
             foreach ($forms as $form) {
@@ -497,14 +506,17 @@ class Project extends PostWrapper
     }
 
     /**
-     * Gets the value saved from the project meta-form. If it wasn't set, uses
-     * the form's default value
+     * Gets the value from the post's property or postmeta. If the value it wasn't set, uses
+     * the form's default value from the project's metadata form.
      * @param string $setting_name
      *
      * @return mixed|null
      */
     public function getSetting($setting_name)
     {
+        if(property_exists('WP_Post',$setting_name)){
+            return $this->getWpPost()->{$setting_name};
+        }
         // tries to get the setting from a postmeta
         $setting = $this->getPmbMeta($setting_name);
         if ($setting !== null) {
@@ -540,11 +552,16 @@ class Project extends PostWrapper
     }
 
     /**
+     * Updates the post property or metadata
      * @param $setting_name string
      * @param $value mixed
      */
     public function setSetting($setting_name, $value)
     {
+        if(property_exists('WP_Post',$setting_name)){
+            $this->getWpPost()->{$setting_name} = $value;
+            wp_update_post((array)$this->getWpPost());
+        }
         $this->setPmbMeta($setting_name, $value);
     }
 

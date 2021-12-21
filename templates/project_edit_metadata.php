@@ -16,12 +16,6 @@ pmb_render_template(
 );
 ?>
 <form method="POST" action="<?php echo esc_attr($form_url);?>">
-    <p><?php
-        printf(
-                esc_html__('To edit the project\'s title, %1$sgo back to the setup step.%2$s', 'print-my-blog'),
-                '<a href="' . esc_url($steps_to_urls[\PrintMyBlog\entities\ProjectProgress::SETUP_STEP]) .'">',
-                '</a>'
-        );?></p>
     <?php echo $form->getHtmlAndJs();?>
     <button class="button button-primary pmb-save"><?php esc_html_e('Save & Proceed', 'print-my-blog');?></button>
 </form>

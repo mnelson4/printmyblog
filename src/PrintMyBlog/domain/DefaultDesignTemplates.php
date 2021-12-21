@@ -404,11 +404,17 @@ class DefaultDesignTemplates
                         return new FormSection(
                             [
                                 'subsections' => [
-                                    'description' => new TextAreaInput(
+                                    'post_name' => new TextInput(
+                                        [
+                                            'html_label_text' => __('File name', 'print-my-blog'),
+                                        ]
+                                    ),
+                                    'post_content' => new TextAreaInput(
                                         [
                                             'html_label_text' => __('Description', 'print-my-blog'),
                                         ]
                                     ),
+//                                    ''
                                     'cover' => new AdminFileUploaderInput(
                                         [
                                             'html_label_text' => __('Cover Image', 'print-my-blog'),
