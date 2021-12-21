@@ -31,6 +31,7 @@ use Twine\entities\notifications\OneTimeNotification;
 use Twine\forms\base\FormSection;
 use Twine\forms\base\FormSectionHtml;
 use Twine\forms\helpers\InputOption;
+use Twine\forms\inputs\CheckboxMultiInput;
 use Twine\forms\inputs\HiddenInput;
 use Twine\forms\inputs\RadioButtonInput;
 use Twine\forms\inputs\TextAreaInput;
@@ -1129,21 +1130,9 @@ class Admin extends BaseController
                 $format->desc()
             );
         }
-        $format_options['all'] = new InputOption(
-            __('Both', 'print-my-blog'),
-            __('A project can be prepared to use both a Digital PDF and a Print-Ready PDF, but it will be more complex. (Eg the design for one format might support different features than the design for the other format.)', 'print-my-blog')
-        );
-        $default_format = null;
+        $default_formats = [DefaultFileFormats::DIGITAL_PDF];
         if ($this->project instanceof Project) {
-            $formats_preselected = $this->project->getFormatsSelected();
-            if (count($formats_preselected) === 1) {
-                $format_preselected = reset($formats_preselected);
-                $default_format = $format_preselected->slug();
-            } elseif (count($format_options) > 1) {
-                $default_format = 'all';
-            }
-        } else {
-            $default_format = DefaultFileFormats::DIGITAL_PDF;
+            $default_formats = array_keys($this->project->getFormatsSelected());
         }
         return apply_filters(
             '\PrintMyBlog\controllers\Admin::getSetupForm',
@@ -1158,12 +1147,12 @@ class Admin extends BaseController
                                 'autofocus'
                         ]
                     ]),
-                    'formats' => new RadioButtonInput(
+                    'formats' => new CheckboxMultiInput(
                         $format_options,
                         [
                             'html_label_text' => __('Format', 'print-my-blog'),
                             'required' => true,
-                            'default' => $default_format
+                            'default' => $default_formats
                         ]
                     )
                 ]
