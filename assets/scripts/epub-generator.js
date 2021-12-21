@@ -19,6 +19,7 @@ jQuery(document).ready(function(){
         ignoreFailedDownloads:true,
         prependChapterTitles:false,
         numberChaptersInTOC:false,
+        cover:pmb_epub.cover,
     }
     var sections = [];
     var found_toc = false;

@@ -42,7 +42,8 @@ class EpubGenerator extends HtmlBaseGenerator
             'pmb_epub',
             [
                 'title' => $this->project->getPublishedTitle(),
-                'authors' => $this->getAuthors()
+                'authors' => $this->getAuthors(),
+                'cover' => $this->project->getSetting('cover')
             ]
         );
     }

@@ -420,7 +420,6 @@ class DefaultDesignTemplates
                                             'html_label_text' => __('Description', 'print-my-blog'),
                                         ]
                                     ),
-//                                    ''
                                     'cover' => new AdminFileUploaderInput(
                                         [
                                             'html_label_text' => __('Cover Image', 'print-my-blog'),
