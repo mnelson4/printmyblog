@@ -528,7 +528,8 @@ class DefaultDesignTemplates
      * @return FormSection
      * @throws \Twine\forms\helpers\ImproperUsageException
      */
-    protected function getDefaultPdfDesignForm(){
+    protected function getDefaultPdfDesignForm()
+    {
         return new FormSection(
             [
                 'subsections' => [

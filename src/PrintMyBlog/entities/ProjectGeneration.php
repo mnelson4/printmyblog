@@ -171,14 +171,16 @@ class ProjectGeneration
      * The name of the file (minus extension)
      * @return string
      */
-    protected function getFileName(){
+    protected function getFileName()
+    {
         return $this->project->getWpPost()->post_name;
     }
 
     /**
      * @return string
      */
-    public function getFileNameWithExtension(){
+    public function getFileNameWithExtension()
+    {
         return $this->getFileName() . '.' . $this->format->extension();
     }
 

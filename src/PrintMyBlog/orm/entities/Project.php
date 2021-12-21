@@ -515,7 +515,7 @@ class Project extends PostWrapper
      */
     public function getSetting($setting_name)
     {
-        if(property_exists('WP_Post',$setting_name)){
+        if (property_exists('WP_Post', $setting_name)) {
             return $this->getWpPost()->{$setting_name};
         }
         // tries to get the setting from a postmeta
@@ -523,7 +523,7 @@ class Project extends PostWrapper
         if ($setting !== null) {
             return $setting;
         }
-        if($setting_name === 'byline'){
+        if ($setting_name === 'byline') {
             return get_the_author_meta('display_name', $this->getWpPost()->post_author);
         }
         $form    = $this->getMetaForm();
@@ -562,7 +562,7 @@ class Project extends PostWrapper
      */
     public function setSetting($setting_name, $value)
     {
-        if(property_exists('WP_Post',$setting_name)){
+        if (property_exists('WP_Post', $setting_name)) {
             $this->getWpPost()->{$setting_name} = $value;
             wp_update_post((array)$this->getWpPost());
         }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace PrintMyBlog\services\generators;
-
 
 class EpubGenerator extends HtmlBaseGenerator
 {
@@ -51,11 +49,12 @@ class EpubGenerator extends HtmlBaseGenerator
     /**
      * @return false|string|string[]
      */
-    protected function getAuthors(){
+    protected function getAuthors()
+    {
         $byline = $this->project->getSetting('byline');
-        if(! $byline){
+        if (! $byline) {
             return '';
         }
-        return array_map('trim', explode(',', str_replace(['\n'],',',$byline)));
+        return array_map('trim', explode(',', str_replace(['\n'], ',', $byline)));
     }
 }

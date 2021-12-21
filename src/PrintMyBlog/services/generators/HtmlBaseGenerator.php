@@ -1,8 +1,6 @@
 <?php
 
-
 namespace PrintMyBlog\services\generators;
-
 
 use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\orm\entities\Design;
@@ -187,7 +185,8 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
      */
     abstract protected function addPrintWindowToPage();
 
-    protected function getUrlBackToGenerateStep(){
+    protected function getUrlBackToGenerateStep()
+    {
         return add_query_arg(
             [
                 'ID' => $this->project->getWpPost()->ID,

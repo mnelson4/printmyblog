@@ -89,7 +89,7 @@ class FileFormat
         } else {
             $this->color = 'black';
         }
-        if(isset($data['extension'])){
+        if (isset($data['extension'])) {
             $this->extension = $data['extension'];
         } else {
             $this->extension = 'pdf';
@@ -201,7 +201,8 @@ class FileFormat
     /**
      * @return string
      */
-    public function extension(){
+    public function extension()
+    {
         return $this->extension;
     }
 }
