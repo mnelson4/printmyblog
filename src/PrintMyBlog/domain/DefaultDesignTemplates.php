@@ -409,6 +409,12 @@ class DefaultDesignTemplates
                                             'html_label_text' => __('File name', 'print-my-blog'),
                                         ]
                                     ),
+                                    'byline' => new TextAreaInput(
+                                        [
+                                            'html_label_text' => __('ByLine', 'print-my-blog'),
+                                            'html_help_text' => __('Project Author(s)', 'print-my-blog'),
+                                        ]
+                                    ),
                                     'post_content' => new TextAreaInput(
                                         [
                                             'html_label_text' => __('Description', 'print-my-blog'),

@@ -13,7 +13,14 @@ class EpubGenerator extends HtmlBaseGenerator
      */
     public function addPrintWindowToPage()
     {
-        echo pmb_get_contents(PMB_TEMPLATES_DIR . 'partials/pro_print_page_epub_window.php', ['project' => $this->project, 'project_generation' => $this->project_generation, 'generate_url' => $this->getUrlBackToGenerateStep()]);
+        echo pmb_get_contents(
+            PMB_TEMPLATES_DIR . 'partials/pro_print_page_epub_window.php',
+            [
+                'project' => $this->project,
+                'project_generation' => $this->project_generation,
+                'generate_url' => $this->getUrlBackToGenerateStep(),
+            ]
+        );
     }
 
     public function enqueueStylesAndScripts()
@@ -35,7 +42,19 @@ class EpubGenerator extends HtmlBaseGenerator
             'pmb_epub',
             [
                 'title' => $this->project->getPublishedTitle(),
+                'authors' => $this->getAuthors()
             ]
         );
+    }
+
+    /**
+     * @return false|string|string[]
+     */
+    protected function getAuthors(){
+        $byline = $this->project->getSetting('byline');
+        if(! $byline){
+            return '';
+        }
+        return array_map('trim', explode(',', str_replace(['\n'],',',$byline)));
     }
 }

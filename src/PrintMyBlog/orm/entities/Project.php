@@ -20,6 +20,7 @@ use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
 use PrintMyBlog\services\SectionTemplateRegistry;
 use Twine\forms\base\FormSection;
 use Twine\forms\inputs\FormInputBase;
+use Twine\forms\inputs\TextAreaInput;
 use Twine\forms\inputs\TextInput;
 use Twine\orm\entities\PostWrapper;
 use WP_Post;
@@ -488,7 +489,7 @@ class Project extends PostWrapper
                             [
                                 'html_label_text' => __('Project Title', 'print-my-blog'),
                             ]
-                        )
+                        ),
                     ]]
             );
 
@@ -521,6 +522,9 @@ class Project extends PostWrapper
         $setting = $this->getPmbMeta($setting_name);
         if ($setting !== null) {
             return $setting;
+        }
+        if($setting_name === 'byline'){
+            return get_the_author_meta('display_name', $this->getWpPost()->post_author);
         }
         $form    = $this->getMetaForm();
         $section = $form->findSection($setting_name);

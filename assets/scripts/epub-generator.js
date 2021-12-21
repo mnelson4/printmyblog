@@ -14,6 +14,7 @@ function blobToBase64(blob) {
 jQuery(document).ready(function(){
     var epub_options = {
         title: pmb_epub.title,
+        author:pmb_epub.authors,
         verbose: true,
         ignoreFailedDownloads:true,
         prependChapterTitles:false,
