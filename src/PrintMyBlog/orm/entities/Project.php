@@ -565,8 +565,9 @@ class Project extends PostWrapper
         if (property_exists('WP_Post', $setting_name)) {
             $this->getWpPost()->{$setting_name} = $value;
             wp_update_post((array)$this->getWpPost());
+        } else {
+            $this->setPmbMeta($setting_name, $value);
         }
-        $this->setPmbMeta($setting_name, $value);
     }
 
     /**
