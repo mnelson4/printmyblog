@@ -77,8 +77,13 @@ Styles for the print window
         width:400px;
         flex-grow:1;
     }
+    .pmb-print-option.pmb-constrained{
+        max-width:600px;
+    }
     .pmb-pro-print-window-options .pmb-print-option.pmb-big-option{
         flex-grow:2;
+    }
+    .pmb-highlight{
         background-color:lightgoldenrodyellow;
     }
     .pmb-pro-print-window-options .pmb-print-option h2{

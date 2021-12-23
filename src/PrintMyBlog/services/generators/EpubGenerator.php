@@ -23,6 +23,7 @@ class EpubGenerator extends HtmlBaseGenerator
 
     public function enqueueStylesAndScripts()
     {
+        wp_enqueue_style('pmb_pro_page');
         wp_register_script(
             'epub-gen-memory',
             PMB_SCRIPTS_URL . 'libs/epub-gen-memory__premium_only.min.js',
@@ -35,13 +36,18 @@ class EpubGenerator extends HtmlBaseGenerator
             ['epub-gen-memory','jquery'],
             filemtime(PMB_SCRIPTS_DIR . 'epub-generator.js')
         );
+        $css = pmb_get_contents(
+            PMB_STYLES_DIR . '/pmb-epub.css'
+        );
         wp_localize_script(
             'pmb-epub',
             'pmb_epub',
             [
                 'title' => $this->project->getPublishedTitle(),
                 'authors' => $this->getAuthors(),
-                'cover' => $this->project->getSetting('cover')
+                'cover' => $this->project->getSetting('cover'),
+                'css' => $css,
+                'version' => '3'
             ]
         );
     }

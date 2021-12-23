@@ -40,7 +40,7 @@ $generate_url = add_query_arg(
                     <p><?php esc_html_e('Limited to features supported by your browser.', 'print-my-blog');?></p>
                     <p><a target="_blank" href="https://printmy.blog/free-vs-pro/"><?php esc_html_e('Compare printing with your browser vs Pro Print Service', 'print-my-blog');?></a></p>
                 </div>
-                <div class="pmb-print-option pmb-big-option">
+                <div class="pmb-print-option pmb-big-option pmb-highlight">
                     <h2><?php esc_html_e('Pro Print Service', 'print-my-blog');?></h2>
                     <?php if(! is_array($license_info) ){ ?>
 

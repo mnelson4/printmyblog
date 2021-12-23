@@ -1,0 +1,33 @@
+.blocks-gallery-grid{
+    list-style-type: none;
+}
+
+figure{
+    margin:0.5em 0 0.5em 0;
+    padding:0.5em 0 0.5em 0;
+}
+.wp-block-gallery ul{
+    margin:0;
+    padding-left:0;
+}
+.wp-block-gallery li{
+    margin:0;
+    padding-left:0;
+}
+ul, ol{
+    padding-left:1em;
+}
+blockquote{
+    margin-right:0;
+}
+div{
+    margin:0;
+    padding:0;
+}
+h1{
+    margin-bottom:1em;
+    padding-top:1em;
+}
+h1,h2,h3,h3,h4,h5,h6{
+    margin-top:1em;
+}

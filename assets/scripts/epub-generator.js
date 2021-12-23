@@ -20,6 +20,8 @@ jQuery(document).ready(function(){
         prependChapterTitles:false,
         numberChaptersInTOC:false,
         cover:pmb_epub.cover,
+        css:pmb_epub.css,
+        version: parseInt(pmb_epub.version)
     }
     var sections = [];
     var found_toc = false;
