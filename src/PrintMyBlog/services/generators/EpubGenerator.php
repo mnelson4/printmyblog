@@ -38,6 +38,10 @@ class EpubGenerator extends HtmlBaseGenerator
         );
         $css = pmb_get_contents(
             PMB_STYLES_DIR . '/pmb-epub.css'
+        ) . $this->design->getSetting('custom_css');
+        wp_add_inline_style(
+            'pmb_pro_page',
+            $css
         );
         wp_localize_script(
             'pmb-epub',
