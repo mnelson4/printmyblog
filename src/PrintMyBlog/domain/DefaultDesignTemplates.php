@@ -398,7 +398,9 @@ class DefaultDesignTemplates
                         'back_matter',
                     ],
                     'design_form_callback'  => function () {
-                        return $this->getDefaultDesignForm()->merge($this->getGenericDesignForm());
+                        $form = $this->getDefaultDesignForm()->merge($this->getGenericDesignForm());
+                        $form->getProperSubsection('generic_sections')->removeSubsection('use_theme');
+                        return $form;
                     },
                     'project_form_callback' => function (Design $design) {
                         return new FormSection(

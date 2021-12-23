@@ -67,4 +67,14 @@ class EpubGenerator extends HtmlBaseGenerator
         }
         return array_map('trim', explode(',', str_replace(['\n'], ',', $byline)));
     }
+
+    protected function finishGenerating()
+    {
+        parent::finishGenerating();
+        if($this->design->getSetting('powered_by')){
+            $this->getFileWriter()->write(
+                pmb_get_contents($this->design->getDesignTemplate()->getDir() . 'templates/footer.php')
+            );
+        }
+    }
 }
