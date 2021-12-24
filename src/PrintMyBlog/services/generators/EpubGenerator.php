@@ -71,7 +71,7 @@ class EpubGenerator extends HtmlBaseGenerator
     protected function finishGenerating()
     {
         parent::finishGenerating();
-        if($this->design->getSetting('powered_by')){
+        if ($this->design->getSetting('powered_by')) {
             $this->getFileWriter()->write(
                 pmb_get_contents($this->design->getDesignTemplate()->getDir() . 'templates/footer.php')
             );

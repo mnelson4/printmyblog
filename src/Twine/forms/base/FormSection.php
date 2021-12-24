@@ -1277,7 +1277,8 @@ class FormSection extends FormSectionValidatable
      * Remove the given subsection in this form (does not recursively search for it)
      * @param $name
      */
-    public function removeSubsection($name){
+    public function removeSubsection($name)
+    {
         unset($this->subsections[$name]);
     }
 
