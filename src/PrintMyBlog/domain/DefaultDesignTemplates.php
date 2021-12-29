@@ -391,7 +391,7 @@ class DefaultDesignTemplates
                     'dir'                   => PMB_DESIGNS_DIR . 'epub/classic',
                     'url' => plugins_url('designs/epub/classic', PMB_MAIN_FILE),
                     'default' => 'classic_epub',
-                    'docs' => '', // https://printmy.blog/user-guide/pdf-design/classic-print-pdf-and-variations/',
+                    'docs' => 'https://printmy.blog/user-guide/', // update
                     'supports' => [
                         'front_matter',
                         'part',
