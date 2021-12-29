@@ -420,12 +420,13 @@ class DefaultDesignTemplates
                                     'post_content' => new TextAreaInput(
                                         [
                                             'html_label_text' => __('Description', 'print-my-blog'),
+                                            'html_help_text' => __('Shown as eBook metadata.', 'print-my-blog')
                                         ]
                                     ),
                                     'cover' => new AdminFileUploaderInput(
                                         [
                                             'html_label_text' => __('Cover Image', 'print-my-blog'),
-                                            'html_help_text' => __('Cover image used on file (does not necessarily appear inside project', 'print-my-blog'),
+                                            'html_help_text' => __('Cover image used on eBook file (does not necessarily appear inside project', 'print-my-blog'),
                                             'default' => plugins_url('assets/images/icon-128x128.jpg', PMB_MAIN_FILE)
                                         ]
                                     ),

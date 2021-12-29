@@ -47,7 +47,7 @@ class DefaultFileFormats
                     'icon' => 'dashicons-tablet',
                     'generator' => 'PrintMyBlog\services\generators\EpubGenerator',
                     'default' => 'basic_epub',
-                    'desc' => __('ePub file especially good for reading on mobile devices and for selling as e-books on marketplaces like Amazon.com', 'print-my-blog'),
+                    'desc' => __('ePub file intended for reading from an eReader, tablet, or phone; or for publishing on an eBook marketplace like Amazon\'s Kindle Direct Publishing, Apple Books, or Kobo.', 'print-my-blog'),
                     'color' => '#ffcc00',
                     'extension' => 'epub'
                 ]
