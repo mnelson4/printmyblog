@@ -1448,7 +1448,12 @@ class Admin extends BaseController
         $this->updateProjectModifiedDate();
         $format = $this->file_format_registry->getFormat(Array2::setOr($_GET, 'format', ''));
         if (! $format instanceof FileFormat) {
-            throw new Exception(__('There is no file format with the slug "%s"', 'print-my-blog'), Array2::setOr($_GET, 'format', ''));
+            throw new Exception(
+                    sprintf(
+                            __('There is no file format with the slug "%s"', 'print-my-blog'),
+                            Array2::setOr($_GET, 'format', '')
+                    )
+            );
         }
         $project_generation = $this->project->getGenerationFor($format);
         $project_generation->deleteGeneratedFiles();
