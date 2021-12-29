@@ -432,7 +432,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.9.0 xxxx =
+= 3.9.0 December 29, 2021 =
 * Add ePub export format (Pro only)
 
 = 3.8.2 November 24, 2021 =
