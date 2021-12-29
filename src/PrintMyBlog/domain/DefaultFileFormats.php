@@ -39,7 +39,7 @@ class DefaultFileFormats
                 'extension' => 'pdf'
                 ]
         );
-        if(pmb_fs()->is__premium_only()) {
+        if (pmb_fs()->is__premium_only()) {
             pmb_register_file_format(
                 self::EPUB,
                 [
