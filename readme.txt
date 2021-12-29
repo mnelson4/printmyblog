@@ -108,7 +108,7 @@ Example uses:
 **Pro Print Features**
 
 * saveable projects
-* create digital and print-ready PDFs
+* create digital PDFs, print-ready PDFs, and ePub eBooks
 * select posts, pages, print materials (posts intended only for use in Pro Print) and most custom post types (eg products from WooCommerce)
 * search and filter for posts based on post type, status, categories, tags, custom taxonomies, author, and publish date
 * drag-and-drop reordering of content (and add new print materials on-the-fly)
@@ -433,7 +433,7 @@ https://youtu.be/uPQ3vqm7A2g
 == Changelog ==
 
 = 3.9.0 xxxx =
-* Add epub
+* Add ePub export format (Pro only)
 
 = 3.8.2 November 24, 2021 =
 * Bugfix: fix redirecting to print page when it contains UTF-8 characters (eg Chinese)

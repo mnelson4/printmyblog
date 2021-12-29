@@ -10,6 +10,8 @@
         <custom-field action="translate">_pmb_issue</custom-field>
         <custom-field action="translate">_pmb_byline</custom-field>
         <custom-field action="translate">_pmb_cover_preamble</custom-field>
+        <custom-field action="translate">_pmb_post_name</custom-field>
+
 
         <!-- design metas -->
         <custom-field action="translate">_pmb_internal_footnote_text</custom-field>
@@ -76,5 +78,7 @@
         <custom-field action="copy">_pmb_url</custom-field>
         <custom-field action="copy">_pmb_use_theme</custom-field>
         <custom-field action="copy">pmb_buttons</custom-field>
+        <custom-field action="copy">pmb_cover</custom-field>
+
     </custom-fields>
 </wpml-config>
