@@ -39,19 +39,19 @@ class DefaultFileFormats
                 'extension' => 'pdf'
                 ]
         );
-//        if(pmb_fs()->is_plan__premium_only('founding_members')) {
+        if(pmb_fs()->is__premium_only()) {
             pmb_register_file_format(
                 self::EPUB,
                 [
                     'title' => __('e-Book (ePub)', 'print-my-blog'),
                     'icon' => 'dashicons-tablet',
                     'generator' => 'PrintMyBlog\services\generators\EpubGenerator',
-                    'default' => 'basic_epub',
+                    'default' => 'classic_epub',
                     'desc' => __('ePub file intended for reading from an eReader, tablet, or phone; or for publishing on an eBook marketplace like Amazon\'s Kindle Direct Publishing, Apple Books, or Kobo.', 'print-my-blog'),
                     'color' => '#ffcc00',
                     'extension' => 'epub'
                 ]
             );
-//        }
+        }
     }
 }

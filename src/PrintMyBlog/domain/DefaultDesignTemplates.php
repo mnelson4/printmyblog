@@ -382,6 +382,7 @@ class DefaultDesignTemplates
             }
         );
 
+        // it's ok to register this design even if the format isn't registered (which it isn't for the wp.org version)
         pmb_register_design_template(
             'classic_epub',
             function () {
