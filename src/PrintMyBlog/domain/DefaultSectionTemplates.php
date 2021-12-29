@@ -12,7 +12,8 @@ class DefaultSectionTemplates
                 'classic_digital',
                 'buurma',
                 'mayer',
-                'classic_print'
+                'classic_print',
+                'classic_epub'
             ],
             function () {
                 return [
@@ -27,7 +28,7 @@ class DefaultSectionTemplates
                 'classic_digital',
                 'buurma',
                 'mayer',
-                'classic_print'
+                'classic_print',
             ],
             function () {
                 return [
