@@ -24,11 +24,11 @@ class DefaultDesigns
                     ],
                     'previews' => [
                         [
-                            'url' => $design_template->getUrl() . 'assets/preview1.png',
+                            'url' => $design_template->getUrl() . 'assets/preview1.jpg',
                             'desc' => __('Title page, with working hyperlinks.', 'print-my-blog')
                         ],
                         [
-                            'url' => $design_template->getUrl() . 'assets/preview2.png',
+                            'url' => $design_template->getUrl() . 'assets/preview2.jpg',
                             'desc' => __('Main matter, showing hyperlinks and large images.', 'print-my-blog')
                         ],
                     ],
