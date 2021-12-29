@@ -383,14 +383,14 @@ class DefaultDesignTemplates
         );
 
         pmb_register_design_template(
-            'basic_epub',
+            'classic_epub',
             function () {
                 return [
-                    'title'                 => __('Basic ePub', 'print-my-blog'),
+                    'title'                 => __('Classic ePub', 'print-my-blog'),
                     'format'                => 'epub',
-                    'dir'                   => PMB_DESIGNS_DIR . 'epub/basic',
-                    'url' => plugins_url('designs/epub/basic', PMB_MAIN_FILE),
-                    'default' => 'basic_epub',
+                    'dir'                   => PMB_DESIGNS_DIR . 'epub/classic',
+                    'url' => plugins_url('designs/epub/classic', PMB_MAIN_FILE),
+                    'default' => 'classic_epub',
                     'docs' => '', // https://printmy.blog/user-guide/pdf-design/classic-print-pdf-and-variations/',
                     'supports' => [
                         'front_matter',
@@ -664,7 +664,7 @@ class DefaultDesignTemplates
                                         'html_help_text'  => __('Styles to be applied only when printing projects using this design.', 'print-my-blog')
                                         ]),
                                     'powered_by' => new YesNoInput([
-                                        'html_label_text' => __('Add "Powered By" when using Pro Print Service', 'print-my-blog') . ( $powered_by_in_pro_service ? pmb_hover_help(__('Only added when using the Pro Print Service for Free and Hobbyist users. In compliance with WordPress.org guidelines, not added when printing from your browser.', 'print-my-blog')) : ''),
+                                        'html_label_text' => __('Add "Powered By"', 'print-my-blog') . ( $powered_by_in_pro_service ? pmb_hover_help(__('In compliance with WordPress.org guidelines, not added when printing from your browser.', 'print-my-blog')) : ''),
                                         'html_help_text' => __('Instructs the Pro Print Service to add "Powered by Print My Blog Pro & WordPress" to your project. Does not appear when printing using your browser.', 'print-my-blog'),
                                         'default' => $powered_by_in_pro_service,
                                         'disabled' => $powered_by_in_pro_service

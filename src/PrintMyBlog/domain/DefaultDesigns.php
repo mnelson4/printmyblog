@@ -24,11 +24,11 @@ class DefaultDesigns
                     ],
                     'previews' => [
                         [
-                            'url' => $design_template->getUrl() . 'assets/preview1.jpg',
+                            'url' => $design_template->getUrl() . 'assets/preview1.png',
                             'desc' => __('Title page, with working hyperlinks.', 'print-my-blog')
                         ],
                         [
-                            'url' => $design_template->getUrl() . 'assets/preview2.jpg',
+                            'url' => $design_template->getUrl() . 'assets/preview2.png',
                             'desc' => __('Main matter, showing hyperlinks and large images.', 'print-my-blog')
                         ],
                     ],
@@ -274,11 +274,11 @@ class DefaultDesigns
         );
 
         pmb_register_design(
-            'basic_epub',
-            'basic_epub',
+            'classic_epub',
+            'classic_epub',
             function (DesignTemplate $design_template) {
                 return [
-                    'title' => __('Basic ePub', 'print-my-blog'),
+                    'title' => __('Classic ePub', 'print-my-blog'),
                     'quick_description' => __('Simple ePub for using when uploading as an eBook to Amazon and other epub marketplaces', 'print-my-blog'),
                     'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
