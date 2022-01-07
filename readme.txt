@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.9.0
+Stable tag: 3.1.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -432,8 +432,11 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.10.0 xxxx =
+* Feature: ePub hyperlinks to internal content now link to the page in the ePub instead of the website
+
 = 3.9.0 December 29, 2021 =
-* Add ePub export format (Pro only)
+* Feature: Add ePub export format (Pro only)
 
 = 3.8.2 November 24, 2021 =
 * Bugfix: fix redirecting to print page when it contains UTF-8 characters (eg Chinese)

@@ -43,7 +43,7 @@ class DefaultFileFormats
             pmb_register_file_format(
                 self::EPUB,
                 [
-                    'title' => __('e-Book (ePub)', 'print-my-blog'),
+                    'title' => __('eBook (ePub)', 'print-my-blog'),
                     'icon' => 'dashicons-tablet',
                     'generator' => 'PrintMyBlog\services\generators\EpubGenerator',
                     'default' => 'classic_epub',

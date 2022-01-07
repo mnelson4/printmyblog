@@ -11,7 +11,7 @@ function blobToBase64(blob) {
         reader.readAsDataURL(blob);
     });
 }
-jQuery(document).ready(function(){
+jQuery(document).on('pmb_wrap_up', function(){
     var epub_options = {
         title: pmb_epub.title,
         author:pmb_epub.authors,
@@ -27,7 +27,11 @@ jQuery(document).ready(function(){
     var found_toc = false;
     var toc_title_found = null;
     jQuery('.pmb-section').each(function(index,element){
-        var chapter_data = {content:element.outerHTML, beforeToc: ! found_toc};
+        var chapter_data = {
+            content:element.outerHTML,
+            beforeToc: ! found_toc,
+            filename: pmb_hyperlink_to_filename(element.id)
+        };
 
         var jqelement = jQuery(element);
         var section_title = jqelement.find('.pmb-title');
@@ -58,3 +62,31 @@ jQuery(document).ready(function(){
         download_link.href = await blobToBase64(content);
     })();
 });
+
+
+// print-page-beautifier-functions.js's pmb_replace_internal_links_with_page_refs_and_footnotes has similar logic
+function pmb_replace_internal_links_with_epub_file_links(){
+    _pmb_for_each_hyperlink(
+        function(a, id_url, id_selector){
+
+            // find that section's title
+            var section_element = jQuery(id_selector);
+            // deduce its filename
+            var filename = pmb_hyperlink_to_filename(section_element.attr('id')) + '.xhtml';
+            // replace with a hyperlink to that
+            a.attr('href',filename);
+        },
+        function(a){
+            // leave external hyperlinks alone
+        }
+    )
+}
+
+/**
+ * Convert a hyperlink into a valid filename
+ * @param hyperlink
+ * @returns {*}
+ */
+function pmb_hyperlink_to_filename(hyperlink){
+    return hyperlink.replaceAll('http','').replaceAll('/','-').replaceAll(':','').replaceAll('.','-');
+}

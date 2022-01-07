@@ -29,7 +29,12 @@ class PdfGenerator extends HtmlBaseGenerator
         wp_enqueue_style('pmb_print_common');
         wp_enqueue_style('pmb_pro_page');
         wp_enqueue_style('pmb-plugin-compatibility');
-        wp_enqueue_script('pmb-beautifier-functions');
+        wp_enqueue_script(
+            'pmb-pdf-beautifier-functions',
+            PMB_SCRIPTS_URL . 'pdf-beautifier-functions.js',
+            ['pmb-beautifier-functions'],
+            filemtime(PMB_SCRIPTS_DIR . 'pdf-beautifier-functions.js')
+        );
         wp_enqueue_script('pmb_pro_page');
         wp_enqueue_script('pmb_general');
         $style_file = $this->getDesignDir() . 'assets/style.css';
