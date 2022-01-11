@@ -8,7 +8,16 @@ function pmb_remove_unsupported_content(){
     // remove all the broken images and links etc
     jQuery('[src^="file:"]').remove();
     jQuery('[href^="file:"]').contents().unwrap();
+    // DocRaptor handles "//" like "/" which means it thinks you're trying to access resources on its server
+    // and has an error. So change those to the old way of specifying links.
+    jQuery('[src^="//"]').each(function(index, element){
+        element.setAttribute("src", location.protocol + element.getAttribute('src'));
+    });
+    jQuery('[href^="//"]').each(function(index, element){
+        element.setAttribute("href", location.protocol + element.getAttribute('href'));
+    });
 }
+
 function pmb_dont_float(){
     jQuery('.alignright').removeClass('alignright');
     jQuery('.alignleft').removeClass('alignleft');
