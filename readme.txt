@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.1.0
+Stable tag: 3.10.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -432,8 +432,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.10.0 xxxx =
+= 3.10.0 January 11, 2022 =
 * Feature: ePub hyperlinks to internal content now link to the page in the ePub instead of the website
+* Bugfix: fix "file system access is not allowed" downloading test PDFs via Pro Print Service because of URLs starting with "//" (like those added by LearnDash LMS)
 
 = 3.9.0 December 29, 2021 =
 * Feature: Add ePub export format (Pro only)
