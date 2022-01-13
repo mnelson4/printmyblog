@@ -434,6 +434,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.10.1 xxxx =
 * Enhancement: ePubs center images by default
+* Enhancement: subsections in ePub table of contents are indented
 
 = 3.10.0 January 11, 2022 =
 * Feature: ePub hyperlinks to internal content now link to the page in the ePub instead of the website

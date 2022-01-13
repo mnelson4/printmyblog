@@ -35,10 +35,14 @@ jQuery(document).on('pmb_wrap_up', function(){
 
         var jqelement = jQuery(element);
         var section_title = jqelement.find('.pmb-title');
-
+        var spaces_to_add = parseInt(jqelement.data('depth'), 10);
+        var spaces = '';
+        for(var i=0; i< spaces_to_add; i++){
+            spaces += '  ';
+        }
 
         if(section_title.length){
-            chapter_data.title = section_title.text();
+            chapter_data.title = spaces + section_title.text();
             chapter_data.excludeFromToc = false;
         } else {
             chapter_data.excludeFromToc = true;
