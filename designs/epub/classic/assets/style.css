@@ -1,0 +1,8 @@
+.aligncenter{
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+}
+.wp-block-image.aligncenter {
+    text-align: center;
+}
