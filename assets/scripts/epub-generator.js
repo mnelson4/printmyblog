@@ -37,8 +37,8 @@ jQuery(document).on('pmb_wrap_up', function(){
         var section_title = jqelement.find('.pmb-title');
         var spaces_to_add = parseInt(jqelement.data('depth'), 10);
         var spaces = '';
-        for(var i=0; i< spaces_to_add; i++){
-            spaces += '  ';
+        for(var i=0; i < spaces_to_add; i++){
+            spaces += '- ';
         }
 
         if(section_title.length){
