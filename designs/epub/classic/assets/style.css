@@ -1,12 +1,4 @@
-.aligncenter{
-    margin-left:auto;
-    margin-right:auto;
-    display:block;
-}
-.wp-block-image.aligncenter {
-    text-align: center;
-}
-
 .pmb-part .pmb-title{
     font-size:3em;
+    padding-top:1em;
 }
