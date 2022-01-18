@@ -427,7 +427,7 @@ class DefaultDesignTemplates
                                     'cover' => new AdminFileUploaderInput(
                                         [
                                             'html_label_text' => __('Cover Image', 'print-my-blog'),
-                                            'html_help_text' => __('Cover image used on eBook file (does not necessarily appear inside project)', 'print-my-blog'),
+                                            'html_help_text' => __('Cover image used on eBook file (does not necessarily appear inside project). Ideal dimensions are 2,560 x 1,600 pixels.', 'print-my-blog'),
                                             'default' => plugins_url('assets/images/icon-128x128.jpg', PMB_MAIN_FILE)
                                         ]
                                     ),

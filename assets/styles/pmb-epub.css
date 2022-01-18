@@ -29,6 +29,12 @@ div{
     margin-right:auto;
     display:block;
 }
-.wp-block-image.aligncenter {
+.aligncenter {
     text-align: center;
+}
+.alignright{
+    float:right;
+}
+.alignleft{
+    float:left;
 }
