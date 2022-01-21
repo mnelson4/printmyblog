@@ -2,13 +2,13 @@
     <p class="pmb-center"><?php esc_html_e('It’s finally here...', 'print-my-blog');?></p>
     <h1 class="pmb-big-header">🎉<?php esc_html_e( 'Print My Blog – Pro Print!', 'print-my-blog' ); ?>🎉</h1>
     <p class="pmb-center"><?php esc_html_e('The old features are still here: "Print Now" was just renamed "Quick Print", and the Print Buttons are still available under "Settings".', 'print-my-blog');?></p>
-    <p class="pmb-center"><?php esc_html_e('Pro Print makes more functional and visually-appealing PDFs using your web browser for free, or the new paid Pro Print Service.', 'print-my-blog');?></p>
+    <p class="pmb-center"><?php esc_html_e('Pro Print makes more functional and visually-appealing PDFs using your web browser for free, or the new paid Pro PDF Service.', 'print-my-blog');?></p>
 
         <?php
             $features = [
                     [
                             __('Automatic Table of Contents', 'print-my-blog'),
-                            __('Add a table of contents to your project, with links and page numbers.', 'print-my-blog') . pmb_pro_print_service_best(__('Pro Print Service adds page numbers.', 'print-my-blog'))
+                            __('Add a table of contents to your project, with links and page numbers.', 'print-my-blog') . pmb_pro_print_service_best(__('Pro PDF Service adds page numbers.', 'print-my-blog'))
                     ],
                     [
                         __('Automatic page references and footnotes', 'print-my-blog'),
@@ -28,7 +28,7 @@
                     ],
                     [
                         __('Premade, Reusable, Customizable Designs', 'print-my-blog'),
-                        __('Print My Blog\'s Designs are like WordPress Themes: each has its own look and customization options. Reuse the same design across projects. Or even create your own design using HTML, CSS, and Javascript', 'print-my-blog') . pmb_pro_print_service_best(__('Pro Print Service lets designs fully control the margins, page backgrounds, and los of other aspects.', 'print-my-blog'))
+                        __('Print My Blog\'s Designs are like WordPress Themes: each has its own look and customization options. Reuse the same design across projects. Or even create your own design using HTML, CSS, and Javascript', 'print-my-blog') . pmb_pro_print_service_best(__('Pro PDF Service lets designs fully control the margins, page backgrounds, and los of other aspects.', 'print-my-blog'))
                     ],
                     [
                             __('Saveable Projects', 'print-my-blog'),

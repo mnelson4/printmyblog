@@ -37,7 +37,7 @@ function pmb_pro_print_service_only($explanation = ''){
         return '';
     } else {
         $hover_text = '<b>' . sprintf(
-                __('Only works with %1$sPro Print Service%2$s', 'print-my-blog'),
+                __('Only works with %1$sPro PDF Service%2$s', 'print-my-blog'),
                 '<a href="' . pmb_fs()->get_upgrade_url() . '">',
                 '</a>'
             ) . '</b>';
@@ -64,7 +64,7 @@ function pmb_pro_print_service_best($explanation = ''){
         return '';
     } else {
         $hover_text = '<b>' . sprintf(
-                __('Works better with %1$sPro Print Service%2$s', 'print-my-blog'),
+                __('Works better with %1$sPro PDF Service%2$s', 'print-my-blog'),
                 '<a href="' . pmb_fs()->get_upgrade_url() . '">',
                 '</a>'
             ) . '</b>';

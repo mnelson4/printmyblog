@@ -74,7 +74,7 @@ class DefaultDesignTemplates
                                                     ],
                                                     [
                                                         'default' => pmb_fs()->is_premium() ? 'footnote' : 'parens',
-                                                        'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') . pmb_pro_print_service_only(__('Footnotes and page references only work with Pro Print Service', 'print-my-blog')),
+                                                        'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') . pmb_pro_print_service_only(__('Footnotes and page references only work with Pro PDF Service', 'print-my-blog')),
                                                         'html_help_text' => __('How to display hyperlinks to content included in this project.', 'print-my-blog')
                                                     ]
                                                 ),
@@ -169,7 +169,7 @@ class DefaultDesignTemplates
                                                     ],
                                                     [
                                                         'default' => pmb_fs()->is_premium() ? 'parens' : 'remove',
-                                                        'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') . pmb_pro_print_service_best(__('Footnotes and page references only work with Pro Print Service', 'print-my-blog')),
+                                                        'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') . pmb_pro_print_service_best(__('Footnotes and page references only work with Pro PDF Service', 'print-my-blog')),
                                                         'html_help_text' => __(
                                                             'How to display hyperlinks to content included in this project.',
                                                             'print-my-blog'
@@ -667,7 +667,7 @@ class DefaultDesignTemplates
                                         ]),
                                     'powered_by' => new YesNoInput([
                                         'html_label_text' => __('Add "Powered By"', 'print-my-blog') . ( $powered_by_in_pro_service ? pmb_hover_help(__('In compliance with WordPress.org guidelines, not added when printing from your browser.', 'print-my-blog')) : ''),
-                                        'html_help_text' => __('Instructs the Pro Print Service to add "Powered by Print My Blog Pro & WordPress" to your project. Does not appear when printing using your browser.', 'print-my-blog'),
+                                        'html_help_text' => __('Instructs the Pro PDF Service to add "Powered by Print My Blog Pro & WordPress" to your project. Does not appear when printing using your browser.', 'print-my-blog'),
                                         'default' => $powered_by_in_pro_service,
                                         'disabled' => $powered_by_in_pro_service
                                     ])

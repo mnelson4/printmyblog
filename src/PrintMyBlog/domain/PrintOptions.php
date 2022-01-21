@@ -147,7 +147,7 @@ class PrintOptions
                 //phpcs:enable
             ],
             'links' => [
-                'label' => esc_html__('Include Hyperlinks', 'print-my-blog') . ($upsells ? pmb_pro_better(__('Pro Print with Pro Print Service supports changing hyperlinks to page references or footnotes', 'print-my-blog')) : ''),
+                'label' => esc_html__('Include Hyperlinks', 'print-my-blog') . ($upsells ? pmb_pro_better(__('Pro Print with Pro PDF Service supports changing hyperlinks to page references or footnotes', 'print-my-blog')) : ''),
                 'default' => 'include',
                 'options' => [
                     'include' => esc_html__('Include', 'print-my-blog'),

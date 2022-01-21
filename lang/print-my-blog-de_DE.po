@@ -240,8 +240,8 @@ msgstr ""
 #: designs/pdf/digital/classic/description.php:8
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:77
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:172
-msgid "Footnotes and page references only work with Pro Print Service"
-msgstr "Fußnoten und Seitenverweise funktionieren nur mit Pro Print Service"
+msgid "Footnotes and page references only work with Pro PDF Service"
+msgstr "Fußnoten und Seitenverweise funktionieren nur mit Pro PDF Service"
 
 #: designs/pdf/digital/classic/description.php:9
 #: designs/pdf/print/classic/descriptions/shared.php:7
@@ -476,8 +476,8 @@ msgstr ""
 "automatisch in Fußnoten, Inline-Seitenverweise oder entfernt werden"
 
 #: designs/pdf/print/classic/descriptions/shared.php:6
-msgid "Footnotes and page references require Pro Print Service"
-msgstr "Fußnoten und Seitenverweise erfordern Pro Print Service"
+msgid "Footnotes and page references require Pro PDF Service"
+msgstr "Fußnoten und Seitenverweise erfordern Pro PDF Service"
 
 #: designs/pdf/print/classic/descriptions/shared.php:13
 msgid ""
@@ -505,13 +505,13 @@ msgstr "Drucken Sie meinen Blog jetzt kostenlos"
 
 #: inc/internal_functions.php:40
 #, php-format
-msgid "Only works with %1$sPro Print Service%2$s"
-msgstr "Funktioniert nur mit %1$sPro Print Service%2$s"
+msgid "Only works with %1$sPro PDF Service%2$s"
+msgstr "Funktioniert nur mit %1$sPro PDF Service%2$s"
 
 #: inc/internal_functions.php:67
 #, php-format
-msgid "Works better with %1$sPro Print Service%2$s"
-msgstr "Funktioniert besser mit %1$sPro Print Service%2$s"
+msgid "Works better with %1$sPro PDF Service%2$s"
+msgstr "Funktioniert besser mit %1$sPro PDF Service%2$s"
 
 #: inc/internal_functions.php:99
 #, php-format
@@ -1603,17 +1603,17 @@ msgid ""
 "In compliance with WordPress.org guidelines, not added when printing from "
 "your browser."
 msgstr ""
-"Nur hinzugefügt, wenn Sie den Pro Print Service für kostenlose und Hobbyist-"
+"Nur hinzugefügt, wenn Sie den Pro PDF Service für kostenlose und Hobbyist-"
 "Benutzer verwenden. In Übereinstimmung mit WordPress.org Richtlinien, die "
 "beim Drucken in Ihrem Browser nicht hinzugefügt werden."
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:669
 msgid ""
-"Instructs the Pro Print Service to add \"Powered by Print My Blog Pro & "
+"Instructs the Pro PDF Service to add \"Powered by Print My Blog Pro & "
 "WordPress\" to your project. Does not appear when printing using your "
 "browser."
 msgstr ""
-"Weist den Pro Print Service an, \"Powered by Print My Blog Pro & WordPress\" "
+"Weist den Pro PDF Service an, \"Powered by Print My Blog Pro & WordPress\" "
 "in der Fußzeile der ersten Seite hinzuzufügen. Wird beim Drucken mit Ihrem "
 "Browser nicht angezeigt."
 
@@ -2276,10 +2276,10 @@ msgstr "Hyperlinks einschließen"
 
 #: src/PrintMyBlog/domain/PrintOptions.php:150
 msgid ""
-"Pro Print with Pro Print Service supports changing hyperlinks to page "
+"Pro Print with Pro PDF Service supports changing hyperlinks to page "
 "references or footnotes"
 msgstr ""
-"Pro Print mit Pro Print Service unterstützt das Ändern von Hyperlinks zu "
+"Pro Print mit Pro PDF Service unterstützt das Ändern von Hyperlinks zu "
 "Seitenverweisen oder Fußnoten"
 
 #: src/PrintMyBlog/domain/PrintOptions.php:153
@@ -3123,13 +3123,13 @@ msgid "Limited to features supported by your browser."
 msgstr "Beschränkt auf Funktionen, die von Ihrem Browser unterstützt werden."
 
 #: templates/partials/pro_print_page_window.php:41
-msgid "Compare printing with your browser vs Pro Print Service"
+msgid "Compare printing with your browser vs Pro PDF Service"
 msgstr ""
-"Vergleichen Sie den Druck mit Ihrem Browser im Vergleich zu Pro Print Service"
+"Vergleichen Sie den Druck mit Ihrem Browser im Vergleich zu Pro PDF Service"
 
 #: templates/partials/pro_print_page_window.php:44
-msgid "Pro Print Service"
-msgstr "Pro Print Service"
+msgid "Pro PDF Service"
+msgstr "Pro PDF Service"
 
 #: templates/partials/pro_print_page_window.php:48
 #: templates/partials/pro_print_page_window.php:56
@@ -3931,10 +3931,10 @@ msgstr ""
 #: templates/upgrade_to_3.php:5
 msgid ""
 "Pro Print makes more functional and visually-appealing PDFs using your web "
-"browser for free, or the new paid Pro Print Service."
+"browser for free, or the new paid Pro PDF Service."
 msgstr ""
 "Pro Print macht funktionalere und visuell ansprechende PDFs mit Ihrem "
-"Webbrowser kostenlos oder den neuen kostenpflichtigen Pro Print Service."
+"Webbrowser kostenlos oder den neuen kostenpflichtigen Pro PDF Service."
 
 #: templates/upgrade_to_3.php:10 templates/welcome.php:50
 msgid "Automatic Table of Contents"
@@ -3947,8 +3947,8 @@ msgstr ""
 "hinzu."
 
 #: templates/upgrade_to_3.php:11
-msgid "Pro Print Service adds page numbers."
-msgstr "Pro Print Service"
+msgid "Pro PDF Service adds page numbers."
+msgstr "Pro PDF Service"
 
 #: templates/upgrade_to_3.php:14
 msgid "Automatic page references and footnotes"
@@ -4017,10 +4017,10 @@ msgstr ""
 
 #: templates/upgrade_to_3.php:31
 msgid ""
-"Pro Print Service lets designs fully control the margins, page backgrounds, "
+"Pro PDF Service lets designs fully control the margins, page backgrounds, "
 "and los of other aspects."
 msgstr ""
-"Mit Pro Print Service können Designs die Ränder, Seitenhintergründe und den "
+"Mit Pro PDF Service können Designs die Ränder, Seitenhintergründe und den "
 "Verlust anderer Aspekte vollständig steuern."
 
 #: templates/upgrade_to_3.php:34

@@ -244,7 +244,7 @@ msgstr ""
 #: designs/pdf/digital/classic/description.php:8
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:77
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:172
-msgid "Footnotes and page references only work with Pro Print Service"
+msgid "Footnotes and page references only work with Pro PDF Service"
 msgstr ""
 "Les notes de bas de page et les références de page ne fonctionnent qu’avec "
 "pro print service"
@@ -486,7 +486,7 @@ msgstr ""
 "de pages en ligne ou supprimés"
 
 #: designs/pdf/print/classic/descriptions/shared.php:6
-msgid "Footnotes and page references require Pro Print Service"
+msgid "Footnotes and page references require Pro PDF Service"
 msgstr ""
 "Les notes de bas de page et les références de page nécessitent un service "
 "d’impression pro"
@@ -518,13 +518,13 @@ msgstr "Desarrollado por Print My Blog Pro y WordPress"
 
 #: inc/internal_functions.php:40
 #, php-format
-msgid "Only works with %1$sPro Print Service%2$s"
-msgstr "Ne fonctionne qu’avec %1$sPro Print Service%2$s"
+msgid "Only works with %1$sPro PDF Service%2$s"
+msgstr "Ne fonctionne qu’avec %1$sPro PDF Service%2$s"
 
 #: inc/internal_functions.php:67
 #, php-format
-msgid "Works better with %1$sPro Print Service%2$s"
-msgstr "Fonctionne mieux avec %1$sPro Print Service%2$s"
+msgid "Works better with %1$sPro PDF Service%2$s"
+msgstr "Fonctionne mieux avec %1$sPro PDF Service%2$s"
 
 #: inc/internal_functions.php:99
 #, php-format
@@ -1628,7 +1628,7 @@ msgstr ""
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:669
 msgid ""
-"Instructs the Pro Print Service to add \"Powered by Print My Blog Pro & "
+"Instructs the Pro PDF Service to add \"Powered by Print My Blog Pro & "
 "WordPress\" to your project. Does not appear when printing using your "
 "browser."
 msgstr ""
@@ -2303,10 +2303,10 @@ msgstr "Inclure hyperliens"
 
 #: src/PrintMyBlog/domain/PrintOptions.php:150
 msgid ""
-"Pro Print with Pro Print Service supports changing hyperlinks to page "
+"Pro Print with Pro PDF Service supports changing hyperlinks to page "
 "references or footnotes"
 msgstr ""
-"Pro Print with Pro Print Service prend en charge la modification des "
+"Pro Print with Pro PDF Service prend en charge la modification des "
 "hyperliens vers les références de page ou les notes de bas de page"
 
 #: src/PrintMyBlog/domain/PrintOptions.php:153
@@ -3154,11 +3154,11 @@ msgid "Limited to features supported by your browser."
 msgstr "Limité aux fonctionnalités prises en charge par votre navigateur."
 
 #: templates/partials/pro_print_page_window.php:41
-msgid "Compare printing with your browser vs Pro Print Service"
-msgstr "Comparez l’impression avec votre navigateur vs Pro Print Service"
+msgid "Compare printing with your browser vs Pro PDF Service"
+msgstr "Comparez l’impression avec votre navigateur vs Pro PDF Service"
 
 #: templates/partials/pro_print_page_window.php:44
-msgid "Pro Print Service"
+msgid "Pro PDF Service"
 msgstr "Service d’impression Pro"
 
 #: templates/partials/pro_print_page_window.php:48
@@ -3960,7 +3960,7 @@ msgstr ""
 #: templates/upgrade_to_3.php:5
 msgid ""
 "Pro Print makes more functional and visually-appealing PDFs using your web "
-"browser for free, or the new paid Pro Print Service."
+"browser for free, or the new paid Pro PDF Service."
 msgstr ""
 "Pro Print rend les fichiers PDF plus fonctionnels et visuellement attrayants "
 "en utilisant votre navigateur Web gratuitement, ou le nouveau service "
@@ -3977,7 +3977,7 @@ msgstr ""
 "de page."
 
 #: templates/upgrade_to_3.php:11
-msgid "Pro Print Service adds page numbers."
+msgid "Pro PDF Service adds page numbers."
 msgstr "Service d’impression Pro"
 
 #: templates/upgrade_to_3.php:14
@@ -4048,10 +4048,10 @@ msgstr ""
 
 #: templates/upgrade_to_3.php:31
 msgid ""
-"Pro Print Service lets designs fully control the margins, page backgrounds, "
+"Pro PDF Service lets designs fully control the margins, page backgrounds, "
 "and los of other aspects."
 msgstr ""
-"Pro Print Service permet aux conceptions de contrôler entièrement les "
+"Pro PDF Service permet aux conceptions de contrôler entièrement les "
 "marges, les arrière-plans des pages et les aspects suivants."
 
 #: templates/upgrade_to_3.php:34
