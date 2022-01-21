@@ -1049,7 +1049,7 @@ class Admin extends BaseController
             'ID' => $project->getWpPost()->ID,
             'action' => Admin::SLUG_ACTION_EDIT_PROJECT,
         ];
-        $mapping = [];
+        $mappings = [];
         foreach ($project->getProgress()->getSteps() as $step => $label) {
             $args = $project->getProgress()->mapStepToSubactionArgs($step);
             $mappings[$step] = add_query_arg(
@@ -1125,9 +1125,19 @@ class Admin extends BaseController
         $formats = $this->file_format_registry->getFormats();
         $format_options = [];
         foreach ($formats as $format) {
+            $option_text = $format->coloredTitleAndIcon();
+            if(! $format->supported()) {
+                $upsell_text = '';
+                if($format->slug() === 'epub'){
+                    $upsell_text = __('Create unlimited ePubs with any purchase.', 'print-my-blog');
+                }
+
+                $option_text .= pmb_pro_print_service_only($upsell_text);
+            }
             $format_options[$format->slug()] = new InputOption(
-                $format->coloredTitleAndIcon(),
-                $format->desc()
+                $option_text,
+                $format->desc(),
+                $format->supported()
             );
         }
         $default_formats = [DefaultFileFormats::DIGITAL_PDF];

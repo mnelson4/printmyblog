@@ -54,6 +54,10 @@ class FileFormat
      * @var string
      */
     protected $extension;
+    /**
+     * @var Whether this version of PMB has all the necessary files to support this format
+     */
+    protected $supported = true;
 
     /**
      * ProjectFormat constructor.
@@ -93,6 +97,9 @@ class FileFormat
             $this->extension = $data['extension'];
         } else {
             $this->extension = 'pdf';
+        }
+        if (array_key_exists('supported',$data)){
+            $this->supported = $data['supported'];
         }
     }
 
@@ -204,5 +211,15 @@ class FileFormat
     public function extension()
     {
         return $this->extension;
+    }
+
+    /**
+     * Returns true if this version of PMB has all the necessary files to create files using this format.
+     * (Eg some large Javascript files are excluded from some versions of PMB which means some formats can't be
+     * created in this version.)
+     * @return bool
+     */
+    public function supported(){
+        return $this->supported;
     }
 }

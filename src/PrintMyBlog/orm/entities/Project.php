@@ -237,7 +237,7 @@ class Project extends PostWrapper
         $formats = [];
         foreach ($format_slugs as $slug) {
             $format_obj = $this->format_registry->getFormat($slug);
-            if ($format_obj) {
+            if ($format_obj && $format_obj->supported()) {
                 $formats[$slug] = $format_obj;
             }
         }

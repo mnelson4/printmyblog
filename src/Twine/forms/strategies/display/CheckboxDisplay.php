@@ -49,7 +49,8 @@ class CheckboxDisplay extends CompoundInputDisplay
                      . $html_id
                      . '" id="'
                      . $html_id
-                     . '-lbl" class="twine-checkbox-label-after'
+                     . '-lbl" class="twine-checkbox-label-after twine-option'
+                     . ($option->enabled() ? '  twine-option-enabled' : ' twine-option-disabled')
                      . '">';
             $html .= $html_generator->nl(1, 'checkbox');
             $html .= '<input type="checkbox"';
@@ -58,6 +59,9 @@ class CheckboxDisplay extends CompoundInputDisplay
             $html .= ' class="' . $input->htmlClass() . '"';
             $html .= ' style="' . $input->htmlStyle() . '"';
             $html .= ' value="' . esc_attr($value) . '"';
+            if(! $option->enabled()){
+                $html .= ' disabled=1';
+            }
             $html .= ! empty($input_raw_value) && in_array($value, $input_raw_value, true)
                 ? ' checked="checked"'
                 : '';
@@ -65,11 +69,12 @@ class CheckboxDisplay extends CompoundInputDisplay
             $html .= ' data-question_label="' . $input->htmlLabelId() . '"';
             $html .= '>&nbsp;';
             $html .= $option->getDisplayText();
-            $html .= $html_generator->nl(-1, 'checkbox') . '</label>';
+            $html .= $html_generator->nl(-1, 'checkbox');
             $help_text = $option->getHelpText();
             if ($help_text) {
-                $html .= $html_generator->span($help_text, '', 'description');
+                $html .= $html_generator->p($help_text, '', 'description');
             }
+            $html .= '</label>';
         }
         return $html;
     }

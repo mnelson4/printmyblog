@@ -23,10 +23,19 @@ function pmb_hover_help($explanation = ''){
  * Adds an icon which has explanatory text when hovered over.
  * @param string $explanation
  * @param string $extra_css_classes
+ * @param string $url not escaped
  * @return string HTML
  */
-function pmb_hover_tip($explanation = '', $extra_css_classes = ''){
-    return '<span data-help="' . esc_attr($explanation) . '" class="dashicons dashicons-superhero pmb-hover ' . $extra_css_classes . '"></span>';
+function pmb_hover_tip($explanation = '', $extra_css_classes = '', $url = ''){
+    $html = '';
+    if($url){
+        $html .= '<a href="' . esc_url($url) . '">';
+    }
+    $html .= '<span data-help="' . esc_attr($explanation) . '" class="dashicons dashicons-superhero pmb-hover ' . $extra_css_classes . '"></span>';
+    if($url){
+        $html .= '</a>';
+    }
+    return $html;
 }
 /**
  * Returns a string that says this feature only works with Pro Print Service (not supported by browsers).
@@ -36,15 +45,16 @@ function pmb_pro_print_service_only($explanation = ''){
     if(pmb_fs()->is_plan__premium_only('hobbyist')){
         return '';
     } else {
+        $upgrade_url = pmb_fs()->get_upgrade_url();
         $hover_text = '<b>' . sprintf(
-                __('Only works with %1$sPro PDF Service%2$s', 'print-my-blog'),
-                '<a href="' . pmb_fs()->get_upgrade_url() . '">',
+                __('%1$sPurchase Required%2$s', 'print-my-blog'),
+                '<a href="' . $upgrade_url . '">',
                 '</a>'
             ) . '</b>';
         if ($explanation) {
             $hover_text .= "<br>" . $explanation;
         }
-        return pmb_hover_tip($hover_text, 'pmb-pro-only');
+        return pmb_hover_tip($hover_text, 'pmb-pro-only', $upgrade_url);
     }
 }
 
@@ -63,15 +73,16 @@ function pmb_pro_print_service_best($explanation = ''){
     if(pmb_fs()->is_plan__premium_only('hobbyist')){
         return '';
     } else {
+        $upgrade_url = pmb_fs()->get_upgrade_url();
         $hover_text = '<b>' . sprintf(
                 __('Works better with %1$sPro PDF Service%2$s', 'print-my-blog'),
-                '<a href="' . pmb_fs()->get_upgrade_url() . '">',
+                '<a href="' . $upgrade_url . '">',
                 '</a>'
             ) . '</b>';
         if ($explanation) {
             $hover_text .= "<br>" . $explanation;
         }
-        return pmb_hover_tip($hover_text, 'pmb-pro-best');
+        return pmb_hover_tip($hover_text, 'pmb-pro-best', $upgrade_url);
     }
 }
 
@@ -95,15 +106,16 @@ function pmb_pro_better_e($explanation = ''){
  * @return string
  */
 function pmb_pro_better($explanation = ''){
+    $url = admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH);
     $hover_text = '<b>' . sprintf(
             __('More Advanced Features in %1$sPro Print%2$s', 'print-my-blog'),
-        '<a href="'. admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH) . '">',
+        '<a href="'. esc_url($url) . '">',
         '</a>'
     ) . '</b>';
     if($explanation){
         $hover_text .= "<br>" . $explanation;
     }
-    return pmb_hover_tip($hover_text);
+    return pmb_hover_tip($hover_text, '', $url);
 }
 
 

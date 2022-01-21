@@ -223,6 +223,7 @@ For displaying a series of boxes
 }
 .pmb-hover .wp-pointer-content{
     text-align:left;
+    color:black;
 }
 .pmb-constrained-content{
     max-width:800px;
@@ -238,4 +239,10 @@ For displaying a series of boxes
 }
 .pmb-dont-break-phrase{
     white-space:nowrap;
+}
+.dashicons{
+    text-decoration: none;
+}
+.twine-option .pmb-pro-only{
+    padding:5px;
 }

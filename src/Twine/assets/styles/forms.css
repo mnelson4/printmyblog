@@ -15,3 +15,13 @@ summary.twine-summary{
     color:red;
     font-weight:normal;
 }
+.twine-option{
+    margin-bottom:1em;
+}
+.twine-option-disabled{
+    color:darkgray;
+    cursor:not-allowed;
+}
+.twine-option-disabled input{
+    cursor:not-allowed;
+}
