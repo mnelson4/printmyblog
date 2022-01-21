@@ -270,8 +270,7 @@ Mozilla Firefox (PDF)
 https://youtu.be/sU02oSPWj34
 
 = How do I create an eBook using Print My Blog? =
-
-This plugin puts your blog's content onto a single web page, and you can then use the [dotEPUB browser extension](https:dotepub.com) to turn it into an eBook.
+Create ePub eBooks requires payment, or you can create ePub eBooks using Quick Print and [dotEPUB browser extension](https:dotepub.com)
 
 https://youtu.be/M5ZZN3KsqOA
 
