@@ -67,11 +67,7 @@ $generate_url = add_query_arg(
                             <button class="pmb-pro-window-button pmb-download-live pmb-pro-disabled" title="<?php echo esc_attr(__('Please download the Test PDF before the Paid PDF', 'print-my-blog'));?>">
                                 <?php _e('Download Paid PDF', 'print-my-blog'); ?>
                             </button>
-                           <p class="description pmb-pro-description"><?php printf(
-                                    esc_html__('Downloading the Paid PDF will use one of your %1$s remaining credits, and is non-refundable.',
-                                        'print-my-blog'),
-                                    $license_info['remaining_credits']
-                                );?>
+                            <p class="pmb-pro-description"><?php esc_html_e('Always download a free Test PDF before a Paid PDF.', 'print-my-blog');?>
                            </p>
                             <div class="pmb-pro-after-pro">
                                 <p><?php esc_html_e('One credit was used to generate the file.', 'print-my-blog');?></p>

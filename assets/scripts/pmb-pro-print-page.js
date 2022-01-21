@@ -39,13 +39,14 @@ function pmb_generate_test_doc(jqelement) {
 
             pmb_stop_doing_button(jqelement);
             jQuery('.pmb-download-live').removeClass('pmb-pro-disabled');
+            jQuery('.pmb-pro-description').html(pmb_pro.translations.pro_description);
             window.location.href = download_url;
         },
         (error_message) => {
             // jQuery('.pmb-downloading-live-pdf').hide();
             // jQuery('.pmb-error-downloading-test-pdf').show();
             if(error_message === 'Socket error downloading document content from supplied url.'){
-                error_message = pmb_generate.translations.socket_error;
+                error_message = pmb_pro.translations.socket_error;
             }
             pmb_stop_doing_button(jqelement);
             jQuery.ajax(
