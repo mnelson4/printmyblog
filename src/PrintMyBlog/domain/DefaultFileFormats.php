@@ -42,7 +42,7 @@ class DefaultFileFormats
 
         // only show it enabled if this version of PMB has the necessary files included.
         $supported = false;
-        if(pmb_fs()->is__premium_only()) {
+        if (pmb_fs()->is__premium_only()) {
             $supported = true;
         }
         pmb_register_file_format(

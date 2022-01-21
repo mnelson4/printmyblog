@@ -1126,9 +1126,9 @@ class Admin extends BaseController
         $format_options = [];
         foreach ($formats as $format) {
             $option_text = $format->coloredTitleAndIcon();
-            if(! $format->supported()) {
+            if (! $format->supported()) {
                 $upsell_text = '';
-                if($format->slug() === 'epub'){
+                if ($format->slug() === 'epub') {
                     $upsell_text = __('Create unlimited ePubs with any purchase.', 'print-my-blog');
                 }
 

@@ -42,7 +42,8 @@ class InputOption
     /**
      * @return boolean
      */
-    public function enabled(){
+    public function enabled()
+    {
         return $this->enabled;
     }
 }

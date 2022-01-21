@@ -59,7 +59,7 @@ class CheckboxDisplay extends CompoundInputDisplay
             $html .= ' class="' . $input->htmlClass() . '"';
             $html .= ' style="' . $input->htmlStyle() . '"';
             $html .= ' value="' . esc_attr($value) . '"';
-            if(! $option->enabled()){
+            if (! $option->enabled()) {
                 $html .= ' disabled=1';
             }
             $html .= ! empty($input_raw_value) && in_array($value, $input_raw_value, true)

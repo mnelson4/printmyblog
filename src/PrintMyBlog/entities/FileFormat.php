@@ -98,7 +98,7 @@ class FileFormat
         } else {
             $this->extension = 'pdf';
         }
-        if (array_key_exists('supported',$data)){
+        if (array_key_exists('supported', $data)) {
             $this->supported = $data['supported'];
         }
     }
@@ -219,7 +219,8 @@ class FileFormat
      * created in this version.)
      * @return bool
      */
-    public function supported(){
+    public function supported()
+    {
         return $this->supported;
     }
 }
