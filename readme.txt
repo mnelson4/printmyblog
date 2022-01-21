@@ -85,7 +85,7 @@ https://www.youtube.com/watch?v=rvSo9NCOIX0
 
 = Pro Print =
 Replace Google Docs and Microsoft Word with WordPress! Turn existing posts, pages, and custom post types —or write all new print materials— into professional-looking documents that are ready to share with customers and the world.
-Use your browser to print Pro Print projects for free, but some features (like automatic page references, footnotes, and full control of page margins) require printing using our Pro Print Service for a subscription fee.
+Use your browser to print Pro Print projects for free, but some features (like automatic page references, footnotes, and full control of page margins) require printing using our Pro PDF Service for a subscription fee.
 
 https://youtu.be/-RzrbnCbbLw
 
@@ -108,21 +108,21 @@ Example uses:
 **Pro Print Features**
 
 * saveable projects
-* create digital PDFs, print-ready PDFs, and ePub eBooks
+* create digital PDFs, print-ready PDFs, and ePub eBooks (paid only)
 * select posts, pages, print materials (posts intended only for use in Pro Print) and most custom post types (eg products from WooCommerce)
 * search and filter for posts based on post type, status, categories, tags, custom taxonomies, author, and publish date
 * drag-and-drop reordering of content (and add new print materials on-the-fly)
 * organize posts into parts
-* add front and back matter (usually numbered with roman numerals with Pro Print Service)
+* add front and back matter (usually numbered with roman numerals with Pro PDF Service)
 * select from a variety of pre-built designs (similar to WordPress Themes, but for Pro Print)
 * customize designs (each has different settings and can have custom CSS) and can be saved for future projects
 * Theme Designers will feel at home creating a custom design using HTML, CSS, and even Javascript
 * better integration with plugins than Quick Print (especially those using Javascript)
 * save project metadata (like title, extra cover page content, categories etc)
-* automatic table of contents (with page references using Pro Print Service)
-* automatically replace hyperlinks to included content with page references (Pro Print Service only)
-* automatically replace hyperlinks to external content with footnotes (Pro Print Service only)
-* automatically move images to avoid spanning a pagebreak and unsightly whitespace (Pro Print Service only)
+* automatic table of contents (with page references using Pro PDF Service)
+* automatically replace hyperlinks to included content with page references (Pro PDF Service only)
+* automatically replace hyperlinks to external content with footnotes (Pro PDF Service only)
+* automatically move images to avoid spanning a pagebreak and unsightly whitespace (Pro PDF Service only)
 * choose article templates (eg "Content Only" or "Centered Content")
 * choose fonts, font sizes, page sizes and lots more
 * optionally apply your active theme's CSS (this is optional and because themes usually aren't designed for print, support for this requires payment)
@@ -136,9 +136,9 @@ Some designs have features like:
 * background colors, even with gradients and choosable logos
 * two-column layout
 
-Read more about Print My Blog Pro Print in our [extensive user guide](https://printmy.blog/user-guide/).
+Read more about Pro Print in our [extensive user guide](https://printmy.blog/user-guide/).
 
-Ready to purchase the Pro Print Service? Here's the [pricing page](https://printmy.blog/pricing/), but you can also just try the free version and then make the purchase using the plugin from Print My Blog's Pricing page.
+Ready to purchase the full version? Here's the [pricing page](https://printmy.blog/pricing/).
 
 **Give your story life outside your blog!**
 
@@ -229,15 +229,16 @@ Follow the instructions presented, or refer to our [user guide](https://printmy.
 = Can I use Pro Print for Free? =
 Yes, you can use PMB's Pro Print for free (it's included in this plugin) to create projects, and can print or make PDFs with them using your web browser. Your web browser will not, however, support all the features that Pro Print is capable of (eg adding page references, footnotes, and fully controlling page margins).
 
-So, PMB Pro Print is free, but it's best when used with our Pro Print Service which is paid.
+ePub eBooks with Pro Print require payment.
+
+So, creating PDFs and printing with PMB Pro Print is free, but it's best when used with our Pro PDF Service which is paid.
 
 = I have a question about Pro Print =
 You're in luck, we have an [entire use guide](https://printmy.blog/user-guide/) that walks you through the first project, then onto customizations, and even through making your own custom designs in HTML, CSS, and Javascript (with a bit of PHP). These FAQs are mostly about Quick Print and Print Buttons.
 
 = How do I create a PDF using Quick Print? =
-*Use Pro Print and the Pro Print Service. However, your browser can still make pretty good PDFs for free.*
 
-This plugin just puts the content onto a single web page so your browser can print it or create a PDF from it. Because your browser is what creates the PDF, it depends on the browser. Check out the instructions that apply to you:
+Quick Print just puts the content onto a single web page so your browser can print it or create a PDF from it. Because your browser is what creates the PDF, it depends on the browser. Check out the instructions that apply to you:
 
 Google Chrome
 
@@ -269,6 +270,7 @@ Mozilla Firefox (PDF)
 https://youtu.be/sU02oSPWj34
 
 = How do I create an eBook using Print My Blog? =
+
 This plugin puts your blog's content onto a single web page, and you can then use the [dotEPUB browser extension](https:dotepub.com) to turn it into an eBook.
 
 https://youtu.be/M5ZZN3KsqOA
@@ -276,8 +278,6 @@ https://youtu.be/M5ZZN3KsqOA
 Note: if your printout has many images, dotEpub warns you it will replace them with links.
 
 Once the eBook has been generated, you can read it from your computer (here's instructions on how to [read ePubs](https://www.wikihow.com/Open-EPUB-Files) and [MOBI files](https://www.howtogeek.com/360419/what-is-a-mobi-file/)), or a phone or tablet.
-
-*Pro Print for ePub files is still in the works.*
 
 = Some images aren't appearing =
 
@@ -287,7 +287,7 @@ down to show Troubleshooting options, and increase "Post Rendering Wait-Time" (e
 value you need to in order to get all the images to load).
 
 = My PDFs are missing images =
-*This is usually a problem with browsers, which our Pro Print service, so far, hasn't experienced. So you may want to use Pro Print with the Pro Print Service.*
+*This is usually a problem with browsers, which our Pro PDF service hasn't experienced. So you may want to try Pro Print with the Pro PDF Service.*
 
 If your print-page has hundreds of images, browsers may generate PDFs that are missing images at the end.
 To fix this, just retry generate the PDF. Each time the browser will fetch more images. Continue re-generating the PDF until the images at the end are included.
@@ -435,10 +435,11 @@ https://youtu.be/uPQ3vqm7A2g
 = 3.10.1 xxxx =
 * Enhancement: ePubs center images by default
 * Enhancement: ePubs table of contents adds dashes to indicate nested content
+* Enhancement: notify free users of ePubs
 
 = 3.10.0 January 11, 2022 =
 * Feature: ePub hyperlinks to internal content now link to the page in the ePub instead of the website
-* Bugfix: fix "file system access is not allowed" downloading test PDFs via Pro Print Service because of URLs starting with "//" (like those added by LearnDash LMS)
+* Bugfix: fix "file system access is not allowed" downloading test PDFs via Pro PDF Service because of URLs starting with "//" (like those added by LearnDash LMS)
 
 = 3.9.0 December 29, 2021 =
 * Feature: Add ePub export format (Pro only)
@@ -576,7 +577,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.3.0 May 25, 2021 =
 * Introduces Freemius integration for selling Print My Blog Pro (plugin zip file about 2MB now, sorry, but I hope the often-requested improvements and having an actual business model will compensate for that)
-* Introduces Pro Print to WordPress.org. Free features include: saveable projects, drag-and-drop project organizer, custom post type support, customizable title page, table of contents. Features requiring Pro Print Service: page references, footnotes, clean page numbering and running headers, automatic adjustments of image position, and others. See [printmy.blog](https://printmy.blog) for more info, pricing, and user manual.
+* Introduces Pro Print to WordPress.org. Free features include: saveable projects, drag-and-drop project organizer, custom post type support, customizable title page, table of contents. Features requiring Pro PDF Service: page references, footnotes, clean page numbering and running headers, automatic adjustments of image position, and others. See [printmy.blog](https://printmy.blog) for more info, pricing, and user manual.
 * FYI Previous versions on WordPress.org was 2.9.9; version 3.0.0 to 3.2.4 were released to Founding Members only separately.
 * "Print Now" renamed "Quick Print", but otherwise the same. The old print buttons (configured on the Print My Blog > Settings page) are also unchanged.
 * Removed dashboard notice for Print My Blog Pro (because it's released! This is it.)
