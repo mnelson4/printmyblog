@@ -104,8 +104,10 @@ class PdfGenerator extends HtmlBaseGenerator
                     'error_generating' => __('There was an error preparing your content. Please visit the Print My Blog Help page.', 'print-my-blog'),
                     'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public? Please visit the Print My Blog Help page.', 'print-my-blog'),
                     'pro_description' => sprintf(
-                        esc_html__('Downloading the Paid PDF will use one of your %1$s remaining credits, and is non-refundable.',
-                        'print-my-blog'),
+                        esc_html__(
+                            'Downloading the Paid PDF will use one of your %1$s remaining credits, and is non-refundable.',
+                            'print-my-blog'
+                        ),
                         is_array($license_info) ? $license_info['remaining_credits'] : '0'
                     )
                 ]
