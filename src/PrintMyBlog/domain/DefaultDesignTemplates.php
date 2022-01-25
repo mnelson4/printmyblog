@@ -404,36 +404,40 @@ class DefaultDesignTemplates
                         return $form;
                     },
                     'project_form_callback' => function (Design $design) {
-                        return new FormSection(
-                            [
-                                'subsections' => [
-                                    'post_name' => new TextInput(
-                                        [
-                                            'html_label_text' => __('File name', 'print-my-blog'),
-                                        ]
-                                    ),
-                                    'byline' => new TextAreaInput(
-                                        [
-                                            'html_label_text' => __('ByLine', 'print-my-blog'),
-                                            'html_help_text' => __('Project Author(s)', 'print-my-blog'),
-                                        ]
-                                    ),
-                                    'post_content' => new TextAreaInput(
-                                        [
-                                            'html_label_text' => __('Description', 'print-my-blog'),
-                                            'html_help_text' => __('Shown as eBook metadata.', 'print-my-blog')
-                                        ]
-                                    ),
-                                    'cover' => new AdminFileUploaderInput(
-                                        [
-                                            'html_label_text' => __('Cover Image', 'print-my-blog'),
-                                            'html_help_text' => __('Cover image used on eBook file (does not necessarily appear inside project). Ideal dimensions are 2,560 x 1,600 pixels.', 'print-my-blog'),
-                                            'default' => plugins_url('assets/images/icon-128x128.jpg', PMB_MAIN_FILE)
-                                        ]
-                                    ),
+                        $project_form = $this->getDefaultProjectForm($design);
+                        $project_form->merge(
+                            new FormSection(
+                                [
+                                    'subsections' => [
+                                        'post_name' => new TextInput(
+                                            [
+                                                'html_label_text' => __('File name', 'print-my-blog'),
+                                            ]
+                                        ),
+                                        'byline' => new TextAreaInput(
+                                            [
+                                                'html_label_text' => __('ByLine', 'print-my-blog'),
+                                                'html_help_text' => __('Project Author(s)', 'print-my-blog'),
+                                            ]
+                                        ),
+                                        'post_content' => new TextAreaInput(
+                                            [
+                                                'html_label_text' => __('Description', 'print-my-blog'),
+                                                'html_help_text' => __('Shown as eBook metadata.', 'print-my-blog')
+                                            ]
+                                        ),
+                                        'cover' => new AdminFileUploaderInput(
+                                            [
+                                                'html_label_text' => __('Cover Image', 'print-my-blog'),
+                                                'html_help_text' => __('Cover image used on eBook file (does not necessarily appear inside project). Ideal dimensions are 2,560 x 1,600 pixels.', 'print-my-blog'),
+                                                'default' => plugins_url('assets/images/icon-128x128.jpg', PMB_MAIN_FILE)
+                                            ]
+                                        ),
+                                    ]
                                 ]
-                            ]
+                            )
                         );
+                        return $project_form;
                     }
                 ];
             }
