@@ -928,7 +928,7 @@ class Admin extends BaseController
         ];
 
         // Capability queries were only introduced in WP 5.9.
-        if ( version_compare( $GLOBALS['wp_version'], '5.9', '<' ) ) {
+        if (version_compare($GLOBALS['wp_version'], '5.9', '<')) {
             $user_query_args['who'] = 'authors';
         } else {
             $user_query_args['capability'] = ['edit_posts'];
