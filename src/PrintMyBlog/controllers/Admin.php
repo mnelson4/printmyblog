@@ -923,6 +923,17 @@ class Admin extends BaseController
             ],
             admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
         );
+        $user_query_args = [
+                'number' => 100
+        ];
+
+        // Capability queries were only introduced in WP 5.9.
+        if ( version_compare( $GLOBALS['wp_version'], '5.9', '<' ) ) {
+            $user_query_args['who'] = 'authors';
+        } else {
+            $user_query_args['capability'] = ['edit_posts'];
+        }
+
         $this->renderProjectTemplate(
             'project_edit_content.php',
             [
@@ -934,7 +945,7 @@ class Admin extends BaseController
             'project_support_front_matter' => $project_support_front_matter,
             'project_support_back_matter' => $project_support_back_matter,
             'post_types' => $this->post_fetcher->getProjectPostTypes('objects'),
-            'authors' => get_users(['number' => 10, 'who' => 'authors']),
+            'authors' => get_users($user_query_args),
             ]
         );
     }
