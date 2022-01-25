@@ -64,6 +64,7 @@ jQuery(document).on('pmb_wrap_up', function(){
     (async () => {
         const content = await epub(epub_options, sections);
         download_link.href = await blobToBase64(content);
+        jQuery('#download_link').removeClass('pmb-disabled');
     })();
 });
 
