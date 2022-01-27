@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.10.2
+Stable tag: 3.11.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -431,7 +431,8 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.10.2 xxx =
+= 3.11.0 xxx =
+* Feature: add ePub option to convert videos to images and links
 * Bugfix: fix warning introduced in WordPress 5.9 (WP_User_Query "who" argument was deprecated)
 
 = 3.10.1 January 21, 2022 =

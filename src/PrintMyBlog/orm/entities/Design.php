@@ -63,6 +63,12 @@ class Design extends PostWrapper
         }
     }
 
+    /**
+     * Gets the saved metadata and falls back to the default.
+     * @param $setting_name
+     * @return mixed|null
+     * @throws Exception
+     */
     public function getSetting($setting_name)
     {
         // tries to get the setting from a postmeta
