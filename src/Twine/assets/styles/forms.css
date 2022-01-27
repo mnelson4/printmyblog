@@ -15,7 +15,7 @@ summary.twine-summary{
     color:red;
     font-weight:normal;
 }
-.twine-option{
+.twine-option p.description{
     margin-bottom:1em;
 }
 .twine-option-disabled{
