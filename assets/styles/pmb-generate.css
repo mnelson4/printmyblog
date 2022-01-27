@@ -4,3 +4,6 @@
 #pmb-success-download-test-pdf, #pmb-error-downloading-test-pdf{
     display:none;
 }
+.pmb-get-help-icon{
+    padding-top:4px;
+}

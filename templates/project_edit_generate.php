@@ -21,6 +21,37 @@ pmb_render_template(
 		'steps_to_urls' => $steps_to_urls
 	]
 );
+$base_args = [
+    'ID' => $project->getWpPost()->ID,
+    'action' => Admin::SLUG_ACTION_EDIT_PROJECT,
+];
+$setup_link = add_query_arg(
+    array_merge(
+        $base_args,
+        [
+            'subaction' => Admin::SLUG_SUBACTION_PROJECT_SETUP
+        ]
+    ),
+    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+);
+$edit_content_link = add_query_arg(
+        array_merge(
+            $base_args,
+            [
+                'subaction' => Admin::SLUG_SUBACTION_PROJECT_CONTENT
+            ]
+        ),
+    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+);
+$edit_metadata_link = add_query_arg(
+    array_merge(
+        $base_args,
+        [
+            'subaction' => Admin::SLUG_SUBACTION_PROJECT_META
+        ]
+    ),
+    admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+);
 do_action('project_edit_generate__under_header', $project, $generations);
 ?>
 <?php if (is_array($license_info)){
@@ -37,14 +68,15 @@ do_action('project_edit_generate__under_header', $project, $generations);
 }?>
 <?php
 foreach($generations as $generation){
-    $base_args = [
-        'ID' => $project->getWpPost()->ID,
-        'action' => Admin::SLUG_ACTION_EDIT_PROJECT,
-        'format' => $generation->getFormat()->slug()
-    ];
+    $generation_base_args = array_merge(
+            $base_args,
+        [
+            'format' => $generation->getFormat()->slug()
+        ]
+    );
 	$generate_link = add_query_arg(
 	    array_merge(
-            $base_args,
+            $generation_base_args,
             [
                 'subaction' => Admin::SLUG_SUBACTION_PROJECT_GENERATE,
             ]
@@ -52,22 +84,22 @@ foreach($generations as $generation){
 		admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 	);
 	$change_design_link = add_query_arg(
-	        array_merge(
-	                $base_args,
-	        [
+        array_merge(
+            $generation_base_args,
+            [
                 'subaction' => Admin::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN
             ]
         ),
         admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
     );
 	$edit_design_link = add_query_arg(
-	        array_merge(
-                $base_args,
-                [
-                    'subaction' => Admin::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN,
+        array_merge(
+            $generation_base_args,
+            [
+                'subaction' => Admin::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN,
 
-                ]
-            ),
+            ]
+        ),
         admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
     );
 
@@ -93,8 +125,12 @@ foreach($generations as $generation){
 <?php
 }
 ?>
-<a href="<?php echo esc_url(admin_url(PMB_ADMIN_HELP_PAGE_PATH));?>"><span class="pmb-spinner-container"><span class="dashicons
-                dashicons-sos"></span></span> <?php esc_html_e('Something not right? We’re happy to help!', 'print-my-blog');?></a>
+<h2><?php esc_html_e('Need to Change Something?', 'print-my-blog');?></h2>
+    <a class="button" href="<?php echo esc_url($setup_link);?>"><?php esc_html_e('Change Title or Format', 'print-my-blog');?></a>
+    <a class="button" href="<?php echo esc_url($edit_content_link);?>"><?php esc_html_e('Edit Content', 'print-my-blog');?></a>
+    <a class="button" href="<?php echo esc_url($edit_metadata_link);?>"><?php esc_html_e('Edit Metadata', 'print-my-blog');?></a>
+<a class="button" href="<?php echo esc_url(admin_url(PMB_ADMIN_HELP_PAGE_PATH));?>"><span class="dashicons
+                dashicons-sos pmb-get-help-icon"></span> <?php esc_html_e('Get Help', 'print-my-blog');?></a>
 <?php
 pmb_render_template('partials/project_footer.php');
 
