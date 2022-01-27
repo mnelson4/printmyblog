@@ -433,7 +433,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.11.0 xxx =
 * Feature: add Pro ePub option to convert videos to images and links
-* Feature: add links to change or edit designs from Pro generate page
+* Feature: add clearer links to modify the project and designs to the Generate page
 * Bugfix: fix warning introduced in WordPress 5.9 (WP_User_Query "who" argument was deprecated)
 
 = 3.10.1 January 21, 2022 =
