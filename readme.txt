@@ -432,12 +432,13 @@ https://youtu.be/uPQ3vqm7A2g
 == Changelog ==
 
 = 3.11.0 xxx =
-* Feature: add ePub option to convert videos to images and links
+* Feature: add Pro ePub option to convert videos to images and links
+* Feature: add links to change or edit designs from Pro generate page
 * Bugfix: fix warning introduced in WordPress 5.9 (WP_User_Query "who" argument was deprecated)
 
 = 3.10.1 January 21, 2022 =
-* Enhancement: ePubs center images by default
-* Enhancement: ePubs table of contents adds dashes to indicate nested content
+* Enhancement: Pro ePubs center images by default
+* Enhancement: Pro ePubs table of contents adds dashes to indicate nested content
 * Enhancement: notify free users of ePubs
 
 = 3.10.0 January 11, 2022 =
