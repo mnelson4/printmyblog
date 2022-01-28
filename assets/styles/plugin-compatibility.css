@@ -1,4 +1,4 @@
-/* Hide Content from the following plugins...*/
+/* Only added to print pages, mostly hides content from the following plugins...*/
 /* Yuzo Related Posts */
 .pmb-posts .yuzo_related_post{
     display:none;
@@ -128,5 +128,9 @@ Hide stuff that doesn't make sense in print
 Hide WPML language selectors
  */
 .wpml-ls{
+    display:none;
+}
+
+#ez-toc-container{
     display:none;
 }
