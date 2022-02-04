@@ -9,11 +9,13 @@ Prince.registerPostLayoutFunc(function() {
 
 
         var footnotes_height = 0;
-        for (child in p['children']){
-            if(p['children']['type'] === 'FOOTNOTES'){
-                footnotes_height = p['children']['type']['h'];
+        for (var index in p['children']){
+            var child = p['children'][index];
+            if(child['type'] === 'FOOTNOTES'){
+                footnotes_height = child['h'];
             }
         }
+        Log.info('footnotes height' + footnotes_height);
         var new_height = box.y - (p.y - p.h) - 10 - footnotes_height;
 
         x.style.height = new_height + "pt";
