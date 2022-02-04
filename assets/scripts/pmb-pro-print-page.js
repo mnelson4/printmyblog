@@ -12,7 +12,19 @@ function pmb_generate_doc_from_html(is_preview, success_callback, failure_callba
         dynamic_doc_attrs.test = true;
     }
 
+    jQuery('script').replaceWith(function(){
+        return jQuery("<disabled-script />", {html: jQuery(this).html()});
+    });
+    jQuery('prince-script').replaceWith(function(){
+        return jQuery("<script />", {html: jQuery(this).html()});
+    });
     dynamic_doc_attrs.document_content = '<html>' + jQuery('html').html() + '</html>';
+    jQuery('script').replaceWith(function(){
+        return jQuery("<prince-script />", {html: jQuery(this).html()});
+    });
+    jQuery('disabled-script').replaceWith(function(){
+        return jQuery("<script />", {html: jQuery(this).html()});
+    });
 
 
     var server_communicator = new PmbAsyncPdfCreation(

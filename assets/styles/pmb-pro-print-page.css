@@ -249,3 +249,11 @@ otherwise Prince allots them no height and they overflow into content beneath. *
 .a11y-speak-intro-text, .a11y-speak-region{
     display:none !important;
 }
+
+/**
+We dynamically change all "script" tags to the non-standard "disabled-script" tag when sending for conversion.
+Don't show them, of course.
+ */
+disabled-script, prince-script{
+    display:none;
+}

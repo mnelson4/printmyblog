@@ -97,6 +97,7 @@ class PdfGenerator extends HtmlBaseGenerator
                             'media' => 'print',
                             'http_timeout' => 60,
                             'http_insecure' => true,
+                            'javascript' => true, // before sending the HTML to DocRaptor, we turn all the "script" tags into "disabled-script"; and all the "prince-script" into "script" tags.
                         ]
                     ]
                 ),
@@ -112,6 +113,16 @@ class PdfGenerator extends HtmlBaseGenerator
                     )
                 ]
             ]
+        );
+
+        // now add the Prince script, which Prince will run
+        add_action(
+            'wp_print_scripts',
+            function(){
+                echo '<prince-script>' . pmb_get_contents(
+                        PMB_SCRIPTS_DIR . '/prince-print-page.js'
+                    ) . '</prince-script>';
+            }
         );
     }
 
