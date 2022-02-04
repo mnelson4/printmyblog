@@ -9,10 +9,10 @@ Prince.registerPostLayoutFunc(function() {
 
         var old_height = box.h;
         var new_height = box.y - (p.y - p.h) - p.marginBottom - 10;
-        console.log('p.y' + p.y)
-        console.log('p.h' + p.h)
-        console.log('p.marginBottom' + p.marginBottom);
-        console.log('box.marginBottom' + box.marginBottom);
+        Log.info('p.y' + p.y)
+        Log.info('p.h' + p.h)
+        Log.info('p.marginBottom' + p.marginBottom);
+        Log.info('box.marginBottom' + box.marginBottom);
         var ratio = old_height / new_height;
 
         var new_width = p.w * ratio;
