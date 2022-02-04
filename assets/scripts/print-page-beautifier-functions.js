@@ -152,6 +152,7 @@ function pmb_resize_images(desired_max_height) {
         //     });
         // });
     }
+    pmb_dynamically_resize_images();
 }
 
 /**
