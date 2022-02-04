@@ -12,12 +12,13 @@ function pmb_generate_doc_from_html(is_preview, success_callback, failure_callba
         dynamic_doc_attrs.test = true;
     }
 
-    var html = '<html>' + jQuery('html').text() + '</html>';
+    var html = '<html>' + jQuery('html').html() + '</html>';
     html = html
         .replaceAll('<script', '<disabled-script')
         .replaceAll('</script>','</disabled-script>')
         .replaceAll('<prince-script', '<script')
         .replaceAll('</prince-script>','</script>');
+    html = _.unescape(html);
     dynamic_doc_attrs.document_content = html;
     console.log(html);
 
