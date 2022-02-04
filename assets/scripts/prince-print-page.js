@@ -8,11 +8,9 @@ Prince.registerPostLayoutFunc(function() {
         var p = PDF.pages[box.pageNum-1];
 
         var old_height = box.h;
-        var new_height = box.y - (p.y - p.h) - p.marginBottom - 10;
-        for(var prop in p){
-            var val = p[prop];
-            Log.info(prop + ':' + val);
-        }
+        var new_height = box.y - (p.y - p.h) - 10;
+pmb_print_props(box, 'box');
+pmb_print_props(p, 'page');
         // var ratio = old_height / new_height;
 
         // var new_width = p.w * ratio;
@@ -21,4 +19,12 @@ Prince.registerPostLayoutFunc(function() {
         // x.style.width = new_width + "pt';"
     }
 });
+
+function pmb_print_props(obj, label){
+    Log.info(label)
+    for(var prop in obj){
+        var val = p[prop];
+        Log.info(prop + ':' + val);
+    }
+}
 
