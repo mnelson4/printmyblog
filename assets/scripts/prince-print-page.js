@@ -9,8 +9,11 @@ Prince.registerPostLayoutFunc(function() {
 
         var old_height = box.h;
         var new_height = box.y - (p.y - p.h) - 10;
-pmb_print_props(box, 'box');
-pmb_print_props(p, 'page');
+        pmb_print_props(box, 'box');
+        pmb_print_props(p, 'page');
+        for (child in p['children']){
+            pmb_print_props(p['children'][child],'child-' + child);
+        }
         // var ratio = old_height / new_height;
 
         // var new_width = p.w * ratio;
@@ -23,7 +26,7 @@ pmb_print_props(p, 'page');
 function pmb_print_props(obj, label){
     Log.info(label)
     for(var prop in obj){
-        var val = p[prop];
+        var val = obj[prop];
         Log.info(prop + ':' + val);
     }
 }
