@@ -9,16 +9,16 @@ Prince.registerPostLayoutFunc(function() {
 
         var old_height = box.h;
         var new_height = box.y - (p.y - p.h) - p.marginBottom - 10;
-        Log.info('p' + p)
-        Log.info('box' + box);
-        Log.info('p stringify' + JSON.stringify(p));
-        Log.info('box stringify' + JSON.stringify(box));
-        var ratio = old_height / new_height;
+        for(var prop in p){
+            var val = p[prop];
+            Log.info(prop + ':' + val);
+        }
+        // var ratio = old_height / new_height;
 
-        var new_width = p.w * ratio;
+        // var new_width = p.w * ratio;
 
         x.style.height = new_height + "pt";
-        x.style.width = new_width + "pt';"
+        // x.style.width = new_width + "pt';"
     }
 });
 
