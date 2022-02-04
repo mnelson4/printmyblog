@@ -6,7 +6,15 @@ Prince.registerPostLayoutFunc(function() {
         var x = xs[i].getElementsByTagName("img")[0];
         var box = x.getPrinceBoxes()[0];
         var p = PDF.pages[box.pageNum-1];
-        var h = box.y - (p.y - p.h) - 10;
-        x.style.height = h + "pt";
+
+        var old_height = p.h;
+        var new_height = box.y - (p.y - p.h) - 10;
+        var ratio = old_height / new_height;
+
+        var old_width = p.w;
+        var new_width = p.w * ratio;
+
+        x.style.height = new_height + "pt";
+        x.style.width = new_width + "pt';"
     }
 });
