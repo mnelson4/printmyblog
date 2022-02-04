@@ -1,4 +1,5 @@
 Prince.trackBoxes = true;
+
 Prince.registerPostLayoutFunc(function() {
     var xs = document.getElementsByClassName("pmb-dynamic-resize");
     for (var i = 0; i < xs.length; ++i) {
