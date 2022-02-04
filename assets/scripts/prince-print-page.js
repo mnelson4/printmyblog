@@ -8,7 +8,11 @@ Prince.registerPostLayoutFunc(function() {
         var p = PDF.pages[box.pageNum-1];
 
         var old_height = box.h;
-        var new_height = box.y - (p.y - p.h) - 10;
+        var new_height = box.y - (p.y - p.h) - p.marginBottom - 10;
+        console.log('p.y' + p.y)
+        console.log('p.h' + p.h)
+        console.log('p.marginBottom' + p.marginBottom);
+        console.log('box.marginBottom' + box.marginBottom);
         var ratio = old_height / new_height;
 
         var new_width = p.w * ratio;
