@@ -9,10 +9,10 @@ Prince.registerPostLayoutFunc(function() {
 
         var old_height = box.h;
         var new_height = box.y - (p.y - p.h) - p.marginBottom - 10;
-        Log.info('p.y' + p.y)
-        Log.info('p.h' + p.h)
-        Log.info('p.marginBottom' + p.marginBottom);
-        Log.info('box.marginBottom' + box.marginBottom);
+        Log.info('p' + p)
+        Log.info('box' + box);
+        Log.info('p stringify' + JSON.stringify(p));
+        Log.info('box stringify' + JSON.stringify(box));
         var ratio = old_height / new_height;
 
         var new_width = p.w * ratio;
@@ -21,3 +21,4 @@ Prince.registerPostLayoutFunc(function() {
         x.style.width = new_width + "pt';"
     }
 });
+
