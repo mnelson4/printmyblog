@@ -14,10 +14,10 @@ function pmb_generate_doc_from_html(is_preview, success_callback, failure_callba
 
     var html = '<html>' + jQuery('html').html() + '</html>';
     html = html
-        .replace('<script', '<disabled-script')
-        .replace('</script>','</disabled-script>')
-        .replace('<prince-script', '<script')
-        .replace('</prince-script>','</script>');
+        .replaceAll('<script', '<disabled-script')
+        .replaceAll('</script>','</disabled-script>')
+        .replaceAll('<prince-script', '<script')
+        .replaceAll('</prince-script>','</script>');
     dynamic_doc_attrs.document_content = html;
     console.log(html);
 
