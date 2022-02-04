@@ -7,16 +7,14 @@ Prince.registerPostLayoutFunc(function() {
         var box = x.getPrinceBoxes()[0];
         var p = PDF.pages[box.pageNum-1];
 
-        var old_height = box.h;
-        var new_height = box.y - (p.y - p.h) - 10;
-        pmb_print_props(box, 'box');
-        pmb_print_props(p, 'page');
-        for (child in p['children']){
-            pmb_print_props(p['children'][child],'child-' + child);
-        }
-        // var ratio = old_height / new_height;
 
-        // var new_width = p.w * ratio;
+        var footnotes_height = 0;
+        for (child in p['children']){
+            if(p['children']['type'] === 'FOOTNOTES'){
+                footnotes_height = p['children']['type']['h'];
+            }
+        }
+        var new_height = box.y - (p.y - p.h) - 10 - footnotes_height;
 
         x.style.height = new_height + "pt";
         // x.style.width = new_width + "pt';"
