@@ -12,7 +12,8 @@ function pmb_generate_doc_from_html(is_preview, success_callback, failure_callba
         dynamic_doc_attrs.test = true;
     }
 
-    var html = '<html>' + jQuery('html').html() + '</html>'
+    var html = '<html>' + jQuery('html').html() + '</html>';
+    html = html
         .replace('<script', '<disabled-script')
         .replace('</script>','</disabled-script>')
         .replace('<prince-script', '<script')
