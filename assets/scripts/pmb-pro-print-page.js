@@ -18,7 +18,9 @@ function pmb_generate_doc_from_html(is_preview, success_callback, failure_callba
     jQuery('prince-script').replaceWith(function(){
         return jQuery("<script />", {html: jQuery(this).html()});
     });
-    dynamic_doc_attrs.document_content = '<html>' + jQuery('html').html() + '</html>';
+    var html = '<html>' + jQuery('html').html() + '</html>';
+    dynamic_doc_attrs.document_content = html;
+    console.log(html);
     jQuery('script').replaceWith(function(){
         return jQuery("<prince-script />", {html: jQuery(this).html()});
     });
