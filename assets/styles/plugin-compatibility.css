@@ -134,3 +134,10 @@ Hide WPML language selectors
 #ez-toc-container{
     display:none;
 }
+
+/**
+* Accessibility toolbar
+ */
+.a11y-toolbar{
+    display:none;
+}

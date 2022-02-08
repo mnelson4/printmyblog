@@ -347,7 +347,7 @@ class DefaultDesignTemplates
                                 ]),
                                 'images_full_column' => new YesNoInput([
                                     'html_label_text' => __('Full-Column Images', 'print-my-blog'),
-                                    'html_help_text' => __('Resizes images to be the full column width (except ones with the CSS class "mayer-no-resize"', 'print-my-blog')
+                                    'html_help_text' => __('Resizes images to be the full column width (except ones with the CSS class "mayer-no-resize")', 'print-my-blog')
                                     ]),
                                 'no_extra_columns' => new YesNoInput([
                                     'html_label_text' => __('Remove Extra Columns', 'print-my-blog'),

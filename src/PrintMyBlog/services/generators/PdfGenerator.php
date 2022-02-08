@@ -118,10 +118,10 @@ class PdfGenerator extends HtmlBaseGenerator
         // now add the Prince script, which Prince will run
         add_action(
             'wp_print_scripts',
-            function(){
+            function () {
                 echo '<prince-script>' . pmb_get_contents(
-                        PMB_SCRIPTS_DIR . '/prince-print-page.js'
-                    ) . '</prince-script>';
+                    PMB_SCRIPTS_DIR . '/prince-print-page.js'
+                ) . '</prince-script>';
             }
         );
     }

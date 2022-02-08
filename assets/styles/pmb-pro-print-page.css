@@ -257,3 +257,11 @@ Don't show them, of course.
 disabled-script, prince-script{
     display:none;
 }
+
+/**
+* Most designs don't want a pagebreak inside a header
+ */
+.entry-header{
+    page-break-after:avoid;
+    page-break-inside:avoid;
+}
