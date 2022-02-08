@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2022-01-21 10:21-0800\n"
-"PO-Revision-Date: 2022-01-21 10:21-0800\n"
+"POT-Creation-Date: 2022-02-08 11:00-0800\n"
+"PO-Revision-Date: 2022-02-08 11:01-0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -74,6 +74,23 @@ msgstr ""
 "Si hay alguna característica u opción que desee, %1$spor favor, póngase en "
 "contacto. %2$s"
 
+#: designs/epub/classic/description.php:8
+#: designs/pdf/digital/buurma/description.php:5
+#: designs/pdf/digital/classic/description.php:4
+#: designs/pdf/digital/mayer/description.php:6
+#: designs/pdf/print/classic/descriptions/shared.php:2
+msgid "Features"
+msgstr "Características"
+
+#: designs/epub/classic/description.php:20
+#: designs/pdf/digital/buurma/description.php:12
+#: designs/pdf/digital/classic/description.php:15
+#: designs/pdf/digital/mayer/description.php:25
+#: designs/pdf/print/classic/descriptions/shared.php:12
+#: templates/partials/layout_options.php:13
+msgid "Page Layout"
+msgstr "Diseño de página"
+
 #: designs/epub/classic/templates/article.php:17
 #: designs/pdf/digital/classic/templates/article.php:17
 #: designs/pdf/print/classic/templates/article.php:17
@@ -128,13 +145,6 @@ msgstr ""
 "colores, por lo general se ve mejor desde un ordenador o dispositivo "
 "portátil."
 
-#: designs/pdf/digital/buurma/description.php:5
-#: designs/pdf/digital/classic/description.php:4
-#: designs/pdf/digital/mayer/description.php:6
-#: designs/pdf/print/classic/descriptions/shared.php:2
-msgid "Features"
-msgstr "Características"
-
 #: designs/pdf/digital/buurma/description.php:7
 msgid "Easier content editing because there are no nesting parts."
 msgstr "Edición de contenido más fácil porque no hay partes de anidamiento."
@@ -155,14 +165,6 @@ msgstr ""
 #: designs/pdf/digital/buurma/description.php:10
 msgid "Each article includes just its title and content"
 msgstr "Cada artículo incluye solo su título y contenido"
-
-#: designs/pdf/digital/buurma/description.php:12
-#: designs/pdf/digital/classic/description.php:15
-#: designs/pdf/digital/mayer/description.php:25
-#: designs/pdf/print/classic/descriptions/shared.php:12
-#: templates/partials/layout_options.php:13
-msgid "Page Layout"
-msgstr "Diseño de página"
 
 #: designs/pdf/digital/buurma/description.php:14
 msgid ""
@@ -809,7 +811,7 @@ msgstr ""
 "Error al insertar. Utilice la página de ayuda de PMB para obtener ayuda"
 
 #: src/PrintMyBlog/controllers/Admin.php:701
-#: src/PrintMyBlog/services/generators/PdfGenerator.php:104
+#: src/PrintMyBlog/services/generators/PdfGenerator.php:105
 msgid ""
 "There was an error preparing your content. Please visit the Print My Blog "
 "Help page."
@@ -818,7 +820,7 @@ msgstr ""
 "imprimir mi blog."
 
 #: src/PrintMyBlog/controllers/Admin.php:702
-#: src/PrintMyBlog/services/generators/PdfGenerator.php:105
+#: src/PrintMyBlog/services/generators/PdfGenerator.php:106
 msgid ""
 "Your project could not be accessed in order to generate the file. Maybe your "
 "website is not public? Please visit the Print My Blog Help page."
@@ -832,52 +834,52 @@ msgstr ""
 "¿Está seguro de que desea restablecer la configuración de nuevo a los "
 "valores predeterminados?"
 
-#: src/PrintMyBlog/controllers/Admin.php:993
-#: src/PrintMyBlog/controllers/Admin.php:1604
+#: src/PrintMyBlog/controllers/Admin.php:1004
+#: src/PrintMyBlog/controllers/Admin.php:1615
 #, php-format
 msgid "There was an error communicating with Print My Blog Central. It was %s"
 msgstr ""
 "Se ha producido un error al comunicarme con Print My Blog Central. Fue %s"
 
-#: src/PrintMyBlog/controllers/Admin.php:1132
+#: src/PrintMyBlog/controllers/Admin.php:1143
 msgid "Create unlimited ePubs with any purchase."
 msgstr "Crea ePubs ilimitados con cualquier compra."
 
-#: src/PrintMyBlog/controllers/Admin.php:1153
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:481
+#: src/PrintMyBlog/controllers/Admin.php:1164
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:498
 #: src/PrintMyBlog/orm/entities/Project.php:493
 msgid "Project Title"
 msgstr "Título del proyecto"
 
-#: src/PrintMyBlog/controllers/Admin.php:1163
+#: src/PrintMyBlog/controllers/Admin.php:1174
 #: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:112
 #: templates/setup_page.php:39
 msgid "Format"
 msgstr "Formato"
 
-#: src/PrintMyBlog/controllers/Admin.php:1228
+#: src/PrintMyBlog/controllers/Admin.php:1239
 #, php-format
 msgid "Successfully setup the project \"%s\"."
 msgstr "Configure correctamente el proyecto \"%s\"."
 
-#: src/PrintMyBlog/controllers/Admin.php:1242
+#: src/PrintMyBlog/controllers/Admin.php:1253
 #, php-format
 msgid "You need to choose and customize the design for your %s."
 msgstr "Debe elegir y personalizar el diseño de su %s."
 
-#: src/PrintMyBlog/controllers/Admin.php:1287
+#: src/PrintMyBlog/controllers/Admin.php:1298
 msgid "The content in your project has changed"
 msgstr "El contenido del proyecto ha cambiado"
 
-#: src/PrintMyBlog/controllers/Admin.php:1315
+#: src/PrintMyBlog/controllers/Admin.php:1326
 msgid "Updated project content."
 msgstr "Contenido actualizado del proyecto."
 
-#: src/PrintMyBlog/controllers/Admin.php:1362
+#: src/PrintMyBlog/controllers/Admin.php:1373
 msgid "You have customized this design"
 msgstr "Ha personalizado este diseño"
 
-#: src/PrintMyBlog/controllers/Admin.php:1368
+#: src/PrintMyBlog/controllers/Admin.php:1379
 #, php-format
 msgid ""
 "The design \"%s\" has been customized, and its changes will be reflected in "
@@ -886,71 +888,71 @@ msgstr ""
 "El diseño \"%s\" ha sido personalizado, y sus cambios se reflejarán en todos "
 "los proyectos que lo utilizan."
 
-#: src/PrintMyBlog/controllers/Admin.php:1383
+#: src/PrintMyBlog/controllers/Admin.php:1394
 #, php-format
 msgid "An invalid design (%s) or format provided(%s)"
 msgstr "Un diseño (%s) o formato no válido(%s)"
 
-#: src/PrintMyBlog/controllers/Admin.php:1393
+#: src/PrintMyBlog/controllers/Admin.php:1404
 msgid "You changed the design"
 msgstr "Cambiaste el diseño"
 
-#: src/PrintMyBlog/controllers/Admin.php:1398
+#: src/PrintMyBlog/controllers/Admin.php:1409
 #, php-format
 msgid "You chose the design \"%1$s\" for the %2$s of your project."
 msgstr "Usted eligió el diseño \"%1$s\" para el %2$s de su proyecto."
 
-#: src/PrintMyBlog/controllers/Admin.php:1439
+#: src/PrintMyBlog/controllers/Admin.php:1450
 msgid "You changed projected metadata"
 msgstr "Ha cambiado los metadatos proyectados"
 
-#: src/PrintMyBlog/controllers/Admin.php:1445
+#: src/PrintMyBlog/controllers/Admin.php:1456
 msgid "Project metadata updated."
 msgstr "Metadatos del proyecto actualizados."
 
-#: src/PrintMyBlog/controllers/Admin.php:1463
+#: src/PrintMyBlog/controllers/Admin.php:1474
 #, php-format
 msgid "There is no file format with the slug \"%s\""
 msgstr "No hay ningún formato de archivo con el slug \"%s\""
 
-#: src/PrintMyBlog/controllers/Admin.php:1501
+#: src/PrintMyBlog/controllers/Admin.php:1512
 msgid "Save"
 msgstr "Guardar"
 
 #. translators: 1: the name of the new project.
-#: src/PrintMyBlog/controllers/Admin.php:1552
+#: src/PrintMyBlog/controllers/Admin.php:1563
 #, php-format
 msgid "Project successfully duplicated. It is titled \"%1$s\"."
 msgstr "Proyecto duplicado correctamente. Se titula \"%1$s\"."
 
 #. translators: 1 post type label, 2: post title
-#: src/PrintMyBlog/controllers/Admin.php:1738
+#: src/PrintMyBlog/controllers/Admin.php:1749
 #, php-format
 msgid "Go to the %1$s \"%2$s\" was copied from."
 msgstr "Vaya a la %1$s se copió \"%2$s\"."
 
-#: src/PrintMyBlog/controllers/Admin.php:1741
+#: src/PrintMyBlog/controllers/Admin.php:1752
 #, php-format
 msgid "Go to Original %s"
 msgstr "Ir a %s original"
 
 #. translators: 1: post title
-#: src/PrintMyBlog/controllers/Admin.php:1755
+#: src/PrintMyBlog/controllers/Admin.php:1766
 #, php-format
 msgid "Go to Print Material \"%s\" was created from."
 msgstr "Ir a Material de impresión a partir del que se creó \"%s\"."
 
-#: src/PrintMyBlog/controllers/Admin.php:1758
+#: src/PrintMyBlog/controllers/Admin.php:1769
 msgid "Go to Print Material"
 msgstr "Material de impresión"
 
-#: src/PrintMyBlog/controllers/Admin.php:1762
+#: src/PrintMyBlog/controllers/Admin.php:1773
 #, php-format
 msgid "Copy \"%s\" to New Print Material for a Print My Blog project"
 msgstr ""
 "Copiar \"%s\" en Nuevo material impreso para un proyecto imprimir mi blog"
 
-#: src/PrintMyBlog/controllers/Admin.php:1766
+#: src/PrintMyBlog/controllers/Admin.php:1777
 msgid "Copy to Print Material"
 msgstr "Material de impresión"
 
@@ -1141,7 +1143,7 @@ msgid "Classic Print PDf"
 msgstr "PDf de impresión clásica"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:55
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:548
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:565
 msgid "Font Settings"
 msgstr "Configuración de fuente"
 
@@ -1266,12 +1268,12 @@ msgid "Text that appears at the top-right of the cover"
 msgstr "Texto que aparece en la parte superior derecha de la portada"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:294
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:417
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:432
 msgid "ByLine"
 msgstr "firma"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:295
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:418
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:433
 msgid "Project Author(s)"
 msgstr "Autor(es) del proyecto(s)"
 
@@ -1298,13 +1300,13 @@ msgid "Mayer Digital PDF"
 msgstr "Mayer Digital PDF"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:335
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:543
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:560
 #: src/PrintMyBlog/domain/PrintOptions.php:107
 msgid "Each Post Begins on a New Page"
 msgstr "Cada publicación comienza en una nueva página"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:336
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:544
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:561
 #: src/PrintMyBlog/domain/PrintOptions.php:110
 msgid ""
 "Whether to force posts to always start on a new page. Doing so makes the "
@@ -1337,10 +1339,10 @@ msgstr "Imágenes de columna completa"
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:350
 msgid ""
 "Resizes images to be the full column width (except ones with the CSS class "
-"\"mayer-no-resize\""
+"\"mayer-no-resize\")"
 msgstr ""
 "Redimensiona las imágenes para que sean el ancho completo de la columna "
-"(excepto las de la clase CSS \"mayer-no-resize\""
+"(excepto las de la clase CSS \"mayer-no-resize\")"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:353
 msgid "Remove Extra Columns"
@@ -1355,13 +1357,13 @@ msgstr ""
 "sí se dividió en más columnas (por ejemplo, mediante el bloque \"Columnas\")"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:367
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:454
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:483
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:471
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:500
 msgid "Byline"
 msgstr "Autor"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:368
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:455
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:472
 msgid "Project author(s)"
 msgstr "Autor(es) del proyecto(s)"
 
@@ -1370,23 +1372,36 @@ msgstr "Autor(es) del proyecto(s)"
 msgid "Classic ePub"
 msgstr "ePub Classico"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:412
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:408
+msgid "Convert Videos to Images and Links"
+msgstr "Convertir videos en imágenes y enlaces"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:409
+msgid ""
+"Some eReaders don't show videos, in which case you may prefer to replace "
+"them with an image and a hyperlink to the online video content."
+msgstr ""
+"Algunos eReaders no muestran videos, en cuyo caso es posible que prefiera "
+"reemplazarlos con una imagen y un hipervínculo al contenido de video en "
+"línea."
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:427
 msgid "File name"
 msgstr "Nombre del archivo"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:423
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:438
 msgid "Description"
 msgstr "Descripción"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:424
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:439
 msgid "Shown as eBook metadata."
 msgstr "Se muestra como metadatos de libros electrónicos."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:429
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:444
 msgid "Cover Image"
 msgstr "Imagen de portada"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:430
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:445
 msgid ""
 "Cover image used on eBook file (does not necessarily appear inside project). "
 "Ideal dimensions are 2,560 x 1,600 pixels."
@@ -1394,16 +1409,16 @@ msgstr ""
 "Imagen de portada utilizada en el archivo del libro electrónico (no aparece "
 "necesariamente dentro del proyecto)"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:449
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:482
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:466
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:499
 msgid "Subtitle"
 msgstr "Subtítulo"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:461
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:478
 msgid "Source Location"
 msgstr "Ubicación Origen"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:462
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:479
 msgid ""
 "Shown on the title page under the subtitle. Could be your website’s URL, or "
 "anything else you like."
@@ -1411,82 +1426,82 @@ msgstr ""
 "Se muestra en la página de título debajo del subtítulo. Podría ser la URL de "
 "tu sitio web, o cualquier otra cosa que te guste."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:484
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:501
 #: src/PrintMyBlog/domain/PrintOptions.php:29
 msgid "Site URL"
 msgstr "URL del sitio"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:485
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:502
 #: src/PrintMyBlog/domain/PrintOptions.php:38
 msgid "Date Printed"
 msgstr "Fecha de Impresión"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:494
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:511
 msgid "Title Page Content"
 msgstr "Contenido de la página de título"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:499
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:516
 msgid "Post Title"
 msgstr "Título de la publicación"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:500
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:517
 #: src/PrintMyBlog/domain/PrintOptions.php:61
 msgid "ID"
 msgstr "ID"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:501
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:518
 #: src/PrintMyBlog/domain/PrintOptions.php:65
 msgid "Author"
 msgstr "Autor"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:502
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:519
 #: src/PrintMyBlog/domain/PrintOptions.php:73
 msgid "Published Date"
 msgstr "Fecha de publicación"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:503
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:520
 #: src/PrintMyBlog/domain/PrintOptions.php:77
 msgid "Categories and Tags"
 msgstr "Categorías y Etiquetas"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:504
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:521
 #: src/PrintMyBlog/domain/PrintOptions.php:69
 msgid "URL"
 msgstr "URL"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:507
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:524
 #: src/PrintMyBlog/domain/PrintOptions.php:81
 msgid "Featured Image"
 msgstr "Imagen destacada"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:508
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:525
 #: src/PrintMyBlog/domain/PrintOptions.php:85
 msgid "Excerpt"
 msgstr "Extracto"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:509
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:526
 msgid "Custom Fields"
 msgstr "Campos personalizados"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:510
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:527
 #: src/PrintMyBlog/domain/PrintOptions.php:89
 #: templates/partials/content_options.php:13
 msgid "Content"
 msgstr "Contenido"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:521
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:538
 msgid "Post Content"
 msgstr "Contenido de la entrada"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:522
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:539
 msgid "Content from each post to print."
 msgstr "Contenido de cada publicación para imprimir."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:553
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:570
 msgid "Title page and Part Header Font Size"
 msgstr "Tamaño de fuente de encabezado y encabezado de pieza"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:555
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:572
 #, php-format
 msgid ""
 "Font size used for the default title page’s and part’s header (all other "
@@ -1501,20 +1516,20 @@ msgstr ""
 "\"pequeño\") o una %3$slength en cualquier unidad%2$s (por ejemplo, \"14pt"
 "\", \"50%%\" o \"10px\")."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:564
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:581
 msgid "Header Font"
 msgstr "Fuente de cabecera"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:565
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:582
 msgid "Default font for header tags"
 msgstr "Fuente predeterminada para etiquetas de encabezado"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:570
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:587
 #: src/PrintMyBlog/domain/PrintOptions.php:126
 msgid "Font Size"
 msgstr "Tamaño de fuente"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:572
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:589
 #, php-format
 msgid ""
 "Use any recognized %1$sCSS font-size keyword%2$s (like \"large\", \"medium"
@@ -1525,54 +1540,54 @@ msgstr ""
 "(como \"grande\", \"medio\", \"pequeño\") o una %3$slength en cualquier "
 "unidad%2$s (por ejemplo, \"14pt\", \"50%%\" o \"10px\")."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:581
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:598
 msgid "Font"
 msgstr "Fuente"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:582
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:599
 msgid "Default font used in paragraphs, bulleted lists, tables, etc."
 msgstr ""
 "Fuente predeterminada utilizada en párrafos, listas de viñetas, tablas, etc."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:587
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:604
 msgid "Image Settings"
 msgstr "Ajustes de imagen"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:591
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:608
 msgid "Maximum Image Height (in pixels)"
 msgstr "Altura máxima de imagen (en píxeles)"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:594
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:611
 msgid ""
 "Larger images will be resized to this, smaller images will be unchanged."
 msgstr ""
 "Las imágenes más grandes se cambiarán de tamaño a esto, las imágenes más "
 "pequeñas se cambiarán."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:605
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:622
 msgid "Page Settings"
 msgstr "Configuración de página"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:608
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:625
 msgid "Page Width"
 msgstr "Ancho de página"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:608
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:617
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:625
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:634
 msgid "Not supported by some browsers"
 msgstr "No es compatible con algunos navegadores"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:610
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:619
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:627
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:636
 #, php-format
 msgid "Use standard %1$sCSS units%2$s"
 msgstr "Utilice unidades %1$sCSS estándar%2$s"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:617
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:634
 msgid "Page Height"
 msgstr "Altura Página"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:640
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:657
 #, php-format
 msgid ""
 "Your theme, \"%1$s\", can be used in conjunction with your design. Themes "
@@ -1583,27 +1598,27 @@ msgstr ""
 "no están destinados a la impresión y pueden entrar en conflicto con el "
 "diseño, pero es posible que tenga contenido que se vea roto sin el tema."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:644
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:661
 msgid "Note: this option is only supported for the business license."
 msgstr "Nota: esta opción solo se admite para la licencia de negocio."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:660
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:677
 msgid "Apply Website Theme"
 msgstr "Aplicar tema del sitio web"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:665
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:682
 msgid "Custom CSS"
 msgstr "CSS personalizado"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:666
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:683
 msgid "Styles to be applied only when printing projects using this design."
 msgstr "Los estilos solo se aplicarán al imprimir proyectos con este diseño."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:669
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:686
 msgid "Add \"Powered By\""
 msgstr "Añadir \"Powered By\""
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:669
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:686
 msgid ""
 "In compliance with WordPress.org guidelines, not added when printing from "
 "your browser."
@@ -1611,7 +1626,7 @@ msgstr ""
 "De acuerdo con las pautas de WordPress.org, no se agrega al imprimir desde "
 "su navegador."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:670
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:687
 msgid ""
 "Instructs the Pro PDF Service to add \"Powered by Print My Blog Pro & "
 "WordPress\" to your project. Does not appear when printing using your "
@@ -1621,11 +1636,11 @@ msgstr ""
 "Pro &WordPress\" en el pie de página de la primera página. No aparece al "
 "imprimir con el navegador."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:685
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:702
 msgid "Page Reference Text"
 msgstr "Texto de referencia de página"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:686
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:703
 #, php-format
 msgid ""
 "Text to use when replacing a hyperlink with a page reference. \"%s\" will be "
@@ -1634,12 +1649,12 @@ msgstr ""
 "Texto que se usará al reemplazar un hipervínculo por una referencia de "
 "página. \"%s\" se reemplazará por el número de página."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:687
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:704
 #, php-format
 msgid "(see page %s)"
 msgstr "(ver página %s)"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:689
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:706
 #, php-format
 msgid ""
 "You must include \"%s\" in the page reference text so we know where to put "
@@ -1648,11 +1663,11 @@ msgstr ""
 "Debe incluir \"%s\" en el texto de referencia de la página para que sepamos "
 "dónde colocar el número de página."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:697
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:714
 msgid "Internal Footnote Text"
 msgstr "Texto de la nota al pie"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:698
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:715
 #, php-format
 msgid ""
 "Text to use when replacing a hyperlink with a footnote. \"%s\" will be "
@@ -1661,13 +1676,13 @@ msgstr ""
 "Texto que se usará al reemplazar un hipervínculo por una referencia de "
 "página. \"%s\" se reemplazará por el número de página."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:699
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:716
 #, php-format
 msgid "See page %s."
 msgstr "(ver página %s)"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:701
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:714
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:718
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:731
 #, php-format
 msgid ""
 "You must include \"%s\" in the footnote text so we know where to put the URL."
@@ -1675,11 +1690,11 @@ msgstr ""
 "Debe incluir \"%s\" en el texto de la nota al pie para que sepamos dónde "
 "colocar la DIRECCIÓN URL."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:710
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:727
 msgid "External Footnote Text"
 msgstr "Texto de la nota al pie"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:711
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:728
 #, php-format
 msgid ""
 "Text to use when replacing a hyperlink with a footnote. \"%s\" will be "
@@ -1688,24 +1703,24 @@ msgstr ""
 "Texto que se usará al reemplazar un hipervínculo por un foonote. \"%s\" será "
 "reemplazado por la URL"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:712
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:729
 #, php-format
 msgid "See %s."
 msgstr "Véase %s."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:726
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:743
 msgid "None"
 msgstr "Ninguno"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:727
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:744
 msgid "Center"
 msgstr "Centro"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:730
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:747
 msgid "Default Image Alignment"
 msgstr "Alineación de imagen predeterminada"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:731
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:748
 msgid ""
 "Images normally default to \"no alignment\", which can look jumbled in "
 "printouts. Usually it’s best to automatically switch those to align to the "
@@ -1715,24 +1730,24 @@ msgstr ""
 "confusa en las impresiones. Por lo general, lo mejor es cambiarlos "
 "automáticamente para alinearlos con el centro."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:741
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:758
 msgid "Don’t move"
 msgstr "No te muevas"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:742
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:759
 msgid "Snap to the top or bottom of the page"
 msgstr "Ajustar a la parte superior o inferior de la página"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:743
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:760
 msgid "Only snap if it would otherwise cause a page break"
 msgstr "Sólo ajustar si la imagen causaría un salto de página"
 
 #. translators: 1: "Best with Pro"
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:747
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:764
 msgid "Image Placement"
 msgstr "Colocación de imagen"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:748
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:765
 msgid ""
 "To reduce whitespace around images, galleries, and tables, Print My Blog can "
 "move around in your content."
@@ -2387,10 +2402,12 @@ msgid "Customize %s Design"
 msgstr "Personalizar el diseño de %s"
 
 #: src/PrintMyBlog/entities/ProjectProgress.php:94
+#: templates/project_edit_generate.php:130
 msgid "Edit Content"
 msgstr "Editar Contenido"
 
 #: src/PrintMyBlog/entities/ProjectProgress.php:95
+#: templates/project_edit_generate.php:131
 msgid "Edit Metadata"
 msgstr "Editar metadatos"
 
@@ -2428,7 +2445,7 @@ msgstr "Sin identificación de licencia disponible"
 msgid "There is no site registered with Freemius"
 msgstr "No hay sitio registrado con Freemius"
 
-#: src/PrintMyBlog/services/generators/PdfGenerator.php:108
+#: src/PrintMyBlog/services/generators/PdfGenerator.php:109
 #, php-format
 msgid ""
 "Downloading the Paid PDF will use one of your %1$s remaining credits, and is "
@@ -3660,32 +3677,48 @@ msgstr ""
 msgid "Press escape to unselect everything."
 msgstr "Presiona escape para anular la selección de todo."
 
-#: templates/project_edit_generate.php:16
+#: templates/project_edit_generate.php:19
 msgid "Generate Project"
 msgstr "Generar proyecto"
 
-#: templates/project_edit_generate.php:27
+#: templates/project_edit_generate.php:61
 #, php-format
 msgid "You have %1$s/%2$s download credits left which expire on %3$s"
 msgstr "Le quedan créditos de descarga %1$s/%2$s que caducan en %3$s"
 
-#: templates/project_edit_generate.php:50
+#: templates/project_edit_generate.php:110
 #, php-format
 msgid "Generate %s"
 msgstr "Generar %s"
 
-#: templates/project_edit_generate.php:51
+#: templates/project_edit_generate.php:111
 msgid "Generate"
 msgstr "Generar"
 
-#: templates/project_edit_generate.php:56
+#: templates/project_edit_generate.php:114
+msgid "Change Design"
+msgstr "Cambia Diseño"
+
+#: templates/project_edit_generate.php:116
+msgid "Edit Design"
+msgstr "Modificar el diseño"
+
+#: templates/project_edit_generate.php:120
 #, php-format
 msgid "View %s Print Page"
 msgstr "Ver página de impresión de %s"
 
-#: templates/project_edit_generate.php:61
-msgid "Something not right? We’re happy to help!"
-msgstr "¿Algo no está bien? ¡Estamos encantados de ayudar!"
+#: templates/project_edit_generate.php:128
+msgid "Need to Change Something?"
+msgstr "¿Necesitas cambiar algo?"
+
+#: templates/project_edit_generate.php:129
+msgid "Change Title or Format"
+msgstr "Cambiar título o formato"
+
+#: templates/project_edit_generate.php:133
+msgid "Get Help"
+msgstr "Obtener ayuda"
 
 #: templates/project_edit_metadata.php:12
 msgid "Edit Project Metadata"
@@ -4170,6 +4203,9 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "Michael Nelson"
 msgstr "Michael Nelson"
+
+#~ msgid "Something not right? We’re happy to help!"
+#~ msgstr "¿Algo no está bien? ¡Estamos encantados de ayudar!"
 
 #, php-format
 #~ msgid "Only works with %1$sPro PDF Service%2$s"
