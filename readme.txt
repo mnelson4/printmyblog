@@ -434,7 +434,12 @@ https://youtu.be/uPQ3vqm7A2g
 = 3.11.0 xxx =
 * Feature: add Pro ePub option to convert videos to images and links
 * Feature: add clearer links to modify the project and designs to the Generate page
+* Feature: images with class "pmb-dynamic-resize" are resized to fill remaining space on page
 * Bugfix: fix warning introduced in WordPress 5.9 (WP_User_Query "who" argument was deprecated)
+* Bugfix: resolve license mix-up by updating Freemius SDK to 2.5.0
+* Enhancement: improve Mayer Magazine images by increasing priority of making images full width
+* Compatibility: remove WordPress Accessibility plugin's toolbar from printouts
+* Enhancement: add more links to project steps from generate step
 
 = 3.10.1 January 21, 2022 =
 * Enhancement: Pro ePubs center images by default
