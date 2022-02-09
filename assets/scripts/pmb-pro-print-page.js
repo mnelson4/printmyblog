@@ -13,12 +13,35 @@ function pmb_generate_doc_from_html(is_preview, success_callback, failure_callba
     }
 
     var html = '<html>' + jQuery('html').html() + '</html>';
+
+    // don't send script tags, as we don't want Prince to execute Javascript we've already executed in the browser
+    var open_tag = '<script';
+    var close_tag = '</script>';
+    var open_tag_pos = html.indexOf(open_tag);
+    var close_tag_pos = html.indexOf(close_tag);
+
+    while(open_tag_pos !== -1){
+        var pre_script = html.substring(0,open_tag_pos);
+        var post_script = html.substring(close_tag_pos + close_tag.length);
+        html =  pre_script + post_script;
+        open_tag_pos = html.indexOf(open_tag);
+        close_tag_pos = html.indexOf(close_tag);
+    }
+
+    // unleash the Javascript for Prince!!
     html = html
-        .replaceAll('<script', '<disabled-script')
-        .replaceAll('</script>','</disabled-script>')
         .replaceAll('<prince-script', '<script')
         .replaceAll('</prince-script>','</script>');
-    html = _.unescape(html);
+
+    // jQuery escaped the contents of the Prince script when we fetched it, so un-escaped it using underscore.js
+    var open_tag_pos = html.indexOf('<script');
+    var close_tag_pos = html.indexOf(close_tag);
+    var pre_script = html.substring(0,open_tag_pos);
+    var script_contents = html.substring(open_tag_pos + open_tag.length + 1, close_tag_pos);
+    script_contents = _.unescape(script_contents);
+    var post_script = html.substring(close_tag_pos + close_tag.length);
+    html =  pre_script + open_tag + '>' + script_contents + close_tag + post_script;
+
     dynamic_doc_attrs.document_content = html;
     console.log(html);
 
