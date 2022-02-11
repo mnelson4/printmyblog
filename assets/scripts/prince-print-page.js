@@ -7,13 +7,13 @@ Prince.trackBoxes = true;
 // page they're on. Prince will then need to re-render.
 Prince.registerPostLayoutFunc(function() {
 
-    var image_wrapper = document.getElementsByClassName("pmb-dynamic-resize");
-    for (var i = 0; i < image_wrapper.length; ++i) {
+    var elements_to_resize = document.getElementsByClassName("pmb-dynamic-resize");
+    for (var i = 0; i < elements_to_resize.length; ++i) {
 
         // get the image's size, and how far it is from the bottom of the page
         // then stretch it down to there.
-        var image_element = image_wrapper[i].getElementsByTagName("img")[0];
-        var image_box = image_element.getPrinceBoxes()[0];
+        var element_to_resize = elements_to_resize[i];
+        var image_box = element_to_resize.getPrinceBoxes()[0];
         var page_box = PDF.pages[image_box.pageNum-1];
 
         // don't forget to take the footnote height into account
@@ -25,7 +25,7 @@ Prince.registerPostLayoutFunc(function() {
             }
         }
         var new_image_height = image_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
-        image_element.style.height = new_image_height + "pt";
+        element_to_resize.style.height = new_image_height + "pt";
     }
 });
 

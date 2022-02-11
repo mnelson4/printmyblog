@@ -123,6 +123,7 @@ if (defined('PMB_VERSION')) {
     define('PMB_DIR', wp_normalize_path(__DIR__) . '/');
     define('PMB_MAIN_FILE', __FILE__);
     define('PMB_TEMPLATES_DIR', PMB_DIR . 'templates/');
+    define('PMB_NO_THEME_DIR', PMB_TEMPLATES_DIR . 'no_theme/');
     define('PMB_VENDOR_DIR', PMB_DIR . 'vendor/');
     define('PMB_ADMIN_CAP', 'read_private_posts');
     define('PMB_BASENAME', plugin_basename(PMB_MAIN_FILE));
@@ -232,8 +233,9 @@ if (defined('PMB_VERSION')) {
         }
 		// We don't want the theme interfering. Kill it.
 	    add_filter( 'wp_using_themes', '__return_false' );
-		add_filter('template_directory', '__return_false', 100);
-		add_filter('stylesheet_directory', '__return_false', 100);
+		// some plugins and theme still assume a theme, so give them the directory of our bundled fake theme
+		add_filter('template_directory', function(){return PMB_NO_THEME_DIR;}, 100);
+		add_filter('stylesheet_directory', function(){return PMB_NO_THEME_DIR;}, 100);
 		add_action('init',function(){
             remove_action( 'wp_head', 'wp_custom_css_cb', 11 );
             remove_action( 'wp_head', 'wp_custom_css_cb', 101 );
