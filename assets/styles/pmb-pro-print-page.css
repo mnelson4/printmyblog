@@ -265,3 +265,8 @@ disabled-script, prince-script{
     page-break-after:avoid;
     page-break-inside:avoid;
 }
+
+.pmb-dynamic-resize img{
+    height:200px !important;
+    width:auto !important;
+}

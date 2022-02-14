@@ -152,14 +152,6 @@ function pmb_resize_images(desired_max_height) {
         //     });
         // });
     }
-    pmb_dynamically_resize_images();
-}
-
-/**
- * Sets the minimum size of dynamically-resized images. Increasing the size will happen later, when Prince Javascript runs
- */
-function pmb_dynamically_resize_images(){
-    jQuery('.pmb-dynamic-resize img').css('height','200px').css('width','auto');
 }
 
 function pmb_load_avada_lazy_images(){
