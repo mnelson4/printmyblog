@@ -13,12 +13,7 @@ Prince.registerPostLayoutFunc(function() {
         // get the image's size, and how far it is from the bottom of the page
         // then stretch it down to there.
         var element_to_resize = elements_to_resize[i];
-        Log.info('element to resize:');
-        pmb_print_props(element_to_resize);
-        element_to_resize.classList.add('pmb-dynamic-resize-done');
-        Log.info('classes after adding done');
-        pmb_print_props(element_to_resize.classList);
-        element_to_resize.classList.remove('pmb-dynamic-resize');
+        element_to_resize.className += 'pmb-dynamic-resize-done';
         var image_box = element_to_resize.getPrinceBoxes()[0];
         var page_box = PDF.pages[image_box.pageNum-1];
 
