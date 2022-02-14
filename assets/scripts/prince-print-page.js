@@ -6,16 +6,17 @@ Prince.trackBoxes = true;
 // once the first pass of rendering is finished, let's make the "pmb-dynamic-resize" images take up the rest of the
 // page they're on. Prince will then need to re-render.
 Prince.registerPostLayoutFunc(function() {
-    var elements_to_resize = document.getElementsByClassName("pmb-dynamic-resize");
+
     pmb_continue_image_resizing();
 });
 
 function pmb_continue_image_resizing(){
-    var element_to_resize = elements_to_resize.shift();
+    var elements_to_resize = document.getElementsByClassName("pmb-dynamic-resize");
+    var element_to_resize = elements_to_resize[0];
     if(typeof element_to_resize === 'undefined'){
         return;
     }
-    element_to_resize.className += ' pmb-dynamic-resize-done';
+    element_to_resize.className = element_to_resize.replace('pmb-dynamic-resize', '') + ' pmb-dynamic-resize-done';
     var element_box = element_to_resize.getPrinceBoxes()[0];
     var page_box = PDF.pages[element_box.pageNum-1];
 
