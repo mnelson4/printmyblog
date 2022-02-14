@@ -19,7 +19,9 @@ function pmb_continue_image_resizing(){
     element_to_resize.className = element_to_resize.className.replace('pmb-dynamic-resize', '') + ' pmb-dynamic-resize-done';
     var element_box = element_to_resize.getPrinceBoxes()[0];
     var page_box = PDF.pages[element_box.pageNum-1];
-
+    var sub_image = element_to_resize.getElementsByTagName("img")[0];
+    sub_image.style.height = null;
+    
     // don't forget to take the footnote height into account
     var footnotes_height = 0;
     for (var index in page_box['children']){
