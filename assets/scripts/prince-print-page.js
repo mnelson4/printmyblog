@@ -28,12 +28,9 @@ function pmb_continue_image_resizing(){
             footnotes_height = box_on_page['h'];
         }
     }
-    Log.info('=========' + i + '=================');
-    pmb_print_props(element_box, '>>> element ' + i + ' box');
-    pmb_print_props(page_box, '>>> page ' + (element_box.pageNum) + ' box');
     var new_element_height = element_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
     element_to_resize.style.height = new_element_height + "pt";
-    Log.info('new element height:' + new_element_height);
+
     Prince.registerPostLayoutFunc(pmb_continue_image_resizing);
 }
 
