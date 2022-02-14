@@ -16,7 +16,7 @@ function pmb_continue_image_resizing(){
     if(typeof element_to_resize === 'undefined'){
         return;
     }
-    element_to_resize.className = element_to_resize.replace('pmb-dynamic-resize', '') + ' pmb-dynamic-resize-done';
+    element_to_resize.className = element_to_resize.className.replace('pmb-dynamic-resize', '') + ' pmb-dynamic-resize-done';
     var element_box = element_to_resize.getPrinceBoxes()[0];
     var page_box = PDF.pages[element_box.pageNum-1];
 
