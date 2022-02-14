@@ -14,6 +14,7 @@ Prince.registerPostLayoutFunc(function() {
         // then stretch it down to there.
         var element_to_resize = elements_to_resize[i];
         element_to_resize.classList.add('pmb-dynamic-resize-done');
+        element_to_resize.classList.remove('pmb-dynamic-resize');
         var image_box = element_to_resize.getPrinceBoxes()[0];
         var page_box = PDF.pages[image_box.pageNum-1];
 
