@@ -13,6 +13,7 @@ Prince.registerPostLayoutFunc(function() {
         // get the image's size, and how far it is from the bottom of the page
         // then stretch it down to there.
         var element_to_resize = elements_to_resize[i];
+        element_to_resize.classList.add('pmb-dynamic-resize-done');
         var image_box = element_to_resize.getPrinceBoxes()[0];
         var page_box = PDF.pages[image_box.pageNum-1];
 
@@ -24,8 +25,8 @@ Prince.registerPostLayoutFunc(function() {
                 footnotes_height = box_on_page['h'];
             }
         }
-        var new_image_height = image_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
-        element_to_resize.style.height = new_image_height + "pt";
+        var new_element_height = image_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
+        element_to_resize.style.height = new_element_height + "pt";
     }
 });
 
