@@ -14,8 +14,8 @@ Prince.registerPostLayoutFunc(function() {
         // then stretch it down to there.
         var element_to_resize = elements_to_resize[i];
         element_to_resize.className += ' pmb-dynamic-resize-done';
-        var image_box = element_to_resize.getPrinceBoxes()[0];
-        var page_box = PDF.pages[image_box.pageNum-1];
+        var element_box = element_to_resize.getPrinceBoxes()[0];
+        var page_box = PDF.pages[element_box.pageNum-1];
 
         // don't forget to take the footnote height into account
         var footnotes_height = 0;
@@ -25,8 +25,12 @@ Prince.registerPostLayoutFunc(function() {
                 footnotes_height = box_on_page['h'];
             }
         }
-        var new_element_height = image_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
+        Log.info('=========' + i + '=================');
+        pmb_print_props(element_box, '>>> element ' + i + ' box');
+        pmb_print_props(page_box, '>>> page ' + (element_box.pageNum-1) + ' box');
+        var new_element_height = element_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
         element_to_resize.style.height = new_element_height + "pt";
+        Log.info('new element height:' + new_element_height);
     }
 });
 
