@@ -267,6 +267,10 @@ disabled-script, prince-script{
 }
 
 .pmb-dynamic-resize img{
-    height:200px !important;
-    width:auto !important;
+    height:200px;
+    width:auto;
+}
+.pmb-dynamic-resize-done img{
+    height:auto;
+    width:auto;
 }
