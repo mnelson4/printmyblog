@@ -20,5 +20,20 @@ h1,h2,h3,h4,h5,h6{
 }
 .pmb-dynamic-resize-done img{
     height:auto;
+    max-height:100%;
     width:auto;
+}
+
+/**
+* Use this style to make images take up the full space and then clip it
+ */
+.pmb-image-clip{
+    overflow-y:hidden;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.pmb-image-clip.pmb-nudge-up{
+    transform:translate(0, )
 }
