@@ -18,6 +18,12 @@ h1,h2,h3,h4,h5,h6{
     height:200px;
     width:auto;
 }
+.pmb-dynamic-resize-done{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
 .pmb-dynamic-resize-done img{
     height:auto;
     max-height:100%;
@@ -29,9 +35,10 @@ h1,h2,h3,h4,h5,h6{
  */
 .pmb-image-clip{
     overflow-y:hidden;
-    display:flex;
-    align-items:center;
-    justify-content: center;
+}
+
+.pmb-image-clip img{
+    max-height:none;
 }
 
 .pmb-image-clip.pmb-nudge-up{
