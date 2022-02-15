@@ -152,6 +152,7 @@ function pmb_resize_images(desired_max_height) {
         //     });
         // });
     }
+    jQuery('.pmb-dynamic-resize').wrap('<div class="pmb-dynamic-resize-wrapper"></div>');
 }
 
 function pmb_load_avada_lazy_images(){

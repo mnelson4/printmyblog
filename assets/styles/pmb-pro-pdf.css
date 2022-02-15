@@ -14,14 +14,14 @@ h1,h2,h3,h4,h5,h6{
 .pmb-depth-3:not([id*='/pmb-']) h1.pmb-title{prince-bookmark-level: 4}
 .pmb-depth-4:not([id*='/pmb-']) h1.pmb-title{prince-bookmark-level: 5}
 
-.pmb-dynamic-resize img{
+.pmb-dynamic-resize-wrapper img{
     height:200px;
     width:auto;
 }
 .pmb-dynamic-resized{
 
 }
-.pmb-dynamic-resized img{
+.pmb-dynamic-resize img{
     height:auto;
     max-height:100%;
     width:auto;
