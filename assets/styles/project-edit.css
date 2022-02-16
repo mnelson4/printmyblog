@@ -316,3 +316,7 @@
     color:gray;
     cursor:help;
 }
+/* Hide WPML language switcher on project pages as it doesn't make sense there. All projects are */
+#wp-admin-bar-WPML_ALS{
+    display:none;
+}
