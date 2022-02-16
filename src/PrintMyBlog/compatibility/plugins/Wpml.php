@@ -47,7 +47,7 @@ class Wpml extends CompatibilityBase
     public function setHooks()
     {
         // when activating make sure we create the needed translations of PMB default content
-        add_action('PrintMyBlog\system\Activation->install done', [$this, 'verifyPmbContentsTranslated']);
+        add_action('PrintMyBlog\system\Activation->install done', [$this, 'fixPmbContentTranslations']);
         // add a filter for language on the content editing page
         add_action('pmb__project_edit_content__filters_top', [$this, 'addLanguageFilter'], 1);
 
@@ -79,7 +79,7 @@ class Wpml extends CompatibilityBase
         // PMB project pages are all treated as if they're in the site's primary language
         if ($hook === 'toplevel_page_print-my-blog-projects') {
             global $sitepress;
-            $sitepress->switch_lang('all');
+            $sitepress->switch_lang(wpml_get_default_language());
             wp_add_inline_style(
                 'pmb_common',
                 '/* Hide WPML language switcher on PMB project pages as it doesn\'t make sense there. All projects are in the main languager then translated*/
@@ -87,13 +87,14 @@ class Wpml extends CompatibilityBase
                 display:none;
             }'
             );
+//            $this->fixPmbContentTranslations();
         }
     }
 
     /**
-     * Finds a ton of PMB content that has no translation entry and adds it
+     * Fixes PMB content (no initial translation record, or its in the wrong language)
      */
-    public function verifyPmbContentsTranslated(){
+    public function fixPmbContentTranslations(){
         global $wpdb, $sitepress;
         // find all PMB content needing a translation entry
         $post_types_sql = implode(
@@ -106,23 +107,41 @@ class Wpml extends CompatibilityBase
                 $this->post_types->getPostTypes()
             )
         );
-        $posts_needing_update = $wpdb->get_results(
-            "SELECT * FROM {$wpdb->posts} posts
+        $default_lang = wpml_get_default_language();
+
+        // find PMB content with no initial translation record (WPML assumes that always exists)
+        // or its a project or design that is not for the primary language (their original entry must always be in the primary language)
+        $pmb_stuff_to_fix = $wpdb->get_results(
+            $wpdb->prepare(
+                    "SELECT * FROM {$wpdb->posts} posts
             LEFT JOIN {$wpdb->prefix}icl_translations translations ON translations.element_type=CONCAT('post_', posts.post_type) AND posts.ID=translations.element_id
-            WHERE posts.post_type IN ({$post_types_sql}) AND translations.translation_id IS NULL",
+            WHERE 
+                (
+                    posts.post_type IN ({$post_types_sql}) 
+                    AND translations.translation_id IS NULL
+                )
+                OR 
+                (
+                    posts.post_type IN (%s, %s)
+                    AND translations.language_code!=%s 
+                    AND translations.source_language_code IS NULL
+                )",
+                   CustomPostTypes::PROJECT,
+                    CustomPostTypes::DESIGN,
+                    $default_lang
+            ),
                 ARRAY_A
         );
-        foreach($posts_needing_update as $post_needing_update){
+        foreach($pmb_stuff_to_fix as $post_needing_update){
             $sitepress->set_element_language_details(
                 $post_needing_update['ID'],
                 'post_' . $post_needing_update['post_type'],
                 null,
-                wpml_get_default_language(),
+                $default_lang,
                 null,
                 true
             );
         }
-
     }
 
     /**
