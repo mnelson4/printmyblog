@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2022-02-08 10:59-0800\n"
+"POT-Creation-Date: 2022-02-16 12:21-0800\n"
 "PO-Revision-Date: 2021-05-25 13:59-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -499,35 +499,35 @@ msgstr ""
 msgid "360 Image Available"
 msgstr ""
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:91
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:311
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:170
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:390
 msgid "Language"
 msgstr ""
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:94
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:173
 msgid "All Languages"
 msgstr ""
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:267
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:346
 #, php-format
 msgid "Default language (currently %s)"
 msgstr ""
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:283
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:362
 #, php-format
 msgid "Translate %s Design"
 msgstr ""
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:293
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:372
 #, php-format
 msgid "%s Translations"
 msgstr ""
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:295
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:374
 msgid "Translate Project Metadata"
 msgstr ""
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:400
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:479
 #, php-format
 msgid "\"%s\" is fully translated into %s"
 msgstr ""
@@ -2206,11 +2206,11 @@ msgid "Parent Print Materials:"
 msgstr ""
 
 #: src/PrintMyBlog/system/CustomPostTypes.php:89
-msgid "No books found."
+msgid "No Print Materials found."
 msgstr ""
 
 #: src/PrintMyBlog/system/CustomPostTypes.php:90
-msgid "No books found in Trash."
+msgid "No Print Materials found in Trash."
 msgstr ""
 
 #: src/PrintMyBlog/system/CustomPostTypes.php:91
@@ -2248,21 +2248,21 @@ msgstr ""
 msgctxt ""
 "Overrides the “Insert into post”/”Insert into page” phrase (used when "
 "inserting media into a post). Added in 4.4"
-msgid "Insert into book"
+msgid "Insert into Print Material"
 msgstr ""
 
 #: src/PrintMyBlog/system/CustomPostTypes.php:97
 msgctxt ""
 "Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used "
 "when viewing media attached to a post). Added in 4.4"
-msgid "Uploaded to this book"
+msgid "Uploaded to this Print Material"
 msgstr ""
 
 #: src/PrintMyBlog/system/CustomPostTypes.php:98
 msgctxt ""
 "Screen reader text for the filter links heading on the post type listing "
 "screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4"
-msgid "Filter books list"
+msgid "Filter Print Materials list"
 msgstr ""
 
 #: src/PrintMyBlog/system/CustomPostTypes.php:99

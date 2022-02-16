@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2022-02-08 11:03-0800\n"
-"PO-Revision-Date: 2022-02-08 11:05-0800\n"
+"POT-Creation-Date: 2022-02-16 12:24-0800\n"
+"PO-Revision-Date: 2022-02-16 12:25-0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -620,35 +620,35 @@ msgstr ""
 msgid "360 Image Available"
 msgstr "360 Image disponible"
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:91
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:311
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:170
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:390
 msgid "Language"
 msgstr "Langue"
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:94
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:173
 msgid "All Languages"
 msgstr "Toutes les langues"
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:267
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:346
 #, php-format
 msgid "Default language (currently %s)"
 msgstr "Langue par défaut (actuellement %s)"
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:283
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:362
 #, php-format
 msgid "Translate %s Design"
 msgstr "Choisissez %s design"
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:293
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:372
 #, php-format
 msgid "%s Translations"
 msgstr "%s Traductions"
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:295
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:374
 msgid "Translate Project Metadata"
 msgstr "Modifier les métadonnées du projet"
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:400
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:479
 #, php-format
 msgid "\"%s\" is fully translated into %s"
 msgstr "« %s » est entièrement traduit en %s"
@@ -2546,12 +2546,12 @@ msgid "Parent Print Materials:"
 msgstr "Documents imprimés pour les parents :"
 
 #: src/PrintMyBlog/system/CustomPostTypes.php:89
-msgid "No books found."
-msgstr "Aucune réservation trouvé."
+msgid "No Print Materials found."
+msgstr "Aucun matériel d'impression trouvé."
 
 #: src/PrintMyBlog/system/CustomPostTypes.php:90
-msgid "No books found in Trash."
-msgstr "Aucune réservation trouvée dans la corbeille."
+msgid "No Print Materials found in Trash."
+msgstr "Aucun matériel d'impression trouvé dans la corbeille."
 
 #: src/PrintMyBlog/system/CustomPostTypes.php:91
 msgctxt ""
@@ -2588,22 +2588,22 @@ msgstr "Archives du matériel d'impression"
 msgctxt ""
 "Overrides the “Insert into post”/”Insert into page” phrase (used when "
 "inserting media into a post). Added in 4.4"
-msgid "Insert into book"
-msgstr "Insérer dans l'inscription"
+msgid "Insert into Print Material"
+msgstr "Insérer dans le matériel d'impression"
 
 #: src/PrintMyBlog/system/CustomPostTypes.php:97
 msgctxt ""
 "Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used "
 "when viewing media attached to a post). Added in 4.4"
-msgid "Uploaded to this book"
-msgstr "Téléchargé dans l'inscription"
+msgid "Uploaded to this Print Material"
+msgstr "Téléchargé sur ce matériel d'impression"
 
 #: src/PrintMyBlog/system/CustomPostTypes.php:98
 msgctxt ""
 "Screen reader text for the filter links heading on the post type listing "
 "screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4"
-msgid "Filter books list"
-msgstr "Filtrer par"
+msgid "Filter Print Materials list"
+msgstr "Filtrer la liste des supports d'impression"
 
 #: src/PrintMyBlog/system/CustomPostTypes.php:99
 msgctxt ""
@@ -4232,6 +4232,27 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "Michael Nelson"
 msgstr "Michael Nelson"
+
+#~ msgid "No books found."
+#~ msgstr "Aucune réservation trouvé."
+
+#~ msgctxt ""
+#~ "Overrides the “Insert into post”/”Insert into page” phrase (used when "
+#~ "inserting media into a post). Added in 4.4"
+#~ msgid "Insert into book"
+#~ msgstr "Insérer dans l'inscription"
+
+#~ msgctxt ""
+#~ "Overrides the “Uploaded to this post”/”Uploaded to this page” phrase "
+#~ "(used when viewing media attached to a post). Added in 4.4"
+#~ msgid "Uploaded to this book"
+#~ msgstr "Téléchargé dans l'inscription"
+
+#~ msgctxt ""
+#~ "Screen reader text for the filter links heading on the post type listing "
+#~ "screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4"
+#~ msgid "Filter books list"
+#~ msgstr "Filtrer par"
 
 #~ msgid "Something not right? We’re happy to help!"
 #~ msgstr "Quelque chose ne va pas ? Nous sommes heureux de vous aider!"
