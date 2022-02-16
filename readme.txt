@@ -431,8 +431,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.11.1 Feb 14, 2022 =
+= 3.11.1 Feb 16, 2022 =
 * Bugfix: avoid warning using Ultimate Elementor by bundling a fake theme in PMB
+* Compatibility: fix WPML hiding projects and designs, and hide its language switcher when editing projects
 
 = 3.11.0 Feb 8, 2022 =
 * Feature: add Pro ePub option to convert videos to images and links
