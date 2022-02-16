@@ -7,6 +7,7 @@ use PrintMyBlog\orm\entities\ProjectSection;
 use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
+use PrintMyBlog\system\CustomPostTypes;
 use SitePress;
 use Twine\forms\base\FormSection;
 use Twine\forms\base\FormSectionHtml;
@@ -29,17 +30,24 @@ class Wpml extends CompatibilityBase
      * @var DesignManager
      */
     private $design_manager;
+    /**
+     * @var CustomPostTypes
+     */
+    private $post_types;
 
-    public function inject(ProjectManager $project_manager, DesignManager $design_manager)
+    public function inject(ProjectManager $project_manager, DesignManager $design_manager, CustomPostTypes $post_types)
     {
         $this->project_manager = $project_manager;
         $this->design_manager = $design_manager;
+        $this->post_types = $post_types;
     }
     /**
      * Set hooks for compatibility with PMB for any request.
      */
     public function setHooks()
     {
+        // when activating make sure we create the needed translations of PMB default content
+        add_action('PrintMyBlog\system\Activation->install done', [$this, 'verifyPmbContentsTranslated']);
         // add a filter for language on the content editing page
         add_action('pmb__project_edit_content__filters_top', [$this, 'addLanguageFilter'], 1);
 
@@ -80,6 +88,41 @@ class Wpml extends CompatibilityBase
             }'
             );
         }
+    }
+
+    /**
+     * Finds a ton of PMB content that has no translation entry and adds it
+     */
+    public function verifyPmbContentsTranslated(){
+        global $wpdb, $sitepress;
+        // find all PMB content needing a translation entry
+        $post_types_sql = implode(
+            ', ',
+            array_map(
+                function($item){
+                    global $wpdb;
+                    return $wpdb->prepare('%s', $item);
+                },
+                $this->post_types->getPostTypes()
+            )
+        );
+        $posts_needing_update = $wpdb->get_results(
+            "SELECT * FROM {$wpdb->posts} posts
+            LEFT JOIN {$wpdb->prefix}icl_translations translations ON translations.element_type=CONCAT('post_', posts.post_type) AND posts.ID=translations.element_id
+            WHERE posts.post_type IN ({$post_types_sql}) AND translations.translation_id IS NULL",
+                ARRAY_A
+        );
+        foreach($posts_needing_update as $post_needing_update){
+            $sitepress->set_element_language_details(
+                $post_needing_update['ID'],
+                'post_' . $post_needing_update['post_type'],
+                null,
+                wpml_get_default_language(),
+                null,
+                true
+            );
+        }
+
     }
 
     /**
@@ -279,7 +322,7 @@ class Wpml extends CompatibilityBase
         $default_language_details = $sitepress->get_language_details($default_language_code);
 
         $language_options = [
-            '' => new InputOption(
+            $default_language_code => new InputOption(
                 sprintf(
                     esc_html__('Default language (currently %s)', 'sitepress'),
                     $default_language_details['display_name']

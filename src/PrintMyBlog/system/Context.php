@@ -146,7 +146,8 @@ class Context extends BaseContext
             ],
             'PrintMyBlog\compatibility\plugins\Wpml' => [
                 'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
-                'PrintMyBlog\orm\managers\DesignManager' => self::REUSE
+                'PrintMyBlog\orm\managers\DesignManager' => self::REUSE,
+                'PrintMyBlog\system\CustomPostTypes' => self::REUSE,
             ]
         ];
     }

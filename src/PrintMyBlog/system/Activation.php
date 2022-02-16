@@ -123,6 +123,7 @@ class Activation extends BaseActivation
         $this->capabilities->grantCapabilities();
         $this->design_registry->createRegisteredDesigns();
         $this->project_contents->addDefaultContents();
+        do_action('PrintMyBlog\system\Activation->install done', $this);
     }
 
     public function upgrade()
