@@ -63,6 +63,23 @@ class Wpml extends CompatibilityBase
         add_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom before_ob_start', [$this,'setTranslatedProject']);
         add_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom after_get_clean', [$this,'unsetTranslatedProject']);
         add_action('wp_ajax_pmb_update_project_lang', [$this,'handleAjaxUpdateProjectLanguage']);
+
+        add_action('admin_enqueue_scripts',[$this,'enqueueWpmlCompatAssets']);
+    }
+
+    public function enqueueWpmlCompatAssets($hook){
+        // PMB project pages are all treated as if they're in the site's primary language
+        if ($hook === 'toplevel_page_print-my-blog-projects') {
+            global $sitepress;
+            $sitepress->switch_lang('all');
+            wp_add_inline_style(
+                'pmb_common',
+                '/* Hide WPML language switcher on PMB project pages as it doesn\'t make sense there. All projects are in the main languager then translated*/
+            #wp-admin-bar-WPML_ALS{
+                display:none;
+            }'
+            );
+        }
     }
 
     /**
