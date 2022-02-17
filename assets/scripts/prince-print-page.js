@@ -30,7 +30,12 @@ function pmb_continue_image_resizing(){
     var figure_image_height = figure_image.getPrinceBoxes()[0].h;
 
     var figure_caption = figure_to_resize.getElementsByTagName('figcaption')[0];
-    var figure_caption_height = figure_caption.getPrinceBoxes()[0].h;
+    if(typeof figure_caption === 'undefined'){
+        var figure_caption_height = 0;
+    } else {
+        var figure_caption_height = figure_caption.getPrinceBoxes()[0].h;
+    }
+
 
     var figure_box = figure_to_resize.getPrinceBoxes()[0];
     var page_box = PDF.pages[figure_box.pageNum-1];
