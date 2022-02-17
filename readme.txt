@@ -431,7 +431,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.11.3 xxxxxxx =
+= 3.11.3 Feb 17, 2022s =
 * Bugfix: prevent emojis in image descriptions in Mayer Magazine design from taking up full column width
 * Bugix: ensure underscore.js is enqueued on print page
 
