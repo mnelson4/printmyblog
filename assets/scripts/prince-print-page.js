@@ -41,7 +41,7 @@ function pmb_continue_image_resizing(){
     pmb_print_props(element_box,'>>>>>element box');
     var resize_ratio = new_element_height / element_box.h;
     figure_to_resize.style.height = new_element_height + "pt";
-    Log.info('figure is floating: ' + figure_is_floating + '. Resize ratio is ' + resize_ratio + '. New width is ' + (element_box.w * resize_ratio));
+    Log.info('figure is floating: ' + figure_is_floating + '. Resize ratio is ' + resize_ratio + '. New width is ' + (element_box.w * resize_ratio) + ' and new height is ' + new_element_height);
     if(figure_is_floating) {
         figure_to_resize.style.width = (element_box.w * resize_ratio) + 'pt';
     }
