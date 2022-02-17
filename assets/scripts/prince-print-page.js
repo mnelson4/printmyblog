@@ -26,7 +26,7 @@ function pmb_continue_image_resizing(){
         figure_to_resize = a_dynamic_resize_block;
         figure_is_floating = false;
     }
-    var figure_image = figure_to_resize.getElementsByTagName['img'][0];
+    var figure_image = figure_to_resize.getElementsByTagName('img')[0];
     var figure_image_height = figure_image.getPrinceBoxes()[0].h;
 
     var figure_caption = figure_to_resize.getElementsByTagName['figcaption'][0];
