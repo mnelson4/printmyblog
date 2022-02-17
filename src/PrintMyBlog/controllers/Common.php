@@ -64,7 +64,7 @@ class Common extends BaseController
         wp_register_script(
             'pmb_pro_page',
             PMB_ASSETS_URL . 'scripts/pmb-pro-print-page.js',
-            array('docraptor', 'jquery'),
+            array('docraptor', 'jquery', 'underscore'),
             filemtime(PMB_ASSETS_DIR . 'scripts/pmb-pro-print-page.js')
         );
         wp_register_script(

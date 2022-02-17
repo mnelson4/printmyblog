@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.11.2
+Stable tag: 3.11.3
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -433,6 +433,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.11.3 xxxxxxx =
 * Bugfix: prevent emojis in image descriptions in Mayer Magazine design from taking up full column width
+* Bugix: ensure underscore.js is enqueued on print page
 
 = 3.11.2 Feb 17, 2022 =
 * Bugfix: prevent "pmb-dynamic-resize" images with captions from overflowing
