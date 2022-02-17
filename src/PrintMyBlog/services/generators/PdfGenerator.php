@@ -36,6 +36,12 @@ class PdfGenerator extends HtmlBaseGenerator
             filemtime(PMB_SCRIPTS_DIR . 'pdf-beautifier-functions.js')
         );
         wp_enqueue_script('pmb_pro_page');
+        wp_enqueue_style(
+            'pmb_pro_pdf',
+            PMB_STYLES_URL . 'pmb-pro-pdf.css',
+            null,
+            filemtime(PMB_STYLES_DIR . 'pmb-pro-pdf.css')
+        );
         wp_enqueue_script('pmb_general');
         $style_file = $this->getDesignDir() . 'assets/style.css';
         $script_file = $this->getDesignDir() . 'assets/script.js';
@@ -115,15 +121,29 @@ class PdfGenerator extends HtmlBaseGenerator
             ]
         );
 
-        // now add the Prince script, which Prince will run
         add_action(
             'wp_print_scripts',
-            function () {
-                echo '<prince-script>' . pmb_get_contents(
-                    PMB_SCRIPTS_DIR . '/prince-print-page.js'
-                ) . '</prince-script>';
-            }
+            [$this, 'printScripts']
         );
+    }
+
+    /**
+     * Prints the scripts and other stuff that's really custom (like the Prince script)
+     */
+    public function printScripts()
+    {
+        // now add the Prince script, which Prince will run
+        // pass in its variables, like maximum image size
+        $prince_js_vars = [];
+        $max_image_size = $this->design->getSetting('image_size');
+        if (! $max_image_size) {
+            $max_image_size = 1200;
+        }
+        $prince_js_vars['max_image_size'] = $max_image_size;
+        echo '<prince-script>'
+            . 'var pmb = ' . wp_json_encode($prince_js_vars) . ';'
+            . pmb_get_contents(PMB_SCRIPTS_DIR . '/prince-print-page.js')
+            . '</prince-script>';
     }
 
     /**
