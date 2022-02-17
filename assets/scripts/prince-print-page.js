@@ -62,7 +62,8 @@ function pmb_continue_image_resizing(){
     var max_height_because_of_max_width = page_box.w * figure_box.h / figure_image_box.w;
 
     // put a limit on how big the image can be
-    new_figure_height = Math.min(500, new_figure_height, max_height_because_of_max_width);
+    // use the design's maximum image size, which was passed from PHP
+    new_figure_height = Math.min(pmb.max_image_size, new_figure_height, max_height_because_of_max_width);
 
     // Used some grade 12 math to figure out this equation.
     var new_image_height = new_figure_height - figure_box.h + figure_image_height;

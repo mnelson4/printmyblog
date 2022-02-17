@@ -122,10 +122,18 @@ class PdfGenerator extends HtmlBaseGenerator
         );
 
         // now add the Prince script, which Prince will run
+        // pass in its variables, like maximum image size
+        $prince_js_vars = [];
+        $max_image_size = $this->design->getSetting('image_size');
+        if( ! $max_image_size){
+            $max_image_size = 1200;
+        }
+        $prince_js_vars['max_image_size'] = $max_image_size;
+        $prince_js_var_string = 'var pmb = ' . wp_json_encode($prince_js_vars) . ';';
         add_action(
             'wp_print_scripts',
             function () {
-                echo '<prince-script>' . pmb_get_contents(
+                echo '<prince-script>' . $prince_js_var_string . pmb_get_contents(
                     PMB_SCRIPTS_DIR . '/prince-print-page.js'
                 ) . '</prince-script>';
             }
