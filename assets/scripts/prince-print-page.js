@@ -11,12 +11,19 @@ Prince.registerPostLayoutFunc(function() {
 });
 
 function pmb_continue_image_resizing(){
-    var elements_to_resize = document.getElementsByClassName("pmb-dynamic-resize");
-    var element_to_resize = elements_to_resize[0];
-    if(typeof element_to_resize === 'undefined'){
+    var dynamic_resize_blocks = document.getElementsByClassName("pmb-dynamic-resize");
+    var a_dynamic_resize_block = dynamic_resize_blocks[0];
+    if(typeof a_dynamic_resize_block === 'undefined'){
         return;
     }
-    var element_box = element_to_resize.getPrinceBoxes()[0];
+    // when images are floating, the block had a div (with no height) because its contents are floating
+    // in that case we want to resize the figure inside the block. So check if there's a figure inside it
+    var figure_to_resize = a_dynamic_resize_block.getElementsByTagName("figure")[0];
+    if( typeof figure_to_resize === 'undefined'){
+        // There's no figure inside it. The figure is the block.
+        figure_to_resize = a_dynamic_resize_block;
+    }
+    var element_box = figure_to_resize.getPrinceBoxes()[0];
     var page_box = PDF.pages[element_box.pageNum-1];
 
     // don't forget to take the footnote height into account
@@ -28,8 +35,8 @@ function pmb_continue_image_resizing(){
         }
     }
     var new_element_height = element_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
-    element_to_resize.style.height = new_element_height + "pt";
-    element_to_resize.className = element_to_resize.className.replace('pmb-dynamic-resize', 'pmb-dynamic-resized');
+    figure_to_resize.style.height = new_element_height + "pt";
+    a_dynamic_resize_block.className = a_dynamic_resize_block.className.replace('pmb-dynamic-resize', 'pmb-dynamic-resized');
 
     Prince.registerPostLayoutFunc(pmb_continue_image_resizing);
 }
