@@ -431,6 +431,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.11.3 xxxxxxx =
+* Bugfix: prevent emojis in image descriptions in Mayer Magazine design from taking up full column width
+
 = 3.11.2 Feb 17, 2022 =
 * Bugfix: prevent "pmb-dynamic-resize" images with captions from overflowing
 * Feature: "pmb-dynamic-resize" images respect the designs maximum image height
