@@ -40,6 +40,7 @@ function pmb_continue_image_resizing(){
     var new_element_height = element_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
     var resize_ratio = element_box.height / new_element_height;
     figure_to_resize.style.height = new_element_height + "pt";
+    Log.info('figure is floating: ' + figure_is_floating + '. Resize ratio is ' + resize_ratio + '. New width is ' + (element_box.width * resize_ratio));
     if(figure_is_floating) {
         figure_to_resize.style.width = element_box.width * resize_ratio;
     }
