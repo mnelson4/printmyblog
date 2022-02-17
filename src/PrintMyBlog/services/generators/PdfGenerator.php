@@ -121,6 +121,16 @@ class PdfGenerator extends HtmlBaseGenerator
             ]
         );
 
+        add_action(
+            'wp_print_scripts',
+            [$this, 'printScripts']
+        );
+    }
+
+    /**
+     * Prints the scripts and other stuff that's really custom (like the Prince script)
+     */
+    public function printScripts(){
         // now add the Prince script, which Prince will run
         // pass in its variables, like maximum image size
         $prince_js_vars = [];
@@ -129,15 +139,10 @@ class PdfGenerator extends HtmlBaseGenerator
             $max_image_size = 1200;
         }
         $prince_js_vars['max_image_size'] = $max_image_size;
-        $prince_js_var_string = 'var pmb = ' . wp_json_encode($prince_js_vars) . ';';
-        add_action(
-            'wp_print_scripts',
-            function () {
-                echo '<prince-script>' . $prince_js_var_string . pmb_get_contents(
-                    PMB_SCRIPTS_DIR . '/prince-print-page.js'
-                ) . '</prince-script>';
-            }
-        );
+        echo '<prince-script>'
+            . 'var pmb = ' . wp_json_encode($prince_js_vars) . ';'
+            . pmb_get_contents(PMB_SCRIPTS_DIR . '/prince-print-page.js')
+            . '</prince-script>';
     }
 
     /**
