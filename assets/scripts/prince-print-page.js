@@ -38,7 +38,8 @@ function pmb_continue_image_resizing(){
     // For floating images we need to also set the block's width (I can't figure out how to get CSS to set the width automatically)
     // so for that we need to figure out how much the image inside the figure got resized (non-trivial if there's a caption).
     var figure_image = figure_to_resize.getElementsByTagName('img')[0];
-    var figure_image_height = figure_image.getPrinceBoxes()[0].h;
+    var figure_image_box = figure_image.getPrinceBoxes()[0];
+    var figure_image_height = figure_image_box.h;
 
     var figure_box = figure_to_resize.getPrinceBoxes()[0];
     var page_box = PDF.pages[figure_box.pageNum-1];
@@ -57,9 +58,9 @@ function pmb_continue_image_resizing(){
     // see https://www.princexml.com/forum/post/23543/attachment/img-fill.html
     var new_figure_height = figure_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
 
-    var max_height_because_of_max_width = page_box.w * figure_box.h / figure_box.w;
+    var max_height_because_of_max_width = page_box.w * figure_box.h / figure_image_box.w;
     pmb_print_props(page_box, '>>>>>>>.page box');
-    pmb_print_props(figure_box, '>>>>>>>>figure box');
+    pmb_print_props(figure_image_box, '>>>>>>>>figure box');
     Log.info('new figure max height because of width ' + max_height_because_of_max_width);
     new_figure_height = Math.min(500, new_figure_height, max_height_because_of_max_width);
 
