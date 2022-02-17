@@ -18,7 +18,7 @@ h1,h2,h3,h4,h5,h6{
     height:200px;
     width:auto;
 }
-.pmb-dynamic-resized{
+figure.pmb-dynamic-resized, .pmb-dynamic-resized figure{
     display:flex;
     flex-direction:column;
 }
