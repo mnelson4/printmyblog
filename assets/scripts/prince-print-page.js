@@ -58,10 +58,10 @@ function pmb_continue_image_resizing(){
     // see https://www.princexml.com/forum/post/23543/attachment/img-fill.html
     var new_figure_height = figure_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
 
+    // calculate the maximum potential image height based on the image's dimensions and page width
     var max_height_because_of_max_width = page_box.w * figure_box.h / figure_image_box.w;
-    pmb_print_props(page_box, '>>>>>>>.page box');
-    pmb_print_props(figure_image_box, '>>>>>>>>figure box');
-    Log.info('new figure max height because of width ' + max_height_because_of_max_width);
+
+    // put a limit on how big the image can be
     new_figure_height = Math.min(500, new_figure_height, max_height_because_of_max_width);
 
     // Used some grade 12 math to figure out this equation.
