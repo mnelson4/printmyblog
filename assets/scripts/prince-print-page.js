@@ -11,7 +11,7 @@ Prince.registerPostLayoutFunc(function() {
 });
 
 function pmb_continue_image_resizing(){
-    var elements_to_resize = document.getElementsByClassName("pmb-dynamic-resize-wrapper");
+    var elements_to_resize = document.getElementsByClassName("pmb-dynamic-resize");
     var element_to_resize = elements_to_resize[0];
     if(typeof element_to_resize === 'undefined'){
         return;
@@ -29,7 +29,7 @@ function pmb_continue_image_resizing(){
     }
     var new_element_height = element_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
     element_to_resize.style.height = new_element_height + "pt";
-    element_to_resize.className = element_to_resize.className.replace('pmb-dynamic-resize-wrapper', 'pmb-dynamic-resized-wrapper');
+    element_to_resize.className = element_to_resize.className.replace('pmb-dynamic-resize', 'pmb-dynamic-resized');
 
     Prince.registerPostLayoutFunc(pmb_continue_image_resizing);
 }
