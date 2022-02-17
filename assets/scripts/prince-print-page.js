@@ -43,7 +43,7 @@ function pmb_continue_image_resizing(){
     figure_to_resize.style.height = new_element_height + "pt";
     Log.info('figure is floating: ' + figure_is_floating + '. Resize ratio is ' + resize_ratio + '. New width is ' + (element_box.w * resize_ratio));
     if(figure_is_floating) {
-        figure_to_resize.style.width = element_box.w * resize_ratio;
+        figure_to_resize.style.width = element_box.w * resize_ratio + 'pt';
     }
     a_dynamic_resize_block.className = a_dynamic_resize_block.className.replace('pmb-dynamic-resize', 'pmb-dynamic-resized');
 
