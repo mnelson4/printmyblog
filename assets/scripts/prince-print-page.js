@@ -39,11 +39,11 @@ function pmb_continue_image_resizing(){
     }
     var new_element_height = element_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
     pmb_print_props(element_box,'>>>>>element box');
-    var resize_ratio = element_box.h / new_element_height;
+    var resize_ratio = new_element_height / element_box.h;
     figure_to_resize.style.height = new_element_height + "pt";
     Log.info('figure is floating: ' + figure_is_floating + '. Resize ratio is ' + resize_ratio + '. New width is ' + (element_box.w * resize_ratio));
     if(figure_is_floating) {
-        figure_to_resize.style.width = element_box.w * resize_ratio + 'pt';
+        figure_to_resize.style.width = (element_box.w * resize_ratio) + 'pt';
     }
     a_dynamic_resize_block.className = a_dynamic_resize_block.className.replace('pmb-dynamic-resize', 'pmb-dynamic-resized');
 
