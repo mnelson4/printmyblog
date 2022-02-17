@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2022-02-16 12:21-0800\n"
+"POT-Creation-Date: 2022-02-17 14:23-0800\n"
 "PO-Revision-Date: 2021-05-25 13:59-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -499,35 +499,35 @@ msgstr ""
 msgid "360 Image Available"
 msgstr ""
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:170
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:390
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:172
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:392
 msgid "Language"
 msgstr ""
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:173
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:175
 msgid "All Languages"
 msgstr ""
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:346
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:348
 #, php-format
 msgid "Default language (currently %s)"
 msgstr ""
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:362
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:364
 #, php-format
 msgid "Translate %s Design"
 msgstr ""
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:372
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:374
 #, php-format
 msgid "%s Translations"
 msgstr ""
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:374
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:376
 msgid "Translate Project Metadata"
 msgstr ""
 
-#: src/PrintMyBlog/compatibility/plugins/Wpml.php:479
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:481
 #, php-format
 msgid "\"%s\" is fully translated into %s"
 msgstr ""
@@ -677,14 +677,14 @@ msgid ""
 msgstr ""
 
 #: src/PrintMyBlog/controllers/Admin.php:701
-#: src/PrintMyBlog/services/generators/PdfGenerator.php:105
+#: src/PrintMyBlog/services/generators/PdfGenerator.php:111
 msgid ""
 "There was an error preparing your content. Please visit the Print My Blog "
 "Help page."
 msgstr ""
 
 #: src/PrintMyBlog/controllers/Admin.php:702
-#: src/PrintMyBlog/services/generators/PdfGenerator.php:106
+#: src/PrintMyBlog/services/generators/PdfGenerator.php:112
 msgid ""
 "Your project could not be accessed in order to generate the file. Maybe your "
 "website is not public? Please visit the Print My Blog Help page."
@@ -2130,7 +2130,7 @@ msgstr ""
 msgid "There is no site registered with Freemius"
 msgstr ""
 
-#: src/PrintMyBlog/services/generators/PdfGenerator.php:109
+#: src/PrintMyBlog/services/generators/PdfGenerator.php:115
 #, php-format
 msgid ""
 "Downloading the Paid PDF will use one of your %1$s remaining credits, and is "
@@ -3284,7 +3284,7 @@ msgid "Change Design"
 msgstr ""
 
 #: templates/project_edit_generate.php:116
-msgid "Edit Design"
+msgid "Customize Design"
 msgstr ""
 
 #: templates/project_edit_generate.php:120
