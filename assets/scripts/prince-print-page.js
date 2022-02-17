@@ -18,10 +18,13 @@ function pmb_continue_image_resizing(){
     }
     // when images are floating, the block had a div (with no height) because its contents are floating
     // in that case we want to resize the figure inside the block. So check if there's a figure inside it
+    var figure_is_floating = true;
     var figure_to_resize = a_dynamic_resize_block.getElementsByTagName("figure")[0];
+
     if( typeof figure_to_resize === 'undefined'){
         // There's no figure inside it. The figure is the block.
         figure_to_resize = a_dynamic_resize_block;
+        figure_is_floating = false;
     }
     var element_box = figure_to_resize.getPrinceBoxes()[0];
     var page_box = PDF.pages[element_box.pageNum-1];
@@ -35,7 +38,11 @@ function pmb_continue_image_resizing(){
         }
     }
     var new_element_height = element_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
+    var resize_ratio = element_box.height / new_element_height;
     figure_to_resize.style.height = new_element_height + "pt";
+    if(figure_is_floating) {
+        figure_to_resize.style.width = element_box.width * resize_ratio;
+    }
     a_dynamic_resize_block.className = a_dynamic_resize_block.className.replace('pmb-dynamic-resize', 'pmb-dynamic-resized');
 
     Prince.registerPostLayoutFunc(pmb_continue_image_resizing);
