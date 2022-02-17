@@ -56,8 +56,13 @@ function pmb_continue_image_resizing(){
     // figure_box.y is the distance from the top of the page to the bottom-left corner of the figure
     // see https://www.princexml.com/forum/post/23543/attachment/img-fill.html
     var new_figure_height = figure_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
-    new_figure_height = Math.min(500, new_figure_height);
-    
+
+    var max_height_because_of_max_width = page_box.w * figure_box.h / figure_box.w;
+    pmb_print_props(page_box, '>>>>>>>.page box');
+    pmb_print_props(figure_box, '>>>>>>>>figure box');
+    Log.info('new figure max height because of width ' + max_height_because_of_max_width);
+    new_figure_height = Math.min(500, new_figure_height, max_height_because_of_max_width);
+
     // Used some grade 12 math to figure out this equation.
     var new_image_height = new_figure_height - figure_box.h + figure_image_height;
     var resize_ratio = new_image_height / figure_image_height;
