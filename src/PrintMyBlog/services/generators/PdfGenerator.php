@@ -130,12 +130,13 @@ class PdfGenerator extends HtmlBaseGenerator
     /**
      * Prints the scripts and other stuff that's really custom (like the Prince script)
      */
-    public function printScripts(){
+    public function printScripts()
+    {
         // now add the Prince script, which Prince will run
         // pass in its variables, like maximum image size
         $prince_js_vars = [];
         $max_image_size = $this->design->getSetting('image_size');
-        if( ! $max_image_size){
+        if (! $max_image_size) {
             $max_image_size = 1200;
         }
         $prince_js_vars['max_image_size'] = $max_image_size;

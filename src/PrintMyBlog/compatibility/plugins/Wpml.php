@@ -72,10 +72,11 @@ class Wpml extends CompatibilityBase
         add_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom after_get_clean', [$this,'unsetTranslatedProject']);
         add_action('wp_ajax_pmb_update_project_lang', [$this,'handleAjaxUpdateProjectLanguage']);
 
-        add_action('admin_enqueue_scripts',[$this,'enqueueWpmlCompatAssets']);
+        add_action('admin_enqueue_scripts', [$this,'enqueueWpmlCompatAssets']);
     }
 
-    public function enqueueWpmlCompatAssets($hook){
+    public function enqueueWpmlCompatAssets($hook)
+    {
         // PMB project pages are all treated as if they're in the site's primary language
         if ($hook === 'toplevel_page_print-my-blog-projects') {
             global $sitepress;
@@ -94,13 +95,14 @@ class Wpml extends CompatibilityBase
     /**
      * Fixes PMB content (no initial translation record, or its in the wrong language)
      */
-    public function fixPmbContentTranslations(){
+    public function fixPmbContentTranslations()
+    {
         global $wpdb, $sitepress;
         // find all PMB content needing a translation entry
         $post_types_sql = implode(
             ', ',
             array_map(
-                function($item){
+                function ($item) {
                     global $wpdb;
                     return $wpdb->prepare('%s', $item);
                 },
@@ -113,7 +115,7 @@ class Wpml extends CompatibilityBase
         // or its a project or design that is not for the primary language (their original entry must always be in the primary language)
         $pmb_stuff_to_fix = $wpdb->get_results(
             $wpdb->prepare(
-                    "SELECT * FROM {$wpdb->posts} posts
+                "SELECT * FROM {$wpdb->posts} posts
             LEFT JOIN {$wpdb->prefix}icl_translations translations ON translations.element_type=CONCAT('post_', posts.post_type) AND posts.ID=translations.element_id
             WHERE 
                 (
@@ -126,13 +128,13 @@ class Wpml extends CompatibilityBase
                     AND translations.language_code!=%s 
                     AND translations.source_language_code IS NULL
                 )",
-                   CustomPostTypes::PROJECT,
-                    CustomPostTypes::DESIGN,
-                    $default_lang
+                CustomPostTypes::PROJECT,
+                CustomPostTypes::DESIGN,
+                $default_lang
             ),
-                ARRAY_A
+            ARRAY_A
         );
-        foreach($pmb_stuff_to_fix as $post_needing_update){
+        foreach ($pmb_stuff_to_fix as $post_needing_update) {
             $sitepress->set_element_language_details(
                 $post_needing_update['ID'],
                 'post_' . $post_needing_update['post_type'],
