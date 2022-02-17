@@ -26,8 +26,14 @@ function pmb_continue_image_resizing(){
         figure_to_resize = a_dynamic_resize_block;
         figure_is_floating = false;
     }
-    var element_box = figure_to_resize.getPrinceBoxes()[0];
-    var page_box = PDF.pages[element_box.pageNum-1];
+    var figure_image = figure_to_resize.getElementsByTagName['img'][0];
+    var figure_image_height = figure_image.getPrinceBoxes()[0].h;
+
+    var figure_caption = figure_to_resize.getElementsByTagName['figcaption'][0];
+    var figure_caption_height = figure_caption.getPrinceBoxes()[0].h;
+
+    var figure_box = figure_to_resize.getPrinceBoxes()[0];
+    var page_box = PDF.pages[figure_box.pageNum-1];
 
     // don't forget to take the footnote height into account
     var footnotes_height = 0;
@@ -37,13 +43,14 @@ function pmb_continue_image_resizing(){
             footnotes_height = box_on_page['h'];
         }
     }
-    var new_element_height = element_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
-    pmb_print_props(element_box,'>>>>>element box');
-    var resize_ratio = new_element_height / element_box.h;
-    figure_to_resize.style.height = new_element_height + "pt";
-    Log.info('figure is floating: ' + figure_is_floating + '. Resize ratio is ' + resize_ratio + '. New width is ' + (element_box.w * resize_ratio) + ' and new height is ' + new_element_height);
+    var new_figure_height = figure_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
+    pmb_print_props(figure_box,'>>>>>element box');
+    var new_image_height = new_figure_height - figure_box.h + figure_image_height;
+    var resize_ratio = new_image_height / figure_image_height;
+    figure_to_resize.style.height = new_figure_height + "pt";
+    Log.info('figure is floating: ' + figure_is_floating + '. Resize ratio is ' + resize_ratio + '. Old figure h:' + figure_box.h + ', New figure h:' + new_figure_height + '. Old image h:' + figure_image_height + ', New image h:' + new_image_height);
     if(figure_is_floating) {
-        figure_to_resize.style.width = (element_box.w * resize_ratio) + 'pt';
+        figure_to_resize.style.width = (figure_box.w * resize_ratio) + 'pt';
     }
     a_dynamic_resize_block.className = a_dynamic_resize_block.className.replace('pmb-dynamic-resize', 'pmb-dynamic-resized');
 
