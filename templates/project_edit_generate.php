@@ -106,14 +106,14 @@ foreach($generations as $generation){
 	$format_slug = $generation->getFormat()->slug();
 	?>
     <div class="pmb-generate-options-for-<?php echo esc_attr($format_slug);?>">
-        <h2><?php echo $generation->getFormat()->coloredTitleAndIcon();?></h2>
+        <h2><?php echo $generation->getFormat()->coloredTitleAndIcon();?> <?php echo $project->getDesignFor($generation->getFormat())->getWpPost()->post_title;?></h2>
         <a class="button button-primary pmb-generate pmb_spin_on_click" data-format="<?php echo esc_attr($format_slug);?>" aria-label="<?php echo esc_attr(sprintf(esc_html__('Generate %s', 'print-my-blog'), $generation->getFormat()->title()));?>"><?php
             esc_html_e('Generate', 'print-my-blog');
         ?></a>
         <a
                 class="button button-secondary" href="<?php echo esc_attr($change_design_link);?>"><?php esc_html_e('Change Design', 'print-my-blog');?></a>
         <a
-            class="button button-secondary" href="<?php echo esc_attr($edit_design_link);?>"><?php esc_html_e('Edit Design', 'print-my-blog');?></a>
+            class="button button-secondary" href="<?php echo esc_attr($edit_design_link);?>"><?php esc_html_e('Customize Design', 'print-my-blog');?></a>
         <?php
         ?>
         <div class="pmb-after-generation" style="display:none">
