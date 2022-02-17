@@ -24,7 +24,7 @@ function pmb_enqueue_mayer_script(){
         $css .= '.pmb-main-matter .entry-content{border-bottom:1px solid gray;box-decoration-break: slice;}';
     }
     if($pmb_design->getSetting('images_full_column')){
-        $css .=' figure.wp-caption:not(.mayer-noresize), figure.wp-block-image:not(.mayer-no-resize), .pmb-posts .pmb-image img:not(.mayer-no-resize), img:not(.mayer-no-resize){width:100% !important;height:auto;}';
+        $css .=' figure.wp-caption:not(.mayer-noresize, .emoji), figure.wp-block-image:not(.mayer-no-resize, .emoji), .pmb-posts .pmb-image img:not(.mayer-no-resize, .emoji), img:not(.mayer-no-resize, .emoji){width:100% !important;height:auto;}';
     }
     if($pmb_design->getSetting('page_per_post')){
         $css .=' article{page-break-before:always}';
