@@ -29,7 +29,7 @@ function pmb_continue_image_resizing(){
     var figure_image = figure_to_resize.getElementsByTagName('img')[0];
     var figure_image_height = figure_image.getPrinceBoxes()[0].h;
 
-    var figure_caption = figure_to_resize.getElementsByTagName['figcaption'][0];
+    var figure_caption = figure_to_resize.getElementsByTagName('figcaption')[0];
     var figure_caption_height = figure_caption.getPrinceBoxes()[0].h;
 
     var figure_box = figure_to_resize.getPrinceBoxes()[0];
