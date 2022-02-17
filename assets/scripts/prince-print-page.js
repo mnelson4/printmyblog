@@ -7,7 +7,7 @@ Prince.trackBoxes = true;
 // page they're on. Prince will then need to re-render.
 Prince.registerPostLayoutFunc(function() {
 
-    pmb_continue_image_resizing();
+    //pmb_continue_image_resizing();
 });
 
 function pmb_continue_image_resizing(){
