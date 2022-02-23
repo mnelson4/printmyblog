@@ -20,7 +20,6 @@ function pmb_continue_image_resizing(){
 
     // To make this more efficient, grab the first image from each section followed by a pagebreak
     if(pmb.page_per_post){
-        Log.info('>>>>pmb page per post image resizing');
         var dynamic_resize_blocks = document.getElementsByClassName('pmb-section');
         for(var i=0; i<dynamic_resize_blocks.length; i++){
             var resized_element = pmb_resize_an_image_inside(dynamic_resize_blocks[i]);
@@ -29,7 +28,6 @@ function pmb_continue_image_resizing(){
             }
         }
     } else {
-        Log.info('>>>>pmb slow image resizing');
         if(pmb_resize_an_image_inside(document)){
             resized_something = true;
         }
