@@ -44,7 +44,7 @@ function pmb_continue_image_resizing(){
  * @return element|null
  */
 function pmb_resize_an_image_inside(element){
-    element.getElementsByClassName("pmb-dynamic-resize");
+    var dynamic_resize_blocks = element.getElementsByClassName("pmb-dynamic-resize");
 
     // just grab one block at a time because how the first image is resized will affect the subsequentn ones
     // and subsequent ones' telemetry is only updated after re-rendering. So do one, then get Prince to re-render, then
