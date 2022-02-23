@@ -28,7 +28,9 @@ function pmb_continue_image_resizing(){
             }
         }
     } else {
-        pmb_resize_an_image_inside(document);
+        if(pmb_resize_an_image_inside(document)){
+            resized_something = true;
+        }
     }
 
 
