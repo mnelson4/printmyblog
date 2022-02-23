@@ -7,10 +7,16 @@ add_action(
         global $pmb_design;
         $pmb_design = $design;
         add_action('wp_enqueue_scripts', 'pmb_enqueue_buurma_script', 1001);
+        add_filter(
+            'PrintMyBlog\services\generators\PdfGenerator->printScripts prince_js_vars',
+            'pmb_buurma_modify_prince_vars'
+        );
 	},
 	10,
 	2
 );
+
+
 
 function pmb_enqueue_buurma_script(){
     global $pmb_design;
@@ -62,4 +68,14 @@ function pmb_enqueue_buurma_script(){
             'external_footnote_text' => $pmb_design->getSetting('footnote_text')
         ]
     );
+}
+
+/**
+ * Tell the generator we use a post-per-page so layout can be more efficient.
+ * @param $prince_js_vars
+ * @return array
+ */
+function pmb_buurma_modify_prince_vars($prince_js_vars){
+    $prince_js_vars['page_per_post'] = true;
+    return $prince_js_vars;
 }
