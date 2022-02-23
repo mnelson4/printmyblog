@@ -134,7 +134,9 @@ class PdfGenerator extends HtmlBaseGenerator
     {
         // now add the Prince script, which Prince will run
         // pass in its variables, like maximum image size
-        $prince_js_vars = [];
+        $prince_js_vars = [
+            'page_per_post' => (int)$this->design->getSetting('page_per_post')
+        ];
         $max_image_size = $this->design->getSetting('image_size');
         if (! $max_image_size) {
             $max_image_size = 1200;

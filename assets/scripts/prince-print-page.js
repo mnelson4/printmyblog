@@ -16,14 +16,42 @@ Prince.registerPostLayoutFunc(function() {
  * The image's initial height effectively becomes the minimum height. The maximum height
  */
 function pmb_continue_image_resizing(){
-    var dynamic_resize_blocks = document.getElementsByClassName("pmb-dynamic-resize");
+    var resized_something = false;
 
-    // just grab one block at a time. We'd love to blitz through and do them all now but the way the first image
-    // is resized will affect all subsequent ones, so we need to resize one and then re-render the entire document.
-    // brutally inefficient I know.
+    // To make this more efficient, grab the first image from each section followed by a pagebreak
+    if(pmb.page_per_post){
+        var dynamic_resize_blocks = document.getElementsByClassName('pmb-section');
+        for(var i=0; i<dynamic_resize_blocks.length; i++){
+            var resized_element = pmb_resize_an_image_inside(dynamic_resize_blocks[i]);
+            if(resized_element){
+                resized_something = true;
+            }
+        }
+    } else {
+        pmb_resize_an_image_inside(document);
+    }
+
+
+    if(resized_something){
+        Prince.registerPostLayoutFunc(pmb_continue_image_resizing);
+    }
+}
+
+/**
+ * Grabs a "pmb-dynamic-resize" element inside here and resizes it and returns it.
+ * (If none are found, returns null)
+ * @param element
+ * @return element|null
+ */
+function pmb_resize_an_image_inside(element){
+    element.getElementsByClassName("pmb-dynamic-resize");
+
+    // just grab one block at a time because how the first image is resized will affect the subsequentn ones
+    // and subsequent ones' telemetry is only updated after re-rendering. So do one, then get Prince to re-render, then
+    // do another... etc.
     var a_dynamic_resize_block = dynamic_resize_blocks[0];
     if(typeof a_dynamic_resize_block === 'undefined'){
-        return;
+        return null;
     }
     // when images are floating, the block had a div (with no height) because its contents are floating
     // in that case we want to resize the figure inside the block. So check if there's a figure inside it
@@ -77,7 +105,7 @@ function pmb_continue_image_resizing(){
 
     // Change the class so we know we don't try to resize this block again
     a_dynamic_resize_block.className = a_dynamic_resize_block.className.replace('pmb-dynamic-resize', 'pmb-dynamic-resized');
-    Prince.registerPostLayoutFunc(pmb_continue_image_resizing);
+    return a_dynamic_resize_block;
 }
 
 /**
