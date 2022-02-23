@@ -153,6 +153,8 @@ function pmb_resize_images(desired_max_height) {
         // });
     }
     jQuery('.pmb-dynamic-resize img').wrap('<div class="pmb-dynamic-resized-image-wrapper"></div>');
+    // tell JetPack to not resize these images, as we may want a bigger size.
+    jQuery('.pmb-dynamic-resize img.wp-image-1108[src*="?resize"]').each(function(i,element){var jqe = jQuery(element); jqe.prop('src',jqe.prop('src').substring(0, src.indexOf('?')))})
 }
 
 function pmb_load_avada_lazy_images(){
