@@ -142,7 +142,8 @@ class PdfGenerator extends HtmlBaseGenerator
             $max_image_size = 1200;
         }
         $prince_js_vars['max_image_size'] = $max_image_size;
-        $prince_js_vars = apply_filters('PrintMyBlog\services\generators\PdfGenerator->printScripts prince_js_vars',
+        $prince_js_vars = apply_filters(
+            'PrintMyBlog\services\generators\PdfGenerator->printScripts prince_js_vars',
             $prince_js_vars,
             $this->project_generation
         );
