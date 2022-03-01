@@ -435,6 +435,7 @@ https://youtu.be/uPQ3vqm7A2g
 * Bugfix: prevent emojis in image descriptions in Mayer Magazine design from taking up full column width
 * Bugix: ensure underscore.js is enqueued on print page
 * Bugfix: fix design preview images if corrupted
+* Enhancement: update Freemius SDK to 2.5.0-rc2
 
 = 3.11.2 Feb 17, 2022 =
 * Bugfix: prevent "pmb-dynamic-resize" images with captions from overflowing
