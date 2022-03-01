@@ -143,8 +143,8 @@ class DesignRegistry
                 $design->setPmbMeta('author_' . $field, $value);
             }
         }
-        // Set preview images
-        if (! $design->isCustom() && isset($args['previews'])) {
+        // Set preview images (or fix them for
+        if (isset($args['previews'])) {
             $count = 1;
             foreach ((array)$args['previews'] as $preview_data) {
                 $design->setPmbMeta('preview_' . $count . '_url', $preview_data['url']);
