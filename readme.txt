@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.11.3
+Stable tag: 3.11.4
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -431,11 +431,13 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.11.3 Feb 17, 2022s =
+= 3.11.4 March 1, 2022
+* Enhancement: update Freemius SDK to 2.5.0-rc2
+* Enhancement: improve a few French translations
+
+= 3.11.3 Feb 17, 2022 =
 * Bugfix: prevent emojis in image descriptions in Mayer Magazine design from taking up full column width
 * Bugix: ensure underscore.js is enqueued on print page
-* Bugfix: fix design preview images if corrupted
-* Enhancement: update Freemius SDK to 2.5.0-rc2
 
 = 3.11.2 Feb 17, 2022 =
 * Bugfix: prevent "pmb-dynamic-resize" images with captions from overflowing
