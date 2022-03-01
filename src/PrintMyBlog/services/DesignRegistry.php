@@ -144,7 +144,7 @@ class DesignRegistry
             }
         }
         // Set preview images
-        if (isset($args['previews'])) {
+        if (! $design->isCustom() && isset($args['previews'])) {
             $count = 1;
             foreach ((array)$args['previews'] as $preview_data) {
                 $design->setPmbMeta('preview_' . $count . '_url', $preview_data['url']);

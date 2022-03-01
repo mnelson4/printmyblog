@@ -169,6 +169,16 @@ class Design extends PostWrapper
     }
 
     /**
+     * Returns whether this is a custom design (created by the user) or a standard one (created by PMB on activation).
+     * @return bool
+     * @throws Exception
+     */
+    public function isCustom()
+    {
+        return (bool)$this->getSetting('custom');
+    }
+
+    /**
      * If this is the default design, returns true.
      * @return Design|null|bool
      */

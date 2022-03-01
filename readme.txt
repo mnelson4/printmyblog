@@ -434,6 +434,7 @@ https://youtu.be/uPQ3vqm7A2g
 = 3.11.3 Feb 17, 2022s =
 * Bugfix: prevent emojis in image descriptions in Mayer Magazine design from taking up full column width
 * Bugix: ensure underscore.js is enqueued on print page
+* Bugfix: fix design preview images if corrupted
 
 = 3.11.2 Feb 17, 2022 =
 * Bugfix: prevent "pmb-dynamic-resize" images with captions from overflowing
