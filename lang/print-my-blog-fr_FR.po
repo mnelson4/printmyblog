@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
 "POT-Creation-Date: 2022-02-17 14:24-0800\n"
-"PO-Revision-Date: 2022-02-17 14:24-0800\n"
+"PO-Revision-Date: 2022-03-01 08:51-0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -637,7 +637,7 @@ msgstr "Langue par défaut (actuellement %s)"
 #: src/PrintMyBlog/compatibility/plugins/Wpml.php:364
 #, php-format
 msgid "Translate %s Design"
-msgstr "Choisissez %s design"
+msgstr "Traduire la conception %s"
 
 #: src/PrintMyBlog/compatibility/plugins/Wpml.php:374
 #, php-format
@@ -2417,7 +2417,7 @@ msgstr "Configuration"
 #: src/PrintMyBlog/entities/ProjectProgress.php:86
 #, php-format
 msgid "Choose %s Design"
-msgstr "Choisissez %s design"
+msgstr "Choisissez la conception %s "
 
 #: src/PrintMyBlog/entities/ProjectProgress.php:90
 #, php-format
@@ -3029,7 +3029,7 @@ msgstr "Le site WordPress a répondu par une réponse inattendue."
 #: templates/design_choose.php:19
 #, php-format
 msgid "Choose Design: %s"
-msgstr "Choisissez %s design"
+msgstr "Choisissez la conception %s"
 
 #: templates/design_choose.php:46
 #, php-format
@@ -3346,7 +3346,7 @@ msgstr "Cliquez sur « Imprimer en PDF »"
 
 #: templates/print_page.php:133
 msgid "Choose to \"Save as PDF.\""
-msgstr "Choisissez d’enregistrer en FORMAT PDF."
+msgstr "Choisissez d’enregistrer en format PDF."
 
 #: templates/print_page.php:140
 msgid "How on Mobile Safari"
