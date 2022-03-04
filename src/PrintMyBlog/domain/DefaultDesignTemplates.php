@@ -4,6 +4,7 @@ namespace PrintMyBlog\domain;
 
 use Dompdf\Renderer\Text;
 use PrintMyBlog\entities\SectionTemplate;
+use PrintMyBlog\helpers\ImageHelper;
 use PrintMyBlog\orm\entities\Design;
 use Twine\forms\base\FormSectionDetails;
 use Twine\forms\base\FormSection;
@@ -26,6 +27,15 @@ use Twine\forms\strategies\validation\TextValidation;
 
 class DefaultDesignTemplates
 {
+
+    /**
+     * @var ImageHelper
+     */
+    private $image_helper;
+
+    public function inject(ImageHelper $image_helper){
+        $this->image_helper = $image_helper;
+    }
     public function registerDesignTemplates()
     {
         pmb_register_design_template(
@@ -665,9 +675,39 @@ class DefaultDesignTemplates
         } else {
             $powered_by_in_pro_service = true;
         }
+
+        $image_sizes = $this->image_helper->getAllImageSizes();
+        $image_quality_options = [
+            '' => new InputOption(__('Don’t Change Image Quality', 'print-my-blog'))
+        ];
+
+        foreach($image_sizes as $thumbnail_slug => $thumbnail_data){
+            // skip weird images with no height
+            // also don't show non-cropped images, because finding their filename would require a trip to the server
+            if(! $thumbnail_data['width'] || ! $thumbnail_data['height'] || $thumbnail_data['crop'] == false){
+                continue;
+            }
+            $dimensions = $thumbnail_data['width'] . 'x' . $thumbnail_data['height'];
+            $image_quality_options[$dimensions] = new InputOption(sprintf(__('Resize to %s', 'print-my-blog'), $dimensions));
+        }
+        $image_quality_options['scaled'] = new InputOption(__('Full Size (on web)', 'print-my-blog'));
+        $image_quality_options['uploaded'] = new InputOption(__('Uploaded Size (largest possible)', 'print-my-blog'));
+
         return new FormSection(
             [
                 'subsections' => [
+                    'image' => new FormSection([
+                        'subsections' => [
+                            'image_quality' => new SelectInput(
+                                $image_quality_options,
+                                [
+                                    'html_label_text' => __('Image Quality (in pixels)', 'print-my-blog'),
+                                    'html_help_text' => __('Lower quality means smaller file size, whereas higher quality means higher resolution images.', 'print-my-blog'),
+                                    'default' => ''
+                                ]
+                            )
+                        ],
+                    ]),
                     'generic_sections' => new FormSection([
                         'subsections' =>
                             apply_filters(

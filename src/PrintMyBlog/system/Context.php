@@ -148,6 +148,9 @@ class Context extends BaseContext
                 'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
                 'PrintMyBlog\orm\managers\DesignManager' => self::REUSE,
                 'PrintMyBlog\system\CustomPostTypes' => self::REUSE,
+            ],
+            'PrintMyBlog\domain\DefaultDesignTemplates' => [
+                'PrintMyBlog\helpers\ImageHelper' => self::REUSE
             ]
         ];
     }

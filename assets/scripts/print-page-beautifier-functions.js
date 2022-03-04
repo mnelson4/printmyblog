@@ -155,6 +155,45 @@ function pmb_resize_images(desired_max_height) {
     jQuery('.pmb-dynamic-resize img').wrap('<div class="pmb-dynamic-resized-image-wrapper"></div>');
     // tell JetPack to not resize these images, as we may want a bigger size.
     jQuery('.pmb-dynamic-resize img.wp-image-1108[src*="?resize"]').each(function(i,element){var jqe = jQuery(element); jqe.prop('src',jqe.prop('src').substring(0, src.indexOf('?')))})
+
+    // test resizing full-size images to smaller equivalents. Eg
+    // https://i0.wp.com/caravana2021.wpcomstaging.com/wp-content/uploads/2021/11/img_76282.jpeg
+    // to
+    // https://i0.wp.com/caravana2021.wpcomstaging.com/wp-content/uploads/2021/11/img_76282-1024x768.jpeg
+}
+
+/**
+ * Change the image "src" attribute to use a different size of the image. Useful if you want to make the PDF really small
+ * (save on filesize) or if you demand high quality images (eg in print).
+ * @param string image_quality '1024x768', 'scaled' (for the resized original introduced in WP 5.3, see https://www.wpbeginner.com/wp-tutorials/how-to-display-full-size-images-in-wordpress-4-methods/)
+ * 'uploaded' (meaning the actual original, fullsized file), '' (to not change at all), or some other string of form '?x?'
+ */
+function pmb_change_image_quality(image_quality){
+    // If it's '' (empty string), then treat it as the previous default behaviour
+    if(image_quality === '' || ! image_quality){
+        return;
+    }
+    // ok I admit this will be confusing. The forms system needed the null option to be '' (empty string), but
+    // inside this function '' means the full, uploaded image size. So swap 'uploaded' for '' here.
+
+    if(image_quality === 'uploaded'){
+        image_quality = '';
+    }
+    jQuery('img').each(function(image_index,element){
+        var jqe = jQuery(element);
+        var src = jqe.prop('src');
+        var index_of_last_slash = src.lastIndexOf('/');
+        var filename = src.substring(index_of_last_slash + 1);
+        var reg = /-((.*)x(.*)|scaled)\./;
+        filename = filename.replace(reg, '.');
+        var index_of_last_period = filename.lastIndexOf('.');
+        var extension = filename.substring(index_of_last_period + 1);
+        if(image_quality !== ''){
+            filename = filename.replace('.' + extension, '-' + image_quality + '.' + extension);
+        }
+
+        jqe.prop('src',src.substring(0,index_of_last_slash + 1) + filename);
+    });
 }
 
 function pmb_load_avada_lazy_images(){

@@ -25,7 +25,8 @@ function pmb_enqueue_classic_script(){
         'pmb-design',
         'pmb_design_options',
         [
-            'convert_videos' => (int)$pmb_design->getSetting('convert_videos')
+            'convert_videos' => (int)$pmb_design->getSetting('convert_videos'),
+            'image_quality' => $pmb_design->getSetting('image_quality'),
         ]
     );
 }

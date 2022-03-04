@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.11.4
+Stable tag: 3.12.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -431,7 +431,11 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.11.4 March 1, 2022
+= 3.12.0 March 4, 2022 =
+* Feature: all designs allow you to change image quality (uploaded image size, full size on web, or other smaller scaled image qualities)
+
+
+= 3.11.4 March 1, 2022 =
 * Enhancement: update Freemius SDK to 2.5.0-rc2
 * Enhancement: improve a few French translations
 

@@ -12,6 +12,11 @@ jQuery(document).ready(function(){
     pmb_reveal_dynamic_content();
     pmb_replace_internal_links_with_page_refs_and_footnotes('leave', 'parens');
     new PmbToc();
-    jQuery(document).trigger('pmb_wrap_up');
 });
 
+
+// wait until the images are loaded to try to resize them.
+jQuery(window).on("load", function() {
+    pmb_change_image_quality(pmb_design_options.image_quality);
+    jQuery(document).trigger('pmb_wrap_up');
+});

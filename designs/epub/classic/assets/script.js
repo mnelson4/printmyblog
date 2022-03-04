@@ -10,11 +10,11 @@ jQuery(document).ready(function(){
     pmb_load_avada_lazy_images();
     pmb_reveal_dynamic_content();
     pmb_replace_internal_links_with_epub_file_links();
-    jQuery(document).trigger('pmb_wrap_up');
 });
 
 // wait until the images are loaded to try to resize them.
-// jQuery(window).on("load", function() {
-//     // pmb_resize_images(parseInt(pmb_design_options['image_size'],10));
-//     jQuery(document).trigger('pmb_wrap_up');
-// });
+jQuery(window).on("load", function() {
+    // pmb_resize_images(parseInt(pmb_design_options['image_size'],10));
+    pmb_change_image_quality(pmb_design_options.image_quality);
+    jQuery(document).trigger('pmb_wrap_up');
+});

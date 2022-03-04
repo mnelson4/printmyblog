@@ -36,12 +36,11 @@ function pmb_enqueue_mayer_script(){
         'pmb_print_common',
         $css
     );
-//		wp_localize_script(
-//			'pmb-design',
-//			'pmb_classic_options',
-//			[
-//				'external_links' => $pmb_design->getSetting('external_links'),
-//				'internal_links' => $pmb_design->getSetting('internal_links')
-//			]
-//		);
+    wp_localize_script(
+        'pmb-design',
+        'pmb_design_options',
+        [
+            'image_quality' => $pmb_design->getSetting('image_quality')
+        ]
+    );
 }
