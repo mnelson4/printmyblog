@@ -433,6 +433,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.12.0 March 4, 2022 =
 * Feature: all designs allow you to change image quality (uploaded image size, full size on web, or other smaller scaled image qualities)
+* Bugfix: fix URL being printed out in classic editor's Publish Box (it should have been a button)
 
 
 = 3.11.4 March 1, 2022 =
