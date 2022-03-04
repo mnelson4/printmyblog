@@ -33,7 +33,8 @@ class DefaultDesignTemplates
      */
     private $image_helper;
 
-    public function inject(ImageHelper $image_helper){
+    public function inject(ImageHelper $image_helper)
+    {
         $this->image_helper = $image_helper;
     }
     public function registerDesignTemplates()
@@ -681,10 +682,10 @@ class DefaultDesignTemplates
             '' => new InputOption(__('Don’t Change Image Quality', 'print-my-blog'))
         ];
 
-        foreach($image_sizes as $thumbnail_slug => $thumbnail_data){
+        foreach ($image_sizes as $thumbnail_slug => $thumbnail_data) {
             // skip weird images with no height
             // also don't show non-cropped images, because finding their filename would require a trip to the server
-            if(! $thumbnail_data['width'] || ! $thumbnail_data['height'] || $thumbnail_data['crop'] == false){
+            if (! $thumbnail_data['width'] || ! $thumbnail_data['height'] || $thumbnail_data['crop'] == false) {
                 continue;
             }
             $dimensions = $thumbnail_data['width'] . 'x' . $thumbnail_data['height'];

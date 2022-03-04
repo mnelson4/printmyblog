@@ -117,7 +117,7 @@ if (defined('PMB_VERSION')) {
 
     add_action('admin_notices', 'pmb_minimum_wp_version_error', 1, 0);
 
-}else {
+} else {
     // it's all good! go for it!
     define('PMB_VERSION', '3.12.0');
     define('PMB_DIR', wp_normalize_path(__DIR__) . '/');

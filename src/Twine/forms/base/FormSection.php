@@ -400,9 +400,9 @@ class FormSection extends FormSectionValidatable
             }
         }
         // now let's look through all the sub-sections
-        foreach($this->subforms() as $form){
+        foreach ($this->subforms() as $form) {
             $subsection_found = $form->findSection($input_name);
-            if($subsection_found !== null){
+            if ($subsection_found !== null) {
                 return $subsection_found;
             }
         }
