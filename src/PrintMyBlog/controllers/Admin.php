@@ -195,7 +195,7 @@ class Admin extends BaseController
         add_filter('plugin_action_links_' . PMB_BASENAME, array($this, 'pluginPageLinks'));
         add_action('admin_enqueue_scripts', [$this,'enqueueScripts']);
 
-        if (pmb_fs()->is_plan__premium_only('founding_members')) {
+        if (true || pmb_fs()->is_plan__premium_only('founding_members')) {
             add_filter('post_row_actions', [$this, 'postAdminRowActions'], 10, 2);
             add_filter('page_row_actions', [$this, 'postAdminRowActions'], 10, 2);
             add_action('post_submitbox_misc_actions', array( $this, 'addDuplicateAsPrintMaterialToClassicEditor'));
@@ -1717,8 +1717,8 @@ class Admin extends BaseController
      */
     public function addDuplicateAsPrintMaterialToClassicEditor()
     {
-        ?><div><?php
-        echo $this->getDuplicatePostAsPrintMaterialUrl('button button-secondary');
+        ?><div class="pmb-duplicate-button-area"><?php
+        echo $this->getDuplicateAsPrintMaterialHtml('button button-secondary');
 ?></div><?php
     }
 
