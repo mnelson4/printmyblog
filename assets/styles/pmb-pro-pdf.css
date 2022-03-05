@@ -15,7 +15,6 @@ h1,h2,h3,h4,h5,h6{
 .pmb-depth-4:not([id*='/pmb-']) h1.pmb-title{prince-bookmark-level: 5}
 
 .pmb-posts .pmb-dynamic-resize img{
-    height:200px;
     width:auto;
 }
 figure.pmb-dynamic-resized, .wp-block-image.pmb-dynamic-resized figure{

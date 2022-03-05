@@ -152,14 +152,38 @@ function pmb_resize_images(desired_max_height) {
         //     });
         // });
     }
-    jQuery('.pmb-dynamic-resize img').wrap('<div class="pmb-dynamic-resized-image-wrapper"></div>');
-    // tell JetPack to not resize these images, as we may want a bigger size.
-    jQuery('.pmb-dynamic-resize img.wp-image-1108[src*="?resize"]').each(function(i,element){var jqe = jQuery(element); jqe.prop('src',jqe.prop('src').substring(0, src.indexOf('?')))})
 
     // test resizing full-size images to smaller equivalents. Eg
     // https://i0.wp.com/caravana2021.wpcomstaging.com/wp-content/uploads/2021/11/img_76282.jpeg
     // to
     // https://i0.wp.com/caravana2021.wpcomstaging.com/wp-content/uploads/2021/11/img_76282-1024x768.jpeg
+}
+
+/**
+ * Gets content ready for Prince JS to do the dynamic resize.
+ * For that, we mainly need to add the CSS class "pmb-dynamic-resize" onto blocks.
+ * @param min_image_size
+ */
+function pmb_mark_for_dynamic_resize(min_image_size){
+    jQuery('img:not(.pmb-dont-dynamic-resize)').each(function(index, element){
+        if(element.offsetHeight > min_image_size){
+            var block = jQuery(element).parents('.wp-block-image');
+            if(block.length > 0){
+                block.addClass('pmb-dynamic-resize');
+                return;
+            }
+            var figure = jQuery(element).parents('figure');
+            if(figure.length > 0){
+                figure.addClass('pmb-dynamic-resize');
+                return;
+            }
+            jQuery(element).addClass('pmb-dynamic-resize');
+        }
+    });
+    // wrap the images again in order for flexbox layout to fill the space properly.
+    jQuery('.pmb-dynamic-resize img').wrap('<div class="pmb-dynamic-resized-image-wrapper"></div>');
+    // tell JetPack to not resize these images, as we may want a bigger size.
+    jQuery('.pmb-dynamic-resize img.wp-image-1108[src*="?resize"]').each(function(i,element){var jqe = jQuery(element); jqe.prop('src',jqe.prop('src').substring(0, src.indexOf('?')))})
 }
 
 /**

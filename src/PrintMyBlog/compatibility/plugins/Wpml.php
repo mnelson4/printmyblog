@@ -479,13 +479,13 @@ class Wpml extends CompatibilityBase
 
         foreach ($languages_data as $language_code => $language_data) {
             list( $text, $link, $trid, $css_class, $status ) = $post_status_display->get_status_data($post_id, $language_code);
-            if ( $status >= ICL_TM_TRANSLATION_READY_TO_DOWNLOAD) {
+            if ($status >= ICL_TM_TRANSLATION_READY_TO_DOWNLOAD) {
                 $flag_url = $sitepress->get_flag_url($language_code);
-                if( $flag_url){
-                ?>
+                if ($flag_url) {
+                    ?>
                 <img src="<?php echo esc_url($flag_url);?>"
                      title="<?php echo esc_attr(sprintf(__('"%s" is fully translated into %s', 'print-my-blog'), $title, $language_data['display_name']));?>" width="18" height="12">
-                <?php
+                    <?php
                 } else {
                     ?>
                     <span style="margin-right:5px; padding-left: 5px; padding-right:5px; padding-bottom:3px; color:white; background-color:green; border-radius:4px;"><?php echo $language_code;?></span>

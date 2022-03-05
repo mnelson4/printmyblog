@@ -46,6 +46,8 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design){
 		case 'snap-unless-fit':
 			$css .= $combined_selector . '{float:prince-snap unless-fit;}';
 			break;
+        case 'dynamic-resize':
+            $css .= '.pmb-posts .pmb-dynamic-resize img{height:' . $design->getSetting('dynamic_resize_min') . 'px;}';
 		case 'default':
 		default:
 			// leave alone

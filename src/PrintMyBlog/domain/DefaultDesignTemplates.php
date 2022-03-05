@@ -58,9 +58,7 @@ class DefaultDesignTemplates
                         return $this->getDefaultDesignForm()->merge($this->getDefaultPdfDesignForm())->merge(new FormSection([
                             'subsections' => [
                                 'image' => new FormSection([
-                                    'subsections' => [
-                                        'image_placement' => $this->getImageSnapInput()
-                                    ]
+                                    'subsections' => $this->getImageSnapInputs()
                                 ]),
                                 'fonts' => new FormSectionDetails([
                                     'html_summary' => __('Font Settings', 'print-my-blog'),
@@ -153,9 +151,7 @@ class DefaultDesignTemplates
                         return $this->getDefaultDesignForm()->merge($this->getDefaultPdfDesignForm())->merge(new FormSection([
                             'subsections' => [
                                 'image' => new FormSection([
-                                    'subsections' => [
-                                        'image_placement' => $this->getImageSnapInput()
-                                    ]
+                                    'subsections' => $this->getImageSnapInputs()
                                 ]),
                                 'links' => new FormSectionDetails([
                                     'html_summary' => __('Link, Page Reference, and Footnote Settings', 'print-my-blog'),
@@ -366,9 +362,7 @@ class DefaultDesignTemplates
                                     'html_help_text' => __('Forces your content to only use two columns, even if the content itself was divided into more columns (eg using the "Columns" block)', 'print-my-blog')
                                     ]),
                                 'image' => new FormSection([
-                                    'subsections' => [
-                                        'image_placement' => $this->getImageSnapInput()
-                                    ]
+                                    'subsections' => $this->getImageSnapInputs()
                                 ]),
                             ],
                         ]))->merge($this->getGenericDesignForm());
@@ -794,18 +788,42 @@ class DefaultDesignTemplates
 
     public function getImageSnapInput()
     {
-        return new SelectInput(
+        return new SelectRevealInput(
             [
                 'default' => new InputOption(__('Don’t move', 'print-my-blog')),
                 'snap' => new InputOption(__('Snap to the top or bottom of the page', 'print-my-blog')),
-                'snap-unless-fit' => new InputOption(__('Only snap if it would otherwise cause a page break', 'print-my-blog'))
+                'snap-unless-fit' => new InputOption(__('Only snap if it would otherwise cause a page break', 'print-my-blog')),
+                'dynamic-resize' => new InputOption(__('Resize images if they don’t fit on the page'))
                 ],
             [
                 // translators: 1: "Best with Pro"
                 'html_label_text' => __('Image Placement', 'print-my-blog') . pmb_pro_print_service_only(),
-                'html_help_text' => __('To reduce whitespace around images, galleries, and tables, Print My Blog can move around in your content.', 'print-my-blog'),
+                'html_help_text' => __('To reduce whitespace around images, galleries, and tables, Print My Blog can adjust the placement of your content, or resize it according to the space on the page.', 'print-my-blog'),
                 'default' => 'snap-unless-fit'
             ]
         );
+    }
+
+    /**
+     * Gets the image placement input and its sister dynamic-resize input (which gets revealed when choosing to resize images)
+     * @return FormInputBase[]
+     */
+    protected function getImageSnapInputs(){
+        return [
+            'image_placement' => $this->getImageSnapInput(),
+            'dynamic-resize' => new FormSection(
+                [
+                    'subsections' => [
+                        'dynamic_resize_min' => new TextInput(
+                            [
+                                'html_label_text' => __('Minimum Image Size (in pixels)', 'print-my-blog'),
+                                'html_help_text' => __('Any images larger than this may be resized to fit onto the page, but they will be no smaller than this size.', 'print-my-blog'),
+                                'default' => '300'
+                            ]
+                        )
+                    ]
+                ]
+            )
+        ];
     }
 }

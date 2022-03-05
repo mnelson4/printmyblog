@@ -63,6 +63,7 @@ function pmb_enqueue_classic_script(){
             'internal_footnote_text' => $pmb_design->getSetting('internal_footnote_text'),
             'external_footnote_text' => $pmb_design->getSetting('footnote_text'),
             'image_quality' => $pmb_design->getSetting('image_quality'),
+            'dynamic_resize_min' => $pmb_design->getSetting('dynamic_resize_min'),
         ]
     );
 }
