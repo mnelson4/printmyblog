@@ -808,7 +808,8 @@ class DefaultDesignTemplates
      * Gets the image placement input and its sister dynamic-resize input (which gets revealed when choosing to resize images)
      * @return FormInputBase[]
      */
-    protected function getImageSnapInputs(){
+    protected function getImageSnapInputs()
+    {
         return [
             'image_placement' => $this->getImageSnapInput(),
             'dynamic-resize' => new FormSection(
