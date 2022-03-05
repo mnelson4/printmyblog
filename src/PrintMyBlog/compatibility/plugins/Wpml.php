@@ -2,6 +2,8 @@
 
 namespace PrintMyBlog\compatibility\plugins;
 
+use PrintMyBlog\entities\ProjectGeneration;
+use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;
 use PrintMyBlog\orm\managers\DesignManager;
@@ -73,6 +75,8 @@ class Wpml extends CompatibilityBase
         add_action('wp_ajax_pmb_update_project_lang', [$this,'handleAjaxUpdateProjectLanguage']);
 
         add_action('admin_enqueue_scripts', [$this,'enqueueWpmlCompatAssets']);
+        add_action('PrintMyBlog\controllers\Admin->saveProjectCustomizeDesign done', [$this,'updateTranslatedDesignsToo'], 10, 4);
+        add_action('PrintMyBlog\controllers\Admin->saveProjectMetadata done', [$this, 'updateTranslatedProjectsToo'], 10, 3);
     }
 
     public function enqueueWpmlCompatAssets($hook)
@@ -484,5 +488,33 @@ class Wpml extends CompatibilityBase
             ?>
             <?php
         }
+    }
+
+    /**
+     * Make sure to update the translations of the design too when the design is customized.
+     * See https://wpml.org/wpml-hook/wpml_sync_all_custom_fields/
+     * @param Project $project
+     * @param ProjectGEneration $project_generation
+     * @param Design $design
+     * @param FormSection $design_form
+     */
+    public function updateTranslatedDesignsToo($project, $project_generation, $design, $design_form){
+        if( ! $design instanceof Design){
+            return;
+        }
+        do_action('wpml_sync_all_custom_fields', $design->getWpPost()->ID);
+    }
+
+    /**
+     * Make sure to update all the translations of a project's metadata when it gets saved.
+     * @param Project $project
+     * @param ProjectGeneration[] $project_generations
+     * @param FormSection $form
+     */
+    public function updateTranslatedProjectsToo($project, $project_generations, $form){
+        if( ! $project instanceof Project){
+            return;
+        }
+        do_action('wpml_sync_all_custom_fields', $project->getWpPost()->ID);
     }
 }

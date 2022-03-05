@@ -14,6 +14,7 @@ use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintOptions;
 use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\entities\FileFormat;
+use PrintMyBlog\entities\ProjectGeneration;
 use PrintMyBlog\entities\ProjectProgress;
 use PrintMyBlog\exceptions\DesignTemplateDoesNotExist;
 use PrintMyBlog\orm\entities\Design;
@@ -29,6 +30,7 @@ use PrintMyBlog\system\Context;
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\entities\notifications\OneTimeNotification;
 use Twine\forms\base\FormSection;
+use Twine\forms\base\FormSectionBase;
 use Twine\forms\base\FormSectionHtml;
 use Twine\forms\helpers\InputOption;
 use Twine\forms\inputs\CheckboxMultiInput;
@@ -1380,6 +1382,14 @@ class Admin extends BaseController
                 $design->getWpPost()->post_title
             )
         );
+        /**
+         * Hook for doing more processing after a design is customized
+         * @param Project $project
+         * @param ProjectGeneration $project_generation
+         * @param Design $design
+         * @param FormSection $design_form
+         */
+        do_action('PrintMyBlog\controllers\Admin->saveProjectCustomizeDesign done', $this->project, $project_generation, $design, $design_form);
         $this->redirectToNextStep($this->project);
     }
 
@@ -1455,6 +1465,13 @@ class Admin extends BaseController
             OneTimeNotification::TYPE_SUCCESS,
             __('Project metadata updated.', 'print-my-blog')
         );
+        /**
+         * Hook for doing more processing when project metadata is saved.
+         * @param Project $project
+         * @param ProjectGeneration[] $project_generations
+         * @param FormSectionBase $form
+         */
+        do_action('PrintMyBlog\controllers\Admin->saveProjectMetadata done', $this->project, $project_generations, $form);
         $this->redirectToNextStep($this->project);
     }
 
