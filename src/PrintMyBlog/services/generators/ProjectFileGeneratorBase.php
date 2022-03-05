@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\services\generators;
 
+use Automattic\WooCommerce\Vendor\League\Container\Argument\ClassName;
 use PrintMyBlog\compatibility\DetectAndActivate;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\entities\DesignTemplate;
@@ -11,10 +12,12 @@ use PrintMyBlog\entities\ProjectGeneration;
 use PrintMyBlog\orm\entities\ProjectSection;
 use PrintMyBlog\services\PmbCentral;
 use PrintMyBlog\services\SectionTemplateRegistry;
+use ReflectionObject;
 use stdClass;
 use Twine\services\filesystem\File;
 use WP_Post;
 use WP_Query;
+use WP_Screen;
 
 abstract class ProjectFileGeneratorBase
 {
@@ -111,6 +114,10 @@ abstract class ProjectFileGeneratorBase
      */
     protected function startGenerating()
     {
+        // falsely claim we're on the frontend. This way JetPack and others will enqueue their assets like they should.
+        // See https://github.com/mnelson4/printmyblog/issues/311
+        global $current_screen;
+        $current_screen = WP_Screen::get('front');
         do_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->startGenerating', $this);
         // show protected posts' bodies as normal.
         add_filter('post_password_required', '__return_false');
