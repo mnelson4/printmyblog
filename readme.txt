@@ -435,6 +435,7 @@ https://youtu.be/uPQ3vqm7A2g
 * Feature: all designs allow you to change image quality (uploaded image size, full size on web, or other smaller scaled image qualities)
 * Bugfix: fix URL being printed out in classic editor's Publish Box (it should have been a button)
 * Compatibility: update WPML translations of designs and project when they are edited
+* Compatibility: fix WPML translation flags not appearing in some situations
 
 = 3.11.4 March 1, 2022 =
 * Enhancement: update Freemius SDK to 2.5.0-rc2

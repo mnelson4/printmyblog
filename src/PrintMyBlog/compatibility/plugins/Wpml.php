@@ -479,11 +479,18 @@ class Wpml extends CompatibilityBase
 
         foreach ($languages_data as $language_code => $language_data) {
             list( $text, $link, $trid, $css_class, $status ) = $post_status_display->get_status_data($post_id, $language_code);
-            if ($status === 10) {
+            if ( $status >= ICL_TM_TRANSLATION_READY_TO_DOWNLOAD) {
+                $flag_url = $sitepress->get_flag_url($language_code);
+                if( $flag_url){
                 ?>
-                <img src="<?php echo esc_url($sitepress->get_flag_url($language_code));?>"
+                <img src="<?php echo esc_url($flag_url);?>"
                      title="<?php echo esc_attr(sprintf(__('"%s" is fully translated into %s', 'print-my-blog'), $title, $language_data['display_name']));?>" width="18" height="12">
                 <?php
+                } else {
+                    ?>
+                    <span style="margin-right:5px; padding-left: 5px; padding-right:5px; padding-bottom:3px; color:white; background-color:green; border-radius:4px;"><?php echo $language_code;?></span>
+                    <?php
+                }
             }
             ?>
             <?php
@@ -498,8 +505,9 @@ class Wpml extends CompatibilityBase
      * @param Design $design
      * @param FormSection $design_form
      */
-    public function updateTranslatedDesignsToo($project, $project_generation, $design, $design_form){
-        if( ! $design instanceof Design){
+    public function updateTranslatedDesignsToo($project, $project_generation, $design, $design_form)
+    {
+        if (! $design instanceof Design) {
             return;
         }
         do_action('wpml_sync_all_custom_fields', $design->getWpPost()->ID);
@@ -511,10 +519,13 @@ class Wpml extends CompatibilityBase
      * @param ProjectGeneration[] $project_generations
      * @param FormSection $form
      */
-    public function updateTranslatedProjectsToo($project, $project_generations, $form){
-        if( ! $project instanceof Project){
+    public function updateTranslatedProjectsToo($project, $project_generations, $form)
+    {
+        if (! $project instanceof Project) {
             return;
         }
         do_action('wpml_sync_all_custom_fields', $project->getWpPost()->ID);
     }
+    // otgs-ico-in-progress
+    // otgs-ico-add
 }
