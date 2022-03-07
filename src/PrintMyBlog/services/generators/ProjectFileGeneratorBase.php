@@ -118,9 +118,12 @@ abstract class ProjectFileGeneratorBase
         // See https://github.com/mnelson4/printmyblog/issues/311
         global $current_screen;
         $current_screen = WP_Screen::get('front');
-        do_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->startGenerating', $this);
         // show protected posts' bodies as normal.
         add_filter('post_password_required', '__return_false');
+        // don't add "protected" or "private" onto post titles when generating
+        add_filter('protected_title_format',function(){return '%s';});
+        add_filter('private_title_format',function(){return '%s';});
+        do_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->startGenerating', $this);
     }
 
     /**
