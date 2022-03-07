@@ -40,7 +40,8 @@ function pmb_enqueue_mayer_script(){
         'pmb-design',
         'pmb_design_options',
         [
-            'image_quality' => $pmb_design->getSetting('image_quality')
+            'image_quality' => $pmb_design->getSetting('image_quality'),
+            'domain' => pmb_site_domain()
         ]
     );
 }

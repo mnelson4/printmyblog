@@ -15,6 +15,6 @@ jQuery(document).ready(function(){
 // wait until the images are loaded to try to resize them.
 jQuery(window).on("load", function() {
     // pmb_resize_images(parseInt(pmb_design_options['image_size'],10));
-    pmb_change_image_quality(pmb_design_options.image_quality);
+    pmb_change_image_quality(pmb_design_options.image_quality, pmb_design_options.domain);
     jQuery(document).trigger('pmb_wrap_up');
 });

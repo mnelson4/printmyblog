@@ -76,3 +76,18 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design){
     }
 	return $css;
 }
+
+/**
+ * Gets the site's domain (without the http:// or https:// at the beginning)
+ *
+ * @return string
+ */
+function pmb_site_domain(){
+    return str_replace(
+        ['http://',
+            'https://'
+        ],
+        '',
+        site_url()
+    );
+}

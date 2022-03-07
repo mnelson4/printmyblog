@@ -191,8 +191,9 @@ function pmb_mark_for_dynamic_resize(min_image_size){
  * (save on filesize) or if you demand high quality images (eg in print).
  * @param string image_quality '1024x768', 'scaled' (for the resized original introduced in WP 5.3, see https://www.wpbeginner.com/wp-tutorials/how-to-display-full-size-images-in-wordpress-4-methods/)
  * 'uploaded' (meaning the actual original, fullsized file), '' (to not change at all), or some other string of form '?x?'
+ * @param string domain eg "www.mysite.com", so we can identify external images which usually shouldn't be resized. An exception is wp.com JetPack images.
  */
-function pmb_change_image_quality(image_quality){
+function pmb_change_image_quality(image_quality, domain){
     // If it's '' (empty string), then treat it as the previous default behaviour
     if(image_quality === '' || ! image_quality){
         return;
@@ -203,7 +204,7 @@ function pmb_change_image_quality(image_quality){
     if(image_quality === 'uploaded'){
         image_quality = '';
     }
-    jQuery('img').each(function(image_index,element){
+    jQuery('img[src*="' + domain + '"]:not(.pmb-dont-change-image-quality), img[src*=".wp.com"]:not(.pmb-dont-change-image-quality)').each(function(index, element){
         var jqe = jQuery(element);
         var src = jqe.prop('src');
         var index_of_last_slash = src.lastIndexOf('/');
