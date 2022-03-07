@@ -431,7 +431,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-3.12.2 March 7, 2022 =
+= 3.12.2 March 7, 2022 =
 * Bugfix: when adjusting image quality (new in 3.12.0) don't try to change image quality on external images
 
 = 3.12.1 March 7, 2022 =
