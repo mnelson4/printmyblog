@@ -431,9 +431,11 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+3.12.2 March 7, 2022 =
+* Bugfix: when adjusting image quality (new in 3.12.0) don't try to change image quality on external images
+
 = 3.12.1 March 7, 2022 =
 * Bugfix: fix regression in 3.12.0 which showed "Protected" and "Private" on post titles in Pro Print
-* Bugfix: don't try to change image quality on external images
 
 = 3.12.0 March 7, 2022 =
 * Feature: all designs allow you to change image quality (uploaded image size, full size on web, or other smaller scaled image qualities)
