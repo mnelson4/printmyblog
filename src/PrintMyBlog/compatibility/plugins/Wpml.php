@@ -92,7 +92,6 @@ class Wpml extends CompatibilityBase
                 display:none;
             }'
             );
-//            $this->fixPmbContentTranslations();
         }
     }
 
