@@ -41,7 +41,7 @@ function pmb_enqueue_classic_script(){
         */
         @media not print{
             .pmb-project-content{
-                width: calc(" . $pmb_design->getSetting('page_width') . " - 54pt - 54pt);
+                width: calc(" . $pmb_design->getSetting('page_width') . " - 54pt - 54pt - 5pt);
             }
         }
 			";
