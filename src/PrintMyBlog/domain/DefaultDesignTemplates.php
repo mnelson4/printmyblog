@@ -334,7 +334,7 @@ class DefaultDesignTemplates
                     ],
                     'url' => plugins_url('designs/pdf/digital/mayer', PMB_MAIN_FILE),
                     'design_form_callback'  => function () {
-                        return (new FormSection([
+                        $design_form = (new FormSection([
                             'subsections' => [
                                 'page_per_post' => new YesNoInput(
                                     [
@@ -366,6 +366,8 @@ class DefaultDesignTemplates
                                 ]),
                             ],
                         ]))->merge($this->getGenericDesignForm());
+                        $design_form->findSection('image_placement')->removeOption('dynamic-resize');
+                        return $design_form;
                     },
                     'project_form_callback' => function (Design $design) {
                         $sections['byline'] = new TextInput([
