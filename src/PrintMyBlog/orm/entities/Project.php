@@ -223,8 +223,13 @@ class Project extends PostWrapper
         $formats = $this->getPmbMetas(
             self::POSTMETA_FORMAT
         );
-        ksort($formats);
-        return $formats;
+        $formats_sorted = [];
+        foreach($this->format_registry->getFormats() as $key => $format){
+            if(in_array($key, $formats)){
+                $formats_sorted[] = $key;
+            }
+        }
+        return $formats_sorted;
     }
 
     /**
