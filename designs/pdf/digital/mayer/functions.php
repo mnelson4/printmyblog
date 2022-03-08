@@ -41,6 +41,7 @@ function pmb_enqueue_mayer_script(){
         'pmb_design_options',
         [
             'image_quality' => $pmb_design->getSetting('image_quality'),
+            'dynamic_resize_min' => $pmb_design->getSetting('dynamic_resize_min'),
             'domain' => pmb_site_domain()
         ]
     );

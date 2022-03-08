@@ -17,6 +17,7 @@ jQuery(document).ready(function(){
 
 // wait until the images are loaded to try to resize them.
 jQuery(window).on("load", function() {
+    pmb_mark_for_dynamic_resize(parseInt(pmb_design_options.dynamic_resize_min));
     pmb_change_image_quality(pmb_design_options.image_quality, pmb_design_options.domain);
     jQuery(document).trigger('pmb_wrap_up');
 });
