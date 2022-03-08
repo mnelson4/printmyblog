@@ -431,6 +431,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= xxxxxxxxxxx =
+* Bugfix: shows formats in a consistent order (Digital PDF, Print-Ready PDF, ePub eBook)
+
 = 3.12.2 March 7, 2022 =
 * Bugfix: when adjusting image quality (new in 3.12.0) don't try to change image quality on external images
 
