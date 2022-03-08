@@ -106,7 +106,7 @@ function pmb_resize_an_image_inside(element){
     }
 
     // Change the class so we know we don't try to resize this block again
-    a_dynamic_resize_block.className = a_dynamic_resize_block.className.replace('pmb-dynamic-resize', 'pmb-dynamic-resized');
+    a_dynamic_resize_block.className = a_dynamic_resize_block.className.replaceAll('pmb-dynamic-resize', 'pmb-dynamic-resized');
     return a_dynamic_resize_block;
 }
 

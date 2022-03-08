@@ -34,7 +34,7 @@ function pmb_enqueue_classic_script(){
            }     
 			@page{
 				size: " . $pmb_design->getSetting('page_width') . ' ' . $pmb_design->getSetting('page_height')
-        ."}
+        .";}
         /* 
             Make the preview appear about the same size as in the PDF. Besides making the preview better,
             Javascript code that's calculating element dimensions will be better too.
