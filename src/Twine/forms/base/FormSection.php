@@ -782,17 +782,18 @@ class FormSection extends FormSectionValidatable
     /**
      * Gets a flat array of inputs for this form section and its subsections.
      * Keys are their form input names, and values are the inputs themselves
-     *
+     * @param string $name_using 'html_name' (default, guarantees uniqueness), or 'name' (which can conflict with other subsection names)
      * @return FormInputBase[]
      */
-    public function inputsInSubsections()
+    public function inputsInSubsections($name_using = 'html_name')
     {
         $inputs = array();
         foreach ($this->subsections() as $subsection) {
             if ($subsection instanceof FormInputBase) {
-                $inputs[ $subsection->htmlName() ] = $subsection;
+                $key = ($name_using === 'html_name') ? $subsection->htmlName() : $subsection->name();
+                $inputs[ $key ] = $subsection;
             } elseif ($subsection instanceof FormSection) {
-                $inputs += $subsection->inputsInSubsections();
+                $inputs += $subsection->inputsInSubsections($name_using);
             }
         }
         return $inputs;

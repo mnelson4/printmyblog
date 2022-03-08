@@ -1,4 +1,7 @@
 <?php
+
+use PrintMyBlog\orm\entities\Design;
+
 /**
  * @param \PrintMyBlog\orm\entities\Design $design
  * @return string CSS to include in the style
@@ -75,6 +78,23 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design){
         }";
     }
 	return $css;
+}
+
+/**
+ * Gets an array of all the design settings plus a few other things the JS might want when rendering a design.
+ * @param Design $design
+ * @return array keys are setting names, values are their values, plus a few other odds-n-ends
+ * @throws Exception
+ */
+function pmb_design_settings(Design $design){
+    $settings =  $design->getSettings();
+    $settings['domain'] = pmb_site_domain();
+    unset($settings['custom_css'],$settings['use_theme']);
+    return apply_filters(
+        'pmb_design_settings',
+        $settings,
+        $design
+    );
 }
 
 /**

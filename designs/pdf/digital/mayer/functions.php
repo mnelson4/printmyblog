@@ -39,9 +39,6 @@ function pmb_enqueue_mayer_script(){
     wp_localize_script(
         'pmb-design',
         'pmb_design_options',
-        [
-            'image_quality' => $pmb_design->getSetting('image_quality'),
-            'domain' => pmb_site_domain()
-        ]
+        pmb_design_settings($pmb_design)
     );
 }
