@@ -224,8 +224,8 @@ class Project extends PostWrapper
             self::POSTMETA_FORMAT
         );
         $formats_sorted = [];
-        foreach($this->format_registry->getFormats() as $key => $format){
-            if(in_array($key, $formats)){
+        foreach ($this->format_registry->getFormats() as $key => $format) {
+            if (in_array($key, $formats)) {
                 $formats_sorted[] = $key;
             }
         }

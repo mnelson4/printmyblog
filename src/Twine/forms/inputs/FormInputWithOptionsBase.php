@@ -137,7 +137,8 @@ abstract class FormInputWithOptionsBase extends FormInputBase
      * Removes the option with this value
      * @param string $option_name
      */
-    public function removeOption($option_name){
+    public function removeOption($option_name)
+    {
         unset($this->options[$option_name]);
     }
 

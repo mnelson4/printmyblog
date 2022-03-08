@@ -98,10 +98,11 @@ class Design extends PostWrapper
      * @return array keys are setting names, values are their values (either from postmetas or defaults from form defaults)
      * @throws Exception
      */
-    public function getSettings(){
+    public function getSettings()
+    {
         $form = $this->getDesignForm();
         $settings = [];
-        foreach($form->inputsInSubsections('name') as $setting_name => $input){
+        foreach ($form->inputsInSubsections('name') as $setting_name => $input) {
             $settings[$setting_name] = $this->getSetting($setting_name);
         }
         return $settings;
