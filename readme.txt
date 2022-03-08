@@ -431,8 +431,10 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= xxxxxxxxxxx =
+= 3.12.3 =
 * Bugfix: shows formats in a consistent order (Digital PDF, Print-Ready PDF, ePub eBook)
+* Bugfix: fix Javascript layouts (eg JetPack's Tiled Gallery) by having the print-page's content width match the generate PDF's width
+* Bugfix: only do dynamic resize when requested
 
 = 3.12.2 March 7, 2022 =
 * Bugfix: when adjusting image quality (new in 3.12.0) don't try to change image quality on external images
