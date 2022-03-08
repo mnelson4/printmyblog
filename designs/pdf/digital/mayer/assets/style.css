@@ -164,3 +164,14 @@
         font-weight:normal;
     }
 }
+
+/*
+    Make the preview appear about the same size as in the PDF. Besides making the preview better,
+    Javascript code that's calculating element dimensions will be better too.
+    Note these margins are different from the classic designs' margins.
+*/
+@media not print{
+    .pmb-project-content{
+        width: calc(8.5in - 1.5em - 1.5em);
+    }
+}
