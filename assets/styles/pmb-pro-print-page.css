@@ -100,6 +100,10 @@ Styles for the print window
         display:none;
         margin-bottom:20px;
     }
+    .pmb-project-content{
+        margin-left:auto;
+        margin-right:auto;
+    }
 }
 @media print{
     .pmb-pro-print-window-wrapper{

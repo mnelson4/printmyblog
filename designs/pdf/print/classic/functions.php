@@ -35,6 +35,9 @@ function pmb_enqueue_classic_script(){
 			@page{
 				size: " . $pmb_design->getSetting('page_width') . ' ' . $pmb_design->getSetting('page_height')
         ."}
+            .pmb-project-content{
+                width: calc(" . $pmb_design->getSetting('page_width') . " - 54pt - 54pt);
+            }
 			";
     if($pmb_design->getPmbMeta('paragraph_indent')){
         $css .= ' .pmb-article .post-inner p{
