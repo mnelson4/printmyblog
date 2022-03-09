@@ -110,7 +110,12 @@ function pmb_resize_an_image_inside(element){
         } else {
             var max_height_from_resolution_x_of_image = 100000;
         }
-
+        Log.info('<<<<<<<<<<<<<<<<<, image' + figure_image.attributes['src']);
+        Log.info(' max image size' + pmb.max_image_size);
+        Log.info(' new figure height ' + new_figure_height);
+        Log.info(' max height because of max width' + max_height_because_of_max_width);
+        Log.info(' max height from resolution y' + max_height_from_resolution_y_of_image);
+        Log.info(' max height from resolution x' + max_height_from_resolution_x_of_image);
         // put a limit on how big the image can be
         // use the design's maximum image size, which was passed from PHP
 
