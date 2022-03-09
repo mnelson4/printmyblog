@@ -184,17 +184,22 @@ function pmb_mark_for_dynamic_resize(min_image_size){
                     jqe.addClass('pmb-dynamic-resize');
                 }
             }
-            // record the image's resolution as attributes on it
-            var newImg = new Image();
 
-            newImg.onload = function() {
-                var height = newImg.height;
-                var width = newImg.width;
-                jqe.attr('pmb_resolution_y', height);
-                jqe.attr('pmb_resolution_x', width);
+            // make sure the image's height and width are set
+            if(typeof(jqe.attr('height')) === 'undefined' || typeof(jqe.attr('width')) === 'undefined'){
+                // record the image's resolution as attributes on it
+                var newImg = new Image();
+
+                newImg.onload = function() {
+                    var height = newImg.height;
+                    var width = newImg.width;
+                    jqe.attr('pmb_resolution_y', height);
+                    jqe.attr('pmb_resolution_x', width);
+                }
+
+                newImg.src = jqe.prop('src'); // this must be done AFTER setting onload
             }
 
-            newImg.src = jqe.prop('src'); // this must be done AFTER setting onload
         }
     });
     // wrap the images again in order for flexbox layout to fill the space properly.

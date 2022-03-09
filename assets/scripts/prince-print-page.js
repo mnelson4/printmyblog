@@ -96,8 +96,8 @@ function pmb_resize_an_image_inside(element){
 
         // also gather the maximum heights from the original image
 
-        if('pmb_resolution_y' in figure_image.attributes){
-            var max_height_from_resolution_y_of_image = figure_image.attributes['pmb_resolution_y'].value;
+        if('height' in figure_image.attributes){
+            var max_height_from_resolution_y_of_image = figure_image.attributes['height'].value;
         } else {
             var max_height_from_resolution_y_of_image = 100000;
         }
@@ -105,8 +105,8 @@ function pmb_resize_an_image_inside(element){
         // original_height     max_height
         // --------------   = -------------     =>   max_height = max_width  * original_height / original_width
         // original_width      max_width
-        if('pmb_resolution_x' in figure_image.attributes && 'pmb_resolution_y' in figure_image.attributes){
-            var max_height_from_resolution_x_of_image = page_box.w * figure_image.attributes['pmb_resolution_y'].value / figure_image.attributes['pmb_resolution_x'].value;
+        if('width' in figure_image.attributes && 'height' in figure_image.attributes){
+            var max_height_from_resolution_x_of_image = page_box.w * figure_image.attributes['height'].value / figure_image.attributes['width'].value;
         } else {
             var max_height_from_resolution_x_of_image = 100000;
         }
