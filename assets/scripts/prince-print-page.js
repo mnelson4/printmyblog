@@ -94,9 +94,33 @@ function pmb_resize_an_image_inside(element){
         // calculate the maximum potential image height based on the image's dimensions and page width
         var max_height_because_of_max_width = page_box.w * figure_box.h / figure_image_box.w;
 
+        // also gather the maximum heights from the original image
+
+        if('pmb_resolution_y' in figure_image.attributes){
+            var max_height_from_resolution_y_of_image = figure_image.attributes['pmb_resolution_y'].value;
+        } else {
+            var max_height_from_resolution_y_of_image = 100000;
+        }
+
+        // original_height     max_height
+        // --------------   = -------------     =>   max_height = max_width  * original_height / original_width
+        // original_width      max_width
+        if('pmb_resolution_x' in figure_image.attributes && 'pmb_resolution_y' in figure_image.attributes){
+            var max_height_from_resolution_x_of_image = page_box.w * figure_image.attributes['pmb_resolution_y'] / figure_image.attributes['pmb_resolution_x'].value;
+        } else {
+            var max_height_from_resolution_x_of_image = 100000;
+        }
+
         // put a limit on how big the image can be
         // use the design's maximum image size, which was passed from PHP
-        new_figure_height = Math.min(pmb.max_image_size, new_figure_height, max_height_because_of_max_width);
+
+        new_figure_height = Math.min(
+            pmb.max_image_size,
+            new_figure_height,
+            max_height_because_of_max_width,
+            max_height_from_resolution_y_of_image,
+            max_height_from_resolution_x_of_image
+        );
 
         // Used some grade 12 math to figure out this equation.
         var new_image_height = new_figure_height - figure_box.h + figure_image_height;

@@ -699,7 +699,11 @@ class DefaultDesignTemplates
                                 $image_quality_options,
                                 [
                                     'html_label_text' => __('Image Quality (in pixels)', 'print-my-blog'),
-                                    'html_help_text' => __('Lower quality means smaller file size, whereas higher quality means higher resolution images.', 'print-my-blog'),
+                                    'html_help_text' => sprintf(
+                                        __('Lower quality means smaller file size, whereas higher quality means higher resolution images. Note: "Full size (on web)" size isn‘t available if using JetPack or some other image plugin, and other sizes may require you to first use the %1$s Regenerate Thumbnails plugin%2$s.', 'print-my-blog'),
+                                        '<a href="https://wordpress.org/plugins/regenerate-thumbnails/">',
+                                        '</a>'
+                                    ),
                                     'default' => ''
                                 ]
                             )

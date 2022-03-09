@@ -175,14 +175,26 @@ function pmb_mark_for_dynamic_resize(min_image_size){
             var block = jqe.parents('.wp-block-image');
             if(block.length > 0){
                 block.addClass('pmb-dynamic-resize');
-                return;
+            } else {
+                var figure = jQuery(element).parents('figure');
+                if(figure.length > 0){
+                    figure.addClass('pmb-dynamic-resize');
+
+                } else {
+                    jqe.addClass('pmb-dynamic-resize');
+                }
             }
-            var figure = jQuery(element).parents('figure');
-            if(figure.length > 0){
-                figure.addClass('pmb-dynamic-resize');
-                return;
+            // record the image's resolution as attributes on it
+            var newImg = new Image();
+
+            newImg.onload = function() {
+                var height = newImg.height;
+                var width = newImg.width;
+                jqe.attr('pmb_resolution_y', height);
+                jqe.attr('pmb_resolution_x', width);
             }
-            jQuery(element).addClass('pmb-dynamic-resize');
+
+            newImg.src = jqe.prop('src'); // this must be done AFTER setting onload
         }
     });
     // wrap the images again in order for flexbox layout to fill the space properly.
