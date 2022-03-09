@@ -97,7 +97,7 @@ function pmb_resize_an_image_inside(element){
         // also gather the maximum heights from the original image
 
         if('height' in figure_image.attributes){
-            var max_height_from_resolution_y_of_image = pmb_px_to_ptsfigure_image.attributes['height'].value);
+            var max_height_from_resolution_y_of_image = pmb_px_to_pts(figure_image.attributes['height'].value);
         } else {
             var max_height_from_resolution_y_of_image = 100000;
         }
