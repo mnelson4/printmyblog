@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.12.1
+Stable tag: 3.12.3
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -122,7 +122,8 @@ Example uses:
 * automatic table of contents (with page references using Pro PDF Service)
 * automatically replace hyperlinks to included content with page references (Pro PDF Service only)
 * automatically replace hyperlinks to external content with footnotes (Pro PDF Service only)
-* automatically move images to avoid spanning a pagebreak and unsightly whitespace (Pro PDF Service only)
+* automatically move or automatically resize images to reduce whitespace and fit better on the page (Pro PDF Service only)
+* choose image quality and maximum image size to reduce filesize or save ink
 * choose article templates (eg "Content Only" or "Centered Content")
 * choose fonts, font sizes, page sizes and lots more
 * optionally apply your active theme's CSS (this is optional and because themes usually aren't designed for print, support for this requires payment)
@@ -151,8 +152,9 @@ PMB strives to be compatible with all plugins. But here are some that are especi
 * [BasePress](https://printmy.blog/2021/06/14/making-a-user-manual-for-web-pdf-print-with-wordpress/) for creating a user manual on both the web and print
 * [MathJax-LaTeX](https://wordpress.org/plugins/mathjax-latex/) and [WP Quick LaTeX](https://wordpress.org/plugins/wp-quicklatex/) for mathematical formulas
 * [Translate WordPress with GTranslate](https://wordpress.org/plugins/gtranslate/) for quick and automatic translating of projects
-* [TablePress](https://wordpress.org/plugins/tablepress/) makes tables look good in print too, even when they span multiple pages
 * [WPML](https://wpml.org) for more advanced translating of projects, and add print buttons different languages. [Read Translating Projects with WPML Plugin](https://printmy.blog/user-guide/design-layout/translating-projects-with-wpml-plugin/)
+* [TablePress](https://wordpress.org/plugins/tablepress/) makes tables look good in print too, even when they span multiple pages
+
 
 If you are delighted how PMB worked with another plugin, or had trouble, please let us know!
 
