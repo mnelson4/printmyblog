@@ -316,8 +316,8 @@ class Wpml extends CompatibilityBase
         global $pmb_project, $pmb_wpml_original_project, $pmb_design, $pmb_wpml_original_design;
         $pmb_wpml_original_project = $pmb_project;
         $pmb_wpml_original_design = $pmb_design;
-        $pmb_project = $this->project_manager->getById(wpml_object_id_filter($pmb_project->getWpPost()->ID));
-        $pmb_design = $this->design_manager->getById(wpml_object_id_filter($pmb_design->getWpPost()->ID));
+        $pmb_project = $this->project_manager->getById(wpml_object_id_filter($pmb_project->getWpPost()->ID, 'post', true));
+        $pmb_design = $this->design_manager->getById(wpml_object_id_filter($pmb_design->getWpPost()->ID, 'post', true));
     }
 
     public function unsetTranslatedProject()
