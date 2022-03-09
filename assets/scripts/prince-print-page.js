@@ -97,7 +97,7 @@ function pmb_resize_an_image_inside(element){
         // also gather the maximum heights from the original image
 
         if('height' in figure_image.attributes){
-            var max_height_from_resolution_y_of_image = figure_image.attributes['height'].value;
+            var max_height_from_resolution_y_of_image = pmb_px_to_ptsfigure_image.attributes['height'].value);
         } else {
             var max_height_from_resolution_y_of_image = 100000;
         }
@@ -106,7 +106,7 @@ function pmb_resize_an_image_inside(element){
         // --------------   = -------------     =>   max_height = max_width  * original_height / original_width
         // original_width      max_width
         if('width' in figure_image.attributes && 'height' in figure_image.attributes){
-            var max_height_from_resolution_x_of_image = page_box.w * figure_image.attributes['height'].value / figure_image.attributes['width'].value;
+            var max_height_from_resolution_x_of_image = pmb_px_to_pts(page_box.w * figure_image.attributes['height'].value / figure_image.attributes['width'].value);
         } else {
             var max_height_from_resolution_x_of_image = 100000;
         }
@@ -120,7 +120,7 @@ function pmb_resize_an_image_inside(element){
         // use the design's maximum image size, which was passed from PHP
 
         new_figure_height = Math.min(
-            pmb.max_image_size,
+            pmb_px_to_pts(pmb.max_image_size),
             new_figure_height,
             max_height_because_of_max_width,
             max_height_from_resolution_y_of_image,
@@ -142,6 +142,15 @@ function pmb_resize_an_image_inside(element){
     // Change the class so we know we don't try to resize this block again
     a_dynamic_resize_block.className = a_dynamic_resize_block.className.replace(/pmb-dynamic-resize/g, 'pmb-dynamic-resized');
     return a_dynamic_resize_block;
+}
+
+/**
+ * From https://www.princexml.com/doc/cookbook/#how-and-where-is-my-box
+ * @param pixels
+ * @returns {number}
+ */
+function pmb_px_to_pts(pixels){
+    return pixels * 96 / 72;
 }
 
 /**
