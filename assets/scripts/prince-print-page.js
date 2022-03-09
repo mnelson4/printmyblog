@@ -150,7 +150,7 @@ function pmb_resize_an_image_inside(element){
  * @returns {number}
  */
 function pmb_px_to_pts(pixels){
-    return pixels * 96 / 72;
+    return pixels * (72 / 96);
 }
 
 /**

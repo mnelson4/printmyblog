@@ -52,3 +52,10 @@ figure.pmb-dynamic-resized, .wp-block-image.pmb-dynamic-resized figure{
 .pmb-image-clip.pmb-nudge-up-100 img{
     transform:translate(0, 100px)
 }
+
+/* When an image is floating it has a wrapped div that should have no height, so the floating items can stack
+ horizontally. When they aren't floating then it's the "figure" that's the top-level block element (even if there's
+ no caption) */
+div.wp-block-image{
+    margin:0;
+}
