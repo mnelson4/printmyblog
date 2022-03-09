@@ -131,6 +131,7 @@ function pmb_resize_an_image_inside(element){
         var new_image_height = new_figure_height - figure_box.h + figure_image_height;
         var resize_ratio = new_image_height / figure_image_height;
 
+        Log.info('New size is ' + new_figure_height);
         // Resize the block
         figure_to_resize.style.height = new_figure_height + "pt";
         if (figure_is_floating) {
