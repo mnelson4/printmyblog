@@ -43,7 +43,7 @@ function pmb_continue_image_resizing(){
  * Grabs a "pmb-dynamic-resize" element inside here and resizes it and returns it.
  * (If none are found, returns null)
  * @param element
- * @return element|null
+ * @return boolean
  */
 function pmb_resize_an_image_inside(element){
     var dynamic_resize_blocks = element.getElementsByClassName("pmb-dynamic-resize");
@@ -68,45 +68,49 @@ function pmb_resize_an_image_inside(element){
     // For floating images we need to also set the block's width (I can't figure out how to get CSS to set the width automatically)
     // so for that we need to figure out how much the image inside the figure got resized (non-trivial if there's a caption).
     var figure_image = figure_to_resize.getElementsByTagName('img')[0];
-    var figure_image_box = figure_image.getPrinceBoxes()[0];
-    var figure_image_height = figure_image_box.h;
 
-    var figure_box = figure_to_resize.getPrinceBoxes()[0];
-    var page_box = PDF.pages[figure_box.pageNum-1];
+    // If we can't find an image to resize, there's nothing to resize (which is weird but somehow happens?)
+    if(typeof(figure_image) !== 'undefined') {
+        var figure_image_box = figure_image.getPrinceBoxes()[0];
+        var figure_image_height = figure_image_box.h;
 
-    // don't forget to take the footnote height into account
-    var footnotes_height = 0;
-    for (var index in page_box['children']){
-        var box_on_page = page_box['children'][index];
-        if(box_on_page['type'] === 'FOOTNOTES'){
-            footnotes_height = box_on_page['h'];
+        var figure_box = figure_to_resize.getPrinceBoxes()[0];
+        var page_box = PDF.pages[figure_box.pageNum - 1];
+
+        // don't forget to take the footnote height into account
+        var footnotes_height = 0;
+        for (var index in page_box['children']) {
+            var box_on_page = page_box['children'][index];
+            if (box_on_page['type'] === 'FOOTNOTES') {
+                footnotes_height = box_on_page['h'];
+            }
         }
-    }
-    // page_box.y is the distance from the top of the page to the bottom margin;
-    // page_box.h is the distance from the bottom margin to the top margin
-    // figure_box.y is the distance from the top of the page to the bottom-left corner of the figure
-    // see https://www.princexml.com/forum/post/23543/attachment/img-fill.html
-    var new_figure_height = figure_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
+        // page_box.y is the distance from the top of the page to the bottom margin;
+        // page_box.h is the distance from the bottom margin to the top margin
+        // figure_box.y is the distance from the top of the page to the bottom-left corner of the figure
+        // see https://www.princexml.com/forum/post/23543/attachment/img-fill.html
+        var new_figure_height = figure_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
 
-    // calculate the maximum potential image height based on the image's dimensions and page width
-    var max_height_because_of_max_width = page_box.w * figure_box.h / figure_image_box.w;
+        // calculate the maximum potential image height based on the image's dimensions and page width
+        var max_height_because_of_max_width = page_box.w * figure_box.h / figure_image_box.w;
 
-    // put a limit on how big the image can be
-    // use the design's maximum image size, which was passed from PHP
-    new_figure_height = Math.min(pmb.max_image_size, new_figure_height, max_height_because_of_max_width);
+        // put a limit on how big the image can be
+        // use the design's maximum image size, which was passed from PHP
+        new_figure_height = Math.min(pmb.max_image_size, new_figure_height, max_height_because_of_max_width);
 
-    // Used some grade 12 math to figure out this equation.
-    var new_image_height = new_figure_height - figure_box.h + figure_image_height;
-    var resize_ratio = new_image_height / figure_image_height;
+        // Used some grade 12 math to figure out this equation.
+        var new_image_height = new_figure_height - figure_box.h + figure_image_height;
+        var resize_ratio = new_image_height / figure_image_height;
 
-    // Resize the block
-    figure_to_resize.style.height = new_figure_height + "pt";
-    if(figure_is_floating) {
-        figure_to_resize.style.width = (figure_box.w * resize_ratio) + 'pt';
+        // Resize the block
+        figure_to_resize.style.height = new_figure_height + "pt";
+        if (figure_is_floating) {
+            figure_to_resize.style.width = (figure_box.w * resize_ratio) + 'pt';
+        }
     }
 
     // Change the class so we know we don't try to resize this block again
-    a_dynamic_resize_block.className = a_dynamic_resize_block.className.replaceAll('pmb-dynamic-resize', 'pmb-dynamic-resized');
+    a_dynamic_resize_block.className = a_dynamic_resize_block.className.replace(/pmb-dynamic-resize/g, 'pmb-dynamic-resized');
     return a_dynamic_resize_block;
 }
 
@@ -116,7 +120,7 @@ function pmb_resize_an_image_inside(element){
  * @param label
  */
 function pmb_print_props(obj, label){
-    Log.info(label)
+    Log.info(label);
     for(var prop in obj){
         var val = obj[prop];
         Log.info(prop + ':' + val);

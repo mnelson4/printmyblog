@@ -166,8 +166,13 @@ function pmb_resize_images(desired_max_height) {
  */
 function pmb_mark_for_dynamic_resize(min_image_size){
     jQuery('img:not(.pmb-dont-dynamic-resize)').each(function(index, element){
+        // Don't try to resize trickier items like columns or YouTube videos
+        var jqe = jQuery(element);
+        if(jqe.parents('.wp-block-columns, .wp-block-embed-youtube, .wp-block-gallery, .gallery').length > 0){
+            return;
+        }
         if(element.offsetHeight > min_image_size){
-            var block = jQuery(element).parents('.wp-block-image');
+            var block = jqe.parents('.wp-block-image');
             if(block.length > 0){
                 block.addClass('pmb-dynamic-resize');
                 return;
@@ -209,7 +214,7 @@ function pmb_change_image_quality(image_quality, domain){
         var src = jqe.prop('src');
         var index_of_last_slash = src.lastIndexOf('/');
         var filename = src.substring(index_of_last_slash + 1);
-        var reg = /-((.*)x(.*)|scaled)\./;
+        var reg = /-(([^-]*)x([^-]*)|scaled)\./;
         filename = filename.replace(reg, '.');
         var index_of_last_period = filename.lastIndexOf('.');
         var extension = filename.substring(index_of_last_period + 1);
