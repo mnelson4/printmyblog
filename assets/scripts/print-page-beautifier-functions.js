@@ -114,7 +114,8 @@ function pmb_resize_images(desired_max_height) {
         var figures_containing_a_big_image = jQuery('figure.wp-caption:not(.pmb-dont-resize), figure.wp-block-image:not(.pmb-dont-resize), div.wp-caption:not(.pmb-dont-resize)').filter(function(){
             var element = jQuery(this);
             // ignore images in columns. If they get moved by prince-snap they can disappear
-            if(element.parents('.wp-block-columns').length !== 0){
+            // also don't resize images inside galleries. They just get messed up
+            if(element.parents('.wp-block-columns, .wp-block-gallery').length !== 0){
                 return false;
             }
             // If there's a figure and the figure is big enough, include it.
