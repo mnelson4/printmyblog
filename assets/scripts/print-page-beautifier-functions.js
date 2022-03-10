@@ -193,8 +193,8 @@ function pmb_mark_for_dynamic_resize(min_image_size){
                 newImg.onload = function() {
                     var height = newImg.height;
                     var width = newImg.width;
-                    jqe.attr('pmb_resolution_y', height);
-                    jqe.attr('pmb_resolution_x', width);
+                    jqe.attr('height', height);
+                    jqe.attr('width', width);
                 }
 
                 newImg.src = jqe.prop('src'); // this must be done AFTER setting onload
