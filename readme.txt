@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.12.4
+Stable tag: 3.12.3
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -433,13 +433,11 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.12.4 March 9, 2022 =
+= 3.12.3 March 10, 2022 =
 * Compatibility: prevent error generating using WPML
 * Bugfix: fix image quality modifier on filenames with dashes
 * Bugfix: avoid image resizing on trickier items (YouTube videos, images in columns)
 * Enhancement: factor in image's original dimensions when dynamically resizing
-
-= 3.12.3 March 9, 2022 =
 * Bugfix: shows formats in a consistent order (Digital PDF, Print-Ready PDF, ePub eBook)
 * Bugfix: fix Javascript layouts (eg JetPack's Tiled Gallery) by having the print-page's content width match the generate PDF's width
 * Bugfix: only do dynamic resize when requested
