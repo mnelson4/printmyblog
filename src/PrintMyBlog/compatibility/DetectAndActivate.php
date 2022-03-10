@@ -6,6 +6,7 @@ use PrintMyBlog\compatibility\plugins\CoBlocks;
 use PrintMyBlog\compatibility\plugins\ContactForm7;
 use PrintMyBlog\compatibility\plugins\EasyFootnotes;
 use PrintMyBlog\compatibility\plugins\GoogleLanguageTranslator;
+use PrintMyBlog\compatibility\plugins\JetPack;
 use PrintMyBlog\compatibility\plugins\LazyLoadingFeaturePlugin;
 use PrintMyBlog\compatibility\plugins\TablePress;
 use PrintMyBlog\compatibility\plugins\Wpml;
@@ -63,6 +64,9 @@ class DetectAndActivate
             }
             if (defined('ICL_SITEPRESS_VERSION')) {
                 $compatiblity_mods_to_activate[] = Context::instance()->reuse('PrintMyBlog\compatibility\plugins\Wpml');
+            }
+            if (defined('JETPACK__VERSION')) {
+                $compatiblity_mods_to_activate[] = new JetPack();
             }
             $this->compatibility_mods = $compatiblity_mods_to_activate;
         }

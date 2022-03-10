@@ -690,50 +690,53 @@ class DefaultDesignTemplates
         $image_quality_options['scaled'] = new InputOption(__('Full Size (on web)', 'print-my-blog'));
         $image_quality_options['uploaded'] = new InputOption(__('Uploaded Size (largest possible)', 'print-my-blog'));
 
-        return new FormSection(
-            [
-                'subsections' => [
-                    'image' => new FormSection([
-                        'subsections' => [
-                            'image_quality' => new SelectInput(
-                                $image_quality_options,
-                                [
-                                    'html_label_text' => __('Image Quality (in pixels)', 'print-my-blog'),
-                                    'html_help_text' => sprintf(
-                                        __('Lower quality means smaller file size, whereas higher quality means higher resolution images. Note: "Full size (on web)" size isn‘t available if using JetPack or some other image plugin, and other sizes may require you to first use the %1$s Regenerate Thumbnails plugin%2$s.', 'print-my-blog'),
-                                        '<a href="https://wordpress.org/plugins/regenerate-thumbnails/">',
-                                        '</a>'
-                                    ),
-                                    'default' => ''
-                                ]
-                            )
-                        ],
-                    ]),
-                    'generic_sections' => new FormSection([
-                        'subsections' =>
-                            apply_filters(
-                                'PrintMyBlog\domain\DefaultDesignTemplates->getGenericDesignFormSections',
-                                [
-                                    'use_theme' => new YesNoInput([
-                                        'html_label_text' => __('Apply Website Theme', 'print-my-blog'),
-                                        'html_help_text' => $use_theme_help_text,
-                                        'default' => false
-                                    ]),
-                                    'custom_css' => new TextAreaInput([
-                                        'html_label_text' => __('Custom CSS', 'print-my-blog'),
-                                        'html_help_text'  => __('Styles to be applied only when printing projects using this design.', 'print-my-blog')
+        return apply_filters(
+            'PrintMyBlog\domain\DefaultDesignTemplates->getGenericDesignForm',
+            new FormSection(
+                [
+                    'subsections' => [
+                        'image' => new FormSection([
+                            'subsections' => [
+                                'image_quality' => new SelectInput(
+                                    $image_quality_options,
+                                    [
+                                        'html_label_text' => __('Image Quality (in pixels)', 'print-my-blog'),
+                                        'html_help_text' => sprintf(
+                                            __('Lower quality means smaller file size, whereas higher quality means higher resolution images. Note: if images are missing from the generated PDF, the requested image size might not be available. Use the %1$s Regenerate Thumbnails plugin%2$s to create the missing image sizes.', 'print-my-blog'),
+                                            '<a href="https://wordpress.org/plugins/regenerate-thumbnails/">',
+                                            '</a>'
+                                        ),
+                                        'default' => ''
+                                    ]
+                                )
+                            ],
+                        ]),
+                        'generic_sections' => new FormSection([
+                            'subsections' =>
+                                apply_filters(
+                                    'PrintMyBlog\domain\DefaultDesignTemplates->getGenericDesignFormSections',
+                                    [
+                                        'use_theme' => new YesNoInput([
+                                            'html_label_text' => __('Apply Website Theme', 'print-my-blog'),
+                                            'html_help_text' => $use_theme_help_text,
+                                            'default' => false
                                         ]),
-                                    'powered_by' => new YesNoInput([
-                                        'html_label_text' => __('Add "Powered By"', 'print-my-blog') . ( $powered_by_in_pro_service ? pmb_hover_help(__('In compliance with WordPress.org guidelines, not added when printing from your browser.', 'print-my-blog')) : ''),
-                                        'html_help_text' => __('Instructs the Pro PDF Service to add "Powered by Print My Blog Pro & WordPress" to your project. Does not appear when printing using your browser.', 'print-my-blog'),
-                                        'default' => $powered_by_in_pro_service,
-                                        'disabled' => $powered_by_in_pro_service
-                                    ])
-                                ]
-                            )
-                    ])
+                                        'custom_css' => new TextAreaInput([
+                                            'html_label_text' => __('Custom CSS', 'print-my-blog'),
+                                            'html_help_text'  => __('Styles to be applied only when printing projects using this design.', 'print-my-blog')
+                                            ]),
+                                        'powered_by' => new YesNoInput([
+                                            'html_label_text' => __('Add "Powered By"', 'print-my-blog') . ( $powered_by_in_pro_service ? pmb_hover_help(__('In compliance with WordPress.org guidelines, not added when printing from your browser.', 'print-my-blog')) : ''),
+                                            'html_help_text' => __('Instructs the Pro PDF Service to add "Powered by Print My Blog Pro & WordPress" to your project. Does not appear when printing using your browser.', 'print-my-blog'),
+                                            'default' => $powered_by_in_pro_service,
+                                            'disabled' => $powered_by_in_pro_service
+                                        ])
+                                    ]
+                                )
+                        ])
+                    ]
                 ]
-            ]
+            )
         );
     }
 
