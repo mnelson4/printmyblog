@@ -437,6 +437,7 @@ https://youtu.be/uPQ3vqm7A2g
 * Compatibility: prevent error generating using WPML
 * Bugfix: fix image quality modifier on filenames with dashes
 * Bugfix: avoid image resizing on trickier items (YouTube videos, images in columns)
+* Enhancement: factor in image's original dimensions when dynamically resizing
 
 = 3.12.3 March 9, 2022 =
 * Bugfix: shows formats in a consistent order (Digital PDF, Print-Ready PDF, ePub eBook)
