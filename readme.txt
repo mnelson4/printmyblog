@@ -433,6 +433,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.12.8 xxxxxxx =
+* Compatibility: fix QuickFix with Thrive ThemeBuilder
+
 = 3.12.7 March 10, 2022 =
 * Bugfix: fix gallery blocks display (WP recently changed the HTML structure so our CSS needed updating too)
 
