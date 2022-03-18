@@ -166,7 +166,8 @@ function pmb_resize_images(desired_max_height) {
  * @param min_image_size
  */
 function pmb_mark_for_dynamic_resize(min_image_size){
-    jQuery('img:not(.pmb-dont-dynamic-resize)').each(function(index, element){
+    // don't add the CSS class a second time, of course
+    jQuery('img').each(function(index, element){
         // Don't try to resize trickier items like columns or YouTube videos
         var jqe = jQuery(element);
         if(jqe.parents('.wp-block-columns, .wp-block-embed-youtube, .wp-block-gallery, .gallery').length > 0){
@@ -174,35 +175,37 @@ function pmb_mark_for_dynamic_resize(min_image_size){
         }
         if(element.offsetHeight > min_image_size){
             var block = jqe.parents('.wp-block-image');
+            var element_to_add_css_class_to = null;
             if(block.length > 0){
-                block.addClass('pmb-dynamic-resize');
+                element_to_add_css_class_to = block;
             } else {
                 var figure = jQuery(element).parents('figure');
                 if(figure.length > 0){
-                    figure.addClass('pmb-dynamic-resize');
-
+                    element_to_add_css_class_to = figure;
                 } else {
-                    jqe.addClass('pmb-dynamic-resize');
+                    element_to_add_css_class_to = jqe;
                 }
             }
+            // double-check the element doesn't already have the CSS class
+            if(! element_to_add_css_class_to.hasClass('pmb-dynamic-resize')){
+                element_to_add_css_class_to.addClass('pmb-dynamic-resize');
+            }
+        }
+        if (typeof (jqe.attr('height')) === 'undefined' || typeof (jqe.attr('width')) === 'undefined') {
+            // record the image's resolution as attributes on it
+            var newImg = new Image();
 
-            // make sure the image's height and width are set
-            if(typeof(jqe.attr('height')) === 'undefined' || typeof(jqe.attr('width')) === 'undefined'){
-                // record the image's resolution as attributes on it
-                var newImg = new Image();
-
-                newImg.onload = function() {
-                    var height = newImg.height;
-                    var width = newImg.width;
-                    jqe.attr('height', height);
-                    jqe.attr('width', width);
-                }
-
-                newImg.src = jqe.prop('src'); // this must be done AFTER setting onload
+            newImg.onload = function () {
+                var height = newImg.height;
+                var width = newImg.width;
+                jqe.attr('height', height);
+                jqe.attr('width', width);
             }
 
+            newImg.src = jqe.prop('src'); // this must be done AFTER setting onload
         }
     });
+
     // wrap the images again in order for flexbox layout to fill the space properly.
     jQuery('.pmb-dynamic-resize img').wrap('<div class="pmb-dynamic-resized-image-wrapper"></div>');
     // tell JetPack to not resize these images, as we may want a bigger size.
