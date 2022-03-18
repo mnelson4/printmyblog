@@ -20,7 +20,7 @@ function pmb_remove_unsupported_content(){
     // wrap the images again in order for flexbox layout to fill the space properly.
     // especially when the images take up the full page height (the only want to have the contents of a figure
     // respect the figure's height is with flexbox)
-    jQuery('.wp-block-image img').wrap('<div class="pmb-figure-image-wrapper"></div>');
+    jQuery('.wp-block-image img, .wp-caption img').wrap('<div class="pmb-figure-image-wrapper"></div>');
 }
 
 function pmb_dont_float(){

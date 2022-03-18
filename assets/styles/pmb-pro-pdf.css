@@ -18,7 +18,7 @@ h1,h2,h3,h4,h5,h6{
 .pmb-posts .pmb-dynamic-resize img{
     width:auto;
 }
-figure.wp-block-image, .wp-block-image figure{
+figure.wp-block-image, .wp-block-image figure, figure.wp-caption{
     display:flex;
     flex-direction:column;
 }
@@ -26,7 +26,7 @@ figure.wp-block-image, .wp-block-image figure{
 .pmb-figure-image-wrapper{
     overflow:auto;
 }
-.wp-block-image .pmb-figure-image-wrapper img{
+.wp-block-image .pmb-figure-image-wrapper img, .wp-caption .pmb-figure-image-wrapper img{
     height:100%;
     max-height:100%;
     width:auto;
@@ -37,7 +37,7 @@ figure.wp-block-image, .wp-block-image figure{
 /*
 Don't let image blocks take up more than the max height
 */
-.wp-block-image{
+.wp-block-image, figure{
     max-height:100vh;
 }
 
