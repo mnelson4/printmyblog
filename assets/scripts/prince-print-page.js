@@ -41,6 +41,10 @@ function pmb_continue_image_resizing(){
 
 /**
  * Grabs a "pmb-dynamic-resize" element inside here and resizes it and returns it.
+ * Note: pmb-dynamic-resize CSS class could be on:
+ * * the image itself (ClassicPress image with no caption, regardless of floating)
+ * * the figure wrapping the image (ClassicPress with caption, regardless of floating; Gutenberg not floating)
+ * * the div wrapping the figure wrapping the image (Gutenberg floating)
  * (If none are found, returns null)
  * @param element
  * @return boolean
@@ -55,7 +59,7 @@ function pmb_resize_an_image_inside(element){
     if(typeof a_dynamic_resize_block === 'undefined'){
         return null;
     }
-    // when images are floating, the block had a div (with no height) because its contents are floating
+    // when Gutenberg images are floating, the block had a div (with no height) because its contents are floating
     // in that case we want to resize the figure inside the block. So check if there's a figure inside it
     var figure_is_floating = true;
     var figure_to_resize = a_dynamic_resize_block.getElementsByTagName("figure")[0];
