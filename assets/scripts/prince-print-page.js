@@ -100,7 +100,7 @@ function pmb_resize_an_image_inside(element){
         // page_box.h is the distance from the bottom margin to the top margin
         // figure_box.y is the distance from the top of the page to the bottom-left corner of the figure
         // see https://www.princexml.com/forum/post/23543/attachment/img-fill.html
-        var new_figure_height = figure_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
+        var distance_to_page_bottom = figure_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
 
         // calculate the maximum potential image height based on the image's dimensions and page width
         var max_height_because_of_max_width = page_box.w * figure_box.h / figure_image_box.w;
@@ -120,8 +120,8 @@ function pmb_resize_an_image_inside(element){
         }
         Log.info('IMG:' + figure_image.attributes['src'].value);
         Log.info(' page width:' + page_box.w);
-        Log.info(' max image size' + pmb.max_image_size);
-        Log.info(' new figure height ' + new_figure_height);
+        Log.info(' max image size' + pmb_px_to_pts(pmb.max_image_size));
+        Log.info(' distance_to_page_bottom ' + distance_to_page_bottom);
         Log.info(' max height because of max width' + max_height_because_of_max_width);
         Log.info(' max height from resolution y' + max_height_from_resolution_y_of_image);
         Log.info(' max height from resolution x' + max_height_from_resolution_x_of_image);
@@ -130,10 +130,10 @@ function pmb_resize_an_image_inside(element){
 
         new_figure_height = Math.min(
             pmb_px_to_pts(pmb.max_image_size),
-            new_figure_height,
-            max_height_because_of_max_width + footnotes_height,
-            max_height_from_resolution_y_of_image + footnotes_height,
-            max_height_from_resolution_x_of_image + footnotes_height
+            distance_to_page_bottom,
+            max_height_because_of_max_width,
+            max_height_from_resolution_y_of_image,
+            max_height_from_resolution_x_of_image
         );
 
         // Used some grade 12 math to figure out this equation.
