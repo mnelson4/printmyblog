@@ -132,8 +132,8 @@ function pmb_resize_an_image_inside(element){
             pmb_px_to_pts(pmb.max_image_size),
             new_figure_height,
             max_height_because_of_max_width,
-            max_height_from_resolution_y_of_image,
-            max_height_from_resolution_x_of_image
+            max_height_from_resolution_y_of_image + footnotes_height,
+            max_height_from_resolution_x_of_image + footnotes_height
         );
 
         // Used some grade 12 math to figure out this equation.
