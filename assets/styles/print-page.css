@@ -13,7 +13,7 @@
     }
 }
 @media not print{
-    .pmb-posts{
+    .pmb-posts#content{
         display: none !important;
         width: 1000px;
         margin: 10em auto 0 auto;
