@@ -73,9 +73,9 @@ function pmb_resize_an_image_inside(element){
     // check the image itself isn't what had pmb-dynamic-resize (like in ClassicPress images with no captions)
     var figure_image = null;
     if( figure_to_resize.tagName === 'IMG'){
-        figure_image = figure_to_resize.getElementsByTagName('img')[0];
-    } else {
         figure_image = figure_to_resize;
+    } else {
+        figure_image = figure_to_resize.getElementsByTagName('img')[0];
     }
 
     // For floating images we need to also set the block's width (I can't figure out how to get CSS to set the width automatically)
