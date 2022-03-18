@@ -17,15 +17,15 @@ h1,h2,h3,h4,h5,h6{
 .pmb-posts .pmb-dynamic-resize img{
     width:auto;
 }
-figure.pmb-dynamic-resized, .wp-block-image.pmb-dynamic-resized figure{
+figure.wp-block-image, .wp-block-image figure{
     display:flex;
     flex-direction:column;
 }
 
-.pmb-dynamic-resized-image-wrapper{
+.pmb-figure-image-wrapper{
     overflow:auto;
 }
-.pmb-dynamic-resized .pmb-dynamic-resized-image-wrapper img{
+.wp-block-image .pmb-figure-image-wrapper img{
     height:100%;
     max-height:100%;
     width:auto;
