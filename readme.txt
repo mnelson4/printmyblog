@@ -8,7 +8,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.12.7
+Stable tag: 3.12.8
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -433,8 +433,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.12.8 xxxxxxx =
-* Compatibility: fix QuickFix with Thrive ThemeBuilder
+= 3.12.8 March 28, 2022 =
+* Compatibility: fix QuickPrint with Thrive ThemeBuilder
+* Bugfix: tell search engines to no index print page
 
 = 3.12.7 March 10, 2022 =
 * Bugfix: fix gallery blocks display (WP recently changed the HTML structure so our CSS needed updating too)
