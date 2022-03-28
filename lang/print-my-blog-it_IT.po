@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2022-03-09 09:49-0800\n"
-"PO-Revision-Date: 2022-03-09 09:50-0800\n"
+"POT-Creation-Date: 2022-03-28 10:53-0700\n"
+"PO-Revision-Date: 2022-03-28 10:54-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it\n"
@@ -131,7 +131,7 @@ msgstr[1] "%1$s Risposte a &ldquo;%2$s&rdquo;"
 #: designs/epub/classic/templates/title_page.php:43
 #: designs/pdf/digital/classic/templates/title_page.php:53
 #: designs/pdf/print/classic/templates/title_page.php:43
-#: templates/print_page.php:299
+#: templates/print_page.php:300
 #, php-format
 msgid "Printed on %1$s"
 msgstr "Stampato su %1$s"
@@ -1639,37 +1639,43 @@ msgstr "Full Size (sul web)"
 msgid "Uploaded Size (largest possible)"
 msgstr "Dimensione caricata (la più grande possibile)"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:701
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:703
 msgid "Image Quality (in pixels)"
 msgstr "Altezza massima dell'immagine (in pixel)"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:702
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:705
+#, php-format
 msgid ""
 "Lower quality means smaller file size, whereas higher quality means higher "
-"resolution images."
+"resolution images. Note: if images are missing from the generated PDF, the "
+"requested image size might not be available. Use the %1$s Regenerate "
+"Thumbnails plugin%2$s to create the missing image sizes."
 msgstr ""
 "Qualità inferiore significa dimensioni del file più piccole, mentre una "
-"qualità superiore significa immagini a risoluzione più elevata."
+"qualità superiore significa immagini a risoluzione più elevata. Nota: se le "
+"immagini non sono presenti nel PDF generato, la dimensione dell'immagine "
+"richiesta potrebbe non essere disponibile. Usa il plug-in rigenera miniature "
+"%1$s%2$s per creare le dimensioni delle immagini mancanti."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:714
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:720
 msgid "Apply Website Theme"
 msgstr "Applica il tema del sito Web"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:719
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:725
 msgid "Custom CSS"
 msgstr "CSS personalizzato"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:720
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:726
 msgid "Styles to be applied only when printing projects using this design."
 msgstr ""
 "Stili da applicare solo quando si stampano progetti utilizzando questo "
 "disegno."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:723
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:729
 msgid "Add \"Powered By\""
 msgstr "Aggiungi \"Powered By\""
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:723
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:729
 msgid ""
 "In compliance with WordPress.org guidelines, not added when printing from "
 "your browser."
@@ -1677,7 +1683,7 @@ msgstr ""
 "In conformità con le linee guida WordPress.org, non aggiunte durante la "
 "stampa dal browser."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:724
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:730
 msgid ""
 "Instructs the Pro PDF Service to add \"Powered by Print My Blog Pro & "
 "WordPress\" to your project. Does not appear when printing using your "
@@ -1687,11 +1693,11 @@ msgstr ""
 "WordPress\" al progetto. Non viene visualizzato quando si stampa utilizzando "
 "il browser."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:739
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:746
 msgid "Page Reference Text"
 msgstr "Testo di riferimento della pagina"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:740
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:747
 #, php-format
 msgid ""
 "Text to use when replacing a hyperlink with a page reference. \"%s\" will be "
@@ -1700,12 +1706,12 @@ msgstr ""
 "Testo da utilizzare quando si sostituisce un collegamento ipertestuale con "
 "un riferimento di pagina. \"%s\" verrà sostituito con il numero di pagina."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:741
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:748
 #, php-format
 msgid "(see page %s)"
 msgstr "(vedi pagina %s)"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:743
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:750
 #, php-format
 msgid ""
 "You must include \"%s\" in the page reference text so we know where to put "
@@ -1714,11 +1720,11 @@ msgstr ""
 "È necessario includere \"%s\" nel testo di riferimento della pagina in modo "
 "da sapere dove inserire il numero di pagina."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:751
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:758
 msgid "Internal Footnote Text"
 msgstr "Testo interno della nota a piè di pagina"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:752
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:759
 #, php-format
 msgid ""
 "Text to use when replacing a hyperlink with a footnote. \"%s\" will be "
@@ -1727,13 +1733,13 @@ msgstr ""
 "Testo da utilizzare quando si sostituisce un collegamento ipertestuale con "
 "una nota a piè di pagina. \"%s\" verrà sostituito con il numero di pagina."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:753
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:760
 #, php-format
 msgid "See page %s."
 msgstr "Vedi pagina %s."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:755
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:768
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:762
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:775
 #, php-format
 msgid ""
 "You must include \"%s\" in the footnote text so we know where to put the URL."
@@ -1741,11 +1747,11 @@ msgstr ""
 "Devi includere \"%s\" nel testo della nota a piè di pagina in modo da sapere "
 "dove inserire l'URL."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:764
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:771
 msgid "External Footnote Text"
 msgstr "Testo esterno della nota a piè di pagina"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:765
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:772
 #, php-format
 msgid ""
 "Text to use when replacing a hyperlink with a footnote. \"%s\" will be "
@@ -1754,24 +1760,24 @@ msgstr ""
 "Testo da utilizzare quando si sostituisce un collegamento ipertestuale con "
 "una nota a piè di pagina. \"%s\" verrà sostituito con l'URL"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:766
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:773
 #, php-format
 msgid "See %s."
 msgstr "Vedi %s."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:780
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:787
 msgid "None"
 msgstr "Nessuna"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:781
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:788
 msgid "Center"
 msgstr "Centro"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:784
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:791
 msgid "Default Image Alignment"
 msgstr "Allineamento immagine predefinito"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:785
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:792
 msgid ""
 "Images normally default to \"no alignment\", which can look jumbled in "
 "printouts. Usually it’s best to automatically switch those to align to the "
@@ -1781,28 +1787,28 @@ msgstr ""
 "sembrare confuso nelle stampe. Di solito è meglio cambiare automaticamente "
 "quelli per allinearli al centro."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:795
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:802
 msgid "Don’t move"
 msgstr "Non ti muovere"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:796
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:803
 msgid "Snap to the top or bottom of the page"
 msgstr "Aggancia alla parte superiore o inferiore della pagina"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:797
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:804
 msgid "Only snap if it would otherwise cause a page break"
 msgstr "Scatta solo se altrimenti causerebbe un'interruzione di pagina"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:798
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:805
 msgid "Resize images if they don’t fit on the page"
 msgstr "Ridimensionare le immagini se non si adattano alla pagina"
 
 #. translators: 1: "Best with Pro"
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:802
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:809
 msgid "Image Placement"
 msgstr "Posizionamento Immagine"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:803
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:810
 msgid ""
 "To reduce whitespace around images, galleries, and tables, Print My Blog can "
 "adjust the placement of your content, or resize it according to the space on "
@@ -1811,11 +1817,11 @@ msgstr ""
 "Per ridurre gli spazi vuoti intorno a immagini, gallerie e tabelle, Stampa "
 "il mio blog può spostarsi nei tuoi contenuti."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:822
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:829
 msgid "Minimum Image Size (in pixels)"
 msgstr "Altezza massima dell'immagine (in pixel)"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:823
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:830
 msgid ""
 "Any images larger than this may be resized to fit onto the page, but they "
 "will be no smaller than this size."
@@ -2224,7 +2230,7 @@ msgid "Single Column"
 msgstr "Colonna Singola"
 
 #: src/PrintMyBlog/domain/FrontendPrintSettings.php:53
-#: templates/print_page.php:164
+#: templates/print_page.php:165
 msgid "Print"
 msgstr "Stampa"
 
@@ -2883,7 +2889,7 @@ msgstr ""
 
 #. translators: 1 taxonomy name, 2: list of terms that apply to this post
 #: src/Twine/forms/strategies/display/RadioButtonDisplay.php:47
-#: templates/print_page.php:237
+#: templates/print_page.php:238
 #, php-format
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
@@ -3284,171 +3290,171 @@ msgstr "Torna a Genera pagina"
 msgid "Read how your data is handled"
 msgstr "Leggi come vengono gestiti i tuoi dati"
 
-#: templates/print_page.php:34
+#: templates/print_page.php:35
 msgid "Cancel"
 msgstr "Annulla"
 
-#: templates/print_page.php:39
+#: templates/print_page.php:40
 msgid "Return"
 msgstr "Ritorno"
 
 #. translators: 1: a bunch of HTML for emoji buttons
-#: templates/print_page.php:47
+#: templates/print_page.php:48
 #, php-format
 msgid "What do you think? %1$s"
 msgstr "Che ne pensi? %1$s"
 
-#: templates/print_page.php:49
+#: templates/print_page.php:50
 msgid "Love it (shows feedback options)"
 msgstr "Lo adoro (mostra le opzioni di feedback)"
 
-#: templates/print_page.php:51
+#: templates/print_page.php:52
 msgid "Don’t like something (shows feedback options)"
 msgstr "Non ti piace qualcosa (mostra le opzioni di feedback)"
 
 #. translators: 1: opening link tag, 2: closing link tag
-#: templates/print_page.php:57
+#: templates/print_page.php:58
 #, php-format
 msgid "Nice! %1$sPlease leave a review%2$s."
 msgstr "Gentile! %1$s Si prega di lasciare una recensione%2$s."
 
-#: templates/print_page.php:58
+#: templates/print_page.php:59
 msgid "Plugin Reviews (opens in new tab)"
 msgstr "Recensioni plugin (si apre in una nuova scheda)"
 
 #. translators: 1: opening link tag, 2: closing link tag.
-#: templates/print_page.php:63
+#: templates/print_page.php:64
 #, php-format
 msgid "That’s disappointing. %1$sPlease tell us how to improve.%2$s"
 msgstr "È deludente. %1$s Per favore, dicci come migliorare. %2$s"
 
-#: templates/print_page.php:64
+#: templates/print_page.php:65
 msgid "Plugin support forum (opens in new tab)"
 msgstr "Forum di supporto plugin (si apre in una nuova scheda)"
 
-#: templates/print_page.php:70
+#: templates/print_page.php:71
 msgid "Initializing"
 msgstr "Inizializzando"
 
-#: templates/print_page.php:77
+#: templates/print_page.php:78
 msgid "You may now use dotEPUB to create the eBook."
 msgstr "Ora puoi usare dotEPUB per creare l'eBook."
 
-#: templates/print_page.php:78 templates/print_page.php:102
-#: templates/print_page.php:109 templates/print_page.php:120
+#: templates/print_page.php:79 templates/print_page.php:103
+#: templates/print_page.php:110 templates/print_page.php:121
 msgid "How?"
 msgstr "Come?"
 
-#: templates/print_page.php:84
+#: templates/print_page.php:85
 msgid "You may now create the PDF using a browser extension."
 msgstr "È ora possibile creare il PDF utilizzando un'estensione del browser."
 
-#: templates/print_page.php:89
+#: templates/print_page.php:90
 msgid "Print to PDF"
 msgstr "Stampa in PDF"
 
-#: templates/print_page.php:92
+#: templates/print_page.php:93
 msgid "Use your browser to print to PDF."
 msgstr "Utilizzare il browser per stampare in formato PDF."
 
-#: templates/print_page.php:100 templates/print_page.php:112
+#: templates/print_page.php:101 templates/print_page.php:113
 msgid "opens in new tab"
 msgstr "si apre nella nuova scheda"
 
-#: templates/print_page.php:112
+#: templates/print_page.php:113
 msgid "Download Print to PDF Browser Extension"
 msgstr "Scarica l'estensione del browser Print to PDF"
 
-#: templates/print_page.php:113
+#: templates/print_page.php:114
 msgid "Click the extension’s button."
 msgstr "Fai clic sul pulsante dell'estensione."
 
-#: templates/print_page.php:122
+#: templates/print_page.php:123
 msgid ""
 "After clicking \"Print to PDF\", set the \"Destination\" to \"Save as PDF.\""
 msgstr ""
 "Dopo aver fatto clic su \"Stampa su PDF\", imposta \"Destinazione\" su "
 "\"Salva come PDF\"."
 
-#: templates/print_page.php:129
+#: templates/print_page.php:130
 msgid "How on Safari on Desktop"
 msgstr "Come su Safari sul desktop"
 
-#: templates/print_page.php:132
+#: templates/print_page.php:133
 msgid "Click \"Print to PDF\""
 msgstr "Fai clic su \"Stampa su PDF\""
 
-#: templates/print_page.php:133
+#: templates/print_page.php:134
 msgid "Choose to \"Save as PDF.\""
 msgstr "Scegli \"Salva come PDF\"."
 
-#: templates/print_page.php:140
+#: templates/print_page.php:141
 msgid "How on Mobile Safari"
 msgstr "Come su Mobile Safari"
 
-#: templates/print_page.php:144
+#: templates/print_page.php:145
 msgid "Click the share button"
 msgstr "Fai clic sul pulsante di condivisione"
 
-#: templates/print_page.php:147
+#: templates/print_page.php:148
 msgid "Click \"Options\" and choose PDF"
 msgstr "Fai clic su \"Opzioni\" e scegli PDF"
 
-#: templates/print_page.php:150
+#: templates/print_page.php:151
 msgid "Save to Files"
 msgstr "Salva in file"
 
-#: templates/print_page.php:157
+#: templates/print_page.php:158
 msgid ""
 "Note: Google Chrome and Microsoft Edge are recommended for producing PDFs."
 msgstr ""
 "Nota: Google Chrome e Microsoft Edge sono consigliati per la produzione di "
 "PDF."
 
-#: templates/print_page.php:160
+#: templates/print_page.php:161
 msgid "Copy to Clipboard"
 msgstr "Copia negli Appunti"
 
-#: templates/print_page.php:165
+#: templates/print_page.php:166
 msgid "Use your browser to print."
 msgstr "Utilizzare il browser per stampare."
 
-#: templates/print_page.php:188
+#: templates/print_page.php:189
 msgid "Use your browser’s \"print preview\" for the best preview."
 msgstr ""
 "Usa l'\"anteprima di stampa\" del tuo browser per la migliore anteprima."
 
 #. translators: 1: date string
-#: templates/print_page.php:217
+#: templates/print_page.php:218
 #, php-format
 msgid "published on %1$s and later,"
 msgstr "pubblicato il %1$s e successivamente,"
 
 #. translators: 1: date string
-#: templates/print_page.php:223
+#: templates/print_page.php:224
 #, php-format
 msgid "published on %1$s and earlier,"
 msgstr "pubblicato il %1$s e precedenti,"
 
 #. translators: $s, the categories and terms used to filter this print-out,
 #. eg "Category: WordPress, Blogging; Term: Computers, Headphones".
-#: templates/print_page.php:247
+#: templates/print_page.php:248
 #, php-format
 msgid "with %s,"
 msgstr "con %s,"
 
-#: templates/print_page.php:252
+#: templates/print_page.php:253
 #, php-format
 msgid "by %s"
 msgstr "di %s"
 
 #. translators: 1 description of printout, 2: site URL
-#: templates/print_page.php:267
+#: templates/print_page.php:268
 #, php-format
 msgid "%1$s from %2$s."
 msgstr "%1$s da %2$s."
 
-#: templates/print_page.php:278
+#: templates/print_page.php:279
 #, php-format
 msgctxt ""
 "Description of what's in the printout. Eg the post type, dante range, and "
@@ -3457,12 +3463,12 @@ msgid "%s."
 msgstr "%s."
 
 #. translators: 1: date, 2: opening link tag, 3: closing link tag
-#: templates/print_page.php:291
+#: templates/print_page.php:292
 #, php-format
 msgid "Printed on %1$s using %2$sPrint My Blog%3$s"
 msgstr "Stampato su %1$s utilizzando %2$sStampa il mio blog%3$s"
 
-#: templates/print_page.php:304
+#: templates/print_page.php:305
 #, php-format
 msgid "Printed using %1$sPrint My Blog%2$s"
 msgstr "Stampato utilizzando %1$sStampa il mio blog%2$s"
@@ -4258,6 +4264,13 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "Michael Nelson"
 msgstr "Michael Nelson"
+
+#~ msgid ""
+#~ "Lower quality means smaller file size, whereas higher quality means "
+#~ "higher resolution images."
+#~ msgstr ""
+#~ "Qualità inferiore significa dimensioni del file più piccole, mentre una "
+#~ "qualità superiore significa immagini a risoluzione più elevata."
 
 #~ msgid "Edit Design"
 #~ msgstr "Modifica design"
