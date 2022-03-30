@@ -187,6 +187,14 @@ figcaption{
 }
 
 /*!* Block galleries *!*/
+
+/**
+Prevent galleries that are too big from spilling into the bottom margin.
+ */
+.wp-block-gallery, .wp-block-jetpack-tiled-gallery{
+    max-height:100vh;
+    overflow:hidden;
+}
 /* Make the figures inside block galleries inline blocks instead of flex items
 otherwise Prince allots them no height and they overflow into content beneath. */
 .wp-block-gallery .blocks-gallery-item figure{
