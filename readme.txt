@@ -432,8 +432,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.12.11 xxx =
+= 3.12.11 March 30, 2022 =
 * Enhancement: tell free users to first create a GitHub account before reporting the issue
+* Bugfix: prevent galleries from overflowing into the bottom margin by hiding extra content
 
 = 3.12.10 March 30, 2022 =
 * Bugfix: fix Quick Print page for Italian users (categories and tags weren't being shown)
