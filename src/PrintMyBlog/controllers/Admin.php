@@ -576,11 +576,11 @@ class Admin extends BaseController
                 array(),
                 filemtime(PMB_ASSETS_DIR . 'styles/welcome.css')
             );
-        } elseif ($hook === 'print-my-blog_page_print-my-blog-now') {
+        } elseif (isset($_GET['page']) && $_GET['page'] === 'print-my-blog-now') {
             wp_enqueue_script('pmb-setup-page');
             wp_enqueue_style('pmb-setup-page');
         } elseif (
-            $hook === 'toplevel_page_print-my-blog-projects'
+            isset($_GET['page']) && $_GET['page'] === 'print-my-blog-projects'
         ) {
             if (
                 isset($_GET['action'])

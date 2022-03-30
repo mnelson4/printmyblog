@@ -432,6 +432,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.12.10 xxx =
+* Bugfix: fix Quick Print page for Italian users (categories and tags weren't being shown)
+
 = 3.12.9 March 30, 2022 =
 * Bugfix: fix QuickPrint's and Print Buttons's print page content being blank (introduced in 3.12.8)
 * Bugfix: tell search engines to not even visit print page
