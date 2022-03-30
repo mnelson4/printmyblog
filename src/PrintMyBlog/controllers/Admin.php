@@ -490,7 +490,6 @@ class Admin extends BaseController
                                 '<a href="https://github.com/signup">',
                                 '</a>',
                                 '<a href="' . esc_url(pmb_fs()->get_upgrade_url()) . '">'
-
                             )
                             . '</p>'
                         ),
