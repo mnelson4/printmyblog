@@ -2,7 +2,6 @@
 Contributors: mnelson4
 Tags: print, PDF, backup, eBook, print button
 Requires at least: 4.6
-Stable tag: trunk
 Tested up to: 5.9.2
 Requires PHP: 5.4
 License: GPLv2 or later
@@ -435,6 +434,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.12.9 March 30, 2022 =
 * Bugfix: fix QuickPrint's and Print Buttons's print page content being blank (introduced in 3.12.8)
+* Bugfix: tell search engines to not even visit print page
 
 = 3.12.8 March 28, 2022 =
 * Compatibility: fix QuickPrint with Thrive ThemeBuilder

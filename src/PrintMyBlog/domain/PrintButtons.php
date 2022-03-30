@@ -51,7 +51,7 @@ class PrintButtons
                 continue;
             }
             $html .= sprintf(
-                ' <a href="%s" class="button button-secondary wp-block-button__link">%s</a>',
+                ' <a href="%s" class="button button-secondary wp-block-button__link" rel="nofollow">%s</a>',
                 esc_url($url_generator->getUrl($slug)),
                 esc_html($this->print_settings->getFrontendLabel($slug))
             );
