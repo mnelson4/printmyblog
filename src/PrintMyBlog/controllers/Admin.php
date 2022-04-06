@@ -360,17 +360,17 @@ class Admin extends BaseController
             $method = 'GET';
             $button_text = '';
         } else {
-            if (pmb_fs()->is_plan__premium_only('founding_members')) {
+//            if (pmb_fs()->is_plan__premium_only('founding_members')) {
                 $form = $this->getEmailHelpForm();
                 $form_url = admin_url(PMB_ADMIN_HELP_PAGE_PATH);
                 $method = 'POST';
                 $button_text = esc_html__('Email Print My Blog Support', 'print-my-blog');
-            } else {
-                $form = $this->getGithubHelpForm();
-                $form_url = 'https://github.com/mnelson4/printmyblog/issues/new';
-                $method = 'GET';
-                $button_text = esc_html__('Report Issue on GitHub', 'print-my-blog');
-            }
+//            } else {
+//                $form = $this->getGithubHelpForm();
+//                $form_url = 'https://github.com/mnelson4/printmyblog/issues/new';
+//                $method = 'GET';
+//                $button_text = esc_html__('Report Issue on GitHub', 'print-my-blog');
+//            }
         }
         pmb_render_template(
             'help.php',
@@ -404,10 +404,13 @@ class Admin extends BaseController
         );
         $subject = sprintf('Help for %s', site_url());
         $message = sprintf(
-            'Message:%1$s
+            'Name:%1$s
             <br>
-            Consent:%2$s,
-            Data:%3$s',
+            Message:%2$s
+            <br>
+            Consent:%3$s,
+            Data:%4$s',
+            $form->getInputValue('name'),
             $form->getInputValue('reason'),
             $form->getInputValue('consent') ? 'yes' : 'no',
             $form->getInputValue('debug_info')
@@ -487,7 +490,7 @@ class Admin extends BaseController
                             '<p>' . __('GitHub is a public forum to share your issues with the developer and other users.', 'print-my-blog') . '</p>' .
                             '<p>' . sprintf(
                                 __('You will need to first %1$screate a GitHub account%2$s. If you prefer to use email support please %3$spurchase a license that offers email support.%2$s', 'print-my-blog'),
-                                '<a href="https://github.com/signup">',
+                                '<a target="_blank" href="https://github.com/signup">',
                                 '</a>',
                                 '<a href="' . esc_url(pmb_fs()->get_upgrade_url()) . '">'
                             )
