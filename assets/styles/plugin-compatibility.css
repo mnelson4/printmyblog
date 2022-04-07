@@ -141,3 +141,10 @@ Hide WPML language selectors
 .a11y-toolbar{
     display:none;
 }
+
+/**
+Hide Axeptio overlay https://support.axeptio.eu/hc/en-gb/articles/4404040521105-Install-Axeptio-on-your-website#h_01FEGV1GE4P9A1GJ6H7AH90T5B
+ */
+#axeptio_overlay{
+    display: none;
+}
