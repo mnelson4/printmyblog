@@ -74,7 +74,8 @@ function pmb_resize_an_image_inside(element){
     var caption_height = 0;
     if(typeof(figure_caption) !== 'undefined'){
         var caption_box = figure_image.getPrinceBoxes()[0];
-        caption_height = caption_box.h;
+        pmb_print_props(caption_box, 'caption box');
+        caption_height = caption_box.h - caption_box.marginBottom;
     }
     // If we can't find an image to resize, there's nothing to resize (which is weird but somehow happens?)
     if(typeof(figure_image) !== 'undefined') {
@@ -113,7 +114,7 @@ function pmb_resize_an_image_inside(element){
         // resolution_width px      max_width pts
         var max_height_from_resolution_x_of_image = 100000;
         if('width' in figure_image.attributes && 'height' in figure_image.attributes){
-            max_height_from_resolution_x_of_image = (page_box.w * figure_image.attributes['height'].value + caption_height) / figure_image.attributes['width'].value;
+            max_height_from_resolution_x_of_image = (page_box.w * figure_image.attributes['height'].value / figure_image.attributes['width'].value) + caption_height;
         }
         Log.info('IMG:' + figure_image.attributes['src'].value);
         Log.info(' page width:' + page_box.w);
