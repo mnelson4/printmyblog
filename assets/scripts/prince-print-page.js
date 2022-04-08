@@ -117,11 +117,11 @@ function pmb_resize_an_image_inside(element){
         }
         Log.info('IMG:' + figure_image.attributes['src'].value);
         Log.info(' page width:' + page_box.w);
-        Log.info(' max image size' + pmb.max_image_size);
-        Log.info(' new figure height ' + remaining_vertical_space);
-        Log.info(' max height because of max width' + max_height_because_of_max_width);
-        Log.info(' max height from resolution y' + max_height_from_resolution_y_of_image);
-        Log.info(' max height from resolution x' + max_height_from_resolution_x_of_image);
+        Log.info('  pmb.max_image_size' + pmb.max_image_size);
+        Log.info(' remaining_vertical_space ' + remaining_vertical_space);
+        Log.info(' max_height_because_of_max_width' + max_height_because_of_max_width);
+        Log.info(' max_height_from_resolution_y_of_image' + max_height_from_resolution_y_of_image);
+        Log.info(' max_height_from_resolution_x_of_image' + max_height_from_resolution_x_of_image);
         Log.info(' caption height ' + caption_height);
         // put a limit on how big the image can be
         // use the design's maximum image size, which was passed from PHP
@@ -153,6 +153,7 @@ function pmb_resize_an_image_inside(element){
                 max_class = 'pmb-dynamic-resize-limited-by-max_height_from_resolution_x_of_image';
                 break;
         }
+        Log.info('max height css class:'+ max_class);
         // Resize the block
         figure_to_resize.style.height = new_figure_height + "pt";
         if (figure_is_floating) {
