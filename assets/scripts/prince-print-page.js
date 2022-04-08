@@ -73,9 +73,9 @@ function pmb_resize_an_image_inside(element){
     var figure_caption = figure_to_resize.getElementsByTagName('figcaption')[0];
     var caption_height = 0;
     if(typeof(figure_caption) !== 'undefined'){
-        var caption_box = figure_image.getPrinceBoxes()[0];
-        pmb_print_props(caption_box.children[0], 'caption box children');
-        caption_height = caption_box.h - caption_box.marginBottom;
+        var caption_box = figure_caption.getPrinceBoxes()[0];
+        pmb_print_props(caption_box, 'caption box');
+        caption_height = caption_box.h;
     }
     // If we can't find an image to resize, there's nothing to resize (which is weird but somehow happens?)
     if(typeof(figure_image) !== 'undefined') {
