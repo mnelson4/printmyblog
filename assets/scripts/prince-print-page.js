@@ -122,6 +122,7 @@ function pmb_resize_an_image_inside(element){
         Log.info(' max height because of max width' + max_height_because_of_max_width);
         Log.info(' max height from resolution y' + max_height_from_resolution_y_of_image);
         Log.info(' max height from resolution x' + max_height_from_resolution_x_of_image);
+        Log.info(' caption height ' + caption_height);
         // put a limit on how big the image can be
         // use the design's maximum image size, which was passed from PHP
 
