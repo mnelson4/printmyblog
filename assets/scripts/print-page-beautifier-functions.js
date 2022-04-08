@@ -171,7 +171,7 @@ function pmb_mark_for_dynamic_resize(min_image_size){
     jQuery('img').each(function(index, element){
         // Don't try to resize trickier items like columns or YouTube videos
         var jqe = jQuery(element);
-        if(jqe.parents('.wp-block-columns, .wp-block-embed-youtube, .wp-block-gallery, .gallery').length > 0){
+        if(jqe.parents('.wp-block-columns, .wp-block-embed-youtube, .wp-block-gallery, .gallery, .pmb-dont-dynamic-resize').length > 0){
             return;
         }
         if(element.offsetHeight > min_image_size){
