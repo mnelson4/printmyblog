@@ -113,7 +113,7 @@ function pmb_resize_an_image_inside(element){
         // original_width px      max_width pts
         var max_height_from_resolution_x_of_image = 100000;
         if('width' in figure_image.attributes && 'height' in figure_image.attributes){
-            max_height_from_resolution_x_of_image = page_box.w * figure_image.attributes['height'].value / figure_image.attributes['width'].value;
+            max_height_from_resolution_x_of_image = (page_box.w * figure_image.attributes['height'].value / figure_image.attributes['width'].value) + caption_height;
         }
         Log.info('IMG:' + figure_image.attributes['src'].value);
         Log.info(' page width:' + page_box.w);
