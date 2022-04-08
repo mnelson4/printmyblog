@@ -75,7 +75,7 @@ function pmb_resize_an_image_inside(element){
     if(typeof(figure_caption) !== 'undefined'){
         var caption_box = figure_caption.getPrinceBoxes()[0];
         pmb_print_props(caption_box, 'caption box');
-        caption_height = caption_box.h;
+        caption_height = caption_box.marginTop + caption_box.h + caption_box.marginBottom;
     }
     // If we can't find an image to resize, there's nothing to resize (which is weird but somehow happens?)
     if(typeof(figure_image) !== 'undefined') {
