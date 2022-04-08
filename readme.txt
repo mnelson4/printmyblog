@@ -435,6 +435,7 @@ https://youtu.be/uPQ3vqm7A2g
 = 3.13.1 April 6, 2022 =
 * Feature: offer email support for all users (it was a hassle to explain how to use it to non-technical folks)
 * Compatibility: hide Axeptio hovering button in print page
+* Bugfix: correct dynamic image resizing images with captions when restricted by width
 
 = 3.13.0 March 30, 2022 =
 * Feature: show featured image captions in all built-in designs
