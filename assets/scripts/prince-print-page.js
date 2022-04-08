@@ -99,7 +99,7 @@ function pmb_resize_an_image_inside(element){
         var new_figure_height = figure_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
 
         // calculate the maximum potential image height based on the image's dimensions and page width
-        var max_height_because_of_max_width = page_box.w * figure_box.h / figure_image_box.w + caption_height2;
+        var max_height_because_of_max_width = page_box.w * figure_box.h / figure_image_box.w + caption_height;
 
         // also gather the maximum heights from the original image
         var max_height_from_resolution_y_of_image = 100000;
