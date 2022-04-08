@@ -69,6 +69,13 @@ function pmb_resize_an_image_inside(element){
     // so for that we need to figure out how much the image inside the figure got resized (non-trivial if there's a caption).
     var figure_image = figure_to_resize.getElementsByTagName('img')[0];
 
+    // determine the caption's height
+    var figure_caption = figure_to_resize.getElementsByTagName('figcaption')[0];
+    var caption_height = 0;
+    if(typeof(figure_caption) !== 'undefined'){
+        var caption_box = figure_image.getPrinceBoxes()[0];
+        caption_height = caption_box.h;
+    }
     // If we can't find an image to resize, there's nothing to resize (which is weird but somehow happens?)
     if(typeof(figure_image) !== 'undefined') {
         var figure_image_box = figure_image.getPrinceBoxes()[0];
@@ -92,7 +99,7 @@ function pmb_resize_an_image_inside(element){
         var new_figure_height = figure_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
 
         // calculate the maximum potential image height based on the image's dimensions and page width
-        var max_height_because_of_max_width = page_box.w * figure_box.h / figure_image_box.w;
+        var max_height_because_of_max_width = page_box.w * figure_box.h / figure_image_box.w + caption_height2;
 
         // also gather the maximum heights from the original image
         var max_height_from_resolution_y_of_image = 100000;
