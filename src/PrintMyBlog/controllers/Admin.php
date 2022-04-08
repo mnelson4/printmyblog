@@ -657,7 +657,7 @@ class Admin extends BaseController
                         $license = pmb_fs()->_get_license();
                         $site = pmb_fs()->get_site();
                         $use_pmb_central = 0;
-                        if (pmb_fs()->is_plan__premium_only('business')) {
+                        if (pmb_fs()->is_plan__premium_only('business') || (defined('PMB_USE_CENTRAL') && PMB_USE_CENTRAL) {
                             $use_pmb_central = 1;
                         }
                         wp_localize_script(
