@@ -125,7 +125,7 @@ function pmb_resize_an_image_inside(element){
         // put a limit on how big the image can be
         // use the design's maximum image size, which was passed from PHP
 
-        remaining_vertical_space = Math.min(
+        var new_figure_height = Math.min(
             max_allowable_height,
             remaining_vertical_space,
             max_height_because_of_max_width,
@@ -133,13 +133,9 @@ function pmb_resize_an_image_inside(element){
             max_height_from_resolution_x_of_image
         );
 
-        // Used some grade 12 math to figure out this equation.
-        var new_image_height = remaining_vertical_space - figure_box.h + figure_image_height;
-        var resize_ratio = new_image_height / figure_image_height;
-
-        Log.info('New size is ' + remaining_vertical_space);
+        Log.info('New figure size is ' + new_figure_height);
         var max_class = 'pmb-dynamic-resize-limited-by-unknown';
-        switch(new_max_height){
+        switch(new_figure_height){
             case max_allowable_height:
                 max_class = 'pmb-dynamic-resize-limited-by-max_allowable_height';
                 break;
@@ -157,8 +153,11 @@ function pmb_resize_an_image_inside(element){
                 break;
         }
         // Resize the block
-        figure_to_resize.style.height = remaining_vertical_space + "pt";
+        figure_to_resize.style.height = new_figure_height + "pt";
         if (figure_is_floating) {
+            // Used some grade 12 math to figure out this equation.
+            var new_image_height = new_figure_height - figure_box.h + figure_image_height;
+            var resize_ratio = new_image_height / figure_image_height;
             figure_to_resize.style.width = (figure_box.w * resize_ratio) + 'pt';
         }
     }
