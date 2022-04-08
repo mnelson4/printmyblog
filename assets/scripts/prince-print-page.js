@@ -92,11 +92,12 @@ function pmb_resize_an_image_inside(element){
                 footnotes_height = box_on_page['h'];
             }
         }
+        var max_allowable_height = pmb_px_to_pts(pmb.max_image_size);
         // page_box.y is the distance from the top of the page to the bottom margin;
         // page_box.h is the distance from the bottom margin to the top margin
         // figure_box.y is the distance from the top of the page to the bottom-left corner of the figure
         // see https://www.princexml.com/forum/post/23543/attachment/img-fill.html
-        var new_figure_height = figure_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
+        var remaining_vertical_space = figure_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
 
         // calculate the maximum potential image height based on the image's dimensions and page width
         var max_height_because_of_max_width = page_box.w * figure_box.h / figure_image_box.w + caption_height;
@@ -117,35 +118,53 @@ function pmb_resize_an_image_inside(element){
         Log.info('IMG:' + figure_image.attributes['src'].value);
         Log.info(' page width:' + page_box.w);
         Log.info(' max image size' + pmb.max_image_size);
-        Log.info(' new figure height ' + new_figure_height);
+        Log.info(' new figure height ' + remaining_vertical_space);
         Log.info(' max height because of max width' + max_height_because_of_max_width);
         Log.info(' max height from resolution y' + max_height_from_resolution_y_of_image);
         Log.info(' max height from resolution x' + max_height_from_resolution_x_of_image);
         // put a limit on how big the image can be
         // use the design's maximum image size, which was passed from PHP
 
-        new_figure_height = Math.min(
-            pmb_px_to_pts(pmb.max_image_size),
-            new_figure_height,
+        remaining_vertical_space = Math.min(
+            max_allowable_height,
+            remaining_vertical_space,
             max_height_because_of_max_width,
             max_height_from_resolution_y_of_image,
             max_height_from_resolution_x_of_image
         );
 
         // Used some grade 12 math to figure out this equation.
-        var new_image_height = new_figure_height - figure_box.h + figure_image_height;
+        var new_image_height = remaining_vertical_space - figure_box.h + figure_image_height;
         var resize_ratio = new_image_height / figure_image_height;
 
-        Log.info('New size is ' + new_figure_height);
+        Log.info('New size is ' + remaining_vertical_space);
+        var max_class = 'pmb-dynamic-resize-limited-by-unknown';
+        switch(new_max_height){
+            case max_allowable_height:
+                max_class = 'pmb-dynamic-resize-limited-by-max_allowable_height';
+                break;
+            case remaining_vertical_space:
+                max_class = 'pmb-dynamic-resize-limited-by-remaining_vertical_space';
+                break;
+            case max_height_because_of_max_width:
+                max_class = 'pmb-dynamic-resize-limited-by-max_height_because_of_max_width';
+                break;
+            case max_height_from_resolution_y_of_image:
+                max_class = 'pmb-dynamic-resize-limited-by-max_height_from_resolution_y_of_image';
+                break;
+            case max_height_from_resolution_x_of_image:
+                max_class = 'pmb-dynamic-resize-limited-by-max_height_from_resolution_x_of_image';
+                break;
+        }
         // Resize the block
-        figure_to_resize.style.height = new_figure_height + "pt";
+        figure_to_resize.style.height = remaining_vertical_space + "pt";
         if (figure_is_floating) {
             figure_to_resize.style.width = (figure_box.w * resize_ratio) + 'pt';
         }
     }
 
     // Change the class so we know we don't try to resize this block again
-    a_dynamic_resize_block.className = a_dynamic_resize_block.className.replace(/pmb-dynamic-resize/g, 'pmb-dynamic-resized');
+    a_dynamic_resize_block.className = a_dynamic_resize_block.className.replace(/pmb-dynamic-resize/g, 'pmb-dynamic-resized') + ' ' + max_class;
     return a_dynamic_resize_block;
 }
 
