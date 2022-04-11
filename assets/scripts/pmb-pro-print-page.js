@@ -15,9 +15,9 @@ function pmb_standard_print_page_wrapup(){
  */
 function pmb_check_project_size(warning_element_selector){
     //check for really, really big printouts
-    var many_articles = jQuery('article').length > 100;
+    var many_articles = jQuery('article').length > 200;
     // don't warn about many images if they've already reduced their quality
-    var many_images = jQuery('img').length > 100 &&
+    var many_images = jQuery('img').length > 200 &&
         (typeof pmb_design_options == 'object' &&
             typeof pmb_design_options.image_quality === 'string' &&
             ['', 'uploaded'].includes(pmb_design_options.image_quality)
