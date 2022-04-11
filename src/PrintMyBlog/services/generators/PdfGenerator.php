@@ -42,6 +42,12 @@ class PdfGenerator extends HtmlBaseGenerator
             null,
             filemtime(PMB_STYLES_DIR . 'pmb-pro-pdf.css')
         );
+        wp_enqueue_script(
+            'pmb_pro_pdf',
+            PMB_ASSETS_URL . 'scripts/pmb-pro-pdf.js',
+            array('docraptor', 'jquery', 'underscore', 'pmb_pro_page'),
+            filemtime(PMB_ASSETS_DIR . 'scripts/pmb-pro-pdf.js')
+        );
         wp_enqueue_script('pmb_general');
         $style_file = $this->getDesignDir() . 'assets/style.css';
         $script_file = $this->getDesignDir() . 'assets/script.js';
@@ -116,7 +122,9 @@ class PdfGenerator extends HtmlBaseGenerator
                             'print-my-blog'
                         ),
                         is_array($license_info) ? $license_info['remaining_credits'] : '0'
-                    )
+                    ),
+                    'many_articles' => __('Your project is very big and you might have errors downloading the file. If so, try splitting your content into multiple projects and instead creating multiple smaller files.', 'print-my-blog'),
+                    'many_images' => __('Your project has lots of images and you might have errors downloading the file. If so, try spltting your content into multiple projects or reducing the image quality set on your design.', 'print-my-blog'),
                 ]
             ]
         );

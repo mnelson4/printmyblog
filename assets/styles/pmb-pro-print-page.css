@@ -111,6 +111,13 @@ Styles for the print window
     }
 }
 
+.pmb-warning{
+    border:2px solid orange;
+    padding:1em;
+    margin:1em;
+    color:orangered;
+}
+
 /**
  * Styles for the document itself
  */

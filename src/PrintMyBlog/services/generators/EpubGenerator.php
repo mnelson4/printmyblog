@@ -43,6 +43,7 @@ class EpubGenerator extends HtmlBaseGenerator
 
     public function enqueueStylesAndScripts()
     {
+        wp_enqueue_script('pmb_pro_page');
         wp_enqueue_style('pmb_pro_page');
         wp_register_script(
             'epub-gen-memory',
@@ -83,13 +84,17 @@ class EpubGenerator extends HtmlBaseGenerator
 
         wp_localize_script(
             'pmb-epub',
-            'pmb_epub',
+            'pmb_pro',
             [
                 'title' => $this->project->getPublishedTitle(),
                 'authors' => $this->getAuthors(),
                 'cover' => $this->project->getSetting('cover'),
                 'css' => $css,
-                'version' => '3'
+                'version' => '3',
+                'translations' => [
+                    'many_articles' => __('Your project is very big and you might have errors downloading the file. If so, try splitting your content into multiple projects and instead creating multiple smaller files.', 'print-my-blog'),
+                    'many_images' => __('Your project has lots of images and you might have errors downloading the file. If so, try spltting your content into multiple projects or reducing the image quality set on your design.', 'print-my-blog'),
+                ]
             ]
         );
     }

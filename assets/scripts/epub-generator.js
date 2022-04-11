@@ -1,5 +1,5 @@
 /**
- * @var pmb_epub object
+ * @var pmb_pro object
  * @param blob
  * @returns {Promise<unknown>}
  */
@@ -13,15 +13,15 @@ function blobToBase64(blob) {
 }
 jQuery(document).on('pmb_wrap_up', function(){
     var epub_options = {
-        title: pmb_epub.title,
-        author:pmb_epub.authors,
+        title: pmb_pro.title,
+        author:pmb_pro.authors,
         verbose: true,
         ignoreFailedDownloads:true,
         prependChapterTitles:false,
         numberChaptersInTOC:false,
-        cover:pmb_epub.cover,
-        css:pmb_epub.css,
-        version: parseInt(pmb_epub.version)
+        cover:pmb_pro.cover,
+        css:pmb_pro.css,
+        version: parseInt(pmb_pro.version)
     }
     var sections = [];
     var found_toc = false;

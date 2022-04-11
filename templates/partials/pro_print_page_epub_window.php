@@ -25,6 +25,7 @@
                 <div class="pmb-print-option pmb-constrained pmb-highlight">
                     <h2><?php esc_html_e('ePub Generator', 'print-my-blog');?></h2>
                     <p><?php esc_html_e('Unlimited ePubs with a current subscripstion', 'print-my-blog');?></p>
+                    <div style="display:none" class="pmb-warning" id="pmb-print-page-warnings"></div>
                     <a class="pmb-pro-window-button pmb-disabled" id="download_link"  download="<?php echo esc_attr($project_generation->getFileNameWithExtension());?>"><?php esc_html_e('Download ePub', 'print-my-blog');?></a>
                     <p><?php esc_html_e('Please refer to our documentation if you have questions about styling ', 'print-my-blog');?></p>
                 </div>

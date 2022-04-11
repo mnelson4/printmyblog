@@ -1,14 +1,10 @@
 jQuery(document).ready(function(){
-    // Pretty up the pageit
-    pmb_remove_unsupported_content();
-    pmb_add_header_classes();
+    // Pretty up the page
+    pmb_standard_print_page_wrapup();
     pmb_default_align_center();
-    pmb_fix_wp_videos();
     if(pmb_design_options.convert_videos === '1'){
         pmb_convert_youtube_videos_to_images();
     }
-    pmb_load_avada_lazy_images();
-    pmb_reveal_dynamic_content();
     pmb_replace_internal_links_with_epub_file_links();
 });
 

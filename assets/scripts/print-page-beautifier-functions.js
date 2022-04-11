@@ -16,6 +16,7 @@ function pmb_remove_unsupported_content(){
     jQuery('[href^="//"]').each(function(index, element){
         element.setAttribute("href", location.protocol + element.getAttribute('href'));
     });
+    // Don't stack columns vertically
     jQuery('.wp-block-columns').addClass('is-not-stacked-on-mobile');
 }
 

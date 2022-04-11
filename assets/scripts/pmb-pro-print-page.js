@@ -1,170 +1,41 @@
-function pmb_generate_doc_from_html(is_preview, success_callback, failure_callback){
-    var use_middleman = parseInt(pmb_pro.use_pmb_central_for_previews) || ! is_preview;
-    if(use_middleman){
-        var authorization_data = pmb_pro.license_data;
-    } else {
-        var authorization_data = 'YOUR_API_KEY_HERE';
-    }
-
-    var dynamic_doc_attrs = JSON.parse(JSON.stringify(pmb_pro.doc_attrs));
-    // if this a preview, always override whether its a test request or not.
-    if(is_preview){
-        dynamic_doc_attrs.test = true;
-    }
-
-    var html = '<html>' + jQuery('html').html() + '</html>';
-
-    // don't send script tags, as we don't want Prince to execute Javascript we've already executed in the browser
-    var open_tag = '<script';
-    var close_tag = '</script>';
-    var open_tag_pos = html.indexOf(open_tag);
-    var close_tag_pos = html.indexOf(close_tag);
-
-    while(open_tag_pos !== -1){
-        var pre_script = html.substring(0,open_tag_pos);
-        var post_script = html.substring(close_tag_pos + close_tag.length);
-        html =  pre_script + post_script;
-        open_tag_pos = html.indexOf(open_tag);
-        close_tag_pos = html.indexOf(close_tag);
-    }
-
-    // unleash the Javascript for Prince!!
-    html = html
-        .replaceAll('<prince-script', '<script')
-        .replaceAll('</prince-script>','</script>');
-
-    // jQuery escaped the contents of the Prince script when we fetched it, so un-escaped it using underscore.js
-    var open_tag_pos = html.indexOf('<script');
-    var close_tag_pos = html.indexOf(close_tag);
-    var pre_script = html.substring(0,open_tag_pos);
-    var script_contents = html.substring(open_tag_pos + open_tag.length + 1, close_tag_pos);
-    script_contents = _.unescape(script_contents);
-    var post_script = html.substring(close_tag_pos + close_tag.length);
-    html =  pre_script + open_tag + '>' + script_contents + close_tag + post_script;
-
-    dynamic_doc_attrs.document_content = html;
-    console.log(html);
-
-
-    var server_communicator = new PmbAsyncPdfCreation(
-        use_middleman,
-        authorization_data,
-        dynamic_doc_attrs,
-        (response) => {
-            console.log(response);
-        },
-        success_callback,
-        failure_callback
-    );
-    server_communicator.begin();
-}
-
 /**
- * Generates the test document from the current page, downloads it, and enables downloading the paid PDF
- * @param jqelement
+ * Functions that does a bunch of standard wrap-up function calls done by pretty well all designs.
  */
-function pmb_generate_test_doc(jqelement) {
-    pmb_generate_doc_from_html(
-        true,
-        (download_url) => {
-
-            pmb_stop_doing_button(jqelement);
-            jQuery('.pmb-download-live').removeClass('pmb-pro-disabled');
-            jQuery('.pmb-pro-description').html(pmb_pro.translations.pro_description);
-            window.location.href = download_url;
-        },
-        (error_message) => {
-            // jQuery('.pmb-downloading-live-pdf').hide();
-            // jQuery('.pmb-error-downloading-test-pdf').show();
-            if(error_message === 'Socket error downloading document content from supplied url.'){
-                error_message = pmb_pro.translations.socket_error;
-            }
-            pmb_stop_doing_button(jqelement);
-            jQuery.ajax(
-                pmb_pro.ajaxurl,
-                {
-                    'method': 'POST',
-                    'data':{
-                        'action':'pmb_report_error',
-                        'error': error_message,
-                        'project_id': pmb_pro.project_id,
-                        'format': pmb_pro.format
-                    }
-                }
-            );
-            alert(error_message);
-        }
-    );
+function pmb_standard_print_page_wrapup(){
+    pmb_remove_unsupported_content();
+    pmb_add_header_classes();
+    pmb_fix_wp_videos();
+    pmb_load_avada_lazy_images();
+    pmb_reveal_dynamic_content();
+    pmb_check_project_size('#pmb-print-page-warnings');
 }
-
 /**
- * Generates the paid document from the current page and downloads it
- * @param jqelement
+ * Checks if the project is really big, in which case suggests either reducing splitting it up or reducing image quality
+ * @var string warning_element_selector jQuery selector indicating where to place the warning if there is one.
  */
-function pmb_generate_live_doc(jqelement) {
-    pmb_generate_doc_from_html(
-        false,
-        (download_url) => {
-            pmb_stop_doing_button(jqelement);
-            window.location.href = download_url;
-            jQuery.ajax(
-                pmb_pro.ajaxurl,
-                {
-                    'method': 'POST',
-                    'data':{
-                        'action':'pmb_reduce_credits'
-                    }
-                }
-            );
-            jQuery('.pmb-pro-description').hide();
-            jQuery('.pmb-pro-after-pro').show();
-        },
-        (error_message) => {
-            // jQuery('.pmb-downloading-live-pdf').hide();
-            // jQuery('.pmb-error-downloading-test-pdf').show();
-            if(error_message === 'Socket error downloading document content from supplied url.'){
-                error_message = pmb_generate.translations.socket_error;
-            }
-            pmb_stop_doing_button(jqelement);
-            jQuery.ajax(
-                pmb_pro.ajaxurl,
-                {
-                    'method': 'POST',
-                    'data':{
-                        'action':'pmb_report_error',
-                        'error': error_message,
-                        'project_id': pmb_pro.project_id,
-                        'format': pmb_pro.format
-                    }
-                }
-            );
-            alert(error_message);
-        }
-    );
-}
+function pmb_check_project_size(warning_element_selector){
+    //check for really, really big printouts
+    var many_articles = jQuery('article').length > 100;
+    // don't warn about many images if they've already reduced their quality
+    var many_images = jQuery('img').length > 1 &&
+        (typeof pmb_design_options == 'object' &&
+            typeof pmb_design_options.image_quality === 'string' &&
+            ['', 'uploaded'].includes(pmb_design_options.image_quality)
+        );
 
-jQuery(document).ready(function(){
-    var input = document.getElementById("pmb-print-with-browser");
-    input.addEventListener("keyup", function(event) {
-        // Number 13 is the "Enter" key on the keyboard
-        if (event.keyCode === 13) {
-            // Cancel the default action, if needed
-            event.preventDefault();
-            // Trigger the button element with a click
-            document.getElementById("pmb-print-with-browser").click();
-        }
-    });
-    jQuery('.pmb-download-test').click(function(event){
-        var jqelement = jQuery(event.currentTarget);
-        pmb_generate_test_doc(jqelement);
-        pmb_doing_button(jqelement);
-    });
-    jQuery('.pmb-download-live').click(function(event){
-        var jqelement = jQuery(event.currentTarget);
-        if(! jqelement.hasClass('pmb-pro-disabled')) {
-            pmb_generate_live_doc(jqelement);
-            pmb_doing_button(jqelement);
-        }
-    });
-    jQuery('.pmb-screen-only').remove();
-})
+    var warning_text = false;
+    switch(true){
+        case many_articles:
+            warning_text = pmb_pro.translations.many_articles;
+            break;
+        case many_images:
+            warning_text = pmb_pro.translations.many_images;
+            break;
+    }
+    if(warning_text){
+        var warning_element = jQuery(warning_element_selector);
+        warning_element.append(warning_text);
+        warning_element.show();
+
+    }
+}
