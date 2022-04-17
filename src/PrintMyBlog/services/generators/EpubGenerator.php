@@ -91,6 +91,10 @@ class EpubGenerator extends HtmlBaseGenerator
                 'cover' => $this->project->getSetting('cover'),
                 'css' => $css,
                 'version' => '3',
+                'pmb_nonce' => wp_create_nonce('pmb_pro_page'),
+                'external_resouce_mapping' => $this->external_resource_cache->getMapping(),
+                'domains_to_not_map' => $this->external_resource_cache->domainsToNotMap(),
+                'ajaxurl' => admin_url('admin-ajax.php'),
                 'translations' => [
                     'many_articles' => __('Your project is very big and you might have errors downloading the file. If so, try splitting your content into multiple projects and instead creating multiple smaller files.', 'print-my-blog'),
                     'many_images' => __('Your project has lots of images and you might have errors downloading the file. If so, try spltting your content into multiple projects or reducing the image quality set on your design.', 'print-my-blog'),

@@ -3,6 +3,7 @@
  */
 function pmb_standard_print_page_wrapup(){
     pmb_remove_unsupported_content();
+    pmb_fix_protocols();
     pmb_add_header_classes();
     pmb_fix_wp_videos();
     pmb_load_avada_lazy_images();
@@ -38,4 +39,93 @@ function pmb_check_project_size(warning_element_selector){
         warning_element.show();
 
     }
+}
+/**
+ * Looks at each of the types of tags provided, then replaces their external resources with a proxied-local one.
+ * Useful when the conversion technology (eg html-to-pdf) can't access external resources.
+ * Treats resources from whitelisted_domains as if they were local
+ * eg
+ * ```
+ * var erc = new PmbExternalResourceCacher(pmb_pro.domains_to_not_map, pmb_pro.external_resouce_mapping);
+ * erc.replaceExternalImages();
+ * erc.replaceIFrames();
+ * ```
+ * @param array html_tags
+ * @param array whitelisted_external_domains
+ */
+function PmbExternalResourceCacher(domains_to_not_map, external_resouce_mapping) {
+    this.domains_to_not_map = domains_to_not_map;
+    this.external_resource_mapping = external_resouce_mapping;
+
+    this.replaceIFrames = function(){
+        this._replace_external_resources_on('iframe','src');
+    }
+
+    this.replaceExternalImages = function(){
+        this._replace_external_resources_on('img','src')
+    }
+
+    this._replace_external_resources_on = function(tag, attribute) {
+        jQuery(tag).each(function (index, element) {
+            var treat_as_external = true;
+            var origina_url = element.attrs[attribute].val();
+            for (var i = 0; i < this.domains_to_not_map.length; i++) {
+                if (this.domains_to_not_map[i].indexOf(origina_url) !== -1) {
+                    treat_as_external = false;
+                    break;
+                }
+            }
+            if (! treat_as_external) {
+                return;
+            }
+            // find if we already know the mapping
+            var copy_url = this.external_resource_mapping[origina_url];
+            if(copy_url !== null){
+                this._update_element_and_map(origina_url, copy_url, element);
+                return;
+            }
+            // ok we need to ask the server to fetch the resource and then switch it
+            this._fetch_and_replace_external_resource(origina_url, element, attribute);
+        });
+    }
+
+    /**
+     * Updates the element's attribute with the copy's URL, and adds to the in-memory map (the server took care
+     * of doing that on the server already).
+     * @param external_url string
+     * @param copy_url string
+     * @param element
+     * @private
+     */
+    this._update_element_and_map = function(external_url, copy_url, element, attribute){
+        element.attrs[attribute].val(copy_url);
+        this.external_resource_mapping[origina_url] = copy_url;
+    }
+
+    /**
+     * Sends an AJAX request to the server, so it can fetch the external resource and cache it, and reply with the
+     * location of the cached resource
+     * @param url
+     * @param element
+     * @param attribute
+     * @private
+     */
+    this._fetch_and_replace_external_resource = function(url, element, attribute){
+        jQuery.post(
+            pmb_pro.ajaxurl,
+
+            {
+                '_pmb_nonce': pmb_pro.pmb_nonce,
+                'action': 'pmb_fetch_external_resource',
+                'resource_url': url,
+            },
+            function(data, textStatus){
+                if(typof(data.copy_url) === 'string'){
+                    this._update_element_and_map(url, data.copy_url, element, attribute);
+                }
+            }
+        );
+    }
+
+
 }

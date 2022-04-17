@@ -10,6 +10,7 @@ use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\entities\ProjectGeneration;
 use PrintMyBlog\orm\entities\ProjectSection;
+use PrintMyBlog\services\ExternalResourceCache;
 use PrintMyBlog\services\PmbCentral;
 use PrintMyBlog\services\SectionTemplateRegistry;
 use ReflectionObject;
@@ -52,6 +53,11 @@ abstract class ProjectFileGeneratorBase
     protected $section_template_registry;
 
     /**
+     * @var ExternalResourceCache
+     */
+    protected $external_resource_cache;
+
+    /**
      * ProjectHtmlGenerator constructor.
      *
      * @param Project $project
@@ -65,10 +71,12 @@ abstract class ProjectFileGeneratorBase
 
     public function inject(
         PostFetcher $post_fetcher,
-        DetectAndActivate $plugin_compatibility
+        DetectAndActivate $plugin_compatibility,
+        ExternalResourceCache $external_resource_cache
     ) {
         $this->post_fetcher = $post_fetcher;
         $this->plugin_compatibility = $plugin_compatibility;
+        $this->external_resource_cache = $external_resource_cache;
     }
 
     /**

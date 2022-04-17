@@ -8,6 +8,7 @@ use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\entities\ProjectGeneration;
 use PrintMyBlog\entities\ProjectProgress;
 use PrintMyBlog\orm\managers\ProjectManager;
+use PrintMyBlog\services\ExternalResourceCache;
 use PrintMyBlog\services\FileFormatRegistry;
 use PrintMyBlog\services\PmbCentral;
 use PrintMyBlog\system\Context;
@@ -15,6 +16,8 @@ use PrintMyBlog\system\CustomPostTypes;
 use Twine\controllers\BaseController;
 use Twine\helpers\Array2;
 use Twine\orm\managers\PostWrapperManager;
+use Twine\services\filesystem\File;
+use WP_Error;
 use WP_Post_Type;
 use WP_Query;
 use PrintMyBlog\orm\entities\Project;
@@ -54,6 +57,11 @@ class Ajax extends BaseController
     protected $post_manager;
 
     /**
+     * @var ExternalResourceCache
+     */
+    protected $external_resouce_cache;
+
+    /**
      * @param ProjectManager $project_manager
      */
     public function inject(
@@ -61,13 +69,15 @@ class Ajax extends BaseController
         FileFormatRegistry $format_registry,
         PostFetcher $post_fetcher,
         PmbCentral $pmb_central,
-        PostWrapperManager $post_manager
+        PostWrapperManager $post_manager,
+        ExternalResourceCache $external_resource_map
     ) {
         $this->project_manager = $project_manager;
         $this->format_registry = $format_registry;
         $this->post_fetcher = $post_fetcher;
         $this->pmb_central = $pmb_central;
         $this->post_manager = $post_manager;
+        $this->external_resouce_cache = $external_resource_map;
     }
     /**
      * Sets hooks that we'll use in the admin.
@@ -75,6 +85,10 @@ class Ajax extends BaseController
      */
     public function setHooks()
     {
+        $this->addUnauthenticatedCallback(
+            'pmb_fetch_external_resource',
+            'handleFetchExternalResource'
+        );
         $this->addUnauthenticatedCallback(
             'pmb_fetch_rest_api_url',
             'handleFetchRestApiUrl'
@@ -371,4 +385,25 @@ class Ajax extends BaseController
         wp_send_json_success();
         exit;
     }
+
+    public function handleFetchExternalResource(){
+        // check print page nonce. Access to the print page is only shared with authorized users and necessary external
+        // services. So it acts as a temporary access token.
+        check_admin_referer('pmb_pro_page', '_pmb_nonce');
+
+        // ok fetch external resource
+        $url = $_REQUEST['resource_url'];
+        $copy_url = $this->external_resouce_cache->getLocalUrlFromExternalUrl($url);
+        if( ! $copy_url){
+            $copy_url = $this->external_resouce_cache->writeAndMapFile($url);
+            $this->external_resouce_cache->saveMapping();
+        }
+        wp_send_json_success(
+            [
+                'copy_url' => $copy_url
+            ]
+        );
+    }
+
+
 }
