@@ -308,21 +308,21 @@ class Admin extends BaseController
             if (isset($_POST['pmb-reset'])) {
                 $settings = Context::instance()->useNew('PrintMyBlog\domain\FrontendPrintSettings', [null,false]);
             } else {
-                $settings->setShowButtons(isset($_POST['show_buttons']));
-                $settings->setShowButtonsPages(isset($_POST['show_buttons_pages']));
-                $settings->setPlaceAbove(Array2::setOr($_POST, 'place_above', 1));
+                $settings->setShowButtons(isset($_POST['pmb_show_buttons']));
+                $settings->setShowButtonsPages(isset($_POST['pmb_show_buttons_pages']));
+                $settings->setPlaceAbove(Array2::setOr($_POST, 'pmb_place_above', 1));
                 foreach ($settings->formatSlugs() as $slug) {
-                    if (isset($_POST['format'][$slug])) {
+                    if (isset($_POST['pmb_format'][$slug])) {
                         $active = true;
                     } else {
                         $active = false;
                     }
                     $settings->setFormatActive($slug, $active);
-                    if (isset($_POST['frontend_labels'][$slug])) {
-                        $settings->setFormatFrontendLabel($slug, $_POST['frontend_labels'][$slug]);
+                    if (isset($_POST['pmb_frontend_labels'][$slug])) {
+                        $settings->setFormatFrontendLabel($slug, $_POST['pmb_frontend_labels'][$slug]);
                     }
-                    if (isset($_POST['print_options'][$slug])) {
-                        $settings->setPrintOptions($slug, $_POST['print_options'][$slug]);
+                    if (isset($_POST['pmb_print_options'][$slug])) {
+                        $settings->setPrintOptions($slug, $_POST['pmb_print_options'][$slug]);
                     }
                 }
             }
