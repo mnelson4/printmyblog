@@ -434,6 +434,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = xxxxxx xxxxx =
 * Enhancement: in case a search engine comes across a Pro Print page, instruct them to not index those either
+* Bugfix: namespace form inputs on settings page to avoid conflicts with other plugins
 
 = 3.13.1 April 11, 2022 =
 * Feature: offer email support for all users (it was a hassle to explain how to use it to non-technical folks)
