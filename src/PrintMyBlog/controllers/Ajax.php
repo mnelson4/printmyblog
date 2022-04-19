@@ -389,18 +389,28 @@ class Ajax extends BaseController
     public function handleFetchExternalResource(){
         // check print page nonce. Access to the print page is only shared with authorized users and necessary external
         // services. So it acts as a temporary access token.
-        check_admin_referer('pmb_pro_page', '_pmb_nonce');
-
-        // ok fetch external resource
-        $url = $_REQUEST['resource_url'];
-        $copy_url = $this->external_resouce_cache->getLocalUrlFromExternalUrl($url);
-        if( ! $copy_url){
-            $copy_url = $this->external_resouce_cache->writeAndMapFile($url);
-            $this->external_resouce_cache->saveMapping();
+        $valid_nonce = check_admin_referer('pmb_pro_page', '_pmb_nonce');
+        $authorized = current_user_can('edit_pmb_projects');
+        if (
+            $valid_nonce
+            && $authorized
+        ) {
+            // ok fetch external resource
+            $url = $_REQUEST['resource_url'];
+            $copy_url = $this->external_resouce_cache->getLocalUrlFromExternalUrl($url);
+            if( $copy_url === null){
+                $copy_url = $this->external_resouce_cache->writeAndMapFile($url);
+            }
+            wp_send_json_success(
+                [
+                    'copy_url' => $copy_url
+                ]
+            );
         }
-        wp_send_json_success(
+        wp_send_json_error(
             [
-                'copy_url' => $copy_url
+                'nonce_valid' => $valid_nonce,
+                'current_user_authenticated' => $authorized
             ]
         );
     }

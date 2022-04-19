@@ -46,16 +46,16 @@ function pmb_check_project_size(warning_element_selector){
  * Treats resources from whitelisted_domains as if they were local
  * eg
  * ```
- * var erc = new PmbExternalResourceCacher(pmb_pro.domains_to_not_map, pmb_pro.external_resouce_mapping);
+ * var erc = new PmbExternalResourceCacher();
  * erc.replaceExternalImages();
  * erc.replaceIFrames();
  * ```
  * @param array html_tags
  * @param array whitelisted_external_domains
  */
-function PmbExternalResourceCacher(domains_to_not_map, external_resouce_mapping) {
-    this.domains_to_not_map = domains_to_not_map;
-    this.external_resource_mapping = external_resouce_mapping;
+function PmbExternalResourceCacher() {
+    this.domains_to_not_map = pmb_pro.domains_to_not_map;
+    this.external_resource_mapping = pmb_pro.external_resouce_mapping;
 
     this.replaceIFrames = function(){
         this._replace_external_resources_on('iframe','src');
@@ -66,11 +66,13 @@ function PmbExternalResourceCacher(domains_to_not_map, external_resouce_mapping)
     }
 
     this._replace_external_resources_on = function(tag, attribute) {
+        var that = this;
         jQuery(tag).each(function (index, element) {
             var treat_as_external = true;
-            var origina_url = element.attrs[attribute].val();
-            for (var i = 0; i < this.domains_to_not_map.length; i++) {
-                if (this.domains_to_not_map[i].indexOf(origina_url) !== -1) {
+            var remote_url = element.attributes[attribute].value;
+            var remote_domain = (new URL(remote_url)).hostname;
+            for (var i = 0; i < that.domains_to_not_map.length; i++) {
+                if (that.domains_to_not_map[i].indexOf(remote_domain) !== -1) {
                     treat_as_external = false;
                     break;
                 }
@@ -79,13 +81,13 @@ function PmbExternalResourceCacher(domains_to_not_map, external_resouce_mapping)
                 return;
             }
             // find if we already know the mapping
-            var copy_url = this.external_resource_mapping[origina_url];
-            if(copy_url !== null){
-                this._update_element_and_map(origina_url, copy_url, element);
+            var copy_url = that.external_resource_mapping[remote_url];
+            if(copy_url !== null && copy_url !== false && typeof(copy_url) !== 'undefined'){
+                that._update_element_and_map(remote_url, copy_url, element, attribute);
                 return;
             }
             // ok we need to ask the server to fetch the resource and then switch it
-            this._fetch_and_replace_external_resource(origina_url, element, attribute);
+            that._fetch_and_replace_external_resource(remote_url, element, attribute);
         });
     }
 
@@ -98,8 +100,8 @@ function PmbExternalResourceCacher(domains_to_not_map, external_resouce_mapping)
      * @private
      */
     this._update_element_and_map = function(external_url, copy_url, element, attribute){
-        element.attrs[attribute].val(copy_url);
-        this.external_resource_mapping[origina_url] = copy_url;
+        element.attributes[attribute].value = copy_url;
+        this.external_resource_mapping[external_url] = copy_url;
     }
 
     /**
@@ -111,17 +113,17 @@ function PmbExternalResourceCacher(domains_to_not_map, external_resouce_mapping)
      * @private
      */
     this._fetch_and_replace_external_resource = function(url, element, attribute){
+        var that = this;
         jQuery.post(
             pmb_pro.ajaxurl,
-
             {
                 '_pmb_nonce': pmb_pro.pmb_nonce,
                 'action': 'pmb_fetch_external_resource',
                 'resource_url': url,
             },
             function(data, textStatus){
-                if(typof(data.copy_url) === 'string'){
-                    this._update_element_and_map(url, data.copy_url, element, attribute);
+                if(data.success && typeof(data.data.copy_url) === 'string'){
+                    that._update_element_and_map(url, data.data.copy_url, element, attribute);
                 }
             }
         );

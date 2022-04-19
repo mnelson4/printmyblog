@@ -4,65 +4,21 @@
 namespace PrintMyBlog\services;
 
 
+use PrintMyBlog\orm\managers\ExternalResourceManager;
+use stdClass;
 use Twine\services\filesystem\File;
 use WP_Error;
 
 class ExternalResourceCache
 {
-    const option_name = 'pmb_external_resource_map';
     /**
-     * @var array|boolean keys are external resouce URLs, values are their internal resource names; if boolean
-     * FALSE then it hasn't been initialized yet.
+     * @var ExternalResourceManager
      */
-    private $mapping = false;
+    private $external_resouce_manager;
 
-    /**
-     * Stores the mapping so it can be saved later during the request
-     * @param string $external_resource_url absolute URL
-     * @param string|null $internal_copy_url (relative to wp-content/uploads/pmb/)
-     */
-    protected function mapExternalUrlToFilename($external_resource_url, $internal_copy_path){
-        $this->initMap();
-        $this->mapping[$external_resource_url] = $internal_copy_path;
-    }
 
-    /**
-     * Gets the filename (relative to wp-content/uploads/pmb/) of the local resource from the URL to the external,
-     * @param $external_resource_url
-     * @return string|null
-     */
-    protected function getCopiedFilenameFromExternalUrl($external_resource_url){
-        $this->initMap();
-        if(isset($this->mapping[$external_resource_url])){
-            return $this->mapping[$external_resource_url];
-        }
-        return null;
-    }
-
-    /**
-     * Gets the absolute URL of the copy of the external resource
-     * @param $external_resource_url
-     * @return string
-     */
-    public function getLocalUrlFromExternalUrl($external_resource_url){
-        $filename = $this->getCopiedFilenameFromExternalUrl($external_resource_url);
-        if( ! $filename){
-            return null;
-        }
-        return $this->getCacheUrl() . $filename;
-    }
-
-    /**
-     * Gets the absolute filepath from of the local copy of the external resource
-     * @param $external_resource_url
-     * @return string
-     */
-    protected function getLocalFullPathFromExternalUrl($external_resource_url){
-        $filename = $this->getCopiedFilenameFromExternalUrl($external_resource_url);
-        if( ! $filename){
-            return null;
-        }
-        return $this->getCacheDir() . $filename;
+    public function inject(ExternalResourceManager $external_resource_manager){
+        $this->external_resouce_manager = $external_resource_manager;
     }
 
     /**
@@ -83,49 +39,80 @@ class ExternalResourceCache
 
     /**
      * @param $external_url
-     * @return string|null URL of copied resource, or null if there was an error
+     * @return string|null|false URL of copied resource, null if not yet copied, or false if there was an error
      */
     public function writeAndMapFile($external_url){
-        $copy_filename = sanitize_file_name($external_url);
+        $start_of_querystring = strpos($external_url,'?');
+        if( ! $start_of_querystring === false){
+            $querystring = substr($external_url, $start_of_querystring);
+            $external_url_sans_querystring = substr($external_url, 0, $start_of_querystring);
+        } else {
+            $querystring = '';
+            $external_url_sans_querystring = $external_url;
+        }
+
+        $copy_filename = sanitize_file_name($external_url_sans_querystring);
+
+        $extension = pathinfo($external_url, PATHINFO_EXTENSION);
+        if( ! $extension){
+            $copy_filename .= '.html';
+        }
+
         $folder = $this->getCacheDir();
 
-        $response = wp_remote_get($external_url);
-        if(is_array($response) && ! $response instanceof WP_Error){
+        $response = wp_remote_get(
+            $external_url,
+            [
+                'sslverify' => false,
+                'timeout' => 15,
+                'user-agent' => 'PostmanRuntime/7.26.8',
+                'httpversion' => '1.1',
+//              streaming the file directly to the FS sounds more efficient, but it actually still goes into memory and seems buggy
+//                'stream' => true,
+//                'filename'=> $folder . $copy_filename,
+            ]
+        );
+        if(is_array($response) && $response['response']['code'] === 200 && ! $response instanceof WP_Error){
             $filepath = $folder . '/' . $copy_filename;
             $content = $response['body'];
             $file = new File($filepath);
             $file->write($content);
-
+            $this->external_resouce_manager->map($external_url, $copy_filename . $querystring);
+        } else {
+            $this->external_resouce_manager->map($external_url, null);
         }
-        $this->mapExternalUrlToFilename($external_url, $copy_filename);
+
         return $this->getLocalUrlFromExternalUrl($external_url);
     }
 
     /**
-     * Gets the current mapping from external resources to copied resource URLs
-     * @return array
+     * @param $external_url
+     * @return string|null|false null if not yet cached; false if there was an error caching it
      */
-    public function getMapping(){
-        $this->initMap();
-        $mapping_absolute_urls = [];
-        foreach($this->mapping as $external_url => $copied_filename){
-            $mapping_absolute_urls[$external_url] = $this->getCacheUrl() . $copied_filename;
-        }
-        return $mapping_absolute_urls;
-    }
+    public function getLocalUrlFromExternalUrl($external_url){
+        $external_resource = $this->external_resouce_manager->getByExternalUrl($external_url);
+        if($external_resource){
+            if($external_resource->getCopyFilename()){
+                return $this->getCacheUrl() . $external_resource->getCopyFilename();
+            }
+            return false;
 
-
-    protected function initMap(){
-        if( $this->mapping === false){
-            $this->mapping = (array)get_option(self::option_name, []);
         }
+        return null;
     }
 
     /**
-     * Updates the mapping using mapping data saved on this class
+     * Gets the current mapping from external resources to copied resource URLs
+     * @return array|stdClass if it's empty (so WP's localize_script will still make it a JS object)
      */
-    public function saveMapping(){
-        update_option(self::option_name, $this->mapping);
+    public function getMapping(){
+        foreach($this->external_resouce_manager->getAllMapping() as $external_resource){
+            $mapping_absolute_urls[$external_resource->getExternalUrl()] = $this->getCacheUrl() . $external_resource->getCopyFilename();
+        }
+        if(empty($mapping_absolute_urls)){
+            return new stdClass();
+        }
+        return $mapping_absolute_urls;
     }
 
     /**

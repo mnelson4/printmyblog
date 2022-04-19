@@ -154,6 +154,9 @@ class Context extends BaseContext
             ],
             'PrintMyBlog\domain\DefaultDesignTemplates' => [
                 'PrintMyBlog\helpers\ImageHelper' => self::REUSE
+            ],
+            'PrintMyBlog\services\ExternalResourceCache' => [
+                'PrintMyBlog\orm\managers\ExternalResourceManager' => self::REUSE
             ]
         ];
     }
