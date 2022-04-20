@@ -91,9 +91,12 @@ class PdfGenerator extends HtmlBaseGenerator
                     'install_id' => $site instanceof FS_Site ? $site->id : '',
                     'authorization_header' => $site instanceof FS_Site ? $this->getPmbCentral()->getSiteAuthorizationHeader() : '',
                 ],
+                'pmb_nonce' => wp_create_nonce('pmb_pro_page'),
                 'ajaxurl' => admin_url('admin-ajax.php'),
                 'project_id' => $this->project->getWpPost()->ID,
                 'format' => $this->project_generation->getFormat()->slug(),
+                'external_resouce_mapping' => $this->external_resource_cache->getMapping(),
+                'domains_to_not_map' => $this->external_resource_cache->domainsToNotMap(),
                 'doc_attrs' => apply_filters(
                     '\PrintMyBlog\controllers\Admin::enqueueScripts doc_attrs',
                     [

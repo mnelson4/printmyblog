@@ -70,7 +70,8 @@ class Context extends BaseContext
                 'PrintMyBlog\services\FileFormatRegistry' => self::REUSE,
                 'PrintMyBlog\db\PostFetcher' => self::REUSE,
                 'PrintMyBlog\services\PmbCentral' => self::REUSE,
-                'Twine\orm\managers\PostWrapperManager' => self::REUSE
+                'Twine\orm\managers\PostWrapperManager' => self::REUSE,
+                'PrintMyBlog\services\ExternalResourceCache' => self::REUSE
             ],
             'PrintMyBlog\orm\entities\Project'          => [
                 'PrintMyBlog\orm\managers\ProjectSectionManager'             => self::REUSE,
@@ -102,11 +103,13 @@ class Context extends BaseContext
             ],
             'PrintMyBlog\services\generators\PdfGenerator' => [
                 'PrintMyBlog\db\PostFetcher' => self::REUSE,
-                'PrintMyBlog\compatibility\DetectAndActivate' => self::REUSE
+                'PrintMyBlog\compatibility\DetectAndActivate' => self::REUSE,
+                'PrintMyBlog\services\ExternalResourceCache' => self::REUSE
             ],
             'PrintMyBlog\services\generators\EpubGenerator' => [
                 'PrintMyBlog\db\PostFetcher' => self::REUSE,
-                'PrintMyBlog\compatibility\DetectAndActivate' => self::REUSE
+                'PrintMyBlog\compatibility\DetectAndActivate' => self::REUSE,
+                'PrintMyBlog\services\ExternalResourceCache' => self::REUSE
             ],
             'PrintMyBlog\services\FileFormatRegistry' => [
                 'PrintMyBlog\factories\FileFormatFactory' => self::REUSE,
@@ -151,6 +154,9 @@ class Context extends BaseContext
             ],
             'PrintMyBlog\domain\DefaultDesignTemplates' => [
                 'PrintMyBlog\helpers\ImageHelper' => self::REUSE
+            ],
+            'PrintMyBlog\services\ExternalResourceCache' => [
+                'PrintMyBlog\orm\managers\ExternalResourceManager' => self::REUSE
             ]
         ];
     }

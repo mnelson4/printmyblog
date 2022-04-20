@@ -5,6 +5,15 @@ function pmb_remove_unsupported_content(){
     // remove "noscripts" because we actually executed Javascript in the browser, then turn JS off for DocRaptor
     // (but Javascript was executed, so no need to do noscript tags)
     jQuery('noscript').remove();
+    // Don't stack columns vertically
+    jQuery('.wp-block-columns').addClass('is-not-stacked-on-mobile');
+}
+
+/**
+ * Fix common issues with folks using protocols that don't work (often these don't work on their website either,
+ * or have warnings, but we'll cut them some slack and fix them here.)
+ */
+function pmb_fix_protocols(){
     // remove all the broken images and links etc
     jQuery('[src^="file:"]').remove();
     jQuery('[href^="file:"]').contents().unwrap();
@@ -16,8 +25,18 @@ function pmb_remove_unsupported_content(){
     jQuery('[href^="//"]').each(function(index, element){
         element.setAttribute("href", location.protocol + element.getAttribute('href'));
     });
-    // Don't stack columns vertically
-    jQuery('.wp-block-columns').addClass('is-not-stacked-on-mobile');
+
+    var correct_protocol = window.location.protocol;
+    var incorrect_protocol = 'http:';
+    if( correct_protocol === 'http:'){
+        incorrect_protocol = 'https:';
+    }
+    jQuery('[src^="' + incorrect_protocol + '//' + window.location.host + '"]').each(function(index, element){
+        element.setAttribute("src", element.getAttribute('src').replace(incorrect_protocol, correct_protocol));
+    });
+    jQuery('[href^="' + incorrect_protocol + '//' + window.location.host + '"]').each(function(index, element){
+        element.setAttribute("href", element.getAttribute('src').replace(incorrect_protocol, correct_protocol));
+    });
 }
 
 function pmb_dont_float(){

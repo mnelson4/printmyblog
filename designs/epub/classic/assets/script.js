@@ -12,5 +12,7 @@ jQuery(document).ready(function(){
 jQuery(window).on("load", function() {
     // pmb_resize_images(parseInt(pmb_design_options['image_size'],10));
     pmb_change_image_quality(pmb_design_options.image_quality, pmb_design_options.domain);
+    var erc = new PmbExternalResourceCacher();
+    erc.replaceExternalImages();
     jQuery(document).trigger('pmb_wrap_up');
 });
