@@ -1,8 +1,6 @@
 <?php
 
-
 namespace PrintMyBlog\orm\entities;
-
 
 use stdClass;
 
@@ -27,7 +25,8 @@ class ExternalResource
     /**
      * @return array
      */
-    public function properties(){
+    public function properties()
+    {
         return [
             'ID' => $this->getID(),
             'external_url' => $this->getExternalUrl(),
@@ -35,7 +34,8 @@ class ExternalResource
         ];
     }
 
-    public function wpdbPropertyFormats(){
+    public function wpdbPropertyFormats()
+    {
         return [
             '%d',
             '%s',

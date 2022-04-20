@@ -1,8 +1,6 @@
 <?php
 
-
 namespace PrintMyBlog\orm\managers;
-
 
 use PrintMyBlog\db\TableManager;
 use PrintMyBlog\orm\entities\ExternalResource;
@@ -18,7 +16,7 @@ class ExternalResourceManager
      */
     public function createObjFromRow($row)
     {
-        if($row){
+        if ($row) {
             return new ExternalResource($row);
         }
         return null;
@@ -28,13 +26,14 @@ class ExternalResourceManager
      * Gets a row by the external URL
      * @return ExternalResource
      */
-    public function getByExternalUrl($external_resource_url){
+    public function getByExternalUrl($external_resource_url)
+    {
         global $wpdb;
         return $this->createObjFromRow(
             $wpdb->get_row(
                 $wpdb->prepare(
-                    'SELECT * FROM ' .$wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE . ' WHERE external_url=%s LIMIT 1',
-                $external_resource_url
+                    'SELECT * FROM ' . $wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE . ' WHERE external_url=%s LIMIT 1',
+                    $external_resource_url
                 )
             )
         );
@@ -44,11 +43,12 @@ class ExternalResourceManager
      * Gets the mapping between all external resources and cached items
      * @return \stdClass[]
      */
-    public function getAllMapping(){
+    public function getAllMapping()
+    {
         global $wpdb;
         return $this->createObjsFromRows(
             $wpdb->get_results(
-            'SELECT * FROM ' . $wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE
+                'SELECT * FROM ' . $wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE
             )
         );
     }
@@ -57,9 +57,10 @@ class ExternalResourceManager
      * @param stdClass[] $rows
      * @return ExternalResource[]
      */
-    protected function createObjsFromRows($rows){
+    protected function createObjsFromRows($rows)
+    {
         $objs = [];
-        foreach($rows as $row){
+        foreach ($rows as $row) {
             $objs[] = $this->createObjFromRow($row);
         }
         return $objs;
@@ -70,7 +71,8 @@ class ExternalResourceManager
      * @param $external_url
      * @return bool
      */
-    public function cached($external_url){
+    public function cached($external_url)
+    {
         global $wpdb;
         return (bool)$wpdb->get_var(
             $wpdb->prepare(
@@ -85,9 +87,10 @@ class ExternalResourceManager
      * @param $filename
      * @return int
      */
-    public function map($external_url, $filename){
+    public function map($external_url, $filename)
+    {
         $external_resource = $this->getByExternalUrl($external_url);
-        if(! $external_resource){
+        if (! $external_resource) {
             $external_resource = new ExternalResource(
                 [
                     'ID' => null,
@@ -103,9 +106,10 @@ class ExternalResourceManager
      * @param ExternalResource $externalResource
      * @return int the ID of the saved row
      */
-    public function save(ExternalResource $externalResource){
+    public function save(ExternalResource $externalResource)
+    {
         global $wpdb;
-        if($externalResource->getID()){
+        if ($externalResource->getID()) {
             $wpdb->update(
                 $wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE,
                 $externalResource->properties(),

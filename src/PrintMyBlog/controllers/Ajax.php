@@ -386,7 +386,8 @@ class Ajax extends BaseController
         exit;
     }
 
-    public function handleFetchExternalResource(){
+    public function handleFetchExternalResource()
+    {
         // check print page nonce. Access to the print page is only shared with authorized users and necessary external
         // services. So it acts as a temporary access token.
         $valid_nonce = check_admin_referer('pmb_pro_page', '_pmb_nonce');
@@ -398,7 +399,7 @@ class Ajax extends BaseController
             // ok fetch external resource
             $url = $_REQUEST['resource_url'];
             $copy_url = $this->external_resouce_cache->getLocalUrlFromExternalUrl($url);
-            if( $copy_url === null){
+            if ($copy_url === null) {
                 $copy_url = $this->external_resouce_cache->writeAndMapFile($url);
             }
             wp_send_json_success(
@@ -414,6 +415,4 @@ class Ajax extends BaseController
             ]
         );
     }
-
-
 }

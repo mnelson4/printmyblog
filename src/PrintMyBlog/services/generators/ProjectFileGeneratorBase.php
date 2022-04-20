@@ -136,7 +136,7 @@ abstract class ProjectFileGeneratorBase
             return '%s';
         });
         do_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->startGenerating', $this);
-        register_shutdown_function( array( $this, 'shutdown' ) );
+        register_shutdown_function(array( $this, 'shutdown' ));
     }
 
     /**
@@ -395,17 +395,18 @@ abstract class ProjectFileGeneratorBase
     /**
      * Records any PHP fatal errors while generating the file.
      */
-    public function shutdown(){
+    public function shutdown()
+    {
         // copy-aste from Fatal Error Notify plugin
         $error = error_get_last();
 
-        if ( is_null( $error ) ) {
+        if (is_null($error)) {
             return;
         }
 
         // A couple types of errors we don't need reported.
 
-        if ( E_WARNING === $error['type'] && strpos( $error['message'], 'unlink' ) ) {
+        if (E_WARNING === $error['type'] && strpos($error['message'], 'unlink')) {
             // a lot of plugins generate these because it's faster to unlink()
             // without checking if the file exists first, even if it creates a
             // warning.
@@ -414,8 +415,7 @@ abstract class ProjectFileGeneratorBase
 
         $generation = $this->project_generation;
         if ($generation instanceof ProjectGeneration) {
-            $generation->setLastError(var_export($error,true));
+            $generation->setLastError(var_export($error, true));
         }
-
     }
 }
