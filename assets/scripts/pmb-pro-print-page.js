@@ -56,6 +56,7 @@ function pmb_check_project_size(warning_element_selector){
 function PmbExternalResourceCacher() {
     this.domains_to_not_map = pmb_pro.domains_to_not_map;
     this.external_resource_mapping = pmb_pro.external_resouce_mapping;
+    this.external_resource_queue = [];
 
     this.replaceIFrames = function(){
         this._replace_external_resources_on('iframe','src');
@@ -72,7 +73,7 @@ function PmbExternalResourceCacher() {
             var remote_url = element.attributes[attribute].value;
             var remote_domain = (new URL(remote_url)).hostname;
             for (var i = 0; i < that.domains_to_not_map.length; i++) {
-                if (that.domains_to_not_map[i].indexOf(remote_domain) !== -1) {
+                if (remote_domain.indexOf(that.domains_to_not_map[i]) !== -1) {
                     treat_as_external = false;
                     break;
                 }
@@ -86,9 +87,31 @@ function PmbExternalResourceCacher() {
                 that._update_element_and_map(remote_url, copy_url, element, attribute);
                 return;
             }
-            // ok we need to ask the server to fetch the resource and then switch it
-            that._fetch_and_replace_external_resource(remote_url, element, attribute);
+            that.external_resource_queue.push(element);
         });
+
+        if(that.check_done_swapping_external_resouces()){
+            return;
+        }
+
+        // ok now blitz through the queue of external resouces to swap
+        var element = null;
+        while(element = that.external_resource_queue.shift()){
+            var remote_url = element.attributes[attribute].value;
+            that._fetch_and_replace_external_resource(remote_url, element, attribute);
+        }
+    }
+
+    this.check_done_swapping_external_resouces = function(){
+        if(this.external_resource_queue.length === 0){
+            this.done_swapping_external_resources();
+            return true;
+        }
+        return false;
+    }
+
+    this.done_swapping_external_resources = function(){
+        jQuery(document).trigger('pmb_external_resouces_loaded');
     }
 
     /**
@@ -126,7 +149,9 @@ function PmbExternalResourceCacher() {
                     that._update_element_and_map(url, data.data.copy_url, element, attribute);
                 }
             }
-        );
+        ).always(function(){
+            that.check_done_swapping_external_resouces();
+        });
     }
 
 
