@@ -128,7 +128,7 @@ class ExternalResourceCache
         return apply_filters(
             'PrintMyBlog\services\ExternalResourceCache->domainsToNotMap()',
             [
-                site_url(),
+                str_replace(['http://','https://'],'',site_url()),
                 '.wp.com',
                 'data:'
             ]
