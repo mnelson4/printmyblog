@@ -432,7 +432,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.14.0 April 20, 2022 =
+= 3.14.0 April 21, 2022 =
 * Feature: in order to show images from external websites in ePubs, cache them on the server
 * Bugfix: record PHP fatal errors when generating files even when WP_DEBUG is off
 

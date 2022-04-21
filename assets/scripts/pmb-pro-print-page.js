@@ -42,13 +42,12 @@ function pmb_check_project_size(warning_element_selector){
 }
 /**
  * Looks at each of the types of tags provided, then replaces their external resources with a proxied-local one.
- * Useful when the conversion technology (eg html-to-pdf) can't access external resources.
+ * Useful when the conversion technology (eg html-to-epub) can't access external resources.
  * Treats resources from whitelisted_domains as if they were local
  * eg
  * ```
  * var erc = new PmbExternalResourceCacher();
  * erc.replaceExternalImages();
- * erc.replaceIFrames();
  * ```
  * @param array html_tags
  * @param array whitelisted_external_domains
