@@ -433,7 +433,7 @@ https://youtu.be/uPQ3vqm7A2g
 == Changelog ==
 
 = 3.14.0 April 21, 2022 =
-* Feature: in order to show images from external websites in ePubs, cache them on the server
+* Feature: in order to show images from external websites in ePubs, cache them on the server (to uploads/pmb/cache) and adds new database table, pmb_external_resources (both are removed when all plugin data is deleted)
 * Bugfix: record PHP fatal errors when generating files even when WP_DEBUG is off
 
 = 3.13.2 April 18, 2022 =

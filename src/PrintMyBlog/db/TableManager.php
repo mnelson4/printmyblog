@@ -14,7 +14,7 @@ namespace PrintMyBlog\db;
 class TableManager extends \Twine\db\TableManager
 {
     const SECTIONS_TABLE = 'pmb_project_sections';
-    const EXTERNAL_RESOURCE_TABLE = 'pmb_external_resource';
+    const EXTERNAL_RESOURCE_TABLE = 'pmb_external_resources';
 
     /**
      * Ensures PMB's tables exist.
