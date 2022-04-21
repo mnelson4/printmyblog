@@ -52,6 +52,18 @@ $edit_metadata_link = add_query_arg(
     ),
     admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
 );
+$clear_cache_link = wp_nonce_url(
+    add_query_arg(
+        array_merge(
+            $base_args,
+            [
+                'subaction' => Admin::SLUG_SUBACTION_PROJECT_CLEAR_CACHE
+            ]
+        ),
+        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+    ),
+    Admin::SLUG_ACTION_EDIT_PROJECT
+);
 do_action('project_edit_generate__under_header', $project, $generations);
 ?>
 <?php if (is_array($license_info)){
@@ -129,7 +141,8 @@ foreach($generations as $generation){
     <a class="button" href="<?php echo esc_url($setup_link);?>"><?php esc_html_e('Change Title or Format', 'print-my-blog');?></a>
     <a class="button" href="<?php echo esc_url($edit_content_link);?>"><?php esc_html_e('Edit Content', 'print-my-blog');?></a>
     <a class="button" href="<?php echo esc_url($edit_metadata_link);?>"><?php esc_html_e('Edit Metadata', 'print-my-blog');?></a>
-<a class="button" href="<?php echo esc_url(admin_url(PMB_ADMIN_HELP_PAGE_PATH));?>"><span class="dashicons
+    <a class="button" href="<?php echo esc_url($clear_cache_link);?>"><?php esc_html_e('Clear Cached Resources', 'print-my-blog');?></a>
+    <a class="button" href="<?php echo esc_url(admin_url(PMB_ADMIN_HELP_PAGE_PATH));?>"><span class="dashicons
                 dashicons-sos pmb-get-help-icon"></span> <?php esc_html_e('Get Help', 'print-my-blog');?></a>
 <?php
 pmb_render_template('partials/project_footer.php');

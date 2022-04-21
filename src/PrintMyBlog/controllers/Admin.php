@@ -23,6 +23,7 @@ use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\orm\managers\ProjectSectionManager;
 use PrintMyBlog\services\DebugInfo;
+use PrintMyBlog\services\ExternalResourceCache;
 use PrintMyBlog\services\FileFormatRegistry;
 use PrintMyBlog\services\PmbCentral;
 use PrintMyBlog\services\SvgDoer;
@@ -43,6 +44,7 @@ use Twine\helpers\Array2;
 use Twine\orm\managers\PostWrapperManager;
 use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
+use Twine\services\filesystem\Folder;
 use Twine\services\notifications\OneTimeNotificationManager;
 use WP_Error;
 use WP_Post;
@@ -75,6 +77,7 @@ class Admin extends BaseController
     const SLUG_SUBACTION_PROJECT_META = 'metadata';
     const SLUG_SUBACTION_PROJECT_GENERATE = 'generate';
     const SLUG_SUBACTION_PROJECT_DUPLICATE = 'duplicate';
+    const SLUG_SUBACTION_PROJECT_CLEAR_CACHE = 'clear_cache';
     const REVIEW_OPTION_NAME = 'pmb_review';
     const SLUG_ACTION_UNINSTALL = 'uninstall';
 
@@ -148,6 +151,11 @@ class Admin extends BaseController
     protected $post_manager;
 
     /**
+     * @var ExternalResourceCache
+     */
+    protected $external_resource_cache;
+
+    /**
      * @param PostFetcher $post_fetcher
      * @param ProjectSectionManager $section_manager
      * @param ProjectManager $project_manager
@@ -169,7 +177,8 @@ class Admin extends BaseController
         OneTimeNotificationManager $notification_manager,
         DebugInfo $debug_info,
         PmbCentral $pmb_central,
-        PostWrapperManager $post_manager
+        PostWrapperManager $post_manager,
+        ExternalResourceCache $external_resouce_cache
     ) {
         $this->post_fetcher    = $post_fetcher;
         $this->section_manager = $section_manager;
@@ -182,6 +191,7 @@ class Admin extends BaseController
         $this->debug_info = $debug_info;
         $this->pmb_central = $pmb_central;
         $this->post_manager = $post_manager;
+        $this->external_resource_cache = $external_resouce_cache;
     }
     /**
      * name of the option that just indicates we successfully saved the setttings
@@ -1587,6 +1597,11 @@ class Admin extends BaseController
         );
     }
 
+    protected function clearCachedExternalResources(){
+        check_admin_referer(self::SLUG_ACTION_EDIT_PROJECT);
+        $this->external_resource_cache->clear();
+    }
+
     /**
      * Duplicates a post (any type) to be a print material and redirects to it.
      */
@@ -1616,6 +1631,10 @@ class Admin extends BaseController
         // clear options
         global $wpdb;
         $wpdb->query('DELETE FROM ' . $wpdb->options . ' WHERE option_name LIKE "pmb_%"');
+
+        $upload_dir_info = wp_upload_dir();
+        $folder = new Folder($upload_dir_info['basedir'] . '/pmb');
+        $folder->delete();
     }
 
     /**
@@ -1688,6 +1707,23 @@ class Admin extends BaseController
                 if ($subsection === self::SLUG_SUBACTION_PROJECT_DUPLICATE) {
                     $this->duplicate();
                     $redirect = admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH);
+                    wp_safe_redirect($redirect);
+                    exit;
+                }
+                if($subsection === self::SLUG_SUBACTION_PROJECT_CLEAR_CACHE) {
+                    $this->clearCachedExternalResources();
+                    $this->notification_manager->addTextNotificationForCurrentUser(
+                            OneTimeNotification::TYPE_SUCCESS,
+                        __('Cached external resources and images were cleared.', 'print-my-blog')
+                    );
+                    $redirect = add_query_arg(
+                        [
+                            'action' => self::SLUG_ACTION_EDIT_PROJECT,
+                            'subaction' => self::SLUG_SUBACTION_PROJECT_GENERATE,
+                            'ID' => $this->project->getWpPost()->ID,
+                        ],
+                        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+                    );
                     wp_safe_redirect($redirect);
                     exit;
                 }

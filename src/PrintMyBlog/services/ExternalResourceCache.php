@@ -5,6 +5,7 @@ namespace PrintMyBlog\services;
 use PrintMyBlog\orm\managers\ExternalResourceManager;
 use stdClass;
 use Twine\services\filesystem\File;
+use Twine\services\filesystem\Folder;
 use WP_Error;
 
 class ExternalResourceCache
@@ -131,5 +132,11 @@ class ExternalResourceCache
                 '.wp.com',
             ]
         );
+    }
+
+    public function clear(){
+        $this->external_resouce_manager->clear();
+        $folder = new Folder($this->getCacheDir());
+        $folder->delete();
     }
 }

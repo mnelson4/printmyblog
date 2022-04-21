@@ -59,7 +59,8 @@ class Context extends BaseContext
                 'Twine\services\notifications\OneTimeNotificationManager' => self::REUSE,
                 'PrintMyBlog\services\DebugInfo' => self::REUSE,
                 'PrintMyBlog\services\PmbCentral' => self::REUSE,
-                'Twine\orm\managers\PostWrapperManager' => self::REUSE
+                'Twine\orm\managers\PostWrapperManager' => self::REUSE,
+                'PrintMyBlog\services\ExternalResourceCache' => self::REUSE
             ],
             'PrintMyBlog\services\PersistentNotices' => [
                 'mnelson4\AdminNotices\Notices' => self::REUSE,
