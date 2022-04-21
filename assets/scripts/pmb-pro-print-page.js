@@ -55,6 +55,7 @@ function pmb_check_project_size(warning_element_selector){
 function PmbExternalResourceCacher() {
     this.domains_to_not_map = pmb_pro.domains_to_not_map;
     this.external_resource_mapping = pmb_pro.external_resouce_mapping;
+    this.external_resources_to_cache = [];
     this.resources_pending_caching_count = 0;
 
     this.replaceIFrames = function(){
@@ -86,16 +87,33 @@ function PmbExternalResourceCacher() {
                 that._update_element_and_map(remote_url, copy_url, element, attribute);
                 return;
             }
-            that._fetch_and_replace_external_resource(remote_url, element, attribute);
+            that.external_resources_to_cache.push(element);
         });
 
         if(that.check_done_swapping_external_resouces()){
             return;
         }
+        this.continue_caching_external_resources(attribute);
+    }
+
+    this.continue_caching_external_resources = function(attribute){
+        var element = this.external_resources_to_cache.shift();
+        if( ! element){
+            return;
+        }
+        var remote_url = element.attributes[attribute].value;
+        this._fetch_and_replace_external_resource(remote_url, element, attribute);
+        var that = this;
+        setTimeout(
+            function(){
+                that.continue_caching_external_resources(attribute);
+            },
+            500
+        );
     }
 
     this.check_done_swapping_external_resouces = function(){
-        if(this.resources_pending_caching_count === 0){
+        if(this.resources_pending_caching_count === 0 && this.external_resources_to_cache.length === 0){
             this.done_swapping_external_resources();
             return true;
         }
@@ -117,6 +135,7 @@ function PmbExternalResourceCacher() {
     this._update_element_and_map = function(external_url, copy_url, element, attribute){
         element.attributes[attribute].value = copy_url;
         this.external_resource_mapping[external_url] = copy_url;
+        console.log('PMB swapped "' + external_url + '" for "' + copy_url + '"');
     }
 
     /**

@@ -35,7 +35,7 @@ function pmb_fix_protocols(){
         element.setAttribute("src", element.getAttribute('src').replace(incorrect_protocol, correct_protocol));
     });
     jQuery('[href^="' + incorrect_protocol + '//' + window.location.host + '"]').each(function(index, element){
-        element.setAttribute("href", element.getAttribute('src').replace(incorrect_protocol, correct_protocol));
+        element.setAttribute("href", element.getAttribute('href').replace(incorrect_protocol, correct_protocol));
     });
 }
 

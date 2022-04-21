@@ -130,6 +130,7 @@ class ExternalResourceCache
             [
                 site_url(),
                 '.wp.com',
+                'data:'
             ]
         );
     }
