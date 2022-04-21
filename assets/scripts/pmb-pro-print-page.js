@@ -56,7 +56,7 @@ function pmb_check_project_size(warning_element_selector){
 function PmbExternalResourceCacher() {
     this.domains_to_not_map = pmb_pro.domains_to_not_map;
     this.external_resource_mapping = pmb_pro.external_resouce_mapping;
-    this.external_resource_queue = [];
+    this.resources_pending_caching_count = 0;
 
     this.replaceIFrames = function(){
         this._replace_external_resources_on('iframe','src');
@@ -87,23 +87,16 @@ function PmbExternalResourceCacher() {
                 that._update_element_and_map(remote_url, copy_url, element, attribute);
                 return;
             }
-            that.external_resource_queue.push(element);
+            that._fetch_and_replace_external_resource(remote_url, element, attribute);
         });
 
         if(that.check_done_swapping_external_resouces()){
             return;
         }
-
-        // ok now blitz through the queue of external resouces to swap
-        var element = null;
-        while(element = that.external_resource_queue.shift()){
-            var remote_url = element.attributes[attribute].value;
-            that._fetch_and_replace_external_resource(remote_url, element, attribute);
-        }
     }
 
     this.check_done_swapping_external_resouces = function(){
-        if(this.external_resource_queue.length === 0){
+        if(this.resources_pending_caching_count === 0){
             this.done_swapping_external_resources();
             return true;
         }
@@ -136,6 +129,7 @@ function PmbExternalResourceCacher() {
      * @private
      */
     this._fetch_and_replace_external_resource = function(url, element, attribute){
+        this.resources_pending_caching_count++;
         var that = this;
         jQuery.post(
             pmb_pro.ajaxurl,
@@ -150,6 +144,7 @@ function PmbExternalResourceCacher() {
                 }
             }
         ).always(function(){
+            that.resources_pending_caching_count--;
             that.check_done_swapping_external_resouces();
         });
     }
