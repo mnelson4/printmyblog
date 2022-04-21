@@ -104,6 +104,7 @@ function PmbExternalResourceCacher() {
         var remote_url = element.attributes[attribute].value;
         this._fetch_and_replace_external_resource(remote_url, element, attribute);
         var that = this;
+        // don't overrun the server all at once
         setTimeout(
             function(){
                 that.continue_caching_external_resources(attribute);

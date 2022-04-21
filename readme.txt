@@ -434,6 +434,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.14.1 April 21, 2022 =
 * Bugfix: fix code introduced in 3.14.0 which aimed to automatically fix links using the wrong HTTP protocol
+* Bugfix: slow down caching external images so server can handle it
 
 = 3.14.0 April 21, 2022 =
 * Feature: in order to show images from external websites in ePubs, cache them on the server (to uploads/pmb/cache) and adds new database table, pmb_external_resources (both are removed when all plugin data is deleted)
