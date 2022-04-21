@@ -42,5 +42,5 @@ abstract class ThingOnServer
     /**
      * @return bool success
      */
-    public abstract function delete();
+    abstract public function delete();
 }

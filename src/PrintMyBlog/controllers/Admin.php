@@ -1597,7 +1597,8 @@ class Admin extends BaseController
         );
     }
 
-    protected function clearCachedExternalResources(){
+    protected function clearCachedExternalResources()
+    {
         check_admin_referer(self::SLUG_ACTION_EDIT_PROJECT);
         $this->external_resource_cache->clear();
     }
@@ -1710,10 +1711,10 @@ class Admin extends BaseController
                     wp_safe_redirect($redirect);
                     exit;
                 }
-                if($subsection === self::SLUG_SUBACTION_PROJECT_CLEAR_CACHE) {
+                if ($subsection === self::SLUG_SUBACTION_PROJECT_CLEAR_CACHE) {
                     $this->clearCachedExternalResources();
                     $this->notification_manager->addTextNotificationForCurrentUser(
-                            OneTimeNotification::TYPE_SUCCESS,
+                        OneTimeNotification::TYPE_SUCCESS,
                         __('Cached external resources and images were cleared.', 'print-my-blog')
                     );
                     $redirect = add_query_arg(

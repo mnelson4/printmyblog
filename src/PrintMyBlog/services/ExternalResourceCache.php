@@ -134,7 +134,8 @@ class ExternalResourceCache
         );
     }
 
-    public function clear(){
+    public function clear()
+    {
         $this->external_resouce_manager->clear();
         $folder = new Folder($this->getCacheDir());
         $folder->delete();

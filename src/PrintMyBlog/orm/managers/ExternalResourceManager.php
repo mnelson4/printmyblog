@@ -134,7 +134,8 @@ class ExternalResourceManager
     /**
      * Truncates the table storing all the information about cached items.
      */
-    public function clear(){
+    public function clear()
+    {
         global $wpdb;
         $wpdb->query('TRUNCATE TABLE ' . $wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE);
     }
