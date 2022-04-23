@@ -68,7 +68,7 @@ jQuery(document).on('pmb_wrap_up', function(){
         jQuery('#download_link').removeClass('pmb-disabled');
         jQuery('.pmb-loading').remove();
 
-        const readableStream = blob.stream()
+        var readableStream = blob.stream()
 
         // more optimized pipe version
         // (Safari may have pipeTo but it's useless without the WritableStream)
@@ -77,19 +77,22 @@ jQuery(document).on('pmb_wrap_up', function(){
                 .then(() => console.log('done writing'))
         }
 
-        const fileStream = streamSaver.createWriteStream(jQuery('#download_link').attr('download').valueOf(), {
+        var fileStream = streamSaver.createWriteStream(jQuery('#download_link').attr('download').valueOf(), {
             size: blob.size // Makes the procentage visiable in the download
         })
 
         // Write (pipe) manually
         window.writer = fileStream.getWriter()
 
-        const reader = readableStream.getReader()
-        const pump = () => reader.read()
-            .then(res => res.done
-                ? writer.close()
-                : writer.write(res.value).then(pump))
-
+        var reader = readableStream.getReader()
+        var pump = function() {
+            return reader.read()
+                .then(function() {
+                return res.done
+                    ? writer.close()
+                    : writer.write(res.value).then(pump);
+            });
+        }
 
 
         // const uInt8 = new TextEncoder().encode('StreamSaver is awesome')
