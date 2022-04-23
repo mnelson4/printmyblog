@@ -52,16 +52,16 @@ class EpubGenerator extends HtmlBaseGenerator
             filemtime(PMB_SCRIPTS_DIR . 'libs/epub-gen-memory__premium_only.min.js')
         );
         wp_register_script(
-            'pmb-webstream-polyfill',
-            'https://cdn.jsdelivr.net/npm/web-streams-polyfill@2.0.2/dist/ponyfill.min.js',
+            'pmb-web-streams-ponit yfill',
+            PMB_SCRIPTS_URL . 'libs/web-streams-ponyfill__premium_only.min.js',
             [],
-            PMB_VERSION
+            filemtime(PMB_SCRIPTS_DIR . 'libs/web-streams-ponyfill__premium_only.min.js')
         );
         wp_register_script(
             'pmb-streamsaver',
-            'https://cdn.jsdelivr.net/npm/streamsaver@2.0.3/StreamSaver.min.js',
-            ['pmb-webstream-polyfill'],
-            PMB_VERSION
+            PMB_SCRIPTS_URL . 'libs/streamsaver__premium_only.min.js',
+            ['pmb-web-streams-ponyfill'],
+            filemtime(PMB_SCRIPTS_DIR . 'libs/streamsaver__premium_only.min.js')
         );
         wp_enqueue_script(
             'pmb-epub',
