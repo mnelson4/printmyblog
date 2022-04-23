@@ -1,8 +1,10 @@
+const streamSaver = window.streamSaver
 /**
  * @var pmb_pro object
  * @param blob
  * @returns {Promise<unknown>}
  */
+
 
 function blobToBase64(blob) {
     return new Promise((resolve, _) => {
@@ -12,6 +14,29 @@ function blobToBase64(blob) {
     });
 }
 jQuery(document).on('pmb_wrap_up', function(){
+
+
+    const uInt8 = new TextEncoder().encode('StreamSaver is awesome')
+
+    // streamSaver.createWriteStream() returns a writable byte stream
+    // The WritableStream only accepts Uint8Array chunks
+    // (no other typed arrays, arrayBuffers or strings are allowed)
+    const fileStream = streamSaver.createWriteStream('filename.txt', {
+        size: uInt8.byteLength, // (optional filesize) Will show progress
+        writableStrategy: undefined, // (optional)
+        readableStrategy: undefined  // (optional)
+    });
+    jQuery('#download_link').click(function(){
+        const writer = fileStream.getWriter()
+        writer.write(uInt8)
+        writer.close()
+    });
+    jQuery('#download_link').removeClass('pmb-disabled');
+    jQuery('.pmb-loading').remove();
+    return;
+
+
+
     var epub_options = {
         title: pmb_pro.title,
         author:pmb_pro.authors,
