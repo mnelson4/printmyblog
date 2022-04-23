@@ -14,29 +14,6 @@ function blobToBase64(blob) {
     });
 }
 jQuery(document).on('pmb_wrap_up', function(){
-
-
-    const uInt8 = new TextEncoder().encode('StreamSaver is awesome')
-
-    // streamSaver.createWriteStream() returns a writable byte stream
-    // The WritableStream only accepts Uint8Array chunks
-    // (no other typed arrays, arrayBuffers or strings are allowed)
-    const fileStream = streamSaver.createWriteStream('filename.txt', {
-        size: uInt8.byteLength, // (optional filesize) Will show progress
-        writableStrategy: undefined, // (optional)
-        readableStrategy: undefined  // (optional)
-    });
-    jQuery('#download_link').click(function(){
-        const writer = fileStream.getWriter()
-        writer.write(uInt8)
-        writer.close()
-    });
-    jQuery('#download_link').removeClass('pmb-disabled');
-    jQuery('.pmb-loading').remove();
-    return;
-
-
-
     var epub_options = {
         title: pmb_pro.title,
         author:pmb_pro.authors,
@@ -87,10 +64,46 @@ jQuery(document).on('pmb_wrap_up', function(){
 
     const epub = epubGen.default;
     (async () => {
-        const content = await epub(epub_options, sections);
-        download_link.href = await blobToBase64(content);
+        const blob = await epub(epub_options, sections);
         jQuery('#download_link').removeClass('pmb-disabled');
         jQuery('.pmb-loading').remove();
+
+        const readableStream = blob.stream()
+
+        // more optimized pipe version
+        // (Safari may have pipeTo but it's useless without the WritableStream)
+        if (window.WritableStream && readableStream.pipeTo) {
+            return readableStream.pipeTo(fileStream)
+                .then(() => console.log('done writing'))
+        }
+
+        // Write (pipe) manually
+        window.writer = fileStream.getWriter()
+
+        const reader = readableStream.getReader()
+        const pump = () => reader.read()
+            .then(res => res.done
+                ? writer.close()
+                : writer.write(res.value).then(pump))
+
+
+
+        // const uInt8 = new TextEncoder().encode('StreamSaver is awesome')
+        //
+        // // streamSaver.createWriteStream() returns a writable byte stream
+        // // The WritableStream only accepts Uint8Array chunks
+        // // (no other typed arrays, arrayBuffers or strings are allowed)
+        // const fileStream = streamSaver.createWriteStream('filename.txt', {
+        //     size: uInt8.byteLength, // (optional filesize) Will show progress
+        //     writableStrategy: undefined, // (optional)
+        //     readableStrategy: undefined  // (optional)
+        // });
+        jQuery('#download_link').click(function(){
+            pump();
+            // const writer = fileStream.getWriter()
+            // writer.write(uInt8)
+            // writer.close()
+        });
     })();
 });
 
