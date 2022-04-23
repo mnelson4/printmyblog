@@ -86,8 +86,11 @@ jQuery(document).on('pmb_wrap_up', function(){
 
         var reader = readableStream.getReader()
         var pump = function() {
-            return reader.read()
-                .then(function() {
+            // reader.read()
+            //     .then(res => res.done
+            //         ? writer.close()
+            //         : writer.write(res.value).then(pump));
+            reader.read().then(function(res){
                 return res.done
                     ? writer.close()
                     : writer.write(res.value).then(pump);
