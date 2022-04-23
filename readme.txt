@@ -432,6 +432,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.15.1 April 23, 2022 =
+* Enhancement: debug info includes more projects
+
 = 3.15.0 April 23, 2022 =
 * Feature: support making much larger ePubs on HTTPS sites
 

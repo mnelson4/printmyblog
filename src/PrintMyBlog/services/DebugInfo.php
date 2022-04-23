@@ -105,8 +105,20 @@ class DebugInfo
             'effective_max_size' => $effective,
             'ssl' => $is_ssl,
             'multisite' => $is_multisite,
-            'projects' => $this->getProjectData()
+            'projects' => $this->getProjectData(),
+            'designs' => $this->getDesignData(),
         ];
+    }
+
+    protected function getDesignData(){
+        $design_datas = [];
+        $designs = $this->design_manager->getAll(
+            new \WP_Query()
+        );
+        foreach($designs as $design){
+            $design_datas[] = $this->simplifyDesignData($design);
+        }
+        return $design_datas;
     }
 
     protected function getProjectData()
@@ -118,7 +130,7 @@ class DebugInfo
             new \WP_Query([
                 'order' => 'DESC',
                 'orderby' => 'modified',
-                'posts_per_page' => 1
+                'posts_per_page' => 5
             ])
         );
         $project_datas = [];
@@ -130,7 +142,7 @@ class DebugInfo
                 'designs' => []
             ];
             foreach ($project->getDesigns() as $format => $design) {
-                $project_data['designs'][$format] = $this->simplifyDesignData($design);
+                $project_data['designs'][$format] = $design->getWpPost()->post_title . ' (ID:' . $design->getWpPost()->ID . ')';
             }
             foreach ($project->getAllGenerations() as $generation) {
                 $project_data['generations'][$generation->getFormat()->slug()] = $generation->getGeneratedIntermediaryFileUrl();
@@ -184,7 +196,8 @@ class DebugInfo
     protected function simplifyDesignData(Design $design)
     {
             return [
-                'title' => $design->getWpPost()->ID,
+                'title' => $design->getWpPost()->post_title,
+                'ID' => $design->getWpPost()->ID,
                 'template' => $design->getDesignTemplate()->getTitle(),
                 'meta' => array_diff_key(
                     $this->simpifyMetadata(get_post_meta($design->getWpPost()->ID)),
