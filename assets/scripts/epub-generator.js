@@ -77,7 +77,7 @@ jQuery(document).on('pmb_wrap_up', function(){
                 .then(() => console.log('done writing'))
         }
 
-        const fileStream = streamSaver.createWriteStream(jQuery('#download_link').attr('download').val(), {
+        const fileStream = streamSaver.createWriteStream(jQuery('#download_link').attr('download').valueOf(), {
             size: blob.size // Makes the procentage visiable in the download
         })
 
