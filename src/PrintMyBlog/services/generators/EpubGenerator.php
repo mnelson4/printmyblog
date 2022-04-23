@@ -52,7 +52,7 @@ class EpubGenerator extends HtmlBaseGenerator
             filemtime(PMB_SCRIPTS_DIR . 'libs/epub-gen-memory__premium_only.min.js')
         );
         wp_register_script(
-            'pmb-web-streams-ponit yfill',
+            'pmb-web-streams-ponyfill',
             PMB_SCRIPTS_URL . 'libs/web-streams-ponyfill__premium_only.min.js',
             [],
             filemtime(PMB_SCRIPTS_DIR . 'libs/web-streams-ponyfill__premium_only.min.js')
