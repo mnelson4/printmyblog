@@ -72,41 +72,30 @@ jQuery(document).on('pmb_wrap_up', function(){
         if(document.location.protocol == 'https:'){
             var readableStream = epub_blob.stream()
 
-            // more optimized pipe version
-            // (Safari may have pipeTo but it's useless without the WritableStream)
-            if (window.WritableStream && readableStream.pipeTo) {
-                return readableStream.pipeTo(fileStream)
-                    .then(() => console.log('done writing'))
-            }
-
             var fileStream = streamSaver.createWriteStream(download_button.attr('download').valueOf(), {
                 size: epub_blob.size // Makes the procentage visiable in the download
-            })
+            });
 
-            // Write (pipe) manually
-            window.writer = fileStream.getWriter()
-
-            var reader = readableStream.getReader()
-            var pump = function() {
-                reader.read().then(function(res){
-                    return res.done
-                        ? writer.close()
-                        : writer.write(res.value).then(pump);
-                });
-            }
-
-
-            // const uInt8 = new TextEncoder().encode('StreamSaver is awesome')
-            //
-            // // streamSaver.createWriteStream() returns a writable byte stream
-            // // The WritableStream only accepts Uint8Array chunks
-            // // (no other typed arrays, arrayBuffers or strings are allowed)
-            // const fileStream = streamSaver.createWriteStream('filename.txt', {
-            //     size: uInt8.byteLength, // (optional filesize) Will show progress
-            //     writableStrategy: undefined, // (optional)
-            //     readableStrategy: undefined  // (optional)
-            // });
             jQuery('#download_link').click(function(){
+                // more optimized pipe version
+                // (Safari may have pipeTo but it's useless without the WritableStream)
+                if (window.WritableStream && readableStream.pipeTo) {
+                    return readableStream.pipeTo(fileStream)
+                        .then(() => console.log('done writing'))
+                }
+
+                // Write (pipe) manually
+                window.writer = fileStream.getWriter()
+
+                var reader = readableStream.getReader()
+                var pump = function() {
+                    reader.read().then(function(res){
+                        return res.done
+                            ? writer.close()
+                            : writer.write(res.value).then(pump);
+                    });
+                }
+
                 pump();
                 // const writer = fileStream.getWriter()
                 // writer.write(uInt8)
