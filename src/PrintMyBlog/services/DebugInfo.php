@@ -110,12 +110,13 @@ class DebugInfo
         ];
     }
 
-    protected function getDesignData(){
+    protected function getDesignData()
+    {
         $design_datas = [];
         $designs = $this->design_manager->getAll(
             new \WP_Query()
         );
-        foreach($designs as $design){
+        foreach ($designs as $design) {
             $design_datas[] = $this->simplifyDesignData($design);
         }
         return $design_datas;
