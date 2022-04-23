@@ -64,56 +64,59 @@ jQuery(document).on('pmb_wrap_up', function(){
 
     const epub = epubGen.default;
     (async () => {
-        const blob = await epub(epub_options, sections);
-        jQuery('#download_link').removeClass('pmb-disabled');
+        var epub_blob = await epub(epub_options, sections);
+        var download_button = jQuery('#download_link');
+        download_button.removeClass('pmb-disabled');
         jQuery('.pmb-loading').remove();
 
-        var readableStream = blob.stream()
+        if(document.location.protocol == 'https:'){
+            var readableStream = epub_blob.stream()
 
-        // more optimized pipe version
-        // (Safari may have pipeTo but it's useless without the WritableStream)
-        if (window.WritableStream && readableStream.pipeTo) {
-            return readableStream.pipeTo(fileStream)
-                .then(() => console.log('done writing'))
-        }
+            // more optimized pipe version
+            // (Safari may have pipeTo but it's useless without the WritableStream)
+            if (window.WritableStream && readableStream.pipeTo) {
+                return readableStream.pipeTo(fileStream)
+                    .then(() => console.log('done writing'))
+            }
 
-        var fileStream = streamSaver.createWriteStream(jQuery('#download_link').attr('download').valueOf(), {
-            size: blob.size // Makes the procentage visiable in the download
-        })
+            var fileStream = streamSaver.createWriteStream(download_button.attr('download').valueOf(), {
+                size: epub_blob.size // Makes the procentage visiable in the download
+            })
 
-        // Write (pipe) manually
-        window.writer = fileStream.getWriter()
+            // Write (pipe) manually
+            window.writer = fileStream.getWriter()
 
-        var reader = readableStream.getReader()
-        var pump = function() {
-            // reader.read()
-            //     .then(res => res.done
-            //         ? writer.close()
-            //         : writer.write(res.value).then(pump));
-            reader.read().then(function(res){
-                return res.done
-                    ? writer.close()
-                    : writer.write(res.value).then(pump);
+            var reader = readableStream.getReader()
+            var pump = function() {
+                reader.read().then(function(res){
+                    return res.done
+                        ? writer.close()
+                        : writer.write(res.value).then(pump);
+                });
+            }
+
+
+            // const uInt8 = new TextEncoder().encode('StreamSaver is awesome')
+            //
+            // // streamSaver.createWriteStream() returns a writable byte stream
+            // // The WritableStream only accepts Uint8Array chunks
+            // // (no other typed arrays, arrayBuffers or strings are allowed)
+            // const fileStream = streamSaver.createWriteStream('filename.txt', {
+            //     size: uInt8.byteLength, // (optional filesize) Will show progress
+            //     writableStrategy: undefined, // (optional)
+            //     readableStrategy: undefined  // (optional)
+            // });
+            jQuery('#download_link').click(function(){
+                pump();
+                // const writer = fileStream.getWriter()
+                // writer.write(uInt8)
+                // writer.close()
             });
+        } else {
+            download_link.href = await blobToBase64(epub_blob);
         }
 
 
-        // const uInt8 = new TextEncoder().encode('StreamSaver is awesome')
-        //
-        // // streamSaver.createWriteStream() returns a writable byte stream
-        // // The WritableStream only accepts Uint8Array chunks
-        // // (no other typed arrays, arrayBuffers or strings are allowed)
-        // const fileStream = streamSaver.createWriteStream('filename.txt', {
-        //     size: uInt8.byteLength, // (optional filesize) Will show progress
-        //     writableStrategy: undefined, // (optional)
-        //     readableStrategy: undefined  // (optional)
-        // });
-        jQuery('#download_link').click(function(){
-            pump();
-            // const writer = fileStream.getWriter()
-            // writer.write(uInt8)
-            // writer.close()
-        });
     })();
 });
 
