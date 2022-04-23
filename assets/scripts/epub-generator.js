@@ -77,6 +77,10 @@ jQuery(document).on('pmb_wrap_up', function(){
                 .then(() => console.log('done writing'))
         }
 
+        const fileStream = streamSaver.createWriteStream('sample.epub', {
+            size: blob.size // Makes the procentage visiable in the download
+        })
+
         // Write (pipe) manually
         window.writer = fileStream.getWriter()
 
