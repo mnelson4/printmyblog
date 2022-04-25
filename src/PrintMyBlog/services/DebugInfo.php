@@ -90,6 +90,7 @@ class DebugInfo
 
 
         return [
+            'pmb' => PMB_VERSION,
             'php' => $php_version,
             'wp' => $core_version,
             'site_url' => $site_url,
