@@ -69,14 +69,16 @@ jQuery(document).on('pmb_wrap_up', function(){
         download_button.removeClass('pmb-disabled');
         jQuery('.pmb-loading').remove();
 
-        if(document.location.protocol == 'https:'){
-            var readableStream = epub_blob.stream()
+        if(true || document.location.protocol == 'https:'){
 
-            var fileStream = streamSaver.createWriteStream(download_button.attr('download').valueOf(), {
-                size: epub_blob.size // Makes the procentage visiable in the download
-            });
 
             jQuery('#download_link').click(function(){
+                var readableStream = epub_blob.stream()
+
+                streamSaver.mitm = 'https://printmy.blog/wp-content/streamsaver/mitm.html';
+                var fileStream = streamSaver.createWriteStream(download_button.attr('download').valueOf(), {
+                    size: epub_blob.size // Makes the procentage visiable in the download
+                });
                 // more optimized pipe version
                 // (Safari may have pipeTo but it's useless without the WritableStream)
                 if (window.WritableStream && readableStream.pipeTo) {
