@@ -434,6 +434,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.15.3 April 27, 2022 =
 * Bugfix: support making large ePubs on HTTP
+* Bugfix: don't try to resize PMB logo in ePubs
 
 = 3.15.2 April 23, 2022 =
 * Bugfix: fix ePub downloads for Google Chrome
