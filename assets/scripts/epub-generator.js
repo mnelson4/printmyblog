@@ -1,4 +1,5 @@
 const streamSaver = window.streamSaver
+
 /**
  * @var pmb_pro object
  * @param blob
@@ -68,15 +69,14 @@ jQuery(document).on('pmb_wrap_up', function(){
         var download_button = jQuery('#download_link');
         download_button.removeClass('pmb-disabled');
         jQuery('.pmb-loading').remove();
+        jQuery('#download_link').click(function(){
+            if(document.location.protocol == 'https:'){
+                var readableStream = epub_blob.stream()
 
-        if(document.location.protocol == 'https:'){
-            var readableStream = epub_blob.stream()
-
-            var fileStream = streamSaver.createWriteStream(download_button.attr('download').valueOf(), {
-                size: epub_blob.size // Makes the procentage visiable in the download
-            });
-
-            jQuery('#download_link').click(function(){
+                streamSaver.mitm = 'https://printmy.blog/wp-content/streamsaver/mitm.html';
+                var fileStream = streamSaver.createWriteStream(download_button.attr('download').valueOf(), {
+                    size: epub_blob.size // Makes the procentage visiable in the download
+                });
                 // more optimized pipe version
                 // (Safari may have pipeTo but it's useless without the WritableStream)
                 if (window.WritableStream && readableStream.pipeTo) {
@@ -97,13 +97,12 @@ jQuery(document).on('pmb_wrap_up', function(){
                 }
 
                 pump();
-                // const writer = fileStream.getWriter()
-                // writer.write(uInt8)
-                // writer.close()
-            });
-        } else {
-            download_link.href = await blobToBase64(epub_blob);
-        }
+            } else {
+                saveAs(epub_blob, download_button.attr('download').valueOf());
+                //download_link.href = await blobToBase64(epub_blob);
+            }
+        });
+
 
 
     })();
