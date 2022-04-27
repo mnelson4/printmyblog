@@ -1,4 +1,5 @@
 const streamSaver = window.streamSaver
+
 /**
  * @var pmb_pro object
  * @param blob
@@ -68,11 +69,8 @@ jQuery(document).on('pmb_wrap_up', function(){
         var download_button = jQuery('#download_link');
         download_button.removeClass('pmb-disabled');
         jQuery('.pmb-loading').remove();
-
-        if(true || document.location.protocol == 'https:'){
-
-
-            jQuery('#download_link').click(function(){
+        jQuery('#download_link').click(function(){
+            if(document.location.protocol == 'https:'){
                 var readableStream = epub_blob.stream()
 
                 streamSaver.mitm = 'https://printmy.blog/wp-content/streamsaver/mitm.html';
@@ -99,13 +97,12 @@ jQuery(document).on('pmb_wrap_up', function(){
                 }
 
                 pump();
-                // const writer = fileStream.getWriter()
-                // writer.write(uInt8)
-                // writer.close()
-            });
-        } else {
-            download_link.href = await blobToBase64(epub_blob);
-        }
+            } else {
+                saveAs(epub_blob, download_button.attr('download').valueOf());
+                //download_link.href = await blobToBase64(epub_blob);
+            }
+        });
+
 
 
     })();
