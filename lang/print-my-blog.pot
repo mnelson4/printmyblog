@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2022-04-21 11:38-0700\n"
+"POT-Creation-Date: 2022-04-29 11:41-0700\n"
 "PO-Revision-Date: 2021-05-25 13:59-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -536,6 +536,7 @@ msgstr ""
 #: src/PrintMyBlog/controllers/Admin.php:230
 #: src/PrintMyBlog/controllers/Admin.php:231
 #: src/PrintMyBlog/system/Init.php:210 templates/partials/breadcrumb.php:10
+#: templates/welcome.php:6
 msgid "Print My Blog"
 msgstr ""
 
@@ -1796,7 +1797,7 @@ msgstr ""
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:79
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:95
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:109
-#: templates/welcome.php:54
+#: templates/welcome.php:59
 msgid "Read the User Guide"
 msgstr ""
 
@@ -2175,7 +2176,7 @@ msgstr ""
 msgid "There is no site registered with Freemius"
 msgstr ""
 
-#: src/PrintMyBlog/services/generators/EpubGenerator.php:99
+#: src/PrintMyBlog/services/generators/EpubGenerator.php:120
 #: src/PrintMyBlog/services/generators/PdfGenerator.php:129
 msgid ""
 "Your project is very big and you might have errors downloading the file. If "
@@ -2183,7 +2184,7 @@ msgid ""
 "multiple smaller files."
 msgstr ""
 
-#: src/PrintMyBlog/services/generators/EpubGenerator.php:100
+#: src/PrintMyBlog/services/generators/EpubGenerator.php:121
 #: src/PrintMyBlog/services/generators/PdfGenerator.php:130
 msgid ""
 "Your project has lots of images and you might have errors downloading the "
@@ -3605,7 +3606,7 @@ msgid ""
 "browser for free, or the new paid Pro PDF Service."
 msgstr ""
 
-#: templates/upgrade_to_3.php:10 templates/welcome.php:50
+#: templates/upgrade_to_3.php:10 templates/welcome.php:55
 msgid "Automatic Table of Contents"
 msgstr ""
 
@@ -3713,79 +3714,84 @@ msgstr ""
 msgid "Best wishes, Mike Nelson, Print My Blog Developer"
 msgstr ""
 
-#: templates/welcome.php:2
-msgid "Welcome to Print My Blog!"
+#: templates/welcome.php:3
+#, php-format
+msgid "Welcome to %s!"
 msgstr ""
 
-#: templates/welcome.php:3
+#: templates/welcome.php:5
+msgid "Print My Blog Pro"
+msgstr ""
+
+#: templates/welcome.php:8
 msgid "What would you like to do?"
 msgstr ""
 
-#: templates/welcome.php:7
+#: templates/welcome.php:12
 msgid "Print My Blog Now for Free"
 msgstr ""
 
-#: templates/welcome.php:11
+#: templates/welcome.php:16
 msgid "Use Quick Print"
 msgstr ""
 
-#: templates/welcome.php:16
+#: templates/welcome.php:21
 msgid "2 clicks to printing"
 msgstr ""
 
-#: templates/welcome.php:17
+#: templates/welcome.php:22
 msgid "No watermark"
 msgstr ""
 
-#: templates/welcome.php:18
+#: templates/welcome.php:23
 msgid "Print Thousands of Pages from your Web Browser"
 msgstr ""
 
-#: templates/welcome.php:24
+#: templates/welcome.php:29
 msgid "Let Visitors Print My Blog for Free"
 msgstr ""
 
-#: templates/welcome.php:27
+#: templates/welcome.php:32
 msgid "Configure the Print Button Settings"
 msgstr ""
 
-#: templates/welcome.php:31
+#: templates/welcome.php:36
 msgid "No Coding Required"
 msgstr ""
 
-#: templates/welcome.php:32
+#: templates/welcome.php:37
 msgid "Highly Customizable"
 msgstr ""
 
-#: templates/welcome.php:33
+#: templates/welcome.php:38
 msgid "Place Print Buttons Anywhere"
 msgstr ""
 
-#: templates/welcome.php:39
+#: templates/welcome.php:44
 msgid "Make Professional Books and Documents"
 msgstr ""
 
-#: templates/welcome.php:42
+#: templates/welcome.php:47
 msgid "Use Pro Print"
 msgstr ""
 
-#: templates/welcome.php:45
+#: templates/welcome.php:50
 msgid "Free and Paid Options"
 msgstr ""
 
-#: templates/welcome.php:48
+#: templates/welcome.php:53
 msgid "Drag-and-drop content into projects"
 msgstr ""
 
-#: templates/welcome.php:49
+#: templates/welcome.php:54
 msgid "Include any post types, in any order"
 msgstr ""
 
-#: templates/welcome.php:51
+#: templates/welcome.php:56
 msgid "Choose and Customize Many Designs, or code your own"
 msgstr ""
 
-#: templates/welcome.php:52
+#: templates/welcome.php:57
 msgid "Automatically convert hyperlinks to page references and footnotes"
 msgstr ""
 

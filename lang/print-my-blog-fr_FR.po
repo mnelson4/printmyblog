@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2022-04-21 11:44-0700\n"
-"PO-Revision-Date: 2022-04-21 11:45-0700\n"
+"POT-Creation-Date: 2022-04-29 11:43-0700\n"
+"PO-Revision-Date: 2022-04-29 11:43-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -657,6 +657,7 @@ msgstr "« %s » est entièrement traduit en %s"
 #: src/PrintMyBlog/controllers/Admin.php:230
 #: src/PrintMyBlog/controllers/Admin.php:231
 #: src/PrintMyBlog/system/Init.php:210 templates/partials/breadcrumb.php:10
+#: templates/welcome.php:6
 msgid "Print My Blog"
 msgstr "Print My Blog"
 
@@ -2093,7 +2094,7 @@ msgstr ""
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:79
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:95
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:109
-#: templates/welcome.php:54
+#: templates/welcome.php:59
 msgid "Read the User Guide"
 msgstr "Lire le guide de l’utilisateur"
 
@@ -2183,10 +2184,6 @@ msgid "Generate and View Your File"
 msgstr "Générer et afficher votre fichier"
 
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:117
-#, fuzzy
-#| msgid ""
-#| "Your project is ready to be generated! Clicking \"Generate\" will compile "
-#| "your content into a document. Then click \"view\"."
 msgid ""
 "Your project is ready to be generated! Clicking \"Generate\" will compile "
 "your content into a print-page."
@@ -2525,7 +2522,7 @@ msgstr "Aucun id de licence disponible"
 msgid "There is no site registered with Freemius"
 msgstr "Il n’y a pas de site enregistré auprès de Freemius"
 
-#: src/PrintMyBlog/services/generators/EpubGenerator.php:99
+#: src/PrintMyBlog/services/generators/EpubGenerator.php:120
 #: src/PrintMyBlog/services/generators/PdfGenerator.php:129
 msgid ""
 "Your project is very big and you might have errors downloading the file. If "
@@ -2536,7 +2533,7 @@ msgstr ""
 "téléchargement du fichier. Si c’est le cas, essayez de diviser votre contenu "
 "en plusieurs projets et de créer plusieurs fichiers plus petits."
 
-#: src/PrintMyBlog/services/generators/EpubGenerator.php:100
+#: src/PrintMyBlog/services/generators/EpubGenerator.php:121
 #: src/PrintMyBlog/services/generators/PdfGenerator.php:130
 msgid ""
 "Your project has lots of images and you might have errors downloading the "
@@ -4092,7 +4089,7 @@ msgstr ""
 "en utilisant votre navigateur Web gratuitement, ou le nouveau service "
 "d’impression Pro payant."
 
-#: templates/upgrade_to_3.php:10 templates/welcome.php:50
+#: templates/upgrade_to_3.php:10 templates/welcome.php:55
 msgid "Automatic Table of Contents"
 msgstr "Table automatique des matières"
 
@@ -4222,79 +4219,84 @@ msgstr "S'%1$s s’il vous plaît %2$s-moi savoir%2$s si vous avez des questions
 msgid "Best wishes, Mike Nelson, Print My Blog Developer"
 msgstr "Meilleurs voeux, Mike Nelson, Print My Blog Developer"
 
-#: templates/welcome.php:2
-msgid "Welcome to Print My Blog!"
-msgstr "Bienvenue à Imprimer mon blog 3!"
-
 #: templates/welcome.php:3
+#, php-format
+msgid "Welcome to %s!"
+msgstr "Bienvenue sur %s !"
+
+#: templates/welcome.php:5
+msgid "Print My Blog Pro"
+msgstr "Print My Blog Pro"
+
+#: templates/welcome.php:8
 msgid "What would you like to do?"
 msgstr "Qu'est-ce que vous aimeriez faire ?"
 
-#: templates/welcome.php:7
+#: templates/welcome.php:12
 msgid "Print My Blog Now for Free"
 msgstr "Imprimer mon blog maintenant gratuitement"
 
-#: templates/welcome.php:11
+#: templates/welcome.php:16
 msgid "Use Quick Print"
 msgstr "Utiliser Quick Print"
 
-#: templates/welcome.php:16
+#: templates/welcome.php:21
 msgid "2 clicks to printing"
 msgstr "2 clics à imprimer"
 
-#: templates/welcome.php:17
+#: templates/welcome.php:22
 msgid "No watermark"
 msgstr "Pas de filigrane"
 
-#: templates/welcome.php:18
+#: templates/welcome.php:23
 msgid "Print Thousands of Pages from your Web Browser"
 msgstr "Imprimez des milliers de pages à partir de votre navigateur Web"
 
-#: templates/welcome.php:24
+#: templates/welcome.php:29
 msgid "Let Visitors Print My Blog for Free"
 msgstr "Laissez les visiteurs imprimer mon blog gratuitement"
 
-#: templates/welcome.php:27
+#: templates/welcome.php:32
 msgid "Configure the Print Button Settings"
 msgstr "Configurer les paramètres du bouton d’impression"
 
-#: templates/welcome.php:31
+#: templates/welcome.php:36
 msgid "No Coding Required"
 msgstr "Aucun codage requis"
 
-#: templates/welcome.php:32
+#: templates/welcome.php:37
 msgid "Highly Customizable"
 msgstr "Association Agate"
 
-#: templates/welcome.php:33
+#: templates/welcome.php:38
 msgid "Place Print Buttons Anywhere"
 msgstr "Placez les boutons d’impression n’importe où"
 
-#: templates/welcome.php:39
+#: templates/welcome.php:44
 msgid "Make Professional Books and Documents"
 msgstr "Faire des livres et des documents professionnels"
 
-#: templates/welcome.php:42
+#: templates/welcome.php:47
 msgid "Use Pro Print"
 msgstr "Utiliser Pro Print"
 
-#: templates/welcome.php:45
+#: templates/welcome.php:50
 msgid "Free and Paid Options"
 msgstr "Gratuit, avec options payantes"
 
-#: templates/welcome.php:48
+#: templates/welcome.php:53
 msgid "Drag-and-drop content into projects"
 msgstr "Glisser-déposer le contenu dans les projets"
 
-#: templates/welcome.php:49
+#: templates/welcome.php:54
 msgid "Include any post types, in any order"
 msgstr "Inclure tous les types de postes, dans n’importe quel ordre"
 
-#: templates/welcome.php:51
+#: templates/welcome.php:56
 msgid "Choose and Customize Many Designs, or code your own"
 msgstr "Choisissez et personnalisez de nombreux designs ou codez vos propres"
 
-#: templates/welcome.php:52
+#: templates/welcome.php:57
 msgid "Automatically convert hyperlinks to page references and footnotes"
 msgstr ""
 "Convertir automatiquement les hyperliens en références de page et notes de "
