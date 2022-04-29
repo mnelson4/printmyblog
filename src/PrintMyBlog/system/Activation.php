@@ -87,9 +87,9 @@ class Activation extends BaseActivation
         if (pmb_fs()->is_premium() && in_array($this->request_type->getRequestType(), [RequestType::REQUEST_TYPE_UPDATE, RequestType::REQUEST_TYPE_REACTIVATION]) && pmb_fs()->is_anonymous() && pmb_fs()->is_registered()) {
             // although freemius rechecks on each reactivation, don't recheck on each update
             $rechecked = get_option('pmb_rechecked_on_upgrade', false);
-            if(! $rechecked){
+            if (! $rechecked) {
                 pmb_fs()->connect_again();
-                update_option('pmb_rechecked_on_upgrade',true);
+                update_option('pmb_rechecked_on_upgrade', true);
             }
         }
         if ($activation_indicator === '' && $this->version_history->previousVersion() === null) {
