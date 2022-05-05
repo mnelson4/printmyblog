@@ -296,10 +296,12 @@ function pmb_reveal_dynamic_content(){
 
     jQuery('.wp-block-jetpack-slideshow').each(function(slideshow_index, slideshow_element){
         jQuery(this).find('figure').each(function(figure_index,figure_element){
-            if(jQuery(figure_element).parents('.swiper-slide-duplicate').length !== 0){
+            var figure = jQuery(figure_element);
+            if(figure.parents('.swiper-slide-duplicate').length !== 0){
                 return;
             }
-            jQuery(slideshow_element).after(figure_element);
+            jQuery(slideshow_element).after(figure);
+            figure.addClass('wp-block-image');
         });
         jQuery(this).remove();
     });
