@@ -432,6 +432,11 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.15.5 xxxx =
+* Compatibility: fix only printing one page when using Betheme
+* Compatibility: hide GDPR cookie consent overlay and "pum overlay"
+* Bugfix: Pro Print avoids Javascript error when there is an image with invalid src
+
 = 3.15.4 April 29, 2022 =
 * Bugfix: ask for license key immediately when upgrading to Pro version
 * Feature: ask free users to opt in upon activation again (removing it caused the above-mentioned bug)
