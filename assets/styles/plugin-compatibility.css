@@ -152,3 +152,17 @@ Hide Axeptio overlay https://support.axeptio.eu/hc/en-gb/articles/4404040521105-
 #axeptio_overlay{
     display: none;
 }
+
+/**
+Hide some overlay using the prefix "pum" encountered on https://durbanneurolaserclinic.co.za
+ */
+.pum-overlay{
+    display:none !important;
+}
+
+/**
+Hide GDPR Cookie Consent
+ */
+#cookie-law-info-bar{
+    display:none !important;
+}
