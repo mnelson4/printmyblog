@@ -295,6 +295,19 @@ function pmb_reveal_dynamic_content(){
         })
     },
     2000);
+    //break images out of JetPack slideshows, which make no effort at print-readiness whatsoever
+
+    jQuery('.wp-block-jetpack-slideshow').each(function(slideshow_index, slideshow_element){
+        jQuery(this).find('figure').each(function(figure_index,figure_element){
+            var figure = jQuery(figure_element);
+            if(figure.parents('.swiper-slide-duplicate').length !== 0){
+                return;
+            }
+            jQuery(slideshow_element).after(figure);
+            figure.addClass('wp-block-image');
+        });
+        jQuery(this).remove();
+    });
 }
 
 /**
