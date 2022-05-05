@@ -105,15 +105,19 @@ Hide stuff that doesn't make sense in print
 .llms-course-navigation, .llms-lesson-button-wrapper {
     display: none;
 }
-/**
- LaText2Html (https://wordpress.org/plugins/latex2html/) strangely thinks it should set the page and body size.
- Don't let it, or others, do that. See https://wordpress.org/support/topic/losing-all-formatting/
- */
+
 @media print{
-    body {
+    /*
+    Don't let page content overflow into the bottom page margin
+     */
+    body.pmb-pro-print-pdf {
         height: 100% !important;
         width: initial !important;
     }
+    /**
+     LaText2Html (https://wordpress.org/plugins/latex2html/) strangely thinks it should set the page and body size.
+     Don't let it, or others, do that. See https://wordpress.org/support/topic/losing-all-formatting/
+     */
     @page {
         size: initial;
     }
