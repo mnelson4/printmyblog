@@ -71,7 +71,13 @@ function PmbExternalResourceCacher() {
         jQuery(tag).each(function (index, element) {
             var treat_as_external = true;
             var remote_url = element.attributes[attribute].value;
-            var remote_domain = (new URL(remote_url)).hostname;
+            try{
+                var remote_domain = (new URL(remote_url)).hostname;
+            }catch(error){
+                //invalid URL probably; continue
+                return;
+            }
+
             for (var i = 0; i < that.domains_to_not_map.length; i++) {
                 if (remote_domain.indexOf(that.domains_to_not_map[i]) !== -1) {
                     treat_as_external = false;
