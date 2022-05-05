@@ -2,13 +2,12 @@
 Contributors: mnelson4
 Tags: print, PDF, backup, eBook, print button
 Requires at least: 4.6
-Stable tag: trunk
-Tested up to: 5.9.2
+Tested up to: 5.9.3
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.12.7
+Stable tag: 3.15.4
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -432,6 +431,67 @@ https://youtu.be/uPQ3vqm7A2g
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+
+= 3.15.5 xxxx =
+* Compatibility: fix only printing one page when using Betheme
+* Compatibility: hide GDPR cookie consent overlay and "pum overlay"
+* Bugfix: Pro Print avoids Javascript error when there is an image with invalid src
+
+= 3.15.4 April 29, 2022 =
+* Bugfix: ask for license key immediately when upgrading to Pro version
+* Feature: ask free users to opt in upon activation again (removing it caused the above-mentioned bug)
+
+= 3.15.3 April 27, 2022 =
+* Bugfix: support making large ePubs on HTTP
+* Bugfix: don't try to resize PMB logo in ePubs
+
+= 3.15.2 April 23, 2022 =
+* Bugfix: fix ePub downloads for Google Chrome
+
+= 3.15.1 April 23, 2022 =
+* Enhancement: debug info includes more projects
+
+= 3.15.0 April 23, 2022 =
+* Feature: support making much larger ePubs on HTTPS sites
+
+= 3.14.2 April 21, 2022 =
+* Bugfix: don't cache images already on same domain
+
+= 3.14.1 April 21, 2022 =
+* Bugfix: fix code introduced in 3.14.0 which aimed to automatically fix links using the wrong HTTP protocol
+* Bugfix: slow down caching external images so server can handle it
+
+= 3.14.0 April 21, 2022 =
+* Feature: in order to show images from external websites in ePubs, cache them on the server (to uploads/pmb/cache) and adds new database table, pmb_external_resources (both are removed when all plugin data is deleted)
+* Bugfix: record PHP fatal errors when generating files even when WP_DEBUG is off
+
+= 3.13.2 April 18, 2022 =
+* Enhancement: in case a search engine comes across a Pro Print page, instruct them to not index those either
+* Bugfix: namespace form inputs on settings page to avoid conflicts with other plugins
+
+= 3.13.1 April 11, 2022 =
+* Feature: offer email support for all users (it was a hassle to explain how to use it to non-technical folks)
+* Compatibility: hide Axeptio hovering button in print page
+* Bugfix: correct dynamic image resizing images with captions when restricted by width
+* Enhancement: warn if a project is very big, or has a lot of images, a sit can have errors, and suggest workarounds
+
+= 3.13.0 March 30, 2022 =
+* Feature: show featured image captions in all built-in designs
+
+= 3.12.11 March 30, 2022 =
+* Enhancement: tell free users to first create a GitHub account before reporting the issue
+* Bugfix: prevent galleries from overflowing into the bottom margin by hiding extra content
+
+= 3.12.10 March 30, 2022 =
+* Bugfix: fix Quick Print page for Italian users (categories and tags weren't being shown)
+
+= 3.12.9 March 30, 2022 =
+* Bugfix: fix QuickPrint's and Print Buttons's print page content being blank (introduced in 3.12.8)
+* Bugfix: tell search engines to not even visit print page
+
+= 3.12.8 March 28, 2022 =
+* Compatibility: fix QuickPrint with Thrive ThemeBuilder
+* Bugfix: tell search engines to not index print page
 
 = 3.12.7 March 10, 2022 =
 * Bugfix: fix gallery blocks display (WP recently changed the HTML structure so our CSS needed updating too)

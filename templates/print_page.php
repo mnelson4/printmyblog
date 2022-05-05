@@ -20,6 +20,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="http://gmpg.org/xfn/11">
+    <meta name="robots" content="noindex,nofollow">
 
     <?php wp_head(); ?>
 </head>

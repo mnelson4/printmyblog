@@ -9,7 +9,7 @@ class ImageHelper
      * Copy-paste from https://wordpress.stackexchange.com/a/251602/52760
      * @return array of arrays with sub-indexes 'width', 'height' and 'crop'
      */
-    function getAllImageSizes()
+    public function getAllImageSizes()
     {
         global $_wp_additional_image_sizes;
 

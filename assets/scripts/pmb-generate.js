@@ -19,18 +19,7 @@ jQuery(document).ready(function () {
             },
             converters: pmb_jquery_ajax_converters,
         }).fail((jqXhr, text_message, text_status) => {
-                jQuery.ajax(
-                    ajaxurl,
-                    {
-                        'method': 'POST',
-                        'data':{
-                            'action':'pmb_report_error',
-                            'error': 'error generating. Status:' + text_status + ', message: ' + text_message + ', raw response: ' + jqXhr.responseText,
-                            'project_id': querystring_args['ID'],
-                            'format': format_slug
-                        }
-                    }
-                );
+                // the server dhould have already recorded the error
                 alert(pmb_generate.translations.error_generating);
             }
         );

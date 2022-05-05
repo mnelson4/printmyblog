@@ -1,5 +1,10 @@
 <div class="wrap nosubsub pmb-welcome">
-    <h1>🎉<?php esc_html_e( 'Welcome to Print My Blog!', 'print-my-blog' ); ?>🎉</h1>
+    <h1>🎉<?php printf(
+            esc_html__( 'Welcome to %s!', 'print-my-blog' ),
+            pmb_fs()->is_premium() && !pmb_fs()->is_free_plan() ?
+                __('Print My Blog Pro', 'print-my-blog') :
+            __('Print My Blog', 'print-my-blog')
+        ); ?>🎉</h1>
     <p class="pmb-middle-important-text"><?php esc_html_e( 'What would you like to do?', 'print-my-blog' ); ?></p>
     <div class="pmb-content-boxes">
         <div class="pmb-content-box-wrap">

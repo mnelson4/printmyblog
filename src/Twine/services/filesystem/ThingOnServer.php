@@ -2,7 +2,7 @@
 
 namespace Twine\services\filesystem;
 
-class ThingOnServer
+abstract class ThingOnServer
 {
     /**
      * @var string
@@ -38,4 +38,9 @@ class ThingOnServer
     {
         return $this->path;
     }
+
+    /**
+     * @return bool success
+     */
+    abstract public function delete();
 }

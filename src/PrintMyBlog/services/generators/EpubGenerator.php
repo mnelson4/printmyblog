@@ -43,6 +43,7 @@ class EpubGenerator extends HtmlBaseGenerator
 
     public function enqueueStylesAndScripts()
     {
+        wp_enqueue_script('pmb_pro_page');
         wp_enqueue_style('pmb_pro_page');
         wp_register_script(
             'epub-gen-memory',
@@ -50,10 +51,31 @@ class EpubGenerator extends HtmlBaseGenerator
             [],
             filemtime(PMB_SCRIPTS_DIR . 'libs/epub-gen-memory__premium_only.min.js')
         );
+        wp_register_script(
+            'pmb-web-streams-ponyfill',
+            PMB_SCRIPTS_URL . 'libs/web-streams-ponyfill__premium_only.min.js',
+            [],
+            filemtime(PMB_SCRIPTS_DIR . 'libs/web-streams-ponyfill__premium_only.min.js')
+        );
+        // https://github.com/jimmywarting/StreamSaver.js
+        wp_register_script(
+            'pmb-streamsaver',
+            PMB_SCRIPTS_URL . 'libs/streamsaver__premium_only.min.js',
+            ['pmb-web-streams-ponyfill'],
+            filemtime(PMB_SCRIPTS_DIR . 'libs/streamsaver__premium_only.min.js')
+        );
+        // https://github.com/koffsyrup/FileSaver.js#examples
+        wp_register_script(
+            'pmb-filesaver',
+            PMB_SCRIPTS_URL . 'libs/filesaver__premium_only.min.js',
+            [],
+            filemtime(PMB_SCRIPTS_DIR . 'libs/filesaver__premium_only.min.js')
+        );
+
         wp_enqueue_script(
             'pmb-epub',
             PMB_SCRIPTS_URL . 'epub-generator.js',
-            ['epub-gen-memory','jquery', 'pmb-beautifier-functions'],
+            ['epub-gen-memory','jquery', 'pmb-beautifier-functions', 'pmb-streamsaver', 'pmb-filesaver'],
             filemtime(PMB_SCRIPTS_DIR . 'epub-generator.js')
         );
         $css = pmb_get_contents(
@@ -83,13 +105,21 @@ class EpubGenerator extends HtmlBaseGenerator
 
         wp_localize_script(
             'pmb-epub',
-            'pmb_epub',
+            'pmb_pro',
             [
                 'title' => $this->project->getPublishedTitle(),
                 'authors' => $this->getAuthors(),
                 'cover' => $this->project->getSetting('cover'),
                 'css' => $css,
-                'version' => '3'
+                'version' => '3',
+                'pmb_nonce' => wp_create_nonce('pmb_pro_page'),
+                'external_resouce_mapping' => $this->external_resource_cache->getMapping(),
+                'domains_to_not_map' => $this->external_resource_cache->domainsToNotMap(),
+                'ajaxurl' => admin_url('admin-ajax.php'),
+                'translations' => [
+                    'many_articles' => __('Your project is very big and you might have errors downloading the file. If so, try splitting your content into multiple projects and instead creating multiple smaller files.', 'print-my-blog'),
+                    'many_images' => __('Your project has lots of images and you might have errors downloading the file. If so, try spltting your content into multiple projects or reducing the image quality set on your design.', 'print-my-blog'),
+                ]
             ]
         );
     }

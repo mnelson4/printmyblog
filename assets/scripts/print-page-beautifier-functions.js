@@ -5,6 +5,15 @@ function pmb_remove_unsupported_content(){
     // remove "noscripts" because we actually executed Javascript in the browser, then turn JS off for DocRaptor
     // (but Javascript was executed, so no need to do noscript tags)
     jQuery('noscript').remove();
+    // Don't stack columns vertically
+    jQuery('.wp-block-columns').addClass('is-not-stacked-on-mobile');
+}
+
+/**
+ * Fix common issues with folks using protocols that don't work (often these don't work on their website either,
+ * or have warnings, but we'll cut them some slack and fix them here.)
+ */
+function pmb_fix_protocols(){
     // remove all the broken images and links etc
     jQuery('[src^="file:"]').remove();
     jQuery('[href^="file:"]').contents().unwrap();
@@ -21,6 +30,18 @@ function pmb_remove_unsupported_content(){
     // especially when the images take up the full page height (the only want to have the contents of a figure
     // respect the figure's height is with flexbox)
     jQuery('.wp-block-image img, .wp-caption img').wrap('<div class="pmb-figure-image-wrapper"></div>');
+
+    var correct_protocol = window.location.protocol;
+    var incorrect_protocol = 'http:';
+    if( correct_protocol === 'http:'){
+        incorrect_protocol = 'https:';
+    }
+    jQuery('[src^="' + incorrect_protocol + '//' + window.location.host + '"]').each(function(index, element){
+        element.setAttribute("src", element.getAttribute('src').replace(incorrect_protocol, correct_protocol));
+    });
+    jQuery('[href^="' + incorrect_protocol + '//' + window.location.host + '"]').each(function(index, element){
+        element.setAttribute("href", element.getAttribute('href').replace(incorrect_protocol, correct_protocol));
+    });
 }
 
 function pmb_dont_float(){
@@ -175,7 +196,7 @@ function pmb_mark_for_dynamic_resize(min_image_size){
     jQuery('img').each(function(index, element){
         // Don't try to resize trickier items like columns or YouTube videos
         var jqe = jQuery(element);
-        if(jqe.parents('.wp-block-columns, .wp-block-embed-youtube, .wp-block-gallery, .gallery').length > 0){
+        if(jqe.parents('.wp-block-columns, .wp-block-embed-youtube, .wp-block-gallery, .gallery, .pmb-dont-dynamic-resize').length > 0){
             return;
         }
         if(element.offsetHeight > min_image_size){

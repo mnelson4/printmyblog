@@ -78,4 +78,13 @@ class Folder extends ThingOnServer
     {
         return $this->getPath() . '/index.html';
     }
+
+    /**
+     * @return bool success
+     */
+    public function delete()
+    {
+        array_map('unlink', glob($this->getPath() . "/*.*"));
+        return rmdir($this->getPath());
+    }
 }

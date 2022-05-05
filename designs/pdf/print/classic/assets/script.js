@@ -1,14 +1,10 @@
 jQuery(document).ready(function(){
     // Pretty up the pageit
-    pmb_remove_unsupported_content();
-    pmb_add_header_classes();
+    pmb_standard_print_page_wrapup();
     if(pmb_design_options['default_alignment'] === 'center'){
         pmb_default_align_center();
     }
-    pmb_fix_wp_videos();
     pmb_convert_youtube_videos_to_images();
-    pmb_load_avada_lazy_images();
-    pmb_reveal_dynamic_content();
     pmb_replace_internal_links_with_page_refs_and_footnotes(pmb_design_options['external_links'], pmb_design_options['internal_links'],pmb_design_options['footnote_text'],  pmb_design_options['internal_footnote_text']);
     new PmbToc();
 });

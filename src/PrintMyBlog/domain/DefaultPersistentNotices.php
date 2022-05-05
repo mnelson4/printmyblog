@@ -114,7 +114,7 @@ class DefaultPersistentNotices
                 'pmb_generate',
                 __('Generate and View Your File', 'print-my-blog'),
                 '<p>' .
-                    __('Your project is ready to be generated! Clicking "Generate" will compile your content into a document. Then click "view".', 'print-my-blog') .
+                    __('Your project is ready to be generated! Clicking "Generate" will compile your content into a print-page.', 'print-my-blog') .
                 '</p>'
                 . '<p>'
                 . sprintf(

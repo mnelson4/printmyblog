@@ -10,6 +10,7 @@ use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\entities\ProjectGeneration;
 use PrintMyBlog\orm\entities\ProjectSection;
+use PrintMyBlog\services\ExternalResourceCache;
 use PrintMyBlog\services\PmbCentral;
 use PrintMyBlog\services\SectionTemplateRegistry;
 use ReflectionObject;
@@ -52,6 +53,11 @@ abstract class ProjectFileGeneratorBase
     protected $section_template_registry;
 
     /**
+     * @var ExternalResourceCache
+     */
+    protected $external_resource_cache;
+
+    /**
      * ProjectHtmlGenerator constructor.
      *
      * @param Project $project
@@ -65,10 +71,12 @@ abstract class ProjectFileGeneratorBase
 
     public function inject(
         PostFetcher $post_fetcher,
-        DetectAndActivate $plugin_compatibility
+        DetectAndActivate $plugin_compatibility,
+        ExternalResourceCache $external_resource_cache
     ) {
         $this->post_fetcher = $post_fetcher;
         $this->plugin_compatibility = $plugin_compatibility;
+        $this->external_resource_cache = $external_resource_cache;
     }
 
     /**
@@ -128,6 +136,7 @@ abstract class ProjectFileGeneratorBase
             return '%s';
         });
         do_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->startGenerating', $this);
+        register_shutdown_function(array( $this, 'shutdown' ));
     }
 
     /**
@@ -382,4 +391,31 @@ abstract class ProjectFileGeneratorBase
      * @return bool
      */
     abstract public function deleteFile();
+
+    /**
+     * Records any PHP fatal errors while generating the file.
+     */
+    public function shutdown()
+    {
+        // copy-aste from Fatal Error Notify plugin
+        $error = error_get_last();
+
+        if (is_null($error)) {
+            return;
+        }
+
+        // A couple types of errors we don't need reported.
+
+        if (E_WARNING === $error['type'] && strpos($error['message'], 'unlink')) {
+            // a lot of plugins generate these because it's faster to unlink()
+            // without checking if the file exists first, even if it creates a
+            // warning.
+            return;
+        }
+
+        $generation = $this->project_generation;
+        if ($generation instanceof ProjectGeneration) {
+            $generation->setLastError(var_export($error, true));
+        }
+    }
 }

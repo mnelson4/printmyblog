@@ -42,6 +42,7 @@ $generate_url = add_query_arg(
                 </div>
                 <div class="pmb-print-option pmb-big-option pmb-highlight">
                     <h2><?php esc_html_e('Pro PDF Service', 'print-my-blog');?></h2>
+                    <div style="display:none" class="pmb-warning" id="pmb-print-page-warnings"></div>
                     <?php if(! is_array($license_info) ){ ?>
 
                         <button class="pmb-pro-window-button pmb-download-test">

@@ -1,8 +1,11 @@
+const streamSaver = window.streamSaver
+
 /**
- * @var pmb_epub object
+ * @var pmb_pro object
  * @param blob
  * @returns {Promise<unknown>}
  */
+
 
 function blobToBase64(blob) {
     return new Promise((resolve, _) => {
@@ -13,15 +16,15 @@ function blobToBase64(blob) {
 }
 jQuery(document).on('pmb_wrap_up', function(){
     var epub_options = {
-        title: pmb_epub.title,
-        author:pmb_epub.authors,
+        title: pmb_pro.title,
+        author:pmb_pro.authors,
         verbose: true,
         ignoreFailedDownloads:true,
         prependChapterTitles:false,
         numberChaptersInTOC:false,
-        cover:pmb_epub.cover,
-        css:pmb_epub.css,
-        version: parseInt(pmb_epub.version)
+        cover:pmb_pro.cover,
+        css:pmb_pro.css,
+        version: parseInt(pmb_pro.version)
     }
     var sections = [];
     var found_toc = false;
@@ -62,9 +65,46 @@ jQuery(document).on('pmb_wrap_up', function(){
 
     const epub = epubGen.default;
     (async () => {
-        const content = await epub(epub_options, sections);
-        download_link.href = await blobToBase64(content);
-        jQuery('#download_link').removeClass('pmb-disabled');
+        var epub_blob = await epub(epub_options, sections);
+        var download_button = jQuery('#download_link');
+        download_button.removeClass('pmb-disabled');
+        jQuery('.pmb-loading').remove();
+        jQuery('#download_link').click(function(){
+            if(document.location.protocol == 'https:'){
+                var readableStream = epub_blob.stream()
+
+                streamSaver.mitm = 'https://printmy.blog/wp-content/streamsaver/mitm.html';
+                var fileStream = streamSaver.createWriteStream(download_button.attr('download').valueOf(), {
+                    size: epub_blob.size // Makes the procentage visiable in the download
+                });
+                // more optimized pipe version
+                // (Safari may have pipeTo but it's useless without the WritableStream)
+                if (window.WritableStream && readableStream.pipeTo) {
+                    return readableStream.pipeTo(fileStream)
+                        .then(() => console.log('done writing'))
+                }
+
+                // Write (pipe) manually
+                window.writer = fileStream.getWriter()
+
+                var reader = readableStream.getReader()
+                var pump = function() {
+                    reader.read().then(function(res){
+                        return res.done
+                            ? writer.close()
+                            : writer.write(res.value).then(pump);
+                    });
+                }
+
+                pump();
+            } else {
+                saveAs(epub_blob, download_button.attr('download').valueOf());
+                //download_link.href = await blobToBase64(epub_blob);
+            }
+        });
+
+
+
     })();
 });
 

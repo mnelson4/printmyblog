@@ -6,6 +6,7 @@ use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;
+use PrintMyBlog\services\ExternalResourceCache;
 use Twine\services\filesystem\File;
 
 abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase

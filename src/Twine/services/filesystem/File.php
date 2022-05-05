@@ -85,7 +85,6 @@ class File extends ThingOnServer
      * ensures that a folder exists and is writable, will attempt to create folder if it does not exist
      * Also ensures all the parent folders exist, and if not tries to create them.
      * Also, if this function creates the folder, adds a .htaccess file and index.html file
-     * @return bool false if folder isn't writable; true if it exists and is writeable,
      */
     public function ensureFolderExists()
     {

@@ -14,6 +14,7 @@ namespace PrintMyBlog\db;
 class TableManager extends \Twine\db\TableManager
 {
     const SECTIONS_TABLE = 'pmb_project_sections';
+    const EXTERNAL_RESOURCE_TABLE = 'pmb_external_resources';
 
     /**
      * Ensures PMB's tables exist.
@@ -34,10 +35,19 @@ class TableManager extends \Twine\db\TableManager
                 PRIMARY KEY  (ID),
                 KEY sorted (project_id,placement,section_order)'
         );
+        $this->installTable(
+            self::EXTERNAL_RESOURCE_TABLE,
+            'ID bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+                external_url varchar(511) NOT NULL,
+                copy_filename varchar(511) DEFAULT NULL,
+                PRIMARY KEY  (ID),
+                KEY external_url (external_url)'
+        );
     }
 
     public function dropTables()
     {
         $this->dropTable(self::SECTIONS_TABLE);
+        $this->dropTable(self::EXTERNAL_RESOURCE_TABLE);
     }
 }
