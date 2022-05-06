@@ -50,7 +50,7 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design){
 			$css .= $combined_selector . '{float:prince-snap unless-fit;}';
 			break;
         case 'dynamic-resize':
-            $css .= '.pmb-posts .pmb-dynamic-resize img{height:' . $design->getSetting('dynamic_resize_min') . 'px;}';
+            $css .= '.pmb-posts .pmb-dynamic-resize img, .pmb-posts img.pmb-dynamic-resize{height:' . $design->getSetting('dynamic_resize_min') . 'px !important;}';
 		case 'default':
 		default:
 			// leave alone

@@ -26,6 +26,11 @@ function pmb_fix_protocols(){
         element.setAttribute("href", location.protocol + element.getAttribute('href'));
     });
 
+    // wrap the images again in order for flexbox layout to fill the space properly.
+    // especially when the images take up the full page height (the only want to have the contents of a figure
+    // respect the figure's height is with flexbox)
+    jQuery('.wp-block-image img, .wp-caption img').wrap('<div class="pmb-figure-image-wrapper"></div>');
+
     var correct_protocol = window.location.protocol;
     var incorrect_protocol = 'http:';
     if( correct_protocol === 'http:'){
@@ -227,8 +232,6 @@ function pmb_mark_for_dynamic_resize(min_image_size){
         }
     });
 
-    // wrap the images again in order for flexbox layout to fill the space properly.
-    jQuery('.pmb-dynamic-resize img').wrap('<div class="pmb-dynamic-resized-image-wrapper"></div>');
     // tell JetPack to not resize these images, as we may want a bigger size.
     jQuery('.pmb-dynamic-resize img.wp-image-1108[src*="?resize"]').each(function(i,element){var jqe = jQuery(element); jqe.prop('src',jqe.prop('src').substring(0, src.indexOf('?')))})
 }

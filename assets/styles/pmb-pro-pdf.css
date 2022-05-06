@@ -14,24 +14,31 @@ h1,h2,h3,h4,h5,h6{
 .pmb-depth-3:not([id*='/pmb-']) h1.pmb-title{prince-bookmark-level: 4}
 .pmb-depth-4:not([id*='/pmb-']) h1.pmb-title{prince-bookmark-level: 5}
 
+
 .pmb-posts .pmb-dynamic-resize img{
     width:auto;
 }
-figure.pmb-dynamic-resized, .wp-block-image.pmb-dynamic-resized figure{
+figure.wp-block-image, .wp-block-image figure, figure.wp-caption{
     display:flex;
     flex-direction:column;
 }
 
-.pmb-dynamic-resized-image-wrapper{
+.pmb-figure-image-wrapper{
     overflow:auto;
 }
-.pmb-dynamic-resized .pmb-dynamic-resized-image-wrapper img{
+.wp-block-image .pmb-figure-image-wrapper img, .wp-caption .pmb-figure-image-wrapper img{
     height:100%;
     max-height:100%;
     width:auto;
     display:block;
     margin-right:auto;
     margin-left:auto;
+}
+/*
+Don't let image blocks take up more than the max height
+*/
+.wp-block-image, figure{
+    max-height:100vh;
 }
 
 /**
