@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.15.4
+Stable tag: 3.15.5
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -432,7 +432,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.15.5 xxxx =
+= 3.15.5 May 5, 2022 =
 * Compatibility: fix only printing one page when using Betheme
 * Compatibility: hide GDPR cookie consent overlay and "pum overlay"
 * Bugfix: Pro Print avoids Javascript error when there is an image with invalid src
