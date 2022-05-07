@@ -463,6 +463,73 @@ class DefaultDesignTemplates
                 ];
             }
         );
+
+        // it's ok to register this design even if the format isn't registered (which it isn't for the wp.org version)
+        pmb_register_design_template(
+            'classic_word',
+            function () {
+                return [
+                    'title'                 => __('Classic Word', 'print-my-blog'),
+                    'format'                => DefaultFileFormats::WORD,
+                    'dir'                   => PMB_DESIGNS_DIR . 'word/classic',
+                    'url' => plugins_url('designs/word/classic', PMB_MAIN_FILE),
+                    'default' => 'classic_word',
+                    'docs' => 'https://printmy.blog/user-guide/', // update
+                    'supports' => [
+                        'front_matter',
+                        'part',
+                        'back_matter',
+                    ],
+                    'design_form_callback'  => function () {
+
+                        $form = $this->getDefaultDesignForm()->merge($this->getGenericDesignForm());
+                        $form->addSubsections(
+                            [
+                                'convert_videos' => new YesNoInput(
+                                    [
+                                        'html_label_text' => __('Convert Videos to Images and Links', 'print-my-blog'),
+                                        'html_help_text' => __('Some eReaders don\'t show videos, in which case you may prefer to replace them with an image and a hyperlink to the online video content.', 'print-my-blog'),
+                                        'default' => false
+                                    ]
+                                )
+                            ],
+                            'generic_sections'
+                        );
+                        $form->getProperSubsection('generic_sections')->removeSubsection('use_theme');
+                        return $form;
+                    },
+                    'project_form_callback' => function (Design $design) {
+                        $project_form = $this->getDefaultProjectForm($design);
+                        $project_form->merge(
+                            new FormSection(
+                                [
+                                    'subsections' => [
+                                        'post_name' => new TextInput(
+                                            [
+                                                'html_label_text' => __('File name', 'print-my-blog'),
+                                            ]
+                                        ),
+                                        'byline' => new TextAreaInput(
+                                            [
+                                                'html_label_text' => __('ByLine', 'print-my-blog'),
+                                                'html_help_text' => __('Project Author(s)', 'print-my-blog'),
+                                            ]
+                                        ),
+                                        'post_content' => new TextAreaInput(
+                                            [
+                                                'html_label_text' => __('Description', 'print-my-blog'),
+                                                'html_help_text' => __('Shown as eBook metadata.', 'print-my-blog')
+                                            ]
+                                        ),
+                                    ]
+                                ]
+                            )
+                        );
+                        return $project_form;
+                    }
+                ];
+            }
+        );
     }
 
     public function getDefaultProjectForm(Design $design)

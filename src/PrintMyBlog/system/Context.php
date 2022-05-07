@@ -107,7 +107,7 @@ class Context extends BaseContext
                 'PrintMyBlog\compatibility\DetectAndActivate' => self::REUSE,
                 'PrintMyBlog\services\ExternalResourceCache' => self::REUSE
             ],
-            'PrintMyBlog\services\generators\EpubGenerator' => [
+            'PrintMyBlog\services\generators\WordGenerator' => [
                 'PrintMyBlog\db\PostFetcher' => self::REUSE,
                 'PrintMyBlog\compatibility\DetectAndActivate' => self::REUSE,
                 'PrintMyBlog\services\ExternalResourceCache' => self::REUSE

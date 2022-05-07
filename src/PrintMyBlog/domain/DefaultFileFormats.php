@@ -9,6 +9,7 @@ class DefaultFileFormats
     const DIGITAL_PDF = 'digital_pdf';
     const PRINT_PDF = 'print_pdf';
     const EPUB = 'epub';
+    const WORD = 'word';
 
     /**
      * @return FileFormat[]
@@ -50,11 +51,24 @@ class DefaultFileFormats
             [
                 'title' => __('eBook (ePub)', 'print-my-blog'),
                 'icon' => 'dashicons-tablet',
-                'generator' => 'PrintMyBlog\services\generators\EpubGenerator',
+                'generator' => 'PrintMyBlog\services\generators\WordGenerator',
                 'default' => 'classic_epub',
                 'desc' => __('ePub file intended for reading from an eReader, tablet, or phone; or for publishing on an eBook marketplace like Amazon\'s Kindle Direct Publishing, Apple Books, or Kobo.', 'print-my-blog'),
                 'color' => '#ffcc00',
                 'extension' => 'epub',
+                'supported' => $supported
+            ]
+        );
+        pmb_register_file_format(
+            self::WORD,
+            [
+                'title' => __('Word Document', 'print-my-blog'),
+                'icon' => 'dashicons-media-document',
+                'generator' => 'PrintMyBlog\services\generators\WordGenerator',
+                'default' => 'classic_word',
+                'desc' => __('Useful when working with people and software that prefer Microft Word. Most formatting is lost and you\'ll probably need to maintain two copies of your works, but sometimes this is the only way.', 'print-my-blog'),
+                'color' => '#ffbdde',
+                'extension' => 'doc',
                 'supported' => $supported
             ]
         );
