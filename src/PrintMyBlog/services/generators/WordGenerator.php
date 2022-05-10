@@ -75,6 +75,10 @@ class WordGenerator extends HtmlBaseGenerator
             );
         }
 
+        add_filter(
+            'PrintMyBlog\services\ExternalResourceCache->domainsToNotMap()',
+            [$this, 'cacheWpComToo']
+        );
         wp_localize_script(
             'pmb-word',
             'pmb_pro',
@@ -123,5 +127,16 @@ TOC \o \"1-3\" \u
 <span style='mso-element:field-end'></span> 
 <![endif]--> 
 </p>";
+    }
+
+    /**
+     *
+     * @param $domains_to_not_map
+     * @return mixed
+     */
+    public function cacheWpComToo($domains_to_not_map){
+        $key = array_search('.wp.com', $domains_to_not_map);
+        unset($domains_to_not_map[$key]);
+        return $domains_to_not_map;
     }
 }
