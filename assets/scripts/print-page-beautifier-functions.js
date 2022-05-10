@@ -227,22 +227,26 @@ function pmb_mark_for_dynamic_resize(min_image_size){
  * @param callback_when_done
  */
 function pmb_set_image_dimension_attributes(element, callback_when_done){
-    if (! element.hasAttribute('height') || ! element.hasAttribute('width')) {
-        // record the image's resolution as attributes on it
-        var newImg = new Image();
-
-        newImg.onload = function () {
-            var height = newImg.height;
-            var width = newImg.width;
-            element.setAttribute('height', height);
-            element.setAttribute('width', width);
-            if(typeof(callback_when_done) === 'function'){
-                callback_when_done();
-            }
+    if (element.hasAttribute('height') && element.hasAttribute('width')) {
+        if(typeof(callback_when_done) === 'function'){
+            callback_when_done();
         }
-
-        newImg.src = element.attributes['src'].value; // this must be done AFTER setting onload
+        return;
     }
+    // record the image's resolution as attributes on it
+    var newImg = new Image();
+
+    newImg.onload = function () {
+        var height = newImg.height;
+        var width = newImg.width;
+        element.setAttribute('height', height);
+        element.setAttribute('width', width);
+        if(typeof(callback_when_done) === 'function'){
+            callback_when_done();
+        }
+    }
+
+    newImg.src = element.attributes['src'].value; // this must be done AFTER setting onload
 }
 
 /**
