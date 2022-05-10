@@ -43,7 +43,7 @@ function pmb_convert_images_to_data_urls(){
                 var context = canvas.getContext && canvas.getContext( '2d' );
                 context.drawImage(element, 0, 0);
 
-                element.attributes['src'].value = canvas.toDataURL();
+                element.setAttribute('src', canvas.toDataURL());
                 element.setAttribute('height', original_height);
                 element.setAttribute('width', original_width);
             });
