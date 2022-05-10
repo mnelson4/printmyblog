@@ -143,6 +143,9 @@ function PmbExternalResourceCacher() {
         element.attributes[attribute].value = copy_url;
         this.external_resource_mapping[external_url] = copy_url;
         console.log('PMB swapped "' + external_url + '" for "' + copy_url + '"');
+        if(element.hasAttribute('srcset')){
+            element.removeAttribute('srcset');
+        }
     }
 
     /**
