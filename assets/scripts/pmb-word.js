@@ -34,23 +34,88 @@ function pmb_convert_images_to_data_urls(){
 
 
     jQuery('img').each(function(index, element){
-        canvas.setAttribute('height', element.attributes['height'].value);
-        canvas.setAttribute('width', element.attributes['width'].value);
-        var context = canvas.getContext && canvas.getContext( '2d' );
-        context.drawImage(element, 0, 0);
+        var original_height = element.offsetHeight;
+        var original_width = element.offsetWidth;
+        pmb_set_image_dimension_attributes(element,
+            function(){
+                canvas.setAttribute('height', element.attributes['height'].value);
+                canvas.setAttribute('width', element.attributes['width'].value);
+                var context = canvas.getContext && canvas.getContext( '2d' );
+                context.drawImage(element, 0, 0);
 
-        element.attributes['src'].value = canvas.toDataURL();
-        //element.removeAttribute('srcset');
+                element.attributes['src'].value = canvas.toDataURL();
+                element.setAttribute('height', original_height);
+                element.setAttribute('width', original_width);
+            });
     });
 
 }
+
+/**
+ * v1: just converts internal hyperlinks to anchor links
+ */
+function pmb_replace_links_for_word()
+{
+    // epub-generator.js's pmb_replace_internal_links_with_epub_file_links has similar logic
+    _pmb_for_each_hyperlink(
+        // internal hyperlinks
+        function(a, id_url, id_selector){
+            // v1: convert internal hyperlinks to anchor links
+            // switch(internal_link_policy){
+            //     case 'footnote':
+                    // only add the footnote if the link isn't just the URL spelled out.
+                    if(a.attr('href') !== a.html().trim()) {
+                        a.attr('href',id_url);
+                    }
+            //         break;
+            //     case 'leave':
+            //         a.attr('href',id_url);
+            //         break;
+            //     case 'remove':
+            //         a.contents().unwrap();
+            //         break;
+            //     // otherwise, leave alone
+            // }
+        },
+        // external hyperlinks
+        function(a){
+            // v1 just always leave external hyperlinks
+            // switch(external_link_policy){
+            //     case 'footnote':
+            //         // only add the footnote if the link isn't just the URL spelled out.
+            //         var link_text = a.html().trim();
+            //         var href = a.attr('href');
+            //         var matches = [href, href.replace('https://',''), href.replace('http://',''), href.replace('//',''), href.replace('mailto:','')];
+            //         if(matches.indexOf(link_text) === -1){
+            //             a.after('<span class="pmb-footnote">' + pre_external_footnote  + a.attr('href') + post_external_footnote + '</span>');
+            //         }
+            //         break;
+            //     case 'remove':
+            //         a.contents().unwrap();
+            //         break;
+            //     // otherwise, leave alone
+            // }
+        }
+    );
+}
+
 jQuery(document).on('pmb_wrap_up', function() {
     var download_button = jQuery('#download_link');
     download_button.removeClass('pmb-disabled');
-    pmb_convert_images_to_data_urls();
-    jQuery('.pmb-loading').remove();
+    pmb_replace_links_for_word();
 
-    download_button.click(function() {
-        pmb_export_as_doc();
+
+
+    jQuery(document).on("pmb_external_resouces_loaded", function() {
+        pmb_convert_images_to_data_urls();
+        jQuery('.pmb-loading').remove();
+        download_button.click(function() {
+            pmb_export_as_doc();
+        });
     });
+    var erc = new PmbExternalResourceCacher();
+    erc.replaceExternalImages();
+
+
+
 });

@@ -7,6 +7,10 @@ class WordGenerator extends HtmlBaseGenerator
 
     public function startGenerating()
     {
+        add_filter(
+            '\PrintMyBlog\controllers\Shortcodes->tableOfContents',
+            [$this, 'wordToc']
+        );
         parent::startGenerating();
     }
 
@@ -111,5 +115,22 @@ class WordGenerator extends HtmlBaseGenerator
                 pmb_get_contents($this->design->getDesignTemplate()->getDir() . 'templates/footer.php')
             );
         }
+    }
+
+    /**
+     * ignores original html
+     */
+    public function wordToc(){
+        return "<p class=MsoToc1> 
+<!--[if supportFields]> 
+<span style='mso-element:field-begin'></span> 
+TOC \o \"1-3\" \u 
+<span style='mso-element:field-separator'></span> 
+<![endif]--> 
+<span style='mso-no-proof:yes'>" . __('Table of content - Please right-click and choose "Update field".', 'print-my-blog') . "</span> 
+<!--[if supportFields]> 
+<span style='mso-element:field-end'></span> 
+<![endif]--> 
+</p>";
     }
 }
