@@ -140,15 +140,19 @@ function PmbExternalResourceCacher() {
      * @private
      */
     this._update_element_and_map = function(external_url, copy_url, element, attribute){
+        if(element.hasAttribute('srcset')){
+            element.removeAttribute('srcset');
+        }
+        if(element.hasAttribute('sizes')){
+            element.removeAttribute('sizes');
+        }
         element.attributes[attribute].value = copy_url;
         if(attribute === 'src'){
             element.src = copy_url;
         }
         this.external_resource_mapping[external_url] = copy_url;
         console.log('PMB swapped "' + external_url + '" for "' + copy_url + '"');
-        if(element.hasAttribute('srcset')){
-            element.removeAttribute('srcset');
-        }
+
     }
 
     /**
