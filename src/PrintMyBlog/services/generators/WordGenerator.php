@@ -120,7 +120,8 @@ class WordGenerator extends HtmlBaseGenerator
     /**
      * ignores original html
      */
-    public function wordToc(){
+    public function wordToc()
+    {
         return "<p class=MsoToc1> 
 <!--[if supportFields]> 
 <span style='mso-element:field-begin'></span> 
