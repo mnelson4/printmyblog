@@ -54,7 +54,12 @@ class WordGenerator extends HtmlBaseGenerator
             PMB_STYLES_DIR . '/pmb-word.css'
         ) . $this->design->getSetting('custom_css');
 
-
+        wp_enqueue_style(
+            'pmb-word',
+            PMB_STYLES_URL . 'pmb-word.css',
+            [],
+            filemtime(PMB_STYLES_DIR . 'pmb-word.css')
+        );
         $style_file = $this->getDesignDir() . 'assets/style.css';
 
         if (file_exists($style_file)) {

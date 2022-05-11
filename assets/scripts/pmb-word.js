@@ -10,11 +10,20 @@ function pmb_export_as_doc(){
         "<xml>" +
         "<w:WordDocument>" +
         "<w:View>Print</w:View>" +
-        "<w:Zoom>10</w:Zoom>" +
+        "<w:Zoom>100</w:Zoom>" +
         "<w:DoNotOptimizeForBrowser/>" +
         "</w:WordDocument>" +
         "</xml>" +
         "<![endif]-->" +
+        "<style> <!-- " +
+"@page" +
+"{" +
+    "size: 21cm 29.7cm;  /* A4 */" +
+    "margin: 2cm 2cm 2cm 2cm; /* Margins: 2 cm on each side */"+
+    "mso-page-orientation: portrait;" +
+"}"+
+"-->" +
+        "</style>" +
         print_page_head +
         "</head><body>";
     var footer = "</body></html>";
@@ -24,31 +33,23 @@ function pmb_export_as_doc(){
     var blob = new Blob([sourceHTML], {type: "data:application/vnd.ms-word;charset=utf-8"});
     var download_button = jQuery('#download_link');
     saveAs(blob, download_button.attr('download').valueOf());
-    //saveTextAs(sourceHTML, download_button.attr('download').valueOf());
 }
 
-function pmb_convert_images_to_data_urls(){
-    // trock from https://stackoverflow.com/questions/15760764/how-to-get-base64-encoded-data-from-html-imagea
-    var canvas = document.createElement( 'canvas' );
-
-
-
+/**
+ * Word ignores CSS (from my testing) but does respect the height and width attributes. Limit them to the page's width
+ */
+function pmb_limit_img_widths(){
     jQuery('img').each(function(index, element){
-        var original_height = element.offsetHeight;
-        var original_width = element.offsetWidth;
-        pmb_set_image_dimension_attributes(element,
-            function(){
-                canvas.setAttribute('height', element.attributes['height'].value);
-                canvas.setAttribute('width', element.attributes['width'].value);
-                var context = canvas.getContext && canvas.getContext( '2d' );
-                context.drawImage(element, 0, 0);
-
-                element.src = canvas.toDataURL();
-                element.setAttribute('height', original_height);
-                element.setAttribute('width', original_width);
-            });
+        var old_width = element.getAttribute('width');
+        var new_width = Math.min(old_width, 642);
+        var ratio = new_width / old_width;
+        if(element.hasAttribute('width')){
+            element.setAttribute('width', new_width);
+        }
+        if(element.hasAttribute('height')){
+            element.setAttribute('height', element.getAttribute('height') * ratio);
+        }
     });
-
 }
 
 /**
@@ -99,28 +100,71 @@ function pmb_replace_links_for_word()
     );
 }
 
+/**
+ * converts all images to dataurls for easy inclusion in word docs
+ * @param finished_callback called when done all conversions
+ * @constructor
+ */
+function PmbImgToDataUrls(finished_callback) {
+    this.pending = 0;
+    this.finished_callback = finished_callback;
+
+    /**
+     * starts converting images to dataurls
+     */
+    this.convert = function(){
+        // trock from https://stackoverflow.com/questions/15760764/how-to-get-base64-encoded-data-from-html-imagea
+        var canvas = document.createElement( 'canvas' );
+        var that = this;
+        jQuery('img').each(function(index, element){
+            var original_height = element.offsetHeight;
+            var original_width = element.offsetWidth;
+            that.pending++;
+            pmb_set_image_dimension_attributes(element,
+                function(){
+                    canvas.setAttribute('height', element.attributes['height'].value);
+                    canvas.setAttribute('width', element.attributes['width'].value);
+                    var context = canvas.getContext && canvas.getContext( '2d' );
+                    context.drawImage(element, 0, 0);
+
+                    element.src = canvas.toDataURL();
+                    element.setAttribute('height', original_height);
+                    element.setAttribute('width', original_width);
+                    that.pending--;
+                    that.checkFinished();
+                });
+        });
+        that.checkFinished();
+    }
+
+    /**
+     * @private
+     */
+    this.checkFinished = function(){
+        if(this.pending <= 0){
+            this.finished_callback();
+        }
+    }
+}
+
 jQuery(document).on('pmb_wrap_up', function() {
     var download_button = jQuery('#download_link');
-    download_button.removeClass('pmb-disabled');
+
     pmb_replace_links_for_word();
 
-
-
     jQuery(document).on("pmb_external_resouces_loaded", function() {
-        setTimeout(
+        var dataurl_converter = new PmbImgToDataUrls(
             function(){
-                pmb_convert_images_to_data_urls();
                 jQuery('.pmb-loading').remove();
+                pmb_limit_img_widths();
+                download_button.removeClass('pmb-disabled');
                 download_button.click(function() {
                     pmb_export_as_doc();
                 });
-            },
-            5000
+            }
         );
+        dataurl_converter.convert();
     });
     var erc = new PmbExternalResourceCacher();
     erc.replaceExternalImages();
-
-
-
 });
