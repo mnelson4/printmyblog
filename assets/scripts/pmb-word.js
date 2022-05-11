@@ -1,10 +1,13 @@
 
 function pmb_export_as_doc(){
-    var print_page_head = document.getElementsByTagName("head")[0].innerHTML;
+    var print_page_head_jq = jQuery('head');
+    print_page_head_jq.find('script'),each(function(){
+        jQuery(this).replaceWith('');
+    });
     var word_doc_head = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
         "xmlns:w='urn:schemas-microsoft-com:office:word' "+
         "xmlns='http://www.w3.org/TR/REC-html40'>"+
-        "<head><title>test</title>" +
+        "<head><meta charset='utf-8'>" +
         // https://www.codeproject.com/Articles/7341/Dynamically-generate-a-MS-Word-document-using-HTML
         "<!--[if gte mso 9]>" +
         "<xml>" +
@@ -23,12 +26,13 @@ function pmb_export_as_doc(){
     "mso-page-orientation: portrait;" +
 "}"+
 "-->" +
-        "</style><meta charset='utf-8'>" +
-        print_page_head +
+        "</style>" +
+        print_page_head_jq.html() +
         "</head><body>";
     var footer = "</body></html>";
 
-    var sourceHTML = word_doc_head+document.getElementsByClassName("pmb-project-content")[0].innerHTML+footer;
+    var body_jq= jQuery('noscript').replaceWith('');
+    var sourceHTML = word_doc_head+body_jq.html()+footer;
 
     var blob = new Blob([sourceHTML], {type: "data:application/vnd.ms-word;charset=utf-8"});
     var download_button = jQuery('#download_link');
