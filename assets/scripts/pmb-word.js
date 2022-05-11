@@ -4,13 +4,13 @@ function pmb_export_as_doc(){
     var word_doc_head = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
         "xmlns:w='urn:schemas-microsoft-com:office:word' "+
         "xmlns='http://www.w3.org/TR/REC-html40'>"+
-        "<head><meta charset='utf-8'>" +
+        "<head><title>test</title>" +
         // https://www.codeproject.com/Articles/7341/Dynamically-generate-a-MS-Word-document-using-HTML
         "<!--[if gte mso 9]>" +
         "<xml>" +
         "<w:WordDocument>" +
         "<w:View>Print</w:View>" +
-        "<w:Zoom>100</w:Zoom>" +
+        "<w:Zoom>10</w:Zoom>" +
         "<w:DoNotOptimizeForBrowser/>" +
         "</w:WordDocument>" +
         "</xml>" +
@@ -23,7 +23,7 @@ function pmb_export_as_doc(){
     "mso-page-orientation: portrait;" +
 "}"+
 "-->" +
-        "</style>" +
+        "</style><meta charset='utf-8'>" +
         print_page_head +
         "</head><body>";
     var footer = "</body></html>";
