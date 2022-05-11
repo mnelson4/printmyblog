@@ -139,7 +139,8 @@ TOC \o \"1-3\" \u
      * @param $domains_to_not_map
      * @return mixed
      */
-    public function cacheWpComToo($domains_to_not_map){
+    public function cacheWpComToo($domains_to_not_map)
+    {
         $key = array_search('.wp.com', $domains_to_not_map);
         unset($domains_to_not_map[$key]);
         return $domains_to_not_map;
