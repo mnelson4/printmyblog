@@ -150,6 +150,9 @@ function PmbExternalResourceCacher() {
         if(attribute === 'src'){
             element.src = copy_url;
         }
+        var clone = element.cloneNode();
+        element.replaceWith(clone);
+
         this.external_resource_mapping[external_url] = copy_url;
         console.log('PMB swapped "' + external_url + '" for "' + copy_url + '"');
 

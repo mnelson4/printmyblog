@@ -107,11 +107,16 @@ jQuery(document).on('pmb_wrap_up', function() {
 
 
     jQuery(document).on("pmb_external_resouces_loaded", function() {
-        pmb_convert_images_to_data_urls();
-        jQuery('.pmb-loading').remove();
-        download_button.click(function() {
-            pmb_export_as_doc();
-        });
+        setTimeout(
+            function(){
+                pmb_convert_images_to_data_urls();
+                jQuery('.pmb-loading').remove();
+                download_button.click(function() {
+                    pmb_export_as_doc();
+                });
+            },
+            5000
+        );
     });
     var erc = new PmbExternalResourceCacher();
     erc.replaceExternalImages();
