@@ -1,9 +1,7 @@
 
 function pmb_export_as_doc(){
     var print_page_head_jq = jQuery('head');
-    print_page_head_jq.find('script'),each(function(){
-        jQuery(this).replaceWith('');
-    });
+    print_page_head_jq.find('script').remove();
     var word_doc_head = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
         "xmlns:w='urn:schemas-microsoft-com:office:word' "+
         "xmlns='http://www.w3.org/TR/REC-html40'>"+
@@ -31,7 +29,8 @@ function pmb_export_as_doc(){
         "</head><body>";
     var footer = "</body></html>";
 
-    var body_jq= jQuery('noscript').replaceWith('');
+    var body_jq= jQuery('.pmb-project-content');
+    body_jq.find('noscript').remove();
     var sourceHTML = word_doc_head+body_jq.html()+footer;
 
     var blob = new Blob([sourceHTML], {type: "data:application/vnd.ms-word;charset=utf-8"});
