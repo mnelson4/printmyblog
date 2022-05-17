@@ -432,6 +432,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= xxxxxxxxxxxxxxxxxx =
+* Enhancement: send more debugging info when using Pro PDF Service
+
 = 3.15.6 May 16, 2022 =
 * Update: assert WP 6.0 compatiblility
 
