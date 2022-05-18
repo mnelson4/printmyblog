@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.15.6
+Stable tag: 3.15.7
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -432,8 +432,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= xxxxxxxxxxxxxxxxxx =
+= 3.15.7 May 18, 2021 =
 * Enhancement: send more debugging info when using Pro PDF Service
+* Feature: Japanese translation
 
 = 3.15.6 May 16, 2022 =
 * Update: assert WP 6.0 compatiblility

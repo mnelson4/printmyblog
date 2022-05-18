@@ -1,0 +1,4176 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Print My Blog\n"
+"POT-Creation-Date: 2022-05-18 13:26-0700\n"
+"PO-Revision-Date: 2022-05-18 13:26-0700\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ja_JP\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.4.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: printmyblog.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+"X-Poedit-SearchPathExcluded-2: node_modules\n"
+
+#: designs/epub/classic/description.php:1
+#: designs/pdf/digital/buurma/description.php:1
+#: designs/pdf/digital/classic/description.php:1
+#: designs/pdf/digital/mayer/description.php:1
+#: designs/pdf/print/classic/descriptions/classic.php:1
+#: designs/pdf/print/classic/descriptions/economical.php:1
+#: designs/pdf/print/classic/descriptions/edit.php:1
+msgid "Purpose"
+msgstr "用途・目的"
+
+#: designs/epub/classic/description.php:2
+msgid ""
+"Similar to Print My Blog Quick Print and dotEpub, but supporting Pro "
+"features. Great for printing your WordPress content as an eBook for reading "
+"from a tablet or phone, or uploading to eBook marketplaces like Amazon or "
+"Apple Book Store."
+msgstr ""
+"Print My Blog Quick Print や dotEpub に似ていますが、Pro 機能をサポートしてい"
+"ます。WordPressのコンテンツをタブレットや携帯電話から読んだり、AmazonやApple "
+"Book Storeなどの電子書籍マーケットプレイスにアップロードしたりするための電子"
+"書籍として印刷するのに最適です。"
+
+#: designs/epub/classic/description.php:3
+msgid ""
+"A table of contents is generated and inserted into the book (no need to add "
+"it using an external service like Kindle Direct Publishing or Calibre)."
+msgstr ""
+"目次が生成され、ブックに挿入されます (Kindle Direct Publishing や Calibre な"
+"どの外部サービスを使用して追加する必要はありません)。"
+
+#: designs/epub/classic/description.php:4
+msgid "Images are bundled into the book file so they can be used offline."
+msgstr ""
+"画像はブックファイルにバンドルされているため、オフラインで使用できます。"
+
+#: designs/epub/classic/description.php:5
+msgid ""
+"Image galleries are rearranged into a simple list of images which displays "
+"better on smaller devices."
+msgstr ""
+"画像ギャラリーは、小さなデバイスでよりよく表示される画像の単純なリストに再配"
+"置されます。"
+
+#: designs/epub/classic/description.php:6
+#, php-format
+msgid ""
+"If there are any features or options you want, %1$splease get in touch.%2$s"
+msgstr "ご希望の機能やオプションがある場合は、%1$sお問い合わせください。%2$s"
+
+#: designs/epub/classic/description.php:8
+#: designs/pdf/digital/buurma/description.php:5
+#: designs/pdf/digital/classic/description.php:4
+#: designs/pdf/digital/mayer/description.php:6
+#: designs/pdf/print/classic/descriptions/shared.php:2
+msgid "Features"
+msgstr "特徴"
+
+#: designs/epub/classic/description.php:20
+#: designs/pdf/digital/buurma/description.php:12
+#: designs/pdf/digital/classic/description.php:15
+#: designs/pdf/digital/mayer/description.php:25
+#: designs/pdf/print/classic/descriptions/shared.php:12
+#: templates/partials/layout_options.php:13
+msgid "Page Layout"
+msgstr "ページレイアウト"
+
+#: designs/epub/classic/templates/article.php:17
+#: designs/pdf/digital/classic/templates/article.php:17
+#: designs/pdf/print/classic/templates/article.php:17
+#, php-format
+msgid "ID:%s"
+msgstr "番号:%s"
+
+#: designs/epub/classic/templates/article.php:22
+#: designs/pdf/digital/classic/templates/article.php:22
+#: designs/pdf/print/classic/templates/article.php:22
+#, php-format
+msgid "By %s"
+msgstr "%s による"
+
+#: designs/epub/classic/templates/footer.php:4
+msgid "Powered by WordPress & Print My Blog"
+msgstr "Powered by WordPress & Print My Blog"
+
+#. translators: %s: Post title.
+#: designs/epub/classic/templates/partials/comments.php:13
+#: designs/pdf/print/classic/templates/partials/comments.php:13
+#, php-format
+msgctxt "comments title"
+msgid "One Reply to &ldquo;%s&rdquo;"
+msgstr "&ldquo;%s&rdquo; への1件の返信;"
+
+#: designs/epub/classic/templates/partials/comments.php:18
+#: designs/pdf/print/classic/templates/partials/comments.php:18
+#, php-format
+msgctxt "comments title"
+msgid "%1$s Reply to &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s Replies to &ldquo;%2$s&rdquo;"
+msgstr[0] "%1$s 返信 &ldquo;%2$s&rdquo;"
+
+#: designs/epub/classic/templates/title_page.php:43
+#: designs/pdf/digital/classic/templates/title_page.php:53
+#: designs/pdf/print/classic/templates/title_page.php:43
+#: templates/print_page.php:300
+#, php-format
+msgid "Printed on %1$s"
+msgstr "%1$sに印刷"
+
+#: designs/pdf/digital/buurma/description.php:2
+msgid ""
+"Designed for a school, company, or organization that wants to include their "
+"name, logo, and colors throughout the PDF. Because of its exstensive use of "
+"colors, it’s usually best viewed from a computer or handheld device."
+msgstr ""
+"学校、会社、または組織で、名前、ロゴ、および色を PDF 全体に含める必要がある場"
+"合に設計されています。色が広範囲に使用されているため、通常はコンピューターま"
+"たはハンドヘルド デバイスから見るのが最適です。"
+
+#: designs/pdf/digital/buurma/description.php:7
+msgid "Easier content editing because there are no nesting parts."
+msgstr "ネスト部分がないため、コンテンツ編集が容易になります。"
+
+#: designs/pdf/digital/buurma/description.php:8
+msgid "All hyperlinks converted into footnotes"
+msgstr "脚注に変換されたすべてのハイパーリンク"
+
+#: designs/pdf/digital/buurma/description.php:9
+msgid ""
+"The title page can include your organization’s name, project title, issue "
+"number, list of authors, and an introductory paragraph."
+msgstr ""
+"タイトル ページには、組織の名前、プロジェクトのタイトル、懸案事項番号、作成者"
+"の一覧、および導入段落を含めることができます。"
+
+#: designs/pdf/digital/buurma/description.php:10
+msgid "Each article includes just its title and content"
+msgstr "各記事には、タイトルと内容のみが含まれています"
+
+#: designs/pdf/digital/buurma/description.php:14
+msgid ""
+"The default title page includes a stylized banner (with customizable color) "
+"above a colored background featuring a large version of your company logo."
+msgstr ""
+"既定のタイトル ページには、色付きの背景の上に定型化されたバナー (カスタマイズ"
+"可能な色) があり、会社のロゴの大きなバージョンが特徴です。"
+
+#: designs/pdf/digital/buurma/description.php:15
+msgid ""
+"Main matter pages fade from white to a color of your choosing in the corner "
+"where your logo and page number are shown."
+msgstr ""
+"メインマターページは、ロゴとページ番号が表示されるコーナーで、白から選択した"
+"色にフェードします。"
+
+#: designs/pdf/digital/buurma/description.php:16
+msgid ""
+"Page numbers in bottom-right corner, and article titles in the top-right. "
+"Front-matter’s pages are numbered with Roman numerals"
+msgstr ""
+"右下隅にページ番号、右上に記事のタイトル。フロントマターのページにはローマ数"
+"字の番号が付けられています"
+
+#: designs/pdf/digital/buurma/description.php:17
+msgid "Each article begins on a new page"
+msgstr "各記事は新しいページから始まります"
+
+#: designs/pdf/digital/buurma/description.php:18
+msgid "Back matter uses your large company logo with background color"
+msgstr "バックマターは、背景色で大企業のロゴを使用しています"
+
+#: designs/pdf/digital/classic/description.php:2
+msgid ""
+"Very similar to Print My Blog Quick Print, but supporting Pro features. "
+"Great for making a PDF for an easy-to-read digital backup of your favorite "
+"website content."
+msgstr ""
+"私のブログクイックプリントを印刷するのと非常によく似ていますが、Pro機能をサ"
+"ポートしています。お気に入りのウェブサイトコンテンツの読みやすいデジタルバッ"
+"クアップ用のPDFを作成するのに最適です。"
+
+#: designs/pdf/digital/classic/description.php:6
+#: designs/pdf/print/classic/descriptions/shared.php:4
+msgid "Supports nesting articles (like posts and pages) into “parts”"
+msgstr "記事(投稿やページなど)を「パーツ」にネストすることをサポート"
+
+#: designs/pdf/digital/classic/description.php:7
+msgid ""
+"External hyperlinks (links to web pages not in the project) can be "
+"automatically converted to footnotes, left in-place, or removed"
+msgstr ""
+"外部ハイパーリンク (プロジェクト内にない Web ページへのリンク) は、自動的に脚"
+"注に変換したり、そのままにしたり、削除したりできます。"
+
+#: designs/pdf/digital/classic/description.php:7
+msgid "Footnotes only work with Pro"
+msgstr "脚注はProでのみ機能します"
+
+#: designs/pdf/digital/classic/description.php:8
+msgid ""
+"Internal hyperlinks (links to content included in the project) can be "
+"automatically converted to to footnotes, inline page references, left in-"
+"place, or removed"
+msgstr ""
+"内部ハイパーリンク(プロジェクトに含まれるコンテンツへのリンク)は、脚注、イン"
+"ラインページ参照、インプレースのままにしたり、削除に自動的に変換したりできま"
+"す。"
+
+#: designs/pdf/digital/classic/description.php:8
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:86
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:179
+msgid "Footnotes and page references only work with Pro PDF Service"
+msgstr "脚注とページ参照は、Pro PDF サービスでのみ機能します。"
+
+#: designs/pdf/digital/classic/description.php:9
+#: designs/pdf/print/classic/descriptions/shared.php:7
+msgid ""
+"The default title page can include: Project Title, Subtitle, Site URL, Date "
+"Printed, Credit to Print My Blog"
+msgstr ""
+"デフォルトのタイトルページには、プロジェクトタイトル、字幕、サイトURL、印刷"
+"日、マイブログを印刷するためのクレジットを含めることができます。"
+
+#: designs/pdf/digital/classic/description.php:10
+#: designs/pdf/print/classic/descriptions/shared.php:8
+msgid ""
+"Each article can include: Title, ID, Author, URL, Date Published, Categories "
+"and Tags, Featured Image, Excerpt, Custom Fields, Content"
+msgstr ""
+"各記事に含めることができます:タイトル、ID、著者、URL、公開日、カテゴリとタ"
+"グ、アイキャッチ画像、抜粋、カスタムフィールド、コンテンツ"
+
+#: designs/pdf/digital/classic/description.php:11
+msgid "Limit image size by setting maximum height"
+msgstr "最大高さを設定して画像サイズを制限する"
+
+#: designs/pdf/digital/classic/description.php:12
+#: designs/pdf/print/classic/descriptions/shared.php:9
+msgid "Optionally automatically center images"
+msgstr "オプションで画像を自動的に中央揃えにする"
+
+#: designs/pdf/digital/classic/description.php:13
+#: designs/pdf/print/classic/descriptions/shared.php:10
+msgid "Optionally float images to the top or bottom of each page"
+msgstr "オプションで、画像を各ページの上部または下部にフロートする"
+
+#: designs/pdf/digital/classic/description.php:17
+msgid ""
+"Page numbers in bottom-right corner, article titles in the top-right, and "
+"part titles (if using parts) appear in the top-left corner. Front-matter’s "
+"pages are numbered with Roman numerals"
+msgstr ""
+"右下隅にページ番号、右上に記事タイトル、およびパーツタイトル(パーツを使用して"
+"いる場合)が左上隅に表示されます。フロントマターのページにはローマ数字の番号が"
+"付けられています"
+
+#: designs/pdf/digital/classic/description.php:17
+#: designs/pdf/digital/mayer/description.php:28
+#: designs/pdf/print/classic/descriptions/shared.php:16
+msgid "Most browsers add their own content to the page margins"
+msgstr "ほとんどのブラウザは、ページ余白に独自のコンテンツを追加します"
+
+#: designs/pdf/digital/classic/description.php:18
+#: designs/pdf/print/classic/descriptions/shared.php:17
+msgid "Each article can optionally begin on a new page"
+msgstr "各記事は、必要に応じて新しいページから開始できます"
+
+#: designs/pdf/digital/mayer/description.php:3
+msgid ""
+"Designed to look good when viewed from a device or printing to paper. The "
+"two-column layout leads to more compact content, especially good if your "
+"content doesn’t require the full page width"
+msgstr ""
+"デバイスから見たり、紙に印刷したりしたときに見栄えが良いように設計されていま"
+"す。2列のレイアウトは、コンテンツがよりコンパクトになり、コンテンツがページ幅"
+"全体を必要としない場合に特に適しています"
+
+#: designs/pdf/digital/mayer/description.php:3
+msgid "Most browsers will only print a white background"
+msgstr "ほとんどのブラウザは白い背景のみを印刷します"
+
+#: designs/pdf/digital/mayer/description.php:8
+msgid ""
+"Main matter is divided into two columns, while front matter uses the full "
+"page width."
+msgstr ""
+"メインマターは2つの列に分かれていますが、フロントマターはページ幅全体を使用し"
+"ます。"
+
+#: designs/pdf/digital/mayer/description.php:8
+msgid "Some browsers don‘t support multiple columns"
+msgstr "一部のブラウザーは複数の列をサポートしていません"
+
+#: designs/pdf/digital/mayer/description.php:9
+msgid ""
+"Content can be divided into parts with a special part opening area using the "
+"full page width."
+msgstr ""
+"コンテンツは、全ページ幅を使用して、特別な部分開口部領域を持つ部分に分割する"
+"ことができます。"
+
+#: designs/pdf/digital/mayer/description.php:12
+msgid ""
+"The title page can include a title and preamble. Other content can "
+"immediately follow, without needing a page break."
+msgstr ""
+"タイトル ページには、タイトルとプリアンブルを含めることができます。他のコンテ"
+"ンツは、改ページを必要とせずに、すぐに続くことができます。"
+
+#: designs/pdf/digital/mayer/description.php:13
+msgid ""
+"Each article includes just its title and content, and an optional dividing "
+"line to help distinguish between articles."
+msgstr ""
+"各記事には、タイトルと内容のみが含まれ、記事を区別するのに役立つオプションの"
+"分割線が含まれています。"
+
+#: designs/pdf/digital/mayer/description.php:15
+msgid ""
+"If your content is already divided into columns, optionally automatically "
+"remove them to improve the layout."
+msgstr ""
+"コンテンツが既に列に分割されている場合は、必要に応じて自動的に削除してレイア"
+"ウトを改善します。"
+
+#: designs/pdf/digital/mayer/description.php:16
+msgid ""
+"Optionally begin each post on a new page, or be shown immediately following "
+"the previous one."
+msgstr ""
+"必要に応じて、各投稿を新しいページで開始するか、前のページの直後に表示しま"
+"す。"
+
+#: designs/pdf/digital/mayer/description.php:17
+msgid ""
+"Optionally have each article title take up the full page width, or show them "
+"inside columns."
+msgstr ""
+"必要に応じて、各記事のタイトルをページ幅全体にするか、列内に表示します。"
+
+#: designs/pdf/digital/mayer/description.php:19
+msgid ""
+"Internal links (hyperlinks to content included in the project) are replaced "
+"with page references."
+msgstr ""
+"内部リンク (プロジェクトに含まれるコンテンツへのハイパーリンク) は、ページ参"
+"照に置き換えられます。"
+
+#: designs/pdf/digital/mayer/description.php:21
+msgid "External links (hyperlinks to content on the internet) are left as-is."
+msgstr ""
+"外部リンク(インターネット上のコンテンツへのハイパーリンク)はそのまま残されま"
+"す。"
+
+#: designs/pdf/digital/mayer/description.php:27
+msgid "Most content is divided between two columns."
+msgstr "ほとんどのコンテンツは 2 つの列に分割されます。"
+
+#: designs/pdf/digital/mayer/description.php:28
+msgid ""
+"Page numbers in bottom-right corner, and part titles in the top-left. Front-"
+"matter’s pages are numbered with Roman numerals"
+msgstr ""
+"右下隅にページ番号、左上にパーツ タイトルがあります。フロントマターのページに"
+"はローマ数字の番号が付けられています"
+
+#: designs/pdf/digital/mayer/description.php:30
+msgid "Special Instructions"
+msgstr "特別な指示"
+
+#: designs/pdf/digital/mayer/description.php:31
+msgid ""
+"Front matter defaults to using the full page width. To force something to be "
+"divided into columns, add the CSS class \"mayer-columns\" inside your "
+"content."
+msgstr ""
+"フロントマターはデフォルトでページ幅全体を使用します。何かを強制的に列に分割"
+"するには、コンテンツ内にCSSクラス \"mayer-columns\"を追加します。"
+
+#: designs/pdf/digital/mayer/description.php:33
+msgid ""
+"Main matter defaults to being divided into columns. To force something to "
+"use the full page width, add the CSS class \"mayer-wide\" inside the content."
+msgstr ""
+"メインマターのデフォルトは列に分割されます。ページ幅全体を使用するように強制"
+"するには、コンテンツ内に CSS クラス \"mayer-wide\" を追加します。"
+
+#: designs/pdf/print/classic/descriptions/classic.php:2
+msgid ""
+"Very similar to Print My Blog Quick Print, but supporting Pro features. "
+"Great for printing your WordPress content."
+msgstr ""
+"私のブログクイックプリントを印刷するのと非常によく似ていますが、Pro機能をサ"
+"ポートしています。あなたのワードプレスのコンテンツを印刷するのに最適です。"
+
+#: designs/pdf/print/classic/descriptions/economical.php:2
+msgid ""
+"For creating a printout of your WordPress content that saves paper and ink."
+msgstr ""
+"紙とインクを節約するWordPressコンテンツのプリントアウトを作成するため。"
+
+#: designs/pdf/print/classic/descriptions/economical.php:4
+msgid ""
+"This design uses a smaller font, small images, doesn’t add pagebreaks "
+"between articles, and avoids unnecessary extra information."
+msgstr ""
+"このデザインは、小さなフォントと小さな画像を使用し、記事間に改ページを追加せ"
+"ず、不要な追加情報を回避します。"
+
+#: designs/pdf/print/classic/descriptions/edit.php:2
+msgid ""
+"Perfect for editing and reviewing your content! Compact to conserve paper, "
+"lots of meta-information, and double-spaced text to allow for editor’s notes."
+msgstr ""
+"コンテンツの編集やレビューに最適です!コンパクトで、紙、多くのメタ情報、および"
+"編集者のメモを可能にするダブルスペースのテキストを節約します。"
+
+#: designs/pdf/print/classic/descriptions/shared.php:5
+msgid ""
+"External hyperlinks (links to web pages not in the project) can be "
+"automatically converted to footnotes or removed"
+msgstr ""
+"外部ハイパーリンク(プロジェクト内にないウェブページへのリンク)は、自動的に脚"
+"注に変換したり、削除したりできます。"
+
+#: designs/pdf/print/classic/descriptions/shared.php:5
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:113
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:210
+msgid "Footnotes require Pro"
+msgstr "脚注にはプロが必要"
+
+#: designs/pdf/print/classic/descriptions/shared.php:6
+msgid ""
+"Internal hyperlinks (links to content included in the project) can be "
+"automatically converted to footnotes, inline page references, or removed"
+msgstr ""
+"内部ハイパーリンク (プロジェクトに含まれるコンテンツへのリンク) は、脚注、イ"
+"ンライン ページ参照に自動的に変換、または削除できます。"
+
+#: designs/pdf/print/classic/descriptions/shared.php:6
+msgid "Footnotes and page references require Pro PDF Service"
+msgstr "脚注とページ参照にはPro PDFサービスが必要です"
+
+#: designs/pdf/print/classic/descriptions/shared.php:13
+msgid ""
+"This design is meant for printing on both sides of the page so you see two "
+"pages at once (the \"page spread\"). So the left-hand page will be styled "
+"differently than the right-hand page."
+msgstr ""
+"このデザインは、ページの両面に印刷するためのもので、一度に2つのページ(「見開"
+"きページ」)が表示されます。したがって、左側のページは右側のページとは異なるス"
+"タイルになります。"
+
+#: designs/pdf/print/classic/descriptions/shared.php:16
+msgid ""
+"Page numbers in bottom-outside corner, part titles appear in the top of the "
+"left page, article titles appear at the top of the right page. Front-"
+"matter’s pages are numbered with Roman numerals"
+msgstr ""
+"ページ番号は外側下隅に、部品タイトルは左ページの上部に、記事タイトルは右ペー"
+"ジの上部に表示されます。フロントマターのページにはローマ数字の番号が付けられ"
+"ています"
+
+#: inc/design_functions.php:74
+msgid "Powered by Print My Blog Pro & WordPress"
+msgstr "Powered by Print My Blog Pro & WordPress"
+
+#: inc/internal_functions.php:50
+#, php-format
+msgid "%1$sPurchase Required%2$s"
+msgstr "%1$s購入が必要%2$s"
+
+#: inc/internal_functions.php:78
+#, php-format
+msgid "Works better with %1$sPro PDF Service%2$s"
+msgstr "%1$sPro PDFサービスでより良く動作%2$s"
+
+#: inc/internal_functions.php:111
+#, php-format
+msgid "More Advanced Features in %1$sPro Print%2$s"
+msgstr "%1$sProプリントのより高度な機能%2$s"
+
+#: inc/internal_functions.php:239
+#, php-format
+msgid "Drag the %s \"%s\" into your project"
+msgstr "%s「%s」をプロジェクトにドラッグします"
+
+#: inc/internal_functions.php:263
+#, php-format
+msgid "View \"%s\""
+msgstr "%sを表示 "
+
+#: inc/internal_functions.php:277
+#, php-format
+msgid "Edit \"%s\""
+msgstr "“%s”を編集"
+
+#. translators: 1: post title
+#: inc/internal_functions.php:294
+#, php-format
+msgid "Replace \"%s\" with the existing Print Material for customizing."
+msgstr "\"%s\" を既存の印刷材料に置き換えて、カスタマイジングします。"
+
+#: inc/internal_functions.php:296
+#, php-format
+msgid "Replace \"%s\" with a New Print Material for customizing"
+msgstr "「%s」をカスタマイジング用の新しい印刷物に置き換えます。"
+
+#: inc/internal_functions.php:310
+msgid ""
+"Upgrade to Professional License for one-click copying to Print Materials for "
+"customization."
+msgstr ""
+"プロフェッショナルライセンスにアップグレードして、ワンクリックで印刷物にコ"
+"ピーしてカスタマイズできます。"
+
+#: inc/internal_functions.php:319
+#, php-format
+msgid "Add \"%s\" to project"
+msgstr "プロジェクトに「%s」を追加する"
+
+#: inc/internal_functions.php:329
+#, php-format
+msgid "Remove \"%s\""
+msgstr "「%s」を削除する"
+
+#: inc/internal_functions.php:359
+msgid "Drag or click here"
+msgstr "ドラッグまたはここをクリック"
+
+#: printmyblog.php:38
+msgid ""
+"We’re sorry, but you have another version of Print My Blog active. Only one "
+"can be active at a time. Please deactivate one."
+msgstr ""
+"申し訳ありませんが、別のバージョンの [マイ ブログの印刷] がアクティブになって"
+"います。一度にアクティブにできるのは 1 つだけです。1 つを無効にしてください。"
+
+#: printmyblog.php:64
+#, php-format
+msgid ""
+"We’re sorry, but Print My Blog requires PHP version %1$s or greater in order "
+"to operate. You are currently running version %2$s.%3$sIn order to update "
+"your version of PHP, you will need to contact your current hosting provider."
+"%3$sFor information on stable PHP versions, please go to %4$s."
+msgstr ""
+"申し訳ありませんが、私のブログを印刷するにはPHPバージョン%1$s以上が必要です。"
+"現在、バージョン %2$s を実行しています。%3$sPHPのバージョンを更新するには、現"
+"在のホスティングプロバイダに連絡する必要があります。%3$sPHPの安定版について"
+"は、%4$sをご覧ください。"
+
+#: printmyblog.php:104
+#, php-format
+msgid ""
+"We’re sorry, but Print My Blog requires WordPress %1$s. You are using %2$s."
+"%3$sFor information on how to update, please see %4$s."
+msgstr ""
+"申し訳ありませんが、私のブログを印刷するにはWordPressの%1$sが必要です。あなた"
+"は%2$sを使用しています。%3$s更新方法については、%4$sを参照してください。"
+
+#: src/PrintMyBlog/compatibility/plugins/WpVrView.php:91
+msgid "360 Image Available"
+msgstr "360 個の画像が利用可能"
+
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:175
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:395
+msgid "Language"
+msgstr "言語"
+
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:178
+msgid "All Languages"
+msgstr "すべての言語"
+
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:351
+#, php-format
+msgid "Default language (currently %s)"
+msgstr "既定の言語 (現在%s)"
+
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:367
+#, php-format
+msgid "Translate %s Design"
+msgstr "翻訳%sデザイン"
+
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:377
+#, php-format
+msgid "%s Translations"
+msgstr "%s翻訳"
+
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:379
+msgid "Translate Project Metadata"
+msgstr "プロジェクトメタデータの翻訳"
+
+#: src/PrintMyBlog/compatibility/plugins/Wpml.php:486
+#, php-format
+msgid "\"%s\" is fully translated into %s"
+msgstr "\"%s\" は完全に %s に変換されます。"
+
+#. Plugin Name of the plugin/theme
+#: src/PrintMyBlog/controllers/Admin.php:230
+#: src/PrintMyBlog/controllers/Admin.php:231
+#: src/PrintMyBlog/system/Init.php:210 templates/partials/breadcrumb.php:10
+#: templates/welcome.php:6
+msgid "Print My Blog"
+msgstr "私のブログを印刷する"
+
+#: src/PrintMyBlog/controllers/Admin.php:243
+#: src/PrintMyBlog/controllers/Admin.php:244
+#: templates/partials/breadcrumb.php:15
+msgid "Pro Print"
+msgstr "プロプリント"
+
+#: src/PrintMyBlog/controllers/Admin.php:253
+msgid "Print My Blog – Quick Print"
+msgstr "私のブログを印刷する - クイック印刷"
+
+#: src/PrintMyBlog/controllers/Admin.php:254
+msgid "Quick Print"
+msgstr "クイックプリント"
+
+#: src/PrintMyBlog/controllers/Admin.php:261
+msgid "Print My Blog Settings"
+msgstr "マイブログ設定を印刷する"
+
+#: src/PrintMyBlog/controllers/Admin.php:262
+msgid "Settings"
+msgstr "設定"
+
+#: src/PrintMyBlog/controllers/Admin.php:269 templates/help.php:10
+msgid "Help Me Print My Blog"
+msgstr "私のブログを印刷するのを手伝ってください"
+
+#: src/PrintMyBlog/controllers/Admin.php:270
+msgid "Help"
+msgstr "ヘルプ"
+
+#: src/PrintMyBlog/controllers/Admin.php:288
+msgid "Keyboard Accessibility"
+msgstr "キーボードのアクセシビリティ"
+
+#: src/PrintMyBlog/controllers/Admin.php:347
+msgid "Settings Saved!"
+msgstr "設定を保存しました！"
+
+#: src/PrintMyBlog/controllers/Admin.php:352
+#, php-format
+msgid "You should see the changes on your %1$slatest post%2$s."
+msgstr "変更は%1$s最新の投稿%2$sに表示されます。"
+
+#: src/PrintMyBlog/controllers/Admin.php:377
+msgid "Email Print My Blog Support"
+msgstr "メール印刷マイブログサポート"
+
+#: src/PrintMyBlog/controllers/Admin.php:438
+msgid "Email successfully sent. Expect a reply in the next 1-2 business days."
+msgstr ""
+"電子メールが正常に送信されました。今後 1 ~ 2 営業日以内に返信が届くことを期待"
+"してください。"
+
+#: src/PrintMyBlog/controllers/Admin.php:445
+#, php-format
+msgid ""
+"There was an error sending an email from your website (it was \"%1$s\"). "
+"Please manually send an email to %2$s, with the subject \"%3$s\", with the "
+"content:"
+msgstr ""
+"Web サイトからメールを送信中にエラーが発生しました (\"%1$s\" でした)。%2$sに"
+"「%3$s」という件名で、内容のメールを手動で送信してください。"
+
+#: src/PrintMyBlog/controllers/Admin.php:469
+msgid "Please explain what you did, what you expected, and what went wrong"
+msgstr ""
+"あなたが何をしたのか、何を期待していたのか、何がうまくいかなかったのかを説明"
+"してください"
+
+#: src/PrintMyBlog/controllers/Admin.php:471
+msgid "Including links to screenshots is appreciated"
+msgstr "スクリーンショットへのリンクを含めることは高く評価されています"
+
+#: src/PrintMyBlog/controllers/Admin.php:474
+msgid "Your Name"
+msgstr "名前"
+
+#: src/PrintMyBlog/controllers/Admin.php:480
+msgid "Are you ok with us viewing your most recent generated documents?"
+msgstr "最後に生成されたドキュメントを表示しても問題ありませんか?"
+
+#: src/PrintMyBlog/controllers/Admin.php:482
+msgid ""
+"Viewing your most recent generated documents saves a lot of time figuring "
+"out what is going wrong. We won’t share your content with anyone else."
+msgstr ""
+"最後に生成されたドキュメントを表示すると、何が問題になっているのかを理解する"
+"のに多くの時間を節約できます。私たちはあなたのコンテンツを他の人と共有するこ"
+"とはありません。"
+
+#: src/PrintMyBlog/controllers/Admin.php:485
+msgid "This debug info will also be sent."
+msgstr "このデバッグ情報も送信されます。"
+
+#: src/PrintMyBlog/controllers/Admin.php:488
+msgid ""
+"This is mostly system information, list of active plugins, active theme, and "
+"some Print My Blog Pro info like your most recent projects."
+msgstr ""
+"これは主にシステム情報、アクティブなプラグインのリスト、アクティブなテーマ、"
+"および最新のプロジェクトのようなPrint My Blog Pro情報です。"
+
+#: src/PrintMyBlog/controllers/Admin.php:499
+msgid "Support for your plan is offered on GitHub"
+msgstr "プランのサポートは GitHub で提供されます。"
+
+#: src/PrintMyBlog/controllers/Admin.php:500
+msgid ""
+"GitHub is a public forum to share your issues with the developer and other "
+"users."
+msgstr ""
+"GitHub は、開発者や他のユーザーと問題を共有するための公開フォーラムです。"
+
+#: src/PrintMyBlog/controllers/Admin.php:502
+#, php-format
+msgid ""
+"You will need to first %1$screate a GitHub account%2$s. If you prefer to use "
+"email support please %3$spurchase a license that offers email support.%2$s"
+msgstr ""
+"最初に%1$sGitHub アカウントを作成%2$s必要があります。電子メールサポートを使用"
+"する場合は、%3$s電子メールサポートを提供するライセンスを購入してくださ"
+"い。%2$s"
+
+#: src/PrintMyBlog/controllers/Admin.php:562
+msgid "Delete All Data"
+msgstr "すべてのデータを削除"
+
+#: src/PrintMyBlog/controllers/Admin.php:627
+msgid "Please select items to add to the project"
+msgstr "プロジェクトに追加する項目を選択してください"
+
+#: src/PrintMyBlog/controllers/Admin.php:628
+msgid "Please select items to remove"
+msgstr "削除する項目を選択してください"
+
+#: src/PrintMyBlog/controllers/Admin.php:629
+msgid "Please select items to move"
+msgstr "移動する項目を選択してください"
+
+#: src/PrintMyBlog/controllers/Admin.php:630
+msgid "Error inserting. Please use the PMB help page to get help"
+msgstr ""
+"挿入中にエラーが発生しました。PMBヘルプページを使用してヘルプを入手してくださ"
+"い"
+
+#: src/PrintMyBlog/controllers/Admin.php:631
+msgid ""
+"Error creating new print material. Please use the PMB help page to get help."
+msgstr ""
+"新しい印刷材料の作成中にエラーが発生しました。PMB ヘルプ ページを使用してヘル"
+"プを入手してください。"
+
+#: src/PrintMyBlog/controllers/Admin.php:717
+#: src/PrintMyBlog/services/generators/PdfGenerator.php:121
+msgid ""
+"There was an error preparing your content. Please visit the Print My Blog "
+"Help page."
+msgstr ""
+"コンテンツの準備中にエラーが発生しました。私のブログの印刷ヘルプページをご覧"
+"ください。"
+
+#: src/PrintMyBlog/controllers/Admin.php:718
+#: src/PrintMyBlog/services/generators/PdfGenerator.php:122
+msgid ""
+"Your project could not be accessed in order to generate the file. Maybe your "
+"website is not public? Please visit the Print My Blog Help page."
+msgstr ""
+"ファイルを生成するためにプロジェクトにアクセスできませんでした。たぶんあなた"
+"のウェブサイトは公開されていませんか?私のブログの印刷ヘルプページをご覧くださ"
+"い。"
+
+#: src/PrintMyBlog/controllers/Admin.php:745
+msgid "Are you sure you want to duplicate this project?"
+msgstr "このプロジェクトを複製してよろしいですか?"
+
+#: src/PrintMyBlog/controllers/Admin.php:1020
+#: src/PrintMyBlog/controllers/Admin.php:1656
+#, php-format
+msgid "There was an error communicating with Print My Blog Central. It was %s"
+msgstr "Print My Blog Central との通信中にエラーが発生しました。それは%sだった"
+
+#: src/PrintMyBlog/controllers/Admin.php:1159
+msgid "Create unlimited ePubs with any purchase."
+msgstr "任意の購入で無制限のeパブを作成します。"
+
+#: src/PrintMyBlog/controllers/Admin.php:1180
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:506
+#: src/PrintMyBlog/orm/entities/Project.php:498
+msgid "Project Title"
+msgstr "タイトル"
+
+#: src/PrintMyBlog/controllers/Admin.php:1190
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:112
+#: templates/setup_page.php:39
+msgid "Format"
+msgstr "フォーマット"
+
+#: src/PrintMyBlog/controllers/Admin.php:1255
+#, php-format
+msgid "Successfully setup the project \"%s\"."
+msgstr "プロジェクト「%s」のセットアップに成功しました。"
+
+#: src/PrintMyBlog/controllers/Admin.php:1269
+#, php-format
+msgid "You need to choose and customize the design for your %s."
+msgstr ""
+"あなたはあなたの%sのためにデザインを選択してカスタマイズする必要があります。"
+
+#: src/PrintMyBlog/controllers/Admin.php:1314
+msgid "The content in your project has changed"
+msgstr "プロジェクトの内容が変更されました"
+
+#: src/PrintMyBlog/controllers/Admin.php:1342
+msgid "Updated project content."
+msgstr "プロジェクトの内容を更新しました。"
+
+#: src/PrintMyBlog/controllers/Admin.php:1389
+msgid "You have customized this design"
+msgstr "このデザインをカスタマイズしました"
+
+#: src/PrintMyBlog/controllers/Admin.php:1395
+#, php-format
+msgid ""
+"The design \"%s\" has been customized, and its changes will be reflected in "
+"all projects that use it."
+msgstr ""
+"デザイン「%s」はカスタマイズされており、その変更はそれを使用するすべてのプロ"
+"ジェクトに反映されます。"
+
+#: src/PrintMyBlog/controllers/Admin.php:1418
+#, php-format
+msgid "An invalid design (%s) or format provided(%s)"
+msgstr "無効なデザイン (%s) または指定された形式 (%s)"
+
+#: src/PrintMyBlog/controllers/Admin.php:1428
+msgid "You changed the design"
+msgstr "デザインを変更した"
+
+#: src/PrintMyBlog/controllers/Admin.php:1433
+#, php-format
+msgid "You chose the design \"%1$s\" for the %2$s of your project."
+msgstr "プロジェクトの%1$sに「%2$s」というデザインを選択しました。"
+
+#: src/PrintMyBlog/controllers/Admin.php:1474
+msgid "You changed projected metadata"
+msgstr "投影されたメタデータを変更しました"
+
+#: src/PrintMyBlog/controllers/Admin.php:1480
+msgid "Project metadata updated."
+msgstr "プロジェクト メタデータが更新されました。"
+
+#: src/PrintMyBlog/controllers/Admin.php:1505
+#, php-format
+msgid "There is no file format with the slug \"%s\""
+msgstr "スラッグ \"%s\" のファイル形式はありません。"
+
+#: src/PrintMyBlog/controllers/Admin.php:1543
+msgid "Save"
+msgstr "保存"
+
+#. translators: 1: the name of the new project.
+#: src/PrintMyBlog/controllers/Admin.php:1594
+#, php-format
+msgid "Project successfully duplicated. It is titled \"%1$s\"."
+msgstr "プロジェクトが正常に複製されました。タイトルは「%1$s」です。"
+
+#: src/PrintMyBlog/controllers/Admin.php:1718
+msgid "Cached external resources and images were cleared."
+msgstr "キャッシュされた外部リソースとイメージがクリアされました。"
+
+#. translators: 1 post type label, 2: post title
+#: src/PrintMyBlog/controllers/Admin.php:1807
+#, php-format
+msgid "Go to the %1$s \"%2$s\" was copied from."
+msgstr "「%1$s」のコピー元%2$sに移動します。"
+
+#: src/PrintMyBlog/controllers/Admin.php:1810
+#, php-format
+msgid "Go to Original %s"
+msgstr "元の%sに移動"
+
+#. translators: 1: post title
+#: src/PrintMyBlog/controllers/Admin.php:1824
+#, php-format
+msgid "Go to Print Material \"%s\" was created from."
+msgstr "印刷物「%s」から作成されたものに移動します。"
+
+#: src/PrintMyBlog/controllers/Admin.php:1827
+msgid "Go to Print Material"
+msgstr "印刷物に移動"
+
+#: src/PrintMyBlog/controllers/Admin.php:1831
+#, php-format
+msgid "Copy \"%s\" to New Print Material for a Print My Blog project"
+msgstr "「%s」を「マイブログ印刷」プロジェクトの新しい印刷物にコピーする"
+
+#: src/PrintMyBlog/controllers/Admin.php:1835
+msgid "Copy to Print Material"
+msgstr "印刷物にコピー"
+
+#: src/PrintMyBlog/controllers/Ajax.php:279
+msgid "Show more..."
+msgstr "もっと見る..."
+
+#: src/PrintMyBlog/controllers/Ajax.php:288
+msgid "No results. Try changing your search and filter criteria."
+msgstr "結果はありません。検索条件とフィルター条件を変更してみてください。"
+
+#: src/PrintMyBlog/controllers/Common.php:138
+msgid "Unknown site name"
+msgstr "不明なサイト名"
+
+#: src/PrintMyBlog/controllers/Common.php:139
+msgid "No categories available."
+msgstr "使用可能なカテゴリはありません。"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:119
+msgid "Unknown post type"
+msgstr "不明な投稿タイプ"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:313
+msgid ""
+"There seems to be an error initializing. Please verify you are using an up-"
+"to-date web browser."
+msgstr ""
+"初期化中にエラーが発生しているようです。最新のウェブブラウザを使用しているこ"
+"とを確認してください。"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:320
+msgid ""
+"Also check the WP REST API isn’t disabled by a security plugin. Feel free to "
+"contact Print My Blog support."
+msgstr ""
+"また、WP REST APIがセキュリティプラグインによって無効になっていないことを確認"
+"してください。お気軽に私のブログの印刷サポートにお問い合わせください。"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:330
+msgid "Loading Content"
+msgstr "コンテンツの読み込み"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:331
+msgid "Loading Comments"
+msgstr "コメントの読み込み"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:332
+msgid "Ordering Posts"
+msgstr "投稿の注文"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:333
+msgid "Ordering Comments"
+msgstr "コメントの順序付け"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:334
+msgid "Placing Content on Page"
+msgstr "ページへのコンテンツの配置"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:335
+msgid "Optimizing for Print"
+msgstr "印刷の最適化"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:336
+msgid "Print-Page Ready"
+msgstr "印刷ページ準備完了"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:338
+msgid "There was an error fetching posts. It was: "
+msgstr "投稿の取得中にエラーが発生しました。そうでした："
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:341
+msgid "No response from WP REST API."
+msgstr "WP REST API からの応答がありません。"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:342
+msgid "Sorry, There was a Problem 😢"
+msgstr "申し訳ありませんが、問題😢がありました"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:345
+#, php-format
+msgid ""
+"%1$sRead our FAQs%2$s, then feel free to ask for help in %3$sthe support "
+"forum.%2$s"
+msgstr ""
+"%1$sFAQを%2$s読み、%3$sサポートフォーラムでお気軽にお問い合わせください。%2$s"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:351
+#: src/PrintMyBlog/domain/PrintOptions.php:93
+msgid "Comments"
+msgstr "コメント"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:352
+msgid "No Comments"
+msgstr "コメントなし"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:353
+msgid "<span class=\"screen-reader-text says\">says:</span>"
+msgstr "<span class=\"screen-reader-text says\">曰く：</span>"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:354
+msgid "ID:"
+msgstr "ID:"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:355
+#: templates/design_choose.php:87 templates/project_edit_content.php:105
+msgid "By"
+msgstr "投稿者"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:356
+msgid "Protected:"
+msgstr "保護："
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:357
+msgid "Private:"
+msgstr "プライベート："
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:359
+msgid "Copied! Ready to paste."
+msgstr "コピー！貼り付ける準備ができました。"
+
+#: src/PrintMyBlog/controllers/LegacyPrintPage.php:361
+msgid ""
+"There was an error copying. You can still select all the text manually and "
+"copy it."
+msgstr ""
+"コピー中にエラーが発生しました。すべてのテキストを手動で選択してコピーするこ"
+"ともできます。"
+
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:111
+#: src/PrintMyBlog/domain/PrintOptions.php:57
+#: templates/project_edit_content.php:138
+#: templates/project_edit_content.php:296
+msgid "Title"
+msgstr "タイトル"
+
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:113
+#: templates/project_edit_content.php:139
+msgid "Date"
+msgstr "日付"
+
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:144
+msgid "Delete"
+msgstr "削除"
+
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:166
+msgid "Untitled"
+msgstr "無題"
+
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:212
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:214
+msgid "Duplicate"
+msgstr "複製"
+
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:216
+msgid "Feature included in Professional and Business licenses"
+msgstr "プロフェッショナルおよびビジネスライセンスに含まれる機能"
+
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:237
+msgid "Started"
+msgstr "始めた"
+
+#. translators: 1: Post date, 2: Post time.
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:239
+#, php-format
+msgid "%1$s at %2$s"
+msgstr "％2$sで％1$s"
+
+#. translators: Post date format. See https://www.php.net/date
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:241
+msgid "Y/m/d"
+msgstr "Y年m月d日"
+
+#. translators: Post time format. See https://www.php.net/date
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:243
+msgid "g:i a"
+msgstr "g:i a"
+
+#: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:252
+msgid "Click \"Add New Project\" 👆 To Make Your First Project!"
+msgstr ""
+"「新しいプロジェクトを追加」👆をクリックして、最初のプロジェクトを作成してくだ"
+"さい!"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:46
+msgid "Classic Print PDf"
+msgstr "クラシックプリントPDf"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:64
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:573
+msgid "Font Settings"
+msgstr "フォント設定"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:68
+msgid "Paragraph Indent"
+msgstr "段落インデント"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:69
+msgid ""
+"Indent the first line of each new paragraph instead of adding a paragraph "
+"break."
+msgstr ""
+"段落区切りを追加する代わりに、新しい各段落の最初の行をインデントします。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:74
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:157
+msgid "Link, Page Reference, and Footnote Settings"
+msgstr "リンク、ページ参照、脚注の設定"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:80
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:106
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:165
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:202
+#: src/PrintMyBlog/domain/PrintOptions.php:154
+msgid "Remove"
+msgstr "削除"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:81
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:171
+msgid "Replace with page reference"
+msgstr "ページ参照で置換"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:82
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:108
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:174
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:205
+msgid "Replace with footnote"
+msgstr "脚注で置き換える"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:86
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:179
+msgid "Internal Hyperlinks"
+msgstr "内部ハイパーリンク"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:87
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:181
+msgid "How to display hyperlinks to content included in this project."
+msgstr "このプロジェクトに含まれるコンテンツへのハイパーリンクを表示する方法。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:113
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:210
+msgid "External Hyperlinks"
+msgstr "外部ハイパーリンク"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:114
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:212
+msgid "How to display hyperlinks to content not included in this project."
+msgstr ""
+"このプロジェクトに含まれていないコンテンツへのハイパーリンクを表示する方法。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:139
+#: src/PrintMyBlog/domain/DefaultDesigns.php:18
+msgid "Classic Digital PDF"
+msgstr "クラシックデジタルPDF"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:168
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:203
+msgid "Leave as hyperlink"
+msgstr "ハイパーリンクとして残す"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:239
+msgid "Buurma Digital PDF"
+msgstr "ブウルマデジタルPDF"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:255
+msgid "Title Page Top-Banner Color"
+msgstr "タイトルページトップバナーカラー"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:256
+msgid "Image used at the top of the background on the title page."
+msgstr "タイトル ページの背景の上部で使用される画像。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:262
+msgid "Background Color"
+msgstr "背景色"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:264
+msgid ""
+"A gradient between this color and white will be used in the page backgrounds"
+msgstr "この色と白の間のグラデーションがページの背景で使用されます"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:271
+msgid "Organization Name"
+msgstr "寄付の宛先 (組織名)"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:273
+msgid "Shown in the title page. Eg \"Institute of Print My Blog\""
+msgstr "タイトル ページに表示されます。例えば、 \"印刷研究所私のブログ\""
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:279
+msgid "Background Embellishment"
+msgstr "背景の装飾"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:280
+msgid ""
+"Faded image used as a full-page background on the title page, and next to "
+"the page number on numbered pages."
+msgstr ""
+"タイトル ページでは全ページの背景として、番号付きページではページ番号の横に使"
+"用されるフェード イメージ。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:295
+msgid "Issue"
+msgstr "問題"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:296
+msgid "Text that appears at the top-right of the cover"
+msgstr "表紙の右上に表示されるテキスト"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:301
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:440
+msgid "ByLine"
+msgstr "署名"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:302
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:441
+msgid "Project Author(s)"
+msgstr "プロジェクト著者"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:306
+msgid "Date Issued"
+msgstr "発行日"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:307
+msgid "Text that appears under the byline"
+msgstr "バイラインの下に表示されるテキスト"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:311
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:379
+msgid "Coverpage Preamble"
+msgstr "表紙前文"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:312
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:381
+msgid "Explanatory text that appears at the bottom of the cover page"
+msgstr "表紙の下部に表示される説明テキスト"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:325
+msgid "Mayer Digital PDF"
+msgstr "メイヤーデジタルPDF"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:342
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:568
+#: src/PrintMyBlog/domain/PrintOptions.php:107
+msgid "Each Post Begins on a New Page"
+msgstr "各投稿は新しいページから始まります"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:343
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:569
+#: src/PrintMyBlog/domain/PrintOptions.php:110
+msgid ""
+"Whether to force posts to always start on a new page. Doing so makes the "
+"page more legible, but uses more paper."
+msgstr ""
+"投稿を常に新しいページで強制的に開始するかどうか。これにより、ページは読みや"
+"すくなりますが、より多くの用紙が使用されます。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:348
+msgid "Show Post Header inside Columns"
+msgstr "列内に投稿ヘッダーを表示"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:349
+msgid ""
+"Check this to make post header information, like title, date, author, etc, "
+"appear inside columns; uncheck this to have it take up the full page width"
+msgstr ""
+"これをチェックして、タイトル、日付、著者などの投稿ヘッダー情報を列内に表示し"
+"ます。このチェックを外すと、ページ幅全体が占有されます"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:353
+msgid "Show a Dividing Line Between Posts"
+msgstr "投稿間の分割線を表示する"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:356
+msgid "Full-Column Images"
+msgstr "全列画像"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:357
+msgid ""
+"Resizes images to be the full column width (except ones with the CSS class "
+"\"mayer-no-resize\")"
+msgstr ""
+"画像のサイズを列幅いっぱいに変更します(CSSクラス \"mayer-no-resize\"を持つ画"
+"像を除く)"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:360
+msgid "Remove Extra Columns"
+msgstr "余分な列の削除"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:362
+msgid ""
+"Forces your content to only use two columns, even if the content itself was "
+"divided into more columns (eg using the \"Columns\" block)"
+msgstr ""
+"コンテンツ自体がより多くの列に分割されている場合でも(たとえば、「列」ブロック"
+"を使用して)、コンテンツが2つの列のみを使用するように強制します。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:375
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:479
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:508
+msgid "Byline"
+msgstr "署名欄"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:376
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:480
+msgid "Project author(s)"
+msgstr "プロジェクト著者"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:398
+#: src/PrintMyBlog/domain/DefaultDesigns.php:281
+msgid "Classic ePub"
+msgstr "クラシックeパブ"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:416
+msgid "Convert Videos to Images and Links"
+msgstr "ビデオを画像やリンクに変換する"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:417
+msgid ""
+"Some eReaders don't show videos, in which case you may prefer to replace "
+"them with an image and a hyperlink to the online video content."
+msgstr ""
+"一部の電子書籍リーダーでは動画が表示されないため、画像とオンライン動画コンテ"
+"ンツへのハイパーリンクに置き換えることができます。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:435
+msgid "File name"
+msgstr "ファイル名"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:446
+msgid "Description"
+msgstr "説明"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:447
+msgid "Shown as eBook metadata."
+msgstr "電子書籍メタデータとして表示されます。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:452
+msgid "Cover Image"
+msgstr "カバー画像"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:453
+msgid ""
+"Cover image used on eBook file (does not necessarily appear inside project). "
+"Ideal dimensions are 2,560 x 1,600 pixels."
+msgstr ""
+"電子書籍ファイルで使用される表紙画像(必ずしもプロジェクト内に表示されるとは限"
+"りません)。理想的な寸法は 2,560 x 1,600 ピクセルです。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:474
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:507
+msgid "Subtitle"
+msgstr "サブタイトル"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:486
+msgid "Source Location"
+msgstr "ソースの場所"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:487
+msgid ""
+"Shown on the title page under the subtitle. Could be your website’s URL, or "
+"anything else you like."
+msgstr ""
+"タイトルページの字幕の下に表示されます。あなたのウェブサイトのURLやあなたが好"
+"きな他のものかもしれません。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:509
+#: src/PrintMyBlog/domain/PrintOptions.php:29
+msgid "Site URL"
+msgstr "サイト URL"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:510
+#: src/PrintMyBlog/domain/PrintOptions.php:38
+msgid "Date Printed"
+msgstr "印刷日"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:519
+msgid "Title Page Content"
+msgstr "タイトルページのコンテンツ"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:524
+msgid "Post Title"
+msgstr "投稿タイトル"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:525
+#: src/PrintMyBlog/domain/PrintOptions.php:61
+msgid "ID"
+msgstr "ID"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:526
+#: src/PrintMyBlog/domain/PrintOptions.php:65
+msgid "Author"
+msgstr "投稿者"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:527
+#: src/PrintMyBlog/domain/PrintOptions.php:73
+msgid "Published Date"
+msgstr "公開日"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:528
+#: src/PrintMyBlog/domain/PrintOptions.php:77
+msgid "Categories and Tags"
+msgstr "カテゴリとタグ"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:529
+#: src/PrintMyBlog/domain/PrintOptions.php:69
+msgid "URL"
+msgstr "URL"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:532
+#: src/PrintMyBlog/domain/PrintOptions.php:81
+msgid "Featured Image"
+msgstr "アイキャッチ画像"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:533
+#: src/PrintMyBlog/domain/PrintOptions.php:85
+msgid "Excerpt"
+msgstr "抜粋"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:534
+msgid "Custom Fields"
+msgstr "カスタムフィールド"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:535
+#: src/PrintMyBlog/domain/PrintOptions.php:89
+#: templates/partials/content_options.php:13
+msgid "Content"
+msgstr "コンテンツ"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:546
+msgid "Post Content"
+msgstr "投稿のコンテンツ"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:547
+msgid "Content from each post to print."
+msgstr "印刷する各投稿のコンテンツ。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:578
+msgid "Title page and Part Header Font Size"
+msgstr "タイトルページと部品ヘッダーのフォントサイズ"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:580
+#, php-format
+msgid ""
+"Font size used for the default title page’s and part’s header (all other "
+"headers’ sizes are derived from the main font size). Use any recognized "
+"%1$sCSS font-size keyword%2$s (like \"large\", \"medium\", \"small\") or a "
+"%3$slength in any units%2$s (eg \"14pt\", \"50%%\", or \"10px\")."
+msgstr ""
+"既定のタイトル ページとパーツのヘッダーに使用されるフォント サイズ (他のすべ"
+"てのヘッダーのサイズは、メインのフォント サイズから派生します)。認識され"
+"た%1$sCSSフォントサイズキーワード%2$s(「大」、「中」、「小」など)または%3$s任"
+"意の単位の長さ%2$s(「14pt」、「50%%」、「10px」など)を使用します。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:589
+msgid "Header Font"
+msgstr "標題字體"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:590
+msgid "Default font for header tags"
+msgstr "ヘッダータグのデフォルトフォント"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:595
+#: src/PrintMyBlog/domain/PrintOptions.php:126
+msgid "Font Size"
+msgstr "フォントサイズ"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:597
+#, php-format
+msgid ""
+"Use any recognized %1$sCSS font-size keyword%2$s (like \"large\", \"medium"
+"\", \"small\") or a %3$slength in any units%2$s (eg \"14pt\", \"50%%\", or "
+"\"10px\")."
+msgstr ""
+"認識された%1$sCSSフォントサイズキーワード%2$s(「大」、「中」、「小」など)また"
+"は%3$s任意の単位の長さ%2$s(「14pt」、「50%%」、「10px」など)を使用します。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:606
+msgid "Font"
+msgstr "フォント"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:607
+msgid "Default font used in paragraphs, bulleted lists, tables, etc."
+msgstr "段落、箇条書きリスト、表などで使用される既定のフォント。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:612
+msgid "Image Settings"
+msgstr "画像の設定"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:616
+msgid "Maximum Image Height (in pixels)"
+msgstr "最大画像の高さ(ピクセル単位)"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:619
+msgid ""
+"Larger images will be resized to this, smaller images will be unchanged."
+msgstr "大きい画像はこれにサイズ変更され、小さい画像は変更されません。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:630
+msgid "Page Settings"
+msgstr "ページ設定"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:633
+msgid "Page Width"
+msgstr "ページ幅"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:633
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:642
+msgid "Not supported by some browsers"
+msgstr "一部のブラウザではサポートされていません"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:635
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:644
+#, php-format
+msgid "Use standard %1$sCSS units%2$s"
+msgstr "標準の %1$sCSS 単位を使用%2$s"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:642
+msgid "Page Height"
+msgstr "ページの高さ"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:665
+#, php-format
+msgid ""
+"Your theme, \"%1$s\", can be used in conjunction with your design. Themes "
+"are often not intended for print and can conflict with the design, but you "
+"may have content that looks broken without the theme."
+msgstr ""
+"テーマ「%1$s」は、デザインと組み合わせて使用できます。テーマは印刷用ではない"
+"ことが多く、デザインと競合する可能性がありますが、テーマがないとコンテンツが"
+"壊れているように見えることがあります。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:669
+msgid "Note: this option is only supported for the business license."
+msgstr "注: このオプションは、ビジネス・ライセンスでのみサポートされます。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:679
+msgid "Don’t Change Image Quality"
+msgstr "画質を変更しない"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:689
+#, php-format
+msgid "Resize to %s"
+msgstr "%sにサイズ変更"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:691
+msgid "Full Size (on web)"
+msgstr "フルサイズ(ウェブ上)"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:692
+msgid "Uploaded Size (largest possible)"
+msgstr "アップロードされたサイズ(可能な限り大きい)"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:704
+msgid "Image Quality (in pixels)"
+msgstr "画質 (ピクセル単位)"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:706
+#, php-format
+msgid ""
+"Lower quality means smaller file size, whereas higher quality means higher "
+"resolution images. Note: if images are missing from the generated PDF, the "
+"requested image size might not be available. Use the %1$s Regenerate "
+"Thumbnails plugin%2$s to create the missing image sizes."
+msgstr ""
+"低品質はファイルサイズが小さいことを意味し、高品質は高解像度の画像を意味しま"
+"す。注記: 生成された PDF に画像がない場合は、要求された画像サイズが使用できな"
+"い可能性があります。%1$sサムネイルの再生成プラグインを使用して%2$s不足してい"
+"る画像サイズを作成します。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:721
+msgid "Apply Website Theme"
+msgstr "ウェブサイトのテーマを適用する"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:726
+msgid "Custom CSS"
+msgstr "カスタムCSS"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:727
+msgid "Styles to be applied only when printing projects using this design."
+msgstr ""
+"このデザインを使用してプロジェクトを印刷するときにのみ適用されるスタイル。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:730
+msgid "Add \"Powered By\""
+msgstr "「電源」を追加"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:730
+msgid ""
+"In compliance with WordPress.org guidelines, not added when printing from "
+"your browser."
+msgstr ""
+"WordPress.org ガイドラインに準拠しており、ブラウザから印刷するときには追加さ"
+"れません。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:731
+msgid ""
+"Instructs the Pro PDF Service to add \"Powered by Print My Blog Pro & "
+"WordPress\" to your project. Does not appear when printing using your "
+"browser."
+msgstr ""
+"Pro PDF Service に \"Powered by Print My Blog Pro & WordPress\" をプロジェク"
+"トに追加するよう指示します。ブラウザで印刷するときには表示されません。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:747
+msgid "Page Reference Text"
+msgstr "ページ参照テキスト"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:748
+#, php-format
+msgid ""
+"Text to use when replacing a hyperlink with a page reference. \"%s\" will be "
+"replaced with the page number."
+msgstr ""
+"ハイパーリンクをページ参照で置き換えるときに使用するテキスト。「%s」はページ"
+"番号に置き換えられます。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:749
+#, php-format
+msgid "(see page %s)"
+msgstr "(%sページ参照)"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:751
+#, php-format
+msgid ""
+"You must include \"%s\" in the page reference text so we know where to put "
+"the page number."
+msgstr ""
+"ページ参照テキストに「%s」を含めると、ページ番号の配置場所がわかります。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:759
+msgid "Internal Footnote Text"
+msgstr "内部脚注テキスト"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:760
+#, php-format
+msgid ""
+"Text to use when replacing a hyperlink with a footnote. \"%s\" will be "
+"replaced with the page number."
+msgstr ""
+"ハイパーリンクを脚注に置き換えるときに使用するテキスト。「%s」はページ番号に"
+"置き換えられます。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:761
+#, php-format
+msgid "See page %s."
+msgstr "%sページを参照してください。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:763
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:776
+#, php-format
+msgid ""
+"You must include \"%s\" in the footnote text so we know where to put the URL."
+msgstr "脚注テキストに「%s」を含めると、URLをどこに置くべきかがわかります。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:772
+msgid "External Footnote Text"
+msgstr "外部脚注テキスト"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:773
+#, php-format
+msgid ""
+"Text to use when replacing a hyperlink with a footnote. \"%s\" will be "
+"replaced with the URL"
+msgstr ""
+"ハイパーリンクを脚注に置き換えるときに使用するテキスト。「%s」はURLに置き換え"
+"られます"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:774
+#, php-format
+msgid "See %s."
+msgstr "%sを参照してください。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:788
+msgid "None"
+msgstr "なし"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:789
+msgid "Center"
+msgstr "中央"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:792
+msgid "Default Image Alignment"
+msgstr "デフォルトの画像配置"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:793
+msgid ""
+"Images normally default to \"no alignment\", which can look jumbled in "
+"printouts. Usually it’s best to automatically switch those to align to the "
+"center."
+msgstr ""
+"画像は通常、デフォルトで「整列なし」で、印刷物でごちゃごちゃに見えることがあ"
+"ります。通常、中央に揃えるように自動的に切り替えるのが最善です。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:803
+msgid "Don’t move"
+msgstr "動かないで"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:804
+msgid "Snap to the top or bottom of the page"
+msgstr "ページの上部または下部にスナップする"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:805
+msgid "Only snap if it would otherwise cause a page break"
+msgstr "スナップは、改ページの原因になる場合のみに限ります。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:806
+msgid "Resize images if they don’t fit on the page"
+msgstr "ページに収まらない場合の画像のサイズ変更"
+
+#. translators: 1: "Best with Pro"
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:810
+msgid "Image Placement"
+msgstr "画像の配置"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:811
+msgid ""
+"To reduce whitespace around images, galleries, and tables, Print My Blog can "
+"adjust the placement of your content, or resize it according to the space on "
+"the page."
+msgstr ""
+"画像、ギャラリー、および表の周囲の空白を減らすために、Print My Blog ではコン"
+"テンツの配置を調整したり、ページ上のスペースに応じてコンテンツのサイズを変更"
+"したりできます。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:830
+msgid "Minimum Image Size (in pixels)"
+msgstr "最小画像サイズ(ピクセル単位)"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:831
+msgid ""
+"Any images larger than this may be resized to fit onto the page, but they "
+"will be no smaller than this size."
+msgstr ""
+"これより大きい画像は、ページに収まるようにサイズ変更できますが、このサイズよ"
+"り小さくはなりません。"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:19
+msgid ""
+"A simple but flexible design intended mainly for reading from screens, "
+"inspired by Print My Blog Quick Print."
+msgstr ""
+"シンプルで柔軟なデザインは、主に画面からの読書を目的とし、印刷マイブログク"
+"イックプリントに触発されました。"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:28
+msgid "Title page, with working hyperlinks."
+msgstr "作業ハイパーリンクを含むタイトル ページ。"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:32
+msgid "Main matter, showing hyperlinks and large images."
+msgstr "ハイパーリンクと大きな画像を表示する主な問題。"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:53
+msgid "Editorial Review"
+msgstr "エディトリアルレビュー"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:54
+msgid "Your writing in an easy-to-review format for editors."
+msgstr "編集者にとってレビューしやすい形式でのあなたの文章。"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:63
+msgid "Title page, showing the double-spaced text."
+msgstr "タイトル ページ。ダブル スペースのテキストが表示されます。"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:67
+msgid "Main matter, showing smaller images and double-spaced text."
+msgstr "主な問題は、小さな画像とダブルスペースのテキストを表示することです。"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:103
+msgid "Classic Print PDF"
+msgstr "クラシック印刷 PDF"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:104
+msgid ""
+"A simple but flexible design intended for printing, inspired by Print My "
+"Blog Quick Print"
+msgstr ""
+"印刷を目的としたシンプルだが柔軟なデザイン、印刷マイブログクイックプリントに"
+"触発された"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:113
+msgid "Title page, showing removed hyperlinks."
+msgstr "削除されたハイパーリンクを表示するタイトル ページ。"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:117
+msgid ""
+"Main matter, showing external hyperlinks automatically converted into "
+"footnotes. Page numbers are always on the bottom-outside corner, and each "
+"article’s title is shown at the top of right pages."
+msgstr ""
+"主な事項は、脚注に自動的に変換された外部ハイパーリンクを表示することです。"
+"ページ番号は常に外側の下隅にあり、各記事のタイトルは右ページの上部に表示され"
+"ます。"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:138
+msgid "Economical Print PDF"
+msgstr "経済的な印刷PDF"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:139
+msgid "Compact design meant to save paper but still deliver all the content."
+msgstr ""
+"コンパクトなデザインは、紙を節約しながらもすべてのコンテンツを提供することを"
+"意味していました。"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:148
+msgid "Title page, showing smaller text."
+msgstr "小さいテキストを表示するタイトル ページ。"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:153
+msgid "Main matter, showing smaller text and images to reduce ink usage."
+msgstr ""
+"主な問題は、インク使用量を減らすために小さなテキストと画像を表示することで"
+"す。"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:191
+msgid "Buurma Whitepaper"
+msgstr "ブウルマホワイトペーパー"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:192
+msgid ""
+"Stylized and branded PDF designed mainly for reading from a device, great "
+"for organizations"
+msgstr ""
+"主にデバイスからの読み取り用に設計された定型化されたブランド化されたPDFで、組"
+"織に最適です"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:201
+msgid ""
+"Title page, showing a stylzed upper margin for a company name, background "
+"gradient and logo, among other things."
+msgstr ""
+"タイトル ページ。会社名、背景のグラデーション、ロゴなどのスタイル化された上余"
+"白が表示されます。"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:205
+msgid ""
+"Main matter, showing working hyperlinks (which also each get an automatic "
+"footnote), and page number and logo in bottom-right corner."
+msgstr ""
+"主な事項は、作業中のハイパーリンク(それぞれに自動脚注が表示されます)、および"
+"右下隅にページ番号とロゴを表示することです。"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:214
+msgid "Issue 01"
+msgstr "第01号"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:215
+msgid ""
+"Text explaining the purpose of the paper and gives a brief summary of it, so "
+"folks know they’re reading the right thing."
+msgstr ""
+"テキストは、論文の目的を説明し、それの簡単な要約を与えるので、人々は彼らが正"
+"しいものを読んでいることを知っている。"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:225
+msgid "Mayer Magazine"
+msgstr "メイヤーマガジン"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:226
+msgid "Digital 2-column magazine inspired by the defunct Zinepal"
+msgstr "廃刊となったジネパルにインスパイアされたデジタル2列マガジン"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:236
+#: src/PrintMyBlog/domain/DefaultDesigns.php:292
+msgid "Title page and table of contents both fit on the first page."
+msgstr "タイトルページと目次はどちらも最初のページに収まります。"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:243
+#: src/PrintMyBlog/domain/DefaultDesigns.php:299
+msgid "Two column layout which compactly shows content and images."
+msgstr "コンテンツと画像をコンパクトに表示する2列レイアウト。"
+
+#: src/PrintMyBlog/domain/DefaultDesigns.php:282
+msgid ""
+"Simple ePub for using when uploading as an eBook to Amazon and other epub "
+"marketplaces"
+msgstr ""
+"Amazonや他のepubマーケットプレイスに電子書籍としてアップロードするときに使用"
+"するシンプルなePub"
+
+#: src/PrintMyBlog/domain/DefaultFileFormats.php:21 templates/setup_page.php:50
+msgid "Digital PDF"
+msgstr "デジタルPDF"
+
+#: src/PrintMyBlog/domain/DefaultFileFormats.php:25
+msgid ""
+"PDF file intended for viewing on a computer, tablet or phone, but not "
+"necessarily for printing to paper. Usually includes working hyperlinks, "
+"ample colors, and other features that require a device."
+msgstr ""
+"PDFファイルは、コンピュータ、タブレット、または携帯電話での表示を目的としてい"
+"ますが、必ずしも紙に印刷するためのものではありません。通常、機能するハイパー"
+"リンク、十分な色、およびデバイスを必要とするその他の機能が含まれます。"
+
+#: src/PrintMyBlog/domain/DefaultFileFormats.php:33
+msgid "Print-Ready PDF"
+msgstr "印刷可能な PDF"
+
+#: src/PrintMyBlog/domain/DefaultFileFormats.php:37
+msgid ""
+"PDF file intended for printing on your home printer or with a printer "
+"service. Usually removes hyperlinks, avoids excessive ink use, and are "
+"designed for viewing the 2-page spread (using the front and back of a page)."
+msgstr ""
+"自宅のプリンターまたはプリンター サービスで印刷するための PDF ファイル。通"
+"常、ハイパーリンクを削除し、インクの過度の使用を回避し、見開き 2 ページを表示"
+"するために設計されています (ページの表と裏を使用)。"
+
+#: src/PrintMyBlog/domain/DefaultFileFormats.php:51
+msgid "eBook (ePub)"
+msgstr "電子ブック(電子パブ)"
+
+#: src/PrintMyBlog/domain/DefaultFileFormats.php:55
+msgid ""
+"ePub file intended for reading from an eReader, tablet, or phone; or for "
+"publishing on an eBook marketplace like Amazon's Kindle Direct Publishing, "
+"Apple Books, or Kobo."
+msgstr ""
+"電子書籍リーダー、タブレット、または電話からの読み取りを目的としたePubファイ"
+"ル。または、AmazonのKindle Direct Publishing、Apple Books、Koboなどの電子書籍"
+"市場での出版用です。"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:22
+msgid "About Quick Print"
+msgstr "クイックプリントについて"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:25
+#, php-format
+msgid ""
+"This is the quick-and-easy option, best for making printouts for your own "
+"records. For something more professional and full-featured, use %1$sPro Print"
+"%2$s. It has free and paid options. %3$sSee full feature comparison.%2$s"
+msgstr ""
+"これはすばやく簡単なオプションであり、自分のレコードのプリントアウトを作成す"
+"るのに最適です。よりプロフェッショナルでフル機能のものについては、%1$sPro "
+"Print%2$sを使用してください。無料と有料のオプションがあります。%3$s完全な機能"
+"の比較を参照してください。%2$s"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:37
+msgid "About Pro Print"
+msgstr "プロプリントについて"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:40
+#, php-format
+msgid ""
+"Pro Print is the best way to make professional-quality documents. You will "
+"be able to print them for free using your browser, or upgrade to use Print "
+"My Blog Pro's full features. %1$sSee full feature comparison.%2$s"
+msgstr ""
+"プロプリントは、プロ品質の文書を作成するための最良の方法です。ブラウザを使用"
+"して無料で印刷したり、Print My Blog Proの全機能を使用するようにアップグレード"
+"したりできます。%1$s完全な機能の比較を参照してください。%2$s"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:46
+#, php-format
+msgid "If you just want something quick, use %1$sQuick Print%2$s instead."
+msgstr ""
+"何か手っ取り早くしたいだけなら、代わりに%1$sクイックプリント%2$sを使用してく"
+"ださい。"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:63
+msgid "Project Designs are like WordPress Themes"
+msgstr "プロジェクトデザインはワードプレスのテーマのようなものです"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:64
+msgid "Each has a different look and options that can be customized."
+msgstr "それぞれに異なる外観とカスタマイズ可能なオプションがあります。"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:65
+msgid ""
+"The \"Classic\" design is the most similar Print My Blog’s Quick Print, so "
+"it’s a good default choice."
+msgstr ""
+"「クラシック」デザインは、私のブログのクイックプリントを印刷するのに最も似て"
+"いるので、デフォルトの選択として適しています。"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:66
+msgid ""
+"Click on the preview image for more details, and feel free to come back to "
+"this page later if you want to try a different design."
+msgstr ""
+"詳細については、プレビュー画像をクリックし、別のデザインを試したい場合は、後"
+"でこのページに戻ってください。"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:68
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:79
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:95
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:109
+#: templates/welcome.php:59
+msgid "Read the User Guide"
+msgstr "ユーザーガイドを読む"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:74
+msgid "Each Design has Different Options and is Reusable"
+msgstr "各デザインには異なるオプションがあり、再利用可能"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:75
+msgid "Below are your chosen design’s customization options."
+msgstr "以下は、選択したデザインのカスタマイズオプションです。"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:76
+msgid ""
+"If you don’t see an option you need, you may want to go back and choose a "
+"different design, or ask the design’s author for it."
+msgstr ""
+"必要なオプションが表示されない場合は、戻って別のデザインを選択するか、デザイ"
+"ンの作者に依頼してください。"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:77
+msgid ""
+"Note: designs are reused between projects. So customizations to this design "
+"will be reused by other projects using this same design"
+msgstr ""
+"注: デザインはプロジェクト間で再利用されます。したがって、このデザインのカス"
+"タマイズは、この同じデザインを使用する他のプロジェクトによって再利用されます"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:85
+msgid "How to Edit Project Content"
+msgstr "プロジェクトコンテンツを編集する方法"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:90
+msgid ""
+"Find the articles (posts, pages, other post types) from WordPress you want "
+"to add on the left, and add it to your project on the right by dragging"
+msgstr ""
+"左側に追加したいWordPressの記事(投稿、ページ、その他の投稿タイプ)を見つけ、右"
+"側のプロジェクトにドラッグして追加します"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:91
+msgid ""
+"Place articles in either front matter, main matter, or back matter, "
+"according to how you want your project organized. Each design can style them "
+"differently (eg front matter is often is numbered with roman numerals)"
+msgstr ""
+"記事をフロントマター、メインマター、またはバックマターのいずれかに配置して、"
+"プロジェクトをどのように編成するかに応じて配置します。各デザインはそれらを異"
+"なるスタイルにすることができます(例えば、フロントマターはしばしばローマ数字で"
+"番号が付けられています)"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:92
+msgid "Nest content inside others to create parts"
+msgstr "コンテンツを他のコンテンツの内部にネストしてパーツを作成する"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:102
+msgid "Everything Else About Your Project is Stored Here"
+msgstr "プロジェクトに関するその他のすべてはここに保存されます"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:103
+msgid ""
+"Different formats and designs may require other information about your "
+"project."
+msgstr ""
+"形式やデザインが異なると、プロジェクトに関する他の情報が必要になる場合があり"
+"ます。"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:105
+msgid ""
+"Some examples of metadata are: title page info, file info, or copyright data."
+msgstr ""
+"メタデータの例としては、タイトル ページ情報、ファイル情報、著作権データなどが"
+"あります。"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:106
+msgid ""
+"So although your choice of design may affect what metadata is required, it "
+"is not shared with other projects."
+msgstr ""
+"そのため、デザインの選択は必要なメタデータに影響する可能性がありますが、他の"
+"プロジェクトとは共有されません。"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:115
+msgid "Generate and View Your File"
+msgstr "ファイルの生成と表示"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:117
+msgid ""
+"Your project is ready to be generated! Clicking \"Generate\" will compile "
+"your content into a print-page."
+msgstr ""
+"プロジェクトを生成する準備ができました!「生成」をクリックすると、コンテンツが"
+"印刷ページにコンパイルされます。"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:121
+#, php-format
+msgid ""
+"Read the User Guide on %1$supdating%2$s, %3$sgenerating the pro file%2$s, "
+"and %4$sgetting help%2$s."
+msgstr ""
+"%1$s更新%2$s、%3$sproファイルの生成%2$s、および%4$sヘルプの入手%2$sに関する"
+"ユーザーガイドをお読みください。"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:132
+msgid "Posts just for Print My Blog"
+msgstr "私のブログを印刷するためだけに投稿"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:133
+msgid ""
+"Print My Blog \"Print Materials\" are like private posts. They aren’t "
+"visible to site visitors, but you can use them in your Pro Print Projects."
+msgstr ""
+"私のブログを印刷する 「印刷物」はプライベートな投稿のようなものです。サイト訪"
+"問者には表示されませんが、Pro Print プロジェクトで使用できます。"
+
+#: src/PrintMyBlog/domain/DefaultProjectContents.php:39
+msgid "Title Page"
+msgstr "標題紙"
+
+#: src/PrintMyBlog/domain/DefaultProjectContents.php:43
+msgid "Table of Contents"
+msgstr "目次"
+
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:20
+msgid "Fullpage Content"
+msgstr "フルページコンテンツ"
+
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:35
+msgid "Centered Content"
+msgstr "中央揃えのコンテンツ"
+
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:47
+msgid "Single Column"
+msgstr "シングルカラム"
+
+#: src/PrintMyBlog/domain/FrontendPrintSettings.php:53
+#: templates/print_page.php:165
+msgid "Print"
+msgstr "印刷"
+
+#: src/PrintMyBlog/domain/FrontendPrintSettings.php:54
+msgid "Print 🖨"
+msgstr "印刷する 🖨"
+
+#: src/PrintMyBlog/domain/FrontendPrintSettings.php:57
+msgid "PDF"
+msgstr "PDF"
+
+#: src/PrintMyBlog/domain/FrontendPrintSettings.php:58
+msgid "PDF 📄"
+msgstr "ティッカー 📄"
+
+#: src/PrintMyBlog/domain/FrontendPrintSettings.php:61
+msgid "eBook"
+msgstr "電子書籍"
+
+#: src/PrintMyBlog/domain/FrontendPrintSettings.php:62
+msgid "eBook 📱"
+msgstr "電子ブック 📱"
+
+#: src/PrintMyBlog/domain/FrontendPrintSettings.php:130
+#, php-format
+msgid "Invalid format \"%s\"."
+msgstr "無効な形式 \"%s\"。"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:21
+msgid "Site Title"
+msgstr "サイトタイトル"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:25
+msgid "Tagline"
+msgstr "タグライン"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:33
+msgid "Filters Used"
+msgstr "使用されるフィルター"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:35
+msgid "E.g. selected categories, taxonomies, and date range."
+msgstr "たとえば、選択したカテゴリ、分類、日付範囲などです。"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:42
+msgid "Credit Print My Blog Plugin"
+msgstr "クレジット印刷マイブログプラグイン"
+
+#. translators: 1: heart emoji
+#: src/PrintMyBlog/domain/PrintOptions.php:46
+#, php-format
+msgid "Show some love and tell your readers about Print My Blog %1$s"
+msgstr "いくつかの愛を示し、印刷マイブログ%1$sについてあなたの読者に伝える"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:97
+msgid "Extra dividing line at end of post"
+msgstr "投稿の最後に余分な分割線"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:114
+msgid "Columns"
+msgstr "カラム"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:117
+msgid "1"
+msgstr "1"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:118
+msgid "2"
+msgstr "2"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:119
+msgid "3"
+msgstr "3"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:122
+msgid ""
+"The number of columns of text on each page. Not supported by some web "
+"browsers."
+msgstr ""
+"各ページのテキストの列数。一部の Web ブラウザーではサポートされていません。"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:126
+msgid "Pro Print lets you specify header and text size and font"
+msgstr "Pro Printでは、ヘッダーとテキストのサイズとフォントを指定できます"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:129
+msgid "Tiny (1/2 size)"
+msgstr "タイニー(1/2サイズ)"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:130
+msgid "Small (3/4 size)"
+msgstr "小型(3/4サイズ)"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:131
+msgid "Normal (theme default)"
+msgstr "標準 (テーマの既定値)"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:132
+msgid "Large (slightly larger than normal)"
+msgstr "大きい(通常より少し大きい)"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:136
+msgid "Image Size"
+msgstr "画像サイズ"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:139
+msgid "Full (theme default)"
+msgstr "フル (テーマの既定値)"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:140
+msgid "Large (3/4 size)"
+msgstr "ラージ(3/4サイズ)"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:141
+msgid "Medium (1/2 size)"
+msgstr "ミディアム(1/2サイズ)"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:142
+msgid "Small (1/4 size)"
+msgstr "小型(1/4サイズ)"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:143
+msgid "None (hide images)"
+msgstr "なし (画像を非表示にする)"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:146
+msgid ""
+"If you want to save paper, choose a smaller image size, or hide images "
+"altogether."
+msgstr ""
+"用紙を節約する場合は、小さい画像サイズを選択するか、画像を完全に非表示にしま"
+"す。"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:150
+msgid "Include Hyperlinks"
+msgstr "ハイパーリンクを含める"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:150
+msgid ""
+"Pro Print with Pro PDF Service supports changing hyperlinks to page "
+"references or footnotes"
+msgstr ""
+"Pro PDFサービスでPro Printは、ページ参照または脚注へのハイパーリンクの変更を"
+"サポートしています"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:153
+msgid "Include"
+msgstr "含める"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:155
+msgid "Replace with URL in Parenthesis"
+msgstr "括弧内のURLに置き換える"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:158
+msgid ""
+"Note: PDFs generated in Firefox and Safari automatically remove hyperlinks. "
+"If you want your PDF to include hyperlinks, please use another browser."
+msgstr ""
+"注記: Firefox および Safari で生成された PDF はハイパーリンクを自動的に削除し"
+"ます。PDFにハイパーリンクを含める場合は、別のブラウザを使用してください。"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:172
+msgid "Post Rendering Wait-Time"
+msgstr "レンダリング後の待機時間"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:176
+msgid "ms"
+msgstr "ミリ秒"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:178
+msgid ""
+"Milliseconds to wait between rendering posts. If posts are rendered too "
+"quickly on the page, sometimes images won’t load properly. "
+msgstr ""
+"投稿のレンダリング間で待機するミリ秒数。投稿がページ上でレンダリングされるの"
+"が速すぎると、画像が正しく読み込まれないことがあります。"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:182
+msgid "Include Inline Javascript"
+msgstr "インラインジャバスクリプトを含める"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:185
+msgid ""
+"Sometimes posts contain inline javascript which can cause errors and stop "
+"the page from rendering."
+msgstr ""
+"時々投稿にはインラインjavascriptが含まれており、エラーが発生し、ページのレン"
+"ダリングが停止する可能性があります。"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:189
+msgid "Include Unrendered Shortcodes"
+msgstr "レンダリングされていないショートコードを含める"
+
+#: src/PrintMyBlog/domain/PrintOptions.php:192
+msgid ""
+"If you left shortcodes from deactivated deactivated plugins or themes in "
+"your posts, they are automatically removed from printouts. Check this to "
+"leave them."
+msgstr ""
+"非アクティブ化された非アクティブ化されたプラグインやテーマのショートコードを"
+"投稿に残した場合、それらは印刷物から自動的に削除されます。これをチェックし"
+"て、それらを残してください。"
+
+#: src/PrintMyBlog/entities/DesignTemplate.php:366
+msgid "article"
+msgstr "記事"
+
+#: src/PrintMyBlog/entities/DesignTemplate.php:367
+msgid "part"
+msgstr "部分"
+
+#: src/PrintMyBlog/entities/DesignTemplate.php:368
+msgid "volume"
+msgstr "volume"
+
+#: src/PrintMyBlog/entities/DesignTemplate.php:369
+msgid "anthology"
+msgstr "アンソロジー"
+
+#: src/PrintMyBlog/entities/FileFormat.php:80
+#, php-format
+msgid "No generator class specified for format \"%s\""
+msgstr "形式 \"%s\" にジェネレータークラスが指定されていません"
+
+#: src/PrintMyBlog/entities/ProjectProgress.php:81
+msgid "Setup"
+msgstr "セットアップ"
+
+#: src/PrintMyBlog/entities/ProjectProgress.php:86
+#, php-format
+msgid "Choose %s Design"
+msgstr "デザイン%s選択"
+
+#: src/PrintMyBlog/entities/ProjectProgress.php:90
+#, php-format
+msgid "Customize %s Design"
+msgstr "%sデザインのカスタマイズ"
+
+#: src/PrintMyBlog/entities/ProjectProgress.php:94
+#: templates/project_edit_generate.php:142
+msgid "Edit Content"
+msgstr "コンテンツを編集"
+
+#: src/PrintMyBlog/entities/ProjectProgress.php:95
+#: templates/project_edit_generate.php:143
+msgid "Edit Metadata"
+msgstr "メタデータの編集"
+
+#: src/PrintMyBlog/entities/ProjectProgress.php:96
+msgid "Generate Print Page"
+msgstr "印刷ページの生成"
+
+#: src/PrintMyBlog/exceptions/DesignTemplateDoesNotExist.php:11
+#, php-format
+msgid ""
+"The design with slug \"%s\" should exist but doesn't. Check the plugin that "
+"added that design is still active (and if it required a subscription, that "
+"the subscription is still up-to-date). For now, please choose a different "
+"design."
+msgstr ""
+"ナメクジ \"%s\"を持つデザインは存在するはずですが、存在しません。そのデザイン"
+"がまだアクティブである(そしてサブスクリプションが必要な場合は、サブスクリプ"
+"ションがまだ最新であること)を追加したプラグインを確認してください。とりあえ"
+"ず、別のデザインを選んでください。"
+
+#: src/PrintMyBlog/exceptions/TemplateDoesNotExist.php:13
+#, php-format
+msgid "Template file \"%s\" should exist but doesn't."
+msgstr "テンプレートファイル \"%s\" は存在するはずですが、存在しないはずです。"
+
+#: src/PrintMyBlog/orm/entities/Project.php:674
+msgid "Default Template"
+msgstr "デフォルトテンプレート"
+
+#: src/PrintMyBlog/services/PmbCentral.php:20
+msgid "No license ID available"
+msgstr "使用可能なライセンス ID がありません"
+
+#: src/PrintMyBlog/services/PmbCentral.php:76
+msgid "There is no site registered with Freemius"
+msgstr "Freemiusに登録されているサイトはありません"
+
+#: src/PrintMyBlog/services/generators/EpubGenerator.php:120
+#: src/PrintMyBlog/services/generators/PdfGenerator.php:130
+msgid ""
+"Your project is very big and you might have errors downloading the file. If "
+"so, try splitting your content into multiple projects and instead creating "
+"multiple smaller files."
+msgstr ""
+"プロジェクトが非常に大きく、ファイルのダウンロード中にエラーが発生することが"
+"あります。その場合は、コンテンツを複数のプロジェクトに分割し、代わりに複数の"
+"小さなファイルを作成してみてください。"
+
+#: src/PrintMyBlog/services/generators/EpubGenerator.php:121
+#: src/PrintMyBlog/services/generators/PdfGenerator.php:131
+msgid ""
+"Your project has lots of images and you might have errors downloading the "
+"file. If so, try spltting your content into multiple projects or reducing "
+"the image quality set on your design."
+msgstr ""
+"プロジェクトに多くの画像があり、ファイルのダウンロード中にエラーが発生するこ"
+"とがあります。その場合は、コンテンツを複数のプロジェクトに分割するか、デザイ"
+"ンに設定されている画質を下げてみてください。"
+
+#: src/PrintMyBlog/services/generators/PdfGenerator.php:125
+#, php-format
+msgid ""
+"Downloading the Paid PDF will use one of your %1$s remaining credits, and is "
+"non-refundable."
+msgstr ""
+"有料PDFをダウンロードすると、残りのクレジットの%1$s1つが使用され、払い戻しは"
+"できません。"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:43
+msgid "Projects"
+msgstr "プロジェクト"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:44
+msgid "Projects for printing with Print My Blog"
+msgstr "ブログ印刷で印刷するプロジェクト"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:61
+msgid "Designs"
+msgstr "デザイン"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:62
+msgid "Designs for printing with Print My Blog"
+msgstr "マイブログを印刷して印刷するためのデザイン"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:77
+msgctxt "Post type general name"
+msgid "Print Materials"
+msgstr "印刷物"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:78
+msgctxt "Post type singular name"
+msgid "Print Material"
+msgstr "印刷物"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:79
+msgctxt "Admin Menu text"
+msgid "Print Materials"
+msgstr "印刷物"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:80
+msgctxt "Add New on Toolbar"
+msgid "Print Material"
+msgstr "印刷物"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:81
+msgid "Add New"
+msgstr "新規追加"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:82
+msgid "Add New Print Material"
+msgstr "新しい印刷物の追加"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:83
+msgid "New Print Material"
+msgstr "新しい印刷材料"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:84
+msgid "Edit Print Material"
+msgstr "印刷物の編集"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:85
+msgid "View Print Material"
+msgstr "印刷物を見る"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:86
+msgid "All Print Materials"
+msgstr "すべての印刷物"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:87
+msgid "Search Print Materials"
+msgstr "印刷物の検索"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:88
+msgid "Parent Print Materials:"
+msgstr "親印刷物:"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:89
+msgid "No Print Materials found."
+msgstr "印刷物が見つかりません。"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:90
+msgid "No Print Materials found in Trash."
+msgstr "ゴミ箱に印刷物が見つかりません。"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:91
+msgctxt ""
+"Overrides the “Featured Image” phrase for this post type. Added in 4.3"
+msgid "Print Material Cover Image"
+msgstr "印刷物カバー画像"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:92
+msgctxt ""
+"Overrides the “Set featured image” phrase for this post type. Added in 4.3"
+msgid "Set cover image"
+msgstr "カバー画像の設定"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:93
+msgctxt ""
+"Overrides the “Remove featured image” phrase for this post type. Added in 4.3"
+msgid "Remove cover image"
+msgstr "カバー画像を削除する"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:94
+msgctxt ""
+"Overrides the “Use as featured image” phrase for this post type. Added in 4.3"
+msgid "Use as cover image"
+msgstr "表紙画像として使用"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:95
+msgctxt ""
+"The post type archive label used in nav menus. Default “Post Archives”. "
+"Added in 4.4"
+msgid "Print Material archives"
+msgstr "印刷資料アーカイブ"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:96
+msgctxt ""
+"Overrides the “Insert into post”/”Insert into page” phrase (used when "
+"inserting media into a post). Added in 4.4"
+msgid "Insert into Print Material"
+msgstr "印刷物への挿入"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:97
+msgctxt ""
+"Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used "
+"when viewing media attached to a post). Added in 4.4"
+msgid "Uploaded to this Print Material"
+msgstr "この印刷物にアップロード"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:98
+msgctxt ""
+"Screen reader text for the filter links heading on the post type listing "
+"screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4"
+msgid "Filter Print Materials list"
+msgstr "印刷材料リストのフィルター処理"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:99
+msgctxt ""
+"Screen reader text for the pagination heading on the post type listing "
+"screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4"
+msgid "Print Materials list navigation"
+msgstr "印刷材料リストナビゲーション"
+
+#: src/PrintMyBlog/system/CustomPostTypes.php:100
+msgctxt ""
+"Screen reader text for the items list heading on the post type listing "
+"screen. Default “Posts list”/”Pages list”. Added in 4.4"
+msgid "Print Materials list"
+msgstr "印刷材料リスト"
+
+#: src/PrintMyBlog/system/Init.php:211
+msgid "Print My Blog news"
+msgstr "私のブログのニュースを印刷する"
+
+#: src/PrintMyBlog/system/Init.php:212
+msgid "Dismiss all Print My Blog news"
+msgstr "すべての印刷私のブログのニュースを閉じる"
+
+#: src/PrintMyBlog/system/Init.php:214
+msgid "Are you sure you want to dismiss all Print My Blog news forever?"
+msgstr "すべての Print My Blog ニュースを永久に却下してよろしいですか?"
+
+#: src/Twine/entities/FileSubmission.php:70
+#, php-format
+msgid ""
+"The scheme (\"%1$s\") on the temporary file (\"%2$s\") indicates is located "
+"elsewhere, that’s not ok!"
+msgstr ""
+"一時ファイル(「%1$s」)のスキーム(「%2$s」)は、他の場所にあることを示していま"
+"すが、それは問題ありません!"
+
+#: src/Twine/forms/base/FormSection.php:220
+#, php-format
+msgid ""
+"Subsection \"%s\" is not an instanceof FormSectionBase on form \"%s\". It is "
+"a \"%s\""
+msgstr ""
+"サブセクション \"%s\" は、フォーム \"%s\" 上の FormSectionBase のインスタンス"
+"ではありません。それは「%s」です"
+
+#: src/Twine/forms/base/FormSection.php:225
+#: src/Twine/forms/base/FormSection.php:494
+msgid "NULL"
+msgstr "空"
+
+#: src/Twine/forms/base/FormSection.php:489
+#, php-format
+msgid ""
+"Subsection '%s' is not an instanceof FormInputBase on form '%s'. It is a '%s'"
+msgstr ""
+"サブセクション '%s' は、フォーム '%s' の FormInputBase のインスタンスではあり"
+"ません。それは「%s」です"
+
+#: src/Twine/forms/base/FormSection.php:527
+msgid "Subsection '%'s is not an instanceof FormSectionProper on form '%s'"
+msgstr ""
+"サブセクション '%'s はフォーム '%s' の適切なフォームセクションのインスタンス"
+"ではありません"
+
+#: src/Twine/forms/base/FormSection.php:567
+msgid ""
+"You cannot check if a form is valid before receiving the form submission "
+"using receive_form_submission"
+msgstr ""
+"フォームを使用してフォーム送信を受信する前に、フォームが有効かどうかを確認"
+"receive_form_submission"
+
+#: src/Twine/forms/base/FormSection.php:866
+msgid "This is not a valid absolute URL. Eg, http://domain.com/monkey.jpg"
+msgstr ""
+"これは有効な絶対 URL ではありません。例えば、http://domain.com/monkey.jpg"
+
+#: src/Twine/forms/base/FormSection.php:869
+msgid "Please check your input"
+msgstr "入力内容を確認してください"
+
+#: src/Twine/forms/base/FormSection.php:1244
+#, php-format
+msgid ""
+"Trying to add a %s as a subsection (it was named '%s') to the form section "
+"'%s'. It was removed."
+msgstr ""
+"%sをサブセクションとして追加しようとしています ('%s' という名前でした) フォー"
+"ムセクション '%s' に。それは取り除かれました。"
+
+#: src/Twine/forms/base/FormSection.php:1361
+msgid "Form submitted successfully"
+msgstr "フォームが正常に送信されました"
+
+#: src/Twine/forms/base/FormSection.php:1502
+msgid "Unknown"
+msgstr "不明"
+
+#: src/Twine/forms/base/FormSection.php:1505
+#, php-format
+msgid "%s : %s"
+msgstr "%s : %s"
+
+#: src/Twine/forms/base/FormSectionBase.php:12
+msgid ""
+"In order to use Twine forms, you need to define TWINE_MAIN_FILE to be the "
+"main file of your plugin, then put Twine folder inside wp-content/plugins/"
+"yourplugin/src/Twine"
+msgstr ""
+"Twineフォームを使用するには、TWINE_MAIN_FILEをプラグインのメインファイルとし"
+"て定義し、wp-content/plugins/yourplugin/src/Twine 内にTwineフォルダを配置する"
+"必要があります。"
+
+#: src/Twine/forms/base/FormSectionBase.php:347
+msgid ""
+"You cannot use the form section\\s name until constructFinalize has been "
+"called on it (when we set the name). It was called on a form section of type "
+"'s'"
+msgstr ""
+"フォームセクション\\sの名前は、constructFinalizeが呼び出されるまで(名前を設定"
+"するとき)使用できません。型 's'のフォームセクションで呼び出されました"
+
+#: src/Twine/forms/base/FormSectionDetails.php:16
+msgid "Details"
+msgstr "詳細"
+
+#: src/Twine/forms/inputs/ButtonInput.php:31
+msgid "Button"
+msgstr "ボタン"
+
+#: src/Twine/forms/inputs/FontInput.php:12
+msgid "Arial"
+msgstr "Arial"
+
+#: src/Twine/forms/inputs/FontInput.php:13
+msgid "Courier New"
+msgstr "Courier New"
+
+#: src/Twine/forms/inputs/FontInput.php:14
+msgid "Georgia"
+msgstr "ジョージア"
+
+#: src/Twine/forms/inputs/FontInput.php:15
+msgid "Impact"
+msgstr "表示箇所"
+
+#: src/Twine/forms/inputs/FontInput.php:16
+msgid "Lucida Console"
+msgstr "ルシーダコンソール"
+
+#: src/Twine/forms/inputs/FontInput.php:17
+msgid "Palatino Linotype"
+msgstr "パラティーノ・リノタイプ"
+
+#: src/Twine/forms/inputs/FontInput.php:18
+msgid "Tahoma"
+msgstr "Tahoma"
+
+#: src/Twine/forms/inputs/FontInput.php:19
+msgid "Times New Roman"
+msgstr "Times New Roman"
+
+#: src/Twine/forms/inputs/FontInput.php:20
+msgid "Verdana"
+msgstr "Verdana"
+
+#: src/Twine/forms/inputs/FormInputBase.php:295
+#, php-format
+msgid ""
+"Cannot get display strategy for form input with name %s and id %s, because "
+"it has not been set in the constructor"
+msgstr ""
+"名前 %s と id %s を持つフォーム入力の表示戦略を取得できません。コンストラク"
+"ターで設定されていないためです。"
+
+#: src/Twine/forms/inputs/FormInputWithOptionsBase.php:83
+#, php-format
+msgid ""
+"A form input of type \"%s\" was passed in an arrya of non-options. It should "
+"be given an object of type \"%s\""
+msgstr ""
+"型 \"%s\" のフォーム入力が、オプション以外の arrya に渡されました。型 \"%s\" "
+"のオブジェクトを指定する必要があります。"
+
+#: src/Twine/forms/inputs/PhoneInput.php:28
+msgid "Please enter a valid phone number. Eg 123-456-7890 or 1234567890"
+msgstr "有効な電話番号を入力してください。例:123-456-7890または1234567890"
+
+#: src/Twine/forms/inputs/SubmitInput.php:27
+msgid "Submit"
+msgstr "送信"
+
+#: src/Twine/forms/strategies/display/AdminFileUploaderDisplay.php:48
+msgid "Choose File"
+msgstr "ファイルを選択"
+
+#: src/Twine/forms/strategies/display/AdminFileUploaderDisplay.php:49
+msgid "click to add an image"
+msgstr "クリックして画像を追加します"
+
+#: src/Twine/forms/strategies/display/CheckboxDisplay.php:32
+#, php-format
+msgctxt ""
+"Input values for checkboxes should be an array of values, but the value for "
+"input \"form-input-id\" is \"form-input-value\". Please verify that the "
+"input name is exactly \"form_input_name[]\""
+msgid ""
+"Input values for checkboxes should be an array of values, but the value for "
+"input \"%1$s\" is \"%2$s\". Please verify that the input name is exactly "
+"\"%3$s\""
+msgstr ""
+"チェックボックスの入力値は値の配列でなければなりませんが、入力 \"%1$s\" の値"
+"は \"%2$s\" です。入力名が正確に \"%3$s\" であることを確認してください。"
+
+#: src/Twine/forms/strategies/display/CompoundInputDisplay.php:68
+msgid ""
+"Can not use a Compound Input Display Strategy (eg checkbox or radio) with an "
+"input that doesn't have options"
+msgstr ""
+"オプションを持たない入力で複合入力表示戦略(チェックボックスやラジオなど)を使"
+"用することはできません"
+
+#: src/Twine/forms/strategies/display/NumberInputDisplay.php:73
+#, php-format
+msgid ""
+"The %1$s parameter value for %2$s must be numeric or null, %3$s was passed "
+"into the constructor."
+msgstr ""
+"%1$s の%2$sパラメーター値は、コンストラクターに渡された数値または null で%3$s"
+"る必要があります。"
+
+#. translators: 1 taxonomy name, 2: list of terms that apply to this post
+#: src/Twine/forms/strategies/display/RadioButtonDisplay.php:47
+#: templates/print_page.php:238
+#, php-format
+msgid "%1$s: %2$s"
+msgstr "%1$s: %2$s"
+
+#: src/Twine/forms/strategies/display/SelectDisplay.php:34
+msgid ""
+"Cannot use Select Display Strategy with an input that doesn't have options"
+msgstr "オプションのない入力で表示方法の選択を使用できません。"
+
+#: src/Twine/forms/strategies/display/SelectMultipleDisplay.php:33
+msgid ""
+"Cannot use Select Multiple Display Strategy with an input that doesn't have "
+"options"
+msgstr "オプションのない入力で複数の表示方法を選択できない"
+
+#: src/Twine/forms/strategies/display/SelectMultipleDisplay.php:56
+msgid ""
+"Select multiple display strategy does not allow for nested arrays of options."
+msgstr ""
+"複数の表示方法を選択しても、オプションのネストされた配列は使用できません。"
+
+#: src/Twine/forms/strategies/display/TextAreaDisplay.php:39
+#, php-format
+msgid "%1$s(allowed tags: %2$s)%3$s"
+msgstr "%1$s(許可されるタグ: %2$s)%3$s"
+
+#: src/Twine/forms/strategies/layout/DetailsSummaryLayout.php:41
+#: templates/settings_page.php:73
+msgid "Show Options"
+msgstr "オプションを表示"
+
+#: src/Twine/forms/strategies/normalization/FileNormalization.php:31
+msgid "The file input has an invalid format."
+msgstr "ファイル入力の形式が無効です。"
+
+#: src/Twine/forms/strategies/normalization/FloatNormalization.php:44
+#: src/Twine/forms/strategies/normalization/IntNormalization.php:44
+#, php-format
+msgid ""
+"The value \"%s\" must be a string submitted for normalization, it was %s"
+msgstr "値 \"%s\" は正規化のために送信された文字列でなければならず、%s"
+
+#: src/Twine/forms/strategies/validation/ConditionallyRequiredValidation.php:39
+#: src/Twine/forms/strategies/validation/RequiredValidation.php:28
+msgid "This field is required."
+msgstr "この項目は必須です。"
+
+#: src/Twine/forms/strategies/validation/ConditionallyRequiredValidation.php:129
+#, php-format
+msgid "Input requirement conditions must be an array. You provided %1$s"
+msgstr "入力要件の条件は配列でなければなりません。あなたが%1$sを提供した"
+
+#: src/Twine/forms/strategies/validation/ConditionallyRequiredValidation.php:137
+#, php-format
+msgid ""
+"Required Validation Strategy does not yet support multiple conditions. You "
+"should add it! The related input is %1$s"
+msgstr ""
+"必要な検証戦略は、まだ複数の条件をサポートしていません。あなたはそれを追加す"
+"る必要があります!関連する入力は%1$s"
+
+#: src/Twine/forms/strategies/validation/ConditionallyRequiredValidation.php:147
+#: src/Twine/forms/strategies/validation/ConditionallyRequiredValidation.php:189
+#, php-format
+msgid ""
+"Error encountered while setting requirement condition for input %1$s. The "
+"path %2$s does not correspond to a valid input"
+msgstr ""
+"入力%1$sの要件条件の設定中にエラーが発生しました。パス%2$sが有効な入力に対応"
+"していません"
+
+#: src/Twine/forms/strategies/validation/ConditionallyRequiredValidation.php:158
+#, php-format
+msgid ""
+"Required Validation Strategy can only depend on another input which uses the "
+"SelectDisplay, but you specified a field \"%1$s\" that uses display strategy "
+"\"%2$s\". If you need others, please add support for it! The related input "
+"is %3$s"
+msgstr ""
+"必要な検証戦略は、SelectDisplay を使用する別の入力にのみ依存できますが、表示"
+"戦略 \"%1$s\" を使用する項目 \"%2$s\" を指定しました。あなたが他の人を必要と"
+"するならば、それのためのサポートを追加してください!関連する入力は%3$s"
+
+#: src/Twine/forms/strategies/validation/ConditionallyRequiredValidation.php:223
+#, php-format
+msgid ""
+"Required Validation Strategy conditions array's value must be an array with "
+"two elements: an operator, and a value. It didn't. The related input is %1$s"
+msgstr ""
+"必須検証戦略条件配列の値は、演算子と値の 2 つの要素を持つ配列である必要があり"
+"ます。そうではありませんでした。関連する入力は%1$s"
+
+#: src/Twine/forms/strategies/validation/ConditionallyRequiredValidation.php:233
+#, php-format
+msgid ""
+"Required Validation Strategy conditions can currently only use the equals "
+"operator. If you need others, please add support for it! The related input "
+"is %1$s"
+msgstr ""
+"必須の検証戦略条件は、現在、equals 演算子のみを使用できます。あなたが他の人を"
+"必要とするならば、それのためのサポートを追加してください!関連する入力は%1$s"
+
+#: src/Twine/forms/strategies/validation/EmailValidation.php:30
+msgid "Please enter a valid email address."
+msgstr "有効なメールアドレスを入力してください"
+
+#: src/Twine/forms/strategies/validation/EnumValidation.php:33
+msgid ""
+"Cannot use Enum Validation Strategy with an input that doesn't have options"
+msgstr "列挙型検証戦略をオプションのない入力で使用することはできません"
+
+#: src/Twine/forms/strategies/validation/EnumValidation.php:63
+#, php-format
+msgid "This is not allowed option. Allowed options are %s."
+msgstr "これは許可されていないオプションです。許可されるオプションは%sです。"
+
+#: src/Twine/forms/strategies/validation/EqualToValidation.php:32
+msgid "Fields do not match."
+msgstr "フィールドが一致しません。"
+
+#: src/Twine/forms/strategies/validation/FloatValidation.php:24
+msgid "Only numeric characters, commas, periods, and spaces, please!"
+msgstr "数字、カンマ、ピリオド、スペースのみ、お願いします!"
+
+#: src/Twine/forms/strategies/validation/FullHtmlValidation.php:29
+#, php-format
+msgid "Only the following HTML tags are allowed:%1$s%2$s"
+msgstr "次の HTML タグのみが許可され%1$s%2$s"
+
+#: src/Twine/forms/strategies/validation/IntValidation.php:21
+msgid "Only digits are allowed."
+msgstr "数字のみが許可されます。"
+
+#: src/Twine/forms/strategies/validation/MaxLengthValidation.php:26
+#, php-format
+msgid "Input is too long. Maximum number of characters is %1$s"
+msgstr "入力が長すぎます。最大文字数は%1$s"
+
+#: src/Twine/forms/strategies/validation/PlaintextValidation.php:27
+msgid "HTML tags are not permitted in this field"
+msgstr "HTML タグはこのフィールドでは使用できません"
+
+#: src/Twine/forms/strategies/validation/ValidationBase.php:29
+msgid "Input invalid"
+msgstr "無効な入力。"
+
+#: src/Twine/orm/entities/PostWrapper.php:175
+#, php-format
+msgid "%s (print material)"
+msgstr "%s(印刷物)"
+
+#. translators: 1: the name of the original post being duplicated
+#: src/Twine/orm/entities/PostWrapper.php:208
+#, php-format
+msgid "%s (copy)"
+msgstr "%s (コピー)"
+
+#: src/mnelson4/rest_api_detector/RestApiDetector.php:153
+msgid "The WordPress site has an error in its REST API data."
+msgstr "WordPress サイトの REST API データにエラーがあります。"
+
+#: src/mnelson4/rest_api_detector/RestApiDetector.php:171
+msgid "The WordPress site responded with an unexpected response."
+msgstr "ワードプレスのサイトは予想外の反応で応答しました。"
+
+#: templates/design_choose.php:19
+#, php-format
+msgid "Choose Design: %s"
+msgstr "デザインを選択: %s"
+
+#: templates/design_choose.php:46
+#, php-format
+msgid "View details of Design \"%s\""
+msgstr "デザイン「%s」の詳細を見る"
+
+#: templates/design_choose.php:46
+msgid "Design Details"
+msgstr "デザインの詳細"
+
+#: templates/design_choose.php:52
+#, php-format
+msgid "Use the Design \"%s\""
+msgstr "デザイン \"%s\" を使用する"
+
+#: templates/design_choose.php:52
+msgid "Use This Design"
+msgstr "このデザインを使用する"
+
+#: templates/design_choose.php:53
+#, php-format
+msgid "Use and Customize the Design \"%s\""
+msgstr "デザイン「%s」を使用してカスタマイズする"
+
+#: templates/design_choose.php:53
+msgid "Customize"
+msgstr "カスタマイズ"
+
+#: templates/design_choose.php:78
+msgid "Customization of"
+msgstr "のカスタマイズ"
+
+#: templates/design_choose.php:97
+msgid "Supports"
+msgstr "サポート"
+
+#: templates/design_choose.php:101
+msgid "front matter"
+msgstr "フロントマター"
+
+#: templates/design_choose.php:106
+#, php-format
+msgid "%1$s layer of nesting"
+msgid_plural "%1$s layers of nesting"
+msgstr[0] "ネスティングの%1$s層"
+
+#: templates/design_choose.php:117
+#, php-format
+msgid "each %1$s can put in a %2$s"
+msgstr "各%1$sは%2$sに入れることができます"
+
+#: templates/design_choose.php:123
+msgid "(no parts)"
+msgstr "(部品なし)"
+
+#: templates/design_choose.php:127
+msgid "back matter"
+msgstr "バックマター"
+
+#: templates/design_choose.php:134 templates/design_customize.php:27
+#, php-format
+msgid "Read %s Documentation Online"
+msgstr "%sドキュメントをオンラインで読む"
+
+#: templates/design_customize.php:18
+#, php-format
+msgid "Customize %s Design: %s"
+msgstr "カスタマイズ%sデザイン:%s"
+
+#: templates/design_customize.php:30 templates/project_edit_content.php:286
+#: templates/project_edit_metadata.php:20
+msgid "Save & Proceed"
+msgstr "保存と続行"
+
+#: templates/help.php:12
+#, php-format
+msgid ""
+"Please %1$stake a look at our user guide%2$s for quick answers. If that "
+"doesn’t contain the info you need, please get in touch."
+msgstr ""
+"迅速な回答については、%1$sユーザーガイド%2$sをご覧ください。必要な情報が含ま"
+"れていない場合は、お問い合わせください。"
+
+#: templates/partials/content_options.php:18
+msgid "Header Content to Print"
+msgstr "印刷するヘッダーの内容"
+
+#: templates/partials/content_options.php:18
+msgid ""
+"Pro Print supports full-page title pages, custom title pages, or no title "
+"page"
+msgstr ""
+"Pro Printは、フルページのタイトルページ、カスタムタイトルページ、またはタイト"
+"ルページなしをサポートしています"
+
+#: templates/partials/content_options.php:19
+msgid "Appears at the top of the first page."
+msgstr "最初のページの上部に表示されます。"
+
+#: templates/partials/content_options.php:28
+msgid "Post Content to Print"
+msgstr "コンテンツを印刷に投稿する"
+
+#: templates/partials/debug_options.php:13
+msgid "Troubleshooting Options"
+msgstr "トラブルシューティング オプション "
+
+#: templates/partials/pro_print_page_epub_window.php:13
+#: templates/partials/pro_print_page_window.php:22
+msgid "Back"
+msgstr "戻る"
+
+#: templates/partials/pro_print_page_epub_window.php:16
+#: templates/partials/pro_print_page_window.php:25
+msgid "Print My Blog — Pro Print"
+msgstr "私のブログを印刷する - プロプリント"
+
+#: templates/partials/pro_print_page_epub_window.php:20
+#: templates/partials/pro_print_page_window.php:29
+msgid "Help!"
+msgstr "ヘルプ！"
+
+#: templates/partials/pro_print_page_epub_window.php:26
+msgid "ePub Generator"
+msgstr "eパブジェネレータ"
+
+#: templates/partials/pro_print_page_epub_window.php:27
+msgid "Unlimited ePubs with a current subscripstion"
+msgstr "現在のサブスクリプションを持つ無制限のePub"
+
+#: templates/partials/pro_print_page_epub_window.php:29
+msgid "Download ePub"
+msgstr "ePubをダウンロード"
+
+#: templates/partials/pro_print_page_epub_window.php:30
+msgid "Please refer to our documentation if you have questions about styling "
+msgstr ""
+"スタイリングについてご質問がある場合は、ドキュメントを参照してください。"
+
+#: templates/partials/pro_print_page_window.php:36
+msgid "Free"
+msgstr "無料"
+
+#: templates/partials/pro_print_page_window.php:38
+msgid "Print with Browser"
+msgstr "ブラウザで印刷する"
+
+#: templates/partials/pro_print_page_window.php:40
+msgid "Limited to features supported by your browser."
+msgstr "お使いのブラウザでサポートされている機能に限定されます。"
+
+#: templates/partials/pro_print_page_window.php:41
+msgid "Compare printing with your browser vs Pro PDF Service"
+msgstr "印刷をブラウザとプロPDFサービスで比較する"
+
+#: templates/partials/pro_print_page_window.php:44
+msgid "Pro PDF Service"
+msgstr "プロPDFサービス"
+
+#: templates/partials/pro_print_page_window.php:49
+#: templates/partials/pro_print_page_window.php:57
+msgid "Download Test PDF"
+msgstr "テストPDFのダウンロード"
+
+#: templates/partials/pro_print_page_window.php:52
+msgid "Purchase Subscription"
+msgstr "サブスクリプションの購入"
+
+#: templates/partials/pro_print_page_window.php:54
+msgid "Feature Comparison List"
+msgstr "機能比較リスト"
+
+#: templates/partials/pro_print_page_window.php:62
+msgid "Upgrade Subscription"
+msgstr "サブスクリプションをアップグレード"
+
+#: templates/partials/pro_print_page_window.php:64
+msgid "Sorry you have no more download credits for this month."
+msgstr "申し訳ありませんが、今月のダウンロードクレジットはもうありません。"
+
+#: templates/partials/pro_print_page_window.php:65
+msgid ""
+"Please upgrade your plan for more credits per month. If you have a yearlong "
+"subscription and this is the first time, feel free to contact us and ask for "
+"a one-time increase to your credits."
+msgstr ""
+"プランをアップグレードして、1 か月あたりのクレジット数を増やしてください。1年"
+"間のサブスクリプションをお持ちで、これが初めての場合は、お気軽にお問い合わせ"
+"いただき、クレジットの1回限りの増額を依頼してください。"
+
+#: templates/partials/pro_print_page_window.php:68
+msgid "Please download the Test PDF before the Paid PDF"
+msgstr "有料PDFの前にテストPDFをダウンロードしてください"
+
+#: templates/partials/pro_print_page_window.php:69
+msgid "Download Paid PDF"
+msgstr "有料PDFをダウンロードする"
+
+#: templates/partials/pro_print_page_window.php:71
+msgid "Always download a free Test PDF before a Paid PDF."
+msgstr "有料PDFの前に、常に無料のテストPDFをダウンロードしてください。"
+
+#: templates/partials/pro_print_page_window.php:74
+msgid "One credit was used to generate the file."
+msgstr "ファイルの生成に 1 つのクレジットが使用されました。"
+
+#: templates/partials/pro_print_page_window.php:75
+msgid "Return to Generate Page"
+msgstr "生成ページに戻る"
+
+#: templates/partials/pro_print_page_window.php:80
+msgid "Read how your data is handled"
+msgstr "データの処理方法を読む"
+
+#: templates/print_page.php:35
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: templates/print_page.php:40
+msgid "Return"
+msgstr "戻る"
+
+#. translators: 1: a bunch of HTML for emoji buttons
+#: templates/print_page.php:48
+#, php-format
+msgid "What do you think? %1$s"
+msgstr "どう思いますか。%1$s"
+
+#: templates/print_page.php:50
+msgid "Love it (shows feedback options)"
+msgstr "気に入って(フィードバックオプションを表示)"
+
+#: templates/print_page.php:52
+msgid "Don’t like something (shows feedback options)"
+msgstr "何かが気に入らない (フィードバックのオプションを表示)"
+
+#. translators: 1: opening link tag, 2: closing link tag
+#: templates/print_page.php:58
+#, php-format
+msgid "Nice! %1$sPlease leave a review%2$s."
+msgstr "ナイス！%1$sレビューを残してくださ%2$s.."
+
+#: templates/print_page.php:59
+msgid "Plugin Reviews (opens in new tab)"
+msgstr "プラグインのレビュー(新しいタブで開きます)"
+
+#. translators: 1: opening link tag, 2: closing link tag.
+#: templates/print_page.php:64
+#, php-format
+msgid "That’s disappointing. %1$sPlease tell us how to improve.%2$s"
+msgstr "それは残念です。%1$s改善方法を教えてください。%2$s"
+
+#: templates/print_page.php:65
+msgid "Plugin support forum (opens in new tab)"
+msgstr "プラグインサポートフォーラム(新しいタブで開きます)"
+
+#: templates/print_page.php:71
+msgid "Initializing"
+msgstr "初期化"
+
+#: templates/print_page.php:78
+msgid "You may now use dotEPUB to create the eBook."
+msgstr "dotEPUB を使用して電子ブックを作成できるようになりました。"
+
+#: templates/print_page.php:79 templates/print_page.php:103
+#: templates/print_page.php:110 templates/print_page.php:121
+msgid "How?"
+msgstr "どのように？"
+
+#: templates/print_page.php:85
+msgid "You may now create the PDF using a browser extension."
+msgstr "これで、ブラウザ拡張機能を使用してPDFを作成できるようになりました。"
+
+#: templates/print_page.php:90
+msgid "Print to PDF"
+msgstr "PDFに印刷する"
+
+#: templates/print_page.php:93
+msgid "Use your browser to print to PDF."
+msgstr "ブラウザを使用してPDFに印刷します。"
+
+#: templates/print_page.php:101 templates/print_page.php:113
+msgid "opens in new tab"
+msgstr "新しいタブで開く"
+
+#: templates/print_page.php:113
+msgid "Download Print to PDF Browser Extension"
+msgstr "PDFブラウザ拡張機能に印刷をダウンロード"
+
+#: templates/print_page.php:114
+msgid "Click the extension’s button."
+msgstr "拡張機能のボタンをクリックします。"
+
+#: templates/print_page.php:123
+msgid ""
+"After clicking \"Print to PDF\", set the \"Destination\" to \"Save as PDF.\""
+msgstr ""
+"「PDFに印刷」をクリックした後、「保存先」を「PDFとして保存」に設定します。"
+
+#: templates/print_page.php:130
+msgid "How on Safari on Desktop"
+msgstr "デスクトップ上のサファリの方法"
+
+#: templates/print_page.php:133
+msgid "Click \"Print to PDF\""
+msgstr "「PDFに印刷」をクリックします。"
+
+#: templates/print_page.php:134
+msgid "Choose to \"Save as PDF.\""
+msgstr "「PDFとして保存」を選択します。"
+
+#: templates/print_page.php:141
+msgid "How on Mobile Safari"
+msgstr "モバイルサファリの方法"
+
+#: templates/print_page.php:145
+msgid "Click the share button"
+msgstr "共有ボタンをクリックします。"
+
+#: templates/print_page.php:148
+msgid "Click \"Options\" and choose PDF"
+msgstr "「オプション」をクリックしてPDFを選択します"
+
+#: templates/print_page.php:151
+msgid "Save to Files"
+msgstr "ファイルに保存"
+
+#: templates/print_page.php:158
+msgid ""
+"Note: Google Chrome and Microsoft Edge are recommended for producing PDFs."
+msgstr "注: PDF の作成には、Google Chrome と Microsoft Edge をお勧めします。"
+
+#: templates/print_page.php:161
+msgid "Copy to Clipboard"
+msgstr "クリップボードにコピー"
+
+#: templates/print_page.php:166
+msgid "Use your browser to print."
+msgstr "ブラウザを使用して印刷します。"
+
+#: templates/print_page.php:189
+msgid "Use your browser’s \"print preview\" for the best preview."
+msgstr "ブラウザの「印刷プレビュー」を使用して、最適なプレビューを作成します。"
+
+#. translators: 1: date string
+#: templates/print_page.php:218
+#, php-format
+msgid "published on %1$s and later,"
+msgstr "%1$s以降に公開され、"
+
+#. translators: 1: date string
+#: templates/print_page.php:224
+#, php-format
+msgid "published on %1$s and earlier,"
+msgstr "%1$s以前に公開され、"
+
+#. translators: $s, the categories and terms used to filter this print-out,
+#. eg "Category: WordPress, Blogging; Term: Computers, Headphones".
+#: templates/print_page.php:248
+#, php-format
+msgid "with %s,"
+msgstr "%sで、"
+
+#: templates/print_page.php:253
+#, php-format
+msgid "by %s"
+msgstr "%s"
+
+#. translators: 1 description of printout, 2: site URL
+#: templates/print_page.php:268
+#, php-format
+msgid "%1$s from %2$s."
+msgstr "%1$sから%2$s。"
+
+#: templates/print_page.php:279
+#, php-format
+msgctxt ""
+"Description of what's in the printout. Eg the post type, dante range, and "
+"filters."
+msgid "%s."
+msgstr "%s."
+
+#. translators: 1: date, 2: opening link tag, 3: closing link tag
+#: templates/print_page.php:292
+#, php-format
+msgid "Printed on %1$s using %2$sPrint My Blog%3$s"
+msgstr "%1$sブログの印刷%2$sを使用して印刷%3$s"
+
+#: templates/print_page.php:305
+#, php-format
+msgid "Printed using %1$sPrint My Blog%2$s"
+msgstr "%1$sブログを印刷%2$sを使用して印刷"
+
+#: templates/print_page_error.php:27
+msgid "Sorry, we could not print the WordPress Blog."
+msgstr "申し訳ありませんが、ワードプレスのブログを印刷できませんでした。"
+
+#: templates/print_page_error.php:28
+#, php-format
+msgid "Problem: %s"
+msgstr "問題: %s"
+
+#: templates/print_page_error.php:29
+#, php-format
+msgid "Code: %s"
+msgstr "コード: %s"
+
+#. translators: 1: submitted URL
+#: templates/print_page_error.php:34
+#, php-format
+msgid ""
+"The site URL you provided was \"%1$s\". Are you sure that URL is correct and "
+"that it's a WordPress site?"
+msgstr ""
+"入力したサイトの URL は \"%1$s\" でした。URLが正しく、WordPressサイトであると"
+"確信していますか?"
+
+#: templates/print_page_error.php:39
+msgid "Are you sure the blog hasn't deactivated the REST API?"
+msgstr "ブログが REST API を無効にしていないことを確認していますか?"
+
+#. translators: 1: opening link tag, 2: closing link tag
+#: templates/print_page_error.php:43
+#, php-format
+msgid ""
+"If you are still having problems, please report it to the %1$sPrint My Blog"
+"%2$s support forum."
+msgstr ""
+"それでも問題が解決しない場合は、%1$sブログの印刷%2$sサポートフォーラムに報告"
+"してください。"
+
+#: templates/project_edit_content.php:22
+msgid "Edit Project Content"
+msgstr "プロジェクトコンテンツの編集"
+
+#: templates/project_edit_content.php:36
+msgid "Available Content"
+msgstr "利用可能なコンテンツ"
+
+#: templates/project_edit_content.php:40
+#, php-format
+msgid ""
+"Select content from your website, then move it into your project. %1$sRead "
+"more%2$s."
+msgstr ""
+"Web サイトからコンテンツを選択し、プロジェクトに移動します。%1$s続きを読"
+"む%2$s."
+
+#: templates/project_edit_content.php:46
+msgid "Use <em>CTRL</em> or <em>SHIFT</em> to select multiple items"
+msgstr ""
+"<em>Ctrl</em> キーまたは <em>Shift</em> キーを使用して複数の項目を選択する"
+
+#: templates/project_edit_content.php:48
+msgid "Search Posts, Pages, Custom Post Types..."
+msgstr "検索投稿、ページ、カスタム投稿タイプ..."
+
+#: templates/project_edit_content.php:49
+msgid "Show Filters"
+msgstr "フィルターを表示"
+
+#: templates/project_edit_content.php:50
+msgid "Hide Filters"
+msgstr "フィルターを隠す"
+
+#: templates/project_edit_content.php:57
+msgid "Post Type"
+msgstr "投稿タイプ"
+
+#: templates/project_edit_content.php:60
+msgid "Any"
+msgstr "任意"
+
+#: templates/project_edit_content.php:70
+msgid "Status"
+msgstr "ステータス"
+
+#: templates/project_edit_content.php:74 templates/setup_page.php:120
+msgid "Draft"
+msgstr "下書き"
+
+#: templates/project_edit_content.php:75 templates/setup_page.php:121
+msgid "Pending Review"
+msgstr "保留中のレビュー"
+
+#: templates/project_edit_content.php:76 templates/setup_page.php:122
+msgid "Private"
+msgstr "プライベート"
+
+#: templates/project_edit_content.php:77 templates/setup_page.php:124
+msgid "Published"
+msgstr "公開済み"
+
+#: templates/project_edit_content.php:78 templates/setup_page.php:125
+msgid "Scheduled"
+msgstr "予定済み"
+
+#: templates/project_edit_content.php:79 templates/setup_page.php:126
+msgid "Trash"
+msgstr "ゴミ箱"
+
+#: templates/project_edit_content.php:118
+msgid "Written Between"
+msgstr "間に書かれている"
+
+#. translators: 1: "from" date input, 2: "to" date input
+#: templates/project_edit_content.php:121
+#, php-format
+msgid "%s and %s"
+msgstr "%s は%s でした"
+
+#: templates/project_edit_content.php:128
+msgid "Show Included Content?"
+msgstr "含まれるコンテンツを表示しますか?"
+
+#: templates/project_edit_content.php:130
+msgid "Show content already added to project"
+msgstr "プロジェクトに既に追加されているコンテンツを表示する"
+
+#: templates/project_edit_content.php:134
+msgid "Order By"
+msgstr "並び順"
+
+#: templates/project_edit_content.php:140
+msgid "Menu Order"
+msgstr "メニューの並び順"
+
+#: templates/project_edit_content.php:141
+msgid "Search Relevance"
+msgstr "検索の関連性"
+
+#: templates/project_edit_content.php:142
+msgid "Post ID"
+msgstr "投稿 ID"
+
+#: templates/project_edit_content.php:152
+msgid "Ascending"
+msgstr "昇順"
+
+#: templates/project_edit_content.php:153
+msgid "Descending"
+msgstr "降順"
+
+#: templates/project_edit_content.php:167
+msgid "Search & Apply Filters"
+msgstr "検索とフィルターの適用"
+
+#: templates/project_edit_content.php:170
+msgid "Select All"
+msgstr "すべて選択"
+
+#: templates/project_edit_content.php:171
+msgid "Deselect All"
+msgstr "すべての選択を解除"
+
+#: templates/project_edit_content.php:178
+msgid "Add selected items to project"
+msgstr "選択した項目をプロジェクトに追加する"
+
+#: templates/project_edit_content.php:183
+msgid "Remove selected items"
+msgstr "選択したアイテムを削除する"
+
+#: templates/project_edit_content.php:188
+msgid "Move selected items up"
+msgstr "選択したアイテムを上に移動する"
+
+#: templates/project_edit_content.php:193
+msgid "Move selected items down"
+msgstr "選択したアイテムを下に移動する"
+
+#: templates/project_edit_content.php:198
+msgid "Chosen Project Content"
+msgstr "選択したプロジェクトの内容"
+
+#: templates/project_edit_content.php:202
+msgid "Front Matter"
+msgstr "フロントマター"
+
+#: templates/project_edit_content.php:205
+#, php-format
+msgid ""
+"Preliminary content like a title page, copyright page and introduction. "
+"%1$sRead more%2$s"
+msgstr ""
+"タイトルページ、著作権ページ、紹介などの予備的なコンテンツ。%1$s続きを読"
+"む%2$s"
+
+#: templates/project_edit_content.php:224
+msgid "Main Matter"
+msgstr "主な事項"
+
+#: templates/project_edit_content.php:231
+#, php-format
+msgid "Each %1$s can be put in a %2$s."
+msgstr "各%1$sは%2$sに入れることができます。"
+
+#: templates/project_edit_content.php:238
+#, php-format
+msgid ""
+"The main contents of your document or book, like chapters or articles. %1$s "
+"%2$sRead more%3$s"
+msgstr "ドキュメントやブックの主な内容 (章や記事など)。%1$s %2$s続きを読む%3$s"
+
+#: templates/project_edit_content.php:256
+msgid "Back Matter"
+msgstr "バックマター"
+
+#: templates/project_edit_content.php:260
+#, php-format
+msgid ""
+"Supplemental content like \"About the author\", glossary, and \"Further "
+"reading\". %1$sRead more.%2$s"
+msgstr ""
+"「著者について」、「用語集」、「さらに読む」などの補足コンテンツ。%1$s続きを"
+"読む%2$s"
+
+#: templates/project_edit_content.php:292
+msgid "Quick Add Print Material"
+msgstr "印刷物のクイック追加"
+
+#: templates/project_edit_content_help_tab.php:1
+msgid "How to Edit Project Content Using Only Your Keyboard"
+msgstr "キーボードのみを使用してプロジェクトコンテンツを編集する方法"
+
+#: templates/project_edit_content_help_tab.php:2
+msgid ""
+"Use <b>tab</b> key to focus on the searchbox, other buttons, and the project "
+"items. "
+msgstr ""
+"<b>Tab</b> キーを使用して、検索ボックス、その他のボタン、およびプロジェクト項"
+"目にフォーカスを合わせます。"
+
+#: templates/project_edit_content_help_tab.php:3
+msgid ""
+"Once a project item has focus, press <b>spacebar</b> to toggle selecting it. "
+"Select more items in the same way."
+msgstr ""
+"プロジェクト項目にフォーカスが合ったら、 <b>Space</b> キーを押して選択を切り"
+"替えます。同じ方法でさらに項目を選択します。"
+
+#: templates/project_edit_content_help_tab.php:4
+msgid ""
+"Once items are selected, press <b>enter</b> to add them to the project's "
+"main matter."
+msgstr ""
+"項目を選択したら、 <b>Enter</b> キーを押してプロジェクトの主案事項に追加しま"
+"す。"
+
+#: templates/project_edit_content_help_tab.php:5
+msgid ""
+"Press <b>up</b> or <b>down</b> keys to move the selected items up or down in "
+"the project."
+msgstr ""
+"<b>上</b>または<b>下の</b>キーを押して、プロジェクト内で選択した項目を上下に"
+"移動します。"
+
+#: templates/project_edit_content_help_tab.php:6
+msgid "Press escape to unselect everything."
+msgstr "エスケープを押して、すべての選択を解除します。"
+
+#: templates/project_edit_generate.php:19
+msgid "Generate Project"
+msgstr "プロジェクトの生成"
+
+#: templates/project_edit_generate.php:73
+#, php-format
+msgid "You have %1$s/%2$s download credits left which expire on %3$s"
+msgstr "%1$s/%2$sダウンロードクレジットが残っており、%3$sで有効期限が切れます"
+
+#: templates/project_edit_generate.php:122
+#, php-format
+msgid "Generate %s"
+msgstr "%sの生成"
+
+#: templates/project_edit_generate.php:123
+msgid "Generate"
+msgstr "生成"
+
+#: templates/project_edit_generate.php:126
+msgid "Change Design"
+msgstr "デザインの変更"
+
+#: templates/project_edit_generate.php:128
+msgid "Customize Design"
+msgstr "デザインのカスタマイズ"
+
+#: templates/project_edit_generate.php:132
+#, php-format
+msgid "View %s Print Page"
+msgstr "印刷ページ%s表示"
+
+#: templates/project_edit_generate.php:140
+msgid "Need to Change Something?"
+msgstr "何かを変更する必要がありますか?"
+
+#: templates/project_edit_generate.php:141
+msgid "Change Title or Format"
+msgstr "タイトルまたはフォーマットの変更"
+
+#: templates/project_edit_generate.php:144
+msgid "Clear Cached Resources"
+msgstr "キャッシュされたリソースのクリア"
+
+#: templates/project_edit_generate.php:146
+msgid "Get Help"
+msgstr "ヘルプ"
+
+#: templates/project_edit_metadata.php:12
+msgid "Edit Project Metadata"
+msgstr "プロジェクトメタデータの編集"
+
+#: templates/project_edit_setup.php:13
+msgid "Edit Project"
+msgstr "プロジェクトを編集"
+
+#: templates/project_edit_setup.php:22
+msgid "Submit & Proceed"
+msgstr "送信と続行"
+
+#: templates/projects_list_table.php:7
+msgid "Pro Print ― Projects"
+msgstr "プロプリント ― プロジェクト"
+
+#: templates/projects_list_table.php:8
+msgid "Add New Project"
+msgstr "新しいプロジェクトを追加"
+
+#: templates/settings_page.php:14
+msgid "Print My Blog - Settings"
+msgstr "私のブログを印刷する - 設定"
+
+#: templates/settings_page.php:16
+msgid "Print Buttons"
+msgstr "印刷ボタン"
+
+#: templates/settings_page.php:22
+msgid "Show print buttons on:"
+msgstr "印刷ボタンの表示先:"
+
+#: templates/settings_page.php:27 templates/setup_page.php:95
+msgid "Posts"
+msgstr "投稿"
+
+#: templates/settings_page.php:32 templates/setup_page.php:97
+msgid "Pages"
+msgstr "ページ"
+
+#: templates/settings_page.php:41
+msgid "Customize Buttons"
+msgstr "ボタンのカスタマイズ"
+
+#: templates/settings_page.php:47
+msgid "Place Buttons"
+msgstr "配置ボタン"
+
+#: templates/settings_page.php:51
+msgid "Above Content"
+msgstr "コンテンツの上"
+
+#: templates/settings_page.php:52
+msgid "Below Content"
+msgstr "コンテンツの下"
+
+#: templates/settings_page.php:58
+msgid "Print Formats"
+msgstr "印刷形式"
+
+#: templates/settings_page.php:70
+msgid "Label"
+msgstr "ラベル"
+
+#: templates/settings_page.php:86
+msgid "Save Settings"
+msgstr "設定を保存"
+
+#: templates/settings_page.php:86
+msgid "Are you sure you want to reset the settings back to defaults?"
+msgstr "設定をデフォルトにリセットしてもよろしいですか?"
+
+#: templates/settings_page.php:86
+msgid "Reset to Defaults"
+msgstr "デフォルトへリセット"
+
+#: templates/setup_page.php:12
+msgid "Print My Blog - Quick Print"
+msgstr "私のブログを印刷する - クイック印刷"
+
+#: templates/setup_page.php:13
+msgid ""
+"Configure how you’d like the blog to be printed, or just use our recommended "
+"defaults."
+msgstr "ブログの印刷方法を設定するか、推奨されるデフォルトを使用します。"
+
+#: templates/setup_page.php:20
+msgid "Site URL (including \"https://\" or \"http://\")"
+msgstr "サイトのURL(「https://」または「http://」を含む)"
+
+#: templates/setup_page.php:28
+msgid ""
+"URL of the WordPress site (self-hosted or on WordPress.com) you’d like to "
+"print. Leave blank to use this current site."
+msgstr ""
+"印刷したいワードプレスサイト(自己ホスト型または WordPress.com 上)のURL。空白"
+"のままにして、この現在のサイトを使用します。"
+
+#: templates/setup_page.php:45
+msgid "Paper"
+msgstr "用紙"
+
+#: templates/setup_page.php:46
+msgid "Print a physical copy using your web browser’s print functionality."
+msgstr "Web ブラウザーの印刷機能を使用して、物理的なコピーを印刷します。"
+
+#: templates/setup_page.php:51
+msgid ""
+"Make a PDF file, intended for reading from a computer or other device, using "
+"your browser or a browser extension."
+msgstr ""
+"コンピュータやその他のデバイスからの読み取りを目的としたPDFファイルを、ブラウ"
+"ザまたはブラウザの拡張機能を使用して作成します。"
+
+#: templates/setup_page.php:55
+msgid "eBook (ePub or MOBI)"
+msgstr "電子書籍(電子パブまたはMOBI)"
+
+#: templates/setup_page.php:56
+msgid "Make a free eBook using dotEPUB."
+msgstr "dotEPUBを使用して無料の電子ブックを作成します。"
+
+#: templates/setup_page.php:60
+msgid "HTML"
+msgstr "HTML"
+
+#: templates/setup_page.php:61
+msgid ""
+"Easily copy-and-paste into another program like Microsoft Word or Google "
+"Docs. Note: this is not recommended for customizing printouts, as other "
+"programs usually format the content poorly. Instead, use Print My Blog’s CSS "
+"classes to remove or add content from printouts."
+msgstr ""
+"Microsoft WordやGoogle Docsなどの別のプログラムに簡単にコピー&ペーストできま"
+"す。注: これは、他のプログラムは通常、コンテンツのフォーマットが不適切である"
+"ため、プリントアウトのカスタマイズには推奨されません。代わりに、印刷ブログの "
+"CSS クラスを使用して、印刷物からコンテンツを削除または追加します。"
+
+#: templates/setup_page.php:75
+msgid "Learn More"
+msgstr "詳細はこちら"
+
+#: templates/setup_page.php:87
+msgid "Show More Print Options"
+msgstr "その他の印刷オプションを表示"
+
+#: templates/setup_page.php:88
+msgid "Options"
+msgstr "オプション"
+
+#: templates/setup_page.php:89 templates/setup_page.php:93
+msgid "Post Selection"
+msgstr "投稿選択"
+
+#: templates/setup_page.php:93
+msgid ""
+"Pro Print supports custom post types, combining posts with pages, and print-"
+"only materials"
+msgstr ""
+"Pro Printは、カスタム投稿タイプ、投稿とページの組み合わせ、印刷専用素材をサ"
+"ポートしています"
+
+#: templates/setup_page.php:102
+msgid "Order"
+msgstr "注文"
+
+#: templates/setup_page.php:102
+msgid "Pro Print supports drag-and-drop ordering of content."
+msgstr ""
+"Pro Printは、コンテンツのドラッグアンドドロップ順序をサポートしています。"
+
+#: templates/setup_page.php:105
+msgid "Posts will be ordered:"
+msgstr "投稿は注文されます:"
+
+#: templates/setup_page.php:106
+msgid "Oldest First"
+msgstr "古い順"
+
+#: templates/setup_page.php:107
+msgid "Newest First"
+msgstr "新しい順"
+
+#: templates/setup_page.php:110
+msgid "Pages will be ordered using the \"Order\" attribute:"
+msgstr "ページは \"Order\" 属性を使用して順序付けられます。"
+
+#: templates/setup_page.php:111
+msgid "From Lowest to Highest"
+msgstr "最低から最高へ"
+
+#: templates/setup_page.php:112
+msgid "From Highest to Lowest"
+msgstr "最高から最低へ"
+
+#: templates/setup_page.php:123
+msgid "Password-Protected"
+msgstr "パスワードで保護"
+
+#: templates/setup_page.php:129
+msgid "Statuses"
+msgstr "ステータス"
+
+#: templates/setup_page.php:145
+msgid "Filters"
+msgstr "フィルター"
+
+#: templates/setup_page.php:145
+msgid "Pro Print supports filtering by custom taxonomies."
+msgstr ""
+"Pro Print では、カスタム分類によるフィルター処理がサポートされています。"
+
+#: templates/setup_page.php:153
+msgid "Authored By"
+msgstr "著者"
+
+#: templates/setup_page.php:157
+msgid "Posted After (and Including)"
+msgstr "投稿後(および含む)"
+
+#: templates/setup_page.php:161
+msgid "Posted Before (and Including)"
+msgstr "投稿前 (および含む)"
+
+#: templates/setup_page.php:171
+msgid "Prepare Print-Page"
+msgstr "印刷ページの準備"
+
+#: templates/upgrade_to_3.php:2
+msgid "It’s finally here..."
+msgstr "それはついにここにあります..."
+
+#: templates/upgrade_to_3.php:3
+msgid "Print My Blog – Pro Print!"
+msgstr "私のブログを印刷 - プロプリント!"
+
+#: templates/upgrade_to_3.php:4
+msgid ""
+"The old features are still here: \"Print Now\" was just renamed \"Quick Print"
+"\", and the Print Buttons are still available under \"Settings\"."
+msgstr ""
+"古い機能はまだここにあります:「今すぐ印刷」は「クイックプリント」と改名された"
+"ばかりで、印刷ボタンは「設定」の下でまだ利用可能です。"
+
+#: templates/upgrade_to_3.php:5
+msgid ""
+"Pro Print makes more functional and visually-appealing PDFs using your web "
+"browser for free, or the new paid Pro PDF Service."
+msgstr ""
+"Pro Printは、Webブラウザを無料で、または新しい有料のPro PDFサービスを使用し"
+"て、より機能的で視覚的に魅力的なPDFを作成します。"
+
+#: templates/upgrade_to_3.php:10 templates/welcome.php:55
+msgid "Automatic Table of Contents"
+msgstr "自動目次"
+
+#: templates/upgrade_to_3.php:11
+msgid "Add a table of contents to your project, with links and page numbers."
+msgstr "リンクとページ番号を含む目次をプロジェクトに追加します。"
+
+#: templates/upgrade_to_3.php:11
+msgid "Pro PDF Service adds page numbers."
+msgstr "プロPDFサービスは、ページ番号を追加します。"
+
+#: templates/upgrade_to_3.php:14
+msgid "Automatic page references and footnotes"
+msgstr "自動ページ参照と脚注"
+
+#: templates/upgrade_to_3.php:15
+msgid ""
+"Hyperlinks can be automatically converted into references to the page the "
+"linked-to content is located, or a footnote with the web address print-out."
+msgstr ""
+"ハイパーリンクは、リンク先のコンテンツが配置されているページへの参照、または "
+"Web アドレスが印刷された脚注に自動的に変換できます。"
+
+#: templates/upgrade_to_3.php:18
+msgid "Proper margins, page numbers and running heads"
+msgstr "適切な余白、ページ番号、ランニングヘッド"
+
+#: templates/upgrade_to_3.php:19
+msgid ""
+"Clean margins, alternating page numbers, roman numerals for front matter, "
+"running chapter heads, and more."
+msgstr ""
+"きれいな余白、交互のページ番号、フロントマターのローマ数字、チャプターヘッド"
+"の実行など。"
+
+#: templates/upgrade_to_3.php:22
+msgid "Support Custom Post Types"
+msgstr "カスタム投稿タイプをサポート"
+
+#: templates/upgrade_to_3.php:23
+msgid ""
+"Content from other plugins, like WooCommerce Products, or your LMS's course "
+"materials, can be included in projects."
+msgstr ""
+"WooCommerce 製品や LMS のコース教材などの他のプラグインのコンテンツをプロジェ"
+"クトに含めることができます。"
+
+#: templates/upgrade_to_3.php:26
+msgid "Drag-and-Drop Content Organizer"
+msgstr "ドラッグアンドドロップコンテンツオーガナイザー"
+
+#: templates/upgrade_to_3.php:27
+msgid ""
+"Drop posts, pages, and other post types into projects in any order. Even "
+"organize them into parts."
+msgstr ""
+"投稿、ページ、その他の投稿タイプを任意の順序でプロジェクトにドロップします。"
+"それらを部分に整理することさえできます。"
+
+#: templates/upgrade_to_3.php:30
+msgid "Premade, Reusable, Customizable Designs"
+msgstr "既製、再利用可能、カスタマイズ可能なデザイン"
+
+#: templates/upgrade_to_3.php:31
+msgid ""
+"Print My Blog's Designs are like WordPress Themes: each has its own look and "
+"customization options. Reuse the same design across projects. Or even create "
+"your own design using HTML, CSS, and Javascript"
+msgstr ""
+"印刷マイブログのデザインはWordPressのテーマのようなものです:それぞれに独自の"
+"外観とカスタマイズオプションがあります。プロジェクト間で同じデザインを再利用"
+"します。または、HTML、CSS、および JavaScript を使用して独自のデザインを作成す"
+"ることもできます。"
+
+#: templates/upgrade_to_3.php:31
+msgid ""
+"Pro PDF Service lets designs fully control the margins, page backgrounds, "
+"and los of other aspects."
+msgstr ""
+"Pro PDFサービスを使用すると、デザインは他の側面の余白、ページの背景、およびロ"
+"スを完全に制御できます。"
+
+#: templates/upgrade_to_3.php:34
+msgid "Saveable Projects"
+msgstr "保存可能なプロジェクト"
+
+#: templates/upgrade_to_3.php:35
+msgid "Save where you left off."
+msgstr "中断したところから保存します。"
+
+#: templates/upgrade_to_3.php:38
+msgid "Front matter, back matter, parts, and print materials"
+msgstr "表裏、裏面、部品、印刷物"
+
+#: templates/upgrade_to_3.php:39
+msgid ""
+"Add front and back matter to books, organize the content into parts, and add "
+"special \"print material\" posts to use only in your projects"
+msgstr ""
+"表と裏の事項を書籍に追加し、コンテンツをパーツに整理し、プロジェクトでのみ使"
+"用する特別な「印刷物」投稿を追加します。"
+
+#: templates/upgrade_to_3.php:69
+msgid "Features Include:"
+msgstr "含まれる機能:"
+
+#: templates/upgrade_to_3.php:83
+msgid "Try Pro Print Now"
+msgstr "今すぐプロプリントをお試しください"
+
+#: templates/upgrade_to_3.php:84
+msgid "Learn More on printmy.blog"
+msgstr "printmy.blog の詳細"
+
+#: templates/upgrade_to_3.php:88
+#, php-format
+msgid "Please %1$slet me know%2$s if you have any questions!"
+msgstr "ご不明な点がございましたら%1$s私に知らせてください%2$s!"
+
+#: templates/upgrade_to_3.php:89
+msgid "Best wishes, Mike Nelson, Print My Blog Developer"
+msgstr "ベストウィッシュ、マイクネルソン、印刷私のブログ開発者"
+
+#: templates/welcome.php:3
+#, php-format
+msgid "Welcome to %s!"
+msgstr "%s へようこそ！"
+
+#: templates/welcome.php:5
+msgid "Print My Blog Pro"
+msgstr "印刷私のブログプロ"
+
+#: templates/welcome.php:8
+msgid "What would you like to do?"
+msgstr "何を行いたいですか？"
+
+#: templates/welcome.php:12
+msgid "Print My Blog Now for Free"
+msgstr "今すぐ無料で私のブログを印刷"
+
+#: templates/welcome.php:16
+msgid "Use Quick Print"
+msgstr "クイックプリントを使用"
+
+#: templates/welcome.php:21
+msgid "2 clicks to printing"
+msgstr "2クリックで印刷"
+
+#: templates/welcome.php:22
+msgid "No watermark"
+msgstr "透かしなし"
+
+#: templates/welcome.php:23
+msgid "Print Thousands of Pages from your Web Browser"
+msgstr "Webブラウザから何千ものページを印刷する"
+
+#: templates/welcome.php:29
+msgid "Let Visitors Print My Blog for Free"
+msgstr "訪問者が無料で私のブログを印刷できるようにする"
+
+#: templates/welcome.php:32
+msgid "Configure the Print Button Settings"
+msgstr "印刷ボタンの設定を構成する"
+
+#: templates/welcome.php:36
+msgid "No Coding Required"
+msgstr "コーディング不要"
+
+#: templates/welcome.php:37
+msgid "Highly Customizable"
+msgstr "高度にカスタマイズ可能"
+
+#: templates/welcome.php:38
+msgid "Place Print Buttons Anywhere"
+msgstr "印刷ボタンをどこにでも配置"
+
+#: templates/welcome.php:44
+msgid "Make Professional Books and Documents"
+msgstr "プロフェッショナルな書籍やドキュメントを作成する"
+
+#: templates/welcome.php:47
+msgid "Use Pro Print"
+msgstr "プロプリントを使用"
+
+#: templates/welcome.php:50
+msgid "Free and Paid Options"
+msgstr "無料と有料のオプション"
+
+#: templates/welcome.php:53
+msgid "Drag-and-drop content into projects"
+msgstr "コンテンツをプロジェクトにドラッグアンドドロップする"
+
+#: templates/welcome.php:54
+msgid "Include any post types, in any order"
+msgstr "投稿タイプを任意の順序で含める"
+
+#: templates/welcome.php:56
+msgid "Choose and Customize Many Designs, or code your own"
+msgstr "多くのデザインを選択してカスタマイズするか、独自のコーディングを行う"
+
+#: templates/welcome.php:57
+msgid "Automatically convert hyperlinks to page references and footnotes"
+msgstr "ハイパーリンクをページ参照と脚注に自動的に変換する"
+
+#. Plugin URI of the plugin/theme
+#. Author URI of the plugin/theme
+msgid "https://printmy.blog"
+msgstr "https://printmy.blog"
+
+#. Description of the plugin/theme
+msgid ""
+"Make printing your blog easy and impressive. For you & your visitors. One "
+"post or thousands."
+msgstr ""
+"あなたのブログを簡単かつ印象的に印刷してください。あなたとあなたの訪問者のた"
+"めに。1つの投稿または数千。"
+
+#. Author of the plugin/theme
+msgid "Michael Nelson"
+msgstr "マイケル・ネルソン"
