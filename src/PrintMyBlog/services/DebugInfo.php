@@ -91,6 +91,7 @@ class DebugInfo
 
         return [
             'pmb' => PMB_VERSION,
+            'pmb_pro' => pmb_fs()->is_premium(),
             'php' => $php_version,
             'wp' => $core_version,
             'site_url' => $site_url,
