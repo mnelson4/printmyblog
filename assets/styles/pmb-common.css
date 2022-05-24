@@ -40,16 +40,23 @@ details.pmb-details{
     margin-top:1em;
     margin-bottom:1em;
 }
-details.pmb-details summary{
+details.pmb-details summary, .twine-details .twine-summary{
     font-weight: bold;
     font-size:1.2em;
 }
-summary.pmb-reveal-options{
-    cursor:pointer;
-}
 /* If a theme changes oursummary tag to display block or inline or anything, the cute arrow disappears in Firefox*/
-summary.pmb-reveal-options{
-    display:flow-root list-item;
+summary.pmb-reveal-options, summary.twine-summary{
+    padding:1em;
+    cursor:pointer;
+    color: #2271b1;
+    border: 1px solid #c3c4c7;
+    background: #f6f7f7;
+    vertical-align: top;
+}
+details .pmb-reveal-details{
+    padding:1em;
+    border: 1px solid #c3c4c7;
+    border-top:none;
 }
 .pmb-print-this-page{
     text-align:right;

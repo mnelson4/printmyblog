@@ -11,9 +11,11 @@ use PrintMyBlog\services\display\FormInputs;
 ?>
 <details class="pmb-details">
     <summary class="pmb-reveal-options"><?php esc_html_e('Troubleshooting Options','print-my-blog' );?></summary>
-    <table class="form-table">
-        <tbody>
-        <?php echo $displayer->getHtmlForTabledOptions($print_options->troubleshootingOptions());?>
-        </tbody>
-    </table>
+    <div class="pmb-reveal-details">
+        <table class="form-table">
+            <tbody>
+            <?php echo $displayer->getHtmlForTabledOptions($print_options->troubleshootingOptions());?>
+            </tbody>
+        </table>
+    </div>
 </details>
