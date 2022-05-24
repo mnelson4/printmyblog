@@ -9,6 +9,7 @@
 figure{
     margin:0.5em 0 0.5em 0;
     padding:0.5em 0 0.5em 0;
+    page-break-inside:avoid;
 }
 .wp-block-gallery ul{
     margin:0;
@@ -28,17 +29,33 @@ div{
     margin:0;
     padding:0;
 }
+
 .aligncenter{
     margin-left:auto;
     margin-right:auto;
     display:block;
-}
-.aligncenter {
     text-align: center;
 }
-.alignright{
-    float:right;
+
+/* On small screens, just center everything*/
+@media (min-width:500px){
+    .alignright{
+        float:right;
+        max-width:70%;
+    }
+    .alignleft{
+        float:left;
+        max-width:70%;
+    }
 }
-.alignleft{
-    float:left;
+@media (max-width:499px){
+    .alignright, .alignleft{
+        margin-left:auto;
+        margin-right:auto;
+        display:table;
+    }
+}
+
+figure{
+    padding:1em;
 }
