@@ -436,6 +436,7 @@ https://youtu.be/uPQ3vqm7A2g
 * Enhancement: debug info includes "is premium"
 * Enhancement: make click=to-reveal areas easier to see by styling the like a button
 * Enhancement: when reading ePubs on small screens, don't float images
+* Bugfix: fix pro epubs where using custom table of contents and not using pretty permalinks
 
 = 3.15.7 May 18, 2021 =
 * Enhancement: send more debugging info when using Pro PDF Service
