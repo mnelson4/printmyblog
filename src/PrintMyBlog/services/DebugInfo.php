@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\services;
 
+use PrintMyBlog\exceptions\DesignTemplateDoesNotExist;
 use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\managers\DesignManager;
@@ -97,7 +98,7 @@ class DebugInfo
             'site_url' => $site_url,
             'home_url' => $home_url,
             'language' => $language,
-            'public' => $blog_public,
+            'public' => (boolean)$blog_public,
             'environment_type' => $environment_type,
             'plugins_active' => $simplified_plugin_data,
             'active_theme' => $simplified_theme_data,
@@ -198,26 +199,33 @@ class DebugInfo
 
     protected function simplifyDesignData(Design $design)
     {
-            return [
-                'title' => $design->getWpPost()->post_title,
-                'ID' => $design->getWpPost()->ID,
-                'template' => $design->getDesignTemplate()->getTitle(),
-                'meta' => array_diff_key(
-                    $this->simpifyMetadata(get_post_meta($design->getWpPost()->ID)),
-                    array_flip(
-                        [
-                            '_pmb_format',
-                            '_pmb_design_template',
-                            '_pmb_preview_1_url',
-                            '_pmb_preview_1_desc',
-                            '_pmb_preview_2_url',
-                            '_pmb_preview_2_desc',
-                            '_pmb_author_name',
-                            '_pmb_author_url'
-                        ]
-                    )
+        try{
+            $template = $design->getDesignTemplate();
+            $title = $template->getTitle();
+        }catch (DesignTemplateDoesNotExist $error){
+            $title = 'Template no longer active';
+        }
+
+        return [
+            'title' => $design->getWpPost()->post_title,
+            'ID' => $design->getWpPost()->ID,
+            'template' => $title,
+            'meta' => array_diff_key(
+                $this->simpifyMetadata(get_post_meta($design->getWpPost()->ID)),
+                array_flip(
+                    [
+                        '_pmb_format',
+                        '_pmb_design_template',
+                        '_pmb_preview_1_url',
+                        '_pmb_preview_1_desc',
+                        '_pmb_preview_2_url',
+                        '_pmb_preview_2_desc',
+                        '_pmb_author_name',
+                        '_pmb_author_url'
+                    ]
                 )
-            ];
+            )
+        ];
     }
 
     /**
