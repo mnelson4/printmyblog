@@ -163,8 +163,8 @@ class ProjectGeneration
     public function getGeneratedIntermediaryFileUrl()
     {
         $upload_dir_info = wp_upload_dir();
-        if(is_ssl()){
-            $start = str_replace('http://','https://', $upload_dir_info['baseurl']);
+        if (is_ssl()) {
+            $start = str_replace('http://', 'https://', $upload_dir_info['baseurl']);
         } else {
             $start = $upload_dir_info['baseurl'];
         }

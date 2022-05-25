@@ -98,7 +98,7 @@ class DebugInfo
             'site_url' => $site_url,
             'home_url' => $home_url,
             'language' => $language,
-            'public' => (boolean)$blog_public,
+            'public' => (bool)$blog_public,
             'environment_type' => $environment_type,
             'plugins_active' => $simplified_plugin_data,
             'active_theme' => $simplified_theme_data,
@@ -199,10 +199,10 @@ class DebugInfo
 
     protected function simplifyDesignData(Design $design)
     {
-        try{
+        try {
             $template = $design->getDesignTemplate();
             $title = $template->getTitle();
-        }catch (DesignTemplateDoesNotExist $error){
+        } catch (DesignTemplateDoesNotExist $error) {
             $title = 'Template no longer active';
         }
 
