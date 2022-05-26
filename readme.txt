@@ -436,6 +436,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= xxxxxxxxxxxxxxx =
+* Compatibility: hide [Top Bar plugin](https://wordpress.org/plugins/top-bar/) from printouts
+
 = 3.15.8 May 26, 2022 =
 * Enhancement: debug info includes "is premium"
 * Enhancement: make click-to-reveal areas easier to see by styling them like a button

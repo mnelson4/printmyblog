@@ -133,5 +133,5 @@ function pmb_replace_internal_links_with_epub_file_links(){
  * @returns {*}
  */
 function pmb_hyperlink_to_filename(hyperlink){
-    return hyperlink.replaceAll('https://','').replaceAll('http://','').replaceAll('/','-').replaceAll(':','').replaceAll('.','-').replaceAll('?','-').replaceAll('#','-');
+    return hyperlink.replaceAll('https://','').replaceAll('http://','').replaceAll('/','-').replaceAll(':','').replaceAll('.','-').replaceAll('?','-').replaceAll('#','-').replaceAll('&','-');
 }

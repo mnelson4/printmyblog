@@ -166,3 +166,10 @@ Hide GDPR Cookie Consent
 #cookie-law-info-bar{
     display:none !important;
 }
+
+/**
+topbar plugin: https://wordpress.org/plugins/top-bar/
+ */
+#tpbr_topbar{
+    display:none;
+}
