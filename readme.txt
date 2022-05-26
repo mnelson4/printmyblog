@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.15.7
+Stable tag: 3.15.8
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -140,6 +140,18 @@ Read more about Pro Print in our [extensive user guide](https://printmy.blog/use
 
 Ready to purchase the full version? Here's the [pricing page](https://printmy.blog/pricing/).
 
+**Translations**
+
+Print My Blog includes translation files in the following languages:
+
+* German
+* French
+* Spanish
+* Italian
+* Japanese
+
+To improve the translations, please [get in touch](https://printmy.blog/contact).
+
 **Give your story life outside your blog!**
 
 Want more? [Tell us what matters to you on GitHub](https://github.com/mnelson4/printmyblog/issues). Thanks to a revenue stream through optional payments, this is actively supported and improved.
@@ -183,14 +195,6 @@ If this doesn't meet your needs, there are good paid and free alternatives.
 [MPL - Publisher](https://wordpress.org/plugins/mpl-publisher/) is another free eBook creator / PDF converter plugin you can use to self-publish a book. To be honest probably the best alternative right now. There's both free and paid versions.
 [PressBooks](https://pressbooks.com/) is a good paid, hosted alternative. Begin creating or import content for free, and can pay to export to PDF and other formats.
 [Designrr](https://designrr.io/) is great for creating short documents, but is a fully paid option.
-
-= Contributing =
-
-If you find it useful, please:
-
-* [give it a 5 star review]((https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post))
-* [translate it into your language using WordPress' GlotPress]((https://translate.wordpress.org/projects/wp-plugins/print-my-blog))
-* report bugs and suggest features on [GitHub](https://github.com/mnelson4/printmyblog) or [WordPress Support Forum]((https://wordpress.org/support/plugin/print-my-blog))
 
 Best Wishes Publishing for Print with WordPress!
 
@@ -432,9 +436,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.15.8 xxxxxxxxx =
+= 3.15.8 May 26, 2022 =
 * Enhancement: debug info includes "is premium"
-* Enhancement: make click=to-reveal areas easier to see by styling the like a button
+* Enhancement: make click-to-reveal areas easier to see by styling them like a button
 * Enhancement: when reading ePubs on small screens, don't float images
 * Bugfix: fix pro epubs where using custom table of contents and not using pretty permalinks
 
