@@ -59,3 +59,10 @@ figure.pmb-dynamic-resized, .wp-block-image.pmb-dynamic-resized figure{
 div.wp-block-image{
     margin:0;
 }
+
+/**
+Remove hairline above image captions in grid galleries
+ */
+.blocks-gallery-grid:not(.has-nested-images) .blocks-gallery-image figcaption, .blocks-gallery-grid:not(.has-nested-images) .blocks-gallery-item figcaption, .wp-block-gallery:not(.has-nested-images) .blocks-gallery-image figcaption, .wp-block-gallery:not(.has-nested-images) .blocks-gallery-item figcaption{
+    background-repeat: no-repeat;
+}

@@ -438,6 +438,8 @@ https://youtu.be/uPQ3vqm7A2g
 
 = xxxxxxxxxxxxxxx =
 * Compatibility: hide [Top Bar plugin](https://wordpress.org/plugins/top-bar/) from printouts
+* Bugfix: remove hairline above captions on gallery images
+* Enhancement: add some space between table cells in ePubs
 
 = 3.15.8 May 26, 2022 =
 * Enhancement: debug info includes "is premium"

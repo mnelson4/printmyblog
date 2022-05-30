@@ -27,3 +27,10 @@ h5{
 figure{
     max-height:100vh;
 }
+tr{
+    border-top:1px solid lightgray;
+}
+td{
+    padding:5px;
+    vertical-align: top;
+}
