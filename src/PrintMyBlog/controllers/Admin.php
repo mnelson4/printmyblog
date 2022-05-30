@@ -590,6 +590,8 @@ class Admin extends BaseController
                 array(),
                 filemtime(PMB_ASSETS_DIR . 'styles/welcome.css')
             );
+            // don't let admin notices ruin the welcoming moment
+            remove_all_actions('admin_notices');
         } elseif (isset($_GET['page']) && $_GET['page'] === 'print-my-blog-now') {
             wp_enqueue_script('pmb-setup-page');
             wp_enqueue_style('pmb-setup-page');

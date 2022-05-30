@@ -97,7 +97,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                     ?>
                     <a
                             target="_blank"
-                            href="https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20a%20pdf%20using%20print%20my%20blog%3F"
+                            href="https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20a%20pdf%20using%20quick%20print%3F"
                             title="<?php esc_html_e('opens in new tab', 'print-my-blog'); ?>"
                     >
                         <?php esc_html_e('How?', 'print-my-blog'); ?>
@@ -109,10 +109,12 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                         <details class="pmb-details">
                             <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('How?', 'print-my-blog'); ?>
                             </summary>
-                            <ol>
-                                <li><a href="https://addons.mozilla.org/en-US/firefox/addon/print-to-pdf-document/" target="_blank" title="<?php esc_html_e('opens in new tab', 'print-my-blog'); ?>"><?php esc_html_e('Download Print to PDF Browser Extension', 'print-my-blog'); ?></a></li>
-                                <li><?php esc_html_e('Click the extension’s button.', 'print-my-blog'); ?></li>
-                            </ol>
+                            <div class="pmb-reveal-details">
+                                <ol>
+                                    <li><a href="https://addons.mozilla.org/en-US/firefox/addon/print-to-pdf-document/" target="_blank" title="<?php esc_html_e('opens in new tab', 'print-my-blog'); ?>"><?php esc_html_e('Download Print to PDF Browser Extension', 'print-my-blog'); ?></a></li>
+                                    <li><?php esc_html_e('Click the extension’s button.', 'print-my-blog'); ?></li>
+                                </ol>
+                            </div>
                         </details>
                         <?php
                     } elseif($pmb_browser === 'chrome') {
@@ -120,7 +122,9 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                         <details class="pmb-details">
                             <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('How?', 'print-my-blog'); ?>
                             </summary>
-                            <p><?php esc_html_e('After clicking "Print to PDF", set the "Destination" to "Save as PDF."', 'print-my-blog'); ?></p>
+                            <div class="pmb-reveal-details">
+                                <p><?php esc_html_e('After clicking "Print to PDF", set the "Destination" to "Save as PDF."', 'print-my-blog'); ?></p>
+                            </div>
                         </details>
                         <?php
                     } elseif($pmb_browser === 'desktop_safari') {
@@ -129,10 +133,12 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                 <summary
                         class="pmb-reveal-options pmb-inline"><?php esc_html_e('How on Safari on Desktop', 'print-my-blog'); ?>
                 </summary>
-                <ol>
-                    <li><?php esc_html_e('Click "Print to PDF"', 'print-my-blog'); ?></li>
-                    <li><?php esc_html_e('Choose to "Save as PDF."', 'print-my-blog'); ?></li>
-                </ol>
+                <div class="pmb-reveal-details">
+                    <ol>
+                        <li><?php esc_html_e('Click "Print to PDF"', 'print-my-blog'); ?></li>
+                        <li><?php esc_html_e('Choose to "Save as PDF."', 'print-my-blog'); ?></li>
+                    </ol>
+                </div>
             </details>
             <?php
                     } elseif( $pmb_browser === 'mobile_safari'){
@@ -140,17 +146,19 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                         <details class="pmb-details">
                             <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('How on Mobile Safari', 'print-my-blog'); ?>
                             </summary>
-                            <ol>
-                                <li>
-                                    <?php esc_html_e('Click the share button', 'print-my-blog'); ?>
-                                </li>
-                                <li>
-                                    <?php esc_html_e('Click "Options" and choose PDF', 'print-my-blog'); ?>
-                                </li>
-                                <li>
-                                    <?php esc_html_e('Save to Files', 'print-my-blog'); ?>
-                                </li>
-                            </ol>
+                            <div class="pmb-reveal-details">
+                                <ol>
+                                    <li>
+                                        <?php esc_html_e('Click the share button', 'print-my-blog'); ?>
+                                    </li>
+                                    <li>
+                                        <?php esc_html_e('Click "Options" and choose PDF', 'print-my-blog'); ?>
+                                    </li>
+                                    <li>
+                                        <?php esc_html_e('Save to Files', 'print-my-blog'); ?>
+                                    </li>
+                                </ol>
+                            </div>
                         </details>
                         <?php
                     }

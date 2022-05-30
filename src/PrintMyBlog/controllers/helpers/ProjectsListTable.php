@@ -235,7 +235,7 @@ echo esc_url(wp_nonce_url(
     public function column_date(Project $project)
     {
         return __('Started', 'print-my-blog') . '<br>' . sprintf(
-        /* translators: 1: Post date, 2: Post time. */
+        // translators: 1: Post date, 2: Post time.
             __('%1$s at %2$s', 'print-my-blog'),
             /* translators: Post date format. See https://www.php.net/date */
             get_the_time(__('Y/m/d'), $project->getWpPost()),

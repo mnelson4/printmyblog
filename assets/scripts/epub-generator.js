@@ -50,7 +50,7 @@ jQuery(document).on('pmb_wrap_up', function(){
         } else {
             chapter_data.excludeFromToc = true;
         }
-        if(element.id.indexOf('pmb-toc') !== -1){
+        if(jqelement.find('div.pmb-toc').length > 0){
             found_toc = true;
             toc_title_found = section_title.text();
             // don't add the TOC page to the book. epub-gen-memory.js adds it automatically
@@ -133,5 +133,5 @@ function pmb_replace_internal_links_with_epub_file_links(){
  * @returns {*}
  */
 function pmb_hyperlink_to_filename(hyperlink){
-    return hyperlink.replaceAll('http','').replaceAll('/','-').replaceAll(':','').replaceAll('.','-');
+    return hyperlink.replaceAll('https://','').replaceAll('http://','').replaceAll('/','-').replaceAll(':','').replaceAll('.','-').replaceAll('?','-').replaceAll('#','-').replaceAll('&','-');
 }

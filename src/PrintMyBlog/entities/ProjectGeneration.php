@@ -163,7 +163,12 @@ class ProjectGeneration
     public function getGeneratedIntermediaryFileUrl()
     {
         $upload_dir_info = wp_upload_dir();
-        return $upload_dir_info['baseurl'] . '/pmb/generated/' . $this->project->code() . '/' . $this->format->slug()
+        if (is_ssl()) {
+            $start = str_replace('http://', 'https://', $upload_dir_info['baseurl']);
+        } else {
+            $start = $upload_dir_info['baseurl'];
+        }
+        return  $start . '/pmb/generated/' . $this->project->code() . '/' . $this->format->slug()
                . '/' . urlencode($this->getFileName()) . '.html?uniqueness=' . current_time('timestamp');
     }
 
