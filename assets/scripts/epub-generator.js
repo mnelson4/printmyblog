@@ -135,3 +135,36 @@ function pmb_replace_internal_links_with_epub_file_links(){
 function pmb_hyperlink_to_filename(hyperlink){
     return hyperlink.replaceAll('https://','').replaceAll('http://','').replaceAll('/','-').replaceAll(':','').replaceAll('.','-').replaceAll('?','-').replaceAll('#','-').replaceAll('&','-');
 }
+
+/**
+ * iBooks expects an alt tags when zooming in on images, so set it using the title attribute or caption
+ */
+function pmb_add_alt_tags(){
+    jQuery('img').each(function(index, element){
+        if(element.hasAttribute('alt') && element.attributes['alt'].value !== ''){
+            return;
+        }
+        var new_alt = '';
+        var has_title = false;
+        var has_cap = false;
+        if(element.hasAttribute('title')){
+            has_title = true;
+            var title = element.attributes['title'].value;
+        }
+        var jqe = jQuery(element);
+        var captions = jqe.siblings('figcaption');
+        if(captions.length > 0){
+            has_cap = true;
+            var caption = captions[0].innerText;
+        }
+        if(has_title && has_cap){
+            new_alt = title + ': ' + caption;
+        } else if (has_title){
+            new_alt = title;
+        } else if (has_cap){
+            new_alt = caption;
+        }
+
+        element.setAttribute('alt',new_alt);
+    });
+}
