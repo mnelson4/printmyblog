@@ -29,7 +29,6 @@ Each of which takes your WordPress content and optimizes it for print, PDF, and 
 
 Read more about each...
 
-[](http://coderisk.com/wp/plugin/print-my-blog/RIPS-Bs3Z7ec5hQ)
 = Quick Print =
 
 Quick Print lets you easily print your entire blog to paper, PDF, or eBook.
