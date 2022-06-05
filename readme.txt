@@ -436,7 +436,7 @@ https://youtu.be/uPQ3vqm7A2g
 == Changelog ==
 
 = xxxxxxxxxxxxxxx =
-* Compatibility: hide [Top Bar plugin](https://wordpress.org/plugins/top-bar/) from printouts
+* Compatibility: hide [Top Bar](https://wordpress.org/plugins/top-bar/) and [Announcer](https://wordpress.org/plugins/announcer/) banners from printouts
 * Bugfix: remove hairline above captions on gallery images
 * Enhancement: add some space between table cells in ePubs
 * Enhancement: in ePubs, because iBooks displays the alt tag on images: if it's not set, set it to the title attribute or image caption
