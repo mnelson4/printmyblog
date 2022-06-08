@@ -15,9 +15,8 @@ use Twine\forms\strategies\validation\FloatValidation;
  */
 class FloatNormalization extends NormalizationBase
 {
-
     /*
-     * regex pattern that matches for the following:
+     * Regex pattern that matches for the following:
      *      * optional negative sign
      *      * one or more digits or decimals
      */

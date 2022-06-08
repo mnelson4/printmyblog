@@ -2,25 +2,28 @@
 
 namespace Twine\helpers;
 
- /**
-  *
-  * Class EEH_HTML
-  *
-  * Sometimes when writing PHP you need to generate some standard HTML,
-  * but either not enough to warrant creating a template file,
-  * or the amount of PHP conditionals and/or loops peppered throughout the HTML
-  * just make it really ugly and difficult to read.
-  * This class simply adds a bunch of methods for generating basic HTML tags.
-  * Most of the methods have the same name as the HTML tag they generate, and most have the same set of parameters.
-  *
-  * @package         Event Espresso
-  * @subpackage    core
-  * @author              Brent Christensen
-  *
-  *
-  */
+/**
+ *
+ * Class EEH_HTML
+ *
+ * Sometimes when writing PHP you need to generate some standard HTML,
+ * but either not enough to warrant creating a template file,
+ * or the amount of PHP conditionals and/or loops peppered throughout the HTML
+ * just make it really ugly and difficult to read.
+ * This class simply adds a bunch of methods for generating basic HTML tags.
+ * Most of the methods have the same name as the HTML tag they generate, and most have the same set of parameters.
+ *
+ * @package         Event Espresso
+ * @subpackage    core
+ * @author              Brent Christensen
+ *
+ *
+ */
 class Html
 {
+    /**
+     * @var Html
+     */
     protected static $instance;
 
     /**
@@ -48,6 +51,7 @@ class Html
         self::$instance = null;
         return self::instance();
     }
+
     /**
      *
      * @access    private
@@ -56,29 +60,29 @@ class Html
     {
         // set some initial formatting for table indentation
         $this->indent = array(
-            'none'  => 0,
-            'form'  => 0,
-            'radio'     => 0,
-            'checkbox'  => 0,
-            'select'    => 0,
+            'none' => 0,
+            'form' => 0,
+            'radio' => 0,
+            'checkbox' => 0,
+            'select' => 0,
             'option' => 0,
             'optgroup' => 0,
-            'table'     => 1,
+            'table' => 1,
             'thead' => 2,
             'tbody' => 2,
-            'tr'    => 3,
-            'th'    => 4,
-            'td'    => 4,
-            'div'   => 0,
-            'h1'    => 0,
-            'h2'    => 0,
-            'h3'    => 0,
-            'h4'    => 0,
-            'h5'    => 0,
-            'h6'    => 0,
-            'p'     => 0,
-            'ul'    => 0,
-            'li'    => 1,
+            'tr' => 3,
+            'th' => 4,
+            'td' => 4,
+            'div' => 0,
+            'h1' => 0,
+            'h2' => 0,
+            'h3' => 0,
+            'h4' => 0,
+            'h5' => 0,
+            'h6' => 0,
+            'p' => 0,
+            'ul' => 0,
+            'li' => 1,
         );
     }
 
@@ -93,7 +97,7 @@ class Html
      * @param string $class - html class attribute
      * @param string $style - html style attribute for applying inline styles
      * @param string $other_attributes - additional attributes like "colspan", inline JS, "rel" tags, etc
-     * @param bool   $force_close
+     * @param bool $force_close
      * @return string
      */
     protected function aTag(
@@ -173,7 +177,6 @@ class Html
     }
 
 
-
     /**
      * Generates HTML closing </XX> tag - if passed the id or class attribute
      * used for the opening tag, will append a comment
@@ -181,7 +184,7 @@ class Html
      * @param string $tag
      * @param string $id - html id attribute
      * @param string $class - html class attribute
-     * @param bool   $indent
+     * @param bool $indent
      * @return string
      */
     public function closeTag($tag = 'div', $id = '', $class = '', $indent = true)
@@ -196,7 +199,6 @@ class Html
         $html .= '</' . $tag . '>' . $comment;
         return $html;
     }
-
 
 
     /**
@@ -218,7 +220,6 @@ class Html
     }
 
 
-
     /**
      * Generates HTML closing </div> tag - if passed the id or class attribute used for the opening div tag, will
      * append a comment
@@ -232,7 +233,6 @@ class Html
     {
         return $this->closeTag('div', $id, $class);
     }
-
 
 
     /**
@@ -252,15 +252,14 @@ class Html
     }
 
 
-
     /**
      * Generates HTML <h2></h2> tags, inserts content, and adds any passed attributes
      * usage: echo $this->h2( 'This is a Heading' );
      *
-     * @param string $content          - inserted after opening tag, and appends closing tag, otherwise tag is left open
-     * @param string $id               - html id attribute
-     * @param string $class            - html class attribute
-     * @param string $style            - html style attribute for applying inline styles
+     * @param string $content - inserted after opening tag, and appends closing tag, otherwise tag is left open
+     * @param string $id - html id attribute
+     * @param string $class - html class attribute
+     * @param string $style - html style attribute for applying inline styles
      * @param string $other_attributes - additional attributes like "colspan", inline JS, "rel" tags, etc
      * @return string
      */
@@ -270,15 +269,14 @@ class Html
     }
 
 
-
     /**
      * Generates HTML <h3></h3> tags, inserts content, and adds any passed attributes
      * usage: echo $this->h3( 'This is a Heading' );
      *
-     * @param string $content          - inserted after opening tag, and appends closing tag, otherwise tag is left open
-     * @param string $id               - html id attribute
-     * @param string $class            - html class attribute
-     * @param string $style            - html style attribute for applying inline styles
+     * @param string $content - inserted after opening tag, and appends closing tag, otherwise tag is left open
+     * @param string $id - html id attribute
+     * @param string $class - html class attribute
+     * @param string $style - html style attribute for applying inline styles
      * @param string $other_attributes - additional attributes like "colspan", inline JS, "rel" tags, etc
      * @return string
      */
@@ -288,15 +286,14 @@ class Html
     }
 
 
-
     /**
      * Generates HTML <h4></h4> tags, inserts content, and adds any passed attributes
      * usage: echo $this->h4( 'This is a Heading' );
      *
-     * @param string $content          - inserted after opening tag, and appends closing tag, otherwise tag is left open
-     * @param string $id               - html id attribute
-     * @param string $class            - html class attribute
-     * @param string $style            - html style attribute for applying inline styles
+     * @param string $content - inserted after opening tag, and appends closing tag, otherwise tag is left open
+     * @param string $id - html id attribute
+     * @param string $class - html class attribute
+     * @param string $style - html style attribute for applying inline styles
      * @param string $other_attributes - additional attributes like "colspan", inline JS, "rel" tags, etc
      * @return string
      */
@@ -306,15 +303,14 @@ class Html
     }
 
 
-
     /**
      * Generates HTML <h5></h5> tags, inserts content, and adds any passed attributes
      * usage: echo $this->h5( 'This is a Heading' );
      *
-     * @param string $content          - inserted after opening tag, and appends closing tag, otherwise tag is left open
-     * @param string $id               - html id attribute
-     * @param string $class            - html class attribute
-     * @param string $style            - html style attribute for applying inline styles
+     * @param string $content - inserted after opening tag, and appends closing tag, otherwise tag is left open
+     * @param string $id - html id attribute
+     * @param string $class - html class attribute
+     * @param string $style - html style attribute for applying inline styles
      * @param string $other_attributes - additional attributes like "colspan", inline JS, "rel" tags, etc
      * @return string
      */
@@ -324,15 +320,14 @@ class Html
     }
 
 
-
     /**
      * Generates HTML <h6></h6> tags, inserts content, and adds any passed attributes
      * usage: echo $this->h6( 'This is a Heading' );
      *
-     * @param string $content          - inserted after opening tag, and appends closing tag, otherwise tag is left open
-     * @param string $id               - html id attribute
-     * @param string $class            - html class attribute
-     * @param string $style            - html style attribute for applying inline styles
+     * @param string $content - inserted after opening tag, and appends closing tag, otherwise tag is left open
+     * @param string $id - html id attribute
+     * @param string $class - html class attribute
+     * @param string $style - html style attribute for applying inline styles
      * @param string $other_attributes - additional attributes like "colspan", inline JS, "rel" tags, etc
      * @return string
      */
@@ -340,7 +335,6 @@ class Html
     {
         return $this->aTag('h6', $content, $id, $class, $style, $other_attributes, true);
     }
-
 
 
     /**
@@ -360,7 +354,6 @@ class Html
     }
 
 
-
     /**
      *  Generates HTML opening <ul> tag and adds any passed attributes
      *  usage:      echo $this->ul( 'my-list-id', 'my-list-class' );
@@ -377,7 +370,6 @@ class Html
     }
 
 
-
     /**
      * Generates HTML closing </ul> tag - if passed the id or class attribute used for the opening ul tag, will append
      * a comment
@@ -391,7 +383,6 @@ class Html
     {
         return $this->closeTag('ul', $id, $class);
     }
-
 
 
     /**
@@ -412,7 +403,6 @@ class Html
     }
 
 
-
     /**
      * Generates HTML closing </li> tag - if passed the id or class attribute used for the opening ul tag, will append
      * a comment
@@ -426,7 +416,6 @@ class Html
     {
         return $this->closeTag('li', $id, $class);
     }
-
 
 
     /**
@@ -446,7 +435,6 @@ class Html
     }
 
 
-
     /**
      * Generates an HTML </table> tag - if passed the id or class attribute used for the opening ul tag, will
      * append a comment
@@ -459,7 +447,6 @@ class Html
     {
         return $this->closeTag('table', $id, $class);
     }
-
 
 
     /**
@@ -479,7 +466,6 @@ class Html
     }
 
 
-
     /**
      * Generates an HTML </thead> tag - if passed the id or class attribute used for the opening ul tag, will
      * append a comment
@@ -492,7 +478,6 @@ class Html
     {
         return $this->closeTag('thead', $id, $class);
     }
-
 
 
     /**
@@ -512,7 +497,6 @@ class Html
     }
 
 
-
     /**
      * Generates an HTML </tbody> tag - if passed the id or class attribute used for the opening ul tag, will
      * append a comment
@@ -525,7 +509,6 @@ class Html
     {
         return $this->closeTag('tbody', $id, $class);
     }
-
 
 
     /**
@@ -545,7 +528,6 @@ class Html
     }
 
 
-
     /**
      * Generates an HTML </tr> tag - if passed the id or class attribute used for the opening ul tag, will append
      * a comment
@@ -558,7 +540,6 @@ class Html
     {
         return $this->closeTag('tr', $id, $class);
     }
-
 
 
     /**
@@ -578,7 +559,6 @@ class Html
     }
 
 
-
     /**
      * Generates an HTML </th> tag - if passed the id or class attribute used for the opening ul tag, will
      * append a comment
@@ -591,7 +571,6 @@ class Html
     {
         return $this->closeTag('th', $id, $class);
     }
-
 
 
     /**
@@ -611,7 +590,6 @@ class Html
     }
 
 
-
     /**
      * Generates an HTML </td> tag - if passed the id or class attribute used for the opening ul tag, will
      * append a comment
@@ -626,14 +604,13 @@ class Html
     }
 
 
-
     /**
      * For generating a "hidden" table row, good for embedding tables within tables
      * generates a new table row with one td cell that spans however many columns you set
      * removes all styles from the tr and td
      *
      * @param string $content
-     * @param int    $colspan
+     * @param int $colspan
      * @return string
      */
     public function noRow($content = '', $colspan = 2)
@@ -645,7 +622,6 @@ class Html
             'padding:0; border:none;'
         );
     }
-
 
 
     /**
@@ -682,7 +658,6 @@ class Html
     }
 
 
-
     /**
      *    Generates an HTML <img> tag and adds any passed attributes
      *    usage: echo $this->img();
@@ -707,7 +682,6 @@ class Html
     }
 
 
-
     /**
      * Generates HTML <label></label> tags, inserts content, and adds any passed attributes
      * usage: echo $this->span( 'this is some inline text' );
@@ -723,7 +697,6 @@ class Html
     {
         return $this->aTag('label', $content, $id, $class, $style, $other_attributes);
     }
-
 
 
     /**
@@ -743,7 +716,6 @@ class Html
     }
 
 
-
     /**
      * Generates HTML <span></span> tags, inserts content, and adds any passed attributes
      * usage: echo $this->span( 'this is some inline text' );
@@ -761,7 +733,6 @@ class Html
     }
 
 
-
     /**
      * Generates an html <--  comment --> tag
      *  usage: echo comment( 'this is a comment' );
@@ -773,7 +744,6 @@ class Html
     {
         return ! empty($comment) ? $this->nl() . '<!-- ' . $comment . ' -->' : '';
     }
-
 
 
     /**
@@ -788,7 +758,6 @@ class Html
     }
 
 
-
     /**
      * Generates non-breaking space entities based on number supplied
      *
@@ -799,7 +768,6 @@ class Html
     {
         return str_repeat('&nbsp;', $nmbr);
     }
-
 
 
     /**
@@ -816,11 +784,10 @@ class Html
     }
 
 
-
     /**
      * Return a newline and tabs ("nl" stands for "new line")
      *
-     * @param int    $indent the number of tabs to ADD to the current indent (can be negative or zero)
+     * @param int $indent the number of tabs to ADD to the current indent (can be negative or zero)
      * @param string $tag
      * @return string - newline character plus # of indents passed (can be + or -)
      */
@@ -828,27 +795,26 @@ class Html
     {
         $html = "\n";
         $this->indent($indent, $tag);
-        for ($x = 0; $x < $this->indent[ $tag ]; $x++) {
+        for ($x = 0; $x < $this->indent[$tag]; $x++) {
             $html .= "\t";
         }
         return $html;
     }
 
 
-
     /**
      * Changes the indents used in $this->nl. Often its convenient to change
      * the indentation level without actually creating a new line
      *
-     * @param int    $indent can be negative to decrease the indentation level
+     * @param int $indent can be negative to decrease the indentation level
      * @param string $tag
      */
     public function indent($indent, $tag = 'none')
     {
-        if (! isset($this->indent[ $tag ])) {
-            $this->indent[ $tag ] = 0;
+        if (! isset($this->indent[$tag])) {
+            $this->indent[$tag] = 0;
         }
-        $this->indent[ $tag ] += (int) $indent;
-        $this->indent[ $tag ] = $this->indent[ $tag ] >= 0 ? $this->indent[ $tag ] : 0;
+        $this->indent[$tag] += (int)$indent;
+        $this->indent[$tag] = $this->indent[$tag] >= 0 ? $this->indent[$tag] : 0;
     }
 }

@@ -102,7 +102,11 @@ class Array2
         // http://core.trac.wordpress.org/ticket/26118 that doesnt' unserialize this automatically.
         $token = 'C';
         $data = is_string($data) ? trim($data) : $data;
+        // Legacy code that used loose comparison; changing it to strict comparison is risky so leave it.
+        // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
         if (is_string($data) && strlen($data) > 1 && $data[0] == $token && preg_match("/^{$token}:[0-9]+:/s", $data)) {
+            // We have legacy data that was serialized, we may need this. But yes, serializing as JSON is usually better.
+            // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize
             return unserialize($data);
         } else {
             return $data;

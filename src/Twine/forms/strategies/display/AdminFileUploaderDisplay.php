@@ -24,10 +24,17 @@ class AdminFileUploaderDisplay extends DisplayBase
     {
         wp_enqueue_media();
         wp_enqueue_script('media-upload');
-        wp_enqueue_script('pmb-media-uploader', TWINE_SCRIPTS_URL . 'media-uploader.js');
+        wp_enqueue_script(
+            'pmb-media-uploader',
+            TWINE_SCRIPTS_URL . 'media-uploader.js',
+            [],
+            '1.0.0'
+        );
         wp_enqueue_style(
             'pmb-media-uploader',
-            TWINE_STYLES_URL . 'media-uploader.css'
+            TWINE_STYLES_URL . 'media-uploader.css',
+            [],
+            '1.0.0'
         );
         parent::enqueueJs();
     }
@@ -38,7 +45,6 @@ class AdminFileUploaderDisplay extends DisplayBase
      *
      * @return string of html to display the field
      */
-
     public function display()
     {
         // image uploader

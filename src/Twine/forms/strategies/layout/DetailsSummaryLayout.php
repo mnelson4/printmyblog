@@ -8,6 +8,10 @@ use Twine\forms\base\FormSection;
 use Twine\forms\inputs\FormInputBase;
 use Twine\helpers\Html;
 
+/**
+ * Class DetailsSummaryLayout
+ * @package Twine\forms\strategies\layout
+ */
 class DetailsSummaryLayout extends FormSectionLayoutBase
 {
     /**

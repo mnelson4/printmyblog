@@ -50,7 +50,6 @@ class ConditionallyRequiredValidation extends ValidationBase
      *
      * @param string $normalized_value
      * @return bool
-     * @throws \Error
      * @throws ValidationError
      */
     public function validate($normalized_value)
@@ -117,7 +116,7 @@ class ConditionallyRequiredValidation extends ValidationBase
      * if the input is required or not. That is not yet implemented, however.
      *
      * @return string see http://jqueryvalidation.org/required-method for format
-     * @throws \Error
+     * @throws ImproperUsageException
      */
     protected function getJqueryRequirementValue()
     {

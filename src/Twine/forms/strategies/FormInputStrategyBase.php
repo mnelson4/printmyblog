@@ -5,7 +5,7 @@ namespace Twine\forms\strategies;
 use Twine\forms\inputs\FormInputBase;
 
 /**
- * base class for all strategies which operate on form inputs. Generally, they
+ * Base class for all strategies which operate on form inputs. Generally, they
  * all need to know about the form input they are operating on.
  */
 abstract class FormInputStrategyBase

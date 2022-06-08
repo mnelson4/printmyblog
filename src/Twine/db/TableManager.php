@@ -2,6 +2,10 @@
 
 namespace Twine\db;
 
+/**
+ * Class TableManager
+ * @package Twine\db
+ */
 abstract class TableManager
 {
 

@@ -73,13 +73,14 @@ abstract class CustomTableManager
     {
         global $wpdb;
         if ($entity->getId()) {
-            // todo: cache
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching
+            // Caching the result of a save is silly; and because we're operating on custom tables,
+            // direct DB queries are the only option.
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
             $success = $wpdb->update(
                 $this->getFullTableName(),
                 $entity->fieldsExceptId(),
                 [
-                    'id' => $entity->getId()
+                    'id' => $entity->getId(),
                 ],
                 array_map(
                     function ($item) {
@@ -88,7 +89,7 @@ abstract class CustomTableManager
                     $entity->fieldsExceptId()
                 ),
                 [
-                    '%d'
+                    '%d',
                 ]
             );
             return $success;

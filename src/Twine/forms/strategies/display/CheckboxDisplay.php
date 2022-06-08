@@ -35,7 +35,7 @@ class CheckboxDisplay extends CompoundInputDisplay
                         'print-my-blog'
                     ),
                     $input->htmlId(),
-                    // phpcs:ignire WordPress.PHP.DevelopmentFunctions.error_log_var_export
+                    // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export
                     var_export($input->rawValue(), true),
                     $input->htmlName() . '[]'
                 )

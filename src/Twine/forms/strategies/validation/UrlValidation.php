@@ -28,20 +28,6 @@ class UrlValidation extends ValidationBase
      */
     protected $url_validator;
 
-    /**
-     * @param null $validation_error_message
-     * @param boolean $check_file_exists
-     * @param URLValidator $url_validator
-     * @throws InvalidArgumentException
-     * @throws \EventEspresso\core\exceptions\InvalidDataTypeException
-     * @throws \EventEspresso\core\exceptions\InvalidInterfaceException
-     */
-    public function __construct(
-        $validation_error_message = null
-    ) {
-        parent::__construct($validation_error_message);
-    }
-
 
 
     /**

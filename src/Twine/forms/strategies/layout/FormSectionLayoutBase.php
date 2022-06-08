@@ -28,14 +28,12 @@ abstract class FormSectionLayoutBase
     protected $form_section;
 
 
-
     /**
      *  __construct
      */
     public function __construct()
     {
     }
-
 
 
     /**
@@ -49,7 +47,6 @@ abstract class FormSectionLayoutBase
     }
 
 
-
     /**
      * @return FormSection
      */
@@ -57,7 +54,6 @@ abstract class FormSectionLayoutBase
     {
         return $this->form_section;
     }
-
 
 
     /**
@@ -98,7 +94,6 @@ abstract class FormSectionLayoutBase
     }
 
 
-
     /**
      * @return string
      */
@@ -128,7 +123,6 @@ abstract class FormSectionLayoutBase
     }
 
 
-
     /**
      * Should be used to start teh form section (Eg a table tag, or a div tag, etc.)
      *
@@ -137,14 +131,12 @@ abstract class FormSectionLayoutBase
     abstract public function layoutFormBegin();
 
 
-
     /**
      * Should be used to end the form section (eg a /table tag, or a /div tag, etc)
      *
      * @return string
      */
     abstract public function layoutFormEnd();
-
 
 
     /**
@@ -162,7 +154,6 @@ abstract class FormSectionLayoutBase
     abstract public function layoutInput($input);
 
 
-
     /**
      * Similar to layout_input(), should be used internally by layout_form() within a
      * loop to layout each proper subsection. Unlike layout_input(), however, it is assumed
@@ -172,7 +163,6 @@ abstract class FormSectionLayoutBase
      * @return string html
      */
     abstract public function layoutSubsection($subsection);
-
 
 
     /**
@@ -194,17 +184,16 @@ abstract class FormSectionLayoutBase
             ? $input->htmlLabelText() . '<span class="twine-asterisk">*</span>'
             : $input->htmlLabelText();
         return '<label id="'
-               . $input->htmlLabelId()
-               . '" class="'
-               . $class
-               . '" style="'
-               . $input->htmlLabelStyle()
-               . '" for="' . $input->htmlId()
-               . '">'
-               . $label_text
-               . '</label>';
+            . $input->htmlLabelId()
+            . '" class="'
+            . $class
+            . '" style="'
+            . $input->htmlLabelStyle()
+            . '" for="' . $input->htmlId()
+            . '">'
+            . $label_text
+            . '</label>';
     }
-
 
 
     /**
@@ -233,9 +222,8 @@ abstract class FormSectionLayoutBase
     }
 
 
-
     /**
-     * returns the HTML for the server-side validation errors for the specified input
+     * Returns the HTML for the server-side validation errors for the specified input
      * Note that if JS is enabled, it should remove these and instead
      * populate the form's errors in the jquery validate fashion
      * using the localized data provided to the JS
@@ -248,14 +236,13 @@ abstract class FormSectionLayoutBase
     {
         if ($input->getValidationErrors()) {
             return "<label  id='"
-                   . $input->htmlId()
-                   . "-error' class='twine-error' for='{$input->htmlName()}'>"
-                   . $input->getValidationErrorString()
-                   . '</label>';
+                . $input->htmlId()
+                . "-error' class='twine-error' for='{$input->htmlName()}'>"
+                . $input->getValidationErrorString()
+                . '</label>';
         }
         return '';
     }
-
 
 
     /**
@@ -267,26 +254,25 @@ abstract class FormSectionLayoutBase
      */
     public function displayHelpText($input)
     {
-        $help_text  = $input->htmlHelpText();
+        $help_text = $input->htmlHelpText();
         if ($help_text !== '' && $help_text !== null) {
             $tag = is_admin() ? 'p' : 'span';
             return '<'
-                   . $tag
-                   . ' id="'
-                   . $input->htmlId()
-                   . '-help" class="'
-                   . $input->htmlHelpClass()
-                   . '" style="'
-                   . $input->htmlHelpStyle()
-                   . '">'
-                   . $help_text
-                   . '</'
-                   . $tag
-                   . '>';
+                . $tag
+                . ' id="'
+                . $input->htmlId()
+                . '-help" class="'
+                . $input->htmlHelpClass()
+                . '" style="'
+                . $input->htmlHelpStyle()
+                . '">'
+                . $help_text
+                . '</'
+                . $tag
+                . '>';
         }
         return '';
     }
-
 
 
     /**
@@ -301,7 +287,7 @@ abstract class FormSectionLayoutBase
         // replace dashes and spaces with underscores
         $hook_name = str_replace(array('-', ' '), '_', $this->form_section->htmlId());
         do_action('AH_Form_Section_Layout__' . $hook_name, $this->form_section);
-        $html = (string) apply_filters(
+        $html = (string)apply_filters(
             'AF_Form_Section_Layout__' . $hook_name . '__html',
             $html,
             $this->form_section

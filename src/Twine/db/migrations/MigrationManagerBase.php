@@ -5,6 +5,10 @@ namespace Twine\db\migrations;
 use Twine\system\RequestType;
 use Twine\system\VersionHistory;
 
+/**
+ * Class MigrationManagerBase
+ * @package Twine\db\migrations
+ */
 abstract class MigrationManagerBase
 {
     /**
@@ -32,6 +36,11 @@ abstract class MigrationManagerBase
      */
     protected $applicable_migrations;
 
+    /**
+     * @param RequestType $request_type
+     * @param VersionHistory $version_history
+     * @param string $option_prefix
+     */
     public function inject(RequestType $request_type, VersionHistory $version_history, $option_prefix)
     {
         $this->request_type = $request_type;
@@ -83,6 +92,9 @@ abstract class MigrationManagerBase
         return get_option($this->getOptionName(), []);
     }
 
+    /**
+     * @return string
+     */
     protected function getOptionName()
     {
         return $this->option_prefix . 'migrations';

@@ -44,7 +44,7 @@ class AdminTwoColumnLayout extends TwoColumnLayout
             $input->getDisplayStrategy() instanceof TextAreaDisplay
             || (
                 $input->getDisplayStrategy() instanceof TextInputDisplay
-                && ! in_array($input->getDisplayStrategy()->getType(), ['checkbox','radio'], true)
+                && ! in_array($input->getDisplayStrategy()->getType(), ['checkbox', 'radio'], true)
                 )
             || $input->getDisplayStrategy() instanceof AdminFileUploaderDisplay
         ) {

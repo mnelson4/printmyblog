@@ -84,7 +84,7 @@ class FormSection extends FormSectionValidatable
     /**
      * Whether or not the form's localized validation JS vars have been set
      *
-     * @type boolean
+     * @var boolean $scripts_localized
      */
     protected static $scripts_localized = false;
 

@@ -257,7 +257,7 @@ class TemplateLayout extends DivPerSectionLayout
         // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
         extract($args);
         ob_start();
-        require($filepath);
+        require $filepath;
         return ob_get_clean();
     }
 }

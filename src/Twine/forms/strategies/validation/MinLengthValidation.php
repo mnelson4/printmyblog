@@ -33,7 +33,8 @@ class MinLengthValidation extends ValidationBase
 
     /**
      * Validates string length requirement met.
-     * @param $normalized_value
+     * @param string $normalized_value
+     * @throws ValidationError
      */
     public function validate($normalized_value)
     {
@@ -56,7 +57,7 @@ class MinLengthValidation extends ValidationBase
             'minlength' => $this->min_length,
             'messages' => array(
                 'minlength' => $this->getValidationErrorMessage(),
-            )
+            ),
         );
     }
 }

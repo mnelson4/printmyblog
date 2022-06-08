@@ -17,7 +17,7 @@ class FieldsetSectionLayout extends DivPerSectionLayout
 {
 
     /**
-     * legend_class
+     * Legend_class
      *
      * @var string
      */
