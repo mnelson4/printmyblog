@@ -66,7 +66,7 @@ abstract class FormSectionValidatable extends FormSectionBase
                 }
             }
         }
-        return implode(", ", $validation_error_messages);
+        return implode(', ', $validation_error_messages);
     }
 
 

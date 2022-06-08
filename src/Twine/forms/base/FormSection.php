@@ -22,7 +22,9 @@ use Twine\helpers\Array2;
  */
 class FormSection extends FormSectionValidatable
 {
-
+    /**
+     * String constant for the session key used to store form data.
+     */
     const SUBMITTED_FORM_DATA_SSN_KEY = 'submitted_form_data';
 
     /**
@@ -47,14 +49,14 @@ class FormSection extends FormSectionValidatable
     protected $received_submission = false;
 
     /**
-     * message displayed to users upon successful form submission
+     * Message displayed to users upon successful form submission
      *
      * @var string
      */
     protected $form_submission_success_message = '';
 
     /**
-     * message displayed to users upon unsuccessful form submission
+     * Message displayed to users upon unsuccessful form submission
      *
      * @var string
      */
@@ -80,7 +82,7 @@ class FormSection extends FormSectionValidatable
     protected static $js_localization = array();
 
     /**
-     * whether or not the form's localized validation JS vars have been set
+     * Whether or not the form's localized validation JS vars have been set
      *
      * @type boolean
      */
@@ -93,22 +95,22 @@ class FormSection extends FormSectionValidatable
 
 
     /**
-     * when constructing a proper form section, calls _construct_finalize on children
+     * When constructing a proper form section, calls _construct_finalize on children
      * so that they know who their parent is, and what name they've been given.
      *
      * @param array[] $options_array   {
-     * @type          $subsections     FormSectionValidatable[] where keys are the section's name
-     * @type          $include         string[] numerically-indexed where values are section names to be included,
+     * @type          $subsections FormSectionValidatable[] where keys are the section's name
+     * @type          string[] $include numerically-indexed where values are section names to be included,
      *                                 and in that order. This is handy if you want
      *                                 the subsections to be ordered differently than the default, and if you override
      *                                 which fields are shown
-     * @type          $exclude         string[] values are subsections to be excluded. This is handy if you want
+     * @type          string[] $exclude values are subsections to be excluded. This is handy if you want
      *                                 to remove certain default subsections (note: if you specify BOTH 'include' AND
      *                                 'exclude', the inclusions will be applied first, and the exclusions will exclude
      *                                 items from that list of inclusions)
-     * @type          $layout_strategy FormSectionLayoutBase strategy for laying out the form
+     * @type          FormSectionLayoutBase $layout_strategy strategy for laying out the form
      *                                 } @see FormSectionValidatable::__construct()
-     * @type          $use_nonce whether or not to use a nonce on this form. Defaults to true.
+     * @type          boolean $use_nonce whether or not to use a nonce on this form. Defaults to true.
      * @throws ImproperUsageException
      */
     public function __construct($options_array = array())
@@ -216,10 +218,8 @@ class FormSection extends FormSectionValidatable
             } else {
                 throw new ImproperUsageException(
                     sprintf(
-                        esc_html__(
-                            'Subsection "%s" is not an instanceof FormSectionBase on form "%s". It is a "%s"',
-                            'print-my-blog'
-                        ),
+                        // Intended for developers, translation unnecessary.
+                        'Subsection "%s" is not an instanceof FormSectionBase on form "%s". It is a "%s"',
                         $subsection_name,
                         get_class($this),
                         $subsection ? get_class($subsection) : esc_html__('NULL', 'print-my-blog')
@@ -273,7 +273,7 @@ class FormSection extends FormSectionValidatable
 
 
     /**
-     * was_submitted - checks if form inputs are present in request data
+     * Checks if form inputs are present in request data
      * Basically an alias for form_data_present_in() (which is used by both
      * proper form sections and form inputs)
      *
@@ -306,6 +306,8 @@ class FormSection extends FormSectionValidatable
                 $this
             );
             if ($req_data === null) {
+                // Nonce verification decision made by client code before processing the form.
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing
                 $req_data = array_merge($_GET, $_POST);
             }
             $req_data = apply_filters(
@@ -388,7 +390,7 @@ class FormSection extends FormSectionValidatable
 
     /**
      * Recursively searches through the form for an input with the specified name.
-     * @param $input_name
+     * @param string $input_name
      *
      * @return FormSectionValidatable|null
      */
@@ -411,7 +413,7 @@ class FormSection extends FormSectionValidatable
 
 
     /**
-     * returns true if subsection exists
+     * Returns true if subsection exists
      *
      * @param string $name
      * @return boolean
@@ -485,10 +487,8 @@ class FormSection extends FormSectionValidatable
         if (! $subsection instanceof FormInputBase) {
             throw new ImproperUsageException(
                 sprintf(
-                    esc_html__(
-                        "Subsection '%s' is not an instanceof FormInputBase on form '%s'. It is a '%s'",
-                        'print-my-blog'
-                    ),
+                    // Intended for developers, translations unnecessary.
+                    "Subsection '%s' is not an instanceof FormInputBase on form '%s'. It is a '%s'",
                     $name,
                     get_class($this),
                     $subsection ? get_class($subsection) : esc_html__('NULL', 'print-my-blog')
@@ -523,10 +523,8 @@ class FormSection extends FormSectionValidatable
         if (! $subsection instanceof FormSection) {
             throw new ImproperUsageException(
                 sprintf(
-                    esc_html__(
-                        "Subsection '%'s is not an instanceof FormSectionProper on form '%s'",
-                        'print-my-blog'
-                    ),
+                    // Intended for developers, translations unnecessary.
+                    "Subsection '%'s is not an instanceof FormSectionProper on form '%s'",
                     $name,
                     get_class($this)
                 )
@@ -562,12 +560,8 @@ class FormSection extends FormSectionValidatable
         if ($this->is_valid === null) {
             if (! $this->hasHeceivedSubmission()) {
                 throw new ImproperUsageException(
-                    sprintf(
-                        esc_html__(
-                            'You cannot check if a form is valid before receiving the form submission using receive_form_submission',
-                            'print-my-blog'
-                        )
-                    )
+                    // intended for developers, translation unnecessary.
+                    'You cannot check if a form is valid before receiving the form submission using receive_form_submission'
                 );
             }
             if (! parent::isValid()) {
@@ -588,7 +582,7 @@ class FormSection extends FormSectionValidatable
 
 
     /**
-     * gets the default name of this form section if none is specified
+     * Gets the default name of this form section if none is specified
      *
      * @return void
      */
@@ -622,9 +616,8 @@ class FormSection extends FormSectionValidatable
 
 
     /**
-     * returns HTML for displaying this form section. recursively calls display_section() on all subsections
+     * Returns HTML for displaying this form section. recursively calls display_section() on all subsections
      *
-     * @param bool $display_previously_submitted_data
      * @return string
      * @throws InvalidArgumentException
      * @throws ImproperUsageException
@@ -637,7 +630,7 @@ class FormSection extends FormSectionValidatable
 
 
     /**
-     * enqueues JS and CSS for the form.
+     * Enqueues JS and CSS for the form.
      * It is preferred to call this before wp_enqueue_scripts so the
      * scripts and styles can be put in the header, but if called later
      * they will be put in the footer (which is OK for JS, but in HTML4 CSS should
@@ -655,7 +648,7 @@ class FormSection extends FormSectionValidatable
         if (did_action('wp_enqueue_scripts') || did_action('admin_enqueue_scripts')) {
             // ok so they've constructed this object after when they should have.
             // just enqueue the generic form scripts and initialize the form immediately in the JS
-            FormSection::wpEnqueueScripts(true);
+            self::wpEnqueueScripts(true);
         } else {
             add_action('wp_enqueue_scripts', array('Twine\forms\base\FormSection', 'wpEnqueueScripts'));
             add_action('admin_enqueue_scripts', array('Twine\forms\base\FormSection', 'wpEnqueueScripts'));
@@ -666,12 +659,11 @@ class FormSection extends FormSectionValidatable
             $subsection->enqueueJs();
         }
         parent::enqueueJs();
-        ;
     }
 
 
     /**
-     * adds a filter so that jquery validate gets enqueued in System::wp_enqueue_scripts().
+     * Adds a filter so that jquery validate gets enqueued in System::wp_enqueue_scripts().
      * This must be done BEFORE wp_enqueue_scripts() gets called, which is on
      * the wp_enqueue_scripts hook.
      * However, registering the form js and localizing it can happen when we
@@ -718,9 +710,9 @@ class FormSection extends FormSectionValidatable
 
 
     /**
-     * gets the variables used by form_section_validation.js.
+     * Gets the variables used by form_section_validation.js.
      * This needs to be called AFTER we've called $this->_enqueue_jquery_validate_script,
-     * but before the wordpress hook wp_loaded
+     * but before the WordPress hook wp_loaded
      */
     public function enqueueAndLocalizeFormJs()
     {
@@ -741,7 +733,7 @@ class FormSection extends FormSectionValidatable
 
 
     /**
-     * add our form section data to a static variable accessible by all form sections
+     * Add our form section data to a static variable accessible by all form sections
      *
      * @param bool $return_for_subsection
      * @return void
@@ -751,13 +743,13 @@ class FormSection extends FormSectionValidatable
         // we only want to localize vars ONCE for the entire form,
         // so if the form section doesn't have a parent, then it must be the top dog
         if ($return_for_subsection || ! $this->parentSection()) {
-            FormSection::$js_localization['form_data'][ $this->htmlId() ] = array(
+            self::$js_localization['form_data'][ $this->htmlId() ] = array(
                 'form_section_id'  => $this->htmlId(true),
                 'validation_rules' => $this->getJqueryValdationRules(),
                 'other_data'       => $this->getOtherJsData(),
                 'errors'           => $this->subsectionValidationErrorsByHtmlName(),
             );
-            FormSection::$scripts_localized                                = true;
+            self::$scripts_localized = true;
         }
     }
 
@@ -821,7 +813,7 @@ class FormSection extends FormSectionValidatable
 
 
     /**
-     * passes all the form data required by the JS to the JS, and enqueues the few required JS files.
+     * Passes all the form data required by the JS to the JS, and enqueues the few required JS files.
      * Should be setup by each form during the _enqueues_and_localize_form_js
      *
      * @throws InvalidArgumentException
@@ -830,24 +822,24 @@ class FormSection extends FormSectionValidatable
     {
         // allow inputs and stuff to hook in their JS and stuff here
         do_action('AH_FormSectionProper__localize_script_for_all_forms__begin');
-        FormSection::$js_localization['localized_error_messages'] = FormSection::getLocalizedErrorMessages();
+        self::$js_localization['localized_error_messages'] = self::getLocalizedErrorMessages();
         $email_validation_level                                          = 'wp_default';
-        FormSection::$js_localization['email_validation_level']   = $email_validation_level;
+        self::$js_localization['email_validation_level']   = $email_validation_level;
         wp_enqueue_script('twine_form_section_validation');
         wp_localize_script(
             'twine_form_section_validation',
             'twine_form_section_vars',
-            FormSection::$js_localization
+            self::$js_localization
         );
     }
 
 
     /**
-     * ensure_scripts_localized
+     * Enqueues and localizes scripts if not already done; otherwise does nothing.
      */
     public function ensureScriptsLocalized()
     {
-        if (! FormSection::$scripts_localized) {
+        if (! self::$scripts_localized) {
             $this->enqueueAndLocalizeFormJs();
         }
     }
@@ -995,7 +987,7 @@ class FormSection extends FormSectionValidatable
      * Gets all the subsections which are a proper form
      *
      * @return FormSection[]
-     * @throws @throws ImproperUsageException
+     * @throws ImproperUsageException
      */
     public function subforms()
     {
@@ -1021,8 +1013,8 @@ class FormSection extends FormSectionValidatable
      *                                                      (realizing that the subsections' html names might not be
      *                                                      set yet, etc.)
      *
-     * @return FormSection[]
-     * @throws @throws ImproperUsageException
+     * @return FormSectionValidatable[]
+     * @throws ImproperUsageException
      */
     public function subsections($require_construction_to_be_finalized = true)
     {
@@ -1057,7 +1049,7 @@ class FormSection extends FormSectionValidatable
      *                                        and if $flatten is FALSE it can be a multidimensional array
      *                                        where keys are always subsection names and values are either
      *                                        the input's normalized value, or an array like the top-level array
-     * @throws @throws ImproperUsageException
+     * @throws ImproperUsageException
      */
     public function inputValues($include_subform_inputs = false, $flatten = false)
     {
@@ -1081,7 +1073,7 @@ class FormSection extends FormSectionValidatable
      *                                        and if $flatten is FALSE it can be a multidimensional array
      *                                        where keys are always subsection names and values are either
      *                                        the input's normalized value, or an array like the top-level array
-     * @throws @throws ImproperUsageException
+     * @throws ImproperUsageException
      */
     public function inputPrettyValues($include_subform_inputs = false, $flatten = false)
     {
@@ -1214,7 +1206,6 @@ class FormSection extends FormSectionValidatable
 
 
     /**
-     * add_subsections
      * Adds the listed subsections to the form section.
      * If $subsection_name_to_target is provided,
      * then new subsections are added before or after that subsection,
@@ -1240,16 +1231,13 @@ class FormSection extends FormSectionValidatable
             if (! $subsection instanceof FormSectionBase) {
                 throw new ImproperUsageException(
                     sprintf(
-                        esc_html__(
-                            "Trying to add a %s as a subsection (it was named '%s') to the form section '%s'. It was removed.",
-                            'print-my-blog'
-                        ),
+                        // intended for developers, translation unnecessary.
+                        "Trying to add a %s as a subsection (it was named '%s') to the form section '%s'. It was removed.",
                         get_class($subsection),
                         $subsection_name,
                         $this->name()
                     )
                 );
-                unset($new_subsections[ $subsection_name ]);
             }
         }
         $this->subsections = Array2::insertIntoArray(
@@ -1280,7 +1268,7 @@ class FormSection extends FormSectionValidatable
 
     /**
      * Remove the given subsection in this form (does not recursively search for it)
-     * @param $name
+     * @param string $name
      */
     public function removeSubsection($name)
     {
@@ -1326,7 +1314,6 @@ class FormSection extends FormSectionValidatable
     /**
      * Sets the submission error message (aka validation error message for this form section and all sub-sections)
      * @param string                           $form_submission_error_message
-     * @param FormSectionValidatable $form_section unused
      */
     public function setSubmissionErrorMessage(
         $form_submission_error_message = ''
@@ -1416,7 +1403,7 @@ class FormSection extends FormSectionValidatable
 
 
     /**
-     * make sure construction finalized was called, otherwise children might not be ready
+     * Make sure construction finalized was called, otherwise children might not be ready
      *
      * @return void
      * @throws ImproperUsageException
@@ -1502,7 +1489,8 @@ class FormSection extends FormSectionValidatable
                     $label = esc_html__('Unknown', 'print-my-blog');
                 }
                 $submission_error_messages[] = sprintf(
-                    __('%s : %s', 'print-my-blog'),
+                    // translators: 1: input name, 2: validation error message
+                    __('%1$s : %2$s', 'print-my-blog'),
                     $label,
                     $validation_error->getMessage()
                 );

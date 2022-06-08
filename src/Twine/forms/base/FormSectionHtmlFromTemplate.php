@@ -13,11 +13,16 @@ namespace Twine\forms\base;
  */
 class FormSectionHtmlFromTemplate extends FormSectionHtml
 {
+    /**
+     * FormSectionHtmlFromTemplate constructor.
+     * @param string $template_file
+     * @param array $args
+     * @param array $options_array
+     */
     public function __construct($template_file, $args = array(), $options_array = array())
     {
-        $html = require_once($template_file);
+        $html = require_once $template_file;
 
-//      echo " filepath:$template_file html $html";
         parent::__construct($html, $options_array);
     }
 }

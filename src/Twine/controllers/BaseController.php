@@ -23,18 +23,21 @@ abstract class BaseController
     /**
      * Helper for getting a value from the request, or setting a default.
      * @since 2.2.3
-     * @param $query_param_name
-     * @param $default
+     * @param string $query_param_name
+     * @param string $default
      * @return mixed
      */
     protected function getFromRequest($query_param_name, $default)
     {
+        // Nonce verification must be done before calling this. Sanitization on these inputs will occur later in forms code.
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
         if (isset($_GET[$query_param_name])) {
             return isset($_GET[$query_param_name]) ? $_GET[$query_param_name] : $default;
         } else {
             $query_param_name = str_replace('-', '_', $query_param_name);
             return isset($_GET[$query_param_name]) ? $_GET[$query_param_name] : $default;
         }
+        // phpcs:enable WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
     }
 }
 // End of file BaseController.php

@@ -52,9 +52,9 @@ class FileSubmission
 
     /**
      * FileSubmission constructor.
-     * @param $name
-     * @param $tmp_file
-     * @param $size
+     * @param string $name
+     * @param string $tmp_file
+     * @param int|string $size
      * @param null $error_code
      * @throws InvalidArgumentException
      */

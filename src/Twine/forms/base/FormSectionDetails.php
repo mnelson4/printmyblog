@@ -5,9 +5,22 @@ namespace Twine\forms\base;
 use Twine\forms\strategies\layout\AdminTwoColumnLayout;
 use Twine\forms\strategies\layout\DetailsSummaryLayout;
 
+/**
+ * Class FormSectionDetails
+ * @package Twine\forms\base
+ */
 class FormSectionDetails extends FormSection
 {
+    /**
+     * @var mixed|string|void
+     */
     protected $html_summary;
+
+    /**
+     * FormSectionDetails constructor.
+     * @param array $options_array
+     * @throws \Twine\forms\helpers\ImproperUsageException
+     */
     public function __construct($options_array = array())
     {
         if (isset($options_array['html_summary'])) {

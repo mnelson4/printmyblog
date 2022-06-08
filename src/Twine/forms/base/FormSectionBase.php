@@ -5,7 +5,7 @@ namespace Twine\forms\base;
 use Exception;
 use Twine\forms\helpers\ImproperUsageException;
 
-if (!defined('TWINE_SCRIPTS_URL')) {
+if (! defined('TWINE_SCRIPTS_URL')) {
     if (! defined('TWINE_MAIN_FILE')) {
         throw new Exception(
             __(
@@ -37,7 +37,7 @@ if (!defined('TWINE_SCRIPTS_URL')) {
 abstract class FormSectionBase
 {
     /**
-     * html_id and html_name are derived from this by default
+     * The html_id and html_name are derived from this by default
      *
      * @var string
      */
@@ -75,7 +75,7 @@ abstract class FormSectionBase
     protected $parent_section;
 
     /**
-     * flag indicating that _construct_finalize has been called.
+     * Flag indicating that _construct_finalize has been called.
      * If it has not been called and we try to use functions which require it, we call it
      * with no parameters. But normally, _construct_finalize should be called by the instantiating class
      *
@@ -103,6 +103,7 @@ abstract class FormSectionBase
      *          ...
      *     }
      * ]
+     * @throws Exception
      */
     public function __construct($options_array = array())
     {
@@ -121,8 +122,10 @@ abstract class FormSectionBase
 
 
     /**
-     * @param $parent_form_section
-     * @param $name
+     * The other half of preparing this object for use, but best done if called by the parent form section which knows
+     * what name it wants to call this object.
+     * @param FormSection $parent_form_section
+     * @param string $name
      * @throws \Error
      */
     protected function constructFinalize($parent_form_section, $name)
@@ -137,7 +140,7 @@ abstract class FormSectionBase
 
 
     /**
-     * make sure construction finalized was called, otherwise children might not be ready
+     * Make sure construction finalized was called, otherwise children might not be ready
      *
      * @return void
      * @throws \Error
@@ -161,8 +164,8 @@ abstract class FormSectionBase
         if (! $this->html_id) {
             if ($this->parent_section && $this->parent_section instanceof FormSection) {
                 $this->html_id = $this->parent_section->htmlId()
-                                  . '-'
-                                  . $this->prepNameForHtmlId($this->name());
+                    . '-'
+                    . $this->prepNameForHtmlId($this->name());
             } else {
                 $this->html_id = $this->prepNameForHtmlId($this->name());
             }
@@ -172,9 +175,9 @@ abstract class FormSectionBase
 
 
     /**
-     * _prep_name_for_html_id
+     * Prepares the name to be an html ID
      *
-     * @param $name
+     * @param string $name
      * @return string
      */
     private function prepNameForHtmlId($name)
@@ -273,12 +276,15 @@ abstract class FormSectionBase
 
 
     /**
+     * Sets any other HTML attributes desired.
      * @param array $other_html_attributes
+     * @throws ImproperUsageException
      */
     public function setOtherHtmlAttributes($other_html_attributes)
     {
         if (! is_array($other_html_attributes)) {
             throw new ImproperUsageException(
+                // only developers should ever see this, so it doesn't need to be translated.
                 get_class($this) . '::set_other_html_attribues should be passed in an array, not a string'
             );
         }
@@ -286,8 +292,9 @@ abstract class FormSectionBase
     }
 
     /**
-     * @param $name
-     * @param $value optional. Leave blank for standalone attributes like "checked"
+     * Adds any HTML attribute needed.
+     * @param string $name
+     * @param string $value optional. Leave blank for standalone attributes like "checked"
      */
     public function addOtherHtmlAttribute($name, $value = null)
     {
@@ -299,7 +306,8 @@ abstract class FormSectionBase
     }
 
     /**
-     * @param $name
+     * Removes the HTML attribute by its attribute name.
+     * @param string $name
      */
     public function removeOtherHtmlAttribute($name)
     {
@@ -343,10 +351,13 @@ abstract class FormSectionBase
     public function name()
     {
         if (! $this->construction_finalized) {
-            throw new ImproperUsageException(sprintf(__(
-                'You cannot use the form section\s name until constructFinalize has been called on it (when we set the name). It was called on a form section of type \'s\'',
-                'print-my-blog'
-            ), get_class($this)));
+            throw new ImproperUsageException(
+                sprintf(
+                    // Intended for developers. Translation unnecessary.
+                    'You cannot use the form section\s name until constructFinalize has been called on it (when we set the name). It was called on a form section of type \'%s\'',
+                    get_class($this)
+                )
+            );
         }
         return $this->name;
     }
@@ -366,7 +377,7 @@ abstract class FormSectionBase
 
 
     /**
-     * enqueues JS (and CSS) for the form (ie immediately call wp_enqueue_script and
+     * Enqueues JS (and CSS) for the form (ie immediately call wp_enqueue_script and
      * wp_enqueue_style; the scripts could have optionally been registered earlier)
      * Default does nothing, but child classes can override
      *
