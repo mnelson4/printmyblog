@@ -453,9 +453,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 this.prettyUpPrintedPage();
                 this.prettyUpPageMeta();
             },
-            // Guess that we'd like 50 milliseconds per post. That's too long for simple text; too short for ones
-            // with images or videos.
-            this.total_posts * 25
+            // Guess that we'd like 25 milliseconds per post. That's too long for simple text; too short for ones
+            // with images or videos. But wait at least 200 milliseconds to prevent running before images loaded.
+            this.total_posts * 25 + 200
         );
     };
 
