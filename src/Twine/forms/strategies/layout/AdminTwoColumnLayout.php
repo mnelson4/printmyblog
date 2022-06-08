@@ -25,7 +25,7 @@ class AdminTwoColumnLayout extends TwoColumnLayout
      */
     public function layoutFormBegin($additional_args = array())
     {
-        $this->Form_section->setHtmlClass($this->Form_section->htmlClass() . ' form-table twine-two-column-layout');
+        $this->form_section->setHtmlClass($this->form_section->htmlClass() . ' form-table twine-two-column-layout');
         return parent::layoutFormBegin($additional_args);
     }
 
@@ -36,7 +36,6 @@ class AdminTwoColumnLayout extends TwoColumnLayout
      *
      * @param FormInputBase $input
      * @return string
-     * @throws Error
      */
     public function layoutInput($input)
     {
@@ -45,7 +44,7 @@ class AdminTwoColumnLayout extends TwoColumnLayout
             $input->getDisplayStrategy() instanceof TextAreaDisplay
             || (
                 $input->getDisplayStrategy() instanceof TextInputDisplay
-                && ! in_array($input->getDisplayStrategy()->getType(), ['checkbox','radio'])
+                && ! in_array($input->getDisplayStrategy()->getType(), ['checkbox','radio'], true)
                 )
             || $input->getDisplayStrategy() instanceof AdminFileUploaderDisplay
         ) {

@@ -2,6 +2,10 @@
 
 namespace Twine\services\config;
 
+/**
+ * Class Config
+ * @package Twine\services\config
+ */
 abstract class Config
 {
     /**
@@ -48,7 +52,7 @@ abstract class Config
 
     /**
      * Gets the saved setting
-     * @param $setting_name
+     * @param string $setting_name
      *
      * @return mixed
      */
@@ -85,10 +89,13 @@ abstract class Config
         $this->settings[$setting_name] = $value;
     }
 
+    /**
+     * Records this needs saving on shutdown.
+     */
     protected function setDirty()
     {
         $this->dirty = true;
-        add_action('shutdown', [$this,'save']);
+        add_action('shutdown', [$this, 'save']);
     }
 
     /**

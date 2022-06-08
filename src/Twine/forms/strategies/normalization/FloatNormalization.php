@@ -41,7 +41,9 @@ class FloatNormalization extends NormalizationBase
         if (! is_string($value_to_normalize)) {
             throw new ValidationError(
                 sprintf(
-                    __('The value "%s" must be a string submitted for normalization, it was %s', 'print-my-blog'),
+                    // translators: 1 submitted value, 2: expected type
+                    __('The value "%1$s" must be a string submitted for normalization, it was %2$s', 'print-my-blog'),
+                    // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
                     print_r($value_to_normalize, true),
                     gettype($value_to_normalize)
                 )
@@ -55,7 +57,7 @@ class FloatNormalization extends NormalizationBase
         if ($normalized_value === '') {
             return null;
         }
-        if (preg_match(FloatNormalization::REGEX, $normalized_value, $matches)) {
+        if (preg_match(self::REGEX, $normalized_value, $matches)) {
             if (count($matches) === 3) {
                 // if first match is the negative sign,
                 // then the number needs to be multiplied by -1 to remain negative

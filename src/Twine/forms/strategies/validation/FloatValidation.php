@@ -21,8 +21,8 @@ class FloatValidation extends ValidationBase
     {
         if (! $validation_error_message) {
             $validation_error_message = __(
-                "Only numeric characters, commas, periods, and spaces, please!",
-                "print-my-blog"
+                'Only numeric characters, commas, periods, and spaces, please!',
+                'print-my-blog'
             );
         }
         parent::__construct($validation_error_message);
@@ -31,8 +31,8 @@ class FloatValidation extends ValidationBase
 
 
     /**
-     *
-     * @param $normalized_value
+     * Does nothing; should bre handled by normalization.
+     * @param string $normalized_value
      */
     public function validate($normalized_value)
     {
@@ -46,6 +46,11 @@ class FloatValidation extends ValidationBase
      */
     public function getJqueryValidationRuleArray()
     {
-        return array('number' => true, 'messages' => array( 'number' => $this->getValidationErrorMessage() ) );
+        return array(
+            'number' => true,
+            'messages' => array(
+                'number' => $this->getValidationErrorMessage(),
+            ),
+        );
     }
 }

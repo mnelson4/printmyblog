@@ -19,7 +19,9 @@ abstract class FormInputStrategyBase
     protected $input;
 
 
-
+    /**
+     * FormInputStrategyBase constructor.
+     */
     public function __construct()
     {
     }

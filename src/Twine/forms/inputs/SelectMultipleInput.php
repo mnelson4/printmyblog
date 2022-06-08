@@ -31,7 +31,7 @@ class SelectMultipleInput extends FormInputWithOptionsBase
                         isset($input_settings['validation_error_message'])
                         ? $input_settings['validation_error_message']
                         : null
-                    )
+                    ),
                 )
             )
         );

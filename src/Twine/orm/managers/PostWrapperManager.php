@@ -9,6 +9,10 @@ use Twine\orm\entities\PostWrapper;
 use WP_Post;
 use WP_Query;
 
+/**
+ * Class PostWrapperManager
+ * @package Twine\orm\managers
+ */
 class PostWrapperManager
 {
     /**
@@ -22,7 +26,7 @@ class PostWrapperManager
     protected $cap_slug = 'post';
 
     /**
-     * @param $post_id
+     * @param int|string $post_id
      *
      * @return PostWrapper|null
      */
@@ -37,7 +41,8 @@ class PostWrapperManager
     }
 
     /**
-     * @param $slug
+     * Gets a post bt its slug.
+     * @param string $slug
      * @return PostWrapper|null
      */
     public function getBySlug($slug)
@@ -70,6 +75,11 @@ class PostWrapperManager
         return $query->post_count;
     }
 
+    /**
+     * Sets the post type on the WP_Query.
+     * @param WP_Query|null $query
+     * @return WP_Query|null
+     */
     protected function setQueryForThisPostType(WP_Query $query = null)
     {
         if (! $query instanceof WP_Query) {
@@ -127,23 +137,25 @@ class PostWrapperManager
     }
 
     /**
-     * @param $meta_key
-     * @param $meta_value
+     * Gets a post by its postmeta.
+     * @param string $meta_key
+     * @param string $meta_value
      * @param int $count
      * @return PostWrapper[]
      */
     public function getByPostMeta($meta_key, $meta_value, $count = -1)
     {
         $args = array(
-            'posts_per_page'   => $count,
-            'orderby'          => 'ID',
-            'order'            => 'DESC',
-            'post_status'      => 'any',
+            'posts_per_page' => $count,
+            'orderby' => 'ID',
+            'order' => 'DESC',
+            'post_status' => 'any',
             'post_type' => 'any',
+            //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
             'meta_query' => array(
                 array(
-                    'key'     => $meta_key,
-                    'value'   => $meta_value
+                    'key' => $meta_key,
+                    'value' => $meta_value,
                 ),
             ),
         );

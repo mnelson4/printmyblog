@@ -5,6 +5,10 @@ namespace Twine\orm\entities;
 use PrintMyBlog\system\CustomPostTypes;
 use WP_Post;
 
+/**
+ * Class PostWrapper
+ * @package Twine\orm\entities
+ */
 class PostWrapper
 {
 
@@ -37,7 +41,7 @@ class PostWrapper
 
     /**
      * Generic function to get metadata stored on the post object.
-     * @param $meta_name
+     * @param string $meta_name
      * @return mixed
      */
     public function getMeta($meta_name)
@@ -49,6 +53,11 @@ class PostWrapper
         return null;
     }
 
+    /**
+     * Get postmetas and prepend pmb_ to the provided meta name.
+     * @param string $meta_name
+     * @return mixed
+     */
     public function getPmbMetas($meta_name)
     {
         return $this->getMetas(
@@ -56,6 +65,11 @@ class PostWrapper
         );
     }
 
+    /**
+     * Wrapper of get_post_meta.
+     * @param string $meta_name
+     * @return mixed
+     */
     public function getMetas($meta_name)
     {
         return get_post_meta(
@@ -66,8 +80,9 @@ class PostWrapper
     }
 
     /**
-     * @param $meta_name
-     * @param $value
+     * Wrapper of update_post_meta.
+     * @param string $meta_name
+     * @param mixed $value
      *
      * @return bool|int
      */
@@ -81,7 +96,7 @@ class PostWrapper
     }
 
     /**
-     *
+     * Wrapper of wp_delete_post.
      * return bool success
      */
     public function delete()
@@ -92,7 +107,7 @@ class PostWrapper
     /**
      * Wraps getMeta() and just adds the meta prefix.
      *
-     * @param $meta_name
+     * @param string $meta_name
      *
      * @return mixed
      */
@@ -102,8 +117,9 @@ class PostWrapper
     }
 
     /**
-     * @param $meta_name
-     * @param $new_value
+     * Saves the meta and adds pmb_ to the meta key.
+     * @param string $meta_name
+     * @param mixed $new_value
      *
      * @return bool|int
      */
@@ -113,8 +129,9 @@ class PostWrapper
     }
 
     /**
-     * @param $meta_name
-     * @param $new_value
+     * Adds a new meta row, prepends pmb_ to the meta key.
+     * @param string $meta_name
+     * @param mixed $new_value
      *
      * @return false|int
      */
@@ -124,8 +141,9 @@ class PostWrapper
     }
 
     /**
-     * @param $meta_name
-     * @param $new_value
+     * Wraps add_post_meta.
+     * @param string $meta_name
+     * @param mixed $new_value
      *
      * @return false|int
      */
@@ -137,18 +155,21 @@ class PostWrapper
             $new_value
         );
     }
+
     /**
-     * @param $meta_name
-     * @param string $value
+     * Deletes meta, prepends pmb_ to the meta key.
+     * @param string $meta_name
+     * @param mixed $value
+     * @return bool
      */
     public function deletePmbMeta($meta_name, $value = '')
     {
-        $this->deleteMeta(self::META_PREFIX . $meta_name, $value);
+        return $this->deleteMeta(self::META_PREFIX . $meta_name, $value);
     }
 
     /**
-     * @param $meta_name
-     *
+     * Wraos delete_post_meta.
+     * @param string $meta_name
      * @param string $value
      *
      * @return bool
@@ -172,12 +193,13 @@ class PostWrapper
     {
         return $this->duplicatePost(
             [
+                // translators: 1 post title
                 'post_title' => sprintf(__('%s (print material)', 'print-my-blog'), $this->getWpPost()->post_title),
                 'post_type' => CustomPostTypes::CONTENT,
-                'post_status' => 'private'
+                'post_status' => 'private',
             ],
             [
-                '_pmb_original_post' => $this->getWpPost()->ID
+                '_pmb_original_post' => $this->getWpPost()->ID,
             ]
         );
     }
@@ -204,11 +226,11 @@ class PostWrapper
                 'post_parent'    => $post->post_parent,
                 'post_password'  => $post->post_password,
                 'post_status'    => $post->post_status,
-                // @translators: 1: the name of the original post being duplicated
+                // translators: 1: the name of the original post being duplicated
                 'post_title'     => sprintf(__('%s (copy)', 'print-my-blog'), $post->post_title),
                 'post_type'      => $post->post_type,
                 'to_ping'        => $post->to_ping,
-                'menu_order'     => $post->menu_order
+                'menu_order'     => $post->menu_order,
             ),
             $args_override
         );
@@ -231,7 +253,7 @@ class PostWrapper
         $old_post_meta = get_post_meta($post->ID);
         if ($old_post_meta) {
             foreach ($old_post_meta as $meta_key => $meta_values) {
-                if ('_wp_old_slug' == $meta_key) { // do nothing for this meta key
+                if ('_wp_old_slug' === $meta_key) { // do nothing for this meta key
                     continue;
                 }
 

@@ -20,6 +20,10 @@ abstract class Activation
      */
     protected $request_type;
 
+    /**
+     * Injects deps
+     * @param RequestType $request_type so we can detect activation
+     */
     public function inject(
         RequestType $request_type
     ) {

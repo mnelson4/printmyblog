@@ -15,14 +15,22 @@ use Twine\forms\helpers\ValidationError;
  */
 class MaxLengthValidation extends ValidationBase
 {
-
+    /**
+     * @var int $max_length
+     */
     protected $max_length;
 
+    /**
+     * MaxLengthValidation constructor.
+     * @param null $validation_error_message
+     * @param int $max_length
+     */
     public function __construct($validation_error_message = null, $max_length = INF)
     {
         $this->max_length = $max_length;
         if ($validation_error_message === null) {
             $validation_error_message = sprintf(
+                // translators: 1: length requirement, a number
                 __('Input is too long. Maximum number of characters is %1$s', 'print-my-blog'),
                 $max_length
             );
@@ -31,7 +39,9 @@ class MaxLengthValidation extends ValidationBase
     }
 
     /**
-     * @param $normalized_value
+     * Validates max length not exceeded.
+     * @param string $normalized_value
+     * @throws ValidationError
      */
     public function validate($normalized_value)
     {
@@ -39,7 +49,7 @@ class MaxLengthValidation extends ValidationBase
             $this->max_length !== INF &&
                 $normalized_value &&
                 is_string($normalized_value) &&
-                 strlen($normalized_value) > $this->max_length
+                strlen($normalized_value) > $this->max_length
         ) {
             throw new ValidationError($this->getValidationErrorMessage(), 'maxlength');
         }
@@ -54,8 +64,8 @@ class MaxLengthValidation extends ValidationBase
             return array(
                 'maxlength' => $this->max_length,
                 'messages' => array(
-                    'maxlength' => $this->getValidationErrorMessage()
-                )
+                    'maxlength' => $this->getValidationErrorMessage(),
+                ),
             );
         } else {
             return array();

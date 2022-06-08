@@ -20,7 +20,7 @@ class EnumValidation extends ValidationBase
 
     /**
      * Check that the value is in the allowed list
-     * @param $normalized_value
+     * @param string $normalized_value
      * @throws ImproperUsageException
      * @throws ValidationError
      * @return boolean
@@ -30,7 +30,7 @@ class EnumValidation extends ValidationBase
         parent::validate($normalized_value);
         if (! $this->input instanceof FormInputWithOptionsBase) {
             throw new ImproperUsageException(
-                __("Cannot use Enum Validation Strategy with an input that doesn't have options", "print-my-blog")
+                __('Cannot use Enum Validation Strategy with an input that doesn\'t have options', 'print-my-blog')
             );
         }
         $enum_options = $this->input->flatOptions();
@@ -60,7 +60,8 @@ class EnumValidation extends ValidationBase
         if (! $parent_validation_error_message) {
             $enum_options = $this->input instanceof FormInputWithOptionsBase ? $this->input->flatOptions() : '';
             return sprintf(
-                __("This is not allowed option. Allowed options are %s.", "print-my-blog"),
+                // translators: 1: list of options.
+                __('This is not allowed option. Allowed options are %s.', 'print-my-blog'),
                 implode(', ', $enum_options)
             );
         } else {

@@ -58,7 +58,7 @@ abstract class CompoundInputDisplay extends DisplayBase
      * appropriate input type
      *
      * @return FormInputWithOptionsBase
-     * @throws \Error
+     * @throws Exception
      */
     public function getInput()
     {

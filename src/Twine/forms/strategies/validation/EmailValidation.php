@@ -35,13 +35,10 @@ class EmailValidation extends TextValidation
 
 
     /**
-     * just checks the field isn't blank
+     * Just checks the field isn't blank
      *
-     * @param $normalized_value
+     * @param string $normalized_value
      * @return bool
-     * @throws InvalidArgumentException
-     * @throws InvalidInterfaceException
-     * @throws InvalidDataTypeException
      * @throws ValidationError
      */
     public function validate($normalized_value)
@@ -59,7 +56,12 @@ class EmailValidation extends TextValidation
      */
     public function getJqueryValidationRuleArray()
     {
-        return array('email' => true, 'messages' => array('email' => $this->getValidationErrorMessage()));
+        return array(
+            'email' => true,
+            'messages' => array(
+                'email' => $this->getValidationErrorMessage(),
+            ),
+        );
     }
 
 
@@ -68,7 +70,7 @@ class EmailValidation extends TextValidation
      * Validate an email address.
      * Provide email address (raw input)
      *
-     * @param $email
+     * @param string $email
      * @return bool of whether the email is valid or not
      */
     private function validateEmail($email)

@@ -45,10 +45,9 @@ class UrlValidation extends ValidationBase
 
 
     /**
-     * just checks the field isn't blank
+     * Just checks the field isn't blank
      *
-     * @param $normalized_value
-     * @return bool
+     * @param string $normalized_value
      * @throws ValidationError
      */
     public function validate($normalized_value)
@@ -67,6 +66,11 @@ class UrlValidation extends ValidationBase
      */
     public function getJqueryValidationRuleArray()
     {
-        return array( 'validUrl' => true, 'messages' => array( 'validUrl' => $this->getValidationErrorMessage() ) );
+        return array(
+            'validUrl' => true,
+            'messages' => array(
+                'validUrl' => $this->getValidationErrorMessage(),
+            ),
+        );
     }
 }

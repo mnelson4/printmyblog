@@ -25,7 +25,7 @@ abstract class FormSectionLayoutBase
      *
      * @var FormSection
      */
-    protected $Form_section;
+    protected $form_section;
 
 
 
@@ -45,7 +45,7 @@ abstract class FormSectionLayoutBase
      */
     public function constructFinalize(FormSection $form)
     {
-        $this->Form_section = $form;
+        $this->form_section = $form;
     }
 
 
@@ -55,7 +55,7 @@ abstract class FormSectionLayoutBase
      */
     public function formSection()
     {
-        return $this->Form_section;
+        return $this->form_section;
     }
 
 
@@ -68,28 +68,27 @@ abstract class FormSectionLayoutBase
      * Returns the HTML
      *
      * @return string HTML for displaying
-     * @throws Error
      */
     public function layoutForm()
     {
         $html = '';
         // layout_form_begin
         $html .= apply_filters(
-            'FH_FormSectionLayoutBase__layout_form__start__for_' . $this->Form_section->name(),
+            'FH_FormSectionLayoutBase__layout_form__start__for_' . $this->form_section->name(),
             $this->layoutFormBegin(),
-            $this->Form_section
+            $this->form_section
         );
         // layout_form_loop
         $html .= apply_filters(
-            'FH_FormSectionLayoutBase__layout_form__loop__for_' . $this->Form_section->name(),
+            'FH_FormSectionLayoutBase__layout_form__loop__for_' . $this->form_section->name(),
             $this->layoutFormLoop(),
-            $this->Form_section
+            $this->form_section
         );
         // layout_form_end
         $html .= apply_filters(
-            'FH_FormSectionLayoutBase__layout_form__end__for_' . $this->Form_section->name(),
+            'FH_FormSectionLayoutBase__layout_form__end__for_' . $this->form_section->name(),
             $this->layoutFormEnd(),
-            $this->Form_section
+            $this->form_section
         );
         $html = $this->addFormSectionHooksAndFilters($html);
         if ($this->formSection()->useNonce()) {
@@ -102,26 +101,25 @@ abstract class FormSectionLayoutBase
 
     /**
      * @return string
-     * @throws Error
      */
     public function layoutFormLoop()
     {
         $html = '';
-        foreach ($this->Form_section->subsections() as $name => $subsection) {
+        foreach ($this->form_section->subsections() as $name => $subsection) {
             if ($subsection instanceof FormInputBase) {
                 $html .= apply_filters(
                     'FH_FormSectionLayoutBase__layout_form__loop_for_input_'
-                    . $name . '__in_' . $this->Form_section->name(),
+                    . $name . '__in_' . $this->form_section->name(),
                     $this->layoutInput($subsection),
-                    $this->Form_section,
+                    $this->form_section,
                     $subsection
                 );
             } elseif ($subsection instanceof FormSectionBase) {
                 $html .= apply_filters(
                     'FH_FormSectionLayoutBase__layout_form__loop_for_non_input_'
-                    . $name . '__in_' . $this->Form_section->name(),
+                    . $name . '__in_' . $this->form_section->name(),
                     $this->layoutSubsection($subsection),
-                    $this->Form_section,
+                    $this->form_section,
                     $subsection
                 );
             }
@@ -218,11 +216,11 @@ abstract class FormSectionLayoutBase
     public function displayFormWideErrors()
     {
         $html = '';
-        if ($this->Form_section->getValidationErrors()) {
+        if ($this->form_section->getValidationErrors()) {
             $html .= "<div class='twine-form-wide-errors'>";
             // get all the errors on THIS form section (errors which aren't
             // for specific inputs, but instead for the entire form section)
-            foreach ($this->Form_section->getValidationErrors() as $error) {
+            foreach ($this->form_section->getValidationErrors() as $error) {
                 $html .= $error->getMessage() . '<br>';
             }
             $html .= '</div>';
@@ -301,12 +299,12 @@ abstract class FormSectionLayoutBase
     {
         $html_generator = Html::instance();
         // replace dashes and spaces with underscores
-        $hook_name = str_replace(array('-', ' '), '_', $this->Form_section->htmlId());
-        do_action('AH_Form_Section_Layout__' . $hook_name, $this->Form_section);
+        $hook_name = str_replace(array('-', ' '), '_', $this->form_section->htmlId());
+        do_action('AH_Form_Section_Layout__' . $hook_name, $this->form_section);
         $html = (string) apply_filters(
             'AF_Form_Section_Layout__' . $hook_name . '__html',
             $html,
-            $this->Form_section
+            $this->form_section
         );
         $html .= $html_generator->nl() . '<!-- AH_Form_Section_Layout__' . $hook_name . '__html -->';
         $html .= $html_generator->nl() . '<!-- AF_Form_Section_Layout__' . $hook_name . ' -->';

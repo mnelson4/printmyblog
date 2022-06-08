@@ -2,12 +2,16 @@
 
 namespace Twine\forms\strategies\display;
 
-use Twine\helpers\Html;
-
+/**
+ * Class SingleCheckboxDisplay
+ * @package Twine\forms\strategies\display
+ */
 class SingleCheckboxDisplay extends DisplayBase
 {
 
-
+    /**
+     * @return string
+     */
     public function display()
     {
         $html = $this->openingTag('input');

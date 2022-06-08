@@ -51,7 +51,7 @@ abstract class NormalizationBase extends FormInputStrategyBase
      * Takes the normalized value (for an Yes_No_Input this could be TRUE or FALSE), and converts it into
      * the value you would use in the html form (for a Yes_No_Input this could be '1' or '0').
      *
-     * @param $normalized_value
+     * @param string $normalized_value
      * @return array|string the 'raw' value as used in the form, usually a string or array of strings.
      */
     abstract public function unnormalize($normalized_value);

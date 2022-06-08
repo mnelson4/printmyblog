@@ -4,6 +4,10 @@ namespace Twine\system;
 
 use PrintMyBlog\compatibility\DetectAndActivate;
 
+/**
+ * Class Init
+ * @package Twine\system
+ */
 abstract class Init
 {
 
@@ -16,20 +20,26 @@ abstract class Init
      */
     abstract protected function initContext();
 
+    /**
+     * Sets hooks for later
+     */
     public function setHooks()
     {
-        add_action('plugins_loaded', array($this,'pluginsLoaded'));
+        add_action('plugins_loaded', array($this, 'pluginsLoaded'));
     }
 
+    /**
+     * Setup once all plugins are loaded
+     */
     public function pluginsLoaded()
     {
-        // prevent loading any PMB until they've ever registered or opted-out of Freemius
+        // prevent loading any PMB until they've ever registered or opted-out of Freemius.
         $this->context = $this->initContext();
         if (pmb_fs()->is_anonymous() || pmb_fs()->is_registered()) {
             add_action('init', array($this, 'earlyInit'), 5);
             add_action('init', array($this, 'init'));
         } else {
-            add_action('init', array($this,'minimalInit'));
+            add_action('init', array($this, 'minimalInit'));
         }
     }
 
@@ -43,7 +53,7 @@ abstract class Init
         // There's no actions between when we know it's a REST request ('parse_request' is when "REST_REQUEST" gets
         // defined)
         // and the posts are fetched for the REST API response, except this one (and maybe another).
-        add_filter('rest_pre_dispatch', [$compatibility_mods_loader,'activateRenderingCompatibilityModes'], 11);
+        add_filter('rest_pre_dispatch', [$compatibility_mods_loader, 'activateRenderingCompatibilityModes'], 11);
     }
 
     /**

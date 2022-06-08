@@ -33,7 +33,7 @@ class TextValidation extends ValidationBase
     public function validate($normalized_value)
     {
         $string_normalized_value = (string) $normalized_value;
-        if ($this->regex &&  $string_normalized_value) {
+        if ($this->regex && $string_normalized_value) {
             if (! preg_match($this->regex, $string_normalized_value)) {
                 throw new ValidationError($this->getValidationErrorMessage(), 'regex');
             }
@@ -49,8 +49,8 @@ class TextValidation extends ValidationBase
             return array(
                 'regex' => $this->regexJs(),
                 'messages' => array(
-                    'regex' => $this->getValidationErrorMessage()
-                )
+                    'regex' => $this->getValidationErrorMessage(),
+                ),
             );
         } else {
             return array();

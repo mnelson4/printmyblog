@@ -15,7 +15,9 @@ use Twine\forms\strategies\FormInputStrategyBase;
 abstract class ValidationBase extends FormInputStrategyBase
 {
 
-
+    /**
+     * @var string
+     */
     protected $validation_error_message = '';
 
 

@@ -23,21 +23,21 @@ abstract class FormInputWithOptionsBase extends FormInputBase
 {
 
     /**
-     * array of available options to choose as an answer
+     * Array of available options to choose as an answer
      *
      * @var InputOption[]
      */
     protected $options = array();
 
     /**
-     * whether to display the html_label_text above the checkbox/radio button options
+     * Whether to display the html_label_text above the checkbox/radio button options
      *
      * @var boolean
      */
     protected $display_html_label_text = true;
 
     /**
-     * whether to allow multiple selections (ie, the value of this input should be an array)
+     * Whether to allow multiple selections (ie, the value of this input should be an array)
      * or not (ie, the value should be a simple int, string, etc)
      *
      * @var boolean
@@ -80,7 +80,8 @@ abstract class FormInputWithOptionsBase extends FormInputBase
             if (! $option instanceof InputOption) {
                 throw new ImproperUsageException(
                     sprintf(
-                        __('A form input of type "%s" was passed in an arrya of non-options. It should be given an object of type "%s"', 'print-my-blog'),
+                        // translators: 1: classname, 2: classname
+                        __('A form input of type "%1$s" was passed in an arrya of non-options. It should be given an object of type "%2$s"', 'print-my-blog'),
                         get_class($this),
                         InputOption::class
                     )
@@ -89,7 +90,6 @@ abstract class FormInputWithOptionsBase extends FormInputBase
         }
         // get the first item in the select options and check it's type
         $this->options = $options;
-        // d( $this->_options );
         $select_option_keys = array_keys($this->options);
         // attempt to determine data type for values in order to set normalization type
         // purposefully only
@@ -176,9 +176,9 @@ abstract class FormInputWithOptionsBase extends FormInputBase
             $unnormalized_value_choices = array($unnormalized_value_choices);
         }
         $pretty_strings = array();
-        foreach ((array) $unnormalized_value_choices as $unnormalized_value_choice) {
-            if (isset($options[ $unnormalized_value_choice ])) {
-                $pretty_strings[] = (string)$options[ $unnormalized_value_choice ];
+        foreach ((array)$unnormalized_value_choices as $unnormalized_value_choice) {
+            if (isset($options[$unnormalized_value_choice])) {
+                $pretty_strings[] = (string)$options[$unnormalized_value_choice];
             } else {
                 $pretty_strings[] = $this->normalizedValue();
             }

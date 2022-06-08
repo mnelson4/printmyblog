@@ -26,7 +26,8 @@ class FullHtmlValidation extends ValidationBase
     {
         if (! $validation_error_message) {
             $validation_error_message = sprintf(
-                __('Only the following HTML tags are allowed:%1$s%2$s', "print-my-blog"),
+                // translators: 1: html for a line break, 2: list of allowed tags
+                __('Only the following HTML tags are allowed:%1$s%2$s', 'print-my-blog'),
                 '<br />',
                 $this->getListOfAllowedTags()
             );
@@ -36,9 +37,7 @@ class FullHtmlValidation extends ValidationBase
 
 
     /**
-     * get_list_of_allowed_tags
-     *
-     * generates and returns a string that lists the top-level HTML tags that are allowable for this input
+     * Generates and returns a string that lists the top-level HTML tags that are allowable for this input
      *
      * @return string
      */
@@ -67,7 +66,7 @@ class FullHtmlValidation extends ValidationBase
                 'li' => array(),
                 'br' => array(),
                 'p' => array(),
-                'a' => array('target')
+                'a' => array('target'),
             )
         );
         return apply_filters('Twine\forms\strategies\validation\FullHtmlValidation::getAllowedTags', $tags_we_allow);
@@ -75,7 +74,8 @@ class FullHtmlValidation extends ValidationBase
 
 
     /**
-     * @param $normalized_value
+     * Validates HTML contains no prohibited tags.
+     * @param string $normalized_value
      * @throws ValidationError
      */
     public function validate($normalized_value)

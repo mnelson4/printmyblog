@@ -2,6 +2,9 @@
 
 namespace Twine\forms\strategies\layout;
 
+use Twine\forms\base\FormSection;
+use Twine\forms\inputs\FormInputBase;
+
 /**
  * TemplateLayout
  * For very customized layouts, where you provide this class with the location of
@@ -25,16 +28,34 @@ namespace Twine\forms\strategies\layout;
 class TemplateLayout extends DivPerSectionLayout
 {
 
+    /**
+     * @var string|null
+     */
     protected $layout_template_file = null;
 
+    /**
+     * @var string|null
+     */
     protected $layout_begin_template_file = null;
 
+    /**
+     * @var string|null
+     */
     protected $input_template_file = null;
 
+    /**
+     * @var string|null
+     */
     protected $subsection_template_file = null;
 
+    /**
+     * @var string|null
+     */
     protected $layout_end_template_file = null;
 
+    /**
+     * @var array
+     */
     protected $template_args = array();
 
 
@@ -85,7 +106,7 @@ class TemplateLayout extends DivPerSectionLayout
 
 
     /**
-     * opening div tag for a form
+     * Opening div tag for a form
      *
      * @return string
      */
@@ -124,9 +145,9 @@ class TemplateLayout extends DivPerSectionLayout
      * If a subsection_template_file was provided upon construction, uses that to layout the subsection. Otherwise uses
      * parent.
      *
-     * @param FormSectionProper $form_section
+     * @param FormSection $form_section
      * @return string
-     *@see DivPerSectionLayout::layoutSubsection() for documentation
+     * @see DivPerSectionLayout::layoutSubsection() for documentation
      */
     public function layoutSubsection($form_section)
     {
@@ -139,7 +160,7 @@ class TemplateLayout extends DivPerSectionLayout
 
 
     /**
-     * closing div tag for a form
+     * Closing div tag for a form
      *
      * @return string
      */
@@ -190,14 +211,13 @@ class TemplateLayout extends DivPerSectionLayout
                 $this->template_args[ $subsection_name ] = $this->layoutSubsection($subsection);
             }
         }
-        //      d( $this->_template_args );
         return $this->template_args;
     }
 
 
 
     /**
-     * prep_form_section_key_name
+     * Sanitize input name.
      *
      * @access public
      * @param string $subsection_name
@@ -212,7 +232,7 @@ class TemplateLayout extends DivPerSectionLayout
 
 
     /**
-     * get_subform - just a wrapper for the above method
+     * Just a wrapper for the above method
      *
      * @access public
      * @param string $subsection_name
@@ -220,14 +240,21 @@ class TemplateLayout extends DivPerSectionLayout
      */
     public static function getSubformName($subsection_name = '')
     {
-        return TemplateLayout::prepFormSubsectionKeyName($subsection_name);
+        return self::prepFormSubsectionKeyName($subsection_name);
     }
 
+    /**
+     * @param string $filepath
+     * @param array|null $args
+     * @return string
+     */
     protected function renderTemplate($filepath, $args = null)
     {
         if (! $args) {
             $args = $this->templateArgs();
         }
+        // extract args so they're available in the template file.
+        // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
         extract($args);
         ob_start();
         require($filepath);

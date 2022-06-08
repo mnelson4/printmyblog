@@ -53,6 +53,8 @@ class AdminFileUploaderDisplay extends DisplayBase
         // the actual input
         $html .= '<input type="text" size="34" ';
         $html .= 'name="' . $this->input->htmlName() . '" ';
+        // Want loose comparison
+        // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
         $html .= $this->input->htmlClass() != ''
             ? 'class="large-text twine_media_url ' . $this->input->htmlClass() . '" '
             : 'class="large-text twine_media_url" ';
@@ -65,7 +67,7 @@ class AdminFileUploaderDisplay extends DisplayBase
             $image = $html_generator->br()
                 . $html_generator->br()
                 . $html_generator->div(
-                    $html_generator->img($this->input->rawValue(), '', '', "twine_media_image"),
+                    $html_generator->img($this->input->rawValue(), '', '', 'twine_media_image'),
                     null,
                     'twine-uploaded-image-wrap'
                 );
@@ -95,7 +97,7 @@ class AdminFileUploaderDisplay extends DisplayBase
     {
         $results = wp_remote_head($src);
         if (is_array($results) && ! $results instanceof WP_Error) {
-            return strpos($results['headers']['content-type'], "image") !== false;
+            return strpos($results['headers']['content-type'], 'image') !== false;
         } else {
             return false;
         }

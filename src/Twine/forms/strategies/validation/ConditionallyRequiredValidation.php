@@ -36,7 +36,7 @@ class ConditionallyRequiredValidation extends ValidationBase
     public function __construct($validation_error_message = null, $requirement_conditions = array())
     {
         if (! $validation_error_message) {
-            $validation_error_message = __("This field is required.", "print-my-blog");
+            $validation_error_message = __('This field is required.', 'print-my-blog');
         }
         $this->setRequirementConditions($requirement_conditions);
         parent::__construct($validation_error_message);
@@ -45,10 +45,10 @@ class ConditionallyRequiredValidation extends ValidationBase
 
 
     /**
-     * just checks the field isn't blank, provided the requirement conditions
+     * Just checks the field isn't blank, provided the requirement conditions
      * indicate this input is still required
      *
-     * @param $normalized_value
+     * @param string $normalized_value
      * @return bool
      * @throws \Error
      * @throws ValidationError
@@ -80,8 +80,8 @@ class ConditionallyRequiredValidation extends ValidationBase
         return array(
             'required' => $this->getJqueryRequirementValue(),
             'messages' => array(
-                'required' => $this->getValidationErrorMessage()
-            )
+                'required' => $this->getValidationErrorMessage(),
+            ),
         );
     }
 
@@ -112,7 +112,7 @@ class ConditionallyRequiredValidation extends ValidationBase
 
 
     /**
-     * gets jQuery dependency expression used for client-side validation
+     * Gets jQuery dependency expression used for client-side validation
      * Its possible this could also return a javascript callback used for determining
      * if the input is required or not. That is not yet implemented, however.
      *
@@ -126,6 +126,7 @@ class ConditionallyRequiredValidation extends ValidationBase
         if (! is_array($conditions)) {
             throw new ImproperUsageException(
                 sprintf(
+                    // translators: 1: name of input.
                     __('Input requirement conditions must be an array. You provided %1$s', 'print-my-blog'),
                     $this->input->name()
                 )
@@ -134,6 +135,7 @@ class ConditionallyRequiredValidation extends ValidationBase
         if (count($conditions) > 1) {
             throw new ImproperUsageException(
                 sprintf(
+                    // translators: 1: name of input.
                     __('Required Validation Strategy does not yet support multiple conditions. You should add it! The related input is %1$s', 'print-my-blog'),
                     $this->input->name()
                 )
@@ -144,6 +146,7 @@ class ConditionallyRequiredValidation extends ValidationBase
             if (! $input instanceof FormInputBase) {
                 throw new ImproperUsageException(
                     sprintf(
+                        // translators: 1: name of input, 2: path to input
                         __('Error encountered while setting requirement condition for input %1$s. The path %2$s does not correspond to a valid input', 'print-my-blog'),
                         $this->input->name(),
                         $input_path
@@ -155,6 +158,7 @@ class ConditionallyRequiredValidation extends ValidationBase
             if (! $input->getDisplayStrategy() instanceof SelectDisplay) {
                 throw new ImproperUsageException(
                     sprintf(
+                        // translators: 1: input name, 2: classname, 3: other input name
                         __('Required Validation Strategy can only depend on another input which uses the SelectDisplay, but you specified a field "%1$s" that uses display strategy "%2$s". If you need others, please add support for it! The related input is %3$s', 'print-my-blog'),
                         $input->name(),
                         get_class($input->getDisplayStrategy()),
@@ -175,7 +179,7 @@ class ConditionallyRequiredValidation extends ValidationBase
      * to decide)
      *
      * @return boolean
-     * @throws \Error
+     * @throws ImproperUsageException
      */
     protected function inputSsRequiredServerSide()
     {
@@ -186,6 +190,7 @@ class ConditionallyRequiredValidation extends ValidationBase
             if (! $input instanceof FormInputBase) {
                 throw new ImproperUsageException(
                     sprintf(
+                        // translators: 1: input name, 2: path to input
                         __('Error encountered while setting requirement condition for input %1$s. The path %2$s does not correspond to a valid input', 'print-my-blog'),
                         $this->input->name(),
                         $input_path
@@ -213,13 +218,14 @@ class ConditionallyRequiredValidation extends ValidationBase
      *
      * @param array $op_and_value
      * @return array
-     * @throws \Error
+     * @throws ImproperUsageException
      */
     protected function validateOpAndValue($op_and_value)
     {
         if (! isset($op_and_value[0], $op_and_value[1])) {
                 throw new ImproperUsageException(
                     sprintf(
+                        // translators: 1: input name
                         __('Required Validation Strategy conditions array\'s value must be an array with two elements: an operator, and a value. It didn\'t. The related input is %1$s', 'print-my-blog'),
                         $this->input->name()
                     )
@@ -230,6 +236,7 @@ class ConditionallyRequiredValidation extends ValidationBase
         if ($operator !== '=') {
             throw new ImproperUsageException(
                 sprintf(
+                    // translators: 1: input name
                     __('Required Validation Strategy conditions can currently only use the equals operator. If you need others, please add support for it! The related input is %1$s', 'print-my-blog'),
                     $this->input->name()
                 )

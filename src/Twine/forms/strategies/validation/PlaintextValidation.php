@@ -24,7 +24,7 @@ class PlaintextValidation extends ValidationBase
     public function __construct($validation_error_message = null)
     {
         if (! $validation_error_message) {
-            $validation_error_message = __("HTML tags are not permitted in this field", "print-my-blog");
+            $validation_error_message = __("HTML tags are not permitted in this field", 'print-my-blog');
         }
         parent::__construct($validation_error_message);
     }

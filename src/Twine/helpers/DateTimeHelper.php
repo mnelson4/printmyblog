@@ -4,13 +4,17 @@ namespace Twine\helpers;
 
 use DateTime;
 
+/**
+ * Class DateTimeHelper
+ * @package Twine\helpers
+ */
 class DateTimeHelper
 {
     const MYSQL_DATE_FORMAT = 'Y-m-d';
     const MYSQL_DATETIME_FORMAT = 'Y-m-d H:i:s';
 
     /**
-     * @param $date_string
+     * @param string $date_string
      *
      * @return DateTime|false
      */
@@ -20,7 +24,7 @@ class DateTimeHelper
     }
 
     /**
-     * @param $datetime_string
+     * @param string $datetime_string
      *
      * @return DateTime|false
      */
@@ -40,16 +44,20 @@ class DateTimeHelper
     {
         $day = $datetime->format('j');
         $datetime->modify('first day of +1 month');
-        $datetime->modify('+' . ( min($day, $datetime->format('t')) - 1) . ' days');
+        $datetime->modify('+' . (min($day, $datetime->format('t')) - 1) . ' days');
         return $datetime;
     }
 
+    /**
+     * @param DateTime $datetime
+     * @return DateTime
+     */
     public static function subtractMonth(DateTime $datetime)
     {
         $datetime = clone $datetime;
         $day = $datetime->format('j');
         $datetime->modify('first day of -1 month');
-        $datetime->modify('+' . ( min($day, $datetime->format('t')) - 1) . ' days');
+        $datetime->modify('+' . (min($day, $datetime->format('t')) - 1) . ' days');
         return $datetime;
     }
 }

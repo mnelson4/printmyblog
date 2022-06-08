@@ -26,42 +26,42 @@ abstract class FormInputBase extends FormSectionValidatable
 {
 
     /**
-     * the input's name attribute
+     * The input's name attribute
      *
      * @var string
      */
     protected $html_name;
 
     /**
-     * id for the html label tag
+     * ID for the html label tag
      *
      * @var string
      */
     protected $html_label_id;
 
     /**
-     * class for teh html label tag
+     * Class for teh html label tag
      *
      * @var string
      */
     protected $html_label_class;
 
     /**
-     * style for teh html label tag
+     * Style for teh html label tag
      *
      * @var string
      */
     protected $html_label_style;
 
     /**
-     * text to be placed in the html label
+     * Text to be placed in the html label
      *
      * @var string
      */
     protected $html_label_text;
 
     /**
-     * the full html label. If used, all other html_label_* properties are invalid
+     * The full html label. If used, all other html_label_* properties are invalid
      *
      * @var string
      */
@@ -99,7 +99,7 @@ abstract class FormInputBase extends FormSectionValidatable
     protected $required;
 
     /**
-     * css class added to required inputs
+     * CSS class added to required inputs
      *
      * @var string
      */
@@ -196,7 +196,7 @@ abstract class FormInputBase extends FormSectionValidatable
         $input_args = (array) apply_filters('FH_FormInputBase___construct__input_args', $input_args, $this);
         // the following properties must be cast as arrays
         if (isset($input_args['validation_strategies'])) {
-            foreach ((array) $input_args['validation_strategies'] as $validation_strategy) {
+            foreach ((array)$input_args['validation_strategies'] as $validation_strategy) {
                 if ($validation_strategy instanceof ValidationBase && empty($input_args['ignore_input'])) {
                     $this->validation_strategies[ get_class($validation_strategy) ] = $validation_strategy;
                 }
@@ -219,7 +219,6 @@ abstract class FormInputBase extends FormSectionValidatable
             ? $input_args['required_validation_error_message']
             : null
         );
-        // $this->_html_name_specified = isset( $input_args['html_name'] ) ? TRUE : FALSE;
         $this->display_strategy->constructFinalize($this);
         foreach ($this->validation_strategies as $validation_strategy) {
             $validation_strategy->constructFinalize($this);
@@ -264,15 +263,14 @@ abstract class FormInputBase extends FormSectionValidatable
 
 
     /**
-     * @param $parent_form_section
-     * @param $name
-     * @throws \Error
+     * @param FormSection $parent_form_section
+     * @param string $name
      */
     public function constructFinalize($parent_form_section, $name)
     {
         parent::constructFinalize($parent_form_section, $name);
         if ($this->html_label === null && $this->html_label_text === null) {
-            $this->html_label_text = ucwords(str_replace("_", " ", $name));
+            $this->html_label_text = ucwords(str_replace('_', ' ', $name));
         }
         do_action('AH_FormInputBase___construct_finalize__end', $this, $parent_form_section, $name);
     }
@@ -290,10 +288,11 @@ abstract class FormInputBase extends FormSectionValidatable
         $this->ensureConstructFinalizedCalled();
         if (! $this->display_strategy || ! $this->display_strategy instanceof DisplayBase) {
             throw new ImproperUsageException(
+                // translators: 1: html name, 2: html id
                 sprintf(
                     __(
-                        "Cannot get display strategy for form input with name %s and id %s, because it has not been set in the constructor",
-                        "print-my-blog"
+                        'Cannot get display strategy for form input with name %1$s and id %2$`s, because it has not been set in the constructor',
+                        'print-my-blog'
                     ),
                     $this->htmlName(),
                     $this->htmlId()
@@ -428,7 +427,7 @@ abstract class FormInputBase extends FormSectionValidatable
 
 
     /**
-     * returns true if input employs any of the validation strategy defined by the supplied array of classnames
+     * Returns true if input employs any of the validation strategy defined by the supplied array of classnames
      *
      * @param array $validation_strategy_classnames
      * @return bool
@@ -439,7 +438,7 @@ abstract class FormInputBase extends FormSectionValidatable
             ? $validation_strategy_classnames
             : array($validation_strategy_classnames);
         foreach ($this->validation_strategies as $key => $validation_strategy) {
-            if (in_array($key, $validation_strategy_classnames)) {
+            if (in_array($key, $validation_strategy_classnames, true)) {
                 return true;
             }
         }
@@ -680,7 +679,7 @@ abstract class FormInputBase extends FormSectionValidatable
 
 
     /**
-     * returns the raw, UNSAFE, input, almost exactly as the user submitted it.
+     * Returns the raw, UNSAFE, input, almost exactly as the user submitted it.
      * Please note that almost all client code should instead use the normalized_value;
      * or possibly raw_value_in_form (which prepares the string for displaying in an HTML attribute on a tag,
      * mostly by escaping quotes)
@@ -711,7 +710,7 @@ abstract class FormInputBase extends FormSectionValidatable
 
 
     /**
-     * returns the value after it's been sanitized, and then converted into it's proper type
+     * Returns the value after it's been sanitized, and then converted into it's proper type
      * in PHP. Eg, a string, an int, an array,
      *
      * @return mixed
@@ -906,8 +905,7 @@ abstract class FormInputBase extends FormSectionValidatable
 
 
     /**
-     * find_form_data_for_this_section
-     * using this section's name and its parents, finds the value of the form data that corresponds to it.
+     * Using this section's name and its parents, finds the value of the form data that corresponds to it.
      * For example, if this form section's HTML name is my_form[subform][form_input_1],
      * then it's value should be in $_REQUEST at $_REQUEST['my_form']['subform']['form_input_1'].
      * (If that doesn't exist, we also check for this subsection's name
@@ -992,6 +990,8 @@ abstract class FormInputBase extends FormSectionValidatable
     public function formDataPresentIn($req_data = null)
     {
         if ($req_data === null) {
+            // Nonce verification must be handled before calling this.
+            // phpcs:ignore WordPress.Security.NonceVerification.Missing
             $req_data = $_POST;
         }
         $checked_value = $this->findFormDataForThisSection($req_data);
@@ -1080,6 +1080,7 @@ abstract class FormInputBase extends FormSectionValidatable
     /**
      * Makes this input disabled. That means it will have the HTML attribute 'disabled="disabled"',
      * and server-side if any input was received it will be ignored
+     * @param bool $disable
      */
     public function disable($disable = true)
     {
