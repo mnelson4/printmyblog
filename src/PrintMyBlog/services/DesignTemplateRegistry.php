@@ -44,7 +44,7 @@ class DesignTemplateRegistry
                 'PrintMyBlog\entities\DesignTemplate',
                 [
                     $slug,
-                    call_user_func($this->design_template_callbacks[$slug])
+                    call_user_func($this->design_template_callbacks[$slug]),
                 ]
             );
         }

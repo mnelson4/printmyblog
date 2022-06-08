@@ -74,19 +74,21 @@ class DesignRegistry
      * @type array $design_defaults which will be sent to design form via \Twine\forms\base\FormSection::populateDefaults
      * @type array $project_defaults which will also be sent to the project metadata form via \Twine\forms\base\FormSection::populateDefaults
      *
-     *}
+     * }
      */
     protected function createNewDesign($design_template_slug, $design_slug, $callback)
     {
         list($design_template, $args) = $this->getTemplateAndArgs($design_template_slug, $callback);
-        $design_post_id = wp_insert_post([
-            'post_title'   => $args['title'],
-            'post_name'    => $design_slug,
-            'post_type'    => CustomPostTypes::DESIGN,
-            'post_content' => $args['description'],
-            'post_excerpt' => Array2::setOr($args, 'quick_description', ''),
-            'post_status' => 'publish'
-        ]);
+        $design_post_id = wp_insert_post(
+            [
+                'post_title'   => $args['title'],
+                'post_name'    => $design_slug,
+                'post_type'    => CustomPostTypes::DESIGN,
+                'post_content' => $args['description'],
+                'post_excerpt' => Array2::setOr($args, 'quick_description', ''),
+                'post_status' => 'publish',
+            ]
+        );
         if (! $design_post_id) {
             throw new Exception(
                 'There was an error inserting the design post "'
@@ -130,7 +132,7 @@ class DesignRegistry
             [
                 'ID' => $design->getWpPost()->ID,
                 'post_excerpt' => Array2::setOr($args, 'quick_description', ''),
-                'post_content' => $args['description']
+                'post_content' => $args['description'],
             ]
         );
         $this->setArgsForDesign($design, $args);

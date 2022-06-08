@@ -30,7 +30,7 @@ class ExternalResource
         return [
             'ID' => $this->getID(),
             'external_url' => $this->getExternalUrl(),
-            'copy_filename' => $this->getCopyFilename()
+            'copy_filename' => $this->getCopyFilename(),
         ];
     }
 
@@ -39,7 +39,7 @@ class ExternalResource
         return [
             '%d',
             '%s',
-            '%s'
+            '%s',
         ];
     }
 

@@ -19,7 +19,7 @@ class ProjectGenerationFactory
             'PrintMyBlog\entities\ProjectGeneration',
             [
                 $project,
-                $format
+                $format,
             ]
         );
     }

@@ -75,13 +75,15 @@ class ProjectSectionManager
         $include_post_title = false,
         $placement = null
     ) {
-        return $this->createObjsFromRows($this->getFlatSectionRowsFor(
-            $project_id,
-            $limit,
-            $offset,
-            $include_post_title,
-            $placement
-        ));
+        return $this->createObjsFromRows(
+            $this->getFlatSectionRowsFor(
+                $project_id,
+                $limit,
+                $offset,
+                $include_post_title,
+                $placement
+            )
+        );
     }
 
     /**
@@ -105,7 +107,6 @@ class ProjectSectionManager
         $select_sql = $this->defaultSelection();
         $join_sql = '';
         $where_sql = $wpdb->prepare(' WHERE project_id=%d', $project_id);
-        ;
         if ($include_post_title) {
             $select_sql .= ', posts.post_title';
             $join_sql .= 'INNER JOIN
@@ -227,10 +228,10 @@ class ProjectSectionManager
         return $wpdb->delete(
             $wpdb->prefix . TableManager::SECTIONS_TABLE,
             [
-                'project_id' => $project_id
+                'project_id' => $project_id,
             ],
             [
-                '%d'
+                '%d',
             ]
         );
     }
@@ -279,17 +280,17 @@ class ProjectSectionManager
                     'template' => $template,
                     'placement' => $placement,
                     'height' => $height,
-                    'depth' => $depth
+                    'depth' => $depth,
                 ],
                 [
-                    '%d',//project_id
-                    '%d',//post_id
-                    '%d',//parent_id
-                    '%d',//section_order
-                    '%s',//template
-                    '%s',//placement
-                    '%d',//height
-                    '%d',//depth
+                    '%d', // project_id
+                    '%d', // post_id
+                    '%d', // parent_id
+                    '%d', // section_order
+                    '%s', // template
+                    '%s', // placement
+                    '%d', // height
+                    '%d', // depth
                 ]
             );
             if (! $success) {

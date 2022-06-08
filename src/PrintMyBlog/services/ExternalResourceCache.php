@@ -70,9 +70,9 @@ class ExternalResourceCache
                 'timeout' => 15,
                 'user-agent' => 'PostmanRuntime/7.26.8',
                 'httpversion' => '1.1',
-            //              streaming the file directly to the FS sounds more efficient, but it actually still goes into memory and seems buggy
-            //                'stream' => true,
-            //                'filename'=> $folder . $copy_filename,
+            // streaming the file directly to the FS sounds more efficient, but it actually still goes into memory and seems buggy
+            // 'stream' => true,
+            // 'filename'=> $folder . $copy_filename,
             ]
         );
         if (is_array($response) && $response['response']['code'] === 200 && ! $response instanceof WP_Error) {
@@ -128,9 +128,9 @@ class ExternalResourceCache
         return apply_filters(
             'PrintMyBlog\services\ExternalResourceCache->domainsToNotMap()',
             [
-                str_replace(['http://','https://'], '', site_url()),
+                str_replace(['http://', 'https://'], '', site_url()),
                 '.wp.com',
-                'data:'
+                'data:',
             ]
         );
     }

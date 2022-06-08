@@ -157,7 +157,7 @@ class Design extends PostWrapper
         $index = 1;
         return [
             $this->getPreview(1),
-            $this->getPreview(2)
+            $this->getPreview(2),
         ];
     }
 
@@ -170,7 +170,7 @@ class Design extends PostWrapper
     {
         return [
             'url' => $this->getPmbMeta('preview_' . $index . '_url'),
-            'desc' => $this->getPmbMeta('preview_' . $index . '_desc')
+            'desc' => $this->getPmbMeta('preview_' . $index . '_desc'),
         ];
     }
 

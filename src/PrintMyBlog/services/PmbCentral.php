@@ -33,7 +33,7 @@ class PmbCentral
             if ($refresh) {
                 $url = add_query_arg(
                     [
-                        'refresh' => true
+                        'refresh' => true,
                     ],
                     $url
                 );
@@ -43,9 +43,9 @@ class PmbCentral
                 $url,
                 [
                     'headers' => [
-                        'Authorization' => $this->getSiteAuthorizationHeader()
+                        'Authorization' => $this->getSiteAuthorizationHeader(),
                     ],
-                    'timeout' => 20
+                    'timeout' => 20,
                 ]
             );
             if ($response instanceof WP_Error) {

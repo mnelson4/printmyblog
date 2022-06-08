@@ -12,7 +12,7 @@ class ColorGuru
      */
     public function convertHexToRgb($hex_code)
     {
-        return sscanf($hex_code, "#%02x%02x%02x");
+        return sscanf($hex_code, '#%02x%02x%02x');
     }
 
     /**

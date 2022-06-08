@@ -114,7 +114,7 @@ class PdfGenerator extends HtmlBaseGenerator
                             'http_insecure' => true,
                             'javascript' => true, // before sending the HTML to DocRaptor, we turn all the "script" tags into "disabled-script"; and all the "prince-script" into "script" tags.
                         ],
-                        'tag' => $this->project_generation->getGeneratedIntermediaryFileUrl() . ($license instanceof FS_Plugin_License ? ', license:' . $license->id : '')
+                        'tag' => $this->project_generation->getGeneratedIntermediaryFileUrl() . ($license instanceof FS_Plugin_License ? ', license:' . $license->id : ''),
                     ]
                 ),
                 'translations' => [
@@ -129,7 +129,7 @@ class PdfGenerator extends HtmlBaseGenerator
                     ),
                     'many_articles' => __('Your project is very big and you might have errors downloading the file. If so, try splitting your content into multiple projects and instead creating multiple smaller files.', 'print-my-blog'),
                     'many_images' => __('Your project has lots of images and you might have errors downloading the file. If so, try spltting your content into multiple projects or reducing the image quality set on your design.', 'print-my-blog'),
-                ]
+                ],
             ]
         );
 
@@ -147,7 +147,7 @@ class PdfGenerator extends HtmlBaseGenerator
         // now add the Prince script, which Prince will run
         // pass in its variables, like maximum image size
         $prince_js_vars = [
-            'page_per_post' => (int)$this->design->getSetting('page_per_post')
+            'page_per_post' => (int)$this->design->getSetting('page_per_post'),
         ];
         $max_image_size = $this->design->getSetting('image_size');
         if (! $max_image_size) {
@@ -180,9 +180,9 @@ class PdfGenerator extends HtmlBaseGenerator
         // Add the "base" tag so relative links work. But if Oxygen pagebuilder is active, we need to use a different hook.
         // (because Oxygen puts everything from wp_head in the footer)
         if (defined('CT_VERSION')) {
-            add_action('oxygen_enqueue_frontend_scripts', [$this,'addBaseTag']);
+            add_action('oxygen_enqueue_frontend_scripts', [$this, 'addBaseTag']);
         } else {
-            add_action('wp_head', [$this,'addBaseTag']);
+            add_action('wp_head', [$this, 'addBaseTag']);
         }
     }
 
@@ -216,6 +216,13 @@ class PdfGenerator extends HtmlBaseGenerator
                 // This probably means their subscription isn't good anymore. Treat it like they have none.
             }
         }
-        echo pmb_get_contents(PMB_TEMPLATES_DIR . 'partials/pro_print_page_window.php', ['license_info' => $license_info, 'project' => $this->project, 'generate_url' => $this->getUrlBackToGenerateStep()]);
+        echo pmb_get_contents(
+            PMB_TEMPLATES_DIR . 'partials/pro_print_page_window.php',
+            [
+                'license_info' => $license_info,
+                'project' => $this->project,
+                'generate_url' => $this->getUrlBackToGenerateStep(),
+            ]
+        );
     }
 }

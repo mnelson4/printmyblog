@@ -46,7 +46,7 @@ class SectionTemplateRegistry
     public function getAll()
     {
         foreach ($this->callbacks as $slug => $callback) {
-            if (!isset($this->instances[$slug])) {
+            if (! isset($this->instances[$slug])) {
                 $this->get($slug);
             }
         }
@@ -63,7 +63,7 @@ class SectionTemplateRegistry
         $template = Context::instance()->useNew(
             'PrintMyBlog\entities\SectionTemplate',
             [
-                call_user_func($args_callback)
+                call_user_func($args_callback),
             ]
         );
         $template->constructFinalize($slug);

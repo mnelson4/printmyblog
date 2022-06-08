@@ -95,7 +95,7 @@ class ExternalResourceManager
                 [
                     'ID' => null,
                     'external_url' => $external_url,
-                    'copy_filename' => $filename
+                    'copy_filename' => $filename,
                 ]
             );
         }
@@ -115,10 +115,10 @@ class ExternalResourceManager
                 $externalResource->properties(),
                 $externalResource->wpdbPropertyFormats(),
                 [
-                    'ID' => $externalResource->getID()
+                    'ID' => $externalResource->getID(),
                 ],
                 [
-                    '%d'
+                    '%d',
                 ]
             );
             return $externalResource->getID();

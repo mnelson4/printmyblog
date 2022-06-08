@@ -30,15 +30,15 @@ class Shortcodes extends BaseController
         );
         add_shortcode(
             'pmb_project_title',
-            [$this,'projectTitle']
+            [$this, 'projectTitle']
         );
         add_shortcode(
             'pmb_toc',
-            [$this,'tableOfContents']
+            [$this, 'tableOfContents']
         );
         add_shortcode(
             'pmb_title_page',
-            [$this,'titlePage']
+            [$this, 'titlePage']
         );
         add_shortcode(
             'pmb_byline',
@@ -46,11 +46,11 @@ class Shortcodes extends BaseController
         );
         add_shortcode(
             'pmb_footnote',
-            [$this,'footnote']
+            [$this, 'footnote']
         );
         add_shortcode(
             'pmb_web_only_text',
-            [$this,'webOnlyText']
+            [$this, 'webOnlyText']
         );
         add_shortcode(
             'pmb_web_only_blocks',
@@ -120,7 +120,7 @@ class Shortcodes extends BaseController
             [
                 'ID' => null,
                 'format' => 'print',
-                'add_protocol' => true
+                'add_protocol' => true,
             ],
             $atts
         );
@@ -134,7 +134,7 @@ class Shortcodes extends BaseController
         // remove the starting "http://" and "https://" because, if used in an anchor link, those get added automatically
         if (! $atts['add_protocol']) {
             $url = str_replace(
-                ['http://','https://','://'],
+                ['http://', 'https://', '://'],
                 '',
                 $url
             );
@@ -145,7 +145,7 @@ class Shortcodes extends BaseController
     {
         $atts = shortcode_atts(
             [
-                'ID' => null
+                'ID' => null,
             ],
             $atts
         );
@@ -181,7 +181,7 @@ class Shortcodes extends BaseController
             $template_path = $pmb_design->getDesignTemplate()->getTemplatePathToDivision(
                 DesignTemplate::TEMPLATE_TITLE_PAGE
             );
-            require($template_path);
+            require $template_path;
         } else {
             return do_shortcode('<h1>[pmb_project_title]</h1>');
         }

@@ -16,11 +16,11 @@ class Migration3_2_3 extends MigrationBase
         $wpdb->update(
             $wpdb->posts,
             [
-                'post_status' => 'private'
+                'post_status' => 'private',
             ],
             [
                 'post_type' => CustomPostTypes::CONTENT,
-                'post_status' => 'publish'
+                'post_status' => 'publish',
             ]
         );
     }

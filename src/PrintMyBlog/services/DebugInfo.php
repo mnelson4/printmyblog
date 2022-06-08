@@ -66,13 +66,13 @@ class DebugInfo
             'author' => $active_theme['author']['value'],
             'author_website' => $active_theme['author_website']['value'],
             'parent_theme' => $active_theme['parent_theme']['value'],
-            'theme_features' => $active_theme['theme_features']['value']
+            'theme_features' => $active_theme['theme_features']['value'],
         ];
         $is_ssl                 = is_ssl();
         $is_multisite           = is_multisite();
         $blog_public            = get_option('blog_public');
         if (function_exists('wp_get_environment_type')) {
-            $environment_type       = wp_get_environment_type();
+            $environment_type = wp_get_environment_type();
         } else {
             $environment_type = 'unknown';
         }
@@ -131,11 +131,13 @@ class DebugInfo
          * @var Project[] $projects
          */
         $projects = $this->project_manager->getAll(
-            new \WP_Query([
-                'order' => 'DESC',
-                'orderby' => 'modified',
-                'posts_per_page' => 5
-            ])
+            new \WP_Query(
+                [
+                    'order' => 'DESC',
+                    'orderby' => 'modified',
+                    'posts_per_page' => 5,
+                ]
+            )
         );
         $project_datas = [];
         foreach ($projects as $project) {
@@ -143,7 +145,7 @@ class DebugInfo
                 'title' => $project->getWpPost()->post_title,
                 'generations' => [],
                 'meta' => [],
-                'designs' => []
+                'designs' => [],
             ];
             foreach ($project->getDesigns() as $format => $design) {
                 $project_data['designs'][$format] = $design->getWpPost()->post_title . ' (ID:' . $design->getWpPost()->ID . ')';
@@ -161,20 +163,22 @@ class DebugInfo
     {
         $metas = array_diff_key(
             $project_meta,
-            array_flip([
+            array_flip(
+                [
                     '_pmb_pmb_code',
                     '_wp_old_slug',
                     '_pmb_format',
                     '_pmb_progress_setup',
-                    '_pmb_levels_used'
-                ])
+                    '_pmb_levels_used',
+                ]
+            )
         );
         $starters_to_ignore = [
             '_pmb_progress_',
             '_pmb_design_for',
             '_pmb_dirty_',
             '_pmb_last_section_',
-            '_pmb_generated_'
+            '_pmb_generated_',
         ];
         $final_metas = [];
         foreach ($metas as $key => $value) {
@@ -221,10 +225,10 @@ class DebugInfo
                         '_pmb_preview_2_url',
                         '_pmb_preview_2_desc',
                         '_pmb_author_name',
-                        '_pmb_author_url'
+                        '_pmb_author_url',
                     ]
                 )
-            )
+            ),
         ];
     }
 

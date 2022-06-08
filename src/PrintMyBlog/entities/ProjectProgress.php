@@ -32,12 +32,12 @@ class ProjectProgress
     protected $steps;
 
     protected $step_to_subaction_mapping = [
-        ProjectProgress::SETUP_STEP => Admin::SLUG_SUBACTION_PROJECT_SETUP,
-        ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX => Admin::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN,
-        ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX => Admin::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN,
-        ProjectProgress::EDIT_CONTENT_STEP => Admin::SLUG_SUBACTION_PROJECT_CONTENT,
-        ProjectProgress::EDIT_METADATA_STEP => Admin::SLUG_SUBACTION_PROJECT_META,
-        ProjectProgress::GENERATE_STEP => Admin::SLUG_SUBACTION_PROJECT_GENERATE
+        self::SETUP_STEP => Admin::SLUG_SUBACTION_PROJECT_SETUP,
+        self::CHOOSE_DESIGN_STEP_PREFIX => Admin::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN,
+        self::CUSTOMIZE_DESIGN_STEP_PREFIX => Admin::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN,
+        self::EDIT_CONTENT_STEP => Admin::SLUG_SUBACTION_PROJECT_CONTENT,
+        self::EDIT_METADATA_STEP => Admin::SLUG_SUBACTION_PROJECT_META,
+        self::GENERATE_STEP => Admin::SLUG_SUBACTION_PROJECT_GENERATE,
     ];
 
     /**
@@ -78,7 +78,7 @@ class ProjectProgress
     {
         if ($this->steps === null) {
             $steps = [
-                self::SETUP_STEP => __('Setup', 'print-my-blog')
+                self::SETUP_STEP => __('Setup', 'print-my-blog'),
             ];
             $formats_in_use = $this->project->getFormatsSelected();
             foreach ($formats_in_use as $format) {
@@ -198,26 +198,26 @@ class ProjectProgress
      */
     public function mapStepToSubactionArgs($step)
     {
-        if (strpos($step, ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX) === 0) {
-            $format = str_replace(ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX, '', $step);
+        if (strpos($step, self::CHOOSE_DESIGN_STEP_PREFIX) === 0) {
+            $format = str_replace(self::CHOOSE_DESIGN_STEP_PREFIX, '', $step);
             $args['subaction'] = Admin::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN;
             $args['format'] = $format;
-        } elseif (strpos($step, ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX) === 0) {
-            $format = str_replace(ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX, '', $step);
+        } elseif (strpos($step, self::CUSTOMIZE_DESIGN_STEP_PREFIX) === 0) {
+            $format = str_replace(self::CUSTOMIZE_DESIGN_STEP_PREFIX, '', $step);
             $args['subaction'] = Admin::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN;
             $args['format'] = $format;
         } else {
             switch ($step) {
-                case ProjectProgress::SETUP_STEP:
+                case self::SETUP_STEP:
                     $subaction = Admin::SLUG_SUBACTION_PROJECT_SETUP;
                     break;
-                case ProjectProgress::EDIT_CONTENT_STEP:
+                case self::EDIT_CONTENT_STEP:
                     $subaction = Admin::SLUG_SUBACTION_PROJECT_CONTENT;
                     break;
-                case ProjectProgress::EDIT_METADATA_STEP:
+                case self::EDIT_METADATA_STEP:
                     $subaction = Admin::SLUG_SUBACTION_PROJECT_META;
                     break;
-                case ProjectProgress::GENERATE_STEP:
+                case self::GENERATE_STEP:
                 default:
                     $subaction = Admin::SLUG_SUBACTION_PROJECT_GENERATE;
             }
@@ -250,7 +250,7 @@ class ProjectProgress
                 $step .= $format;
             }
         } else {
-            $step = ProjectProgress::SETUP_STEP;
+            $step = self::SETUP_STEP;
         }
         return $step;
     }

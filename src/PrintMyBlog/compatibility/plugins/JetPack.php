@@ -12,7 +12,7 @@ class JetPack extends CompatibilityBase
     {
         add_filter(
             'PrintMyBlog\domain\DefaultDesignTemplates->getGenericDesignForm',
-            [$this,'removeScaledResizeOption']
+            [$this, 'removeScaledResizeOption']
         );
     }
 

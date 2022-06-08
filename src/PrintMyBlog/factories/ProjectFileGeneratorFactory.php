@@ -14,7 +14,7 @@ class ProjectFileGeneratorFactory
             $classname,
             [
                 $project_generation,
-                $design
+                $design,
             ]
         );
     }

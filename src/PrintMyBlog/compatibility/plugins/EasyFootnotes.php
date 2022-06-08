@@ -30,7 +30,7 @@ class EasyFootnotes extends CompatibilityBase
         // There's no actions between when we know it's a REST request ('parse_request' is when "REST_REQUEST" gets
         // defined)
         // and the posts are fetched for the REST API response, except this one (and maybe another).
-        add_filter('rest_pre_dispatch', [$this,'checkIfRestRequest'], 11);
+        add_filter('rest_pre_dispatch', [$this, 'checkIfRestRequest'], 11);
     }
 
     /**
@@ -43,7 +43,7 @@ class EasyFootnotes extends CompatibilityBase
     {
 
         add_filter('the_content', [$this, 'tellEasyFootnotesItsASingularRequest'], 19);
-        add_filter('the_content', [$this,'okNoMoreNeedForTheDisguise'], 21);
+        add_filter('the_content', [$this, 'okNoMoreNeedForTheDisguise'], 21);
         return $normal_result;
     }
 

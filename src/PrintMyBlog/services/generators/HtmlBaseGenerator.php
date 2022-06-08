@@ -25,10 +25,10 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
     {
         parent::startGenerating();
         // Try to get enqueued after the theme, if we're doing that, so we get precedence.
-        add_action('wp_enqueue_scripts', [$this,'enqueueStylesAndScripts'], 1000);
+        add_action('wp_enqueue_scripts', [$this, 'enqueueStylesAndScripts'], 1000);
         do_action('pmb_pdf_generation_start', $this->project_generation, $this->design);
         add_filter('should_load_block_editor_scripts_and_styles', '__return_true');
-        add_action('pmb_pro_print_window', [$this,'addPrintWindowToPage']);
+        add_action('pmb_pro_print_window', [$this, 'addPrintWindowToPage']);
         $this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT);
     }
 
@@ -192,7 +192,7 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
             [
                 'ID' => $this->project->getWpPost()->ID,
                 'action' => \PrintMyBlog\controllers\Admin::SLUG_ACTION_EDIT_PROJECT,
-                'subaction' => \PrintMyBlog\entities\ProjectProgress::GENERATE_STEP
+                'subaction' => \PrintMyBlog\entities\ProjectProgress::GENERATE_STEP,
             ],
             admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
         );

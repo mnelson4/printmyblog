@@ -37,12 +37,12 @@ class DefaultProjectContents
             [
                 'pmb-title-page' => [
                     'post_title' => __('Title Page', 'print-my-blog'),
-                    'post_content' => '[pmb_title_page]'
+                    'post_content' => '[pmb_title_page]',
                 ],
                 'pmb-toc' => [
                     'post_title' => __('Table of Contents', 'print-my-blog'),
-                    'post_content' => '[pmb_toc]'
-                ]
+                    'post_content' => '[pmb_toc]',
+                ],
             ]
         );
     }

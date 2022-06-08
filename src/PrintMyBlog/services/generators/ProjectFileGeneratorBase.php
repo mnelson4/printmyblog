@@ -94,7 +94,7 @@ abstract class ProjectFileGeneratorBase
     {
         // Includes the design's functions.php file, if it exists
         if (file_exists($this->getDesignDir() . 'functions.php')) {
-            include($this->getDesignDir() . 'functions.php');
+            include $this->getDesignDir() . 'functions.php';
         }
 
         $this->plugin_compatibility->activateRenderingCompatibilityModes();
@@ -105,15 +105,15 @@ abstract class ProjectFileGeneratorBase
         $this->finishGenerating();
         return true;
 
-//      // If that's all the posts done, add the header and footer, using the scripts we enqueued.
-//      $total = $part_fetcher->countParts($this->getWpPost()->ID);
-//      if( $total >= $part_post_ids){
-//          $this->setGenerated(true);
-//      }
-//      return [
-//          'done' => $part_post_ids,
-//          'total' => $total
-//      ];
+// If that's all the posts done, add the header and footer, using the scripts we enqueued.
+// $total = $part_fetcher->countParts($this->getWpPost()->ID);
+// if( $total >= $part_post_ids){
+// $this->setGenerated(true);
+// }
+// return [
+// 'done' => $part_post_ids,
+// 'total' => $total
+// ];
     }
 
     /**
@@ -129,12 +129,18 @@ abstract class ProjectFileGeneratorBase
         // show protected posts' bodies as normal.
         add_filter('post_password_required', '__return_false');
         // don't add "protected" or "private" onto post titles when generating
-        add_filter('protected_title_format', function () {
-            return '%s';
-        });
-        add_filter('private_title_format', function () {
-            return '%s';
-        });
+        add_filter(
+            'protected_title_format',
+            function () {
+                return '%s';
+            }
+        );
+        add_filter(
+            'private_title_format',
+            function () {
+                return '%s';
+            }
+        );
         do_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->startGenerating', $this);
         register_shutdown_function(array( $this, 'shutdown' ));
     }
@@ -159,16 +165,16 @@ abstract class ProjectFileGeneratorBase
     /**
      * Dequeues the active theme's styles by guessing that all their styles are registered with their name in it.
      */
-//  public function remove_theme_style()
-//  {
-//      $all_styles = wp_styles();
-//      $active_theme_slug = get_stylesheet();
-//      foreach($all_styles->queue as $handle){
-//          if(strpos($handle, $active_theme_slug) !== false){
-//              wp_dequeue_style($handle);
-//          }
-//      }
-//  }
+// public function remove_theme_style()
+// {
+// $all_styles = wp_styles();
+// $active_theme_slug = get_stylesheet();
+// foreach($all_styles->queue as $handle){
+// if(strpos($handle, $active_theme_slug) !== false){
+// wp_dequeue_style($handle);
+// }
+// }
+// }
 
     /**
      * Orders $query->posts according to the order specified by $post_ids_in_order
@@ -263,7 +269,7 @@ abstract class ProjectFileGeneratorBase
                 'post_status' => 'any',
                 'post__in' => $post_ids,
                 'showposts' => count($post_ids),
-                'post_type' => $this->post_fetcher->getProjectPostTypes()
+                'post_type' => $this->post_fetcher->getProjectPostTypes(),
             ]
         );
         $this->sortPostsAndAttachSections($query, $project_sections);
@@ -312,7 +318,7 @@ abstract class ProjectFileGeneratorBase
         $pmb_project_generation = $this->project_generation;
         do_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom before_ob_start');
         ob_start();
-        include($template_file);
+        include $template_file;
         // if Oxygen page builder is active, clear ALL buffers. It starts a buffer and then clears it in the footer
         // somehow resulting in the HTML head getting echoed into the JSON response instead of being added to the top
         // of the print page). Avoid all that by clearing its buffer immediately.

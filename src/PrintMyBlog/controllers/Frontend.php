@@ -40,7 +40,7 @@ class Frontend extends BaseController
     public function addPrintButton($content)
     {
         global $post;
-        if (! $post instanceof WP_Post || ! in_array($post->post_type, ['post','page'])) {
+        if (! $post instanceof WP_Post || ! in_array($post->post_type, ['post', 'page'])) {
             return $content;
         }
         $pmb_print_settings = Context::instance()->reuse('PrintMyBlog\domain\FrontendPrintSettings');

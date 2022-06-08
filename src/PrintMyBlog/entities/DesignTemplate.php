@@ -303,7 +303,7 @@ class DesignTemplate
         if (! $beginning) {
             $division .= '_end';
         }
-        return  $this->getDirForTemplates() . $division . '.php';
+        return $this->getDirForTemplates() . $division . '.php';
     }
 
     /**
@@ -363,10 +363,10 @@ class DesignTemplate
     public function divisionLabelSingular($level)
     {
         $display = [
-             __('article', 'print-my-blog'),
-             __('part', 'print-my-blog'),
+            __('article', 'print-my-blog'),
+            __('part', 'print-my-blog'),
             __('volume', 'print-my-blog'),
-            __('anthology', 'print-my-blog')
+            __('anthology', 'print-my-blog'),
         ];
         return $display[$level];
     }
@@ -375,7 +375,7 @@ class DesignTemplate
     {
         return array_merge(
             [
-                self::IMPLIED_DIVISION_PROJECT
+                self::IMPLIED_DIVISION_PROJECT,
             ],
             self::validPlacements(),
             self::validDivisions()
@@ -391,7 +391,7 @@ class DesignTemplate
         return [
             self::IMPLIED_DIVISION_FRONT_MATTER,
             self::IMPLIED_DIVISION_MAIN_MATTER,
-            self::IMPLIED_DIVISION_BACK_MATTER
+            self::IMPLIED_DIVISION_BACK_MATTER,
         ];
     }
 

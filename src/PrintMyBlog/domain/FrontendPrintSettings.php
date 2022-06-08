@@ -60,7 +60,7 @@ class FrontendPrintSettings
             'ebook' => array(
                 'admin_label' => esc_html__('eBook', 'print-my-blog'),
                 'default' => esc_html__('eBook 📱', 'print-my-blog'),
-            )
+            ),
         );
         // Remove emojis if the database doesn't support it.
         global $wpdb;
@@ -77,8 +77,8 @@ class FrontendPrintSettings
                     $settings['default']
                 );
             } else {
-                $this->formats[$key]['admin_label'] = str_replace(['🖨','📄','📱'], ['','',''], $settings['admin_label']);
-                $this->formats[$key]['default'] = str_replace(['🖨','📄','📱'], ['','',''], $settings['default']);
+                $this->formats[$key]['admin_label'] = str_replace(['🖨', '📄', '📱'], ['', '', ''], $settings['admin_label']);
+                $this->formats[$key]['default'] = str_replace(['🖨', '📄', '📱'], ['', '', ''], $settings['default']);
             }
         }
         // Initialize the settings with the defaults.
@@ -95,16 +95,16 @@ class FrontendPrintSettings
      */
     protected function defaultSettings()
     {
-        $defaults =  [
+        $defaults = [
             'show_buttons' => false,
             'show_buttons_pages' => false,
-            'place_above' => true
+            'place_above' => true,
         ];
         foreach ($this->formats as $slug => $format) {
             $defaults[$slug] = array(
                 'frontend_label' => $format['default'],
                 'active' => true,
-                'print_options' => []
+                'print_options' => [],
             );
         }
         return $defaults;
@@ -320,7 +320,7 @@ class FrontendPrintSettings
         if (! isset($this->settings[$format])) {
             $this->settings[$format] = array(
                 'frontend_label' => $this->formats[$format]['default'],
-                'active' => false
+                'active' => false,
             );
         }
     }
@@ -357,7 +357,7 @@ class FrontendPrintSettings
     {
         return [
             'post' => $this->settings['show_buttons'],
-            'page' => $this->settings['show_buttons_pages']
+            'page' => $this->settings['show_buttons_pages'],
         ];
     }
 }

@@ -75,7 +75,7 @@ class EpubGenerator extends HtmlBaseGenerator
         wp_enqueue_script(
             'pmb-epub',
             PMB_SCRIPTS_URL . 'epub-generator.js',
-            ['epub-gen-memory','jquery', 'pmb-beautifier-functions', 'pmb-streamsaver', 'pmb-filesaver'],
+            ['epub-gen-memory', 'jquery', 'pmb-beautifier-functions', 'pmb-streamsaver', 'pmb-filesaver'],
             filemtime(PMB_SCRIPTS_DIR . 'epub-generator.js')
         );
         $css = pmb_get_contents(
@@ -119,7 +119,7 @@ class EpubGenerator extends HtmlBaseGenerator
                 'translations' => [
                     'many_articles' => __('Your project is very big and you might have errors downloading the file. If so, try splitting your content into multiple projects and instead creating multiple smaller files.', 'print-my-blog'),
                     'many_images' => __('Your project has lots of images and you might have errors downloading the file. If so, try spltting your content into multiple projects or reducing the image quality set on your design.', 'print-my-blog'),
-                ]
+                ],
             ]
         );
     }

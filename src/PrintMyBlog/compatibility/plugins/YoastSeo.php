@@ -13,7 +13,7 @@ class YoastSeo extends CompatibilityBase
     public function setHooks()
     {
         // remove pmb content from sitemap
-        add_filter('wpseo_sitemap_index_links', [$this,'removePmbContentFromSitemap']);
+        add_filter('wpseo_sitemap_index_links', [$this, 'removePmbContentFromSitemap']);
     }
 
     /**

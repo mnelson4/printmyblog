@@ -4,7 +4,6 @@ namespace PrintMyBlog\compatibility\plugins;
 
 use Twine\compatibility\CompatibilityBase;
 
-//
 class ContactForm7 extends CompatibilityBase
 {
     public function setRenderingHooks()

@@ -131,7 +131,7 @@ class Project extends PostWrapper
                     'publish',
                     'pmb_project',
                     0
-                )
+                ),
             ]
         );
     }
@@ -498,7 +498,8 @@ class Project extends PostWrapper
                                 'html_label_text' => __('Project Title', 'print-my-blog'),
                             ]
                         ),
-                    ]]
+                    ],
+                ]
             );
 
             foreach ($forms as $form) {
@@ -671,8 +672,8 @@ class Project extends PostWrapper
     public function getSectionTemplateOptions()
     {
         $all_templates = [
-                '' => __('Default Template', 'print-my-blog')
-            ];
+            '' => __('Default Template', 'print-my-blog'),
+        ];
         foreach ($this->getCustomTemplates() as $template_slug => $section_template) {
             $title = $section_template->title();
             $all_templates[$template_slug] = $title;
@@ -712,17 +713,17 @@ class Project extends PostWrapper
                     'template' => $section_row->template,
                     'placement' => $section_row->placement,
                     'height' => $section_row->height,
-                    'depth' => $section_row->depth
+                    'depth' => $section_row->depth,
                 ],
                 [
-                    '%d',//project_id
-                    '%d',//post_id
-                    '%d',//parent_id
-                    '%d',//section_order
-                    '%s',//template
-                    '%s',//placement
-                    '%d',//height
-                    '%d',//depth
+                    '%d', // project_id
+                    '%d', // post_id
+                    '%d', // parent_id
+                    '%d', // section_order
+                    '%s', // template
+                    '%s', // placement
+                    '%d', // height
+                    '%d', // depth
                 ]
             );
             $new_id = $wpdb->insert_id;

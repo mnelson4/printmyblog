@@ -20,27 +20,27 @@ class DefaultDesigns
                     'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog'
+                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
                             'url' => $design_template->getUrl() . 'assets/preview1.jpg',
-                            'desc' => __('Title page, with working hyperlinks.', 'print-my-blog')
+                            'desc' => __('Title page, with working hyperlinks.', 'print-my-blog'),
                         ],
                         [
                             'url' => $design_template->getUrl() . 'assets/preview2.jpg',
-                            'desc' => __('Main matter, showing hyperlinks and large images.', 'print-my-blog')
+                            'desc' => __('Main matter, showing hyperlinks and large images.', 'print-my-blog'),
                         ],
                     ],
                     'design_defaults' => [
                         'use_title' => true,
                         'image_size' => 800,
                         'font_style' => 'times',
-                        'header_font_style' => 'arial'
+                        'header_font_style' => 'arial',
                     ],
                     'project_defaults' => [
-                        'title' => get_bloginfo('name')
-                    ]
+                        'title' => get_bloginfo('name'),
+                    ],
                 ];
             }
         );
@@ -55,17 +55,17 @@ class DefaultDesigns
                     'description' => pmb_get_contents($design_template->getDir() . 'descriptions/edit.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog'
+                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
                             'url' => $preview_folder_url . '/preview1.jpg',
-                            'desc' => __('Title page, showing the double-spaced text.', 'print-my-blog')
+                            'desc' => __('Title page, showing the double-spaced text.', 'print-my-blog'),
                         ],
                         [
                             'url' => $preview_folder_url . '/preview2.jpg',
-                            'desc' => __('Main matter, showing smaller images and double-spaced text.', 'print-my-blog')
-                        ]
+                            'desc' => __('Main matter, showing smaller images and double-spaced text.', 'print-my-blog'),
+                        ],
                     ],
                     'design_defaults' => [
                         'header_content' => [
@@ -87,10 +87,10 @@ class DefaultDesigns
                         ],
                         'page_per_post' => true,
                         'image_size' => 200,
-                        'custom_css' => 'article{line-height:2;}'
+                        'custom_css' => 'article{line-height:2;}',
                     ],
                     'project_defaults' => [
-                        'title' => get_bloginfo('name')
+                        'title' => get_bloginfo('name'),
                     ],
                 ];
             }
@@ -105,27 +105,27 @@ class DefaultDesigns
                     'description' => pmb_get_contents($design_template->getDir() . 'descriptions/classic.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog'
+                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
                             'url' => $design_template->getUrl() . 'assets/preview1.jpg',
-                            'desc' => __('Title page, showing removed hyperlinks.')
+                            'desc' => __('Title page, showing removed hyperlinks.'),
                         ],
                         [
                             'url' => $design_template->getUrl() . 'assets/preview2.jpg',
-                            'desc' => __('Main matter, showing external hyperlinks automatically converted into footnotes. Page numbers are always on the bottom-outside corner, and each article’s title is shown at the top of right pages.', 'print-my-blog')
-                            ],
+                            'desc' => __('Main matter, showing external hyperlinks automatically converted into footnotes. Page numbers are always on the bottom-outside corner, and each article’s title is shown at the top of right pages.', 'print-my-blog'),
+                        ],
                     ],
                     'design_defaults' => [
                         'use_title' => true,
                         'image_size' => 400,
                         'font_style' => 'times',
-                        'header_font_style' => 'palatino linotype'
+                        'header_font_style' => 'palatino linotype',
                     ],
                     'project_defaults' => [
-                        'title' => get_bloginfo('name')
-                    ]
+                        'title' => get_bloginfo('name'),
+                    ],
                 ];
             }
         );
@@ -140,7 +140,7 @@ class DefaultDesigns
                     'description' => pmb_get_contents($design_template->getDir() . 'descriptions/economical.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog'
+                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
@@ -152,8 +152,8 @@ class DefaultDesigns
                             'desc' => __(
                                 'Main matter, showing smaller text and images to reduce ink usage.',
                                 'print-my-blog'
-                            )
-                        ]
+                            ),
+                        ],
                     ],
                     'design_defaults' => [
                         'header_content' => [
@@ -172,8 +172,8 @@ class DefaultDesigns
                         // purposefully leave hyperlink defaults dynamic
                     ],
                     'project_defaults' => [
-                        'title' => get_bloginfo('name')
-                    ]
+                        'title' => get_bloginfo('name'),
+                    ],
                 ];
             }
         );
@@ -193,27 +193,26 @@ class DefaultDesigns
                     'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog'
+                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
                             'url' => $design_template->getUrl() . 'assets/preview1.jpg',
                             'desc' => __('Title page, showing a stylzed upper margin for a company name, background gradient and logo, among other things.', 'print-my-blog'),
-                            ],
+                        ],
                         [
                             'url' => $design_template->getUrl() . 'assets/preview2.jpg',
-                            'desc' => __('Main matter, showing working hyperlinks (which also each get an automatic footnote), and page number and logo in bottom-right corner.', 'print-my-blog')
-                            ]
+                            'desc' => __('Main matter, showing working hyperlinks (which also each get an automatic footnote), and page number and logo in bottom-right corner.', 'print-my-blog'),
+                        ],
 
                     ],
-                    'design_defaults' => [
-                    ],
+                    'design_defaults' => [],
                     'project_defaults' => [
                         'title' => get_bloginfo('name'),
                         'byline' => $name,
                         'issue' => __('Issue 01', 'print-my-blog'),
-                        'cover_preamble' => __('Text explaining the purpose of the paper and gives a brief summary of it, so folks know they’re reading the right thing.', 'print-my-blog')
-                        ]
+                        'cover_preamble' => __('Text explaining the purpose of the paper and gives a brief summary of it, so folks know they’re reading the right thing.', 'print-my-blog'),
+                    ],
                 ];
             }
         );
@@ -227,7 +226,7 @@ class DefaultDesigns
                     'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog'
+                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
@@ -235,15 +234,15 @@ class DefaultDesigns
                             'desc' => __(
                                 'Title page and table of contents both fit on the first page.',
                                 'print-my-blog'
-                            )
+                            ),
                         ],
                         [
                             'url' => $design_template->getUrl() . 'assets/preview2.jpg',
                             'desc' => __(
                                 'Two column layout which compactly shows content and images.',
                                 'print-my-blog'
-                            )
-                        ]
+                            ),
+                        ],
                     ],
                     'design_defaults' => [
                         'header_content' => [
@@ -264,11 +263,11 @@ class DefaultDesigns
                             'content',
                         ],
                         'page_per_post' => false,
-                        'post_header_in_columns' => false
+                        'post_header_in_columns' => false,
                     ],
                     'project_defaults' => [
                         'title' => get_bloginfo('name'),
-                    ]
+                    ],
                 ];
             }
         );
@@ -283,7 +282,7 @@ class DefaultDesigns
                     'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog'
+                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
@@ -291,15 +290,15 @@ class DefaultDesigns
                             'desc' => __(
                                 'Title page and table of contents both fit on the first page.',
                                 'print-my-blog'
-                            )
+                            ),
                         ],
                         [
                             'url' => $design_template->getUrl() . 'assets/preview2.jpg',
                             'desc' => __(
                                 'Two column layout which compactly shows content and images.',
                                 'print-my-blog'
-                            )
-                        ]
+                            ),
+                        ],
                     ],
                     'design_defaults' => [
                         'header_content' => [
@@ -320,8 +319,7 @@ class DefaultDesigns
                             'content',
                         ],
                     ],
-                    'project_defaults' => [
-                    ]
+                    'project_defaults' => [],
                 ];
             }
         );

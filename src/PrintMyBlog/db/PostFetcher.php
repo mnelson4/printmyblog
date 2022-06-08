@@ -65,7 +65,7 @@ class PostFetcher
             }
         }
 
-        return  $in_search_post_types;
+        return $in_search_post_types;
     }
 
     protected function otherPostTypesToInclude()
@@ -73,7 +73,7 @@ class PostFetcher
         return [
             'stm-lessons', // from MasterStudy LMS
             'lesson', // LifterLMS
-            'section', //
+            'section',
         ];
     }
 

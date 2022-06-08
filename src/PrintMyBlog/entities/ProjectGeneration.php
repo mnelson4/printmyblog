@@ -168,7 +168,7 @@ class ProjectGeneration
         } else {
             $start = $upload_dir_info['baseurl'];
         }
-        return  $start . '/pmb/generated/' . $this->project->code() . '/' . $this->format->slug()
+        return $start . '/pmb/generated/' . $this->project->code() . '/' . $this->format->slug()
                . '/' . urlencode($this->getFileName()) . '.html?uniqueness=' . current_time('timestamp');
     }
 

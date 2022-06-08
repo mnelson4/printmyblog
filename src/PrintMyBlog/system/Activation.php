@@ -79,8 +79,8 @@ class Activation extends BaseActivation
         // get the activation indicator before its value is updated by RequestType
         $activation_indicator = get_option('pmb_activation', null);
 
-        //on a brand new install (or deactivate and activate another version), activation indicator will be true
-        //on an upgrade, activation indicator will be false
+        // on a brand new install (or deactivate and activate another version), activation indicator will be true
+        // on an upgrade, activation indicator will be false
         // so if previous version isnt set, and its not an activation it must be an upgrade
         parent::detectActivation();
         // If someone upgrades to premium, ask for their license key immediately
@@ -96,7 +96,7 @@ class Activation extends BaseActivation
                 wp_redirect(
                     add_query_arg(
                         array(
-                            'upgrade_to_3' => 1
+                            'upgrade_to_3' => 1,
                         ),
                         admin_url(PMB_ADMIN_PAGE_PATH)
                     )
@@ -109,7 +109,7 @@ class Activation extends BaseActivation
                 $this->request_type->getRequestType(),
                 array(
                     RequestType::REQUEST_TYPE_NEW_INSTALL,
-                    RequestType::REQUEST_TYPE_REACTIVATION
+                    RequestType::REQUEST_TYPE_REACTIVATION,
                 )
             )
         ) {
@@ -144,7 +144,7 @@ class Activation extends BaseActivation
         wp_redirect(
             add_query_arg(
                 array(
-                    'welcome' => 1
+                    'welcome' => 1,
                 ),
                 admin_url(PMB_ADMIN_PAGE_PATH)
             ),

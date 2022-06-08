@@ -110,7 +110,7 @@ class CustomPostTypes
                 'show_in_menu' => PMB_ADMIN_PROJECTS_PAGE_SLUG,
                 'rewrite' => array('slug' => 'pmb'),
                 'show_in_rest' => true,
-                'supports' => array('title', 'editor', 'revisions', 'author','thumbnail', 'custom-fields'),
+                'supports' => array('title', 'editor', 'revisions', 'author', 'thumbnail', 'custom-fields'),
                 'taxonomies' => array('category', 'post_tag'),
                 'menu_icon' => $this->svg_doer->getSvgDataAsColor(PMB_DIR . 'assets/images/menu-icon.svg'),
                 'capability_type' => self::CONTENT,
@@ -126,8 +126,8 @@ class CustomPostTypes
         );
         $this->setupMapMetaCaps(self::CONTENT);
 
-        add_filter('wp_insert_post_data', [$this,'makePrintMaterialsAlwaysPrivate']);
-        add_filter('rest_post_search_query', [$this,'includePrivatePrintMaterialsInSearch'], 10, 2);
+        add_filter('wp_insert_post_data', [$this, 'makePrintMaterialsAlwaysPrivate']);
+        add_filter('rest_post_search_query', [$this, 'includePrivatePrintMaterialsInSearch'], 10, 2);
     }
 
     /**
@@ -224,7 +224,7 @@ class CustomPostTypes
         return [
             self::CONTENT,
             self::DESIGN,
-            self::PROJECT
+            self::PROJECT,
         ];
     }
 }

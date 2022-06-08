@@ -29,7 +29,8 @@ class LegacyPrintPage extends BaseController
         add_filter(
             'template_include',
             array($this, 'templateRedirect'),
-            /* after Elementor at priority 12,
+            /*
+             after Elementor at priority 12,
             Enfold theme at the ridiculous priority 20,000...
             Someday, perhaps we should have a regular page dedicated to Print My Blog.
             If you're reading this code and agree, feel free to work on a pull request! */
@@ -71,7 +72,7 @@ class LegacyPrintPage extends BaseController
             $pmb_site_url = str_replace(
                 array(
                     'https://',
-                    'http://'
+                    'http://',
                 ),
                 '',
                 $site_info->getSite()
@@ -104,7 +105,7 @@ class LegacyPrintPage extends BaseController
             // specifically, after everybody else, so we can override them.
             add_action(
                 'wp_enqueue_scripts',
-                array($this,'enqueueScripts'),
+                array($this, 'enqueueScripts'),
                 100
             );
             $pmb_after_date = $this->getDateString('after');
@@ -122,12 +123,12 @@ class LegacyPrintPage extends BaseController
             // Figure out what taxonomies were selected (if any) and their terms.
             // Ideally we'll do this via the REST API, but I'm in a pinch so just doing it via PHP and
             // only when not using WP REST Proxy.
-            if (empty($_GET['site']) && !empty($_GET['taxonomies'])) {
+            if (empty($_GET['site']) && ! empty($_GET['taxonomies'])) {
                 $filtering_taxonomies = $_GET['taxonomies'];
                 foreach ($filtering_taxonomies as $taxonomy => $terms_ids) {
                     $matching_taxonomy_objects = get_taxonomies(
                         array(
-                            'rest_base' => $taxonomy
+                            'rest_base' => $taxonomy,
                         ),
                         'objects'
                     );
@@ -138,7 +139,7 @@ class LegacyPrintPage extends BaseController
                     $term_objects = get_terms(
                         array(
                             'include' => implode(',', $terms_ids),
-                            'hide_empty' => false
+                            'hide_empty' => false,
                         )
                     );
                     $term_names = array();
@@ -147,7 +148,7 @@ class LegacyPrintPage extends BaseController
                     }
                     $pmb_taxonomy_filters[] = array(
                         'taxonomy' => $taxonomy_object,
-                        'terms' => $term_names
+                        'terms' => $term_names,
                     );
                 }
             } else {
@@ -195,7 +196,7 @@ class LegacyPrintPage extends BaseController
         if (
             preg_match('/(Chrome|CriOS)\//i', $agent)
             //phpcs:disable Generic.Files.LineLength.TooLong
-            && !preg_match('/(Aviator|ChromePlus|coc_|Dragon|Edge|Flock|Iron|Kinza|Maxthon|MxNitro|Nichrome|OPR|Perk|Rockmelt|Seznam|Sleipnir|Spark|UBrowser|Vivaldi|WebExplorer|YaBrowser)/i', $_SERVER['HTTP_USER_AGENT'])
+            && ! preg_match('/(Aviator|ChromePlus|coc_|Dragon|Edge|Flock|Iron|Kinza|Maxthon|MxNitro|Nichrome|OPR|Perk|Rockmelt|Seznam|Sleipnir|Spark|UBrowser|Vivaldi|WebExplorer|YaBrowser)/i', $_SERVER['HTTP_USER_AGENT'])
             //phpcs:enable
         ) {
             return 'chrome';
@@ -205,11 +206,11 @@ class LegacyPrintPage extends BaseController
             return 'firefox';
         }
         // From https://stackoverflow.com/a/186779/1493883
-        if (strstr($agent, " AppleWebKit/") && strstr($agent, " Mobile/")) {
+        if (strstr($agent, ' AppleWebKit/') && strstr($agent, ' Mobile/')) {
             return 'mobile_safari';
         }
         // From https://stackoverflow.com/q/15415883/1493883
-        if (strlen(strstr($agent, "Safari")) > 0) {
+        if (strlen(strstr($agent, 'Safari')) > 0) {
             return 'desktop_safari';
         }
         return 'unknown';
@@ -249,11 +250,11 @@ class LegacyPrintPage extends BaseController
             $order_var_to_use = 'order-menu';
         }
         $order = $this->getFromRequest($order_var_to_use, 'asc');
-        $statuses = $this->getFromRequest('statuses', ['publish','password','private','future']);
+        $statuses = $this->getFromRequest('statuses', ['publish', 'password', 'private', 'future']);
         $statuses = array_filter(
             $statuses,
             function ($input) {
-                return in_array($input, ['draft','pending','private','password','publish','future','trash']);
+                return in_array($input, ['draft', 'pending', 'private', 'password', 'publish', 'future', 'trash']);
             }
         );
         $data = [
@@ -289,16 +290,16 @@ class LegacyPrintPage extends BaseController
         // add the before and after filters, if they were provided
         $dates = $this->getFromRequest('dates', array());
         // Check if they entered the dates backwards.
-        if (!empty($dates['before']) && !empty($dates['after']) && $dates['before'] < $dates['after']) {
+        if (! empty($dates['before']) && ! empty($dates['after']) && $dates['before'] < $dates['after']) {
             $dates = [
                 'after' => $dates['before'],
-                'before' => $dates['after']
+                'before' => $dates['after'],
             ];
         }
-        if (!empty($dates['after'])) {
+        if (! empty($dates['after'])) {
             $data['filters']->after = $dates['after'] . 'T00:00:00';
         }
-        if (!empty($dates['before'])) {
+        if (! empty($dates['before'])) {
             $data['filters']->before = $dates['before'] . 'T23:59:59';
         }
         $print_options = new PrintOptions();
@@ -358,7 +359,7 @@ class LegacyPrintPage extends BaseController
                     'init_error' => $init_error_message,
                     'copied' => esc_html__('Copied! Ready to paste.', 'print-my-blog'),
                     //phpcs:disable Generic.Files.LineLength.TooLong
-                    'copy_error' => esc_html__('There was an error copying. You can still select all the text manually and copy it.', 'print-my-blog')
+                    'copy_error' => esc_html__('There was an error copying. You can still select all the text manually and copy it.', 'print-my-blog'),
                     //phpcs:enable
                 ),
                 'data' => $data,
@@ -406,13 +407,13 @@ class LegacyPrintPage extends BaseController
 
     protected function loadThemeCompatibilityIfItExists($slug)
     {
-        $theme_slug_path =  'styles/theme-compatibility/' . $slug . '.css';
+        $theme_slug_path = 'styles/theme-compatibility/' . $slug . '.css';
         if (file_exists(PMB_ASSETS_DIR . $theme_slug_path)) {
             wp_enqueue_style(
                 'pmb_print_page_theme_compatibility',
                 PMB_ASSETS_URL . $theme_slug_path,
                 array(),
-                filemtime(PMB_ASSETS_DIR .  $theme_slug_path)
+                filemtime(PMB_ASSETS_DIR . $theme_slug_path)
             );
         }
         $script_slug_path = 'scripts/theme-compatibility/' . $slug . '.js';
@@ -421,7 +422,7 @@ class LegacyPrintPage extends BaseController
                 'pmb_print_page_script_compatibility',
                 PMB_ASSETS_URL . $script_slug_path,
                 array('pmb_print_page'),
-                filemtime(PMB_ASSETS_DIR .  $script_slug_path)
+                filemtime(PMB_ASSETS_DIR . $script_slug_path)
             );
         }
     }
@@ -445,7 +446,7 @@ class LegacyPrintPage extends BaseController
         // Removing the margins fixes that. And because "pmb_image"s take up the width, they don't prevent
         // the image contained inside them from being centered anyhow. So this seems to be win-win.
         if ($columns > 1) {
-            $css .= "
+            $css .= '
         	.pmb-image{
         	    margin-left:0;
         	    margin-right:0;
@@ -455,7 +456,7 @@ class LegacyPrintPage extends BaseController
         	}
         	.single-featured-image-header img{
         	    width:100%;
-        	}";
+        	}';
         }
         if ($post_page_break) {
             $css .= '.pmb-post-article:not(:first-child){page-break-before:always;}';
@@ -483,7 +484,7 @@ class LegacyPrintPage extends BaseController
             $pre_selects = array(
                 '.pmb-posts p',
                 '.pmb-posts ul',
-                '.pmb-posts ol'
+                '.pmb-posts ol',
             );
             $full_css_selctors = array();
             foreach ($pre_selects as $pre_select) {

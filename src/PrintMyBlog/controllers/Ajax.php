@@ -98,11 +98,11 @@ class Ajax extends BaseController
             'handleProjectStatus'
         );
         add_action('wp_ajax_pmb_save_project_main', [$this, 'handleSaveProjectMain' ]);
-        add_action('wp_ajax_pmb_post_search', [$this,'handlePostSearch']);
-        add_action('wp_ajax_pmb_add_print_material', [$this,'addPrintMaterial']);
-        add_action('wp_ajax_pmb_reduce_credits', [$this,'reduceCredits']);
-        add_action('wp_ajax_pmb_report_error', [$this,'reportError']);
-        add_action('wp_ajax_pmb_duplicate_print_material', [$this,'duplicatePrintMaterial']);
+        add_action('wp_ajax_pmb_post_search', [$this, 'handlePostSearch']);
+        add_action('wp_ajax_pmb_add_print_material', [$this, 'addPrintMaterial']);
+        add_action('wp_ajax_pmb_reduce_credits', [$this, 'reduceCredits']);
+        add_action('wp_ajax_pmb_report_error', [$this, 'reportError']);
+        add_action('wp_ajax_pmb_duplicate_print_material', [$this, 'duplicatePrintMaterial']);
     }
 
     protected function addUnauthenticatedCallback($ajax_action, $method_name)
@@ -121,7 +121,7 @@ class Ajax extends BaseController
                 wp_send_json_error(
                     [
                         'error' => $error->stringCode(),
-                        'message' => $error->getMessage()
+                        'message' => $error->getMessage(),
                     ]
                 );
         }
@@ -130,7 +130,7 @@ class Ajax extends BaseController
                 'name' => $rest_api_detector->getName(),
                 'site' => $rest_api_detector->getSite(),
                 'proxy_for' => $rest_api_detector->getRestApiUrl(),
-                'is_local' => $rest_api_detector->isLocal()
+                'is_local' => $rest_api_detector->isLocal(),
             ]
         );
     }
@@ -143,7 +143,7 @@ class Ajax extends BaseController
         // report errors please
         if (defined('WP_DEBUG_DISPLAY') && WP_DEBUG_DISPLAY) {
             error_reporting(E_ALL);
-            ini_set("display_errors", 1);
+            ini_set('display_errors', 1);
         }
         // Find project by ID.
         /*
@@ -168,7 +168,7 @@ class Ajax extends BaseController
         // If we're all done, return the file.
         $response = [
             'url' => $url,
-            'media' => $format->slug() === 'digital_pdf' ? 'screen' : 'print'
+            'media' => $format->slug() === 'digital_pdf' ? 'screen' : 'print',
         ];
 
         wp_send_json($response);
@@ -202,48 +202,48 @@ class Ajax extends BaseController
         $requested_posts = 50;
         $query_params = [
             'posts_per_page' => $requested_posts,
-            'ignore_sticky_posts' => true
+            'ignore_sticky_posts' => true,
         ];
         $project = $this->project_manager->getById(Array2::setOr($_GET, 'project', 0));
-        if (!empty($_GET['page'])) {
+        if (! empty($_GET['page'])) {
             $query_params['paged'] = $_GET['page'];
             $page = $_GET['page'];
         } else {
             $page = 1;
         }
-        if (!empty($_GET['pmb-search'])) {
+        if (! empty($_GET['pmb-search'])) {
             $query_params['s'] = $_GET['pmb-search'];
         }
-        if (!empty($_GET['pmb-post-type'])) {
+        if (! empty($_GET['pmb-post-type'])) {
             $query_params['post_type'] = $_GET['pmb-post-type'];
         } else {
             $query_params['post_type'] = $this->post_fetcher->getProjectPostTypes('names');
         }
-        if (!empty($_GET['pmb-status'])) {
+        if (! empty($_GET['pmb-status'])) {
             $query_params['post_status'] = $_GET['pmb-status'];
         }
-        if (!empty($_GET['taxonomies'])) {
+        if (! empty($_GET['taxonomies'])) {
             $tax_query = [];
             foreach ($_GET['taxonomies'] as $taxonomy => $ids) {
                 $tax_query[] = [
-                        'taxonomy' => $taxonomy,
-                        'field' => 'term_id',
-                        'terms' => $ids
+                    'taxonomy' => $taxonomy,
+                    'field' => 'term_id',
+                    'terms' => $ids,
                 ];
             }
             if (! empty($tax_query)) {
                 $query_params['tax_query'] = $tax_query;
             }
         }
-        if (!empty($_GET['pmb-author'])) {
+        if (! empty($_GET['pmb-author'])) {
             $query_params['author'] = $_GET['pmb-author'];
         }
         $date_query = [];
-        if (!empty($_GET['pmb-date'])) {
-            if (!empty($_GET['pmb-date']['from'])) {
+        if (! empty($_GET['pmb-date'])) {
+            if (! empty($_GET['pmb-date']['from'])) {
                 $date_query['after'] = $_GET['pmb-date']['from'];
             }
-            if (!empty($_GET['pmb-date']['to'])) {
+            if (! empty($_GET['pmb-date']['to'])) {
                 $date_query['before'] = $_GET['pmb-date']['to'];
             }
             if ($date_query) {
@@ -251,16 +251,16 @@ class Ajax extends BaseController
                 $query_params['date_query'] = $date_query;
             }
         }
-        if (!empty($_GET['exclude'])) {
+        if (! empty($_GET['exclude'])) {
             $query_params['post__not_in'] = array_map(
                 'intval',
                 explode(',', $_GET['exclude'])
             );
         }
-        if (!empty($_GET['pmb-order-by'])) {
+        if (! empty($_GET['pmb-order-by'])) {
             $query_params['orderby'] = $_GET['pmb-order-by'];
         }
-        if (!empty($_GET['pmb-order'])) {
+        if (! empty($_GET['pmb-order'])) {
             $query_params['order'] = $_GET['pmb-order'];
         }
         $posts = get_posts(apply_filters('\PrintMyBlog\controllers\Ajax->handlePostSearch $query_params', $query_params));
@@ -274,9 +274,9 @@ class Ajax extends BaseController
                 <div
                         class="load-more-button button no-drag"
                         tabindex="0" id="pmb-load-more"
-                        data-page="<?php echo esc_attr($page + 1);?>"><span
+                        data-page="<?php echo esc_attr($page + 1); ?>"><span
                             class="dashicons dashicons-arrow-down-alt"></span>
-                    <?php esc_html_e('Show more...', 'print-my-blog');?>
+                    <?php esc_html_e('Show more...', 'print-my-blog'); ?>
                 </div>
             </div>
             <?php
@@ -311,10 +311,12 @@ class Ajax extends BaseController
         ob_start();
         pmb_content_item($post, $project);
         $html = ob_get_clean();
-        wp_send_json_success([
-            'html' => $html,
-            'post_ID' => $post_id
-        ]);
+        wp_send_json_success(
+            [
+                'html' => $html,
+                'post_ID' => $post_id,
+            ]
+        );
         exit;
     }
 
@@ -338,10 +340,12 @@ class Ajax extends BaseController
         ob_start();
         pmb_content_item($print_material_post, $project);
         $html = ob_get_clean();
-        wp_send_json_success([
-            'html' => $html,
-            'post_ID' => $print_material->ID
-        ]);
+        wp_send_json_success(
+            [
+                'html' => $html,
+                'post_ID' => $print_material->ID,
+            ]
+        );
         exit;
     }
 
@@ -363,8 +367,8 @@ class Ajax extends BaseController
         if (! $project) {
             wp_send_json_error(
                 [
-                            'error' => 'Could not find project with ID ' . $project_id
-                    ]
+                    'error' => 'Could not find project with ID ' . $project_id,
+                ]
             );
             exit;
         }
@@ -372,12 +376,12 @@ class Ajax extends BaseController
         if (! $generation instanceof ProjectGeneration) {
             wp_send_json_error(
                 [
-                            'error' => sprintf(
-                                'Could not find project generation for project %d on format %s',
-                                $project_id,
-                                $format
-                            )
-                    ]
+                    'error' => sprintf(
+                        'Could not find project generation for project %d on format %s',
+                        $project_id,
+                        $format
+                    ),
+                ]
             );
             exit;
         }
@@ -404,14 +408,14 @@ class Ajax extends BaseController
             }
             wp_send_json_success(
                 [
-                    'copy_url' => $copy_url
+                    'copy_url' => $copy_url,
                 ]
             );
         }
         wp_send_json_error(
             [
                 'nonce_valid' => $valid_nonce,
-                'current_user_authenticated' => $authorized
+                'current_user_authenticated' => $authorized,
             ]
         );
     }

@@ -56,10 +56,10 @@ class RestApiDetector
         }
         // Let's see if it's self-hosted...
         $data = $this->getSelfHostedSiteInfo($site);
-//        if($data === false){
-//            // Alright, there was no link to the REST API index. But maybe it's a WordPress.com site...
-//            $data = $this->guessSelfHostedSiteInfo($site);
-//        }
+// if($data === false){
+// Alright, there was no link to the REST API index. But maybe it's a WordPress.com site...
+// $data = $this->guessSelfHostedSiteInfo($site);
+// }
         if ($data === false) {
             // Alright, there was no link to the REST API index. But maybe it's a WordPress.com site...
             $data = $this->getWordPressComSiteInfo($site);
@@ -121,12 +121,12 @@ class RestApiDetector
         $matches = array();
         if (
             ! preg_match(
-            //looking for somethign like "<link rel='https://api.w.org/' href='http://wpcowichan.org/wp-json/' />"
+            // looking for somethign like "<link rel='https://api.w.org/' href='http://wpcowichan.org/wp-json/' />"
                 '<link rel=\'https\:\/\/api\.w\.org\/\' href=\'(.*)\' \/>',
                 $response_body,
                 $matches
             )
-            ||  count($matches) !== 2
+            || count($matches) !== 2
         ) {
             // The site exists, but it's not self-hosted.
             return false;
@@ -199,9 +199,9 @@ class RestApiDetector
      */
     protected function getWordPressComSiteInfo($site)
     {
-        $domain = str_replace(array('http://','https://'), '', $site);
+        $domain = str_replace(array('http://', 'https://'), '', $site);
 
-        $success =  $this->fetchWpJsonRootInfo(
+        $success = $this->fetchWpJsonRootInfo(
             'https://public-api.wordpress.com/rest/v1.1/sites/' . $domain
         );
         if ($success) {
@@ -222,7 +222,7 @@ class RestApiDetector
             [
                 'timeout' => 30,
                 'sslverify' => false,
-                'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0'
+                'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0',
             ]
         );
     }

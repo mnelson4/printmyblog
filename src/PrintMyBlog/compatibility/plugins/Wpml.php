@@ -54,7 +54,7 @@ class Wpml extends CompatibilityBase
         add_action('pmb__project_edit_content__filters_top', [$this, 'addLanguageFilter'], 1);
 
         // change the WP_Query to only include the selected language on Ajax requests
-        add_filter('\PrintMyBlog\controllers\Ajax->handlePostSearch $query_params', [$this,'setupWpQueryWithWpml']);
+        add_filter('\PrintMyBlog\controllers\Ajax->handlePostSearch $query_params', [$this, 'setupWpQueryWithWpml']);
 
         // change the print page's language according to the project
         add_filter(
@@ -65,17 +65,17 @@ class Wpml extends CompatibilityBase
         );
 
         // add translation options directly to project editing page
-        add_action('pmb_content_items__project-item-title end', [$this,'showTranslationsOnProjectItems'], 10, 6);
+        add_action('pmb_content_items__project-item-title end', [$this, 'showTranslationsOnProjectItems'], 10, 6);
 
         // translate posts when generating a project
         add_filter('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->sortPostsAndAttachSections $sections', [$this, 'sortTranslatedPosts'], 10, 2);
-        add_action('project_edit_generate__under_header', [$this,'addTranslationOptions'], 10, 2);
-        add_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom before_ob_start', [$this,'setTranslatedProject']);
-        add_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom after_get_clean', [$this,'unsetTranslatedProject']);
-        add_action('wp_ajax_pmb_update_project_lang', [$this,'handleAjaxUpdateProjectLanguage']);
+        add_action('project_edit_generate__under_header', [$this, 'addTranslationOptions'], 10, 2);
+        add_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom before_ob_start', [$this, 'setTranslatedProject']);
+        add_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom after_get_clean', [$this, 'unsetTranslatedProject']);
+        add_action('wp_ajax_pmb_update_project_lang', [$this, 'handleAjaxUpdateProjectLanguage']);
 
-        add_action('admin_enqueue_scripts', [$this,'enqueueWpmlCompatAssets']);
-        add_action('PrintMyBlog\controllers\Admin->saveProjectCustomizeDesign done', [$this,'updateTranslatedDesignsToo'], 10, 4);
+        add_action('admin_enqueue_scripts', [$this, 'enqueueWpmlCompatAssets']);
+        add_action('PrintMyBlog\controllers\Admin->saveProjectCustomizeDesign done', [$this, 'updateTranslatedDesignsToo'], 10, 4);
         add_action('PrintMyBlog\controllers\Admin->saveProjectMetadata done', [$this, 'updateTranslatedProjectsToo'], 10, 3);
     }
 
@@ -172,14 +172,16 @@ class Wpml extends CompatibilityBase
         $project_language = wpml_get_default_language()
         ?>
         <tr>
-            <th><label for="pmb-project-choices-language"><?php esc_html_e('Language', 'sitepress');?></label></th>
+            <th><label for="pmb-project-choices-language"><?php esc_html_e('Language', 'sitepress'); ?></label></th>
             <td>
                 <select id="pmb-project-choices-language" name="pmb-post-language" form="pmb-filter-form">
-                    <option value=""><?php esc_html_e('All Languages', 'sitepress');?></option>
+                    <option value=""><?php esc_html_e('All Languages', 'sitepress'); ?></option>
                     <?php
                     foreach ($languages as $code => $language_data) {
                         $selected_attr = $project_language === $code ? ' selected ' : '';
-                        ?><option value="<?php echo esc_attr($code);?>" <?php echo $selected_attr;?>><?php echo $language_data['display_name'];?></option><?php
+                        ?>
+                        <option value="<?php echo esc_attr($code); ?>" <?php echo $selected_attr; ?>><?php echo $language_data['display_name']; ?></option>
+                        <?php
                     }
                     ?>
                 </select>
@@ -206,8 +208,8 @@ class Wpml extends CompatibilityBase
 
         // setup our filters
         $wp_query['suppress_filters'] = false;
-        add_filter('posts_join', [$this,'joinToWpmlLanguagesTable']);
-        add_filter('posts_where', [$this,'whereWpmlCondition']);
+        add_filter('posts_join', [$this, 'joinToWpmlLanguagesTable']);
+        add_filter('posts_where', [$this, 'whereWpmlCondition']);
         add_filter('posts_request', [$this, 'postsRequest']);
 
         // and remember to re-add WPML's filters where we're done
@@ -351,7 +353,7 @@ class Wpml extends CompatibilityBase
                     esc_html__('Default language (currently %s)', 'sitepress'),
                     $default_language_details['display_name']
                 )
-            )
+            ),
         ];
 
         $form_sections = [];
@@ -380,8 +382,8 @@ class Wpml extends CompatibilityBase
                                     . $post_status_display->get_status_html($project->getWpPost()->ID, $language_code)
                             )
                             . $design_translations_html
-                        )
-                    ]
+                        ),
+                    ],
                 ]
             );
 
@@ -395,19 +397,19 @@ class Wpml extends CompatibilityBase
                         'html_label_text' => __('Language', 'sitepress'),
                         'default' => $this->getProjectLanguage($project),
                     ]
-                )
+                ),
             ],
             $form_sections
         );
 
         $form = new FormSection(
             [
-                    'name' => 'pmb-language-chooser',
-                    'subsections' => $form_sections,
-                    'enqueue_scripts_callback' => function () {
-                        wp_add_inline_script(
-                            'twine_form_section_validation',
-                            "
+                'name' => 'pmb-language-chooser',
+                'subsections' => $form_sections,
+                'enqueue_scripts_callback' => function () {
+                    wp_add_inline_script(
+                        'twine_form_section_validation',
+                        "
                         // when the language is changed, change the parameter for generating the project.
                         jQuery(document).ready(function(){
                             jQuery('#pmb-language-chooser-choose-language').change(function(event){
@@ -429,8 +431,8 @@ class Wpml extends CompatibilityBase
                                 });
                             });
                         });"
-                        );
-                    }
+                    );
+                },
             ]
         );
         echo $form->getHtmlAndJs();
@@ -482,12 +484,12 @@ class Wpml extends CompatibilityBase
                 $flag_url = $sitepress->get_flag_url($language_code);
                 if ($flag_url) {
                     ?>
-                <img src="<?php echo esc_url($flag_url);?>"
-                     title="<?php echo esc_attr(sprintf(__('"%s" is fully translated into %s', 'print-my-blog'), $title, $language_data['display_name']));?>" width="18" height="12">
+                <img src="<?php echo esc_url($flag_url); ?>"
+                     title="<?php echo esc_attr(sprintf(__('"%1$s" is fully translated into %2$s', 'print-my-blog'), $title, $language_data['display_name'])); ?>" width="18" height="12">
                     <?php
                 } else {
                     ?>
-                    <span style="margin-right:5px; padding-left: 5px; padding-right:5px; padding-bottom:3px; color:white; background-color:green; border-radius:4px;"><?php echo $language_code;?></span>
+                    <span style="margin-right:5px; padding-left: 5px; padding-right:5px; padding-bottom:3px; color:white; background-color:green; border-radius:4px;"><?php echo $language_code; ?></span>
                     <?php
                 }
             }

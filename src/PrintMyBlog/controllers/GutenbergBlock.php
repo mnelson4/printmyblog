@@ -28,11 +28,14 @@ class GutenbergBlock extends BaseController
             array('wp-blocks', 'wp-element', 'wp-components', 'pmb-setup-page')
         );
         if (function_exists('register_block_type')) {
-            register_block_type('printmyblog/setupform', array(
-                'editor_script' => 'pmb-block',
-                'style' => 'pmb-setup-page',
-                'render_callback' => [$this, 'block_dynamic_render_cb'],
-            ));
+            register_block_type(
+                'printmyblog/setupform',
+                array(
+                    'editor_script' => 'pmb-block',
+                    'style' => 'pmb-setup-page',
+                    'render_callback' => [$this, 'block_dynamic_render_cb'],
+                )
+            );
         }
     }
 
@@ -70,7 +73,7 @@ class GutenbergBlock extends BaseController
         ob_start();
         $print_options = new PrintOptions();
         $displayer = new FormInputs();
-        include(PMB_TEMPLATES_DIR . 'setup_page.php');
+        include PMB_TEMPLATES_DIR . 'setup_page.php';
         return ob_get_clean();
     }
 }

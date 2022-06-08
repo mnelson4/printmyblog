@@ -51,10 +51,10 @@ class DefaultPersistentNotices
                 array_merge(
                     $this->getOptionsForScreen('toplevel_page_print-my-blog-projects'),
                     [
-                                            'query_args' => [
-                                                'subaction' => null,
-                                                'action' => null
-                                            ]
+                        'query_args' => [
+                            'subaction' => null,
+                            'action' => null,
+                        ],
                     ]
                 )
             ),
@@ -132,7 +132,7 @@ class DefaultPersistentNotices
                 __('Posts just for Print My Blog', 'print-my-blog'),
                 '<p>' . __('Print My Blog "Print Materials" are like private posts. They aren’t visible to site visitors, but you can use them in your Pro Print Projects.', 'print-my-blog') . '</p>',
                 $this->getOptionsForScreen('edit-pmb_content')
-            )
+            ),
 
         ];
     }
@@ -142,7 +142,7 @@ class DefaultPersistentNotices
             'scope' => 'user',
             'type' => 'info',
             'capability' => 'read',
-            ];
+        ];
     }
 
     protected function getOptionsForScreen($screen_id)
@@ -158,7 +158,7 @@ class DefaultPersistentNotices
             'toplevel_page_print-my-blog-projects'
         );
         $options['query_args'] = [
-            'subaction' => $subaction
+            'subaction' => $subaction,
         ];
         return $options;
     }
