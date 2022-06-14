@@ -52,6 +52,16 @@ class Activation extends BaseActivation
     private $version_history;
 
 
+    /**
+     * Injected by Context.
+     * @param RequestType $request_type
+     * @param TableManager|null $table_manager
+     * @param Capabilities|null $capabilities
+     * @param DesignRegistry|null $design_registry
+     * @param DefaultProjectContents|null $project_contents
+     * @param MigrationManager|null $migration_manager
+     * @param VersionHistory|null $version_history
+     */
     public function inject(
         RequestType $request_type,
         TableManager $table_manager = null,
@@ -84,7 +94,16 @@ class Activation extends BaseActivation
         // so if previous version isnt set, and its not an activation it must be an upgrade
         parent::detectActivation();
         // If someone upgrades to premium, ask for their license key immediately
-        if (pmb_fs()->is_premium() && in_array($this->request_type->getRequestType(), [RequestType::REQUEST_TYPE_UPDATE, RequestType::REQUEST_TYPE_REACTIVATION]) && pmb_fs()->is_anonymous() && pmb_fs()->is_registered()) {
+        if (
+            pmb_fs()->is_premium() &&
+            in_array(
+                $this->request_type->getRequestType(),
+                [RequestType::REQUEST_TYPE_UPDATE, RequestType::REQUEST_TYPE_REACTIVATION],
+                true
+            ) &&
+            pmb_fs()->is_anonymous() &&
+            pmb_fs()->is_registered()
+        ) {
             // although freemius rechecks on each reactivation, don't recheck on each update
             $rechecked = get_option('pmb_rechecked_on_upgrade', false);
             if (! $rechecked) {
@@ -93,7 +112,7 @@ class Activation extends BaseActivation
             }
         }
         if ($activation_indicator === '' && $this->version_history->previousVersion() === null) {
-                wp_redirect(
+                wp_safe_redirect(
                     add_query_arg(
                         array(
                             'upgrade_to_3' => 1,
@@ -110,7 +129,8 @@ class Activation extends BaseActivation
                 array(
                     RequestType::REQUEST_TYPE_NEW_INSTALL,
                     RequestType::REQUEST_TYPE_REACTIVATION,
-                )
+                ),
+                true
             )
         ) {
             $this->redirectToActivationPage();
@@ -130,6 +150,9 @@ class Activation extends BaseActivation
         do_action('PrintMyBlog\system\Activation->install done', $this);
     }
 
+    /**
+     * Performs upgrade routines.
+     */
     public function upgrade()
     {
         $this->migration_manager->migrate();
@@ -141,7 +164,7 @@ class Activation extends BaseActivation
      */
     public function redirectToActivationPage()
     {
-        wp_redirect(
+        wp_safe_redirect(
             add_query_arg(
                 array(
                     'welcome' => 1,

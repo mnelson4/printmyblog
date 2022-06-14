@@ -94,6 +94,7 @@ class Project extends PostWrapper
      * @param DesignManager $design_manager
      * @param Config $config
      * @param ProjectGenerationFactory $project_generation_factory
+     * @param SectionTemplateRegistry $section_template_registry
      */
     public function inject(
         ProjectSectionManager $section_manager,
@@ -113,7 +114,7 @@ class Project extends PostWrapper
 
     /**
      * Sets the project's title and immediately saves it.
-     * @param $title
+     * @param string $title
      *
      * @return int|\WP_Error
      */
@@ -201,7 +202,7 @@ class Project extends PostWrapper
 
 
     /**
-     * @param $project_format_slug
+     * @param string $project_format_slug
      *
      * @return bool
      */
@@ -209,7 +210,8 @@ class Project extends PostWrapper
     {
         return in_array(
             $project_format_slug,
-            $this->getFormatSlugsSelected()
+            $this->getFormatSlugsSelected(),
+            true
         );
     }
 
@@ -225,7 +227,7 @@ class Project extends PostWrapper
         );
         $formats_sorted = [];
         foreach ($this->format_registry->getFormats() as $key => $format) {
-            if (in_array($key, $formats)) {
+            if (in_array($key, $formats, true)) {
                 $formats_sorted[] = $key;
             }
         }
@@ -260,9 +262,9 @@ class Project extends PostWrapper
         }
 
         foreach ($this->format_registry->getFormats() as $format) {
-            if (in_array($format->slug(), $new_formats)) {
+            if (in_array($format->slug(), $new_formats, true)) {
                 // It's requested to make this a selected format...
-                if (! in_array($format->slug(), $previous_formats)) {
+                if (! in_array($format->slug(), $previous_formats, true)) {
                     // if it wasn't already, add it.
                     $this->addPmbMeta(
                         self::POSTMETA_FORMAT,
@@ -272,7 +274,7 @@ class Project extends PostWrapper
                 // if it's already selected, no need to do anything.
             } else {
                 // We want it remove it...
-                if (in_array($format->slug(), $previous_formats)) {
+                if (in_array($format->slug(), $previous_formats, true)) {
                     // and it was previously a selected format.
                     $this->deletePmbMeta(
                         self::POSTMETA_FORMAT,
@@ -286,7 +288,7 @@ class Project extends PostWrapper
 
     /**
      * Gets the slug of the design to use for the format specified.
-     * @param FileFormat|string $format_slug
+     * @param FileFormat|string $format
      *
      * @return int
      */
@@ -463,23 +465,10 @@ class Project extends PostWrapper
     }
 
     /**
-     * Clears out the generated files. Useful in case the project has changed and so should be re-generated.
-     * @return bool
-     */
-    public function clearGeneratedFiles()
-    {
-        $project_generation = $this->project_generation_factory->create($this, $this->getFormatsSelected());
-        $project_generation->clearIntermediaryGeneratedTime();
-        $project_generation->getProjectHtmlGenerator()->deleteFile();
-        return true;
-    }
-
-    /**
      * Gets a form that is actually a combination of all the forms for the project's chosen designs.
      * @param Project $project
      *
      * @return FormSection
-     * @throws ImproperUsageException
      */
     public function getMetaForm()
     {

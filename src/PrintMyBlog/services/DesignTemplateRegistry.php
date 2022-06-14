@@ -8,6 +8,10 @@ use PrintMyBlog\exceptions\DesignTemplateDoesNotExist;
 use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\system\Context;
 
+/**
+ * Class DesignTemplateRegistry
+ * @package PrintMyBlog\services
+ */
 class DesignTemplateRegistry
 {
     /**
@@ -16,12 +20,12 @@ class DesignTemplateRegistry
     protected $design_template_callbacks;
 
     /**
-     * @var $design_templates DesignTemplate
+     * @var $design_templates DesignTemplate[]
      */
     protected $design_templates;
 
     /**
-     * @param $slug
+     * @param string $slug
      * @param callable $callback that returns the args to pass into DesignTemplate::__construct()
      */
     public function registerDesignTemplateCallback($slug, $callback)
@@ -30,9 +34,10 @@ class DesignTemplateRegistry
     }
 
     /**
-     * @param $slug
+     * @param string $slug
      *
      * @return DesignTemplate
+     * @throws DesignTemplateDoesNotExist
      */
     public function getDesignTemplate($slug)
     {

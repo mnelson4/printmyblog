@@ -2,8 +2,15 @@
 
 namespace PrintMyBlog\domain;
 
+/**
+ * Class DefaultSectionTemplates
+ * @package PrintMyBlog\domain
+ */
 class DefaultSectionTemplates
 {
+    /**
+     * Registers default section templates.
+     */
     public function registerDefaultSectionTemplates()
     {
         pmb_register_section_template(

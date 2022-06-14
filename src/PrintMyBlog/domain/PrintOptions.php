@@ -14,6 +14,10 @@ namespace PrintMyBlog\domain;
  */
 class PrintOptions
 {
+    /**
+     * @param bool $upsells
+     * @return array[]
+     */
     public function headerContentOptions($upsells = false)
     {
         return [
@@ -50,6 +54,9 @@ class PrintOptions
         ];
     }
 
+    /**
+     * @return array[]
+     */
     public function postContentOptions()
     {
         return [
@@ -100,6 +107,10 @@ class PrintOptions
         ];
     }
 
+    /**
+     * @param bool $upsells
+     * @return array[]
+     */
     public function pageLayoutOptions($upsells = false)
     {
         return [
@@ -195,6 +206,10 @@ class PrintOptions
         ];
     }
 
+    /**
+     * @param $format
+     * @return array
+     */
     protected function defaultOverrides($format)
     {
         $overrides = [];

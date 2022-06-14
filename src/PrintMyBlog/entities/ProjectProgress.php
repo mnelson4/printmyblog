@@ -31,6 +31,9 @@ class ProjectProgress
      */
     protected $steps;
 
+    /**
+     * @var array
+     */
     protected $step_to_subaction_mapping = [
         self::SETUP_STEP => Admin::SLUG_SUBACTION_PROJECT_SETUP,
         self::CHOOSE_DESIGN_STEP_PREFIX => Admin::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN,
@@ -65,6 +68,10 @@ class ProjectProgress
         }
     }
 
+    /**
+     * @param string $step_slug
+     * @return string
+     */
     protected function getStepMetaName($step_slug)
     {
         return self::META_NAME . $step_slug;
@@ -83,10 +90,12 @@ class ProjectProgress
             $formats_in_use = $this->project->getFormatsSelected();
             foreach ($formats_in_use as $format) {
                 $steps[self::CHOOSE_DESIGN_STEP_PREFIX . $format->slug()] = sprintf(
+                    // translators: %s design title
                     __('Choose %s Design', 'print-my-blog'),
                     $format->title()
                 );
                 $steps[self::CUSTOMIZE_DESIGN_STEP_PREFIX . $format->slug()] = sprintf(
+                    // translators: %s design title
                     __('Customize %s Design', 'print-my-blog'),
                     $format->title()
                 );
@@ -125,12 +134,17 @@ class ProjectProgress
     /**
      * Marks the specified step as complete
      * @param string $step
+     * @param bool $new_value
      */
     public function markStepComplete($step, $new_value = true)
     {
         $this->project->setPmbMeta($this->getStepMetaName($step), $new_value);
     }
 
+    /**
+     * @param string $format_slug
+     * @param bool $new_value
+     */
     public function markChooseDesignStepComplete($format_slug, $new_value = true)
     {
         $this->markStepComplete(self::CHOOSE_DESIGN_STEP_PREFIX . $format_slug, $new_value);
@@ -138,6 +152,7 @@ class ProjectProgress
 
     /**
      * @param string $format_slug
+     * @param bool $new_value
      */
     public function markCustomizeDesignStepComplete($format_slug, $new_value = true)
     {
@@ -161,8 +176,8 @@ class ProjectProgress
 
     /**
      * Indicates whether this step was already complete or not.
-     * @param $step_name
-     * @return bool|null
+     * @param string $step_name
+     * @return bool|null returns null if $step_name isn't a step in this project's progress
      */
     public function isStepComplete($step_name)
     {
@@ -173,6 +188,9 @@ class ProjectProgress
         return null;
     }
 
+    /**
+     * @return array keys are step slugs, values are URLs
+     */
     public function stepsToUrls()
     {
         $base_url_args = [
@@ -190,7 +208,7 @@ class ProjectProgress
         return $mappings;
     }
     /**
-     * @param $step
+     * @param string $step
      * @return array {
      * @type $subaction string
      * @type $format string
@@ -236,7 +254,7 @@ class ProjectProgress
     }
 
     /**
-     * @param $subaction
+     * @param string $subaction
      * @param string $format
      *
      * @return string

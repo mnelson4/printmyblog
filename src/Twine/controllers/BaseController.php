@@ -24,7 +24,7 @@ abstract class BaseController
      * Helper for getting a value from the request, or setting a default.
      * @since 2.2.3
      * @param string $query_param_name
-     * @param string $default
+     * @param mixed $default
      * @return mixed
      */
     protected function getFromRequest($query_param_name, $default)

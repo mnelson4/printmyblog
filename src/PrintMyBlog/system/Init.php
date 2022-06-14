@@ -241,6 +241,9 @@ class Init extends BaseInit
         define('MNELSON4_JS_URL', $plugin_url . 'src/mnelson4/AdminNotices/');
     }
 
+    /**
+     * @return \Twine\system\Context
+     */
     protected function initContext()
     {
         return Context::instance();

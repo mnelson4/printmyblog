@@ -8,12 +8,16 @@ use PrintMyBlog\orm\entities\ProjectSection;
 use stdClass;
 use Twine\helpers\Array2;
 
+/**
+ * Class ProjectSectionManager
+ * @package PrintMyBlog\orm\managers
+ */
 class ProjectSectionManager
 {
     /**
      * Gets ProjectSections for this project.
      *
-     * @param $project_id
+     * @param int $project_id
      *
      * @param int $max_levels
      * @param int $limit
@@ -50,6 +54,9 @@ class ProjectSectionManager
     public function getSection($section_id)
     {
         global $wpdb;
+        // Custom table so custom query. And the table name is hard-coded.
+        // todo: cache
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $row = $wpdb->get_row(
             $wpdb->prepare(
                 'SELECT ID ' . $this->defaultFrom() . 'WHERE ID=%d',
@@ -65,6 +72,8 @@ class ProjectSectionManager
      * @param int $project_id
      * @param int $limit
      * @param int $offset
+     * @param bool $include_post_title
+     * @param string|null $placement
      *
      * @return ProjectSection[] unlike fetchPartsFor(), this is a flat array, objects don't have a 'subs' property
      */
@@ -88,7 +97,7 @@ class ProjectSectionManager
 
     /**
      * Gets an array of stdClass for all the rows from the project section table that belong to the project.
-     * @param $project_id
+     * @param int $project_id
      * @param int $limit
      * @param int $offset
      * @param bool $include_post_title
@@ -116,6 +125,8 @@ class ProjectSectionManager
         if ($placement) {
             $where_sql .= $wpdb->prepare(' AND placement=%s', $placement);
         }
+        // too dynamic for non-raw sql.
+        //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         return $wpdb->get_results(
             $wpdb->prepare(
                 $select_sql . $this->defaultFrom()
@@ -128,6 +139,9 @@ class ProjectSectionManager
         );
     }
 
+    /**
+     * @return string
+     */
     protected function defaultSelection()
     {
         return 'SELECT 
@@ -141,6 +155,9 @@ class ProjectSectionManager
             sections.section_order';
     }
 
+    /**
+     * @return string
+     */
     protected function defaultFrom()
     {
         global $wpdb;
@@ -192,7 +209,9 @@ class ProjectSectionManager
         $current_level = 0
     ) {
         $nested_sections = [];
-        for (; $index < count($flat_sections); $index++) {
+        // phpcs:ignore Generic.CodeAnalysis.ForLoopWithTestFunctionCall.NotAllowed
+        $num_sections = count($flat_sections);
+        for (; $index < $num_sections; $index++) {
             if ($flat_sections[$index]->getParentId() === intval($current_parent_id)) {
                 $nested_sections[] = $flat_sections[$index];
             } elseif (intval($flat_sections[ $index - 1]->getId()) === intval($flat_sections[$index]->getParentId())) {

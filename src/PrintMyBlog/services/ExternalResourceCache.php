@@ -8,6 +8,10 @@ use Twine\services\filesystem\File;
 use Twine\services\filesystem\Folder;
 use WP_Error;
 
+/**
+ * Class ExternalResourceCache
+ * @package PrintMyBlog\services
+ */
 class ExternalResourceCache
 {
     /**
@@ -15,7 +19,9 @@ class ExternalResourceCache
      */
     private $external_resouce_manager;
 
-
+    /**
+     * @param ExternalResourceManager $external_resource_manager
+     */
     public function inject(ExternalResourceManager $external_resource_manager)
     {
         $this->external_resouce_manager = $external_resource_manager;
@@ -40,7 +46,7 @@ class ExternalResourceCache
     }
 
     /**
-     * @param $external_url
+     * @param string $external_url
      * @return string|null|false URL of copied resource, null if not yet copied, or false if there was an error
      */
     public function writeAndMapFile($external_url)
@@ -89,7 +95,7 @@ class ExternalResourceCache
     }
 
     /**
-     * @param $external_url
+     * @param string $external_url
      * @return string|null|false null if not yet cached; false if there was an error caching it
      */
     public function getLocalUrlFromExternalUrl($external_url)
@@ -135,6 +141,9 @@ class ExternalResourceCache
         );
     }
 
+    /**
+     * Clears the external resource cache.
+     */
     public function clear()
     {
         $this->external_resouce_manager->clear();

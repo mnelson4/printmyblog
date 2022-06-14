@@ -45,6 +45,9 @@ class TableManager extends \Twine\db\TableManager
         );
     }
 
+    /**
+     * Deletes tables from db.
+     */
     public function dropTables()
     {
         $this->dropTable(self::SECTIONS_TABLE);

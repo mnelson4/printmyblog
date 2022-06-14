@@ -9,7 +9,6 @@ use PrintMyBlog\orm\entities\ProjectSection;
 use PrintMyBlog\orm\managers\ProjectSectionManager;
 use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
 use WP_Post;
-use strptime;
 
 /**
  * Class ProjectGeneration
@@ -52,12 +51,21 @@ class ProjectGeneration
      */
     protected $project_generator_factory;
 
+    /**
+     * ProjectGeneration constructor.
+     * @param Project $project
+     * @param FileFormat $format
+     */
     public function __construct(Project $project, FileFormat $format)
     {
         $this->project = $project;
         $this->format = $format;
     }
 
+    /**
+     * @param ProjectSectionManager $section_manager
+     * @param ProjectFileGeneratorFactory $project_generator_factory
+     */
     public function inject(
         ProjectSectionManager $section_manager,
         ProjectFileGeneratorFactory $project_generator_factory
@@ -68,7 +76,6 @@ class ProjectGeneration
 
     /**
      * Gets whether or not the transitionary HTML file has been generated for making the specified format.
-     * @param string|FileFormat $format
      *
      * @return bool
      */
@@ -97,8 +104,8 @@ class ProjectGeneration
      * Avoids a bit of repetition, when setting, with always appending the format onto all the options saved for this
      * project-format
      * combo.
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param mixed $value
      *
      * @return bool|int
      */
@@ -111,6 +118,10 @@ class ProjectGeneration
         );
     }
 
+    /**
+     * @param string $key
+     * @return bool
+     */
     protected function deletePostMetaForFormat($key)
     {
         return delete_post_meta(
@@ -169,7 +180,7 @@ class ProjectGeneration
             $start = $upload_dir_info['baseurl'];
         }
         return $start . '/pmb/generated/' . $this->project->code() . '/' . $this->format->slug()
-               . '/' . urlencode($this->getFileName()) . '.html?uniqueness=' . current_time('timestamp');
+            . '/' . rawurlencode($this->getFileName()) . '.html?uniqueness=' . current_time('mysql');
     }
 
     /**
@@ -189,6 +200,9 @@ class ProjectGeneration
         return $this->getFileName() . '.' . $this->format->extension();
     }
 
+    /**
+     * @return null
+     */
     public function generatedFileUrl()
     {
         return null;
@@ -218,7 +232,6 @@ class ProjectGeneration
     }
 
     /**
-     * @param FileFormat|string $format
      * @return bool complete
      */
     public function generateIntermediaryFile()
@@ -231,7 +244,6 @@ class ProjectGeneration
     }
 
     /**
-     * @param FileFormat|string $format
      *
      * @return ProjectFileGeneratorBase
      */
@@ -268,11 +280,6 @@ class ProjectGeneration
     public function isDirty()
     {
         return (bool)$this->getDirtyReasons();
-    }
-
-    public function isOld()
-    {
-        return $this->generatedTimestamp() < current_time('timestamp') - DAY_IN_SECONDS;
     }
 
     /**

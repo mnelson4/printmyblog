@@ -2,11 +2,15 @@
 
 namespace PrintMyBlog\services;
 
+/**
+ * Class ColorGuru
+ * @package PrintMyBlog\services
+ */
 class ColorGuru
 {
     /**
      * Returns an array where the values are RGB values from the color.
-     * @param $hex_code
+     * @param string $hex_code
      *
      * @return array|false
      */
@@ -16,7 +20,7 @@ class ColorGuru
     }
 
     /**
-     * @param $hex_code
+     * @param string $hex_code
      *
      * @return string
      */

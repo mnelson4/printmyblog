@@ -6,6 +6,10 @@ use PrintMyBlog\db\TableManager;
 use PrintMyBlog\orm\entities\ExternalResource;
 use stdClass;
 
+/**
+ * Class ExternalResourceManager
+ * @package PrintMyBlog\orm\managers
+ */
 class ExternalResourceManager
 {
 
@@ -30,6 +34,8 @@ class ExternalResourceManager
     {
         global $wpdb;
         return $this->createObjFromRow(
+            // todo: cache
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             $wpdb->get_row(
                 $wpdb->prepare(
                     'SELECT * FROM ' . $wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE . ' WHERE external_url=%s LIMIT 1',
@@ -47,6 +53,8 @@ class ExternalResourceManager
     {
         global $wpdb;
         return $this->createObjsFromRows(
+            // todo: cache
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             $wpdb->get_results(
                 'SELECT * FROM ' . $wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE
             )
@@ -74,6 +82,8 @@ class ExternalResourceManager
     public function cached($external_url)
     {
         global $wpdb;
+        // todo: cache
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         return (bool)$wpdb->get_var(
             $wpdb->prepare(
                 'SELECT COUNT(*) FROM ' . $wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE . ' WHERE external_url=%s LIMIT 1',
@@ -83,8 +93,9 @@ class ExternalResourceManager
     }
 
     /**
-     * @param $external_url
-     * @param $filename
+     * Map external URLS ro local one.
+     * @param string $external_url
+     * @param string $filename
      * @return int
      */
     public function map($external_url, $filename)
@@ -103,30 +114,34 @@ class ExternalResourceManager
     }
 
     /**
-     * @param ExternalResource $externalResource
+     * @param ExternalResource $external_resource
      * @return int the ID of the saved row
      */
-    public function save(ExternalResource $externalResource)
+    public function save(ExternalResource $external_resource)
     {
         global $wpdb;
-        if ($externalResource->getID()) {
+        if ($external_resource->getID()) {
+            // Custom table needs direct query.
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             $wpdb->update(
                 $wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE,
-                $externalResource->properties(),
-                $externalResource->wpdbPropertyFormats(),
+                $external_resource->properties(),
+                $external_resource->wpdbPropertyFormats(),
                 [
-                    'ID' => $externalResource->getID(),
+                    'ID' => $external_resource->getID(),
                 ],
                 [
                     '%d',
                 ]
             );
-            return $externalResource->getID();
+            return $external_resource->getID();
         } else {
+            // Custom table needs direct query.
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             return (int)$wpdb->insert(
                 $wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE,
-                $externalResource->properties(),
-                $externalResource->wpdbPropertyFormats()
+                $external_resource->properties(),
+                $external_resource->wpdbPropertyFormats()
             );
         }
     }
@@ -137,6 +152,8 @@ class ExternalResourceManager
     public function clear()
     {
         global $wpdb;
+        // Custom table needs direct query.
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $wpdb->query('TRUNCATE TABLE ' . $wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE);
     }
 }

@@ -14,11 +14,11 @@ class PrintButtons
     private $print_settings;
 
     /**
-     * @param FrontendPrintSettings $printSettings
+     * @param FrontendPrintSettings $print_settings
      */
-    public function inject(FrontendPrintSettings $printSettings)
+    public function inject(FrontendPrintSettings $print_settings)
     {
-        $this->print_settings = $printSettings;
+        $this->print_settings = $print_settings;
     }
 
     /**
@@ -37,7 +37,7 @@ class PrintButtons
         if (! $post instanceof WP_Post) {
             $post = get_post();
         }
-        if ((! $post instanceof WP_Post || ! $post->ID || ! in_array($post->post_type, ['post', 'page']))) {
+        if ((! $post instanceof WP_Post || ! $post->ID || ! in_array($post->post_type, ['post', 'page'], true))) {
             return '<!-- PMB print buttons are not displayed because there is no valid post of post type "post" or "page"-->';
         }
         /**

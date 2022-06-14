@@ -5,8 +5,15 @@ namespace PrintMyBlog\domain;
 use PrintMyBlog\entities\DesignTemplate;
 use WP_User;
 
+/**
+ * Class DefaultDesigns
+ * @package PrintMyBlog\domain
+ */
 class DefaultDesigns
 {
+    /**
+     *
+     */
     public function registerDefaultDesigns()
     {
 

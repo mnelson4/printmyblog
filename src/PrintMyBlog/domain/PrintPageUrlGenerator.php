@@ -5,6 +5,10 @@ namespace PrintMyBlog\domain;
 use Exception;
 use WP_Post;
 
+/**
+ * Class PrintPageUrlGenerator
+ * @package PrintMyBlog\domain
+ */
 class PrintPageUrlGenerator
 {
     /**
@@ -16,11 +20,18 @@ class PrintPageUrlGenerator
      */
     protected $print_settings;
 
+    /**
+     * @param FrontendPrintSettings $printSettings
+     */
     public function inject(FrontendPrintSettings $printSettings)
     {
         $this->print_settings = $printSettings;
     }
 
+    /**
+     * PrintPageUrlGenerator constructor.
+     * @param WP_Post|int}string $post
+     */
     public function __construct($post)
     {
         if (is_int($post) || is_string($post)) {
@@ -42,6 +53,8 @@ class PrintPageUrlGenerator
             'print-my-blog' => '1',
             'post-type' => $this->post->post_type,
         ];
+        // Loose comparison ok in case post_password is null or false.
+        // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
         if ($this->post->post_password != '') {
             $base_args['statuses[]'] = 'password';
         } else {

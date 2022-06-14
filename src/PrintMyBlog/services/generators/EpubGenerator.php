@@ -2,9 +2,18 @@
 
 namespace PrintMyBlog\services\generators;
 
+use \Exception;
+
+/**
+ * Class EpubGenerator
+ * @package PrintMyBlog\services\generators
+ */
 class EpubGenerator extends HtmlBaseGenerator
 {
 
+    /**
+     * Begins writing to html intermediary file.
+     */
     public function startGenerating()
     {
         $this->disableEmojis();
@@ -27,10 +36,11 @@ class EpubGenerator extends HtmlBaseGenerator
     /**
      * Writes out the PMB Pro print "window" which appears at the top of pro print pages.
      * Echoes, instead of using `$this->file_writer`, because this is a callback on an action called inside the template HTML.
-     * @throws Exception
      */
     public function addPrintWindowToPage()
     {
+        // The template file does the escaping.
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         echo pmb_get_contents(
             PMB_TEMPLATES_DIR . 'partials/pro_print_page_epub_window.php',
             [
@@ -41,6 +51,9 @@ class EpubGenerator extends HtmlBaseGenerator
         );
     }
 
+    /**
+     * @throws Exception
+     */
     public function enqueueStylesAndScripts()
     {
         wp_enqueue_script('pmb_pro_page');
@@ -136,6 +149,10 @@ class EpubGenerator extends HtmlBaseGenerator
         return array_map('trim', explode(',', str_replace(['\n'], ',', $byline)));
     }
 
+    /**
+     * @return void
+     * @throws Exception
+     */
     protected function finishGenerating()
     {
         parent::finishGenerating();

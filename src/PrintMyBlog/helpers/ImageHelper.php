@@ -2,6 +2,10 @@
 
 namespace PrintMyBlog\helpers;
 
+/**
+ * Class ImageHelper
+ * @package PrintMyBlog\helpers
+ */
 class ImageHelper
 {
     /**

@@ -4,6 +4,10 @@ namespace PrintMyBlog\helpers;
 
 use PrintMyBlog\entities\FileFormat;
 
+/**
+ * Class ArgMagician
+ * @package PrintMyBlog\helpers
+ */
 class ArgMagician
 {
 

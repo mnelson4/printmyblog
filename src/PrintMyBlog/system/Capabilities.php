@@ -21,10 +21,17 @@ class Capabilities
      */
     private $custom_post_types;
 
+    /**
+     * @param CustomPostTypes $custom_post_types
+     */
     public function inject(CustomPostTypes $custom_post_types)
     {
         $this->custom_post_types = $custom_post_types;
     }
+
+    /**
+     * Gives capabilities for each custom post type.
+     */
     public function grantCapabilities()
     {
         $post_types = get_post_types([], 'objects');
@@ -38,7 +45,7 @@ class Capabilities
 
     /**
      * Grants the post's caps to the specified role.
-     * @param $post_type
+     * @param WP_Post_Type $post_type
      * @param string $role
      */
     public function grantCapsForCPT($post_type, $role = 'administrator')

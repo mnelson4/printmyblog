@@ -9,6 +9,11 @@ use PrintMyBlog\orm\entities\ProjectSection;
 use PrintMyBlog\services\ExternalResourceCache;
 use Twine\services\filesystem\File;
 
+/**
+ * Class HtmlBaseGenerator
+ * Generators that create an HTML intermediary file.
+ * @package PrintMyBlog\services\generators
+ */
 abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
 {
 
@@ -32,6 +37,10 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
         $this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT);
     }
 
+    /**
+     * Writes html to the file.
+     * @return void
+     */
     protected function generateSection()
     {
         global $post;
@@ -50,6 +59,10 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
         }
     }
 
+    /**
+     * Finishes writing to html file.
+     * @return void
+     */
     protected function finishGenerating()
     {
         $this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT, false);
@@ -68,7 +81,7 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
     }
 
     /**
-     * @param $division
+     * @param string $division
      * @param bool $beginning whether to show the beginning, or end, of this division.
      * @param array $context
      */
@@ -94,6 +107,9 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
         return $this->file_writer;
     }
 
+    /**
+     * @param string $division
+     */
     protected function writeClosingForDesignTemplate($division)
     {
         if ($this->design->getDesignTemplate()->templateFileExists($division, false)) {
@@ -104,6 +120,10 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
         }
     }
 
+    /**
+     * @param ProjectSection|null $last_section
+     * @param ProjectSection|null $current_section
+     */
     protected function maybeGenerateDivisionStart(
         ProjectSection $last_section = null,
         ProjectSection $current_section = null
@@ -125,8 +145,8 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
     }
 
     /**
-     * @param int $previous_depth
-     * @param int $current_depth
+     * @param ProjectSection|null $previous_section
+     * @param ProjectSection|null $current_section
      */
     protected function maybeGenerateDivisionEnd(
         ProjectSection $previous_section = null,
@@ -159,6 +179,9 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
         }
     }
 
+    /**
+     * Adds all the main matters to the html file.
+     */
     protected function generateMainMatter()
     {
         $this->generateSections($this->project->getFlatSections(1000, 0, false));
@@ -186,6 +209,9 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
      */
     abstract protected function addPrintWindowToPage();
 
+    /**
+     * @return string
+     */
     protected function getUrlBackToGenerateStep()
     {
         return add_query_arg(

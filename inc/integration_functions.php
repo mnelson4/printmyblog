@@ -29,8 +29,8 @@ function pmb_generic_design_form(){
     return $default_design_templates->getGenericDesignForm();
 }
 /**
- * @param $file_format_slug
- * @param $args passed into \PrintMyBlog\entities\FileFormat::__construct
+ * @param string $file_format_slug
+ * @param array $args passed into \PrintMyBlog\entities\FileFormat::__construct
  */
 function pmb_register_file_format($file_format_slug, $args){
 	/**

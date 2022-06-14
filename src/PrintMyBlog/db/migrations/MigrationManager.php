@@ -4,6 +4,10 @@ namespace PrintMyBlog\db\migrations;
 
 use Twine\db\migrations\MigrationManagerBase;
 
+/**
+ * Class MigrationManager
+ * @package PrintMyBlog\db\migrations
+ */
 class MigrationManager extends MigrationManagerBase
 {
 

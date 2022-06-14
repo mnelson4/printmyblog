@@ -22,6 +22,10 @@ class DebugInfo
      */
     protected $design_manager;
 
+    /**
+     * @param ProjectManager $project_manager
+     * @param DesignManager $design_manager
+     */
     public function inject(ProjectManager $project_manager, DesignManager $design_manager)
     {
         $this->project_manager = $project_manager;
@@ -29,6 +33,7 @@ class DebugInfo
     }
 
     /**
+     * @param bool $pretty
      * @return string
      */
     public function getDebugInfoString($pretty = true)
@@ -113,6 +118,9 @@ class DebugInfo
         ];
     }
 
+    /**
+     * @return array
+     */
     protected function getDesignData()
     {
         $design_datas = [];
@@ -125,6 +133,9 @@ class DebugInfo
         return $design_datas;
     }
 
+    /**
+     * @return array
+     */
     protected function getProjectData()
     {
         /**
@@ -159,6 +170,10 @@ class DebugInfo
         return $project_datas;
     }
 
+    /**
+     * @param array $project_meta
+     * @return array
+     */
     protected function simplifyProjectMeta($project_meta)
     {
         $metas = array_diff_key(
@@ -201,6 +216,10 @@ class DebugInfo
         return $final_metas;
     }
 
+    /**
+     * @param Design $design
+     * @return array
+     */
     protected function simplifyDesignData(Design $design)
     {
         try {
@@ -234,7 +253,7 @@ class DebugInfo
 
     /**
      * Make it look pretty so it's easy to find info in it.
-     * @param $metadata
+     * @param array $metadata
      * @return array
      */
     protected function simpifyMetadata($metadata)

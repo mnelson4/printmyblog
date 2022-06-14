@@ -4,10 +4,25 @@ namespace PrintMyBlog\orm\entities;
 
 use stdClass;
 
+/**
+ * Class ExternalResource
+ * @package PrintMyBlog\orm\entities
+ */
 class ExternalResource
 {
+    /**
+     * @var string|int
+     */
     protected $ID;
+
+    /**
+     * @var string
+     */
     protected $external_url;
+
+    /**
+     * @var string
+     */
     protected $copy_filename;
 
     /**
@@ -34,6 +49,9 @@ class ExternalResource
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function wpdbPropertyFormats()
     {
         return [

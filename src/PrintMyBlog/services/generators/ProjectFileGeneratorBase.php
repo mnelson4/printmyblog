@@ -20,6 +20,10 @@ use WP_Post;
 use WP_Query;
 use WP_Screen;
 
+/**
+ * Class ProjectFileGeneratorBase
+ * @package PrintMyBlog\services\generators
+ */
 abstract class ProjectFileGeneratorBase
 {
     /**
@@ -60,7 +64,8 @@ abstract class ProjectFileGeneratorBase
     /**
      * ProjectHtmlGenerator constructor.
      *
-     * @param Project $project
+     * @param ProjectGeneration $project_generation
+     * @param Design $design
      */
     public function __construct(ProjectGeneration $project_generation, Design $design)
     {
@@ -69,6 +74,12 @@ abstract class ProjectFileGeneratorBase
         $this->design = $design;
     }
 
+    /**
+     * Called by Context.
+     * @param PostFetcher $post_fetcher
+     * @param DetectAndActivate $plugin_compatibility
+     * @param ExternalResourceCache $external_resource_cache
+     */
     public function inject(
         PostFetcher $post_fetcher,
         DetectAndActivate $plugin_compatibility,
@@ -125,6 +136,8 @@ abstract class ProjectFileGeneratorBase
         // falsely claim we're on the frontend. This way JetPack and others will enqueue their assets like they should.
         // See https://github.com/mnelson4/printmyblog/issues/311
         global $current_screen;
+        // Override this global because so many other plugins incorrectly assume AJAX requests don't need to enqueue scripts etc.
+        // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
         $current_screen = WP_Screen::get('front');
         // show protected posts' bodies as normal.
         add_filter('post_password_required', '__return_false');
@@ -150,7 +163,7 @@ abstract class ProjectFileGeneratorBase
      * @global WP_Post $wp_post
      * @global Project $pmb_project
      * @global Design $pmb_design
-     * @return bool success
+     * @return void
      */
     abstract protected function generateSection();
 
@@ -158,23 +171,8 @@ abstract class ProjectFileGeneratorBase
      * @global WP_Post $wp_post
      * @global Project $pmb_project
      * @global Design $pmb_design
-     * @return bool
      */
     abstract protected function finishGenerating();
-
-    /**
-     * Dequeues the active theme's styles by guessing that all their styles are registered with their name in it.
-     */
-// public function remove_theme_style()
-// {
-// $all_styles = wp_styles();
-// $active_theme_slug = get_stylesheet();
-// foreach($all_styles->queue as $handle){
-// if(strpos($handle, $active_theme_slug) !== false){
-// wp_dequeue_style($handle);
-// }
-// }
-// }
 
     /**
      * Orders $query->posts according to the order specified by $post_ids_in_order
@@ -194,7 +192,7 @@ abstract class ProjectFileGeneratorBase
             $post = null;
             foreach ($unordered_posts as $post) {
                 $post_id_from_section = $section->getPostId();
-                if ($post_id_from_section == $post->ID) {
+                if ($post_id_from_section === $post->ID) {
                     $found = true;
                     break;
                 }
@@ -225,6 +223,8 @@ abstract class ProjectFileGeneratorBase
     protected function generateSections(array $project_sections)
     {
         global $post, $wp_query;
+        // Override WP_Query global to generate sections like WP's "the loop".
+        // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
         $wp_query = $this->setupWpQuery($project_sections);
         while ($wp_query->have_posts()) {
             $wp_query->the_post();
@@ -242,12 +242,15 @@ abstract class ProjectFileGeneratorBase
     {
         global $more, $multipage, $pages, $numpages;
         // we want to see what's after "more" tags
+        // Show all the content at once, don't chop it up into pages.
+        //phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
         $more = true;
         // Remove all pagebreak blocks and stitch it all back together.
         $content_ignoring_pages = implode('<br class="pmb-page-break">', $pages);
         $pages = [$content_ignoring_pages];
         $numpages = 1;
         $multipage = false;
+        //phpcs:enable WordPress.WP.GlobalVariablesOverride.Prohibited
     }
 
     /**
@@ -289,12 +292,21 @@ abstract class ProjectFileGeneratorBase
         $this->maybeGenerateDivisionStart($last_section, $post->pmb_section);
     }
 
+    /**
+     * @param ProjectSection|null $last_section
+     * @param ProjectSection|null $current_section
+     * @return void
+     */
     abstract protected function maybeGenerateDivisionStart(
         ProjectSection $last_section = null,
         ProjectSection $current_section = null
     );
 
-
+    /**
+     * @param ProjectSection|null $previous_section
+     * @param ProjectSection|null $current_section
+     * @return void
+     */
     abstract protected function maybeGenerateDivisionEnd(
         ProjectSection $previous_section = null,
         ProjectSection $current_section = null
@@ -303,7 +315,7 @@ abstract class ProjectFileGeneratorBase
     /**
      * Gets a string of HTML from inluding the specified file.
      *
-     * @param $template_file
+     * @param string $template_file
      *
      * @param array $context to be used in the template.
      *
@@ -312,6 +324,8 @@ abstract class ProjectFileGeneratorBase
     protected function getHtmlFrom($template_file, $context = [])
     {
         global $post, $pmb_project, $pmb_design, $pmb_project_generation;
+        // extract so all that context is available in the template file.
+        // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
         extract($context);
         $pmb_project = $this->project;
         $pmb_design = $this->design;
@@ -349,22 +363,6 @@ abstract class ProjectFileGeneratorBase
             $output .= ob_get_clean();
         }
         return $output;
-    }
-
-    /**
-     * Gets the level "height" (how many levels there are under) of a section.
-     * @param ProjectSection $section
-     *
-     * @return string
-     */
-    protected function getLevel(ProjectSection $section)
-    {
-        $level = $this->project_generation->getLastSectionId();
-        if (! $level) {
-            $level = $section->getLevel();
-            $this->project_generation->setLastSectionId($level);
-        }
-        return $level;
     }
 
     /**
@@ -421,6 +419,8 @@ abstract class ProjectFileGeneratorBase
 
         $generation = $this->project_generation;
         if ($generation instanceof ProjectGeneration) {
+            // This debug information is inteded for developers.
+            // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export
             $generation->setLastError(var_export($error, true));
         }
     }

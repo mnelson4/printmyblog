@@ -24,16 +24,22 @@ class LegacyPrintPage extends BaseController
      * @var URL of domain we'd like this site to proxy for, so we can print that blog instead.
      */
     protected $proxy_for;
+
+    /**
+     * Sets up hooks.
+     */
     public function setHooks()
     {
         add_filter(
             'template_include',
             array($this, 'templateRedirect'),
+
             /*
-             after Elementor at priority 12,
+            After Elementor at priority 12,
             Enfold theme at the ridiculous priority 20,000...
             Someday, perhaps we should have a regular page dedicated to Print My Blog.
-            If you're reading this code and agree, feel free to work on a pull request! */
+            If you're reading this code and agree, feel free to work on a pull request!
+            */
             20001
         );
     }
@@ -44,7 +50,8 @@ class LegacyPrintPage extends BaseController
      */
     public function templateRedirect($template)
     {
-
+        // Allow linking directly to a print page without using a form.
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended
         if (isset($_GET[PMB_PRINTPAGE_SLUG]) && $_GET[PMB_PRINTPAGE_SLUG] === '1') {
             try {
                 $site_info = new RestApiDetector($this->getFromRequest('site', ''));
@@ -53,6 +60,7 @@ class LegacyPrintPage extends BaseController
                 $pmb_wp_error = $exception->wp_error();
                 return PMB_TEMPLATES_DIR . 'print_page_error.php';
             }
+            // phpcs:disable WordPress.WhiteSpace.PrecisionAlignment.Found
             global $pmb_site_name,
                    $pmb_site_description,
                    $pmb_site_url,
@@ -69,6 +77,7 @@ class LegacyPrintPage extends BaseController
                    $pmb_format,
                    $pmb_browser,
                    $pmb_author;
+            // phpcs:enable WordPress.WhiteSpace.PrecisionAlignment.Found
             $pmb_site_url = str_replace(
                 array(
                     'https://',
@@ -159,6 +168,7 @@ class LegacyPrintPage extends BaseController
             return PMB_TEMPLATES_DIR . 'print_page.php';
         }
         return $template;
+        // phpcs:enable WordPress.Security.NonceVerification.Recommended
     }
 
     /**
@@ -168,6 +178,8 @@ class LegacyPrintPage extends BaseController
      */
     protected function getDateString($date_filter_key)
     {
+        // No actions being performed so nonce unnecessary.
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended
         if (
             isset(
                 $_GET['dates'],
@@ -178,6 +190,7 @@ class LegacyPrintPage extends BaseController
         } else {
             return null;
         }
+        // phpcs:enable WordPress.Security.NonceVerification.Recommended
     }
 
     /**
@@ -187,7 +200,7 @@ class LegacyPrintPage extends BaseController
     protected function getBrowser()
     {
         if (isset($_SERVER['HTTP_USER_AGENT'])) {
-            $agent = $_SERVER['HTTP_USER_AGENT'];
+            $agent = wp_strip_all_tags(wp_unslash($_SERVER['HTTP_USER_AGENT']));
         } else {
             $agent = '';
         }
@@ -196,7 +209,7 @@ class LegacyPrintPage extends BaseController
         if (
             preg_match('/(Chrome|CriOS)\//i', $agent)
             //phpcs:disable Generic.Files.LineLength.TooLong
-            && ! preg_match('/(Aviator|ChromePlus|coc_|Dragon|Edge|Flock|Iron|Kinza|Maxthon|MxNitro|Nichrome|OPR|Perk|Rockmelt|Seznam|Sleipnir|Spark|UBrowser|Vivaldi|WebExplorer|YaBrowser)/i', $_SERVER['HTTP_USER_AGENT'])
+            && ! preg_match('/(Aviator|ChromePlus|coc_|Dragon|Edge|Flock|Iron|Kinza|Maxthon|MxNitro|Nichrome|OPR|Perk|Rockmelt|Seznam|Sleipnir|Spark|UBrowser|Vivaldi|WebExplorer|YaBrowser)/i', $agent)
             //phpcs:enable
         ) {
             return 'chrome';
@@ -216,10 +229,12 @@ class LegacyPrintPage extends BaseController
         return 'unknown';
     }
 
-    //phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    /**
+     * Enqueues scripts on print page.
+     */
+    //phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     public function enqueueScripts()
     {
-        //phpcs:enable
         do_action('PrintMyBlog\controllers\PmbPrintPage->enqueueScripts');
         wp_enqueue_script(
             'pmb_print_page',
@@ -254,7 +269,7 @@ class LegacyPrintPage extends BaseController
         $statuses = array_filter(
             $statuses,
             function ($input) {
-                return in_array($input, ['draft', 'pending', 'private', 'password', 'publish', 'future', 'trash']);
+                return in_array($input, ['draft', 'pending', 'private', 'password', 'publish', 'future', 'trash'], true);
             }
         );
         $data = [
@@ -343,6 +358,7 @@ class LegacyPrintPage extends BaseController
                     'error' => esc_html__('Sorry, There was a Problem 😢', 'print-my-blog'),
                     'troubleshooting' => sprintf(
                         //phpcs:disable Generic.Files.LineLength.TooLong
+                        // translators:1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag.
                         esc_html__('%1$sRead our FAQs%2$s, then feel free to ask for help in %3$sthe support forum.%2$s', 'print-my-blog'),
                         '<a href="https://wordpress.org/plugins/print-my-blog/#%0Athe%20print%20page%20says%20%E2%80%9Cthere%20seems%20to%20be%20an%20error%20initializing%E2%80%A6%E2%80%9D%2C%20or%20is%20stuck%20on%20%E2%80%9Cloading%20content%E2%80%9D%2C%20or%20i%20can%E2%80%99t%20filter%20by%20categories%20or%20terms%20from%20the%20print%20setup%20page%0A" target="_blank">',
                         //phpcs:enable
@@ -351,6 +367,8 @@ class LegacyPrintPage extends BaseController
                     ),
                     'comments' => esc_html__('Comments', 'print-my-blog'),
                     'no_comments' => esc_html__('No Comments', 'print-my-blog'),
+                    // Legacy code, just leave the old sub-optimal translated text.
+                    // phpcs:ignore WordPress.WP.I18n.NoHtmlWrappedStrings
                     'says' => __('<span class="screen-reader-text says">says:</span>', 'print-my-blog'),
                     'id' => esc_html__('ID:', 'print-my-blog'),
                     'by' => esc_html__('By', 'print-my-blog'),
@@ -358,9 +376,8 @@ class LegacyPrintPage extends BaseController
                     'private' => esc_html__('Private:', 'print-my-blog'),
                     'init_error' => $init_error_message,
                     'copied' => esc_html__('Copied! Ready to paste.', 'print-my-blog'),
-                    //phpcs:disable Generic.Files.LineLength.TooLong
+                    //phpcs:ignore Generic.Files.LineLength.TooLong
                     'copy_error' => esc_html__('There was an error copying. You can still select all the text manually and copy it.', 'print-my-blog'),
-                    //phpcs:enable
                 ),
                 'data' => $data,
             )
@@ -369,6 +386,9 @@ class LegacyPrintPage extends BaseController
         $this->loadThemeCompatibilityScriptsAndStylesheets();
     }
 
+    /**
+     * @return float
+     */
     protected function getImageRelativeSize()
     {
         $requested_size = sanitize_key($this->getFromRequest('image-size', 'full'));
@@ -378,16 +398,12 @@ class LegacyPrintPage extends BaseController
         switch ($requested_size) {
             case 'large':
                 return $page_height * 3 / 4;
-                break;
             case 'medium':
                 return $page_height / 2;
-                break;
             case 'small':
                 return $page_height / 4;
-                break;
             case 'none':
                 return 0;
-                break;
             default:
                 return $page_height;
         }
@@ -405,6 +421,9 @@ class LegacyPrintPage extends BaseController
         $this->loadThemeCompatibilityIfItExists($theme->template);
     }
 
+    /**
+     * @param string $slug
+     */
     protected function loadThemeCompatibilityIfItExists($slug)
     {
         $theme_slug_path = 'styles/theme-compatibility/' . $slug . '.css';

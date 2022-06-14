@@ -4,6 +4,10 @@ namespace PrintMyBlog\domain;
 
 use PrintMyBlog\entities\FileFormat;
 
+/**
+ * Class DefaultFileFormats
+ * @package PrintMyBlog\domain
+ */
 class DefaultFileFormats
 {
     const DIGITAL_PDF = 'digital_pdf';
@@ -11,7 +15,7 @@ class DefaultFileFormats
     const EPUB = 'epub';
 
     /**
-     * @return FileFormat[]
+     * Registers file formats.
      */
     public function registerFileFormats()
     {

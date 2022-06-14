@@ -25,6 +25,10 @@ use Twine\forms\inputs\YesNoInput;
 use Twine\forms\strategies\display\TextInputDisplay;
 use Twine\forms\strategies\validation\TextValidation;
 
+/**
+ * Class DefaultDesignTemplates
+ * @package PrintMyBlog\domain
+ */
 class DefaultDesignTemplates
 {
 
@@ -33,10 +37,17 @@ class DefaultDesignTemplates
      */
     private $image_helper;
 
+    /**
+     * @param ImageHelper $image_helper
+     */
     public function inject(ImageHelper $image_helper)
     {
         $this->image_helper = $image_helper;
     }
+
+    /**
+     * Registers design templates.
+     */
     public function registerDesignTemplates()
     {
         pmb_register_design_template(
@@ -529,18 +540,23 @@ class DefaultDesignTemplates
         );
     }
 
+    /**
+     * @param Design $design
+     * @return FormSection
+     * @throws \Twine\forms\helpers\ImproperUsageException
+     */
     public function getDefaultProjectForm(Design $design)
     {
         $sections = [];
         $header_content = $design->getSetting('header_content');
-        if (in_array('subtitle', $header_content)) {
+        if (in_array('subtitle', $header_content, true)) {
             $sections['subtitle'] = new TextInput(
                 [
                     'html_label_text' => __('Subtitle', 'print-my-blog'),
                 ]
             );
         }
-        if (in_array('byline', $header_content)) {
+        if (in_array('byline', $header_content, true)) {
             $sections['byline'] = new TextInput(
                 [
                     'html_label_text' => __('Byline', 'print-my-blog'),
@@ -548,7 +564,7 @@ class DefaultDesignTemplates
                 ]
             );
         }
-        if (in_array('url', $header_content)) {
+        if (in_array('url', $header_content, true)) {
             $sections['url'] = new TextInput(
                 [
                     'default' => site_url(),
@@ -605,7 +621,6 @@ class DefaultDesignTemplates
                             'excerpt' => new InputOption(__('Excerpt', 'print-my-blog')),
                             'meta' => new InputOption(__('Custom Fields', 'print-my-blog')),
                             'content' => new InputOption(__('Content', 'print-my-blog')),
-                            // 'comments' => __('Comments', 'print-my-blog'),
                         ],
                         [
                             'default' => [
@@ -650,6 +665,7 @@ class DefaultDesignTemplates
                                         'default' => '4em',
                                         'html_label_text' => __('Title page and Part Header Font Size', 'print-my-blog'),
                                         'html_help_text' => sprintf(
+                                            // translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag
                                             __('Font size used for the default title page’s and part’s header (all other headers’ sizes are derived from the main font size). Use any recognized %1$sCSS font-size keyword%2$s (like "large", "medium", "small") or a %3$slength in any units%2$s (eg "14pt", "50%%", or "10px").'),
                                             '<a href="https://www.w3schools.com/cssref/pr_font_font-size.asp" target="_blank">',
                                             '</a>',
@@ -669,6 +685,7 @@ class DefaultDesignTemplates
                                         'default' => '10pt',
                                         'html_label_text' => __('Font Size', 'print-my-blog'),
                                         'html_help_text' => sprintf(
+                                            // translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag
                                             __('Use any recognized %1$sCSS font-size keyword%2$s (like "large", "medium", "small") or a %3$slength in any units%2$s (eg "14pt", "50%%", or "10px").'),
                                             '<a href="https://www.w3schools.com/cssref/pr_font_font-size.asp" target="_blank">',
                                             '</a>',
@@ -714,6 +731,7 @@ class DefaultDesignTemplates
                                     [
                                         'html_label_text' => __('Page Width', 'print-my-blog') . pmb_pro_print_service_best(__('Not supported by some browsers', 'print-my-blog')),
                                         'html_help_text' => sprintf(
+                                            // translators: 1: opening anchor tag, 2: closing anchor tag
                                             __('Use standard %1$sCSS units%2$s', 'print-my-blog'),
                                             '<a href="https://www.w3schools.com/CSSref/css_units.asp">',
                                             '</a>'
@@ -725,6 +743,7 @@ class DefaultDesignTemplates
                                     [
                                         'html_label_text' => __('Page Height', 'print-my-blog') . pmb_pro_print_service_best(__('Not supported by some browsers', 'print-my-blog')),
                                         'html_help_text' => sprintf(
+                                            // translators: 1: opening anchor tag, 2: closing anchor tag
                                             __('Use standard %1$sCSS units%2$s', 'print-my-blog'),
                                             '<a href="https://www.w3schools.com/CSSref/css_units.asp">',
                                             '</a>'
@@ -748,6 +767,7 @@ class DefaultDesignTemplates
     {
         $theme = wp_get_theme();
         $use_theme_help_text = sprintf(
+            // translators: 1: theme name.
             __('Your theme, "%1$s", can be used in conjunction with your design. Themes are often not intended for print and can conflict with the design, but you may have content that looks broken without the theme.', 'print-my-blog'),
             $theme->name
         );
@@ -768,11 +788,20 @@ class DefaultDesignTemplates
         foreach ($image_sizes as $thumbnail_slug => $thumbnail_data) {
             // skip weird images with no height
             // also don't show non-cropped images, because finding their filename would require a trip to the server
+
+            // Other devs may have expected loose comparisons so keep doing that.
+            // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
             if (! $thumbnail_data['width'] || ! $thumbnail_data['height'] || $thumbnail_data['crop'] == false) {
                 continue;
             }
             $dimensions = $thumbnail_data['width'] . 'x' . $thumbnail_data['height'];
-            $image_quality_options[$dimensions] = new InputOption(sprintf(__('Resize to %s', 'print-my-blog'), $dimensions));
+            $image_quality_options[$dimensions] = new InputOption(
+                sprintf(
+                    // translators: %s image dimensions, like "120x120"
+                    __('Resize to %s', 'print-my-blog'),
+                    $dimensions
+                )
+            );
         }
         $image_quality_options['scaled'] = new InputOption(__('Full Size (on web)', 'print-my-blog'));
         $image_quality_options['uploaded'] = new InputOption(__('Uploaded Size (largest possible)', 'print-my-blog'));
@@ -790,6 +819,7 @@ class DefaultDesignTemplates
                                         [
                                             'html_label_text' => __('Image Quality (in pixels)', 'print-my-blog'),
                                             'html_help_text' => sprintf(
+                                                // translators: 1: opening anchor tag, 2L closing anchor tag.
                                                 __('Lower quality means smaller file size, whereas higher quality means higher resolution images. Note: if images are missing from the generated PDF, the requested image size might not be available. Use the %1$s Regenerate Thumbnails plugin%2$s to create the missing image sizes.', 'print-my-blog'),
                                                 '<a href="https://wordpress.org/plugins/regenerate-thumbnails/">',
                                                 '</a>'
@@ -837,43 +867,60 @@ class DefaultDesignTemplates
         );
     }
 
+    /**
+     * @return TextInput
+     */
     public function getPageReferenceTextInput()
     {
         return new TextInput(
             [
                 'html_label_text' => __('Page Reference Text', 'print-my-blog'),
+                // translators: %s literally the string "%s"
                 'html_help_text' => __('Text to use when replacing a hyperlink with a page reference. "%s" will be replaced with the page number.', 'print-my-blog'),
+                // translators: %s page number
                 'default' => __('(see page %s)', 'print-my-blog'),
                 'validation_strategies' => [
+                    // translators: %s literally the string %s.
                     new TextValidation(__('You must include "%s" in the page reference text so we know where to put the page number.', 'print-my-blog'), '~.*\%s.*~'),
                 ],
             ]
         );
     }
 
+    /**
+     * @return TextInput
+     */
     public function getInternalFootnoteTextInput()
     {
         return new TextInput(
             [
                 'html_label_text' => __('Internal Footnote Text', 'print-my-blog'),
+                // translators: %s literally the string %s.
                 'html_help_text' => __('Text to use when replacing a hyperlink with a footnote. "%s" will be replaced with the page number.', 'print-my-blog'),
+                // translators: %s literally the string %s.
                 'default' => __('See page %s.', 'print-my-blog'),
                 'validation_strategies' => [
+                    // translators: %s literally the string %s.
                     new TextValidation(__('You must include "%s" in the footnote text so we know where to put the URL.', 'print-my-blog'), '~.*\%s.*~'),
                 ],
             ]
         );
     }
 
-
+    /**
+     * @return TextInput
+     */
     public function getExternalFootnoteTextInput()
     {
         return new TextInput(
             [
                 'html_label_text' => __('External Footnote Text', 'print-my-blog'),
+                // translators: %s literally the string %s.
                 'html_help_text' => __('Text to use when replacing a hyperlink with a footnote. "%s" will be replaced with the URL', 'print-my-blog'),
+                // translators: %s literally the string %s.
                 'default' => __('See %s.', 'print-my-blog'),
                 'validation_strategies' => [
+                    // translators: %s literally the string %s.
                     new TextValidation(__('You must include "%s" in the footnote text so we know where to put the URL.', 'print-my-blog'), '~.*\%s.*~'),
                 ],
             ]

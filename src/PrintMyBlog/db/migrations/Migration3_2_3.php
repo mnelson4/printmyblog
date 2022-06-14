@@ -5,14 +5,15 @@ namespace PrintMyBlog\db\migrations;
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\db\migrations\MigrationBase;
 
-// phpcs:disable Squiz.Classes.ValidClassName.NotCamelCaps
+// phpcs:ignore Squiz.Classes.ValidClassName.NotCamelCaps
 class Migration3_2_3 extends MigrationBase
 {
-    // phpcs:enable Generic.Files.LineLength.TooLong
 
     public function perform()
     {
         global $wpdb;
+        // Only do this once on a singe request.
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $wpdb->update(
             $wpdb->posts,
             [

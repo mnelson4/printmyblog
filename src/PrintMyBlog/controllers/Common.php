@@ -15,6 +15,9 @@ use Twine\controllers\BaseController;
  */
 class Common extends BaseController
 {
+    /**
+     * Sets up hooks for both frontend and backend requests.
+     */
     public function setHooks()
     {
         add_action(
