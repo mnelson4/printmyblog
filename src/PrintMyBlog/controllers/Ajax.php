@@ -76,8 +76,7 @@ class Ajax extends BaseController
         PmbCentral $pmb_central,
         PostWrapperManager $post_manager,
         ExternalResourceCache $external_resource_map
-    )
-    {
+    ) {
         $this->project_manager = $project_manager;
         $this->format_registry = $format_registry;
         $this->post_fetcher = $post_fetcher;

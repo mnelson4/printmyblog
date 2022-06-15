@@ -2,7 +2,7 @@
 
 namespace PrintMyBlog\services\generators;
 
-use \Exception;
+use Exception;
 
 /**
  * Class EpubGenerator

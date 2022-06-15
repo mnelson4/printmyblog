@@ -33,7 +33,6 @@ class LegacyPrintPage extends BaseController
         add_filter(
             'template_include',
             array($this, 'templateRedirect'),
-
             /*
             After Elementor at priority 12,
             Enfold theme at the ridiculous priority 20,000...
