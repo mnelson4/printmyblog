@@ -21,7 +21,7 @@ class ColorGuru
 
     /**
      * @param string $hex_code
-     *
+     * @param string $alpha
      * @return string
      */
     public function convertHextToRgba($hex_code, $alpha)

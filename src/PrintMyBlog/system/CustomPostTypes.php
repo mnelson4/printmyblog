@@ -27,6 +27,9 @@ class CustomPostTypes
      */
     protected $svg_doer;
 
+    /**
+     * @param SvgDoer $svg_doer
+     */
     public function inject(SvgDoer $svg_doer)
     {
         $this->svg_doer = $svg_doer;
@@ -175,6 +178,15 @@ class CustomPostTypes
         return $query_args;
     }
 
+    /**
+     * Based on the post in question, determine which caps are required.
+     * @param array $caps
+     * @param string $cap
+     * @param int $user_id
+     * @param array $args
+     * @param string $cap_slug
+     * @return array
+     */
     public function mapMetaCap($caps, $cap, $user_id, $args, $cap_slug)
     {
 

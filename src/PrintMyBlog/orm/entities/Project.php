@@ -104,10 +104,10 @@ class Project extends PostWrapper
         ProjectGenerationFactory $project_generation_factory,
         SectionTemplateRegistry $section_template_registry
     ) {
-        $this->section_manager    = $section_manager;
+        $this->section_manager = $section_manager;
         $this->format_registry = $format_manager;
-        $this->design_manager  = $design_manager;
-        $this->config          = $config;
+        $this->design_manager = $design_manager;
+        $this->config = $config;
         $this->project_generation_factory = $project_generation_factory;
         $this->section_template_registry = $section_template_registry;
     }
@@ -136,7 +136,6 @@ class Project extends PostWrapper
             ]
         );
     }
-
 
 
     /**
@@ -200,7 +199,6 @@ class Project extends PostWrapper
     }
 
 
-
     /**
      * @param string $project_format_slug
      *
@@ -252,7 +250,7 @@ class Project extends PostWrapper
     }
 
     /**
-     * @param $new_formats
+     * @param array $new_formats
      */
     public function setFormatsSelected($new_formats)
     {
@@ -397,7 +395,7 @@ class Project extends PostWrapper
     }
 
     /**
-     * @param $division
+     * @param string $division
      *
      * @return bool
      */
@@ -417,7 +415,7 @@ class Project extends PostWrapper
 
     /**
      *
-     * return bool success
+     * @return bool success
      */
     public function delete()
     {
@@ -466,7 +464,6 @@ class Project extends PostWrapper
 
     /**
      * Gets a form that is actually a combination of all the forms for the project's chosen designs.
-     * @param Project $project
      *
      * @return FormSection
      */
@@ -474,7 +471,7 @@ class Project extends PostWrapper
     {
         if (! $this->meta_form instanceof FormSection) {
             $formats = $this->getFormatSlugsSelected();
-            $forms   = [];
+            $forms = [];
             foreach ($formats as $format) {
                 $forms[] = $this->getDesignFor($format)->getProjectForm();
             }
@@ -524,7 +521,7 @@ class Project extends PostWrapper
         if ($setting_name === 'byline') {
             return get_the_author_meta('display_name', $this->getWpPost()->post_author);
         }
-        $form    = $this->getMetaForm();
+        $form = $this->getMetaForm();
         $section = $form->findSection($setting_name);
         if ($section instanceof FormInputBase) {
             return $section->getDefault();
@@ -544,19 +541,19 @@ class Project extends PostWrapper
     }
 
     /**
-     * Echoes the rendered project's setting
+     * Echoes and escapes the rendered project's setting
      * @param string $setting_name
      * @since 3.4.1
      */
     public function echoSetting($setting_name)
     {
-        echo $this->renderSetting($setting_name);
+        echo esc_html($this->renderSetting($setting_name));
     }
 
     /**
      * Updates the post property or metadata
-     * @param $setting_name string
-     * @param $value mixed
+     * @param string $setting_name string
+     * @param mixed $value mixed
      */
     public function setSetting($setting_name, $value)
     {
@@ -578,7 +575,7 @@ class Project extends PostWrapper
 
     /**
      * Remembers how many levels of divisions this project actually uses.
-     * @param $levels
+     * @param int $levels
      *
      * @return bool|int
      */
@@ -623,13 +620,14 @@ class Project extends PostWrapper
     }
 
     /**
-     * Echoes the rendered title.
+     * Echoes and escapes the rendered title. Not ran through esc_html()
      * @since 3.4.1
      */
     public function echoPublishedTitle()
     {
-        echo $this->renderPublishedTitle();
+        echo esc_html($this->renderPublishedTitle());
     }
+
     /**
      *
      * @return array keys are template names, values are arrays with keys:{
@@ -642,11 +640,11 @@ class Project extends PostWrapper
         if ($this->custom_templates === null) {
             $templates = [];
             foreach ($this->getFormatsSelected() as $format) {
-                $design           = $this->getDesignFor($format);
+                $design = $this->getDesignFor($format);
                 $design_templates = $design->getDesignTemplate()->getCustomTemplates();
                 foreach ($design_templates as $template_slug) {
-                    if (! isset($templates[ $template_slug ])) {
-                        $templates[ $template_slug ] = $this->section_template_registry->get($template_slug);
+                    if (! isset($templates[$template_slug])) {
+                        $templates[$template_slug] = $this->section_template_registry->get($template_slug);
                     }
                 }
             }
@@ -692,6 +690,7 @@ class Project extends PostWrapper
         // keys are old section IDs, values are their new values
         $section_map = [0 => 0];
         foreach ($this->section_manager->getFlatSectionRowsFor($this->getWpPost()->ID, 100000) as $section_row) {
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- we're working with a custom table here, custom queries are the only way.
             $wpdb->insert(
                 $wpdb->prefix . TableManager::SECTIONS_TABLE,
                 [

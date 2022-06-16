@@ -59,8 +59,9 @@ class FileFormat
      * @var string
      */
     protected $extension;
+
     /**
-     * @var Whether this version of PMB has all the necessary files to support this format
+     * @var bool Whether this version of PMB has all the necessary files to support this format
      */
     protected $supported = true;
 
@@ -77,6 +78,7 @@ class FileFormat
      * @type string $icon
      * @type string $extension
      * }
+     * @throws ImproperUsageException
      */
     public function __construct($data = [])
     {

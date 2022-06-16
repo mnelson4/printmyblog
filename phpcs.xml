@@ -39,6 +39,13 @@
         <exclude name="WordPress.NamingConventions.ValidHookName.NotLowercase"/>
         <exclude name="Generic.Formatting.SpaceAfterCast.NoSpace"/>
         <exclude name="WordPress.WhiteSpace.CastStructureSpacing.NoSpaceBeforeOpenParenthesis"/>
+        <exclude name="Squiz.PHP.EmbeddedPhp.ContentBeforeOpen"/>
+        <exclude name="Squiz.PHP.EmbeddedPhp.ContentAfterEnd"/>
+        <exclude name="Squiz.PHP.EmbeddedPhp.ContentAfterOpen"/>
+        <exclude name="Squiz.PHP.EmbeddedPhp.ContentBeforeEnd"/>
+        <exclude name="Generic.WhiteSpace.ScopeIndent.IncorrectExact"/><!-- This is very problematic in template files -->
+        <exclude name="Generic.WhiteSpace.ScopeIndent.Incorrect"/><!-- ditto -->
+        <exclude name="WordPress.WhiteSpace.PrecisionAlignment.Found"/>
 
 <!--        maybe later-->
         <exclude name="Generic.Functions.OpeningFunctionBraceKernighanRitchie.BraceOnNewLine"/>

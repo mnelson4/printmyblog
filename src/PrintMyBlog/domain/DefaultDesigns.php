@@ -12,7 +12,7 @@ use WP_User;
 class DefaultDesigns
 {
     /**
-     *
+     * Registers designs.
      */
     public function registerDefaultDesigns()
     {

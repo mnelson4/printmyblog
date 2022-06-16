@@ -4,8 +4,15 @@ namespace PrintMyBlog\compatibility\plugins;
 
 use Twine\compatibility\CompatibilityBase;
 
+/**
+ * Class ContactForm7
+ * @package PrintMyBlog\compatibility\plugins
+ */
 class ContactForm7 extends CompatibilityBase
 {
+    /**
+     * Hide Google Captcha's badge in printouts.
+     */
     public function setRenderingHooks()
     {
         add_action('wp_enqueue_scripts', array( $this, 'hideGoogleCaptchaBadge'));

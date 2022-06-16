@@ -82,10 +82,9 @@ class Admin extends BaseController
     const SLUG_ACTION_UNINSTALL = 'uninstall';
 
     /**
-     * name of the option that just indicates we successfully saved the setttings
+     * Name of the option that just indicates we successfully saved the setttings.
      */
     const SETTINGS_SAVED_OPTION = 'pmb-settings-saved';
-
 
 
     /**
@@ -188,7 +187,7 @@ class Admin extends BaseController
         PostWrapperManager $post_manager,
         ExternalResourceCache $external_resouce_cache
     ) {
-        $this->post_fetcher    = $post_fetcher;
+        $this->post_fetcher = $post_fetcher;
         $this->section_manager = $section_manager;
         $this->project_manager = $project_manager;
         $this->file_format_registry = $file_format_registry;
@@ -215,8 +214,8 @@ class Admin extends BaseController
         if (pmb_fs()->is_plan__premium_only('founding_members')) {
             add_filter('post_row_actions', [$this, 'postAdminRowActions'], 10, 2);
             add_filter('page_row_actions', [$this, 'postAdminRowActions'], 10, 2);
-            add_action('post_submitbox_misc_actions', array( $this, 'addDuplicateAsPrintMaterialToClassicEditor'));
-            add_action('enqueue_block_editor_assets', array( $this, 'addDuplicateAsPrintMaterialToGutenberg' ));
+            add_action('post_submitbox_misc_actions', array($this, 'addDuplicateAsPrintMaterialToClassicEditor'));
+            add_action('enqueue_block_editor_assets', array($this, 'addDuplicateAsPrintMaterialToGutenberg'));
         }
 
         $this->makePrintContentsSaySaved();
@@ -296,9 +295,9 @@ class Admin extends BaseController
             //phpcs:enable WordPress.Security.NonceVerification.Recommended
             $screen->add_help_tab(
                 array(
-                    'id'    => 'my_help_tab',
+                    'id' => 'my_help_tab',
                     'title' => __('Keyboard Accessibility', 'print-my-blog'),
-                    'content'   => pmb_get_contents(PMB_TEMPLATES_DIR . 'project_edit_content_help_tab.php'),
+                    'content' => pmb_get_contents(PMB_TEMPLATES_DIR . 'project_edit_content_help_tab.php'),
                 )
             );
         }
@@ -315,10 +314,10 @@ class Admin extends BaseController
             foreach ($submenu[PMB_ADMIN_PROJECTS_PAGE_SLUG] as $key => $value) {
                 $k = array_search('edit.php?post_type=pmb_content', $value, true);
                 if ($k) {
-                    unset($submenu[ PMB_ADMIN_PROJECTS_PAGE_SLUG ][ $key ]);
+                    unset($submenu[PMB_ADMIN_PROJECTS_PAGE_SLUG][$key]);
                     // Sorry, this is the only way to rearrange menu items how I want them.
                     // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-                    $submenu[ PMB_ADMIN_PROJECTS_PAGE_SLUG ][] = $value;
+                    $submenu[PMB_ADMIN_PROJECTS_PAGE_SLUG][] = $value;
                 }
             }
         }
@@ -403,10 +402,10 @@ class Admin extends BaseController
             $method = 'GET';
             $button_text = '';
         } else {
-                $form = $this->getEmailHelpForm();
-                $form_url = admin_url(PMB_ADMIN_HELP_PAGE_PATH);
-                $method = 'POST';
-                $button_text = esc_html__('Email Print My Blog Support', 'print-my-blog');
+            $form = $this->getEmailHelpForm();
+            $form_url = admin_url(PMB_ADMIN_HELP_PAGE_PATH);
+            $method = 'POST';
+            $button_text = esc_html__('Email Print My Blog Support', 'print-my-blog');
         }
         pmb_render_template(
             'help.php',
@@ -473,13 +472,13 @@ class Admin extends BaseController
             $this->notification_manager->addTextNotificationForCurrentUser(
                 OneTimeNotification::TYPE_ERROR,
                 sprintf(
-                        // translators: 1: error message, 2: email address, 3: subject of email, 4: content of email.
+                // translators: 1: error message, 2: email address, 3: subject of email, 4: content of email.
                     __('There was an error sending an email from your website (it was "%1$s"). Please manually send an email to %2$s, with the subject "%3$s", with the content:', 'print-my-blog'),
                     $error->get_error_message(),
                     PMB_SUPPORT_EMAIL,
                     $subject
                 )
-                    . '<pre>' . $message . '</pre>'
+                . '<pre>' . $message . '</pre>'
             );
         }
         wp_safe_redirect(
@@ -557,7 +556,7 @@ class Admin extends BaseController
                         '<h2>' . __('Support for your plan is offered on GitHub', 'print-my-blog') . '</h2>' .
                         '<p>' . __('GitHub is a public forum to share your issues with the developer and other users.', 'print-my-blog') . '</p>' .
                         '<p>' . sprintf(
-                                // translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag.
+                        // translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag.
                             __('You will need to first %1$screate a GitHub account%2$s. If you prefer to use email support please %3$spurchase a license that offers email support.%2$s', 'print-my-blog'),
                             '<a target="_blank" href="https://github.com/signup">',
                             '</a>',
@@ -604,8 +603,8 @@ class Admin extends BaseController
 
     /**
      * Adds links to PMB stuff on the plugins page.
-     * @since 1.0.0
      * @param array $links
+     * @since 1.0.0
      */
     public function pluginPageLinks($links)
     {
@@ -830,15 +829,19 @@ class Admin extends BaseController
         // phpcs:enable WordPress.Security.NonceVerification.Recommended
     }
 
+    /**
+     * Displays a page.
+     * @throws \Twine\forms\helpers\ImproperUsageException
+     */
     public function renderProjects()
     {
         // Nonce overkill for just checking which page they're on.
         // phpcs:disable WordPress.Security.NonceVerification.Recommended
-        $action = isset($_GET['action']) ? $_GET['action'] : null;
+        $action = isset($_GET['action']) ? sanitize_key($_GET['action']) : null;
         if ($action === self::SLUG_ACTION_ADD_NEW) {
             $this->editSetup();
         } elseif ($action === self::SLUG_ACTION_EDIT_PROJECT) {
-            $subaction = isset($_GET['subaction']) ? $_GET['subaction'] : null;
+            $subaction = isset($_GET['subaction']) ? sanitize_key($_GET['subaction']) : null;
             try {
                 switch ($subaction) {
                     case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
@@ -889,16 +892,19 @@ class Admin extends BaseController
         // phpcs:enable WordPress.Security.NonceVerification.Recommended
     }
 
+    /**
+     * Shows the design-choosing step.
+     */
     protected function editChooseDesign()
     {
         // determine the format
         // Nonce overkill for just checking which page they're on.
         // phpcs:disable WordPress.Security.NonceVerification.Recommended
-        $format = $this->file_format_registry->getFormat(sanitize_key($_GET['format']));
+        $format = $this->file_format_registry->getFormat(isset($_GET['format']) ? sanitize_key($_GET['format']) : null);
         // get all the designs for this format
         // including which format is actually in-use
         $wp_query_args = [
-                // Sorry, I'm storing the design on a metakey. (Ya maybe we could store them on a custom table too).
+            // Sorry, I'm storing the design on a metakey. (Ya maybe we could store them on a custom table too).
             // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
             'meta_query' => [
                 [
@@ -1112,7 +1118,7 @@ class Admin extends BaseController
                     $this->notification_manager->addTextNotificationForCurrentUser(
                         'warning',
                         sprintf(
-                                // translators: %s error message.
+                        // translators: %s error message.
                             __('There was an error communicating with Print My Blog Central. It was %s', 'print-my-blog'),
                             $e->getMessage()
                         )
@@ -1188,7 +1194,6 @@ class Admin extends BaseController
         }
         return $mappings;
     }
-
 
 
     /**
@@ -1362,7 +1367,7 @@ class Admin extends BaseController
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
-                    // translators: %s project name.
+            // translators: %s project name.
                 __('Successfully setup the project "%s".', 'print-my-blog'),
                 $this->project->getWpPost()->post_title
             )
@@ -1377,7 +1382,7 @@ class Admin extends BaseController
                 $this->notification_manager->addTextNotificationForCurrentUser(
                     OneTimeNotification::TYPE_INFO,
                     sprintf(
-                            // translators: %s format name
+                    // translators: %s format name
                         __('You need to choose and customize the design for your %s.', 'print-my-blog'),
                         $this->file_format_registry->getFormat($new_format)->title()
                     )
@@ -1474,8 +1479,8 @@ class Admin extends BaseController
 
     /**
      * @param Project $project
-     * @param $request_data
-     * @param $placement
+     * @param array $request_data
+     * @param string $placement
      * @param int $order
      */
     protected function setSectionFromRequest(Project $project, $request_data, $placement, &$order = 1)
@@ -1519,7 +1524,7 @@ class Admin extends BaseController
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
-                    // translators: %s: design name
+            // translators: %s: design name
                 __('The design "%s" has been customized, and its changes will be reflected in all projects that use it.', 'print-my-blog'),
                 $design->getWpPost()->post_title
             )
@@ -1546,7 +1551,7 @@ class Admin extends BaseController
         if (! $design instanceof Design || ! $format instanceof FileFormat) {
             throw new Exception(
                 sprintf(
-                        // translators: 1: design slug, 2: format slug
+                // translators: 1: design slug, 2: format slug
                     __('An invalid design (%1$s) or format provided(%2$s)', 'print-my-blog'),
                     sanitize_key(Array2::setOr($_GET, 'design', '')),
                     sanitize_key(Array2::setOr($_GET, 'format', ''))
@@ -1562,7 +1567,7 @@ class Admin extends BaseController
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
-                    // translators: 1: design name, 2: format name.
+            // translators: 1: design name, 2: format name.
                 __('You chose the design "%1$s" for the %2$s of your project.', 'print-my-blog'),
                 $design->getWpPost()->post_title,
                 $format->title()
@@ -1633,7 +1638,7 @@ class Admin extends BaseController
         if (! $format instanceof FileFormat) {
             throw new Exception(
                 sprintf(
-                        // translators: %s: format slug
+                // translators: %s: format slug
                     __('There is no file format with the slug "%s"', 'print-my-blog'),
                     sanitize_key(Array2::setOr($_GET, 'format', ''))
                 )
@@ -1691,15 +1696,15 @@ class Admin extends BaseController
         // we've already checked we're on the right page
         if (wp_script_is('wp-i18n')) {
             ?>
-        <script>
-            // Note: Make sure that `wp.i18n` has already been defined by the time you call `wp.i18n.setLocaleData()`.
-            wp.i18n.setLocaleData({
-                'Publish': [
-                    'Save',
-                    'print-my-blog'
-                ]
-            });
-        </script>
+            <script>
+                // Note: Make sure that `wp.i18n` has already been defined by the time you call `wp.i18n.setLocaleData()`.
+                wp.i18n.setLocaleData({
+                    'Publish': [
+                        'Save',
+                        'print-my-blog'
+                    ]
+                });
+            </script>
             <?php
         }
     }
@@ -1730,7 +1735,7 @@ class Admin extends BaseController
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
-                    // translators: 1: the name of the new project.
+            // translators: 1: the name of the new project.
                 __('Project successfully duplicated. It is titled "%1$s".', 'print-my-blog'),
                 $new_project->getWpPost()->post_title
             )
@@ -1802,7 +1807,7 @@ class Admin extends BaseController
                     $this->notification_manager->addTextNotificationForCurrentUser(
                         'warning',
                         sprintf(
-                                // translators: 1: error message.
+                        // translators: 1: error message.
                             __('There was an error communicating with Print My Blog Central. It was %s', 'print-my-blog'),
                             $e->getMessage()
                         )
@@ -1902,7 +1907,7 @@ class Admin extends BaseController
             isset($_GET['action']) &&
             $_GET['action'] === self::SLUG_ACTION_EDIT_PROJECT
         ) {
-            $project = $this->project_manager->getById((int)$_GET['ID']);
+            $project = $this->project_manager->getById(isset($_GET['ID']) ? (int)$_GET['ID'] : null);
             if (! $project) {
                 wp_safe_redirect(admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH));
                 exit;
@@ -1935,12 +1940,12 @@ class Admin extends BaseController
     {
         ?>
         <div class="pmb-duplicate-button-area">
-        <?php
-        // HTML prepared by the called method.
-        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-        echo $this->getDuplicateAsPrintMaterialHtml('button button-secondary');
-        ?>
-</div>
+            <?php
+            // HTML prepared by the called method.
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo $this->getDuplicateAsPrintMaterialHtml('button button-secondary');
+            ?>
+        </div>
         <?php
     }
 
@@ -2035,7 +2040,7 @@ class Admin extends BaseController
         wp_enqueue_script(
             'pmb_blockeditor',
             PMB_SCRIPTS_URL . 'build/editor.js',
-            array( 'wp-components', 'wp-edit-post', 'wp-element', 'wp-i18n', 'wp-plugins' ),
+            array('wp-components', 'wp-edit-post', 'wp-element', 'wp-i18n', 'wp-plugins'),
             filemtime(PMB_SCRIPTS_DIR . 'build/editor.js')
         );
         wp_localize_script(

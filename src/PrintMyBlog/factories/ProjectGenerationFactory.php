@@ -16,7 +16,7 @@ class ProjectGenerationFactory
     /**
      * @param Project $project
      * @param FileFormat $format
-     * @return Project
+     * @return ProjectGeneration
      */
     public function create(Project $project, FileFormat $format)
     {

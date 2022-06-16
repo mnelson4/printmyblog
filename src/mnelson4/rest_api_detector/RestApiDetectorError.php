@@ -12,13 +12,24 @@ use WP_Error;
  *
  * @package     Print My Blog
  * @author         Mike Nelson
- * @since         $VID:$
  *
  */
 class RestApiDetectorError extends Exception
 {
+    /**
+     * @var string
+     */
     protected $string_code = 'not_set';
+
+    /**
+     * @var WP_Error
+     */
     protected $wp_error;
+
+    /**
+     * RestApiDetectorError constructor.
+     * @param WP_Error $wp_error
+     */
     public function __construct(WP_Error $wp_error)
     {
         $this->string_code = $wp_error->get_error_code();
@@ -35,11 +46,10 @@ class RestApiDetectorError extends Exception
         return $this->string_code;
     }
 
+    // phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     /**
-     * @since $VID:$
      * @return WP_Error
      */
-    //phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     public function wp_error()
     {
         //phpcs:enable

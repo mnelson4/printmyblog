@@ -21,11 +21,11 @@ class PrintPageUrlGenerator
     protected $print_settings;
 
     /**
-     * @param FrontendPrintSettings $printSettings
+     * @param FrontendPrintSettings $print_settings
      */
-    public function inject(FrontendPrintSettings $printSettings)
+    public function inject(FrontendPrintSettings $print_settings)
     {
-        $this->print_settings = $printSettings;
+        $this->print_settings = $print_settings;
     }
 
     /**

@@ -37,7 +37,7 @@ class Capabilities
         $post_types = get_post_types([], 'objects');
         $pmb_post_types = $this->custom_post_types->getPostTypes();
         foreach ($post_types as $post_type) {
-            if ($post_type instanceof WP_Post_Type && in_array($post_type->name, $pmb_post_types)) {
+            if ($post_type instanceof WP_Post_Type && in_array($post_type->name, $pmb_post_types, true)) {
                 $this->grantCapsForCPT($post_type);
             }
         }

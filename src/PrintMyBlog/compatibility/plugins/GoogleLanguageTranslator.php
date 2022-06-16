@@ -4,9 +4,16 @@ namespace PrintMyBlog\compatibility\plugins;
 
 use Twine\compatibility\CompatibilityBase;
 
-// plugin: https://wordpress.org/plugins/gtranslate/
+/**
+ * Class GoogleLanguageTranslator
+ * Plugin file: https://wordpress.org/plugins/gtranslate/
+ * @package PrintMyBlog\compatibility\plugins
+ */
 class GoogleLanguageTranslator extends CompatibilityBase
 {
+    /**
+     * Add some CSS when printing.
+     */
     public function setRenderingHooks()
     {
         global $google_language_translator;

@@ -5,6 +5,10 @@ namespace PrintMyBlog\domain;
 use PrintMyBlog\system\Context;
 use WP_Post;
 
+/**
+ * Class PrintButtons
+ * @package PrintMyBlog\domain
+ */
 class PrintButtons
 {
 

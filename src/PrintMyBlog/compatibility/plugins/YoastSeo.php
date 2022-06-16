@@ -5,6 +5,10 @@ namespace PrintMyBlog\compatibility\plugins;
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\compatibility\CompatibilityBase;
 
+/**
+ * Class YoastSeo
+ * @package PrintMyBlog\compatibility\plugins
+ */
 class YoastSeo extends CompatibilityBase
 {
     /**

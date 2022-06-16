@@ -27,6 +27,9 @@ use Twine\compatibility\CompatibilityBase;
  */
 class DetectAndActivate
 {
+    /**
+     * @var array|null
+     */
     protected $compatibility_mods = null;
 
     /**
@@ -85,13 +88,13 @@ class DetectAndActivate
 
     /**
      * Using a filter as an action to initiate our callbacks
-     * @param $pre_dispatch_result
-     * @return mixed
+     * @param string $pre_dispatch_result
+     * @return string
      */
     public function activateRenderingCompatibilityModes($pre_dispatch_result = '')
     {
-        foreach ($this->getCompatibilityMods() as $compatibilityMod) {
-            $compatibilityMod->setRenderingHooks();
+        foreach ($this->getCompatibilityMods() as $compatibility_mod) {
+            $compatibility_mod->setRenderingHooks();
         }
         return $pre_dispatch_result;
     }

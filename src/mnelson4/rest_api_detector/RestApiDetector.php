@@ -17,16 +17,39 @@ use WP_Error;
  */
 class RestApiDetector
 {
+    /**
+     * @var string
+     */
     protected $site;
+
+    /**
+     * @var string
+     */
     protected $name;
+
+    /**
+     * @var string
+     */
     protected $description;
+
+    /**
+     * @var string
+     */
     protected $rest_api_url;
+
+    /**
+     * @var bool
+     */
     protected $local;
+
+    /**
+     * @var bool
+     */
     protected $initialized = false;
 
     /**
      * RestApiDetector constructor.
-     * @param $site
+     * @param string $site
      * @throws RestApiDetectorError
      */
     public function __construct($site)
@@ -70,8 +93,7 @@ class RestApiDetector
 
     /**
      * Avoid SSRF by sanitizing the site received.
-     * @since $VID:$
-     * @param $site
+     * @param string $site
      * @return mixed|string
      */
     protected function sanitizeSite($site)
@@ -88,7 +110,7 @@ class RestApiDetector
             $site = 'http://' . $site;
         }
         // Remove unexpected URL parts.
-        $url_parts = parse_url($site);
+        $url_parts = wp_parse_url($site);
         if (isset($url_parts['port'])) {
             $site = str_replace(':' . $url_parts['port'], '', $site);
         }
@@ -106,8 +128,7 @@ class RestApiDetector
      * Tries to get the site's name, description, and URL, assuming it's self-hosted.
      * Returns a true on success, false if the site works but wasn't a self-hosted WordPress site, or
      * throws an exception if the site is self-hosted WordPress but had an error.
-     * @since $VID:$
-     * @param $site
+     * @param string $site
      * @return bool false if the site exists but it's not a self-hosted WordPress site.
      * @throws RestApiDetectorError
      */
@@ -139,6 +160,11 @@ class RestApiDetector
         return $success;
     }
 
+    /**
+     * @param string $wp_api_url
+     * @return bool
+     * @throws RestApiDetectorError
+     */
     protected function fetchWpJsonRootInfo($wp_api_url)
     {
         $response = $this->sendHttpGetRequest($wp_api_url);
@@ -176,8 +202,7 @@ class RestApiDetector
     /**
      * We didn't see any indication the website has the WP API enabled. Just take a guess that
      * /wp-json is the REST API base url. Maybe we'll get lucky.
-     * @since $VID:$
-     * @param $site
+     * @param string $site
      * @return bool
      * @throws RestApiDetectorError
      */
@@ -192,8 +217,7 @@ class RestApiDetector
      * Tries to get the site name, description and URL from a site on WordPress.com.
      * Returns true success, or throws a RestApiDetectorError. If the site doesn't appear to be on WordPress.com
      * also has an error.
-     * @since $VID:$
-     * @param $site
+     * @param string $site
      * @return bool
      * @throws RestApiDetectorError
      */
@@ -211,8 +235,7 @@ class RestApiDetector
     }
 
     /**
-     * @since $VID:$
-     * @param $url
+     * @param string $url
      * @return array|WP_Error
      */
     protected function sendHttpGetRequest($url)
@@ -318,7 +341,7 @@ class RestApiDetector
     /**
      * @param bool $initialized
      */
-    protected function setInitialized(bool $initialized)
+    protected function setInitialized($initialized)
     {
         $this->initialized = $initialized;
     }

@@ -316,7 +316,7 @@ class DesignTemplate
     /**
      * Calculates where thie template file SHOULD be in this design template, if it exists at all.
      * @param string bool $division
-     * @param $beginning
+     * @param bool $beginning
      *
      * @return string
      * @throws Exception
@@ -332,7 +332,7 @@ class DesignTemplate
     /**
      * @param string $division
      * @param string $beginning
-     *
+     * @param bool $use_fallback
      * @return bool
      */
     public function templateFileExists($division, $beginning = true, $use_fallback = false)
@@ -384,7 +384,7 @@ class DesignTemplate
     }
 
     /**
-     * @param $level
+     * @param int $level
      * @return string
      */
     public function divisionLabelSingular($level)

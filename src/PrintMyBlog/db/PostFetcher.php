@@ -41,7 +41,7 @@ class PostFetcher
     {
         global $wpdb;
         // todo: cache
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        // phpcs:disable
         return $wpdb->get_results(
             'SELECT ID, post_title FROM '
             . $wpdb->posts
@@ -49,6 +49,7 @@ class PostFetcher
             . implode('\',\'', $this->getProjectPostTypes())
             . '\') AND post_status in ("publish","draft")'
         );
+        // phpcs:enable
     }
 
     /**
@@ -93,8 +94,7 @@ class PostFetcher
     public function deleteCustomPostTypes()
     {
         global $wpdb;
-        // todo: cache
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        // phpcs:disable
         return $wpdb->query(
             'DELETE posts, postmetas FROM '
             . $wpdb->posts
@@ -104,5 +104,6 @@ class PostFetcher
             . implode('","', $this->custom_post_types->getPostTypes())
             . '")'
         );
+        // phpcs:enable
     }
 }

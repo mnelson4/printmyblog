@@ -17,11 +17,9 @@ use Twine\compatibility\CompatibilityBase;
  */
 class WpVrView extends CompatibilityBase
 {
-
-    public function setHooks()
-    {
-    }
-
+    /**
+     * Override their shortcode.
+     */
     public function setRenderingHooks()
     {
         // Their shortcode becomes a simple iFrame that has JS that doesn't work in Prince XML.
@@ -33,7 +31,7 @@ class WpVrView extends CompatibilityBase
     /**
      * We just want to set some hooks; we don't want to actually change any results.
      * @since $VID:$
-     * @param $normal_result
+     * @param array $atts
      * @return mixed
      */
     public function shortcode($atts)

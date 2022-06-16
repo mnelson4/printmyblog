@@ -33,7 +33,7 @@ class LegacyPrintPage extends BaseController
         add_filter(
             'template_include',
             array($this, 'templateRedirect'),
-            /*
+            /**
             After Elementor at priority 12,
             Enfold theme at the ridiculous priority 20,000...
             Someday, perhaps we should have a regular page dedicated to Print My Blog.
@@ -45,6 +45,7 @@ class LegacyPrintPage extends BaseController
 
     /**
      * Determines if the request is for our page generator page, and if so, uses our template for it.
+     * @param string $template
      * @since 1.0.0
      */
     public function templateRedirect($template)
@@ -120,7 +121,12 @@ class LegacyPrintPage extends BaseController
             $pmb_before_date = $this->getDateString('before');
 
             // Figure out what post type was selected.
-            $post_types_using_query_var = get_post_types(array('name' => $_GET['post-type']), 'object');
+            $post_types_using_query_var = get_post_types(
+                array(
+                    'name' => isset($_GET['post-type']) ? sanitize_key(wp_unslash($_GET['post-type'])) : 'post',
+                ),
+                'object'
+            );
             if (is_array($post_types_using_query_var)) {
                 $post_type_info = reset($post_types_using_query_var);
                 $pmb_post_type = $post_type_info->label;
@@ -132,11 +138,12 @@ class LegacyPrintPage extends BaseController
             // Ideally we'll do this via the REST API, but I'm in a pinch so just doing it via PHP and
             // only when not using WP REST Proxy.
             if (empty($_GET['site']) && ! empty($_GET['taxonomies'])) {
-                $filtering_taxonomies = $_GET['taxonomies'];
+                // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- we're right about to sanitize them.
+                $filtering_taxonomies = wp_unslash($_GET['taxonomies']);
                 foreach ($filtering_taxonomies as $taxonomy => $terms_ids) {
                     $matching_taxonomy_objects = get_taxonomies(
                         array(
-                            'rest_base' => $taxonomy,
+                            'rest_base' => sanitize_key($taxonomy),
                         ),
                         'objects'
                     );
@@ -146,7 +153,7 @@ class LegacyPrintPage extends BaseController
                     $taxonomy_object = reset($matching_taxonomy_objects);
                     $term_objects = get_terms(
                         array(
-                            'include' => implode(',', $terms_ids),
+                            'include' => implode(',', array_map('intval', $terms_ids)),
                             'hide_empty' => false,
                         )
                     );
@@ -171,21 +178,22 @@ class LegacyPrintPage extends BaseController
     }
 
     /**
-     * @since $VID:$
-     * @param $date_filter_key
+     * @param string $date_filter_key
      * @return null|string
      */
     protected function getDateString($date_filter_key)
     {
         // No actions being performed so nonce unnecessary.
-        // phpcs:disable WordPress.Security.NonceVerification.Recommended
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- there's no harm in looking.
         if (
             isset(
                 $_GET['dates'],
                 $_GET['dates'][$date_filter_key]
-            ) && $_GET['dates'][$date_filter_key]
+            )
         ) {
-            return date_i18n(get_option('date_format'), strtotime($_GET['dates'][$date_filter_key]));
+            // phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- there's no harm in looking.
+            return date_i18n(get_option('date_format'), strtotime(sanitize_key(wp_unslash($_GET['dates'][$date_filter_key]))));
+            // phpcs:enable WordPress.Security.NonceVerification.Recommended
         } else {
             return null;
         }
@@ -231,7 +239,6 @@ class LegacyPrintPage extends BaseController
     /**
      * Enqueues scripts on print page.
      */
-    //phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     public function enqueueScripts()
     {
         do_action('PrintMyBlog\controllers\PmbPrintPage->enqueueScripts');

@@ -6,8 +6,15 @@ use Twine\compatibility\CompatibilityBase;
 use Twine\forms\base\FormSection;
 use Twine\forms\inputs\SelectInput;
 
+/**
+ * Class JetPack
+ * @package PrintMyBlog\compatibility\plugins
+ */
 class JetPack extends CompatibilityBase
 {
+    /**
+     * Sets hooks
+     */
     public function setHooks()
     {
         add_filter(

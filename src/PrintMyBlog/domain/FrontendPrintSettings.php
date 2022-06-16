@@ -318,6 +318,7 @@ class FrontendPrintSettings
     /**
      * Verifies the format is valid, and that its initialized in the settings.
      * @param string $format
+     * @throws Exception
      */
     protected function beforeSet($format)
     {

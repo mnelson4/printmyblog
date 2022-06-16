@@ -6,10 +6,11 @@ use PrintMyBlog\orm\entities\Design;
  * @param \PrintMyBlog\orm\entities\Design $design
  * @return string CSS to include in the style
  */
-function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design){
-	$css = '/* PMB design styles for ' . $design->getWpPost()->post_title. '*/' . $design->getSetting('custom_css');
+function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design)
+{
+    $css = '/* PMB design styles for ' . $design->getWpPost()->post_title . '*/' . $design->getSetting('custom_css');
 
-	// image placement CSS
+    // image placement CSS
     // identify everything that could get snapped...
     $selectors_to_snap = [
         // Anything we mark as a pmb-image is candidate for snapping
@@ -18,7 +19,7 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design){
         // Gutenberg
         '.wp-block-image', // Gutenberg image block. With or without caption
         '.wp-block-gallery', // Gutenberg gallery
-        '.wp-block-table', /// Gutenberg table
+        '.wp-block-table', // Gutenberg table
 
         // Classic Editor
         'img[class*=wp-image-]', // Classic Editor image
@@ -38,46 +39,47 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design){
         'div.tiled-gallery img', // Jetpack's tiled gallery's images
         'img.fg-image', // FooGallery's images
     ];
-	foreach($selectors_to_snap as $key => $selector){
-	    $selectors_to_snap[$key] = $selector . ':not(' . implode(', ', $selectors_to_not_snap) . ')';
+    foreach ($selectors_to_snap as $key => $selector) {
+        $selectors_to_snap[$key] = $selector . ':not(' . implode(', ', $selectors_to_not_snap) . ')';
     }
-	$combined_selector = implode(', ', $selectors_to_snap);
-	switch($design->getPmbMeta('image_placement')){
-		case 'snap':
-			$css .= $combined_selector . '{float:prince-snap;}';
-			break;
-		case 'snap-unless-fit':
-			$css .= $combined_selector . '{float:prince-snap unless-fit;}';
-			break;
+    $combined_selector = implode(', ', $selectors_to_snap);
+    switch ($design->getPmbMeta('image_placement')) {
+        case 'snap':
+            $css .= $combined_selector . '{float:prince-snap;}';
+            break;
+        case 'snap-unless-fit':
+            $css .= $combined_selector . '{float:prince-snap unless-fit;}';
+            break;
         case 'dynamic-resize':
             $css .= '.pmb-posts .pmb-dynamic-resize img{height:' . $design->getSetting('dynamic_resize_min') . 'px;}';
-		case 'default':
-		default:
-			// leave alone
-	}
+            break;
+        case 'default':
+        default:
+            // leave alone
+    }
 
-	// page reference CSS
+    // page reference CSS
     $css .= '.pmb-posts a.pmb-page-ref[href]::after{
-        content: " ' . sprintf($design->getSetting('page_reference_text'),'" target-counter(attr(href), page) "') . '";
+        content: " ' . sprintf($design->getSetting('page_reference_text'), '" target-counter(attr(href), page) "') . '";
     }
     .pmb-posts a[href].pmb-page-num::after{
         content: target-counter(attr(href), page);
     }';
-	// instruct PMB print service to add "powered by" for free users and cheap plans
+    // instruct PMB print service to add "powered by" for free users and cheap plans
     $show_powered_by = true;
-    if(pmb_fs()->is_plan__premium_only('hobby')){
+    if (pmb_fs()->is_plan__premium_only('hobby')) {
         $show_powered_by = false;
     }
-    if($design->getSetting('powered_by') || $show_powered_by){
+    if ($design->getSetting('powered_by') || $show_powered_by) {
         $css .= "@page:first{
             @bottom{
-                content:'" . strip_tags(__('Powered by Print My Blog Pro & WordPress', 'print-my-blog')) . "';
+                content:'" . wp_strip_all_tags(__('Powered by Print My Blog Pro & WordPress', 'print-my-blog')) . "';
                 color:gray;
                 font-style:italic;
             }
         }";
     }
-	return $css;
+    return $css;
 }
 
 /**
@@ -86,10 +88,11 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design){
  * @return array keys are setting names, values are their values, plus a few other odds-n-ends
  * @throws Exception
  */
-function pmb_design_settings(Design $design){
-    $settings =  $design->getSettings();
+function pmb_design_settings(Design $design)
+{
+    $settings = $design->getSettings();
     $settings['domain'] = pmb_site_domain();
-    unset($settings['custom_css'],$settings['use_theme']);
+    unset($settings['custom_css'], $settings['use_theme']);
     return apply_filters(
         'pmb_design_settings',
         $settings,
@@ -102,10 +105,12 @@ function pmb_design_settings(Design $design){
  *
  * @return string
  */
-function pmb_site_domain(){
+function pmb_site_domain()
+{
     return str_replace(
-        ['http://',
-            'https://'
+        [
+            'http://',
+            'https://',
         ],
         '',
         site_url()

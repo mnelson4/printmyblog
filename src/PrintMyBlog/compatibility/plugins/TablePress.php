@@ -5,6 +5,10 @@ namespace PrintMyBlog\compatibility\plugins;
 use Twine\compatibility\CompatibilityBase;
 use TablePress as TablePressInit;
 
+/**
+ * Class TablePress
+ * @package PrintMyBlog\compatibility\plugins
+ */
 class TablePress extends CompatibilityBase
 {
 
@@ -35,7 +39,7 @@ class TablePress extends CompatibilityBase
     /**
      * Filters TablePress' options to remove interactive elements like pagination, sorting, and searching.
      * See \TablePress_Frontend_Controller::shortcode_table()
-     * @param $original_options
+     * @param array $original_options
      * @return array
      */
     public function optimizeTablesForPmb($original_options)

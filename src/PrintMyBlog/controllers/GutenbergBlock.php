@@ -25,7 +25,7 @@ class GutenbergBlock extends BaseController
     }
 
     /**
-     *
+     * Register block.
      */
     public function registerGutenbergBlock()
     {

@@ -46,7 +46,7 @@ class PrintOptions
                 'label' => esc_html__('Credit Print My Blog Plugin', 'print-my-blog'),
                 'default' => true,
                 'help' => sprintf(
-                    // @translators: 1: heart emoji
+                    // translators: 1: heart emoji
                     esc_html__('Show some love and tell your readers about Print My Blog %1$s', 'print-my-blog'),
                     '❤️'
                 ),
@@ -207,7 +207,7 @@ class PrintOptions
     }
 
     /**
-     * @param $format
+     * @param string $format
      * @return array
      */
     protected function defaultOverrides($format)

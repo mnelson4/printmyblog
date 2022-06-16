@@ -25,6 +25,10 @@ class EasyFootnotes extends CompatibilityBase
      *      which we temporarily reassign.
      */
     protected $old_wp_query_is_singular_value;
+
+    /**
+     * Temporarily make EasyFootnotes think it's a singular page so their stuff works.
+     */
     public function setHooks()
     {
         // There's no actions between when we know it's a REST request ('parse_request' is when "REST_REQUEST" gets
@@ -35,8 +39,7 @@ class EasyFootnotes extends CompatibilityBase
 
     /**
      * We just want to set some hooks; we don't want to actually change any results.
-     * @since $VID:$
-     * @param $normal_result
+     * @param string $normal_result
      * @return mixed
      */
     public function checkIfRestRequest($normal_result)
@@ -49,8 +52,7 @@ class EasyFootnotes extends CompatibilityBase
 
     /**
      * Just tell Easy Footnoes its a singular request so it places the footnotes on the page.
-     * @since $VID:$
-     * @param $content
+     * @param string $content
      * @return mixed
      */
     public function tellEasyFootnotesItsASingularRequest($content)
@@ -63,8 +65,7 @@ class EasyFootnotes extends CompatibilityBase
 
     /**
      * Easy Footnotes should have added the footnotes, so we can restore the true value of WP_Query->is_singular.
-     * @since $VID:$
-     * @param $content
+     * @param string $content
      * @return mixed
      */
     public function okNoMoreNeedForTheDisguise($content)

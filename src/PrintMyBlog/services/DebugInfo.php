@@ -9,6 +9,10 @@ use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\orm\managers\ProjectManager;
 use WP_Debug_Data;
 
+/**
+ * Class DebugInfo
+ * @package PrintMyBlog\services
+ */
 class DebugInfo
 {
 

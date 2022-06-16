@@ -172,10 +172,10 @@ class Ajax extends BaseController
         // report errors please
         if (defined('WP_DEBUG_DISPLAY') && WP_DEBUG_DISPLAY) {
             // We want to see errors, so make sure they're set to display.
-            // phpcs:disable WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting, WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_error_reporting
+            // phpcs:disable WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting, WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_error_reporting, WordPress.PHP.IniSet.display_errors_Blacklisted
             error_reporting(E_ALL);
             ini_set('display_errors', 1);
-            // phpcs:enable WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting, WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_error_reporting
+            // phpcs:enable WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting, WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_error_reporting, WordPress.PHP.IniSet.display_errors_Blacklisted
         }
         // Find project by ID.
         // @var $project Project just so PHPstorm knows what it's dealing with.
@@ -233,7 +233,7 @@ class Ajax extends BaseController
             $page = 1;
         }
         if (! empty($_GET['pmb-search'])) {
-            $query_params['s'] = $_GET['pmb-search'];
+            $query_params['s'] = sanitize_text_field(wp_unslash($_GET['pmb-search']));
         }
         if (! empty($_GET['pmb-post-type'])) {
             $query_params['post_type'] = sanitize_key($_GET['pmb-post-type']);

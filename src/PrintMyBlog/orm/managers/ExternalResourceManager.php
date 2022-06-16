@@ -27,17 +27,20 @@ class ExternalResourceManager
     }
 
     /**
+     * Gets the local URL given the external URL.
      * Gets a row by the external URL
+     * @param string $external_resource_url
      * @return ExternalResource
      */
     public function getByExternalUrl($external_resource_url)
     {
         global $wpdb;
         return $this->createObjFromRow(
-            // todo: cache
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        // todo: cache
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             $wpdb->get_row(
                 $wpdb->prepare(
+                    // phpcs:ignore -- just passing in constants
                     'SELECT * FROM ' . $wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE . ' WHERE external_url=%s LIMIT 1',
                     $external_resource_url
                 )
@@ -47,7 +50,7 @@ class ExternalResourceManager
 
     /**
      * Gets the mapping between all external resources and cached items
-     * @return \stdClass[]
+     * @return ExternalResource[]
      */
     public function getAllMapping()
     {
@@ -56,6 +59,7 @@ class ExternalResourceManager
             // todo: cache
             // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             $wpdb->get_results(
+                // phpcs:ignore -- just passing in constants.
                 'SELECT * FROM ' . $wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE
             )
         );
@@ -76,7 +80,7 @@ class ExternalResourceManager
 
     /**
      * Whether that resource is already cached or not.
-     * @param $external_url
+     * @param string $external_url
      * @return bool
      */
     public function cached($external_url)
@@ -86,6 +90,7 @@ class ExternalResourceManager
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         return (bool)$wpdb->get_var(
             $wpdb->prepare(
+                // phpcs:ignore -- just passing in constants.
                 'SELECT COUNT(*) FROM ' . $wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE . ' WHERE external_url=%s LIMIT 1',
                 $external_url
             )
@@ -153,7 +158,7 @@ class ExternalResourceManager
     {
         global $wpdb;
         // Custom table needs direct query.
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        // phpcs:ignore -- this is the fastest way to empty the table.
         $wpdb->query('TRUNCATE TABLE ' . $wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE);
     }
 }

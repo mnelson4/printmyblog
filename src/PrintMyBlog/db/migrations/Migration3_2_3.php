@@ -5,10 +5,16 @@ namespace PrintMyBlog\db\migrations;
 use PrintMyBlog\system\CustomPostTypes;
 use Twine\db\migrations\MigrationBase;
 
-// phpcs:ignore Squiz.Classes.ValidClassName.NotCamelCaps
+// phpcs:disable Squiz.Classes.ValidClassName.NotCamelCaps
+/**
+ * Class Migration3_2_3
+ * @package PrintMyBlog\db\migrations
+ */
 class Migration3_2_3 extends MigrationBase
 {
-
+    /**
+     * @return bool
+     */
     public function perform()
     {
         global $wpdb;
@@ -24,5 +30,6 @@ class Migration3_2_3 extends MigrationBase
                 'post_status' => 'publish',
             ]
         );
+        return true;
     }
 }

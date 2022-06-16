@@ -945,6 +945,9 @@ class DefaultDesignTemplates
         );
     }
 
+    /**
+     * @return SelectRevealInput
+     */
     public function getImageSnapInput()
     {
         return new SelectRevealInput(
