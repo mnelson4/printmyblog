@@ -435,12 +435,13 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= xxxxxxxxxxxxxxx =
+= 3.15.9 June 17, 2022 =
 * Compatibility: hide [Top Bar](https://wordpress.org/plugins/top-bar/) and [Announcer](https://wordpress.org/plugins/announcer/) banners from printouts
 * Bugfix: remove hairline above captions on gallery images
 * Enhancement: add some space between table cells in ePubs
 * Enhancement: in ePubs, because iBooks displays the alt tag on images: if it's not set, set it to the title attribute or image caption
 * Bugfix: avoid resizing images before they've loaded in Quick Print and Print Buttons
+* Security: check nonces and escape output from DB in many places
 
 = 3.15.8 May 26, 2022 =
 * Enhancement: debug info includes "is premium"
