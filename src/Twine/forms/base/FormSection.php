@@ -524,7 +524,7 @@ class FormSection extends FormSectionValidatable
             throw new ImproperUsageException(
                 sprintf(
                     // Intended for developers, translations unnecessary.
-                    "Subsection '%'s is not an instanceof FormSectionProper on form '%s'",
+                    "Subsection '%s' is not an instanceof FormSectionProper on form '%s'",
                     $name,
                     get_class($this)
                 )

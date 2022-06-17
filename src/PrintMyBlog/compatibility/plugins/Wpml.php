@@ -402,7 +402,7 @@ class Wpml extends CompatibilityBase
                     sprintf(
                     // translators: %s: design name
                         __('Translate %s Design', 'print-my-blog'),
-                        sanitize_html($design->getWpPost()->post_title)
+                        esc_html($design->getWpPost()->post_title)
                     )
                     . $post_status_display->get_status_html($design->getWpPost()->ID, $language_code)
                 );

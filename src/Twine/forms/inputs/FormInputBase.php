@@ -290,7 +290,7 @@ abstract class FormInputBase extends FormSectionValidatable
             throw new ImproperUsageException(
                 sprintf(
                     // Intended for developers, no translations unneecessary.
-                    'Cannot get display strategy for form input with name %1$s and id %2$`s, because it has not been set in the constructor',
+                    'Cannot get display strategy for form input with name %1$s and id %2$s, because it has not been set in the constructor',
                     $this->htmlName(),
                     $this->htmlId()
                 )
