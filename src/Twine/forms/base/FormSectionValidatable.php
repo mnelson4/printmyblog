@@ -51,7 +51,7 @@ abstract class FormSectionValidatable extends FormSectionBase
 
 
     /**
-     * returns a comma-separated list of all the validation errors in it.
+     * Returns a comma-separated list of all the validation errors in it.
      * If we want this to be customizable, we may decide to create a strategy for displaying it
      *
      * @return string
@@ -66,7 +66,7 @@ abstract class FormSectionValidatable extends FormSectionBase
                 }
             }
         }
-        return implode(", ", $validation_error_messages);
+        return implode(', ', $validation_error_messages);
     }
 
 

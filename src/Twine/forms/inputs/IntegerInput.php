@@ -34,11 +34,7 @@ class IntegerInput extends FormInputBase
             )
         );
         $this->setNormalizationStrategy(
-            new IntNormalization(
-                isset($input_settings['validation_error_message'])
-                    ? $input_settings['validation_error_message']
-                    : null
-            )
+            new IntNormalization()
         );
         $this->addValidationStrategy(
             new IntValidation(

@@ -94,6 +94,7 @@ class Project extends PostWrapper
      * @param DesignManager $design_manager
      * @param Config $config
      * @param ProjectGenerationFactory $project_generation_factory
+     * @param SectionTemplateRegistry $section_template_registry
      */
     public function inject(
         ProjectSectionManager $section_manager,
@@ -103,17 +104,17 @@ class Project extends PostWrapper
         ProjectGenerationFactory $project_generation_factory,
         SectionTemplateRegistry $section_template_registry
     ) {
-        $this->section_manager    = $section_manager;
+        $this->section_manager = $section_manager;
         $this->format_registry = $format_manager;
-        $this->design_manager  = $design_manager;
-        $this->config          = $config;
+        $this->design_manager = $design_manager;
+        $this->config = $config;
         $this->project_generation_factory = $project_generation_factory;
         $this->section_template_registry = $section_template_registry;
     }
 
     /**
      * Sets the project's title and immediately saves it.
-     * @param $title
+     * @param string $title
      *
      * @return int|\WP_Error
      */
@@ -131,11 +132,10 @@ class Project extends PostWrapper
                     'publish',
                     'pmb_project',
                     0
-                )
+                ),
             ]
         );
     }
-
 
 
     /**
@@ -199,9 +199,8 @@ class Project extends PostWrapper
     }
 
 
-
     /**
-     * @param $project_format_slug
+     * @param string $project_format_slug
      *
      * @return bool
      */
@@ -209,7 +208,8 @@ class Project extends PostWrapper
     {
         return in_array(
             $project_format_slug,
-            $this->getFormatSlugsSelected()
+            $this->getFormatSlugsSelected(),
+            true
         );
     }
 
@@ -225,7 +225,7 @@ class Project extends PostWrapper
         );
         $formats_sorted = [];
         foreach ($this->format_registry->getFormats() as $key => $format) {
-            if (in_array($key, $formats)) {
+            if (in_array($key, $formats, true)) {
                 $formats_sorted[] = $key;
             }
         }
@@ -250,7 +250,7 @@ class Project extends PostWrapper
     }
 
     /**
-     * @param $new_formats
+     * @param array $new_formats
      */
     public function setFormatsSelected($new_formats)
     {
@@ -260,9 +260,9 @@ class Project extends PostWrapper
         }
 
         foreach ($this->format_registry->getFormats() as $format) {
-            if (in_array($format->slug(), $new_formats)) {
+            if (in_array($format->slug(), $new_formats, true)) {
                 // It's requested to make this a selected format...
-                if (! in_array($format->slug(), $previous_formats)) {
+                if (! in_array($format->slug(), $previous_formats, true)) {
                     // if it wasn't already, add it.
                     $this->addPmbMeta(
                         self::POSTMETA_FORMAT,
@@ -272,7 +272,7 @@ class Project extends PostWrapper
                 // if it's already selected, no need to do anything.
             } else {
                 // We want it remove it...
-                if (in_array($format->slug(), $previous_formats)) {
+                if (in_array($format->slug(), $previous_formats, true)) {
                     // and it was previously a selected format.
                     $this->deletePmbMeta(
                         self::POSTMETA_FORMAT,
@@ -286,7 +286,7 @@ class Project extends PostWrapper
 
     /**
      * Gets the slug of the design to use for the format specified.
-     * @param FileFormat|string $format_slug
+     * @param FileFormat|string $format
      *
      * @return int
      */
@@ -395,7 +395,7 @@ class Project extends PostWrapper
     }
 
     /**
-     * @param $division
+     * @param string $division
      *
      * @return bool
      */
@@ -415,7 +415,7 @@ class Project extends PostWrapper
 
     /**
      *
-     * return bool success
+     * @return bool success
      */
     public function delete()
     {
@@ -463,29 +463,15 @@ class Project extends PostWrapper
     }
 
     /**
-     * Clears out the generated files. Useful in case the project has changed and so should be re-generated.
-     * @return bool
-     */
-    public function clearGeneratedFiles()
-    {
-        $project_generation = $this->project_generation_factory->create($this, $this->getFormatsSelected());
-        $project_generation->clearIntermediaryGeneratedTime();
-        $project_generation->getProjectHtmlGenerator()->deleteFile();
-        return true;
-    }
-
-    /**
      * Gets a form that is actually a combination of all the forms for the project's chosen designs.
-     * @param Project $project
      *
      * @return FormSection
-     * @throws ImproperUsageException
      */
     public function getMetaForm()
     {
         if (! $this->meta_form instanceof FormSection) {
             $formats = $this->getFormatSlugsSelected();
-            $forms   = [];
+            $forms = [];
             foreach ($formats as $format) {
                 $forms[] = $this->getDesignFor($format)->getProjectForm();
             }
@@ -498,7 +484,8 @@ class Project extends PostWrapper
                                 'html_label_text' => __('Project Title', 'print-my-blog'),
                             ]
                         ),
-                    ]]
+                    ],
+                ]
             );
 
             foreach ($forms as $form) {
@@ -534,7 +521,7 @@ class Project extends PostWrapper
         if ($setting_name === 'byline') {
             return get_the_author_meta('display_name', $this->getWpPost()->post_author);
         }
-        $form    = $this->getMetaForm();
+        $form = $this->getMetaForm();
         $section = $form->findSection($setting_name);
         if ($section instanceof FormInputBase) {
             return $section->getDefault();
@@ -554,19 +541,19 @@ class Project extends PostWrapper
     }
 
     /**
-     * Echoes the rendered project's setting
+     * Echoes and escapes the rendered project's setting
      * @param string $setting_name
      * @since 3.4.1
      */
     public function echoSetting($setting_name)
     {
-        echo $this->renderSetting($setting_name);
+        echo esc_html($this->renderSetting($setting_name));
     }
 
     /**
      * Updates the post property or metadata
-     * @param $setting_name string
-     * @param $value mixed
+     * @param string $setting_name string
+     * @param mixed $value mixed
      */
     public function setSetting($setting_name, $value)
     {
@@ -588,7 +575,7 @@ class Project extends PostWrapper
 
     /**
      * Remembers how many levels of divisions this project actually uses.
-     * @param $levels
+     * @param int $levels
      *
      * @return bool|int
      */
@@ -633,13 +620,14 @@ class Project extends PostWrapper
     }
 
     /**
-     * Echoes the rendered title.
+     * Echoes and escapes the rendered title. Not ran through esc_html()
      * @since 3.4.1
      */
     public function echoPublishedTitle()
     {
-        echo $this->renderPublishedTitle();
+        echo esc_html($this->renderPublishedTitle());
     }
+
     /**
      *
      * @return array keys are template names, values are arrays with keys:{
@@ -652,11 +640,11 @@ class Project extends PostWrapper
         if ($this->custom_templates === null) {
             $templates = [];
             foreach ($this->getFormatsSelected() as $format) {
-                $design           = $this->getDesignFor($format);
+                $design = $this->getDesignFor($format);
                 $design_templates = $design->getDesignTemplate()->getCustomTemplates();
                 foreach ($design_templates as $template_slug) {
-                    if (! isset($templates[ $template_slug ])) {
-                        $templates[ $template_slug ] = $this->section_template_registry->get($template_slug);
+                    if (! isset($templates[$template_slug])) {
+                        $templates[$template_slug] = $this->section_template_registry->get($template_slug);
                     }
                 }
             }
@@ -671,8 +659,8 @@ class Project extends PostWrapper
     public function getSectionTemplateOptions()
     {
         $all_templates = [
-                '' => __('Default Template', 'print-my-blog')
-            ];
+            '' => __('Default Template', 'print-my-blog'),
+        ];
         foreach ($this->getCustomTemplates() as $template_slug => $section_template) {
             $title = $section_template->title();
             $all_templates[$template_slug] = $title;
@@ -702,6 +690,7 @@ class Project extends PostWrapper
         // keys are old section IDs, values are their new values
         $section_map = [0 => 0];
         foreach ($this->section_manager->getFlatSectionRowsFor($this->getWpPost()->ID, 100000) as $section_row) {
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- we're working with a custom table here, custom queries are the only way.
             $wpdb->insert(
                 $wpdb->prefix . TableManager::SECTIONS_TABLE,
                 [
@@ -712,17 +701,17 @@ class Project extends PostWrapper
                     'template' => $section_row->template,
                     'placement' => $section_row->placement,
                     'height' => $section_row->height,
-                    'depth' => $section_row->depth
+                    'depth' => $section_row->depth,
                 ],
                 [
-                    '%d',//project_id
-                    '%d',//post_id
-                    '%d',//parent_id
-                    '%d',//section_order
-                    '%s',//template
-                    '%s',//placement
-                    '%d',//height
-                    '%d',//depth
+                    '%d', // project_id
+                    '%d', // post_id
+                    '%d', // parent_id
+                    '%d', // section_order
+                    '%s', // template
+                    '%s', // placement
+                    '%d', // height
+                    '%d', // depth
                 ]
             );
             $new_id = $wpdb->insert_id;

@@ -28,12 +28,14 @@ class CheckboxDisplay extends CompoundInputDisplay
         if (! is_array($input->rawValue()) && $input->rawValue() !== null) {
             throw new Exception(
                 sprintf(
+                    // translators: 1: html ID, 2: value submitted, 3: html input name
                     esc_html_x(
                         'Input values for checkboxes should be an array of values, but the value for input "%1$s" is "%2$s". Please verify that the input name is exactly "%3$s"',
                         'Input values for checkboxes should be an array of values, but the value for input "form-input-id" is "form-input-value". Please verify that the input name is exactly "form_input_name[]"',
                         'print-my-blog'
                     ),
                     $input->htmlId(),
+                    // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export
                     var_export($input->rawValue(), true),
                     $input->htmlName() . '[]'
                 )
@@ -46,12 +48,12 @@ class CheckboxDisplay extends CompoundInputDisplay
             $html_id = $this->getSubInputId($value);
             $html .= $html_generator->nl(0, 'checkbox');
             $html .= '<label for="'
-                     . $html_id
-                     . '" id="'
-                     . $html_id
-                     . '-lbl" class="twine-checkbox-label-after twine-option'
-                     . ($option->enabled() ? '  twine-option-enabled' : ' twine-option-disabled')
-                     . '">';
+                . $html_id
+                . '" id="'
+                . $html_id
+                . '-lbl" class="twine-checkbox-label-after twine-option'
+                . ($option->enabled() ? '  twine-option-enabled' : ' twine-option-disabled')
+                . '">';
             $html .= $html_generator->nl(1, 'checkbox');
             $html .= '<input type="checkbox"';
             $html .= ' name="' . $input->htmlName() . '[]"';

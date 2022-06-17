@@ -5,6 +5,11 @@ namespace Twine\services\notifications;
 use Twine\entities\notifications\OneTimeNotification;
 use WP_User;
 
+/**
+ * Class OneTimeNotificationManager
+ * Manages displaying messages to be shown once.
+ * @package Twine\services\notifications
+ */
 class OneTimeNotificationManager
 {
     const META_KEY = '_twine_ot_notifications';
@@ -43,16 +48,21 @@ class OneTimeNotificationManager
         if (doing_action('admin_notices') || did_action('admin_notices')) {
             $this->displayNotifications($notifications);
         } else {
-            add_action('admin_notices', [$this,'displayNotificationsLater']);
+            add_action('admin_notices', [$this, 'displayNotificationsLater']);
             $this->cached_notifications = $notifications;
         }
         $this->clearNotificationsFor($current_user);
     }
 
+    /**
+     * @param OneTimeNotification[] $notifications
+     */
     protected function displayNotifications($notifications)
     {
         foreach ($notifications as $notification) {
             if ($notification instanceof OneTimeNotification) {
+                // ouput the notification's HTML (which must have been sanitized upstream)
+                //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 echo $notification->display();
             }
         }
@@ -80,9 +90,9 @@ class OneTimeNotificationManager
 
     /**
      * Adds a one-time notification for any user.
-     * @param $wp_user
+     * @param WP_User $wp_user
      * @param string $type constants on \Twine\entities\notifications\OneTimeNotification
-     * @param $html
+     * @param string $html
      */
     public function addHtmlNotification($wp_user, $type, $html)
     {
@@ -94,7 +104,7 @@ class OneTimeNotificationManager
             self::META_KEY,
             [
                 'type' => $type,
-                'html' => $html
+                'html' => $html,
             ]
         );
     }
@@ -112,13 +122,13 @@ class OneTimeNotificationManager
 
     /**
      * @param string $type constants on \Twine\entities\notifications\OneTimeNotification
-     * @param string $text
+     * @param string $html html to display
      */
-    public function addTextNotificationForCurrentUser($type, $text)
+    public function addTextNotificationForCurrentUser($type, $html)
     {
         $this->addHtmlNotificationForCurrentUser(
             $type,
-            '<p>' . $text . '</p>'
+            '<p>' . $html . '</p>'
         );
     }
 }

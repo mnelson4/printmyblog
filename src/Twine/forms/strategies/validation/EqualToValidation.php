@@ -17,12 +17,16 @@ use EventEspresso\core\exceptions\InvalidInterfaceException;
  */
 class EqualToValidation extends TextValidation
 {
-
+    /**
+     * @var string|null
+     */
     protected $compare_to = null;
 
 
     /**
-     * @param string               $validation_error_message
+     * Construction.
+     * @param string $validation_error_message
+     * @param string $compare_to
      */
     public function __construct($validation_error_message = '', $compare_to = '')
     {
@@ -39,9 +43,9 @@ class EqualToValidation extends TextValidation
 
 
     /**
-     * just checks the field isn't blank
+     * Just checks the field isn't blank
      *
-     * @param $normalized_value
+     * @param string $normalized_value
      * @return bool
      */
     public function validate($normalized_value)
@@ -60,8 +64,8 @@ class EqualToValidation extends TextValidation
         return array(
             'equalTo' => $this->compare_to,
             'messages' => array(
-                'equalTo' => $this->getValidationErrorMessage()
-            )
+                'equalTo' => $this->getValidationErrorMessage(),
+            ),
         );
     }
 }

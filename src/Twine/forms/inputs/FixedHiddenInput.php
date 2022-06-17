@@ -19,7 +19,6 @@ class FixedHiddenInput extends HiddenInput
      * and NO normalization or sanitization will occur because the $_REQUEST value is being ignored
      *
      * @param array $req_data like $_POST
-     * @return boolean whether or not there was an error
      */
     protected function normalize($req_data)
     {

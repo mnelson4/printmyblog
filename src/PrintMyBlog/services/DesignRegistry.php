@@ -4,6 +4,7 @@ namespace PrintMyBlog\services;
 
 use Exception;
 use PrintMyBlog\entities\DesignTemplate;
+use PrintMyBlog\exceptions\DesignTemplateDoesNotExist;
 use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\system\CustomPostTypes;
@@ -46,9 +47,9 @@ class DesignRegistry
     }
 
     /**
-     * @param $design_template_slug string
-     * @param $design_slug string
-     * @param $callback callable returns an array to be passed into createNewDesign
+     * @param string $design_template_slug
+     * @param string $design_slug
+     * @param callable $callback returns an array to be passed into createNewDesign
      */
     public function registerDesignCallback($design_template_slug, $design_slug, $callback)
     {
@@ -74,28 +75,32 @@ class DesignRegistry
      * @type array $design_defaults which will be sent to design form via \Twine\forms\base\FormSection::populateDefaults
      * @type array $project_defaults which will also be sent to the project metadata form via \Twine\forms\base\FormSection::populateDefaults
      *
-     *}
+     * }
+     * @throws Exception
      */
     protected function createNewDesign($design_template_slug, $design_slug, $callback)
     {
         list($design_template, $args) = $this->getTemplateAndArgs($design_template_slug, $callback);
-        $design_post_id = wp_insert_post([
-            'post_title'   => $args['title'],
-            'post_name'    => $design_slug,
-            'post_type'    => CustomPostTypes::DESIGN,
-            'post_content' => $args['description'],
-            'post_excerpt' => Array2::setOr($args, 'quick_description', ''),
-            'post_status' => 'publish'
-        ]);
+        $design_post_id = wp_insert_post(
+            [
+                'post_title'   => $args['title'],
+                'post_name'    => $design_slug,
+                'post_type'    => CustomPostTypes::DESIGN,
+                'post_content' => $args['description'],
+                'post_excerpt' => Array2::setOr($args, 'quick_description', ''),
+                'post_status' => 'publish',
+            ]
+        );
         if (! $design_post_id) {
             throw new Exception(
                 'There was an error inserting the design post "'
                 . $design_slug
                 . '" with '
+                // Var export just being used for debugging if there was an error.
+                // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export
                 . var_export($args, true)
             );
         }
-        /* @var $design Design */
         $design = $this->design_manager->getById($design_post_id);
         $design->setPmbMeta('format', $design_template->getFormatSlug());
         $design->setPmbMeta('design_template', $design_template->getSlug());
@@ -112,7 +117,7 @@ class DesignRegistry
 
     /**
      * @param string $design_template_slug
-     * @param callable $design_slug
+     * @param callable $callback
      * @return array containing a DesignTemplate and an array of args
      * @throws Exception
      */
@@ -123,6 +128,12 @@ class DesignRegistry
         return [$design_template, $args];
     }
 
+    /**
+     * @param Design $design
+     * @param string $design_template_slug
+     * @param callable $callback
+     * @throws Exception
+     */
     protected function updateDesign(Design $design, $design_template_slug, $callback)
     {
         list($design_template, $args) = $this->getTemplateAndArgs($design_template_slug, $callback);
@@ -130,12 +141,16 @@ class DesignRegistry
             [
                 'ID' => $design->getWpPost()->ID,
                 'post_excerpt' => Array2::setOr($args, 'quick_description', ''),
-                'post_content' => $args['description']
+                'post_content' => $args['description'],
             ]
         );
         $this->setArgsForDesign($design, $args);
     }
 
+    /**
+     * @param Design $design
+     * @param array $args
+     */
     protected function setArgsForDesign(Design $design, $args)
     {
         if (isset($args['author'])) {

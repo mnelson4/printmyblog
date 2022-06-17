@@ -8,6 +8,10 @@ use Twine\forms\inputs\FormInputBase;
 use Twine\forms\inputs\HiddenInput;
 use Twine\helpers\Html;
 
+/**
+ * Class TwoColumnLayout
+ * @package Twine\forms\strategies\layout
+ */
 class TwoColumnLayout extends FormSectionLayoutBase
 {
 
@@ -23,9 +27,9 @@ class TwoColumnLayout extends FormSectionLayoutBase
         return $this->displayFormWideErrors()
         . $html_generator->table(
             '',
-            $this->Form_section->htmlId(),
-            $this->Form_section->htmlClass(),
-            $this->Form_section->htmlStyle()
+            $this->form_section->htmlId(),
+            $this->form_section->htmlClass(),
+            $this->form_section->htmlStyle()
         ) . $html_generator->tbody();
     }
 
@@ -40,7 +44,7 @@ class TwoColumnLayout extends FormSectionLayoutBase
     public function layoutFormEnd($additional_args = array())
     {
         $html_generator = Html::instance();
-        return $html_generator->tbodyx() . $html_generator->tablex($this->Form_section->htmlId());
+        return $html_generator->tbodyx() . $html_generator->tablex($this->form_section->htmlId());
     }
 
 
@@ -59,9 +63,13 @@ class TwoColumnLayout extends FormSectionLayoutBase
             $html .= $input->getHtmlForInput();
         } else {
             $html_for_input = $input->getHtmlForInput();
+            // want loose comparison
+            // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
             $html_for_input .= $input->getHtmlForErrors() != ''
                 ? $html_generator->nl() . $input->getHtmlForErrors()
                 : '';
+            // want loose comparison
+            // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
             $html_for_input .= $input->getHtmlForHelp() != '' ? $html_generator->nl() . $input->getHtmlForHelp() : '';
             $html .= $html_generator->tr(
                 $html_generator->th($input->getHtmlForLabel()) .
@@ -82,7 +90,7 @@ class TwoColumnLayout extends FormSectionLayoutBase
      * @param FormSection $form_section
      *
      * @return string
-    */
+     */
     public function layoutSubsection($form_section)
     {
         if (

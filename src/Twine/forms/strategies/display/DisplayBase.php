@@ -26,7 +26,7 @@ abstract class DisplayBase extends FormInputStrategyBase
 
 
     /**
-     * returns HTML and javascript related to the displaying of this input
+     * Returns HTML and javascript related to the displaying of this input
      *
      * @return string
      */
@@ -104,7 +104,7 @@ abstract class DisplayBase extends FormInputStrategyBase
 
 
     /**
-     * returns string like: '<tag'
+     * Returns string like: '<tag'
      *
      * @param string $tag
      * @return string
@@ -118,7 +118,7 @@ abstract class DisplayBase extends FormInputStrategyBase
 
 
     /**
-     * returns string like: '</tag>
+     * Returns string like: '</tag>
      *
      * @return string
      */
@@ -130,7 +130,7 @@ abstract class DisplayBase extends FormInputStrategyBase
 
 
     /**
-     * returns string like: '/>'
+     * Returns string like: '/>'
      *
      * @return string
      */
@@ -142,7 +142,7 @@ abstract class DisplayBase extends FormInputStrategyBase
 
 
     /**
-     * returns an array of standard HTML attributes that get added to nearly all inputs,
+     * Returns an array of standard HTML attributes that get added to nearly all inputs,
      * where string keys represent named attributes like id, class, etc
      * and numeric keys represent single attributes like 'required'.
      * Note: this does not include "value" because many inputs (like dropdowns, textareas, and checkboxes) don't use
@@ -165,7 +165,7 @@ abstract class DisplayBase extends FormInputStrategyBase
 
 
     /**
-     * sets the attributes using the incoming array
+     * Sets the attributes using the incoming array
      * and returns a string of all attributes rendered as valid HTML
      *
      * @param array $attributes
@@ -200,7 +200,7 @@ abstract class DisplayBase extends FormInputStrategyBase
 
 
     /**
-     * returns string like: ' attribute="value"'
+     * Returns string like: ' attribute="value"'
      * returns an empty string if $value is null
      *
      * @param string $attribute
@@ -219,7 +219,7 @@ abstract class DisplayBase extends FormInputStrategyBase
 
 
     /**
-     * returns string like: ' data-attribute="value"'
+     * Returns string like: ' data-attribute="value"'
      * returns an empty string if $value is null
      *
      * @param string $attribute
@@ -238,7 +238,7 @@ abstract class DisplayBase extends FormInputStrategyBase
 
 
     /**
-     * returns string like: ' attribute' if $add is true
+     * Returns string like: ' attribute' if $add is true
      *
      * @param string  $attribute
      * @param boolean $add

@@ -14,8 +14,11 @@ use Twine\forms\helpers\ValidationError;
  */
 class TextValidation extends ValidationBase
 {
-
+    /**
+     * @var string|null
+     */
     protected $regex = null;
+
     /**
      *
      * @param string $validation_error_message
@@ -28,12 +31,13 @@ class TextValidation extends ValidationBase
     }
 
     /**
-     * @param $normalized_value
+     * @param string $normalized_value
+     * @throws ValidationError
      */
     public function validate($normalized_value)
     {
         $string_normalized_value = (string) $normalized_value;
-        if ($this->regex &&  $string_normalized_value) {
+        if ($this->regex && $string_normalized_value) {
             if (! preg_match($this->regex, $string_normalized_value)) {
                 throw new ValidationError($this->getValidationErrorMessage(), 'regex');
             }
@@ -49,8 +53,8 @@ class TextValidation extends ValidationBase
             return array(
                 'regex' => $this->regexJs(),
                 'messages' => array(
-                    'regex' => $this->getValidationErrorMessage()
-                )
+                    'regex' => $this->getValidationErrorMessage(),
+                ),
             );
         } else {
             return array();

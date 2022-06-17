@@ -32,6 +32,6 @@ class SlugNormalization extends NormalizationBase
      */
     public function unnormalize($normalized_value)
     {
-        return str_replace("-", " ", $normalized_value);
+        return str_replace('-', ' ', $normalized_value);
     }
 }

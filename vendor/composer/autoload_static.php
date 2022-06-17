@@ -6,6 +6,11 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitaa3acace4531482e132095eacb9548bb
 {
+    public static $files = array (
+        '9b38cf48e83f5d8f60375221cd213eee' => __DIR__ . '/..' . '/phpstan/phpstan/bootstrap.php',
+        '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'm' => 
         array (
@@ -15,9 +20,18 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         array (
             'Twine\\' => 6,
         ),
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Php73\\' => 23,
+        ),
         'P' => 
         array (
             'PrintMyBlog\\' => 12,
+            'PHPStan\\WordPress\\' => 18,
+        ),
+        'D' => 
+        array (
+            'Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\' => 55,
         ),
     );
 
@@ -30,21 +44,45 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         array (
             0 => __DIR__ . '/../..' . '/src/Twine',
         ),
+        'Symfony\\Polyfill\\Php73\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php73',
+        ),
         'PrintMyBlog\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/PrintMyBlog',
         ),
+        'PHPStan\\WordPress\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src',
+        ),
+        'Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dealerdirect/phpcodesniffer-composer-installer/src',
+        ),
     );
 
     public static $classMap = array (
+        'Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin' => __DIR__ . '/..' . '/dealerdirect/phpcodesniffer-composer-installer/src/Plugin.php',
+        'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
+        'PHPStan\\WordPress\\Composer\\FixWpStubs' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/Composer/FixWpStubs.php',
+        'PHPStan\\WordPress\\EscSqlDynamicFunctionReturnTypeExtension' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/EscSqlDynamicFunctionReturnTypeExtension.php',
+        'PHPStan\\WordPress\\GetPostDynamicFunctionReturnTypeExtension' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/GetPostDynamicFunctionReturnTypeExtension.php',
+        'PHPStan\\WordPress\\GetPostsDynamicFunctionReturnTypeExtension' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/GetPostsDynamicFunctionReturnTypeExtension.php',
+        'PHPStan\\WordPress\\GetTaxonomiesDynamicFunctionReturnTypeExtension' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/GetTaxonomiesDynamicFunctionReturnTypeExtension.php',
+        'PHPStan\\WordPress\\IsWpErrorFunctionTypeSpecifyingExtension' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/IsWpErrorFunctionTypeSpecifyingExtension.php',
+        'PHPStan\\WordPress\\RedirectCanonicalDynamicFunctionReturnTypeExtension' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/RedirectCanonicalDynamicFunctionReturnTypeExtension.php',
+        'PHPStan\\WordPress\\WpThemeMagicPropertiesClassReflectionExtension' => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src/WpThemeMagicPropertiesClassReflectionExtension.php',
         'PrintMyBlog\\compatibility\\DetectAndActivate' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/DetectAndActivate.php',
         'PrintMyBlog\\compatibility\\plugins\\CoBlocks' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/CoBlocks.php',
         'PrintMyBlog\\compatibility\\plugins\\ContactForm7' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/ContactForm7.php',
         'PrintMyBlog\\compatibility\\plugins\\EasyFootnotes' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/EasyFootnotes.php',
         'PrintMyBlog\\compatibility\\plugins\\GoogleLanguageTranslator' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/GoogleLanguageTranslator.php',
+        'PrintMyBlog\\compatibility\\plugins\\JetPack' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/JetPack.php',
         'PrintMyBlog\\compatibility\\plugins\\LazyLoadingFeaturePlugin' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/LazyLoadingFeaturePlugin.php',
         'PrintMyBlog\\compatibility\\plugins\\TablePress' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/TablePress.php',
         'PrintMyBlog\\compatibility\\plugins\\WpVrView' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/WpVrView.php',
+        'PrintMyBlog\\compatibility\\plugins\\Wpml' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/Wpml.php',
         'PrintMyBlog\\compatibility\\plugins\\YoastSeo' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/YoastSeo.php',
         'PrintMyBlog\\controllers\\Admin' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/Admin.php',
         'PrintMyBlog\\controllers\\Ajax' => __DIR__ . '/../..' . '/src/PrintMyBlog/controllers/Ajax.php',
@@ -79,22 +117,28 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'PrintMyBlog\\factories\\ProjectFileGeneratorFactory' => __DIR__ . '/../..' . '/src/PrintMyBlog/factories/ProjectFileGeneratorFactory.php',
         'PrintMyBlog\\factories\\ProjectGenerationFactory' => __DIR__ . '/../..' . '/src/PrintMyBlog/factories/ProjectGenerationFactory.php',
         'PrintMyBlog\\helpers\\ArgMagician' => __DIR__ . '/../..' . '/src/PrintMyBlog/helpers/ArgMagician.php',
+        'PrintMyBlog\\helpers\\ImageHelper' => __DIR__ . '/../..' . '/src/PrintMyBlog/helpers/ImageHelper.php',
         'PrintMyBlog\\orm\\entities\\Design' => __DIR__ . '/../..' . '/src/PrintMyBlog/orm/entities/Design.php',
+        'PrintMyBlog\\orm\\entities\\ExternalResource' => __DIR__ . '/../..' . '/src/PrintMyBlog/orm/entities/ExternalResource.php',
         'PrintMyBlog\\orm\\entities\\Project' => __DIR__ . '/../..' . '/src/PrintMyBlog/orm/entities/Project.php',
         'PrintMyBlog\\orm\\entities\\ProjectSection' => __DIR__ . '/../..' . '/src/PrintMyBlog/orm/entities/ProjectSection.php',
         'PrintMyBlog\\orm\\managers\\DesignManager' => __DIR__ . '/../..' . '/src/PrintMyBlog/orm/managers/DesignManager.php',
+        'PrintMyBlog\\orm\\managers\\ExternalResourceManager' => __DIR__ . '/../..' . '/src/PrintMyBlog/orm/managers/ExternalResourceManager.php',
         'PrintMyBlog\\orm\\managers\\ProjectManager' => __DIR__ . '/../..' . '/src/PrintMyBlog/orm/managers/ProjectManager.php',
         'PrintMyBlog\\orm\\managers\\ProjectSectionManager' => __DIR__ . '/../..' . '/src/PrintMyBlog/orm/managers/ProjectSectionManager.php',
         'PrintMyBlog\\services\\ColorGuru' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/ColorGuru.php',
         'PrintMyBlog\\services\\DebugInfo' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/DebugInfo.php',
         'PrintMyBlog\\services\\DesignRegistry' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/DesignRegistry.php',
         'PrintMyBlog\\services\\DesignTemplateRegistry' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/DesignTemplateRegistry.php',
+        'PrintMyBlog\\services\\ExternalResourceCache' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/ExternalResourceCache.php',
         'PrintMyBlog\\services\\FileFormatRegistry' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/FileFormatRegistry.php',
         'PrintMyBlog\\services\\PersistentNotices' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/PersistentNotices.php',
         'PrintMyBlog\\services\\PmbCentral' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/PmbCentral.php',
         'PrintMyBlog\\services\\SectionTemplateRegistry' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/SectionTemplateRegistry.php',
         'PrintMyBlog\\services\\SvgDoer' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/SvgDoer.php',
         'PrintMyBlog\\services\\config\\Config' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/config/Config.php',
+        'PrintMyBlog\\services\\generators\\EpubGenerator' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/generators/EpubGenerator.php',
+        'PrintMyBlog\\services\\generators\\HtmlBaseGenerator' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/generators/HtmlBaseGenerator.php',
         'PrintMyBlog\\services\\generators\\PdfGenerator' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/generators/PdfGenerator.php',
         'PrintMyBlog\\services\\generators\\ProjectFileGeneratorBase' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/generators/ProjectFileGeneratorBase.php',
         'PrintMyBlog\\system\\Activation' => __DIR__ . '/../..' . '/src/PrintMyBlog/system/Activation.php',
@@ -102,6 +146,7 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'PrintMyBlog\\system\\Context' => __DIR__ . '/../..' . '/src/PrintMyBlog/system/Context.php',
         'PrintMyBlog\\system\\CustomPostTypes' => __DIR__ . '/../..' . '/src/PrintMyBlog/system/CustomPostTypes.php',
         'PrintMyBlog\\system\\Init' => __DIR__ . '/../..' . '/src/PrintMyBlog/system/Init.php',
+        'Symfony\\Polyfill\\Php73\\Php73' => __DIR__ . '/..' . '/symfony/polyfill-php73/Php73.php',
         'Twine\\admin\\news\\DashboardNews' => __DIR__ . '/../..' . '/src/Twine/admin/news/DashboardNews.php',
         'Twine\\compatibility\\CompatibilityBase' => __DIR__ . '/../..' . '/src/Twine/compatibility/CompatibilityBase.php',
         'Twine\\controllers\\BaseController' => __DIR__ . '/../..' . '/src/Twine/controllers/BaseController.php',
@@ -199,7 +244,9 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'Twine\\helpers\\Array2' => __DIR__ . '/../..' . '/src/Twine/helpers/Array2.php',
         'Twine\\helpers\\DateTimeHelper' => __DIR__ . '/../..' . '/src/Twine/helpers/DateTimeHelper.php',
         'Twine\\helpers\\Html' => __DIR__ . '/../..' . '/src/Twine/helpers/Html.php',
+        'Twine\\orm\\entities\\CustomTableRow' => __DIR__ . '/../..' . '/src/Twine/orm/entities/CustomTableRow.php',
         'Twine\\orm\\entities\\PostWrapper' => __DIR__ . '/../..' . '/src/Twine/orm/entities/PostWrapper.php',
+        'Twine\\orm\\managers\\CustomTableManager' => __DIR__ . '/../..' . '/src/Twine/orm/managers/CustomTableManager.php',
         'Twine\\orm\\managers\\PostWrapperManager' => __DIR__ . '/../..' . '/src/Twine/orm/managers/PostWrapperManager.php',
         'Twine\\services\\config\\Config' => __DIR__ . '/../..' . '/src/Twine/services/config/Config.php',
         'Twine\\services\\display\\FormInputs' => __DIR__ . '/../..' . '/src/Twine/services/display/FormInputs.php',

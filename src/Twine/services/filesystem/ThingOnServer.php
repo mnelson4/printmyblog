@@ -2,6 +2,10 @@
 
 namespace Twine\services\filesystem;
 
+/**
+ * Class ThingOnServer
+ * @package Twine\services\filesystem
+ */
 abstract class ThingOnServer
 {
     /**
@@ -16,13 +20,18 @@ abstract class ThingOnServer
      */
     protected $exists;
 
+    /**
+     * ThingOnServer constructor.
+     * @param string $path
+     */
     public function __construct($path)
     {
         $this->path = $this->standardizeFilepath($path);
     }
+
     /**
      * Ensures the slashes are all unix-style, which PHP is happy with even on Windows.
-     * @param $file_path
+     * @param string $file_path
      *
      * @return string
      */

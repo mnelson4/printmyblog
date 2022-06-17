@@ -18,7 +18,7 @@ class IntValidation extends ValidationBase
     public function __construct($validation_error_message = null)
     {
         if (! $validation_error_message) {
-            $validation_error_message = __("Only digits are allowed.", "print-my-blog");
+            $validation_error_message = __('Only digits are allowed.', 'print-my-blog');
         }
         parent::__construct($validation_error_message);
     }
@@ -26,7 +26,8 @@ class IntValidation extends ValidationBase
 
 
     /**
-     * @param $normalized_value
+     * Does nothing; int normalization should take care of this.
+     * @param string $normalized_value
      */
     public function validate($normalized_value)
     {
@@ -45,8 +46,8 @@ class IntValidation extends ValidationBase
             'step' => 1,
             'messages' => array(
                 'number' => $this->getValidationErrorMessage(),
-                'step' => $this->getValidationErrorMessage()
-            )
+                'step' => $this->getValidationErrorMessage(),
+            ),
         );
     }
 }

@@ -27,6 +27,9 @@ class CustomPostTypes
      */
     protected $svg_doer;
 
+    /**
+     * @param SvgDoer $svg_doer
+     */
     public function inject(SvgDoer $svg_doer)
     {
         $this->svg_doer = $svg_doer;
@@ -110,7 +113,7 @@ class CustomPostTypes
                 'show_in_menu' => PMB_ADMIN_PROJECTS_PAGE_SLUG,
                 'rewrite' => array('slug' => 'pmb'),
                 'show_in_rest' => true,
-                'supports' => array('title', 'editor', 'revisions', 'author','thumbnail', 'custom-fields'),
+                'supports' => array('title', 'editor', 'revisions', 'author', 'thumbnail', 'custom-fields'),
                 'taxonomies' => array('category', 'post_tag'),
                 'menu_icon' => $this->svg_doer->getSvgDataAsColor(PMB_DIR . 'assets/images/menu-icon.svg'),
                 'capability_type' => self::CONTENT,
@@ -126,8 +129,8 @@ class CustomPostTypes
         );
         $this->setupMapMetaCaps(self::CONTENT);
 
-        add_filter('wp_insert_post_data', [$this,'makePrintMaterialsAlwaysPrivate']);
-        add_filter('rest_post_search_query', [$this,'includePrivatePrintMaterialsInSearch'], 10, 2);
+        add_filter('wp_insert_post_data', [$this, 'makePrintMaterialsAlwaysPrivate']);
+        add_filter('rest_post_search_query', [$this, 'includePrivatePrintMaterialsInSearch'], 10, 2);
     }
 
     /**
@@ -150,12 +153,12 @@ class CustomPostTypes
      * We wanted print materials to not be public... but then again, we want them to have URLs for easy linking
      * and to appear in link searches. So instead we just make them all private...
      * unless they're a draft or trashed, in which case we leave them alone.
-     * @param $post
+     * @param array $post
      * @return mixed
      */
     public function makePrintMaterialsAlwaysPrivate($post)
     {
-        if ($post['post_type'] == self::CONTENT && $post['post_status'] === 'publish') {
+        if ($post['post_type'] === self::CONTENT && $post['post_status'] === 'publish') {
             $post['post_status'] = 'private';
         }
         return $post;
@@ -175,11 +178,20 @@ class CustomPostTypes
         return $query_args;
     }
 
+    /**
+     * Based on the post in question, determine which caps are required.
+     * @param array $caps
+     * @param string $cap
+     * @param int $user_id
+     * @param array $args
+     * @param string $cap_slug
+     * @return array
+     */
     public function mapMetaCap($caps, $cap, $user_id, $args, $cap_slug)
     {
 
         /* If editing, deleting, or reading a project, get the post and post type object. */
-        if ('edit_' . $cap_slug == $cap || 'delete_' . $cap_slug == $cap || 'read_' . $cap_slug == $cap) {
+        if ('edit_' . $cap_slug === $cap || 'delete_' . $cap_slug === $cap || 'read_' . $cap_slug === $cap) {
             $post = get_post($args[0]);
             $post_type = get_post_type_object($post->post_type);
 
@@ -188,24 +200,24 @@ class CustomPostTypes
         }
 
         /* If editing a project, assign the required capability. */
-        if ('edit_' . $cap_slug == $cap) {
-            if ($user_id == $post->post_author) {
+        if ('edit_' . $cap_slug === $cap) {
+            if ($user_id === $post->post_author) {
                 $caps[] = $post_type->cap->edit_posts;
             } else {
                 $caps[] = $post_type->cap->edit_others_posts;
             }
-        } elseif ('delete_' . $cap_slug == $cap) {
+        } elseif ('delete_' . $cap_slug === $cap) {
             /* If deleting a project, assign the required capability. */
-            if ($user_id == $post->post_author) {
+            if ($user_id === $post->post_author) {
                 $caps[] = $post_type->cap->delete_posts;
             } else {
                 $caps[] = $post_type->cap->delete_others_posts;
             }
-        } elseif ('read_' . $cap_slug == $cap) {
+        } elseif ('read_' . $cap_slug === $cap) {
             /* If reading a private project, assign the required capability. */
-            if ('private' != $post->post_status) {
+            if ('private' !== $post->post_status) {
                 $caps[] = 'read';
-            } elseif ($user_id == $post->post_author) {
+            } elseif ($user_id === $post->post_author) {
                 $caps[] = 'read';
             } else {
                 $caps[] = $post_type->cap->read_private_posts;
@@ -224,7 +236,7 @@ class CustomPostTypes
         return [
             self::CONTENT,
             self::DESIGN,
-            self::PROJECT
+            self::PROJECT,
         ];
     }
 }

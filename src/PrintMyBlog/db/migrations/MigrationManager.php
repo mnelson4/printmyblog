@@ -4,6 +4,10 @@ namespace PrintMyBlog\db\migrations;
 
 use Twine\db\migrations\MigrationManagerBase;
 
+/**
+ * Class MigrationManager
+ * @package PrintMyBlog\db\migrations
+ */
 class MigrationManager extends MigrationManagerBase
 {
 
@@ -13,7 +17,7 @@ class MigrationManager extends MigrationManagerBase
     public function getMigrationInfos()
     {
         return [
-            '3.2.3' => 'PrintMyBlog\db\migrations\Migration3_2_3'
+            '3.2.3' => 'PrintMyBlog\db\migrations\Migration3_2_3',
         ];
     }
 }

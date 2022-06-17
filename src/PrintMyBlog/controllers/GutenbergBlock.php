@@ -6,6 +6,10 @@ use PrintMyBlog\domain\PrintOptions;
 use Twine\services\display\FormInputs;
 use Twine\controllers\BaseController;
 
+/**
+ * Class GutenbergBlock
+ * @package PrintMyBlog\controllers
+ */
 class GutenbergBlock extends BaseController
 {
 
@@ -20,19 +24,26 @@ class GutenbergBlock extends BaseController
         add_filter('the_content', array($this, 'enqueueFrontendScript'));
     }
 
+    /**
+     * Register block.
+     */
     public function registerGutenbergBlock()
     {
         wp_register_script(
             'pmb-block',
             PMB_ASSETS_URL . 'scripts/pmb-block.js',
-            array('wp-blocks', 'wp-element', 'wp-components', 'pmb-setup-page')
+            array('wp-blocks', 'wp-element', 'wp-components', 'pmb-setup-page'),
+            PMB_VERSION
         );
         if (function_exists('register_block_type')) {
-            register_block_type('printmyblog/setupform', array(
-                'editor_script' => 'pmb-block',
-                'style' => 'pmb-setup-page',
-                'render_callback' => [$this, 'block_dynamic_render_cb'],
-            ));
+            register_block_type(
+                'printmyblog/setupform',
+                array(
+                    'editor_script' => 'pmb-block',
+                    'style' => 'pmb-setup-page',
+                    'render_callback' => [$this, 'block_dynamic_render_cb'],
+                )
+            );
         }
     }
 
@@ -46,11 +57,12 @@ class GutenbergBlock extends BaseController
     public function enqueueFrontendScript($content)
     {
         if (function_exists('has_block') && has_block('printmyblog/setupform')) {
-            wp_enqueue_script('pmb-setup-page', '', '', '', true);
+            wp_enqueue_script('pmb-setup-page', '', '', PMB_VERSION, true);
         }
         return $content;
     }
 
+    //phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     /**
      * CALLBACK
      *
@@ -58,11 +70,9 @@ class GutenbergBlock extends BaseController
      *
      * Instead of rendering from the block's save(), this callback will render the front-end
      *
-     * @since    1.0.0
-     * @param $att Attributes from the JS block
+     * @param array $att Attributes from the JS block
      * @return string Rendered HTML
      */
-    //phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     public function block_dynamic_render_cb($att)
     {
         //phpcs:enable
@@ -70,7 +80,7 @@ class GutenbergBlock extends BaseController
         ob_start();
         $print_options = new PrintOptions();
         $displayer = new FormInputs();
-        include(PMB_TEMPLATES_DIR . 'setup_page.php');
+        include PMB_TEMPLATES_DIR . 'setup_page.php';
         return ob_get_clean();
     }
 }

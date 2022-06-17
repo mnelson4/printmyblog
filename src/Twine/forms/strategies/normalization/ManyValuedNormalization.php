@@ -12,6 +12,9 @@ namespace Twine\forms\strategies\normalization;
 class ManyValuedNormalization extends NormalizationBase
 {
 
+    /**
+     * @var array|NormalizationBase
+     */
     protected $individual_item_normalization_strategy = array();
 
 

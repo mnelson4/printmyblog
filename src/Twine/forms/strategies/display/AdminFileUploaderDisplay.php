@@ -24,10 +24,17 @@ class AdminFileUploaderDisplay extends DisplayBase
     {
         wp_enqueue_media();
         wp_enqueue_script('media-upload');
-        wp_enqueue_script('pmb-media-uploader', TWINE_SCRIPTS_URL . 'media-uploader.js');
+        wp_enqueue_script(
+            'pmb-media-uploader',
+            TWINE_SCRIPTS_URL . 'media-uploader.js',
+            [],
+            '1.0.0'
+        );
         wp_enqueue_style(
             'pmb-media-uploader',
-            TWINE_STYLES_URL . 'media-uploader.css'
+            TWINE_STYLES_URL . 'media-uploader.css',
+            [],
+            '1.0.0'
         );
         parent::enqueueJs();
     }
@@ -38,7 +45,6 @@ class AdminFileUploaderDisplay extends DisplayBase
      *
      * @return string of html to display the field
      */
-
     public function display()
     {
         // image uploader
@@ -53,6 +59,8 @@ class AdminFileUploaderDisplay extends DisplayBase
         // the actual input
         $html .= '<input type="text" size="34" ';
         $html .= 'name="' . $this->input->htmlName() . '" ';
+        // Want loose comparison
+        // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
         $html .= $this->input->htmlClass() != ''
             ? 'class="large-text twine_media_url ' . $this->input->htmlClass() . '" '
             : 'class="large-text twine_media_url" ';
@@ -65,7 +73,7 @@ class AdminFileUploaderDisplay extends DisplayBase
             $image = $html_generator->br()
                 . $html_generator->br()
                 . $html_generator->div(
-                    $html_generator->img($this->input->rawValue(), '', '', "twine_media_image"),
+                    $html_generator->img($this->input->rawValue(), '', '', 'twine_media_image'),
                     null,
                     'twine-uploaded-image-wrap'
                 );
@@ -95,7 +103,7 @@ class AdminFileUploaderDisplay extends DisplayBase
     {
         $results = wp_remote_head($src);
         if (is_array($results) && ! $results instanceof WP_Error) {
-            return strpos($results['headers']['content-type'], "image") !== false;
+            return strpos($results['headers']['content-type'], 'image') !== false;
         } else {
             return false;
         }

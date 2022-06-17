@@ -41,16 +41,16 @@ class Context extends BaseContext
             ],
             'Twine\system\RequestType'      => [
                 'Twine\system\VersionHistory' => self::REUSE,
-                'pmb_activation'
+                'pmb_activation',
             ],
             'Twine\system\VersionHistory'   => [
                 PMB_VERSION,
                 'pmb_previous_version',
-                'pmb_version_history'
+                'pmb_version_history',
             ],
             'PrintMyBlog\controllers\Admin' => [
                 'PrintMyBlog\db\PostFetcher'              => self::REUSE,
-                'PrintMyBlog\orm\managers\ProjectSectionManager'              => self::REUSE,
+                'PrintMyBlog\orm\managers\ProjectSectionManager' => self::REUSE,
                 'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
                 'PrintMyBlog\services\FileFormatRegistry'   => self::REUSE,
                 'PrintMyBlog\orm\managers\DesignManager' => self::REUSE,
@@ -60,11 +60,11 @@ class Context extends BaseContext
                 'PrintMyBlog\services\DebugInfo' => self::REUSE,
                 'PrintMyBlog\services\PmbCentral' => self::REUSE,
                 'Twine\orm\managers\PostWrapperManager' => self::REUSE,
-                'PrintMyBlog\services\ExternalResourceCache' => self::REUSE
+                'PrintMyBlog\services\ExternalResourceCache' => self::REUSE,
             ],
             'PrintMyBlog\services\PersistentNotices' => [
                 'mnelson4\AdminNotices\Notices' => self::REUSE,
-                'PrintMyBlog\domain\DefaultPersistentNotices' => self::REUSE
+                'PrintMyBlog\domain\DefaultPersistentNotices' => self::REUSE,
             ],
             'PrintMyBlog\controllers\Ajax'  => [
                 'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
@@ -72,22 +72,22 @@ class Context extends BaseContext
                 'PrintMyBlog\db\PostFetcher' => self::REUSE,
                 'PrintMyBlog\services\PmbCentral' => self::REUSE,
                 'Twine\orm\managers\PostWrapperManager' => self::REUSE,
-                'PrintMyBlog\services\ExternalResourceCache' => self::REUSE
+                'PrintMyBlog\services\ExternalResourceCache' => self::REUSE,
             ],
             'PrintMyBlog\orm\entities\Project'          => [
-                'PrintMyBlog\orm\managers\ProjectSectionManager'             => self::REUSE,
+                'PrintMyBlog\orm\managers\ProjectSectionManager' => self::REUSE,
                 'PrintMyBlog\services\FileFormatRegistry'  => self::REUSE,
                 'PrintMyBlog\orm\managers\DesignManager' => self::REUSE,
                 'PrintMyBlog\services\config\Config' => self::REUSE,
                 'PrintMyBlog\factories\ProjectGenerationFactory' => self::REUSE,
-                'PrintMyBlog\services\SectionTemplateRegistry' => self::REUSE
+                'PrintMyBlog\services\SectionTemplateRegistry' => self::REUSE,
             ],
             'PrintMyBlog\services\DesignRegistry' => [
                 'PrintMyBlog\orm\managers\DesignManager' => self::REUSE,
-                'PrintMyBlog\services\DesignTemplateRegistry' => self::REUSE
+                'PrintMyBlog\services\DesignTemplateRegistry' => self::REUSE,
             ],
             'PrintMyBlog\orm\entities\Design' => [
-                'PrintMyBlog\services\DesignTemplateRegistry' => self::REUSE
+                'PrintMyBlog\services\DesignTemplateRegistry' => self::REUSE,
             ],
             'PrintMyBlog\entities\DesignTemplate' => [
                 'PrintMyBlog\services\FileFormatRegistry' => self::REUSE,
@@ -96,21 +96,21 @@ class Context extends BaseContext
             ],
             'PrintMyBlog\services\config\Config' => [
                 'PrintMyBlog\services\FileFormatRegistry' => self::REUSE,
-                'PrintMyBLog\orm\managers\DesignManager' => self::REUSE
+                'PrintMyBLog\orm\managers\DesignManager' => self::REUSE,
             ],
             'PrintMyBlog\entities\ProjectGeneration' => [
                 'PrintMyBlog\orm\managers\ProjectSectionManager' => self::REUSE,
-                'PrintMyBlog\factories\ProjectFileGeneratorFactory' => self::REUSE
+                'PrintMyBlog\factories\ProjectFileGeneratorFactory' => self::REUSE,
             ],
             'PrintMyBlog\services\generators\PdfGenerator' => [
                 'PrintMyBlog\db\PostFetcher' => self::REUSE,
                 'PrintMyBlog\compatibility\DetectAndActivate' => self::REUSE,
-                'PrintMyBlog\services\ExternalResourceCache' => self::REUSE
+                'PrintMyBlog\services\ExternalResourceCache' => self::REUSE,
             ],
             'PrintMyBlog\services\generators\EpubGenerator' => [
                 'PrintMyBlog\db\PostFetcher' => self::REUSE,
                 'PrintMyBlog\compatibility\DetectAndActivate' => self::REUSE,
-                'PrintMyBlog\services\ExternalResourceCache' => self::REUSE
+                'PrintMyBlog\services\ExternalResourceCache' => self::REUSE,
             ],
             'PrintMyBlog\services\FileFormatRegistry' => [
                 'PrintMyBlog\factories\FileFormatFactory' => self::REUSE,
@@ -119,34 +119,34 @@ class Context extends BaseContext
                 'PrintMyBlog\services\DesignTemplateRegistry' => self::REUSE,
             ],
             'PrintMyBlog\db\PostFetcher' => [
-                'PrintMyBlog\system\CustomPostTypes' => self::REUSE
+                'PrintMyBlog\system\CustomPostTypes' => self::REUSE,
             ],
             'PrintMyBlog\system\CustomPostTypes' => [
-                'PrintMyBlog\services\SvgDoer' => self::REUSE
+                'PrintMyBlog\services\SvgDoer' => self::REUSE,
             ],
             'PrintMyBlog\services\DebugInfo' => [
                 'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
                 'PrintMyBlog\orm\managers\DesignManager' => self::REUSE,
             ],
             'PrintMyBlog\services\SectionTemplateRegistry' => [
-                'PrintMyBlog\services\DesignTemplateRegistry' => self::REUSE
+                'PrintMyBlog\services\DesignTemplateRegistry' => self::REUSE,
             ],
             'PrintMyBlog\db\migrations\MigrationManager' => [
                 'Twine\system\RequestType' => self::REUSE,
                 'Twine\system\VersionHistory' => self::REUSE,
-                'pmb_'
+                'pmb_',
             ],
             'PrintMyBlog\domain\PrintButtons' => [
-                'PrintMyBlog\domain\FrontendPrintSettings' => self::REUSE
+                'PrintMyBlog\domain\FrontendPrintSettings' => self::REUSE,
             ],
             'PrintMyBlog\domain\FrontendPrintSettings' => [
                 'PrintMyBlog\domain\PrintOptions' => self::REUSE,
             ],
             'PrintMyBlog\domain\PrintPageUrlGenerator' => [
-                'PrintMyBlog\domain\FrontendPrintSettings' => self::REUSE
+                'PrintMyBlog\domain\FrontendPrintSettings' => self::REUSE,
             ],
             'PrintMyBlog\system\Capabilities' => [
-                'PrintMyBlog\system\CustomPostTypes' => self::REUSE
+                'PrintMyBlog\system\CustomPostTypes' => self::REUSE,
             ],
             'PrintMyBlog\compatibility\plugins\Wpml' => [
                 'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
@@ -154,11 +154,11 @@ class Context extends BaseContext
                 'PrintMyBlog\system\CustomPostTypes' => self::REUSE,
             ],
             'PrintMyBlog\domain\DefaultDesignTemplates' => [
-                'PrintMyBlog\helpers\ImageHelper' => self::REUSE
+                'PrintMyBlog\helpers\ImageHelper' => self::REUSE,
             ],
             'PrintMyBlog\services\ExternalResourceCache' => [
-                'PrintMyBlog\orm\managers\ExternalResourceManager' => self::REUSE
-            ]
+                'PrintMyBlog\orm\managers\ExternalResourceManager' => self::REUSE,
+            ],
         ];
     }
 }

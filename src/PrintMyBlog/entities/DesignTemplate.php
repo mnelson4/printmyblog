@@ -10,6 +10,10 @@ use PrintMyBlog\services\FileFormatRegistry;
 use PrintMyBlog\services\SectionTemplateRegistry;
 use Twine\forms\base\FormSection;
 
+/**
+ * Class DesignTemplate
+ * @package PrintMyBlog\entities
+ */
 class DesignTemplate
 {
 
@@ -26,8 +30,19 @@ class DesignTemplate
     const TEMPLATE_TITLE_PAGE = 'title_page';
     const TEMPLATE_JUST_CONTENT = 'just_content';
 
+    /**
+     * @var string
+     */
     protected $format_slug;
+
+    /**
+     * @var string
+     */
     protected $slug;
+
+    /**
+     * @var string
+     */
     protected $title;
     /**
      * @var string filepath to where the design's files are located
@@ -94,8 +109,8 @@ class DesignTemplate
     /**
      * DesignTemplate constructor.
      *
-     * @param $slug unique string identifying this design template
-     * @param $args {
+     * @param string $slug unique string identifying this design template
+     * @param array $args {
      * @type string title sometimes shown to users
      * @type string format "print_pdf" or "digital_pdf"
      * @type string dir directory of the design (folder that ocntains its `functions.php`)
@@ -129,6 +144,11 @@ class DesignTemplate
         $this->project_form_callback = $args['project_form_callback'];
     }
 
+    /**
+     * @param FileFormatRegistry $file_format_registry
+     * @param DesignManager $design_manager
+     * @param SectionTemplateRegistry $section_template_registry
+     */
     public function inject(FileFormatRegistry $file_format_registry, DesignManager $design_manager, SectionTemplateRegistry $section_template_registry)
     {
         $this->file_format_registry = $file_format_registry;
@@ -264,6 +284,9 @@ class DesignTemplate
      *
      * @param string $division see DesignTemplate::validDivisions()
      * @param bool $beginning
+     * @param bool $use_fallback
+     * @return string
+     * @throws TemplateDoesNotExist
      */
     public function getTemplatePathToDivision($division, $beginning = true, $use_fallback = true)
     {
@@ -292,8 +315,8 @@ class DesignTemplate
 
     /**
      * Calculates where thie template file SHOULD be in this design template, if it exists at all.
-     * @param $division
-     * @param $beginning
+     * @param string bool $division
+     * @param bool $beginning
      *
      * @return string
      * @throws Exception
@@ -303,13 +326,13 @@ class DesignTemplate
         if (! $beginning) {
             $division .= '_end';
         }
-        return  $this->getDirForTemplates() . $division . '.php';
+        return $this->getDirForTemplates() . $division . '.php';
     }
 
     /**
-     * @param $division
+     * @param string $division
      * @param string $beginning
-     *
+     * @param bool $use_fallback
      * @return bool
      */
     public function templateFileExists($division, $beginning = true, $use_fallback = false)
@@ -333,8 +356,8 @@ class DesignTemplate
     public function supports($division)
     {
         return $division === self::IMPLIED_DIVISION_MAIN_MATTER
-        || $this->templateFileExists($division)
-               || in_array($division, $this->supports);
+            || $this->templateFileExists($division)
+            || in_array($division, $this->supports, true);
     }
 
     /**
@@ -360,26 +383,19 @@ class DesignTemplate
         ];
     }
 
+    /**
+     * @param int $level
+     * @return string
+     */
     public function divisionLabelSingular($level)
     {
         $display = [
-             __('article', 'print-my-blog'),
-             __('part', 'print-my-blog'),
+            __('article', 'print-my-blog'),
+            __('part', 'print-my-blog'),
             __('volume', 'print-my-blog'),
-            __('anthology', 'print-my-blog')
+            __('anthology', 'print-my-blog'),
         ];
         return $display[$level];
-    }
-
-    public static function validDivisionsIncludingImplied()
-    {
-        return array_merge(
-            [
-                self::IMPLIED_DIVISION_PROJECT
-            ],
-            self::validPlacements(),
-            self::validDivisions()
-        );
     }
 
     /**
@@ -391,7 +407,7 @@ class DesignTemplate
         return [
             self::IMPLIED_DIVISION_FRONT_MATTER,
             self::IMPLIED_DIVISION_MAIN_MATTER,
-            self::IMPLIED_DIVISION_BACK_MATTER
+            self::IMPLIED_DIVISION_BACK_MATTER,
         ];
     }
 
@@ -406,7 +422,7 @@ class DesignTemplate
     /**
      * Adds the template to the list of custom template slugs used by this design template.
      * It is assumed this custom template has already been registered with pmb_register_section_template()
-     * @param $custom_template_slug
+     * @param string $custom_template_slug
      */
     public function addCustomTemplate($custom_template_slug)
     {
@@ -421,7 +437,7 @@ class DesignTemplate
     public function supportsCustomTemplate($custom_template_slug)
     {
         $supported_custom_templates = $this->getCustomTemplates();
-        return in_array($custom_template_slug, $supported_custom_templates);
+        return in_array($custom_template_slug, $supported_custom_templates, true);
     }
 
     /**

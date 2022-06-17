@@ -32,7 +32,7 @@ class SubmitInputDisplay extends DisplayBase
                     'value' => $default_value,
                     // overwrite the standard id with the backwards compatible one
                     'id' => $this->input->htmlId() . '-submit',
-                    'class' => $this->input->htmlClass()
+                    'class' => $this->input->htmlClass(),
                 )
             )
         );

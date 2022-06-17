@@ -7,7 +7,7 @@ use Twine\compatibility\CompatibilityBase;
 /**
  * Class LazyLoadingFeaturePlugin
  *
- * Description
+ * Disalbe lazy loading images for PMB.
  *
  * @package        Print My Blog
  * @author         Mike Nelson
@@ -17,12 +17,16 @@ use Twine\compatibility\CompatibilityBase;
 class LazyLoadingFeaturePlugin extends CompatibilityBase
 {
 
+    /**
+     * Disable lazy-loading on REST requests. Firefox's print-preview doesn't show the images unless you scroll down.
+     */
     public function setHooks()
     {
-        // Disable lazy-loading on REST requests. Firefox's print-preview doesn't show the images unless you scroll
-        // down.
-        add_filter('wp_lazy_loading_enabled', function () {
-            return ! defined('REST_REQUEST');
-        });
+        add_filter(
+            'wp_lazy_loading_enabled',
+            function () {
+                return ! defined('REST_REQUEST');
+            }
+        );
     }
 }

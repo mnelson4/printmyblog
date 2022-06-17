@@ -13,13 +13,18 @@ use PrintMyBlog\system\Context;
  */
 class ProjectGenerationFactory
 {
+    /**
+     * @param Project $project
+     * @param FileFormat $format
+     * @return ProjectGeneration
+     */
     public function create(Project $project, FileFormat $format)
     {
         return Context::instance()->useNew(
             'PrintMyBlog\entities\ProjectGeneration',
             [
                 $project,
-                $format
+                $format,
             ]
         );
     }

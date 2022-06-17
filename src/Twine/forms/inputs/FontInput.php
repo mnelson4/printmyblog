@@ -4,8 +4,16 @@ namespace Twine\forms\inputs;
 
 use Twine\forms\helpers\InputOption;
 
+/**
+ * Class FontInput
+ * @package Twine\forms\inputs
+ */
 class FontInput extends SelectInput
 {
+    /**
+     * FontInput constructor.
+     * @param array $args
+     */
     public function __construct($args)
     {
         $options = [

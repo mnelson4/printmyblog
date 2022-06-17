@@ -8,6 +8,10 @@ use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\services\FileFormatRegistry;
 use Twine\services\config\Config as TwineConfig;
 
+/**
+ * Class Config
+ * @package PrintMyBlog\services\config
+ */
 class Config extends TwineConfig
 {
     /**
@@ -19,11 +23,17 @@ class Config extends TwineConfig
      */
     protected $design_manager;
 
+    /**
+     * @return string
+     */
     protected function optionName()
     {
         return 'pmb_config';
     }
 
+    /**
+     * @return array
+     */
     protected function declareDefaults()
     {
         $defaults = [];
@@ -33,6 +43,10 @@ class Config extends TwineConfig
         return $defaults;
     }
 
+    /**
+     * @param FileFormatRegistry $format_registry
+     * @param DesignManager $design_manager
+     */
     public function inject(FileFormatRegistry $format_registry, DesignManager $design_manager)
     {
         $this->format_registry = $format_registry;
@@ -54,7 +68,7 @@ class Config extends TwineConfig
 
     /**
      * Gets the default design object for the requested format.
-     * @param $format
+     * @param string|FileFormat $format
      *
      * @return Design|null
      */

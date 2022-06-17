@@ -8,5 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'mnelson4\\' => array($baseDir . '/src/mnelson4'),
     'Twine\\' => array($baseDir . '/src/Twine'),
+    'Symfony\\Polyfill\\Php73\\' => array($vendorDir . '/symfony/polyfill-php73'),
     'PrintMyBlog\\' => array($baseDir . '/src/PrintMyBlog'),
+    'PHPStan\\WordPress\\' => array($vendorDir . '/szepeviktor/phpstan-wordpress/src'),
+    'Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\' => array($vendorDir . '/dealerdirect/phpcodesniffer-composer-installer/src'),
 );

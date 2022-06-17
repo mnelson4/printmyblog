@@ -32,7 +32,7 @@ if (!class_exists('Updraft_Dashboard_News')) :
         /**
          * various translations to use in the UI
          *
-         * @var Array
+         * @var array
          */
         private $translations;
     
@@ -46,7 +46,7 @@ if (!class_exists('Updraft_Dashboard_News')) :
         /**
          * Valid ajax callback pages
          *
-         * @var Array
+         * @var array
          */
         private $valid_callback_pages;
 
@@ -277,16 +277,6 @@ if (!class_exists('Updraft_Dashboard_News')) :
         private function get_current_clean_url()
         {
             return "://" . Array2::setOr($_SERVER,'HTTP_HOST','') . Array2::setOr($_SERVER,'REQUEST_URI','');
-        // Within an UpdraftCentral context, there should be no prefix on the anchor link
-            if (defined('DOING_AJAX') && DOING_AJAX) {
-                $current_url = Array2::setOr($_SERVER,"HTTP_REFERER",'');
-            } else {
-                $url_prefix = is_ssl() ? 'https' : 'http';
-                $current_url = $url_prefix . "://" . Array2::setOr($_SERVER,'HTTP_HOST','') . Array2::setOr($_SERVER,'REQUEST_URI','');
-            }
-            $remove_query_args = array('state', 'action', 'oauth_verifier', 'nonce', 'updraftplus_instance', 'access_token', 'user_id', 'updraftplus_googledriveauth');
-
-            return UpdraftPlus_Manipulation_Functions::wp_unslash(remove_query_arg($remove_query_args, $current_url));
         }
     }
 endif;

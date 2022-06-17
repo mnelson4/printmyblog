@@ -22,11 +22,13 @@ class VersionHistory
     protected $previous_version = false;
 
     /**
+     * Version in code
      * @var string
      */
     protected $current_version;
 
     /**
+     * Name of WP option containing previous version
      * @var string
      */
     protected $previous_version_option_name;
@@ -36,6 +38,11 @@ class VersionHistory
      */
     protected $version_history_option_name;
 
+    /**
+     * @param string $current_version
+     * @param string $previous_version_option_name
+     * @param string $version_history_option_name
+     */
     public function inject(
         $current_version,
         $previous_version_option_name,
@@ -57,12 +64,19 @@ class VersionHistory
         return $this->previous_version;
     }
 
+    /**
+     * Records version change if it's changed
+     */
     public function maybeRecordVersionChange()
     {
         if ($this->previousVersion() !== $this->current_version) {
             $this->recordVersionChange();
         }
     }
+
+    /**
+     * Records that the version number has changed in the DB
+     */
     public function recordVersionChange()
     {
         update_option($this->previous_version_option_name, $this->current_version);
@@ -76,7 +90,7 @@ class VersionHistory
         if (! isset($previous_versions[$this->current_version])) {
             $previous_versions[$this->current_version] = [];
         }
-        $previous_versions[$this->current_version][] = date('Y-m-d H:i:s');
+        $previous_versions[$this->current_version][] = gmdate('Y-m-d H:i:s');
         update_option($this->version_history_option_name, wp_json_encode($previous_versions));
     }
 

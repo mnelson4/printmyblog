@@ -111,10 +111,10 @@ class Init extends BaseInit
      */
     protected function includes()
     {
-        require_once(PMB_DIR . 'inc/internal_functions.php');
-        require_once(PMB_DIR . 'inc/integration_functions.php');
-        require_once(PMB_DIR . 'inc/template_functions.php');
-        require_once(PMB_DIR . 'inc/design_functions.php');
+        require_once PMB_DIR . 'inc/internal_functions.php';
+        require_once PMB_DIR . 'inc/integration_functions.php';
+        require_once PMB_DIR . 'inc/template_functions.php';
+        require_once PMB_DIR . 'inc/design_functions.php';
     }
 
     /**
@@ -241,6 +241,9 @@ class Init extends BaseInit
         define('MNELSON4_JS_URL', $plugin_url . 'src/mnelson4/AdminNotices/');
     }
 
+    /**
+     * @return \Twine\system\Context
+     */
     protected function initContext()
     {
         return Context::instance();

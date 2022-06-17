@@ -24,7 +24,7 @@ class DivPerSectionLayout extends FormSectionLayoutBase
 {
 
     /**
-     * opening div tag for a form
+     * Opening div tag for a form
      *
      * @return string
      */
@@ -33,9 +33,9 @@ class DivPerSectionLayout extends FormSectionLayoutBase
         $html_generator = Html::instance();
         return $html_generator->div(
             '',
-            $this->Form_section->htmlId(),
-            $this->Form_section->htmlClass(),
-            $this->Form_section->htmlStyle()
+            $this->form_section->htmlId(),
+            $this->form_section->htmlClass(),
+            $this->form_section->htmlStyle()
         );
     }
 
@@ -151,13 +151,13 @@ class DivPerSectionLayout extends FormSectionLayoutBase
 
 
     /**
-     * closing div tag for a form
+     * Closing div tag for a form
      *
      * @return string
      */
     public function layoutFormEnd()
     {
         $html_generator = Html::instance();
-        return $html_generator->divx($this->Form_section->htmlId(), $this->Form_section->htmlClass());
+        return $html_generator->divx($this->form_section->htmlId(), $this->form_section->htmlClass());
     }
 }

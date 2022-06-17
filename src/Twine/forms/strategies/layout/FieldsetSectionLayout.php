@@ -17,14 +17,14 @@ class FieldsetSectionLayout extends DivPerSectionLayout
 {
 
     /**
-     * legend_class
+     * Legend_class
      *
      * @var string
      */
     protected $legend_class;
 
     /**
-     * legend_text
+     * Legend_text
      *
      * @var string
      */
@@ -33,7 +33,7 @@ class FieldsetSectionLayout extends DivPerSectionLayout
 
 
     /**
-     *    construct
+     *    Construct
      *
      * @param array $options
      */
@@ -45,12 +45,13 @@ class FieldsetSectionLayout extends DivPerSectionLayout
                 $this->{$key} = $value;
             }
         }
+        parent::__construct();
     }
 
 
 
     /**
-     * opening div tag for a form
+     * Opening div tag for a form
      *
      * @return string
      */
@@ -59,11 +60,11 @@ class FieldsetSectionLayout extends DivPerSectionLayout
         $html_generator = Html::instance();
         $html = $html_generator->nl(1)
                 . '<fieldset id="'
-                . $this->Form_section->htmlId()
+                . $this->form_section->htmlId()
                 . '" class="'
-                . $this->Form_section->htmlClass()
+                . $this->form_section->htmlClass()
                 . '" style="'
-                . $this->Form_section->htmlStyle()
+                . $this->form_section->htmlStyle()
                 . '">';
         $html .= '<legend class="' . $this->legendClass() . '">' . $this->legendText() . '</legend>';
         return $html;
@@ -72,7 +73,7 @@ class FieldsetSectionLayout extends DivPerSectionLayout
 
 
     /**
-     * closing div tag for a form
+     * Closing div tag for a form
      *
      * @return string
      */

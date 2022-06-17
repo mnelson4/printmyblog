@@ -5,6 +5,11 @@ namespace PrintMyBlog\services;
 use Exception;
 use WP_Error;
 
+/**
+ * Class PmbCentral
+ * Communicates with printmy.blog.
+ * @package PrintMyBlog\services
+ */
 class PmbCentral
 {
     /**
@@ -33,7 +38,7 @@ class PmbCentral
             if ($refresh) {
                 $url = add_query_arg(
                     [
-                        'refresh' => true
+                        'refresh' => true,
                     ],
                     $url
                 );
@@ -43,9 +48,9 @@ class PmbCentral
                 $url,
                 [
                     'headers' => [
-                        'Authorization' => $this->getSiteAuthorizationHeader()
+                        'Authorization' => $this->getSiteAuthorizationHeader(),
                     ],
-                    'timeout' => 20
+                    'timeout' => 20,
                 ]
             );
             if ($response instanceof WP_Error) {
@@ -57,6 +62,8 @@ class PmbCentral
                     throw new Exception($credit_data['message'], $credit_data['code']);
                 }
                 if (is_array($credit_data) && isset($credit_data['expiry_date'])) {
+                    // Legacy code using current_time that just works.
+                    // phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested
                     $time_to_expire = rest_parse_date($credit_data['expiry_date']) - current_time('timestamp');
                     set_transient($transient_name, $credit_data, $time_to_expire);
                 }
@@ -68,6 +75,7 @@ class PmbCentral
     /**
      * Gets the special "site signature", derived from the install's private key, to send to PMB central.
      * @return string
+     * @throws Exception
      */
     public function getSiteSignature()
     {
@@ -77,8 +85,10 @@ class PmbCentral
         }
         $site_private_key = pmb_fs()->get_site()->secret_key;
         // create the signature that verifies we own this license and install.
-        $nonce = date('Y-m-d');
+        $nonce = gmdate('Y-m-d');
         $pk_hash = hash('sha512', $site_private_key . '|' . $nonce);
+        // Server we're communicating with expects bas64 encoded data.
+        // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
         return base64_encode($pk_hash . '|' . $nonce);
     }
 
@@ -91,6 +101,9 @@ class PmbCentral
         return 'PMB ' . $this->getSiteSignature();
     }
 
+    /**
+     * @return string
+     */
     public function getCreditsTransientName()
     {
         return 'pmb_license_credits';
@@ -112,11 +125,20 @@ class PmbCentral
         } else {
             // we already have it cached, just modify it then.
             $credit_data['remaining_credits']--;
-            set_transient($transient_name, $credit_data, rest_parse_date($credit_data['expiry_date']) - current_time('timestamp'));
+            set_transient(
+                $transient_name,
+                $credit_data,
+                // Legacy code that just works using current_time, keep doing it.
+                //phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested
+                rest_parse_date($credit_data['expiry_date']) - current_time('timestamp')
+            );
         }
         return $credit_data;
     }
 
+    /**
+     * @return string
+     */
     public function getCentralUrl()
     {
         if (defined('PMB_CENTRAL_URL')) {

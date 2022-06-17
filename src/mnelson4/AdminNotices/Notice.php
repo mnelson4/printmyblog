@@ -6,7 +6,6 @@
  *
  * @package   mnelson4/admin-notices
  * @author    mnelson4 <themes@wordpress.org>
- * @copyright 2019 mnelson4
  * @license   https://www.gnu.org/licenses/gpl-2.0.html GPL-2.0-or-later
  * @link      https://github.com/mnelson4/admin-notices
  */

@@ -75,7 +75,8 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 
 		var data = {
 			'action': 'pmb_fetch_rest_api_url',
-			'site': site_url
+			'site': site_url,
+			'_nonce': this.nonce
 		};
 
 		jQuery.post(this.ajax_url, data, (response) => {

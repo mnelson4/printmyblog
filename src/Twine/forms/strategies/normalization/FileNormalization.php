@@ -21,6 +21,7 @@ class FileNormalization extends NormalizationBase
      * much (other than NOT convert it to a string or something).
      * @param string $value_to_normalize
      * @return FileSubmission
+     * @throws ValidationError
      */
     public function normalize($value_to_normalize)
     {

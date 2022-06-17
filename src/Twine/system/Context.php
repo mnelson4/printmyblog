@@ -66,6 +66,13 @@ abstract class Context
         return $this->instantiate($classname, $args);
     }
 
+    /**
+     * Creates an instance of this class with the arguments provided (and injects declared dependencies)
+     * @param string $classname fully-qualified classname
+     * @param array $args array of arguments that would be passed
+     * @return object of whatever $classname specified
+     * @throws ReflectionException
+     */
     protected function instantiate($classname, $args = [])
     {
         $classname = $this->normalizeClassname($classname);
@@ -75,7 +82,7 @@ abstract class Context
             // this throws a ReflectionException if the method doesn't exist eh
             $reflection->getMethod('inject');
             $obj = $reflection->newInstanceArgs($args);
-            call_user_func_array([$obj,'inject'], $this->getDependencies($classname));
+            call_user_func_array([$obj, 'inject'], $this->getDependencies($classname));
         } catch (ReflectionException $e) {
             $combined_constructor_args = array_merge($args, $this->getDependencies($classname));
             $obj = $reflection->newInstanceArgs($combined_constructor_args);
@@ -84,7 +91,8 @@ abstract class Context
     }
 
     /**
-     * @param $classname
+     * Gets the declared dependencies of the classname
+     * @param string $classname fully-qualified classname
      *
      * @return array of whatever dependencies were declared for this classname in the setDependencies method
      */
@@ -115,7 +123,7 @@ abstract class Context
 
     /**
      * Makes sure there is no slash at the start of the classname.
-     * @param $classname
+     * @param string $classname Fully qualified classname3
      * @return string
      */
     protected function normalizeClassname($classname)

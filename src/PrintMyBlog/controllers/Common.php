@@ -15,6 +15,9 @@ use Twine\controllers\BaseController;
  */
 class Common extends BaseController
 {
+    /**
+     * Sets up hooks for both frontend and backend requests.
+     */
     public function setHooks()
     {
         add_action(
@@ -115,20 +118,20 @@ class Common extends BaseController
             'pmb',
             [
                 'site_url' => site_url(),
-                'site_url_attr' => esc_attr(site_url())
+                'site_url_attr' => esc_attr(site_url()),
             ]
         );
         wp_register_script(
             'pmb-setup-page',
             PMB_ASSETS_URL . 'scripts/setup-page.js',
             ['jquery-debounce', 'pmb-select2', 'wp-api', 'jquery-ui-datepicker'],
-            filemtime(PMB_ASSETS_DIR .  'scripts/setup-page.js')
+            filemtime(PMB_ASSETS_DIR . 'scripts/setup-page.js')
         );
         wp_register_style(
             'pmb-setup-page',
             PMB_ASSETS_URL . 'styles/setup-page.css',
             ['pmb_common', 'pmb-select2', 'jquery-ui'],
-            filemtime(PMB_ASSETS_DIR .  'styles/setup-page.css')
+            filemtime(PMB_ASSETS_DIR . 'styles/setup-page.css')
         );
         wp_localize_script(
             'pmb-setup-page',
@@ -136,7 +139,7 @@ class Common extends BaseController
             [
                 'translations' => [
                     'unknown_site_name' => esc_html__('Unknown site name', 'print-my-blog'),
-                    'no_categories' => esc_html__('No categories available.', 'print-my-blog')
+                    'no_categories' => esc_html__('No categories available.', 'print-my-blog'),
                 ],
                 'data' => [
                     'site_input_selector' => '#pmb-site',
@@ -152,8 +155,8 @@ class Common extends BaseController
                     'author_selector' => '#pmb-author-select',
                     'nonce' => wp_create_nonce('wp_rest'),
                     'order_date_selector' => '#pmb-order-by-date',
-                    'order_menu_selector' => '#pmb-order-by-menu'
-                ]
+                    'order_menu_selector' => '#pmb-order-by-menu',
+                ],
             ]
         );
     }

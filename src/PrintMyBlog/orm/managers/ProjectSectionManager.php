@@ -8,12 +8,18 @@ use PrintMyBlog\orm\entities\ProjectSection;
 use stdClass;
 use Twine\helpers\Array2;
 
+// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery -- this class is all about direct DB queries on a custom table.
+
+/**
+ * Class ProjectSectionManager
+ * @package PrintMyBlog\orm\managers
+ */
 class ProjectSectionManager
 {
     /**
      * Gets ProjectSections for this project.
      *
-     * @param $project_id
+     * @param int $project_id
      *
      * @param int $max_levels
      * @param int $limit
@@ -50,8 +56,12 @@ class ProjectSectionManager
     public function getSection($section_id)
     {
         global $wpdb;
+        // Custom table so custom query. And the table name is hard-coded.
+        // todo: cache
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching
         $row = $wpdb->get_row(
             $wpdb->prepare(
+                // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- it's just hard-coded.
                 'SELECT ID ' . $this->defaultFrom() . 'WHERE ID=%d',
                 $section_id
             )
@@ -65,6 +75,8 @@ class ProjectSectionManager
      * @param int $project_id
      * @param int $limit
      * @param int $offset
+     * @param bool $include_post_title
+     * @param string|null $placement
      *
      * @return ProjectSection[] unlike fetchPartsFor(), this is a flat array, objects don't have a 'subs' property
      */
@@ -75,18 +87,20 @@ class ProjectSectionManager
         $include_post_title = false,
         $placement = null
     ) {
-        return $this->createObjsFromRows($this->getFlatSectionRowsFor(
-            $project_id,
-            $limit,
-            $offset,
-            $include_post_title,
-            $placement
-        ));
+        return $this->createObjsFromRows(
+            $this->getFlatSectionRowsFor(
+                $project_id,
+                $limit,
+                $offset,
+                $include_post_title,
+                $placement
+            )
+        );
     }
 
     /**
      * Gets an array of stdClass for all the rows from the project section table that belong to the project.
-     * @param $project_id
+     * @param int $project_id
      * @param int $limit
      * @param int $offset
      * @param bool $include_post_title
@@ -105,7 +119,6 @@ class ProjectSectionManager
         $select_sql = $this->defaultSelection();
         $join_sql = '';
         $where_sql = $wpdb->prepare(' WHERE project_id=%d', $project_id);
-        ;
         if ($include_post_title) {
             $select_sql .= ', posts.post_title';
             $join_sql .= 'INNER JOIN
@@ -115,8 +128,11 @@ class ProjectSectionManager
         if ($placement) {
             $where_sql .= $wpdb->prepare(' AND placement=%s', $placement);
         }
+        // too dynamic for non-raw sql.
+        //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         return $wpdb->get_results(
             $wpdb->prepare(
+                // phpcs:disable WordPress.DB.PreparedSQL.NotPrepared -- all prepared earlier.
                 $select_sql . $this->defaultFrom()
                 . $join_sql . $where_sql .
                 ' ORDER BY section_order ASC
@@ -125,8 +141,12 @@ class ProjectSectionManager
                 $limit
             )
         );
+        // phpcs:enable WordPress.DB.PreparedSQL.NotPrepared -- all prepared earlier.
     }
 
+    /**
+     * @return string
+     */
     protected function defaultSelection()
     {
         return 'SELECT 
@@ -140,6 +160,9 @@ class ProjectSectionManager
             sections.section_order';
     }
 
+    /**
+     * @return string
+     */
     protected function defaultFrom()
     {
         global $wpdb;
@@ -191,19 +214,21 @@ class ProjectSectionManager
         $current_level = 0
     ) {
         $nested_sections = [];
-        for (; $index < count($flat_sections); $index++) {
+        // phpcs:ignore Generic.CodeAnalysis.ForLoopWithTestFunctionCall.NotAllowed
+        $num_sections = count($flat_sections);
+        for (; $index < $num_sections; $index++) {
             if ($flat_sections[$index]->getParentId() === intval($current_parent_id)) {
                 $nested_sections[] = $flat_sections[$index];
-            } elseif (intval($flat_sections[ $index - 1]->getId()) === intval($flat_sections[$index]->getParentId())) {
+            } elseif (intval($flat_sections[$index - 1]->getId()) === intval($flat_sections[$index]->getParentId())) {
                 $subs = $this->nestSections(
                     $flat_sections,
                     $index,
-                    $flat_sections[ $index - 1 ]->getId(),
+                    $flat_sections[$index - 1]->getId(),
                     $max_levels,
                     $current_level + 1
                 );
                 if ($current_level < $max_levels) {
-                    $nested_sections[ count($nested_sections) - 1]->cacheSubSections($subs);
+                    $nested_sections[count($nested_sections) - 1]->cacheSubSections($subs);
                 } else {
                     $nested_sections = array_merge($nested_sections, $subs);
                 }
@@ -217,30 +242,31 @@ class ProjectSectionManager
     }
 
     /**
-     * @param $project_id
+     * @param string $project_id
      *
      * @return int|false number of rows deleted, or false on error
      */
     public function clearSectionsFor($project_id)
     {
         global $wpdb;
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- I'm not caching a delete query, sorry.
         return $wpdb->delete(
             $wpdb->prefix . TableManager::SECTIONS_TABLE,
             [
-                'project_id' => $project_id
+                'project_id' => $project_id,
             ],
             [
-                '%d'
+                '%d',
             ]
         );
     }
 
     /**
-     * @param $project_id
+     * @param int $project_id
      * @param array $sections_data . Top-level array has sub-arrays, each with 5 items: the post ID, its template, its
      * "height" in the tree, its "depth" in the tree, and an array of its sub-items (whose structure is just like the
      * top-level array).
-     * @param $placement see DesignTemplate::validPlacements()
+     * @param string $placement see DesignTemplate::validPlacements()
      *
      * @param int $order
      *
@@ -252,11 +278,11 @@ class ProjectSectionManager
     }
 
     /**
-     * @param $project_id
-     * @param $sections_data
-     * @param $parent_id
-     * @param $order
-     * @param $placement see DesignTemplate::valid
+     * @param int $project_id
+     * @param array $sections_data
+     * @param int $parent_id
+     * @param int $order
+     * @param string $placement see DesignTemplate::valid
      *
      * @return bool
      */
@@ -279,17 +305,17 @@ class ProjectSectionManager
                     'template' => $template,
                     'placement' => $placement,
                     'height' => $height,
-                    'depth' => $depth
+                    'depth' => $depth,
                 ],
                 [
-                    '%d',//project_id
-                    '%d',//post_id
-                    '%d',//parent_id
-                    '%d',//section_order
-                    '%s',//template
-                    '%s',//placement
-                    '%d',//height
-                    '%d',//depth
+                    '%d', // project_id
+                    '%d', // post_id
+                    '%d', // parent_id
+                    '%d', // section_order
+                    '%s', // template
+                    '%s', // placement
+                    '%d', // height
+                    '%d', // depth
                 ]
             );
             if (! $success) {
@@ -308,6 +334,7 @@ class ProjectSectionManager
 
     /**
      * Gets the ID of this part's parent.
+     * It's usually better to have previously fetched the entire db row which contains parent_id.
      * @param int $part_id
      *
      * @return int
@@ -315,8 +342,10 @@ class ProjectSectionManager
     public function getParentOf($part_id)
     {
         global $wpdb;
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- ya, this method isn't used and it's discouraged.
         return (int)$wpdb->get_var(
             $wpdb->prepare(
+                // phpcs:ignore -- errrmmm, here I am preparing it, don't say I'm not.
                 'SELECT parent_id FROM ' . $wpdb->prefix . TableManager::SECTIONS_TABLE . ' WHERE ID=%d',
                 $part_id
             )

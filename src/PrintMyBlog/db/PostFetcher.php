@@ -24,6 +24,9 @@ class PostFetcher
      */
     private $custom_post_types;
 
+    /**
+     * @param CustomPostTypes $custom_post_types
+     */
     public function inject(CustomPostTypes $custom_post_types)
     {
         $this->custom_post_types = $custom_post_types;
@@ -32,11 +35,13 @@ class PostFetcher
     /**
      * Based on the request, fetches posts. Returns an array of WP_Posts
      * @since $VID:$
-     * @return WP_Post[]
+     * @return object[]
      */
     public function fetchPostOptionssForProject()
     {
         global $wpdb;
+        // todo: cache
+        // phpcs:disable
         return $wpdb->get_results(
             'SELECT ID, post_title FROM '
             . $wpdb->posts
@@ -44,6 +49,7 @@ class PostFetcher
             . implode('\',\'', $this->getProjectPostTypes())
             . '\') AND post_status in ("publish","draft")'
         );
+        // phpcs:enable
     }
 
     /**
@@ -65,15 +71,18 @@ class PostFetcher
             }
         }
 
-        return  $in_search_post_types;
+        return $in_search_post_types;
     }
 
+    /**
+     * @return string[]
+     */
     protected function otherPostTypesToInclude()
     {
         return [
             'stm-lessons', // from MasterStudy LMS
             'lesson', // LifterLMS
-            'section', //
+            'section',
         ];
     }
 
@@ -85,6 +94,7 @@ class PostFetcher
     public function deleteCustomPostTypes()
     {
         global $wpdb;
+        // phpcs:disable
         return $wpdb->query(
             'DELETE posts, postmetas FROM '
             . $wpdb->posts
@@ -94,5 +104,6 @@ class PostFetcher
             . implode('","', $this->custom_post_types->getPostTypes())
             . '")'
         );
+        // phpcs:enable
     }
 }

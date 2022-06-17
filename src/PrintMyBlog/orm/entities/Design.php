@@ -30,8 +30,15 @@ class Design extends PostWrapper
      * @var FormSection
      */
     protected $project_form;
+
+    /**
+     * @var FormSection
+     */
     protected $design_form;
 
+    /**
+     * @param DesignTemplateRegistry $design_template_manager
+     */
     public function inject(DesignTemplateRegistry $design_template_manager)
     {
         $this->design_template_manager = $design_template_manager;
@@ -65,7 +72,7 @@ class Design extends PostWrapper
 
     /**
      * Gets the saved metadata and falls back to the default.
-     * @param $setting_name
+     * @param string $setting_name
      * @return mixed|null
      * @throws Exception
      */
@@ -109,8 +116,8 @@ class Design extends PostWrapper
     }
 
     /**
-     * @param $setting_name string
-     * @param $value mixed
+     * @param string $setting_name
+     * @param mixed $value
      */
     public function setSetting($setting_name, $value)
     {
@@ -157,12 +164,12 @@ class Design extends PostWrapper
         $index = 1;
         return [
             $this->getPreview(1),
-            $this->getPreview(2)
+            $this->getPreview(2),
         ];
     }
 
     /**
-     * @param $index
+     * @param int $index
      *
      * @return array with keys url and desc
      */
@@ -170,7 +177,7 @@ class Design extends PostWrapper
     {
         return [
             'url' => $this->getPmbMeta('preview_' . $index . '_url'),
-            'desc' => $this->getPmbMeta('preview_' . $index . '_desc')
+            'desc' => $this->getPmbMeta('preview_' . $index . '_desc'),
         ];
     }
 
@@ -180,7 +187,7 @@ class Design extends PostWrapper
      */
     public function isDefault()
     {
-        return $this->getWpPost()->post_name == $this->getDesignTemplate()->getDefaultDesignSlug();
+        return $this->getWpPost()->post_name === $this->getDesignTemplate()->getDefaultDesignSlug();
     }
 
     /**
