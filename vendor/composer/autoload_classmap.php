@@ -6,16 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin' => $vendorDir . '/dealerdirect/phpcodesniffer-composer-installer/src/Plugin.php',
-    'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
-    'PHPStan\\WordPress\\Composer\\FixWpStubs' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/Composer/FixWpStubs.php',
-    'PHPStan\\WordPress\\EscSqlDynamicFunctionReturnTypeExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/EscSqlDynamicFunctionReturnTypeExtension.php',
-    'PHPStan\\WordPress\\GetPostDynamicFunctionReturnTypeExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/GetPostDynamicFunctionReturnTypeExtension.php',
-    'PHPStan\\WordPress\\GetPostsDynamicFunctionReturnTypeExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/GetPostsDynamicFunctionReturnTypeExtension.php',
-    'PHPStan\\WordPress\\GetTaxonomiesDynamicFunctionReturnTypeExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/GetTaxonomiesDynamicFunctionReturnTypeExtension.php',
-    'PHPStan\\WordPress\\IsWpErrorFunctionTypeSpecifyingExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/IsWpErrorFunctionTypeSpecifyingExtension.php',
-    'PHPStan\\WordPress\\RedirectCanonicalDynamicFunctionReturnTypeExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/RedirectCanonicalDynamicFunctionReturnTypeExtension.php',
-    'PHPStan\\WordPress\\WpThemeMagicPropertiesClassReflectionExtension' => $vendorDir . '/szepeviktor/phpstan-wordpress/src/WpThemeMagicPropertiesClassReflectionExtension.php',
     'PrintMyBlog\\compatibility\\DetectAndActivate' => $baseDir . '/src/PrintMyBlog/compatibility/DetectAndActivate.php',
     'PrintMyBlog\\compatibility\\plugins\\CoBlocks' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/CoBlocks.php',
     'PrintMyBlog\\compatibility\\plugins\\ContactForm7' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/ContactForm7.php',
@@ -89,7 +79,6 @@ return array(
     'PrintMyBlog\\system\\Context' => $baseDir . '/src/PrintMyBlog/system/Context.php',
     'PrintMyBlog\\system\\CustomPostTypes' => $baseDir . '/src/PrintMyBlog/system/CustomPostTypes.php',
     'PrintMyBlog\\system\\Init' => $baseDir . '/src/PrintMyBlog/system/Init.php',
-    'Symfony\\Polyfill\\Php73\\Php73' => $vendorDir . '/symfony/polyfill-php73/Php73.php',
     'Twine\\admin\\news\\DashboardNews' => $baseDir . '/src/Twine/admin/news/DashboardNews.php',
     'Twine\\compatibility\\CompatibilityBase' => $baseDir . '/src/Twine/compatibility/CompatibilityBase.php',
     'Twine\\controllers\\BaseController' => $baseDir . '/src/Twine/controllers/BaseController.php',
