@@ -24,10 +24,6 @@ function pmb_enqueue_classic_script(){
     wp_localize_script(
         'pmb-design',
         'pmb_design_options',
-        [
-            'convert_videos' => (int)$pmb_design->getSetting('convert_videos'),
-            'image_quality' => $pmb_design->getSetting('image_quality'),
-            'domain' => pmb_site_domain()
-        ]
+        pmb_design_settings($pmb_design)
     );
 }

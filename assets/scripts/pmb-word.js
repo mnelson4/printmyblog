@@ -58,47 +58,36 @@ function pmb_limit_img_widths(){
 /**
  * v1: just converts internal hyperlinks to anchor links
  */
-function pmb_replace_links_for_word()
+function pmb_replace_links_for_word(external_link_policy, internal_link_policy)
 {
     // epub-generator.js's pmb_replace_internal_links_with_epub_file_links has similar logic
     _pmb_for_each_hyperlink(
         // internal hyperlinks
-        function(a, id_url, id_selector){
-            // v1: convert internal hyperlinks to anchor links
-            // switch(internal_link_policy){
-            //     case 'footnote':
+        function(a, id_url){
+            switch(internal_link_policy){
+                case 'leave':
                     // only add the footnote if the link isn't just the URL spelled out.
                     if(a.attr('href') !== a.html().trim()) {
                         a.attr('href',id_url);
                     }
-            //         break;
-            //     case 'leave':
-            //         a.attr('href',id_url);
-            //         break;
-            //     case 'remove':
-            //         a.contents().unwrap();
-            //         break;
-            //     // otherwise, leave alone
-            // }
+                    break;
+                case 'remove':
+                    a.contents().unwrap();
+                    break;
+                case 'leave_external':
+                // otherwise, leave alone
+            }
         },
         // external hyperlinks
         function(a){
-            // v1 just always leave external hyperlinks
-            // switch(external_link_policy){
-            //     case 'footnote':
-            //         // only add the footnote if the link isn't just the URL spelled out.
-            //         var link_text = a.html().trim();
-            //         var href = a.attr('href');
-            //         var matches = [href, href.replace('https://',''), href.replace('http://',''), href.replace('//',''), href.replace('mailto:','')];
-            //         if(matches.indexOf(link_text) === -1){
-            //             a.after('<span class="pmb-footnote">' + pre_external_footnote  + a.attr('href') + post_external_footnote + '</span>');
-            //         }
-            //         break;
-            //     case 'remove':
-            //         a.contents().unwrap();
-            //         break;
-            //     // otherwise, leave alone
-            // }
+            switch(external_link_policy){
+                case 'remove':
+                    a.contents().unwrap();
+                    break;
+                case 'leave':
+                default:
+                // otherwise, leave alone
+            }
         }
     );
 }

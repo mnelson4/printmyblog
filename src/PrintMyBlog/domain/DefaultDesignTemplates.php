@@ -566,7 +566,41 @@ class DefaultDesignTemplates
                                         'html_help_text' => __('Some eReaders don\'t show videos, in which case you may prefer to replace them with an image and a hyperlink to the online video content.', 'print-my-blog'),
                                         'default' => false
                                     ]
-                                )
+                                ),
+
+                                'internal_links' => new SelectRevealInput(
+                                    [
+                                        'remove' => new InputOption(
+                                            __('Remove', 'print-my-blog')
+                                        ),
+                                        'leave_external' => new InputOption(
+                                            __('Leave as hyperlink to website', 'print-my-blog')
+                                        ),
+                                        'leave' => new InputOption(
+                                            __('Leave as hyperlink to document', 'print-my-blog')
+                                        )
+                                    ],
+                                    [
+                                        'default' => 'leave',
+                                        'html_label_text' => __('Internal Hyperlinks', 'print-my-blog'),
+                                        'html_help_text' => __('How to display hyperlinks to content included in this project.', 'print-my-blog'),
+                                    ]
+                                ),
+                                'external_links' => new SelectRevealInput(
+                                    [
+                                        'remove' => new InputOption(
+                                            __('Remove', 'print-my-blog')
+                                        ),
+                                        'leave' => new InputOption(
+                                            __('Leave as hyperlink', 'print-my-blog')
+                                        ),
+                                    ],
+                                    [
+                                        'default' => 'leave',
+                                        'html_label_text' => __('External Hyperlinks', 'print-my-blog'),
+                                        'html_help_text' => __('How to display hyperlinks to content not included in this project.', 'print-my-blog'),
+                                    ]
+                                ),
                             ],
                             'generic_sections'
                         );

@@ -5,6 +5,7 @@ jQuery(document).ready(function(){
     if(pmb_design_options.convert_videos === '1'){
         pmb_convert_youtube_videos_to_images();
     }
+    pmb_replace_links_for_word(pmb_design_options['external_links'], pmb_design_options['internal_links']);
 });
 
 // wait until the images are loaded to try to resize them.
