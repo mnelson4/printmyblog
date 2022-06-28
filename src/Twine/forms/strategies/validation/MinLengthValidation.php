@@ -15,9 +15,16 @@ use Twine\forms\helpers\ValidationError;
  */
 class MinLengthValidation extends ValidationBase
 {
-
+    /**
+     * @var int
+     */
     protected $min_length;
 
+    /**
+     * MinLengthValidation constructor.
+     * @param null $validation_error_message
+     * @param int $min_length
+     */
     public function __construct($validation_error_message = null, $min_length = 0)
     {
         $this->min_length = $min_length;
@@ -25,7 +32,9 @@ class MinLengthValidation extends ValidationBase
     }
 
     /**
-     * @param $normalized_value
+     * Validates string length requirement met.
+     * @param string $normalized_value
+     * @throws ValidationError
      */
     public function validate($normalized_value)
     {
@@ -47,8 +56,8 @@ class MinLengthValidation extends ValidationBase
         return array(
             'minlength' => $this->min_length,
             'messages' => array(
-                'minlength' => $this->getValidationErrorMessage()
-            )
+                'minlength' => $this->getValidationErrorMessage(),
+            ),
         );
     }
 }

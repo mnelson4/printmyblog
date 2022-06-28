@@ -25,23 +25,15 @@ class File extends ThingOnServer
     protected $folder;
 
     /**
-     * FileWriter constructor.
-     *
-     * @param $filepath
-     */
-    public function __construct($filepath)
-    {
-        parent::__construct($filepath);
-    }
-
-    /**
      * Writes the content to the file. Note: it defaults to appending, so if the file already exists, the content
      * will be *added* to it; it will not overwrite it.
-     * @param $content
+     * @param string $content
      */
     public function write($content)
     {
         $this->ensureFolderExists();
+        // todo: use WP Filesystem
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fwrite
         fwrite($this->getFileHandle(), $content);
     }
 
@@ -63,6 +55,8 @@ class File extends ThingOnServer
     protected function getFileHandle()
     {
         if (! $this->file_handle) {
+            // todo: replace with wp filesystem
+            //phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fopen
             $this->file_handle = fopen($this->path, 'a+');
         }
         return $this->file_handle;
@@ -81,7 +75,7 @@ class File extends ThingOnServer
     }
 
     /**
-     * ensure_folder_exists_and_is_writable
+     * Ensure_folder_exists_and_is_writable
      * ensures that a folder exists and is writable, will attempt to create folder if it does not exist
      * Also ensures all the parent folders exist, and if not tries to create them.
      * Also, if this function creates the folder, adds a .htaccess file and index.html file

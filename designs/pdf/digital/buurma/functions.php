@@ -1,9 +1,9 @@
-<?php
+<?php // phpcs:disable Files.SideEffects.FoundWithSymbols -- sorry, this file is meant for everything
 // Add filters, action callback, and functions you want to use in your design.
 // Note that this file only gets included when gnerating a new project, not on every pageload.
 add_action(
-	'pmb_pdf_generation_start',
-	function(\PrintMyBlog\entities\ProjectGeneration $project_generation, \PrintMyBlog\orm\entities\Design $design){
+    'pmb_pdf_generation_start',
+    function (\PrintMyBlog\entities\ProjectGeneration $project_generation, \PrintMyBlog\orm\entities\Design $design) {
         global $pmb_design;
         $pmb_design = $design;
         add_action('wp_enqueue_scripts', 'pmb_enqueue_buurma_script', 1001);
@@ -11,14 +11,17 @@ add_action(
             'PrintMyBlog\services\generators\PdfGenerator->printScripts prince_js_vars',
             'pmb_buurma_modify_prince_vars'
         );
-	},
-	10,
-	2
+    },
+    10,
+    2
 );
 
-
-
-function pmb_enqueue_buurma_script(){
+/**
+ * Enqueues scripts.
+ * @throws Exception
+ */
+function pmb_enqueue_buurma_script()
+{
     global $pmb_design;
     $css = pmb_design_styles($pmb_design);
     $svg_doer = new \PrintMyBlog\services\SvgDoer();
@@ -33,29 +36,29 @@ function pmb_enqueue_buurma_script(){
         $css . '
 					/* BUURMA DESIGN INLINE CSS */
 					@page title-page /*body*/{
-					background: url("' . $svg_data. '") no-repeat,
+					background: url("' . $svg_data . '") no-repeat,
 						url("' . $pmb_design->getSetting('background_embellishment') . '") center center no-repeat,
-						linear-gradient(' . $color_guru->convertHextToRgba($bg_color,1). ', ' . $color_guru->convertHextToRgba($bg_color, .3). ');
+						linear-gradient(' . $color_guru->convertHextToRgba($bg_color, 1) . ', ' . $color_guru->convertHextToRgba($bg_color, .3) . ');
 					background-size:
 						/* banner */ 100% 150px, 
 						/* logo */ 40%, 
 						/* gradient */ 40%;
 					@top-right {
-			            content: "' . $pmb_design->getSetting('org'). '";
+			            content: "' . $pmb_design->getSetting('org') . '";
 			            color:white;
 			        }
 				}
 				@page front-matter{
 					background: url(' . $pmb_design->getSetting('background_embellishment') . ') right bottom/150px no-repeat,
-						linear-gradient(127deg, ' . $color_guru->convertHextToRgba($bg_color,.3). ' 0%, ' . $color_guru->convertHextToRgba($bg_color,.3). ' 80%, ' . $color_guru->convertHextToRgba($bg_color,1). ' 100%);
+						linear-gradient(127deg, ' . $color_guru->convertHextToRgba($bg_color, .3) . ' 0%, ' . $color_guru->convertHextToRgba($bg_color, .3) . ' 80%, ' . $color_guru->convertHextToRgba($bg_color, 1) . ' 100%);
 				}
 				@page main /*article*/{
 					background: url(' . $pmb_design->getSetting('background_embellishment') . ') right bottom/150px no-repeat,
-						linear-gradient(127deg, ' . $color_guru->convertHextToRgba($bg_color,.3). ' 0%, ' . $color_guru->convertHextToRgba($bg_color,.3). ' 80%, ' . $color_guru->convertHextToRgba($bg_color,1). ' 100%);
+						linear-gradient(127deg, ' . $color_guru->convertHextToRgba($bg_color, .3) . ' 0%, ' . $color_guru->convertHextToRgba($bg_color, .3) . ' 80%, ' . $color_guru->convertHextToRgba($bg_color, 1) . ' 100%);
 				}
 				@page back-matter{
 					background: url(' . $pmb_design->getSetting('background_embellishment') . ') center center no-repeat,
-						linear-gradient(' . $color_guru->convertHextToRgba($bg_color,1). ', ' . $color_guru->convertHextToRgba($bg_color, .3). ');
+						linear-gradient(' . $color_guru->convertHextToRgba($bg_color, 1) . ', ' . $color_guru->convertHextToRgba($bg_color, .3) . ');
 					background-size:80%, 100%;
 				}'
     );
@@ -68,10 +71,11 @@ function pmb_enqueue_buurma_script(){
 
 /**
  * Tell the generator we use a post-per-page so layout can be more efficient.
- * @param $prince_js_vars
+ * @param array $prince_js_vars
  * @return array
  */
-function pmb_buurma_modify_prince_vars($prince_js_vars){
+function pmb_buurma_modify_prince_vars($prince_js_vars)
+{
     $prince_js_vars['page_per_post'] = true;
     return $prince_js_vars;
 }

@@ -19,25 +19,6 @@ use Twine\forms\helpers\InputOption;
  */
 class SelectRevealInput extends SelectInput
 {
-
-    /**
-     * @param InputOption[] $answer_options Array keys which match a sibling section's name
-     *              will show/unhide that sibling subsection. Otherwise, siblings whose names
-     *              match array keys of $answer_options are hidden.
-     *              Note: internally each array key is considered a relative form input path
-     *              (see FormSectionBase::find_section_from_path) but relative
-     *              to THIS INPUT's PARENT section, not this input itself. ie,
-     *              a '../' is automatically added onto each each array key, to produce
-     *              the relative form input path.
-     *              Note however: array keys which are an EMPTY STRING are left as-is
-     *
-     * @param array $input_settings
-     */
-    public function __construct($answer_options, $input_settings = array())
-    {
-        parent::__construct($answer_options, $input_settings);
-    }
-
     /**
      * Gets all the sibling sections controlled by this reveal select input
      * @return FormSectionBase[] keys are their form section paths

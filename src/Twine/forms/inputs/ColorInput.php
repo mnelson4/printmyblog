@@ -6,6 +6,10 @@ use Twine\forms\strategies\display\TextInputDisplay;
 use Twine\forms\strategies\normalization\TextNormalization;
 use Twine\forms\strategies\validation\PlaintextValidation;
 
+/**
+ * Class ColorInput
+ * @package Twine\forms\inputs
+ */
 class ColorInput extends FormInputBase
 {
     /**

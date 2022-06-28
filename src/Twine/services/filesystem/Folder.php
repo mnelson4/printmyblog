@@ -2,6 +2,10 @@
 
 namespace Twine\services\filesystem;
 
+/**
+ * Class Folder
+ * @package Twine\services\filesystem
+ */
 class Folder extends ThingOnServer
 {
     /**
@@ -14,11 +18,6 @@ class Folder extends ThingOnServer
      */
     protected $index_file;
 
-    public function __construct($folder_path)
-    {
-        parent::__construct($folder_path);
-    }
-
     /**
      * @return bool
      */
@@ -29,6 +28,10 @@ class Folder extends ThingOnServer
         }
         return $this->exists;
     }
+
+    /**
+     * @return string
+     */
     public function parentFolderPath()
     {
         return dirname($this->getPath());
@@ -45,6 +48,9 @@ class Folder extends ThingOnServer
         return $this->parent;
     }
 
+    /**
+     * If folder doesn't exist, creates it.
+     */
     public function ensureExists()
     {
         if (! $this->exists()) {
@@ -56,6 +62,9 @@ class Folder extends ThingOnServer
         }
     }
 
+    /**
+     * Make the folder safer by ensuring there is an index file.
+     */
     public function secure()
     {
         if (! $this->indexFile()->fileExists()) {
@@ -74,6 +83,10 @@ class Folder extends ThingOnServer
         return $this->index_file;
     }
 
+    /**
+     * Returns the path where the index file should be.
+     * @return string
+     */
     protected function indexFilePath()
     {
         return $this->getPath() . '/index.html';
@@ -84,7 +97,7 @@ class Folder extends ThingOnServer
      */
     public function delete()
     {
-        array_map('unlink', glob($this->getPath() . "/*.*"));
+        array_map('unlink', glob($this->getPath() . '/*.*'));
         return rmdir($this->getPath());
     }
 }

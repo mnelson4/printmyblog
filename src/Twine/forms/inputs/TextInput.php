@@ -33,7 +33,7 @@ class TextInput extends FormInputBase
             ! $this->hasValidationStrategy(
                 array(
                     'FullHtmlValidation',
-                    'SimpleHtmlValidation'
+                    'SimpleHtmlValidation',
                 )
             )
         ) {

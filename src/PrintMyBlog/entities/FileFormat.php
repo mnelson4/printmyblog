@@ -4,8 +4,13 @@ namespace PrintMyBlog\entities;
 
 use PrintMyBlog\services\DesignTemplateRegistry;
 use Exception;
+use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
 use Twine\forms\helpers\ImproperUsageException;
 
+/**
+ * Class FileFormat
+ * @package PrintMyBlog\entities
+ */
 class FileFormat
 {
     /**
@@ -54,18 +59,26 @@ class FileFormat
      * @var string
      */
     protected $extension;
+
     /**
-     * @var Whether this version of PMB has all the necessary files to support this format
+     * @var bool Whether this version of PMB has all the necessary files to support this format
      */
     protected $supported = true;
 
     /**
      * ProjectFormat constructor.
      *
-     * @param string title
      * @param array $data {
+     * @type string $title
      * @type string $slug title slugified
+     * @type string $desc
+     * @type ProjectFileGeneratorBase $generator
+     * @type string $default design template
+     * @type string $color
+     * @type string $icon
+     * @type string $extension
      * }
+     * @throws ImproperUsageException
      */
     public function __construct($data = [])
     {
@@ -77,6 +90,7 @@ class FileFormat
         }
         if (! isset($data['generator'])) {
             throw new ImproperUsageException(
+                // translators: %s format slug
                 __('No generator class specified for format "%s"', 'print-my-blog'),
                 $this->slug()
             );
@@ -103,11 +117,17 @@ class FileFormat
         }
     }
 
+    /**
+     * @param DesignTemplateRegistry $design_template_registry
+     */
     public function inject(DesignTemplateRegistry $design_template_registry)
     {
         $this->design_template_registry = $design_template_registry;
     }
 
+    /**
+     * @return string
+     */
     public function title()
     {
         return $this->title;
@@ -132,7 +152,7 @@ class FileFormat
     /**
      * Finalizes making the object ready-for-use by setting the slug.
      * This is done because the manager knows the slug initially and this doesn't.
-     * @param $slug
+     * @param string $slug
      */
     public function constructFinalize($slug)
     {
@@ -151,7 +171,7 @@ class FileFormat
     }
 
     /**
-     * @return strings
+     * @return string
      */
     public function desc()
     {

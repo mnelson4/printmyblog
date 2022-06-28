@@ -5,10 +5,14 @@ namespace Twine\orm\managers;
 use ReflectionClass;
 use Twine\orm\entities\CustomTableRow;
 
+/**
+ * Class CustomTableManager
+ * @package Twine\orm\managers
+ */
 abstract class CustomTableManager
 {
     /**
-     * format to use for DateTime functions when we want the format used by MySQL DateTimes
+     * Format to use for DateTime functions when we want the format used by MySQL DateTimes
      */
     const MYSQL_DATETIME_FORMAT = 'Y-m-d H:i:s';
     /**
@@ -21,9 +25,6 @@ abstract class CustomTableManager
      * (which are child instances of Twine\orm\entities\CustomTableRow)
      */
     protected $entity_classname;
-    public function __construct()
-    {
-    }
 
     /**
      * @return string gets the classname from the property $this->entity_classname, which child classes should define.
@@ -43,6 +44,11 @@ abstract class CustomTableManager
         global $wpdb;
         return $wpdb->prefix . $this->table_name;
     }
+
+    /**
+     * @param int $id
+     * @return CustomTableRow
+     */
     abstract public function getById($id);
 
     /**
@@ -67,11 +73,14 @@ abstract class CustomTableManager
     {
         global $wpdb;
         if ($entity->getId()) {
+            // Caching the result of a save is silly; and because we're operating on custom tables,
+            // direct DB queries are the only option.
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
             $success = $wpdb->update(
                 $this->getFullTableName(),
                 $entity->fieldsExceptId(),
                 [
-                    'id' => $entity->getId()
+                    'id' => $entity->getId(),
                 ],
                 array_map(
                     function ($item) {
@@ -80,11 +89,13 @@ abstract class CustomTableManager
                     $entity->fieldsExceptId()
                 ),
                 [
-                    '%d'
+                    '%d',
                 ]
             );
             return $success;
         } else {
+            // use direct query for custom tables of course
+            //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
             $success = $wpdb->insert(
                 $this->getFullTableName(),
                 $entity->fields(),

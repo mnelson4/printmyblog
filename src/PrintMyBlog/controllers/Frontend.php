@@ -22,6 +22,9 @@ use WP_Post;
  */
 class Frontend extends BaseController
 {
+    /**
+     * Sets up hooks which could be used on the front end.
+     */
     public function setHooks()
     {
         add_filter(
@@ -37,10 +40,15 @@ class Frontend extends BaseController
             )
         );
     }
+
+    /**
+     * @param string $content
+     * @return string
+     */
     public function addPrintButton($content)
     {
         global $post;
-        if (! $post instanceof WP_Post || ! in_array($post->post_type, ['post','page'])) {
+        if (! $post instanceof WP_Post || ! in_array($post->post_type, ['post', 'page'], true)) {
             return $content;
         }
         $pmb_print_settings = Context::instance()->reuse('PrintMyBlog\domain\FrontendPrintSettings');
@@ -90,17 +98,12 @@ class Frontend extends BaseController
 
     /**
      * Determines if the request is for our page generator page, and if so, uses our template for it.
-     * @since 1.0.0
+     * @param string $template
      * @deprecated 2.2.3. Instead use `PrintMyBlog/controllers/PmbPrintPage::templateRedirect`
      */
     public function templateRedirect($template)
     {
         $print_page = new LegacyPrintPage();
         return $print_page->templateRedirect($template);
-    }
-
-    //phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-    public function enqueue_scripts()
-    {
     }
 }

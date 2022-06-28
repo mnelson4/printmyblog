@@ -16,8 +16,8 @@ use Twine\forms\strategies\validation\IntValidation;
 class IntNormalization extends NormalizationBase
 {
 
-    /*
-     * regex pattern that matches for the following:
+    /**
+     * Regex pattern that matches for the following:
      *      * optional negative sign
      *      * one or more digits
      */
@@ -41,7 +41,9 @@ class IntNormalization extends NormalizationBase
         if (! is_string($value_to_normalize)) {
             throw new ValidationError(
                 sprintf(
-                    __('The value "%s" must be a string submitted for normalization, it was %s', 'print-my-blog'),
+                    // translators: 1: value to normalize, 2: type of submitted value
+                    __('The value "%1$s" must be a string submitted for normalization, it was %2$s', 'print-my-blog'),
+                    // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
                     print_r($value_to_normalize, true),
                     gettype($value_to_normalize)
                 )
@@ -56,7 +58,7 @@ class IntNormalization extends NormalizationBase
             return null;
         }
         $matches = array();
-        if (preg_match(IntNormalization::REGEX, $value_to_normalize, $matches)) {
+        if (preg_match(self::REGEX, $value_to_normalize, $matches)) {
             if (count($matches) === 3) {
                 // if first match is the negative sign,
                 // then the number needs to be multiplied by -1 to remain negative

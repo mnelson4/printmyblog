@@ -18,6 +18,9 @@ use Twine\controllers\BaseController;
 class Shortcodes extends BaseController
 {
 
+    /**
+     * Adds shortcodes.
+     */
     public function setHooks()
     {
         add_shortcode(
@@ -30,15 +33,15 @@ class Shortcodes extends BaseController
         );
         add_shortcode(
             'pmb_project_title',
-            [$this,'projectTitle']
+            [$this, 'projectTitle']
         );
         add_shortcode(
             'pmb_toc',
-            [$this,'tableOfContents']
+            [$this, 'tableOfContents']
         );
         add_shortcode(
             'pmb_title_page',
-            [$this,'titlePage']
+            [$this, 'titlePage']
         );
         add_shortcode(
             'pmb_byline',
@@ -46,11 +49,11 @@ class Shortcodes extends BaseController
         );
         add_shortcode(
             'pmb_footnote',
-            [$this,'footnote']
+            [$this, 'footnote']
         );
         add_shortcode(
             'pmb_web_only_text',
-            [$this,'webOnlyText']
+            [$this, 'webOnlyText']
         );
         add_shortcode(
             'pmb_web_only_blocks',
@@ -69,8 +72,8 @@ class Shortcodes extends BaseController
 
     /**
      * Adds a span whose contents will only be shown in the screen
-     * @param $atts
-     * @param $content
+     * @param array $atts
+     * @param string $content
      * @return string
      */
     public function webOnlyText($atts, $content)
@@ -80,8 +83,8 @@ class Shortcodes extends BaseController
 
     /**
      * Adds a div whose contents will only be shown on the screen
-     * @param $atts
-     * @param $content
+     * @param array $atts
+     * @param string $content
      * @return string
      */
     public function webOnlyBlocks($atts, $content)
@@ -91,8 +94,8 @@ class Shortcodes extends BaseController
 
     /**
      * Adds a span whose contents will only be shown in the screen
-     * @param $atts
-     * @param $content
+     * @param array $atts
+     * @param string $content
      * @return string
      */
     public function printOnlyText($atts, $content)
@@ -102,8 +105,8 @@ class Shortcodes extends BaseController
 
     /**
      * Adds a div whose contents will only be shown on the screen
-     * @param $atts
-     * @param $content
+     * @param array $atts
+     * @param string $content
      * @return string
      */
     public function printOnlyBlocks($atts, $content)
@@ -111,7 +114,7 @@ class Shortcodes extends BaseController
         return '<div class="pmb-print-only">' . $content . '</div>';
     }
     /**
-     * @param $atts
+     * @param array $atts
      * @return string|string[]
      */
     public function printPageUrl($atts)
@@ -120,7 +123,7 @@ class Shortcodes extends BaseController
             [
                 'ID' => null,
                 'format' => 'print',
-                'add_protocol' => true
+                'add_protocol' => true,
             ],
             $atts
         );
@@ -134,23 +137,32 @@ class Shortcodes extends BaseController
         // remove the starting "http://" and "https://" because, if used in an anchor link, those get added automatically
         if (! $atts['add_protocol']) {
             $url = str_replace(
-                ['http://','https://','://'],
+                ['http://', 'https://', '://'],
                 '',
                 $url
             );
         }
         return $url;
     }
+
+    /**
+     * @param array $atts
+     * @return string
+     */
     public function printButtons($atts)
     {
         $atts = shortcode_atts(
             [
-                'ID' => null
+                'ID' => null,
             ],
             $atts
         );
         return Context::instance()->reuse('PrintMyBlog\domain\PrintButtons')->getHtmlForPrintButtons($atts['ID']);
     }
+
+    /**
+     * @return string
+     */
     public function projectTitle()
     {
         global $pmb_project;
@@ -161,6 +173,9 @@ class Shortcodes extends BaseController
         . 'You should probably not show this post to site visitors by making it private.-->';
     }
 
+    /**
+     * @return string
+     */
     public function tableOfContents()
     {
         return apply_filters(
@@ -173,6 +188,10 @@ class Shortcodes extends BaseController
         );
     }
 
+    /**
+     * @return string
+     * @throws \PrintMyBlog\exceptions\TemplateDoesNotExist
+     */
     public function titlePage()
     {
         global $pmb_project, $pmb_design, $pmb_format;
@@ -184,12 +203,15 @@ class Shortcodes extends BaseController
             $template_path = $pmb_design->getDesignTemplate()->getTemplatePathToDivision(
                 DesignTemplate::TEMPLATE_TITLE_PAGE
             );
-            require($template_path);
+            require $template_path;
         } else {
             return do_shortcode('<h1>[pmb_project_title]</h1>');
         }
     }
 
+    /**
+     * @return string
+     */
     public function pmbByline()
     {
         global $pmb_project;
@@ -202,9 +224,9 @@ class Shortcodes extends BaseController
 
     /**
      * Just wraps the content in a footnote
-     * @param $atts
-     * @param $content
-     * @param $shortcode_tag
+     * @param array $atts
+     * @param string $content
+     * @param string $shortcode_tag
      *
      * @return string
      */

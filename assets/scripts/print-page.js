@@ -453,9 +453,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 this.prettyUpPrintedPage();
                 this.prettyUpPageMeta();
             },
-            // Guess that we'd like 50 milliseconds per post. That's too long for simple text; too short for ones
-            // with images or videos.
-            this.total_posts * 25
+            // Guess that we'd like 25 milliseconds per post. That's too long for simple text; too short for ones
+            // with images or videos. But wait at least 200 milliseconds to prevent running before images loaded.
+            this.total_posts * 25 + 200
         );
     };
 
@@ -485,9 +485,21 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
         // unhide the contents.
         jQuery('.pmb-posts').toggle();
-        // Resize images after unhiding because then we can know how big images actually are.
-        // btw the image size here was in inches, but we want it in pixels. There are about 100 pixels per inch.
-        pmb_resize_images(this.image_size * 100);
+
+        pmb_load_avada_lazy_images();
+        pmb_reveal_dynamic_content();
+
+        // resize after images have had a moment to load
+        setTimeout(() => {
+                // Resize images after unhiding because then we can know how big images actually are.
+                // btw the image size here was in inches, but we want it in pixels. There are about 100 pixels per inch.
+                pmb_resize_images(this.image_size * 100);
+                jQuery('.pmb-print-page-print-button').prop('disabled', false);
+        },
+            // wait time corresponds to the number of images; here we're guessing they take 50 milliseconds to render.
+            jQuery('img').length * 50
+        );
+
         if(this.foogallery) {
             jQuery('img[data-src-fg]').each(function(arg1, arg2){
                 let el = jQuery(this);
@@ -502,10 +514,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             );
 
         }
-        pmb_load_avada_lazy_images();
-        pmb_reveal_dynamic_content();
         jQuery(document).trigger('pmb_wrap_up');
-
     };
 
     /**

@@ -102,7 +102,11 @@ class Array2
         // http://core.trac.wordpress.org/ticket/26118 that doesnt' unserialize this automatically.
         $token = 'C';
         $data = is_string($data) ? trim($data) : $data;
+        // Legacy code that used loose comparison; changing it to strict comparison is risky so leave it.
+        // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
         if (is_string($data) && strlen($data) > 1 && $data[0] == $token && preg_match("/^{$token}:[0-9]+:/s", $data)) {
+            // We have legacy data that was serialized, we may need this. But yes, serializing as JSON is usually better.
+            // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize
             return unserialize($data);
         } else {
             return $data;
@@ -111,7 +115,7 @@ class Array2
 
 
     /**
-     * insert_into_array
+     * Inserts an array into an existing array.
      *
      * @param array        $target_array the array to insert new data into
      * @param array        $array_to_insert the new data to be inserted
@@ -136,7 +140,7 @@ class Array2
             $offset = $add_before ? 0 : count($target_array);
         }
         // if offset key is a string, then find the corresponding numeric location for that element
-        $offset = is_int($offset) ? $offset : array_search($offset, array_keys($target_array));
+        $offset = is_int($offset) ? $offset : array_search($offset, array_keys($target_array), true);
         // add one to the offset if adding after
         $offset = $add_before ? $offset : $offset + 1;
         // but ensure offset does not exceed the length of the array
@@ -161,7 +165,7 @@ class Array2
 
 
     /**
-     * array_merge() is slow and should never be used while looping over data
+     * Because array_merge() is slow and should never be used while looping over data
      * if you don't need to preserve keys from all arrays, then using a foreach loop is much faster
      * so really this acts more like array_replace( $array1, $array2 )
      * or a union with the arrays flipped ( $array2 + $array1 )
@@ -181,7 +185,7 @@ class Array2
 
 
     /**
-     * given a flat array like $array = array('A', 'B', 'C')
+     * Given a flat array like $array = array('A', 'B', 'C')
      * will convert into a multidimensional array like $array[A][B][C]
      * if $final_value is provided and is anything other than null,
      * then that will be set as the value for the innermost array key

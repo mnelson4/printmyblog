@@ -8,6 +8,10 @@ use Twine\services\filesystem\File;
 use Twine\services\filesystem\Folder;
 use WP_Error;
 
+/**
+ * Class ExternalResourceCache
+ * @package PrintMyBlog\services
+ */
 class ExternalResourceCache
 {
     /**
@@ -15,7 +19,9 @@ class ExternalResourceCache
      */
     private $external_resouce_manager;
 
-
+    /**
+     * @param ExternalResourceManager $external_resource_manager
+     */
     public function inject(ExternalResourceManager $external_resource_manager)
     {
         $this->external_resouce_manager = $external_resource_manager;
@@ -40,7 +46,7 @@ class ExternalResourceCache
     }
 
     /**
-     * @param $external_url
+     * @param string $external_url
      * @return string|null|false URL of copied resource, null if not yet copied, or false if there was an error
      */
     public function writeAndMapFile($external_url)
@@ -70,9 +76,9 @@ class ExternalResourceCache
                 'timeout' => 15,
                 'user-agent' => 'PostmanRuntime/7.26.8',
                 'httpversion' => '1.1',
-            //              streaming the file directly to the FS sounds more efficient, but it actually still goes into memory and seems buggy
-            //                'stream' => true,
-            //                'filename'=> $folder . $copy_filename,
+            // streaming the file directly to the FS sounds more efficient, but it actually still goes into memory and seems buggy
+            // 'stream' => true,
+            // 'filename'=> $folder . $copy_filename,
             ]
         );
         if (is_array($response) && $response['response']['code'] === 200 && ! $response instanceof WP_Error) {
@@ -89,7 +95,7 @@ class ExternalResourceCache
     }
 
     /**
-     * @param $external_url
+     * @param string $external_url
      * @return string|null|false null if not yet cached; false if there was an error caching it
      */
     public function getLocalUrlFromExternalUrl($external_url)
@@ -128,13 +134,16 @@ class ExternalResourceCache
         return apply_filters(
             'PrintMyBlog\services\ExternalResourceCache->domainsToNotMap()',
             [
-                str_replace(['http://','https://'], '', site_url()),
+                str_replace(['http://', 'https://'], '', site_url()),
                 '.wp.com',
-                'data:'
+                'data:',
             ]
         );
     }
 
+    /**
+     * Clears the external resource cache.
+     */
     public function clear()
     {
         $this->external_resouce_manager->clear();

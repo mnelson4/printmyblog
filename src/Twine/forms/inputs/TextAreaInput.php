@@ -18,20 +18,27 @@ use Twine\forms\strategies\validation\PlaintextValidation;
 class TextAreaInput extends FormInputBase
 {
 
-
+    /**
+     * @var int
+     */
     protected $rows = 2;
+
+    /**
+     * @var int
+     */
     protected $cols = 20;
 
     /**
-     * sets the rows property on this input
+     * Sets the rows property on this input
      * @param int $rows
      */
     public function setRows($rows)
     {
         $this->rows = $rows;
     }
+
     /**
-     * sets the cols html property on this input
+     * Sets the cols html property on this input
      * @param int $cols
      */
     public function setCols($cols)
@@ -73,7 +80,7 @@ class TextAreaInput extends FormInputBase
             ! $this->hasValidationStrategy(
                 array(
                     'FullHtmlValidation',
-                    'SimpleHtmlValidation'
+                    'SimpleHtmlValidation',
                 )
             )
         ) {

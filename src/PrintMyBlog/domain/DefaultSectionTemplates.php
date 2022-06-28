@@ -2,8 +2,15 @@
 
 namespace PrintMyBlog\domain;
 
+/**
+ * Class DefaultSectionTemplates
+ * @package PrintMyBlog\domain
+ */
 class DefaultSectionTemplates
 {
+    /**
+     * Registers default section templates.
+     */
     public function registerDefaultSectionTemplates()
     {
         pmb_register_section_template(
@@ -13,7 +20,7 @@ class DefaultSectionTemplates
                 'buurma',
                 'mayer',
                 'classic_print',
-                'classic_epub'
+                'classic_epub',
             ],
             function () {
                 return [
@@ -33,19 +40,19 @@ class DefaultSectionTemplates
             function () {
                 return [
                     'title' => __('Centered Content', 'print-my-blog'),
-                    'fallback' => 'just_content'
+                    'fallback' => 'just_content',
                 ];
             }
         );
         pmb_register_section_template(
             'single_column',
             [
-                'mayer'
+                'mayer',
             ],
             function () {
                 return [
                     'title' => __('Single Column', 'print-my-blog'),
-                    'fallback' => ''
+                    'fallback' => '',
                 ];
             }
         );

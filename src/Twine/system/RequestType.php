@@ -28,6 +28,11 @@ class RequestType
      * @var string|null name of the WP option that's set upon activation.
      */
     protected $activation_option_name;
+
+    /**
+     * @param VersionHistory $version_history
+     * @param string $activation_option_name
+     */
     public function inject(VersionHistory $version_history, $activation_option_name = null)
     {
         $this->version_history = $version_history;
@@ -51,8 +56,9 @@ class RequestType
             [
                 self::REQUEST_TYPE_NEW_INSTALL,
                 self::REQUEST_TYPE_UPDATE,
-                self::REQUEST_TYPE_REACTIVATION
-            ]
+                self::REQUEST_TYPE_REACTIVATION,
+            ],
+            true
         );
     }
 

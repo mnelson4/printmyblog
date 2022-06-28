@@ -14,22 +14,37 @@ namespace Twine\services\display;
  */
 class FormInputs
 {
+    /**
+     * @var string[]
+     */
     protected $inputs_prefixes = [];
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $new_values = [];
 
+    /**
+     * @param string[] $new_values
+     */
     public function setNewValues($new_values)
     {
         $this->new_values = $new_values;
     }
+
+    /**
+     * @param string[] $prefixes
+     */
     public function setInputPrefixes($prefixes)
     {
         $this->inputs_prefixes = $prefixes;
     }
 
+    /**
+     * Returns a sanitized HTML ID value.
+     * @param string $id
+     * @return string
+     */
     protected function id($id)
     {
         if ($this->inputs_prefixes) {
@@ -38,6 +53,11 @@ class FormInputs
         return esc_attr($id);
     }
 
+    /**
+     * Returns a sanitized HTML name value.
+     * @param string $name
+     * @return string
+     */
     protected function name($name)
     {
         if ($this->inputs_prefixes) {
@@ -52,9 +72,10 @@ class FormInputs
         }
         return esc_attr($name);
     }
+
     /**
-     * @since $VID:$
-     * @param array $options. Top-level keys are the input names, values are arrays with keys 'label', 'help',
+     * Returns HTML for checkboxes.
+     * @param array $options Top-level keys are the input names, values are arrays with keys 'label', 'help',
      * and 'default'.
      * @return string of HTML
      */
@@ -81,9 +102,8 @@ class FormInputs
 
     /**
      * Gets the value if set, otherwise uses the default.
-     * @since $VID:$
-     * @param $option_name
-     * @param $option_details
+     * @param string $option_name
+     * @param array $option_details
      * @return mixed
      */
     protected function getValue($option_name, $option_details)
@@ -94,6 +114,10 @@ class FormInputs
         return $option_details['default'];
     }
 
+    /**
+     * @param array $options
+     * @return string
+     */
     public function getHtmlForTabledOptions($options)
     {
         $html = '';
@@ -102,7 +126,7 @@ class FormInputs
             $html .= '<th scope="row">';
             $html .= '<label for="' . $this->id($option_name) . '">' . $option_details['label'] . '</label>';
             $html .= '</th>';
-            $html .=  '<td>';
+            $html .= '<td>';
             if (is_bool($option_details['default'])) {
                 $html .= '<input type="checkbox" name="'
                     . $this->name($option_name)
@@ -117,6 +141,8 @@ class FormInputs
                 $html .= '<select name="' . $this->name($option_name) . '" id="' . $this->id($option_name) . '">';
                 foreach ($option_details['options'] as $option_value => $option_label) {
                     $html .= '<option value="' . esc_attr($option_value) . '"';
+                    // we want soft comparison so an int equals a string of an int.
+                    // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
                     if ($this->getValue($option_name, $option_details) == $option_value) {
                         $html .= 'selected="selected"';
                     }

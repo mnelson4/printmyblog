@@ -31,7 +31,7 @@ class SelectMultipleDisplay extends SelectDisplay
             throw new Exception(
                 __(
                     'Cannot use Select Multiple Display Strategy with an input that doesn\'t have options',
-                    "print-my-blog"
+                    'print-my-blog'
                 )
             );
         }
@@ -53,13 +53,13 @@ class SelectMultipleDisplay extends SelectDisplay
         $html_generator->indent(1, 'select');
         if (Array2::isMultiDimensionalArray($this->input->options())) {
             throw new Exception(
-                __("Select multiple display strategy does not allow for nested arrays of options.", "print-my-blog")
+                __('Select multiple display strategy does not allow for nested arrays of options.', 'print-my-blog')
             );
         } else {
             $html .= $this->displayOptions($this->input->options());
         }
 
-        $html .= $html_generator->nl(-1, 'select') . "</select>";
+        $html .= $html_generator->nl(-1, 'select') . '</select>';
         return $html;
     }
 
@@ -76,6 +76,8 @@ class SelectMultipleDisplay extends SelectDisplay
         if (empty($selected_options)) {
             return false;
         }
-        return in_array($value, $selected_options) ? true : false;
+        // Want loose comparison.
+        // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
+        return in_array($value, (array)$selected_options) ? true : false;
     }
 }

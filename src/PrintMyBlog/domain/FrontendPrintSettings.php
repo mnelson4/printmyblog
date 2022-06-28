@@ -33,9 +33,12 @@ class FrontendPrintSettings
      */
     protected $print_options;
 
-    public function inject(PrintOptions $printOptions)
+    /**
+     * @param PrintOptions $print_options
+     */
+    public function inject(PrintOptions $print_options)
     {
-        $this->print_options = $printOptions;
+        $this->print_options = $print_options;
     }
 
     /**
@@ -60,7 +63,7 @@ class FrontendPrintSettings
             'ebook' => array(
                 'admin_label' => esc_html__('eBook', 'print-my-blog'),
                 'default' => esc_html__('eBook 📱', 'print-my-blog'),
-            )
+            ),
         );
         // Remove emojis if the database doesn't support it.
         global $wpdb;
@@ -77,8 +80,8 @@ class FrontendPrintSettings
                     $settings['default']
                 );
             } else {
-                $this->formats[$key]['admin_label'] = str_replace(['🖨','📄','📱'], ['','',''], $settings['admin_label']);
-                $this->formats[$key]['default'] = str_replace(['🖨','📄','📱'], ['','',''], $settings['default']);
+                $this->formats[$key]['admin_label'] = str_replace(['🖨', '📄', '📱'], ['', '', ''], $settings['admin_label']);
+                $this->formats[$key]['default'] = str_replace(['🖨', '📄', '📱'], ['', '', ''], $settings['default']);
             }
         }
         // Initialize the settings with the defaults.
@@ -95,16 +98,16 @@ class FrontendPrintSettings
      */
     protected function defaultSettings()
     {
-        $defaults =  [
+        $defaults = [
             'show_buttons' => false,
             'show_buttons_pages' => false,
-            'place_above' => true
+            'place_above' => true,
         ];
         foreach ($this->formats as $slug => $format) {
             $defaults[$slug] = array(
                 'frontend_label' => $format['default'],
                 'active' => true,
-                'print_options' => []
+                'print_options' => [],
             );
         }
         return $defaults;
@@ -120,14 +123,20 @@ class FrontendPrintSettings
     }
 
     /**
-     * @param $format_slug
+     * @param string $format_slug
      * @return array
-     * @throws Exception if there is an invalid format
+     * @throws Exception If there is an invalid format.
      */
     public function formatSettings($format_slug)
     {
         if (! isset($this->formats[$format_slug])) {
-            throw new Exception(sprintf(__('Invalid format "%s".', 'print-my-blog'), $format_slug));
+            throw new Exception(
+                sprintf(
+                    // translators: %s: format slug
+                    __('Invalid format "%s".', 'print-my-blog'),
+                    $format_slug
+                )
+            );
         }
         return $this->formats[$format_slug];
     }
@@ -143,7 +152,7 @@ class FrontendPrintSettings
 
     /**
      * @since $VID:$
-     * @param $format
+     * @param string $format
      * @return bool
      */
     public function isActive($format)
@@ -156,8 +165,8 @@ class FrontendPrintSettings
 
     /**
      * @since $VID:$
-     * @param $format
-     * @param $active
+     * @param string $format
+     * @param string $active
      */
     public function setFormatActive($format, $active)
     {
@@ -167,8 +176,8 @@ class FrontendPrintSettings
 
     /**
      * @since $VID:$
-     * @param $format
-     * @param $label
+     * @param string $format
+     * @param string $label
      */
     public function setFormatFrontendLabel($format, $label)
     {
@@ -176,6 +185,11 @@ class FrontendPrintSettings
         $this->settings[$format]['frontend_label'] = sanitize_text_field($label);
     }
 
+    /**
+     * @param string $format
+     * @param array $submitted_values
+     * @throws Exception
+     */
     public function setPrintOptions($format, $submitted_values)
     {
         $this->beforeSet($format);
@@ -189,7 +203,7 @@ class FrontendPrintSettings
                 } elseif (is_numeric($default)) {
                     $new_value = (int)$submitted_values[$option_name];
                 } else {
-                    $new_value = strip_tags($submitted_values[$option_name]);
+                    $new_value = wp_strip_all_tags($submitted_values[$option_name]);
                 }
                 if (isset($details['options']) && ! array_key_exists($new_value, $details['options'])) {
                     // that's not one of the acceptable options. Replace it with the default
@@ -212,7 +226,7 @@ class FrontendPrintSettings
     /**
      * Gets the print option names and their current values
      * @since $VID:$
-     * @param $format
+     * @param string $format
      * @return array keys are the option names, values are their saved values
      */
     public function getPrintOptionsAndValues($format)
@@ -232,8 +246,7 @@ class FrontendPrintSettings
     }
 
     /**
-     * @since $VID:$
-     * @param $format
+     * @param string $format
      * @return string
      */
     public function getFrontendLabel($format)
@@ -304,8 +317,8 @@ class FrontendPrintSettings
 
     /**
      * Verifies the format is valid, and that its initialized in the settings.
-     * @since $VID:$
-     * @param $format
+     * @param string $format
+     * @throws Exception
      */
     protected function beforeSet($format)
     {
@@ -320,7 +333,7 @@ class FrontendPrintSettings
         if (! isset($this->settings[$format])) {
             $this->settings[$format] = array(
                 'frontend_label' => $this->formats[$format]['default'],
-                'active' => false
+                'active' => false,
             );
         }
     }
@@ -357,7 +370,7 @@ class FrontendPrintSettings
     {
         return [
             'post' => $this->settings['show_buttons'],
-            'page' => $this->settings['show_buttons_pages']
+            'page' => $this->settings['show_buttons_pages'],
         ];
     }
 }

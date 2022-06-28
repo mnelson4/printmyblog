@@ -9,6 +9,11 @@ use PrintMyBlog\orm\entities\ProjectSection;
 use PrintMyBlog\services\ExternalResourceCache;
 use Twine\services\filesystem\File;
 
+/**
+ * Class HtmlBaseGenerator
+ * Generators that create an HTML intermediary file.
+ * @package PrintMyBlog\services\generators
+ */
 abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
 {
 
@@ -25,13 +30,17 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
     {
         parent::startGenerating();
         // Try to get enqueued after the theme, if we're doing that, so we get precedence.
-        add_action('wp_enqueue_scripts', [$this,'enqueueStylesAndScripts'], 1000);
+        add_action('wp_enqueue_scripts', [$this, 'enqueueStylesAndScripts'], 1000);
         do_action('pmb_pdf_generation_start', $this->project_generation, $this->design);
         add_filter('should_load_block_editor_scripts_and_styles', '__return_true');
-        add_action('pmb_pro_print_window', [$this,'addPrintWindowToPage']);
+        add_action('pmb_pro_print_window', [$this, 'addPrintWindowToPage']);
         $this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT);
     }
 
+    /**
+     * Writes html to the file.
+     * @return void
+     */
     protected function generateSection()
     {
         global $post;
@@ -50,6 +59,10 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
         }
     }
 
+    /**
+     * Finishes writing to html file.
+     * @return void
+     */
     protected function finishGenerating()
     {
         $this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT, false);
@@ -68,7 +81,7 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
     }
 
     /**
-     * @param $division
+     * @param string $division
      * @param bool $beginning whether to show the beginning, or end, of this division.
      * @param array $context
      */
@@ -94,6 +107,9 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
         return $this->file_writer;
     }
 
+    /**
+     * @param string $division
+     */
     protected function writeClosingForDesignTemplate($division)
     {
         if ($this->design->getDesignTemplate()->templateFileExists($division, false)) {
@@ -104,6 +120,10 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
         }
     }
 
+    /**
+     * @param ProjectSection|null $last_section
+     * @param ProjectSection|null $current_section
+     */
     protected function maybeGenerateDivisionStart(
         ProjectSection $last_section = null,
         ProjectSection $current_section = null
@@ -125,8 +145,8 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
     }
 
     /**
-     * @param int $previous_depth
-     * @param int $current_depth
+     * @param ProjectSection|null $previous_section
+     * @param ProjectSection|null $current_section
      */
     protected function maybeGenerateDivisionEnd(
         ProjectSection $previous_section = null,
@@ -159,6 +179,9 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
         }
     }
 
+    /**
+     * Adds all the main matters to the html file.
+     */
     protected function generateMainMatter()
     {
         $this->generateSections($this->project->getFlatSections(1000, 0, false));
@@ -186,13 +209,16 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
      */
     abstract protected function addPrintWindowToPage();
 
+    /**
+     * @return string
+     */
     protected function getUrlBackToGenerateStep()
     {
         return add_query_arg(
             [
                 'ID' => $this->project->getWpPost()->ID,
                 'action' => \PrintMyBlog\controllers\Admin::SLUG_ACTION_EDIT_PROJECT,
-                'subaction' => \PrintMyBlog\entities\ProjectProgress::GENERATE_STEP
+                'subaction' => \PrintMyBlog\entities\ProjectProgress::GENERATE_STEP,
             ],
             admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
         );

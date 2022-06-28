@@ -52,17 +52,17 @@ class FileSubmission
 
     /**
      * FileSubmission constructor.
-     * @param $name
-     * @param $tmp_file
-     * @param $size
+     * @param string $name
+     * @param string $tmp_file
+     * @param int|string $size
      * @param null $error_code
      * @throws InvalidArgumentException
      */
     public function __construct($name, $tmp_file, $size, $error_code = null)
     {
         $this->name = basename($name);
-        $scheme = parse_url($tmp_file, PHP_URL_SCHEME);
-        if (in_array($scheme, ['http', 'https'])) {
+        $scheme = wp_parse_url($tmp_file, PHP_URL_SCHEME);
+        if (in_array($scheme, ['http', 'https'], true)) {
             // Wait a minute- just local filepaths please, no URL schemes allowed!
             throw new InvalidArgumentException(
                 sprintf(
@@ -93,7 +93,7 @@ class FileSubmission
      */
     public function getType()
     {
-        if (!$this->type) {
+        if (! $this->type) {
             $this->type = $this->determineType();
         }
         return $this->type;
@@ -105,7 +105,7 @@ class FileSubmission
      */
     protected function determineType()
     {
-        if (!$this->getTmpFile()) {
+        if (! $this->getTmpFile()) {
             return '';
         }
         $finfo = new finfo(FILEINFO_MIME_TYPE);
@@ -119,7 +119,7 @@ class FileSubmission
      */
     public function getExtension()
     {
-        if (!$this->extension) {
+        if (! $this->extension) {
             $this->extension = $this->determineExtension();
         }
         return $this->extension;

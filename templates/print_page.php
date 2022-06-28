@@ -86,7 +86,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                     <?php
                 } elseif(in_array($pmb_browser, ['chrome','desktop_safari'])) {
                     ?>
-                    <input type="submit" onclick="window.print()"
+                    <input disabled="disabled" class="pmb-print-page-print-button" type="submit" onclick="window.print()"
                            value="<?php esc_attr_e('Print to PDF', 'print-my-blog'); ?>"/><?php
                 } else {
                     ?>
@@ -170,7 +170,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                 <?php
             } else { // default: print
                 ?>
-                <input type="submit" onclick="window.print()" value="<?php esc_attr_e('Print', 'print-my-blog'); ?>"/>
+                <input type="submit" disabled="disabled" class="pmb-print-page-print-button"  onclick="window.print()" value="<?php esc_attr_e('Print', 'print-my-blog'); ?>"/>
                 <div class="pmb-small-instructions"><?php esc_html_e('Use your browser to print.', 'print-my-blog'); ?></div>
                 <?php
             }

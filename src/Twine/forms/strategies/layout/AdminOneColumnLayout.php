@@ -12,6 +12,10 @@ use Twine\forms\strategies\display\TextAreaDisplay;
 use Twine\forms\strategies\display\TextInputDisplay;
 use Twine\helpers\Html;
 
+/**
+ * Class AdminOneColumnLayout
+ * @package Twine\forms\strategies\layout
+ */
 class AdminOneColumnLayout extends FormSectionLayoutBase
 {
 
@@ -26,9 +30,9 @@ class AdminOneColumnLayout extends FormSectionLayoutBase
         $html_generator = Html::instance();
         return $html_generator->table(
             '',
-            $this->Form_section->htmlId(),
-            $this->Form_section->htmlClass() . ' form-table',
-            $this->Form_section->htmlStyle()
+            $this->form_section->htmlId(),
+            $this->form_section->htmlClass() . ' form-table',
+            $this->form_section->htmlStyle()
         ) . $html_generator->tbody();
     }
 
@@ -42,7 +46,7 @@ class AdminOneColumnLayout extends FormSectionLayoutBase
     public function layoutFormEnd($additional_args = array())
     {
         $html_generator = Html::instance();
-        return $html_generator->tbodyx() . $html_generator->tablex($this->Form_section->htmlId());
+        return $html_generator->tbodyx() . $html_generator->tablex($this->form_section->htmlId());
     }
 
 

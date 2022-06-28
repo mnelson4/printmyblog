@@ -18,6 +18,9 @@ use Twine\forms\inputs\FormInputBase;
  */
 class ManyValuedValidation extends ValidationBase
 {
+    /**
+     * @var array|ValidationBase[]|ValidationBase[][]
+     */
     protected $individual_item_validation_strategies = array();
     /**
      *

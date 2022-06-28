@@ -5,6 +5,10 @@ namespace PrintMyBlog\services;
 use PrintMyBlog\domain\DefaultPersistentNotices;
 use mnelson4\AdminNotices\Notices;
 
+/**
+ * Class PersistentNotices
+ * @package PrintMyBlog\services
+ */
 class PersistentNotices
 {
     /**
@@ -16,6 +20,11 @@ class PersistentNotices
      */
     protected $default_persistent_notices;
 
+    /**
+     * Called by Context.
+     * @param Notices $persistent_notices
+     * @param DefaultPersistentNotices $default_persistent_notices
+     */
     public function inject(
         Notices $persistent_notices,
         DefaultPersistentNotices $default_persistent_notices

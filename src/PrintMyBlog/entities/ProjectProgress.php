@@ -31,13 +31,16 @@ class ProjectProgress
      */
     protected $steps;
 
+    /**
+     * @var array
+     */
     protected $step_to_subaction_mapping = [
-        ProjectProgress::SETUP_STEP => Admin::SLUG_SUBACTION_PROJECT_SETUP,
-        ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX => Admin::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN,
-        ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX => Admin::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN,
-        ProjectProgress::EDIT_CONTENT_STEP => Admin::SLUG_SUBACTION_PROJECT_CONTENT,
-        ProjectProgress::EDIT_METADATA_STEP => Admin::SLUG_SUBACTION_PROJECT_META,
-        ProjectProgress::GENERATE_STEP => Admin::SLUG_SUBACTION_PROJECT_GENERATE
+        self::SETUP_STEP => Admin::SLUG_SUBACTION_PROJECT_SETUP,
+        self::CHOOSE_DESIGN_STEP_PREFIX => Admin::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN,
+        self::CUSTOMIZE_DESIGN_STEP_PREFIX => Admin::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN,
+        self::EDIT_CONTENT_STEP => Admin::SLUG_SUBACTION_PROJECT_CONTENT,
+        self::EDIT_METADATA_STEP => Admin::SLUG_SUBACTION_PROJECT_META,
+        self::GENERATE_STEP => Admin::SLUG_SUBACTION_PROJECT_GENERATE,
     ];
 
     /**
@@ -65,6 +68,10 @@ class ProjectProgress
         }
     }
 
+    /**
+     * @param string $step_slug
+     * @return string
+     */
     protected function getStepMetaName($step_slug)
     {
         return self::META_NAME . $step_slug;
@@ -78,15 +85,17 @@ class ProjectProgress
     {
         if ($this->steps === null) {
             $steps = [
-                self::SETUP_STEP => __('Setup', 'print-my-blog')
+                self::SETUP_STEP => __('Setup', 'print-my-blog'),
             ];
             $formats_in_use = $this->project->getFormatsSelected();
             foreach ($formats_in_use as $format) {
                 $steps[self::CHOOSE_DESIGN_STEP_PREFIX . $format->slug()] = sprintf(
+                    // translators: %s design title
                     __('Choose %s Design', 'print-my-blog'),
                     $format->title()
                 );
                 $steps[self::CUSTOMIZE_DESIGN_STEP_PREFIX . $format->slug()] = sprintf(
+                    // translators: %s design title
                     __('Customize %s Design', 'print-my-blog'),
                     $format->title()
                 );
@@ -125,12 +134,17 @@ class ProjectProgress
     /**
      * Marks the specified step as complete
      * @param string $step
+     * @param bool $new_value
      */
     public function markStepComplete($step, $new_value = true)
     {
         $this->project->setPmbMeta($this->getStepMetaName($step), $new_value);
     }
 
+    /**
+     * @param string $format_slug
+     * @param bool $new_value
+     */
     public function markChooseDesignStepComplete($format_slug, $new_value = true)
     {
         $this->markStepComplete(self::CHOOSE_DESIGN_STEP_PREFIX . $format_slug, $new_value);
@@ -138,6 +152,7 @@ class ProjectProgress
 
     /**
      * @param string $format_slug
+     * @param bool $new_value
      */
     public function markCustomizeDesignStepComplete($format_slug, $new_value = true)
     {
@@ -161,8 +176,8 @@ class ProjectProgress
 
     /**
      * Indicates whether this step was already complete or not.
-     * @param $step_name
-     * @return bool|null
+     * @param string $step_name
+     * @return bool|null returns null if $step_name isn't a step in this project's progress
      */
     public function isStepComplete($step_name)
     {
@@ -173,6 +188,9 @@ class ProjectProgress
         return null;
     }
 
+    /**
+     * @return array keys are step slugs, values are URLs
+     */
     public function stepsToUrls()
     {
         $base_url_args = [
@@ -190,7 +208,7 @@ class ProjectProgress
         return $mappings;
     }
     /**
-     * @param $step
+     * @param string $step
      * @return array {
      * @type $subaction string
      * @type $format string
@@ -198,26 +216,26 @@ class ProjectProgress
      */
     public function mapStepToSubactionArgs($step)
     {
-        if (strpos($step, ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX) === 0) {
-            $format = str_replace(ProjectProgress::CHOOSE_DESIGN_STEP_PREFIX, '', $step);
+        if (strpos($step, self::CHOOSE_DESIGN_STEP_PREFIX) === 0) {
+            $format = str_replace(self::CHOOSE_DESIGN_STEP_PREFIX, '', $step);
             $args['subaction'] = Admin::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN;
             $args['format'] = $format;
-        } elseif (strpos($step, ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX) === 0) {
-            $format = str_replace(ProjectProgress::CUSTOMIZE_DESIGN_STEP_PREFIX, '', $step);
+        } elseif (strpos($step, self::CUSTOMIZE_DESIGN_STEP_PREFIX) === 0) {
+            $format = str_replace(self::CUSTOMIZE_DESIGN_STEP_PREFIX, '', $step);
             $args['subaction'] = Admin::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN;
             $args['format'] = $format;
         } else {
             switch ($step) {
-                case ProjectProgress::SETUP_STEP:
+                case self::SETUP_STEP:
                     $subaction = Admin::SLUG_SUBACTION_PROJECT_SETUP;
                     break;
-                case ProjectProgress::EDIT_CONTENT_STEP:
+                case self::EDIT_CONTENT_STEP:
                     $subaction = Admin::SLUG_SUBACTION_PROJECT_CONTENT;
                     break;
-                case ProjectProgress::EDIT_METADATA_STEP:
+                case self::EDIT_METADATA_STEP:
                     $subaction = Admin::SLUG_SUBACTION_PROJECT_META;
                     break;
-                case ProjectProgress::GENERATE_STEP:
+                case self::GENERATE_STEP:
                 default:
                     $subaction = Admin::SLUG_SUBACTION_PROJECT_GENERATE;
             }
@@ -236,7 +254,7 @@ class ProjectProgress
     }
 
     /**
-     * @param $subaction
+     * @param string $subaction
      * @param string $format
      *
      * @return string
@@ -250,7 +268,7 @@ class ProjectProgress
                 $step .= $format;
             }
         } else {
-            $step = ProjectProgress::SETUP_STEP;
+            $step = self::SETUP_STEP;
         }
         return $step;
     }

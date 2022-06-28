@@ -2,11 +2,27 @@
 
 namespace PrintMyBlog\entities;
 
+/**
+ * Class SectionTemplate
+ * @package PrintMyBlog\entities
+ */
 class SectionTemplate
 {
+    /**
+     * @var string
+     */
     protected $title;
+
+    /**
+     * @var string
+     */
     protected $fallback;
+
+    /**
+     * @var string
+     */
     protected $slug;
+
     /**
      * The ProjectFileGeneratorBase's should use a template file with the same name as the slug in the templates
      * directory of the design. Eg for the Buurma Design, and we're using the section template 'just_content',
@@ -21,7 +37,7 @@ class SectionTemplate
 
     /**
      * SectionTemplate constructor.
-     * @param $data array {
+     * @param array $data {
      * @type string $title
      * @type string $fallback slug of section template to fallback to
      * @type string $filepath the filepath of the section template if it doesn't exist in the design template's
@@ -40,6 +56,9 @@ class SectionTemplate
         }
     }
 
+    /**
+     * @param string $slug
+     */
     public function constructFinalize($slug)
     {
         $this->slug = $slug;
@@ -65,6 +84,9 @@ class SectionTemplate
         return $this->fallback;
     }
 
+    /**
+     * @return string
+     */
     public function slug()
     {
         return $this->slug;

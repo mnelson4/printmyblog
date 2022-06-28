@@ -4,6 +4,10 @@ namespace PrintMyBlog\domain;
 
 use mnelson4\AdminNotices\Notice;
 
+/**
+ * Class DefaultPersistentNotices
+ * @package PrintMyBlog\domain
+ */
 class DefaultPersistentNotices
 {
     /**
@@ -12,6 +16,8 @@ class DefaultPersistentNotices
     public function getNotices()
     {
         // don't show any of these notices on the welcome page, please. Give them a moment.
+        // This is just deciding whether to hide notifications on the welcome page. Nonce is overkill.
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if (isset($_GET['welcome']) || isset($_GET['upgrade_to_3'])) {
             return [];
         }
@@ -22,6 +28,7 @@ class DefaultPersistentNotices
                 __('About Quick Print', 'print-my-blog'),
                 '<p>'
                 . sprintf(
+                    // translators: 1: html tag, 2: html tag, 3: html tag
                     __('This is the quick-and-easy option, best for making printouts for your own records. For something more professional and full-featured, use %1$sPro Print%2$s. It has free and paid options. %3$sSee full feature comparison.%2$s', 'print-my-blog'),
                     '<a href="'
                     . esc_attr(admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH))
@@ -37,12 +44,14 @@ class DefaultPersistentNotices
                 __('About Pro Print', 'print-my-blog'),
                 '<p>'
                 . sprintf(
+                    // translators: 1: html tag, 2: html tag
                     __('Pro Print is the best way to make professional-quality documents. You will be able to print them for free using your browser, or upgrade to use Print My Blog Pro\'s full features. %1$sSee full feature comparison.%2$s', 'print-my-blog'),
                     '<a href="https://printmy.blog/free-vs-pro/" target="_blank">',
                     '</a>'
                 )
                 . '</p><p>'
                 . sprintf(
+                    // translators: 1: html tag, 2: html tag
                     __('If you just want something quick, use %1$sQuick Print%2$s instead.', 'print-my-blog'),
                     '<a href="' . esc_attr(admin_url(PMB_ADMIN_PAGE_PATH)) . '">',
                     '</a>'
@@ -51,10 +60,10 @@ class DefaultPersistentNotices
                 array_merge(
                     $this->getOptionsForScreen('toplevel_page_print-my-blog-projects'),
                     [
-                                            'query_args' => [
-                                                'subaction' => null,
-                                                'action' => null
-                                            ]
+                        'query_args' => [
+                            'subaction' => null,
+                            'action' => null,
+                        ],
                     ]
                 )
             ),
@@ -86,15 +95,15 @@ class DefaultPersistentNotices
                 '<div class="pmb-two-column-notice"><div class="pmb-image-column"><iframe style="width:100%" height="315" src="https://www.youtube.com/embed/un7EnpDG2qs" 
         frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
                 . '<div class="pmb-text-column">'
-                 . '<ol>'
-                 . '<li>' . __('Find the articles (posts, pages, other post types) from WordPress you want to add on the left, and add it to your project on the right by dragging', 'print-my-blog') . '</li>'
-                 . '<li>' . __('Place articles in either front matter, main matter, or back matter, according to how you want your project organized. Each design can style them differently (eg front matter is often is numbered with roman numerals)') . '</li>'
-                 . '<li>' . __('Nest content inside others to create parts', 'print-my-blog') . '</li>'
+                . '<ol>'
+                . '<li>' . __('Find the articles (posts, pages, other post types) from WordPress you want to add on the left, and add it to your project on the right by dragging', 'print-my-blog') . '</li>'
+                . '<li>' . __('Place articles in either front matter, main matter, or back matter, according to how you want your project organized. Each design can style them differently (eg front matter is often is numbered with roman numerals)') . '</li>'
+                . '<li>' . __('Nest content inside others to create parts', 'print-my-blog') . '</li>'
                 . '</ol>'
-                 . '<p><a href="https://printmy.blog/user-guide/pro/getting-started/6-choose-project-content/" target="_blank">'
-                 . __('Read the User Guide', 'print-my-blog')
-                 . '</a></p>'
-                 . '</div></div>',
+                . '<p><a href="https://printmy.blog/user-guide/pro/getting-started/6-choose-project-content/" target="_blank">'
+                . __('Read the User Guide', 'print-my-blog')
+                . '</a></p>'
+                . '</div></div>',
                 $this->getOptionsForProjectSubaction('content')
             ),
             new Notice(
@@ -118,6 +127,7 @@ class DefaultPersistentNotices
                 '</p>'
                 . '<p>'
                 . sprintf(
+                    // translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag, 4: opening anchor tag
                     __('Read the User Guide on %1$supdating%2$s, %3$sgenerating the pro file%2$s, and %4$sgetting help%2$s.', 'print-my-blog'),
                     '<a href="https://printmy.blog/user-guide/pro/getting-started/9-update-the-project/" target="_blank">',
                     '</a>',
@@ -132,19 +142,27 @@ class DefaultPersistentNotices
                 __('Posts just for Print My Blog', 'print-my-blog'),
                 '<p>' . __('Print My Blog "Print Materials" are like private posts. They aren’t visible to site visitors, but you can use them in your Pro Print Projects.', 'print-my-blog') . '</p>',
                 $this->getOptionsForScreen('edit-pmb_content')
-            )
+            ),
 
         ];
     }
+
+    /**
+     * @return string[]
+     */
     protected function getNoticeDefaultOptions()
     {
         return [
             'scope' => 'user',
             'type' => 'info',
             'capability' => 'read',
-            ];
+        ];
     }
 
+    /**
+     * @param string $screen_id
+     * @return string[]
+     */
     protected function getOptionsForScreen($screen_id)
     {
         $options = $this->getNoticeDefaultOptions();
@@ -152,13 +170,17 @@ class DefaultPersistentNotices
         return $options;
     }
 
+    /**
+     * @param string $subaction
+     * @return string[]
+     */
     protected function getOptionsForProjectSubaction($subaction)
     {
         $options = $this->getOptionsForScreen(
             'toplevel_page_print-my-blog-projects'
         );
         $options['query_args'] = [
-            'subaction' => $subaction
+            'subaction' => $subaction,
         ];
         return $options;
     }

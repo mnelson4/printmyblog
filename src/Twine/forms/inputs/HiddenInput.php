@@ -21,7 +21,6 @@ class HiddenInput extends FormInputBase
      */
     public function __construct($input_settings = array())
     {
-        // require_once('strategies/display_strategies/TextInputDisplay.strategy.php');
         $this->setDisplayStrategy(new HiddenDisplay());
         if (
             isset($input_settings['normalization_strategy'])

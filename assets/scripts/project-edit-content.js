@@ -378,6 +378,7 @@ function pmb_select_all(){
 function pmb_request_content(extra_params, callback){
 	var form = jQuery("#pmb-filter-form");
 	var data = form.serialize();
+	data += '&_wpnonce=' + jQuery('#_wpnonce').val();
 	if(! jQuery('#pmb-show-included').is(':checked')){
 		var exclude = [];
 		jQuery('.pmb-project-matters .pmb-project-item').each(function(index, element) {
@@ -484,7 +485,7 @@ function pmb_add_print_material_submit(add_button, submit_button){
 		ajaxurl,
 		{
 			'action': 'pmb_add_print_material',
-			'_nonce': _wpnonce.value,
+			'_wpnonce': _wpnonce.value,
 			'title': jQuery('#pmb-print-material-title').val(),
 			'project': jQuery('#pmb-print-material-project').val()
 		},
@@ -695,7 +696,7 @@ function pmb_setup_item_options(){
 			ajaxurl,
 			{
 				'action': 'pmb_duplicate_print_material',
-				'_nonce': _wpnonce.value,
+				'_wpnonce': _wpnonce.value,
 				'id': id,
 				'project': jQuery('#pmb-print-material-project').val()
 			},

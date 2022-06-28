@@ -9,6 +9,10 @@ use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\orm\managers\ProjectManager;
 use WP_Debug_Data;
 
+/**
+ * Class DebugInfo
+ * @package PrintMyBlog\services
+ */
 class DebugInfo
 {
 
@@ -22,6 +26,10 @@ class DebugInfo
      */
     protected $design_manager;
 
+    /**
+     * @param ProjectManager $project_manager
+     * @param DesignManager $design_manager
+     */
     public function inject(ProjectManager $project_manager, DesignManager $design_manager)
     {
         $this->project_manager = $project_manager;
@@ -29,6 +37,7 @@ class DebugInfo
     }
 
     /**
+     * @param bool $pretty
      * @return string
      */
     public function getDebugInfoString($pretty = true)
@@ -66,13 +75,13 @@ class DebugInfo
             'author' => $active_theme['author']['value'],
             'author_website' => $active_theme['author_website']['value'],
             'parent_theme' => $active_theme['parent_theme']['value'],
-            'theme_features' => $active_theme['theme_features']['value']
+            'theme_features' => $active_theme['theme_features']['value'],
         ];
         $is_ssl                 = is_ssl();
         $is_multisite           = is_multisite();
         $blog_public            = get_option('blog_public');
         if (function_exists('wp_get_environment_type')) {
-            $environment_type       = wp_get_environment_type();
+            $environment_type = wp_get_environment_type();
         } else {
             $environment_type = 'unknown';
         }
@@ -113,6 +122,9 @@ class DebugInfo
         ];
     }
 
+    /**
+     * @return array
+     */
     protected function getDesignData()
     {
         $design_datas = [];
@@ -125,17 +137,22 @@ class DebugInfo
         return $design_datas;
     }
 
+    /**
+     * @return array
+     */
     protected function getProjectData()
     {
         /**
          * @var Project[] $projects
          */
         $projects = $this->project_manager->getAll(
-            new \WP_Query([
-                'order' => 'DESC',
-                'orderby' => 'modified',
-                'posts_per_page' => 5
-            ])
+            new \WP_Query(
+                [
+                    'order' => 'DESC',
+                    'orderby' => 'modified',
+                    'posts_per_page' => 5,
+                ]
+            )
         );
         $project_datas = [];
         foreach ($projects as $project) {
@@ -143,7 +160,7 @@ class DebugInfo
                 'title' => $project->getWpPost()->post_title,
                 'generations' => [],
                 'meta' => [],
-                'designs' => []
+                'designs' => [],
             ];
             foreach ($project->getDesigns() as $format => $design) {
                 $project_data['designs'][$format] = $design->getWpPost()->post_title . ' (ID:' . $design->getWpPost()->ID . ')';
@@ -157,24 +174,30 @@ class DebugInfo
         return $project_datas;
     }
 
+    /**
+     * @param array $project_meta
+     * @return array
+     */
     protected function simplifyProjectMeta($project_meta)
     {
         $metas = array_diff_key(
             $project_meta,
-            array_flip([
+            array_flip(
+                [
                     '_pmb_pmb_code',
                     '_wp_old_slug',
                     '_pmb_format',
                     '_pmb_progress_setup',
-                    '_pmb_levels_used'
-                ])
+                    '_pmb_levels_used',
+                ]
+            )
         );
         $starters_to_ignore = [
             '_pmb_progress_',
             '_pmb_design_for',
             '_pmb_dirty_',
             '_pmb_last_section_',
-            '_pmb_generated_'
+            '_pmb_generated_',
         ];
         $final_metas = [];
         foreach ($metas as $key => $value) {
@@ -197,6 +220,10 @@ class DebugInfo
         return $final_metas;
     }
 
+    /**
+     * @param Design $design
+     * @return array
+     */
     protected function simplifyDesignData(Design $design)
     {
         try {
@@ -221,16 +248,16 @@ class DebugInfo
                         '_pmb_preview_2_url',
                         '_pmb_preview_2_desc',
                         '_pmb_author_name',
-                        '_pmb_author_url'
+                        '_pmb_author_url',
                     ]
                 )
-            )
+            ),
         ];
     }
 
     /**
      * Make it look pretty so it's easy to find info in it.
-     * @param $metadata
+     * @param array $metadata
      * @return array
      */
     protected function simpifyMetadata($metadata)

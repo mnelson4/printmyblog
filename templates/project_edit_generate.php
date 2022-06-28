@@ -16,7 +16,7 @@ pmb_render_template(
 	'partials/project_header.php',
 	[
 		'project' => $project,
-		'page_title' => __('Generate Project', 'print-my-blog'),
+		'page_title' => __('Generate Print Page', 'print-my-blog'),
 		'current_step' => $current_step,
 		'steps_to_urls' => $steps_to_urls
 	]

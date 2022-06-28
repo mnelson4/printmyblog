@@ -6,6 +6,7 @@ jQuery(document).ready(function(){
         pmb_convert_youtube_videos_to_images();
     }
     pmb_replace_internal_links_with_epub_file_links();
+    pmb_add_alt_tags();
 });
 
 // wait until the images are loaded to try to resize them.

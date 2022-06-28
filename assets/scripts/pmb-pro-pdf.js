@@ -112,7 +112,8 @@ function pmb_generate_live_doc(jqelement) {
                 {
                     'method': 'POST',
                     'data':{
-                        'action':'pmb_reduce_credits'
+                        'action':'pmb_reduce_credits',
+                        '_wpnonce':pmb_pro.pmb_nonce,
                     }
                 }
             );
@@ -120,8 +121,6 @@ function pmb_generate_live_doc(jqelement) {
             jQuery('.pmb-pro-after-pro').show();
         },
         (error_message) => {
-            // jQuery('.pmb-downloading-live-pdf').hide();
-            // jQuery('.pmb-error-downloading-test-pdf').show();
             if(error_message === 'Socket error downloading document content from supplied url.'){
                 error_message = pmb_pro.translations.socket_error;
             }
@@ -134,7 +133,8 @@ function pmb_generate_live_doc(jqelement) {
                         'action':'pmb_report_error',
                         'error': error_message,
                         'project_id': pmb_pro.project_id,
-                        'format': pmb_pro.format
+                        'format': pmb_pro.format,
+                        '_wpnonce':pmb_pro.pmb_nonce,
                     }
                 }
             );

@@ -173,3 +173,9 @@ topbar plugin: https://wordpress.org/plugins/top-bar/
 #tpbr_topbar{
     display:none;
 }
+/**
+Announcer plugin integration
+ */
+.ancr-sticky{
+    display:none;
+}

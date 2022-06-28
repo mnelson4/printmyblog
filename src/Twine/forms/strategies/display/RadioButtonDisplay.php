@@ -18,7 +18,6 @@ class RadioButtonDisplay extends CompoundInputDisplay
 
     /**
      *
-     * @throws Exception
      * @return string of html to display the field
      */
     public function display()
@@ -44,7 +43,12 @@ class RadioButtonDisplay extends CompoundInputDisplay
                         $input,
                         $value
                     ),
-                    'aria-label' => sprintf(__('%1$s: %2$s', 'print-my-blog'), strip_tags($input->htmlLabelText()), strip_tags($option->getDisplayText()))
+                    'aria-label' => sprintf(
+                        // translators: 1: label text, 2: display text
+                        __('%1$s: %2$s', 'print-my-blog'),
+                        wp_strip_all_tags($input->htmlLabelText()),
+                        wp_strip_all_tags($option->getDisplayText())
+                    ),
                 )
             );
             $html .= '>';
@@ -58,7 +62,7 @@ class RadioButtonDisplay extends CompoundInputDisplay
                 'type' => 'radio',
                 'value' => $value,
                 0 => $input->otherHtmlAttributesString(),
-                'data-question_label' => $input->htmlLabelId()
+                'data-question_label' => $input->htmlLabelId(),
             );
             if ($input->rawValue() === $value) {
                 $attributes['checked'] = 'checked';

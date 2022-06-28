@@ -2,9 +2,18 @@
 
 namespace PrintMyBlog\services\generators;
 
+use Exception;
+
+/**
+ * Class EpubGenerator
+ * @package PrintMyBlog\services\generators
+ */
 class EpubGenerator extends HtmlBaseGenerator
 {
 
+    /**
+     * Begins writing to html intermediary file.
+     */
     public function startGenerating()
     {
         $this->disableEmojis();
@@ -27,10 +36,11 @@ class EpubGenerator extends HtmlBaseGenerator
     /**
      * Writes out the PMB Pro print "window" which appears at the top of pro print pages.
      * Echoes, instead of using `$this->file_writer`, because this is a callback on an action called inside the template HTML.
-     * @throws Exception
      */
     public function addPrintWindowToPage()
     {
+        // The template file does the escaping.
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         echo pmb_get_contents(
             PMB_TEMPLATES_DIR . 'partials/pro_print_page_epub_window.php',
             [
@@ -41,6 +51,9 @@ class EpubGenerator extends HtmlBaseGenerator
         );
     }
 
+    /**
+     * @throws Exception
+     */
     public function enqueueStylesAndScripts()
     {
         wp_enqueue_script('pmb_pro_page');
@@ -75,7 +88,7 @@ class EpubGenerator extends HtmlBaseGenerator
         wp_enqueue_script(
             'pmb-epub',
             PMB_SCRIPTS_URL . 'epub-generator.js',
-            ['epub-gen-memory','jquery', 'pmb-beautifier-functions', 'pmb-streamsaver', 'pmb-filesaver'],
+            ['epub-gen-memory', 'jquery', 'pmb-beautifier-functions', 'pmb-streamsaver', 'pmb-filesaver'],
             filemtime(PMB_SCRIPTS_DIR . 'epub-generator.js')
         );
         $css = pmb_get_contents(
@@ -119,7 +132,7 @@ class EpubGenerator extends HtmlBaseGenerator
                 'translations' => [
                     'many_articles' => __('Your project is very big and you might have errors downloading the file. If so, try splitting your content into multiple projects and instead creating multiple smaller files.', 'print-my-blog'),
                     'many_images' => __('Your project has lots of images and you might have errors downloading the file. If so, try spltting your content into multiple projects or reducing the image quality set on your design.', 'print-my-blog'),
-                ]
+                ],
             ]
         );
     }
@@ -136,6 +149,10 @@ class EpubGenerator extends HtmlBaseGenerator
         return array_map('trim', explode(',', str_replace(['\n'], ',', $byline)));
     }
 
+    /**
+     * @return void
+     * @throws Exception
+     */
     protected function finishGenerating()
     {
         parent::finishGenerating();

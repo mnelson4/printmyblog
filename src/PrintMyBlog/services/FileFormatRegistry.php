@@ -5,6 +5,10 @@ namespace PrintMyBlog\services;
 use PrintMyBlog\entities\FileFormat;
 use PrintMyBlog\factories\FileFormatFactory;
 
+/**
+ * Class FileFormatRegistry
+ * @package PrintMyBlog\services
+ */
 class FileFormatRegistry
 {
 
@@ -13,6 +17,10 @@ class FileFormatRegistry
      */
     protected $factory;
 
+    /**
+     * Called by Context.
+     * @param FileFormatFactory $factory
+     */
     public function inject(FileFormatFactory $factory)
     {
         $this->factory = $factory;
@@ -23,7 +31,7 @@ class FileFormatRegistry
     protected $formats;
 
     /**
-     * @param $slug
+     * @param string $slug
      *
      * @return FileFormat
      */
@@ -44,7 +52,7 @@ class FileFormatRegistry
     }
 
     /**
-     * @param slug $slug
+     * @param string $slug
      * @param array $args
      */
     public function registerFormat($slug, $args)

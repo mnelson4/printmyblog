@@ -25,7 +25,7 @@ class RequiredValidation extends ValidationBase
     public function __construct($validation_error_message = null)
     {
         if (! $validation_error_message) {
-            $validation_error_message = __("This field is required.", "print-my-blog");
+            $validation_error_message = __('This field is required.', 'print-my-blog');
         }
         parent::__construct($validation_error_message);
     }
@@ -33,10 +33,10 @@ class RequiredValidation extends ValidationBase
 
 
     /**
-     * just checks the field isn't blank, provided the requirement conditions
+     * Just checks the field isn't blank, provided the requirement conditions
      * indicate this input is still required
      *
-     * @param $normalized_value
+     * @param string $normalized_value
      * @return bool
      * @throws ValidationError
      */
@@ -64,8 +64,8 @@ class RequiredValidation extends ValidationBase
         return array(
             'required' => true,
             'messages' => array(
-                'required' => $this->getValidationErrorMessage()
-            )
+                'required' => $this->getValidationErrorMessage(),
+            ),
         );
     }
 }

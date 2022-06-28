@@ -18,7 +18,6 @@ class FloatInput extends FormInputBase
 
     /**
      * @param array $input_settings
-     * @throws InvalidArgumentException
      */
     public function __construct($input_settings = array())
     {

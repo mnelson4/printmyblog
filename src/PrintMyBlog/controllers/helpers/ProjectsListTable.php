@@ -23,9 +23,6 @@ use WP_Query;
  * @since          $VID:$
  *
  */
-
-/** * Create a new table class that will extend the WP_List_Table */
-
 class ProjectsListTable extends WP_List_Table
 {
     /**
@@ -33,13 +30,17 @@ class ProjectsListTable extends WP_List_Table
      */
     protected $project_manager;
 
+    /**
+     * ProjectsListTable constructor.
+     */
     public function __construct()
     {
-        parent::__construct(array(
-            'singular' => 'project',
-            'plural' => 'projects',
-            // 'ajax' => true
-        ));
+        parent::__construct(
+            array(
+                'singular' => 'project',
+                'plural' => 'projects',
+            )
+        );
     }
 
     /** * Prepare the items for the table to process
@@ -47,14 +48,13 @@ class ProjectsListTable extends WP_List_Table
      */
     public function prepare_items()
     {
-        // $this->_column_headers = $this->get_column_info();
         $columns = $this->get_columns();
         $hidden = $this->get_hidden_columns();
         $sortable = $this->get_sortable_columns();
         $this->_column_headers = array(
             $columns,
             $hidden,
-            $sortable
+            $sortable,
         );
         $per_page = $this->get_items_per_page('records_per_page', 10);
         $current_page = $this->get_pagenum();
@@ -62,18 +62,18 @@ class ProjectsListTable extends WP_List_Table
         $data = $this->get_records($per_page, $current_page);
         $this->set_pagination_args(
             [
-                'total_items' => $total_items, //WE have to calculate the total number of items
-                'per_page' => $per_page // WE have to determine how many items to show on a page
+                'total_items' => $total_items, // WE have to calculate the total number of items
+                'per_page' => $per_page, // WE have to determine how many items to show on a page
             ]
         );
         $this->items = $data;
     }
 
-    /** *
-    Retrieve records data from the database
-     * * @param int $per_page
+    /**
+     * Retrieve records data from the database
+     * @param int $per_page
      * @param int $page_number
-     * * @return mixed
+     * @return mixed
      */
     public function get_records($per_page = 10, $page_number = 1)
     {
@@ -110,11 +110,15 @@ class ProjectsListTable extends WP_List_Table
             'cb' => '<input type="checkbox" />',
             'title' => __('Title', 'print-my-blog'),
             'format' => __('Format', 'print-my-blog'),
-            'date' => __('Date', 'print-my-blog')
+            'date' => __('Date', 'print-my-blog'),
         ];
         return $columns;
     }
 
+    /**
+     * There are no hidden columns.
+     * @return array
+     */
     public function get_hidden_columns()
     {
         // Setup Hidden columns and return them
@@ -127,28 +131,24 @@ class ProjectsListTable extends WP_List_Table
      */
     public function get_sortable_columns()
     {
-        $sortable_columns = array(
-//            'title' => array('title',true),
-//            'format' => array('format',true),
-//            'date' => ['date', true]
-            // 'second_column_name' => array('second_column_name',false) ,
-            // 'fifth_column_name' => array('fifth_column_name',false) ,
-            // 'created' => array('created',false)
-        );
+        $sortable_columns = array();
         return $sortable_columns;
     }
 
+    /**
+     * @return array
+     */
     protected function get_bulk_actions()
     {
         return [
-            'delete' => __('Delete')
+            'delete' => __('Delete'),
         ];
     }
 
     /**
      * Render the bulk edit checkbox
-     * * @param Project $project
-     * * @return string
+     * @param Project $project
+     * @return string
      */
     public function column_cb($project)
     {
@@ -157,8 +157,7 @@ class ProjectsListTable extends WP_List_Table
 
     /**
      * Render the bulk edit checkbox
-     * * @param Project $project
-     * * @return string
+     * @param Project $project
      */
     public function column_title(Project $project)
     {
@@ -171,51 +170,71 @@ class ProjectsListTable extends WP_List_Table
 
         printf(
             '<strong><a href="%s" class="btn btn-primary"/>%s</a></strong>',
-            $steps_to_urls[$next_step],
-            $title
+            esc_url_raw($steps_to_urls[$next_step]),
+            esc_html($title)
         );
 
 
-        ?><div class="pmb-row-actions row-actions"><?php
-foreach ($steps as $slug => $display_text) {
-    $completed = $progress[$slug] ? true : false;
-    $next = $next_step === $slug ? true : false;
-    $accessible = $completed || $next;
-    ?> <span class="pmb-step
-    <?php echo esc_attr($completed ? 'pmb-completed' : 'pmb-incomplete');?>
-        <?php echo esc_attr($next ? 'pmb-next-step' : '');?>
-        <?php echo esc_attr($accessible ? 'pmb-accessible-step' : 'pmb-inaccessible-step');?>
-                            "><?php if (($completed || $next)) {
-                                ?>
-                                <a href="<?php echo esc_attr($steps_to_urls[$slug]);?>">
-                              <?php }
-                              echo $display_text;
-                              if ($completed || $next) {
-                                    ?></a><?php
-                              }?></span><?php
-}
-?><span class="pmb-dont-break-phrase">| &nbsp; <?php
+        ?><div class="pmb-row-actions row-actions">
+        <?php
+        foreach ($steps as $slug => $display_text) {
+            $completed = $progress[$slug] ? true : false;
+            $next = $next_step === $slug ? true : false;
+            $accessible = $completed || $next;
+            ?>
+            <span class="pmb-step
+            <?php echo esc_attr($completed ? 'pmb-completed' : 'pmb-incomplete'); ?>
+            <?php echo esc_attr($next ? 'pmb-next-step' : ''); ?>
+            <?php echo esc_attr($accessible ? 'pmb-accessible-step' : 'pmb-inaccessible-step'); ?>
+            ">
+            <?php
+            if (($completed || $next)) {
+                ?>
+                <a href="<?php echo esc_attr($steps_to_urls[$slug]); ?>">
+                <?php
+            }
+            echo esc_html($display_text);
+            if ($completed || $next) {
+                ?>
+                    </a>
+                    <?php
+            }
+            ?>
+            </span>
+            <?php
+        }
+        ?>
+<span class="pmb-dont-break-phrase">| &nbsp; 
+        <?php
         // only show duplicate feature for Professional and Business licenses
-if (pmb_fs()->is_plan__premium_only('founding_members')) {
-    ?><a class="pmb-duplicate" href="<?php
-echo esc_url(wp_nonce_url(
-    add_query_arg(
-        [
-            'action' => Admin::SLUG_ACTION_EDIT_PROJECT,
-            'subaction' => Admin::SLUG_SUBACTION_PROJECT_DUPLICATE,
-            'ID' => $post->ID
-        ],
-        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-    ),
-    Admin::SLUG_ACTION_EDIT_PROJECT
-));
-                                        ?>"><?php esc_html_e('Duplicate', 'print-my-blog');?></a><?php
-} else {
-     esc_html_e('Duplicate', 'print-my-blog');
-     echo '&nbsp;';
-    echo pmb_hover_tip(__('Feature included in Professional and Business licenses', 'print-my-blog'));
-}
-?>
+        if (pmb_fs()->is_plan__premium_only('founding_members')) {
+            ?>
+    <a class="pmb-duplicate" href="
+            <?php
+            echo esc_url(
+                wp_nonce_url(
+                    add_query_arg(
+                        [
+                            'action' => Admin::SLUG_ACTION_EDIT_PROJECT,
+                            'subaction' => Admin::SLUG_SUBACTION_PROJECT_DUPLICATE,
+                            'ID' => $post->ID,
+                        ],
+                        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+                    ),
+                    Admin::SLUG_ACTION_EDIT_PROJECT
+                )
+            );
+            ?>
+                                        "><?php esc_html_e('Duplicate', 'print-my-blog'); ?></a>
+                                        <?php
+        } else {
+            esc_html_e('Duplicate', 'print-my-blog');
+            echo '&nbsp;';
+            // We want to show HTML here.
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo pmb_hover_tip(__('Feature included in Professional and Business licenses', 'print-my-blog'));
+        }
+        ?>
         </span>
         <?php
     }
@@ -232,6 +251,10 @@ echo esc_url(wp_nonce_url(
         return implode(', ', $names);
     }
 
+    /**
+     * @param Project $project
+     * @return string
+     */
     public function column_date(Project $project)
     {
         return __('Started', 'print-my-blog') . '<br>' . sprintf(
@@ -245,11 +268,11 @@ echo esc_url(wp_nonce_url(
     }
 
     /**
-     *Text displayed when no record data is available
+     * Text displayed when no record data is available
      */
     public function no_items()
     {
-        _e('Click "Add New Project" 👆 To Make Your First Project!', 'print-my-blog');
+        esc_html_e('Click "Add New Project" 👆 To Make Your First Project!', 'print-my-blog');
     }
 
     /**

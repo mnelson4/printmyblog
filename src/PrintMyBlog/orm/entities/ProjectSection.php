@@ -5,16 +5,55 @@ namespace PrintMyBlog\orm\entities;
 use PrintMyBlog\system\Context;
 use stdClass;
 
+/**
+ * Class ProjectSection
+ * @package PrintMyBlog\orm\entities
+ */
 class ProjectSection
 {
+    /**
+     * @var int $ID
+     */
     protected $ID;
+
+    /**
+     * @var int $post_id
+     */
     protected $post_id;
+
+    /**
+     * @var string $post_title
+     */
     protected $post_title;
+
+    /**
+     * @var int $parent_id
+     */
     protected $parent_id;
+
+    /**
+     * @var int $section_order
+     */
     protected $section_order;
+
+    /**
+     * @var string
+     */
     protected $template;
+
+    /**
+     * @var string
+     */
     protected $placement;
+
+    /**
+     * @var int
+     */
     protected $height;
+
+    /**
+     * @var int
+     */
     protected $depth;
 
     /**
@@ -60,6 +99,9 @@ class ProjectSection
         return (int)$this->post_id;
     }
 
+    /**
+     * @param int $new_post_id
+     */
     public function setPostId($new_post_id)
     {
         $this->post_id = $new_post_id;

@@ -1,18 +1,23 @@
-<?php
+<?php // phpcs:disable Files.SideEffects.FoundWithSymbols -- sorry, this file is meant for everything
 // Add filters, action callback, and functions you want to use in your design.
 // Note that this file only gets included when generating a new project, not on every pageload.
 add_action(
-	'pmb_pdf_generation_start',
-	function(\PrintMyBlog\entities\ProjectGeneration $project_generation, \PrintMyBlog\orm\entities\Design $design){
-	    global $pmb_design;
-	    $pmb_design = $design;
-	    add_action('wp_enqueue_scripts', 'pmb_enqueue_classic_script', 1001);
-	},
-	10,
-	2
+    'pmb_pdf_generation_start',
+    function (\PrintMyBlog\entities\ProjectGeneration $project_generation, \PrintMyBlog\orm\entities\Design $design) {
+        global $pmb_design;
+        $pmb_design = $design;
+        add_action('wp_enqueue_scripts', 'pmb_enqueue_classic_script', 1001);
+    },
+    10,
+    2
 );
 
-function pmb_enqueue_classic_script(){
+/**
+ * Enqueues scripts on print page.
+ * @throws Exception
+ */
+function pmb_enqueue_classic_script()
+{
     /**
      * @var $pmb_design \PrintMyBlog\orm\entities\Design
      */

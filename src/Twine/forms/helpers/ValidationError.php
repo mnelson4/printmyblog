@@ -5,6 +5,10 @@ namespace Twine\forms\helpers;
 use Exception;
 use Twine\forms\base\FormSectionValidatable;
 
+/**
+ * Class ValidationError
+ * @package Twine\forms\helpers
+ */
 class ValidationError extends Exception
 {
     /**
@@ -13,7 +17,7 @@ class ValidationError extends Exception
      */
     protected $form_section;
     /**
-     * a short string for uniquely identifying the error, which isn't internationalized and
+     * A short string for uniquely identifying the error, which isn't internationalized and
      * machines can use to identify the error
      * @var string
      */
@@ -34,7 +38,7 @@ class ValidationError extends Exception
     }
 
     /**
-     * returns teh form section which caused the error.
+     * Returns teh form section which caused the error.
      * @return FormSectionValidatable
      */
     public function getFormSection()

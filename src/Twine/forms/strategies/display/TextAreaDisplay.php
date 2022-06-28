@@ -5,12 +5,16 @@ namespace Twine\forms\strategies\display;
 use Twine\forms\inputs\TextAreaInput;
 use Twine\forms\strategies\validation\FullHtmlValidation;
 
+/**
+ * Class TextAreaDisplay
+ * @package Twine\forms\strategies\display
+ */
 class TextAreaDisplay extends DisplayBase
 {
     /**
-    *
-    * @return string of html to display the field
-    */
+     *
+     * @return string of html to display the field
+     */
     public function display()
     {
         $input = $this->input;
@@ -25,7 +29,7 @@ class TextAreaDisplay extends DisplayBase
         $html = '<textarea';
         $html .= ' id="' . $input->htmlId() . '"';
         $html .= ' name="' . $input->htmlName() . '"';
-        $html .= ' class="' . $input->htmlClass() . '"' ;
+        $html .= ' class="' . $input->htmlClass() . '"';
         $html .= ' style="' . $input->htmlStyle() . '"';
         $html .= $input->otherHtmlAttributesString();
         $html .= ' rows= "' . $rows . '" cols="' . $cols . '">';
@@ -35,12 +39,11 @@ class TextAreaDisplay extends DisplayBase
             if (
                 $validation_strategy instanceof FullHtmlValidation
             ) {
-                $html .= sprintf(
-                    __('%1$s(allowed tags: %2$s)%3$s', 'print-my-blog'),
-                    '<p class="twine-question-desc">',
-                    $validation_strategy->getListOfAllowedTags(),
-                    '</p>'
-                );
+                $html .= '<p class="twine-question-desc">' . sprintf(
+                    // translators: 1: list of alloed htm;l tags
+                    __('(allowed tags: %1$s)', 'print-my-blog'),
+                    $validation_strategy->getListOfAllowedTags()
+                ) . '</p>';
             }
         }
         return $html;

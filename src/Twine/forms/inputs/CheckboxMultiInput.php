@@ -11,7 +11,7 @@ use Twine\forms\strategies\validation\ManyValuedValidation;
  *
  * Class Checkbox_Multi_Input
  *
- * configures a set of checkbox inputs
+ * Configures a set of checkbox inputs
  *
  * @package             Event Espresso
  * @subpackage  core
@@ -23,8 +23,8 @@ class CheckboxMultiInput extends FormInputWithOptionsBase
 {
 
     /**
-     * @param InputOption $input_settings
      * @param array $answer_options
+     * @param InputOption $input_settings
      */
     public function __construct($answer_options, $input_settings = array())
     {
@@ -36,7 +36,7 @@ class CheckboxMultiInput extends FormInputWithOptionsBase
                         isset($input_settings['validation_error_message'])
                             ? $input_settings['validation_error_message']
                             : null
-                    )
+                    ),
                 )
             )
         );

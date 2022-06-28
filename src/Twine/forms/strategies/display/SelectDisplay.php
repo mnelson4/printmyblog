@@ -3,6 +3,7 @@
 namespace Twine\forms\strategies\display;
 
 use Exception;
+use Twine\forms\helpers\InputOption;
 use Twine\forms\inputs\FormInputWithOptionsBase;
 use Twine\helpers\Array2;
 use Twine\helpers\Html;
@@ -11,7 +12,7 @@ use Twine\helpers\Html;
  *
  * Class SelectDisplay
  *
- * displays either simple arrays as selected, or if a 2d array is provided, separates them into optgroups
+ * Displays either simple arrays as selected, or if a 2d array is provided, separates them into optgroups
  *
  * @package             Event Espresso
  * @subpackage  core
@@ -71,7 +72,7 @@ class SelectDisplay extends DisplayBase
 
     /**
      * Displays a flat list of options as option tags
-     * @param array $options
+     * @param InputOption[] $options
      * @return string
      */
     protected function displayOptions($options)
@@ -79,7 +80,7 @@ class SelectDisplay extends DisplayBase
         $html = '';
         $html_generator = Html::instance();
         $html_generator->indent(1, 'option');
-        foreach ($options as $value => $display_text) {
+        foreach ($options as $value => $option) {
             // even if this input uses TextNormalization if one of the array keys is a numeric string, like "123",
             // PHP will have converted it to a PHP integer (eg 123). So we need to make sure it's a string
             $unnormalized_value = $this->input->getNormalizationStrategy()->unnormalizeOne($value);
@@ -90,7 +91,7 @@ class SelectDisplay extends DisplayBase
                 . '"'
                 . $selected
                 . '>'
-                . $display_text
+                . $option->getDisplayText()
                 . '</option>';
         }
         $html_generator->indent(-1, 'option');

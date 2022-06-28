@@ -17,16 +17,39 @@ use WP_Error;
  */
 class RestApiDetector
 {
+    /**
+     * @var string
+     */
     protected $site;
+
+    /**
+     * @var string
+     */
     protected $name;
+
+    /**
+     * @var string
+     */
     protected $description;
+
+    /**
+     * @var string
+     */
     protected $rest_api_url;
+
+    /**
+     * @var bool
+     */
     protected $local;
+
+    /**
+     * @var bool
+     */
     protected $initialized = false;
 
     /**
      * RestApiDetector constructor.
-     * @param $site
+     * @param string $site
      * @throws RestApiDetectorError
      */
     public function __construct($site)
@@ -56,10 +79,10 @@ class RestApiDetector
         }
         // Let's see if it's self-hosted...
         $data = $this->getSelfHostedSiteInfo($site);
-//        if($data === false){
-//            // Alright, there was no link to the REST API index. But maybe it's a WordPress.com site...
-//            $data = $this->guessSelfHostedSiteInfo($site);
-//        }
+// if($data === false){
+// Alright, there was no link to the REST API index. But maybe it's a WordPress.com site...
+// $data = $this->guessSelfHostedSiteInfo($site);
+// }
         if ($data === false) {
             // Alright, there was no link to the REST API index. But maybe it's a WordPress.com site...
             $data = $this->getWordPressComSiteInfo($site);
@@ -70,8 +93,7 @@ class RestApiDetector
 
     /**
      * Avoid SSRF by sanitizing the site received.
-     * @since $VID:$
-     * @param $site
+     * @param string $site
      * @return mixed|string
      */
     protected function sanitizeSite($site)
@@ -88,7 +110,7 @@ class RestApiDetector
             $site = 'http://' . $site;
         }
         // Remove unexpected URL parts.
-        $url_parts = parse_url($site);
+        $url_parts = wp_parse_url($site);
         if (isset($url_parts['port'])) {
             $site = str_replace(':' . $url_parts['port'], '', $site);
         }
@@ -106,8 +128,7 @@ class RestApiDetector
      * Tries to get the site's name, description, and URL, assuming it's self-hosted.
      * Returns a true on success, false if the site works but wasn't a self-hosted WordPress site, or
      * throws an exception if the site is self-hosted WordPress but had an error.
-     * @since $VID:$
-     * @param $site
+     * @param string $site
      * @return bool false if the site exists but it's not a self-hosted WordPress site.
      * @throws RestApiDetectorError
      */
@@ -121,12 +142,12 @@ class RestApiDetector
         $matches = array();
         if (
             ! preg_match(
-            //looking for somethign like "<link rel='https://api.w.org/' href='http://wpcowichan.org/wp-json/' />"
+            // looking for somethign like "<link rel='https://api.w.org/' href='http://wpcowichan.org/wp-json/' />"
                 '<link rel=\'https\:\/\/api\.w\.org\/\' href=\'(.*)\' \/>',
                 $response_body,
                 $matches
             )
-            ||  count($matches) !== 2
+            || count($matches) !== 2
         ) {
             // The site exists, but it's not self-hosted.
             return false;
@@ -139,6 +160,11 @@ class RestApiDetector
         return $success;
     }
 
+    /**
+     * @param string $wp_api_url
+     * @return bool
+     * @throws RestApiDetectorError
+     */
     protected function fetchWpJsonRootInfo($wp_api_url)
     {
         $response = $this->sendHttpGetRequest($wp_api_url);
@@ -176,8 +202,7 @@ class RestApiDetector
     /**
      * We didn't see any indication the website has the WP API enabled. Just take a guess that
      * /wp-json is the REST API base url. Maybe we'll get lucky.
-     * @since $VID:$
-     * @param $site
+     * @param string $site
      * @return bool
      * @throws RestApiDetectorError
      */
@@ -192,16 +217,15 @@ class RestApiDetector
      * Tries to get the site name, description and URL from a site on WordPress.com.
      * Returns true success, or throws a RestApiDetectorError. If the site doesn't appear to be on WordPress.com
      * also has an error.
-     * @since $VID:$
-     * @param $site
+     * @param string $site
      * @return bool
      * @throws RestApiDetectorError
      */
     protected function getWordPressComSiteInfo($site)
     {
-        $domain = str_replace(array('http://','https://'), '', $site);
+        $domain = str_replace(array('http://', 'https://'), '', $site);
 
-        $success =  $this->fetchWpJsonRootInfo(
+        $success = $this->fetchWpJsonRootInfo(
             'https://public-api.wordpress.com/rest/v1.1/sites/' . $domain
         );
         if ($success) {
@@ -211,8 +235,7 @@ class RestApiDetector
     }
 
     /**
-     * @since $VID:$
-     * @param $url
+     * @param string $url
      * @return array|WP_Error
      */
     protected function sendHttpGetRequest($url)
@@ -222,7 +245,7 @@ class RestApiDetector
             [
                 'timeout' => 30,
                 'sslverify' => false,
-                'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0'
+                'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0',
             ]
         );
     }
@@ -318,7 +341,7 @@ class RestApiDetector
     /**
      * @param bool $initialized
      */
-    protected function setInitialized(bool $initialized)
+    protected function setInitialized($initialized)
     {
         $this->initialized = $initialized;
     }

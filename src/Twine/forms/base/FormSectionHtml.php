@@ -15,7 +15,9 @@ namespace Twine\forms\base;
  */
 class FormSectionHtml extends FormSectionBase
 {
-
+    /**
+     * @var string
+     */
     protected $html = '';
 
 

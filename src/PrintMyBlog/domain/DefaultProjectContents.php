@@ -6,8 +6,15 @@ use PrintMyBlog\system\CustomPostTypes;
 use WP_Error;
 use WP_Post;
 
+/**
+ * Class DefaultProjectContents
+ * @package PrintMyBlog\domain
+ */
 class DefaultProjectContents
 {
+    /**
+     * Adds default content to db.
+     */
     public function addDefaultContents()
     {
         foreach ($this->getDefaultContents() as $slug => $postargs) {
@@ -16,10 +23,7 @@ class DefaultProjectContents
                 $postargs['post_type'] = CustomPostTypes::CONTENT;
                 $postargs['post_name'] = $slug;
                 $postargs['post_status'] = 'private';
-                $result = wp_insert_post($postargs, true);
-                if ($result instanceof WP_Error) {
-                    // record and show the error somehow
-                }
+                wp_insert_post($postargs, true);
             }
         }
     }
@@ -37,12 +41,12 @@ class DefaultProjectContents
             [
                 'pmb-title-page' => [
                     'post_title' => __('Title Page', 'print-my-blog'),
-                    'post_content' => '[pmb_title_page]'
+                    'post_content' => '[pmb_title_page]',
                 ],
                 'pmb-toc' => [
                     'post_title' => __('Table of Contents', 'print-my-blog'),
-                    'post_content' => '[pmb_toc]'
-                ]
+                    'post_content' => '[pmb_toc]',
+                ],
             ]
         );
     }
