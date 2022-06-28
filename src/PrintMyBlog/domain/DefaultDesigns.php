@@ -346,7 +346,7 @@ class DefaultDesigns
                         [
                             'url' => $design_template->getUrl() . 'assets/preview1.jpg',
                             'desc' => __(
-                                'Title page and table of contents..',
+                                'Title page and table of contents.',
                                 'print-my-blog'
                             )
                         ],
