@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.15.9
+Stable tag: 3.15.10
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -434,6 +434,9 @@ https://youtu.be/uPQ3vqm7A2g
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+
+= 3.15.10 July 4, 2022 =
+* Bugfix: Quick Print use Post Rendering Wait Time to decide how long to wait before resizing images
 
 = 3.15.9 June 17, 2022 =
 * Compatibility: hide [Top Bar](https://wordpress.org/plugins/top-bar/) and [Announcer](https://wordpress.org/plugins/announcer/) banners from printouts

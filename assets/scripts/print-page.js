@@ -496,8 +496,8 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 pmb_resize_images(this.image_size * 100);
                 jQuery('.pmb-print-page-print-button').prop('disabled', false);
         },
-            // wait time corresponds to the number of images; here we're guessing they take 50 milliseconds to render.
-            jQuery('img').length * 50
+            // wait time corresponds to the number of images; here we're guessing they will take a few milliseconds
+            jQuery('img').length * this.rendering_wait / 3
         );
 
         if(this.foogallery) {
