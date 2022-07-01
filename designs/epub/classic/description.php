@@ -14,23 +14,20 @@
 
 <h2><?php esc_html_e('Features', 'print-my-blog'); ?></h2>
 <ul class="pmb-list">
-    <li>Supports nesting articles (like posts and pages) into “parts”</li>
-    <li>External hyperlinks (links to web pages not in the project) are left as working hyperlinks</li>
-    <li>Internal hyperlinks (links to content included in the project) are converted into links to the appropriate page
-        of the eBook
+    <li><?php esc_html_e('Supports nesting articles (like posts and pages) into “parts”', 'print-my-blog'); ?></li>
+    <li><?php esc_html_e('External hyperlinks (links to web pages not in the project) are left as working hyperlinks', 'print-my-blog'); ?></li>
+    <li><?php esc_html_e('Internal hyperlinks (links to content included in the project) are converted into links to the appropriate page of the eBook', 'print-my-blog'); ?>
     </li>
-    <li>The default title page can include: Project Title, Subtitle, Site URL, Date Printed, Credit to Print My Blog
+    <li><?php esc_html_e('The default title page can include: Project Title, Subtitle, Site URL, Date Printed, Credit to Print My Blog', 'print-my-blog'); ?>
     </li>
-    <li>Each article can include: Title, ID, Author, URL, Date Published, Categories and Tags, Featured Image, Excerpt,
-        Custom Fields, Content
+    <li><?php esc_html_e('Each article can include: Title, ID, Author, URL, Date Published, Categories and Tags, Featured Image, Excerpt, Custom Fields, Content', 'print-my-blog'); ?>
     </li>
-    <li>All images are automatically included in the ePub file (instead of merely pointing to the external image
-        source). This makes the filesize larger, but allows users to view images while disconnected from the Internet.
+    <li><?php esc_html_e('All images are automatically included in the ePub file (instead of merely pointing to the external image source). This makes the filesize larger, but allows users to view images while disconnected from the Internet.', 'print-my-blog'); ?>
     </li>
-    <li>Small images are automatically centered</li>
-    <li>Image galleries are converted into regular list of images, which look better on small screens.</li>
+    <li><?php esc_html_e('Small images are automatically centered', 'print-my-blog'); ?></li>
+    <li><?php esc_html_e('Image galleries are converted into regular list of images, which look better on small screens.', 'print-my-blog'); ?></li>
 </ul>
 
 <h2><?php esc_html_e('Page Layout', 'print-my-blog'); ?></h2>
-<p>The page design is mostly dictated by the app and device used for reading</p>
-<p>Each article begins on a new page.</p>
+<p><?php esc_html_e('The page design is mostly dictated by the app and device used for reading', 'print-my-blog'); ?></p>
+<p><?php esc_html_e('Each article begins on a new page.', 'print-my-blog'); ?></p>
