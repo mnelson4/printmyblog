@@ -46,9 +46,9 @@ class WordGenerator extends HtmlBaseGenerator
 
         wp_enqueue_script(
             'pmb-word',
-            PMB_SCRIPTS_URL . 'pmb-word.js',
+            PMB_SCRIPTS_URL . 'pmb-word__premium_only.js',
             ['jquery','pmb-filesaver'],
-            filemtime(PMB_SCRIPTS_DIR . 'pmb-word.js')
+            filemtime(PMB_SCRIPTS_DIR . 'pmb-word__premium_only.js')
         );
         $css = pmb_get_contents(
             PMB_STYLES_DIR . '/pmb-word.css'
