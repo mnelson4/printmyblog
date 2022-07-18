@@ -65,6 +65,7 @@ class DefaultFileFormats
                 'color' => '#ffcc00',
                 'extension' => 'epub',
                 'supported' => $ebook_supported,
+                'upsell' => __('Create unlimited ePubs with any purchase.', 'print-my-blog')
             ]
         );
         pmb_register_file_format(
@@ -77,7 +78,8 @@ class DefaultFileFormats
                 'desc' => __('Useful when working with people and software that prefer Microft Word. Most formatting is lost and you\'ll probably need to maintain two copies of your works, but sometimes this is the only way.', 'print-my-blog'),
                 'color' => '#ffbdde',
                 'extension' => 'doc',
-                'supported' => $word_supported
+                'supported' => $word_supported,
+                'upsell' => __('Create unlimited Word Documents with a Pro Plan.', 'print-my-blog')
             ]
         );
     }
