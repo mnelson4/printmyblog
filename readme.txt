@@ -436,7 +436,8 @@ https://youtu.be/uPQ3vqm7A2g
 == Changelog ==
 
 = 3.16.0 xxxxxx =
-* Feature: Microsoft Word documents with license
+* Feature: introduce Microsoft Word documents for Pro licenses
+* Bugfix: fix Mayer Magazine center and right-aligned text
 
 = 3.15.9 June 17, 2022 =
 * Compatibility: hide [Top Bar](https://wordpress.org/plugins/top-bar/) and [Announcer](https://wordpress.org/plugins/announcer/) banners from printouts
