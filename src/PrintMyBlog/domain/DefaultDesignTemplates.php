@@ -557,7 +557,7 @@ class DefaultDesignTemplates
                     ],
                     'design_form_callback'  => function () {
 
-                        $form = $this->getDefaultDesignForm()->merge($this->getGenericDesignForm());
+                        $form = $this->getDefaultDesignForm();
                         $form->addSubsections(
                             [
                                 'convert_videos' => new YesNoInput(
@@ -604,7 +604,6 @@ class DefaultDesignTemplates
                             ],
                             'generic_sections'
                         );
-                        $form->getProperSubsection('generic_sections')->removeSubsection('use_theme');
                         return $form;
                     },
                     'project_form_callback' => function (Design $design) {
