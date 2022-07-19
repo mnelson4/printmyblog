@@ -35,12 +35,8 @@ abstract class Init
     {
         // prevent loading any PMB until they've ever registered or opted-out of Freemius.
         $this->context = $this->initContext();
-        if (pmb_fs()->is_anonymous() || pmb_fs()->is_registered()) {
-            add_action('init', array($this, 'earlyInit'), 5);
-            add_action('init', array($this, 'init'));
-        } else {
-            add_action('init', array($this, 'minimalInit'));
-        }
+        add_action('init', array($this, 'earlyInit'), 5);
+        add_action('init', array($this, 'init'));
     }
 
     /**
@@ -66,16 +62,6 @@ abstract class Init
         $this->registerStuff();
         $this->setupDbEnvironment();
         $this->takeActionOnIncomingRequest();
-    }
-
-    /**
-     * Initializes a minimal set of features, for before Freemius has been opted-into. Eg frontend stuff taht should still work
-     * even before they've opted in or out of Freemius.
-     * This is really only helpful when migrating from pmb 2 to 3 (not so much new activations) because pmb 2 users
-     * expect their print buttons to keep working after upgrading to 3 and before opting it or out of Freemius
-     */
-    public function minimalInit()
-    {
     }
 
     /**

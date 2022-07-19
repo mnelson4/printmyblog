@@ -131,7 +131,7 @@ class Activation extends BaseActivation
                     RequestType::REQUEST_TYPE_REACTIVATION,
                 ),
                 true
-            )
+            ) && (pmb_fs()->is_anonymous() || pmb_fs()->is_registered())
         ) {
             $this->redirectToActivationPage();
         }

@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.16.0
+Stable tag: 3.16.1
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -106,7 +106,7 @@ Example uses:
 **Pro Print Features**
 
 * saveable projects
-* create digital PDFs, print-ready PDFs, and ePub eBooks (paid only)
+* create digital PDFs, print-ready PDFs, ePub eBooks (paid only), and Microsoft Word documents (paid only)
 * select posts, pages, print materials (posts intended only for use in Pro Print) and most custom post types (eg products from WooCommerce)
 * search and filter for posts based on post type, status, categories, tags, custom taxonomies, author, and publish date
 * drag-and-drop reordering of content (and add new print materials on-the-fly)
@@ -434,6 +434,9 @@ https://youtu.be/uPQ3vqm7A2g
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+
+= 3.16.1 July 20, 2022 =
+* Bugfix: prevent no formats existing when opting into Freemius but before confirming email
 
 = 3.16.0 July 19, 2022 =
 * Feature: introduce Microsoft Word documents for Pro licenses
