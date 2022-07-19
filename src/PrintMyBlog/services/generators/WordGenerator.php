@@ -47,7 +47,7 @@ class WordGenerator extends HtmlBaseGenerator
         wp_enqueue_script(
             'pmb-word',
             PMB_SCRIPTS_URL . 'pmb-word__premium_only.js',
-            ['jquery','pmb-filesaver'],
+            ['jquery', 'pmb-filesaver'],
             filemtime(PMB_SCRIPTS_DIR . 'pmb-word__premium_only.js')
         );
         $css = pmb_get_contents(
@@ -99,7 +99,7 @@ class WordGenerator extends HtmlBaseGenerator
                 'translations' => [
                     'many_articles' => __('Your project is very big and you might have errors downloading the file. If so, try splitting your content into multiple projects and instead creating multiple smaller files.', 'print-my-blog'),
                     'many_images' => __('Your project has lots of images and you might have errors downloading the file. If so, try spltting your content into multiple projects or reducing the image quality set on your design.', 'print-my-blog'),
-                ]
+                ],
             ]
         );
     }

@@ -50,7 +50,7 @@ class DefaultFileFormats
         $word_supported = false;
         if (pmb_fs()->is__premium_only()) {
             $ebook_supported = true;
-            if(pmb_fs()->is_plan__premium_only('founding_members')){
+            if (pmb_fs()->is_plan__premium_only('founding_members')) {
                 $word_supported = true;
             }
         }
@@ -65,7 +65,7 @@ class DefaultFileFormats
                 'color' => '#ffcc00',
                 'extension' => 'epub',
                 'supported' => $ebook_supported,
-                'upsell' => __('Create unlimited ePubs with any purchase.', 'print-my-blog')
+                'upsell' => __('Create unlimited ePubs with any purchase.', 'print-my-blog'),
             ]
         );
         pmb_register_file_format(
@@ -79,7 +79,7 @@ class DefaultFileFormats
                 'color' => '#ffbdde',
                 'extension' => 'doc',
                 'supported' => $word_supported,
-                'upsell' => __('Create unlimited Word Documents with a Pro Plan.', 'print-my-blog')
+                'upsell' => __('Create unlimited Word Documents with a Pro Plan.', 'print-my-blog'),
             ]
         );
     }

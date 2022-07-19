@@ -340,7 +340,7 @@ class DefaultDesigns
                     'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog'
+                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
@@ -348,15 +348,15 @@ class DefaultDesigns
                             'desc' => __(
                                 'Title page and table of contents.',
                                 'print-my-blog'
-                            )
+                            ),
                         ],
                         [
                             'url' => $design_template->getUrl() . 'assets/preview2.jpg',
                             'desc' => __(
                                 'Simple layout',
                                 'print-my-blog'
-                            )
-                        ]
+                            ),
+                        ],
                     ],
                     'design_defaults' => [
                         'header_content' => [
@@ -377,8 +377,7 @@ class DefaultDesigns
                             'content',
                         ],
                     ],
-                    'project_defaults' => [
-                    ]
+                    'project_defaults' => [],
                 ];
             }
         );

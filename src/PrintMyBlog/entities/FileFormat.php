@@ -155,7 +155,7 @@ class FileFormat
     public function coloredTitleAndIcon()
     {
         $html = '<span class="pmb-emphasis" style="background-color:' . $this->color() . '">' . $this->titleAndIcon() . '</span>';
-        if(! $this->supported() && $this->upsell()){
+        if (! $this->supported() && $this->upsell()) {
             $html .= pmb_pro_print_service_only($this->upsell());
         }
         return $html;
