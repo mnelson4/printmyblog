@@ -129,7 +129,7 @@
         columns:2;
     }
     /* Justify content looks way better when there are columns */
-    article:not(.pmb-just-content) div.entry-content p,
+    article:not(.pmb-just-content) div.entry-content p:not(.has-text-align-center, .has-text-align-right),
     article:not(.pmb-just-content) div.entry-content li{
         text-justify:inter-character;
         text-align:justify;

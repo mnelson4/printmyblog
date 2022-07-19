@@ -103,9 +103,16 @@ function pmb_section_wrapper_id()
 /**
  * Echoes out the ID attribute to use on the section.
  */
-function pmb_section_id()
-{
-    echo 'id="' . esc_attr(str_replace('%', '-', get_the_permalink())) . '"';
+function pmb_section_id(){
+	echo 'id="' . pmb_permalink_as_attr() . '"';
+}
+
+/**
+ * Returns the current post's permalink as an attribute
+ * @return string|void
+ */
+function pmb_permalink_as_attr(){
+    return esc_attr(str_replace('%','-',get_the_permalink()));
 }
 
 /**

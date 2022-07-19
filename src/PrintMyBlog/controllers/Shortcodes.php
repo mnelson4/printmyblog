@@ -178,11 +178,14 @@ class Shortcodes extends BaseController
      */
     public function tableOfContents()
     {
-        return '<div  class="pmb-toc">
+        return apply_filters(
+            '\PrintMyBlog\controllers\Shortcodes->tableOfContents',
+            '<div  class="pmb-toc">
 	        <ul id="pmb-toc-list" class="pmb-toc-list ">
 	            <!-- Populated dynamically by JS -->
 	        </ul>
-	    </div>';
+	    </div>'
+        );
     }
 
     /**

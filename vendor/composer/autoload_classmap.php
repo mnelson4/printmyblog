@@ -74,6 +74,7 @@ return array(
     'PrintMyBlog\\services\\generators\\HtmlBaseGenerator' => $baseDir . '/src/PrintMyBlog/services/generators/HtmlBaseGenerator.php',
     'PrintMyBlog\\services\\generators\\PdfGenerator' => $baseDir . '/src/PrintMyBlog/services/generators/PdfGenerator.php',
     'PrintMyBlog\\services\\generators\\ProjectFileGeneratorBase' => $baseDir . '/src/PrintMyBlog/services/generators/ProjectFileGeneratorBase.php',
+    'PrintMyBlog\\services\\generators\\WordGenerator' => $baseDir . '/src/PrintMyBlog/services/generators/WordGenerator.php',
     'PrintMyBlog\\system\\Activation' => $baseDir . '/src/PrintMyBlog/system/Activation.php',
     'PrintMyBlog\\system\\Capabilities' => $baseDir . '/src/PrintMyBlog/system/Capabilities.php',
     'PrintMyBlog\\system\\Context' => $baseDir . '/src/PrintMyBlog/system/Context.php',

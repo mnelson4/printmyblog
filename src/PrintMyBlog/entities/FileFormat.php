@@ -66,6 +66,11 @@ class FileFormat
     protected $supported = true;
 
     /**
+     * @var string text used to upsell if not supported in this version.
+     */
+    protected $upsell = '';
+
+    /**
      * ProjectFormat constructor.
      *
      * @param array $data {
@@ -115,6 +120,9 @@ class FileFormat
         if (array_key_exists('supported', $data)) {
             $this->supported = $data['supported'];
         }
+        if (array_key_exists('upsell', $data)) {
+            $this->upsell = $data['upsell'];
+        }
     }
 
     /**
@@ -146,7 +154,11 @@ class FileFormat
      */
     public function coloredTitleAndIcon()
     {
-        return '<span class="pmb-emphasis" style="background-color:' . $this->color() . '">' . $this->titleAndIcon() . '</span>';
+        $html = '<span class="pmb-emphasis" style="background-color:' . $this->color() . '">' . $this->titleAndIcon() . '</span>';
+        if (! $this->supported() && $this->upsell()) {
+            $html .= pmb_pro_print_service_only($this->upsell());
+        }
+        return $html;
     }
 
     /**
@@ -242,5 +254,13 @@ class FileFormat
     public function supported()
     {
         return $this->supported;
+    }
+
+    /**
+     * @return string
+     */
+    public function upsell()
+    {
+        return $this->upsell;
     }
 }

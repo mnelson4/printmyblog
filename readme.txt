@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.15.10
+Stable tag: 3.16.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -435,8 +435,10 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.15.10 July 4, 2022 =
-* Bugfix: Quick Print use Post Rendering Wait Time to decide how long to wait before resizing images
+= 3.16.0 July 19, 2022 =
+* Feature: introduce Microsoft Word documents for Pro licenses
+* Bugfix: fix Mayer Magazine center and right-aligned text
+* Bugfix: fix Quick Print image resizing by using "Post Rendering Wait Time" setting to calculate how long to wait before resizing images
 
 = 3.15.9 June 17, 2022 =
 * Compatibility: hide [Top Bar](https://wordpress.org/plugins/top-bar/) and [Announcer](https://wordpress.org/plugins/announcer/) banners from printouts

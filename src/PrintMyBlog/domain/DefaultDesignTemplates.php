@@ -538,6 +538,100 @@ class DefaultDesignTemplates
                 ];
             }
         );
+
+        // it's ok to register this design even if the format isn't registered (which it isn't for the wp.org version)
+        pmb_register_design_template(
+            'classic_word',
+            function () {
+                return [
+                    'title'                 => __('Classic Word', 'print-my-blog'),
+                    'format'                => DefaultFileFormats::WORD,
+                    'dir'                   => PMB_DESIGNS_DIR . 'word/classic',
+                    'url' => plugins_url('designs/word/classic', PMB_MAIN_FILE),
+                    'default' => 'classic_word',
+                    'docs' => 'https://printmy.blog/user-guide/', // update
+                    'supports' => [
+                        'front_matter',
+                        'part',
+                        'back_matter',
+                    ],
+                    'design_form_callback'  => function () {
+
+                        $form = $this->getDefaultDesignForm();
+                        $form->addSubsections(
+                            [
+                                'convert_videos' => new YesNoInput(
+                                    [
+                                        'html_label_text' => __('Convert Videos to Images and Links', 'print-my-blog'),
+                                        'html_help_text' => __('Some eReaders don\'t show videos, in which case you may prefer to replace them with an image and a hyperlink to the online video content.', 'print-my-blog'),
+                                        'default' => false,
+                                    ]
+                                ),
+
+                                'internal_links' => new SelectRevealInput(
+                                    [
+                                        'remove' => new InputOption(
+                                            __('Remove', 'print-my-blog')
+                                        ),
+                                        'leave_external' => new InputOption(
+                                            __('Leave as hyperlink to website', 'print-my-blog')
+                                        ),
+                                        'leave' => new InputOption(
+                                            __('Leave as hyperlink to document', 'print-my-blog')
+                                        ),
+                                    ],
+                                    [
+                                        'default' => 'leave',
+                                        'html_label_text' => __('Internal Hyperlinks', 'print-my-blog'),
+                                        'html_help_text' => __('How to display hyperlinks to content included in this project.', 'print-my-blog'),
+                                    ]
+                                ),
+                                'external_links' => new SelectRevealInput(
+                                    [
+                                        'remove' => new InputOption(
+                                            __('Remove', 'print-my-blog')
+                                        ),
+                                        'leave' => new InputOption(
+                                            __('Leave as hyperlink', 'print-my-blog')
+                                        ),
+                                    ],
+                                    [
+                                        'default' => 'leave',
+                                        'html_label_text' => __('External Hyperlinks', 'print-my-blog'),
+                                        'html_help_text' => __('How to display hyperlinks to content not included in this project.', 'print-my-blog'),
+                                    ]
+                                ),
+                            ],
+                            'generic_sections'
+                        );
+                        return $form;
+                    },
+                    'project_form_callback' => function (Design $design) {
+                        $project_form = $this->getDefaultProjectForm($design);
+                        $project_form->merge(
+                            new FormSection(
+                                [
+                                    'subsections' => [
+                                        'post_name' => new TextInput(
+                                            [
+                                                'html_label_text' => __('File name', 'print-my-blog'),
+                                            ]
+                                        ),
+                                        'byline' => new TextAreaInput(
+                                            [
+                                                'html_label_text' => __('ByLine', 'print-my-blog'),
+                                                'html_help_text' => __('Project Author(s)', 'print-my-blog'),
+                                            ]
+                                        ),
+                                    ],
+                                ]
+                            )
+                        );
+                        return $project_form;
+                    },
+                ];
+            }
+        );
     }
 
     /**

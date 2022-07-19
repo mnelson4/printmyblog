@@ -21,6 +21,7 @@ class DefaultSectionTemplates
                 'mayer',
                 'classic_print',
                 'classic_epub',
+                'classic_word',
             ],
             function () {
                 return [

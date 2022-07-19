@@ -90,7 +90,12 @@ function PmbExternalResourceCacher() {
             // find if we already know the mapping
             var copy_url = that.external_resource_mapping[remote_url];
             if(copy_url !== null && copy_url !== false && typeof(copy_url) !== 'undefined'){
-                that._update_element_and_map(remote_url, copy_url, element, attribute);
+                that.resources_pending_caching_count++;
+                that._update_element_and_map(remote_url, copy_url, element, attribute,
+                    function(){
+                        that.resources_pending_caching_count--;
+                        that.check_done_swapping_external_resouces();
+                    });
                 return;
             }
             that.external_resources_to_cache.push(element);
@@ -137,12 +142,29 @@ function PmbExternalResourceCacher() {
      * @param external_url string
      * @param copy_url string
      * @param element
+     * @param ibkiad_callback
      * @private
      */
-    this._update_element_and_map = function(external_url, copy_url, element, attribute){
+    this._update_element_and_map = function(external_url, copy_url, element, attribute, onload_callback){
+        if(element.hasAttribute('srcset')){
+            element.removeAttribute('srcset');
+        }
+        if(element.hasAttribute('sizes')){
+            element.removeAttribute('sizes');
+        }
         element.attributes[attribute].value = copy_url;
+        if(attribute === 'src'){
+            element.src = copy_url;
+        }
+        var clone = element.cloneNode();
+        if(typeof(onload_callback) === 'function'){
+            clone.onload = onload_callback;
+        }
+        element.replaceWith(clone);
+
         this.external_resource_mapping[external_url] = copy_url;
         console.log('PMB swapped "' + external_url + '" for "' + copy_url + '"');
+
     }
 
     /**
@@ -165,7 +187,13 @@ function PmbExternalResourceCacher() {
             },
             function(data, textStatus){
                 if(data.success && typeof(data.data.copy_url) === 'string'){
-                    that._update_element_and_map(url, data.data.copy_url, element, attribute);
+                    //we will need for the image to reload, so undo decrementing that count
+                    that.resources_pending_caching_count++;
+                    that._update_element_and_map(url, data.data.copy_url, element, attribute,
+                        function(){
+                            that.resources_pending_caching_count--;
+                            that.check_done_swapping_external_resouces();
+                        });
                 }
             }
         ).always(function(){

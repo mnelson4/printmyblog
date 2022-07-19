@@ -69,7 +69,7 @@ jQuery(document).on('pmb_wrap_up', function(){
         var download_button = jQuery('#download_link');
         download_button.removeClass('pmb-disabled');
         jQuery('.pmb-loading').remove();
-        jQuery('#download_link').click(function(){
+        download_button.click(function(){
             if(document.location.protocol == 'https:'){
                 var readableStream = epub_blob.stream()
 

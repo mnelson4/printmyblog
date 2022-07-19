@@ -330,6 +330,57 @@ class DefaultDesigns
                 ];
             }
         );
+        pmb_register_design(
+            'classic_word',
+            'classic_word',
+            function (DesignTemplate $design_template) {
+                return [
+                    'title' => __('Classic Word', 'print-my-blog'),
+                    'quick_description' => __('Simple Microsoft Word document when that format is required.', 'print-my-blog'),
+                    'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
+                    'author' => [
+                        'name' => 'Mike Nelson',
+                        'url' => 'https://printmy.blog',
+                    ],
+                    'previews' => [
+                        [
+                            'url' => $design_template->getUrl() . 'assets/preview1.jpg',
+                            'desc' => __(
+                                'Title page and table of contents.',
+                                'print-my-blog'
+                            ),
+                        ],
+                        [
+                            'url' => $design_template->getUrl() . 'assets/preview2.jpg',
+                            'desc' => __(
+                                'Simple layout',
+                                'print-my-blog'
+                            ),
+                        ],
+                    ],
+                    'design_defaults' => [
+                        'header_content' => [
+                            'title',
+                            'subtitle',
+                            'url',
+                            'date_printed',
+                        ],
+                        'post_content' => [
+                            'title',
+                            'id',
+                            'author',
+                            'url',
+                            'published_date',
+                            'categories',
+                            'featured_image',
+                            'excerpt',
+                            'content',
+                        ],
+                    ],
+                    'project_defaults' => [],
+                ];
+            }
+        );
 
 
         do_action('pmb_register_designs');

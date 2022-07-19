@@ -105,6 +105,7 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'PrintMyBlog\\services\\generators\\HtmlBaseGenerator' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/generators/HtmlBaseGenerator.php',
         'PrintMyBlog\\services\\generators\\PdfGenerator' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/generators/PdfGenerator.php',
         'PrintMyBlog\\services\\generators\\ProjectFileGeneratorBase' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/generators/ProjectFileGeneratorBase.php',
+        'PrintMyBlog\\services\\generators\\WordGenerator' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/generators/WordGenerator.php',
         'PrintMyBlog\\system\\Activation' => __DIR__ . '/../..' . '/src/PrintMyBlog/system/Activation.php',
         'PrintMyBlog\\system\\Capabilities' => __DIR__ . '/../..' . '/src/PrintMyBlog/system/Capabilities.php',
         'PrintMyBlog\\system\\Context' => __DIR__ . '/../..' . '/src/PrintMyBlog/system/Context.php',

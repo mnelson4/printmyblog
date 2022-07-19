@@ -212,25 +212,41 @@ function pmb_mark_for_dynamic_resize(min_image_size){
                 element_to_add_css_class_to.addClass('pmb-dynamic-resize');
             }
         }
-        if (typeof (jqe.attr('height')) === 'undefined' || typeof (jqe.attr('width')) === 'undefined') {
-            // record the image's resolution as attributes on it
-            var newImg = new Image();
-
-            newImg.onload = function () {
-                var height = newImg.height;
-                var width = newImg.width;
-                jqe.attr('height', height);
-                jqe.attr('width', width);
-            }
-
-            newImg.src = jqe.prop('src'); // this must be done AFTER setting onload
-        }
+        pmb_set_image_dimension_attributes(element);
     });
 
     // wrap the images again in order for flexbox layout to fill the space properly.
     jQuery('.pmb-dynamic-resize img').wrap('<div class="pmb-dynamic-resized-image-wrapper"></div>');
     // tell JetPack to not resize these images, as we may want a bigger size.
     jQuery('.pmb-dynamic-resize img.wp-image-1108[src*="?resize"]').each(function(i,element){var jqe = jQuery(element); jqe.prop('src',jqe.prop('src').substring(0, src.indexOf('?')))})
+}
+
+/**
+ *
+ * @param element
+ * @param callback_when_done
+ */
+function pmb_set_image_dimension_attributes(element, callback_when_done){
+    if (element.hasAttribute('height') && element.hasAttribute('width')) {
+        if(typeof(callback_when_done) === 'function'){
+            callback_when_done();
+        }
+        return;
+    }
+    // record the image's resolution as attributes on it
+    var newImg = new Image();
+
+    newImg.onload = function () {
+        var height = newImg.height;
+        var width = newImg.width;
+        element.setAttribute('height', height);
+        element.setAttribute('width', width);
+        if(typeof(callback_when_done) === 'function'){
+            callback_when_done();
+        }
+    }
+
+    newImg.src = element.attributes['src'].value; // this must be done AFTER setting onload
 }
 
 /**
