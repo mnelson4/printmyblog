@@ -563,8 +563,8 @@ class DefaultDesignTemplates
                                 'convert_videos' => new YesNoInput(
                                     [
                                         'html_label_text' => __('Convert Videos to Images and Links', 'print-my-blog'),
-                                        'html_help_text' => __('Some eReaders don\'t show videos, in which case you may prefer to replace them with an image and a hyperlink to the online video content.', 'print-my-blog'),
-                                        'default' => false,
+                                        'html_help_text' => __('Some Word Processors don\'t show videos, in which case you may prefer to replace them with an image and a hyperlink to the online video content.', 'print-my-blog'),
+                                        'default' => true,
                                     ]
                                 ),
 

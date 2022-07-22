@@ -75,7 +75,7 @@ class DefaultFileFormats
                 'icon' => 'dashicons-media-document',
                 'generator' => 'PrintMyBlog\services\generators\WordGenerator',
                 'default' => 'classic_word',
-                'desc' => __('Useful when working with people and software that prefer Microft Word. Most formatting is lost and you\'ll probably need to maintain two copies of your works, but sometimes this is the only way.', 'print-my-blog'),
+                'desc' => __('File editable in Microsoft Word, Google Docs, LibreOffice, etc. Useful for sharing persons and programs that require a ".doc" file. Word Documents typically require manual formatting in your chosen Word Processor.', 'print-my-blog'),
                 'color' => '#ffbdde',
                 'extension' => 'doc',
                 'supported' => $word_supported,
