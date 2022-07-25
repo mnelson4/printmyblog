@@ -475,7 +475,7 @@ class DefaultDesignTemplates
                     'dir'                   => PMB_DESIGNS_DIR . 'epub/classic',
                     'url' => plugins_url('designs/epub/classic', PMB_MAIN_FILE),
                     'default' => 'classic_epub',
-                    'docs' => 'https://printmy.blog/user-guide/', // update
+                    'docs' => 'https://printmy.blog/user-guide/pdf-design/7-classic-word-document/',
                     'supports' => [
                         'front_matter',
                         'part',
@@ -496,7 +496,6 @@ class DefaultDesignTemplates
                             ],
                             'generic_sections'
                         );
-                        $form->getProperSubsection('generic_sections')->removeSubsection('use_theme');
                         return $form;
                     },
                     'project_form_callback' => function (Design $design) {
@@ -557,7 +556,7 @@ class DefaultDesignTemplates
                     ],
                     'design_form_callback'  => function () {
 
-                        $form = $this->getDefaultDesignForm();
+                        $form = $this->getDefaultDesignForm()->merge($this->getGenericDesignForm());
                         $form->addSubsections(
                             [
                                 'convert_videos' => new YesNoInput(
@@ -604,6 +603,7 @@ class DefaultDesignTemplates
                             ],
                             'generic_sections'
                         );
+                        $form->getProperSubsection('generic_sections', false)->removeSubsection('powered_by');
                         return $form;
                     },
                     'project_form_callback' => function (Design $design) {
