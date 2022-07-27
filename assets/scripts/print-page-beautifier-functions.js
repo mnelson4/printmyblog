@@ -237,6 +237,7 @@ function pmb_set_image_dimension_attributes(element, callback_when_done){
     var newImg = new Image();
 
     newImg.onload = function () {
+        console.log('PMB loaded image ' + element.currentSrc + ' to determine dimensions');
         var height = newImg.height;
         var width = newImg.width;
         element.setAttribute('height', height);
@@ -247,7 +248,7 @@ function pmb_set_image_dimension_attributes(element, callback_when_done){
     }
 
     newImg.onerror = function(error, otherarg) {
-        alert('error loadin gimage');
+        console.log('PMB error loading image ' + element.currentSrc + ' to determine its dimensions');
     }
 
     newImg.src = element.attributes['src'].value; // this must be done AFTER setting onload
