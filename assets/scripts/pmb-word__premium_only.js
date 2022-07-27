@@ -117,11 +117,17 @@ function PmbImgToDataUrls(finished_callback) {
                     canvas.setAttribute('height', element.attributes['height'].value);
                     canvas.setAttribute('width', element.attributes['width'].value);
                     var context = canvas.getContext && canvas.getContext( '2d' );
-                    context.drawImage(element, 0, 0);
+                    try{
+                        context.drawImage(element, 0, 0);
+                        element.src = canvas.toDataURL();
+                        element.setAttribute('height', original_height);
+                        element.setAttribute('width', original_width);
+                    }catch(e){
+                        console.log('PMB could not convert image ' + element.src + ' to dataUrl');
+                    }
 
-                    element.src = canvas.toDataURL();
-                    element.setAttribute('height', original_height);
-                    element.setAttribute('width', original_width);
+
+
                     that.pending--;
                     that.checkFinished();
                 });

@@ -69,7 +69,6 @@ function PmbExternalResourceCacher() {
     this._replace_external_resources_on = function(tag, attribute) {
         var that = this;
         jQuery(tag).each(function (index, element) {
-            var treat_as_external = true;
             var remote_url = element.attributes[attribute].value;
             try{
                 var remote_domain = (new URL(remote_url)).hostname;
@@ -77,25 +76,44 @@ function PmbExternalResourceCacher() {
                 //invalid URL probably; continue
                 return;
             }
-
-            for (var i = 0; i < that.domains_to_not_map.length; i++) {
+            // double-check the image needed to be cached anyway (because it's external)
+            for (var i in that.domains_to_not_map) {
                 if (remote_domain.indexOf(that.domains_to_not_map[i]) !== -1) {
-                    treat_as_external = false;
-                    break;
+                    // it's not an external image, no need to replace with a cached version
+                    return;
                 }
-            }
-            if (! treat_as_external) {
-                return;
             }
             // find if we already know the mapping
             var copy_url = that.external_resource_mapping[remote_url];
             if(copy_url !== null && copy_url !== false && typeof(copy_url) !== 'undefined'){
                 that.resources_pending_caching_count++;
+                var success_callback = function(cloned_element){
+                    that.external_resource_mapping[remote_url] = copy_url;
+                    console.log('PMB swapped "' + remote_url + '" for "' + copy_url + '"');
+                    that.resources_pending_caching_count--;
+                    that.check_done_swapping_external_resouces();
+                };
+                var error_callback = function(cloned_element){
+                    console.log('PMB ERROR  swapping "' + remote_url + '" for "' + copy_url + '"');
+                    setTimeout(
+                        function(){
+                            that._update_element_and_map(remote_url, copy_url, element, attribute,
+                                success_callback,
+                                function(){
+                                    // error'd twice, give up.
+                                    console.log('PMB gave up swapping "' + remote_url + '" for "' + copy_url + '"');
+                                    that.resources_pending_caching_count--;
+                                    that.check_done_swapping_external_resouces();
+                                }
+                            );
+                        },
+                        500
+                    );
+                };
                 that._update_element_and_map(remote_url, copy_url, element, attribute,
-                    function(){
-                        that.resources_pending_caching_count--;
-                        that.check_done_swapping_external_resouces();
-                    });
+                    success_callback,
+                    error_callback
+                );
                 return;
             }
             that.external_resources_to_cache.push(element);
@@ -142,10 +160,11 @@ function PmbExternalResourceCacher() {
      * @param external_url string
      * @param copy_url string
      * @param element
-     * @param ibkiad_callback
+     * @param onload_callback
+     * @param function onerror_callback
      * @private
      */
-    this._update_element_and_map = function(external_url, copy_url, element, attribute, onload_callback){
+    this._update_element_and_map = function(external_url, copy_url, element, attribute, onload_callback, onerror_callback){
         if(element.hasAttribute('srcset')){
             element.removeAttribute('srcset');
         }
@@ -157,13 +176,17 @@ function PmbExternalResourceCacher() {
             element.src = copy_url;
         }
         var clone = element.cloneNode();
-        if(typeof(onload_callback) === 'function'){
-            clone.onload = onload_callback;
-        }
         element.replaceWith(clone);
-
-        this.external_resource_mapping[external_url] = copy_url;
-        console.log('PMB swapped "' + external_url + '" for "' + copy_url + '"');
+        if(typeof(onload_callback) === 'function'){
+            clone.onload = function(){
+                onload_callback(clone)
+            };
+        }
+        if(typeof(onerror_callback) === 'function'){
+            clone.onerror = function(){
+                onerror_callback(clone);
+            }
+        }
 
     }
 

@@ -94,7 +94,7 @@ class WordGenerator extends HtmlBaseGenerator
                 'css' => $css,
                 'pmb_nonce' => wp_create_nonce('pmb_pro_page'),
                 'external_resouce_mapping' => $this->external_resource_cache->getMapping(),
-                'domains_to_not_map' => $this->external_resource_cache->domainsToNotMap(),
+                'domains_to_not_map' => (array)$this->external_resource_cache->domainsToNotMap(),
                 'ajaxurl' => admin_url('admin-ajax.php'),
                 'translations' => [
                     'many_articles' => __('Your project is very big and you might have errors downloading the file. If so, try splitting your content into multiple projects and instead creating multiple smaller files.', 'print-my-blog'),
@@ -136,13 +136,13 @@ TOC \o \"1-3\" \u
 
     /**
      *
-     * @param $domains_to_not_map
+     * @param array $domains_to_not_map
      * @return mixed
      */
     public function cacheWpComToo($domains_to_not_map)
     {
         $key = array_search('.wp.com', $domains_to_not_map);
         unset($domains_to_not_map[$key]);
-        return $domains_to_not_map;
+        return array_values($domains_to_not_map);
     }
 }

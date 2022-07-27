@@ -246,6 +246,10 @@ function pmb_set_image_dimension_attributes(element, callback_when_done){
         }
     }
 
+    newImg.onerror = function(error, otherarg) {
+        alert('error loadin gimage');
+    }
+
     newImg.src = element.attributes['src'].value; // this must be done AFTER setting onload
 }
 
