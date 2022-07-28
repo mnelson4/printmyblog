@@ -114,8 +114,8 @@ function PmbImgToDataUrls(finished_callback) {
             that.pending++;
             pmb_set_image_dimension_attributes(element,
                 function(){
-                    canvas.setAttribute('height', element.attributes['height'].value);
-                    canvas.setAttribute('width', element.attributes['width'].value);
+                    canvas.setAttribute('height', element.naturalHeight);
+                    canvas.setAttribute('width', element.naturalWidth);
                     var context = canvas.getContext && canvas.getContext( '2d' );
                     try{
                         context.drawImage(element, 0, 0);
