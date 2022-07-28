@@ -44,13 +44,21 @@ function pmb_export_as_doc(){
 function pmb_limit_img_widths(){
     jQuery('img').each(function(index, element){
         var old_width = element.getAttribute('width');
-        var new_width = Math.min(old_width, 642);
+        var new_width = Math.min(old_width, 642); //about page width
+        var old_height = element.getAttribute('height');
         var ratio = new_width / old_width;
+        var new_height = old_height * ratio;
+        // double-check its not bigger than the page
+        if( new_height > 870 ) { // 9about page height
+            new_height = 870;
+            ratio = new_height / old_height;
+            new_width = old_width * ratio;
+        }
         if(element.hasAttribute('width')){
             element.setAttribute('width', new_width);
         }
         if(element.hasAttribute('height')){
-            element.setAttribute('height', element.getAttribute('height') * ratio);
+            element.setAttribute('height', new_height);
         }
     });
 }
@@ -149,6 +157,10 @@ jQuery(document).on('pmb_wrap_up', function() {
     var download_button = jQuery('#download_link');
 
     pmb_replace_links_for_word();
+    // word doesn't know how to handle figcaptions (it shows them inline) so replace with paragraphs
+    jQuery('figcaption').replaceWith(function(){
+        return "<p>" + jQuery( this ).text() + "</p>";
+    });
 
     jQuery(document).on("pmb_external_resouces_loaded", function() {
         var dataurl_converter = new PmbImgToDataUrls(

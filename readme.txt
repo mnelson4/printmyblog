@@ -437,6 +437,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.16.1 July 20, 2022 =
 * Bugfix: prevent no formats existing when opting into Freemius but before confirming email
+* Bugfix: prevent images in Word from being taller than the page and appearing stretched
 
 = 3.16.0 July 19, 2022 =
 * Feature: introduce Microsoft Word documents for Pro licenses
