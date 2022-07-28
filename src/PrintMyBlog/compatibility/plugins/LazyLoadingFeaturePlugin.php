@@ -30,6 +30,9 @@ class LazyLoadingFeaturePlugin extends CompatibilityBase
         );
     }
 
+    /**
+     * Prevent lazy loading images.
+     */
     public function setRenderingHooks()
     {
         // when rendering pro print, always disable lazy loading

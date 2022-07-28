@@ -2,9 +2,18 @@
 
 namespace PrintMyBlog\services\generators;
 
+use Exception;
+
+/**
+ * Class WordGenerator
+ * @package PrintMyBlog\services\generators
+ */
 class WordGenerator extends HtmlBaseGenerator
 {
 
+    /**
+     * Start making doc
+     */
     public function startGenerating()
     {
         add_filter(
@@ -21,6 +30,7 @@ class WordGenerator extends HtmlBaseGenerator
      */
     public function addPrintWindowToPage()
     {
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         echo pmb_get_contents(
             PMB_TEMPLATES_DIR . 'partials/pro_print_page_word_window.php',
             [
@@ -31,6 +41,9 @@ class WordGenerator extends HtmlBaseGenerator
         );
     }
 
+    /**
+     * @throws Exception
+     */
     public function enqueueStylesAndScripts()
     {
         wp_enqueue_script('pmb_pro_page');
@@ -117,7 +130,7 @@ class WordGenerator extends HtmlBaseGenerator
     }
 
     /**
-     * ignores original html
+     * Ignores original html.
      */
     public function wordToc()
     {
@@ -141,7 +154,7 @@ TOC \o \"1-3\" \u
      */
     public function cacheWpComToo($domains_to_not_map)
     {
-        $key = array_search('.wp.com', $domains_to_not_map);
+        $key = array_search('.wp.com', $domains_to_not_map, true);
         unset($domains_to_not_map[$key]);
         return array_values($domains_to_not_map);
     }
