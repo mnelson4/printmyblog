@@ -151,17 +151,17 @@ jQuery(document).on('pmb_wrap_up', function() {
     pmb_replace_links_for_word();
 
     jQuery(document).on("pmb_external_resouces_loaded", function() {
-        var dataurl_converter = new PmbImgToDataUrls(
-            function(){
+        // var dataurl_converter = new PmbImgToDataUrls(
+        //     function(){
                 jQuery('.pmb-loading').remove();
                 pmb_limit_img_widths();
                 download_button.removeClass('pmb-disabled');
                 download_button.click(function() {
                     pmb_export_as_doc();
                 });
-            }
-        );
-        dataurl_converter.convert();
+        //     }
+        // );
+        // dataurl_converter.convert();
     });
     var erc = new PmbExternalResourceCacher();
     erc.replaceExternalImages();
