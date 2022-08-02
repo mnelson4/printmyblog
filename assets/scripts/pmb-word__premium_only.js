@@ -106,49 +106,67 @@ function pmb_replace_links_for_word(external_link_policy, internal_link_policy)
  * @constructor
  */
 function PmbImgToDataUrls(finished_callback) {
-    this.pending = 0;
+    this.pending = [];
     this.finished_callback = finished_callback;
+    this.canvas = null;
 
     /**
      * starts converting images to dataurls
      */
     this.convert = function(){
         // trock from https://stackoverflow.com/questions/15760764/how-to-get-base64-encoded-data-from-html-imagea
-        var canvas = document.createElement( 'canvas' );
+        this.canvas = document.createElement( 'canvas' );
         var that = this;
-        jQuery('img').each(function(index, element){
-            var original_height = element.offsetHeight;
-            var original_width = element.offsetWidth;
-            that.pending++;
-            pmb_set_image_dimension_attributes(element,
-                function(){
-                    canvas.setAttribute('height', element.naturalHeight);
-                    canvas.setAttribute('width', element.naturalWidth);
-                    var context = canvas.getContext && canvas.getContext( '2d' );
-                    try{
-                        context.drawImage(element, 0, 0);
-                        element.src = canvas.toDataURL();
-                        element.setAttribute('height', original_height);
-                        element.setAttribute('width', original_width);
-                    }catch(e){
-                        console.log('PMB could not convert image ' + element.src + ' to dataUrl');
-                    }
-
-
-
-                    that.pending--;
-                    that.checkFinished();
-                });
-        });
+        this.enqueue();
         that.checkFinished();
     }
 
     /**
+     * First enqueues all the images we need to convert.
+     */
+    this.enqueue = function(){
+        var that = this;
+        jQuery('img').each(function(index, element){
+            that.pending.push(element);
+        });
+    }
+
+    /**
+     * Grab an enqueued image and convert it, then see if we're done.
+     */
+    this.continueConvertingImages = function(){
+        var that = this;
+        var element = this.pending.pop();
+        var original_height = element.offsetHeight;
+        var original_width = element.offsetWidth;
+        pmb_set_image_dimension_attributes(
+            element,
+            function(){
+                that.canvas.setAttribute('height', element.naturalHeight);
+                that.canvas.setAttribute('width', element.naturalWidth);
+                var context = that.canvas.getContext && that.canvas.getContext( '2d' );
+                try{
+                    context.drawImage(element, 0, 0);
+                    element.src = that.canvas.toDataURL();
+                    element.setAttribute('height', original_height);
+                    element.setAttribute('width', original_width);
+                }catch(e){
+                    console.log('PMB could not convert image ' + element.src + ' to dataUrl');
+                }
+                that.checkFinished();
+            }
+        );
+    }
+
+    /**
+     * If we've converted all the enqueued images, stop and do the wrap-up callback; otherwise keep converting images.
      * @private
      */
     this.checkFinished = function(){
-        if(this.pending <= 0){
+        if(this.pending.length <= 0){
             this.finished_callback();
+        } else {
+            this.continueConvertingImages();
         }
     }
 }
