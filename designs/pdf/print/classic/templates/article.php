@@ -56,7 +56,7 @@
         if (pmb_design_uses('featured_image', true) && has_post_thumbnail()) {
             ?>
             <figure class="post-thumbnail">
-                <?php the_post_thumbnail('full', ['class' => 'alignnone pmb-featured-image']); ?>
+                <?php the_post_thumbnail('full', ['class' => 'alignnone pmb-featured-image','loading' => 'eager']); ?>
                 <?php if (wp_get_attachment_caption(get_post_thumbnail_id())) : ?>
                     <figcaption
                             class="wp-caption-text"><?php echo wp_kses_post(wp_get_attachment_caption(get_post_thumbnail_id())); ?></figcaption>
