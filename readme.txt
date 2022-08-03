@@ -438,6 +438,7 @@ https://youtu.be/uPQ3vqm7A2g
 = 3.16.2 August 3, 2022 =
 * Bugfix: when generating Word docs, prevent bug that downloaded it multiple times
 * Bugfix: avoid lazy loading featured images in Pro Print
+* Bugfix: for Word docs, change external stylesheets to inline ones to simplify debugging CSS issues
 
 = 3.16.1 July 28, 2022 =
 * Bugfix: prevent no formats existing when opting into Freemius but before confirming email

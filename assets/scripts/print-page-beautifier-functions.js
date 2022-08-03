@@ -365,3 +365,20 @@ function _pmb_for_each_hyperlink(internal_hyperlink_callback, external_hyperlink
         }
     });
 }
+
+/**
+ * Changes external stylesheets to inline ones so a generated file is more independent (with regards to CSS anyway)
+ */
+function pmb_inline_css(){
+    // don't inline dashicons, as it uses relative links to images
+    jQuery('link[rel="stylesheet"][id!="dashicons-css"]').each(function(index,element){
+        var jqe = jQuery(element);
+        var url = jqe.attr('href');
+        if(url){
+            jQuery.get(url).success(function(data,status){
+                jqe.replaceWith('<style><!-- PMB inlined from ' + url + ' -->\r\n' + data + '</style>');
+            });
+        }
+
+    })
+}

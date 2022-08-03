@@ -175,6 +175,7 @@ jQuery(document).on('pmb_wrap_up', function() {
     var download_button = jQuery('#download_link');
 
     pmb_replace_links_for_word();
+    pmb_inline_css();
     // word doesn't know how to handle figcaptions (it shows them inline) so replace with paragraphs
     jQuery('figcaption').replaceWith(function(){
         return "<p>" + jQuery( this ).text() + "</p>";
