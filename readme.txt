@@ -435,7 +435,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.16.3 August 17, 2022 =
+= 3.16.3 August 16, 2022 =
 * Bugfix: prevent warning from JetPack infinite scroll during generation by using $wp_the_query instead of $wp_query
 
 = 3.16.2 August 3, 2022 =
