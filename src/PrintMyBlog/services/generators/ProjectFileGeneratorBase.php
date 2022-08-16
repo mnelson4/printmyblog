@@ -222,12 +222,12 @@ abstract class ProjectFileGeneratorBase
      */
     protected function generateSections(array $project_sections)
     {
-        global $post, $wp_query;
+        global $post, $wp_the_query;
         // Override WP_Query global to generate sections like WP's "the loop".
         // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-        $wp_query = $this->setupWpQuery($project_sections);
-        while ($wp_query->have_posts()) {
-            $wp_query->the_post();
+        $wp_the_query = $this->setupWpQuery($project_sections);
+        while ($wp_the_query->have_posts()) {
+            $wp_the_query->the_post();
             $this->setupPostData();
             $this->maybeGenerateDivisionTransition($post);
             $this->generateSection();
