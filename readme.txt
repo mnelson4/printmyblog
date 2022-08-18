@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.16.3
+Stable tag: 3.16.4
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -434,6 +434,9 @@ https://youtu.be/uPQ3vqm7A2g
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+
+= 3.16.4 xxxx =
+* Compatibility: don't cut off Elementor/WooCommerce items at the bottom of the page of PDFs
 
 = 3.16.3 August 16, 2022 =
 * Bugfix: prevent warning from JetPack infinite scroll during generation by using $wp_the_query instead of $wp_query
