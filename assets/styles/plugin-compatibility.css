@@ -179,3 +179,17 @@ Announcer plugin integration
 .ancr-sticky{
     display:none;
 }
+
+/**
+Elementor.
+Turn its flexboxes into regular blocks so pagebreaks work better again
+ */
+.pmb-posts .elementor-section .elementor-container{
+    display:block;
+}
+.pmb-posts .elementor-column{
+    display:block;
+}
+.pmb-posts .elementor:not(.elementor-bc-flex-widget) .elementor-widget-wrap{
+    display:block;
+}
