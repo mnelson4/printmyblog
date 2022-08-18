@@ -44,12 +44,6 @@ abstract class Init
      */
     public function earlyInit()
     {
-        $compatibility_mods_loader = $this->context->reuse('PrintMyBlog\compatibility\DetectAndActivate');
-        $compatibility_mods_loader->detectAndActivateGlobalCompatibilityMods();
-        // There's no actions between when we know it's a REST request ('parse_request' is when "REST_REQUEST" gets
-        // defined)
-        // and the posts are fetched for the REST API response, except this one (and maybe another).
-        add_filter('rest_pre_dispatch', [$compatibility_mods_loader, 'activateRenderingCompatibilityModes'], 11);
     }
 
     /**
