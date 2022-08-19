@@ -437,6 +437,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.16.4 xxxx =
 * Compatibility: don't cut off Elementor/WooCommerce items at the bottom of the page of PDFs
+* Compatibility: avoid leading empty page of PDFs when using WooCommerce
 
 = 3.16.3 August 16, 2022 =
 * Bugfix: prevent warning from JetPack infinite scroll during generation by using $wp_the_query instead of $wp_query

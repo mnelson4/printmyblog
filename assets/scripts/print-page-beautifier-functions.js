@@ -7,6 +7,10 @@ function pmb_remove_unsupported_content(){
     jQuery('noscript').remove();
     // Don't stack columns vertically
     jQuery('.wp-block-columns').addClass('is-not-stacked-on-mobile');
+    // remove empty divs, as one of them at the start will cause an empty first page (happens when WooCommerce active)
+    jQuery("body>div").filter(function() {
+        return jQuery.trim(jQuery(this).html()) === "";
+    }).remove();
 }
 
 /**
