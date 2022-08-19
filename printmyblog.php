@@ -120,7 +120,7 @@ version_compare(
 
     add_action('admin_notices', 'pmb_minimum_wp_version_error', 1, 0);
 } else {
-    // it's all good! go for it!
+    // it's all good! start bootstraping PMB.
     define('PMB_VERSION', '3.16.4');
     define('PMB_DIR', wp_normalize_path(__DIR__) . '/');
     define('PMB_MAIN_FILE', __FILE__);
