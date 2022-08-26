@@ -267,8 +267,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null)
     }
     ?>
     <div class="list-group-item pmb-project-item" tabindex="0" id="pmb-content-item-<?php echo esc_attr($id); ?>" data-id="<?php echo esc_attr($id); ?>">
-        <div class="pmb-project-item-header" title="
-        <?php
+        <div class="pmb-project-item-header" title="<?php
         echo esc_attr(
             sprintf(
                 __('Drag the %s "%s" into your project', 'print-my-blog'),
