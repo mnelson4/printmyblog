@@ -72,7 +72,8 @@ class PostWrapperManager
     public function count(WP_Query $query)
     {
         $query = $this->setQueryForThisPostType($query);
-        return $query->post_count;
+        $query->get_posts();
+        return $query->found_posts;
     }
 
     /**
