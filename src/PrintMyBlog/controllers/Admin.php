@@ -748,11 +748,16 @@ class Admin extends BaseController
                                 'generate_ajax_data' => apply_filters(
                                     '\PrintMyBlog\controllers\Admin->enqueueScripts generate generate_ajax_data',
                                     [
-                                        'action' => 'pmb_project_status',
+                                        'action' => Frontend::PMB_PROJECT_STATUS_ACTION,
                                         'ID' => $this->project->getWpPost()->ID,
                                         '_nonce' => wp_create_nonce('pmb-project-edit'),
                                     ],
                                     $this->project
+                                ),
+                                'pmb_ajax' => add_query_arg([
+                                        Frontend::PMB_AJAX_INDICATOR => 1,
+                                    ],
+                                    site_url()
                                 ),
                                 'site_url' => site_url(),
                                 'use_pmb_central_for_previews' => $use_pmb_central,

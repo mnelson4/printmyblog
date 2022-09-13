@@ -154,7 +154,8 @@ class Init extends BaseInit
             $admin->setHooks();
             $this->initDashboardNews();
         } else {
-            (new Frontend())->setHooks();
+            $frontend = $this->context->reuse('PrintMyBlog\controllers\Frontend');
+            $frontend->setHooks();
             (new LegacyPrintPage())->setHooks();
         }
         // These are needed at least during frontend and ajax requests

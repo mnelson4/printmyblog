@@ -15,6 +15,8 @@
  * Text Domain: print-my-blog
  */
 
+use PrintMyBlog\controllers\Frontend;
+
 if (! defined('PMB_MIN_PHP_VER_REQUIRED')) {
     define('PMB_MIN_PHP_VER_REQUIRED', '5.4.0');
 }
@@ -214,7 +216,12 @@ version_compare(
     // Disable the active theme if generating a PDF.
     // This needs to be done super early
     // phpcs:disable WordPress.Security.NonceVerification.Recommended -- we're just looking, not processing or saving etc.
-    if (defined('DOING_AJAX') && isset($_REQUEST['action'], $_REQUEST['format']) && $_REQUEST['action'] === 'pmb_project_status') {
+    if ((
+            defined('DOING_AJAX') ||
+            isset($_REQUEST[Frontend::PMB_AJAX_INDICATOR])
+        ) &&
+        isset($_REQUEST['action'], $_REQUEST['format']) &&
+        $_REQUEST['action'] === Frontend::PMB_PROJECT_STATUS_ACTION) {
         // Find if this project's design for this format uses the theme or not.
         // This circumvents a ton of our own code which isn't setup at all yet.
         $project_id = isset($_REQUEST['ID']) ? (int)$_REQUEST['ID'] : null;
@@ -238,8 +245,16 @@ version_compare(
             // ha, they say to use the theme. So don't change anything
             return;
         }
-        // We don't want the theme interfering. Kill it.
-        add_filter('wp_using_themes', '__return_false');
+        // unregister the theme once we have a moment to override it
+        add_action(
+            'template_redirect',
+            function(){
+                // We don't want the theme interfering. Kill it.
+                add_filter('wp_using_themes', '__return_false');
+            },
+            9
+        );
+
         // some plugins and theme still assume a theme, so give them the directory of our bundled fake theme
         add_filter(
             'template_directory',

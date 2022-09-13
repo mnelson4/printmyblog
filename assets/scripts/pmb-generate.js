@@ -7,7 +7,7 @@ jQuery(document).ready(function () {
         var data = pmb_generate.generate_ajax_data;
         data.format = format_slug;
         jQuery.ajax({
-            url:ajaxurl,
+            url:pmb_generate.pmb_ajax,
             method:'POST',
             data:data,
             dataType:'json',

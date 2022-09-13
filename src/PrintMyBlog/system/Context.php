@@ -164,6 +164,10 @@ class Context extends BaseContext
             'PrintMyBlog\services\ExternalResourceCache' => [
                 'PrintMyBlog\orm\managers\ExternalResourceManager' => self::REUSE,
             ],
+            'PrintMyBlog\controllers\Frontend' => [
+                'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
+                'PrintMyBlog\services\FileFormatRegistry'   => self::REUSE,
+            ]
         ];
     }
 }
