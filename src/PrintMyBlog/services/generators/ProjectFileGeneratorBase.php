@@ -133,12 +133,6 @@ abstract class ProjectFileGeneratorBase
      */
     protected function startGenerating()
     {
-        // falsely claim we're on the frontend. This way JetPack and others will enqueue their assets like they should.
-        // See https://github.com/mnelson4/printmyblog/issues/311
-        global $current_screen;
-        // Override this global because so many other plugins incorrectly assume AJAX requests don't need to enqueue scripts etc.
-        // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-        $current_screen = WP_Screen::get('front');
         // show protected posts' bodies as normal.
         add_filter('post_password_required', '__return_false');
         // don't add "protected" or "private" onto post titles when generating
