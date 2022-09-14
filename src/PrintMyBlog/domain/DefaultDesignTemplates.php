@@ -647,7 +647,7 @@ class DefaultDesignTemplates
                         'part',
                         'back_matter',
                     ],
-                    'url' => plugins_url('designs/pdf/digital/haller', PMB_MAIN_FILE),
+                    'url' => plugins_url('designs/pdf/print/haller', PMB_MAIN_FILE),
                     'design_form_callback'  => function () {
                         $design_form = (new FormSection(
                             [
