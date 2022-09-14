@@ -632,6 +632,82 @@ class DefaultDesignTemplates
                 ];
             }
         );
+
+        pmb_register_design_template(
+            'haller',
+            function () {
+                return [
+                    'title'           => __('Haller Tabloid Print PDF'),
+                    'format'          => 'print_pdf',
+                    'dir'             => PMB_DESIGNS_DIR . 'pdf/print/haller/',
+                    'default' => 'haller',
+                    'docs' => 'https://printmy.blog/user-guide/pdf-design/haller-tabloid-print-pdf/',
+                    'supports' => [
+                        'front_matter',
+                        'part',
+                        'back_matter',
+                    ],
+                    'url' => plugins_url('designs/pdf/digital/haller', PMB_MAIN_FILE),
+                    'design_form_callback'  => function () {
+                        $design_form = (new FormSection(
+                            [
+                                'subsections' => [
+                                    'post_header_in_columns' => new YesNoInput(
+                                        [
+                                            'html_label_text' => __('Show Post Header inside Columns', 'print-my-blog'),
+                                            'html_help_text' => __('Check this to make post header information, like title, date, author, etc, appear inside columns; uncheck this to have it take up the full page width', 'print-my-blog'),
+                                        ]
+                                    ),
+                                    'images_full_column' => new YesNoInput(
+                                        [
+                                            'html_label_text' => __('Full-Column Images', 'print-my-blog'),
+                                            'html_help_text' => __('Resizes images to be the full column width (except ones with the CSS class "mayer-no-resize")', 'print-my-blog'),
+                                        ]
+                                    ),
+                                    'no_extra_columns' => new YesNoInput(
+                                        [
+                                            'html_label_text' => __('Remove Extra Columns', 'print-my-blog'),
+                                            'default' => true,
+                                            'html_help_text' => __('Forces your content to only use two columns, even if the content itself was divided into more columns (eg using the "Columns" block)', 'print-my-blog'),
+                                        ]
+                                    ),
+                                    'image' => new FormSection(
+                                        [
+                                            'subsections' => $this->getImageSnapInputs(),
+                                        ]
+                                    ),
+                                ],
+                            ]
+                        ))->merge($this->getGenericDesignForm());
+                        $design_form->findSection('image_placement')->removeOption('dynamic-resize');
+                        $design_form->removeSubsection('dynamic-resize');
+                        return $design_form;
+                    },
+                    'project_form_callback' => function (Design $design) {
+                        $sections['byline'] = new TextInput(
+                            [
+                                'html_display_text' => __('Byline', 'print-my-blog'),
+                                'html_help_text' => __('Project author(s)', 'print-my-blog'),
+                            ]
+                        );
+                        $sections['cover_preamble'] = new TextAreaInput(
+                            [
+                                'html_label_text' => __('Coverpage Preamble', 'print-my-blog'),
+                                'html_help_text' => __(
+                                    'Explanatory text that appears at the bottom of the cover page',
+                                    'print-my-blog'
+                                ),
+                            ]
+                        );
+                        return new FormSection(
+                            [
+                                'subsections' => $sections,
+                            ]
+                        );
+                    },
+                ];
+            }
+        );
     }
 
     /**

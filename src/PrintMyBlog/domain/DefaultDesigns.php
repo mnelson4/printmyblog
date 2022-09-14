@@ -252,23 +252,6 @@ class DefaultDesigns
                         ],
                     ],
                     'design_defaults' => [
-                        'header_content' => [
-                            'title',
-                            'subtitle',
-                            'url',
-                            'date_printed',
-                        ],
-                        'post_content' => [
-                            'title',
-                            'id',
-                            'author',
-                            'url',
-                            'published_date',
-                            'categories',
-                            'featured_image',
-                            'excerpt',
-                            'content',
-                        ],
                         'page_per_post' => false,
                         'post_header_in_columns' => false,
                     ],
@@ -378,6 +361,45 @@ class DefaultDesigns
                         ],
                     ],
                     'project_defaults' => [],
+                ];
+            }
+        );
+
+        pmb_register_design(
+            'haller',
+            'haller',
+            function (DesignTemplate $design_template) {
+                return [
+                    'title' => __('Haller Tabloid', 'print-my-blog'),
+                    'quick_description' => __('Print-ready newspaper design', 'print-my-blog'),
+                    'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
+                    'author' => [
+                        'name' => 'Mike Nelson',
+                        'url' => 'https://printmy.blog',
+                    ],
+                    'previews' => [
+                        [
+                            'url' => $design_template->getUrl() . 'assets/preview1.jpg',
+                            'desc' => __(
+                                'Title page and table of contents both fit on the first page.',
+                                'print-my-blog'
+                            ),
+                        ],
+                        [
+                            'url' => $design_template->getUrl() . 'assets/preview2.jpg',
+                            'desc' => __(
+                                'Two column layout which compactly shows content and images.',
+                                'print-my-blog'
+                            ),
+                        ],
+                    ],
+                    'design_defaults' => [
+                        'page_per_post' => false,
+                        'post_header_in_columns' => false,
+                    ],
+                    'project_defaults' => [
+                        'title' => get_bloginfo('name'),
+                    ],
                 ];
             }
         );

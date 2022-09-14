@@ -1,0 +1,185 @@
+/* pagination */
+@media print, screen {
+    .pmb-front-matter {
+        display: block;
+        page: front-matter;
+        counter-reset: page 1
+    }
+
+    @page front-matter {
+        @bottom-right {
+            content: counter(page, lower-roman)
+        }
+    }
+
+
+    @page{
+        margin-left:1.5em;
+        margin-right:1.5em;
+        counter-reset: footnote;
+
+        @footnotes {
+            border-top: solid black thin;
+            padding-top: 8pt;
+        }
+    }
+    body {
+        prince-footnote-policy: keep-with-line;
+    }
+
+
+    .pmb-main-matter {
+        display: block;
+        page: main-matter;
+        counter-reset: page 1
+    }
+
+    @page main-matter {
+        @top-left {
+            content: string(part-title, first-except);
+        }
+        /*@top-right {
+            content: string(article-title, first-except)
+        }*/
+        @bottom-right {
+            content: counter(page)
+        }
+    }
+
+    @page back-matter {
+        @top-right {
+            content: string(article-title, first-except)
+        }
+        @bottom-right {
+            content: counter(page)
+        }
+    }
+
+    /* Title Page styles */
+    .pmb-posts-header{
+        margin-top:2in;
+        text-align:center;
+    }
+    .pmb-posts-header .project-title{
+        font-size:5em;
+    }
+    .project-intro{
+        padding:1em;
+        text-align:initial;
+    }
+
+
+    /* toc */
+    .pmb-toc-list{
+        column-span:all;
+        padding-left:0;
+        width:100%;
+    }
+    .pmb-toc-list{
+        width:80vw;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .pmb-toc-list li{
+        padding-left:0;
+        list-style:none;
+    }
+    .pmb-toc-item.pmb-toc-height-1{
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-top: 10px;
+    }
+    .pmb-toc-item.pmb-toc-depth-1{
+        margin-left:1em;
+    }
+    .pmb-toc-list .pmb-toc-item.pmb-toc-front a::after {
+        content: leader('.') target-counter(attr(href), page, lower-roman) !important;
+    }
+    .pmb-toc-list .pmb-toc-item:not(.pmb-toc-front) a::after {
+        content: leader('.') target-counter(attr(href), page) !important;
+    }
+
+    /* General */
+    img, figure{
+        max-width:100%;
+    }
+    /**
+     * avoid margins for block columns
+     */
+    .wp-block-column:not(:first-child){
+        margin-left:0;
+    }
+    .wp-block-columns>.wp-block-column{
+        width:100% !important;
+    }
+
+
+
+    /* part styling*/
+    .pmb-part{
+        column-span: all;
+    }
+    .pmb-part h1.pmb-title{
+        font-size:300%;
+        font-weight:400;
+        string-set: part-title content();
+    }
+    .pmb-part div.entry-content{
+        margin-top:1in;
+        columns:2;
+    }
+    /* Justify content looks way better when there are columns */
+    article:not(.pmb-just-content) div.entry-content p:not(.has-text-align-center, .has-text-align-right),
+    article:not(.pmb-just-content) div.entry-content li{
+        text-justify:inter-character;
+        text-align:justify;
+    }
+    .pmb-print-page .pmb-single-column div.entry-content{
+        columns:1;
+    }
+
+
+    /* Article styles */
+    .pmb-article h1.pmb-title {
+        string-set: article-title content();
+    }
+
+    .project-title{
+        border-bottom:2px solid black;
+    }
+    .mayer-wide{
+        column-span: all;
+    }
+    .mayer-columns{
+        columns:2;
+    }
+    .project-intro{
+        background-color:lightgrey;
+        font-style:italic;
+    }
+    .pmb-posts span.pmb-footnote{
+        float:footnote;
+        text-align:left;
+        margin-left:0;
+        font-weight:normal;
+    }
+}
+
+/*
+    Make the preview appear about the same size as in the PDF. Besides making the preview better,
+    Javascript code that's calculating element dimensions will be better too.
+    Note these margins are different from the classic designs' margins.
+*/
+@media not print{
+    .pmb-project-content{
+        width: calc(8.5in - 1.5em - 1.5em);
+    }
+}
+@media print{
+    #haller-repeat-logo{
+        position:absolute;
+        top:0;
+        background-color:blue;
+        color:white;
+    }
+}
