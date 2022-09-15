@@ -44,11 +44,15 @@ class Frontend extends BaseController
      */
     protected $format_registry;
 
+    /**
+     * Context injects these dependencies.
+     * @param ProjectManager $project_manager
+     * @param FileFormatRegistry $format_registry
+     */
     public function inject(
         ProjectManager $project_manager,
         FileFormatRegistry $format_registry
-    )
-    {
+    ) {
         $this->project_manager = $project_manager;
         $this->format_registry = $format_registry;
     }
@@ -150,7 +154,7 @@ class Frontend extends BaseController
         // which makes lots of plugins malfunction. Plus, many legitimately think they don't need to enqueue
         // scripts on AJAX requests.
 
-        if (isset($_REQUEST[self::PMB_AJAX_INDICATOR]) && $_REQUEST['action'] === self::PMB_PROJECT_STATUS_ACTION) {
+        if (isset($_REQUEST[self::PMB_AJAX_INDICATOR], $_REQUEST['action']) && $_REQUEST['action'] === self::PMB_PROJECT_STATUS_ACTION) {
             if (! isset($_POST['_nonce']) || ! wp_verify_nonce(sanitize_key($_POST['_nonce']), 'pmb-project-edit')) {
                 wp_send_json_error(
                     [
