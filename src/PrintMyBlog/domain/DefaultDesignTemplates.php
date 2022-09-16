@@ -652,6 +652,25 @@ class DefaultDesignTemplates
                         $design_form = (new FormSection(
                             [
                                 'subsections' => [
+                                    'publication_title' => new TextInput(
+                                        [
+                                            'html_label_text' => __('Title of Publication', 'print-my-blog'),
+                                            'html_help_text' => __('Shown in a large font on front page and in the top margin of every subsequent page.')
+                                        ]
+                                    ),
+                                    'publication_subtitle' => new TextInput(
+                                        [
+                                            'html_label_text' => __('Subtitle of Publication', 'print-my-blog'),
+                                            'html_help_text' => __('Only shown on front page, under the name of the publication, in a slightly smaller font.')
+                                        ]
+                                    ),
+                                    'cover_preamble' => new TextInput(
+                                        [
+                                            'html_label_text' => __('Publication Preamble', 'print-my-blog'),
+                                            'html_help_text' => __('Shown on the front page under the Title and Subtitle.')
+                                        ]
+                                    ),
+
                                     'post_header_in_columns' => new YesNoInput(
                                         [
                                             'html_label_text' => __('Show Post Header inside Columns', 'print-my-blog'),
@@ -684,21 +703,21 @@ class DefaultDesignTemplates
                         return $design_form;
                     },
                     'project_form_callback' => function (Design $design) {
-                        $sections['byline'] = new TextInput(
-                            [
-                                'html_display_text' => __('Byline', 'print-my-blog'),
-                                'html_help_text' => __('Project author(s)', 'print-my-blog'),
-                            ]
-                        );
-                        $sections['cover_preamble'] = new TextAreaInput(
-                            [
-                                'html_label_text' => __('Coverpage Preamble', 'print-my-blog'),
-                                'html_help_text' => __(
-                                    'Explanatory text that appears at the bottom of the cover page',
-                                    'print-my-blog'
-                                ),
-                            ]
-                        );
+                        $sections = [
+                            'date' => new TextInput(
+                                [
+                                    'html_label_text' => __('Date', 'print-my-blog'),
+                                    'html_help_text' => __("Shown on frontpage and in the top margin of all subsequent pages", 'print-my-blog')
+                                ]
+                            ),
+                            'issue' => new TextInput(
+                                [
+                                    'html_label_text' => __('Issue Number', 'print-my-blog'),
+                                    'html_help_text' => __('Shown on the frontpage and in the top margin of all subsequent pages', 'print-my-blog')
+                                ]
+                            ),
+                        ];
+
                         return new FormSection(
                             [
                                 'subsections' => $sections,

@@ -21,9 +21,9 @@ function pmb_enqueue_mayer_script()
     global $pmb_design;
     $css = pmb_design_styles($pmb_design);
     if ($pmb_design->getSetting('post_header_in_columns')) {
-        $css .= ' .pmb-main-matter{columns:2}';
+        $css .= '.pmb-main-matter .pmb-main-matter{columns:2}';
     } else {
-        $css .= 'article:not(.pmb-just-content) div.entry-content{columns:2}';
+        $css .= '.pmb-main-matter article:not(.pmb-just-content) div.entry-content{columns:2}';
     }
     if ($pmb_design->getSetting('images_full_column')) {
         $css .= ' figure.wp-caption:not(.mayer-noresize, .emoji), figure.wp-block-image:not(.mayer-no-resize, .emoji), .pmb-posts .pmb-image img:not(.mayer-no-resize, .emoji), img:not(.mayer-no-resize, .emoji){width:100% !important;height:auto;}';

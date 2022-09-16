@@ -59,16 +59,55 @@
     }
 
     /* Title Page styles */
-    .pmb-posts-header{
-        margin-top:2in;
+    .pmb-haller-frontpage-above-header{
+        display:flex;
+    }
+    .pmb-haller-frontpage-above-header span{
+        width:50%;
+    }
+    .pmb-haller-frontpage-issue{
+        text-align:right;
+    }
+    .pmb-haller-frontpage-main{
+        border-top:2px solid black;
+        border-bottom:2px solid black;
+        display:flex;
+        justify-content:center;
+    }
+    .pmb-haller-frontpage-main-sidebar{
+        margin:1em;
+        padding:1em;
+    }
+    .pmb-haller-frontpage-main-sidebar.left{
+        border-right:2px solid black;
+        flex-grow:0;
+    }
+    .pmb-haller-frontpage-main-sidebar.right{
+        border-left:2px solid black;
+        flex-grow:0;
+    }
+    .pmb-haller-frontpage-main-title-area{
         text-align:center;
     }
-    .pmb-posts-header .project-title{
+    .pmb-haller-frontpage-main-title{
+        margin-top:0;
         font-size:5em;
+        margin-bottom:0;
     }
-    .project-intro{
-        padding:1em;
-        text-align:initial;
+
+    .pmb-haller-frontpage-main-subtitle{
+        font-size:3em;
+        margin-top:0;
+    }
+
+    .pmb-haller-frontpage-preamble{
+        text-align:center;
+        border-bottom:2px solid black;
+        padding-top:.5em;
+        padding-bottom:.5em;
+    }
+    .pmb-haller-frontpage-preamble-text{
+        font-size:1.3em;
     }
 
 
@@ -100,6 +139,20 @@
     }
     .pmb-toc-list .pmb-toc-item:not(.pmb-toc-front) a::after {
         content: leader('.') target-counter(attr(href), page) !important;
+    }
+
+    /* Repeating header */
+    #haller-repeat-header{
+        -prince-flow: static(footer, start);/* see https://www.princexml.com/doc/paged/#generated-content-in-page-regions */
+        display:flex;
+        justify-content:space-around;
+        border-bottom:2px solid black;
+    }
+    #haller-repeat-header div:nth-child(2){
+        border-left:2px solid black;
+        border-right:2px solid black;
+        padd
+
     }
 
     /* General */
@@ -147,9 +200,6 @@
         string-set: article-title content();
     }
 
-    .project-title{
-        border-bottom:2px solid black;
-    }
     .mayer-wide{
         column-span: all;
     }
@@ -176,12 +226,5 @@
 @media not print{
     .pmb-project-content{
         width: calc(8.5in - 1.5em - 1.5em);
-    }
-}
-@media print{
-    #haller-repeat-logo{
-        -prince-flow: static(footer, start);/* see https://www.princexml.com/doc/paged/#generated-content-in-page-regions */
-        background-color:blue;
-        color:White;
     }
 }

@@ -2,14 +2,36 @@
 /**
  * @var $pmb_project \PrintMyBlog\orm\entities\Project
  * @var $pmb_design \PrintMyBlog\orm\entities\Design
-*
+ *
  */
 ?>
-<div class="pmb-posts-header">
-    <h1 class="project-title mayer-wide"><?php $pmb_project->echoPublishedTitle(); ?></h1>
-    <h2 class="project-byline mayer-wide"><?php $pmb_project->echoSetting('byline'); ?></h2>
-    <?php
-    $intro = $pmb_project->renderSetting('cover_preamble');
-    if ($intro) { ?>
-        <p class="project-intro"><?php echo $intro; ?></p>
-	<?php } ?>
+<div class="pmb-haller-frontpage-header">
+<div class="pmb-haller-frontpage-above-header">
+    <span class="pmb-haller-frontpage-date"><?php $pmb_project->echoSetting('date');?></span>
+    <span class="pmb-haller-frontpage-issue"><?php $pmb_project->echoSetting('issue');?></span>
+</div>
+<div class="pmb-haller-frontpage-main">
+    <?php $left_side = $pmb_project->getSetting('frontpage_left_side');
+    if($left_side){
+        ?>
+        <div class="pmb-haller-frontpage-main-sidebar left">
+        </div>
+        <?php
+    }
+    ?>
+    <div class="pmb-haller-frontpage-main-title-area">
+        <h1 class="pmb-haller-frontpage-main-title project-title"><?php echo $pmb_design->getSetting('publication_title'); ?></h1>
+        <h2 class="pmb-haller-frontpage-main-subtitle"><?php echo $pmb_design->getSetting('publication_subtitle');?></h2>
+    </div>
+    <?php $right_side = $pmb_project->getSetting('frontpage_right_side');
+    if($right_side){
+        ?>
+        <div class="pmb-haller-frontpage-main-sidebar right">
+        </div>
+        <?php
+    }
+    ?>
+</div>
+<div class="pmb-haller-frontpage-preamble">
+<span class="pmb-haller-frontpage-preamble-text"><?php echo $pmb_design->getSetting('cover_preamble');?></span>
+</div>

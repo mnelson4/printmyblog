@@ -22,6 +22,7 @@ class DefaultSectionTemplates
                 'classic_print',
                 'classic_epub',
                 'classic_word',
+                'haller',
             ],
             function () {
                 return [
