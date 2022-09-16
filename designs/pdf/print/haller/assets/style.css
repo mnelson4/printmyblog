@@ -1,9 +1,9 @@
 /* pagination */
 @media print, screen {
     @page{
-        margin-left:1.5em;
-        margin-right:1.5em;
+        margin:1.5em;
         counter-reset: footnote;
+        size:11in 17in;
 
         @footnotes {
             border-top: solid black thin;
@@ -125,6 +125,7 @@
 
     /* Repeating header */
     #haller-repeat-header{
+        padding-top:1.5em;
         -prince-flow: static(footer, start);/* see https://www.princexml.com/doc/paged/#generated-content-in-page-regions */
         display:flex;
         justify-content:space-around;
