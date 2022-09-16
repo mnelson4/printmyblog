@@ -754,7 +754,8 @@ class Admin extends BaseController
                                     ],
                                     $this->project
                                 ),
-                                'pmb_ajax' => add_query_arg([
+                                'pmb_ajax' => add_query_arg(
+                                    [
                                         Frontend::PMB_AJAX_INDICATOR => 1,
                                     ],
                                     site_url()
