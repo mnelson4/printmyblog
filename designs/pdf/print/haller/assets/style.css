@@ -18,7 +18,7 @@
         @top{
             content:flow(footer);
         }
-        .pmb-page-number{
+        .pmb-page-number::after{
             content:counter(page);
         }
         /*@bottom-right {*/
@@ -28,9 +28,6 @@
     @page:first{
         @top{
             content:normal;
-        }
-        #haller-repeat-header{
-            display:none;
         }
     }
 
@@ -141,6 +138,16 @@
         border-left:2px solid black;
         border-right:2px solid black;
         flex-grow:5;
+    }
+    .haller-centered{
+        display:relative;
+    }
+    .haller-centered-inner{
+        margin:0;
+        position:absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
     /* General */
