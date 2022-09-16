@@ -140,7 +140,7 @@
         flex-grow:5;
     }
     .haller-centered{
-        display:relative;
+        position:relative;
     }
     .haller-centered-inner{
         margin:0;
