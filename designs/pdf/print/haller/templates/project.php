@@ -15,7 +15,11 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
 <?php do_action('pmb_pro_print_window'); ?>
 <div class="pmb-posts pmb-project-content site">
 <div id="haller-repeat-header">
-    <div id="haller-repeat-header-date"><?php $pmb_project->echoSetting('date');?></div>
-    <div id="haller-repeat-header-title"><?php echo $pmb_design->getSetting('publication_title'); ?></div>
-    <div id="haller-repeat-header-issue"><?php $pmb_project->echoSetting('issue');?></div>
+    <div>
+        <?php $pmb_project->echoSetting('issue');?><br>
+        <?php $pmb_project->echoSetting('date');?>
+    </div>
+    <div id="haller-repeat-header-title">
+        <h1><?php echo $pmb_design->getSetting('publication_title'); ?></h1></div>
+    <div><span class="pmb-page-number"></span></div>
 </div>
