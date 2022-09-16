@@ -1,9 +1,17 @@
 /* pagination */
 @media print, screen {
-    @page{
-        margin:1.5em;
+    @page {
+        margin: 1.5em;
         counter-reset: footnote;
-        size:11in 17in;
+        size: 11in 17in;
+
+        @top {
+            content: flow(footer);
+        }
+    }
+    .pmb-page-number::after{
+        content:counter(page);
+    }
 
         @footnotes {
             border-top: solid black thin;
@@ -12,18 +20,6 @@
     }
     body {
         prince-footnote-policy: keep-with-line;
-    }
-
-    @page{
-        @top{
-            content:flow(footer);
-        }
-        .pmb-page-number::after{
-            content:counter(page);
-        }
-        /*@bottom-right {*/
-        /*    content: counter(page)*/
-        /*}*/
     }
     @page:first{
         @top{
