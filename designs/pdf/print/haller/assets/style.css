@@ -1,7 +1,7 @@
 /* pagination */
 @media print, screen {
     @page {
-        margin-top: 200px;
+        margin-top: 3em;
         margin-right:1.5em;
         margin-bottom: 1.5em;
         margin-left:1.5em;
@@ -125,7 +125,7 @@
 
     /* Repeating header */
     #haller-repeat-header{
-        padding-top:1.5em;
+        margin-top:1.5em;
         -prince-flow: static(footer, start);/* see https://www.princexml.com/doc/paged/#generated-content-in-page-regions */
         display:flex;
         justify-content:space-around;
@@ -138,7 +138,7 @@
     #haller-repeat-header div:nth-child(2){
         border-left:2px solid black;
         border-right:2px solid black;
-        flex-grow:5;
+        flex-grow:3;
     }
     .haller-centered{
         position:relative;
