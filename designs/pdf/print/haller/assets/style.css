@@ -138,7 +138,7 @@
     #haller-repeat-header div:nth-child(2){
         border-left:2px solid black;
         border-right:2px solid black;
-        flex-grow:3;
+        flex-grow:2;
     }
     .haller-centered{
         position:relative;
