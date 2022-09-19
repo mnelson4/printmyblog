@@ -161,8 +161,13 @@
     }
     #haller-repeat-header-title {
         font-weight:bold;
+        font-size:2em;
     }
-
+    #haller-repeat-header div {
+        display: flex;
+        justify-content:center;
+        align-items:flex-end;
+    }
     /* General */
     img, figure{
         max-width:100%;
