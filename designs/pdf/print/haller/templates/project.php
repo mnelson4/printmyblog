@@ -17,16 +17,17 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
 <div id="haller-repeat-header">
     <div class="haller-centered">
         <div class="haller-centered-inner">
-            <?php $pmb_project->echoSetting('issue');?>
             <?php $pmb_project->echoSetting('date');?>
         </div>
     </div>
-    <div id="haller-repeat-header-title">
-        <?php echo $pmb_design->getSetting('publication_title'); ?>
+    <div id="haller-repeat-header-title" class="haller-centered">
+        <div class="haller-centered-inner">
+            <?php echo $pmb_design->getSetting('publication_title'); ?>
+        </div>
     </div>
     <div class="haller-centered">
         <div class="haller-centered-inner">
-            Page <span class="pmb-page-number"></span>
+            <?php $pmb_project->echoSetting('issue');?>, Page <span class="pmb-page-number"></span>
         </div>
     </div>
 </div>
