@@ -135,10 +135,19 @@
     #haller-repeat-header div{
         flex-grow:1;
     }
+    #haller-repeat-header div:first-child .haller-centered-inner {
+        border-right:1px solid black;
+        padding-right:3em;
+    }
+
+    #haller-repeat-header div:last-child .haller-centered-inner {
+        border-left:1px solid black;
+        padding-left:3em;
+    }
     #haller-repeat-header div:nth-child(2){
-        border-left:2px solid black;
-        border-right:2px solid black;
-        flex-grow:2;
+        /*border-left:2px solid black;*/
+        /*border-right:2px solid black;*/
+        flex-grow:1;
     }
     .haller-centered{
         position:relative;
