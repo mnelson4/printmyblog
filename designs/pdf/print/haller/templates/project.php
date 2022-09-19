@@ -14,18 +14,23 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
 ?>">
 <?php do_action('pmb_pro_print_window'); ?>
 <div class="pmb-posts pmb-project-content site">
-<div id="haller-repeat-header">
-    <div>
-        <span>
-            <?php $pmb_project->echoSetting('date');?>
-        </span>
+<div id="haller-repeat-header-wrap">
+    <div id="haller-repeat-header">
+        <div>
+            <span>
+                <?php $pmb_project->echoSetting('date');?>
+            </span>
+        </div>
+        <div id="haller-repeat-header-title" >
+            <?php echo $pmb_design->getSetting('publication_title'); ?>
+        </div>
+        <div>
+            <span>
+                <?php $pmb_project->echoSetting('issue');?>, Page <span class="pmb-page-number"></span>
+            </span>
+        </div>
     </div>
-    <div id="haller-repeat-header-title" >
-        <?php echo $pmb_design->getSetting('publication_title'); ?>
-    </div>
-    <div>
-        <span>
-            <?php $pmb_project->echoSetting('issue');?>, Page <span class="pmb-page-number"></span>
-        </span>
+    <div id="haller-repeat-header-subtitle">
+        <?php echo $pmb_design->getSetting('publication_subtitle'); ?>
     </div>
 </div>
