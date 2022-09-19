@@ -24,7 +24,7 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
     <div id="haller-repeat-header-title">
         <?php echo $pmb_design->getSetting('publication_title'); ?>
     </div>
-    <div class=""haller-centered">
+    <div class="haller-centered">
         <div class="haller-centered-inner">
             Page <span class="pmb-page-number"></span>
         </div>
