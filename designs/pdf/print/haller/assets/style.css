@@ -135,12 +135,12 @@
     #haller-repeat-header div{
         flex-grow:1;
     }
-    #haller-repeat-header div:first-child span {
+    #haller-repeat-header div:first-child>span {
         border-right:1px solid black;
         padding-right:3em;
     }
 
-    #haller-repeat-header div:last-child span {
+    #haller-repeat-header div:last-child>span {
         border-left:1px solid black;
         padding-left:3em;
     }
