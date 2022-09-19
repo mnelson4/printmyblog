@@ -61,12 +61,19 @@ class FullHtmlValidation extends ValidationBase
         $tags_we_allow = array_merge_recursive(
             $allowedtags,
             array(
-                'ol' => array(),
-                'ul' => array(),
-                'li' => array(),
-                'br' => array(),
-                'p' => array(),
-                'a' => array('target'),
+                'ol' => array('class'),
+                'ul' => array('class'),
+                'li' => array('class'),
+                'br' => array('class'),
+                'p' => array('class'),
+                'a' => array('target', 'class'),
+                'h1' => array('class'),
+                'h2' => array('class'),
+                'h3' => array('class'),
+                'h4' => array('class'),
+                'h5' => array('class'),
+                'h6' => array('class'),
+                'hr' => array('class'),
             )
         );
         return apply_filters('Twine\forms\strategies\validation\FullHtmlValidation::getAllowedTags', $tags_we_allow);

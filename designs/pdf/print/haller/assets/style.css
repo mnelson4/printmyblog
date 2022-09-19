@@ -70,6 +70,7 @@
     }
     .pmb-haller-frontpage-main-title-area{
         text-align:center;
+        flex-grow:1;
     }
     .pmb-haller-frontpage-main-title{
         margin-top:0;

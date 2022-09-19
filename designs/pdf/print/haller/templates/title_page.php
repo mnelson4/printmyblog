@@ -15,6 +15,7 @@
     if($left_side){
         ?>
         <div class="pmb-haller-frontpage-main-sidebar left">
+            <?php echo do_shortcode($left_side);?>
         </div>
         <?php
     }
@@ -27,6 +28,7 @@
     if($right_side){
         ?>
         <div class="pmb-haller-frontpage-main-sidebar right">
+            <?php echo do_shortcode($right_side);?>
         </div>
         <?php
     }

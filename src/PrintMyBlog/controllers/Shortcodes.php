@@ -4,6 +4,7 @@ namespace PrintMyBlog\controllers;
 
 use PrintMyBlog\domain\PrintButtons;
 use PrintMyBlog\entities\DesignTemplate;
+use PrintMyBlog\entities\FileFormat;
 use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\system\Context;
@@ -66,6 +67,10 @@ class Shortcodes extends BaseController
         add_shortcode(
             'pmb_print_only_blocks',
             [$this, 'printOnlyBlocks']
+        );
+        add_shortcode(
+            'pmb_project_setting',
+            [$this, 'projectSetting']
         );
     }
 	// @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
@@ -233,5 +238,29 @@ class Shortcodes extends BaseController
     public function footnote($atts, $content, $shortcode_tag)
     {
         return '<span class="pmb-footnote">' . $content . '</span>';
+    }
+
+    /**
+     * Shortcode for getting a setting on a project.
+     * @param array $atts
+     * @return mixed|string|null
+     * @throws \Exception
+     */
+    public function projectSetting($atts){
+        global $pmb_project, $pmb_format;
+        $key = isset($atts['name']) ? (string)$atts['name'] : '';
+        if($key){
+            if($pmb_project instanceof Project) {
+                return $pmb_project->getSetting($key);
+            } else {
+                return 'Project Setting ' . $key;
+            }
+        } else {
+            if($pmb_project instanceof Project && $pmb_format instanceof FileFormat) {
+                return '[pmb_project_setting] requires you provide the setting\'s name. Available settings are: ' . wp_json_encode($pmb_project->getDesignFor($pmb_format)->getSettings());
+            } else {
+                return 'Project Setting ' . $key;
+            }
+        }
     }
 }

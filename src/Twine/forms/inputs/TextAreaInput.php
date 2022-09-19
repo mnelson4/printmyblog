@@ -79,8 +79,8 @@ class TextAreaInput extends FormInputBase
         if (
             ! $this->hasValidationStrategy(
                 array(
-                    'FullHtmlValidation',
-                    'SimpleHtmlValidation',
+                    'Twine\forms\strategies\validation\FullHtmlValidation',
+                    'Twine\forms\strategies\validation\SimpleHtmlValidation',
                 )
             )
         ) {
