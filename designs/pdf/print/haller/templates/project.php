@@ -17,7 +17,7 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
 <div id="haller-repeat-header">
     <div class="haller-centered">
         <div class="haller-centered-inner">
-            <?php $pmb_project->echoSetting('issue');?><br>
+            <?php $pmb_project->echoSetting('issue');?>
             <?php $pmb_project->echoSetting('date');?>
         </div>
     </div>
