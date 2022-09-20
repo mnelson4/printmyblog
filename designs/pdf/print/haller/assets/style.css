@@ -181,7 +181,7 @@
             display: none;
         }
         #haller-repeat-header-left {
-            display: left;
+            display: block;
         }
     }
 
