@@ -132,44 +132,34 @@
         margin-top:1.5em;
         -prince-flow: static(footer, start); /* see https://www.princexml.com/doc/paged/#generated-content-in-page-regions */
     }
-    #haller-repeat-header{
+    .haller-repeat-header{
         display:flex;
         justify-content:space-around;
         border-bottom:2px solid black;
         text-align:center;
     }
-    #haller-repeat-header div{
+    .haller-repeat-header div{
         flex-grow:1;
     }
-    #haller-repeat-header div:first-child>span {
+    .haller-repeat-header div:first-child>span {
         border-right:1px solid black;
         padding-right:3em;
     }
 
-    #haller-repeat-header div:last-child>span {
+    .haller-repeat-header div:last-child>span {
         border-left:1px solid black;
         padding-left:3em;
     }
-    #haller-repeat-header div:nth-child(2){
+    .haller-repeat-header div:nth-child(2){
         /*border-left:2px solid black;*/
         /*border-right:2px solid black;*/
         flex-grow:1;
-    }
-    .haller-centered{
-        position:relative;
-    }
-    .haller-centered-inner{
-        margin:0;
-        position:absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
     }
     #haller-repeat-header-title {
         font-weight:bold;
         font-size:2em;
     }
-    #haller-repeat-header div {
+    .haller-repeat-header div {
         display: flex;
         justify-content:center;
         align-items:flex-end;
@@ -177,6 +167,22 @@
     #haller-repeat-header-subtitle {
         text-align: center;
         border-bottom: 2px solid black;
+    }
+    @page:right {
+        #haller-repeat-header-right {
+            display: block;
+        }
+        #haller-repeat-header-left {
+            display: none;
+        }
+    }
+    @page:left {
+        #haller-repeat-header-right {
+            display: none;
+        }
+        #haller-repeat-header-left {
+            display: left;
+        }
     }
 
     /* General */

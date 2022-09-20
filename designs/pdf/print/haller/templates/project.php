@@ -15,8 +15,8 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
 <?php do_action('pmb_pro_print_window'); ?>
 <div class="pmb-posts pmb-project-content site">
 <div id="haller-repeat-header-wrap">
-    <div id="haller-repeat-header">
-        <div>
+    <div id="haller-repeat-header-right" class="haller-repeat-header">
+        <div id="haller-repeat-heder-date">
             <span>
                 <?php $pmb_project->echoSetting('date');?>
             </span>
@@ -24,9 +24,24 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
         <div id="haller-repeat-header-title" >
             <?php echo $pmb_design->getSetting('publication_title'); ?>
         </div>
-        <div>
+        <div id="haller-repeat-header-issue-page">
             <span>
                 <?php $pmb_project->echoSetting('issue');?>, Page <span class="pmb-page-number"></span>
+            </span>
+        </div>
+    </div>
+    <div id="haller-repeat-header-left" class="haller-repeat-header">
+        <div id="haller-repeat-header-issue-page">
+            <span>
+                <?php $pmb_project->echoSetting('issue');?>, Page <span class="pmb-page-number"></span>
+            </span>
+        </div>
+        <div id="haller-repeat-header-title" >
+            <?php echo $pmb_design->getSetting('publication_title'); ?>
+        </div>
+        <div id="haller-repeat-heder-date">
+            <span>
+                <?php $pmb_project->echoSetting('date');?>
             </span>
         </div>
     </div>
