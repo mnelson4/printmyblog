@@ -7,6 +7,12 @@
         margin-left:1.5em;
         counter-reset: footnote;
         size: 11in 17in;
+        @left {
+            content: flow(left-sidebar);
+        }
+        @right {
+            content: flow(right-sidebar);
+        }
     }
     @page:left {
         @top {
@@ -178,6 +184,19 @@
     .haller-repeat-header-subtitle {
         text-align: center;
         border-bottom: 2px solid black;
+    }
+
+    /* Sidebar content */
+    .haller-sidebar {
+        width:10cm;
+    }
+
+    .haller-sidebar.left {
+        float:left;
+        margin-right:1px solid black;
+    }
+    .haller-sidebar .pmb-toc-list {
+        width: auto;
     }
 
     /* General */

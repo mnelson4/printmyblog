@@ -58,5 +58,17 @@ class DefaultSectionTemplates
                 ];
             }
         );
+        pmb_register_section_template(
+            'left_sidebar',
+            [
+                'haller',
+            ],
+            function () {
+                return [
+                    'title' => __('Left Sidebar', 'print-my-blog'),
+                    'fallback' => '',
+                ];
+            }
+        );
     }
 }

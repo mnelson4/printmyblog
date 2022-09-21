@@ -188,7 +188,7 @@ Turn its flexboxes into regular blocks so pagebreaks work better again
     display:block;
 }
 .pmb-posts .elementor-column{
-    display:block;
+    display:inline-block;
 }
 .pmb-posts .elementor:not(.elementor-bc-flex-widget) .elementor-widget-wrap{
     display:block;
