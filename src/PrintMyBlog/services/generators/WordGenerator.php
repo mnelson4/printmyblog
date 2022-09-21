@@ -140,7 +140,7 @@ class WordGenerator extends HtmlBaseGenerator
 TOC \o \"1-3\" \u 
 <span style='mso-element:field-separator'></span> 
 <![endif]--> 
-<span style='mso-no-proof:yes'>" . __('Table of content - Please right-click and choose "Update field".', 'print-my-blog') . "</span> 
+<span style='mso-no-proof:yes'>" . __('Table of content - In Microsoft Word, please right-click and choose "Update field".', 'print-my-blog') . "</span> 
 <!--[if supportFields]> 
 <span style='mso-element:field-end'></span> 
 <![endif]--> 

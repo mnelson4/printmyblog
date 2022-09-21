@@ -97,7 +97,7 @@ class DefaultPersistentNotices
                 . '<div class="pmb-text-column">'
                 . '<ol>'
                 . '<li>' . __('Find the articles (posts, pages, other post types) from WordPress you want to add on the left, and add it to your project on the right by dragging', 'print-my-blog') . '</li>'
-                . '<li>' . __('Place articles in either front matter, main matter, or back matter, according to how you want your project organized. Each design can style them differently (eg front matter is often is numbered with roman numerals)') . '</li>'
+                . '<li>' . __('Place articles in either front matter, body, or back matter, according to how you want your project organized. Each design can style them differently (eg front matter is often is numbered with roman numerals)') . '</li>'
                 . '<li>' . __('Nest content inside others to create parts', 'print-my-blog') . '</li>'
                 . '</ol>'
                 . '<p><a href="https://printmy.blog/user-guide/pro/getting-started/6-choose-project-content/" target="_blank">'

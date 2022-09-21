@@ -221,7 +221,7 @@ pmb_render_template(
                         <?php
                         }?>
                         <h2>
-                            <?php _e('Main Matter', 'print-my-blog');?>
+                            <?php _e('Body', 'print-my-blog');?>
                             <?php
                             $all_designs = $project->getDesignsSelected();
                             $a_design = reset($all_designs);

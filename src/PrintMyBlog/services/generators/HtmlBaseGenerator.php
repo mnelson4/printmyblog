@@ -180,7 +180,7 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
     }
 
     /**
-     * Adds all the main matters to the html file.
+     * Adds all the body to the html file.
      */
     protected function generateMainMatter()
     {

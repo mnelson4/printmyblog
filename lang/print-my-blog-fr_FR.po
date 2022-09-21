@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
 "POT-Creation-Date: 2022-07-19 14:10-0700\n"
-"PO-Revision-Date: 2022-07-19 14:13-0700\n"
+"PO-Revision-Date: 2022-09-20 22:02-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -233,7 +233,7 @@ msgstr[1] "%1$s réponses à  &ldquo;%2$s&rdquo;"
 #: templates/print_page.php:308
 #, php-format
 msgid "Printed on %1$s"
-msgstr "Imprimé sur %1$s"
+msgstr "Imprimé le %1$s"
 
 #: designs/pdf/digital/buurma/description.php:2
 msgid ""
@@ -3744,7 +3744,7 @@ msgstr "%s."
 #: templates/print_page.php:300
 #, php-format
 msgid "Printed on %1$s using %2$sPrint My Blog%3$s"
-msgstr "Imprimé sur %1$s à %2$sPrint My Blog%3$s"
+msgstr "Imprimé le  %1$s à %2$sPrint My Blog%3$s"
 
 #: templates/print_page.php:313
 #, php-format

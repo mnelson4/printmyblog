@@ -193,3 +193,11 @@ Turn its flexboxes into regular blocks so pagebreaks work better again
 .pmb-posts .elementor:not(.elementor-bc-flex-widget) .elementor-widget-wrap{
     display:block;
 }
+
+/**
+ Supsystic tables. https://wordpress.org/plugins/data-tables-generator-by-supsystic/
+ Don't show the edit links
+ */
+.tblEditLink{
+    display:none !important;
+}
