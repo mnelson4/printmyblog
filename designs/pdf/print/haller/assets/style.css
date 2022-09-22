@@ -188,8 +188,7 @@
 
     /* Sidebar content */
     .haller-sidebar {
-        width:10cm;
-        display:flex;
+        width:8cm;
         background-color:#333333;
         color:white;
         padding:1em;
