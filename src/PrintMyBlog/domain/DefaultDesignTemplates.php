@@ -684,6 +684,18 @@ class DefaultDesignTemplates
                                             'html_help_text' => __('Resizes images to be the full column width (except ones with the CSS class "mayer-no-resize")', 'print-my-blog'),
                                         ]
                                     ),
+                                    'columns' => new SelectInput(
+                                        [
+                                            2 => new InputOption('2'),
+                                            3 => new InputOption('3'),
+                                            4 => new InputOption('4')
+                                        ],
+                                        [
+                                            'html_label_text' => __('Columns', 'print-my-blog'),
+                                            'default' => 3,
+                                            'html_help_text' => __('Number of columns to use for content.', 'print-my-blog')
+                                        ]
+                                    ),
                                     'no_extra_columns' => new YesNoInput(
                                         [
                                             'html_label_text' => __('Remove Extra Columns', 'print-my-blog'),

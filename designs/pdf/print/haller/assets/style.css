@@ -282,6 +282,12 @@
     .pmb-print-page .aligncenter{
         clear:none;
     }
+    .alignwide {
+        column-count:2;
+    }
+    .alignfull {
+        column-count:3;
+    }
 }
 
 /*
