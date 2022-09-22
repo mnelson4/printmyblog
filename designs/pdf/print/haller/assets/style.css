@@ -279,6 +279,9 @@
         margin-left:0;
         font-weight:normal;
     }
+    .pmb-print-page .aligncenter{
+        clear:none;
+    }
 }
 
 /*
