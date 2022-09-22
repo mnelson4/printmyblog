@@ -7,6 +7,7 @@ Prince.trackBoxes = true;
 // page they're on. Prince will then need to re-render.
 Prince.registerPostLayoutFunc(function() {
     pmb_continue_image_resizing();
+    pmb_extend_to_bottom();
 });
 
 /**
@@ -167,6 +168,32 @@ function pmb_resize_an_image_inside(element){
     // Change the class so we know we don't try to resize this block again
     a_dynamic_resize_block.className = a_dynamic_resize_block.className.replace(/pmb-dynamic-resize/g, 'pmb-dynamic-resized') + ' ' + max_class;
     return a_dynamic_resize_block;
+}
+
+function pmb_extend_to_bottom(){
+    Log.info('pmb_extend_to_bottom');
+    // find all elements that should extend to bottom
+    var dynamic_resize_elements = document.getElementsByClassName('pmb-fill-remaining-height');
+    if(dynamic_resize_elements.length){
+        Log.info('found something to resize');
+        // find their distance to the bottom of the page
+        var element = dynamic_resize_elements[0];
+        var element_box = element.getPrinceBoxes()[0];
+        var page_box = PDF.pages[element_box.pageNum - 1];
+        Log.info('element to resize');
+        pmb_print_props(element_box, 'element to resize box');
+        pmb_print_props(page_box, 'page box');
+        var remaining_vertical_space = element_box.y - (page_box.y - page_box.h) - 10;
+        Log.info('resize to ' + remaining_vertical_space);
+        // make the element fill that vertical height
+        element.style.height = remaining_vertical_space + "pt";
+        // remember not to do this one again
+        element.className = element.className.replace(/pmb-fill-remaining-height/g, 'pmb-filled-remaining-height');
+        // redraw and look again
+        Prince.registerPostLayoutFunc(pmb_extend_to_bottom);
+    } else {
+        Log.info('nothing more to do');
+    }
 }
 
 /**
