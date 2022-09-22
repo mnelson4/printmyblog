@@ -10,6 +10,7 @@
             <?php endif; ?>
         </figure>
         <?php
+        }
         ?>
         <header class="entry-header has-text-align-center">
 			<div class="entry-header-inner section-inner medium">
