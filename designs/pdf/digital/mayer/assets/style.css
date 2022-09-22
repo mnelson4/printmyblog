@@ -137,6 +137,9 @@
     .pmb-print-page .pmb-single-column div.entry-content{
         columns:1;
     }
+    .pmb-print-page .aligncente{
+        clear:none;
+    }
 
 
     /* Article styles */
