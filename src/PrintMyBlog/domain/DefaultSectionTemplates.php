@@ -50,6 +50,7 @@ class DefaultSectionTemplates
             'single_column',
             [
                 'mayer',
+                'haller'
             ],
             function () {
                 return [
