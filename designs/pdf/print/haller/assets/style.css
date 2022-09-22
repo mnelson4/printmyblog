@@ -194,6 +194,9 @@
         color:white;
         padding:1em;
     }
+    .haller-sidebar article {
+        width: 100%;
+    }
     .haller-sidebar a {
         color: white;
     }

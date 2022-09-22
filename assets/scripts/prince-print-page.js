@@ -183,7 +183,7 @@ function pmb_extend_to_bottom(){
         Log.info('element to resize');
         pmb_print_props(element_box, 'element to resize box');
         pmb_print_props(page_box, 'page box');
-        var remaining_vertical_space = element_box.y - (page_box.y - page_box.h) - 10;
+        var remaining_vertical_space = element_box.y - (page_box.y - page_box.h) - 50;
         Log.info('resize to ' + remaining_vertical_space);
         // make the element fill that vertical height
         element.style.height = remaining_vertical_space + "pt";
