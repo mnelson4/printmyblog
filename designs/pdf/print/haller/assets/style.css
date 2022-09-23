@@ -18,10 +18,18 @@
         @top {
             content: flow(left-header);
         }
+        @leftnote {
+            width: 20vw;
+            padding-right: 1em;
+        }
     }
     @page:right {
         @top {
             content: flow(right-header);
+        }
+        @rightnote {
+            width: 20vw;
+            padding-right: 1em;
         }
     }
     .pmb-page-number::after{
@@ -192,6 +200,7 @@
         background-color:#333333;
         color:white;
         padding:1em;
+        -prince-float: sidenote;
     }
     .haller-sidebar article {
         width: 100%;
@@ -200,11 +209,10 @@
         color: white;
     }
 
-    .haller-sidebar.left {
-        float:left;
-        border-right:1px solid black;
-        margin-right:1em;
-    }
+    /*.haller-sidebar.left {*/
+    /*    border-right:1px solid black;*/
+    /*    margin-right:1em;*/
+    /*}*/
     .haller-sidebar .pmb-toc-list {
         width: auto;
     }
