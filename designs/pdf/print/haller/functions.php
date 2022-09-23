@@ -30,7 +30,7 @@ function pmb_enqueue_haller_script()
         $css .= ' figure.wp-caption:not(.mayer-noresize, .emoji), figure.wp-block-image:not(.mayer-no-resize, .emoji), .pmb-posts .pmb-image img:not(.mayer-no-resize, .emoji), img:not(.mayer-no-resize, .emoji){width:100% !important;height:auto;}';
     }
     if ($pmb_design->getSetting('no_extra_columns')) {
-        $css .= ' .pmb-print-page .wp-block-columns{display:block;}';
+        $css .= '.pmb-section:not(.pmb-single-column) .wp-block-columns{display:block;}';
     }
     wp_add_inline_style(
         'pmb_print_common',
