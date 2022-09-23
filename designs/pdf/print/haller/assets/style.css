@@ -291,6 +291,8 @@
         column-span:all;
         -prince-float: snap;
     }
+    .alignwide, .alignfull{
+        -prince-float-tail:fill-page;
 }
 
 /*

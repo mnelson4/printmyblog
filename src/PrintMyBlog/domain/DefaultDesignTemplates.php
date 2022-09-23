@@ -707,7 +707,7 @@ class DefaultDesignTemplates
 //                                        [
 //                                            'subsections' => $this->getImageSnapInputs(),
 //                                        ]
-//                                    ), 
+//                                    ),
                                 ],
                             ]
                         ))->merge($this->getGenericDesignForm());
