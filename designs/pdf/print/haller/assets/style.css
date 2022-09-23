@@ -228,7 +228,7 @@
     .wp-block-column:not(:first-child){
         margin-left:0;
     }
-    :not(.pmb-just-content) .wp-block-columns>.wp-block-column{
+    :not(.pmb-single-column) .wp-block-columns>.wp-block-column{
         width:100% !important;
     }
 
