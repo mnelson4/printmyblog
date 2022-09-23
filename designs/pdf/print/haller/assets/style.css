@@ -18,21 +18,21 @@
         @top {
             content: flow(left-header);
         }
-        @leftnote {
-            width: 20vw;
-            padding-right: 1em;
-        }
-        margin-left:20vw;
+        /*@leftnote {*/
+        /*    width: 20vw;*/
+        /*    padding-right: 1em;*/
+        /*}*/
+        /*margin-left:20vw;*/
     }
     @page:right {
         @top {
             content: flow(right-header);
         }
-        @rightnote {
-            width: 20vw;
-            padding-right: 1em;
-        }
-        margin-right:20vw;
+        /*@rightnote {*/
+        /*    width: 20vw;*/
+        /*    padding-right: 1em;*/
+        /*}*/
+        /*margin-right:20vw;*/
     }
     .pmb-page-number::after{
         content:counter(page);
