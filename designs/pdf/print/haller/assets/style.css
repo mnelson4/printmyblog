@@ -302,6 +302,6 @@
 */
 @media not print{
     .pmb-project-content{
-        width: calc(8.5in - 1.5em - 1.5em);
+        width: calc(11in - 1.5em - 1.5em);
     }
 }
