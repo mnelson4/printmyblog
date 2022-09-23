@@ -703,11 +703,11 @@ class DefaultDesignTemplates
                                             'html_help_text' => __('Forces your content to only use two columns, even if the content itself was divided into more columns (eg using the "Columns" block)', 'print-my-blog'),
                                         ]
                                     ),
-                                    'image' => new FormSection(
-                                        [
-                                            'subsections' => $this->getImageSnapInputs(),
-                                        ]
-                                    ),
+//                                    'image' => new FormSection(
+//                                        [
+//                                            'subsections' => $this->getImageSnapInputs(),
+//                                        ]
+//                                    ),
                                 ],
                             ]
                         ))->merge($this->getGenericDesignForm());
