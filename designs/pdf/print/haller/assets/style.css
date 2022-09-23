@@ -22,6 +22,7 @@
             width: 20vw;
             padding-right: 1em;
         }
+        margin-left:20vw;
     }
     @page:right {
         @top {
@@ -31,6 +32,7 @@
             width: 20vw;
             padding-right: 1em;
         }
+        margin-right:20vw;
     }
     .pmb-page-number::after{
         content:counter(page);
