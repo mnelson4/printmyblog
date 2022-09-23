@@ -23,8 +23,6 @@ function pmb_enqueue_haller_script()
     $columns = (int)$pmb_design->getSetting('columns');
     if ($pmb_design->getSetting('post_header_in_columns')) {
         $css .= '.pmb-main-matter{columns:' . $columns . '}';
-    } else {
-        $css .= 'article:not(.pmb-just-content) div.entry-content{columns:' . $columns . '}';
     }
     if ($pmb_design->getSetting('images_full_column')) {
         $css .= ' figure.wp-caption:not(.mayer-noresize, .emoji), figure.wp-block-image:not(.mayer-no-resize, .emoji), .pmb-posts .pmb-image img:not(.mayer-no-resize, .emoji), img:not(.mayer-no-resize, .emoji){width:100% !important;height:auto;}';

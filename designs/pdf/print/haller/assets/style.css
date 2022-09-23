@@ -293,7 +293,7 @@
     }
     .alignwide, .alignfull{
         -prince-float-tail:fill-page;
-}
+    }
 
 /*
     Make the preview appear about the same size as in the PDF. Besides making the preview better,
