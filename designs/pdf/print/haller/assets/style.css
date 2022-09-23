@@ -97,6 +97,7 @@
     .pmb-haller-frontpage-main-subtitle{
         font-size:3em;
         margin-top:0;
+        margin-bottom:0;
     }
 
     .pmb-haller-frontpage-preamble{
@@ -222,6 +223,9 @@
     img, figure{
         max-width:100%;
     }
+    h1,h2,h3,h4,h5{
+        margin-bottom:0;
+    }
     /**
      * avoid margins for block columns
      */
@@ -260,6 +264,11 @@
 
 
     /* Article styles */
+    .haller-important h1.pmb-title{
+        font-size:4em;
+        margin-top:0;
+        margin-bottom:0;
+    }
     .pmb-article h1.pmb-title {
         string-set: article-title content();
     }
