@@ -267,6 +267,9 @@
     .pmb-wide{
         column-span: all;
     }
+    .pmb-wider{
+        column-span:2;
+    }
     .pmb-columns{
         columns:2;
     }
