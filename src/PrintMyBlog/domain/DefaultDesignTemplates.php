@@ -707,12 +707,12 @@ class DefaultDesignTemplates
 //                                        [
 //                                            'subsections' => $this->getImageSnapInputs(),
 //                                        ]
-//                                    ),
+//                                    ), 
                                 ],
                             ]
                         ))->merge($this->getGenericDesignForm());
-                        $design_form->findSection('image_placement')->removeOption('dynamic-resize');
-                        $design_form->removeSubsection('dynamic-resize');
+//                        $design_form->findSection('image_placement')->removeOption('dynamic-resize');
+//                        $design_form->removeSubsection('dynamic-resize');
                         return $design_form;
                     },
                     'project_form_callback' => function (Design $design) {
