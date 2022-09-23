@@ -1,4 +1,4 @@
-<div <?php pmb_section_wrapper_class('haller-sidebar left pmb-fill-remaining-height'); ?> <?php pmb_section_wrapper_id(); ?>>
+<div <?php pmb_section_wrapper_class('haller-sidebar left'); ?> <?php pmb_section_wrapper_id(); ?>>
     <header class="entry-header has-text-align-center">
         <div class="entry-header-inner section-inner medium">
             <?php pmb_the_title();?>

@@ -51,15 +51,6 @@
         }
     }
 
-    @page back-matter {
-        @top-right {
-            content: string(article-title, first-except)
-        }
-        @bottom-right {
-            content: counter(page)
-        }
-    }
-
     /* Title Page styles */
     .pmb-haller-frontpage-above-header{
         display:flex;
