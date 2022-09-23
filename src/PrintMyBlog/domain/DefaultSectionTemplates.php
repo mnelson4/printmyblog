@@ -71,5 +71,17 @@ class DefaultSectionTemplates
 //                ];
 //            }
 //        );
+        pmb_register_section_template(
+            'important_article',
+            [
+                'haller',
+            ],
+            function () {
+                return [
+                    'title' => __('Important', 'print-my-blog'),
+                    'fallback' => '',
+                ];
+            }
+        );
     }
 }
