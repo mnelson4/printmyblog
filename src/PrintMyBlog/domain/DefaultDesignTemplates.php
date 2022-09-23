@@ -671,13 +671,12 @@ class DefaultDesignTemplates
                                             'html_help_text' => __('Shown on the front page under the Title and Subtitle.')
                                         ]
                                     ),
-
-                                    'post_header_in_columns' => new YesNoInput(
-                                        [
-                                            'html_label_text' => __('Show Post Header inside Columns', 'print-my-blog'),
-                                            'html_help_text' => __('Check this to make post header information, like title, date, author, etc, appear inside columns; uncheck this to have it take up the full page width', 'print-my-blog'),
-                                        ]
-                                    ),
+//                                    'post_header_in_columns' => new YesNoInput(
+//                                        [
+//                                            'html_label_text' => __('Show Post Header inside Columns', 'print-my-blog'),
+//                                            'html_help_text' => __('Check this to make post header information, like title, date, author, etc, appear inside columns; uncheck this to have it take up the full page width', 'print-my-blog'),
+//                                        ]
+//                                    ),
                                     'images_full_column' => new YesNoInput(
                                         [
                                             'html_label_text' => __('Full-Column Images', 'print-my-blog'),
