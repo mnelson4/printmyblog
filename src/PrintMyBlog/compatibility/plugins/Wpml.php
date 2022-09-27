@@ -86,13 +86,16 @@ class Wpml extends CompatibilityBase
         add_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom after_get_clean', [$this, 'unsetTranslatedProject']);
         add_action('wp_ajax_pmb_update_project_lang', [$this, 'handleAjaxUpdateProjectLanguage']);
 
+        // all projects are in the site's default language and then translated from the "generate" page
         add_action('admin_enqueue_scripts', [$this, 'enqueueWpmlCompatAssets']);
+
+        // when designs and project metadata are saved, make those changes to their translations too
         add_action('PrintMyBlog\controllers\Admin->saveProjectCustomizeDesign done', [$this, 'updateTranslatedDesignsToo'], 10, 4);
         add_action('PrintMyBlog\controllers\Admin->saveProjectMetadata done', [$this, 'updateTranslatedProjectsToo'], 10, 3);
 
         // When a new project is created, it's created with the language last set in the WPML topbar--but we want it to always be the
         // default language. So fix that after each time
-        add_action('wp_after_insert_post', [$this,'fixNewPmbPost'], 10, 4);
+        add_action('wp_after_insert_post', [$this, 'fixNewPmbPost'], 10, 4);
     }
 
     /**
@@ -177,21 +180,21 @@ class Wpml extends CompatibilityBase
      * @param WP_Post $post
      * @param boolean $updated true if it's an update, false if it's newly inserted
      */
-    public function fixNewPmbPost($post_id, WP_Post $post, $updated, $post_before)
+    public function fixNewPmbPost($post_id, $post, $updated, $post_before)
     {
         global $sitepress;
         if (
+            $post instanceof WP_Post &&
             in_array(
-            $post->post_type,
-            [
-                CustomPostTypes::PROJECT,
-                CustomPostTypes::DESIGN,
-            ],
-            true
-            )
-        && ! $updated
+                $post->post_type,
+                [
+                    CustomPostTypes::PROJECT,
+                    CustomPostTypes::DESIGN,
+                ],
+                true
+            ) &&
+            ! $updated
         ) {
-
             $sitepress->set_element_language_details(
                 $post_id,
                 'post_' . $post->post_type,
