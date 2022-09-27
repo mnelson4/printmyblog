@@ -754,13 +754,8 @@ class Admin extends BaseController
                                     ],
                                     $this->project
                                 ),
-                                'pmb_ajax' => add_query_arg(
-                                    [
-                                        Frontend::PMB_AJAX_INDICATOR => 1,
-                                    ],
-                                    site_url()
-                                ),
-                                'site_url' => site_url(),
+                                'pmb_ajax' => apply_filters('\PrintMyBlog\controllers\Admin::enqueueScripts pmb_ajax', pmb_ajax_url(), $this->project),
+                                'site_url' => apply_filters('\PrintMyBlog\controllers\Admin::enqueueScripts site_url', site_url(), $this->project),
                                 'use_pmb_central_for_previews' => $use_pmb_central,
                                 'license_data' => [
                                     'endpoint' => $this->pmb_central->getCentralUrl(),
