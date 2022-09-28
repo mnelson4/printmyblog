@@ -106,8 +106,8 @@ class Wpml extends CompatibilityBase
 
     /**
      * Point to the right language for the site.
-     * @param $site_url
-     * @param $project
+     * @param string $site_url
+     * @param Project $project
      * @return mixed|void
      */
     public function changeUrlToProjectLanguage($site_url, $project)
@@ -200,9 +200,10 @@ class Wpml extends CompatibilityBase
 
     /**
      * After a project or design is newly created, make sure it's in the default language
-     * @param $post_id
+     * @param int $post_id
      * @param WP_Post $post
      * @param boolean $updated true if it's an update, false if it's newly inserted
+     * @param WP_Post|null $post_before
      */
     public function fixNewPmbPost($post_id, $post, $updated, $post_before)
     {
