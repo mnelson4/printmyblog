@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.16.5
+Stable tag: 3.17.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -435,8 +435,11 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.16.5 September 5, 2022 =
+= 3.17.0 September 28, 2022 =
+* Feature: build Print Page on front end requests insead of admin AJAX requests so more plugins' JS and CSS load
 * Bugfix: show all projects when there are more than 10
+* Compatibility: make Supsystic tables render in projects
+* Compatibility: with WPML, prevent projects from hiding when selecting a different language
 
 = 3.16.4 August 19, 2022 =
 * Compatibility: don't cut off Elementor/WooCommerce items at the bottom of the page of PDFs

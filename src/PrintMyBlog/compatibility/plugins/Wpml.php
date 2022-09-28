@@ -110,15 +110,16 @@ class Wpml extends CompatibilityBase
      * @param $project
      * @return mixed|void
      */
-    public function changeUrlToProjectLanguage($site_url, $project){
-        if(! $project instanceof Project){
+    public function changeUrlToProjectLanguage($site_url, $project)
+    {
+        if (! $project instanceof Project) {
             return $site_url;
         }
         $selected_language = $this->getProjectLanguage($project);
         if (! $selected_language) {
             return $site_url;
         }
-        return apply_filters( 'wpml_permalink', $site_url, $selected_language );
+        return apply_filters('wpml_permalink', $site_url, $selected_language);
     }
 
     /**
