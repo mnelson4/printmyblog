@@ -247,7 +247,7 @@
         column-span: all;
     }
     .pmb-part h1.pmb-title{
-        font-size:300%;
+        font-size:5em;
         font-weight:400;
         string-set: part-title content();
     }
