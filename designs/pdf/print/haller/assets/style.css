@@ -245,14 +245,13 @@
     /* part styling*/
     .pmb-part{
         column-span: all;
+        border-top:2px solid black;
     }
     .pmb-part h1.pmb-title{
         font-size:5em;
         font-weight:400;
         string-set: part-title content();
-    }
-    .pmb-part div.entry-content{
-        margin-top:1in;
+        margin-top:.2in;
     }
     /* Justify content looks way better when there are columns */
     article:not(.pmb-just-content) div.entry-content p:not(.has-text-align-center, .has-text-align-right),
