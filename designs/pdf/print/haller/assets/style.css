@@ -246,6 +246,7 @@
     .pmb-part{
         column-span: all;
         border-top:2px solid black;
+        margin-top:.4in;
     }
     .pmb-part h1.pmb-title{
         font-size:5em;
