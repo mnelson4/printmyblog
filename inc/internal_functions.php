@@ -4,6 +4,7 @@
  */
 
 use PrintMyBlog\controllers\Admin;
+use PrintMyBlog\controllers\Frontend;
 use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;
@@ -406,4 +407,18 @@ function pmb_drag_here()
         </div>
     </div>
     <?php
+}
+
+/**
+ * Gets the URL to perform "PMB AJAX" requests (just like regular WP_AJAX, except on a request that's technically
+ * for the frontend, which most plugins think it's a frontend request).
+ * @return string
+ */
+function pmb_ajax_url(){
+    return add_query_arg(
+        [
+            Frontend::PMB_AJAX_INDICATOR => 1,
+        ],
+        site_url()
+    );
 }

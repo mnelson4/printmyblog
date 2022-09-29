@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
 "POT-Creation-Date: 2022-07-19 14:10-0700\n"
-"PO-Revision-Date: 2022-09-20 22:02-0700\n"
+"PO-Revision-Date: 2022-09-29 09:33-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -1466,7 +1466,7 @@ msgstr "Texte qui apparaît en haut à droite de la couverture"
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:515
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:622
 msgid "ByLine"
-msgstr "Byline"
+msgstr "Par ligne"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:358
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:516
@@ -1558,7 +1558,7 @@ msgstr ""
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:656
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:690
 msgid "Byline"
-msgstr "Sous titre"
+msgstr "Par ligne"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:446
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:657

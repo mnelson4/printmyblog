@@ -70,8 +70,14 @@ class Wpml extends CompatibilityBase
 
         // change the print page's language according to the project
         add_filter(
-            '\PrintMyBlog\controllers\Admin->enqueueScripts generate generate_ajax_data',
-            [$this, 'setPrintPageLanguage'],
+            '\PrintMyBlog\controllers\Admin::enqueueScripts pmb_ajax',
+            [$this, 'changeUrlToProjectLanguage'],
+            10,
+            2
+        );
+        add_filter(
+            '\PrintMyBlog\controllers\Admin::enqueueScripts site_url',
+            [$this, 'changeUrlToProjectLanguage'],
             10,
             2
         );
@@ -86,9 +92,34 @@ class Wpml extends CompatibilityBase
         add_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom after_get_clean', [$this, 'unsetTranslatedProject']);
         add_action('wp_ajax_pmb_update_project_lang', [$this, 'handleAjaxUpdateProjectLanguage']);
 
+        // all projects are in the site's default language and then translated from the "generate" page
         add_action('admin_enqueue_scripts', [$this, 'enqueueWpmlCompatAssets']);
+
+        // when designs and project metadata are saved, make those changes to their translations too
         add_action('PrintMyBlog\controllers\Admin->saveProjectCustomizeDesign done', [$this, 'updateTranslatedDesignsToo'], 10, 4);
         add_action('PrintMyBlog\controllers\Admin->saveProjectMetadata done', [$this, 'updateTranslatedProjectsToo'], 10, 3);
+
+        // When a new project is created, it's created with the language last set in the WPML topbar--but we want it to always be the
+        // default language. So fix that after each time
+        add_action('wp_after_insert_post', [$this, 'fixNewPmbPost'], 10, 4);
+    }
+
+    /**
+     * Point to the right language for the site.
+     * @param string $site_url
+     * @param Project $project
+     * @return mixed|void
+     */
+    public function changeUrlToProjectLanguage($site_url, $project)
+    {
+        if (! $project instanceof Project) {
+            return $site_url;
+        }
+        $selected_language = $this->getProjectLanguage($project);
+        if (! $selected_language) {
+            return $site_url;
+        }
+        return apply_filters('wpml_permalink', $site_url, $selected_language);
     }
 
     /**
@@ -160,7 +191,40 @@ class Wpml extends CompatibilityBase
                 $post_needing_update['ID'],
                 'post_' . $post_needing_update['post_type'],
                 null,
-                $default_lang,
+                wpml_get_default_language(),
+                null,
+                true
+            );
+        }
+    }
+
+    /**
+     * After a project or design is newly created, make sure it's in the default language
+     * @param int $post_id
+     * @param WP_Post $post
+     * @param boolean $updated true if it's an update, false if it's newly inserted
+     * @param WP_Post|null $post_before
+     */
+    public function fixNewPmbPost($post_id, $post, $updated, $post_before)
+    {
+        global $sitepress;
+        if (
+            $post instanceof WP_Post &&
+            in_array(
+                $post->post_type,
+                [
+                    CustomPostTypes::PROJECT,
+                    CustomPostTypes::DESIGN,
+                ],
+                true
+            ) &&
+            ! $updated
+        ) {
+            $sitepress->set_element_language_details(
+                $post_id,
+                'post_' . $post->post_type,
+                null,
+                wpml_get_default_language(),
                 null,
                 true
             );
@@ -466,8 +530,16 @@ class Wpml extends CompatibilityBase
                                     url:ajaxurl,
                                     method:'POST',
                                     data:data,
-                                    success:function(){
-                                        // alert('success');
+                                    success:function(response){
+                                        console.log(response);
+                                        if (typeof (response) === 'object' && 
+                                            typeof(response.data) === 'object' && 
+                                            typeof (response.data.site_url) === 'string' && 
+                                            typeof (response.data.pmb_ajax) === 'string') {
+                                            
+                                            pmb_generate.site_url = response.data.site_url;
+                                            pmb_generate.pmb_ajax = response.data.pmb_ajax;                                        
+                                        }
                                     }
                                 });
                             });
@@ -501,7 +573,13 @@ class Wpml extends CompatibilityBase
             wp_send_json_error('oups no such project');
         }
         $project->setPmbMeta('lang', $language_code);
-        wp_send_json_success();
+        wp_send_json_success(
+            [
+                'lang' => $language_code,
+                'site_url' => $this->changeUrlToProjectLanguage(site_url(), $project),
+                'pmb_ajax' => $this->changeUrlToProjectLanguage(pmb_ajax_url(), $project),
+            ]
+        );
         exit;
     }
 
