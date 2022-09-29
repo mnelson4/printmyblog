@@ -54,6 +54,9 @@
     }
 
     /* Title Page styles */
+    .pmb-haller-frontpage-header{
+        column-span:all;
+    }
     .pmb-haller-frontpage-above-header{
         display:flex;
     }
@@ -113,12 +116,8 @@
 
     /* toc */
     .pmb-toc-list{
-        column-span:all;
         padding-left:0;
         width:100%;
-    }
-    .pmb-toc-list{
-        width:80vw;
         margin-left:auto;
         margin-right:auto;
     }
@@ -214,7 +213,12 @@
     .pmb-toc li {
         padding-bottom: 0.4em;
     }
-
+    .pmb-front-matter{
+        border-bottom:2px solid black;
+    }
+    .pmb.back-matter{
+        border-top:2px solid black;
+    }
     /* General */
     a{
         color:black;
