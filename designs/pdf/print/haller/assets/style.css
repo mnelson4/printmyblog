@@ -6,7 +6,6 @@
         margin-bottom: 1.5em;
         margin-left:1.5em;
         counter-reset: footnote;
-        size: 11in 17in;
         @left {
             content: flow(left-sidebar);
         }

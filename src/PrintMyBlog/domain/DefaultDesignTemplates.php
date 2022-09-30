@@ -698,16 +698,13 @@ class DefaultDesignTemplates
                                             'html_help_text' => __('Forces your content to only use two columns, even if the content itself was divided into more columns (eg using the "Columns" block)', 'print-my-blog'),
                                         ]
                                     ),
-//                                    'image' => new FormSection(
-//                                        [
-//                                            'subsections' => $this->getImageSnapInputs(),
-//                                        ]
-//                                    ),
+                                    'page' => $this->getPageSubsection()
                                 ],
                             ]
                         ))->merge($this->getGenericDesignForm());
-//                        $design_form->findSection('image_placement')->removeOption('dynamic-resize');
-//                        $design_form->removeSubsection('dynamic-resize');
+                        $design_form->findSection('page_height')->setDefault('17in');
+                        $design_form->findSection('page_width')->setDefault('11in');
+
                         return $design_form;
                     },
                     'project_form_callback' => function (Design $design) {
@@ -938,35 +935,43 @@ class DefaultDesignTemplates
                             ],
                         ]
                     ),
-                    'page' => new FormSectionDetails(
+                    'page' => $this->getPageSubsection()
+                ],
+            ]
+        );
+    }
+
+    /**
+     * @return FormSectionDetails
+     * @throws \Twine\forms\helpers\ImproperUsageException
+     */
+    protected function getPageSubsection(){
+        return new FormSectionDetails(
+            [
+                'html_summary' => __('Page Settings', 'print-my-blog'),
+                'subsections' => [
+                    'page_width' => new TextInput(
                         [
-                            'html_summary' => __('Page Settings', 'print-my-blog'),
-                            'subsections' => [
-                                'page_width' => new TextInput(
-                                    [
-                                        'html_label_text' => __('Page Width', 'print-my-blog') . pmb_pro_print_service_best(__('Not supported by some browsers', 'print-my-blog')),
-                                        'html_help_text' => sprintf(
-                                            // translators: 1: opening anchor tag, 2: closing anchor tag
-                                            __('Use standard %1$sCSS units%2$s', 'print-my-blog'),
-                                            '<a href="https://www.w3schools.com/CSSref/css_units.asp">',
-                                            '</a>'
-                                        ),
-                                        'default' => '8.5in',
-                                    ]
-                                ),
-                                'page_height' => new TextInput(
-                                    [
-                                        'html_label_text' => __('Page Height', 'print-my-blog') . pmb_pro_print_service_best(__('Not supported by some browsers', 'print-my-blog')),
-                                        'html_help_text' => sprintf(
-                                            // translators: 1: opening anchor tag, 2: closing anchor tag
-                                            __('Use standard %1$sCSS units%2$s', 'print-my-blog'),
-                                            '<a href="https://www.w3schools.com/CSSref/css_units.asp">',
-                                            '</a>'
-                                        ),
-                                        'default' => '11in',
-                                    ]
-                                ),
-                            ],
+                            'html_label_text' => __('Page Width', 'print-my-blog') . pmb_pro_print_service_best(__('Not supported by some browsers', 'print-my-blog')),
+                            'html_help_text' => sprintf(
+                                // translators: 1: opening anchor tag, 2: closing anchor tag
+                                __('Use standard %1$sCSS units%2$s', 'print-my-blog'),
+                                '<a href="https://www.w3schools.com/CSSref/css_units.asp">',
+                                '</a>'
+                            ),
+                            'default' => '8.5in',
+                        ]
+                    ),
+                    'page_height' => new TextInput(
+                        [
+                            'html_label_text' => __('Page Height', 'print-my-blog') . pmb_pro_print_service_best(__('Not supported by some browsers', 'print-my-blog')),
+                            'html_help_text' => sprintf(
+                                // translators: 1: opening anchor tag, 2: closing anchor tag
+                                __('Use standard %1$sCSS units%2$s', 'print-my-blog'),
+                                '<a href="https://www.w3schools.com/CSSref/css_units.asp">',
+                                '</a>'
+                            ),
+                            'default' => '11in',
                         ]
                     ),
                 ],
