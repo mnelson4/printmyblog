@@ -691,6 +691,7 @@ class DefaultDesignTemplates
                                             'html_help_text' => __('Number of columns to use for content.', 'print-my-blog'),
                                         ]
                                     ),
+                                    'post_content' => $this->getPostContentInput(),
                                     'no_extra_columns' => new YesNoInput(
                                         [
                                             'html_label_text' => __('Remove Extra Columns', 'print-my-blog'),
@@ -819,34 +820,41 @@ class DefaultDesignTemplates
                             'html_label_text' => __('Title Page Content'),
                         ]
                     ),
-                    'post_content' => new CheckboxMultiInput(
-                        [
-                            'title' => new InputOption(__('Post Title', 'print-my-blog')),
-                            'id' => new InputOption(__('ID', 'print-my-blog')),
-                            'author' => new InputOption(__('Author', 'print-my-blog')),
-                            'published_date' => new InputOption(__('Published Date', 'print-my-blog')),
-                            'categories' => new InputOption(__('Categories and Tags', 'print-my-blog')),
-                            'url' => new InputOption(__('URL', 'print-my-blog')),
-
-
-                            'featured_image' => new InputOption(__('Featured Image', 'print-my-blog')),
-                            'excerpt' => new InputOption(__('Excerpt', 'print-my-blog')),
-                            'meta' => new InputOption(__('Custom Fields', 'print-my-blog')),
-                            'content' => new InputOption(__('Content', 'print-my-blog')),
-                        ],
-                        [
-                            'default' => [
-                                'title',
-                                'published_date',
-                                'categories',
-                                'featured_image',
-                                'content',
-                            ],
-                            'html_label_text' => __('Post Content'),
-                            'html_help_text' => __('Content from each post to print.', 'print-my-blog'),
-                        ]
-                    ),
+                    'post_content' => $this->getPostContentInput(),
                 ],
+            ]
+        );
+    }
+
+    /**
+     * @return CheckboxMultiInput
+     */
+    protected function getPostContentInput(){
+        return new CheckboxMultiInput(
+            [
+                'title' => new InputOption(__('Post Title', 'print-my-blog')),
+                'id' => new InputOption(__('ID', 'print-my-blog')),
+                'author' => new InputOption(__('Author', 'print-my-blog')),
+                'published_date' => new InputOption(__('Published Date', 'print-my-blog')),
+                'categories' => new InputOption(__('Categories and Tags', 'print-my-blog')),
+                'url' => new InputOption(__('URL', 'print-my-blog')),
+
+
+                'featured_image' => new InputOption(__('Featured Image', 'print-my-blog')),
+                'excerpt' => new InputOption(__('Excerpt', 'print-my-blog')),
+                'meta' => new InputOption(__('Custom Fields', 'print-my-blog')),
+                'content' => new InputOption(__('Content', 'print-my-blog')),
+            ],
+            [
+                'default' => [
+                    'title',
+                    'published_date',
+                    'categories',
+                    'featured_image',
+                    'content',
+                ],
+                'html_label_text' => __('Post Content'),
+                'html_help_text' => __('Content from each post to print.', 'print-my-blog'),
             ]
         );
     }

@@ -229,6 +229,16 @@
     h1,h2,h3,h4,h5{
         margin-bottom:0;
     }
+    h1.pmb-title{
+        font-size:2em;
+    }
+    .excerpt p{
+        font-size:1.2em;
+        background-color: #ececec;
+        padding: 10px;
+        margin: 10px 0 10px 0;
+        border-radius: 5px;
+    }
     /**
      * avoid margins for block columns
      */
