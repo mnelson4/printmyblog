@@ -2,6 +2,7 @@
 
 namespace Twine\forms\inputs;
 
+use Twine\forms\strategies\display\DisplayBase;
 use Twine\forms\strategies\display\TextAreaDisplay;
 use Twine\forms\strategies\normalization\TextNormalization;
 use Twine\forms\strategies\validation\PlaintextValidation;
@@ -69,7 +70,9 @@ class TextAreaInput extends FormInputBase
      */
     public function __construct($options_array = array())
     {
-        $this->setDisplayStrategy(new TextAreaDisplay());
+        if (! $this->getDisplayStrategy() instanceof DisplayBase) {
+            $this->setDisplayStrategy(new TextAreaDisplay());
+        }
         $this->setNormalizationStrategy(new TextNormalization());
 
         parent::__construct($options_array);

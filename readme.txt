@@ -437,9 +437,11 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.17.0 September 28, 2022 =
 * Feature: build Print Page on front end requests insead of admin AJAX requests so more plugins' JS and CSS load
-* Bugfix: show all projects when there are more than 10
 * Compatibility: make Supsystic tables render in projects
 * Compatibility: with WPML, prevent projects from hiding when selecting a different language
+
+= 3.16.5 September 5, 2022 =
+* Bugfix: show all projects when there are more than 10
 
 = 3.16.4 August 19, 2022 =
 * Compatibility: don't cut off Elementor/WooCommerce items at the bottom of the page of PDFs

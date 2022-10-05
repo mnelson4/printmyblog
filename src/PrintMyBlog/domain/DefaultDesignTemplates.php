@@ -21,6 +21,7 @@ use Twine\forms\inputs\SelectInput;
 use Twine\forms\inputs\SelectRevealInput;
 use Twine\forms\inputs\TextAreaInput;
 use Twine\forms\inputs\TextInput;
+use Twine\forms\inputs\WysiwygInput;
 use Twine\forms\inputs\YesNoInput;
 use Twine\forms\strategies\display\TextInputDisplay;
 use Twine\forms\strategies\validation\FullHtmlValidation;
@@ -722,22 +723,16 @@ class DefaultDesignTemplates
                                     'html_help_text' => __('Shown on the frontpage and in the top margin of all subsequent pages (shortcodes supported).', 'print-my-blog'),
                                 ]
                             ),
-                            'frontpage_left_side' => new TextAreaInput(
+                            'frontpage_left_side' => new WysiwygInput(
                                 [
                                     'html_label_text' => __('Frontpage Title Left Call-Out', 'print-my-blog'),
                                     'html_help_text' => __('HTML displayed to the left of the title on the frontpage (shortcodes supported).', 'print-my-blog'),
-                                    'validation_strategies' => [
-                                        new FullHtmlValidation(),
-                                    ],
                                 ]
                             ),
-                            'frontpage_right_side' => new TextAreaInput(
+                            'frontpage_right_side' => new WysiwygInput(
                                 [
                                     'html_label_text' => __('Frontpage Title Right Call-Out', 'print-my-blog'),
                                     'html_help_text' => __('HTML displayed to the right of the title on the frontpage', 'print-my-blog'),
-                                    'validation_strategies' => [
-                                        new FullHtmlValidation(),
-                                    ],
                                 ]
                             ),
                         ];
