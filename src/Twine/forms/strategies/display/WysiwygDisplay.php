@@ -17,7 +17,15 @@ class WysiwygDisplay extends TextAreaDisplay
      */
     public function display()
     {
-        $this->input->setHtmlClass($this->input->htmlClass() . ' theEditor');
-        return parent::display();
+        ob_start();
+        wp_editor(
+            $this->input->rawValue(),
+            $this->input->htmlID(),
+            [
+                'editor_class' => $this->input->htmlClass(),
+                'textarea_name' => $this->input->htmlName(),
+            ]
+        );
+        return ob_get_clean();
     }
 }

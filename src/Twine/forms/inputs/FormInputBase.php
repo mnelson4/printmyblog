@@ -435,7 +435,7 @@ abstract class FormInputBase extends FormSectionValidatable
             ? $validation_strategy_classnames
             : array($validation_strategy_classnames);
         foreach ($this->validation_strategies as $key => $validation_strategy) {
-            if (in_array($key, $validation_strategy_classnames, true)) {
+            if (in_array(get_class($validation_strategy), $validation_strategy_classnames, true)) {
                 return true;
             }
         }
