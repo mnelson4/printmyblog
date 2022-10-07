@@ -435,6 +435,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+3.17.1 October 6, 2022 =
+* Compatibility: hide One Click Accessibility Toolbar on Print Page
+
 = 3.17.0 September 28, 2022 =
 * Feature: build Print Page on front end requests insead of admin AJAX requests so more plugins' JS and CSS load
 * Bugfix: show all projects when there are more than 10

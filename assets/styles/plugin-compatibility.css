@@ -193,3 +193,10 @@ Turn its flexboxes into regular blocks so pagebreaks work better again
 .pmb-posts .elementor:not(.elementor-bc-flex-widget) .elementor-widget-wrap{
     display:block;
 }
+
+/**
+One-Click Accessibility Toolbar
+ */
+#pojo-a11y-toolbar{
+    display:none;
+}
