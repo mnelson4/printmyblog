@@ -438,7 +438,7 @@ https://youtu.be/uPQ3vqm7A2g
 = 3.17.2 October 11, 2022 =
 * Bugfix: fix error generating Pro Print print page for subdirectory WordPress
 
-3.17.1 October 6, 2022 =
+= 3.17.1 October 6, 2022 =
 * Compatibility: hide One Click Accessibility Toolbar on Print Page
 
 = 3.17.0 September 28, 2022 =
