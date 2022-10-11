@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
 "POT-Creation-Date: 2022-07-19 14:10-0700\n"
-"PO-Revision-Date: 2022-09-29 09:33-0700\n"
+"PO-Revision-Date: 2022-10-11 10:43-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -3744,12 +3744,12 @@ msgstr "%s."
 #: templates/print_page.php:300
 #, php-format
 msgid "Printed on %1$s using %2$sPrint My Blog%3$s"
-msgstr "Imprimé le  %1$s à %2$sPrint My Blog%3$s"
+msgstr "Imprimé le %1$s à %2$sPrint My Blog%3$s"
 
 #: templates/print_page.php:313
 #, php-format
 msgid "Printed using %1$sPrint My Blog%2$s"
-msgstr "Imprimé à l%1$sPrint My Blog%2$s"
+msgstr "Imprimé par %1$sPrint My Blog%2$s"
 
 #: templates/print_page_error.php:27
 msgid "Sorry, we could not print the WordPress Blog."

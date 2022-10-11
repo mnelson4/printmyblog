@@ -198,6 +198,12 @@ Turn its flexboxes into regular blocks so pagebreaks work better again
  Supsystic tables. https://wordpress.org/plugins/data-tables-generator-by-supsystic/
  Don't show the edit links
  */
-.tblEditLink{
-    display:none !important;
+.tblEditLink {
+    display: none !important;
+}
+/**
+ One-Click Accessibility Toolbar
+ */
+#pojo-a11y-toolbar{
+    display:none;
 }
