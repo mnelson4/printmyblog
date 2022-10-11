@@ -419,6 +419,6 @@ function pmb_ajax_url(){
         [
             Frontend::PMB_AJAX_INDICATOR => 1,
         ],
-        site_url()
+        site_url('/')
     );
 }
