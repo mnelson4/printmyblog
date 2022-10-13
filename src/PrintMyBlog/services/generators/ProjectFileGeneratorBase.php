@@ -194,6 +194,9 @@ abstract class ProjectFileGeneratorBase
             // if the post is somehow missing from the query results, fix that. Especially helpful if a section was added via the filter.
             if (! $found) {
                 $post = get_post($section->getPostId());
+            } else {
+                // use a clone so posts can have different section info (i.e., be included in different spots in the project)
+                $post = clone $post;
             }
             if ($post) {
                 $post->pmb_section = $section;
