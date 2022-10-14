@@ -46,6 +46,7 @@ class Design extends PostWrapper
 
     /**
      * @return DesignTemplate
+     * @throws DesignTemplateDoesNotExist
      */
     public function getDesignTemplate()
     {

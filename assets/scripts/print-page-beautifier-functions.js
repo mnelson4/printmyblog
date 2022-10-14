@@ -11,6 +11,18 @@ function pmb_remove_unsupported_content(){
     jQuery("body>div").filter(function() {
         return jQuery.trim(jQuery(this).html()) === "";
     }).remove();
+    // prevent MathJax-LaTeX (https://wordpress.org/plugins/mathjax-latex/) from adding a page empty pages
+    // and remove any totally empty divs
+    setTimeout(function(){
+        jQuery('body>*').each(function(){
+            var element = jQuery(this);
+            if(this.innerHTML === ''){
+                element.remove();
+            }
+        });
+    },
+        2000 // just a guess that MathJax-LaTeX will be done by now
+    );
 }
 
 /**

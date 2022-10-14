@@ -32,8 +32,8 @@
         ?><?php pmb_pro_print_service_only_e(); ?></li>
     <li><?php
         esc_html_e('External links (hyperlinks to content on the internet) are left as-is.', 'print-my-blog');
-        ?></li>
-    <li>
+        ?>
+    </li>
 </ul>
 <h2><?php esc_html_e('Page Layout', 'print-my-blog'); ?></h2>
 <ul class="pmb-list">
