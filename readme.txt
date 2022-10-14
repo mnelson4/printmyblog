@@ -137,7 +137,7 @@ Some designs have features like:
 
 Read more about Pro Print in our [extensive user guide](https://printmy.blog/user-guide/).
 
-Ready to purchase the full version? Here's the [pricing page](https://printmy.blog/pricing/).
+Wanna See it in Action? [Try Print My Blog on a Free Test Site Now](https://tastewp.com/plugins/print-my-blog)
 
 **Translations**
 
