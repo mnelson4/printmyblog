@@ -10,6 +10,7 @@ use PrintMyBlog\entities\FileFormat;
 use PrintMyBlog\entities\ProjectGeneration;
 use PrintMyBlog\entities\ProjectProgress;
 use PrintMyBlog\entities\SectionTemplate;
+use PrintMyBlog\exceptions\DesignTemplateDoesNotExist;
 use PrintMyBlog\factories\ProjectGenerationFactory;
 use PrintMyBlog\helpers\ArgMagician;
 use PrintMyBlog\orm\managers\DesignManager;
@@ -365,8 +366,13 @@ class Project extends PostWrapper
     {
         $lowest_allowed_by_a_design = 5;
         foreach ($this->getDesignsSelected() as $design) {
-            if ($design->getDesignTemplate()->getLevels() < $lowest_allowed_by_a_design) {
-                $lowest_allowed_by_a_design = $design->getDesignTemplate()->getLevels();
+            try {
+                if ($design->getDesignTemplate()->getLevels() < $lowest_allowed_by_a_design) {
+                        $lowest_allowed_by_a_design = $design->getDesignTemplate()->getLevels();
+                }
+            } catch (DesignTemplateDoesNotExist $e) {
+                // hopefully a different design does exist then.
+                continue;
             }
         }
         return $lowest_allowed_by_a_design;
