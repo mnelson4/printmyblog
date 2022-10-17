@@ -317,6 +317,10 @@
         column-span:all;
         -prince-float: snap;
     }
+    /* Because we're in columns, save a bit of space by decreasing the indent on lists.*/
+    ul, ol{
+        padding-left:1em;
+    }
 
 /*
     Make the preview appear about the same size as in the PDF. Besides making the preview better,
