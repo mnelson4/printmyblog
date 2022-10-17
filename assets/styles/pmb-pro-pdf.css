@@ -14,6 +14,15 @@ h1,h2,h3,h4,h5,h6{
 .pmb-depth-3:not([id*='/pmb-']) h1.pmb-title{prince-bookmark-level: 4}
 .pmb-depth-4:not([id*='/pmb-']) h1.pmb-title{prince-bookmark-level: 5}
 
+/**
+ Accessibility stuff. See  https://www.princexml.com/doc/prince-output/#pdf-tags 
+ */
+.pmb-toc-list{
+    -prince-pdf-tag-type: TOC;
+}
+.pmb-toc-list .pmb-toc-item{
+    -prince-pdf-tag-type: TOCI;
+}
 .pmb-posts .pmb-dynamic-resize img{
     width:auto;
 }
