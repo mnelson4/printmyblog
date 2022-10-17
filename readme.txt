@@ -439,6 +439,7 @@ https://youtu.be/uPQ3vqm7A2g
 * Feature: added Haller Tabloid Print-Ready design, a multi-column magazine
 * Bugfix: fix error on Edit Content page when a design no longer exists
 * Compatibility: remove empty pages added to PDFs by MathJax-LaTeX and other plugins
+* Aesthetic: renamed a project's "Main Matter" to "Body"
 
 = 3.17.2 October 11, 2022 =
 * Bugfix: fix error generating Pro Print print page for subdirectory WordPress

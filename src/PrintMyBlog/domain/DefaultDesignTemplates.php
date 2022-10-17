@@ -664,7 +664,7 @@ class DefaultDesignTemplates
                                     'publication_subtitle' => new TextInput(
                                         [
                                             'html_label_text' => __('Subtitle of Publication', 'print-my-blog'),
-                                            'html_help_text' => __('Only shown on front page, under the name of the publication, in a slightly smaller font.', 'print-my-blog'),
+                                            'html_help_text' => __('Shown under the name of the publication, in a slightly smaller font.', 'print-my-blog'),
                                             'default' => get_bloginfo('description'),
                                         ]
                                     ),
