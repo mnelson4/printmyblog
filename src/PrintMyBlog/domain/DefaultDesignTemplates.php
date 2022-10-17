@@ -643,7 +643,7 @@ class DefaultDesignTemplates
                     'format'          => 'print_pdf',
                     'dir'             => PMB_DESIGNS_DIR . 'pdf/print/haller/',
                     'default' => 'haller',
-                    'docs' => 'https://printmy.blog/user-guide/pdf-design/haller-tabloid-print-pdf/',
+                    'docs' => 'https://printmy.blog/user-guide/pdf-design/haller-tabloid-print-ready-pdf/',
                     'supports' => [
                         'front_matter',
                         'part',
