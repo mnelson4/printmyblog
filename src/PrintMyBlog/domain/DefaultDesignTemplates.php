@@ -684,7 +684,7 @@ class DefaultDesignTemplates
                                         [
                                             2 => new InputOption('2'),
                                             3 => new InputOption('3'),
-                                            4 => new InputOption('4')
+                                            4 => new InputOption('4'),
                                         ],
                                         [
                                             'html_label_text' => __('Columns', 'print-my-blog'),
@@ -700,7 +700,7 @@ class DefaultDesignTemplates
                                             'html_help_text' => __('Forces your content to only use two columns, even if the content itself was divided into more columns (eg using the "Columns" block)', 'print-my-blog'),
                                         ]
                                     ),
-                                    'page' => $this->getPageSubsection()
+                                    'page' => $this->getPageSubsection(),
                                 ],
                             ]
                         ))->merge($this->getGenericDesignForm());
@@ -714,7 +714,7 @@ class DefaultDesignTemplates
                             'date' => new TextInput(
                                 [
                                     'html_label_text' => __('Date', 'print-my-blog'),
-                                    'html_help_text' => __("Shown on frontpage and in the top margin of all subsequent pages.", 'print-my-blog'),
+                                    'html_help_text' => __('Shown on frontpage and in the top margin of all subsequent pages.', 'print-my-blog'),
                                 ]
                             ),
                             'issue' => new TextInput(
@@ -824,7 +824,8 @@ class DefaultDesignTemplates
     /**
      * @return CheckboxMultiInput
      */
-    protected function getPostContentInput(){
+    protected function getPostContentInput()
+    {
         return new CheckboxMultiInput(
             [
                 'title' => new InputOption(__('Post Title', 'print-my-blog')),
@@ -938,7 +939,7 @@ class DefaultDesignTemplates
                             ],
                         ]
                     ),
-                    'page' => $this->getPageSubsection()
+                    'page' => $this->getPageSubsection(),
                 ],
             ]
         );
@@ -948,7 +949,8 @@ class DefaultDesignTemplates
      * @return FormSectionDetails
      * @throws \Twine\forms\helpers\ImproperUsageException
      */
-    protected function getPageSubsection(){
+    protected function getPageSubsection()
+    {
         return new FormSectionDetails(
             [
                 'html_summary' => __('Page Settings', 'print-my-blog'),

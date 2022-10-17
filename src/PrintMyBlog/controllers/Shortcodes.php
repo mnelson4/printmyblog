@@ -246,17 +246,18 @@ class Shortcodes extends BaseController
      * @return mixed|string|null
      * @throws \Exception
      */
-    public function projectSetting($atts){
+    public function projectSetting($atts)
+    {
         global $pmb_project, $pmb_format;
         $key = isset($atts['name']) ? (string)$atts['name'] : '';
-        if($key){
-            if($pmb_project instanceof Project) {
+        if ($key) {
+            if ($pmb_project instanceof Project) {
                 return $pmb_project->getSetting($key);
             } else {
                 return 'Project Setting ' . $key;
             }
         } else {
-            if($pmb_project instanceof Project && $pmb_format instanceof FileFormat) {
+            if ($pmb_project instanceof Project && $pmb_format instanceof FileFormat) {
                 return '[pmb_project_setting] requires you provide the setting\'s name. Available settings are: ' . wp_json_encode($pmb_project->getDesignFor($pmb_format)->getSettings());
             } else {
                 return 'Project Setting ' . $key;

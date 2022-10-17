@@ -50,7 +50,7 @@ class DefaultSectionTemplates
             'single_column',
             [
                 'mayer',
-                'haller'
+                'haller',
             ],
             function () {
                 return [
@@ -59,18 +59,18 @@ class DefaultSectionTemplates
                 ];
             }
         );
-//        pmb_register_section_template(
-//            'left_sidebar',
-//            [
-//                'haller',
-//            ],
-//            function () {
-//                return [
-//                    'title' => __('Left Sidebar', 'print-my-blog'),
-//                    'fallback' => '',
-//                ];
-//            }
-//        );
+// pmb_register_section_template(
+// 'left_sidebar',
+// [
+// 'haller',
+// ],
+// function () {
+// return [
+// 'title' => __('Left Sidebar', 'print-my-blog'),
+// 'fallback' => '',
+// ];
+// }
+// );
         pmb_register_section_template(
             'important_article',
             [
