@@ -11,7 +11,10 @@
         <custom-field action="translate">_pmb_byline</custom-field>
         <custom-field action="translate">_pmb_cover_preamble</custom-field>
         <custom-field action="translate">_pmb_post_name</custom-field>
-
+        <custom-field action="translate">_pmb_frontpage_right_side</custom-field>
+        <custom-field action="translate">_pmb_frontpage_left_side</custom-field>
+        <custom-field action="translate">_pmb_issue</custom-field>
+        <custom-field action="translate">_pmb_date</custom-field>
 
         <!-- design metas -->
         <custom-field action="translate">_pmb_internal_footnote_text</custom-field>
@@ -19,14 +22,12 @@
         <custom-field action="translate">_pmb_page_reference_text</custom-field>
         <custom-field action="translate">_pmb_org</custom-field>
 
-
         <!-- all metas that start with _pmb_ that aren't for translating. Easiest fetched from the DB of an existing site. -->
         <custom-field action="copy">_pmb_author_name</custom-field>
         <custom-field action="copy">_pmb_author_url</custom-field>
         <custom-field action="copy">_pmb_background_embellishment</custom-field>
         <custom-field action="copy">_pmb_background_color</custom-field>
         <custom-field action="copy">_pmb_custom_css</custom-field>
-        <custom-field action="copy">_pmb_date</custom-field>
         <custom-field action="copy">_pmb_default_alignment</custom-field>
         <custom-field action="copy">_pmb_design_for_digital_pdf</custom-field>
         <custom-field action="copy">_pmb_design_for_print_pdf</custom-field>
