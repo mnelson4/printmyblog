@@ -435,7 +435,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.18.1 xxx =
+= 3.18.1 October 17, 2022 =
 * Aesthetic: decrease indent on lists in Haller Tabloid design
 * Aesthetic: Haller design defaults to leaving in-content columns alone
 
