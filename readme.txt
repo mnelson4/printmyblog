@@ -435,7 +435,8 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.17.3 xxxxxxxx =
+= 3.18.0 October 17, 2022 =
+* Feature: added Haller Tabloid Print-Ready design, a multi-column magazine
 * Bugfix: fix error on Edit Content page when a design no longer exists
 * Compatibility: remove empty pages added to PDFs by MathJax-LaTeX and other plugins
 
