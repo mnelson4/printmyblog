@@ -7,7 +7,7 @@
 <ul class="pmb-list">
     <li><?php esc_html_e('The "Title page" is actually a special header on the front page containing your publication\'s title, issue number, date, and other optional prominent info (set on the design and project meta settings).', 'print-my-blog'); ?></li>
     <li><?php esc_html_e('Content is divided into two, three, or four columns.', 'print-my-blog'); ?><?php pmb_pro_print_service_best_e(__('Some browsers don‘t support multiple columns', 'print-my-blog')); ?></li>
-    <li><?php esc_html_e('The top margin contains the front page (publication title, issue number, date, etc.).', 'print-my-blog');?> <?php pmb_pro_print_service_best_e(__('Most browsers add their own content to the page margins.', 'print-my-blog')); ?></li>
+    <li><?php esc_html_e('The top margin contains the front page (publication title, issue number, date, etc.).', 'print-my-blog');?> <?php pmb_pro_print_service_best_e(__('Most browsers add their own content to the page margins', 'print-my-blog')); ?></li>
     <li><?php esc_html_e('Designed for duplex printing with the left page mirroring the right page\'s margins.', 'print-my-blog');?></li>
     <li><?php esc_html_e('Content can be divided into parts. Part openings and important articles\' titles and cover images take up the full page width, whereas regular articles compactly fit into columns.', 'print-my-blog'); ?></li>
 
