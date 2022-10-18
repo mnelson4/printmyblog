@@ -704,9 +704,6 @@ class DefaultDesignTemplates
                                 ],
                             ]
                         ))->merge($this->getGenericDesignForm());
-                        $design_form->findSection('page_height')->setDefault('17in');
-                        $design_form->findSection('page_width')->setDefault('11in');
-
                         return $design_form;
                     },
                     'project_form_callback' => function (Design $design) {

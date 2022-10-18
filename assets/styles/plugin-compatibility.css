@@ -114,13 +114,6 @@ Hide stuff that doesn't make sense in print
         height: 100% !important;
         width: initial !important;
     }
-    /**
-     LaText2Html (https://wordpress.org/plugins/latex2html/) strangely thinks it should set the page and body size.
-     Don't let it, or others, do that. See https://wordpress.org/support/topic/losing-all-formatting/
-     */
-    @page {
-        size: initial;
-    }
 }
 
 /* Place NextGen gallery https://wordpress.org/plugins/nextgen-gallery/ items side-by-side */

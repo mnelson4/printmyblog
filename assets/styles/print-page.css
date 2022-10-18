@@ -244,3 +244,13 @@ because it also takes up 100% of the width.
 .pmb-print-page .wp-block-column{
     display:inline-block;
 }
+
+/**
+    This should go in plugin-compatibility.css, but it only applies to Quick Print, which I plan to remove soon. So
+    here it is.
+    LaText2Html (https://wordpress.org/plugins/latex2html/) strangely thinks it should set the page and body size.
+    Don't let it, or others, do that. See https://wordpress.org/support/topic/losing-all-formatting/
+*/
+@page {
+    size: initial;
+}
