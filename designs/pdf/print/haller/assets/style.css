@@ -1,10 +1,18 @@
+/*
+Generic stuff.
+Ask PDF viewers to display pages side-by-side by default.
+*/
+@prince-pdf {
+    -prince-pdf-page-layout: two-column-right;
+}
+
 /* pagination */
 @media print, screen {
     @page {
         margin-top: 4em;
-        margin-right:1.5em;
+        margin-right: 1.5em;
         margin-bottom: 1.5em;
-        margin-left:1.5em;
+        margin-left: 1.5em;
         counter-reset: footnote;
         @left {
             content: flow(left-sidebar);
@@ -12,7 +20,12 @@
         @right {
             content: flow(right-sidebar);
         }
+        @footnote {
+            border-top: solid black thin;
+            padding-top: 8pt;
+        }
     }
+
     @page:left {
         @top {
             content: flow(left-header);
@@ -23,6 +36,7 @@
         /*}*/
         /*margin-left:20vw;*/
     }
+
     @page:right {
         @top {
             content: flow(right-header);
@@ -33,154 +47,176 @@
         /*}*/
         /*margin-right:20vw;*/
     }
-    .pmb-page-number::after{
-        content:counter(page);
+
+    .pmb-page-number::after {
+        content: counter(page);
     }
 
-        @footnotes {
-            border-top: solid black thin;
-            padding-top: 8pt;
-        }
-    }
+
     body {
         prince-footnote-policy: keep-with-line;
     }
-    @page:first{
-        margin-top:1em;
-        @top{
-            content:normal;
+
+    @page:first {
+        margin-top: 1em;
+        @top {
+            content: normal;
         }
     }
 
     /* Title Page styles */
-    .pmb-haller-frontpage-header{
-        column-span:all;
-    }
-    .pmb-haller-frontpage-above-header{
-        display:flex;
-    }
-    .pmb-haller-frontpage-above-header span{
-        width:50%;
-    }
-    .pmb-haller-frontpage-issue{
-        text-align:right;
-    }
-    .pmb-haller-frontpage-main{
-        border-top:2px solid black;
-        border-bottom:2px solid black;
-        display:flex;
-        justify-content:center;
-    }
-    .pmb-haller-frontpage-main-sidebar{
-        margin-top:1em;
-        margin-bottom:1em;
-        padding-top:1em;
-        padding-bottom:1em;
-        width:2in;
-    }
-    .pmb-haller-frontpage-main-sidebar.left{
-        border-right:2px solid black;
-        padding-right:1em;
-    }
-    .pmb-haller-frontpage-main-sidebar.right{
-        border-left:2px solid black;
-        padding-left:1em;
-    }
-    .pmb-haller-frontpage-main-title-area{
-        text-align:center;
-        flex-grow:1;
-    }
-    .pmb-haller-frontpage-main-title{
-        margin-top:0;
-        font-size:5em;
-        margin-bottom:0;
+    .pmb-haller-frontpage-header {
+        column-span: all;
     }
 
-    .pmb-haller-frontpage-main-subtitle{
-        font-size:3em;
-        margin-top:0;
-        margin-bottom:0;
+    .pmb-haller-frontpage-above-header {
+        display: flex;
     }
 
-    .pmb-haller-frontpage-preamble{
-        text-align:center;
-        border-bottom:2px solid black;
-        padding-top:.5em;
-        padding-bottom:.5em;
+    .pmb-haller-frontpage-above-header span {
+        width: 50%;
     }
-    .pmb-haller-frontpage-preamble-text{
-        font-size:1.3em;
+
+    .pmb-haller-frontpage-issue {
+        text-align: right;
+    }
+
+    .pmb-haller-frontpage-main {
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
+        display: flex;
+        justify-content: center;
+    }
+
+    .pmb-haller-frontpage-main-sidebar {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        width: 2in;
+    }
+
+    .pmb-haller-frontpage-main-sidebar.left {
+        border-right: 2px solid black;
+        padding-right: 1em;
+    }
+
+    .pmb-haller-frontpage-main-sidebar.right {
+        border-left: 2px solid black;
+        padding-left: 1em;
+    }
+
+    .pmb-haller-frontpage-main-title-area {
+        text-align: center;
+        flex-grow: 1;
+    }
+
+    .pmb-haller-frontpage-main-title {
+        margin-top: 0;
+        font-size: 5em;
+        margin-bottom: 0;
+    }
+
+    .pmb-haller-frontpage-main-subtitle {
+        font-size: 3em;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .pmb-haller-frontpage-preamble {
+        text-align: center;
+        border-bottom: 2px solid black;
+        padding-top: .5em;
+        padding-bottom: .5em;
+    }
+
+    .pmb-haller-frontpage-preamble-text {
+        font-size: 1.3em;
     }
 
 
     /* toc */
-    .pmb-toc-list{
-        padding-left:0;
-        width:100%;
-        margin-left:auto;
-        margin-right:auto;
+    .pmb-toc-list {
+        padding-left: 0;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
     }
-    .pmb-toc-list li{
-        padding-left:0;
-        list-style:none;
+
+    .pmb-toc-list li {
+        padding-left: 0;
+        list-style: none;
     }
-    .pmb-toc-item.pmb-toc-height-1{
+
+    .pmb-toc-item.pmb-toc-height-1 {
         font-weight: bold;
         font-size: 1.2em;
         margin-top: 10px;
     }
-    .pmb-toc-item.pmb-toc-depth-1{
-        margin-left:1em;
+
+    .pmb-toc-item.pmb-toc-depth-1 {
+        margin-left: 1em;
     }
+
     .pmb-toc-list .pmb-toc-item.pmb-toc-front a::after {
         content: leader('.') target-counter(attr(href), page, lower-roman) !important;
     }
+
     .pmb-toc-list .pmb-toc-item:not(.pmb-toc-front) a::after {
         content: leader('.') target-counter(attr(href), page) !important;
     }
 
     /* Repeating header */
     .haller-repeat-header-wrap {
-        margin-top:1.5em;
+        margin-top: 1.5em;
     }
+
     #haller-repeat-header-wrap-right {
         -prince-flow: static(right-header, start); /* see https://www.princexml.com/doc/paged/#generated-content-in-page-regions */
     }
+
     #haller-repeat-header-wrap-left {
         -prince-flow: static(left-header, start); /* see https://www.princexml.com/doc/paged/#generated-content-in-page-regions */
     }
-    .haller-repeat-header{
-        display:flex;
-        justify-content:space-around;
-        border-bottom:2px solid black;
-        text-align:center;
-    }
-    .haller-repeat-header div{
-        flex-grow:1;
-    }
-    .haller-repeat-header div:first-child>span {
-        border-right:1px solid black;
-        padding-right:3em;
+
+    .haller-repeat-header {
+        display: flex;
+        justify-content: space-around;
+        border-bottom: 2px solid black;
+        text-align: center;
     }
 
-    .haller-repeat-header div:last-child>span {
-        border-left:1px solid black;
-        padding-left:3em;
+    .haller-repeat-header div {
+        flex-grow: 1;
     }
-    .haller-repeat-header div:nth-child(2){
+
+    .haller-repeat-header div:first-child > span {
+        border-right: 1px solid black;
+        padding-right: 3em;
+    }
+
+    .haller-repeat-header div:last-child > span {
+        border-left: 1px solid black;
+        padding-left: 3em;
+    }
+
+    .haller-repeat-header div:nth-child(2) {
         /*border-left:2px solid black;*/
         /*border-right:2px solid black;*/
-        flex-grow:1;
+        flex-grow: 1;
     }
+
     .haller-repeat-header-title {
-        font-weight:bold;
-        font-size:2em;
+        font-weight: bold;
+        font-size: 2em;
     }
+
     .haller-repeat-header div {
         display: flex;
-        justify-content:center;
-        align-items:flex-end;
+        justify-content: center;
+        align-items: flex-end;
     }
+
     .haller-repeat-header-subtitle {
         text-align: center;
         border-bottom: 2px solid black;
@@ -188,15 +224,17 @@
 
     /* Sidebar content */
     .haller-sidebar {
-        width:18vw;
-        background-color:#333333;
-        color:white;
-        padding:1em;
+        width: 18vw;
+        background-color: #333333;
+        color: white;
+        padding: 1em;
         -prince-float: sidenote;
     }
+
     .haller-sidebar article {
         width: 100%;
     }
+
     .haller-sidebar a {
         color: white;
     }
@@ -212,116 +250,133 @@
     .pmb-toc li {
         padding-bottom: 0.4em;
     }
-    .pmb-front-matter{
-        border-bottom:2px solid black;
+
+    .pmb-front-matter {
+        border-bottom: 2px solid black;
     }
-    .pmb.back-matter{
-        border-top:2px solid black;
+
+    .pmb.back-matter {
+        border-top: 2px solid black;
     }
+
     /* General */
-    a{
-        color:black;
-        text-decoration:none;
+    a {
+        color: black;
+        text-decoration: none;
     }
-    img, figure{
-        max-width:100%;
+
+    img, figure {
+        max-width: 100%;
     }
-    h1,h2,h3,h4,h5{
-        margin-bottom:0;
+
+    h1, h2, h3, h4, h5 {
+        margin-bottom: 0;
     }
-    h1.pmb-title{
-        font-size:2em;
+
+    h1.pmb-title {
+        font-size: 2em;
     }
-    .excerpt p{
-        font-size:1.2em;
+
+    .excerpt p {
+        font-size: 1.2em;
         background-color: #ececec;
         padding: 10px;
         margin: 10px 0 10px 0;
         border-radius: 5px;
     }
+
     /**
      * avoid margins for block columns
      */
-    .wp-block-column:not(:first-child){
-        margin-left:0;
-    }
-    .pmb-section:not(.pmb-single-column) .wp-block-columns>.wp-block-column{
-        width:100% !important;
+    .wp-block-column:not(:first-child) {
+        margin-left: 0;
     }
 
+    .pmb-section:not(.pmb-single-column) .wp-block-columns > .wp-block-column {
+        width: 100% !important;
+    }
 
 
     /* part styling*/
-    .pmb-part{
+    .pmb-part {
         column-span: all;
-        border-top:2px solid black;
-        margin-top:.4in;
+        border-top: 2px solid black;
+        margin-top: .4in;
     }
-    .pmb-part h1.pmb-title{
-        font-size:5em;
-        font-weight:400;
+
+    .pmb-part h1.pmb-title {
+        font-size: 5em;
+        font-weight: 400;
         string-set: part-title content();
-        margin-top:.2in;
+        margin-top: .2in;
     }
+
     /* Justify content looks way better when there are columns */
     article:not(.pmb-just-content) div.entry-content p:not(.has-text-align-center, .has-text-align-right),
-    article:not(.pmb-just-content) div.entry-content li{
-        text-justify:inter-character;
-        text-align:justify;
-    }
-    .pmb-print-page .pmb-single-column, .pmb-print-page .pmb-just-content{
-        column-span:all;
+    article:not(.pmb-just-content) div.entry-content li {
+        text-justify: inter-character;
+        text-align: justify;
     }
 
-
-
+    .pmb-print-page .pmb-single-column, .pmb-print-page .pmb-just-content {
+        column-span: all;
+    }
 
 
     /* Article styles */
-    .haller-important h1.pmb-title{
-        font-size:4em;
-        margin-top:0;
-        margin-bottom:0;
+    .haller-important h1.pmb-title {
+        font-size: 4em;
+        margin-top: 0;
+        margin-bottom: 0;
     }
+
     .pmb-article h1.pmb-title {
         string-set: article-title content();
     }
 
-    .pmb-wide{
+    .pmb-wide {
         column-span: all;
     }
-    .pmb-wider{
-        column-span:2;
-    }
-    .pmb-columns{
-        columns:2;
-    }
-    .project-intro{
-        background-color:lightgrey;
-        font-style:italic;
-    }
-    .pmb-posts span.pmb-footnote{
-        float:footnote;
-        text-align:left;
-        margin-left:0;
-        font-weight:normal;
-    }
-    .pmb-print-page .aligncenter{
-        clear:none;
-    }
-    .alignwide {
-        column-span:2;
-        -prince-float: snap;
-    }
-    .alignfull {
-        column-span:all;
-        -prince-float: snap;
-    }
-    /* Because we're in columns, save a bit of space by decreasing the indent on lists.*/
-    ul, ol{
-        padding-left:1em;
+
+    .pmb-wider {
+        column-span: 2;
     }
 
+    .pmb-columns {
+        columns: 2;
+    }
+
+    .project-intro {
+        background-color: lightgrey;
+        font-style: italic;
+    }
+
+    .pmb-posts span.pmb-footnote {
+        float: footnote;
+        text-align: left;
+        margin-left: 0;
+        font-weight: normal;
+    }
+
+    .pmb-print-page .aligncenter {
+        clear: none;
+    }
+
+    .alignwide {
+        column-span: 2;
+        -prince-float: snap;
+    }
+
+    .alignfull {
+        column-span: all;
+        -prince-float: snap;
+    }
+
+    /* Because we're in columns, save a bit of space by decreasing the indent on lists.*/
+    ul, ol {
+        padding-left: 1em;
+    }
+}
 /*
     Make the preview appear about the same size as in the PDF. Besides making the preview better,
     Javascript code that's calculating element dimensions will be better too.
