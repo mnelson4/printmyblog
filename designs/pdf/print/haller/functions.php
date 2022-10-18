@@ -21,7 +21,7 @@ function pmb_enqueue_haller_script()
     global $pmb_design;
     $css = pmb_design_styles($pmb_design);
     $css .= '@media print, screen {
-                @page { size:' . $pmb_design->getSetting('page_width') . ' ' . $pmb_design->getSetting('page_height') . '
+                @page { size:' . $pmb_design->getSetting('page_width') . ' ' . $pmb_design->getSetting('page_height') . ';
                 }
             }';
 
