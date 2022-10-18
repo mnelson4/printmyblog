@@ -91,9 +91,10 @@ Ask PDF viewers to display pages side-by-side by default.
     .pmb-haller-frontpage-main-sidebar {
         margin-top: 1em;
         margin-bottom: 1em;
-        padding-top: 1em;
-        padding-bottom: 1em;
         width: 2in;
+    }
+    .pmb-haller-frontpage-main-sidebar>:first-child{
+        margin-top:0 !important;
     }
 
     .pmb-haller-frontpage-main-sidebar.left {
