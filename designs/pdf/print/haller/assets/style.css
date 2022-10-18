@@ -369,7 +369,7 @@ Ask PDF viewers to display pages side-by-side by default.
     .alignfull {
         column-span: all;
     }
-    figure{
+    figure:not(.post-thumbnail){
         -prince-float:snap;
     }
 
