@@ -43,5 +43,6 @@
 </ul>
 <p><?php esc_html_e('Parts start on a new page and include the part’s title, featured image, and content.', 'print-my-blog'); ?></p>
 <h2><?php esc_html_e('Special Instructions', 'print-my-blog'); ?></h2>
+<p><?php esc_html_e('Note that in order to improve page layout, all images and figures snap to the nearest page edge.', 'print-my-blog'); ?></p>
 <p><?php esc_html_e('"Full width" images take up all columns and snap to the nearest page edge.','print-my-blog'); ?></p>
 <p><?php esc_html_e('"Wide width" images take up 2 columns and snap to the nearest page edge.','print-my-blog'); ?> <?php pmb_pro_print_service_only_e(__('Only works with PMB’s Pro PDF Service.', 'print-my-blog')); ?></p>

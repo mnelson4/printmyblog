@@ -437,6 +437,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.18.3 October 18, 2022 =
 * Bugfix: fix resizing page sizes
+* Aesthetic: all images and figures in Haller designs snap to nearest page edge by default
 
 = 3.18.2 October 17, 2022 =
 * Compatibility: have WPML translate new design settings in Haller Tabloid design
