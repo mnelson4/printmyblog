@@ -364,12 +364,13 @@ Ask PDF viewers to display pages side-by-side by default.
 
     .alignwide {
         column-span: 2;
-        -prince-float: snap;
     }
 
     .alignfull {
         column-span: all;
-        -prince-float: snap;
+    }
+    figure{
+        -prince-float:snap;
     }
 
     /* Because we're in columns, save a bit of space by decreasing the indent on lists.*/
