@@ -1,6 +1,6 @@
 <h2><?php esc_html_e('Purpose', 'print-my-blog'); ?></h2>
 <p>
-    <?php esc_html_e('Multi-column newspaper design designed for printing. Wide images can span multiple columns and always snap to the nearest page edge to make a visually-appearling layout.', 'print-my-blog'); ?>
+    <?php esc_html_e('Multi-column newspaper design designed for printing. Wide images can span multiple columns and always snap to the nearest page edge to make a visually-appealing layout.', 'print-my-blog'); ?>
 </p>
 
 <h2><?php esc_html_e('Features', 'print-my-blog'); ?></h2>
