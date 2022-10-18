@@ -26,10 +26,11 @@ class FullHtmlValidation extends ValidationBase
     {
         if (! $validation_error_message) {
             $validation_error_message = sprintf(
-                // translators: 1: html for a line break, 2: list of allowed tags
-                __('Only the following HTML tags are allowed:%1$s%2$s', 'print-my-blog'),
+            // translators: 1: html for a line break, 2: list of allowed tags
+                __('You are using HTML that might be beyond your permission. Only the following HTML tags are allowed:%1$s%2$s, and the following attributes: %3$s. If you are using the style attribute, make sure you don’t end in a semicolon and remove whitespace between CSS properties (e.g. "style=\'color:red;height:12px\'")', 'print-my-blog'),
                 '<br />',
-                $this->getListOfAllowedTags()
+                $this->getListOfAllowedTags(),
+                $this->getListOfAllowedAttributes()
             );
         }
         parent::__construct($validation_error_message);
@@ -48,6 +49,36 @@ class FullHtmlValidation extends ValidationBase
         return implode(', ', array_keys($tags_we_allow));
     }
 
+    /**
+     * Returns an array whose keys are allowed attributes.
+     * @return bool[]
+     */
+    public function getAllowedAttributes()
+    {
+        return [
+            'class' => true,
+            'id' => true,
+            'style' => true,
+            'src' => true,
+            'alt' => true,
+            'width' => true,
+            'height' => true,
+            'target' => true,
+        ];
+    }
+
+    /**
+     * Generates and returns a string that lists the top-level HTML tags that are allowable for this input
+     *
+     * @return string
+     */
+    public function getListOfAllowedAttributes()
+    {
+        $tags_we_allow = $this->getAllowedAttributes();
+        ksort($tags_we_allow);
+        return implode(', ', array_keys($tags_we_allow));
+    }
+
 
     /**
      * Returns an array whose keys are allowed tags and values are an array of allowed attributes
@@ -58,16 +89,7 @@ class FullHtmlValidation extends ValidationBase
     {
         global $allowedtags;
         $tags_we_allow['p'] = array();
-        $allowed_attributes = [
-            'class' => true,
-            'id' => true,
-            'style' => true,
-            'src' => true,
-            'alt' => true,
-            'width' => true,
-            'height' => true,
-            'target' => true,
-        ];
+        $allowed_attributes = $this->getAllowedAttributes();
         $tags_we_allow = array_merge_recursive(
             $allowedtags,
             array(
