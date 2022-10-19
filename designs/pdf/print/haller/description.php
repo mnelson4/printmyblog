@@ -18,16 +18,9 @@
         );
         ?></li>
     <li><?php esc_html_e('If your content is already divided into columns, optionally automatically remove them to improve the layout.', 'print-my-blog'); ?></li>
-    <li><?php
-        esc_html_e(
-            'Internal links (hyperlinks to content included in the project) are replaced with page references.',
-            'print-my-blog'
-        );
-        ?><?php pmb_pro_print_service_only_e(__('Only works with PMB’s Pro PDF Service.', 'print-my-blog')); ?></li>
-    <li><?php
-        esc_html_e('External links (hyperlinks to content on the internet) are left as-is.', 'print-my-blog');
-        ?>
-    </li>
+    <li><?php esc_html_e('External hyperlinks (links to web pages not in the project) can be automatically converted to footnotes or removed', 'print-my-blog'); ?><?php pmb_pro_print_service_best_e(__('Footnotes require Pro', 'print-my-blog')); ?></li>
+    <li><?php esc_html_e('Internal hyperlinks (links to content included in the project) can be automatically converted to footnotes, inline page references, or removed', 'print-my-blog'); ?><?php pmb_pro_print_service_best_e(__('Footnotes and page references require Pro PDF Service', 'print-my-blog')); ?></li>
+
 </ul>
 <h2><?php esc_html_e('Page Layout', 'print-my-blog'); ?></h2>
 <ul class="pmb-list">
