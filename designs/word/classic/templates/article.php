@@ -69,7 +69,7 @@
 	?>
 	<?php
     if(pmb_design_uses('meta',false)){
-        the_meta();
+        pmb_the_meta();
     }
 
     if(pmb_design_uses('content',true)){

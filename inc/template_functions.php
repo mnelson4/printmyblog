@@ -195,3 +195,44 @@ function pmb_post_type_icon_html(WP_Post_Type $post_type, $extra_css_classes = '
     }
     return "<div class='{$img_class} " . esc_attr($extra_css_classes) . "'{$img_style} {$extra_attrs}>{$img}</div>";
 }
+
+/**
+ * Copy of WP's deprecated the_meta() function: echoes out the post's meta keys and values.
+ */
+function pmb_the_meta() {
+    $keys = get_post_custom_keys();
+    if ( $keys ) {
+        $li_html = '';
+        foreach ( (array) $keys as $key ) {
+            $keyt = trim( $key );
+            if ( is_protected_meta( $keyt, 'post' ) ) {
+                continue;
+            }
+
+            $values = array_map( 'trim', get_post_custom_values( $key ) );
+            $value  = implode( ', ', $values );
+
+            $html = sprintf(
+                "<li><span class='post-meta-key'>%s</span> %s</li>\n",
+                /* translators: %s: Post custom field name. */
+                esc_html( sprintf( _x( '%s:', 'Post custom field name' ), $key ) ),
+                esc_html( $value )
+            );
+
+            /**
+             * Filters the HTML output of the li element in the post custom fields list.
+             *
+             * @since 2.2.0
+             *
+             * @param string $html  The HTML output for the li element.
+             * @param string $key   Meta key.
+             * @param string $value Meta value.
+             */
+            $li_html .= apply_filters( 'the_meta_key', $html, $key, $value );
+        }
+
+        if ( $li_html ) {
+            echo "<ul class='post-meta'>\n{$li_html}</ul>\n";
+        }
+    }
+}
