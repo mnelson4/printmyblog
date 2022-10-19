@@ -107,6 +107,7 @@ class FullHtmlValidation extends ValidationBase
                 'h6' => $allowed_attributes,
                 'hr' => $allowed_attributes,
                 'img' => $allowed_attributes,
+                'div' => $allowed_attributes,
             )
         );
         return apply_filters('Twine\forms\strategies\validation\FullHtmlValidation::getAllowedTags', $tags_we_allow);
