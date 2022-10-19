@@ -88,6 +88,12 @@ Ask PDF viewers to display pages side-by-side by default.
         justify-content: center;
     }
 
+    .pmb-haller-frontpage-area {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
     .pmb-haller-frontpage-main-sidebar {
         margin-top: 1em;
         margin-bottom: 1em;

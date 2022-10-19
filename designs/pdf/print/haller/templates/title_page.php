@@ -14,20 +14,20 @@
     <?php $left_side = $pmb_project->getSetting('frontpage_left_side');
     if($left_side){
         ?>
-        <div class="pmb-haller-frontpage-main-sidebar left">
+        <div class="pmb-haller-frontpage-main-sidebar pmb-haller-frontpage-area left">
             <?php echo do_shortcode($left_side);?>
         </div>
         <?php
     }
     ?>
-    <div class="pmb-haller-frontpage-main-title-area">
+    <div class="pmb-haller-frontpage-main-title-area pmb-haller-frontpage-area">
         <h1 class="pmb-haller-frontpage-main-title project-title"><?php echo $pmb_design->getSetting('publication_title'); ?></h1>
         <h2 class="pmb-haller-frontpage-main-subtitle"><?php echo $pmb_design->getSetting('publication_subtitle');?></h2>
     </div>
     <?php $right_side = $pmb_project->getSetting('frontpage_right_side');
     if($right_side){
         ?>
-        <div class="pmb-haller-frontpage-main-sidebar right">
+        <div class="pmb-haller-frontpage-main-sidebar pmb-haller-frontpage-area right">
             <?php echo do_shortcode($right_side);?>
         </div>
         <?php
