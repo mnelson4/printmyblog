@@ -4,7 +4,7 @@ jQuery(document).ready(function(){
     // There's not enough space for alignnone images to ever look good.
     pmb_default_align_center();
     pmb_convert_youtube_videos_to_images();
-    pmb_replace_internal_links_with_page_refs_and_footnotes('leave', 'parens');
+    pmb_replace_internal_links_with_page_refs_and_footnotes('footnote', 'parens');
     new PmbToc();
 });
 
