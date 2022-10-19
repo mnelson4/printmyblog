@@ -8,7 +8,7 @@
 <div class="pmb-haller-frontpage-header">
 <div class="pmb-haller-frontpage-above-header">
     <span class="pmb-haller-frontpage-date"><?php $pmb_project->echoSetting('date');?></span>
-    <span class="pmb-haller-frontpage-issue"><?php $pmb_project->echoSetting('issue');?></span>
+    <span class="pmb-haller-frontpage-issue"><?php printf(__('Issue %s', 'print-my-blog'), $pmb_project->getSetting('issue'));?></span>
 </div>
 <div class="pmb-haller-frontpage-main">
     <?php $left_side = $pmb_project->getSetting('frontpage_left_side');
