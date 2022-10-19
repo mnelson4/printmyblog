@@ -435,9 +435,10 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.18.3 October 18, 2022 =
+= 3.18.3 October 19, 2022 =
 * Bugfix: fix resizing page sizes
 * Aesthetic: all images and figures in Haller designs snap to nearest page edge by default
+* Maintenance: removed deprecated `the_meta` function and replaced with `pmb_the_meta`
 
 = 3.18.2 October 17, 2022 =
 * Compatibility: have WPML translate new design settings in Haller Tabloid design
