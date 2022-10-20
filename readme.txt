@@ -435,10 +435,12 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.18.3 October 19, 2022 =
-* Bugfix: fix resizing page sizes
-* Aesthetic: all images and figures in Haller designs snap to nearest page edge by default
+= 3.18.3 October 20, 2022 =
+* Feature: add support for footnotes and page references to Haller Tabloid design
+* Bugfix: fix setting page size in Pro Print
+* Aesthetic: all images and figures in Haller Tabloid designs snap to nearest page edge by default
 * Maintenance: removed deprecated `the_meta` function and replaced with `pmb_the_meta`
+* Dev Feature: added action 'pmb_print_page_after_printed_on' after Quick Print's "Printed on..." area for adding custom content
 
 = 3.18.2 October 17, 2022 =
 * Compatibility: have WPML translate new design settings in Haller Tabloid design
