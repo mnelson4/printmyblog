@@ -24,7 +24,7 @@
 </ul>
 <h2><?php esc_html_e('Page Layout', 'print-my-blog'); ?></h2>
 <ul class="pmb-list">
-    <li><?php esc_html_e('Issue and page number are in the outside top margin, the publication\'s title is in the middle top margin, and the publication date is in the inside top margin. The optional catchphrase is underneath the other top-margin content.', 'print-my-blog'); ?><?php pmb_pro_print_service_best_e(__('Most browsers add their own content to the page margins', 'print-my-blog')); ?></li>
+    <li><?php esc_html_e('Issue and page number are in the outside top margin, the publication\'s title is in the middle top margin, and the publication date is in the inside top margin. The optional publication subtitle is underneath the other top-margin content.', 'print-my-blog'); ?><?php pmb_pro_print_service_best_e(__('Most browsers add their own content to the page margins', 'print-my-blog')); ?></li>
 </ul>
 <h3><?php esc_html_e('Section Templates', 'print-my-blog');?></h3>
 <p><?php esc_html_e('Choose different styles for articles included in your project:', 'print-my-blog'); ?></p>
