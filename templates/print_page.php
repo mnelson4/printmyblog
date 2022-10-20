@@ -315,6 +315,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                         '</a>'
                     );
                 }
+                do_action('pmb_print_page_after_printed_on');
                 ?></p>
             <?php
             if ($pmb_format !== 'ebook') {
