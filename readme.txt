@@ -435,6 +435,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.18.4 xxxxxxxx =
+* Bugfix: avoid having Haller images snap above front matter (like the frontpage header)
+
 = 3.18.3 October 20, 2022 =
 * Feature: add support for footnotes and page references to Haller Tabloid design
 * Bugfix: fix setting page size in Pro Print
