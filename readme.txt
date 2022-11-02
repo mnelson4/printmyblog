@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.18.3
+Stable tag: 3.18.4
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -435,7 +435,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.18.4 xxxxxxxx =
+= 3.18.4 November 2, 2022 =
 * Bugfix: avoid having Haller images snap above front matter (like the frontpage header)
 * Compatibility: hide Creative Minds table of contents on print page (it's buggy when used with PMB)
 
