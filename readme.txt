@@ -437,6 +437,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.18.4 xxxxxxxx =
 * Bugfix: avoid having Haller images snap above front matter (like the frontpage header)
+* Compatibility: hide Creative Minds table of contents on print page (it's buggy when used with PMB)
 
 = 3.18.3 October 20, 2022 =
 * Feature: add support for footnotes and page references to Haller Tabloid design

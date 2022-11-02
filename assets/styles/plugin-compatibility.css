@@ -132,6 +132,13 @@ Hide WPML language selectors
     display:none;
 }
 
+/*
+ Hide Creative Minds table of contents. Its because when there are multiple of them on the same page
+ */
+#cmtoc_wrapper_id, .cmtoc-flbtn-container, .cmtoc_table_of_contents_wrapper{
+    display:none;
+}
+
 /**
 * Accessibility toolbar
  */
