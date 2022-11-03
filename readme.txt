@@ -307,6 +307,10 @@ This is often done by a security plugin.
 * Wordfence has a setting on their "All Options" page, under "Brute Force Proection", called "Prevent discovery of usernames through ‘/?author=N’ scans, the oEmbed API, and the WordPress REST API". [Disable it.](https://drive.google.com/file/d/1K3-2BjNSWQBUi1uPxq_l2gCj4xXZ44MD/view)
 * iThemes security has a setting under "WordPress Tweaks" called "REST API". [Switch it to "Default Access"](https://drive.google.com/file/d/1jvujNmQuMMUDWls1LNndHM8pmpP53Ktt/view) if you want to let site visitors print your blog.
 
+If none of the above help identify the issue, please use Print My Blog plugin's Help page or the [WordPress.org support forum](https://wordpress.org/support/plugin/print-my-blog/) to report the problem.
+Along with that, it can also be helpful to follow the steps in the following video in order to provide more information about the error.
+https://www.youtube.com/watch?v=JNK39YuuhMM
+
 = How do I remove post content from the printout? =
 
 There may be text, images, and other stuff that looks great when viewed from a screen, but doesn't make sense to have in the printout. Eg, related posts, share buttons, etc.
