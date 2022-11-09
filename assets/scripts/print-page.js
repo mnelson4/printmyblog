@@ -84,13 +84,13 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 					this.beginLoading();
 				},
 				(jqxhr,textStatus,errorThrown) => {
-					if(errorThrown==='Forbidden'){
+					if(errorThrown==='Forbidden' || errorThrown === 'Unauthorized'){
 						// They might be logged-in but not have permission to
 						// edit the post. So try again but in read context.
 						this.can_view_sensitive_data = false;
 						this.preloadTaxonomies();
 					} else {
-						this.stopAndShowError(errorThrown);
+						this.stopAndShowError(errorThrow n);
           }
 
 				});
