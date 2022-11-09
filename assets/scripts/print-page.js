@@ -90,7 +90,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 						this.can_view_sensitive_data = false;
 						this.preloadTaxonomies();
 					} else {
-						this.stopAndShowError(errorThrow n);
+						this.stopAndShowError(errorThrown);
           }
 
 				});
