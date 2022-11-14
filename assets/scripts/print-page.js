@@ -84,7 +84,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 					this.beginLoading();
 				},
 				(jqxhr,textStatus,errorThrown) => {
-					if(errorThrown==='Forbidden' || errorThrown === 'Unauthorized'){
+				    // Somehow different browsers + server configurations return different error responses, even when it's the same unauthorized error
+                    // This accounts for when it's "Forbidden", "Unauthorized" or "" (blank, but there's a response code in the JSON)
+					if(errorThrown==='Forbidden' || errorThrown === 'Unauthorized' || (jqxhr.responseJSON instanceof Object && jqxhr.responseJSON.code === 'rest_cannot_view')){
 						// They might be logged-in but not have permission to
 						// edit the post. So try again but in read context.
 						this.can_view_sensitive_data = false;
