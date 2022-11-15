@@ -207,3 +207,9 @@ Turn its flexboxes into regular blocks so pagebreaks work better again
 #pojo-a11y-toolbar{
     display:none;
 }
+/**
+* Hide Google AdSense in printouts
+ */
+.pmb-posts .google-auto-placed{
+    display:none !important;
+}
