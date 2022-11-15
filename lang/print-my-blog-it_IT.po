@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2022-10-20 14:10-0700\n"
-"PO-Revision-Date: 2022-10-20 14:10-0700\n"
+"POT-Creation-Date: 2022-11-15 12:47-0800\n"
+"PO-Revision-Date: 2022-11-15 12:47-0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it\n"
@@ -347,7 +347,7 @@ msgstr ""
 
 #: designs/pdf/digital/classic/description.php:8
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:109
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1168
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1167
 msgid "Footnotes and page references only work with Pro PDF Service"
 msgstr ""
 "Le note a piè di pagina e i riferimenti alle pagine funzionano solo con Pro "
@@ -568,7 +568,7 @@ msgstr ""
 #: designs/pdf/print/classic/descriptions/shared.php:4
 #: designs/pdf/print/haller/description.php:21
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:142
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1205
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1204
 msgid "Footnotes require Pro"
 msgstr "Le note a piè di pagina richiedono Pro"
 
@@ -1532,7 +1532,7 @@ msgstr ""
 "aggiungere un'interruzione di paragrafo."
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:96
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1145
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1144
 msgid "Link, Page Reference, and Footnote Settings"
 msgstr ""
 "Impostazioni di collegamento, riferimento alla pagina e nota a piè di pagina"
@@ -1541,33 +1541,33 @@ msgstr ""
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:135
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:494
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:512
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1154
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1197
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1153
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1196
 #: src/PrintMyBlog/domain/PrintOptions.php:165
 msgid "Remove"
 msgstr "Rimuovi"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:104
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1160
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1159
 msgid "Replace with page reference"
 msgstr "Sostituisci con riferimento alla pagina"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:105
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:137
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1163
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1200
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1162
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1199
 msgid "Replace with footnote"
 msgstr "Sostituisci con nota a piè di pagina"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:109
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:505
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1168
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1167
 msgid "Internal Hyperlinks"
 msgstr "Collegamenti ipertestuali interni"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:110
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:506
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1170
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1169
 msgid "How to display hyperlinks to content included in this project."
 msgstr ""
 "Come visualizzare i collegamenti ipertestuali al contenuto incluso in questo "
@@ -1575,13 +1575,13 @@ msgstr ""
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:142
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:520
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1205
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1204
 msgid "External Hyperlinks"
 msgstr "Collegamenti ipertestuali esterni"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:143
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:521
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1207
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1206
 msgid "How to display hyperlinks to content not included in this project."
 msgstr ""
 "Come visualizzare collegamenti ipertestuali a contenuto non incluso in "
@@ -1821,8 +1821,8 @@ msgid "Leave as hyperlink to document"
 msgstr "Lascia come collegamento ipertestuale al documento"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:515
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1157
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1198
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1156
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1197
 msgid "Leave as hyperlink"
 msgstr "Lascia come collegamento ipertestuale"
 
@@ -2052,8 +2052,8 @@ msgstr ""
 "Carattere predefinito utilizzato in paragrafi, elenchi puntati, tabelle, ecc."
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:841
-msgid "Image Settings"
-msgstr "Impostazioni immagine"
+msgid "Image & Block Settings"
+msgstr "Impostazioni immagine e blocco"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:845
 msgid "Maximum Image Height (in pixels)"
@@ -2298,12 +2298,17 @@ msgstr "Scatta solo se altrimenti causerebbe un'interruzione di pagina"
 msgid "Resize images if they don’t fit on the page"
 msgstr "Ridimensionare le immagini se non si adattano alla pagina"
 
-#. translators: 1: "Best with Pro"
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1104
-msgid "Image Placement"
-msgstr "Posizionamento Immagine"
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1103
+msgid "Image and Block Placement"
+msgstr "Posizionamento di immagini e blocchi"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1105
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1103
+msgid "Image snapping and dynamic resizing only works using Pro Print."
+msgstr ""
+"Lo snap delle immagini e il ridimensionamento dinamico funzionano solo "
+"utilizzando Pro Print."
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1104
 msgid ""
 "To reduce whitespace around images, galleries, and tables, Print My Blog can "
 "adjust the placement of your content, or resize it according to the space on "
@@ -2312,11 +2317,11 @@ msgstr ""
 "Per ridurre gli spazi vuoti intorno a immagini, gallerie e tabelle, Stampa "
 "il mio blog può spostarsi nei tuoi contenuti."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1124
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1123
 msgid "Minimum Image Size (in pixels)"
 msgstr "Altezza massima dell'immagine (in pixel)"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1125
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1124
 msgid ""
 "Any images larger than this may be resized to fit onto the page, but they "
 "will be no smaller than this size."

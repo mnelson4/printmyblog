@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2022-10-20 14:08-0700\n"
-"PO-Revision-Date: 2022-10-20 14:10-0700\n"
+"POT-Creation-Date: 2022-11-15 12:46-0800\n"
+"PO-Revision-Date: 2022-11-15 12:47-0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -346,7 +346,7 @@ msgstr ""
 
 #: designs/pdf/digital/classic/description.php:8
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:109
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1168
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1167
 msgid "Footnotes and page references only work with Pro PDF Service"
 msgstr ""
 "Les notes de bas de page et les références de page ne fonctionnent qu’avec "
@@ -564,7 +564,7 @@ msgstr ""
 #: designs/pdf/print/classic/descriptions/shared.php:4
 #: designs/pdf/print/haller/description.php:21
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:142
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1205
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1204
 msgid "Footnotes require Pro"
 msgstr "Les notes de bas de page nécessitent pro"
 
@@ -1531,7 +1531,7 @@ msgstr ""
 "pause paragraphe."
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:96
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1145
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1144
 msgid "Link, Page Reference, and Footnote Settings"
 msgstr "Paramètres de lien, de référence de page et de note de bas de page"
 
@@ -1539,45 +1539,45 @@ msgstr "Paramètres de lien, de référence de page et de note de bas de page"
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:135
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:494
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:512
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1154
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1197
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1153
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1196
 #: src/PrintMyBlog/domain/PrintOptions.php:165
 msgid "Remove"
 msgstr "Supprimer"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:104
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1160
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1159
 msgid "Replace with page reference"
 msgstr "Remplacer par la référence de page"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:105
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:137
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1163
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1200
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1162
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1199
 msgid "Replace with footnote"
 msgstr "Remplacer par une note de bas de page"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:109
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:505
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1168
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1167
 msgid "Internal Hyperlinks"
 msgstr "Hyperliens internes"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:110
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:506
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1170
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1169
 msgid "How to display hyperlinks to content included in this project."
 msgstr "Comment afficher les hyperliens vers le contenu inclus dans ce projet."
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:142
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:520
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1205
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1204
 msgid "External Hyperlinks"
 msgstr "Hyperliens externes"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:143
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:521
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1207
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1206
 msgid "How to display hyperlinks to content not included in this project."
 msgstr ""
 "Comment afficher des hyperliens vers du contenu non inclus dans ce projet."
@@ -1814,8 +1814,8 @@ msgid "Leave as hyperlink to document"
 msgstr "Laisser comme lien hypertexte vers le document"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:515
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1157
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1198
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1156
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1197
 msgid "Leave as hyperlink"
 msgstr "Laisser comme hyperlien"
 
@@ -2044,8 +2044,8 @@ msgstr ""
 "tables, etc."
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:841
-msgid "Image Settings"
-msgstr "Réglages d’image"
+msgid "Image & Block Settings"
+msgstr "Réglages d’image et de bloques"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:845
 msgid "Maximum Image Height (in pixels)"
@@ -2293,12 +2293,17 @@ msgstr "Ne craquez que si l’image provoquerait une rupture de page"
 msgid "Resize images if they don’t fit on the page"
 msgstr "Redimensionner les images si elles ne rentrent pas sur la page"
 
-#. translators: 1: "Best with Pro"
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1104
-msgid "Image Placement"
-msgstr "Placement de l’image"
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1103
+msgid "Image and Block Placement"
+msgstr "Placement de l’image et de bloques"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1105
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1103
+msgid "Image snapping and dynamic resizing only works using Pro Print."
+msgstr ""
+"L’accrochage d’image et le redimensionnement dynamique ne fonctionnent "
+"qu’avec Pro Print."
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1104
 msgid ""
 "To reduce whitespace around images, galleries, and tables, Print My Blog can "
 "adjust the placement of your content, or resize it according to the space on "
@@ -2307,11 +2312,11 @@ msgstr ""
 "Pour réduire l’espace blanc autour des images, Print My Blog peut déplacer "
 "des images dans votre contenu."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1124
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1123
 msgid "Minimum Image Size (in pixels)"
 msgstr "Hauteur maximale de l’image (en pixels)"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1125
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1124
 msgid ""
 "Any images larger than this may be resized to fit onto the page, but they "
 "will be no smaller than this size."
