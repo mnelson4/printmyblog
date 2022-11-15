@@ -439,9 +439,10 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-* 3.18.8 xxxx =
+* 3.18.8 November 15, 2022 =
 * Compatibility: remove Google AdSense ads from printouts
 * Aesthetic: rename Pro Print's "Image Settings" to "Image and Block Settings"
+* Compatibility: prevent JetPack from hiding images
 
 * 3.18.7 November 14, 2022 =
 * Bugfix: fix Quick Print authorization error when blank response instead of "Forbidden"

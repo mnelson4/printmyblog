@@ -11,8 +11,8 @@ function pmb_generate_doc_from_html(is_preview, success_callback, failure_callba
     if(is_preview){
         dynamic_doc_attrs.test = true;
     }
-
-    var html = '<html>' + jQuery('html').html() + '</html>';
+    var jq_html = jQuery('html');
+    var html = '<html class="' + jq_html[0].className + '">' + jq_html.html() + '</html>';
 
     // don't send script tags, as we don't want Prince to execute Javascript we've already executed in the browser
     var open_tag = '<script';
