@@ -213,3 +213,10 @@ Turn its flexboxes into regular blocks so pagebreaks work better again
 .pmb-posts .google-auto-placed{
     display:none !important;
 }
+
+/**
+Hide Kadence Accordions' expand/collapse icon
+ */
+.kt-blocks-accordion-icon-trigger{
+    display:none !important;
+}

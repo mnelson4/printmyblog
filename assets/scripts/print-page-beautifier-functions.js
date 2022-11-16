@@ -317,6 +317,7 @@ function pmb_load_avada_lazy_images(){
 function pmb_reveal_dynamic_content(){
     // Expand all Arconix accordion parts (see https://wordpress.org/plugins/arconix-shortcodes/)
     jQuery('.arconix-accordion-content').css('display','block');
+
     // Reveal all https://wordpress.org/plugins/show-hidecollapse-expand/ content (the reveal buttons got removed in CSS)
     jQuery('div[id^="bg-showmore-hidden-"]').css('display','block');
     // Change canvases to regular images please! Helpful if someone is using chart.js or something else that
@@ -327,6 +328,10 @@ function pmb_reveal_dynamic_content(){
             jQuery(this).after('<div class="pmb-image"><img src="' + chartImage + '"></div>');
             jQuery(this).remove();
         })
+            // Expand all Kadence Accordion blocks and make them all look equally active
+            jQuery('.kt-accordion-panel-hidden').removeClass('kt-accordion-panel-hidden');
+            jQuery('.kt-accordion-panel-active').removeClass('kt-accordion-panel-active');
+
     },
     2000);
     //break images out of JetPack slideshows, which make no effort at print-readiness whatsoever

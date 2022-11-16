@@ -52,7 +52,7 @@ function pmb_enqueue_classic_script()
         }
 			';
     if ($pmb_design->getPmbMeta('paragraph_indent')) {
-        $css .= ' .pmb-article .post-inner p{
+        $css .= ' .pmb-article .post-inner p:not(.has-text-align-center){
                         text-indent:3em;
                         margin:0;
                     }';
