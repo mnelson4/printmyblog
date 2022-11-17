@@ -9,7 +9,7 @@
  * Description: Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
  * Author: Michael Nelson
  * Author URI: https://printmy.blog
- * Version: 3.18.8
+ * Version: 3.18.9
  * Requires at least: 4.7
  * Requires PHP: 5.4
  * Text Domain: print-my-blog
@@ -178,7 +178,9 @@ version_compare(
                 if (! isset($pmb_fs)) {
                     // Include Freemius SDK.
                     require_once dirname(__FILE__) . '/freemius/start.php';
-
+                    // don't ask to opt in if it's a tastewp site
+                    $site_url = get_site_url();
+                    $is_demo_site = (bool)preg_match('~https:\/\/([^\.]*\.[^-]*-tastewp\.com|[^.]*.instawp.xyz)~',$site_url);
                     $pmb_fs = fs_dynamic_init(
                         array(
                             'id' => '5396',
@@ -198,6 +200,7 @@ version_compare(
                                 'contact' => false,
                                 'support' => false,
                             ),
+                            'anonymous_mode' => $is_demo_site
                         )
                     );
                 }
