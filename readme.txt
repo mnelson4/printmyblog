@@ -439,7 +439,8 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-* 3.18.9 xxxxx =
+* 3.18.9 November 18, 2022 =
+* Bugfix: fix relative hyperlinks in Pro Print
 * User Experience: on instaWP and tasteWP demo sites, don't ask for Freemius opt-in
 
 * 3.18.8 November 16, 2022 =

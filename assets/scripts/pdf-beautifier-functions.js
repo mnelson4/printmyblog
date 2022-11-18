@@ -5,7 +5,8 @@
  * @param internal_link_policy string can be 'parens' "(see page 12)", 'footnote' "[1]...See page 12", 'leave'
  * (leaves hyperlink to the page), 'remove' (removes the hyperlink altogether)
  * @param internal_footnote_text string
- * @param external_footnote_text string
+ * @param external_footnote_text string\
+ * @global string pmb_pro.site_url
  */
 function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_policy, internal_link_policy, external_footnote_text, internal_footnote_text)
 {

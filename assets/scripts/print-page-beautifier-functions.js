@@ -356,6 +356,7 @@ function pmb_reveal_dynamic_content(){
  * (if any exists), and the selector you can pass to jQuery to get the section element linked-to.
  * @param internal_hyperlink_callback
  * @param external_hyperlink_callback
+ * @global string pmb_pro.site_url
  * @private
  */
 function _pmb_for_each_hyperlink(internal_hyperlink_callback, external_hyperlink_callback){
@@ -365,13 +366,17 @@ function _pmb_for_each_hyperlink(internal_hyperlink_callback, external_hyperlink
         if(! a.text().trim()){
             return;
         }
-        var id_selector = '#' + a.attr('href').replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g,'\\$1').replace('%','-');
-        var id_url = '#' + a.attr('href');
+        var href = a.attr('href');
+        if(typeof(URL) === 'function'){
+            href = new URL(href, pmb_pro.site_url).href;
+        }
+        var id_selector = '#' + href.replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g,'\\$1').replace('%','-');
+        var id_url = '#' + href;
         try{
             var matching_elements = jQuery(id_selector).length;
             // if that doesn't point to any internal posts, and it's an anchor link, then just use it as an anchor link
-            if( matching_elements === 0 && a.attr('href')[0] === '#'){
-                id_selector = id_url = a.attr('href');
+            if( matching_elements === 0 && href[0] === '#'){
+                id_selector = id_url = href;
                 matching_elements = jQuery(id_selector).length;
             }
         }catch(exception){
