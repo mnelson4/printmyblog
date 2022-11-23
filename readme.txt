@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.18.9
+Stable tag: 3.18.10
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -439,17 +439,21 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.18.10 Novemer 23, 2022 =
+* Bugfix: in Pro Print, change relative hyperlinks to absolute ones
+* Bugfix: in Pro Print, prevent Javascript error on invalid hyperlinks
+
 * 3.18.9 November 18, 2022 =
 * Bugfix: fix relative hyperlinks in Pro Print
 * User Experience: on instaWP and tasteWP demo sites, don't ask for Freemius opt-in
 
-* 3.18.8 November 16, 2022 =
+= 3.18.8 November 16, 2022 =
 * Compatibility: remove Google AdSense ads from printouts
 * Aesthetic: rename Pro Print's "Image Settings" to "Image and Block Settings"
 * Compatibility: prevent JetPack from hiding images
 * Compatibility: reveal Kadence Blocks Accordions
 
-* 3.18.7 November 14, 2022 =
+= 3.18.7 November 14, 2022 =
 * Bugfix: fix Quick Print authorization error when blank response instead of "Forbidden"
 
 = 3.18.6 November 9, 2022 =
