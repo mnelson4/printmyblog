@@ -350,6 +350,22 @@ function pmb_reveal_dynamic_content(){
 }
 
 /**
+ * Given a jQuery selection containing an <a> element, returns its URL (resolves relative links etc)
+ * @param jQuery jquery_a_selection
+ * @private
+ */
+function _pmb_get_href_from_a(jquery_a_selection){
+    var href = jquery_a_selection.attr('href');
+    if(typeof(URL) === 'function'){
+        try{
+            href = new URL(href, pmb_pro.site_url).href;
+        }catch(error){
+            // leave it alone. It's an invalid URL, we can't fix that any more
+        }
+    }
+    return href;
+}
+/**
  * Function used to loop over all the hyperlinks on the print page and call one of two callbacks on each of them.
  * The first callback is executed on links to content that are in this project, the second is used for everything
  * outside of this project. Each callback is passed the jQuery selection of the hyperlink and the URI to the element's ID
@@ -366,10 +382,7 @@ function _pmb_for_each_hyperlink(internal_hyperlink_callback, external_hyperlink
         if(! a.text().trim()){
             return;
         }
-        var href = a.attr('href');
-        if(typeof(URL) === 'function'){
-            href = new URL(href, pmb_pro.site_url).href;
-        }
+        var href = _pmb_get_href_from_a(a);
         var id_selector = '#' + href.replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g,'\\$1').replace('%','-');
         var id_url = '#' + href;
         try{

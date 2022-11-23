@@ -35,9 +35,10 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
                     break;
                 case 'footnote':
                     // only add the footnote if the link isn't just the URL spelled out.
-                    if(a.attr('href') !== a.html().trim()) {
+                    href = _pmb_get_href_from_a(a)
+                    if( href !== a.html().trim()) {
                         a.attr('href',id_url);
-                        a.after('<span class="pmb-footnote">' + pre_internal_footnote  + '<a class="pmb-page-num" href="' + a.attr('href') + '"></a>' + post_internal_footnote + '</span>');
+                        a.after('<span class="pmb-footnote">' + pre_internal_footnote  + '<a class="pmb-page-num" href="' + href + '"></a>' + post_internal_footnote + '</span>');
                     }
                     break;
                 case 'leave':
@@ -51,20 +52,22 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
         },
         // external hyperlinks
         function(a){
+            var href = _pmb_get_href_from_a(a);
             switch(external_link_policy){
                 case 'footnote':
                     // only add the footnote if the link isn't just the URL spelled out.
                     var link_text = a.html().trim();
-                    var href = a.attr('href');
                     var matches = [href, href.replace('https://',''), href.replace('http://',''), href.replace('//',''), href.replace('mailto:','')];
                     if(matches.indexOf(link_text) === -1){
-                        a.after('<span class="pmb-footnote">' + pre_external_footnote  + a.attr('href') + post_external_footnote + '</span>');
+                        a.after('<span class="pmb-footnote">' + pre_external_footnote  + href + post_external_footnote + '</span>');
+                        a.attr('href',href);
                     }
                     break;
                 case 'remove':
                     a.contents().unwrap();
                     break;
-                // otherwise, leave alone
+                case 'leave':
+                    a.attr('href', href);
             }
         }
     );
