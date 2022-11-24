@@ -329,6 +329,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
 
 
         </div>
+        <?php do_action('pmb_print_page_after_posts');?>
     </div>
     <?php wp_footer(); ?>
 
