@@ -928,19 +928,17 @@ class DefaultDesignTemplates
         ];
 
         foreach ($image_sizes as $thumbnail_slug => $thumbnail_data) {
-            // skip weird images with no height
-            // also don't show non-cropped images, because finding their filename would require a trip to the server
-
+            // Only show non-cropped images because their locations are listed on the img tag's "srcset" attribute.
             // Other devs may have expected loose comparisons so keep doing that.
             // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
-            if (! $thumbnail_data['width'] || ! $thumbnail_data['height'] || $thumbnail_data['crop'] == false) {
+            if (isset($thumbnail_data['crop']) && $thumbnail_data['crop'] == true) {
                 continue;
             }
-            $dimensions = $thumbnail_data['width'] . 'x' . $thumbnail_data['height'];
+            $dimensions = $thumbnail_data['width'];
             $image_quality_options[$dimensions] = new InputOption(
                 sprintf(
                     // translators: %s image dimensions, like "120x120"
-                    __('Resize to %s', 'print-my-blog'),
+                    __('%s pixels wide', 'print-my-blog'),
                     $dimensions
                 )
             );

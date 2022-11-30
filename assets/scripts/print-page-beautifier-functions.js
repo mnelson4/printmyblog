@@ -278,31 +278,83 @@ function pmb_set_image_dimension_attributes(element, callback_when_done){
  * @param string domain eg "www.mysite.com", so we can identify external images which usually shouldn't be resized. An exception is wp.com JetPack images.
  */
 function pmb_change_image_quality(image_quality, domain){
-    // If it's '' (empty string), then treat it as the previous default behaviour
-    if(image_quality === '' || ! image_quality){
+    // If it's '' (empty string), then treat it as the previous default behaviour, which was to leave the images alone
+    if(image_quality === '' || ! image_quality || image_quality === '150'){
         return;
     }
-    // ok I admit this will be confusing. The forms system needed the null option to be '' (empty string), but
-    // inside this function '' means the full, uploaded image size. So swap 'uploaded' for '' here.
-
-    if(image_quality === 'uploaded'){
-        image_quality = '';
-    }
     jQuery('img[src*="' + domain + '"]:not(.pmb-dont-change-image-quality), img[src*=".wp.com"]:not(.pmb-dont-change-image-quality)').each(function(index, element){
-        var jqe = jQuery(element);
-        var src = jqe.prop('src');
-        var index_of_last_slash = src.lastIndexOf('/');
-        var filename = src.substring(index_of_last_slash + 1);
-        var reg = /-(([^-]*)x([^-]*)|scaled)\./;
-        filename = filename.replace(reg, '.');
-        var index_of_last_period = filename.lastIndexOf('.');
-        var extension = filename.substring(index_of_last_period + 1);
-        if(image_quality !== ''){
-            filename = filename.replace('.' + extension, '-' + image_quality + '.' + extension);
-        }
+        var src_to_use = null;
 
-        jqe.prop('src',src.substring(0,index_of_last_slash + 1) + filename);
+        // Before we start parsing the srcset attribute for the right size, make sure it's set.
+        // If not, fallback to leaving the image alone
+        if(! element.hasAttribute('srcset') || ! element.attributes['srcset'].value){
+            return;
+        }
+        switch(image_quality){
+            case 'scaled':
+                // Find the biggest size listed on "srcset" and use that
+                var size_and_srcs = _pmb_parse_srcset(element.attributes['srcset'].value, false);
+                src_to_use = size_and_srcs[0]['src'];
+                break;
+            default:
+                // Find a thumbnail as big than the one requested (if we can't find it, use the next biggest that's available.)
+                var size_and_srcs = _pmb_parse_srcset(element.attributes['srcset'].value);
+                for(var i=0; i<size_and_srcs.length; i++){
+                    if(parseInt(image_quality, 10) > parseInt(size_and_srcs[i]['size'],10)){
+                        size_and_srcs.shift();
+                        i--;
+                    }
+                }
+                if(size_and_srcs.length > 0){
+                    src_to_use = size_and_srcs[0]['src'];
+                    break;
+                }
+                // no thumbnail as big as requested, use the uploaded size
+            case 'uploaded':
+                // Use the "src" attribute to deduce the original filename.
+                src_to_use = element.attributes['src'].value;
+
+                var index_of_last_slash = src_to_use.lastIndexOf('/');
+                var filename = src_to_use.substring(index_of_last_slash + 1);
+                var reg = /-(([^-]*)x([^-]*)|scaled)\./;
+                filename = filename.replace(reg, '.');
+                src_to_use = src_to_use.substring(0,index_of_last_slash + 1) + filename
+                break;
+        }
+        element.setAttribute('src', src_to_use);
+        element.setAttribute('srcset-original', element.attributes['srcset'].value);
+        element.removeAttribute('srcset');
     });
+}
+
+/**
+ * Takes a srcset attribute's value (like "http://site.com/img1.jpg 4032w, http://site.com/img2.jpg 300w")
+ * and turns into an array of objects, each with keys "size" and "src". The array is sorted with the smallest first
+ * (unless you set `ascending` to false).
+ * [
+ *   {'size':'300', 'src': 'http://site.com/img2.jpg'}
+ *   {'size':'4032', 'src': 'http://site.com/img1.jpg'},
+ * ]
+ * @param srcset
+ * @param boolean ascending order
+ * @returns [{}] in each object, there are keys "size" and "src", both strings.
+ * @private
+ */
+function _pmb_parse_srcset(srcset, ascending = true){
+    var srcs_and_sizes = srcset.split(', ');
+    var size_and_srcs = [];
+    srcs_and_sizes.forEach(function(item){
+        var src_and_size = item.split(' ');
+        var src=src_and_size[0];
+        var size = src_and_size[1];
+        size = size.replace('w','');
+        size_and_srcs.push({'size':size, 'src':src});
+    });
+    size_and_srcs.sort(function(a,b,){return parseInt(a['size']) - parseInt(b['size'])})
+    if(! ascending){
+        size_and_srcs.reverse();
+    }
+    return size_and_srcs;
 }
 
 function pmb_load_avada_lazy_images(){

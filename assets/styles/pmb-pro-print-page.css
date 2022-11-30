@@ -172,6 +172,11 @@ figcaption{
     margin-top:0.5em;
 }
 
+pre{
+    white-space:pre-wrap;
+    word-wrap:break-word;
+}
+
 /* Column blocks*/
 .wp-block-columns{
     page-break-inside:avoid;

@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.18.11
+Stable tag: 3.19.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -439,7 +439,11 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-* 3.18.11 November 24, 2022 =
+= 3.19.0 November 30, 2022 =
+* Feature: in Pro Print, improved image quality control. More sizes (e.g., 300 pixels, 1024 pixels, etc) and always uses an image size that actually exists. Removed image sizes that cropped the image (i.e., 150x150 pixel option).
+* Bugfix: in Pro Print, prevent content in code blocks (e.g. `<pre>` tags) from overflowing off the page
+
+= 3.18.11 November 24, 2022 =
 * Feature: in Quick Print, added action 'pmb_print_page_after_posts' for adding custom content at the bottom of printout
 
 = 3.18.10 Novemer 23, 2022 =
