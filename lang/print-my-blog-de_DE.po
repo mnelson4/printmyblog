@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2022-11-15 12:45-0800\n"
-"PO-Revision-Date: 2022-11-15 12:45-0800\n"
+"POT-Creation-Date: 2022-11-30 11:26-0800\n"
+"PO-Revision-Date: 2022-11-30 11:27-0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -343,7 +343,7 @@ msgstr ""
 
 #: designs/pdf/digital/classic/description.php:8
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:109
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1167
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1165
 msgid "Footnotes and page references only work with Pro PDF Service"
 msgstr "Fußnoten und Seitenverweise funktionieren nur mit Pro PDF Service"
 
@@ -555,7 +555,7 @@ msgstr ""
 #: designs/pdf/print/classic/descriptions/shared.php:4
 #: designs/pdf/print/haller/description.php:21
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:142
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1204
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1202
 msgid "Footnotes require Pro"
 msgstr "Fußnoten erfordern Pro"
 
@@ -1515,7 +1515,7 @@ msgstr ""
 "Absatzumbruch hinzuzufügen."
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:96
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1144
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1142
 msgid "Link, Page Reference, and Footnote Settings"
 msgstr "Link-, Seitenreferenz- und Fußnoteneinstellungen"
 
@@ -1523,46 +1523,46 @@ msgstr "Link-, Seitenreferenz- und Fußnoteneinstellungen"
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:135
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:494
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:512
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1153
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1196
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1151
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1194
 #: src/PrintMyBlog/domain/PrintOptions.php:165
 msgid "Remove"
 msgstr "Entfernen"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:104
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1159
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1157
 msgid "Replace with page reference"
 msgstr "Ersetzen durch Seitenverweis"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:105
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:137
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1162
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1199
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1160
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1197
 msgid "Replace with footnote"
 msgstr "Ersetzen durch Fußnote"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:109
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:505
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1167
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1165
 msgid "Internal Hyperlinks"
 msgstr "Interne Hyperlinks"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:110
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:506
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1169
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1167
 msgid "How to display hyperlinks to content included in this project."
 msgstr ""
 "Anzeigen von Hyperlinks zu Inhalten, die in diesem Projekt enthalten sind."
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:142
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:520
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1204
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1202
 msgid "External Hyperlinks"
 msgstr "Externe Hyperlinks"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:143
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:521
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1206
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1204
 msgid "How to display hyperlinks to content not included in this project."
 msgstr ""
 "Anzeigen von Hyperlinks zu Inhalten, die nicht in diesem Projekt enthalten "
@@ -1798,8 +1798,8 @@ msgid "Leave as hyperlink to document"
 msgstr "Als Hyperlink zum Dokument belassen"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:515
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1156
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1197
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1154
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1195
 msgid "Leave as hyperlink"
 msgstr "Als Hyperlink hinterlassen"
 
@@ -2086,25 +2086,25 @@ msgid "Don’t Change Image Quality"
 msgstr "Ändern Sie die Bildqualität nicht"
 
 #. translators: %s image dimensions, like "120x120"
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:943
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:941
 #, php-format
-msgid "Resize to %s"
-msgstr "Größe ändern auf %s"
+msgid "%s pixels wide"
+msgstr "%s Pixel breit"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:948
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:946
 msgid "Full Size (on web)"
 msgstr "Full Size (im Web)"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:949
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:947
 msgid "Uploaded Size (largest possible)"
 msgstr "Hochgeladene Größe (größtmögliche Größe)"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:962
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:960
 msgid "Image Quality (in pixels)"
 msgstr "Maximale Bildhöhe (in Pixel)"
 
 #. translators: 1: opening anchor tag, 2L closing anchor tag.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:965
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:963
 #, php-format
 msgid ""
 "Lower quality means smaller file size, whereas higher quality means higher "
@@ -2118,25 +2118,25 @@ msgstr ""
 "nicht verfügbar. Verwenden Sie das %1$s Regenerate Thumbnails Plugin%2$s um "
 "die fehlenden Bildgrößen zu erstellen."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:983
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:981
 msgid "Apply Website Theme"
 msgstr "Wenden Sie Website-Thema"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:990
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:988
 msgid "Custom CSS"
 msgstr "Benutzerdefiniertes CSS"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:991
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:989
 msgid "Styles to be applied only when printing projects using this design."
 msgstr ""
 "Stile, die nur beim Drucken von Projekten mit diesem Entwurf angewendet "
 "werden sollen."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:996
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:994
 msgid "Add \"Powered By\""
 msgstr "\"Powered By\" hinzufügen"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:996
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:994
 msgid ""
 "In compliance with WordPress.org guidelines, not added when printing from "
 "your browser."
@@ -2145,7 +2145,7 @@ msgstr ""
 "Benutzer verwenden. In Übereinstimmung mit WordPress.org Richtlinien, die "
 "beim Drucken in Ihrem Browser nicht hinzugefügt werden."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:997
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:995
 msgid ""
 "Instructs the Pro PDF Service to add \"Powered by Print My Blog Pro & "
 "WordPress\" to your project. Does not appear when printing using your "
@@ -2155,12 +2155,12 @@ msgstr ""
 "in der Fußzeile der ersten Seite hinzuzufügen. Wird beim Drucken mit Ihrem "
 "Browser nicht angezeigt."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1019
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1017
 msgid "Page Reference Text"
 msgstr "Seitenreferenztext"
 
 #. translators: %s literally the string "%s"
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1021
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1019
 #, php-format
 msgid ""
 "Text to use when replacing a hyperlink with a page reference. \"%s\" will be "
@@ -2170,13 +2170,13 @@ msgstr ""
 "werden soll. \"%s\" wird durch die Seitenzahl ersetzt."
 
 #. translators: %s page number
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1023
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1021
 #, php-format
 msgid "(see page %s)"
 msgstr "(siehe Seite %s)"
 
 #. translators: %s literally the string %s.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1026
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1024
 #, php-format
 msgid ""
 "You must include \"%s\" in the page reference text so we know where to put "
@@ -2185,12 +2185,12 @@ msgstr ""
 "Sie müssen \"%s\" in den Seitenreferenztext aufnehmen, damit wir wissen, wo "
 "die Seitenzahl gesetzt werden soll."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1039
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1037
 msgid "Internal Footnote Text"
 msgstr "Fußnotentext"
 
 #. translators: %s literally the string %s.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1041
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1039
 #, php-format
 msgid ""
 "Text to use when replacing a hyperlink with a footnote. \"%s\" will be "
@@ -2200,14 +2200,14 @@ msgstr ""
 "werden soll. \"%s\" wird durch die Seitenzahl ersetzt."
 
 #. translators: %s literally the string %s.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1043
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1041
 #, php-format
 msgid "See page %s."
 msgstr "(siehe Seite %s)"
 
 #. translators: %s literally the string %s.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1046
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1066
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1044
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1064
 #, php-format
 msgid ""
 "You must include \"%s\" in the footnote text so we know where to put the URL."
@@ -2215,12 +2215,12 @@ msgstr ""
 "Sie müssen \"%s\" in den Fußnotentext aufnehmen, damit wir wissen, wo die "
 "URL abgelegt werden soll."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1059
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1057
 msgid "External Footnote Text"
 msgstr "Fußnotentext"
 
 #. translators: %s literally the string %s.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1061
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1059
 #, php-format
 msgid ""
 "Text to use when replacing a hyperlink with a footnote. \"%s\" will be "
@@ -2230,24 +2230,24 @@ msgstr ""
 "soll. \"%s\" wird durch die URL ersetzt"
 
 #. translators: %s literally the string %s.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1063
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1061
 #, php-format
 msgid "See %s."
 msgstr "Siehe %s."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1079
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1077
 msgid "None"
 msgstr "Nichts"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1080
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1078
 msgid "Center"
 msgstr "Zentriert"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1083
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1081
 msgid "Default Image Alignment"
 msgstr "Standard-Bildausrichtung"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1084
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1082
 msgid ""
 "Images normally default to \"no alignment\", which can look jumbled in "
 "printouts. Usually it’s best to automatically switch those to align to the "
@@ -2257,33 +2257,33 @@ msgstr ""
 "verwendet, was in Ausdrucken durcheinander wirken kann. Normalerweise ist es "
 "am besten, diese automatisch zu wechseln, um sie an der Mitte auszurichten."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1097
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1095
 msgid "Don’t move"
 msgstr "Nicht bewegen"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1098
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1096
 msgid "Snap to the top or bottom of the page"
 msgstr "Fangen am oberen oder unteren Rand der Seite"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1099
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1097
 msgid "Only snap if it would otherwise cause a page break"
 msgstr "Fangen Sie nur, wenn das Bild einen Seitenumbruch verursachen würde"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1100
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1098
 msgid "Resize images if they don’t fit on the page"
 msgstr "Ändern der Größe von Bildern, wenn sie nicht auf die Seite passen"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1103
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1101
 msgid "Image and Block Placement"
 msgstr "Bild- und Blockplatzierung"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1103
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1101
 msgid "Image snapping and dynamic resizing only works using Pro Print."
 msgstr ""
 "Das Einrasten von Bildern und die dynamische Größenanpassung funktionieren "
 "nur mit Pro Print."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1104
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1102
 msgid ""
 "To reduce whitespace around images, galleries, and tables, Print My Blog can "
 "adjust the placement of your content, or resize it according to the space on "
@@ -2292,11 +2292,11 @@ msgstr ""
 "Um Leerzeichen um Bilder zu reduzieren, kann \"Mein Blog drucken\" Bilder in "
 "Ihren Inhalten verschieben."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1123
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1121
 msgid "Minimum Image Size (in pixels)"
 msgstr "Maximale Bildhöhe (in Pixel)"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1124
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1122
 msgid ""
 "Any images larger than this may be resized to fit onto the page, but they "
 "will be no smaller than this size."
@@ -4830,6 +4830,10 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "Michael Nelson"
 msgstr "Michael Nelson"
+
+#, php-format
+#~ msgid "Resize to %s"
+#~ msgstr "Größe ändern auf %s"
 
 #, php-format
 #~ msgid "Only the following HTML tags are allowed:%1$s%2$s"

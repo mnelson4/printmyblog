@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2022-11-15 12:46-0800\n"
-"PO-Revision-Date: 2022-11-15 12:46-0800\n"
+"POT-Creation-Date: 2022-11-30 11:27-0800\n"
+"PO-Revision-Date: 2022-11-30 11:27-0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -344,7 +344,7 @@ msgstr ""
 
 #: designs/pdf/digital/classic/description.php:8
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:109
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1167
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1165
 msgid "Footnotes and page references only work with Pro PDF Service"
 msgstr ""
 "Las notas al pie y las referencias de página solo funcionan con Pro Print "
@@ -563,7 +563,7 @@ msgstr ""
 #: designs/pdf/print/classic/descriptions/shared.php:4
 #: designs/pdf/print/haller/description.php:21
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:142
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1204
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1202
 msgid "Footnotes require Pro"
 msgstr "Las notas al pie de página requieren Pro"
 
@@ -1516,7 +1516,7 @@ msgstr ""
 "salto de párrafo."
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:96
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1144
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1142
 msgid "Link, Page Reference, and Footnote Settings"
 msgstr "Configuración de enlace, referencia de página y nota al pie"
 
@@ -1524,45 +1524,45 @@ msgstr "Configuración de enlace, referencia de página y nota al pie"
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:135
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:494
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:512
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1153
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1196
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1151
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1194
 #: src/PrintMyBlog/domain/PrintOptions.php:165
 msgid "Remove"
 msgstr "Eliminar"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:104
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1159
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1157
 msgid "Replace with page reference"
 msgstr "Reemplazar por referencia de página"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:105
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:137
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1162
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1199
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1160
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1197
 msgid "Replace with footnote"
 msgstr "Reemplazar por nota al pie"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:109
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:505
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1167
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1165
 msgid "Internal Hyperlinks"
 msgstr "Hipervínculos internos"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:110
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:506
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1169
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1167
 msgid "How to display hyperlinks to content included in this project."
 msgstr "Cómo mostrar hipervínculos al contenido incluido en este proyecto."
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:142
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:520
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1204
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1202
 msgid "External Hyperlinks"
 msgstr "Hipervínculos externos"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:143
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:521
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1206
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1204
 msgid "How to display hyperlinks to content not included in this project."
 msgstr "Cómo mostrar hipervínculos en contenido no incluido en este proyecto."
 
@@ -1797,8 +1797,8 @@ msgid "Leave as hyperlink to document"
 msgstr "Dejar como hipervínculo al documento"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:515
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1156
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1197
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1154
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1195
 msgid "Leave as hyperlink"
 msgstr "Dejar como hipervínculo"
 
@@ -2085,25 +2085,25 @@ msgid "Don’t Change Image Quality"
 msgstr "No cambies la calidad de imagen"
 
 #. translators: %s image dimensions, like "120x120"
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:943
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:941
 #, php-format
-msgid "Resize to %s"
-msgstr "Redimensionar a %s"
+msgid "%s pixels wide"
+msgstr "%s píxeles de ancho"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:948
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:946
 msgid "Full Size (on web)"
 msgstr "Tamaño completo (en la web)"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:949
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:947
 msgid "Uploaded Size (largest possible)"
 msgstr "Tamaño cargado (el más grande posible)"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:962
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:960
 msgid "Image Quality (in pixels)"
 msgstr "Altura máxima de imagen (en píxeles)"
 
 #. translators: 1: opening anchor tag, 2L closing anchor tag.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:965
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:963
 #, php-format
 msgid ""
 "Lower quality means smaller file size, whereas higher quality means higher "
@@ -2117,23 +2117,23 @@ msgstr ""
 "solicitado no esté disponible. Utilice el complemento %1$s Regenerate "
 "Thumbnails%2$s para crear los tamaños de imagen que faltan."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:983
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:981
 msgid "Apply Website Theme"
 msgstr "Aplicar tema del sitio web"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:990
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:988
 msgid "Custom CSS"
 msgstr "CSS personalizado"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:991
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:989
 msgid "Styles to be applied only when printing projects using this design."
 msgstr "Los estilos solo se aplicarán al imprimir proyectos con este diseño."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:996
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:994
 msgid "Add \"Powered By\""
 msgstr "Añadir \"Powered By\""
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:996
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:994
 msgid ""
 "In compliance with WordPress.org guidelines, not added when printing from "
 "your browser."
@@ -2141,7 +2141,7 @@ msgstr ""
 "De acuerdo con las pautas de WordPress.org, no se agrega al imprimir desde "
 "su navegador."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:997
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:995
 msgid ""
 "Instructs the Pro PDF Service to add \"Powered by Print My Blog Pro & "
 "WordPress\" to your project. Does not appear when printing using your "
@@ -2151,12 +2151,12 @@ msgstr ""
 "Pro &WordPress\" en el pie de página de la primera página. No aparece al "
 "imprimir con el navegador."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1019
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1017
 msgid "Page Reference Text"
 msgstr "Texto de referencia de página"
 
 #. translators: %s literally the string "%s"
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1021
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1019
 #, php-format
 msgid ""
 "Text to use when replacing a hyperlink with a page reference. \"%s\" will be "
@@ -2166,13 +2166,13 @@ msgstr ""
 "página. \"%s\" se reemplazará por el número de página."
 
 #. translators: %s page number
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1023
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1021
 #, php-format
 msgid "(see page %s)"
 msgstr "(ver página %s)"
 
 #. translators: %s literally the string %s.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1026
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1024
 #, php-format
 msgid ""
 "You must include \"%s\" in the page reference text so we know where to put "
@@ -2181,12 +2181,12 @@ msgstr ""
 "Debe incluir \"%s\" en el texto de referencia de la página para que sepamos "
 "dónde colocar el número de página."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1039
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1037
 msgid "Internal Footnote Text"
 msgstr "Texto de la nota al pie"
 
 #. translators: %s literally the string %s.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1041
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1039
 #, php-format
 msgid ""
 "Text to use when replacing a hyperlink with a footnote. \"%s\" will be "
@@ -2196,14 +2196,14 @@ msgstr ""
 "página. \"%s\" se reemplazará por el número de página."
 
 #. translators: %s literally the string %s.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1043
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1041
 #, php-format
 msgid "See page %s."
 msgstr "(ver página %s)"
 
 #. translators: %s literally the string %s.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1046
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1066
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1044
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1064
 #, php-format
 msgid ""
 "You must include \"%s\" in the footnote text so we know where to put the URL."
@@ -2211,12 +2211,12 @@ msgstr ""
 "Debe incluir \"%s\" en el texto de la nota al pie para que sepamos dónde "
 "colocar la DIRECCIÓN URL."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1059
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1057
 msgid "External Footnote Text"
 msgstr "Texto de la nota al pie"
 
 #. translators: %s literally the string %s.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1061
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1059
 #, php-format
 msgid ""
 "Text to use when replacing a hyperlink with a footnote. \"%s\" will be "
@@ -2226,24 +2226,24 @@ msgstr ""
 "reemplazado por la URL"
 
 #. translators: %s literally the string %s.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1063
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1061
 #, php-format
 msgid "See %s."
 msgstr "Véase %s."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1079
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1077
 msgid "None"
 msgstr "Ninguno"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1080
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1078
 msgid "Center"
 msgstr "Centro"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1083
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1081
 msgid "Default Image Alignment"
 msgstr "Alineación de imagen predeterminada"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1084
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1082
 msgid ""
 "Images normally default to \"no alignment\", which can look jumbled in "
 "printouts. Usually it’s best to automatically switch those to align to the "
@@ -2253,33 +2253,33 @@ msgstr ""
 "confusa en las impresiones. Por lo general, lo mejor es cambiarlos "
 "automáticamente para alinearlos con el centro."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1097
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1095
 msgid "Don’t move"
 msgstr "No te muevas"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1098
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1096
 msgid "Snap to the top or bottom of the page"
 msgstr "Ajustar a la parte superior o inferior de la página"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1099
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1097
 msgid "Only snap if it would otherwise cause a page break"
 msgstr "Sólo ajustar si la imagen causaría un salto de página"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1100
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1098
 msgid "Resize images if they don’t fit on the page"
 msgstr "Cambiar el tamaño de las imágenes si no caben en la página"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1103
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1101
 msgid "Image and Block Placement"
 msgstr "Colocación de imagen y blocks"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1103
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1101
 msgid "Image snapping and dynamic resizing only works using Pro Print."
 msgstr ""
 "El ajuste de imágenes y el cambio de tamaño dinámico solo funcionan con Pro "
 "Print."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1104
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1102
 msgid ""
 "To reduce whitespace around images, galleries, and tables, Print My Blog can "
 "adjust the placement of your content, or resize it according to the space on "
@@ -2288,11 +2288,11 @@ msgstr ""
 "Para reducir el espacio en blanco alrededor de las imágenes, Imprimir mi "
 "blog puede mover imágenes en su contenido."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1123
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1121
 msgid "Minimum Image Size (in pixels)"
 msgstr "Altura máxima de imagen (en píxeles)"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1124
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1122
 msgid ""
 "Any images larger than this may be resized to fit onto the page, but they "
 "will be no smaller than this size."
@@ -4824,6 +4824,10 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "Michael Nelson"
 msgstr "Michael Nelson"
+
+#, php-format
+#~ msgid "Resize to %s"
+#~ msgstr "Redimensionar a %s"
 
 #, php-format
 #~ msgid "Only the following HTML tags are allowed:%1$s%2$s"
