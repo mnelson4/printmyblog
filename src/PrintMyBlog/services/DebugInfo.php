@@ -49,6 +49,24 @@ class DebugInfo
     }
 
     /**
+     * Loops through the plugin data and removes stuff I think unnecessary.
+     * @param array $plugin_data
+     * @return array
+     */
+    protected function simplifyPluginData($plugin_data){
+        $simplified_plugin_data = [];
+        foreach ($plugin_data as $plugin_slug => $plugin_info) {
+            $version = str_replace('Version ', '', $plugin_info['value']);
+            $unnecessary_auto_updates_string_location = strpos($version, '| Auto-updates');
+            if ($unnecessary_auto_updates_string_location !== false) {
+                $version = substr($version, 0, $unnecessary_auto_updates_string_location);
+            }
+            $simplified_plugin_data[$plugin_slug] = $version;
+        }
+        return $simplified_plugin_data;
+    }
+
+    /**
      * @return array
      * @throws \ImagickException
      */
@@ -57,18 +75,10 @@ class DebugInfo
         require_once ABSPATH . 'wp-admin/includes/class-wp-debug-data.php';
         $all_debug_core_info = WP_Debug_Data::debug_data();
 
-        $plugins_active = $all_debug_core_info['wp-plugins-active']['fields'];
-        $simplified_plugin_data = [];
-        foreach ($plugins_active as $plugin_slug => $plugin_info) {
-            $version = str_replace('Version ', '', $plugin_info['value']);
-            $unnecessary_auto_updates_string_location = strpos($version, '| Auto-updates');
-            if ($unnecessary_auto_updates_string_location !== false) {
-                $version = substr($version, 0, $unnecessary_auto_updates_string_location);
-            }
-            $simplified_plugin_data[$plugin_slug] = $version;
-        }
+        $plugin_data = $this->simplifyPluginData($all_debug_core_info['wp-plugins-active']['fields']);
+        $mu_plugin_data = $this->simplifyPluginData($all_debug_core_info['wp-mu-plugins']['fields']);
+
         $active_theme = $all_debug_core_info['wp-active-theme']['fields'];
-        $simplified_theme_data = [];
         $simplified_theme_data = [
             'name' => $active_theme['name']['value'],
             'version' => $active_theme['version']['value'],
@@ -109,7 +119,8 @@ class DebugInfo
             'language' => $language,
             'public' => (bool)$blog_public,
             'environment_type' => $environment_type,
-            'plugins_active' => $simplified_plugin_data,
+            'mu_plugins' => $mu_plugin_data,
+            'plugins_active' => $plugin_data,
             'active_theme' => $simplified_theme_data,
             'debug' => $debug,
             'post_max_size' => $post_max_size,

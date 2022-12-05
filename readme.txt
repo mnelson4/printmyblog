@@ -439,6 +439,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.19.1 Dec 5, 2022 =
+* Enhancement: help page debug data now includes "Must-Use" plugins
+
 = 3.19.0 November 30, 2022 =
 * Feature: in Pro Print, improved image quality control. More sizes (e.g., 300 pixels, 1024 pixels, etc) and always uses an image size that actually exists. Removed image sizes that cropped the image (i.e., 150x150 pixel option).
 * Bugfix: in Pro Print, prevent content in code blocks (e.g. `<pre>` tags) from overflowing off the page
