@@ -357,12 +357,24 @@ function _pmb_parse_srcset(srcset, ascending = true){
     return size_and_srcs;
 }
 
+/**
+ * Actually, this does lazy loaded-images from other plugins too.
+ */
 function pmb_load_avada_lazy_images(){
     // Load Avada's lazy images (they took out images' "src" attribute and put it into "data-orig-src". Put it back.)
     jQuery('img[data-orig-src]').each(function(index,element){
         var jqelement = jQuery(this);
         jqelement.attr('src',jqelement.attr('data-orig-src'));
         jqelement.attr('srcset',jqelement.attr('data-orig-src'));
+    });
+    // Load siteground lazy-loaded images.
+    jQuery('img[data-src]').each(function(index,element){
+        var jqelement = jQuery(this);
+        jqelement.attr('src',jqelement.attr('data-src'));
+        jqelement.attr('srcset',jqelement.attr('data-srcset'));
+        jqelement.removeAttr('data-src');
+        jqelement.removeAttr('data-srcset');
+        jqelement.removeClass('lazyload');
     });
 }
 
