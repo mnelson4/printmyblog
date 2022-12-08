@@ -78,7 +78,7 @@ class PrintPageUrlGenerator
             $this->getBaseArgs(),
             $this->print_settings->getPrintOptionsAndValues($slug)
         );
-        $args['format'] = $slug;
+        $args['pmb_f'] = $slug;
         $args['pmb-post'] = $this->post->ID;
         if (defined('ICL_LANGUAGE_CODE')) {
             $args['lang'] = ICL_LANGUAGE_CODE;

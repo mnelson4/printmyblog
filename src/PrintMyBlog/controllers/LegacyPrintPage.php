@@ -169,7 +169,7 @@ class LegacyPrintPage extends BaseController
             } else {
                 $pmb_taxonomy_filters = array();
             }
-            $pmb_format = $this->getFromRequest('format', 'print');
+            $pmb_format = $this->getFromRequest('pmb_f', $this->getFromRequest('format', 'print'));
             $pmb_browser = $this->getBrowser();
             return PMB_TEMPLATES_DIR . 'print_page.php';
         }

@@ -442,6 +442,7 @@ https://youtu.be/uPQ3vqm7A2g
 = 3.19.1 Dec 5, 2022 =
 * Enhancement: help page debug data now includes "Must-Use" plugins
 * Compatibility: load [SiteGround Optimizer](https://wordpress.org/plugins/sg-cachepress/) lazy images
+* Compatibility: in Quick Print, use query parameter "pmb_f" instead of "format" to prevent plugin conflicts
 
 = 3.19.0 November 30, 2022 =
 * Feature: in Pro Print, improved image quality control. More sizes (e.g., 300 pixels, 1024 pixels, etc) and always uses an image size that actually exists. Removed image sizes that cropped the image (i.e., 150x150 pixel option).
@@ -454,7 +455,7 @@ https://youtu.be/uPQ3vqm7A2g
 * Bugfix: in Pro Print, change relative hyperlinks to absolute ones
 * Bugfix: in Pro Print, prevent Javascript error on invalid hyperlinks
 
-* 3.18.9 November 18, 2022 =
+= 3.18.9 November 18, 2022 =
 * Bugfix: fix relative hyperlinks in Pro Print
 * User Experience: on instaWP and tasteWP demo sites, don't ask for Freemius opt-in
 
