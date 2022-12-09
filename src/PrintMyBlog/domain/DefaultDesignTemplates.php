@@ -943,6 +943,7 @@ class DefaultDesignTemplates
                 )
             );
         }
+        ksort($image_quality_options);
         $image_quality_options['scaled'] = new InputOption(__('Full Size (on web)', 'print-my-blog'));
         $image_quality_options['uploaded'] = new InputOption(__('Uploaded Size (largest possible)', 'print-my-blog'));
 
