@@ -90,23 +90,28 @@ function pmb_fix_wp_videos(){
 
 function pmb_convert_youtube_videos_to_images() {
     jQuery('div.wp-block-embed__wrapper iframe[src*=youtube]').unwrap();
-    var selection = jQuery('iframe[src*=youtube]');
-    selection.replaceWith(function(index){
-        var title = this.title;
-        var src = this.src;
-        var youtube_id = src.replace('https://www.youtube.com/embed/','');
-        youtube_id = youtube_id.substring(0, youtube_id.indexOf('?'));
-        var image_url = 'https://img.youtube.com/vi/' + youtube_id + '/0.jpg';
-        var link = 'https://youtube.com/watch?v=' + youtube_id;
-        return '<div class="pmb-youtube-video-replacement-wrapper">' +
-            '<div class="pmb-youtube-video-replacement-header"><div class="pmb-youtube-video-replacement-icon">🎦</div>' +
-            '<div class="pmb-youtube-video-replacement-text"><b class="pmb-youtube-video-title">' + title + '</b><br/><a href="' + link +'" target="_blank">' + link + '</a>' +
-            '</div>' +
-            '</div>' +
-            '<img class="pmb-youtube-video-replacement" src="' + image_url + '">' +
-            '</div>';
-    });
-
+    setTimeout(
+        function(){
+            var selection = jQuery('iframe[src*=youtube]');
+            selection.replaceWith(function(index){
+                var title = this.title;
+                var src = this.src;
+                var youtube_id = src.replace('https://www.youtube.com/embed/','');
+                youtube_id = youtube_id.substring(0, youtube_id.indexOf('?'));
+                var image_url = 'https://img.youtube.com/vi/' + youtube_id + '/0.jpg';
+                var link = 'https://youtube.com/watch?v=' + youtube_id;
+                return '<div class="pmb-youtube-video-replacement-wrapper">' +
+                    '<div class="pmb-youtube-video-replacement-header"><div class="pmb-youtube-video-replacement-icon">🎦</div>' +
+                    '<div class="pmb-youtube-video-replacement-text"><b class="pmb-youtube-video-title">' + title + '</b><br/><a href="' + link +'" target="_blank">' + link + '</a>' +
+                    '</div>' +
+                    '</div>' +
+                    '<img class="pmb-youtube-video-replacement" src="' + image_url + '">' +
+                    '</div>';
+            });
+        },
+        // Elementor uses Javascript to turn special DIVs into YouTube iFrames, which is probably done after a few seconds.
+        3000
+    );
 };
 
 function pmb_resize_images(desired_max_height) {
