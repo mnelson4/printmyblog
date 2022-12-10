@@ -220,3 +220,10 @@ Hide Kadence Accordions' expand/collapse icon
 .kt-blocks-accordion-icon-trigger{
     display:none !important;
 }
+
+/**
+Hide Orbit Fox sharing buttons
+ */
+.pmb-posts .obfx-sharing{
+    display:none;
+}
