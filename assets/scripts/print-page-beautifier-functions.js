@@ -89,7 +89,7 @@ function pmb_fix_wp_videos(){
 }
 
 function pmb_convert_youtube_videos_to_images() {
-    jQuery('div.wp-block-embed__wrapper iframe[src*=youtube]').unwrap().end();
+    jQuery('div.wp-block-embed__wrapper iframe[src*=youtube]').unwrap();
     var selection = jQuery('iframe[src*=youtube]');
     selection.replaceWith(function(index){
         var title = this.title;

@@ -445,6 +445,7 @@ https://youtu.be/uPQ3vqm7A2g
 * Compatibility: in Quick Print, use query parameter "pmb_f" instead of "format" to prevent plugin conflicts
 * Bugfix: in Pro Print, order image quality options
 * Compatibility: hide Orbit Fox Companion social sharing buttons in print
+* Compatibility: hide WPMUDEV's Hustle Slide-In
 
 = 3.19.0 November 30, 2022 =
 * Feature: in Pro Print, improved image quality control. More sizes (e.g., 300 pixels, 1024 pixels, etc) and always uses an image size that actually exists. Removed image sizes that cropped the image (i.e., 150x150 pixel option).

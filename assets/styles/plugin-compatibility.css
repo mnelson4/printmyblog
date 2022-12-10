@@ -227,3 +227,9 @@ Hide Orbit Fox sharing buttons
 .pmb-posts .obfx-sharing{
     display:none;
 }
+/**
+Hide Hustle Slide-In
+ */
+.pmb-posts .hustle-slidein{
+    display:none !important;
+}
