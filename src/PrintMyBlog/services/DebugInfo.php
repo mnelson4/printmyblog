@@ -53,7 +53,8 @@ class DebugInfo
      * @param array $plugin_data
      * @return array
      */
-    protected function simplifyPluginData($plugin_data){
+    protected function simplifyPluginData($plugin_data)
+    {
         $simplified_plugin_data = [];
         foreach ($plugin_data as $plugin_slug => $plugin_info) {
             $version = str_replace('Version ', '', $plugin_info['value']);
