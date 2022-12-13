@@ -439,7 +439,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.19.1 Dec xxx, 2022 =
+= 3.19.1 Dec 13, 2022 =
 * Enhancement: help page debug data now includes "Must-Use" plugins
 * Compatibility: load [SiteGround Optimizer](https://wordpress.org/plugins/sg-cachepress/) lazy images
 * Compatibility: in Quick Print, use query parameter "pmb_f" instead of "format" to prevent plugin conflicts
