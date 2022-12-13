@@ -88,31 +88,97 @@ function pmb_fix_wp_videos(){
     jQuery('div.wp-video').css({'width': '','min-width':'', 'height': '', 'min-height': ''});
 }
 
+/**
+ * Converts YouTube videos, Vimeo Videos, and self-hosted videos to screenshots and URLs.
+ */
 function pmb_convert_youtube_videos_to_images() {
-    jQuery('div.wp-block-embed__wrapper iframe[src*=youtube]').unwrap();
-    setTimeout(
-        function(){
-            var selection = jQuery('iframe[src*=youtube]');
-            selection.replaceWith(function(index){
-                var title = this.title;
-                var src = this.src;
-                var youtube_id = src.replace('https://www.youtube.com/embed/','');
-                youtube_id = youtube_id.substring(0, youtube_id.indexOf('?'));
-                var image_url = 'https://img.youtube.com/vi/' + youtube_id + '/0.jpg';
-                var link = 'https://youtube.com/watch?v=' + youtube_id;
-                return '<div class="pmb-youtube-video-replacement-wrapper">' +
-                    '<div class="pmb-youtube-video-replacement-header"><div class="pmb-youtube-video-replacement-icon">🎦</div>' +
-                    '<div class="pmb-youtube-video-replacement-text"><b class="pmb-youtube-video-title">' + title + '</b><br/><a href="' + link +'" target="_blank">' + link + '</a>' +
-                    '</div>' +
-                    '</div>' +
-                    '<img class="pmb-youtube-video-replacement" src="' + image_url + '">' +
-                    '</div>';
-            });
-        },
-        // Elementor uses Javascript to turn special DIVs into YouTube iFrames, which is probably done after a few seconds.
-        3000
-    );
+    var video_converter = new PmbVideo();
+    video_converter.convert();
 };
+
+/**
+ * Converts videos into screenshots-with-links. Probably easier to just call the wrapper
+ * pmb_convert_youtube_videos_to_images().
+ */
+function PmbVideo(){
+    this.convert = function(){
+        var that = this;
+        setTimeout(
+            function(){
+                that._convertYoutubeVideos();
+                that._convertVimeoVideos();
+                that._convertOtherVideos();
+            },
+            // Elementor uses Javascript to turn special DIVs into YouTube iFrames, which is probably done after a few seconds.
+            3000
+        );
+    }
+
+    this._convertYoutubeVideos = function(){
+        jQuery('div.wp-block-embed__wrapper iframe[src*=youtube]').unwrap();
+        var selection = jQuery('iframe[src*=youtube]');
+        var that = this;
+        selection.replaceWith(function(index){
+            var title = this.title;
+            var src = this.src;
+            var youtube_id = src.replace('https://www.youtube.com/embed/','');
+            youtube_id = youtube_id.substring(0, youtube_id.indexOf('?'));
+            var image_url = 'https://img.youtube.com/vi/' + youtube_id + '/0.jpg';
+            var link = 'https://youtube.com/watch?v=' + youtube_id;
+            return that._getScreenshotAndLinkHtml(title,link, image_url);
+        });
+    };
+
+    this._convertVimeoVideos = function(){
+        jQuery('div.wp-block-embed__wrapper iframe[src*=vimeo]').unwrap();
+        var vimeo_videos = jQuery('iframe[src*=vimeo]');
+        var that = this;
+        vimeo_videos.each(function(index){
+            var iframe = this;
+            var title = iframe.title;
+            var src = iframe.src;
+            var vimeo_id = src.replace('https://player.vimeo.com/video/','');
+            vimeo_id = vimeo_id.substring(0, vimeo_id.indexOf('?'));
+            var vimeo_api_url = 'https://vimeo.com/api/v2/video/' + vimeo_id+ '.json';
+            jQuery.ajax({
+                url: vimeo_api_url,
+                dataType: 'json',
+                success: function(response){
+                    if(typeof(response) === 'object' && typeof(response[0]) === 'object' && typeof(response[0].thumbnail_large)){
+                        var image_url = response[0].thumbnail_large || response[0].thumbnail_medium || response[0].thumbnail_small;
+                        var link = response[0].url;
+                        var new_html = that._getScreenshotAndLinkHtml(title, link, image_url);
+                        jQuery(iframe).replaceWith(new_html);
+                    }
+                }
+            }
+            );
+        });
+    };
+
+    this._convertOtherVideos = function(){
+        var that = this;
+        var videos = jQuery('video');
+
+        videos.replaceWith(function(index){
+           var video_element = this;
+           var title='';
+           var src = video_element.src;
+           var screenshot = video_element.poster || '';
+           return that._getScreenshotAndLinkHtml('',src,screenshot);
+        });
+    };
+
+    this._getScreenshotAndLinkHtml = function(video_title, video_url, video_screenshot_src){
+        return '<div class="pmb-youtube-video-replacement-wrapper">' +
+            '<div class="pmb-youtube-video-replacement-header"><div class="pmb-youtube-video-replacement-icon">🎦</div>' +
+            '<div class="pmb-youtube-video-replacement-text"><b class="pmb-youtube-video-title">' + video_title + '</b><br/><a href="' + video_url +'" target="_blank">' + video_url + '</a>' +
+            '</div>' +
+            '</div>' +
+            '<img class="pmb-youtube-video-replacement" src="' + video_screenshot_src + '">' +
+            '</div>';
+    };
+}
 
 function pmb_resize_images(desired_max_height) {
     // Images that take up the entire page width are usually too big, so we usually want to shrink images and center them.
