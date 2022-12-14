@@ -4,7 +4,7 @@ jQuery(document).ready(function(){
     if(pmb_design_options['default_alignment'] === 'center'){
         pmb_default_align_center();
     }
-    pmb_convert_youtube_videos_to_images();
+    pmb_convert_youtube_videos_to_images('pretty');
     pmb_replace_internal_links_with_page_refs_and_footnotes('footnote', 'footnote', pmb_design_options['footnote_text'], pmb_design_options['internal_footnote_text']);
     new PmbToc();
 });

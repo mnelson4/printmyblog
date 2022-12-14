@@ -90,17 +90,21 @@ function pmb_fix_wp_videos(){
 
 /**
  * Converts YouTube videos, Vimeo Videos, and self-hosted videos to screenshots and URLs.
+ * @param string format either "pretty" or "simple". Pretty works best in PDFs, "simple" works better in ePub and Word
  */
-function pmb_convert_youtube_videos_to_images() {
-    var video_converter = new PmbVideo();
+function pmb_convert_youtube_videos_to_images(format) {
+    var video_converter = new PmbVideo(format);
     video_converter.convert();
 };
 
 /**
  * Converts videos into screenshots-with-links. Probably easier to just call the wrapper
  * pmb_convert_youtube_videos_to_images().
+ * @param string format "pretty" or "simple". Pretty works best where CSS assets/styles/print-page-common.css is loaded.
+ *  If we can't be sure that's loaded, "simple" is better.
  */
-function PmbVideo(){
+function PmbVideo(format){
+    this.format = format || 'pretty';
     this.convert = function(){
         var that = this;
         setTimeout(
@@ -143,7 +147,7 @@ function PmbVideo(){
             youtube_id = youtube_id.substring(0, youtube_id.indexOf('?'));
             var image_url = 'https://img.youtube.com/vi/' + youtube_id + '/0.jpg';
             var link = 'https://youtube.com/watch?v=' + youtube_id;
-            return that._getScreenshotAndLinkHtml(title,link, image_url);
+            return that._getHtml(title,link, image_url, );
         });
     };
 
@@ -165,7 +169,7 @@ function PmbVideo(){
                     if(typeof(response) === 'object' && typeof(response[0]) === 'object' && typeof(response[0].thumbnail_large)){
                         var image_url = response[0].thumbnail_large || response[0].thumbnail_medium || response[0].thumbnail_small;
                         var link = response[0].url;
-                        var new_html = that._getScreenshotAndLinkHtml(title, link, image_url);
+                        var new_html = that._getHtml(title, link, image_url);
                         jQuery(iframe).replaceWith(new_html);
                     }
                 }
@@ -183,10 +187,18 @@ function PmbVideo(){
            var title='';
            var src = video_element.src;
            var screenshot = video_element.poster || '';
-           return that._getScreenshotAndLinkHtml('',src,screenshot);
+           return that._getHtml('',src,screenshot);
         });
     };
 
+    /**
+     * Probably best for PDFs where advanced CSS is OK.
+     * @param video_title
+     * @param video_url
+     * @param video_screenshot_src
+     * @returns {string}
+     * @private
+     */
     this._getScreenshotAndLinkHtml = function(video_title, video_url, video_screenshot_src){
         var html = '<div class="pmb-video-wrapper">' +
             '<div class="pmb-video-inner-wrapper">' +
@@ -209,6 +221,46 @@ function PmbVideo(){
             html += '</div>' +
         '</div>';
         return html;
+    };
+
+    /**
+     * Gets HTML that's intended to look good even without any external CSS files. This is done by using inline CSS and keeping it basic.
+     * @param video_title
+     * @param video_url
+     * @param video_screenshot_src
+     * @returns {string}
+     * @private
+     */
+    this._getSimpleHtml = function(video_title, video_url, video_screenshot_src){
+        var html = '<div style="border:1px solid black;"><a href="' + video_url + '">';
+        if(typeof(video_title) === 'string' && video_title.length > 0){
+            html += '<b>' + video_title + '</b><br>';
+        } else {
+            html += '<b>' + video_url + '</b><br>';
+        }
+        if(typeof(video_screenshot_src) === 'string'  && video_screenshot_src.length > 0){
+            html += '<img src="' + video_screenshot_src + '" style="max-height:500px; max-width:100vw; display:block; margin-left:auto; margin-right:auto;">;';
+        } else {
+            html += '<div style="max-height:80vh;max-width:100vw"><div style="display:inline-block; margin-left:auto; margin-right:auto; max-width:500px;"><svg height="100%" version="1.1" viewBox="0 0 68 48" width="100%"><circle cx="34" cy="24" r="20" stroke="white" stroke-width="3" fill="black" /><path d="M 45,24 27,14 27,34" fill="white"></path></svg></div></div>';
+        }
+        html += '</a></div>';
+        return html;
+    };
+
+    /**
+     * Gets the HTML to use instead of the video.
+     * @param video_title
+     * @param video_url
+     * @param video_screenshot_src
+     * @returns {string}
+     * @private
+     */
+    this._getHtml = function(video_title, video_url, video_screenshot_src){
+        if(this.format === 'pretty'){
+            return this._getScreenshotAndLinkHtml(video_title, video_url, video_screenshot_src);
+        } else {
+            return this._getSimpleHtml(video_title, video_url, video_screenshot_src);
+        }
     };
 }
 
