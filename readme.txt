@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.19.1
+Stable tag: 3.20.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -51,7 +51,7 @@ https://youtu.be/shOjx-Ijung
 * optionally places each post on a new page
 * resize text
 * resize images or remove them altogether
-* replaces embedded YouTube videos with a link, full video title, and screenshot
+* replaces embedded videos with a link, full video title, screenshot and QRCode
 * optionally removes hyperlinks
 * optionally includes post’s excerpt
 * order posts by date, or pages by the "order" attribute
@@ -438,6 +438,10 @@ https://youtu.be/uPQ3vqm7A2g
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+
+= 3.20.0 xxxx, 2022 =
+* Feature: convert Vimeo and other videos to screenshots and links
+* Feature: add QRcodes to video screenshots
 
 = 3.19.1 Dec 13, 2022 =
 * Enhancement: help page debug data now includes "Must-Use" plugins
