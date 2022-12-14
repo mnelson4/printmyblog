@@ -108,24 +108,72 @@ span.pmb-post-meta{
     display:block;
 }
 
-div.pmb-youtube-video-replacement-wrapper{
+div.pmb-video-wrapper {
+    display:flex;
+    justify-content:center;
+}
+div.pmb-video-inner-wrapper{
+    position:relative;
     page-break-inside:avoid;
-    text-align:center;
-}
-div.pmb-youtube-video-replacement-header{
+    min-height:200px;
     display:inline-block;
+    min-width:500px;
 }
-div.pmb-youtube-video-replacement-icon{
+div.pmb-video-gradient{
+    height:60px;
+    padding-bottom: 50px;
+    top: 0;
+    z-index: 25;
+    background-position: top;
+    width: 100%;
+    position: absolute;
+    background-repeat: repeat-x;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==);
+}
+div.pmb-video-header{
+    position:absolute;
+}
+
+div.pmb-video-text{
     display:inline-block;
-    text-align:center;
+    position:absolute;
+    z-index:30;
+    color:white;
+    font-size:20px;
+    padding:10px;
+    text-align:left;
+    left:0;
 }
-div.pmb-youtube-video-replacement-icon img{
-    vertical-align:middle;
-    font-size:3em;
+div.pmb-video-text a{
+    color:white;
 }
-div.pmb-youtube-video-replacement-text{
-    display:inline-block;
+div.pmb-video-overlay{
+    position:absolute;
+    z-index:10;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
 }
+div.pmb-pretend-play-button{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:68px;
+    height:48px;
+    margin-left:-34px;
+    margin-top:-24px;
+}
+img.pmb-video-screenshot{
+    min-width:500px;
+}
+
+div.pmb-video-screenshot-placeholder{
+    height:200px;
+    width:500px;
+    border:1px solid gray;
+}
+
 .pmb-posts div.pmb-print-this-page{
     display:none;
 }

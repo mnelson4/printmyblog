@@ -170,13 +170,25 @@ function PmbVideo(){
     };
 
     this._getScreenshotAndLinkHtml = function(video_title, video_url, video_screenshot_src){
-        return '<div class="pmb-youtube-video-replacement-wrapper">' +
-            '<div class="pmb-youtube-video-replacement-header"><div class="pmb-youtube-video-replacement-icon">🎦</div>' +
-            '<div class="pmb-youtube-video-replacement-text"><b class="pmb-youtube-video-title">' + video_title + '</b><br/><a href="' + video_url +'" target="_blank">' + video_url + '</a>' +
-            '</div>' +
-            '</div>' +
-            '<img class="pmb-youtube-video-replacement" src="' + video_screenshot_src + '">' +
-            '</div>';
+        var html = '<div class="pmb-video-wrapper">' +
+            '<div class="pmb-video-inner-wrapper">' +
+                '<div class="pmb-video-gradient"></div>' +
+                '<div class="pmb-video-overlay"><div class="pmb-pretend-play-button"><svg height="100%" version="1.1" viewBox="0 0 68 48" width="100%"><circle cx="34" cy="24" r="20" stroke="white" stroke-width="3" fill="black" /><path d="M 45,24 27,14 27,34" fill="white"></path></svg></div></div>' +
+                '<div class="pmb-video-text">';
+        if(typeof(video_title) === 'string' && video_title.length > 0){
+            html += '<b class="pmb-video-title">' + video_title + '</b><br/>';
+        }
+        html += '<a href="' + video_url +'" target="_blank">' + video_url + '</a>' +
+                '</div>';
+        if(typeof(video_screenshot_src) === 'string'  && video_screenshot_src.length > 0){
+            html += '<img class="pmb-video-screenshot" src="' + video_screenshot_src + '">';
+        } else {
+            html += '<div class="pmb-video-screenshot-placeholder"></div>';
+        }
+
+            html += '</div>' +
+        '</div>';
+        return html;
     };
 }
 
@@ -278,7 +290,7 @@ function pmb_mark_for_dynamic_resize(min_image_size){
     jQuery('img').each(function(index, element){
         // Don't try to resize trickier items like columns or YouTube videos
         var jqe = jQuery(element);
-        if(jqe.parents('.wp-block-columns, .wp-block-embed-youtube, .wp-block-gallery, .gallery, .pmb-dont-dynamic-resize').length > 0){
+        if(jqe.parents('.wp-block-columns, .wp-block-embed, .wp-block-gallery, .gallery, .pmb-dont-dynamic-resize').length > 0){
             return;
         }
         if(element.offsetHeight > min_image_size){
