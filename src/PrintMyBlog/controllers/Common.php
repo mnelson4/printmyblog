@@ -108,9 +108,15 @@ class Common extends BaseController
             filemtime(PMB_ASSETS_DIR . 'styles/plugin-compatibility.css')
         );
         wp_register_script(
+            'pmb-qrcode',
+            PMB_SCRIPTS_URL . 'libs/qrcode.min.js',
+            [],
+            filemtime(PMB_SCRIPTS_DIR . 'libs/qrcode.min.js')
+        );
+        wp_register_script(
             'pmb-beautifier-functions',
             PMB_SCRIPTS_URL . 'print-page-beautifier-functions.js',
-            [],
+            ['pmb-qrcode'],
             filemtime(PMB_SCRIPTS_DIR . 'print-page-beautifier-functions.js')
         );
         wp_localize_script(

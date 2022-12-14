@@ -108,10 +108,28 @@ function PmbVideo(){
                 that._convertYoutubeVideos();
                 that._convertVimeoVideos();
                 that._convertOtherVideos();
+                setTimeout(
+                    function(){
+                        that._addQrCodes();
+                    },
+                    1000
+                );
             },
             // Elementor uses Javascript to turn special DIVs into YouTube iFrames, which is probably done after a few seconds.
             3000
         );
+    }
+
+    this._addQrCodes = function(){
+        jQuery('.pmb-video-qrcode').each(function(){
+             new QRCode(
+                 this,
+                 {
+                     text:this.attributes['data-url'].value,
+                     height:128,
+                     width:128
+                 });
+        })
     }
 
     this._convertYoutubeVideos = function(){
@@ -173,7 +191,9 @@ function PmbVideo(){
         var html = '<div class="pmb-video-wrapper">' +
             '<div class="pmb-video-inner-wrapper">' +
                 '<div class="pmb-video-gradient"></div>' +
-                '<div class="pmb-video-overlay"><div class="pmb-pretend-play-button"><svg height="100%" version="1.1" viewBox="0 0 68 48" width="100%"><circle cx="34" cy="24" r="20" stroke="white" stroke-width="3" fill="black" /><path d="M 45,24 27,14 27,34" fill="white"></path></svg></div></div>' +
+                '<div class="pmb-video-overlay">' +
+                    '<div class="pmb-pretend-play-button"><svg height="100%" version="1.1" viewBox="0 0 68 48" width="100%"><circle cx="34" cy="24" r="20" stroke="white" stroke-width="3" fill="black" /><path d="M 45,24 27,14 27,34" fill="white"></path></svg></div></div>' +
+                    '<div class="pmb-video-qrcode" data-url="' + video_url+ '"></div>' +
                 '<div class="pmb-video-text">';
         if(typeof(video_title) === 'string' && video_title.length > 0){
             html += '<b class="pmb-video-title">' + video_title + '</b><br/>';

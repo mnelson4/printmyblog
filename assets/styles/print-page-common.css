@@ -169,9 +169,17 @@ img.pmb-video-screenshot{
 }
 
 div.pmb-video-screenshot-placeholder{
-    height:200px;
+    height:350px;
     width:500px;
     border:1px solid gray;
+}
+
+div.pmb-video-qrcode{
+    position:absolute;
+    right:10px;
+    bottom:10px;
+    width:128px;
+    height:128px;
 }
 
 .pmb-posts div.pmb-print-this-page{
