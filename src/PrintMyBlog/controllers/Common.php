@@ -125,6 +125,7 @@ class Common extends BaseController
             [
                 'site_url' => site_url(),
                 'site_url_attr' => esc_attr(site_url()),
+                'play_button_gif' => PMB_IMAGES_URL . 'play-button.gif',
             ]
         );
         wp_register_script(

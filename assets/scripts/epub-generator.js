@@ -14,7 +14,11 @@ function blobToBase64(blob) {
         reader.readAsDataURL(blob);
     });
 }
-jQuery(document).on('pmb_wrap_up', function(){
+
+/**
+ * Creates the ePub file from the current page's HTML and enables the download link when it's done.
+ */
+function pmb_create_epub(){
     var epub_options = {
         title: pmb_pro.title,
         author:pmb_pro.authors,
@@ -106,6 +110,12 @@ jQuery(document).on('pmb_wrap_up', function(){
 
 
     })();
+}
+jQuery(document).on('pmb_wrap_up', function(){
+    setTimeout(
+        pmb_create_epub,
+        4000
+    );
 });
 
 

@@ -232,17 +232,16 @@ function PmbVideo(format){
      * @private
      */
     this._getSimpleHtml = function(video_title, video_url, video_screenshot_src){
-        var html = '<div style="border:1px solid black;"><a href="' + video_url + '">';
+        var html = '<div style="border:1px solid black;padding:15px;"><a href="' + video_url + '">';
         if(typeof(video_title) === 'string' && video_title.length > 0){
             html += '<b>' + video_title + '</b><br>';
         } else {
             html += '<b>' + video_url + '</b><br>';
         }
-        if(typeof(video_screenshot_src) === 'string'  && video_screenshot_src.length > 0){
-            html += '<img src="' + video_screenshot_src + '" style="max-height:500px; max-width:100vw; display:block; margin-left:auto; margin-right:auto;">;';
-        } else {
-            html += '<div style="max-height:80vh;max-width:100vw"><div style="display:inline-block; margin-left:auto; margin-right:auto; max-width:500px;"><svg height="100%" version="1.1" viewBox="0 0 68 48" width="100%"><circle cx="34" cy="24" r="20" stroke="white" stroke-width="3" fill="black" /><path d="M 45,24 27,14 27,34" fill="white"></path></svg></div></div>';
+        if(! typeof(video_screenshot_src) === 'string' ||  video_screenshot_src.length == 0){
+            video_screenshot_src = pmb.play_button_gif;
         }
+        html += '<img src="' + video_screenshot_src + '" style="max-height:500px; max-width:100vw; display:block; margin-left:auto; margin-right:auto;">';
         html += '</a></div>';
         return html;
     };
