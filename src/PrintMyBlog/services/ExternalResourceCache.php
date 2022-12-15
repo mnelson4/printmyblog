@@ -64,7 +64,7 @@ class ExternalResourceCache
 
         $extension = pathinfo($external_url, PATHINFO_EXTENSION);
         if (! $extension) {
-            $copy_filename .= '.html';
+            $copy_filename .= '.avif';
         }
 
         $folder = $this->getCacheDir();
