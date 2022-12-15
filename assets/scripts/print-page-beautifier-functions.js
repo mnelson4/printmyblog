@@ -104,26 +104,67 @@ function pmb_convert_youtube_videos_to_images(format) {
  *  If we can't be sure that's loaded, "simple" is better.
  */
 function PmbVideo(format){
-    this.format = format || 'pretty';
-    this.convert = function(){
-        var that = this;
-        setTimeout(
-            function(){
-                that._convertYoutubeVideos();
-                that._convertVimeoVideos();
-                that._convertOtherVideos();
-                setTimeout(
-                    function(){
-                        that._addQrCodes();
-                    },
-                    1000
-                );
-            },
-            // Elementor uses Javascript to turn special DIVs into YouTube iFrames, which is probably done after a few seconds.
-            3000
-        );
+    this._format = format || 'pretty';
+
+    /**
+     * Number of open HTTP requests to get video data.
+     * @type {number}
+     * @private
+     */
+    this._open_requests = 0;
+    this._doneSearchForVideos = false;
+    this._triggeredDoneProcessingVideos = false;
+    /**
+     * If there are no open HTTP requests for video data
+     * and we're done searching for videos, triggers "pmb_done_processing_videos" on the document.
+     * @returns null
+     * @private
+     */
+    this._checkDoneProcessingVideos = function(){
+        if(this._open_requests <= 0 && this._doneSearchForVideos && ! this._triggeredDoneProcessingVideos){
+            console.log('trigger done processing videos');
+            this._triggeredDoneProcessingVideos = true;
+            jQuery(document).trigger('pmb_done_processing_videos');
+        }
     }
 
+    /**
+     * Increments the count of open HTTP requests.
+     * @private
+     */
+    this._addOpenRequest = function(){
+        this._open_requests++;
+    }
+
+    /**
+     * Decrements the count of open HTTP requests
+     * @private
+     */
+    this._closeRequest = function(){
+        this._open_requests--;
+    }
+
+    /**
+     * Main function that converts videos into screenshots etc.
+     * Fires "pmb_done_processing_videos" on document when finished.
+     */
+    this.convert = function(){
+        var that = this;
+        console.log('PMB converting videos ');
+        this._convertVimeoVideos();
+        this._convertYoutubeVideos();
+        this._convertOtherVideos();
+        this._doneSearchForVideos = true;
+        jQuery(document).on('pmb_done_processing_videos',function(){
+            that._addQrCodes();
+        })
+        this._checkDoneProcessingVideos();
+    }
+
+    /**
+     * After videos are converted, adds a QR code next to them.
+     * @private
+     */
     this._addQrCodes = function(){
         jQuery('.pmb-video-qrcode').each(function(){
              new QRCode(
@@ -162,6 +203,7 @@ function PmbVideo(format){
             var vimeo_id = src.replace('https://player.vimeo.com/video/','');
             vimeo_id = vimeo_id.substring(0, vimeo_id.indexOf('?'));
             var vimeo_api_url = 'https://vimeo.com/api/v2/video/' + vimeo_id+ '.json';
+            that._addOpenRequest();
             jQuery.ajax({
                 url: vimeo_api_url,
                 dataType: 'json',
@@ -172,6 +214,15 @@ function PmbVideo(format){
                         var new_html = that._getHtml(title, link, image_url);
                         jQuery(iframe).replaceWith(new_html);
                     }
+                },
+                complete: function(){
+                    setTimeout(function(){
+                            that._closeRequest();
+                            that._checkDoneProcessingVideos();
+                        },
+                        100
+                    );
+
                 }
             }
             );
@@ -255,7 +306,7 @@ function PmbVideo(format){
      * @private
      */
     this._getHtml = function(video_title, video_url, video_screenshot_src){
-        if(this.format === 'pretty'){
+        if(this._format === 'pretty'){
             return this._getScreenshotAndLinkHtml(video_title, video_url, video_screenshot_src);
         } else {
             return this._getSimpleHtml(video_title, video_url, video_screenshot_src);
