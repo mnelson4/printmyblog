@@ -115,9 +115,9 @@ div.pmb-video-wrapper {
 div.pmb-video-inner-wrapper{
     position:relative;
     page-break-inside:avoid;
-    min-height:200px;
     display:inline-block;
-    min-width:500px;
+    width:500px;
+    max-width:100%;
 }
 div.pmb-video-gradient{
     height:60px;
@@ -166,21 +166,22 @@ div.pmb-pretend-play-button{
     margin-top:-24px;
 }
 img.pmb-video-screenshot{
-    min-width:500px;
+    width:500px;
 }
 
 div.pmb-video-screenshot-placeholder{
     height:350px;
     width:500px;
     border:1px solid gray;
+    max-width:100%;
 }
 
 div.pmb-video-qrcode{
     position:absolute;
     right:10px;
     bottom:10px;
-    width:128px;
-    height:128px;
+    width:64px;
+    height:64px;
 }
 
 .pmb-posts div.pmb-print-this-page{

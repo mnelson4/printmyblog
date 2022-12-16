@@ -175,8 +175,8 @@ function PmbVideo(format, add_qr_codes){
                  this,
                  {
                      text:this.attributes['data-url'].value,
-                     height:128,
-                     width:128
+                     height:64,
+                     width:64
                  });
         })
     }

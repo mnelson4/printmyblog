@@ -163,6 +163,10 @@
         margin-left:0;
         font-weight:normal;
     }
+    /* Override video height, make them not so tall*/
+    .pmb-posts div.pmb-video-screenshot-placeholder{
+        height:200px;
+    }
 }
 
 /*

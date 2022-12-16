@@ -267,6 +267,11 @@ Ask PDF viewers to display pages side-by-side by default.
         border-top: 2px solid black;
     }
 
+    /* Override video height, make them not so tall*/
+    .pmb-posts div.pmb-video-screenshot-placeholder{
+        height:200px;
+    }
+
     /* General */
     a {
         color: black;
