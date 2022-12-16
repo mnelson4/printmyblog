@@ -146,6 +146,7 @@ div.pmb-video-text{
 }
 div.pmb-video-text a{
     color:white;
+    text-decoration: none;
 }
 div.pmb-video-overlay{
     position:absolute;
