@@ -12,7 +12,7 @@ jQuery(document).ready(function(){
 jQuery(window).on("load", function() {
     setTimeout(
         function(){
-            pmb_convert_youtube_videos_to_images('pretty');
+            pmb_convert_youtube_videos_to_images('pretty', pmb_design_options.video_qr_codes);
         },
         2000
     );

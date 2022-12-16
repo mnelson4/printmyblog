@@ -91,9 +91,10 @@ function pmb_fix_wp_videos(){
 /**
  * Converts YouTube videos, Vimeo Videos, and self-hosted videos to screenshots and URLs.
  * @param string format either "pretty" or "simple". Pretty works best in PDFs, "simple" works better in ePub and Word
+ * @param boolean add_qr_codes whether to add QR codes or not. Defaults to adding them.
  */
-function pmb_convert_youtube_videos_to_images(format) {
-    var video_converter = new PmbVideo(format);
+function pmb_convert_youtube_videos_to_images(format, add_qr_codes) {
+    var video_converter = new PmbVideo(format, add_qr_codes);
     video_converter.convert();
 };
 
@@ -102,10 +103,11 @@ function pmb_convert_youtube_videos_to_images(format) {
  * pmb_convert_youtube_videos_to_images().
  * @param string format "pretty" or "simple". Pretty works best where CSS assets/styles/print-page-common.css is loaded.
  *  If we can't be sure that's loaded, "simple" is better.
+ *  @param boolean add_qr_codes whether to add QR codes or not
  */
-function PmbVideo(format){
+function PmbVideo(format, add_qr_codes){
     this._format = format || 'pretty';
-
+    this._add_qr_codes = add_qr_codes == true;
     /**
      * Number of open HTTP requests to get video data.
      * @type {number}
@@ -155,9 +157,11 @@ function PmbVideo(format){
         this._convertYoutubeVideos();
         this._convertOtherVideos();
         this._doneSearchForVideos = true;
-        jQuery(document).on('pmb_done_processing_videos',function(){
-            that._addQrCodes();
-        })
+        if(this._add_qr_codes){
+            jQuery(document).on('pmb_done_processing_videos',function(){
+                that._addQrCodes();
+            });
+        }
         this._checkDoneProcessingVideos();
     }
 

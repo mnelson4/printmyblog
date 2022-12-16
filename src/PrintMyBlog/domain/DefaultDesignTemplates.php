@@ -156,6 +156,7 @@ class DefaultDesignTemplates
                                                 ],
                                             ]
                                         ),
+                                        'video_qr_codes' => $this->getVideoQRCodeInput(),
                                     ],
                                 ]
                             )
@@ -193,6 +194,7 @@ class DefaultDesignTemplates
                                             ]
                                         ),
                                         'links' => $this->getLinksInputs(),
+                                        'video_qr_codes' => $this->getVideoQRCodeInput(),
                                     ],
                                 ]
                             )
@@ -259,6 +261,7 @@ class DefaultDesignTemplates
                                     'default_alignment' => $this->getDefaultAlignmentInput(),
                                     'internal_footnote_text' => $this->getInternalFootnoteTextInput(),
                                     'footnote_text' => $this->getExternalFootnoteTextInput(),
+                                    'video_qr_codes' => $this->getVideoQRCodeInput(),
                                 ],
                             ]
                         ))->merge($this->getGenericDesignForm());
@@ -353,6 +356,7 @@ class DefaultDesignTemplates
                                             'subsections' => $this->getImageSnapInputs(),
                                         ]
                                     ),
+                                    'video_qr_codes' => $this->getVideoQRCodeInput(),
                                 ],
                             ]
                         ))->merge($this->getGenericDesignForm());
@@ -621,6 +625,7 @@ class DefaultDesignTemplates
                                     ),
                                     'page' => $this->getPageSubsection(),
                                     'links' => $this->getLinksInputs(),
+                                    'video_qr_codes' => $this->getVideoQRCodeInput(),
                                 ],
                             ]
                         ))->merge($this->getGenericDesignForm());
@@ -1218,6 +1223,20 @@ class DefaultDesignTemplates
                         ]
                     ),
                 ],
+            ]
+        );
+    }
+
+    /**
+     * Gets the input that control displaying qr codes on videos.
+     * @return YesNoInput
+     */
+    public function getVideoQRCodeInput(){
+        return new YesNoInput(
+            [
+                'default' => true,
+                'html_label_text' => __('Add QR Code to Videos', 'print-my-blog'),
+                'html_help_text' => __('After a video is converted into a screenshot and URL, you can optionally add a QR code that readers can scan with their phones to view the video.', 'print-my-blog')
             ]
         );
     }
