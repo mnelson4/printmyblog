@@ -442,6 +442,7 @@ https://youtu.be/uPQ3vqm7A2g
 = 3.20.0 xxxx, 2022 =
 * Feature: convert Vimeo and other videos to screenshots and links
 * Feature: add QRcodes to video screenshots
+* Bugfix: in Pro Print, fix error downloading PDF when print page URL is too long
 
 = 3.19.1 Dec 13, 2022 =
 * Enhancement: help page debug data now includes "Must-Use" plugins

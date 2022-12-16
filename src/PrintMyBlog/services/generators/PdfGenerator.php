@@ -114,7 +114,11 @@ class PdfGenerator extends HtmlBaseGenerator
                             'http_insecure' => true,
                             'javascript' => true, // before sending the HTML to DocRaptor, we turn all the "script" tags into "disabled-script"; and all the "prince-script" into "script" tags.
                         ],
-                        'tag' => $this->project_generation->getGeneratedIntermediaryFileUrl() . ($license instanceof FS_Plugin_License ? ', license:' . $license->id : ''),
+                        'tag' => substr(
+                            $this->project_generation->getGeneratedIntermediaryFileUrl() . ($license instanceof FS_Plugin_License ? ', license:' . $license->id : ''),
+                            0,
+                            200
+                        )
                     ]
                 ),
                 'translations' => [
