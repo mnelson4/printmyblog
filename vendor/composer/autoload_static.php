@@ -44,6 +44,7 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
         'PrintMyBlog\\compatibility\\plugins\\GoogleLanguageTranslator' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/GoogleLanguageTranslator.php',
         'PrintMyBlog\\compatibility\\plugins\\JetPack' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/JetPack.php',
         'PrintMyBlog\\compatibility\\plugins\\LazyLoadingFeaturePlugin' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/LazyLoadingFeaturePlugin.php',
+        'PrintMyBlog\\compatibility\\plugins\\PaidMembershipsPro' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/PaidMembershipsPro.php',
         'PrintMyBlog\\compatibility\\plugins\\TablePress' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/TablePress.php',
         'PrintMyBlog\\compatibility\\plugins\\WpVrView' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/WpVrView.php',
         'PrintMyBlog\\compatibility\\plugins\\Wpml' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/Wpml.php',

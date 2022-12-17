@@ -13,6 +13,7 @@ return array(
     'PrintMyBlog\\compatibility\\plugins\\GoogleLanguageTranslator' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/GoogleLanguageTranslator.php',
     'PrintMyBlog\\compatibility\\plugins\\JetPack' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/JetPack.php',
     'PrintMyBlog\\compatibility\\plugins\\LazyLoadingFeaturePlugin' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/LazyLoadingFeaturePlugin.php',
+    'PrintMyBlog\\compatibility\\plugins\\PaidMembershipsPro' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/PaidMembershipsPro.php',
     'PrintMyBlog\\compatibility\\plugins\\TablePress' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/TablePress.php',
     'PrintMyBlog\\compatibility\\plugins\\WpVrView' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/WpVrView.php',
     'PrintMyBlog\\compatibility\\plugins\\Wpml' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/Wpml.php',

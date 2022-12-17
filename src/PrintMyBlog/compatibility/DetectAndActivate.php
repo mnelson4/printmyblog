@@ -8,6 +8,7 @@ use PrintMyBlog\compatibility\plugins\EasyFootnotes;
 use PrintMyBlog\compatibility\plugins\GoogleLanguageTranslator;
 use PrintMyBlog\compatibility\plugins\JetPack;
 use PrintMyBlog\compatibility\plugins\LazyLoadingFeaturePlugin;
+use PrintMyBlog\compatibility\plugins\PaidMembershipsPro;
 use PrintMyBlog\compatibility\plugins\TablePress;
 use PrintMyBlog\compatibility\plugins\Wpml;
 use PrintMyBlog\compatibility\plugins\WpVrView;
@@ -70,6 +71,9 @@ class DetectAndActivate
             }
             if (defined('JETPACK__VERSION')) {
                 $compatiblity_mods_to_activate[] = new JetPack();
+            }
+            if(defined('PMPRO_VERSION')){
+                $compatiblity_mods_to_activate[] = new PaidMembershipsPro();
             }
             $this->compatibility_mods = $compatiblity_mods_to_activate;
         }
