@@ -5,6 +5,7 @@ jQuery(document).ready(function(){
     pmb_default_align_center();
     pmb_replace_internal_links_with_page_refs_and_footnotes('leave', 'parens');
     new PmbToc();
+    pmb_pdf_plugin_fixups();
 });
 
 

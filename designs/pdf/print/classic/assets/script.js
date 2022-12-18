@@ -6,6 +6,7 @@ jQuery(document).ready(function(){
     }
     pmb_replace_internal_links_with_page_refs_and_footnotes(pmb_design_options['external_links'], pmb_design_options['internal_links'],pmb_design_options['footnote_text'],  pmb_design_options['internal_footnote_text']);
     new PmbToc();
+    pmb_pdf_plugin_fixups();
 });
 
 // wait until the images are loaded to try to resize them.

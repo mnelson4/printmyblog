@@ -118,3 +118,15 @@ function PmbToc(){
     }
     this.create_toc_for_depth('.pmb-print-page', 0);
 }
+
+/**
+ * Whatever content we need to fix in a way that only applies to PDFs
+ */
+function pmb_pdf_plugin_fixups(){
+    // On any Elementor rows, use the CSS columns and count the number of column DIVs
+    jQuery('.elementor-row').each(function(){
+        var jqe_row = jQuery(this);
+        var columns = jqe_row.find('.elementor-column').length;
+        jqe_row.css('columns', columns.toString());
+    });
+}

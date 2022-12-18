@@ -444,6 +444,7 @@ https://youtu.be/uPQ3vqm7A2g
 * Feature: add QRcodes to video screenshots
 * Bugfix: in Pro Print, fix error downloading PDF when print page URL is too long
 * Compatibility: don't hide Paid Membershipas Pro (PMP) content in projects
+* Compatibility: have Elementor rows and columns use the CSS "columns-count" property
 
 = 3.19.1 Dec 13, 2022 =
 * Enhancement: help page debug data now includes "Must-Use" plugins
