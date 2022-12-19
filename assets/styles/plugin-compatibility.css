@@ -187,8 +187,13 @@ Turn its flexboxes into regular blocks so pagebreaks work better again
 .pmb-posts .elementor-section .elementor-container{
     display:block;
 }
+/**
+ Flexbox stinks with Prince, so make Elementor columns take up the full width, and on the parent row we set "columns:x"
+ (according to the number of elementor column divs we counted using JS.)
+ */
 .pmb-posts .elementor-column{
-    display:inline-block;
+    display:block;
+    width:100%;
 }
 .pmb-posts .elementor:not(.elementor-bc-flex-widget) .elementor-widget-wrap{
     display:block;

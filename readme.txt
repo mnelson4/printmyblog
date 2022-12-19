@@ -439,14 +439,14 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.20.0 xxxx, 2022 =
+= 3.20.0 December 19, 2022 =
 * Feature: convert Vimeo and other videos to screenshots and links
 * Feature: add QRcodes to video screenshots
 * Bugfix: in Pro Print, fix error downloading PDF when print page URL is too long
 * Compatibility: don't hide Paid Membershipas Pro (PMP) content in projects
 * Compatibility: have Elementor rows and columns use the CSS "columns-count" property
 
-= 3.19.1 Dec 13, 2022 =
+= 3.19.1 December 13, 2022 =
 * Enhancement: help page debug data now includes "Must-Use" plugins
 * Compatibility: load [SiteGround Optimizer](https://wordpress.org/plugins/sg-cachepress/) lazy images
 * Compatibility: in Quick Print, use query parameter "pmb_f" instead of "format" to prevent plugin conflicts
