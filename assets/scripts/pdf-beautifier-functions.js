@@ -38,7 +38,7 @@ function pmb_replace_internal_links_with_page_refs_and_footnotes(external_link_p
                     href = _pmb_get_href_from_a(a)
                     if( href !== a.html().trim()) {
                         a.attr('href',id_url);
-                        a.after('<span class="pmb-footnote">' + pre_internal_footnote  + '<a class="pmb-page-num" href="' + href + '"></a>' + post_internal_footnote + '</span>');
+                        a.after('<span class="pmb-footnote">' + pre_internal_footnote  + '<a class="pmb-page-num" href="' + id_url + '"></a>' + post_internal_footnote + '</span>');
                     }
                     break;
                 case 'leave':

@@ -1231,12 +1231,13 @@ class DefaultDesignTemplates
      * Gets the input that control displaying qr codes on videos.
      * @return YesNoInput
      */
-    public function getVideoQRCodeInput(){
+    public function getVideoQRCodeInput()
+    {
         return new YesNoInput(
             [
                 'default' => true,
                 'html_label_text' => __('Add QR Code to Videos', 'print-my-blog'),
-                'html_help_text' => __('After a video is converted into a screenshot and URL, you can optionally add a QR code that readers can scan with their phones to view the video.', 'print-my-blog')
+                'html_help_text' => __('After a video is converted into a screenshot and URL, you can optionally add a QR code that readers can scan with their phones to view the video.', 'print-my-blog'),
             ]
         );
     }

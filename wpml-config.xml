@@ -78,6 +78,7 @@
         <custom-field action="copy">_pmb_title_page_banner_color</custom-field>
         <custom-field action="copy">_pmb_url</custom-field>
         <custom-field action="copy">_pmb_use_theme</custom-field>
+        <custom-field action="copy">_pmb_video_qr_codes</custom-field>
         <!-- this postmeta goes on posts, so it doesn't follow the same naming convention. -->
         <custom-field action="copy">pmb_buttons</custom-field>
         <custom-field action="copy">_pmb_cover</custom-field>

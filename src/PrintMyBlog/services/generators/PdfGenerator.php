@@ -118,7 +118,7 @@ class PdfGenerator extends HtmlBaseGenerator
                             $this->project_generation->getGeneratedIntermediaryFileUrl() . ($license instanceof FS_Plugin_License ? ', license:' . $license->id : ''),
                             0,
                             200
-                        )
+                        ),
                     ]
                 ),
                 'translations' => [

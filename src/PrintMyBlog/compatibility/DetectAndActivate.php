@@ -72,7 +72,7 @@ class DetectAndActivate
             if (defined('JETPACK__VERSION')) {
                 $compatiblity_mods_to_activate[] = new JetPack();
             }
-            if(defined('PMPRO_VERSION')){
+            if (defined('PMPRO_VERSION')) {
                 $compatiblity_mods_to_activate[] = new PaidMembershipsPro();
             }
             $this->compatibility_mods = $compatiblity_mods_to_activate;
