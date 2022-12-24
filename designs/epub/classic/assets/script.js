@@ -50,7 +50,6 @@ function pmb_epub_maybe_process_after_images_ready(){
             },
             2000
         );
-
     } else {
         var erc = new PmbExternalResourceCacher();
         erc.replaceExternalImages();

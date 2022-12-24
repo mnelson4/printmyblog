@@ -41,11 +41,19 @@ function pmb_fix_protocols(){
     jQuery('[href^="//"]').each(function(index, element){
         element.setAttribute("href", location.protocol + element.getAttribute('href'));
     });
-    // There can be invalid URLs in CSS inline styles too.
-    jQuery('style:contains(url("//), style:contains(url(\'//)').each(function(index,element){
-        var new_html = element.innerHTML.replace('url("//','url("' + location.protocol + '//').replace("url('//","url('" + location.protocol + "//");
-        element.innerHTML = new_html;
-    });
+    // delay doing this one because of a particular user has issues because the HTML this needs to fix is generated
+    // dynamically after page load.
+    setTimeout(
+        function(){
+            // There can be invalid URLs in CSS inline styles too.
+            jQuery('style:contains(url("//), style:contains(url(\'//)').each(function(index,element){
+                var new_html = element.innerHTML.replace('url("//','url("' + location.protocol + '//').replace("url('//","url('" + location.protocol + "//");
+                element.innerHTML = new_html;
+            });
+        },
+        2000
+    );
+
 
     var correct_protocol = window.location.protocol;
     var incorrect_protocol = 'http:';
