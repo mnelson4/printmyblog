@@ -117,7 +117,13 @@ class ExternalResourceCache
     public function getMapping()
     {
         foreach ($this->external_resouce_manager->getAllMapping() as $external_resource) {
-            $mapping_absolute_urls[$external_resource->getExternalUrl()] = $this->getCacheUrl() . $external_resource->getCopyFilename();
+            $cached_filename = $external_resource->getCopyFilename();
+            if($cached_filename){
+                $cached_file_url = $this->getCacheUrl() . $external_resource->getCopyFilename();
+            } else {
+                $cached_file_url = null;
+            }
+            $mapping_absolute_urls[$external_resource->getExternalUrl()] = $cached_file_url;
         }
         if (empty($mapping_absolute_urls)) {
             return new stdClass();

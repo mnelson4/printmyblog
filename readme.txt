@@ -440,6 +440,7 @@ https://youtu.be/uPQ3vqm7A2g
 == Changelog ==
 = 3.20.4 xxxx =
 * Bugfix: in Pro Print, fix protocols in URLs in inline styles added after pageload (again from Advances Ads plugin)
+* Bugfix: in Pro Print, when creating Word docs, handle errors when images dont exist
 
 = 3.20.3 December 21, 2022 =
 * Bugfix: in Pro Print, fix error creating ePub when page loaded in unexpected order

@@ -154,6 +154,9 @@ function PmbImgToDataUrls(finished_callback) {
                     console.log('PMB could not convert image ' + element.src + ' to dataUrl');
                 }
                 that.checkFinished();
+            },
+            function(){
+                that.checkFinished();
             }
         );
     }

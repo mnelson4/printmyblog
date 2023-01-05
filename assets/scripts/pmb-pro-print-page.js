@@ -85,7 +85,7 @@ function PmbExternalResourceCacher() {
             }
             // find if we already know the mapping
             var copy_url = that.external_resource_mapping[remote_url];
-            if(copy_url !== null && copy_url !== false && typeof(copy_url) !== 'undefined'){
+            if(typeof(copy_url) !== 'undefined'){
                 that.resources_pending_caching_count++;
                 var success_callback = function(cloned_element){
                     that.external_resource_mapping[remote_url] = copy_url;

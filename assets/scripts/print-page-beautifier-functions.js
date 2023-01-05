@@ -462,9 +462,10 @@ function pmb_mark_for_dynamic_resize(min_image_size){
 /**
  *
  * @param element
- * @param callback_when_done
+ * @param funciton callback_when_done
+ * @param funciton callback_on_error
  */
-function pmb_set_image_dimension_attributes(element, callback_when_done){
+function pmb_set_image_dimension_attributes(element, callback_when_done, callback_on_error){
     if (element.hasAttribute('height') && element.hasAttribute('width')) {
         if(typeof(callback_when_done) === 'function'){
             callback_when_done();
@@ -487,6 +488,9 @@ function pmb_set_image_dimension_attributes(element, callback_when_done){
 
     newImg.onerror = function(error, otherarg) {
         console.log('PMB error loading image ' + element.currentSrc + ' to determine its dimensions');
+        if(typeof(callback_on_error) === 'function'){
+            callback_on_error();
+        }
     }
 
     newImg.src = element.attributes['src'].value; // this must be done AFTER setting onload
