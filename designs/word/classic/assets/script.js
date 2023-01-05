@@ -7,7 +7,7 @@ jQuery(document).ready(function(){
 });
 
 // wait until the images are loaded to try to resize them.
-jQuery(window).on("load", function() {
+jQuery(document).on('pmb_document_ready_and_window_loaded', function(){
     if(pmb_design_options.convert_videos === '1') {
         setTimeout(
             function () {

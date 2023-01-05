@@ -227,3 +227,30 @@ function PmbExternalResourceCacher() {
 
 
 }
+
+/**
+ * It turns out we can't rely on the order in which document.ready and window.load are triggered (usually document.ready
+ * is first, but it turns out to be random if images are lazy-loaded).
+ * So code that wants to wait for them to both complete can instead listen for document.pmb_document_done_and_window_loaded.
+ * Code that wants to run on either of them that runs first can run on pmb_document_done_or_window_loaded
+ */
+var pmb_window_load_fired = false;
+var pmb_done_document_ready_tasks = false;
+
+jQuery(document).ready(function(){
+    pmb_done_document_ready_tasks = true;
+    if( pmb_window_load_fired){
+        jQuery(document).trigger('pmb_document_ready_and_window_loaded');
+    } else {
+        jQuery(document).trigger('pmb_document_ready_or_window_loaded');
+    }
+});
+
+jQuery(window).on("load", function() {
+    pmb_window_load_fired = true;
+    if( pmb_done_document_ready_tasks){
+        jQuery(document).trigger('pmb_document_ready_and_window_loaded');
+    } else {
+        jQuery(document).trigger('pmb_document_ready_or_window_loaded');
+    }
+});

@@ -10,7 +10,7 @@ jQuery(document).ready(function(){
 
 
 // wait until the images are loaded to try to resize them.
-jQuery(window).on("load", function() {
+jQuery(document).on('pmb_document_ready_and_window_loaded', function(){
     setTimeout(
         function(){
             pmb_convert_youtube_videos_to_images('pretty', pmb_design_options.video_qr_codes);

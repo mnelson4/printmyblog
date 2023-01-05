@@ -1,5 +1,3 @@
-var pmb_window_load_fired = false;
-var pmb_done_document_ready_tasks = false;
 
 jQuery(document).ready(function(){
     console.log('PMB says document ready ');
@@ -8,16 +6,8 @@ jQuery(document).ready(function(){
     pmb_default_align_center();
     pmb_replace_internal_links_with_epub_file_links();
     pmb_add_alt_tags();
-    pmb_done_document_ready_tasks = true;
-    pmb_epub_maybe_process_after_images_ready();
 });
 
-// wait until the images are loaded to try to resize them.
-jQuery(window).on("load", function() {
-    console.log('PMB says window loaded ');
-    pmb_window_load_fired = true;
-    pmb_epub_maybe_process_after_images_ready();
-});
 
 /**
  * We can't be certain is document ready or window load will be called first (see https://stackoverflow.com/questions/47405458/which-come-first-document-load-or-window-load)
@@ -25,7 +15,7 @@ jQuery(window).on("load", function() {
  * and on window load we know non-lazy-loaded images are all available, so we need to wait for both before processing
  * those images.)
  */
-function pmb_epub_maybe_process_after_images_ready(){
+jQuery(document).on('pmb_document_ready_and_window_loaded', function(){
     // only execute once window loaded (images loaded) and PMB's done all the ready tasks.
     // We can't be certain on what order those will be executed so this gets called twice.
     if(! pmb_window_load_fired || !pmb_done_document_ready_tasks){
@@ -54,4 +44,4 @@ function pmb_epub_maybe_process_after_images_ready(){
         var erc = new PmbExternalResourceCacher();
         erc.replaceExternalImages();
     }
-}
+});
