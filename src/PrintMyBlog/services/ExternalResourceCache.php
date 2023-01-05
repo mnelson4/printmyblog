@@ -118,7 +118,7 @@ class ExternalResourceCache
     {
         foreach ($this->external_resouce_manager->getAllMapping() as $external_resource) {
             $cached_filename = $external_resource->getCopyFilename();
-            if($cached_filename){
+            if ($cached_filename) {
                 $cached_file_url = $this->getCacheUrl() . $external_resource->getCopyFilename();
             } else {
                 $cached_file_url = null;
