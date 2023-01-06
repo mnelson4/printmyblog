@@ -59,3 +59,11 @@ div{
 figure{
     padding:1em;
 }
+
+/* Specific plugin compatibility */
+.elementor-image{
+    text-align:center;
+}
+.elementor-image img{
+    display:inline-block;
+}
