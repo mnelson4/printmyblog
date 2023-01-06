@@ -254,6 +254,10 @@ function PmbVideo(format, add_qr_codes){
            var video_element = this;
            var title='';
            var src = video_element.src;
+           // Elementor puts the video src on "data-src" and later lazy-loads it.
+           if( ! src && typeof(video_element.attributes['data-src']) == 'object'){
+                src = video_element.attributes['data-src'].value;
+           }
            var screenshot = video_element.poster || '';
            return that._getHtml('',src,screenshot);
         });

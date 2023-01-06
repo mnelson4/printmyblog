@@ -440,7 +440,8 @@ https://youtu.be/uPQ3vqm7A2g
 == Changelog ==
 = 3.20.5 xxx =
 * Bugfix: in Pro Print ePubs, keep video text with video screenshot
-i
+* Compatibility: in Pro Print with Elementor, handle lazy-loaded local videos
+
 = 3.20.4 January 5, 2023 =
 * Bugfix: in Pro Print, fix protocols in URLs in inline styles added after pageload (again from Advances Ads plugin)
 * Bugfix: in Pro Print, when creating Word docs, handle errors when images dont exist
