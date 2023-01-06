@@ -300,7 +300,7 @@ function PmbVideo(format, add_qr_codes){
      * @private
      */
     this._getSimpleHtml = function(video_title, video_url, video_screenshot_src){
-        var html = '<div style="border:1px solid black;padding:15px;"><a href="' + video_url + '">';
+        var html = '<div style="border:1px solid black;padding:15px;page-break-inside:avoid"><a href="' + video_url + '">';
         if(typeof(video_title) === 'string' && video_title.length > 0){
             html += '<b>' + video_title + '</b><br>';
         } else {
