@@ -67,3 +67,11 @@ figure{
 .elementor-image img{
     display:inline-block;
 }
+
+img{
+    /* If images get stacked, put at least a little space between them. */
+    padding-top:10px;
+    padding-bottom:10px;
+    /* Don't let images take up more space than their width. This especially helps with Elementor galleries in eReaders. */
+    max-width:100%;
+}
