@@ -5,6 +5,13 @@
 .blocks-gallery-grid{
     list-style-type: none;
 }
+/* Elementor/WP includes inline CSS to the gallery that invalidly sets the gallery items to float even though
+they/re inline-block (which don't float) resulting in inconsistent handling in different browsers. This normalized it.
+*/
+.gallery-item{
+    display:inline-block;
+    float: none !important;
+}
 
 figure{
     margin:0.5em 0 0.5em 0;

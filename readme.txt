@@ -438,6 +438,10 @@ https://youtu.be/uPQ3vqm7A2g
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+
+= 3.20.6 xxx =
+* Bugfix: in Pro Print ePubs, tidy up galleries
+
 = 3.20.5 January 10, 2023 =
 * Bugfix: in Pro Print ePubs, keep video text with video screenshot
 * Compatibility: in Pro Print with Elementor, handle lazy-loaded local videos
