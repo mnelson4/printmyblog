@@ -114,7 +114,7 @@ function pmb_convert_youtube_videos_to_images(format, add_qr_codes) {
 /**
  * Converts videos into screenshots-with-links. Probably easier to just call the wrapper
  * pmb_convert_youtube_videos_to_images().
- * @param string format "pretty" or "simple". Pretty works best where CSS assets/styles/print-page-common.css is loaded.
+ * @param string format "pretty" or "simple". Pretty works best where CSS assets/styles/pmb-print-page-common-pdf.css is loaded.
  *  If we can't be sure that's loaded, "simple" is better.
  *  @param boolean add_qr_codes whether to add QR codes or not
  */

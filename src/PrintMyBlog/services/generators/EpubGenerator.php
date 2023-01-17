@@ -100,7 +100,7 @@ class EpubGenerator extends HtmlBaseGenerator
 
         if (file_exists($style_file)) {
             $css .= '/** design styles */ ' . pmb_get_contents($style_file) . '
-            /** common styles */ '. pmb_get_contents(PMB_ASSETS_DIR . 'styles/print-page-common.css');
+            /** common styles */ ' . pmb_get_contents(PMB_ASSETS_DIR . 'styles/pmb-print-page-common.css');
         }
         wp_add_inline_style(
             'pmb_pro_page',
