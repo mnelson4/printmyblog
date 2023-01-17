@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.20.5
+Stable tag: 3.20.6
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -439,7 +439,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.20.6 xxx =
+= 3.20.6 January 17, 2023 =
 * Bugfix: in Pro Print ePubs, tidy up galleries
 * Compatibility: show Elementor items even if they're animated
 * Bugfix: in Pro Print ePubs, support CSS classes to prevent pagebreaks
