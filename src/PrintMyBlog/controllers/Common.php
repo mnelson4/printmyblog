@@ -59,6 +59,12 @@ class Common extends BaseController
             filemtime(PMB_ASSETS_DIR . 'styles/print-page-common.css')
         );
         wp_register_style(
+            'pmb_print_common_pdf',
+            PMB_ASSETS_URL . 'styles/pmb-print-page-common-pdf.css',
+            array('pmb_print_common'),
+            filemtime(PMB_ASSETS_DIR . 'styles/pmb-print-page-common-pdf.css')
+        );
+        wp_register_style(
             'pmb_pro_page',
             PMB_ASSETS_URL . 'styles/pmb-pro-print-page.css',
             array('dashicons'),

@@ -26,7 +26,7 @@ class PdfGenerator extends HtmlBaseGenerator
      */
     public function enqueueStylesAndScripts()
     {
-        wp_enqueue_style('pmb_print_common');
+        wp_enqueue_style('pmb_print_common_pdf');
         wp_enqueue_style('pmb_pro_page');
         wp_enqueue_style('pmb-plugin-compatibility');
         wp_enqueue_script(

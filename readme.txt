@@ -441,6 +441,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.20.6 xxx =
 * Bugfix: in Pro Print ePubs, tidy up galleries
+* Compatibility: show Elementor items even if they're animated
 
 = 3.20.5 January 10, 2023 =
 * Bugfix: in Pro Print ePubs, keep video text with video screenshot

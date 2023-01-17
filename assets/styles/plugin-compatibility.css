@@ -187,6 +187,11 @@ Turn its flexboxes into regular blocks so pagebreaks work better again
 .pmb-posts .elementor-section .elementor-container{
     display:block;
 }
+/* Elementor invisible usually just hides things before showing them via an animation. But we have no animation. We want to just see the stuff.
+*/
+.pmb-posts .elementor-invisible{
+    visibility:visible;
+}
 /**
  Flexbox stinks with Prince, so make Elementor columns take up the full width, and on the parent row we set "columns:x"
  (according to the number of elementor column divs we counted using JS.)

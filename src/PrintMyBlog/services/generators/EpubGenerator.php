@@ -91,7 +91,7 @@ class EpubGenerator extends HtmlBaseGenerator
             ['epub-gen-memory', 'jquery', 'pmb-beautifier-functions', 'pmb-streamsaver', 'pmb-filesaver'],
             filemtime(PMB_SCRIPTS_DIR . 'epub-generator.js')
         );
-        $css = pmb_get_contents(
+        $css = '/* custom styles */ ' . pmb_get_contents(
             PMB_STYLES_DIR . '/pmb-epub.css'
         ) . $this->design->getSetting('custom_css');
 
@@ -99,7 +99,8 @@ class EpubGenerator extends HtmlBaseGenerator
         $style_file = $this->getDesignDir() . 'assets/style.css';
 
         if (file_exists($style_file)) {
-            $css .= pmb_get_contents($style_file);
+            $css .= '/** design styles */ ' . pmb_get_contents($style_file) . '
+            /** common styles */ '. pmb_get_contents(PMB_ASSETS_DIR . 'styles/print-page-common.css');
         }
         wp_add_inline_style(
             'pmb_pro_page',
