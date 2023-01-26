@@ -88,7 +88,7 @@ class EpubGenerator extends HtmlBaseGenerator
         wp_enqueue_script(
             'pmb-epub',
             PMB_SCRIPTS_URL . 'epub-generator.js',
-            ['epub-gen-memory', 'jquery', 'pmb-beautifier-functions', 'pmb-streamsaver', 'pmb-filesaver'],
+            ['epub-gen-memory', 'jquery', 'pmb-beautifier-functions', 'pmb-streamsaver', 'pmb-filesaver', 'pmb_general'],
             filemtime(PMB_SCRIPTS_DIR . 'epub-generator.js')
         );
         $css = '/* custom styles */ ' . pmb_get_contents(

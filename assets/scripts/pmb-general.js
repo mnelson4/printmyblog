@@ -42,12 +42,12 @@ function pmb_setup_hover_helps(){
 function pmb_doing_button(jqelement){
     var current_html = jqelement.html();
     jqelement.append('<div class="pmb-spinner-container"><div class="pmb-spinner"></div></div>')
-    jqelement.addClass('pmb-pro-disabled');
+    jqelement.addClass('pmb-disabled');
 }
 
 function pmb_stop_doing_button(jqelement){
     jqelement.children('.pmb-spinner-container').remove();
-    jqelement.removeClass('pmb-pro-disabled');
+    jqelement.removeClass('pmb-disabled');
 }
 
 // converters for passing to jQuery ajax requests.

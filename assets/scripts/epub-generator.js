@@ -71,8 +71,7 @@ function pmb_create_epub(){
     (async () => {
         var epub_blob = await epub(epub_options, sections);
         var download_button = jQuery('#download_link');
-        download_button.removeClass('pmb-disabled');
-        jQuery('.pmb-loading').hide();
+        pmb_stop_doing_button(download_button);
         if(document.location.protocol == 'https:'){
             var readableStream = epub_blob.stream()
 
@@ -108,18 +107,21 @@ function pmb_create_epub(){
 }
 
 /**
- * Callbacks that listen for document.pmb_doc_conversion_requested should set them to TRUE immediately, otherwise
+ * Callbacks that listen for document.pmb_doc_conversion_requested should set pmb_doc_conversion_request_handled to TRUE immediately, otherwise
  * we'll assume no callback was set and so we'll just proceed with converting the file.
  * @type {boolean}
  */
 var pmb_doc_conversion_request_handled = false;
 jQuery(document).on('ready', function(){
     var download_button = jQuery('#download_link');
-    download_button.removeClass('pmb-disabled');
-    jQuery('.pmb-loading').hide();
+    setTimeout(function(){
+            pmb_stop_doing_button(download_button);
+        },
+        2000
+    );
+
     download_button.click(function(){
-        download_button.addClass('pmb-disabled');
-        jQuery('.pmb-loading').show();
+        pmb_doing_button(download_button);
         jQuery(document).trigger('pmb_doc_conversion_requested');
         // trigger document.pmb_wrap_up for legacy code.
         jQuery(document).trigger('pmb_wrap_up');

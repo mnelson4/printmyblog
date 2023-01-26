@@ -57,10 +57,6 @@ Styles for the print window
         margin:0;
         cursor:pointer;
     }
-    .pmb-pro-window-button.pmb-pro-disabled{
-        color:gray;
-        cursor:default;
-    }
     .pmb-pro-print-window-content{
         padding-top:10px;
     }

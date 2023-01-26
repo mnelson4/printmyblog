@@ -69,7 +69,7 @@ function pmb_generate_test_doc(jqelement) {
         (download_url) => {
 
             pmb_stop_doing_button(jqelement);
-            jQuery('.pmb-download-live').removeClass('pmb-pro-disabled');
+            jQuery('.pmb-download-live').removeClass('pmb-disabled');
             jQuery('.pmb-pro-description').html(pmb_pro.translations.pro_description);
             window.location.href = download_url;
         },
@@ -161,7 +161,7 @@ jQuery(document).ready(function(){
     });
     jQuery('.pmb-download-live').click(function(event){
         var jqelement = jQuery(event.currentTarget);
-        if(! jqelement.hasClass('pmb-pro-disabled')) {
+        if(! jqelement.hasClass('pmb-disabled')) {
             pmb_generate_live_doc(jqelement);
             pmb_doing_button(jqelement);
         }

@@ -43,19 +43,17 @@ $generate_url = add_query_arg(
                 <div class="pmb-print-option pmb-big-option pmb-highlight">
                     <h2><?php esc_html_e('Pro PDF Service', 'print-my-blog');?></h2>
                     <div style="display:none" class="pmb-warning" id="pmb-print-page-warnings"></div>
+                    <button class="pmb-pro-window-button pmb-download-test">
+                        <?php _e('Download Test PDF', 'print-my-blog'); ?><div class="pmb-spinner-container"><div class="pmb-spinner"></div></div>
+                    </button>
                     <?php if(! is_array($license_info) ){ ?>
 
-                        <button class="pmb-pro-window-button pmb-download-test">
-                            <?php _e('Download Test PDF', 'print-my-blog'); ?>
-                        </button>
+
                         <a class="pmb-pro-window-button" href="<?php echo esc_url(pmb_fs()->get_upgrade_url());?>" >
                             <?php _e('Purchase Subscription', 'print-my-blog'); ?>
                         </a>
                         <p><a href="https://printmy.blog/free-vs-pro/" target="_blank"><?php esc_html_e('Feature Comparison List', 'print-my-blog');?></a></p>
-                    <?php } else {?>
-                    <button class="pmb-pro-window-button pmb-download-test">
-                        <?php _e('Download Test PDF', 'print-my-blog'); ?>
-                    </button>
+                    <?php } else { ?>
                     <?php
                         if(! $license_info['remaining_credits']) {?>
                             <button class="pmb-pro-window-button" href="<?php echo esc_url(pmb_fs()->get_upgrade_url());?>" >
@@ -65,7 +63,7 @@ $generate_url = add_query_arg(
                             <p><?php esc_html_e('Please upgrade your plan for more credits per month. If you have a yearlong subscription and this is the first time, feel free to contact us and ask for a one-time increase to your credits.', 'print-my-blog');?></p>
                             </p>
                         <?php } else { ?>
-                            <button class="pmb-pro-window-button pmb-download-live pmb-pro-disabled" title="<?php echo esc_attr(__('Please download the Test PDF before the Paid PDF', 'print-my-blog'));?>">
+                            <button class="pmb-pro-window-button pmb-download-live pmb-disabled" title="<?php echo esc_attr(__('Please download the Test PDF before the Paid PDF', 'print-my-blog'));?>">
                                 <?php _e('Download Paid PDF', 'print-my-blog'); ?>
                             </button>
                             <p class="pmb-pro-description"><?php esc_html_e('Always download a free Test PDF before a Paid PDF.', 'print-my-blog');?>

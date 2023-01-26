@@ -10,9 +10,8 @@ function pmb_prepare_and_export_doc(){
     });
     var dataurl_converter = new PmbImgToDataUrls(
         function () {
-            jQuery('.pmb-loading').remove();
+            pmb_stop_doing_button(jQuery('#download_link'));
             pmb_limit_img_widths();
-            download_button.removeClass('pmb-disabled');
             pmb_export_as_doc();
         }
     );
@@ -204,11 +203,14 @@ function PmbImgToDataUrls(finished_callback) {
 var pmb_doc_conversion_request_handled = false;
 jQuery(document).on('ready', function() {
     var download_button = jQuery('#download_link');
-    download_button.removeClass('pmb-disabled');
-    jQuery('.pmb-loading').hide();
+    setTimeout(
+        function(){
+            pmb_stop_doing_button(download_button);
+        },
+        2000
+    );
     download_button.click(function () {
-        download_button.addClass('pmb-disabled');
-        jQuery('.pmb-loading').show();
+        pmb_doing_button(download_button);
         jQuery(document).trigger('pmb_doc_conversion_requested');
         // trigger document.pmb_wrap_up for legacy code.
         jQuery(document).trigger('pmb_wrap_up');
