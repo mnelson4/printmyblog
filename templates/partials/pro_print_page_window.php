@@ -43,8 +43,8 @@ $generate_url = add_query_arg(
                 <div class="pmb-print-option pmb-big-option pmb-highlight">
                     <h2><?php esc_html_e('Pro PDF Service', 'print-my-blog');?></h2>
                     <div style="display:none" class="pmb-warning" id="pmb-print-page-warnings"></div>
-                    <button class="pmb-pro-window-button pmb-download-test">
-                        <?php _e('Download Test PDF', 'print-my-blog'); ?><div class="pmb-spinner-container"><div class="pmb-spinner"></div></div>
+                    <button class="pmb-pro-window-button pmb-download-test pmb-disabled">
+                        <?php _e('Download Test PDF', 'print-my-blog'); ?> <div class="pmb-spinner-container"><div class="pmb-spinner"></div></div>
                     </button>
                     <?php if(! is_array($license_info) ){ ?>
 

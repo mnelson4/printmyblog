@@ -1,7 +1,3 @@
-jQuery(document).ready(function(){
-    pmb_prevent_lazy_loading();
-});
-
 // once doc conversion requested, process the HTML and trigger when we're ready.
 jQuery(document).on('pmb_doc_conversion_requested', function(){
     pmb_doc_conversion_request_handled = true;

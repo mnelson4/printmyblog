@@ -6,9 +6,6 @@ function pmb_standard_print_page_wrapup(){
     pmb_fix_protocols();
     pmb_add_header_classes();
     pmb_fix_wp_videos();
-    // this next line should usually not be necessary, seeing how it should be done on document.ready and this
-    // should now be called when a download button is pressed.
-    pmb_load_avada_lazy_images();
     pmb_reveal_dynamic_content();
     pmb_check_project_size('#pmb-print-page-warnings');
 }
@@ -230,6 +227,16 @@ function PmbExternalResourceCacher() {
 
 
 }
+
+/**
+ * All designs and formats should do these things as soon as the page is loaded.
+ * Stuff that might need to wait for other plugins' JS to run should listen for the document.pmb_doc_conversion_requested event.
+ */
+jQuery(document).ready(function(){
+    pmb_prevent_lazy_loading();
+    // Don't just hide screen-only content, remove it entirely so there's no chance of it messing up the document.
+    jQuery('.pmb-screen-only').remove();
+});
 
 /**
  * It turns out we can't rely on the order in which document.ready and window.load are triggered (usually document.ready

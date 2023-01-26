@@ -1,8 +1,3 @@
-jQuery(document).ready(function(){
-    // Pretty up the page
-    pmb_prevent_lazy_loading();
-});
-
 // once doc conversion requested, process the HTML and trigger when we're ready.
 jQuery(document).on('pmb_doc_conversion_requested', function(){
     // inform pmb-word__prmemium_only.js that we've handled this

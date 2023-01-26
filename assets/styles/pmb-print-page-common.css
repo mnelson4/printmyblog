@@ -6,9 +6,9 @@
  Make disabled buttons look it, and prevent them from being used.
  */
 .pmb-disabled{
-    color:gray;
-    cursor:default;
-    pointer-events: none;
+    color:gray !important;
+    cursor:default !important;
+    pointer-events: none !important;
 }
 
 /**

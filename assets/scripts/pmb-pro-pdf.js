@@ -143,7 +143,19 @@ function pmb_generate_live_doc(jqelement) {
     );
 }
 
-jQuery(document).ready(function(){
+/**
+ * Callbacks that listen for document.pmb_doc_conversion_requested should set pmb_doc_conversion_request_handled to TRUE immediately, otherwise
+ * we'll assume no callback was set and so we'll just proceed with converting the file.
+ * @type {boolean}
+ */
+var pmb_doc_conversion_request_handled = false;
+jQuery(document).on('ready', function(){
+    var download_test_button = jQuery('.pmb-download-test');
+    setTimeout(function(){
+            pmb_stop_doing_button(download_test_button);
+        },
+        2000
+    );
     var input = document.getElementById("pmb-print-with-browser");
     input.addEventListener("keyup", function(event) {
         // Number 13 is the "Enter" key on the keyboard
@@ -154,17 +166,21 @@ jQuery(document).ready(function(){
             document.getElementById("pmb-print-with-browser").click();
         }
     });
-    jQuery('.pmb-download-test').click(function(event){
+    download_test_button.click(function(event){
         var jqelement = jQuery(event.currentTarget);
-        pmb_generate_test_doc(jqelement);
         pmb_doing_button(jqelement);
+        jQuery(document).trigger('pmb_doc_conversion_requested');
+        // trigger document.pmb_wrap_up for legacy code.
+        jQuery(document).trigger('pmb_wrap_up');
+        // wait for the design to call document.pmb_doc_conversion_ready (and to set pmb_doc_conversion_request_handled
+        // to true)  before proceeding with converting HTML to ePub
+        jQuery(document).on('pmb_doc_conversion_ready', function(){
+            pmb_generate_test_doc(jqelement);
+        });
     });
     jQuery('.pmb-download-live').click(function(event){
         var jqelement = jQuery(event.currentTarget);
-        if(! jqelement.hasClass('pmb-disabled')) {
-            pmb_generate_live_doc(jqelement);
-            pmb_doing_button(jqelement);
-        }
+        pmb_generate_live_doc(jqelement);
+        pmb_doing_button(jqelement);
     });
-    jQuery('.pmb-screen-only').remove();
 });
