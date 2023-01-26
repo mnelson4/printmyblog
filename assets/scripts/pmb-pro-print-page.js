@@ -6,6 +6,8 @@ function pmb_standard_print_page_wrapup(){
     pmb_fix_protocols();
     pmb_add_header_classes();
     pmb_fix_wp_videos();
+    // this next line should usually not be necessary, seeing how it should be done on document.ready and this
+    // should now be called when a download button is pressed.
     pmb_load_avada_lazy_images();
     pmb_reveal_dynamic_content();
     pmb_check_project_size('#pmb-print-page-warnings');

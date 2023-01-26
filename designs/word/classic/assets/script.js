@@ -1,31 +1,34 @@
 jQuery(document).ready(function(){
     // Pretty up the page
+    pmb_prevent_lazy_loading();
+});
+
+// once doc conversion requested, process the HTML and trigger when we're ready.
+jQuery(document).on('pmb_doc_conversion_requested', function(){
+    // inform pmb-word__prmemium_only.js that we've handled this
+    pmb_doc_conversion_request_handled = true;
     pmb_standard_print_page_wrapup();
     pmb_default_align_center();
 
     pmb_replace_links_for_word(pmb_design_options['external_links'], pmb_design_options['internal_links']);
-});
-
-// wait until the images are loaded to try to resize them.
-jQuery(document).on('pmb_document_ready_and_window_loaded', function(){
+    // once done loading external images, tell ePub generator code that we're done.
+    jQuery(document).on("pmb_external_resouces_loaded", function() {
+        jQuery(document).trigger('pmb_doc_conversion_ready');
+    });
     if(pmb_design_options.convert_videos === '1') {
-        setTimeout(
-            function () {
-                pmb_convert_youtube_videos_to_images('simple');
-            },
-            2000
-        );
+        pmb_convert_youtube_videos_to_images('simple');
         jQuery(document).on('pmb_done_processing_videos', function () {
             pmb_word_classic_after_videos();
+            var erc = new PmbExternalResourceCacher();
+            erc.replaceExternalImages();
         });
     } else {
         pmb_word_classic_after_videos();
+        var erc = new PmbExternalResourceCacher();
+        erc.replaceExternalImages();
     }
-
 });
 
 function pmb_word_classic_after_videos(){
-    // pmb_resize_images(parseInt(pmb_design_options['image_size'],10));
     pmb_change_image_quality(pmb_design_options.image_quality, pmb_design_options.domain);
-    jQuery(document).trigger('pmb_wrap_up');
 }

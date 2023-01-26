@@ -1,4 +1,27 @@
+/**
+ * Called when download button clicked and all the design's processing is complete.
+ */
+function pmb_prepare_and_export_doc(){
+    pmb_replace_links_for_word();
+    pmb_inline_css();
+    // word doesn't know how to handle figcaptions (it shows them inline) so replace with paragraphs
+    jQuery('figcaption').replaceWith(function () {
+        return "<p>" + jQuery(this).text() + "</p>";
+    });
+    var dataurl_converter = new PmbImgToDataUrls(
+        function () {
+            jQuery('.pmb-loading').remove();
+            pmb_limit_img_widths();
+            download_button.removeClass('pmb-disabled');
+            pmb_export_as_doc();
+        }
+    );
+    dataurl_converter.convert();
+}
 
+/**
+ * Should really just be called by pmb_prepare_and_export_doc.
+ */
 function pmb_export_as_doc(){
     var print_page_head_jq = jQuery('head');
     print_page_head_jq.find('script').remove();
@@ -173,30 +196,34 @@ function PmbImgToDataUrls(finished_callback) {
         }
     }
 }
-
-jQuery(document).on('pmb_wrap_up', function() {
+/**
+ * Callbacks that listen for document.pmb_doc_conversion_requested should set them to TRUE immediately, otherwise
+ * we'll assume no callback was set and so we'll just proceed with converting the file.
+ * @type {boolean}
+ */
+var pmb_doc_conversion_request_handled = false;
+jQuery(document).on('ready', function() {
     var download_button = jQuery('#download_link');
+    download_button.removeClass('pmb-disabled');
+    jQuery('.pmb-loading').hide();
+    download_button.click(function () {
+        download_button.addClass('pmb-disabled');
+        jQuery('.pmb-loading').show();
+        jQuery(document).trigger('pmb_doc_conversion_requested');
+        // trigger document.pmb_wrap_up for legacy code.
+        jQuery(document).trigger('pmb_wrap_up');
 
-    pmb_replace_links_for_word();
-    pmb_inline_css();
-    // word doesn't know how to handle figcaptions (it shows them inline) so replace with paragraphs
-    jQuery('figcaption').replaceWith(function(){
-        return "<p>" + jQuery( this ).text() + "</p>";
-    });
-
-    jQuery(document).on("pmb_external_resouces_loaded", function() {
-        var dataurl_converter = new PmbImgToDataUrls(
-            function(){
-                jQuery('.pmb-loading').remove();
-                pmb_limit_img_widths();
-                download_button.removeClass('pmb-disabled');
-                download_button.click(function() {
+        jQuery(document).on('pmb_doc_conversion_ready', function () {
+            pmb_prepare_and_export_doc();
+        });
+        // as a backup, in case the design didn't listen for document.pmb_doc_conversion_requested just go ahead and execute it.
+        setTimeout(
+            function () {
+                if (!pmb_doc_conversion_request_handled) {
                     pmb_export_as_doc();
-                });
-            }
-        );
-        dataurl_converter.convert();
+                }
+            },
+            3000
+        )
     });
-    var erc = new PmbExternalResourceCacher();
-    erc.replaceExternalImages();
 });
