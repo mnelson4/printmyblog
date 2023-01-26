@@ -72,50 +72,72 @@ function pmb_create_epub(){
         var epub_blob = await epub(epub_options, sections);
         var download_button = jQuery('#download_link');
         download_button.removeClass('pmb-disabled');
-        jQuery('.pmb-loading').remove();
-        download_button.click(function(){
-            if(document.location.protocol == 'https:'){
-                var readableStream = epub_blob.stream()
+        jQuery('.pmb-loading').hide();
+        if(document.location.protocol == 'https:'){
+            var readableStream = epub_blob.stream()
 
-                streamSaver.mitm = 'https://printmy.blog/wp-content/streamsaver/mitm.html';
-                var fileStream = streamSaver.createWriteStream(download_button.attr('download').valueOf(), {
-                    size: epub_blob.size // Makes the procentage visiable in the download
-                });
-                // more optimized pipe version
-                // (Safari may have pipeTo but it's useless without the WritableStream)
-                if (window.WritableStream && readableStream.pipeTo) {
-                    return readableStream.pipeTo(fileStream)
-                        .then(() => console.log('done writing'))
-                }
-
-                // Write (pipe) manually
-                window.writer = fileStream.getWriter()
-
-                var reader = readableStream.getReader()
-                var pump = function() {
-                    reader.read().then(function(res){
-                        return res.done
-                            ? writer.close()
-                            : writer.write(res.value).then(pump);
-                    });
-                }
-
-                pump();
-            } else {
-                saveAs(epub_blob, download_button.attr('download').valueOf());
-                //download_link.href = await blobToBase64(epub_blob);
+            streamSaver.mitm = 'https://printmy.blog/wp-content/streamsaver/mitm.html';
+            var fileStream = streamSaver.createWriteStream(download_button.attr('download').valueOf(), {
+                size: epub_blob.size // Makes the percentage visible in the download
+            });
+            // more optimized pipe version
+            // (Safari may have pipeTo but it's useless without the WritableStream)
+            if (window.WritableStream && readableStream.pipeTo) {
+                return readableStream.pipeTo(fileStream)
+                    .then(() => console.log('done writing'))
             }
-        });
 
+            // Write (pipe) manually
+            window.writer = fileStream.getWriter()
 
+            var reader = readableStream.getReader()
+            var pump = function() {
+                reader.read().then(function(res){
+                    return res.done
+                        ? writer.close()
+                        : writer.write(res.value).then(pump);
+                });
+            }
 
+            pump();
+        } else {
+            saveAs(epub_blob, download_button.attr('download').valueOf());
+            //download_link.href = await blobToBase64(epub_blob);
+        }
     })();
 }
-jQuery(document).on('pmb_wrap_up', function(){
-    setTimeout(
-        pmb_create_epub,
-        4000
-    );
+
+/**
+ * Callbacks that listen for document.pmb_doc_conversion_requested should set them to TRUE immediately, otherwise
+ * we'll assume no callback was set and so we'll just proceed with converting the file.
+ * @type {boolean}
+ */
+var pmb_doc_conversion_request_handled = false;
+jQuery(document).on('ready', function(){
+    var download_button = jQuery('#download_link');
+    download_button.removeClass('pmb-disabled');
+    jQuery('.pmb-loading').hide();
+    download_button.click(function(){
+        download_button.addClass('pmb-disabled');
+        jQuery('.pmb-loading').show();
+        jQuery(document).trigger('pmb_doc_conversion_requested');
+        // trigger document.pmb_wrap_up for legacy code.
+        jQuery(document).trigger('pmb_wrap_up');
+        // wait for the design to call document.pmb_doc_conversion_ready (and to set pmb_doc_conversion_request_handled
+        // to true)  before proceeding with converting HTML to ePub
+        jQuery(document).on('pmb_doc_conversion_ready', function(){
+            pmb_create_epub();
+        });
+        // as a backup, in case the design didn't listen for document.pmb_doc_conversion_requested just go ahead and execute it.
+        setTimeout(
+            function(){
+                if(! pmb_doc_conversion_request_handled){
+                    pmb_create_epub();
+                }
+            },
+            3000
+        )
+    });
 });
 
 

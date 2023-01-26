@@ -3,6 +3,15 @@
 */
 
 /**
+ Make disabled buttons look it, and prevent them from being used.
+ */
+.pmb-disabled{
+    color:gray;
+    cursor:default;
+    pointer-events: none;
+}
+
+/**
  * CSS classes intended for use by content writers.
  */
 

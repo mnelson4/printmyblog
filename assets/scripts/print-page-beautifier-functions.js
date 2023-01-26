@@ -13,16 +13,12 @@ function pmb_remove_unsupported_content(){
     }).remove();
     // prevent MathJax-LaTeX (https://wordpress.org/plugins/mathjax-latex/) from adding a page empty pages
     // and remove any totally empty divs
-    setTimeout(function(){
-        jQuery('body>*').each(function(){
-            var element = jQuery(this);
-            if(this.innerHTML === ''){
-                element.remove();
-            }
-        });
-    },
-        2000 // just a guess that MathJax-LaTeX will be done by now
-    );
+    jQuery('body>*').each(function(){
+        var element = jQuery(this);
+        if(this.innerHTML === ''){
+            element.remove();
+        }
+    });
 }
 
 /**
@@ -41,19 +37,11 @@ function pmb_fix_protocols(){
     jQuery('[href^="//"]').each(function(index, element){
         element.setAttribute("href", location.protocol + element.getAttribute('href'));
     });
-    // delay doing this one because of a particular user has issues because the HTML this needs to fix is generated
-    // dynamically after page load.
-    setTimeout(
-        function(){
-            // There can be invalid URLs in CSS inline styles too.
-            jQuery('style:contains(url("//), style:contains(url(\'//)').each(function(index,element){
-                var new_html = element.innerHTML.replace('url("//','url("' + location.protocol + '//').replace("url('//","url('" + location.protocol + "//");
-                element.innerHTML = new_html;
-            });
-        },
-        2000
-    );
-
+    // There can be invalid URLs in CSS inline styles too.
+    jQuery('style:contains(url("//), style:contains(url(\'//)').each(function(index,element){
+        var new_html = element.innerHTML.replace('url("//','url("' + location.protocol + '//').replace("url('//","url('" + location.protocol + "//");
+        element.innerHTML = new_html;
+    });
 
     var correct_protocol = window.location.protocol;
     var incorrect_protocol = 'http:';
@@ -588,9 +576,9 @@ function _pmb_parse_srcset(srcset, ascending = true){
 }
 
 /**
- * Actually, this does lazy loaded-images from other plugins too.
+ * Tries to disable as much lazy-loading as possible. This should generally be called on document ready.
  */
-function pmb_load_avada_lazy_images(){
+function pmb_prevent_lazy_loading(){
     // Load Avada's lazy images (they took out images' "src" attribute and put it into "data-orig-src". Put it back.)
     jQuery('img[data-orig-src]').each(function(index,element){
         var jqelement = jQuery(this);
@@ -608,6 +596,14 @@ function pmb_load_avada_lazy_images(){
     });
 }
 
+/**
+ * Actually, this does lazy loaded-images from other plugins too.
+ * @deprecated use pmb_prevent_lazy_loading
+ */
+function pmb_load_avada_lazy_images(){
+    pmb_prevent_lazy_loading();
+}
+
 function pmb_reveal_dynamic_content(){
     // Expand all Arconix accordion parts (see https://wordpress.org/plugins/arconix-shortcodes/)
     jQuery('.arconix-accordion-content').css('display','block');
@@ -616,18 +612,14 @@ function pmb_reveal_dynamic_content(){
     jQuery('div[id^="bg-showmore-hidden-"]').css('display','block');
     // Change canvases to regular images please! Helpful if someone is using chart.js or something else that
     // creates canvases
-    setTimeout(function(){
-        var canvases = jQuery('canvas').each(function(index){
-            var chartImage = this.toDataURL();
-            jQuery(this).after('<div class="pmb-image"><img src="' + chartImage + '"></div>');
-            jQuery(this).remove();
-        })
-            // Expand all Kadence Accordion blocks and make them all look equally active
-            jQuery('.kt-accordion-panel-hidden').removeClass('kt-accordion-panel-hidden');
-            jQuery('.kt-accordion-panel-active').removeClass('kt-accordion-panel-active');
-
-    },
-    2000);
+    var canvases = jQuery('canvas').each(function(index){
+        var chartImage = this.toDataURL();
+        jQuery(this).after('<div class="pmb-image"><img src="' + chartImage + '"></div>');
+        jQuery(this).remove();
+    })
+    // Expand all Kadence Accordion blocks and make them all look equally active
+    jQuery('.kt-accordion-panel-hidden').removeClass('kt-accordion-panel-hidden');
+    jQuery('.kt-accordion-panel-active').removeClass('kt-accordion-panel-active');
     //break images out of JetPack slideshows, which make no effort at print-readiness whatsoever
 
     jQuery('.wp-block-jetpack-slideshow').each(function(slideshow_index, slideshow_element){
