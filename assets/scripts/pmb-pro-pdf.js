@@ -169,14 +169,14 @@ jQuery(document).on('ready', function(){
     download_test_button.click(function(event){
         var jqelement = jQuery(event.currentTarget);
         pmb_doing_button(jqelement);
-        jQuery(document).trigger('pmb_doc_conversion_requested');
-        // trigger document.pmb_wrap_up for legacy code.
-        jQuery(document).trigger('pmb_wrap_up');
         // wait for the design to call document.pmb_doc_conversion_ready (and to set pmb_doc_conversion_request_handled
         // to true)  before proceeding with converting HTML to ePub
         jQuery(document).on('pmb_doc_conversion_ready', function(){
             pmb_generate_test_doc(jqelement);
         });
+        jQuery(document).trigger('pmb_doc_conversion_requested');
+        // trigger document.pmb_wrap_up for legacy code.
+        jQuery(document).trigger('pmb_wrap_up');
     });
     jQuery('.pmb-download-live').click(function(event){
         var jqelement = jQuery(event.currentTarget);
