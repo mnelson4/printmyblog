@@ -211,13 +211,13 @@ jQuery(document).on('ready', function() {
     );
     download_button.click(function () {
         pmb_doing_button(download_button);
-        jQuery(document).trigger('pmb_doc_conversion_requested');
-        // trigger document.pmb_wrap_up for legacy code.
-        jQuery(document).trigger('pmb_wrap_up');
 
         jQuery(document).on('pmb_doc_conversion_ready', function () {
             pmb_prepare_and_export_doc();
         });
+        jQuery(document).trigger('pmb_doc_conversion_requested');
+        // trigger document.pmb_wrap_up for legacy code.
+        jQuery(document).trigger('pmb_wrap_up');
         // as a backup, in case the design didn't listen for document.pmb_doc_conversion_requested just go ahead and execute it.
         setTimeout(
             function () {

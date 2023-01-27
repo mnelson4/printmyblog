@@ -216,6 +216,10 @@ function PmbExternalResourceCacher() {
                         function(){
                             that.resources_pending_caching_count--;
                             that.check_done_swapping_external_resouces();
+                        },
+                        function(){
+                            that.resources_pending_caching_count--;
+                            that.check_done_swapping_external_resouces();
                         });
                 }
             }
