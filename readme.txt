@@ -439,7 +439,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.21.0 xxx =
+= 3.21.0 January 26, 2023 =
 * Compatibility: in Pro Print, improve integration with many other plugins by doing most print-page processing when the download button is pressed (which gives other plugins more time to do all their processing)
 
 = 3.20.6 January 17, 2023 =
