@@ -440,7 +440,7 @@ https://youtu.be/uPQ3vqm7A2g
 == Changelog ==
 
 = 3.21.0 xxx =
-* Compatibility: in Pro Print, do most print-page processing when a button is pressed (which gives other plugins a chance to do all their processing on pageload)
+* Compatibility: in Pro Print, improve integration with many other plugins by doing most print-page processing when the download button is pressed (which gives other plugins more time to do all their processing)
 
 = 3.20.6 January 17, 2023 =
 * Bugfix: in Pro Print ePubs, tidy up galleries
