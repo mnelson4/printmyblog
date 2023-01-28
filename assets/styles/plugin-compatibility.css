@@ -243,3 +243,16 @@ Hide Hustle Slide-In
 .pmb-posts .hustle-slidein{
     display:none !important;
 }
+
+/**
+ * WP Socializer
+ */
+.pmb-posts .wp-socializer{
+    display:none;
+}
+/**
+ * Post Like Dislike plugin
+ */
+.pmb-posts .pld-like-dislike-wrap{
+    display:none;
+}
