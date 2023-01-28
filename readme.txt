@@ -439,6 +439,10 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.21.1 January 27, 2023 =
+* Compatibility: in Pro Print with Elementor, handle lazy-loaded YouTube and Vimeo videos
+* Bugfix: in Pro Print, fix downloading ePubs even when there is an error downloading an image
+
 = 3.21.0 January 26, 2023 =
 * Compatibility: in Pro Print, improve integration with many other plugins by doing most print-page processing when the download button is pressed (which gives other plugins more time to do all their processing)
 

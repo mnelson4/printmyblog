@@ -184,27 +184,27 @@ function PmbVideo(format, add_qr_codes){
 
     this._convertYoutubeVideos = function(){
         jQuery('div.wp-block-embed__wrapper iframe[src*=youtube]').unwrap();
-        var selection = jQuery('iframe[src*=youtube]');
+        var selection = jQuery('iframe[src*=youtube], iframe[data-src*=youtube]');
         var that = this;
         selection.replaceWith(function(index){
             var title = this.title;
-            var src = this.src;
+            var src = this.src || this.attributes['data-src'].value;
             var youtube_id = src.replace('https://www.youtube.com/embed/','');
             youtube_id = youtube_id.substring(0, youtube_id.indexOf('?'));
             var image_url = 'https://img.youtube.com/vi/' + youtube_id + '/0.jpg';
             var link = 'https://youtube.com/watch?v=' + youtube_id;
-            return that._getHtml(title,link, image_url, );
+            return that._getHtml(title, link, image_url, );
         });
     };
 
     this._convertVimeoVideos = function(){
         jQuery('div.wp-block-embed__wrapper iframe[src*=vimeo]').unwrap();
-        var vimeo_videos = jQuery('iframe[src*=vimeo]');
+        var vimeo_videos = jQuery('iframe[src*=vimeo], iframe[data-src*=vimeo]');
         var that = this;
         vimeo_videos.each(function(index){
             var iframe = this;
             var title = iframe.title;
-            var src = iframe.src;
+            var src = iframe.src || iframe.attributes['data-src'].value;
             var vimeo_id = src.replace('https://player.vimeo.com/video/','');
             vimeo_id = vimeo_id.substring(0, vimeo_id.indexOf('?'));
             var vimeo_api_url = 'https://vimeo.com/api/v2/video/' + vimeo_id+ '.json';
@@ -240,14 +240,10 @@ function PmbVideo(format, add_qr_codes){
 
         videos.replaceWith(function(index){
            var video_element = this;
-           var title='';
-           var src = video_element.src;
-           // Elementor puts the video src on "data-src" and later lazy-loads it.
-           if( ! src && typeof(video_element.attributes['data-src']) == 'object'){
-                src = video_element.attributes['data-src'].value;
-           }
+            // Elementor puts the video src on "data-src" and later lazy-loads it.
+           var src = video_element.src || video_element.attributes['data-src'].value;
            var screenshot = video_element.poster || '';
-           return that._getHtml('',src,screenshot);
+           return that._getHtml('', src, screenshot);
         });
     };
 
@@ -594,6 +590,7 @@ function pmb_prevent_lazy_loading(){
         jqelement.removeAttr('data-srcset');
         jqelement.removeClass('lazyload');
     });
+    // Load Elementor
 }
 
 /**
