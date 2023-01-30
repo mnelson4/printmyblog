@@ -439,7 +439,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.21.2 xxxx =
+= 3.21.2 January 30, 2023 =
 * Compatibility: hide WP Socializer sharing bar
 * Compatibility: hide Post Like Dislike button
 
