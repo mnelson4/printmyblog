@@ -100,7 +100,7 @@ class DebugInfo
         $language = get_locale();
         $home_url = get_bloginfo('url');
         $site_url = get_bloginfo('wpurl');
-        $debug = defined(WP_DEBUG) ? WP_DEBUG : false;
+        $debug = defined('WP_DEBUG') ? WP_DEBUG : false;
         $post_max_size       = ini_get('post_max_size');
         $upload_max_filesize = ini_get('upload_max_filesize');
         $effective           = min(
