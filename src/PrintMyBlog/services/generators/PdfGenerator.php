@@ -84,6 +84,7 @@ class PdfGenerator extends HtmlBaseGenerator
             'pmb_pro',
             [
                 'site_url' => site_url(),
+                'domain' => pmb_get_domain(),
                 'use_pmb_central_for_previews' => $use_pmb_central,
                 'license_data' => [
                     'endpoint' => $this->getPmbCentral()->getCentralUrl(),

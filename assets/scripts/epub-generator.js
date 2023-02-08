@@ -147,13 +147,18 @@ jQuery(document).on('ready', function(){
 function pmb_replace_internal_links_with_epub_file_links(){
     _pmb_for_each_hyperlink(
         function(a, id_url, id_selector){
+            // leave anchor links alone
+            if(id_url[0] === '#'){
+                url_in_epub = id_url;
+            } else {
+                // find that section's title
+                var section_element = jQuery(id_selector);
+                // deduce its filename
+                var url_in_epub = pmb_hyperlink_to_filename(section_element.attr('id')) + '.xhtml';
+            }
 
-            // find that section's title
-            var section_element = jQuery(id_selector);
-            // deduce its filename
-            var filename = pmb_hyperlink_to_filename(section_element.attr('id')) + '.xhtml';
             // replace with a hyperlink to that
-            a.attr('href',filename);
+            a.attr('href',url_in_epub);
         },
         function(a){
             // leave external hyperlinks alone

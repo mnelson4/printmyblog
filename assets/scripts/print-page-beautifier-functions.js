@@ -639,7 +639,8 @@ function pmb_reveal_dynamic_content(){
  */
 function _pmb_get_href_from_a(jquery_a_selection){
     var href = jquery_a_selection.attr('href');
-    if(typeof(URL) === 'function'){
+    // if it's an anchor link, leave it alone.
+    if(typeof(URL) === 'function' && href[0] !== '#'){
         try{
             href = new URL(href, pmb_pro.site_url).href;
         }catch(error){
@@ -666,26 +667,69 @@ function _pmb_for_each_hyperlink(internal_hyperlink_callback, external_hyperlink
             return;
         }
         var href = _pmb_get_href_from_a(a);
-        var id_selector = '#' + href.replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g,'\\$1').replace('%','-');
-        var id_url = '#' + href;
-        try{
-            var matching_elements = jQuery(id_selector).length;
-            // if that doesn't point to any internal posts, and it's an anchor link, then just use it as an anchor link
-            if( matching_elements === 0 && href[0] === '#'){
-                id_selector = id_url = href;
-                matching_elements = jQuery(id_selector).length;
+
+        // Remove extra inconsistent fluff at teh start. Let's find if it's an internal or external one...
+        // Convert the URL to the special ID we derive from the post's slug, then see if there's an element with that ID on the print-page.
+        var article_relative_slug = a.parents('article').attr('id');
+        var anchor_href = href
+            .replace('https://www.', '')
+            .replace('http://www.', '')
+            .replace('https://', '')
+            .replace('http://', '')
+            .replace(pmb_pro.domain, '')
+            .replace(article_relative_slug,'') // if it's link to its own post, remove all that (e.g. so we can detect anchor links easier)
+            .replace('%', '-');
+        // Check if, once we removed the protocol, domain, and path, if it's actually an anchor lin.
+        if(anchor_href[0] === '#'){
+            href = anchor_href;
+        }
+        // Anchor links are easy. Leave them alone, so long as they point to something.
+        if (href[0] === '#') {
+            var selector = '#' + href.substring(1).replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1')
+            var url = href;
+            try{
+                var matching_elements = jQuery(selector).length;
+                if(matching_elements){
+                    internal_hyperlink_callback(a, url, selector);
+                    return;
+                }
+            } catch(exception){
+                // somehow the selector was invalid
             }
+            // this anchor link doesn't actually point to anything. Get rid of it.
+            a.contents().unwrap();
+            return;
+        }
+
+        var selector = '#' + _pmb_convert_url_into_selector(anchor_href);
+        var url = '#' + anchor_href;
+
+        try{
+            var matching_elements = jQuery(selector).length;
+            if(matching_elements > 0){
+                internal_hyperlink_callback(a, url, selector);
+                return;
+            }
+            // It's not an internal hyperlink. So it's external.
+            selector = _pmb_convert_url_into_selector(href);
+            url = href;
+            external_hyperlink_callback(a, url, selector);
+            return;
         }catch(exception){
             // somehow the query didn't work. Remove this link then.
             a.contents().unwrap();
         }
-        if( matching_elements > 0){
-            internal_hyperlink_callback(a, id_url, id_selector)
-        } else {
-            // external
-            external_hyperlink_callback(a, id_url, id_selector);
-        }
     });
+}
+
+/**
+ * Helpful for preparing a URL so it can be used in a jQuery selector.
+ * @param string url
+ * @returns {*}
+ * @private
+ */
+function _pmb_convert_url_into_selector(url){
+    return url.replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1');
 }
 
 /**

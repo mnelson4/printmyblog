@@ -145,6 +145,7 @@ class EpubGenerator extends HtmlBaseGenerator
                     'many_articles' => __('Your project is very big and you might have errors downloading the file. If so, try splitting your content into multiple projects and instead creating multiple smaller files.', 'print-my-blog'),
                     'many_images' => __('Your project has lots of images and you might have errors downloading the file. If so, try spltting your content into multiple projects or reducing the image quality set on your design.', 'print-my-blog'),
                 ],
+                'domain' => pmb_get_domain(),
             ]
         );
     }

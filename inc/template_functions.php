@@ -11,31 +11,60 @@ use PrintMyBlog\orm\entities\Project;
  * @param WP_Post|null $post
  * @return bool|false|string|WP_Error
  */
-function pmb_get_the_post_anchor($post)
+function pmb_get_the_post_anchor($post = null)
 {
-    if (! $post instanceof WP_Post) {
-        global $post;
-    }
-    return get_permalink($post);
+    return pmb_convert_url_to_anchor(get_the_permalink($post));
 }
 
 /**
- * Echoes the anchor ID for the post.
+ * Gets the site's domain (site_url minus the "https://" or "http://" prefix).
+ *
+ * @return string|string[]|void
+ */
+function pmb_get_domain()
+{
+    return str_replace('http://','', site_url('', 'http'));
+}
+
+/**
+ * Echoes the anchor ID for the post. Does not escape it (use pmb_permalink_as_attr
  */
 function pmb_the_post_anchor()
 {
-    global $post;
     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped by pmb_convert_url_to_anchor
-    echo pmb_convert_url_to_anchor(pmb_get_the_post_anchor($post));
+    echo pmb_convert_url_to_anchor(pmb_get_the_post_anchor());
 }
 
 /**
+ * Takes a URL and turns it into the form we use for post anchor links in PMB projects.
+ * Specifically,
+ * * removes the "http://" or "https://",
+ * * removes "www."
+ * * removes the domain name.
  * @param string $url
  * @return string|void
  */
 function pmb_convert_url_to_anchor($url)
 {
-    return esc_attr($url);
+    return str_replace(
+        [
+            '%',
+            'https://www.',
+            'http://www.',
+            'https://',
+            'http://',
+            pmb_get_domain(),
+        ],
+        [
+            '-',
+            '',
+            '',
+            '',
+            '',
+            '',
+        ],
+        $url
+    );
 }
 
 /**
@@ -104,15 +133,16 @@ function pmb_section_wrapper_id()
  * Echoes out the ID attribute to use on the section.
  */
 function pmb_section_id(){
-	echo 'id="' . pmb_permalink_as_attr() . '"';
+	echo 'id="' . esc_attr(pmb_get_the_post_anchor()) . '"';
 }
 
 /**
  * Returns the current post's permalink as an attribute
  * @return string|void
+ * @deprecated use esc_attr(pmb_get_the_post_anchor())
  */
 function pmb_permalink_as_attr(){
-    return esc_attr(str_replace('%','-',get_the_permalink()));
+    return esc_attr(pmb_get_the_post_anchor());
 }
 
 /**
