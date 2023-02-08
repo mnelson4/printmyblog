@@ -654,9 +654,10 @@ function _pmb_get_href_from_a(jquery_a_selection){
  * The first callback is executed on links to content that are in this project, the second is used for everything
  * outside of this project. Each callback is passed the jQuery selection of the hyperlink and the URI to the element's ID
  * (if any exists), and the selector you can pass to jQuery to get the section element linked-to.
- * @param internal_hyperlink_callback
- * @param external_hyperlink_callback
+ * @param function internal_hyperlink_callback
+ * @param function external_hyperlink_callback
  * @global string pmb_pro.site_url
+ * @global string pmb_pro.domain
  * @private
  */
 function _pmb_for_each_hyperlink(internal_hyperlink_callback, external_hyperlink_callback){
@@ -666,12 +667,14 @@ function _pmb_for_each_hyperlink(internal_hyperlink_callback, external_hyperlink
         if(! a.text().trim()){
             return;
         }
-        var href = _pmb_get_href_from_a(a);
+        var url = null;
 
-        // Remove extra inconsistent fluff at teh start. Let's find if it's an internal or external one...
-        // Convert the URL to the special ID we derive from the post's slug, then see if there's an element with that ID on the print-page.
+        // Get the absolute URL.
+        var absolute_url = _pmb_get_href_from_a(a);
+
+        // Get the relative URL (to the current URL).
         var article_relative_slug = a.parents('article').attr('id');
-        var anchor_href = href
+        var relative_url = absolute_url
             .replace('https://www.', '')
             .replace('http://www.', '')
             .replace('https://', '')
@@ -679,14 +682,17 @@ function _pmb_for_each_hyperlink(internal_hyperlink_callback, external_hyperlink
             .replace(pmb_pro.domain, '')
             .replace(article_relative_slug,'') // if it's link to its own post, remove all that (e.g. so we can detect anchor links easier)
             .replace('%', '-');
-        // Check if, once we removed the protocol, domain, and path, if it's actually an anchor lin.
-        if(anchor_href[0] === '#'){
-            href = anchor_href;
+        // See if it's really an anchor URL.
+        if(relative_url[0] === '#'){
+            url = relative_url;
+        } else {
+            url = absolute_url;
         }
-        // Anchor links are easy. Leave them alone, so long as they point to something.
-        if (href[0] === '#') {
-            var selector = '#' + href.substring(1).replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1')
-            var url = href;
+
+        // So, was it a anchor URL?
+        if (url[0] === '#') {
+            // If so, leave it alone, so long as it points to something.
+            var selector = '#' + url.substring(1).replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1')
             try{
                 var matching_elements = jQuery(selector).length;
                 if(matching_elements){
@@ -701,8 +707,9 @@ function _pmb_for_each_hyperlink(internal_hyperlink_callback, external_hyperlink
             return;
         }
 
-        var selector = '#' + _pmb_convert_url_into_selector(anchor_href);
-        var url = '#' + anchor_href;
+        // It's NOT an anchor link. But it might be the URL of a real post, which we'll want to convert into an anchor link.
+        var selector = '#' + _pmb_convert_url_into_selector(relative_url);
+        var url = '#' + relative_url;
 
         try{
             var matching_elements = jQuery(selector).length;
@@ -710,9 +717,10 @@ function _pmb_for_each_hyperlink(internal_hyperlink_callback, external_hyperlink
                 internal_hyperlink_callback(a, url, selector);
                 return;
             }
-            // It's not an internal hyperlink. So it's external.
-            selector = _pmb_convert_url_into_selector(href);
-            url = href;
+            // The URL doesn't correspond to any articles in this project.
+            // Treat it as external.
+            selector = _pmb_convert_url_into_selector(url);
+            url = absolute_url;
             external_hyperlink_callback(a, url, selector);
             return;
         }catch(exception){

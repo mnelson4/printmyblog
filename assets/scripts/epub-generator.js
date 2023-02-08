@@ -147,21 +147,29 @@ jQuery(document).on('ready', function(){
 function pmb_replace_internal_links_with_epub_file_links(){
     _pmb_for_each_hyperlink(
         function(a, id_url, id_selector){
-            // leave anchor links alone
-            if(id_url[0] === '#'){
-                url_in_epub = id_url;
-            } else {
-                // find that section's title
-                var section_element = jQuery(id_selector);
+            // the URL is an anchor link to somewhere on the page (either to an article or to something inside an article)
+            var section_element = jQuery(id_selector);
+
+
+            if(section_element.length == 0){
+                return;
+            }
+            // is it linking to an article?
+            if( section_element[0].tagName == 'ARTICLE'){
                 // deduce its filename
                 var url_in_epub = pmb_hyperlink_to_filename(section_element.attr('id')) + '.xhtml';
+            } else {
+                // it's linking to something else on the page. Try adding its parent article's filename on front
+                var parent_article = section_element.parents('article');
+                var url_in_epub = pmb_hyperlink_to_filename(parent_article.attr('id')) + '.xhtml' + id_url;
             }
 
             // replace with a hyperlink to that
             a.attr('href',url_in_epub);
         },
-        function(a){
-            // leave external hyperlinks alone
+        function(a, id_url, id_selector){
+            // If it was originally a relative link, make sure we update it to what we found the actual URL to be.
+            a.attr('href', id_url);
         }
     )
 }

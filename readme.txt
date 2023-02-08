@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.21.3
+Stable tag: 3.21.4
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -438,6 +438,10 @@ https://youtu.be/uPQ3vqm7A2g
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+
+= 3.21.4 February 8, 2023 =
+* Bugfix: in Pro Print, add support for relative hyperlinks, hyperlinks with wrong protocol, hyperlinks with an extra "www", and support for anchor links
+* Bugfix: in Pro Print ePubs, make anchor links work for Kindle Previewer too
 
 = 3.21.3 February 3, 2023 =
 * Bugfix: in Pro Print, remove warning for designs that don't use Page Reference Text (e.g., Mayer Magazine)
