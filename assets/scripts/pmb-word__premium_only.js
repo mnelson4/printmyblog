@@ -109,14 +109,15 @@ function pmb_replace_links_for_word(external_link_policy, internal_link_policy)
             }
         },
         // external hyperlinks
-        function(a){
+        function(a, id_url){
             switch(external_link_policy){
                 case 'remove':
                     a.contents().unwrap();
                     break;
                 case 'leave':
                 default:
-                // otherwise, leave alone
+                    // If it was originally a relative link, make sure we update it to what we found the actual URL to be.
+                    a.attr('href', id_url);
             }
         }
     );

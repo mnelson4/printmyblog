@@ -442,6 +442,7 @@ https://youtu.be/uPQ3vqm7A2g
 = 3.21.4 February 8, 2023 =
 * Bugfix: in Pro Print, add support for relative hyperlinks, hyperlinks with wrong protocol, hyperlinks with an extra "www", and support for anchor links
 * Bugfix: in Pro Print ePubs, make anchor links work for Kindle Previewer too
+* Bufix: in Pro Print Word docs, fix regression where file wouldn't download
 
 = 3.21.3 February 3, 2023 =
 * Bugfix: in Pro Print, remove warning for designs that don't use Page Reference Text (e.g., Mayer Magazine)

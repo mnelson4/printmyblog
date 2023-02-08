@@ -11,12 +11,12 @@ jQuery(document).on('pmb_doc_conversion_requested', function(){
         jQuery(document).trigger('pmb_doc_conversion_ready');
     });
     if(pmb_design_options.convert_videos === '1') {
-        pmb_convert_youtube_videos_to_images('simple');
         jQuery(document).on('pmb_done_processing_videos', function () {
             pmb_word_classic_after_videos();
             var erc = new PmbExternalResourceCacher();
             erc.replaceExternalImages();
         });
+        pmb_convert_youtube_videos_to_images('simple');
     } else {
         pmb_word_classic_after_videos();
         var erc = new PmbExternalResourceCacher();
