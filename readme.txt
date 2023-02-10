@@ -439,6 +439,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.21.5 xxx =
+* Enhancement: in Pro Print's Edit Content step, give a warning if project is empty
+
 = 3.21.4 February 8, 2023 =
 * Bugfix: in Pro Print, add support for relative hyperlinks, hyperlinks with wrong protocol, hyperlinks with an extra "www", and support for anchor links
 * Bugfix: in Pro Print ePubs, make anchor links work for Kindle Previewer too

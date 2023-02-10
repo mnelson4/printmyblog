@@ -35,6 +35,11 @@ jQuery(document).ready(function(){
 		var depth = 1;
 		if(first_item.length){
 			depth = first_item[0].attributes['data-height'].nodeValue;
+		} else {
+			// they haven't entered any body. Let's double-check they're really done.
+			if(! window.confirm(pmb_project_edit_content_data.translations.empty_content_warning)){
+				return false;
+			}
 		}
 		jQuery('#pmb-project-depth').val(depth);
 	});

@@ -700,6 +700,7 @@ class Admin extends BaseController
                                     'cant_move' => __('Please select items to move', 'print-my-blog'),
                                     'insert_error' => __('Error inserting. Please use the PMB help page to get help', 'print-my-blog'),
                                     'duplicate_error' => __('Error creating new print material. Please use the PMB help page to get help.', 'print-my-blog'),
+                                    'empty_content_warning' => __('Your project\'s Body is empty. You may have forgetten to drag items from "Available Content" (on the left) into the "Chosen Project Content"\'s Body (on the right). Are you sure you want to leave your project\'s Body empty?', 'print-my-blog'),
                                 ],
                             ]
                         );
