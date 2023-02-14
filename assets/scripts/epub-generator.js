@@ -112,6 +112,12 @@ function pmb_create_epub(){
  * @type {boolean}
  */
 var pmb_doc_conversion_request_handled = false;
+/**
+ * Keeps track of if we've finished preparing the entire print page. (So we don't process stuff over and over again if the print button
+ * gets pressed again.)
+ * @type boolean
+ */
+var pmb_pro_page_rendered = false;
 jQuery(document).on('ready', function(){
     var download_button = jQuery('#download_link');
     setTimeout(function(){
@@ -121,24 +127,29 @@ jQuery(document).on('ready', function(){
     );
 
     download_button.click(function(){
-        pmb_doing_button(download_button);
-        // wait for the design to call document.pmb_doc_conversion_ready (and to set pmb_doc_conversion_request_handled
-        // to true)  before proceeding with converting HTML to ePub
-        jQuery(document).on('pmb_doc_conversion_ready', function(){
+        if(pmb_pro_page_rendered){
             pmb_create_epub();
-        });
-        jQuery(document).trigger('pmb_doc_conversion_requested');
-        // trigger document.pmb_wrap_up for legacy code.
-        jQuery(document).trigger('pmb_wrap_up');
-        // as a backup, in case the design didn't listen for document.pmb_doc_conversion_requested just go ahead and execute it.
-        setTimeout(
-            function(){
-                if(! pmb_doc_conversion_request_handled){
-                    pmb_create_epub();
-                }
-            },
-            3000
-        )
+        } else {
+            pmb_doing_button(download_button);
+            // wait for the design to call document.pmb_doc_conversion_ready (and to set pmb_doc_conversion_request_handled
+            // to true)  before proceeding with converting HTML to ePub
+            jQuery(document).on('pmb_doc_conversion_ready', function(){
+                pmb_create_epub();
+            });
+            jQuery(document).trigger('pmb_doc_conversion_requested');
+            // trigger document.pmb_wrap_up for legacy code.
+            jQuery(document).trigger('pmb_wrap_up');
+            // as a backup, in case the design didn't listen for document.pmb_doc_conversion_requested just go ahead and execute it.
+            setTimeout(
+                function(){
+                    if(! pmb_doc_conversion_request_handled){
+                        pmb_create_epub();
+                    }
+                },
+                3000
+            );
+            pmb_pro_page_rendered = true;
+        }
     });
 });
 

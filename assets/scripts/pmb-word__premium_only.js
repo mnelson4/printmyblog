@@ -202,6 +202,12 @@ function PmbImgToDataUrls(finished_callback) {
  * @type {boolean}
  */
 var pmb_doc_conversion_request_handled = false;
+/**
+ * Keeps track of if we've finished preparing the entire print page. (So we don't process stuff over and over again if the print button
+ * gets pressed again.)
+ * @type boolean
+ */
+var pmb_pro_page_rendered = false;
 jQuery(document).on('ready', function() {
     var download_button = jQuery('#download_link');
     setTimeout(
@@ -211,22 +217,27 @@ jQuery(document).on('ready', function() {
         2000
     );
     download_button.click(function () {
-        pmb_doing_button(download_button);
+        if(pmb_pro_page_rendered){
+            pmb_export_as_doc();
+        } else {
+            pmb_doing_button(download_button);
 
-        jQuery(document).on('pmb_doc_conversion_ready', function () {
-            pmb_prepare_and_export_doc();
-        });
-        jQuery(document).trigger('pmb_doc_conversion_requested');
-        // trigger document.pmb_wrap_up for legacy code.
-        jQuery(document).trigger('pmb_wrap_up');
-        // as a backup, in case the design didn't listen for document.pmb_doc_conversion_requested just go ahead and execute it.
-        setTimeout(
-            function () {
-                if (!pmb_doc_conversion_request_handled) {
-                    pmb_export_as_doc();
-                }
-            },
-            3000
-        )
+            jQuery(document).on('pmb_doc_conversion_ready', function () {
+                pmb_prepare_and_export_doc();
+            });
+            jQuery(document).trigger('pmb_doc_conversion_requested');
+            // trigger document.pmb_wrap_up for legacy code.
+            jQuery(document).trigger('pmb_wrap_up');
+            // as a backup, in case the design didn't listen for document.pmb_doc_conversion_requested just go ahead and execute it.
+            setTimeout(
+                function () {
+                    if (!pmb_doc_conversion_request_handled) {
+                        pmb_export_as_doc();
+                    }
+                },
+                3000
+            );
+            pmb_pro_page_rendered = true;
+        }
     });
 });

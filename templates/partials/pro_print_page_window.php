@@ -34,7 +34,7 @@ $generate_url = add_query_arg(
             <div class="pmb-pro-print-window-options">
                 <div class="pmb-print-option">
                     <h2><?php esc_html_e('Free', 'print-my-blog');?></h2>
-                    <a id="pmb-print-with-browser" class="pmb-pro-window-button" onclick="window.print()" tabindex="0">
+                    <a id="pmb-print-with-browser" class="pmb-pro-window-button" tabindex="0">
                         <?php _e('Print with Browser', 'print-my-blog'); ?>
                     </a>
                     <p><?php esc_html_e('Limited to features supported by your browser.', 'print-my-blog');?></p>

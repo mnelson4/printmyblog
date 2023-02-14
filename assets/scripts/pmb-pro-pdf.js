@@ -149,6 +149,12 @@ function pmb_generate_live_doc(jqelement) {
  * @type {boolean}
  */
 var pmb_doc_conversion_request_handled = false;
+/**
+ * Keeps track of if we've finished preparing the entire print page. (So we don't process stuff over and over again if the print button
+ * gets pressed again.)
+ * @type boolean
+ */
+var pmb_pro_page_rendered = false;
 jQuery(document).on('ready', function(){
     var download_test_button = jQuery('.pmb-download-test');
     setTimeout(function(){
@@ -168,19 +174,48 @@ jQuery(document).on('ready', function(){
     });
     download_test_button.click(function(event){
         var jqelement = jQuery(event.currentTarget);
-        pmb_doing_button(jqelement);
-        // wait for the design to call document.pmb_doc_conversion_ready (and to set pmb_doc_conversion_request_handled
-        // to true)  before proceeding with converting HTML to ePub
-        jQuery(document).on('pmb_doc_conversion_ready', function(){
+        if(pmb_pro_page_rendered){
             pmb_generate_test_doc(jqelement);
-        });
-        jQuery(document).trigger('pmb_doc_conversion_requested');
-        // trigger document.pmb_wrap_up for legacy code.
-        jQuery(document).trigger('pmb_wrap_up');
+        } else {
+            pmb_doing_button(jqelement);
+            // wait for the design to call document.pmb_doc_conversion_ready (and to set pmb_doc_conversion_request_handled
+            // to true)  before proceeding with converting HTML to ePub
+            jQuery(document).on('pmb_doc_conversion_ready', function(){
+                pmb_generate_test_doc(jqelement);
+            });
+            jQuery(document).trigger('pmb_doc_conversion_requested');
+            // trigger document.pmb_wrap_up for legacy code.
+            jQuery(document).trigger('pmb_wrap_up');
+            pmb_pro_page_rendered = true;
+        }
     });
     jQuery('.pmb-download-live').click(function(event){
         var jqelement = jQuery(event.currentTarget);
         pmb_generate_live_doc(jqelement);
         pmb_doing_button(jqelement);
+    });
+    jQuery('#pmb-print-with-browser').click(function(event){
+        if(pmb_pro_page_rendered){
+            window.print();
+        } else {
+            var jqelement = jQuery(event.currentTarget);
+            pmb_doing_button(jqelement);
+            // wait for the design to call document.pmb_doc_conversion_ready (and to set pmb_doc_conversion_request_handled
+            // to true)  before proceeding with converting HTML to ePub
+            jQuery(document).on('pmb_doc_conversion_ready', function(){
+                window.print();
+                setTimeout(
+                    function(){
+                        pmb_stop_doing_button(jqelement);
+                    },
+                    2000
+                );
+            });
+            jQuery(document).trigger('pmb_doc_conversion_requested');
+            // trigger document.pmb_wrap_up for legacy code.
+            jQuery(document).trigger('pmb_wrap_up');
+            pmb_pro_page_rendered = true;
+        }
+
     });
 });

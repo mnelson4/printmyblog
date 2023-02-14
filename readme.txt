@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.21.4
+Stable tag: 3.21.5
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -439,8 +439,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.21.5 xxx =
+= 3.21.5 February 13, 2023 =
 * Enhancement: in Pro Print's Edit Content step, give a warning if project is empty
+* Bugfix: in Pro Print, when printing from browser, bring back the TOC (it disappeared in 3.21.0 when printing from the browser)
 
 = 3.21.4 February 8, 2023 =
 * Bugfix: in Pro Print, add support for relative hyperlinks, hyperlinks with wrong protocol, hyperlinks with an extra "www", and support for anchor links
