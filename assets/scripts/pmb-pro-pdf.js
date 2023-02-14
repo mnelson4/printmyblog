@@ -174,10 +174,10 @@ jQuery(document).on('ready', function(){
     });
     download_test_button.click(function(event){
         var jqelement = jQuery(event.currentTarget);
+        pmb_doing_button(jqelement);
         if(pmb_pro_page_rendered){
             pmb_generate_test_doc(jqelement);
         } else {
-            pmb_doing_button(jqelement);
             // wait for the design to call document.pmb_doc_conversion_ready (and to set pmb_doc_conversion_request_handled
             // to true)  before proceeding with converting HTML to ePub
             jQuery(document).on('pmb_doc_conversion_ready', function(){
