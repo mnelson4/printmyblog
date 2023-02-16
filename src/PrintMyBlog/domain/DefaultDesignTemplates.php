@@ -865,11 +865,36 @@ class DefaultDesignTemplates
                                         ),
                                     ]
                                 ),
-                                'header_font_style' => new FontInput(
+                                'header_font_style' => new SelectRevealInput(
+                                    [
+                                        'arial' => new InputOption(__('Arial', 'print-my-blog')),
+                                        'courier new' => new InputOption(__('Courier New', 'print-my-blog')),
+                                        'georgia' => new InputOption(__('Georgia', 'print-my-blog')),
+                                        'impact' => new InputOption(__('Impact', 'print-my-blog')),
+                                        'lucida console' => new InputOption(__('Lucida Console', 'print-my-blog')),
+                                        'palatino linotype' => new InputOption(__('Palatino Linotype', 'print-my-blog')),
+                                        'tahoma' => new InputOption(__('Tahoma', 'print-my-blog')),
+                                        'times new roman' => new InputOption(__('Times New Roman', 'print-my-blog')),
+                                        'verdana' => new InputOption(__('Verdana', 'print-my-blog')),
+                                        'custom_header_font' => new InputOption(__('Custom Font...', 'print-my-blog'))
+                                    ],
                                     [
                                         'default' => 'arial',
                                         'html_label_text' => __('Header Font', 'print-my-blog'),
                                         'html_help_text' => __('Default font for header tags', 'print-my-blog'),
+                                    ]
+                                ),
+                                'custom_header_font' => new FormSection(
+                                    [
+                                        'subsections' => [
+                                            'custom_header_font_style' => new AdminFileUploaderInput(
+                                                [
+                                                    'default' => '',
+                                                    'html_label_text' => __('Custom Header Font', 'print-my-blog'),
+                                                    'html_help_text' => __('Specify the URL of a custom font file, or upload one. The formats "wff" and "wff2" work best, but "ttf" and "otf" also work.', 'print-my-blog')
+                                                ]
+                                            ),
+                                        ]
                                     ]
                                 ),
                                 'font_size' => new TextInput(
@@ -885,11 +910,36 @@ class DefaultDesignTemplates
                                         ),
                                     ]
                                 ),
-                                'font_style' => new FontInput(
+                                'font_style' => new SelectRevealInput(
+                                    [
+                                        'arial' => new InputOption(__('Arial', 'print-my-blog')),
+                                        'courier new' => new InputOption(__('Courier New', 'print-my-blog')),
+                                        'georgia' => new InputOption(__('Georgia', 'print-my-blog')),
+                                        'impact' => new InputOption(__('Impact', 'print-my-blog')),
+                                        'lucida console' => new InputOption(__('Lucida Console', 'print-my-blog')),
+                                        'palatino linotype' => new InputOption(__('Palatino Linotype', 'print-my-blog')),
+                                        'tahoma' => new InputOption(__('Tahoma', 'print-my-blog')),
+                                        'times new roman' => new InputOption(__('Times New Roman', 'print-my-blog')),
+                                        'verdana' => new InputOption(__('Verdana', 'print-my-blog')),
+                                        'custom_font' => new InputOption(__('Custom Font...', 'print-my-blog'))
+                                    ],
                                     [
                                         'default' => 'times new roman',
                                         'html_label_text' => __('Font', 'print-my-blog'),
                                         'html_help_text' => __('Default font used in paragraphs, bulleted lists, tables, etc.'),
+                                    ]
+                                ),
+                                'custom_font' => new FormSection(
+                                    [
+                                        'subsections' => [
+                                            'custom_font_style' => new AdminFileUploaderInput(
+                                                [
+                                                    'default' => '',
+                                                    'html_label_text' => __('Custom Font', 'print-my-blog'),
+                                                    'html_help_text' => __('Specify the URL of a custom font file, or upload one. The formats "wff" and "wff2" work best, but "ttf" and "otf" also work.', 'print-my-blog')
+                                                ]
+                                            ),
+                                        ]
                                     ]
                                 ),
                             ],

@@ -20,37 +20,69 @@ add_action(
 function pmb_enqueue_classic_script()
 {
     global $pmb_design;
-    $css = pmb_design_styles($pmb_design)
-        . 'body{
-                font-size:' . $pmb_design->getSetting('font_size') . ';
-                font-family:' . $pmb_design->getSetting('font_style') . ';
-           }
-           .pmb-posts-header .site-title{
-                font-size:' . $pmb_design->getSetting('main_header_font_size') . ';
-            }
-           .pmb-part h1.pmb-title{
-                font-size:' . $pmb_design->getSetting('main_header_font_size') . ';
-            }
-           span.pmb-footnote{
-                font-family:' . $pmb_design->getSetting('font_style') . ';
-                font-size: calc(' . $pmb_design->getSetting('font_size') . ' * 2 / 3);
-           }
-           h1,h2,h3,h4,h5,h6{
-                font-family:' . $pmb_design->getSetting('header_font_style') . ';
-           }     
-			@page{
-				size: ' . $pmb_design->getSetting('page_width') . ' ' . $pmb_design->getSetting('page_height')
-        . ';}
-        /* 
-            Make the preview appear about the same size as in the PDF. Besides making the preview better,
-            Javascript code that\'s calculating element dimensions will be better too.
-        */
-        @media not print{
-            .pmb-project-content{
-                width: calc(' . $pmb_design->getSetting('page_width') . ' - 54pt - 54pt - 5pt);
-            }
+
+    $css = pmb_design_styles($pmb_design);
+
+    // if they're using a custom font, we'll need to declare the font face then use that font.
+    $header_font = $pmb_design->getSetting('header_font_style');
+    if ($header_font === 'custom_header_font') {
+        $custom_header_font = $pmb_design->getSetting('custom_header_font_style');
+        // get the name from the file's name.
+        $header_font = pmb_get_filename($custom_header_font, true);
+        $css .= '
+        @font-face{
+                font-family: "' . $header_font . '";
+                font-style: normal;
+                font-weight: normal;
+                src : url(' . $custom_header_font . ');
+         }';
+
+    }
+    $main_font = $pmb_design->getSetting('font_style');
+    if ($main_font === 'custom_font') {
+        $custom_font = $pmb_design->getSetting('custom_font_style');
+        $main_font = pmb_get_filename($custom_font, true);
+        $css .= '
+        @font-face{
+                font-family: "' . $main_font . '";
+                font-style: normal;
+                font-weight: normal;
+                src : url(' . $custom_font . ');
+         }';
+
+    }
+
+    $css .= 'body{
+            font-size:' . $pmb_design->getSetting('font_size') . ';
+            font-family:' . $main_font . ';
+       }
+       .pmb-posts-header .site-title{
+            font-size:' . $pmb_design->getSetting('main_header_font_size') . ';
         }
-			';
+       .pmb-part h1.pmb-title{
+            font-size:' . $pmb_design->getSetting('main_header_font_size') . ';
+        }
+       span.pmb-footnote{
+            font-family:' . $main_font . ';
+            font-size: calc(' . $pmb_design->getSetting('font_size') . ' * 2 / 3);
+       }
+       h1,h2,h3,h4,h5,h6{
+            font-family:' . $header_font . ';
+       }     
+        @page{
+            size: ' . $pmb_design->getSetting('page_width') . ' ' . $pmb_design->getSetting('page_height')
+        . ';}
+    /* 
+        Make the preview appear about the same size as in the PDF. Besides making the preview better,
+        Javascript code that\'s calculating element dimensions will be better too.
+    */
+    @media not print{
+        .pmb-project-content{
+            width: calc(' . $pmb_design->getSetting('page_width') . ' - 54pt - 54pt - 5pt);
+        }
+    }
+        ';
+
     if ($pmb_design->getPmbMeta('paragraph_indent')) {
         $css .= ' .pmb-article .post-inner p:not(.has-text-align-center){
                         text-indent:3em;
