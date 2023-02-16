@@ -52,7 +52,7 @@ function pmb_enqueue_classic_script()
 
     }
 
-    $css .= 'body{
+    $css .= 'html{
             font-size:' . $pmb_design->getSetting('font_size') . ';
             font-family:' . $main_font . ';
        }
