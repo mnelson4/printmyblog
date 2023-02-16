@@ -442,6 +442,7 @@ https://youtu.be/uPQ3vqm7A2g
 = 3.22.0 xxxx =
 * Feature: in Pro Print PDFs and ePubs, add design options to set custom fonts
 * Feature: allow uploading font files to website
+* Bugfix: in Pro Print PDFs, apply the chosen font to content in margins (not just the main body)
 
 = 3.21.5 February 13, 2023 =
 * Enhancement: in Pro Print's Edit Content step, give a warning if project is empty
