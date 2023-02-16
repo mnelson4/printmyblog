@@ -15,6 +15,29 @@ class FileUploads
     public function setup()
     {
         add_filter('upload_mimes', [$this, 'filterUploadMimeTypes']);
+        add_filter('wp_check_filetype_and_ext', [$this, 'filterCheckFileType'], 10, 3);
+    }
+
+    /**
+     * Correct the mime types and extension for the font types.
+     * Taken verbatim from the plugin custom-fonts's includes\class-bsf-custom-fonts-admin.php
+     * @param $defaults
+     * @param $file
+     * @param $filename
+     * @return mixed
+     */
+    public function filterCheckFileType( $defaults, $file, $filename )
+    {
+        if ('ttf' === pathinfo($filename, PATHINFO_EXTENSION)) {
+            $defaults['type'] = 'application/x-font-ttf';
+            $defaults['ext'] = 'ttf';
+        }
+
+        if ('otf' === pathinfo($filename, PATHINFO_EXTENSION)) {
+            $defaults['type'] = 'application/x-font-otf';
+            $defaults['ext'] = 'otf';
+        }
+        return $defaults;
     }
 
     /**
@@ -24,8 +47,9 @@ class FileUploads
      */
     public function filterUploadMimeTypes($mimes)
     {
+        // servers are inconsistent about what MIME type they detect font files to be. Which is why we also filter wp_check_filetype_and_ext.
         $mimes['ttf'] = 'application/x-font-ttf';
-        $mimes['otf'] = 'application/x-font-opentype';
+        $mimes['otf'] = 'application/x-font-otf';
         $mimes['wff'] = 'application/font-woff';
         $mimes['wff2'] = 'application/font-woff2';
         return $mimes;
