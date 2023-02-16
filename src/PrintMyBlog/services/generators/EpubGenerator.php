@@ -102,6 +102,12 @@ class EpubGenerator extends HtmlBaseGenerator
             $css .= '/** design styles */ ' . pmb_get_contents($style_file) . '
             /** common styles */ ' . pmb_get_contents(PMB_ASSETS_DIR . 'styles/pmb-print-page-common.css');
         }
+        $css = apply_filters(
+            '\PrintMyBlog\services\generators\EpubGenerator::enqueueStylesAndScripts $css',
+            $css,
+            $this->design,
+            $this->project
+        );
         wp_add_inline_style(
             'pmb_pro_page',
             $css

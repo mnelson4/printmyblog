@@ -36,6 +36,15 @@ class AdminFileUploaderDisplay extends DisplayBase
             [],
             '1.0.0'
         );
+        wp_localize_script(
+            'pmb-media-uploader',
+            'twine_media_uploader',
+            [
+                'translations' => [
+                    'choose' => __('Choose File', 'print-my-blog')
+                ]
+            ]
+        );
         parent::enqueueJs();
     }
 
@@ -52,7 +61,7 @@ class AdminFileUploaderDisplay extends DisplayBase
         $html = $html_generator->link(
             '#',
             __('Choose File', 'print-my-blog'),
-            __('click to add an image', 'print-my-blog'),
+            __('Click to select an existing file, or upload a new one.', 'print-my-blog'),
             '',
             'twine_media_upload button'
         );

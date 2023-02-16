@@ -168,6 +168,7 @@ class Context extends BaseContext
                 'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
                 'PrintMyBlog\services\FileFormatRegistry'   => self::REUSE,
             ],
+            'PrintMyBlog\system\FileUploads' => [],
         ];
     }
 }

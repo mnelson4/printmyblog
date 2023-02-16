@@ -80,6 +80,7 @@ return array(
     'PrintMyBlog\\system\\Capabilities' => $baseDir . '/src/PrintMyBlog/system/Capabilities.php',
     'PrintMyBlog\\system\\Context' => $baseDir . '/src/PrintMyBlog/system/Context.php',
     'PrintMyBlog\\system\\CustomPostTypes' => $baseDir . '/src/PrintMyBlog/system/CustomPostTypes.php',
+    'PrintMyBlog\\system\\FileUploads' => $baseDir . '/src/PrintMyBlog/system/FileUploads.php',
     'PrintMyBlog\\system\\Init' => $baseDir . '/src/PrintMyBlog/system/Init.php',
     'Twine\\admin\\news\\DashboardNews' => $baseDir . '/src/Twine/admin/news/DashboardNews.php',
     'Twine\\compatibility\\CompatibilityBase' => $baseDir . '/src/Twine/compatibility/CompatibilityBase.php',

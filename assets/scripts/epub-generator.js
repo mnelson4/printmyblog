@@ -28,7 +28,16 @@ function pmb_create_epub(){
         numberChaptersInTOC:false,
         cover:pmb_pro.cover,
         css:pmb_pro.css,
-        version: parseInt(pmb_pro.version)
+        version: parseInt(pmb_pro.version),
+        // fonts:[
+        //     {
+        //         filename:"Roboto.ttf",
+        //         url:"http://cmljnelson.test/wp-content/uploads/fonts/Roboto/Roboto-Regular.ttf"
+        //     }
+        // ]
+    };
+    if(typeof(pmb_design_options.fonts_to_embed) !== 'undefined'){
+        epub_options.fonts = pmb_design_options.fonts_to_embed;
     }
     var sections = [];
     var found_toc = false;

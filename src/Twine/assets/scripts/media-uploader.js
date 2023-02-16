@@ -9,16 +9,16 @@ jQuery(document).ready(function ($) {
     var custom_uploader;
     $('.twine_media_upload').click(function ( upload_btn ) {
         upload_btn.preventDefault();
-        //If the uploader object has already been created, reopen the dialog
-        if (custom_uploader) {
-            custom_uploader.open();
-            return;
-        }
         //Extend the wp.media object
+        if( typeof(twine_media_uploader) !== 'undefined' && typeof(twine_media_uploader.translations.choose) !== 'undefined'){
+            var twine_media_uploader_choose_text = twine_media_uploader.translations.choose;
+        } else {
+            var twine_media_uploader_choose_text = 'Choose Image';
+        }
         custom_uploader = wp.media.frames.file_frame = wp.media({
-            title: 'Choose Image',
+            title: twine_media_uploader_choose_text,
             button: {
-                text: 'Choose Image'
+                text: twine_media_uploader_choose_text
             },
             frame: 'select',
             multiple: false
@@ -29,6 +29,8 @@ jQuery(document).ready(function ($) {
             if ( typeof attachment.url !== 'undefined' ) {
                 $(upload_btn.target).parents('.twine_media_uploader_area').find('.twine_media_image').attr('src', attachment.url);
                 $(upload_btn.target).parents('.twine_media_uploader_area').find('.twine_media_url').val(attachment.url);
+                // clean up.
+                custom_uploader.close();
             }
         });
         //Open the uploader dialog

@@ -95,6 +95,10 @@ class Init extends BaseInit
     protected function registerStuff()
     {
         load_plugin_textdomain('print-my-blog', false, PMB_DIRNAME . '/lang');
+
+        $uploads = $this->context->reuse('PrintMyBlog\system\FileUploads');
+        $uploads->setup();
+
         /**
          * @var $cpt CustomPostTypes
          */

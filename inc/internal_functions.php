@@ -422,3 +422,11 @@ function pmb_ajax_url(){
         site_url('/')
     );
 }
+
+function pmb_get_filename($url, $remove_extension = false){
+    $filename_and_extension = basename($url);
+    if($remove_extension){
+        $filename_and_extension = substr($filename_and_extension, 0, strpos($filename_and_extension, '.'));
+    }
+    return $filename_and_extension;
+}

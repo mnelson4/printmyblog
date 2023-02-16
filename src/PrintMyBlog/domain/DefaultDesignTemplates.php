@@ -421,6 +421,60 @@ class DefaultDesignTemplates
                             ],
                             'generic_sections'
                         );
+                        $form->addSubsections(
+                            [
+                                'fonts' => new FormSectionDetails(
+                                    [
+                                        'html_summary' => __('Font Settings', 'print-my-blog'),
+                                        'subsections' => [
+                                            'main_header_font_size' => new TextInput(
+                                                [
+                                                    'default' => '24pt',
+                                                    'html_label_text' => __('Title page and Part Header Font Size', 'print-my-blog'),
+                                                    'html_help_text' => sprintf(
+                                                    // translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag
+                                                        __('Font size used for the default title page’s and part’s header (all other headers’ sizes are derived from the main font size). Use any recognized %1$sCSS font-size keyword%2$s (like "large", "medium", "small") or a %3$slength in any units%2$s (eg "14pt", "50%%", or "10px").'),
+                                                        '<a href="https://www.w3schools.com/cssref/pr_font_font-size.asp" target="_blank">',
+                                                        '</a>',
+                                                        '<a href="https://www.w3schools.com/cssref/css_units.asp" target="_blank">'
+                                                    ),
+                                                ]
+                                            ),
+                                            'custom_header_font' => new AdminFileUploaderInput(
+                                                [
+                                                    'default' => '',
+                                                    'html_label_text' => __('Custom Header Font', 'print-my-blog'),
+                                                    'html_help_text' => __('Default font to use for headers of articles, parts, etc. Font files with extension "ttf" work with most eBook readers. Leave blank to use the default font.', 'print-my-blog')
+                                                ]
+                                            ),
+                                            'font_size' => new TextInput(
+                                                [
+                                                    'default' => '12pt',
+                                                    'html_label_text' => __('Font Size', 'print-my-blog'),
+                                                    'html_help_text' => sprintf(
+                                                    // translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag
+                                                        __('Use any recognized %1$sCSS font-size keyword%2$s (like "large", "medium", "small") or a %3$slength in any units%2$s (eg "14pt", "50%%", or "10px").'),
+                                                        '<a href="https://www.w3schools.com/cssref/pr_font_font-size.asp" target="_blank">',
+                                                        '</a>',
+                                                        '<a href="https://www.w3schools.com/cssref/css_units.asp" target="_blank">'
+                                                    ),
+                                                ]
+                                            ),
+                                            'custom_font' => new AdminFileUploaderInput(
+                                                [
+                                                    'default' => '',
+                                                    'html_label_text' => __('Custom Font', 'print-my-blog'),
+                                                    'html_help_text' => __('Default font used in paragraphs, lists, tables, captions, etc. Font files with extension "ttf" work with most eBook readers. Leave blank to use the default font.', 'print-my-blog')
+                                                ]
+                                            ),
+
+                                        ],
+                                    ]
+                                ),
+                            ],
+                            'generic_sections',
+                            true
+                        );
                         return $form;
                     },
                     'project_form_callback' => function (Design $design) {
