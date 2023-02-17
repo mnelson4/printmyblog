@@ -442,7 +442,9 @@ https://youtu.be/uPQ3vqm7A2g
 = 3.22.0 xxxx =
 * Feature: in Pro Print PDFs and ePubs, add design options to set custom fonts
 * Feature: allow uploading font files to website
+* Feature: in Pro Print Classic Digital PDF and Classic Print-Ready PDF designs, add a "Show a Dividing Line Between Posts" setting
 * Bugfix: in Pro Print PDFs, apply the chosen font to content in margins (not just the main body)
+* Bugfix: in Pro Print Classic Digital PDF and Classic Print-Ready PDF designs, respect the "Each Post Begins on a New Page" setting
 
 = 3.21.5 February 13, 2023 =
 * Enhancement: in Pro Print's Edit Content step, give a warning if project is empty
