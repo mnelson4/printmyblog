@@ -89,6 +89,12 @@ function pmb_enqueue_classic_script()
                         margin:0;
                     }';
     }
+    if($pmb_design->getSetting('page_per_post')){
+        $css .= '
+            .pmb-section-wrapper:not(.pmb-first-section-wrapper){
+                break-before:page;
+        }';
+    }
     // if we're removing images, figures in image blocks become crazy tall because they're display:table-caption.
     // but set them just to a regular block and they look fine.
     // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison -- we want '0' to match 0.

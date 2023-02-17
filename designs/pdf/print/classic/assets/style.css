@@ -196,9 +196,6 @@ Ask PDF viewers to display pages side-by-side by default.
         string-set: article-title content();
     }
 
-    .pmb-section-wrapper:not(.pmb-first-section-wrapper){
-        break-before:page;
-    }
     div.pmb-part-wrapper.pmb-section-wrapper{
         break-before:right;
     }

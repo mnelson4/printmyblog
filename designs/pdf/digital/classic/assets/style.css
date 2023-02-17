@@ -134,9 +134,7 @@
         string-set: article-title content();
     }
 
-    .pmb-section-wrapper:not(.pmb-first-section-wrapper){
-        break-before:page;
-    }
+
 
     span.pmb-footnote{
         float:footnote;
