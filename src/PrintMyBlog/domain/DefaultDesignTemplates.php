@@ -848,6 +848,11 @@ class DefaultDesignTemplates
                             'html_help_text' => __('Whether to force posts to always start on a new page. Doing so makes the page more legible, but uses more paper.', 'print-my-blog'),
                         ]
                     ),
+                    'dividing_line' => new YesNoInput(
+                        [
+                            'html_label_text' => __('Show a Dividing Line Between Posts', 'print-my-blog'),
+                        ]
+                    ),
                     'fonts' => new FormSectionDetails(
                         [
                             'html_summary' => __('Font Settings', 'print-my-blog'),

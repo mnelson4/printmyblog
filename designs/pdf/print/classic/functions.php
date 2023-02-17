@@ -95,6 +95,9 @@ function pmb_enqueue_classic_script()
                 break-before:page;
         }';
     }
+    if ($pmb_design->getSetting('dividing_line')) {
+        $css .= '.pmb-main-matter .entry-content{border-bottom:1px solid gray;box-decoration-break: slice;}';
+    }
     // if we're removing images, figures in image blocks become crazy tall because they're display:table-caption.
     // but set them just to a regular block and they look fine.
     // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison -- we want '0' to match 0.
