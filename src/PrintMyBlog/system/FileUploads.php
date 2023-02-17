@@ -28,12 +28,13 @@ class FileUploads
      */
     public function filterCheckFileType( $defaults, $file, $filename )
     {
-        if ('ttf' === pathinfo($filename, PATHINFO_EXTENSION)) {
+        $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+        if ('ttf' === $extension) {
             $defaults['type'] = 'application/x-font-ttf';
             $defaults['ext'] = 'ttf';
         }
 
-        if ('otf' === pathinfo($filename, PATHINFO_EXTENSION)) {
+        if ('otf' === $extension) {
             $defaults['type'] = 'application/x-font-otf';
             $defaults['ext'] = 'otf';
         }
