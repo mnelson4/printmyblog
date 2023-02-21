@@ -400,7 +400,7 @@ class DefaultDesignTemplates
                     'dir'                   => PMB_DESIGNS_DIR . 'epub/classic',
                     'url' => plugins_url('designs/epub/classic', PMB_MAIN_FILE),
                     'default' => 'classic_epub',
-                    'docs' => 'https://printmy.blog/user-guide/pdf-design/7-classic-word-document/',
+                    'docs' => 'https://printmy.blog/user-guide/pdf-design/6-classic-epub-ebook/',
                     'supports' => [
                         'front_matter',
                         'part',
@@ -527,7 +527,7 @@ class DefaultDesignTemplates
                     'dir'                   => PMB_DESIGNS_DIR . 'word/classic',
                     'url' => plugins_url('designs/word/classic', PMB_MAIN_FILE),
                     'default' => 'classic_word',
-                    'docs' => 'https://printmy.blog/user-guide/', // update
+                    'docs' => 'https://printmy.blog/user-guide/pdf-design/7-classic-word-document/',
                     'supports' => [
                         'front_matter',
                         'part',
