@@ -442,6 +442,7 @@ https://youtu.be/uPQ3vqm7A2g
 = 3.22.0 February 20, 2023 =
 * Feature: in Pro Print PDFs and ePubs, add design options to set custom fonts
 * Feature: allow uploading font files to website
+* Feature: add Chinese translations
 * Feature: in Pro Print Classic Digital PDF and Classic Print-Ready PDF designs, add a "Show a Dividing Line Between Posts" setting
 * Bugfix: in Pro Print PDFs, apply the chosen font to content in margins (not just the main body)
 * Bugfix: in Pro Print Classic Digital PDF and Classic Print-Ready PDF designs, respect the "Each Post Begins on a New Page" setting
