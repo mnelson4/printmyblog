@@ -2,8 +2,6 @@
 
 namespace PrintMyBlog\domain;
 
-use Dompdf\Renderer\Text;
-use PrintMyBlog\entities\SectionTemplate;
 use PrintMyBlog\helpers\ImageHelper;
 use PrintMyBlog\orm\entities\Design;
 use Twine\forms\base\FormSectionDetails;
@@ -13,8 +11,6 @@ use Twine\forms\inputs\AdminFileUploaderInput;
 use Twine\forms\inputs\CheckboxMultiInput;
 use Twine\forms\inputs\ColorInput;
 use Twine\forms\inputs\DatepickerInput;
-use Twine\forms\inputs\FloatInput;
-use Twine\forms\inputs\FontInput;
 use Twine\forms\inputs\FormInputBase;
 use Twine\forms\inputs\IntegerInput;
 use Twine\forms\inputs\SelectInput;
@@ -23,8 +19,6 @@ use Twine\forms\inputs\TextAreaInput;
 use Twine\forms\inputs\TextInput;
 use Twine\forms\inputs\WysiwygInput;
 use Twine\forms\inputs\YesNoInput;
-use Twine\forms\strategies\display\TextInputDisplay;
-use Twine\forms\strategies\validation\FullHtmlValidation;
 use Twine\forms\strategies\validation\TextValidation;
 
 /**
