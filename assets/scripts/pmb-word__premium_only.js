@@ -24,7 +24,7 @@ function pmb_prepare_and_export_doc(){
 function pmb_export_as_doc(){
     var print_page_head_jq = jQuery('head');
     print_page_head_jq.find('script').remove();
-    var word_doc_head = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
+    var word_doc_head = "<html xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o='urn:schemas-microsoft-com:office:office' "+
         "xmlns:w='urn:schemas-microsoft-com:office:word' "+
         "xmlns='http://www.w3.org/TR/REC-html40'>"+
         "<head><meta charset='utf-8'>" +
@@ -38,14 +38,10 @@ function pmb_export_as_doc(){
         "</w:WordDocument>" +
         "</xml>" +
         "<![endif]-->" +
-        "<style> <!-- " +
-"@page" +
-"{" +
-    "size: 21cm 29.7cm;  /* A4 */" +
-    "margin: 2cm 2cm 2cm 2cm; /* Margins: 2 cm on each side */"+
-    "mso-page-orientation: portrait;" +
-"}"+
-"-->" +
+        "<style> " +
+        "v:* {behavior:url(#default#VML);}\n" +
+        "o:* {behavior:url(#default#VML);}\n" +
+        "w:* {behavior:url(#default#VML);}" +
         "</style>" +
         print_page_head_jq.html() +
         "</head><body>";
