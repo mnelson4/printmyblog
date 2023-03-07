@@ -17,6 +17,11 @@ global $pmb_design;
 <div class="pmb-posts pmb-project-content site">
     <div class=Section1><table style='margin-left:50in;'><tr style='height:1pt;mso-height-rule:exactly'>
             <td>
+                <div style='mso-element:header' id=fh1>
+                    <?php echo do_shortcode($pmb_design->getSetting('first_header'));?>
+                </div>
+            </td>
+            <td>
                 <div style='mso-element:header' id=h1>
                     <?php echo do_shortcode($pmb_design->getSetting('header'));?>
                 </div>

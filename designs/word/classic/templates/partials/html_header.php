@@ -15,8 +15,10 @@
         @page Section1 {
             mso-header-margin:0.5in;
             mso-header: h1;
+            mso-first-header: fh1;
             mso-footer-margin:0.5in;
             mso-footer: f1;
+            mso-title-page:yes;
         }
 
         div.Section1 {page:Section1;}

@@ -256,3 +256,10 @@ Hide Hustle Slide-In
 .pmb-posts .pld-like-dislike-wrap{
     display:none;
 }
+
+/**
+ * Hide overlays added by Popup maker: https://wordpress.org/plugins/popup-maker/
+ */
+.pum-overlay{
+    display:none;
+}

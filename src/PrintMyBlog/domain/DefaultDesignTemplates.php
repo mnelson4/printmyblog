@@ -533,27 +533,22 @@ class DefaultDesignTemplates
                         $form->addSubsections(
                             [
 
-                                'header' => new TextAreaInput(
+                                'first_header' => new TextAreaInput(
                                     [
-                                        'html_label_text' => __('Document Header', 'print-my-blog'),
-                                        'html_help_text' => __('Content to appear in top margin area', 'print-my-blog')
+                                        'html_label_text' => __('Document Header on First Page', 'print-my-blog'),
+                                        'html_help_text' => __('Content to appear in top margin area but only on the first page.', 'print-my-blog')
                                     ]
                                 ),
-//                                'header_pages' => new SelectInput(
-//                                    [
-//                                        'all' => new InputOption(__('All Pages', 'print-my-blog')),
-//                                        'not_first' => new InputOption(__('All Pages Except First', 'print-my-blog')),
-//                                        'first_only' => new InputOption(__('First Page Only', 'print-my-blog')),
-//                                    ],
-//                                    [
-//                                        'html_label_text' => __('Pages To Use Header', 'print-my-blog'),
-//                                        'html_help_text' => __('Which pages should use this header (all others will use be blank)', 'print-my-blog')
-//                                    ]
-//                                ),
+                                'header' => new TextAreaInput(
+                                    [
+                                        'html_label_text' => __('Document Header on Subsequent Pages', 'print-my-blog'),
+                                        'html_help_text' => __('Content to appear in top margin area on all pages except the first page.', 'print-my-blog')
+                                    ]
+                                ),
                                 'footer' => new TextAreaInput(
                                     [
                                         'html_label_text' => __('Document Footer', 'print-my-blog'),
-                                        'html_help_text' => __('Content to appear in bottom margin area', 'print-my-blog')
+                                        'html_help_text' => __('Content to appear in bottom margin area.', 'print-my-blog')
                                     ]
                                 ),
                                 'convert_videos' => new YesNoInput(
