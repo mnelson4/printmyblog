@@ -199,6 +199,33 @@ class Project extends PostWrapper
         );
     }
 
+    /**
+     * Projects created from a single post instead of the traditional, longer way. No UI for this yet, but there will be...
+     */
+    protected function isPostProject(){
+        return false;
+    }
+
+    /**
+     * On post-projects, gets the project's pos. On regular projects, it's the first post.
+     * @return WP_Post|null
+     */
+    public function getMainPost(){
+        if( $this->isPostProject()){
+            return $this->getWpPost();
+        } else {
+            $one_sections = $this->section_manager->getFlatSectionsFor(
+                $this->getWpPost()->ID,
+                1
+            );
+            if(! empty($one_sections)){
+                $first_section = reset($one_sections);
+                return get_post($first_section->getPostId());
+            }
+            return null;
+        }
+    }
+
 
     /**
      * @param string $project_format_slug

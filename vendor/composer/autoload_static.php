@@ -38,6 +38,7 @@ class ComposerStaticInitaa3acace4531482e132095eacb9548bb
 
     public static $classMap = array (
         'PrintMyBlog\\compatibility\\DetectAndActivate' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/DetectAndActivate.php',
+        'PrintMyBlog\\compatibility\\plugins\\AdvancedCustomFields' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/AdvancedCustomFields.php',
         'PrintMyBlog\\compatibility\\plugins\\CoBlocks' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/CoBlocks.php',
         'PrintMyBlog\\compatibility\\plugins\\ContactForm7' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/ContactForm7.php',
         'PrintMyBlog\\compatibility\\plugins\\EasyFootnotes' => __DIR__ . '/../..' . '/src/PrintMyBlog/compatibility/plugins/EasyFootnotes.php',

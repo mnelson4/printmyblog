@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'PrintMyBlog\\compatibility\\DetectAndActivate' => $baseDir . '/src/PrintMyBlog/compatibility/DetectAndActivate.php',
+    'PrintMyBlog\\compatibility\\plugins\\AdvancedCustomFields' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/AdvancedCustomFields.php',
     'PrintMyBlog\\compatibility\\plugins\\CoBlocks' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/CoBlocks.php',
     'PrintMyBlog\\compatibility\\plugins\\ContactForm7' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/ContactForm7.php',
     'PrintMyBlog\\compatibility\\plugins\\EasyFootnotes' => $baseDir . '/src/PrintMyBlog/compatibility/plugins/EasyFootnotes.php',

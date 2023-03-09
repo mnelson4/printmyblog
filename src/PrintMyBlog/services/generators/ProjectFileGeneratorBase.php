@@ -133,6 +133,9 @@ abstract class ProjectFileGeneratorBase
      */
     protected function startGenerating()
     {
+        // Setup the "main post" for use in templates before the first article.
+        global $post;
+        $post = $this->project->getMainPost();
         // show protected posts' bodies as normal.
         add_filter('post_password_required', '__return_false');
         // don't add "protected" or "private" onto post titles when generating

@@ -2,6 +2,7 @@
 
 namespace PrintMyBlog\compatibility;
 
+use PrintMyBlog\compatibility\plugins\AdvancedCustomFields;
 use PrintMyBlog\compatibility\plugins\CoBlocks;
 use PrintMyBlog\compatibility\plugins\ContactForm7;
 use PrintMyBlog\compatibility\plugins\EasyFootnotes;
@@ -74,6 +75,9 @@ class DetectAndActivate
             }
             if (defined('PMPRO_VERSION')) {
                 $compatiblity_mods_to_activate[] = new PaidMembershipsPro();
+            }
+            if( class_exists('ACF')){
+                $compatiblity_mods_to_activate[] = new AdvancedCustomFields();
             }
             $this->compatibility_mods = $compatiblity_mods_to_activate;
         }
