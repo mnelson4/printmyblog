@@ -8,6 +8,7 @@ use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;
 use PrintMyBlog\services\ExternalResourceCache;
 use Twine\services\filesystem\File;
+use WP_Query;
 
 /**
  * Class HtmlBaseGenerator
@@ -28,6 +29,21 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
      */
     protected function startGenerating()
     {
+        // Setup the "main post" for use in templates before the first article.
+        $post = $this->project->getMainPost();
+
+        $wp_the_query = new WP_Query(
+            [
+                'post_status' => 'any',
+                'post__in' => [$post->ID],
+                'showposts' => count([$post->ID]),
+                'post_type' => $post->post_type,
+            ]
+        );
+        $wp_the_query->have_posts();
+        $wp_the_query->the_post();
+        $this->setupPostData();
+
         parent::startGenerating();
         // Try to get enqueued after the theme, if we're doing that, so we get precedence.
         add_action('wp_enqueue_scripts', [$this, 'enqueueStylesAndScripts'], 1000);
@@ -35,6 +51,8 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
         add_filter('should_load_block_editor_scripts_and_styles', '__return_true');
         add_action('pmb_pro_print_window', [$this, 'addPrintWindowToPage']);
         $this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT);
+
+        wp_reset_postdata();
     }
 
     /**
