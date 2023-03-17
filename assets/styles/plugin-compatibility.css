@@ -154,13 +154,6 @@ Hide Axeptio overlay https://support.axeptio.eu/hc/en-gb/articles/4404040521105-
 }
 
 /**
-Hide some overlay using the prefix "pum" encountered on https://durbanneurolaserclinic.co.za
- */
-.pum-overlay{
-    display:none !important;
-}
-
-/**
 Hide GDPR Cookie Consent
  */
 #cookie-law-info-bar{
@@ -184,9 +177,14 @@ Announcer plugin integration
 Elementor.
 Turn its flexboxes into regular blocks so pagebreaks work better again
  */
+.pmb-posts .elementor-row{
+    display:block;
+}
+
 .pmb-posts .elementor-section .elementor-container{
     display:block;
 }
+
 /* Elementor invisible usually just hides things before showing them via an animation. But we have no animation. We want to just see the stuff.
 */
 .pmb-posts .elementor-invisible{
@@ -200,7 +198,7 @@ Turn its flexboxes into regular blocks so pagebreaks work better again
     display:block;
     width:100%;
 }
-.pmb-posts .elementor:not(.elementor-bc-flex-widget) .elementor-widget-wrap{
+.pmb-posts .elementor:not(.elementor-bc-flex-widget) .elementor-widget-wrap, .pmb-posts .elementor:not(.elementor-bc-flex-widget) .elementor-column-wrap{
     display:block;
 }
 

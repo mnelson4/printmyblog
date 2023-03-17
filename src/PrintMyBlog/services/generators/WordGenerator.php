@@ -73,15 +73,17 @@ class WordGenerator extends HtmlBaseGenerator
             [],
             filemtime(PMB_STYLES_DIR . 'pmb-word.css')
         );
-        $style_file = $this->getDesignDir() . 'assets/style.css';
 
+        $style_file = $this->getDesignDir() . 'assets/style.css';
         if (file_exists($style_file)) {
-            $css .= pmb_get_contents($style_file);
+            wp_enqueue_style(
+                'pmb-design',
+                $this->getDesignAssetsUrl() . 'style.css',
+                ['pmb_print_common', 'pmb-plugin-compatibility'],
+                filemtime($style_file),
+                null
+            );
         }
-        wp_add_inline_style(
-            'pmb_pro_page',
-            $css
-        );
 
         $script_file = $this->getDesignDir() . 'assets/script.js';
         if (file_exists($script_file)) {

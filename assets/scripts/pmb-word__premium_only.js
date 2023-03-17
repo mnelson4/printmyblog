@@ -4,6 +4,7 @@
 function pmb_prepare_and_export_doc(){
     pmb_replace_links_for_word();
     pmb_inline_css();
+    jQuery('body :hidden:not(script, style, link)').remove();
     // word doesn't know how to handle figcaptions (it shows them inline) so replace with paragraphs
     jQuery('figcaption').replaceWith(function () {
         return "<p>" + jQuery(this).text() + "</p>";

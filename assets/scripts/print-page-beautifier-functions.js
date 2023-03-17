@@ -13,7 +13,7 @@ function pmb_remove_unsupported_content(){
     }).remove();
     // prevent MathJax-LaTeX (https://wordpress.org/plugins/mathjax-latex/) from adding a page empty pages
     // and remove any totally empty divs
-    jQuery('body>*').each(function(){
+    jQuery('body>*:not(link)').each(function(){
         var element = jQuery(this);
         if(this.innerHTML === ''){
             element.remove();
@@ -749,10 +749,14 @@ function pmb_inline_css(){
         var jqe = jQuery(element);
         var url = jqe.attr('href');
         if(url){
-            jQuery.get(url).success(function(data,status){
+            jQuery.ajax(
+                url,
+                {
+                    async: false
+                }).success(function(data,status){
                 jqe.replaceWith('<style><!-- PMB inlined from ' + url + ' -->\r\n' + data + '</style>');
             });
         }
 
-    })
+    });
 }

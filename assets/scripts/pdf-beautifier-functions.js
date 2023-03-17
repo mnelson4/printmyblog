@@ -124,9 +124,11 @@ function PmbToc(){
  */
 function pmb_pdf_plugin_fixups(){
     // On any Elementor rows, use the CSS columns and count the number of column DIVs
-    jQuery('.elementor-row').each(function(){
+    jQuery('.elementor-row, .elementor-container').each(function(){
         var jqe_row = jQuery(this);
         var columns = jqe_row.find('.elementor-column').length;
-        jqe_row.css('columns', columns.toString());
+        if(columns){
+            jqe_row.css('columns', columns.toString());
+        }
     });
 }
