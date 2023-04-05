@@ -180,7 +180,7 @@ class ProjectGeneration
             $start = $upload_dir_info['baseurl'];
         }
         return $start . '/pmb/generated/' . $this->project->code() . '/' . $this->format->slug()
-            . '/' . rawurlencode($this->getFileName()) . '.html?uniqueness=' . current_time('mysql');
+            . '/' . rawurlencode($this->getFileName()) . '.html?uniqueness=' . current_time('timestamp');
     }
 
     /**

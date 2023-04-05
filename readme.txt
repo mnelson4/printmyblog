@@ -439,14 +439,17 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.23.2 xxxx =
+= 3.23.2 April 5, 2023  =
 * Bugfix: in Pro Print, avoid losing styles if there are warnings on the print page
+* Bugfix: in Pro Print with Pro PDF Service, prevent "Filesystem access not allowed" error because of relative URLs
+* Bugfix: in Pro Print content editing step, prevent exceeding maximum nesting level by dragging
 
-= 3.23.1 xxxx =
+= 3.23.1 March 10, 2023 =
 * Bugfix: in Pro Print, avoid post being reset by setting up WP_Query properly
 
-= 3.23.0 xxxx =
+= 3.23.0 March 9, 2023 =
 * Feature: in Pro Print Word Documents, add support for headers and footers to documents
+Bugfix: in Pro Print, prevent 403 error for some webservers because we used spaces and colons in the URL
 
 = 3.22.0 February 20, 2023 =
 * Feature: in Pro Print PDFs and ePubs, add design options to set custom fonts
