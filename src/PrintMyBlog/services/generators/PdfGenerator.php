@@ -109,7 +109,7 @@ class PdfGenerator extends HtmlBaseGenerator
                         'ignore_resource_errors' => true,
                         'pipeline' => '9.2',
                         'prince_options' => [
-                            'base_url' => site_url(),
+                            'baseurl' => site_url(),
                             'media' => 'print',
                             'http_timeout' => 60,
                             'http_insecure' => true,

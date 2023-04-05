@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.22.1
+Stable tag: 3.22.2
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -439,7 +439,10 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.22.1 xxxxxx =
+= 3.22.2 =
+* Bugfix: in Pro Print with Pro PDF Service, prevent "Filesystem access not allowed" error because of relative URLs
+
+= 3.22.1 March 10, 2023 =
 * Bugfix: in Pro Print, prevent 403 error for some webservers because we used spaces and colons in the URL
 
 = 3.22.0 February 20, 2023 =
