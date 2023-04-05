@@ -439,8 +439,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.22.2 =
+= 3.22.2 April 5, 2023 =
 * Bugfix: in Pro Print with Pro PDF Service, prevent "Filesystem access not allowed" error because of relative URLs
+* Bugfix: in Pro Print content editing step, prevent exceeding maximum nesting level by dragging
 
 = 3.22.1 March 10, 2023 =
 * Bugfix: in Pro Print, prevent 403 error for some webservers because we used spaces and colons in the URL

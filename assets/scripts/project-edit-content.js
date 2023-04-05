@@ -595,6 +595,9 @@ function pmb_maybe_add_sortable_to_item(sortable_selection, item_selection){
 	} else {
 		var sortable_items = item_selection.children('.pmb-sortable');
 		if(sortable_items.length){
+			// remove sub-items because they're too far nested now.
+			item_selection.find('.pmb-sortable .pmb-project-item').remove();
+			// and hide the sorter on these now-leaf nodes
 			if(typeof sortable_items[0].sorter !== 'undefined'){
 				sortable_items[0].sorter.destroy();
 			}
