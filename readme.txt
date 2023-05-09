@@ -439,6 +439,10 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.23.3 xxx =
+* Enhancement: in Pro Print, note that Mayer Magazine's pagebreaks work best with Pro PDF Service; not so great with browsers
+* Bugfix: in Pro Print's Mayer Magazine avoid warning when Cover Preamble is blank
+
 = 3.23.2 April 5, 2023  =
 * Bugfix: in Pro Print, avoid losing styles if there are warnings on the print page
 * Bugfix: in Pro Print with Pro PDF Service, prevent "Filesystem access not allowed" error because of relative URLs

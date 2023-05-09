@@ -317,7 +317,7 @@ class DefaultDesignTemplates
                                     'page_per_post' => new YesNoInput(
                                         [
                                             'default' => false,
-                                            'html_label_text' => __('Each Post Begins on a New Page', 'print-my-blog'),
+                                            'html_label_text' => __('Each Post Begins on a New Page', 'print-my-blog') . pmb_pro_better(__('Browser support for pagebreaks on columns is typically not very good.', 'print-my-blog')),
                                             'html_help_text' => __('Whether to force posts to always start on a new page. Doing so makes the page more legible, but uses more paper.', 'print-my-blog'),
                                         ]
                                     ),
