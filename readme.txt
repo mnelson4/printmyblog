@@ -449,7 +449,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.23.0 March 9, 2023 =
 * Feature: in Pro Print Word Documents, add support for headers and footers to documents
-Bugfix: in Pro Print, prevent 403 error for some webservers because we used spaces and colons in the URL
+* Bugfix: in Pro Print, prevent 403 error for some webservers because we used spaces and colons in the URL
 
 = 3.22.0 February 20, 2023 =
 * Feature: in Pro Print PDFs and ePubs, add design options to set custom fonts
