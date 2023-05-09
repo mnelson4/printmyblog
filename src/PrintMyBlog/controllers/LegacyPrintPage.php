@@ -32,7 +32,7 @@ class LegacyPrintPage extends BaseController
     {
         add_filter(
             'template_include',
-            array($this, 'templateRedirect'),
+            array($this, 'templateInclude'),
             /**
             After Elementor at priority 12,
             Enfold theme at the ridiculous priority 20,000...
@@ -44,11 +44,20 @@ class LegacyPrintPage extends BaseController
     }
 
     /**
+     * @param $template
+     * @return string
+     * @deprecated since 2.23.0 use LegacyPrintPage::templateInclude() instead
+     */
+    public function templateRedirect($template){
+        return $this->templateInclude($template);
+    }
+
+    /**
      * Determines if the request is for our page generator page, and if so, uses our template for it.
      * @param string $template
      * @since 1.0.0
      */
-    public function templateRedirect($template)
+    public function templateInclude($template)
     {
         // Allow linking directly to a print page without using a form.
         // phpcs:disable WordPress.Security.NonceVerification.Recommended

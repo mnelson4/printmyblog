@@ -11,6 +11,7 @@ use PrintMyBlog\system\Context;
 use Twine\controllers\BaseController;
 use Twine\helpers\Array2;
 use WP_Post;
+use PrintMyBlog\domain\DefaultFileFormats;
 
 /**
  * Class PmbFrontend
@@ -28,6 +29,11 @@ class Frontend extends BaseController
      * Request variable indicating a request like AJAX
      */
     const PMB_AJAX_INDICATOR = 'pmb_ajax';
+
+    /**
+     * Request variable indicating a request to generate a project
+     */
+    const PMB_LOADING_PAGE_INDICATOR = 'pmb_loading';
 
     /**
      * Action indicating we should generate a project or check its status.
@@ -78,6 +84,12 @@ class Frontend extends BaseController
         add_filter(
             'template_redirect',
             array($this, 'templateRedirect'),
+            10
+        );
+
+        add_filter(
+            'template_include',
+            array($this, 'templateInclude'),
             /**
             After Elementor at priority 12,
             Enfold theme at the ridiculous priority 20,000...
@@ -148,54 +160,97 @@ class Frontend extends BaseController
      * @param string $template
      * @deprecated 2.2.3. Instead use `PrintMyBlog/controllers/PmbPrintPage::templateRedirect`
      */
-    public function templateRedirect($template)
+    public function templateInclude($template)
     {
-        // Basically do AJAX logic. We used to simply use AJAX endpoint, but it sets IS_ADMIN to true,
-        // which makes lots of plugins malfunction. Plus, many legitimately think they don't need to enqueue
-        // scripts on AJAX requests.
 
-        if (isset($_REQUEST[self::PMB_AJAX_INDICATOR], $_REQUEST['action']) && $_REQUEST['action'] === self::PMB_PROJECT_STATUS_ACTION) {
-            if (! isset($_POST['_nonce']) || ! wp_verify_nonce(sanitize_key($_POST['_nonce']), 'pmb-project-edit')) {
-                wp_send_json_error(
-                    [
-                        'error' => 'nonce_failure',
-                        'message' => 'Nonce failure',
-                    ]
-                );
-                return;
-            }
-            // report errors please
-            if (defined('WP_DEBUG_DISPLAY') && WP_DEBUG_DISPLAY) {
-                // We want to see errors, so make sure they're set to display.
-                // phpcs:disable WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting, WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_error_reporting, WordPress.PHP.IniSet.display_errors_Blacklisted
-                error_reporting(E_ALL);
-                ini_set('display_errors', 1);
-                // phpcs:enable WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting, WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_error_reporting, WordPress.PHP.IniSet.display_errors_Blacklisted
-            }
-            // Find project by ID.
-            // @var $project Project just so PHPstorm knows what it's dealing with.
-            $project = $this->project_manager->getById((int)Array2::setOr($_REQUEST, 'ID', ''));
-            $format = $this->format_registry->getFormat(sanitize_key(Array2::setOr($_REQUEST, 'format', '')));
-            // @var $project_generation ProjectGeneration just so PHPstorm knows what I'm doing.
-            $project_generation = $project->getGenerationFor($format);
-            $project_generation->deleteGeneratedFiles();
-            $project_generation->clearDirty();
-            $project->getProgress()->markStepComplete(ProjectProgress::GENERATE_STEP);
-            $done = $project_generation->generateIntermediaryFile();
-            if ($done) {
-                $url = $project_generation->getGeneratedIntermediaryFileUrl();
-            } else {
-                $url = null;
-            }
-
-            // If we're all done, return the file.
-            $response = [
-                'url' => $url,
-                'media' => $format->slug() === 'digital_pdf' ? 'screen' : 'print',
-            ];
-            wp_send_json($response);
-            exit;
+        // check for loading page
+        if (isset($_REQUEST[self::PMB_LOADING_PAGE_INDICATOR])){
+            return $this->loadingPage();
         }
+
         return $template;
+    }
+
+    public function templateRedirect(){
+        // check for PMB ajax
+        if (isset($_REQUEST[self::PMB_AJAX_INDICATOR], $_REQUEST['action']) && $_REQUEST['action'] === self::PMB_PROJECT_STATUS_ACTION) {
+            return $this->pmbAjax();
+        }
+    }
+
+    protected function loadingPage(){
+        global $pmb_format;
+        $pmb_format = Array2::setOr($_REQUEST, 'pmb_f', DefaultFileFormats::DIGITAL_PDF);
+        add_action(
+            'wp_enqueue_scripts',
+            array($this, 'loadingPageEnqueueScripts'),
+            100
+        );
+        return PMB_TEMPLATES_DIR . 'loading.php';
+    }
+
+    public function loadingPageEnqueueScripts(){
+        wp_enqueue_script(
+            'pmb_loading',
+            PMB_SCRIPTS_URL . 'pmb-loading.js',
+            array('jquery'),
+            filemtime(PMB_SCRIPTS_DIR . 'pmb-loading.js')
+        );
+        wp_enqueue_style(
+            'pmb_print_page',
+            PMB_STYLES_URL . 'pmb-loading.css',
+            array('pmb_print_common'),
+            filemtime(PMB_STYLES_DIR . 'pmb-loading.css')
+        );
+    }
+
+
+
+    /**
+     * Basically do AJAX logic. We used to simply use AJAX endpoint, but it sets IS_ADMIN to true,
+     * which makes lots of plugins malfunction. Plus, many legitimately think they don't need to enqueue
+     * scripts on AJAX requests.
+     */
+    protected function pmbAjax(){
+        if (! isset($_POST['_nonce']) || ! wp_verify_nonce(sanitize_key($_POST['_nonce']), 'pmb-project-edit')) {
+            wp_send_json_error(
+                [
+                    'error' => 'nonce_failure',
+                    'message' => 'Nonce failure',
+                ]
+            );
+            return;
+        }
+        // report errors please
+        if (defined('WP_DEBUG_DISPLAY') && WP_DEBUG_DISPLAY) {
+            // We want to see errors, so make sure they're set to display.
+            // phpcs:disable WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting, WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_error_reporting, WordPress.PHP.IniSet.display_errors_Blacklisted
+            error_reporting(E_ALL);
+            ini_set('display_errors', 1);
+            // phpcs:enable WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting, WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_error_reporting, WordPress.PHP.IniSet.display_errors_Blacklisted
+        }
+        // Find project by ID.
+        // @var $project Project just so PHPstorm knows what it's dealing with.
+        $project = $this->project_manager->getById((int)Array2::setOr($_REQUEST, 'ID', ''));
+        $format = $this->format_registry->getFormat(sanitize_key(Array2::setOr($_REQUEST, 'format', '')));
+        // @var $project_generation ProjectGeneration just so PHPstorm knows what I'm doing.
+        $project_generation = $project->getGenerationFor($format);
+        $project_generation->deleteGeneratedFiles();
+        $project_generation->clearDirty();
+        $project->getProgress()->markStepComplete(ProjectProgress::GENERATE_STEP);
+        $done = $project_generation->generateIntermediaryFile();
+        if ($done) {
+            $url = $project_generation->getGeneratedIntermediaryFileUrl();
+        } else {
+            $url = null;
+        }
+
+        // If we're all done, return the file.
+        $response = [
+            'url' => $url,
+            'media' => $format->slug() === 'digital_pdf' ? 'screen' : 'print',
+        ];
+        wp_send_json($response);
+        exit;
     }
 }
