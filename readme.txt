@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.23.2
+Stable tag: 3.23.3
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -439,7 +439,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.23.3 xxx =
+= 3.23.3 May 9, 2023 =
 * Enhancement: in Pro Print, note that Mayer Magazine's pagebreaks work best with Pro PDF Service; not so great with browsers
 * Bugfix: in Pro Print's Mayer Magazine avoid warning when Cover Preamble is blank
 
