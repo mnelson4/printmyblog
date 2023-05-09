@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2023-05-08 22:21-0700\n"
-"PO-Revision-Date: 2023-05-08 22:27-0700\n"
+"POT-Creation-Date: 2023-05-09 11:41-0700\n"
+"PO-Revision-Date: 2023-05-09 11:42-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh\n"
@@ -2235,7 +2235,10 @@ msgid "Image and Block Placement"
 msgstr "图像和块放置"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1235
-msgid "Image snapping and dynamic resizing only works using Pro Print."
+#, fuzzy
+#| msgid "Image snapping and dynamic resizing only works using Pro Print."
+msgid ""
+"Image snapping and dynamic resizing only works using the Pro PDF Service."
 msgstr "图像捕捉和动态调整大小仅适用于专业打印。"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1236
@@ -2542,8 +2545,7 @@ msgstr ""
 
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:77
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:88
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:104
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:118
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:119
 #: templates/welcome.php:59
 msgid "Read the User Guide"
 msgstr "阅读用户指南"
@@ -2584,6 +2586,15 @@ msgstr ""
 "将其添加到右侧的项目中"
 
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:100
+#, php-format
+msgid ""
+"Title Page and Table of Contents print materials are automatically added to "
+"each project, but you can remove or %1$scustomize them%2$s."
+msgstr ""
+"标题页和目录打印材料会自动添加到每个项目中，但您可以删除或%1$s自定义它"
+"们%2$s。"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:101
 msgid ""
 "Place articles in either front matter, body, or back matter, according to "
 "how you want your project organized. Each design can style them differently "
@@ -2592,43 +2603,47 @@ msgstr ""
 "根据您希望项目的组织方式将文章放在前体、正文或后体中。每种设计都可以以不同的"
 "方式设置它们的样式（例如，前部通常用罗马数字编号）"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:101
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:102
 msgid "Nest content inside others to create parts"
 msgstr "将内容嵌套在其他人内部以创建零件"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:111
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:105
+msgid "Read the User Guide on how to edit your project's content."
+msgstr "阅读用户指南，了解如何编辑项目内容。"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:112
 msgid "Everything Else About Your Project is Stored Here"
 msgstr "有关项目的其他所有内容都存储在此处"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:112
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:113
 msgid ""
 "Different formats and designs may require other information about your "
 "project."
 msgstr "不同的格式和设计可能需要有关项目的其他信息。"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:114
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:115
 msgid ""
 "Some examples of metadata are: title page info, file info, or copyright data."
 msgstr "元数据的一些示例包括：标题页信息、文件信息或版权数据。"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:115
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:116
 msgid ""
 "So although your choice of design may affect what metadata is required, it "
 "is not shared with other projects."
 msgstr "因此，尽管您选择的设计可能会影响所需的元数据，但它不会与其他项目共享。"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:124
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:125
 msgid "Generate and View Your File"
 msgstr "生成和查看您的文件"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:126
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:127
 msgid ""
 "Your project is ready to be generated! Clicking \"Generate\" will compile "
 "your content into a print-page."
 msgstr "您的项目已准备好生成！单击“生成”会将您的内容编译到打印页面中。"
 
 #. translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag, 4: opening anchor tag
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:131
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:132
 #, php-format
 msgid ""
 "Read the User Guide on %1$supdating%2$s, %3$sgenerating the pro file%2$s, "
@@ -2636,11 +2651,11 @@ msgid ""
 msgstr ""
 "阅读有关%1$s更新%2$s、%3$s生成专业文件%2$s和%4$s获取帮助%2$s的用户指南。"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:142
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:143
 msgid "Posts just for Print My Blog"
 msgstr "帖子只为打印我的博客"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:143
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:144
 msgid ""
 "Print My Blog \"Print Materials\" are like private posts. They aren’t "
 "visible to site visitors, but you can use them in your Pro Print Projects."
@@ -3944,7 +3959,7 @@ msgstr "等待审核"
 #: templates/project_edit_content.php:76 templates/setup_page.php:123
 #, fuzzy
 msgid "Private"
-msgstr "私密"
+msgstr "私募："
 
 #: templates/project_edit_content.php:77 templates/setup_page.php:125
 msgid "Published"
@@ -4351,7 +4366,7 @@ msgstr "状态"
 #: templates/setup_page.php:146
 #, fuzzy
 msgid "Filters"
-msgstr "过滤器"
+msgstr "搜索和应用过滤器"
 
 #: templates/setup_page.php:146
 msgid "Pro Print supports filtering by custom taxonomies."

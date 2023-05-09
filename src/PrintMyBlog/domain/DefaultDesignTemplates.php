@@ -1232,7 +1232,7 @@ class DefaultDesignTemplates
                 'dynamic-resize' => new InputOption(__('Resize images if they don’t fit on the page')),
             ],
             [
-                'html_label_text' => __('Image and Block Placement', 'print-my-blog') . pmb_pro_print_service_only(__('Image snapping and dynamic resizing only works using Pro Print.', 'print-my-blog')),
+                'html_label_text' => __('Image and Block Placement', 'print-my-blog') . pmb_pro_print_service_only(__('Image snapping and dynamic resizing only works using the Pro PDF Service.', 'print-my-blog')),
                 'html_help_text' => __('To reduce whitespace around images, galleries, and tables, Print My Blog can adjust the placement of your content, or resize it according to the space on the page.', 'print-my-blog'),
                 'default' => 'snap-unless-fit',
             ]

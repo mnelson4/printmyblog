@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2023-05-08 22:21-0700\n"
-"PO-Revision-Date: 2023-05-08 22:24-0700\n"
+"POT-Creation-Date: 2023-05-09 11:41-0700\n"
+"PO-Revision-Date: 2023-05-09 11:41-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -2441,7 +2441,10 @@ msgid "Image and Block Placement"
 msgstr "Bild- und Blockplatzierung"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1235
-msgid "Image snapping and dynamic resizing only works using Pro Print."
+#, fuzzy
+#| msgid "Image snapping and dynamic resizing only works using Pro Print."
+msgid ""
+"Image snapping and dynamic resizing only works using the Pro PDF Service."
 msgstr ""
 "Das Einrasten von Bildern und die dynamische Größenanpassung funktionieren "
 "nur mit Pro Print."
@@ -2784,8 +2787,7 @@ msgstr ""
 
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:77
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:88
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:104
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:118
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:119
 #: templates/welcome.php:59
 msgid "Read the User Guide"
 msgstr "Lesen Sie das Benutzerhandbuch"
@@ -2830,6 +2832,16 @@ msgstr ""
 "sie Ihrem Projekt auf der rechten Seite hinzu, indem Sie ziehen"
 
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:100
+#, php-format
+msgid ""
+"Title Page and Table of Contents print materials are automatically added to "
+"each project, but you can remove or %1$scustomize them%2$s."
+msgstr ""
+"Titelseite und Inhaltsverzeichnis Druckmaterialien werden automatisch zu "
+"jedem Projekt hinzugefügt, aber Sie können sie entfernen oder "
+"%1$sanpassen%2$s."
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:101
 msgid ""
 "Place articles in either front matter, body, or back matter, according to "
 "how you want your project organized. Each design can style them differently "
@@ -2840,15 +2852,21 @@ msgstr ""
 "anders formatieren (z.B. Frontmaterie ist oft mit römischen Ziffern "
 "nummeriert)"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:101
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:102
 msgid "Nest content inside others to create parts"
 msgstr "Verschachteln von Inhalten in anderen, um Teile zu erstellen"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:111
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:105
+msgid "Read the User Guide on how to edit your project's content."
+msgstr ""
+"Lesen Sie das Benutzerhandbuch, um zu erfahren, wie Sie den Inhalt Ihres "
+"Projekts bearbeiten können."
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:112
 msgid "Everything Else About Your Project is Stored Here"
 msgstr "Alles andere über Ihr Projekt wird hier gespeichert"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:112
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:113
 msgid ""
 "Different formats and designs may require other information about your "
 "project."
@@ -2856,14 +2874,14 @@ msgstr ""
 "Für verschiedene Formate und Designs sind möglicherweise andere "
 "Informationen zu Ihrem Projekt erforderlich."
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:114
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:115
 msgid ""
 "Some examples of metadata are: title page info, file info, or copyright data."
 msgstr ""
 "Einige Beispiele für Metadaten sind: Titelseiteninformationen, "
 "Dateiinformationen oder Copyright-Daten."
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:115
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:116
 msgid ""
 "So although your choice of design may affect what metadata is required, it "
 "is not shared with other projects."
@@ -2871,11 +2889,11 @@ msgstr ""
 "Obwohl sich Ihre Entwurfsauswahl auf die erforderlichen Metadaten auswirken "
 "kann, wird sie nicht für andere Projekte freigegeben."
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:124
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:125
 msgid "Generate and View Your File"
 msgstr "Generieren und Anzeigen Ihrer Datei"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:126
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:127
 msgid ""
 "Your project is ready to be generated! Clicking \"Generate\" will compile "
 "your content into a print-page."
@@ -2885,7 +2903,7 @@ msgstr ""
 "\"Ansicht\"."
 
 #. translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag, 4: opening anchor tag
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:131
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:132
 #, php-format
 msgid ""
 "Read the User Guide on %1$supdating%2$s, %3$sgenerating the pro file%2$s, "
@@ -2894,11 +2912,11 @@ msgstr ""
 "Lesen Sie das Benutzerhandbuch zum %1$saktualisieren%2$s, %3$sgenerieren der "
 "Pro-Datei%2$s und %4$sHilfeerhalten%2$s."
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:142
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:143
 msgid "Posts just for Print My Blog"
 msgstr "Beiträge nur für Print My Blog"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:143
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:144
 msgid ""
 "Print My Blog \"Print Materials\" are like private posts. They aren’t "
 "visible to site visitors, but you can use them in your Pro Print Projects."
