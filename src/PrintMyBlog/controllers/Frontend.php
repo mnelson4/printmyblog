@@ -219,7 +219,7 @@ class Frontend extends BaseController
         wp_enqueue_script(
             'pmb_loading',
             PMB_SCRIPTS_URL . 'pmb-loading.js',
-            array('jquery'),
+            array('jquery', 'pmb_general'),
             filemtime(PMB_SCRIPTS_DIR . 'pmb-loading.js')
         );
         wp_enqueue_style(
