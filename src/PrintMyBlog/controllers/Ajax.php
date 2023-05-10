@@ -157,6 +157,7 @@ class Ajax extends BaseController
 
     /**
      * Proceeds with loading printing a project and returns a response indicating the status.
+     * @deprecated in 3.24.0; instead use Frontend::pmbAjax()
      */
     public function handleProjectStatus()
     {

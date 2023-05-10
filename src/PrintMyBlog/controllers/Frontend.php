@@ -239,8 +239,9 @@ class Frontend extends BaseController
                     '\PrintMyBlog\controllers\Admin->enqueueScripts generate generate_ajax_data',
                     [
                         'action' => Frontend::PMB_PROJECT_STATUS_ACTION,
-                        'ID' => Array2::setOr($_REQUEST,'ID',null),
+                        'ID' => $this->project->getWpPost()->ID,
                         '_nonce' => wp_create_nonce('pmb-loading'),
+                        'format' => Array2::setOr($_REQUEST, 'pmb_f',DefaultFileFormats::DIGITAL_PDF),
                     ]
                 ),
                 'pmb_ajax' => pmb_ajax_url(),
@@ -290,7 +291,7 @@ class Frontend extends BaseController
      * scripts on AJAX requests.
      */
     protected function pmbAjax(){
-        if (! isset($_POST['_nonce']) || ! wp_verify_nonce(sanitize_key($_POST['_nonce']), 'pmb-project-edit')) {
+        if (! isset($_POST['_nonce']) || ! wp_verify_nonce(sanitize_key($_POST['_nonce']), 'pmb-loading')) {
             wp_send_json_error(
                 [
                     'error' => 'nonce_failure',

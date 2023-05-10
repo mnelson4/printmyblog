@@ -748,7 +748,7 @@ class Admin extends BaseController
                                     [
                                         'action' => Frontend::PMB_PROJECT_STATUS_ACTION,
                                         'ID' => $this->project->getWpPost()->ID,
-                                        '_nonce' => wp_create_nonce('pmb-project-edit'),
+                                        '_nonce' => wp_create_nonce('pmb-loading'),
                                     ],
                                     $this->project
                                 ),
