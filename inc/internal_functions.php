@@ -430,3 +430,21 @@ function pmb_get_filename($url, $remove_extension = false){
     }
     return $filename_and_extension;
 }
+
+/**
+ * Returns whether or not to use PMB Central for generate requests. (We like to use DocRaptor's server on free sites
+ * to keep the load down on printmy.blog; but for paying customers we like to monitor their API requests for quality assurance.)
+ * @return int
+ */
+function pmb_use_pmb_central(){
+    $use_pmb_central = 0;
+    try{
+        if (pmb_fs()->is_plan__premium_only('business') || (defined('PMB_USE_CENTRAL') && PMB_USE_CENTRAL)) {
+            $use_pmb_central = 1;
+        }
+    }catch(Freemius_Exception $e){
+        // ignore it
+    }
+
+    return $use_pmb_central;
+}

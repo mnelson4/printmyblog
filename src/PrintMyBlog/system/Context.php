@@ -167,6 +167,7 @@ class Context extends BaseContext
             'PrintMyBlog\controllers\Frontend' => [
                 'PrintMyBlog\orm\managers\ProjectManager' => self::REUSE,
                 'PrintMyBlog\services\FileFormatRegistry'   => self::REUSE,
+                'PrintMyBlog\services\PmbCentral' => self::REUSE,
             ],
             'PrintMyBlog\system\FileUploads' => [],
         ];

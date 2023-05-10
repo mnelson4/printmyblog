@@ -738,10 +738,7 @@ class Admin extends BaseController
                         );
                         $license = pmb_fs()->_get_license();
                         $site = pmb_fs()->get_site();
-                        $use_pmb_central = 0;
-                        if (pmb_fs()->is_plan__premium_only('business') || (defined('PMB_USE_CENTRAL') && PMB_USE_CENTRAL)) {
-                            $use_pmb_central = 1;
-                        }
+
                         wp_localize_script(
                             'pmb-generate',
                             'pmb_generate',
@@ -757,7 +754,7 @@ class Admin extends BaseController
                                 ),
                                 'pmb_ajax' => apply_filters('\PrintMyBlog\controllers\Admin::enqueueScripts pmb_ajax', pmb_ajax_url(), $this->project),
                                 'site_url' => apply_filters('\PrintMyBlog\controllers\Admin::enqueueScripts site_url', site_url(), $this->project),
-                                'use_pmb_central_for_previews' => $use_pmb_central,
+                                'use_pmb_central_for_previews' => pmb_use_pmb_central(),
                                 'license_data' => [
                                     'endpoint' => $this->pmb_central->getCentralUrl(),
                                     'license_id' => $license instanceof FS_Plugin_License ? $license->id : '',

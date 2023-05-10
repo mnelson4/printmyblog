@@ -2,11 +2,15 @@
 
 namespace PrintMyBlog\controllers;
 
+use Exception;
+use FS_Plugin_License;
+use FS_Site;
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintNowSettings;
 use PrintMyBlog\entities\ProjectProgress;
 use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\services\FileFormatRegistry;
+use PrintMyBlog\services\PmbCentral;
 use PrintMyBlog\system\Context;
 use Twine\controllers\BaseController;
 use Twine\helpers\Array2;
@@ -51,16 +55,29 @@ class Frontend extends BaseController
     protected $format_registry;
 
     /**
+     * @var PmbCentral
+     */
+    protected $pmb_central;
+
+    /**
+     * @var \Twine\orm\entities\PostWrapper|null
+     */
+    protected $project;
+
+    /**
      * Context injects these dependencies.
      * @param ProjectManager $project_manager
      * @param FileFormatRegistry $format_registry
+     * @param PmbCentral $pmb_central
      */
     public function inject(
         ProjectManager $project_manager,
-        FileFormatRegistry $format_registry
+        FileFormatRegistry $format_registry,
+        PmbCentral $pmb_central
     ) {
         $this->project_manager = $project_manager;
         $this->format_registry = $format_registry;
+        $this->pmb_central = $pmb_central;
     }
 
     /**
@@ -178,9 +195,18 @@ class Frontend extends BaseController
         }
     }
 
+    /**
+     * @return string
+     * @throws Exception
+     */
     protected function loadingPage(){
         global $pmb_format;
         $pmb_format = Array2::setOr($_REQUEST, 'pmb_f', DefaultFileFormats::DIGITAL_PDF);
+        $post_id = Array2::setOr($_REQUEST, 'pmb_post', 0);
+        if( ! $post_id){
+            throw new Exception(__('Invalid Post ID. The link you used to get here may be old. If it\'s new, please contact Print My Blog support.', 'print-my-blog'));
+        }
+        $this->project = $this->project_manager->getById($post_id);
         add_action(
             'wp_enqueue_scripts',
             array($this, 'loadingPageEnqueueScripts'),
@@ -201,6 +227,58 @@ class Frontend extends BaseController
             PMB_STYLES_URL . 'pmb-loading.css',
             array('pmb_print_common'),
             filemtime(PMB_STYLES_DIR . 'pmb-loading.css')
+        );
+
+        $license = pmb_fs()->_get_license();
+        $site = pmb_fs()->get_site();
+        wp_localize_script(
+            'pmb_loading',
+            'pmb_loading',
+            [
+                'generate_ajax_data' => apply_filters(
+                    '\PrintMyBlog\controllers\Admin->enqueueScripts generate generate_ajax_data',
+                    [
+                        'action' => Frontend::PMB_PROJECT_STATUS_ACTION,
+                        'ID' => Array2::setOr($_REQUEST,'ID',null),
+                        '_nonce' => wp_create_nonce('pmb-loading'),
+                    ]
+                ),
+                'pmb_ajax' => pmb_ajax_url(),
+                'site_url' => site_url(),
+                'use_pmb_central_for_previews' => pmb_use_pmb_central(),
+                'license_data' => [
+                    'endpoint' => $this->pmb_central->getCentralUrl(),
+                    'license_id' => $license instanceof FS_Plugin_License ? $license->id : '',
+                    'install_id' => $site instanceof FS_Site ? $site->id : '',
+                    'authorization_header' => $site instanceof FS_Site ? $this->pmb_central->getSiteAuthorizationHeader() : '',
+                ],
+
+                'doc_attrs' => apply_filters(
+                    '\PrintMyBlog\controllers\Admin::enqueueScripts doc_attrs',
+                    [
+                        'test' => defined('PMB_TEST_LIVE') && PMB_TEST_LIVE ? true : false,
+                        'type' => 'pdf',
+                        'javascript' => true, // Javascript by DocRaptor
+                        'name' => $this->project->getPublishedTitle(),
+                        'ignore_console_messages' => true,
+                        'ignore_resource_errors' => true,
+                        'pipeline' => 9,
+                        'prince_options' => [
+                            'base_url' => site_url(),
+                            'media' => 'print',                                       // use screen
+                            'http_timeout' => 60,
+                            'http_insecure' => true,
+                            // styles
+                            // instead of print styles
+                            // javascript: true, // use Prince's JS, which is more error tolerant
+                        ],
+                    ]
+                ),
+                'translations' => [
+                    'error_generating' => __('There was an error preparing your content. Please visit the Print My Blog Help page.', 'print-my-blog'),
+                    'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public? Please visit the Print My Blog Help page.', 'print-my-blog'),
+                ],
+            ]
         );
     }
 

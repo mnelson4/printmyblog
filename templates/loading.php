@@ -40,8 +40,6 @@
         <?php }?>
         <div class="pmb-waiting-area">
             <h1 id='pmb-in-progress-h1' class="pmb-waiting-h1"><?php _e('Generating...', 'print-my-blog'); ?></h1>
-        </div>
-        <div class="pmb-posts-placeholder pmb-extra-content">
             <div class="pmb-spinner-container">
                 <div class="pmb-spinner"></div>
             </div>
