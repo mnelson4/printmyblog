@@ -112,7 +112,7 @@ abstract class ProjectFileGeneratorBase
         $this->startGenerating();
         // Don't let anything from a previous generation affect this one.
         $this->project_generation->setLastSectionId(null);
-        $this->generateMainMatter();
+        $this->generateMatter();
         $this->finishGenerating();
         return true;
 
@@ -212,7 +212,7 @@ abstract class ProjectFileGeneratorBase
      * Generates the main matter of the project. May be called repeatedly.
      * @return void
      */
-    abstract protected function generateMainMatter();
+    abstract protected function generateMatter();
 
     /**
      * @param ProjectSection[] $project_sections

@@ -7,6 +7,7 @@ use PrintMyBlog\orm\entities\Design;
 use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\entities\ProjectSection;
 use PrintMyBlog\services\ExternalResourceCache;
+use PrintMyBlog\system\CustomPostTypes;
 use Twine\services\filesystem\File;
 use WP_Query;
 
@@ -200,9 +201,27 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
     /**
      * Adds all the body to the html file.
      */
-    protected function generateMainMatter()
+    protected function generateMatter()
     {
-        $this->generateSections($this->project->getFlatSections(1000, 0, false));
+        if($this->project->getWpPost()->post_type === CustomPostTypes::PROJECT){
+            $sections = $this->project->getFlatSections(1000, 0, false);
+        } else {
+            // it's a "post project", meaning it's only this one post in the "project".
+            $fake_row = new \stdClass();
+            $fake_row->ID = 0;
+            $fake_row->post_id = $this->project->ID;
+            $fake_row->post_title = $this->project->getWpPost()->post_title;
+            $fake_row->parent_id = 0;
+            $fake_row->section_order = 1;
+            $fake_row->template = '';
+            $fake_row->placement = 'main_matter';
+            $fake_row->height = 0;
+            $fake_row->depth = 0;
+            $sections = [
+                new ProjectSection($fake_row)
+            ];
+        }
+        $this->generateSections($sections);
     }
 
 
