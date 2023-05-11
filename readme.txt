@@ -439,6 +439,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.23.4 xxxxx =
+* Compatibility: in Pro Print with Elementor, fix extra columns appearing in projects when using nested columns
+
 = 3.23.3 May 9, 2023 =
 * Enhancement: in Pro Print, note that Mayer Magazine's pagebreaks work best with Pro PDF Service; not so great with browsers
 * Bugfix: in Pro Print's Mayer Magazine avoid warning when Cover Preamble is blank
