@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.23.4
+Stable tag: 3.23.5
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -438,6 +438,10 @@ https://youtu.be/uPQ3vqm7A2g
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+
+= 3.23.5 May 16, 2023 =
+* Bugfix: fix creating database tables when the database has no charset specified
+* Feature: in Pro Print Mayer Magazine, add "Post Contents" option so you can include post ID, author, date, categories and tags, URL, excerpt, and custom fields; allow removing title, featured image and content
 
 = 3.23.4 May 11, 2023 =
 * Compatibility: in Pro Print with Elementor, fix extra columns appearing in projects when using nested columns

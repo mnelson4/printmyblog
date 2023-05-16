@@ -314,6 +314,7 @@ class DefaultDesignTemplates
                         $design_form = (new FormSection(
                             [
                                 'subsections' => [
+                                    'post_content' => $this->getPostContentInput(),
                                     'page_per_post' => new YesNoInput(
                                         [
                                             'default' => false,
@@ -355,6 +356,13 @@ class DefaultDesignTemplates
                             ]
                         ))->merge($this->getGenericDesignForm());
                         $design_form->findSection('image_placement')->removeOption('dynamic-resize');
+                        $design_form->findSection('post_content')->setDefault(
+                        [
+                            'title',
+                            'featured_image',
+                            'content',
+                        ]
+                        );
                         $design_form->removeSubsection('dynamic-resize');
                         return $design_form;
                     },
