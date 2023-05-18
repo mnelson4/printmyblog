@@ -314,10 +314,11 @@ class DefaultDesignTemplates
                         $design_form = (new FormSection(
                             [
                                 'subsections' => [
+                                    'post_content' => $this->getPostContentInput(),
                                     'page_per_post' => new YesNoInput(
                                         [
                                             'default' => false,
-                                            'html_label_text' => __('Each Post Begins on a New Page', 'print-my-blog'),
+                                            'html_label_text' => __('Each Post Begins on a New Page', 'print-my-blog') . pmb_pro_better(__('Browser support for pagebreaks on columns is typically not very good.', 'print-my-blog')),
                                             'html_help_text' => __('Whether to force posts to always start on a new page. Doing so makes the page more legible, but uses more paper.', 'print-my-blog'),
                                         ]
                                     ),
@@ -355,6 +356,13 @@ class DefaultDesignTemplates
                             ]
                         ))->merge($this->getGenericDesignForm());
                         $design_form->findSection('image_placement')->removeOption('dynamic-resize');
+                        $design_form->findSection('post_content')->setDefault(
+                        [
+                            'title',
+                            'featured_image',
+                            'content',
+                        ]
+                        );
                         $design_form->removeSubsection('dynamic-resize');
                         return $design_form;
                     },
@@ -1232,7 +1240,7 @@ class DefaultDesignTemplates
                 'dynamic-resize' => new InputOption(__('Resize images if they don’t fit on the page')),
             ],
             [
-                'html_label_text' => __('Image and Block Placement', 'print-my-blog') . pmb_pro_print_service_only(__('Image snapping and dynamic resizing only works using Pro Print.', 'print-my-blog')),
+                'html_label_text' => __('Image and Block Placement', 'print-my-blog') . pmb_pro_print_service_only(__('Image snapping and dynamic resizing only works using the Pro PDF Service.', 'print-my-blog')),
                 'html_help_text' => __('To reduce whitespace around images, galleries, and tables, Print My Blog can adjust the placement of your content, or resize it according to the space on the page.', 'print-my-blog'),
                 'default' => 'snap-unless-fit',
             ]

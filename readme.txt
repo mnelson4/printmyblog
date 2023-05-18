@@ -2,12 +2,12 @@
 Contributors: mnelson4
 Tags: print, PDF, backup, eBook, print button
 Requires at least: 4.6
-Tested up to: 6.1.1
+Tested up to: 6.2
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.23.2
+Stable tag: 3.23.5
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -439,6 +439,17 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.23.5 May 16, 2023 =
+* Bugfix: fix creating database tables when the database has no charset specified
+* Feature: in Pro Print Mayer Magazine, add "Post Contents" option so you can include post ID, author, date, categories and tags, URL, excerpt, and custom fields; allow removing title, featured image and content
+
+= 3.23.4 May 11, 2023 =
+* Compatibility: in Pro Print with Elementor, fix extra columns appearing in projects when using nested columns
+
+= 3.23.3 May 9, 2023 =
+* Enhancement: in Pro Print, note that Mayer Magazine's pagebreaks work best with Pro PDF Service; not so great with browsers
+* Bugfix: in Pro Print's Mayer Magazine avoid warning when Cover Preamble is blank
+
 = 3.23.2 April 5, 2023  =
 * Bugfix: in Pro Print, avoid losing styles if there are warnings on the print page
 * Bugfix: in Pro Print with Pro PDF Service, prevent "Filesystem access not allowed" error because of relative URLs
@@ -449,7 +460,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.23.0 March 9, 2023 =
 * Feature: in Pro Print Word Documents, add support for headers and footers to documents
-Bugfix: in Pro Print, prevent 403 error for some webservers because we used spaces and colons in the URL
+* Bugfix: in Pro Print, prevent 403 error for some webservers because we used spaces and colons in the URL
 
 = 3.22.0 February 20, 2023 =
 * Feature: in Pro Print PDFs and ePubs, add design options to set custom fonts

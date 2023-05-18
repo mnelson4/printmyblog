@@ -97,11 +97,12 @@ class DefaultPersistentNotices
                 . '<div class="pmb-text-column">'
                 . '<ol>'
                 . '<li>' . __('Find the articles (posts, pages, other post types) from WordPress you want to add on the left, and add it to your project on the right by dragging', 'print-my-blog') . '</li>'
+                . '<li>' . sprintf(__('Title Page and Table of Contents print materials are automatically added to each project, but you can remove or %1$scustomize them%2$s.', 'print-my-blog'), '<a href="https://printmy.blog/user-guide/design-layout/how-to-customize-your-projects-title-page/" target="_blank">', '</a>') . '</li>'
                 . '<li>' . __('Place articles in either front matter, body, or back matter, according to how you want your project organized. Each design can style them differently (eg front matter is often is numbered with roman numerals)') . '</li>'
                 . '<li>' . __('Nest content inside others to create parts', 'print-my-blog') . '</li>'
                 . '</ol>'
                 . '<p><a href="https://printmy.blog/user-guide/pro/getting-started/6-choose-project-content/" target="_blank">'
-                . __('Read the User Guide', 'print-my-blog')
+                . __('Read the User Guide on how to edit your project\'s content.', 'print-my-blog')
                 . '</a></p>'
                 . '</div></div>',
                 $this->getOptionsForProjectSubaction('content')

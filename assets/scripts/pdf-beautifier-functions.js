@@ -126,7 +126,7 @@ function pmb_pdf_plugin_fixups(){
     // On any Elementor rows, use the CSS columns and count the number of column DIVs
     jQuery('.elementor-row, .elementor-container').each(function(){
         var jqe_row = jQuery(this);
-        var columns = jqe_row.find('.elementor-column').length;
+        var columns = jqe_row.children('.elementor-column').length;
         if(columns){
             jqe_row.css('columns', columns.toString());
         }

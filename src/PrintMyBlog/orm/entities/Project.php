@@ -570,7 +570,7 @@ class Project extends PostWrapper
      */
     public function renderSetting($setting_name)
     {
-        return do_shortcode($this->getSetting($setting_name));
+        return do_shortcode((string)$this->getSetting($setting_name));
     }
 
     /**

@@ -28,12 +28,12 @@ abstract class TableManager
     {
         global $wpdb;
         $table_name = $wpdb->prefix . $table_name;
-        $wpdb_collate = $wpdb->collate;
+        $wpdb_charset_collate = $wpdb->get_charset_collate();
         $sql =
             "CREATE TABLE {$table_name} (
 	         {$columns_sql}
 			)
-	         COLLATE {$wpdb_collate}";
+	         {$wpdb_charset_collate}";
         require_once ABSPATH . 'wp-admin/includes/upgrade.php';
         dbDelta($sql);
     }

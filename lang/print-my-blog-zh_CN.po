@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2023-02-20 20:23-0800\n"
-"PO-Revision-Date: 2023-02-20 20:28-0800\n"
+"POT-Creation-Date: 2023-05-09 11:41-0700\n"
+"PO-Revision-Date: 2023-05-09 11:42-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: printmyblog.php\n"
@@ -308,8 +308,8 @@ msgstr ""
 "留或删除"
 
 #: designs/pdf/digital/classic/description.php:8
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:109
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1280
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:103
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1299
 msgid "Footnotes and page references only work with Pro PDF Service"
 msgstr "脚注和页面引用仅适用于专业 PDF 服务"
 
@@ -490,8 +490,8 @@ msgstr "外部超链接（指向不在项目中的网页的链接）可以自动
 
 #: designs/pdf/print/classic/descriptions/shared.php:4
 #: designs/pdf/print/haller/description.php:21
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:142
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1317
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:136
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1336
 msgid "Footnotes require Pro"
 msgstr "脚注需要专业版"
 
@@ -1052,8 +1052,8 @@ msgid "There was an error communicating with Print My Blog Central. It was %s"
 msgstr "与“打印我的博客中心”通信时出错。这是%s"
 
 #: src/PrintMyBlog/controllers/Admin.php:1282
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:778
-#: src/PrintMyBlog/orm/entities/Project.php:490
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:797
+#: src/PrintMyBlog/orm/entities/Project.php:517
 msgid "Project Title"
 msgstr "项目名称"
 
@@ -1316,7 +1316,7 @@ msgid "Title"
 msgstr "标题"
 
 #: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:113
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:692
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:711
 #: templates/project_edit_content.php:139
 msgid "Date"
 msgstr "日期"
@@ -1362,171 +1362,175 @@ msgstr "g:i a"
 msgid "Click \"Add New Project\" 👆 To Make Your First Project!"
 msgstr "点击“添加新项目”👆，制作您的第一个项目！"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:59
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:53
 msgid "Classic Print PDf"
 msgstr "经典打印 PDf"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:82
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:428
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:858
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:76
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:422
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:877
 msgid "Font Settings"
 msgstr "字体设置"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:87
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:81
 msgid "Paragraph Indent"
 msgstr "段落缩进"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:88
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:82
 msgid ""
 "Indent the first line of each new paragraph instead of adding a paragraph "
 "break."
 msgstr "缩进每个新段落的第一行，而不是添加段落分隔符。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:96
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1257
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:90
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1276
 msgid "Link, Page Reference, and Footnote Settings"
 msgstr "链接、页面引用和脚注设置"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:103
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:135
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:552
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:570
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1266
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1309
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:97
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:129
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:571
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:589
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1285
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1328
 #: src/PrintMyBlog/domain/PrintOptions.php:165
 msgid "Remove"
 msgstr "删除"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:104
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1272
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:98
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1291
 msgid "Replace with page reference"
 msgstr "替换为页面引用"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:105
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:137
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1275
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1312
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:99
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:131
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1294
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1331
 msgid "Replace with footnote"
 msgstr "替换为脚注"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:109
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:563
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1280
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:103
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:582
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1299
 msgid "Internal Hyperlinks"
 msgstr "内部超链接"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:110
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:564
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1282
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:104
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:583
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1301
 msgid "How to display hyperlinks to content included in this project."
 msgstr "如何显示指向此项目中包含的内容的超链接。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:142
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:578
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1317
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:136
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:597
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1336
 msgid "External Hyperlinks"
 msgstr "外部超链接"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:143
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:579
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1319
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:137
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:598
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1338
 msgid "How to display hyperlinks to content not included in this project."
 msgstr "如何显示指向此项目中未包含的内容的超链接。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:175
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:169
 #: src/PrintMyBlog/domain/DefaultDesigns.php:25
 msgid "Classic Digital PDF"
 msgstr "经典数字 PDF"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:213
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:207
 msgid "Buurma Digital PDF"
 msgstr "布尔玛数字 PDF"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:230
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:224
 msgid "Title Page Top-Banner Color"
 msgstr "标题页顶部横幅颜色"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:231
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:225
 msgid "Image used at the top of the background on the title page."
 msgstr "标题页背景顶部使用的图像。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:237
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:231
 msgid "Background Color"
 msgstr "背景颜色"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:239
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:233
 msgid ""
 "A gradient between this color and white will be used in the page backgrounds"
 msgstr "此颜色和白色之间的渐变将在页面背景中使用"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:247
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:241
 msgid "Organization Name"
 msgstr "组织名称"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:249
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:243
 msgid "Shown in the title page. Eg \"Institute of Print My Blog\""
 msgstr "显示在标题页中。例如“印刷我的博客研究所”"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:256
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:250
 msgid "Background Embellishment"
 msgstr "背景装饰"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:257
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:251
 msgid ""
 "Faded image used as a full-page background on the title page, and next to "
 "the page number on numbered pages."
 msgstr "褪色的图像用作标题页上的整页背景，以及编号页上页码旁边的图像。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:275
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:269
 msgid "Issue"
 msgstr "问题"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:276
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:270
 msgid "Text that appears at the top-right of the cover"
 msgstr "显示在封面右上角的文本"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:281
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:493
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:601
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:275
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:487
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:620
 msgid "ByLine"
 msgstr "署名"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:282
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:494
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:602
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:276
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:488
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:621
 msgid "Project Author(s)"
 msgstr "项目作者"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:287
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:281
 msgid "Date Issued"
 msgstr "签发日期"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:288
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:282
 msgid "Text that appears under the byline"
 msgstr "署名下显示的文本"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:293
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:376
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:287
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:370
 msgid "Coverpage Preamble"
 msgstr "封面序言"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:294
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:378
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:288
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:372
 msgid "Explanatory text that appears at the bottom of the cover page"
 msgstr "封面底部显示的说明性文本"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:308
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:302
 msgid "Mayer Digital PDF"
 msgstr "孖士打数码 PDF"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:326
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:847
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:320
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:866
 #: src/PrintMyBlog/domain/PrintOptions.php:118
 msgid "Each Post Begins on a New Page"
 msgstr "每个帖子都从新页面开始"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:327
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:848
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:320
+msgid "Browser support for pagebreaks on columns is typically not very good."
+msgstr "浏览器对列分页符的支持通常不是很好。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:321
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:867
 #: src/PrintMyBlog/domain/PrintOptions.php:121
 msgid ""
 "Whether to force posts to always start on a new page. Doing so makes the "
@@ -1534,11 +1538,11 @@ msgid ""
 msgstr ""
 "是否强制帖子始终从新页面开始。这样做会使页面更清晰，但会使用更多的纸张。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:332
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:326
 msgid "Show Post Header inside Columns"
 msgstr "在列内显示帖子标题"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:333
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:327
 msgid ""
 "Check this to make post header information, like title, date, author, etc, "
 "appear inside columns; uncheck this to have it take up the full page width"
@@ -1546,57 +1550,57 @@ msgstr ""
 "检查此选项以使帖子标题信息（如标题、日期、作者等）显示在列内;取消选中此选项以"
 "使其占据整个页面宽度"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:338
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:853
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:332
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:872
 msgid "Show a Dividing Line Between Posts"
 msgstr "显示帖子之间的分界线"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:343
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:656
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:337
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:675
 msgid "Full-Column Images"
 msgstr "全列图像"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:344
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:657
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:338
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:676
 msgid ""
 "Resizes images to be the full column width (except ones with the CSS class "
 "\"mayer-no-resize\")"
 msgstr "将图像大小调整为全列宽度（CSS类为“mayer-no-resize”的图像除外）"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:349
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:675
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:343
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:694
 msgid "Remove Extra Columns"
 msgstr "删除多余的列"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:351
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:677
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:345
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:696
 msgid ""
 "Forces your content to only use two columns, even if the content itself was "
 "divided into more columns (eg using the \"Columns\" block)"
 msgstr "强制您的内容仅使用两列，即使内容本身被分成更多列（例如使用“列”块）"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:370
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:746
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:780
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:364
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:765
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:799
 msgid "Byline"
 msgstr "署名"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:371
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:747
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:365
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:766
 msgid "Project author(s)"
 msgstr "项目作者"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:398
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:392
 #: src/PrintMyBlog/domain/DefaultDesigns.php:270
 msgid "Classic ePub"
 msgstr "经典电子酒吧"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:416
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:543
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:410
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:562
 msgid "Convert Videos to Images and Links"
 msgstr "将视频转换为图像和链接"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:417
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:411
 msgid ""
 "Some eReaders don't show videos, in which case you may prefer to replace "
 "them with an image and a hyperlink to the online video content."
@@ -1604,14 +1608,14 @@ msgstr ""
 "某些电子阅读器不显示视频，在这种情况下，您可能更愿意将其替换为图像和指向在线"
 "视频内容的超链接。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:433
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:863
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:427
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:882
 msgid "Title page and Part Header Font Size"
 msgstr "标题页和部分页眉字体大小"
 
 #. translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:436
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:866
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:430
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:885
 #, php-format
 msgid ""
 "Font size used for the default title page’s and part’s header (all other "
@@ -1623,12 +1627,12 @@ msgstr ""
 "使用任何可识别的%1$sCSS字体大小关键字%2$s（如“大”，“中”，“小”）或%3$s任何单位"
 "的长度%2$s（例如“14pt”，“50%%”或“10px”）。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:446
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:898
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:440
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:917
 msgid "Custom Header Font"
 msgstr "自定义页眉字体"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:447
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:441
 msgid ""
 "Default font to use for headers of articles, parts, etc. Font files with "
 "extension \"ttf\" work with most eBook readers. Leave blank to use the "
@@ -1637,30 +1641,30 @@ msgstr ""
 "用于文章、部件等标题的默认字体。扩展名为“ttf”的字体文件适用于大多数电子书阅读"
 "器。留空以使用默认字体。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:453
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:908
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:447
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:927
 #: src/PrintMyBlog/domain/PrintOptions.php:137
 msgid "Font Size"
 msgstr "字体大小"
 
 #. translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:456
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:911
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:450
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:930
 #, php-format
 msgid ""
-"Use any recognized %1$sCSS font-size keyword%2$s (like \"large\", \"medium"
-"\", \"small\") or a %3$slength in any units%2$s (eg \"14pt\", \"50%%\", or "
-"\"10px\")."
+"Use any recognized %1$sCSS font-size keyword%2$s (like \"large\", "
+"\"medium\", \"small\") or a %3$slength in any units%2$s (eg \"14pt\", \"50%%"
+"\", or \"10px\")."
 msgstr ""
 "使用任何可识别的%1$sCSS字体大小关键字%2$s（如“大”，“中”，“小”）或%3$s任何单位"
 "的长度%2$s（例如“14pt”，“50%%”或“10px”）。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:466
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:943
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:460
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:962
 msgid "Custom Font"
 msgstr "自定义字体"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:467
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:461
 msgid ""
 "Default font used in paragraphs, lists, tables, captions, etc. Font files "
 "with extension \"ttf\" work with most eBook readers. Leave blank to use the "
@@ -1669,24 +1673,24 @@ msgstr ""
 "段落、列表、表格、标题等中使用的默认字体。扩展名为“ttf”的字体文件适用于大多数"
 "电子书阅读器。留空以使用默认字体。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:488
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:596
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:482
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:615
 msgid "File name"
 msgstr "文件名"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:499
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:493
 msgid "Description"
 msgstr "描述"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:500
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:494
 msgid "Shown as eBook metadata."
 msgstr "显示为电子书元数据。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:505
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:499
 msgid "Cover Image"
 msgstr "封面图片"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:506
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:500
 msgid ""
 "Cover image used on eBook file (does not necessarily appear inside project). "
 "Ideal dimensions are 2,560 x 1,600 pixels."
@@ -1694,12 +1698,45 @@ msgstr ""
 "电子书文件中使用的封面图像（不一定出现在项目中）。理想尺寸为 2，560 x 1，600 "
 "像素。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:525
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:519
 #: src/PrintMyBlog/domain/DefaultDesigns.php:321
 msgid "Classic Word"
 msgstr "经典词汇"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:544
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:537
+#, fuzzy
+#| msgid "Header Font"
+msgid "Headers and Footers"
+msgstr "标题字体"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:541
+msgid "Document Header on First Page"
+msgstr "第一页上的文档页眉"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:542
+msgid "Content to appear in top margin area but only on the first page."
+msgstr "内容显示在上边距区域，但仅在第一页上显示。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:547
+msgid "Document Header on Subsequent Pages"
+msgstr "后续页面上的文档页眉"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:548
+msgid ""
+"Content to appear in top margin area on all pages except the first page."
+msgstr "要在除第一页之外的所有页面上的上边距区域中显示的内容。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:553
+msgid "Document Footer"
+msgstr "文档页脚"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:554
+#, fuzzy
+#| msgid "Content from each post to print."
+msgid "Content to appear in bottom margin area."
+msgstr "要打印的每个帖子中的内容。"
+
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:563
 msgid ""
 "Some Word Processors don't show videos, in which case you may prefer to "
 "replace them with an image and a hyperlink to the online video content."
@@ -1707,252 +1744,252 @@ msgstr ""
 "某些文字处理器不显示视频，在这种情况下，您可能希望将它们替换为图像和指向在线"
 "视频内容的超链接。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:555
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:574
 msgid "Leave as hyperlink to website"
 msgstr "保留为指向网站的超链接"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:558
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:577
 msgid "Leave as hyperlink to document"
 msgstr "保留为文档的超链接"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:573
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1269
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1310
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:592
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1288
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1329
 msgid "Leave as hyperlink"
 msgstr "保留为超链接"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:619
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:638
 msgid "Haller Tabloid Print PDF"
 msgstr "哈勒小报打印 PDF"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:636
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:655
 msgid "Title of Publication"
 msgstr "出版物名称"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:637
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:656
 msgid ""
 "Shown in a large font on front page and in the top margin of every "
 "subsequent page."
 msgstr "在首页和后续每一页的上边距中以大字体显示。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:643
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:662
 msgid "Subtitle of Publication"
 msgstr "出版副标题"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:644
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:663
 msgid "Shown under the name of the publication, in a slightly smaller font."
 msgstr "显示在出版物名称下，字体略小。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:650
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:669
 msgid "Publication Preamble"
 msgstr "出版序言"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:651
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:670
 msgid "Shown on the front page under the Title and Subtitle."
 msgstr "显示在首页的标题和副标题下。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:667
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:686
 #: src/PrintMyBlog/domain/PrintOptions.php:125
 msgid "Columns"
 msgstr "列"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:669
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:688
 msgid "Number of columns to use for content."
 msgstr "用于内容的列数。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:693
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:712
 msgid "Shown on frontpage and in the top margin of all subsequent pages."
 msgstr "显示在首页和所有后续页面的上边距中。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:698
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:717
 msgid "Issue Number"
 msgstr "发行好"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:699
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:718
 msgid ""
 "Shown on the frontpage and in the top margin of all subsequent pages "
 "(shortcodes supported)."
 msgstr "显示在首页和所有后续页面的上边距（支持短代码）。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:704
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:723
 msgid "Frontpage Title Left Call-Out"
 msgstr "头版标题左标注"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:705
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:724
 msgid ""
 "HTML displayed to the left of the title on the frontpage (shortcodes "
 "supported)."
 msgstr "HTML 显示在首页标题的左侧（支持短代码）。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:710
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:729
 msgid "Frontpage Title Right Call-Out"
 msgstr "头版标题右标注"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:711
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:730
 msgid "HTML displayed to the right of the title on the frontpage"
 msgstr "HTML 显示在首页标题的右侧"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:739
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:779
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:758
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:798
 msgid "Subtitle"
 msgstr "副标题"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:755
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:774
 msgid "Source Location"
 msgstr "来源库位"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:756
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:775
 msgid ""
 "Shown on the title page under the subtitle. Could be your website’s URL, or "
 "anything else you like."
 msgstr ""
 "显示在标题页的副标题下。可能是您网站的 URL，也可以是您喜欢的任何其他内容。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:781
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:800
 #: src/PrintMyBlog/domain/PrintOptions.php:33
 msgid "Site URL"
 msgstr "网站网址"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:782
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:801
 #: src/PrintMyBlog/domain/PrintOptions.php:42
 msgid "Date Printed"
 msgstr "打印日期"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:791
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:810
 msgid "Title Page Content"
 msgstr "标题页内容"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:807
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:826
 msgid "Post Title"
 msgstr "文章标题"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:808
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:827
 #: src/PrintMyBlog/domain/PrintOptions.php:68
 msgid "ID"
 msgstr "ID"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:809
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:828
 #: src/PrintMyBlog/domain/PrintOptions.php:72
 msgid "Author"
 msgstr "作者"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:810
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:829
 #: src/PrintMyBlog/domain/PrintOptions.php:80
 msgid "Published Date"
 msgstr "发布日期"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:811
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:830
 #: src/PrintMyBlog/domain/PrintOptions.php:84
 msgid "Categories and Tags"
 msgstr "分类和标签"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:812
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:831
 #: src/PrintMyBlog/domain/PrintOptions.php:76
 msgid "URL"
 msgstr "URL"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:815
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:834
 #: src/PrintMyBlog/domain/PrintOptions.php:88
 msgid "Featured Image"
 msgstr "特色图片"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:816
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:835
 #: src/PrintMyBlog/domain/PrintOptions.php:92
 msgid "Excerpt"
 msgstr "摘要"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:817
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:836
 msgid "Custom Fields"
 msgstr "自定义字段"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:818
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:837
 #: src/PrintMyBlog/domain/PrintOptions.php:96
 #: templates/partials/content_options.php:13
 msgid "Content"
 msgstr "内容"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:828
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:847
 msgid "Post Content"
 msgstr "文章内容"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:829
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:848
 msgid "Content from each post to print."
 msgstr "要打印的每个帖子中的内容。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:875
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:920
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:894
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:939
 #: src/Twine/forms/inputs/FontInput.php:24
 #: src/Twine/forms/inputs/FontInput.php:35
 msgid "Arial"
 msgstr "Arial"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:876
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:921
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:895
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:940
 #: src/Twine/forms/inputs/FontInput.php:36
 msgid "Courier New"
 msgstr "Courier New"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:877
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:922
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:896
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:941
 #: src/Twine/forms/inputs/FontInput.php:27
 #: src/Twine/forms/inputs/FontInput.php:37
 msgid "Georgia"
 msgstr "格鲁吉亚"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:878
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:923
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:897
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:942
 #: src/Twine/forms/inputs/FontInput.php:38
 msgid "Impact"
 msgstr "Impact 字体"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:879
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:924
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:898
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:943
 #: src/Twine/forms/inputs/FontInput.php:29
 #: src/Twine/forms/inputs/FontInput.php:39
 msgid "Lucida Console"
 msgstr "露西达控制台"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:880
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:925
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:899
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:944
 #: src/Twine/forms/inputs/FontInput.php:30
 #: src/Twine/forms/inputs/FontInput.php:40
 msgid "Palatino Linotype"
 msgstr "帕拉蒂诺·利诺类型"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:881
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:926
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:900
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:945
 #: src/Twine/forms/inputs/FontInput.php:41
 msgid "Tahoma"
 msgstr "Tahoma"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:882
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:927
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:901
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:946
 #: src/Twine/forms/inputs/FontInput.php:42
 msgid "Times New Roman"
 msgstr "Times New Roman"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:883
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:928
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:902
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:947
 #: src/Twine/forms/inputs/FontInput.php:31
 #: src/Twine/forms/inputs/FontInput.php:43
 msgid "Verdana"
 msgstr "Verdana"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:884
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:929
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:903
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:948
 msgid "Custom Font..."
 msgstr "自定义字体..."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:888
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:907
 msgid "Header Font"
 msgstr "标题字体"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:889
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:908
 msgid "Default font for header tags"
 msgstr "标题标签的默认字体"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:899
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:944
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:918
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:963
 msgid ""
 "Specify the URL of a custom font file, or upload one. The formats \"wff\" "
 "and \"wff2\" work best, but \"ttf\" and \"otf\" also work."
@@ -1960,53 +1997,53 @@ msgstr ""
 "指定自定义字体文件的 URL，或上传一个。格式“wff”和“wff2”效果最好，"
 "但“ttf”和“otf”也有效。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:933
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:952
 msgid "Font"
 msgstr "字体"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:934
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:953
 msgid "Default font used in paragraphs, bulleted lists, tables, etc."
 msgstr "段落、项目符号列表、表格等中使用的默认字体。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:955
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:974
 msgid "Image & Block Settings"
 msgstr "图像和块设置"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:959
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:978
 msgid "Maximum Image Height (in pixels)"
 msgstr "最大图像高度（以像素为单位）"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:962
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:981
 msgid ""
 "Larger images will be resized to this, smaller images will be unchanged."
 msgstr "较大的图像将调整为此大小，较小的图像将保持不变。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:987
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1006
 msgid "Page Settings"
 msgstr "页面设置"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:991
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1010
 msgid "Page Width"
 msgstr "页面宽度"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:991
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1003
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1010
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1022
 msgid "Not supported by some browsers"
 msgstr "某些浏览器不支持"
 
 #. translators: 1: opening anchor tag, 2: closing anchor tag
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:994
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1006
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1013
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1025
 #, php-format
 msgid "Use standard %1$sCSS units%2$s"
 msgstr "使用标准 %1$sCSS 单位%2$s"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1003
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1022
 msgid "Page Height"
 msgstr "页面高度"
 
 #. translators: 1: theme name.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1027
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1046
 #, php-format
 msgid ""
 "Your theme, \"%1$s\", can be used in conjunction with your design. Themes "
@@ -2016,34 +2053,34 @@ msgstr ""
 "您的主题“%1$s”可以与您的设计结合使用。主题通常不用于打印，并且可能与设计冲"
 "突，但如果没有主题，您的内容可能会看起来很糟糕。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1031
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1050
 msgid "Note: this option is only supported for the business license."
 msgstr "注意：此选项仅支持营业执照。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1041
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1060
 msgid "Don’t Change Image Quality"
 msgstr "不要更改图像质量"
 
 #. translators: %s image dimensions, like "120x120"
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1055
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1074
 #, php-format
 msgid "%s pixels wide"
 msgstr "%s 像素宽"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1061
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1080
 msgid "Full Size (on web)"
 msgstr "全尺寸（网络）"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1062
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1081
 msgid "Uploaded Size (largest possible)"
 msgstr "上传大小（可能的最大尺寸）"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1075
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1094
 msgid "Image Quality (in pixels)"
 msgstr "图像质量（以像素为单位）"
 
 #. translators: 1: opening anchor tag, 2L closing anchor tag.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1078
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1097
 #, php-format
 msgid ""
 "Lower quality means smaller file size, whereas higher quality means higher "
@@ -2055,29 +2092,29 @@ msgstr ""
 "生成的 PDF 中缺少图像，则请求的图像大小可能不可用。使用%1$s重新生成缩略图插"
 "件%2$s创建缺少的图像大小。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1096
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1115
 msgid "Apply Website Theme"
 msgstr "应用网站主题"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1103
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1122
 msgid "Custom CSS"
 msgstr "自定义CSS"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1104
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1123
 msgid "Styles to be applied only when printing projects using this design."
 msgstr "仅在使用此设计打印项目时应用的样式。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1109
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1128
 msgid "Add \"Powered By\""
 msgstr "添加“动力来源”"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1109
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1128
 msgid ""
 "In compliance with WordPress.org guidelines, not added when printing from "
 "your browser."
 msgstr "符合 WordPress.org 准则，从浏览器打印时不添加。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1110
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1129
 msgid ""
 "Instructs the Pro PDF Service to add \"Powered by Print My Blog Pro & "
 "WordPress\" to your project. Does not appear when printing using your "
@@ -2086,12 +2123,12 @@ msgstr ""
 "指示 Pro PDF 服务将“Powered by Print My Blog Pro & WordPress”添加到您的项目"
 "中。使用浏览器打印时不显示。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1132
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1151
 msgid "Page Reference Text"
 msgstr "页面引用文本"
 
 #. translators: %s literally the string "%s"
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1134
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1153
 #, php-format
 msgid ""
 "Text to use when replacing a hyperlink with a page reference. \"%s\" will be "
@@ -2099,25 +2136,25 @@ msgid ""
 msgstr "将超链接替换为页面引用时要使用的文本。“%s”将替换为页码。"
 
 #. translators: %s page number
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1136
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1155
 #, php-format
 msgid "(see page %s)"
 msgstr "（见第%s页）"
 
 #. translators: %s literally the string %s.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1139
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1158
 #, php-format
 msgid ""
 "You must include \"%s\" in the page reference text so we know where to put "
 "the page number."
 msgstr "您必须在页面参考文本中包含“%s”，以便我们知道将页码放在哪里。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1152
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1171
 msgid "Internal Footnote Text"
 msgstr "内部脚注文本"
 
 #. translators: %s literally the string %s.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1154
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1173
 #, php-format
 msgid ""
 "Text to use when replacing a hyperlink with a footnote. \"%s\" will be "
@@ -2125,25 +2162,25 @@ msgid ""
 msgstr "将超链接替换为脚注时使用的文本。“%s”将替换为页码。"
 
 #. translators: %s literally the string %s.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1156
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1175
 #, php-format
 msgid "See page %s."
 msgstr "请参阅第 %s 页。"
 
 #. translators: %s literally the string %s.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1159
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1179
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1178
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1198
 #, php-format
 msgid ""
 "You must include \"%s\" in the footnote text so we know where to put the URL."
 msgstr "您必须在脚注文本中包含“%s”，以便我们知道将 URL 放在哪里。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1172
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1191
 msgid "External Footnote Text"
 msgstr "外部脚注文本"
 
 #. translators: %s literally the string %s.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1174
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1193
 #, php-format
 msgid ""
 "Text to use when replacing a hyperlink with a footnote. \"%s\" will be "
@@ -2151,24 +2188,24 @@ msgid ""
 msgstr "将超链接替换为脚注时使用的文本。“%s”将替换为网址"
 
 #. translators: %s literally the string %s.
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1176
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1195
 #, php-format
 msgid "See %s."
 msgstr "见%s."
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1192
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1211
 msgid "None"
 msgstr "无"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1193
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1212
 msgid "Center"
 msgstr "居中"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1196
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1215
 msgid "Default Image Alignment"
 msgstr "默认图像对齐"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1197
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1216
 msgid ""
 "Images normally default to \"no alignment\", which can look jumbled in "
 "printouts. Usually it’s best to automatically switch those to align to the "
@@ -2177,31 +2214,34 @@ msgstr ""
 "图像通常默认为“无对齐”，在打印输出中看起来可能杂乱无章。通常，最好自动切换它"
 "们以对齐中心。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1210
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1229
 msgid "Don’t move"
 msgstr "别动"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1211
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1230
 msgid "Snap to the top or bottom of the page"
 msgstr "对齐页面顶部或底部"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1212
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1231
 msgid "Only snap if it would otherwise cause a page break"
 msgstr "仅当会导致分页符时才对齐"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1213
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1232
 msgid "Resize images if they don’t fit on the page"
 msgstr "如果图像不适合页面，请调整图像大小"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1216
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1235
 msgid "Image and Block Placement"
 msgstr "图像和块放置"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1216
-msgid "Image snapping and dynamic resizing only works using Pro Print."
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1235
+#, fuzzy
+#| msgid "Image snapping and dynamic resizing only works using Pro Print."
+msgid ""
+"Image snapping and dynamic resizing only works using the Pro PDF Service."
 msgstr "图像捕捉和动态调整大小仅适用于专业打印。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1217
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1236
 msgid ""
 "To reduce whitespace around images, galleries, and tables, Print My Blog can "
 "adjust the placement of your content, or resize it according to the space on "
@@ -2210,21 +2250,21 @@ msgstr ""
 "若要减少图像、图库和表格周围的空白区域，“打印我的博客”可以调整内容的位置，或"
 "根据页面上的空间调整内容大小。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1236
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1255
 msgid "Minimum Image Size (in pixels)"
 msgstr "最小图像大小（以像素为单位）"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1237
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1256
 msgid ""
 "Any images larger than this may be resized to fit onto the page, but they "
 "will be no smaller than this size."
 msgstr "任何大于此大小的图像都可以调整大小以适应页面，但它们不会小于此大小。"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1348
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1367
 msgid "Add QR Code to Videos"
 msgstr "为视频添加二维码"
 
-#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1349
+#: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1368
 msgid ""
 "After a video is converted into a screenshot and URL, you can optionally add "
 "a QR code that readers can scan with their phones to view the video."
@@ -2453,8 +2493,8 @@ msgstr "关于快速打印"
 #, php-format
 msgid ""
 "This is the quick-and-easy option, best for making printouts for your own "
-"records. For something more professional and full-featured, use %1$sPro Print"
-"%2$s. It has free and paid options. %3$sSee full feature comparison.%2$s"
+"records. For something more professional and full-featured, use %1$sPro "
+"Print%2$s. It has free and paid options. %3$sSee full feature comparison.%2$s"
 msgstr ""
 "这是快速简便的选项，最适合为您自己的记录制作打印输出。如需更专业和功能齐全的"
 "内容，请使用 %1$sPro Print%2$s。它有免费和付费选项。%3$s查看完整功能比"
@@ -2505,8 +2545,7 @@ msgstr ""
 
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:77
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:88
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:104
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:118
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:119
 #: templates/welcome.php:59
 msgid "Read the User Guide"
 msgstr "阅读用户指南"
@@ -2547,6 +2586,15 @@ msgstr ""
 "将其添加到右侧的项目中"
 
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:100
+#, php-format
+msgid ""
+"Title Page and Table of Contents print materials are automatically added to "
+"each project, but you can remove or %1$scustomize them%2$s."
+msgstr ""
+"标题页和目录打印材料会自动添加到每个项目中，但您可以删除或%1$s自定义它"
+"们%2$s。"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:101
 msgid ""
 "Place articles in either front matter, body, or back matter, according to "
 "how you want your project organized. Each design can style them differently "
@@ -2555,43 +2603,47 @@ msgstr ""
 "根据您希望项目的组织方式将文章放在前体、正文或后体中。每种设计都可以以不同的"
 "方式设置它们的样式（例如，前部通常用罗马数字编号）"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:101
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:102
 msgid "Nest content inside others to create parts"
 msgstr "将内容嵌套在其他人内部以创建零件"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:111
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:105
+msgid "Read the User Guide on how to edit your project's content."
+msgstr "阅读用户指南，了解如何编辑项目内容。"
+
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:112
 msgid "Everything Else About Your Project is Stored Here"
 msgstr "有关项目的其他所有内容都存储在此处"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:112
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:113
 msgid ""
 "Different formats and designs may require other information about your "
 "project."
 msgstr "不同的格式和设计可能需要有关项目的其他信息。"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:114
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:115
 msgid ""
 "Some examples of metadata are: title page info, file info, or copyright data."
 msgstr "元数据的一些示例包括：标题页信息、文件信息或版权数据。"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:115
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:116
 msgid ""
 "So although your choice of design may affect what metadata is required, it "
 "is not shared with other projects."
 msgstr "因此，尽管您选择的设计可能会影响所需的元数据，但它不会与其他项目共享。"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:124
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:125
 msgid "Generate and View Your File"
 msgstr "生成和查看您的文件"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:126
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:127
 msgid ""
 "Your project is ready to be generated! Clicking \"Generate\" will compile "
 "your content into a print-page."
 msgstr "您的项目已准备好生成！单击“生成”会将您的内容编译到打印页面中。"
 
 #. translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag, 4: opening anchor tag
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:131
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:132
 #, php-format
 msgid ""
 "Read the User Guide on %1$supdating%2$s, %3$sgenerating the pro file%2$s, "
@@ -2599,11 +2651,11 @@ msgid ""
 msgstr ""
 "阅读有关%1$s更新%2$s、%3$s生成专业文件%2$s和%4$s获取帮助%2$s的用户指南。"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:142
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:143
 msgid "Posts just for Print My Blog"
 msgstr "帖子只为打印我的博客"
 
-#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:143
+#: src/PrintMyBlog/domain/DefaultPersistentNotices.php:144
 msgid ""
 "Print My Blog \"Print Materials\" are like private posts. They aren’t "
 "visible to site visitors, but you can use them in your Pro Print Projects."
@@ -2900,7 +2952,7 @@ msgstr ""
 msgid "Template file \"%s\" should exist but doesn't."
 msgstr "模板文件“%s”应该存在，但不存在。"
 
-#: src/PrintMyBlog/orm/entities/Project.php:668
+#: src/PrintMyBlog/orm/entities/Project.php:695
 msgid "Default Template"
 msgstr "默认模板"
 
@@ -2914,7 +2966,7 @@ msgstr "没有在Freemius注册的网站"
 
 #: src/PrintMyBlog/services/generators/EpubGenerator.php:151
 #: src/PrintMyBlog/services/generators/PdfGenerator.php:136
-#: src/PrintMyBlog/services/generators/WordGenerator.php:113
+#: src/PrintMyBlog/services/generators/WordGenerator.php:115
 msgid ""
 "Your project is very big and you might have errors downloading the file. If "
 "so, try splitting your content into multiple projects and instead creating "
@@ -2925,7 +2977,7 @@ msgstr ""
 
 #: src/PrintMyBlog/services/generators/EpubGenerator.php:152
 #: src/PrintMyBlog/services/generators/PdfGenerator.php:137
-#: src/PrintMyBlog/services/generators/WordGenerator.php:114
+#: src/PrintMyBlog/services/generators/WordGenerator.php:116
 msgid ""
 "Your project has lots of images and you might have errors downloading the "
 "file. If so, try spltting your content into multiple projects or reducing "
@@ -2941,7 +2993,7 @@ msgid ""
 "non-refundable."
 msgstr "下载付费 PDF 将使用您剩余%1$s配额之一，且不可退款。"
 
-#: src/PrintMyBlog/services/generators/WordGenerator.php:145
+#: src/PrintMyBlog/services/generators/WordGenerator.php:147
 msgid ""
 "Table of content - In Microsoft Word, please right-click and choose \"Update "
 "field\"."
@@ -3849,8 +3901,8 @@ msgstr "您确定博客没有停用 REST API 吗？"
 #: templates/print_page_error.php:43
 #, php-format
 msgid ""
-"If you are still having problems, please report it to the %1$sPrint My Blog"
-"%2$s support forum."
+"If you are still having problems, please report it to the %1$sPrint My "
+"Blog%2$s support forum."
 msgstr "如果您仍然遇到问题，请报告给%1$s打印我的博客%2$s支持论坛。"
 
 #: templates/project_edit_content.php:22
@@ -3907,7 +3959,7 @@ msgstr "等待审核"
 #: templates/project_edit_content.php:76 templates/setup_page.php:123
 #, fuzzy
 msgid "Private"
-msgstr "私密"
+msgstr "私募："
 
 #: templates/project_edit_content.php:77 templates/setup_page.php:125
 msgid "Published"
@@ -4314,7 +4366,7 @@ msgstr "状态"
 #: templates/setup_page.php:146
 #, fuzzy
 msgid "Filters"
-msgstr "过滤器"
+msgstr "搜索和应用过滤器"
 
 #: templates/setup_page.php:146
 msgid "Pro Print supports filtering by custom taxonomies."
@@ -4346,8 +4398,8 @@ msgstr "打印我的博客 – 专业打印！"
 
 #: templates/upgrade_to_3.php:4
 msgid ""
-"The old features are still here: \"Print Now\" was just renamed \"Quick Print"
-"\", and the Print Buttons are still available under \"Settings\"."
+"The old features are still here: \"Print Now\" was just renamed \"Quick "
+"Print\", and the Print Buttons are still available under \"Settings\"."
 msgstr ""
 "旧功能仍然存在：“立即打印”刚刚重命名为“快速打印”，打印按钮仍然在“设置”下可"
 "用。"
