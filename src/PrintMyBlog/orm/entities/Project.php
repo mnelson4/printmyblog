@@ -19,6 +19,7 @@ use PrintMyBlog\services\config\Config;
 use PrintMyBlog\services\FileFormatRegistry;
 use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
 use PrintMyBlog\services\SectionTemplateRegistry;
+use PrintMyBlog\system\CustomPostTypes;
 use Twine\forms\base\FormSection;
 use Twine\forms\inputs\FormInputBase;
 use Twine\forms\inputs\TextAreaInput;
@@ -200,10 +201,10 @@ class Project extends PostWrapper
     }
 
     /**
-     * Projects created from a single post instead of the traditional, longer way. No UI for this yet, but there will be...
+     * Projects created from a single post instead of the traditional, longer way.
      */
     protected function isPostProject(){
-        return false;
+        return $this->getWpPost()->post_type !== CustomPostTypes::PROJECT;
     }
 
     /**

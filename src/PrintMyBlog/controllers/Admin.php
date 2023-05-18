@@ -1913,12 +1913,16 @@ class Admin extends BaseController
      */
     public function postAdminRowActions($actions, $post)
     {
-        if (! $post instanceof WP_Post || ! current_user_can('publish_' . CustomPostTypes::CONTENTS) || ! is_array($actions)) {
-            return $actions;
+        if ($post instanceof WP_Post && current_user_can('publish_' . CustomPostTypes::CONTENTS) && is_array($actions)) {
+            $html = $this->getDuplicateAsPrintMaterialHtml();
+            if ($html) {
+                $actions['pmb_new_print_material'] = $html;
+            }
         }
-        $html = $this->getDuplicateAsPrintMaterialHtml();
-        if ($html) {
-            $actions['pmb_new_print_material'] = $html;
+
+        $formats = ['word'];
+        foreach($formats as $format){
+            $actions['pmb_generate_' . $format] = $this->getGeneratePostProjectHtml($post->ID, $format);
         }
 
         return $actions;
@@ -2020,6 +2024,31 @@ class Admin extends BaseController
             self::SLUG_ACTION_DUPLICATE_PRINT_MATERIAL
         );
         return $url;
+    }
+
+    /**
+     * Gets HTML for a button to generate a document from the given project in the given format.
+     * @param int $post_id
+     * @param string|FileFormat $format
+     * @return string
+     */
+    protected function getGeneratePostProjectHtml($post_id, $format)
+    {
+        $format = $this->file_format_registry->getFormat($format);
+        return '<a href="'. esc_url($this->getGeneratePostProjectUrl($post_id, $format->slug())) . '" >' . sprintf(__('Generate %s', 'print-my-blog'),  $format->title()) . '</a>';
+    }
+
+    protected function getGeneratePostProjectUrl($post_id, $format){
+        return wp_nonce_url(
+                add_query_arg(
+                        [
+                            Frontend::PMB_LOADING_PAGE_INDICATOR => true,
+                            Frontend::PMB_QUERYARG_FORMAT => $format,
+                            Frontend::PMB_QUERYARG_POST => $post_id
+                        ],
+                    site_url()
+                )
+        );
     }
 
     /**

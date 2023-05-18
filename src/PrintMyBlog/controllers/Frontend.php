@@ -30,14 +30,24 @@ use PrintMyBlog\domain\DefaultFileFormats;
 class Frontend extends BaseController
 {
     /**
-     * Request variable indicating a request like AJAX
+     * Request variable indicating a request like AJAX.
      */
     const PMB_AJAX_INDICATOR = 'pmb_ajax';
 
     /**
-     * Request variable indicating a request to generate a project
+     * Request variable indicating a request to generate a project.
      */
     const PMB_LOADING_PAGE_INDICATOR = 'pmb_loading';
+
+    /**
+     * Request variable indicating which post to generate for the loading page.
+     */
+    const PMB_QUERYARG_POST = 'pmb_p';
+
+    /**
+     * Request variable indicating which format to generate for the loading page.
+     */
+    const PMB_QUERYARG_FORMAT = 'pmb_f';
 
     /**
      * Action indicating we should generate a project or check its status.
@@ -201,8 +211,8 @@ class Frontend extends BaseController
      */
     protected function loadingPage(){
         global $pmb_format;
-        $pmb_format = Array2::setOr($_REQUEST, 'pmb_f', DefaultFileFormats::DIGITAL_PDF);
-        $post_id = Array2::setOr($_REQUEST, 'pmb_post', 0);
+        $pmb_format = Array2::setOr($_REQUEST, self::PMB_QUERYARG_FORMAT, DefaultFileFormats::DIGITAL_PDF);
+        $post_id = Array2::setOr($_REQUEST, self::PMB_QUERYARG_POST, 0);
         if( ! $post_id){
             throw new Exception(__('Invalid Post ID. The link you used to get here may be old. If it\'s new, please contact Print My Blog support.', 'print-my-blog'));
         }

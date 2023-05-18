@@ -209,7 +209,7 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
             // it's a "post project", meaning it's only this one post in the "project".
             $fake_row = new \stdClass();
             $fake_row->ID = 0;
-            $fake_row->post_id = $this->project->ID;
+            $fake_row->post_id = $this->project->getWpPost()->ID;
             $fake_row->post_title = $this->project->getWpPost()->post_title;
             $fake_row->parent_id = 0;
             $fake_row->section_order = 1;
