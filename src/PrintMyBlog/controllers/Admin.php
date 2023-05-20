@@ -22,6 +22,7 @@ use PrintMyBlog\orm\entities\Project;
 use PrintMyBlog\orm\managers\DesignManager;
 use PrintMyBlog\orm\managers\ProjectManager;
 use PrintMyBlog\orm\managers\ProjectSectionManager;
+use PrintMyBlog\services\config\Config;
 use PrintMyBlog\services\DebugInfo;
 use PrintMyBlog\services\ExternalResourceCache;
 use PrintMyBlog\services\FileFormatRegistry;
@@ -37,6 +38,7 @@ use Twine\forms\helpers\InputOption;
 use Twine\forms\inputs\CheckboxMultiInput;
 use Twine\forms\inputs\HiddenInput;
 use Twine\forms\inputs\RadioButtonInput;
+use Twine\forms\inputs\SelectInput;
 use Twine\forms\inputs\TextAreaInput;
 use Twine\forms\inputs\TextInput;
 use Twine\forms\inputs\YesNoInput;
@@ -158,6 +160,10 @@ class Admin extends BaseController
      * @var ExternalResourceCache
      */
     protected $external_resource_cache;
+    /**
+     * @var Config
+     */
+    protected Config $config;
 
     /**
      * @param PostFetcher $post_fetcher
@@ -171,7 +177,8 @@ class Admin extends BaseController
      * @param DebugInfo $debug_info
      * @param PmbCentral $pmb_central
      * @param PostWrapperManager $post_manager
-     * @param ExternalResourceCache $external_resouce_cache
+     * @param ExternalResourceCache $external_resource_cache
+     * @param Config $config
      */
     public function inject(
         PostFetcher $post_fetcher,
@@ -185,7 +192,8 @@ class Admin extends BaseController
         DebugInfo $debug_info,
         PmbCentral $pmb_central,
         PostWrapperManager $post_manager,
-        ExternalResourceCache $external_resouce_cache
+        ExternalResourceCache $external_resource_cache,
+        Config $config
     ) {
         $this->post_fetcher = $post_fetcher;
         $this->section_manager = $section_manager;
@@ -198,7 +206,8 @@ class Admin extends BaseController
         $this->debug_info = $debug_info;
         $this->pmb_central = $pmb_central;
         $this->post_manager = $post_manager;
-        $this->external_resource_cache = $external_resouce_cache;
+        $this->external_resource_cache = $external_resource_cache;
+        $this->config = $config;
     }
 
     /**
@@ -329,37 +338,57 @@ class Admin extends BaseController
     public function settingsPage()
     {
         $settings = Context::instance()->reuse('PrintMyBlog\domain\FrontendPrintSettings');
+        $settings_form = $this->getNewSettingsForm();
         if (Array2::setOr($_SERVER, 'REQUEST_METHOD', '') === 'POST') {
             check_admin_referer('pmb-settings');
-            // Ok save those settings!
-            if (isset($_POST['pmb-reset'])) {
-                $settings = Context::instance()->useNew('PrintMyBlog\domain\FrontendPrintSettings', [null, false]);
-            } else {
-                $settings->setShowButtons(isset($_POST['pmb_show_buttons']));
-                $settings->setShowButtonsPages(isset($_POST['pmb_show_buttons_pages']));
-                $settings->setPlaceAbove(Array2::setOr($_POST, 'pmb_place_above', 1));
-                foreach ($settings->formatSlugs() as $slug) {
-                    if (isset($_POST['pmb_format'][$slug])) {
-                        $active = true;
-                    } else {
-                        $active = false;
+            $settings_form->receiveFormSubmission($_POST);
+            if($settings_form->isValid()){
+                // Ok save those settings!
+                if (isset($_POST['pmb-reset'])) {
+                    $settings = Context::instance()->useNew('PrintMyBlog\domain\FrontendPrintSettings', [null, false]);
+                    // reset each format's default design
+                    foreach($this->file_format_registry->getFormats() as $format) {
+                        $design = $this->design_manager->getBySlug($format->getDefaultDesignTemplate()->getDefaultDesignSlug());
+                        if ($design instanceof Design) {
+                            $this->config->setSetting($this->config->getSettingNameForDefaultDesignForFormat($format), $design->getWpPost()->ID);
+                        }
                     }
-                    $settings->setFormatActive($slug, $active);
-                    if (isset($_POST['pmb_frontend_labels'][$slug])) {
-                        // Sanitization happens inside FrontendPrintSettings::setFormatFrontendLabel()
-                        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-                        $settings->setFormatFrontendLabel($slug, wp_unslash($_POST['pmb_frontend_labels'][$slug]));
-                    }
-                    if (isset($_POST['pmb_print_options'][$slug])) {
-                        // Sanitization happens inside FrontendPrintSettings::setPrintOptions(), which is pretty involved.
-                        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-                        $settings->setPrintOptions($slug, wp_unslash($_POST['pmb_print_options'][$slug]));
+                } else {
+                    $settings->setShowButtons(isset($_POST['pmb_show_buttons']));
+                    $settings->setShowButtonsPages(isset($_POST['pmb_show_buttons_pages']));
+                    $settings->setPlaceAbove(Array2::setOr($_POST, 'pmb_place_above', 1));
+                    foreach ($settings->formatSlugs() as $slug) {
+                        if (isset($_POST['pmb_format'][$slug])) {
+                            $active = true;
+                        } else {
+                            $active = false;
+                        }
+                        $settings->setFormatActive($slug, $active);
+                        if (isset($_POST['pmb_frontend_labels'][$slug])) {
+                            // Sanitization happens inside FrontendPrintSettings::setFormatFrontendLabel()
+                            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                            $settings->setFormatFrontendLabel($slug, wp_unslash($_POST['pmb_frontend_labels'][$slug]));
+                        }
+                        if (isset($_POST['pmb_print_options'][$slug])) {
+                            // Sanitization happens inside FrontendPrintSettings::setPrintOptions(), which is pretty involved.
+                            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                            $settings->setPrintOptions($slug, wp_unslash($_POST['pmb_print_options'][$slug]));
+                        }
                     }
                 }
+                $settings->save();
+                update_option(self::SETTINGS_SAVED_OPTION, true, false);
+                foreach($this->file_format_registry->getFormats() as $format){
+                    $this->config->setSetting(
+                        $this->config->getSettingNameForDefaultDesignForFormat($format),
+                        $settings_form->getInputValue($this->config->getSettingNameForDefaultDesignForFormat($format))
+                    );
+                }
+                $this->config->save();
+
+                wp_safe_redirect('');
             }
-            $settings->save();
-            update_option(self::SETTINGS_SAVED_OPTION, true, false);
-            wp_safe_redirect('');
+
         }
         $saved = get_option(self::SETTINGS_SAVED_OPTION, false);
         if ($saved) {
@@ -388,6 +417,29 @@ class Admin extends BaseController
         $print_options = new PrintOptions();
         $displayer = new FormInputs();
         include PMB_TEMPLATES_DIR . 'settings_page.php';
+    }
+
+    protected function getNewSettingsForm(){
+        $subsections = [];
+        $formats = $this->file_format_registry->getFormats();
+        foreach($formats as $format){
+           $designs = $this->design_manager->getDesignsForFormat($format->slug());
+           $design_names = [];
+           foreach($designs as $design){
+               $design_names[$design->getWpPost()->ID] = new InputOption($design->getWpPost()->post_title);
+           }
+           $subsections[$this->config->getSettingNameForDefaultDesignForFormat($format)] = new SelectInput(
+                   $design_names,
+               [
+                       'default' => $this->config->getSetting($this->config->getSettingNameForDefaultDesignForFormat($format))
+               ]
+           );
+        }
+        return new FormSection(
+                [
+                'subsections' => $subsections
+                ]
+        );
     }
 
     /**
@@ -900,19 +952,7 @@ class Admin extends BaseController
         // Nonce overkill for just checking which page they're on.
         // phpcs:disable WordPress.Security.NonceVerification.Recommended
         $format = $this->file_format_registry->getFormat(isset($_GET['format']) ? sanitize_key($_GET['format']) : null);
-        // get all the designs for this format
-        // including which format is actually in-use
-        $wp_query_args = [
-            // Sorry, I'm storing the design on a metakey. (Ya maybe we could store them on a custom table too).
-            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
-            'meta_query' => [
-                [
-                    'key' => Design::META_PREFIX . 'format',
-                    'value' => $format->slug(),
-                ],
-            ],
-        ];
-        $designs = $this->design_manager->getAll(new WP_Query($wp_query_args));
+        $designs = $this->design_manager->getDesignsForFormat($format->slug());
         $chosen_design = $this->project->getDesignFor($format->slug());
         // show them in a template
         $this->renderProjectTemplate(

@@ -61,6 +61,7 @@ class Context extends BaseContext
                 'PrintMyBlog\services\PmbCentral' => self::REUSE,
                 'Twine\orm\managers\PostWrapperManager' => self::REUSE,
                 'PrintMyBlog\services\ExternalResourceCache' => self::REUSE,
+                'PrintMyBlog\services\config\Config' => self::REUSE,
             ],
             'PrintMyBlog\services\PersistentNotices' => [
                 'mnelson4\AdminNotices\Notices' => self::REUSE,

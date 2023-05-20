@@ -38,7 +38,7 @@ class Config extends TwineConfig
     {
         $defaults = [];
         foreach ($this->format_registry->getFormats() as $format) {
-            $defaults[$this->getSettingForDefaultDesignForFormat($format)] = null;
+            $defaults[$this->getSettingNameForDefaultDesignForFormat($format)] = null;
         }
         return $defaults;
     }
@@ -58,7 +58,7 @@ class Config extends TwineConfig
      *
      * @return string
      */
-    protected function getSettingForDefaultDesignForFormat($format)
+    public function getSettingNameForDefaultDesignForFormat($format)
     {
         if ($format instanceof FileFormat) {
             $format = $format->slug();
@@ -77,7 +77,7 @@ class Config extends TwineConfig
         if (! $format instanceof FileFormat) {
             $format = $this->format_registry->getFormat($format);
         }
-        $key = $this->getSettingForDefaultDesignForFormat($format);
+        $key = $this->getSettingNameForDefaultDesignForFormat($format);
         $design_id = $this->getSetting($key);
         if ($design_id) {
             $design = $this->design_manager->getById($design_id);

@@ -2,7 +2,8 @@
 /**
  * @var $print_options PrintMyBlog\domain\PrintOptions
  * @var $displayer PrintMyBlog\services\display\FormInputs
- * @var $settings PrintMyBlog\domain\FrontendPrintSettings;
+ * @var $settings PrintMyBlog\domain\FrontendPrintSettings
+ * @var $settings_form Twine\forms\base\FormSection
  */
 
 use PrintMyBlog\domain\PrintOptions;
@@ -86,6 +87,9 @@ use PrintMyBlog\domain\FrontendPrintSettings;
                 <?php } ?>
             </div>
         </details>
+
+        <h2><?php _e('Admin Quick Project Buttons', 'print-my-blog');?></h2>
+        <?php echo $settings_form->getHtmlAndJs();?>
         <?php wp_nonce_field( 'pmb-settings' );?>
         <button class="button-primary"><?php esc_html_e('Save Settings','print-my-blog' );?></button> <input name="pmb-reset" class="button button-secondary" onclick="return confirm('<?php echo esc_attr(__('Are you sure you want to reset the settings back to defaults?','print-my-blog'));?>');" type="submit" value="<?php esc_html_e('Reset to Defaults', 'print-my-blog'); ?>">
     </form>

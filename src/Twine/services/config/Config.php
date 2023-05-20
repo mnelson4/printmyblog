@@ -59,7 +59,13 @@ abstract class Config
     public function getSetting($setting_name)
     {
         $this->ensureLoadedFromDb();
-        return $this->settings[$setting_name];
+        return apply_filters(
+            '\Twine\services\config\Config::getSetting',
+            $this->settings[$setting_name],
+            $setting_name,
+            static::class,
+            $this->settings
+        );
     }
 
     /**
