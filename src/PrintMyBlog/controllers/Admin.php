@@ -332,64 +332,66 @@ class Admin extends BaseController
         }
     }
 
-    /**
-     * Legacy settings page.
-     */
-    public function settingsPage()
-    {
+    public function saveSettingsPage(){
         $settings = Context::instance()->reuse('PrintMyBlog\domain\FrontendPrintSettings');
         $settings_form = $this->getNewSettingsForm();
-        if (Array2::setOr($_SERVER, 'REQUEST_METHOD', '') === 'POST') {
-            check_admin_referer('pmb-settings');
-            $settings_form->receiveFormSubmission($_POST);
-            if($settings_form->isValid()){
-                // Ok save those settings!
-                if (isset($_POST['pmb-reset'])) {
-                    $settings = Context::instance()->useNew('PrintMyBlog\domain\FrontendPrintSettings', [null, false]);
-                    // reset each format's default design
-                    foreach($this->file_format_registry->getFormats() as $format) {
-                        $design = $this->design_manager->getBySlug($format->getDefaultDesignTemplate()->getDefaultDesignSlug());
-                        if ($design instanceof Design) {
-                            $this->config->setSetting($this->config->getSettingNameForDefaultDesignForFormat($format), $design->getWpPost()->ID);
-                        }
-                    }
-                } else {
-                    $settings->setShowButtons(isset($_POST['pmb_show_buttons']));
-                    $settings->setShowButtonsPages(isset($_POST['pmb_show_buttons_pages']));
-                    $settings->setPlaceAbove(Array2::setOr($_POST, 'pmb_place_above', 1));
-                    foreach ($settings->formatSlugs() as $slug) {
-                        if (isset($_POST['pmb_format'][$slug])) {
-                            $active = true;
-                        } else {
-                            $active = false;
-                        }
-                        $settings->setFormatActive($slug, $active);
-                        if (isset($_POST['pmb_frontend_labels'][$slug])) {
-                            // Sanitization happens inside FrontendPrintSettings::setFormatFrontendLabel()
-                            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-                            $settings->setFormatFrontendLabel($slug, wp_unslash($_POST['pmb_frontend_labels'][$slug]));
-                        }
-                        if (isset($_POST['pmb_print_options'][$slug])) {
-                            // Sanitization happens inside FrontendPrintSettings::setPrintOptions(), which is pretty involved.
-                            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-                            $settings->setPrintOptions($slug, wp_unslash($_POST['pmb_print_options'][$slug]));
-                        }
+        check_admin_referer('pmb-settings');
+        $settings_form->receiveFormSubmission($_POST);
+        if($settings_form->isValid()){
+            // Ok save those settings!
+            if (isset($_POST['pmb-reset'])) {
+                $settings = Context::instance()->useNew('PrintMyBlog\domain\FrontendPrintSettings', [null, false]);
+                // reset each format's default design
+                foreach($this->file_format_registry->getFormats() as $format) {
+                    $design = $this->design_manager->getBySlug($format->getDefaultDesignTemplate()->getDefaultDesignSlug());
+                    if ($design instanceof Design) {
+                        $this->config->setSetting($this->config->getSettingNameForDefaultDesignForFormat($format), $design->getWpPost()->ID);
                     }
                 }
-                $settings->save();
-                update_option(self::SETTINGS_SAVED_OPTION, true, false);
+            } else {
+                $settings->setShowButtons(isset($_POST['pmb_show_buttons']));
+                $settings->setShowButtonsPages(isset($_POST['pmb_show_buttons_pages']));
+                $settings->setPlaceAbove(Array2::setOr($_POST, 'pmb_place_above', 1));
+                foreach ($settings->formatSlugs() as $slug) {
+                    if (isset($_POST['pmb_format'][$slug])) {
+                        $active = true;
+                    } else {
+                        $active = false;
+                    }
+                    $settings->setFormatActive($slug, $active);
+                    if (isset($_POST['pmb_frontend_labels'][$slug])) {
+                        // Sanitization happens inside FrontendPrintSettings::setFormatFrontendLabel()
+                        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                        $settings->setFormatFrontendLabel($slug, wp_unslash($_POST['pmb_frontend_labels'][$slug]));
+                    }
+                    if (isset($_POST['pmb_print_options'][$slug])) {
+                        // Sanitization happens inside FrontendPrintSettings::setPrintOptions(), which is pretty involved.
+                        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                        $settings->setPrintOptions($slug, wp_unslash($_POST['pmb_print_options'][$slug]));
+                    }
+                }
                 foreach($this->file_format_registry->getFormats() as $format){
                     $this->config->setSetting(
                         $this->config->getSettingNameForDefaultDesignForFormat($format),
                         $settings_form->getInputValue($this->config->getSettingNameForDefaultDesignForFormat($format))
                     );
                 }
-                $this->config->save();
-
-                wp_safe_redirect('');
             }
+            $settings->save();
+            update_option(self::SETTINGS_SAVED_OPTION, true, false);
 
+            $this->config->save();
+
+            wp_safe_redirect(admin_url(PMB_ADMIN_SETTINGS_PAGE_PATH));
+            exit;
         }
+    }
+
+    /**
+     * Legacy settings page.
+     */
+    public function settingsPage()
+    {
         $saved = get_option(self::SETTINGS_SAVED_OPTION, false);
         if ($saved) {
             delete_option(self::SETTINGS_SAVED_OPTION);
@@ -416,6 +418,8 @@ class Admin extends BaseController
         }
         $print_options = new PrintOptions();
         $displayer = new FormInputs();
+        $settings_form = $this->getNewSettingsForm();
+        $settings = Context::instance()->reuse('PrintMyBlog\domain\FrontendPrintSettings');
         include PMB_TEMPLATES_DIR . 'settings_page.php';
     }
 
@@ -1249,6 +1253,9 @@ class Admin extends BaseController
         if ($_GET['page'] === PMB_ADMIN_HELP_PAGE_SLUG) {
             $this->sendHelp();
             exit;
+        }
+        if ($_GET['page'] === PMB_ADMIN_SETTINGS_PAGE_SLUG){
+            $this->saveSettingsPage();
         }
         if ($_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG) {
             $action = isset($_REQUEST['action']) ? sanitize_key($_REQUEST['action']) : null;

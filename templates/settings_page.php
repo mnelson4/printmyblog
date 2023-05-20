@@ -1,13 +1,11 @@
 <?php
 /**
  * @var $print_options PrintMyBlog\domain\PrintOptions
- * @var $displayer PrintMyBlog\services\display\FormInputs
  * @var $settings PrintMyBlog\domain\FrontendPrintSettings
  * @var $settings_form Twine\forms\base\FormSection
  */
 
 use PrintMyBlog\domain\PrintOptions;
-use PrintMyBlog\services\display\FormInputs;
 use PrintMyBlog\domain\FrontendPrintSettings;
 
 ?>
