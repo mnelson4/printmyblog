@@ -139,6 +139,8 @@ version_compare(
     define('PMB_ADMIN_SETTINGS_PAGE_SLUG', 'print-my-blog-settings');
     define('PMB_ADMIN_SETTINGS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_SETTINGS_PAGE_SLUG);
     define('PMB_ADMIN_HELP_PAGE_SLUG', 'print-my-blog-help');
+    define('PMB_ADMIN_DESIGNS_PAGE_SLUG','print-my-blog-designs');
+    define('PMB_ADMIN_DESIGNS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_DESIGNS_PAGE_SLUG);
     define('PMB_ADMIN_HELP_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_HELP_PAGE_SLUG);
     define('PMB_DESIGNS_DIR', PMB_DIR . 'designs/');
     define('TWINE_MAIN_FILE', PMB_MAIN_FILE);

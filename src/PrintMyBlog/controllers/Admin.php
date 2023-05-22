@@ -271,6 +271,14 @@ class Admin extends BaseController
         );
         add_submenu_page(
             PMB_ADMIN_PROJECTS_PAGE_SLUG,
+            esc_html__('Print My Blog Designs', 'print-my-blog'),
+            esc_html__('Designs', 'print-my-blog'),
+            'manage_options',
+            PMB_ADMIN_DESIGNS_PAGE_SLUG,
+            array($this, 'designs')
+        );
+        add_submenu_page(
+            PMB_ADMIN_PROJECTS_PAGE_SLUG,
             esc_html__('Print My Blog Settings', 'print-my-blog'),
             esc_html__('Settings', 'print-my-blog'),
             'manage_options',
@@ -717,9 +725,24 @@ class Admin extends BaseController
             );
             // don't let admin notices ruin the welcoming moment
             remove_all_actions('admin_notices');
-        } elseif (isset($_GET['page']) && $_GET['page'] === 'print-my-blog-now') {
+        } elseif (isset($_GET['page']) && $_GET['page'] === PMB_ADMIN_PAGE_SLUG ) {
             wp_enqueue_script('pmb-setup-page');
             wp_enqueue_style('pmb-setup-page');
+        } elseif(isset($_GET['page']) && $_GET['page'] === PMB_ADMIN_DESIGNS_PAGE_SLUG){
+            wp_enqueue_script(
+                'pmb-choose-design',       // handle
+                PMB_SCRIPTS_URL . 'pmb-design-choose.js',       // source
+                array('pmb-modal'),
+                filemtime(PMB_SCRIPTS_DIR . 'pmb-design-choose.js')
+            );
+            // A style available in WP
+            wp_enqueue_style('wp-jquery-ui-dialog');
+            wp_enqueue_style(
+                'pmb-choose-design',
+                PMB_STYLES_URL . 'design-choose.css',
+                [],
+                filemtime(PMB_STYLES_DIR . 'design-choose.css')
+            );
         } elseif (
             isset($_GET['page']) && $_GET['page'] === 'print-my-blog-projects'
         ) {
@@ -1193,6 +1216,79 @@ class Admin extends BaseController
             ]
         );
     }
+    protected function saveDesign(){
+        if (! check_admin_referer(PMB_ADMIN_PROJECTS_PAGE_SLUG)) {
+            wp_die('The request has expired. Please refresh the previous page and try again.');
+        }
+        // get the design
+        $design = $this->design_manager->getById((int)Array2::setOr($_REQUEST, 'design', ''));
+        $format = $this->file_format_registry->getFormat(Array2::setOr($_REQUEST, 'format', ''));
+        if (! $design instanceof Design || ! $format instanceof FileFormat) {
+            throw new Exception(
+                sprintf(
+                // translators: 1: design slug, 2: format slug
+                    __('An invalid design (%1$s) or format provided(%2$s)', 'print-my-blog'),
+                    sanitize_key(Array2::setOr($_GET, 'design', '')),
+                    sanitize_key(Array2::setOr($_GET, 'format', ''))
+                )
+            );
+        }
+        if($_REQUEST['submit-button'] === 'customize'){
+            wp_safe_redirect(
+                    add_query_arg(
+                            [
+                                'action' => 'customize',
+                                'design' => $design->getWpPost()->ID
+                            ],
+                            admin_url(PMB_ADMIN_DESIGNS_PAGE_PATH)
+                    )
+            );
+            exit;
+        }
+
+        // set it as the default for this format
+        $this->config->setSetting(
+                $this->config->getSettingNameForDefaultDesignForFormat($format),
+            $design->getWpPost()->ID
+        );
+
+        $this->notification_manager->addTextNotificationForCurrentUser(
+            OneTimeNotification::TYPE_SUCCESS,
+                sprintf(
+                    __('%1$s is now the default design the %2$s on all new projects.', 'print-my-blog'),
+                    $design->getWpPost()->post_title,
+                    $format->title()
+                )
+        );
+        // redirect back to the edit page
+        wp_safe_redirect(
+                admin_url(PMB_ADMIN_DESIGNS_PAGE_PATH)
+        );
+        exit;
+    }
+    public function designs(){
+        $formats = $this->file_format_registry->getFormats();
+        $designs = $this->design_manager->getAll();
+        $designs_by_format = [];
+        foreach($designs as $design){
+            /**
+             * @var $design Design
+             */
+            if($design->designTemplateExists()){
+                $designs_by_format[$design->getDesignTemplate()->getFormat()->slug()][] = $design;
+            }
+        }
+
+
+        echo pmb_render_template(
+            'designs.php',
+            [
+                'formats' => $formats,
+                'designs' => $designs_by_format,
+                'config' => $this->config
+            ]
+        );
+    }
 
     /**
      * @param string $template_name
@@ -1256,6 +1352,9 @@ class Admin extends BaseController
         }
         if ($_GET['page'] === PMB_ADMIN_SETTINGS_PAGE_SLUG){
             $this->saveSettingsPage();
+        }
+        if ($_GET['page'] === PMB_ADMIN_DESIGNS_PAGE_SLUG){
+            $this->saveDesign();
         }
         if ($_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG) {
             $action = isset($_REQUEST['action']) ? sanitize_key($_REQUEST['action']) : null;
