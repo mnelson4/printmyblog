@@ -70,7 +70,6 @@ class Admin extends BaseController
 {
     const SLUG_ACTION_ADD_NEW = 'new';
     const SLUG_ACTION_EDIT_PROJECT = 'edit';
-    const SLUG_ACTION_REVIEW = 'review';
     const SLUG_ACTION_DUPLICATE_PRINT_MATERIAL = 'duplicate_print_material';
     const SLUG_SUBACTION_PROJECT_SETUP = 'setup';
     const SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN = 'customize_design';
@@ -80,6 +79,8 @@ class Admin extends BaseController
     const SLUG_SUBACTION_PROJECT_GENERATE = 'generate';
     const SLUG_SUBACTION_PROJECT_DUPLICATE = 'duplicate';
     const SLUG_SUBACTION_PROJECT_CLEAR_CACHE = 'clear_cache';
+    const SLUG_ACTION_REVIEW = 'review';
+    const SLUG_ACTION_EDIT_DESIGN = 'customize_design';
     const REVIEW_OPTION_NAME = 'pmb_review';
     const SLUG_ACTION_UNINSTALL = 'uninstall';
 
@@ -275,7 +276,7 @@ class Admin extends BaseController
             esc_html__('Designs', 'print-my-blog'),
             'manage_options',
             PMB_ADMIN_DESIGNS_PAGE_SLUG,
-            array($this, 'designs')
+            array($this, 'editDesigns')
         );
         add_submenu_page(
             PMB_ADMIN_PROJECTS_PAGE_SLUG,
@@ -923,10 +924,10 @@ class Admin extends BaseController
             try {
                 switch ($subaction) {
                     case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
-                        $this->editChooseDesign();
+                        $this->editProjectDesign();
                         break;
                     case self::SLUG_SUBACTION_PROJECT_CUSTOMIZE_DESIGN:
-                        $this->editCustomizeDesign();
+                        $this->editProjectCustomizeDesign();
                         break;
                     case self::SLUG_SUBACTION_PROJECT_CONTENT:
                         $this->editContent();
@@ -973,7 +974,7 @@ class Admin extends BaseController
     /**
      * Shows the design-choosing step.
      */
-    protected function editChooseDesign()
+    protected function editProjectDesign()
     {
         // determine the format
         // Nonce overkill for just checking which page they're on.
@@ -983,7 +984,7 @@ class Admin extends BaseController
         $chosen_design = $this->project->getDesignFor($format->slug());
         // show them in a template
         $this->renderProjectTemplate(
-            'design_choose.php',
+            'project_design_choose.php',
             [
                 'project' => $this->project,
                 'format' => $format,
@@ -1015,7 +1016,7 @@ class Admin extends BaseController
     /**
      * @throws Exception
      */
-    protected function editCustomizeDesign()
+    protected function editProjectCustomizeDesign()
     {
         $format_slug = Array2::setOr($_GET, 'format', '');
         $design = $this->project->getDesignFor($format_slug);
@@ -1046,7 +1047,7 @@ class Admin extends BaseController
             admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
         );
         $this->renderProjectTemplate(
-            'design_customize.php',
+            'project_design_customize.php',
             [
                 'form_url' => $form_url,
                 'form' => $form,
@@ -1216,7 +1217,63 @@ class Admin extends BaseController
             ]
         );
     }
-    protected function saveDesign(){
+
+    protected function editCustomizeDesign(){
+        $id = Array2::setOr($_GET, 'ID', '');
+        $design = $this->design_manager->getById($id);
+        if (! $design instanceof Design) {
+            throw new Exception(
+                sprintf(
+                    'Design does not exist with ID "%s"',
+                    $id
+                )
+            );
+        }
+        // If there was an invalid form submission, show it.
+        if ($this->invalid_form instanceof FormSection) {
+            $form = $this->invalid_form;
+        } else {
+            $form = $design->getDesignForm();
+        }
+
+        $form_url = add_query_arg(
+            [
+                'ID' => $design->getWpPost()->ID,
+            ],
+            admin_url(PMB_ADMIN_DESIGNS_PAGE_PATH)
+        );
+        $this->renderProjectTemplate(
+            'design_customize.php',
+            [
+                'form_url' => $form_url,
+                'form' => $form,
+                'design' => $design,
+                'project' => $this->project,
+            ]
+        );
+    }
+    protected function saveCustomizeDesign(){
+        $design = $this->design_manager->getById(Array2::setOr($_GET, 'ID', ''));
+        $design_form = $design->getDesignTemplate()->getDesignFormTemplate();
+        // Nonce verified by form class.
+        $design_form->receiveFormSubmission($_REQUEST);
+        if (! $design_form->isValid()) {
+            $this->invalid_form = $design_form;
+        }
+        foreach ($design_form->inputValues(true, true) as $setting_name => $normalized_value) {
+            $design->setSetting($setting_name, $normalized_value);
+        }
+        $this->notification_manager->addTextNotificationForCurrentUser(
+                OneTimeNotification::TYPE_SUCCESS,
+                sprintf(
+                    __('Design "%s" successfully saved.', 'print-my-blog'),
+                    $design->getWpPost()->post_title
+                )
+        );
+        wp_safe_redirect(admin_url(PMB_ADMIN_DESIGNS_PAGE_PATH));
+    }
+
+    protected function saveDesignsList(){
         if (! check_admin_referer(PMB_ADMIN_PROJECTS_PAGE_SLUG)) {
             wp_die('The request has expired. Please refresh the previous page and try again.');
         }
@@ -1238,7 +1295,7 @@ class Admin extends BaseController
                     add_query_arg(
                             [
                                 'action' => 'customize',
-                                'design' => $design->getWpPost()->ID
+                                'ID' => $design->getWpPost()->ID
                             ],
                             admin_url(PMB_ADMIN_DESIGNS_PAGE_PATH)
                     )
@@ -1266,7 +1323,24 @@ class Admin extends BaseController
         );
         exit;
     }
-    public function designs(){
+
+    /**
+     * Handles all requests to the designs submenu item.
+     * @throws Exception
+     */
+    public function editDesigns(){
+        if(Array2::setOr($_GET, 'ID', '')){
+            $this->editCustomizeDesign();
+        } else {
+            $this->editDesignsList()();
+        }
+    }
+
+    /**
+     * Shows the list of all designs for choosing a default and customizing them.
+     * @throws DesignTemplateDoesNotExist
+     */
+    protected function editDesignsList(){
         $formats = $this->file_format_registry->getFormats();
         $designs = $this->design_manager->getAll();
         $designs_by_format = [];
@@ -1354,7 +1428,11 @@ class Admin extends BaseController
             $this->saveSettingsPage();
         }
         if ($_GET['page'] === PMB_ADMIN_DESIGNS_PAGE_SLUG){
-            $this->saveDesign();
+            if(isset($_GET['ID'])){
+                $this->saveCustomizeDesign();
+            } else {
+                $this->saveDesignsList();
+            }
         }
         if ($_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG) {
             $action = isset($_REQUEST['action']) ? sanitize_key($_REQUEST['action']) : null;
