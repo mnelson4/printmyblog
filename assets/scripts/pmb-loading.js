@@ -9,7 +9,7 @@ jQuery(document).ready(function () {
         success:(response) => {
             // could fetch more, but for now it all just happens in one request
             if (typeof (response) === 'object' && typeof (response.url) === 'string') {
-                window.location.href = response.url;
+                window.location.replace(response.url);
             }
         },
         converters: pmb_jquery_ajax_converters,

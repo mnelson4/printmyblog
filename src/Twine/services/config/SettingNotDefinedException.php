@@ -4,7 +4,7 @@
 namespace Twine\services\config;
 
 
-class SettingNotDefined extends \Exception
+class SettingNotDefinedException extends \Exception
 {
     protected $setting_name = '';
 

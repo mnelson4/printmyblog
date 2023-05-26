@@ -17,7 +17,7 @@ $generate_url = add_query_arg(
     <div class="pmb-pro-print-window">
         <div class="pmb-pro-print-window-topbar">
             <div class="pmb-pro-window-topbar-left">
-                <a  class="pmb-pro-window-button" href="<?php echo esc_url($generate_url);?>">
+                <a  class="pmb-pro-window-button" href="javascript:history.back();">
                     <span class="pmb-spinner-container"><span class="dashicons dashicons-arrow-left-alt"></span></span>
                     <?php esc_html_e('Back', 'print-my-blog'); ?>
                 </a>

@@ -87,7 +87,7 @@ use PrintMyBlog\domain\FrontendPrintSettings;
                 <?php } ?>
             </div>
         </details>
-
+        <hr>
         <h2><?php _e('Admin Print Buttons', 'print-my-blog');?></h2>
         <p><?php _e('Administrators and other privileged users will see these in the wp-admin (like when editing a post.)', 'print-my-blog');?></p>
         <p class="pmb-help"><?php _e('These print buttons use "Pro Print" technology (which has both free and paid options.)', 'print-my-blog');?></p>

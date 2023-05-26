@@ -14,6 +14,9 @@ use Twine\services\config\Config as TwineConfig;
  */
 class Config extends TwineConfig
 {
+    const ADMIN_PRINT_BUTTONS_FORMATS_SETTING_NAME = 'admin_print_buttons_formats';
+    const ADMIN_PRINT_BUTTONS_POST_TYPES_SETTING_NAME = 'admin_print_buttons_post_types';
+
     /**
      * @var FileFormatRegistry
      */
@@ -36,7 +39,10 @@ class Config extends TwineConfig
      */
     protected function declareDefaults()
     {
-        $defaults = [];
+        $defaults = [
+            self::ADMIN_PRINT_BUTTONS_FORMATS_SETTING_NAME => [],
+            self::ADMIN_PRINT_BUTTONS_POST_TYPES_SETTING_NAME => [],
+        ];
         foreach ($this->format_registry->getFormats() as $format) {
             $defaults[$this->getSettingNameForDefaultDesignForFormat($format)] = null;
         }

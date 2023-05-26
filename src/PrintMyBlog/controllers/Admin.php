@@ -350,8 +350,8 @@ class Admin extends BaseController
             // Ok save those settings!
             if (isset($_POST['pmb-reset'])) {
                 $settings = Context::instance()->useNew('PrintMyBlog\domain\FrontendPrintSettings', [null, false]);
-                $this->config->setSetting('admin_print_buttons_post_types',[]);
-                $this->config->setSetting('admin_print_buttons_formats',[]);
+                $this->config->setSetting(Config::ADMIN_PRINT_BUTTONS_POST_TYPES_SETTING_NAME,[]);
+                $this->config->setSetting(Config::ADMIN_PRINT_BUTTONS_FORMATS_SETTING_NAME,[]);
             } else {
                 $settings->setShowButtons(isset($_POST['pmb_show_buttons']));
                 $settings->setShowButtonsPages(isset($_POST['pmb_show_buttons_pages']));
@@ -374,8 +374,8 @@ class Admin extends BaseController
                         $settings->setPrintOptions($slug, wp_unslash($_POST['pmb_print_options'][$slug]));
                     }
                 }
-                $this->config->setSetting('admin_print_buttons_post_types', $settings_form->getInputValue('post_types'));
-                $this->config->setSetting('admin_print_buttons_formats', $settings_form->getInputValue('formats'));
+                $this->config->setSetting(Config::ADMIN_PRINT_BUTTONS_POST_TYPES_SETTING_NAME, $settings_form->getInputValue('post_types'));
+                $this->config->setSetting(Config::ADMIN_PRINT_BUTTONS_FORMATS_SETTING_NAME, $settings_form->getInputValue('formats'));
             }
             $settings->save();
             update_option(self::SETTINGS_SAVED_OPTION, true, false);
@@ -435,7 +435,7 @@ class Admin extends BaseController
                         $post_type_options,
             [
                 'html_label_text' => __('Show print buttons on:', 'print-my-blog'),
-                'default' => $this->config->getSetting('admin_print_buttons_post_types', [])
+                'default' => $this->config->getSetting(Config::ADMIN_PRINT_BUTTONS_POST_TYPES_SETTING_NAME)
             ]
         );
         // show all (enabled) formats
@@ -459,7 +459,7 @@ class Admin extends BaseController
             [
                 'html_label_text' => __('Print Formats', 'print-my-blog'),
                 'html_help_text' => $note_about_missing_formats,
-                'default' => $this->config->getSetting('admin_print_buttons_formats', [])
+                'default' => $this->config->getSetting(Config::ADMIN_PRINT_BUTTONS_FORMATS_SETTING_NAME)
             ]
         );
         return new FormSection(
@@ -2158,9 +2158,12 @@ class Admin extends BaseController
             }
         }
 
-        $formats = ['word'];
-        foreach($formats as $format){
-            $actions['pmb_generate_' . $format] = $this->getGeneratePostProjectHtml($post->ID, $format);
+        $formats = $this->config->getSetting(Config::ADMIN_PRINT_BUTTONS_FORMATS_SETTING_NAME);
+        $post_types = $this->config->getSetting(Config::ADMIN_PRINT_BUTTONS_POST_TYPES_SETTING_NAME);
+        if($post instanceof WP_Post && in_array($post->post_type, $post_types)){
+            foreach($formats as $format){
+                $actions['pmb_generate_' . $format] = $this->getGeneratePostProjectHtml($post->ID, $format);
+            }
         }
 
         return $actions;

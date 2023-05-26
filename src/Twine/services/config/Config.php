@@ -2,6 +2,8 @@
 
 namespace Twine\services\config;
 
+use Exception;
+
 /**
  * Class Config
  * @package Twine\services\config
@@ -55,18 +57,17 @@ abstract class Config
      * @param string $setting_name
      *
      * @return mixed
+     * @throws SettingNotDefinedException
      */
-    public function getSetting($setting_name, $default = null)
+    public function getSetting($setting_name)
     {
         $this->ensureLoadedFromDb();
-        if(array_key_exists($setting_name, $this->settings)){
-            $value = $this->settings[$setting_name];
-        } else {
-            $value = $default;
+        if(! array_key_exists($setting_name, $this->settings)){
+            throw new SettingNotDefinedException($setting_name);
         }
         return apply_filters(
             '\Twine\services\config\Config::getSetting',
-            $value,
+            $this->settings[$setting_name],
             $setting_name,
             static::class,
             $this->settings
