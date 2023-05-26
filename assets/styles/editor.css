@@ -1,0 +1,6 @@
+.pmb-gutenberg-button-row .button{
+    margin-top:12px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}

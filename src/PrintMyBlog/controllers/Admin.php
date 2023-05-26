@@ -2152,17 +2152,9 @@ class Admin extends BaseController
     public function postAdminRowActions($actions, $post)
     {
         if ($post instanceof WP_Post && current_user_can('publish_' . CustomPostTypes::CONTENTS) && is_array($actions)) {
-            $html = $this->getDuplicateAsPrintMaterialHtml();
-            if ($html) {
-                $actions['pmb_new_print_material'] = $html;
-            }
-        }
-
-        $formats = $this->config->getSetting(Config::ADMIN_PRINT_BUTTONS_FORMATS_SETTING_NAME);
-        $post_types = $this->config->getSetting(Config::ADMIN_PRINT_BUTTONS_POST_TYPES_SETTING_NAME);
-        if($post instanceof WP_Post && in_array($post->post_type, $post_types)){
-            foreach($formats as $format){
-                $actions['pmb_generate_' . $format] = $this->getGeneratePostProjectHtml($post->ID, $format);
+            $pmb_actions = $this->getPostActionButtonLinks();
+            foreach($pmb_actions as $action){
+                $actions[] = '<a href="' . $action['url'] . '" title="' . $action['title'] . '">' . $action['text'] . '</a>';
             }
         }
 
@@ -2179,26 +2171,28 @@ class Admin extends BaseController
             <?php
             // HTML prepared by the called method.
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo $this->getDuplicateAsPrintMaterialHtml('button button-secondary');
+            $action_links = $this->getPostActionButtonLinks('button button-secondary');
+            foreach($action_links as $action_link){
+                $url = $action_link['url'];
+                $title = $action_link['title'];
+                $text = $action_link['text'];
+                ?>
+                <a class="button button-secondary" href="<?php echo esc_url($url);?>" title="<?php echo esc_attr($title);?>"><?php echo $text;?></a>
+                <?php
+            }
             ?>
         </div>
         <?php
     }
 
     /**
-     * Get the HTML for link to either duplicate as a print material, or edit the related print material
-     * that was already created, or edit the original
-     * @param string $css_class to add to the link
-     * @return string
+     * Gets info on the actions that can be taken on a post
+     * @return array of arrays with keys 'url', 'title' and 'text'
+     * @throws \Twine\services\config\SettingNotDefinedException
      */
-    protected function getDuplicateAsPrintMaterialHtml($css_class = '')
-    {
+    protected function getPostActionButtonLinks(){
         global $post;
-        if ($css_class) {
-            $css_attr = ' class="' . esc_attr($css_class) . '" ';
-        } else {
-            $css_attr = '';
-        }
+        $actions = [];
         if ($post->post_type === CustomPostTypes::CONTENT) {
             $original_id = get_post_meta($post->ID, '_pmb_original_post', true);
             $post_type = get_post_type_object(get_post_type($original_id));
@@ -2207,16 +2201,14 @@ class Admin extends BaseController
                 $type_label = $post_type->labels->singular_name;
             }
             if ($original_id) {
-                $html = '<a href="' . esc_url(get_edit_post_link($original_id)) . '" title="'
+                $actions[] = [
+                    'url' =>get_edit_post_link($original_id),
                     // translators: 1 post type label, 2: post title
-                    . esc_attr(sprintf(__('Go to the %1$s "%2$s" was copied from.', 'print-my-blog'), $type_label, $post->post_title))
-                    . '"'
-                    . '>' .
+                    'title' => sprintf(__('Go to the %1$s "%2$s" was copied from.', 'print-my-blog'), $type_label, $post->post_title),
                     // translators: %s: type label.
-                    sprintf(esc_html__('Go to Original %s', 'print-my-blog'), $type_label)
-                    . '</a>';
-            } else {
-                $html = '';
+                    'text' => sprintf(esc_html__('Go to Original %s', 'print-my-blog'), $type_label)
+                ];
+
             }
         } else {
             $print_material = null;
@@ -2225,26 +2217,37 @@ class Admin extends BaseController
                 $print_material = reset($print_materials);
             }
             if ($print_material) {
-                $html = '<a href="' . esc_url(get_edit_post_link($print_material->getWpPost()->ID)) . '" title="'
+                $actions[] = [
+                    'url' => get_edit_post_link($print_material->getWpPost()->ID),
                     // translators: 1: post title
-                    . esc_attr(sprintf(__('Go to Print Material "%s" was created from.', 'print-my-blog'), $print_material->getWpPost()->post_title))
-                    . '"'
-                    . '>' .
-                    esc_html__('Go to Print Material', 'print-my-blog')
-                    . '</a>';
+                    'title' => sprintf(__('Go to Print Material "%s" was created from.', 'print-my-blog'), $print_material->getWpPost()->post_title),
+                    'text' => esc_html__('Go to Print Material', 'print-my-blog')
+                ];
             } else {
-                $html = '<a href="' . esc_url($this->getDuplicatePostAsPrintMaterialUrl($post)) . '" title="'
+                $actions[] = [
+                        'url' => $this->getDuplicatePostAsPrintMaterialUrl($post),
                     // translators: %s: post title
-                    . esc_attr(sprintf(__('Copy "%s" to New Print Material for a Print My Blog project', 'print-my-blog'), $post->post_title))
-                    . '"'
-                    . $css_attr
-                    . '>' .
-                    esc_html__('Copy to Print Material', 'print-my-blog')
-                    . '</a>';
+                    'title' => sprintf(__('Copy "%s" to New Print Material for a Print My Blog project', 'print-my-blog'), $post->post_title),
+                    'text' => esc_html__('Copy to Print Material', 'print-my-blog')
+                ];
             }
         }
-        return $html;
+        // add other print buttons
+        $formats = $this->config->getSetting(Config::ADMIN_PRINT_BUTTONS_FORMATS_SETTING_NAME);
+        $post_types = $this->config->getSetting(Config::ADMIN_PRINT_BUTTONS_POST_TYPES_SETTING_NAME);
+        if($post instanceof WP_Post && in_array($post->post_type, $post_types)){
+            foreach($formats as $format_slug){
+                $format = $this->file_format_registry->getFormat($format_slug);
+                $actions[] = [
+                    'url' => $this->getGeneratePostProjectUrl($post->ID, $format->slug()),
+                    'title' => sprintf(__('Generate %s', 'print-my-blog'),  $format->title()),
+                    'text' => sprintf(__('Generate %s', 'print-my-blog'),  $format->title())
+                ];
+            }
+        }
+        return $actions;
     }
+
 
     /**
      * Gets the URL to the admin action which makes a duplicate print material of the given post.
@@ -2271,12 +2274,18 @@ class Admin extends BaseController
      * Gets HTML for a button to generate a document from the given project in the given format.
      * @param int $post_id
      * @param string|FileFormat $format
+     * @param string $button_css_class
      * @return string
      */
-    protected function getGeneratePostProjectHtml($post_id, $format)
+    protected function getGeneratePostProjectHtml($post_id, $format, $button_css_class = '')
     {
+        if ($button_css_class) {
+            $css_attr = ' class="' . esc_attr($button_css_class) . '" ';
+        } else {
+            $css_attr = '';
+        }
         $format = $this->file_format_registry->getFormat($format);
-        return '<a href="'. esc_url($this->getGeneratePostProjectUrl($post_id, $format->slug())) . '" >' . sprintf(__('Generate %s', 'print-my-blog'),  $format->title()) . '</a>';
+        return '<a href="'. esc_url($this->getGeneratePostProjectUrl($post_id, $format->slug())) . '" ' . $css_attr . '>' . sprintf(__('Generate %s', 'print-my-blog'),  $format->title()) . '</a>';
     }
 
     protected function getGeneratePostProjectUrl($post_id, $format){
@@ -2304,13 +2313,25 @@ class Admin extends BaseController
             array('wp-components', 'wp-edit-post', 'wp-element', 'wp-i18n', 'wp-plugins'),
             filemtime(PMB_SCRIPTS_DIR . 'build/editor.js')
         );
+        wp_enqueue_style(
+                'pmb_blockeditor',
+                PMB_STYLES_URL . 'editor.css',
+            [],
+            filemtime(PMB_STYLES_DIR . 'editor.css')
+        );
+
+        $html = '';
+        $pmb_actions = $this->getPostActionButtonLinks();
+        foreach($pmb_actions as $action){
+            $html .= '<div class="pmb-gutenberg-button-row"><a class="button button-secondary" href="' . esc_url($action['url']) . '" title="' . esc_attr($action['title']) . '">' . $action['text'] . '</a>';
+        }
         wp_localize_script(
             'pmb_blockeditor',
             'pmbBlockEditor',
             [
                 // add HTML entities because wp_localize_script calls html_entities_decode which messes up the
                 // quotes inside the title attributes on the HTML elements
-                'html' => htmlentities($this->getDuplicateAsPrintMaterialHtml('button button-secondary'), ENT_QUOTES, 'UTF-8'),
+                'html' => htmlentities($html, ENT_QUOTES, 'UTF-8'),
             ]
         );
     }

@@ -249,3 +249,9 @@ For displaying a series of boxes
 .pmb-duplicate-button-area{
     padding:10px;
 }
+.pmb-duplicate-button-area .button{
+    margin-top:12px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
