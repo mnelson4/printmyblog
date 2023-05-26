@@ -164,7 +164,7 @@ class Admin extends BaseController
     /**
      * @var Config
      */
-    protected Config $config;
+    protected $config;
 
     /**
      * @param PostFetcher $post_fetcher
