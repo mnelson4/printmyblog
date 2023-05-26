@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.23.5
+Stable tag: 3.24.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -179,7 +179,6 @@ If this doesn't meet your needs, there are good paid and free alternatives.
 **Alternatives to Quick Print**
 [printmy.blog](https://printmy.blog/now) we run a hosted version of this same plugin, so you can print your blog without even installing this. Especially useful for WordPress**.com** users, or those who can't install the plugin on their site. (Its free like Quick Print, but won't use your blog's styles).
 [Anthologize](https://wordpress.org/plugins/anthologize/) is another great plugin for customizing your blog's content before exporting to an e-book format. Also free.
-[bloxp](http://www.bloxp.com/) converts your blog into an e-book with any type of blog (not just WordPress). Fewer, but different, options. Supported by donations.
 [Blog To HTML](https://wordpress.org/plugins/blog-to-html/) is actually very similar to Print My Blog. It allows you to export your blog to HTML for eBook creation.
 [blogbooker](https://blogbooker.com/) prints a book, or creates a PDF, from your blog using their pre-made styles. Paid service.
 [blog2print](https://www.blog2print.com/) ditto, but temporarily requests your username and password. Paid service.
@@ -189,11 +188,14 @@ If this doesn't meet your needs, there are good paid and free alternatives.
 [WP Print Friendly](https://wordpress.org/plugins/wp-print-friendly/) automatically adds a link to print the current post, page, or custom post type. Can convert links to endnotes. Doesn’t use theme’s styles.
 [WP-Print](https://wordpress.org/plugins/wp-print/) printouts quite customizable. Requires editing theme files. Does not use theme’s styles.
 [Print-o-Matic](https://wordpress.org/plugins/print-o-matic/) add print buttons with a shortcode. Customizable and can work with theme’s and plugin’s styles.
+[PDF Generator for WordPress](https://wordpress.org/plugins/pdf-generator-for-wp/) Create & Customize PDF for Post, Pages and WooCommerce Products
 
 **Alternatives to Pro Print**
 [MPL - Publisher](https://wordpress.org/plugins/mpl-publisher/) is another free eBook creator / PDF converter plugin you can use to self-publish a book. To be honest probably the best alternative right now. There's both free and paid versions.
 [PressBooks](https://pressbooks.com/) is a good paid, hosted alternative. Begin creating or import content for free, and can pay to export to PDF and other formats.
 [Designrr](https://designrr.io/) is great for creating short documents, but is a fully paid option.
+[Aspose.Words](https://wordpress.org/plugins/aspose-doc-exporter/) for exporting Microsoft Word documents from selected posts.
+
 
 Best Wishes Publishing for Print with WordPress!
 
@@ -438,6 +440,10 @@ https://youtu.be/uPQ3vqm7A2g
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+
+= 3.24.0 May 2023 =
+* Feature: add Admin Print Buttons, to quickly create PDF, eBooks and Word documents from individual posts, pages, and other post types. Go to Print My Blog > Settings to enable.
+* Feature: add Designs page, where you can set the default design for each project and customize any design (even ones not in use on any projects currently.)
 
 = 3.23.5 May 16, 2023 =
 * Bugfix: fix creating database tables when the database has no charset specified
