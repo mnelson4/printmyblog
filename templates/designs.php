@@ -25,6 +25,7 @@ foreach($formats as $format){
             'select_button_text' => esc_html__('Make Default', 'print-my-blog'),
             'select_button_aria_label' => esc_html__('Make "%s" the Default Design for its Format', 'print-my-blog'),
             'customize_button_aria_label' => esc_html__(' Customize the Design "%s"', 'print-my-blog'),
+            'context' => 'designs_list'
         ]
     );
 }

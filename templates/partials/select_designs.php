@@ -7,6 +7,7 @@
  * @var $select_button_text string
  * @var $select_button_aria_label strings need a placeholder
  * @var $customize_button_aria_label string needs a placeholder
+ * @var $context string either 'designs_list' or 'project'
  */
 
 use PrintMyBlog\entities\DesignTemplate;
@@ -40,7 +41,9 @@ use PrintMyBlog\entities\DesignTemplate;
                         <input type="hidden" name="design" value="<?php echo esc_attr($design->getWpPost()->ID);?>">
                         <input type="hidden" name="format" value="<?php echo esc_attr($format->slug());?>">
                         <?php wp_nonce_field(PMB_ADMIN_PROJECTS_PAGE_SLUG);?>
-                        <button class="button button-primary pmb-choose-design" value="choose" name="submit-button" aria-label="<?php echo esc_attr(sprintf($select_button_aria_label, $design->getWpPost()->post_title));?>"><?php echo $select_button_text;?></button>
+                        <?php if( $context === 'project' || ( ! $active)){ ?>
+                            <button class="button button-primary pmb-choose-design" value="choose" name="submit-button" aria-label="<?php echo esc_attr(sprintf($select_button_aria_label, $design->getWpPost()->post_title));?>"><?php echo $select_button_text;?></button>
+                        <?php } ?>
                         <button class="button button-primary pmb-customize-design" value="customize" name="submit-button" aria-label="<?php echo esc_attr(sprintf($customize_button_aria_label, $design->getWpPost()->post_title));?>"><?php esc_html_e('Customize', 'print-my-blog');?></button>
                     </form>
                 </div>
