@@ -284,7 +284,7 @@ class Admin extends BaseController
             esc_html__('Settings', 'print-my-blog'),
             'manage_options',
             PMB_ADMIN_SETTINGS_PAGE_SLUG,
-            array($this, 'settingsPage')
+            array($this, 'editSettingsPage')
         );
         add_submenu_page(
             PMB_ADMIN_PROJECTS_PAGE_SLUG,
@@ -350,13 +350,8 @@ class Admin extends BaseController
             // Ok save those settings!
             if (isset($_POST['pmb-reset'])) {
                 $settings = Context::instance()->useNew('PrintMyBlog\domain\FrontendPrintSettings', [null, false]);
-                // reset each format's default design
-                foreach($this->file_format_registry->getFormats() as $format) {
-                    $design = $this->design_manager->getBySlug($format->getDefaultDesignTemplate()->getDefaultDesignSlug());
-                    if ($design instanceof Design) {
-                        $this->config->setSetting($this->config->getSettingNameForDefaultDesignForFormat($format), $design->getWpPost()->ID);
-                    }
-                }
+                $this->config->setSetting('admin_print_buttons_post_types',[]);
+                $this->config->setSetting('admin_print_buttons_formats',[]);
             } else {
                 $settings->setShowButtons(isset($_POST['pmb_show_buttons']));
                 $settings->setShowButtonsPages(isset($_POST['pmb_show_buttons_pages']));
@@ -379,12 +374,8 @@ class Admin extends BaseController
                         $settings->setPrintOptions($slug, wp_unslash($_POST['pmb_print_options'][$slug]));
                     }
                 }
-                foreach($this->file_format_registry->getFormats() as $format){
-                    $this->config->setSetting(
-                        $this->config->getSettingNameForDefaultDesignForFormat($format),
-                        $settings_form->getInputValue($this->config->getSettingNameForDefaultDesignForFormat($format))
-                    );
-                }
+                $this->config->setSetting('admin_print_buttons_post_types', $settings_form->getInputValue('post_types'));
+                $this->config->setSetting('admin_print_buttons_formats', $settings_form->getInputValue('formats'));
             }
             $settings->save();
             update_option(self::SETTINGS_SAVED_OPTION, true, false);
@@ -399,7 +390,7 @@ class Admin extends BaseController
     /**
      * Legacy settings page.
      */
-    public function settingsPage()
+    public function editSettingsPage()
     {
         $saved = get_option(self::SETTINGS_SAVED_OPTION, false);
         if ($saved) {
@@ -434,20 +425,43 @@ class Admin extends BaseController
 
     protected function getNewSettingsForm(){
         $subsections = [];
-        $formats = $this->file_format_registry->getFormats();
-        foreach($formats as $format){
-           $designs = $this->design_manager->getDesignsForFormat($format->slug());
-           $design_names = [];
-           foreach($designs as $design){
-               $design_names[$design->getWpPost()->ID] = new InputOption($design->getWpPost()->post_title);
-           }
-           $subsections[$this->config->getSettingNameForDefaultDesignForFormat($format)] = new SelectInput(
-                   $design_names,
-               [
-                       'default' => $this->config->getSetting($this->config->getSettingNameForDefaultDesignForFormat($format))
-               ]
-           );
+        // get all post types
+        $post_types = get_post_types(array( 'exclude_from_search' => false ), 'objects');
+        $post_type_options = [];
+        foreach($post_types as $post_type_slug => $post_type_obj){
+            $post_type_options[$post_type_slug] = new InputOption($post_type_obj->label);
         }
+        $subsections['post_types'] = new CheckboxMultiInput(
+                        $post_type_options,
+            [
+                'html_label_text' => __('Show print buttons on:', 'print-my-blog'),
+                'default' => $this->config->getSetting('admin_print_buttons_post_types', [])
+            ]
+        );
+        // show all (enabled) formats
+        $formats = $this->file_format_registry->getFormats();
+        $format_options = [];
+        $unsupported_formats = [];
+        foreach($formats as $format){
+            if($format->supported()){
+                $format_options[$format->slug()] = new InputOption($format->title());
+            } else {
+                $unsupported_formats[] = $format->title();
+            }
+        }
+        $note_about_missing_formats = '';
+        if($unsupported_formats){
+            $unsupported_formats_string = implode(', ', $unsupported_formats);
+            $note_about_missing_formats = sprintf(__('Note: you need to upgrade your license to access the following formats: %s', 'print-my-blog'), $unsupported_formats_string);
+        }
+        $subsections['formats'] = new CheckboxMultiInput(
+                $format_options,
+            [
+                'html_label_text' => __('Print Formats', 'print-my-blog'),
+                'html_help_text' => $note_about_missing_formats,
+                'default' => $this->config->getSetting('admin_print_buttons_formats', [])
+            ]
+        );
         return new FormSection(
                 [
                 'subsections' => $subsections

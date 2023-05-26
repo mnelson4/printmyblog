@@ -33,6 +33,7 @@ pmb_render_template(
         'select_button_text' => esc_html__('Use This Design', 'print-my-blog'),
         'select_button_aria_label' => esc_html__('Use the Design "%s"', 'print-my-blog'),
         'customize_button_aria_label' => esc_html__('Use and Customize the Design "%s"', 'print-my-blog'),
+        'format' => $format,
     ]
 );
 pmb_render_template('partials/project_footer.php');

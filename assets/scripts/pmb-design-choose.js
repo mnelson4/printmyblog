@@ -15,19 +15,21 @@ jQuery(function($) {
     $(".pmb-design-details-opener").click(function(event) {
         event.preventDefault();
         var design_slug = event.currentTarget.getAttribute('data-design-slug');
+        var choose_button_text = jQuery(event.currentTarget.parentElement).find('.pmb-design-id-container button.pmb-choose-design').text();
+        var customize_button_text = jQuery(event.currentTarget.parentElement).find('.pmb-design-id-container button.pmb-customize-design').text();
         pmb_open_modal(
             '#pmb-design-details-' + design_slug,
             {
                 'buttons'       : [
                     {
-                        "text": "Use This Design",
+                        "text": choose_button_text,
                         'class':'button button-primary',
                         'click': function () {
                             $('#pmb-design-form-' + design_slug + ' .pmb-choose-design').click()
                         },
                     },
                     {
-                        "text": "Customize",
+                        "text": customize_button_text,
                         'class':'button button-primary',
                         'click': function () {
                             $('#pmb-design-form-' + design_slug + ' .pmb-customize-design').click()

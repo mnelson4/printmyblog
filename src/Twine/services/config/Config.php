@@ -56,12 +56,17 @@ abstract class Config
      *
      * @return mixed
      */
-    public function getSetting($setting_name)
+    public function getSetting($setting_name, $default = null)
     {
         $this->ensureLoadedFromDb();
+        if(array_key_exists($setting_name, $this->settings)){
+            $value = $this->settings[$setting_name];
+        } else {
+            $value = $default;
+        }
         return apply_filters(
             '\Twine\services\config\Config::getSetting',
-            $this->settings[$setting_name],
+            $value,
             $setting_name,
             static::class,
             $this->settings

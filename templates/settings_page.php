@@ -12,7 +12,9 @@ use PrintMyBlog\domain\FrontendPrintSettings;
 <div class="wrap nosubsub">
     <h1><?php esc_html_e('Print My Blog - Settings','print-my-blog' );?></h1>
     <form method="post">
-        <h2><?php esc_html_e('Print Buttons', 'print-my-blog'); ?></h2>
+        <h2><?php esc_html_e('Front-End Print Buttons', 'print-my-blog'); ?></h2>
+        <p><?php _e('Viewers will see these buttons when they visit your website.', 'print-my-blog');?></p>
+        <p class="pmb-help"><?php _e('These are the legacy print buttons which use the "Quick Print" technology. We\'re currently working on new print buttons that will use "Pro Print" technology.', 'print-my-blog');?></p>
 
         <table class="form-table">
             <tbody>
@@ -86,7 +88,9 @@ use PrintMyBlog\domain\FrontendPrintSettings;
             </div>
         </details>
 
-        <h2><?php _e('Admin Quick Project Buttons', 'print-my-blog');?></h2>
+        <h2><?php _e('Admin Print Buttons', 'print-my-blog');?></h2>
+        <p><?php _e('Administrators and other privileged users will see these in the wp-admin (like when editing a post.)', 'print-my-blog');?></p>
+        <p class="pmb-help"><?php _e('These print buttons use "Pro Print" technology (which has both free and paid options.)', 'print-my-blog');?></p>
         <?php echo $settings_form->getHtmlAndJs();?>
         <?php wp_nonce_field( 'pmb-settings' );?>
         <button class="button-primary"><?php esc_html_e('Save Settings','print-my-blog' );?></button> <input name="pmb-reset" class="button button-secondary" onclick="return confirm('<?php echo esc_attr(__('Are you sure you want to reset the settings back to defaults?','print-my-blog'));?>');" type="submit" value="<?php esc_html_e('Reset to Defaults', 'print-my-blog'); ?>">
