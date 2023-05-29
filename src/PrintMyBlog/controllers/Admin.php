@@ -221,12 +221,11 @@ class Admin extends BaseController
         add_filter('plugin_action_links_' . PMB_BASENAME, array($this, 'pluginPageLinks'));
         add_action('admin_enqueue_scripts', [$this, 'enqueueScripts']);
 
-        if (pmb_fs()->is_plan__premium_only('founding_members')) {
-            add_filter('post_row_actions', [$this, 'postAdminRowActions'], 10, 2);
-            add_filter('page_row_actions', [$this, 'postAdminRowActions'], 10, 2);
-            add_action('post_submitbox_misc_actions', array($this, 'addDuplicateAsPrintMaterialToClassicEditor'));
-            add_action('enqueue_block_editor_assets', array($this, 'addDuplicateAsPrintMaterialToGutenberg'));
-        }
+
+        add_filter('post_row_actions', [$this, 'postAdminRowActions'], 10, 2);
+        add_filter('page_row_actions', [$this, 'postAdminRowActions'], 10, 2);
+        add_action('post_submitbox_misc_actions', array($this, 'addDuplicateAsPrintMaterialToClassicEditor'));
+        add_action('enqueue_block_editor_assets', array($this, 'addDuplicateAsPrintMaterialToGutenberg'));
 
         $this->makePrintContentsSaySaved();
         $this->notification_manager->showOneTimeNotifications();
@@ -2193,43 +2192,46 @@ class Admin extends BaseController
     protected function getPostActionButtonLinks(){
         global $post;
         $actions = [];
-        if ($post->post_type === CustomPostTypes::CONTENT) {
-            $original_id = get_post_meta($post->ID, '_pmb_original_post', true);
-            $post_type = get_post_type_object(get_post_type($original_id));
-            $type_label = '';
-            if ($post_type instanceof WP_Post_Type && isset($post_type->labels, $post_type->labels->singular_name)) {
-                $type_label = $post_type->labels->singular_name;
-            }
-            if ($original_id) {
-                $actions[] = [
-                    'url' =>get_edit_post_link($original_id),
-                    // translators: 1 post type label, 2: post title
-                    'title' => sprintf(__('Go to the %1$s "%2$s" was copied from.', 'print-my-blog'), $type_label, $post->post_title),
-                    // translators: %s: type label.
-                    'text' => sprintf(esc_html__('Go to Original %s', 'print-my-blog'), $type_label)
-                ];
+        // only paying members get the duplicate buttons
+        if (pmb_fs()->is_plan__premium_only('founding_members')) {
+            if ($post->post_type === CustomPostTypes::CONTENT) {
+                $original_id = get_post_meta($post->ID, '_pmb_original_post', true);
+                $post_type = get_post_type_object(get_post_type($original_id));
+                $type_label = '';
+                if ($post_type instanceof WP_Post_Type && isset($post_type->labels, $post_type->labels->singular_name)) {
+                    $type_label = $post_type->labels->singular_name;
+                }
+                if ($original_id) {
+                    $actions[] = [
+                        'url' => get_edit_post_link($original_id),
+                        // translators: 1 post type label, 2: post title
+                        'title' => sprintf(__('Go to the %1$s "%2$s" was copied from.', 'print-my-blog'), $type_label, $post->post_title),
+                        // translators: %s: type label.
+                        'text' => sprintf(esc_html__('Go to Original %s', 'print-my-blog'), $type_label)
+                    ];
 
-            }
-        } else {
-            $print_material = null;
-            $print_materials = $this->post_manager->getByPostMeta('_pmb_original_post', (string)$post->ID, 1);
-            if ($print_materials) {
-                $print_material = reset($print_materials);
-            }
-            if ($print_material) {
-                $actions[] = [
-                    'url' => get_edit_post_link($print_material->getWpPost()->ID),
-                    // translators: 1: post title
-                    'title' => sprintf(__('Go to Print Material "%s" was created from.', 'print-my-blog'), $print_material->getWpPost()->post_title),
-                    'text' => esc_html__('Go to Print Material', 'print-my-blog')
-                ];
+                }
             } else {
-                $actions[] = [
+                $print_material = null;
+                $print_materials = $this->post_manager->getByPostMeta('_pmb_original_post', (string)$post->ID, 1);
+                if ($print_materials) {
+                    $print_material = reset($print_materials);
+                }
+                if ($print_material) {
+                    $actions[] = [
+                        'url' => get_edit_post_link($print_material->getWpPost()->ID),
+                        // translators: 1: post title
+                        'title' => sprintf(__('Go to Print Material "%s" was created from.', 'print-my-blog'), $print_material->getWpPost()->post_title),
+                        'text' => esc_html__('Go to Print Material', 'print-my-blog')
+                    ];
+                } else {
+                    $actions[] = [
                         'url' => $this->getDuplicatePostAsPrintMaterialUrl($post),
-                    // translators: %s: post title
-                    'title' => sprintf(__('Copy "%s" to New Print Material for a Print My Blog project', 'print-my-blog'), $post->post_title),
-                    'text' => esc_html__('Copy to Print Material', 'print-my-blog')
-                ];
+                        // translators: %s: post title
+                        'title' => sprintf(__('Copy "%s" to New Print Material for a Print My Blog project', 'print-my-blog'), $post->post_title),
+                        'text' => esc_html__('Copy to Print Material', 'print-my-blog')
+                    ];
+                }
             }
         }
         // add other print buttons
@@ -2238,11 +2240,13 @@ class Admin extends BaseController
         if($post instanceof WP_Post && in_array($post->post_type, $post_types)){
             foreach($formats as $format_slug){
                 $format = $this->file_format_registry->getFormat($format_slug);
-                $actions[] = [
-                    'url' => $this->getGeneratePostProjectUrl($post->ID, $format->slug()),
-                    'title' => sprintf(__('Generate %s', 'print-my-blog'),  $format->title()),
-                    'text' => sprintf(__('Generate %s', 'print-my-blog'),  $format->title())
-                ];
+                if($format->supported()) {
+                    $actions[] = [
+                        'url' => $this->getGeneratePostProjectUrl($post->ID, $format->slug()),
+                        'title' => sprintf(__('Generate %s', 'print-my-blog'), $format->title()),
+                        'text' => sprintf(__('Generate %s', 'print-my-blog'), $format->title())
+                    ];
+                }
             }
         }
         return $actions;
