@@ -43,8 +43,11 @@ class Config extends TwineConfig
             self::ADMIN_PRINT_BUTTONS_FORMATS_SETTING_NAME => [],
             self::ADMIN_PRINT_BUTTONS_POST_TYPES_SETTING_NAME => [],
         ];
+        $post_types = get_post_types(array( 'exclude_from_search' => false ), 'names');
+        $defaults[self::ADMIN_PRINT_BUTTONS_POST_TYPES_SETTING_NAME] = $post_types;
         foreach ($this->format_registry->getFormats() as $format) {
             $defaults[$this->getSettingNameForDefaultDesignForFormat($format)] = null;
+            $defaults[self::ADMIN_PRINT_BUTTONS_FORMATS_SETTING_NAME][] = $format->slug();
         }
         return $defaults;
     }

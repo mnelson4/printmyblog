@@ -11,14 +11,19 @@ use Exception;
 abstract class Config
 {
     /**
-     * @var array, keys are setting names, values are whatever we want.
+     * @var array|null, keys are setting names, values are whatever we want. null until initialized.
      */
-    protected $settings;
+    protected $settings = null;
 
     /**
      * @var bool indicates the config needs to be saved
      */
     protected $dirty = false;
+
+    /**
+     * @var array|null starts off null until it's initialized.
+     */
+    protected $defaults = null;
 
 
     /**
@@ -34,10 +39,21 @@ abstract class Config
                 $saved_config = [];
             }
             $this->settings = array_merge(
-                $this->declareDefaults(),
+                $this->ensureDefaultsDeclared(),
                 $saved_config
             );
         }
+    }
+
+    /**
+     * Makes sure defaults are set on the config.
+     * @return array defaults
+     */
+    protected function ensureDefaultsDeclared(){
+        if($this->defaults === null){
+            $this->defaults = $this->declareDefaults();
+        }
+        return $this->defaults;
     }
 
     /**
@@ -51,6 +67,36 @@ abstract class Config
      * @return array
      */
     abstract protected function declareDefaults();
+
+    /**
+     * @param $setting_name
+     * @return mixed
+     * @throws SettingNotDefinedException
+     */
+    public function getDefault($setting_name){
+        $this->ensureDefaultsDeclared();
+        if(! array_key_exists($setting_name, $this->defaults)){
+            throw new SettingNotDefinedException($setting_name);
+        }
+        return $this->defaults[$setting_name];
+    }
+
+    /**
+     * Resets all settings back to default.
+     */
+    public function reset(){
+        $this->settings = $this->ensureDefaultsDeclared();
+        $this->setDirty();
+    }
+
+    /**
+     * @param $setting
+     * @throws SettingNotDefinedException
+     */
+    public function resetSetting($setting){
+        $this->setSetting($setting, $this->getDefault($setting));
+        $this->setDirty();
+    }
 
     /**
      * Gets the saved setting

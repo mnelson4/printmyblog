@@ -350,8 +350,8 @@ class Admin extends BaseController
             // Ok save those settings!
             if (isset($_POST['pmb-reset'])) {
                 $settings = Context::instance()->useNew('PrintMyBlog\domain\FrontendPrintSettings', [null, false]);
-                $this->config->setSetting(Config::ADMIN_PRINT_BUTTONS_POST_TYPES_SETTING_NAME,[]);
-                $this->config->setSetting(Config::ADMIN_PRINT_BUTTONS_FORMATS_SETTING_NAME,[]);
+                $this->config->resetSetting(Config::ADMIN_PRINT_BUTTONS_POST_TYPES_SETTING_NAME);
+                $this->config->resetSetting(Config::ADMIN_PRINT_BUTTONS_FORMATS_SETTING_NAME);
             } else {
                 $settings->setShowButtons(isset($_POST['pmb_show_buttons']));
                 $settings->setShowButtonsPages(isset($_POST['pmb_show_buttons_pages']));
