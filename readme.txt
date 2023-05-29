@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.24.0
+Stable tag: 3.24.1
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -441,7 +441,10 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.24.0 May 2023 =
+= 3.24.1 May 29, 2023 =
+* Feature: display Admin Print Buttons by default (although they can still be removed from Print My Blog > Settings)
+
+= 3.24.0 May 27 2023 =
 * Feature: add Admin Print Buttons, to quickly create PDF, eBooks and Word documents from individual posts, pages, and other post types. Go to Print My Blog > Settings to enable.
 * Feature: add Designs page, where you can set the default design for each project and customize any design (even ones not in use on any projects currently.)
 
