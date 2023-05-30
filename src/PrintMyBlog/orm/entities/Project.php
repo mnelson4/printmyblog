@@ -145,7 +145,12 @@ class Project extends PostWrapper
      */
     public function code()
     {
-        return $this->getPmbMeta(self::POSTMETA_CODE);
+        $code = $this->getPmbMeta(self::POSTMETA_CODE);
+        if( ! $code){
+            $this->setCode();
+            $code = $this->getPmbMeta(self::POSTMETA_CODE);
+        }
+        return $code;
     }
 
     /**

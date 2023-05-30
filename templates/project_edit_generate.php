@@ -119,7 +119,7 @@ foreach($generations as $generation){
 	?>
     <div class="pmb-generate-options-for-<?php echo esc_attr($format_slug);?>">
         <h2><?php echo $generation->getFormat()->coloredTitleAndIcon();?> <?php echo $project->getDesignFor($generation->getFormat())->getWpPost()->post_title;?></h2>
-        <a class="button button-primary pmb-generate pmb_spin_on_click" data-format="<?php echo esc_attr($format_slug);?>" aria-label="<?php echo esc_attr(sprintf(esc_html__('Generate %s', 'print-my-blog'), $generation->getFormat()->title()));?>"><?php
+        <a class="button button-primary pmb-generate pmb_spin_on_click" data-use-theme="<?php echo $project->getDesignFor($generation->getFormat())->getSetting('use_theme') ? '1' : '0';?>" data-format="<?php echo esc_attr($format_slug);?>" aria-label="<?php echo esc_attr(sprintf(esc_html__('Generate %s', 'print-my-blog'), $generation->getFormat()->title()));?>"><?php
             esc_html_e('Generate', 'print-my-blog');
         ?></a>
         <a

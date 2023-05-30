@@ -1345,7 +1345,7 @@ class Admin extends BaseController
         if(Array2::setOr($_GET, 'ID', '')){
             $this->editCustomizeDesign();
         } else {
-            $this->editDesignsList()();
+            $this->editDesignsList();
         }
     }
 

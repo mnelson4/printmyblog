@@ -1,10 +1,10 @@
 jQuery(document).ready(function () {
     jQuery('.pmb-generate').click(function (event) {
         event.preventDefault();
-        var querystring_args = pmb_get_querystring_vars();
         var format_slug = event.currentTarget.getAttribute('data-format');
-        var format_options_selection = jQuery('.pmb-generate-options-for-' + format_slug);
+        var use_theme = event.currentTarget.getAttribute('data-use-theme');
         var data = pmb_generate.generate_ajax_data;
+        data['pmb_use_theme'] = use_theme;
         data.format = format_slug;
         jQuery.ajax({
             url:pmb_generate.pmb_ajax,

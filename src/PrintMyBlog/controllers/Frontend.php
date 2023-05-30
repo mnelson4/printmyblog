@@ -55,6 +55,12 @@ class Frontend extends BaseController
     const PMB_PROJECT_STATUS_ACTION = 'pmb_project_status';
 
     /**
+     * Querystring variable name to indicate whether to use or disable the WP theme on the next request
+     * (used because we have to decide very early, before most of PMB is initialized)
+     */
+    const PMB_USE_THEME = 'pmb_use_theme';
+
+    /**
      * @var ProjectManager
      */
     protected $project_manager;
@@ -241,6 +247,9 @@ class Frontend extends BaseController
 
         $license = pmb_fs()->_get_license();
         $site = pmb_fs()->get_site();
+        $format = Array2::setOr($_REQUEST, 'pmb_f',DefaultFileFormats::DIGITAL_PDF);
+        $design = $this->project->getDesignFor($format);
+        $use_theme = $design->getPmbMeta('use_theme');
         wp_localize_script(
             'pmb_loading',
             'pmb_loading',
@@ -251,7 +260,8 @@ class Frontend extends BaseController
                         'action' => Frontend::PMB_PROJECT_STATUS_ACTION,
                         'ID' => $this->project->getWpPost()->ID,
                         '_nonce' => wp_create_nonce('pmb-loading'),
-                        'format' => Array2::setOr($_REQUEST, 'pmb_f',DefaultFileFormats::DIGITAL_PDF),
+                        'format' => $format,
+                        self::PMB_USE_THEME =>$use_theme ? '1' : '0',
                     ]
                 ),
                 'pmb_ajax' => pmb_ajax_url(),

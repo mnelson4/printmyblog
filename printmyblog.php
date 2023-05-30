@@ -15,7 +15,6 @@
  * Text Domain: print-my-blog
  */
 
-use PrintMyBlog\controllers\Frontend;
 
 if (! defined('PMB_MIN_PHP_VER_REQUIRED')) {
     define('PMB_MIN_PHP_VER_REQUIRED', '5.4.0');
@@ -223,29 +222,15 @@ version_compare(
     // phpcs:disable WordPress.Security.NonceVerification.Recommended -- we're just looking, not processing or saving etc.
     if ((
             defined('DOING_AJAX') ||
-            isset($_REQUEST[Frontend::PMB_AJAX_INDICATOR])
+            isset($_REQUEST[PrintMyBlog\controllers\Frontend::PMB_AJAX_INDICATOR])
         ) &&
         isset($_REQUEST['action'], $_REQUEST['format']) &&
-        $_REQUEST['action'] === Frontend::PMB_PROJECT_STATUS_ACTION) {
-        // Find if this project's design for this format uses the theme or not.
-        // This circumvents a ton of our own code which isn't setup at all yet.
-        $project_id = isset($_REQUEST['ID']) ? (int)$_REQUEST['ID'] : null;
-        if (! $project_id) {
-            return;
+        $_REQUEST['action'] === PrintMyBlog\controllers\Frontend::PMB_PROJECT_STATUS_ACTION) {
+        $use_theme = true;
+        if(isset($_REQUEST[PrintMyBlog\controllers\Frontend::PMB_USE_THEME]) && $_REQUEST[PrintMyBlog\controllers\Frontend::PMB_USE_THEME] === '0'){
+            $use_theme = false;
         }
-        $post_object = get_post($project_id);
-        if (! $post_object) {
-            return;
-        }
-        $format = isset($_REQUEST['format']) ? sanitize_key($_REQUEST['format']) : null;
-        if (! $format) {
-            return;
-        }
-        $design_id = get_post_meta($project_id, '_pmb_design_for_' . $format, true);
-        if (! $design_id) {
-            return;
-        }
-        $use_theme = get_post_meta($design_id, '_pmb_use_theme', true);
+
         if ($use_theme) {
             // ha, they say to use the theme. So don't change anything
             return;

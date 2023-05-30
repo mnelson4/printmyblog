@@ -441,8 +441,12 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+=3.24.3 May 29, 2023 =
+* Bugfix: in Admin Print Buttons, respect the design's "Apply Website Theme" setting
+* Bugfix: in Admin Print Buttons, add a unique code onto print page URLs
+
 = 3.24.2 May 29, 2023 =
-* Feature: show Admin Print Buttons to Free users too (again, they can be removed frmo Print My Blog > Settings)
+* Feature: show Admin Print Buttons to Free users too (again, they can be removed from Print My Blog > Settings)
 
 = 3.24.1 May 29, 2023 =
 * Feature: display Admin Print Buttons by default (although they can still be removed from Print My Blog > Settings)
