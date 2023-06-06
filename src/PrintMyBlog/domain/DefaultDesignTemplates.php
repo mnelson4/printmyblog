@@ -547,19 +547,22 @@ class DefaultDesignTemplates
                                             'first_header' => new TextAreaInput(
                                                 [
                                                     'html_label_text' => __('Document Header on First Page', 'print-my-blog'),
-                                                    'html_help_text' => __('Content to appear in top margin area but only on the first page.', 'print-my-blog')
+                                                    'html_help_text' => __('Content to appear in top margin area but only on the first page.', 'print-my-blog'),
+                                                    'default' => ''
                                                 ]
                                             ),
                                             'header' => new TextAreaInput(
                                                 [
                                                     'html_label_text' => __('Document Header on Subsequent Pages', 'print-my-blog'),
-                                                    'html_help_text' => __('Content to appear in top margin area on all pages except the first page.', 'print-my-blog')
+                                                    'html_help_text' => __('Content to appear in top margin area on all pages except the first page.', 'print-my-blog'),
+                                                    'default' => ''
                                                 ]
                                             ),
                                             'footer' => new TextAreaInput(
                                                 [
                                                     'html_label_text' => __('Document Footer', 'print-my-blog'),
-                                                    'html_help_text' => __('Content to appear in bottom margin area.', 'print-my-blog')
+                                                    'html_help_text' => __('Content to appear in bottom margin area.', 'print-my-blog'),
+                                                    'default' => ''
                                                 ]
                                             ),
                                         ]
