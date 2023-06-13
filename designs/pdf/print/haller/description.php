@@ -39,3 +39,11 @@
 <p><?php esc_html_e('Note that in order to improve page layout, all images and figures snap to the nearest page edge.', 'print-my-blog'); ?></p>
 <p><?php esc_html_e('"Full width" images take up all columns and snap to the nearest page edge.','print-my-blog'); ?></p>
 <p><?php esc_html_e('"Wide width" images take up 2 columns and snap to the nearest page edge.','print-my-blog'); ?> <?php pmb_pro_print_service_only_e(__('Only works with PMB’s Pro PDF Service.', 'print-my-blog')); ?></p>
+<p><?php
+    printf(
+        esc_html__('%1$sAdd the CSS class "%2$s"%3$s to any images you don\'t want to snap like this.', 'print-my-blog'),
+        '<a href="https://printmy.blog/user-guide/design-layout-reference/print-my-blogs-css-classes/#pmb-dont-snap" target="_blank">',
+        'pmb-dont-snap',
+        '</a>'
+    );
+?></p>
