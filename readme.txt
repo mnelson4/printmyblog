@@ -441,9 +441,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.24.5 xxx =
+= 3.24.5 June 15, 2023 =
 * Documentation: point users of the Haller Tabloid to the CSS class "pmb-dont-snap" to avoid image snapping
-* Compatibility: prevent [AdvancedExcerpt](https://wordpress.org/plugins/advanced-excerpt/) from filtering content on the print page
+* Compatibility: in Pro Print, prevent [AdvancedExcerpt](https://wordpress.org/plugins/advanced-excerpt/) from filtering content on the print page
 
 = 3.24.4 June 6, 2023 =
 * Bugfix: in Pro Print for Word, avoid warning in header and footers when using default settings
