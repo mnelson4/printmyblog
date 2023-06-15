@@ -80,11 +80,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                 </p>
                 <?php
             } else if ($pmb_format === 'pdf') {
-                if ($pmb_browser === 'firefox') {
-                    ?>
-                    <p> <?php esc_html_e('You may now create the PDF using a browser extension.', 'print-my-blog'); ?></p>
-                    <?php
-                } elseif(in_array($pmb_browser, ['chrome','desktop_safari'])) {
+                if(in_array($pmb_browser, ['chrome','desktop_safari'])) {
                     ?>
                     <input disabled="disabled" class="pmb-print-page-print-button" type="submit" onclick="window.print()"
                            value="<?php esc_attr_e('Print to PDF', 'print-my-blog'); ?>"/><?php
