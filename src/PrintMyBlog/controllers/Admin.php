@@ -2151,7 +2151,7 @@ class Admin extends BaseController
     public function postAdminRowActions($actions, $post)
     {
         if ($post instanceof WP_Post && current_user_can('publish_' . CustomPostTypes::CONTENTS) && is_array($actions)) {
-            $pmb_actions = $this->getPostActionButtonLinks();
+            $pmb_actions = $this->getPostActionButtonLinks(true);
             foreach($pmb_actions as $action){
                 $actions[] = '<a href="' . $action['url'] . '" title="' . $action['title'] . '">' . $action['text'] . '</a>';
             }
@@ -2186,10 +2186,11 @@ class Admin extends BaseController
 
     /**
      * Gets info on the actions that can be taken on a post
+     * @param bool $concise_text whether to use concise titles or slightly more verbose ones.
      * @return array of arrays with keys 'url', 'title' and 'text'
      * @throws \Twine\services\config\SettingNotDefinedException
      */
-    protected function getPostActionButtonLinks(){
+    protected function getPostActionButtonLinks($concise_text = false){
         global $post;
         $actions = [];
         // only paying members get the duplicate buttons
@@ -2244,7 +2245,7 @@ class Admin extends BaseController
                     $actions[] = [
                         'url' => $this->getGeneratePostProjectUrl($post->ID, $format->slug()),
                         'title' => sprintf(__('Generate %s', 'print-my-blog'), $format->title()),
-                        'text' => sprintf(__('Generate %s', 'print-my-blog'), $format->title())
+                        'text' => $concise_text ? $format->title() : sprintf(__('Generate %s', 'print-my-blog'), $format->title())
                     ];
                 }
             }
