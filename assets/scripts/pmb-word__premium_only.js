@@ -12,7 +12,7 @@ function pmb_prepare_and_export_doc(){
     var dataurl_converter = new PmbImgToDataUrls(
         function () {
             pmb_stop_doing_button(jQuery('#download_link'));
-            pmb_limit_img_widths();
+            pmb_limit_img_widths(pmb_design_options.image_size);
             pmb_export_as_doc();
         }
     );
@@ -60,7 +60,14 @@ function pmb_export_as_doc(){
 /**
  * Word ignores CSS (from my testing) but does respect the height and width attributes. Limit them to the page's width
  */
-function pmb_limit_img_widths(){
+function pmb_limit_img_widths(max_image_height){
+    if(typeof(max_image_height) === 'undefined'){
+        max_image_height = 1000;
+    }
+    if(max_image_height === '0'){
+        jQuery('img').remove();
+        return;
+    }
     jQuery('img').each(function(index, element){
         var old_width = element.getAttribute('width');
         var new_width = Math.min(old_width, 642); //about page width
@@ -72,6 +79,12 @@ function pmb_limit_img_widths(){
             new_height = 870;
             ratio = new_height / old_height;
             new_width = old_width * ratio;
+        }
+        // check this new height is smaller than the maximum height
+        if(new_height > max_image_height){
+            ratio = max_image_height / old_height;
+            new_width = new_width * ratio;
+            new_height = max_image_height;
         }
         if(element.hasAttribute('width')){
             element.setAttribute('width', new_width);

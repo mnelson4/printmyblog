@@ -536,82 +536,99 @@ class DefaultDesignTemplates
                         'back_matter',
                     ],
                     'design_form_callback'  => function () {
-
-                        $form = $this->getDefaultDesignForm()->merge($this->getGenericDesignForm());
-                        $form->addSubsections(
+                        $unique_form = new FormSection(
                             [
-                                'headers_and_footers' => new FormSectionDetails(
-                                    [
-                                        'html_summary' => __('Headers and Footers', 'print-my-blog'),
-                                        'subsections' => [
-                                            'first_header' => new TextAreaInput(
-                                                [
-                                                    'html_label_text' => __('Document Header on First Page', 'print-my-blog'),
-                                                    'html_help_text' => __('Content to appear in top margin area but only on the first page.', 'print-my-blog'),
-                                                    'default' => ''
-                                                ]
-                                            ),
-                                            'header' => new TextAreaInput(
-                                                [
-                                                    'html_label_text' => __('Document Header on Subsequent Pages', 'print-my-blog'),
-                                                    'html_help_text' => __('Content to appear in top margin area on all pages except the first page.', 'print-my-blog'),
-                                                    'default' => ''
-                                                ]
-                                            ),
-                                            'footer' => new TextAreaInput(
-                                                [
-                                                    'html_label_text' => __('Document Footer', 'print-my-blog'),
-                                                    'html_help_text' => __('Content to appear in bottom margin area.', 'print-my-blog'),
-                                                    'default' => ''
-                                                ]
-                                            ),
+                                'subsections' => [
+                                    'headers_and_footers' => new FormSectionDetails(
+                                        [
+                                            'html_summary' => __('Headers and Footers', 'print-my-blog'),
+                                            'subsections' => [
+                                                'first_header' => new TextAreaInput(
+                                                    [
+                                                        'html_label_text' => __('Document Header on First Page', 'print-my-blog'),
+                                                        'html_help_text' => __('Content to appear in top margin area but only on the first page.', 'print-my-blog'),
+                                                        'default' => ''
+                                                    ]
+                                                ),
+                                                'header' => new TextAreaInput(
+                                                    [
+                                                        'html_label_text' => __('Document Header on Subsequent Pages', 'print-my-blog'),
+                                                        'html_help_text' => __('Content to appear in top margin area on all pages except the first page.', 'print-my-blog'),
+                                                        'default' => ''
+                                                    ]
+                                                ),
+                                                'footer' => new TextAreaInput(
+                                                    [
+                                                        'html_label_text' => __('Document Footer', 'print-my-blog'),
+                                                        'html_help_text' => __('Content to appear in bottom margin area.', 'print-my-blog'),
+                                                        'default' => ''
+                                                    ]
+                                                ),
+                                            ]
                                         ]
-                                    ]
-                                ),
-                                'convert_videos' => new YesNoInput(
-                                    [
-                                        'html_label_text' => __('Convert Videos to Images and Links', 'print-my-blog'),
-                                        'html_help_text' => __('Some Word Processors don\'t show videos, in which case you may prefer to replace them with an image and a hyperlink to the online video content.', 'print-my-blog'),
-                                        'default' => true,
-                                    ]
-                                ),
-
-                                'internal_links' => new SelectRevealInput(
-                                    [
-                                        'remove' => new InputOption(
-                                            __('Remove', 'print-my-blog')
-                                        ),
-                                        'leave_external' => new InputOption(
-                                            __('Leave as hyperlink to website', 'print-my-blog')
-                                        ),
-                                        'leave' => new InputOption(
-                                            __('Leave as hyperlink to document', 'print-my-blog')
-                                        ),
-                                    ],
-                                    [
-                                        'default' => 'leave',
-                                        'html_label_text' => __('Internal Hyperlinks', 'print-my-blog'),
-                                        'html_help_text' => __('How to display hyperlinks to content included in this project.', 'print-my-blog'),
-                                    ]
-                                ),
-                                'external_links' => new SelectRevealInput(
-                                    [
-                                        'remove' => new InputOption(
-                                            __('Remove', 'print-my-blog')
-                                        ),
-                                        'leave' => new InputOption(
-                                            __('Leave as hyperlink', 'print-my-blog')
-                                        ),
-                                    ],
-                                    [
-                                        'default' => 'leave',
-                                        'html_label_text' => __('External Hyperlinks', 'print-my-blog'),
-                                        'html_help_text' => __('How to display hyperlinks to content not included in this project.', 'print-my-blog'),
-                                    ]
-                                ),
-                            ],
-                            'generic_sections'
+                                    ),
+                                    'convert_videos' => new YesNoInput(
+                                        [
+                                            'html_label_text' => __('Convert Videos to Images and Links', 'print-my-blog'),
+                                            'html_help_text' => __('Some Word Processors don\'t show videos, in which case you may prefer to replace them with an image and a hyperlink to the online video content.', 'print-my-blog'),
+                                            'default' => true,
+                                        ]
+                                    ),
+                                    'image' => new FormSection(
+                                        [
+                                            'subsections' => [
+                                                'image_size' => new IntegerInput(
+                                                    [
+                                                        'html_label_text' => __('Maximum Image Height (in pixels)', 'print-my-blog'),
+                                                        'html_help_text' => sprintf(
+                                                            __(
+                                                                'Larger images will be resized to this, smaller images will be unchanged.',
+                                                                'print-my-blog'
+                                                            )
+                                                        ),
+                                                        'default' => 1000,
+                                                    ]
+                                                ),
+                                            ]
+                                        ]
+                                    ),
+                                    'internal_links' => new SelectRevealInput(
+                                        [
+                                            'remove' => new InputOption(
+                                                __('Remove', 'print-my-blog')
+                                            ),
+                                            'leave_external' => new InputOption(
+                                                __('Leave as hyperlink to website', 'print-my-blog')
+                                            ),
+                                            'leave' => new InputOption(
+                                                __('Leave as hyperlink to document', 'print-my-blog')
+                                            ),
+                                        ],
+                                        [
+                                            'default' => 'leave',
+                                            'html_label_text' => __('Internal Hyperlinks', 'print-my-blog'),
+                                            'html_help_text' => __('How to display hyperlinks to content included in this project.', 'print-my-blog'),
+                                        ]
+                                    ),
+                                    'external_links' => new SelectRevealInput(
+                                        [
+                                            'remove' => new InputOption(
+                                                __('Remove', 'print-my-blog')
+                                            ),
+                                            'leave' => new InputOption(
+                                                __('Leave as hyperlink', 'print-my-blog')
+                                            ),
+                                        ],
+                                        [
+                                            'default' => 'leave',
+                                            'html_label_text' => __('External Hyperlinks', 'print-my-blog'),
+                                            'html_help_text' => __('How to display hyperlinks to content not included in this project.', 'print-my-blog'),
+                                        ]
+                                    ),
+                                ]
+                            ]
                         );
+                        $form = $this->getDefaultDesignForm()->merge($this->getGenericDesignForm())->merge($unique_form);
                         $form->getProperSubsection('generic_sections', false)->removeSubsection('powered_by');
                         return $form;
                     },

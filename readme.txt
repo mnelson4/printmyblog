@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.24.4
+Stable tag: 3.25.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -441,6 +441,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.25.0 June 16, 2023 =
+* Feature: in Pro Print Word Documents, add setting to specify maximum image height
+* Enhancement: make post row actions to generate PMB files smaller (eg instead of "Generate Word Document" it just says "Word Document") to save space
 
 = 3.24.4 June 6, 2023 =
 * Bugfix: in Pro Print for Word, avoid warning in header and footers when using default settings
