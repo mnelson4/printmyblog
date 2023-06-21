@@ -39,7 +39,7 @@ class DefaultFileFormats
                 'icon' => 'dashicons-book-alt',
                 'generator' => 'PrintMyBlog\services\generators\PdfGenerator',
                 'default' => 'classic_print',
-                'desc' => __('PDF file intended for printing on your home printer or with a printer service. Usually removes hyperlinks, avoids excessive ink use, and are designed for viewing the 2-page spread (using the front and back of a page).'),
+                'desc' => __('PDF file intended for printing on your home printer or with a printer service. Usually removes hyperlinks, avoids excessive ink use, and are designed for viewing the 2-page spread (using the front and back of a page).', 'print-my-blog'),
                 'color' => '#B5F2B5',
                 'extension' => 'pdf',
             ]
