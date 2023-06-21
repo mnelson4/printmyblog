@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.25.0
+Stable tag: 3.25.1
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -441,6 +441,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.25.1 June 20, 2023 =
+* Bugfix: in Pro Print for Word, make nested items in the Word TOC appear indented by adjusting their heading levels
+
 = 3.25.0 June 16, 2023 =
 * Feature: in Pro Print Word Documents, add setting to specify maximum image height
 * Enhancement: make post row actions to generate PMB files smaller (eg instead of "Generate Word Document" it just says "Word Document") to save space
@@ -449,7 +452,6 @@ https://youtu.be/uPQ3vqm7A2g
 * Bugfix: in Pro Print for Word, avoid warning in header and footers when using default settings
 * Documentation: point users of the Haller Tabloid to the CSS class "pmb-dont-snap" to avoid image snapping
 * Compatibility: in Pro Print, prevent [AdvancedExcerpt](https://wordpress.org/plugins/advanced-excerpt/) from filtering content on the print page
-
 
 = 3.24.3 May 29, 2023 =
 * Bugfix: in Admin Print Buttons, respect the design's "Apply Website Theme" setting

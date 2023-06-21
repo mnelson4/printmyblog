@@ -6,6 +6,7 @@ jQuery(document).on('pmb_doc_conversion_requested', function(){
     pmb_default_align_center();
 
     pmb_replace_links_for_word(pmb_design_options['external_links'], pmb_design_options['internal_links']);
+    pmb_fix_headings_for_word_toc();
     // once done loading external images, tell ePub generator code that we're done.
     jQuery(document).on("pmb_external_resouces_loaded", function() {
         jQuery(document).trigger('pmb_doc_conversion_ready');

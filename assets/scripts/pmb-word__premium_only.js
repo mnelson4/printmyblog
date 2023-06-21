@@ -58,6 +58,68 @@ function pmb_export_as_doc(){
 }
 
 /**
+ * On all nested content, make their h1s into h2s so Word's table of contents shows them indented (and repeat
+ * for h2s, h3s, h4s, etc.). Do more for content that has lower depths.
+ */
+function pmb_fix_headings_for_word_toc(){
+    jQuery('.pmb-depth-1').each(function(index, element){
+            pmb_decrease_headings_by(jQuery(element),1);
+        }
+    );
+    jQuery('.pmb-depth-2').each(function(index, element){
+            pmb_decrease_headings_by(jQuery(element),2);
+        }
+    );
+    jQuery('.pmb-depth-3').each(function(index, element){
+            pmb_decrease_headings_by(jQuery(element),3);
+        }
+    );
+    jQuery('.pmb-depth-4').each(function(index, element){
+            pmb_decrease_headings_by(jQuery(element),4);
+        }
+    );
+}
+
+/**
+ * Changes all headings (eg h1...h6) to be lower headings (eg h2...h7),
+ * by the "number". (Eg 1 would mean changing all h1s to h2s, h2s to h3s, etc; 2 would mean changing all h1s to h3s,
+ * h2s to h4s, etc)
+ * @param jquery_selection e.g. jQuery('.pmb-depth-1')
+ * @param number int|string
+ */
+function pmb_decrease_headings_by(jquery_selection, number){
+    if(typeof(number) === 'string'){
+        number = parseInt(number);
+    }
+    jquery_selection.find('h6').changeElementType('h' + (6 + number).toString() );
+    jquery_selection.find('h5').changeElementType('h' + (5 + number).toString() );
+    jquery_selection.find('h4').changeElementType('h' + (4 + number).toString() );
+    jquery_selection.find('h3').changeElementType('h' + (3 + number).toString() );
+    jquery_selection.find('h2').changeElementType('h' + (2 + number).toString() );
+    jquery_selection.find('h1').changeElementType('h' + (1 + number).toString() );
+
+}
+
+/**
+ * Add a function to jQuery for changing an element's type. From https://stackoverflow.com/a/8584217
+ * @param newType
+ */
+jQuery.fn.changeElementType = function(newType) {
+    if(typeof(this[0]) === 'undefined'){
+        return;
+    }
+    var attrs = {};
+
+    jQuery.each(this[0].attributes, function(idx, attr) {
+        attrs[attr.nodeName] = attr.nodeValue;
+    });
+
+    this.replaceWith(function() {
+        return jQuery("<" + newType + "/>", attrs).append(jQuery(this).contents());
+    });
+};
+
+/**
  * Word ignores CSS (from my testing) but does respect the height and width attributes. Limit them to the page's width
  */
 function pmb_limit_img_widths(max_image_height){
