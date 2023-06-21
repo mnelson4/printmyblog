@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
 "POT-Creation-Date: 2022-05-18 13:26-0700\n"
-"PO-Revision-Date: 2022-05-18 13:26-0700\n"
+"PO-Revision-Date: 2022-05-25 13:25+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja_JP\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: printmyblog.php\n"
@@ -31,7 +31,7 @@ msgstr ""
 #: designs/pdf/print/classic/descriptions/economical.php:1
 #: designs/pdf/print/classic/descriptions/edit.php:1
 msgid "Purpose"
-msgstr "用途・目的"
+msgstr "用途"
 
 #: designs/epub/classic/description.php:2
 msgid ""
@@ -55,8 +55,7 @@ msgstr ""
 
 #: designs/epub/classic/description.php:4
 msgid "Images are bundled into the book file so they can be used offline."
-msgstr ""
-"画像はブックファイルにバンドルされているため、オフラインで使用できます。"
+msgstr "画像はオフラインで使用ため、ブックファイルにバンドルされています。"
 
 #: designs/epub/classic/description.php:5
 msgid ""
@@ -94,44 +93,46 @@ msgstr "ページレイアウト"
 #: designs/pdf/print/classic/templates/article.php:17
 #, php-format
 msgid "ID:%s"
-msgstr "番号:%s"
+msgstr "ID：%s"
 
 #: designs/epub/classic/templates/article.php:22
 #: designs/pdf/digital/classic/templates/article.php:22
 #: designs/pdf/print/classic/templates/article.php:22
-#, php-format
+#, fuzzy, php-format
 msgid "By %s"
-msgstr "%s による"
+msgstr "%s"
 
 #: designs/epub/classic/templates/footer.php:4
+#, fuzzy
 msgid "Powered by WordPress & Print My Blog"
-msgstr "Powered by WordPress & Print My Blog"
+msgstr "ワードプレス＆私のブログ印刷する"
 
 #. translators: %s: Post title.
 #: designs/epub/classic/templates/partials/comments.php:13
 #: designs/pdf/print/classic/templates/partials/comments.php:13
-#, php-format
+#, fuzzy, php-format
 msgctxt "comments title"
 msgid "One Reply to &ldquo;%s&rdquo;"
-msgstr "&ldquo;%s&rdquo; への1件の返信;"
+msgstr "&ldquo;%s&rdquo; コメント1件"
 
 #: designs/epub/classic/templates/partials/comments.php:18
 #: designs/pdf/print/classic/templates/partials/comments.php:18
-#, php-format
+#, fuzzy, php-format
 msgctxt "comments title"
 msgid "%1$s Reply to &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s Replies to &ldquo;%2$s&rdquo;"
-msgstr[0] "%1$s 返信 &ldquo;%2$s&rdquo;"
+msgstr[0] "&ldquo;%2$s&rdquo;　コメント%1$s件"
 
 #: designs/epub/classic/templates/title_page.php:43
 #: designs/pdf/digital/classic/templates/title_page.php:53
 #: designs/pdf/print/classic/templates/title_page.php:43
 #: templates/print_page.php:300
-#, php-format
+#, fuzzy, php-format
 msgid "Printed on %1$s"
-msgstr "%1$sに印刷"
+msgstr "%1$sに印刷しました"
 
 #: designs/pdf/digital/buurma/description.php:2
+#, fuzzy
 msgid ""
 "Designed for a school, company, or organization that wants to include their "
 "name, logo, and colors throughout the PDF. Because of its exstensive use of "
@@ -142,32 +143,37 @@ msgstr ""
 "たはハンドヘルド デバイスから見るのが最適です。"
 
 #: designs/pdf/digital/buurma/description.php:7
+#, fuzzy
 msgid "Easier content editing because there are no nesting parts."
-msgstr "ネスト部分がないため、コンテンツ編集が容易になります。"
+msgstr "コンテンツ編集が容易ようにネスト部分がありません。"
 
 #: designs/pdf/digital/buurma/description.php:8
+#, fuzzy
 msgid "All hyperlinks converted into footnotes"
-msgstr "脚注に変換されたすべてのハイパーリンク"
+msgstr "ハイパーリンクはすべて脚注に変換されます。"
 
 #: designs/pdf/digital/buurma/description.php:9
+#, fuzzy
 msgid ""
 "The title page can include your organization’s name, project title, issue "
 "number, list of authors, and an introductory paragraph."
 msgstr ""
-"タイトル ページには、組織の名前、プロジェクトのタイトル、懸案事項番号、作成者"
-"の一覧、および導入段落を含めることができます。"
+"タイトル ページには、組織の名前、プロジェクトのタイトル、刊行番号、作成者の一"
+"覧、および導入段落を含めることができます。"
 
 #: designs/pdf/digital/buurma/description.php:10
+#, fuzzy
 msgid "Each article includes just its title and content"
-msgstr "各記事には、タイトルと内容のみが含まれています"
+msgstr "各記事には、タイトルと内容のみが含まれています。"
 
 #: designs/pdf/digital/buurma/description.php:14
+#, fuzzy
 msgid ""
 "The default title page includes a stylized banner (with customizable color) "
 "above a colored background featuring a large version of your company logo."
 msgstr ""
-"既定のタイトル ページには、色付きの背景の上に定型化されたバナー (カスタマイズ"
-"可能な色) があり、会社のロゴの大きなバージョンが特徴です。"
+"既定のタイトル ページには、色付きの背景の上に様式バナー (カスタマイズ可能な"
+"色) があり、会社のロゴの大きなバージョンが特徴です。"
 
 #: designs/pdf/digital/buurma/description.php:15
 msgid ""
@@ -214,7 +220,7 @@ msgid ""
 "automatically converted to footnotes, left in-place, or removed"
 msgstr ""
 "外部ハイパーリンク (プロジェクト内にない Web ページへのリンク) は、自動的に脚"
-"注に変換したり、そのままにしたり、削除したりできます。"
+"注に変換したり、そのままにしたり、削除したりできます"
 
 #: designs/pdf/digital/classic/description.php:7
 msgid "Footnotes only work with Pro"
@@ -226,15 +232,14 @@ msgid ""
 "automatically converted to to footnotes, inline page references, left in-"
 "place, or removed"
 msgstr ""
-"内部ハイパーリンク(プロジェクトに含まれるコンテンツへのリンク)は、脚注、イン"
-"ラインページ参照、インプレースのままにしたり、削除に自動的に変換したりできま"
-"す。"
+"内部ハイパーリンク(プロジェクトコンテンツへのリンク)は、自動的に脚注かインラ"
+"インページ参照に変換したり、そのままにしたり、削除できます"
 
 #: designs/pdf/digital/classic/description.php:8
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:86
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:179
 msgid "Footnotes and page references only work with Pro PDF Service"
-msgstr "脚注とページ参照は、Pro PDF サービスでのみ機能します。"
+msgstr "脚注とページ参照は、Pro PDF サービスでのみ機能します"
 
 #: designs/pdf/digital/classic/description.php:9
 #: designs/pdf/print/classic/descriptions/shared.php:7
@@ -243,7 +248,7 @@ msgid ""
 "Printed, Credit to Print My Blog"
 msgstr ""
 "デフォルトのタイトルページには、プロジェクトタイトル、字幕、サイトURL、印刷"
-"日、マイブログを印刷するためのクレジットを含めることができます。"
+"日、マイブログを印刷するためのクレジットを含めることができます"
 
 #: designs/pdf/digital/classic/description.php:10
 #: designs/pdf/print/classic/descriptions/shared.php:8
@@ -445,7 +450,7 @@ msgid ""
 "automatically converted to footnotes or removed"
 msgstr ""
 "外部ハイパーリンク(プロジェクト内にないウェブページへのリンク)は、自動的に脚"
-"注に変換したり、削除したりできます。"
+"注に変換したり、削除したりできます"
 
 #: designs/pdf/print/classic/descriptions/shared.php:5
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:113
@@ -458,8 +463,8 @@ msgid ""
 "Internal hyperlinks (links to content included in the project) can be "
 "automatically converted to footnotes, inline page references, or removed"
 msgstr ""
-"内部ハイパーリンク (プロジェクトに含まれるコンテンツへのリンク) は、脚注、イ"
-"ンライン ページ参照に自動的に変換、または削除できます。"
+"内部ハイパーリンク(プロジェクトコンテンツへのリンク)は、自動的に脚注かインラ"
+"インページ参照に変換したり、削除できます"
 
 #: designs/pdf/print/classic/descriptions/shared.php:6
 msgid "Footnotes and page references require Pro PDF Service"
@@ -512,7 +517,7 @@ msgstr "%s「%s」をプロジェクトにドラッグします"
 #: inc/internal_functions.php:263
 #, php-format
 msgid "View \"%s\""
-msgstr "%sを表示 "
+msgstr "%sを表示"
 
 #: inc/internal_functions.php:277
 #, php-format
@@ -528,7 +533,7 @@ msgstr "\"%s\" を既存の印刷材料に置き換えて、カスタマイジ�
 #: inc/internal_functions.php:296
 #, php-format
 msgid "Replace \"%s\" with a New Print Material for customizing"
-msgstr "「%s」をカスタマイジング用の新しい印刷物に置き換えます。"
+msgstr "「%s」をカスタマイジング用の新しい印刷物に置き換えます"
 
 #: inc/internal_functions.php:310
 msgid ""
@@ -617,7 +622,7 @@ msgstr "プロジェクトメタデータの翻訳"
 #: src/PrintMyBlog/compatibility/plugins/Wpml.php:486
 #, php-format
 msgid "\"%s\" is fully translated into %s"
-msgstr "\"%s\" は完全に %s に変換されます。"
+msgstr "\"%s\" は完全に %s に変換されます"
 
 #. Plugin Name of the plugin/theme
 #: src/PrintMyBlog/controllers/Admin.php:230
@@ -688,7 +693,7 @@ msgid ""
 "content:"
 msgstr ""
 "Web サイトからメールを送信中にエラーが発生しました (\"%1$s\" でした)。%2$sに"
-"「%3$s」という件名で、内容のメールを手動で送信してください。"
+"「%3$s」という件名で、内容のメールを手動で送信してください："
 
 #: src/PrintMyBlog/controllers/Admin.php:469
 msgid "Please explain what you did, what you expected, and what went wrong"
@@ -731,7 +736,7 @@ msgstr ""
 
 #: src/PrintMyBlog/controllers/Admin.php:499
 msgid "Support for your plan is offered on GitHub"
-msgstr "プランのサポートは GitHub で提供されます。"
+msgstr "プランのサポートは GitHub で提供されます"
 
 #: src/PrintMyBlog/controllers/Admin.php:500
 msgid ""
@@ -993,7 +998,7 @@ msgstr "印刷ページ準備完了"
 
 #: src/PrintMyBlog/controllers/LegacyPrintPage.php:338
 msgid "There was an error fetching posts. It was: "
-msgstr "投稿の取得中にエラーが発生しました。そうでした："
+msgstr "投稿の取得中にエラーが発生しました。そうでした：　"
 
 #: src/PrintMyBlog/controllers/LegacyPrintPage.php:341
 msgid "No response from WP REST API."
@@ -1090,7 +1095,7 @@ msgstr "始めた"
 #: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:239
 #, php-format
 msgid "%1$s at %2$s"
-msgstr "％2$sで％1$s"
+msgstr "％1$s ％2$s"
 
 #. translators: Post date format. See https://www.php.net/date
 #: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:241
@@ -1728,7 +1733,7 @@ msgstr "ページの上部または下部にスナップする"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:805
 msgid "Only snap if it would otherwise cause a page break"
-msgstr "スナップは、改ページの原因になる場合のみに限ります。"
+msgstr "スナップは、改ページの原因になる場合のみに限ります"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:806
 msgid "Resize images if they don’t fit on the page"
@@ -2325,7 +2330,7 @@ msgid ""
 "quickly on the page, sometimes images won’t load properly. "
 msgstr ""
 "投稿のレンダリング間で待機するミリ秒数。投稿がページ上でレンダリングされるの"
-"が速すぎると、画像が正しく読み込まれないことがあります。"
+"が速すぎると、画像が正しく読み込まれないことがあります"
 
 #: src/PrintMyBlog/domain/PrintOptions.php:182
 msgid "Include Inline Javascript"
@@ -2701,7 +2706,7 @@ msgid ""
 msgstr ""
 "Twineフォームを使用するには、TWINE_MAIN_FILEをプラグインのメインファイルとし"
 "て定義し、wp-content/plugins/yourplugin/src/Twine 内にTwineフォルダを配置する"
-"必要があります。"
+"必要があります"
 
 #: src/Twine/forms/base/FormSectionBase.php:347
 msgid ""
@@ -2763,7 +2768,7 @@ msgid ""
 "it has not been set in the constructor"
 msgstr ""
 "名前 %s と id %s を持つフォーム入力の表示戦略を取得できません。コンストラク"
-"ターで設定されていないためです。"
+"ターで設定されていないためです"
 
 #: src/Twine/forms/inputs/FormInputWithOptionsBase.php:83
 #, php-format
@@ -2831,7 +2836,7 @@ msgstr "%1$s: %2$s"
 #: src/Twine/forms/strategies/display/SelectDisplay.php:34
 msgid ""
 "Cannot use Select Display Strategy with an input that doesn't have options"
-msgstr "オプションのない入力で表示方法の選択を使用できません。"
+msgstr "オプションのない入力で表示方法の選択を使用できません"
 
 #: src/Twine/forms/strategies/display/SelectMultipleDisplay.php:33
 msgid ""
@@ -2928,7 +2933,7 @@ msgstr ""
 
 #: src/Twine/forms/strategies/validation/EmailValidation.php:30
 msgid "Please enter a valid email address."
-msgstr "有効なメールアドレスを入力してください"
+msgstr "有効なメールアドレスを入力してください。"
 
 #: src/Twine/forms/strategies/validation/EnumValidation.php:33
 msgid ""
@@ -2968,7 +2973,7 @@ msgstr "HTML タグはこのフィールドでは使用できません"
 
 #: src/Twine/forms/strategies/validation/ValidationBase.php:29
 msgid "Input invalid"
-msgstr "無効な入力。"
+msgstr "無効入力"
 
 #: src/Twine/orm/entities/PostWrapper.php:175
 #, php-format
@@ -3098,7 +3103,7 @@ msgstr "コンテンツを印刷に投稿する"
 
 #: templates/partials/debug_options.php:13
 msgid "Troubleshooting Options"
-msgstr "トラブルシューティング オプション "
+msgstr "トラブルシューティング オプション"
 
 #: templates/partials/pro_print_page_epub_window.php:13
 #: templates/partials/pro_print_page_window.php:22
@@ -3129,8 +3134,7 @@ msgstr "ePubをダウンロード"
 
 #: templates/partials/pro_print_page_epub_window.php:30
 msgid "Please refer to our documentation if you have questions about styling "
-msgstr ""
-"スタイリングについてご質問がある場合は、ドキュメントを参照してください。"
+msgstr "スタイリングについてご質問がある場合は、ドキュメントを参照してください"
 
 #: templates/partials/pro_print_page_window.php:36
 msgid "Free"
@@ -3255,7 +3259,7 @@ msgstr "初期化"
 
 #: templates/print_page.php:78
 msgid "You may now use dotEPUB to create the eBook."
-msgstr "dotEPUB を使用して電子ブックを作成できるようになりました。"
+msgstr "dotEPUB を使用して電子ブックを作成できるようになりました"
 
 #: templates/print_page.php:79 templates/print_page.php:103
 #: templates/print_page.php:110 templates/print_page.php:121
@@ -3310,7 +3314,7 @@ msgstr "モバイルサファリの方法"
 
 #: templates/print_page.php:145
 msgid "Click the share button"
-msgstr "共有ボタンをクリックします。"
+msgstr "共有ボタンをクリックします"
 
 #: templates/print_page.php:148
 msgid "Click \"Options\" and choose PDF"
@@ -3624,7 +3628,7 @@ msgid ""
 "items. "
 msgstr ""
 "<b>Tab</b> キーを使用して、検索ボックス、その他のボタン、およびプロジェクト項"
-"目にフォーカスを合わせます。"
+"目にフォーカスを合わせます"
 
 #: templates/project_edit_content_help_tab.php:3
 msgid ""
@@ -3821,7 +3825,7 @@ msgstr "電子書籍(電子パブまたはMOBI)"
 
 #: templates/setup_page.php:56
 msgid "Make a free eBook using dotEPUB."
-msgstr "dotEPUBを使用して無料の電子ブックを作成します。"
+msgstr "dotEPUBを使用して無料の電子ブックを作成します"
 
 #: templates/setup_page.php:60
 msgid "HTML"
@@ -3886,7 +3890,7 @@ msgstr "新しい順"
 
 #: templates/setup_page.php:110
 msgid "Pages will be ordered using the \"Order\" attribute:"
-msgstr "ページは \"Order\" 属性を使用して順序付けられます。"
+msgstr "ページは \"Order\" 属性を使用して順序付けられます"
 
 #: templates/setup_page.php:111
 msgid "From Lowest to Highest"
@@ -4026,7 +4030,7 @@ msgstr ""
 "印刷マイブログのデザインはWordPressのテーマのようなものです:それぞれに独自の"
 "外観とカスタマイズオプションがあります。プロジェクト間で同じデザインを再利用"
 "します。または、HTML、CSS、および JavaScript を使用して独自のデザインを作成す"
-"ることもできます。"
+"ることもできます"
 
 #: templates/upgrade_to_3.php:31
 msgid ""
@@ -4054,7 +4058,7 @@ msgid ""
 "special \"print material\" posts to use only in your projects"
 msgstr ""
 "表と裏の事項を書籍に追加し、コンテンツをパーツに整理し、プロジェクトでのみ使"
-"用する特別な「印刷物」投稿を追加します。"
+"用する特別な「印刷物」投稿を追加します"
 
 #: templates/upgrade_to_3.php:69
 msgid "Features Include:"
