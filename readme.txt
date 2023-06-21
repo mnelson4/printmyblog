@@ -1,5 +1,5 @@
 === Print My Blog - Print, PDF, & eBook Converter WordPress Plugin ===
-Contributors: mnelson4
+Contributors: mnelson4, ryanvdk
 Tags: print, PDF, backup, eBook, print button
 Requires at least: 4.6
 Tested up to: 6.2
@@ -443,6 +443,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.25.1 June 20, 2023 =
 * Bugfix: in Pro Print for Word, make nested items in the Word TOC appear indented by adjusting their heading levels
+* Translation: props to @ryanvdk for improving the Japanese translations
 
 = 3.25.0 June 16, 2023 =
 * Feature: in Pro Print Word Documents, add setting to specify maximum image height
