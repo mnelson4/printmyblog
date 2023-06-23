@@ -211,7 +211,7 @@ msgstr "Par %s"
 #: designs/epub/classic/templates/footer.php:4
 #: designs/word/classic/templates/footer.php:4
 msgid "Powered by WordPress & Print My Blog"
-msgstr "Desarrollado por Print My Blog Pro y WordPress"
+msgstr "Propulsé par WordPress & Print My Blog"
 
 #. translators: %s: Post title.
 #: designs/epub/classic/templates/partials/comments.php:13

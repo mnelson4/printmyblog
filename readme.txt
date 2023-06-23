@@ -1,5 +1,5 @@
 === Print My Blog - Print, PDF, & eBook Converter WordPress Plugin ===
-Contributors: mnelson4, ryanvdk
+Contributors: mnelson4, ryanvdk, szepeviktor
 Tags: print, PDF, backup, eBook, print button
 Requires at least: 4.6
 Tested up to: 6.2
