@@ -441,9 +441,10 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.25.1 June 20, 2023 =
+= 3.25.1 June 23, 2023 =
 * Bugfix: in Pro Print for Word, make nested items in the Word TOC appear indented by adjusting their heading levels
 * Translation: props to @ryanvdk for improving the Japanese translations
+* Miscellaneous: added @szepeviktor as a contributor (contributed to 2.1.4, so this is old)
 
 = 3.25.0 June 16, 2023 =
 * Feature: in Pro Print Word Documents, add setting to specify maximum image height
