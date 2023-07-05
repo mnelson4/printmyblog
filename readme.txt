@@ -2,12 +2,12 @@
 Contributors: mnelson4, ryanvdk, szepeviktor
 Tags: print, PDF, backup, eBook, print button
 Requires at least: 4.6
-Tested up to: 6.2
+Tested up to: 6.2.2
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.25.1
+Stable tag: 3.25.2
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -440,6 +440,9 @@ https://youtu.be/uPQ3vqm7A2g
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+
+= 3.25.2 July 5, 2023 =
+* Enhancement: improve stability of Freemius license/subscription features by updating Freemius SDK to 2.5.10
 
 = 3.25.1 June 23, 2023 =
 * Bugfix: in Pro Print for Word, make nested items in the Word TOC appear indented by adjusting their heading levels
