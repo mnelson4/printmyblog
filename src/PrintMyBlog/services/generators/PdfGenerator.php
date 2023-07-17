@@ -107,7 +107,7 @@ class PdfGenerator extends HtmlBaseGenerator
                         'name' => $this->project->getPublishedTitle(),
                         'ignore_console_messages' => true,
                         'ignore_resource_errors' => true,
-                        'pipeline' => '9.2',
+                        'pipeline' => '10.1',
                         'prince_options' => [
                             'baseurl' => site_url(),
                             'media' => 'print',

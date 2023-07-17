@@ -283,7 +283,7 @@ class Frontend extends BaseController
                         'name' => $this->project->getPublishedTitle(),
                         'ignore_console_messages' => true,
                         'ignore_resource_errors' => true,
-                        'pipeline' => 9,
+                        'pipeline' => '10.1',
                         'prince_options' => [
                             'base_url' => site_url(),
                             'media' => 'print',                                       // use screen
