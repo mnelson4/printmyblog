@@ -441,6 +441,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.25.5 xxxx =
+* Developer: simplify adding custom fonts to designs (introduces PrintMyBlog\domain\DefaultDesignTemplates::getPdfFontSettings() and adds custom font CSS if those settings are used)
+
 = 3.25.4 xxxx =
 * Bugfix: on the designs page, fixed bug that only showed first 10 designs
 * Feature: added GTranslate plugin compatibility (see https://wordpress.org/plugins/gtranslate/)
