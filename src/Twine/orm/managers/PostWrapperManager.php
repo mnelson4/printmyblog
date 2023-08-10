@@ -84,7 +84,11 @@ class PostWrapperManager
     protected function setQueryForThisPostType(WP_Query $query = null)
     {
         if (! $query instanceof WP_Query) {
-            $query = new WP_Query();
+            $query = new WP_Query(
+                [
+                    'nopaging' => true
+                ]
+            );
         }
         $query->set('post_type', $this->cap_slug);
         return $query;
