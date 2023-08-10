@@ -900,103 +900,7 @@ class DefaultDesignTemplates
                             'html_label_text' => __('Show a Dividing Line Between Posts', 'print-my-blog'),
                         ]
                     ),
-                    'fonts' => new FormSectionDetails(
-                        [
-                            'html_summary' => __('Font Settings', 'print-my-blog'),
-                            'subsections' => [
-                                'main_header_font_size' => new TextInput(
-                                    [
-                                        'default' => '4em',
-                                        'html_label_text' => __('Title page and Part Header Font Size', 'print-my-blog'),
-                                        'html_help_text' => sprintf(
-                                            // translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag
-                                            __('Font size used for the default title page’s and part’s header (all other headers’ sizes are derived from the main font size). Use any recognized %1$sCSS font-size keyword%2$s (like "large", "medium", "small") or a %3$slength in any units%2$s (eg "14pt", "50%%", or "10px").'),
-                                            '<a href="https://www.w3schools.com/cssref/pr_font_font-size.asp" target="_blank">',
-                                            '</a>',
-                                            '<a href="https://www.w3schools.com/cssref/css_units.asp" target="_blank">'
-                                        ),
-                                    ]
-                                ),
-                                'header_font_style' => new SelectRevealInput(
-                                    [
-                                        'arial' => new InputOption(__('Arial', 'print-my-blog')),
-                                        'courier new' => new InputOption(__('Courier New', 'print-my-blog')),
-                                        'georgia' => new InputOption(__('Georgia', 'print-my-blog')),
-                                        'impact' => new InputOption(__('Impact', 'print-my-blog')),
-                                        'lucida console' => new InputOption(__('Lucida Console', 'print-my-blog')),
-                                        'palatino linotype' => new InputOption(__('Palatino Linotype', 'print-my-blog')),
-                                        'tahoma' => new InputOption(__('Tahoma', 'print-my-blog')),
-                                        'times new roman' => new InputOption(__('Times New Roman', 'print-my-blog')),
-                                        'verdana' => new InputOption(__('Verdana', 'print-my-blog')),
-                                        'custom_header_font' => new InputOption(__('Custom Font...', 'print-my-blog'))
-                                    ],
-                                    [
-                                        'default' => 'arial',
-                                        'html_label_text' => __('Header Font', 'print-my-blog'),
-                                        'html_help_text' => __('Default font for header tags', 'print-my-blog'),
-                                    ]
-                                ),
-                                'custom_header_font' => new FormSection(
-                                    [
-                                        'subsections' => [
-                                            'custom_header_font_style' => new AdminFileUploaderInput(
-                                                [
-                                                    'default' => '',
-                                                    'html_label_text' => __('Custom Header Font', 'print-my-blog'),
-                                                    'html_help_text' => __('Specify the URL of a custom font file, or upload one. The formats "wff" and "wff2" work best, but "ttf" and "otf" also work.', 'print-my-blog')
-                                                ]
-                                            ),
-                                        ]
-                                    ]
-                                ),
-                                'font_size' => new TextInput(
-                                    [
-                                        'default' => '10pt',
-                                        'html_label_text' => __('Font Size', 'print-my-blog'),
-                                        'html_help_text' => sprintf(
-                                            // translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag
-                                            __('Use any recognized %1$sCSS font-size keyword%2$s (like "large", "medium", "small") or a %3$slength in any units%2$s (eg "14pt", "50%%", or "10px").'),
-                                            '<a href="https://www.w3schools.com/cssref/pr_font_font-size.asp" target="_blank">',
-                                            '</a>',
-                                            '<a href="https://www.w3schools.com/cssref/css_units.asp" target="_blank">'
-                                        ),
-                                    ]
-                                ),
-                                'font_style' => new SelectRevealInput(
-                                    [
-                                        'arial' => new InputOption(__('Arial', 'print-my-blog')),
-                                        'courier new' => new InputOption(__('Courier New', 'print-my-blog')),
-                                        'georgia' => new InputOption(__('Georgia', 'print-my-blog')),
-                                        'impact' => new InputOption(__('Impact', 'print-my-blog')),
-                                        'lucida console' => new InputOption(__('Lucida Console', 'print-my-blog')),
-                                        'palatino linotype' => new InputOption(__('Palatino Linotype', 'print-my-blog')),
-                                        'tahoma' => new InputOption(__('Tahoma', 'print-my-blog')),
-                                        'times new roman' => new InputOption(__('Times New Roman', 'print-my-blog')),
-                                        'verdana' => new InputOption(__('Verdana', 'print-my-blog')),
-                                        'custom_font' => new InputOption(__('Custom Font...', 'print-my-blog'))
-                                    ],
-                                    [
-                                        'default' => 'times new roman',
-                                        'html_label_text' => __('Font', 'print-my-blog'),
-                                        'html_help_text' => __('Default font used in paragraphs, bulleted lists, tables, etc.'),
-                                    ]
-                                ),
-                                'custom_font' => new FormSection(
-                                    [
-                                        'subsections' => [
-                                            'custom_font_style' => new AdminFileUploaderInput(
-                                                [
-                                                    'default' => '',
-                                                    'html_label_text' => __('Custom Font', 'print-my-blog'),
-                                                    'html_help_text' => __('Specify the URL of a custom font file, or upload one. The formats "wff" and "wff2" work best, but "ttf" and "otf" also work.', 'print-my-blog')
-                                                ]
-                                            ),
-                                        ]
-                                    ]
-                                ),
-                            ],
-                        ]
-                    ),
+                    'fonts' => $this->getPdfFontSettings(),
                     'image' => new FormSectionDetails(
                         [
                             'html_summary' => __('Image & Block Settings', 'print-my-blog'),
@@ -1394,6 +1298,110 @@ class DefaultDesignTemplates
                 'default' => true,
                 'html_label_text' => __('Add QR Code to Videos', 'print-my-blog'),
                 'html_help_text' => __('After a video is converted into a screenshot and URL, you can optionally add a QR code that readers can scan with their phones to view the video.', 'print-my-blog'),
+            ]
+        );
+    }
+
+    /**
+     * @return FormSectionDetails
+     * @throws \Twine\forms\helpers\ImproperUsageException
+     */
+    public function getPdfFontSettings(){
+        return new FormSectionDetails(
+            [
+                'html_summary' => __('Font Settings', 'print-my-blog'),
+                'subsections' => [
+                    'main_header_font_size' => new TextInput(
+                        [
+                            'default' => '4em',
+                            'html_label_text' => __('Title page and Part Header Font Size', 'print-my-blog'),
+                            'html_help_text' => sprintf(
+                            // translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag
+                                __('Font size used for the default title page’s and part’s header (all other headers’ sizes are derived from the main font size). Use any recognized %1$sCSS font-size keyword%2$s (like "large", "medium", "small") or a %3$slength in any units%2$s (eg "14pt", "50%%", or "10px").'),
+                                '<a href="https://www.w3schools.com/cssref/pr_font_font-size.asp" target="_blank">',
+                                '</a>',
+                                '<a href="https://www.w3schools.com/cssref/css_units.asp" target="_blank">'
+                            ),
+                        ]
+                    ),
+                    'header_font_style' => new SelectRevealInput(
+                        [
+                            'arial' => new InputOption(__('Arial', 'print-my-blog')),
+                            'courier new' => new InputOption(__('Courier New', 'print-my-blog')),
+                            'georgia' => new InputOption(__('Georgia', 'print-my-blog')),
+                            'impact' => new InputOption(__('Impact', 'print-my-blog')),
+                            'lucida console' => new InputOption(__('Lucida Console', 'print-my-blog')),
+                            'palatino linotype' => new InputOption(__('Palatino Linotype', 'print-my-blog')),
+                            'tahoma' => new InputOption(__('Tahoma', 'print-my-blog')),
+                            'times new roman' => new InputOption(__('Times New Roman', 'print-my-blog')),
+                            'verdana' => new InputOption(__('Verdana', 'print-my-blog')),
+                            'custom_header_font' => new InputOption(__('Custom Font...', 'print-my-blog'))
+                        ],
+                        [
+                            'default' => 'arial',
+                            'html_label_text' => __('Header Font', 'print-my-blog'),
+                            'html_help_text' => __('Default font for header tags', 'print-my-blog'),
+                        ]
+                    ),
+                    'custom_header_font' => new FormSection(
+                        [
+                            'subsections' => [
+                                'custom_header_font_style' => new AdminFileUploaderInput(
+                                    [
+                                        'default' => '',
+                                        'html_label_text' => __('Custom Header Font', 'print-my-blog'),
+                                        'html_help_text' => __('Specify the URL of a custom font file, or upload one. The formats "wff" and "wff2" work best, but "ttf" and "otf" also work.', 'print-my-blog')
+                                    ]
+                                ),
+                            ]
+                        ]
+                    ),
+                    'font_size' => new TextInput(
+                        [
+                            'default' => '10pt',
+                            'html_label_text' => __('Font Size', 'print-my-blog'),
+                            'html_help_text' => sprintf(
+                            // translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag
+                                __('Use any recognized %1$sCSS font-size keyword%2$s (like "large", "medium", "small") or a %3$slength in any units%2$s (eg "14pt", "50%%", or "10px").'),
+                                '<a href="https://www.w3schools.com/cssref/pr_font_font-size.asp" target="_blank">',
+                                '</a>',
+                                '<a href="https://www.w3schools.com/cssref/css_units.asp" target="_blank">'
+                            ),
+                        ]
+                    ),
+                    'font_style' => new SelectRevealInput(
+                        [
+                            'arial' => new InputOption(__('Arial', 'print-my-blog')),
+                            'courier new' => new InputOption(__('Courier New', 'print-my-blog')),
+                            'georgia' => new InputOption(__('Georgia', 'print-my-blog')),
+                            'impact' => new InputOption(__('Impact', 'print-my-blog')),
+                            'lucida console' => new InputOption(__('Lucida Console', 'print-my-blog')),
+                            'palatino linotype' => new InputOption(__('Palatino Linotype', 'print-my-blog')),
+                            'tahoma' => new InputOption(__('Tahoma', 'print-my-blog')),
+                            'times new roman' => new InputOption(__('Times New Roman', 'print-my-blog')),
+                            'verdana' => new InputOption(__('Verdana', 'print-my-blog')),
+                            'custom_font' => new InputOption(__('Custom Font...', 'print-my-blog'))
+                        ],
+                        [
+                            'default' => 'times new roman',
+                            'html_label_text' => __('Font', 'print-my-blog'),
+                            'html_help_text' => __('Default font used in paragraphs, bulleted lists, tables, etc.'),
+                        ]
+                    ),
+                    'custom_font' => new FormSection(
+                        [
+                            'subsections' => [
+                                'custom_font_style' => new AdminFileUploaderInput(
+                                    [
+                                        'default' => '',
+                                        'html_label_text' => __('Custom Font', 'print-my-blog'),
+                                        'html_help_text' => __('Specify the URL of a custom font file, or upload one. The formats "wff" and "wff2" work best, but "ttf" and "otf" also work.', 'print-my-blog')
+                                    ]
+                                ),
+                            ]
+                        ]
+                    ),
+                ],
             ]
         );
     }

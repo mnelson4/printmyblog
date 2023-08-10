@@ -68,6 +68,72 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design)
     $css .= '.pmb-posts a[href].pmb-page-num::after{
         content: target-counter(attr(href), page);
     }';
+
+    // Set custom fonts. Not all designs have these settings, in which case their values will be null and no CSS will be added
+    // relating to them.
+
+    // if they're using a custom font, we'll need to declare the font face then use that font.
+    $header_font = $design->getSetting('header_font_style');
+    if ($header_font === 'custom_header_font') {
+        $custom_header_font = $design->getSetting('custom_header_font_style');
+        // get the name from the file's name.
+        $header_font = pmb_get_filename($custom_header_font, true);
+        $css .= '
+        @font-face{
+                font-family: "' . $header_font . '";
+                font-style: normal;
+                font-weight: normal;
+                src : url(' . $custom_header_font . ');
+         }';
+
+    }
+    $main_font = $design->getSetting('font_style');
+    if ($main_font === 'custom_font') {
+        $custom_font = $design->getSetting('custom_font_style');
+        $main_font = pmb_get_filename($custom_font, true);
+        $css .= '
+        @font-face{
+                font-family: "' . $main_font . '";
+                font-style: normal;
+                font-weight: normal;
+                src : url(' . $custom_font . ');
+         }';
+
+    }
+    $font_size = $design->getSetting('font_size');
+    if( $font_size && $main_font){
+        $css .= '
+        html{
+            font-size:' . $font_size . ';
+            font-family:' . $main_font . ';
+       }
+       span.pmb-footnote{
+            font-family:' . $main_font . ';
+            font-size: calc(' . $font_size . ' * 2 / 3);
+       }
+       ';
+    }
+    $main_header_font_size = $design->getSetting('main_header_font_size');
+    if($main_header_font_size){
+        $css .= '
+       .pmb-posts-header .site-title{
+            font-size:' . $main_header_font_size . ';
+        }
+        pmb-part h1.pmb-title{
+            font-size:' . $main_header_font_size . ';
+        }
+        ';
+    }
+
+    if($header_font){
+        $css .= '
+       h1,h2,h3,h4,h5,h6{
+            font-family:' . $header_font . ';
+       }  ';
+    }
+
+
+
     // instruct PMB print service to add "powered by" for free users and cheap plans
     $show_powered_by = true;
     if (pmb_fs()->is_plan__premium_only('hobby')) {
