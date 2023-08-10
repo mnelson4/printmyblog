@@ -254,3 +254,11 @@ because it also takes up 100% of the width.
 @page {
     size: initial;
 }
+
+/**
+ * Hide Elementor's table of contents in Quick Print only (it doesn't work because it needs JS that doesn't get loaded;
+ * but it works in Pro Print so leave it there)
+ */
+.pmb-posts div.elementor-toc__header, .pmb-posts div.elementor-toc__body{
+    display: none;
+}

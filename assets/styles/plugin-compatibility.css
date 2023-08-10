@@ -261,3 +261,9 @@ Hide Hustle Slide-In
 .pum-overlay{
     display:none;
 }
+/**
+Hide GTranslate dropdowns in content. See https://wordpress.org/plugins/gtranslate/
+ */
+.pmb-posts .gtranslate_wrapper{
+    display:none;
+}
