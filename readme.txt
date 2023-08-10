@@ -441,6 +441,10 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.25.4 xxxx =
+* Bugfix: on the designs page, fixed bug that only showed first 10 designs
+* Feature: added GTranslate plugin compatibility (see https://wordpress.org/plugins/gtranslate/)
+
 = 3.25.3 July 17, 2023 =
 * Feature: in Pro Print PDFs, use [DocRaptor's Pipeline 10.1](https://docraptor.com/documentation/article/7898168-2022-07-27-pipeline-10-and-10-1-with-prince-15-and-15-1) which adds support for WebP and AVIF images and other features
 
