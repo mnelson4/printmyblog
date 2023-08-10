@@ -7,7 +7,7 @@ pmb_include_design_template('partials/html_header');
 global $pmb_design;
 ?>
 
-<body class="<?php echo str_replace('has-sidebar', '', implode(' ',get_body_class('pmb-print-page pmb-pro-print-page pmb-pro-word pmb-posts'))); ?>">
+<body class="<?php echo str_replace('has-sidebar', '', implode(' ',get_body_class('pmb-print-page pmb-pro-print-page pmb-pro-word'))); ?>">
 <?php do_action('pmb_pro_print_window');?>
 <!-- header/footer:
   This element will appears in your main document (unless you save in a separate HTML),
