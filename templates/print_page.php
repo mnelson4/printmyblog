@@ -71,6 +71,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
             <h1 id='pmb-in-progress-h1' class="pmb-waiting-h1"><?php _e('Initializing', 'print-my-blog'); ?></h1>
         </div>
         <div class="pmb-print-ready pmb-print-instructions">
+            <?php do_action('pmb_print_page_ready_instructions_start');?>
             <?php
             if ($pmb_format === 'ebook') {
                 ?>

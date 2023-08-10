@@ -80,4 +80,5 @@ $generate_url = add_query_arg(
             </div>
         </div>
     </div>
+    <?php do_action('pmb_pro_print_page_window_end', 'pdf');?>
 </div>
