@@ -98,7 +98,8 @@ function pmb_resize_an_image_inside(element){
         // page_box.h is the distance from the bottom margin to the top margin
         // figure_box.y is the distance from the top of the page to the bottom-left corner of the figure
         // see https://www.princexml.com/forum/post/23543/attachment/img-fill.html
-        var remaining_vertical_space = figure_box.y - (page_box.y - page_box.h) - 10 - footnotes_height;
+        var top_margin = page_box.y - page_box.h;
+        var remaining_vertical_space = figure_box.y - top_margin - 10 - footnotes_height;
 
         // calculate the maximum potential image height based on the image's dimensions and page width
         var max_height_because_of_max_width = page_box.w * figure_box.h / figure_image_box.w + caption_height;
@@ -119,7 +120,7 @@ function pmb_resize_an_image_inside(element){
         Log.info('IMG:' + figure_image.attributes['src'].value);
         Log.info(' page width:' + page_box.w);
         Log.info('  pmb.max_image_size' + pmb.max_image_size);
-        Log.info(' remaining_vertical_space ' + remaining_vertical_space);
+        Log.info(' remaining_vertical_space ' + remaining_vertical_space + '(distance to bottom margin ' + page_box.y + ', figure bottom at ' + figure_box.y + ')');
         Log.info(' max_height_because_of_max_width' + max_height_because_of_max_width);
         Log.info(' max_height_from_resolution_y_of_image' + max_height_from_resolution_y_of_image);
         Log.info(' max_height_from_resolution_x_of_image' + max_height_from_resolution_x_of_image);
