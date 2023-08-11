@@ -127,7 +127,7 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design)
 
     if($header_font){
         $css .= '
-       h1,h2,h3,h4,h5,h6{
+       h1,h2,h3,h4,h5,h6,.pmb-header-like{
             font-family:' . $header_font . ';
        }  ';
     }

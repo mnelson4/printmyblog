@@ -150,6 +150,15 @@ function pmb_permalink_as_attr(){
  */
 function pmb_the_title()
 {
+    echo '<h1 class="pmb-title">' . esc_html(pmb_get_title()) . '</h1>';
+}
+
+/**
+ * Gets the current post project's title.
+ * @return string
+ */
+function pmb_get_title()
+{
     $post = get_post();
     if ($post instanceof WP_Post) {
         $title_from_meta = get_post_meta($post->ID, 'pmb_title', true);
@@ -158,8 +167,10 @@ function pmb_the_title()
         } else {
             $title = get_the_title($post);
         }
+    } else {
+        $title = '';
     }
-    echo '<h1 class="pmb-title">' . esc_html($title) . '</h1>';
+    return (string)$title;
 }
 
 /**
