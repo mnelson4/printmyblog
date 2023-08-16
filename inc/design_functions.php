@@ -107,6 +107,9 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design)
             font-size:' . $font_size . ';
             font-family:' . $main_font . ';
        }
+       :root{
+            --pmb-main-font: ' . $main_font . ';
+        }
        span.pmb-footnote{
             font-family:' . $main_font . ';
             font-size: calc(' . $font_size . ' * 2 / 3);
@@ -127,6 +130,9 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design)
 
     if($header_font){
         $css .= '
+        :root{
+            --pmb-header-font: ' . $header_font . ';
+        }
        h1,h2,h3,h4,h5,h6,.pmb-header-like{
             font-family:' . $header_font . ';
        }  ';

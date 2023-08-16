@@ -112,8 +112,8 @@ function PmbToc(item_renderer_callback){
             }
             var title_text = title_element.html();
             if(title_text){
-                if(this.item_rendered_callback){
-                    var html = item_renderer_callback(title_text, href_id, depth, height, matter_class);
+                if(_this.item_renderer_callback){
+                    var html = _this.item_renderer_callback(title_text, id, depth, height, matter_class, selection);
                 } else {
                     var html = '<li class="pmb-toc-item pmb-toc-depth-' + depth + ' pmb-toc-height-' + height + ' '  + matter_class + '"><a href="#' + id + '">' + title_text + '</a></li>';
                 }
