@@ -157,6 +157,10 @@ mess up the layout (especially in galleries!) Footnotes are much better. Or link
     content:'';
 }
 
+figure{
+    break-inside:avoid;
+}
+
 /* Make sure the print button is clearly a pressable button; some themes style it as a block and so the cursor
 won't switch to a pointer when they hover over it; and it won't be centered anymore*/
 .pmb-waiting-message-outer-container input[type=submit]{
