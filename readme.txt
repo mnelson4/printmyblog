@@ -443,6 +443,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.25.5 xxxx =
 * Developer: simplify adding custom fonts to designs (introduces PrintMyBlog\domain\DefaultDesignTemplates::getPdfFontSettings() and adds custom font CSS if those settings are used)
+* Enhancement: avoid pagebreaks between images and their captions
 
 = 3.25.4 xxxx =
 * Bugfix: on the designs page, fixed bug that only showed first 10 designs
