@@ -69,16 +69,18 @@ function pmb_convert_url_to_anchor($url)
 
 /**
  * @param string $relative_filepath filepath relative to the current design's templates directory
+ * @param array $context_variables an array to extract into variables when rendering the template. Keys become variable names, values become their values.
  * @global Design $pmb_design
  * @global Project $pmb_project
  * @global \PrintMyBlog\entities\ProjectGeneration $pmb_project_generation
  */
-function pmb_include_design_template($relative_filepath)
+function pmb_include_design_template($relative_filepath, $context_variables = [])
 {
     /**
      * @var $pmb_design Design
      */
     global $pmb_project, $pmb_design, $pmb_project_generation;
+    extract($context_variables);
     require $pmb_design->getDesignTemplate()->getTemplatePathToDivision($relative_filepath);
 }
 
