@@ -112,7 +112,7 @@ class PdfGenerator extends HtmlBaseGenerator
                             'baseurl' => site_url(),
                             'media' => 'print',
                             'http_timeout' => 60,
-                            'http_insecure' => true,
+                            'insecure' => true,
                             'javascript' => true, // before sending the HTML to DocRaptor, we turn all the "script" tags into "disabled-script"; and all the "prince-script" into "script" tags.
                         ],
                         'tag' => substr(
