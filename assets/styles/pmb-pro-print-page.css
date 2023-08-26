@@ -11,6 +11,10 @@ Styles for the print window
 .pmb-float-bottom{
     float:bottom;
 }
+.pmb-snap{
+    -prince-float:snap;
+    -prince-float-policy:in-order;
+}
 
 /**
  * Styles used internally
