@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.25.3
+Stable tag: 3.25.4
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -441,7 +441,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.25.4 xxxx =
+= 3.25.4 August 31, 2023 =
 * Bugfix: on the designs page, fixed bug that only showed first 10 designs
 * Feature: added GTranslate plugin compatibility (see https://wordpress.org/plugins/gtranslate/)
 * Enhancement: removed unnecessary jQuery UI Javascript file
