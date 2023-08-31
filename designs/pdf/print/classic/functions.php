@@ -23,21 +23,6 @@ function pmb_enqueue_classic_script()
 
     $css = pmb_design_styles($pmb_design);
 
-    $css .= '
-        @page{
-            size: ' . $pmb_design->getSetting('page_width') . ' ' . $pmb_design->getSetting('page_height')
-        . ';}
-    /* 
-        Make the preview appear about the same size as in the PDF. Besides making the preview better,
-        Javascript code that\'s calculating element dimensions will be better too.
-    */
-    @media not print{
-        .pmb-project-content{
-            width: calc(' . $pmb_design->getSetting('page_width') . ' - 54pt - 54pt - 5pt);
-        }
-    }
-        ';
-
     if ($pmb_design->getPmbMeta('paragraph_indent')) {
         $css .= ' .pmb-article .post-inner p:not(.has-text-align-center){
                         text-indent:3em;

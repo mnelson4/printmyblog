@@ -138,6 +138,25 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design)
        }  ';
     }
 
+    $page_width = $design->getSetting('page_width');
+    $page_height = $design->getSetting('page_height');
+    if($page_width && $page_height){
+        $css .= '
+        @page{
+            size: ' . $page_width . ' ' . $page_height
+            . ';}
+        /* 
+            Make the preview appear about the same size as in the PDF. Besides making the preview better,
+            Javascript code that\'s calculating element dimensions will be better too.
+        */
+        @media not print{
+            .pmb-project-content{
+                width: calc(' . $page_width . ' - 54pt - 54pt - 5pt);
+            }
+        }
+        ';
+    }
+
 
 
     // instruct PMB print service to add "powered by" for free users and cheap plans
