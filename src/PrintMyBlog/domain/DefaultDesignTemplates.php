@@ -931,7 +931,7 @@ class DefaultDesignTemplates
      * @return FormSectionDetails
      * @throws \Twine\forms\helpers\ImproperUsageException
      */
-    protected function getPageSubsection()
+    public function getPageSubsection()
     {
         return new FormSectionDetails(
             [
