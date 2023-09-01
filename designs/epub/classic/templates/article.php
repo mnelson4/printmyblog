@@ -25,7 +25,7 @@
 	            if(pmb_design_uses('published_date', false)){
                     ?>
                     <span class="posted-on pmb-post-meta">
-                        <?php the_date();?>
+                        <?php echo get_the_date();?>
                     </span>
                     <?php
                 }
