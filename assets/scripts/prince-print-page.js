@@ -103,11 +103,11 @@ function pmb_resize_an_image_inside(element){
 
         // calculate the maximum potential image height based on the image's dimensions and page width
         var page_width_minus_margins = page_box.w - page_box.marginRight - page_box.marginLeft;
-        var body_element = document.getElementsByTagName('body')[0];
-        pmb_print_props(body_element, 'body element');
-        var body_box = body_element.getPrinceBoxes()[0];
-        pmb_print_props(body_box, 'body box');
-        
+        // var body_element = document.getElementsByTagName('body')[0];
+        // pmb_print_props(body_element, 'body element');
+        // var body_box = body_element.getPrinceBoxes()[0];
+        // pmb_print_props(body_box, 'body box');
+
         var max_height_because_of_max_width = page_width_minus_margins * figure_box.h / figure_image_box.w + caption_height;
 
         // also gather the maximum heights from the original image
