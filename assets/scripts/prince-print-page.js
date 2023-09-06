@@ -117,8 +117,7 @@ function pmb_resize_an_image_inside(element){
             max_height_from_resolution_x_of_image = (page_box.w * figure_image.attributes['height'].value / figure_image.attributes['width'].value) + caption_height;
         }
         Log.info('IMG:' + figure_image.attributes['src'].value);
-        pmb_print_props(page_box, 'page box');
-        Log.info(' page width:' + page_width_minus_margins);
+        Log.info(' page width:' + page_box.w);
         Log.info('  pmb.max_image_size' + pmb.max_image_size);
         Log.info(' remaining_vertical_space ' + remaining_vertical_space + '(distance to bottom margin ' + page_box.y + ', figure bottom at ' + figure_box.y + ')');
         Log.info(' max_height_because_of_max_width' + max_height_because_of_max_width);
