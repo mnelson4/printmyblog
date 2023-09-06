@@ -108,7 +108,7 @@ function pmb_resize_an_image_inside(element){
         // var body_box = body_element.getPrinceBoxes()[0];
         // pmb_print_props(body_box, 'body box');
 
-        var max_height_because_of_max_width = page_width_minus_margins * figure_box.h / figure_image_box.w + caption_height;
+        var max_height_because_of_max_width = page_width_minus_margins * figure_image_box.h / figure_image_box.w + caption_height;
 
         // also gather the maximum heights from the original image
         var max_height_from_resolution_y_of_image = 100000;
