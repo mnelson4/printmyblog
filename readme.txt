@@ -2,12 +2,12 @@
 Contributors: mnelson4, ryanvdk, szepeviktor
 Tags: print, PDF, backup, eBook, print button
 Requires at least: 4.6
-Tested up to: 6.3.1
+Tested up to: 6.4.1
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.25.5
+Stable tag: 3.25.6
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -441,9 +441,12 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
+= 3.25.6 November 13, 2023 =
+* Enhancement: remove Print My Blog dashboard news as I was just told this is in violation of WordPress.org plugin guidelines.
+
 = 3.25.5 August 31, 2023 =
 * Bugfix: in Pro Print, fix missing dates when posts were on the same date
-* Bufix: fix missing PMB icon on WP plugins update page
+* Bugfix: fix missing PMB icon on WP plugins update page
 
 = 3.25.4 August 31, 2023 =
 * Bugfix: on the designs page, fixed bug that only showed first 10 designs
