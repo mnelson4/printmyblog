@@ -444,6 +444,7 @@ https://youtu.be/uPQ3vqm7A2g
 = 3.25.6 November 13, 2023 =
 * Enhancement: remove Print My Blog dashboard news as I was just told this is in violation of WordPress.org plugin guidelines.
 * Bugfix: fix admin print buttons not including some HTML which could affect the design's layout
+* Bugfix: fix image quality adjusting so the CSS class `pmb-dont-change-image-quality` works as intended
 
 = 3.25.5 August 31, 2023 =
 * Bugfix: in Pro Print, fix missing dates when posts were on the same date
