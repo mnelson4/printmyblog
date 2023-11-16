@@ -2,12 +2,12 @@
 Contributors: mnelson4, ryanvdk, szepeviktor
 Tags: print, PDF, backup, eBook, print button
 Requires at least: 4.6
-Tested up to: 6.2.2
+Tested up to: 6.4.1
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.25.3
+Stable tag: 3.25.6
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -441,14 +441,22 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.25.5 xxxx =
+= 3.25.6 November 16, 2023 =
+* Enhancement: remove Print My Blog dashboard news as I was just told this is in violation of WordPress.org plugin guidelines.
+* Bugfix: fix admin print buttons not including some HTML which could affect the design's layout
+* Bugfix: fix image quality adjusting so the CSS class `pmb-dont-change-image-quality` works as intended
 * Developer: simplify adding custom fonts to designs (introduces PrintMyBlog\domain\DefaultDesignTemplates::getPdfFontSettings() and adds custom font CSS if those settings are used)
 * Enhancement: avoid pagebreaks between images and their captions
 * Feature: in Pro Print, introduce CSS class "pmb-snap" to snap a block or image to nearest page edge
 
-= 3.25.4 xxxx =
+= 3.25.5 August 31, 2023 =
+* Bugfix: in Pro Print, fix missing dates when posts were on the same date
+* Bugfix: fix missing PMB icon on WP plugins update page
+
+= 3.25.4 August 31, 2023 =
 * Bugfix: on the designs page, fixed bug that only showed first 10 designs
 * Feature: added GTranslate plugin compatibility (see https://wordpress.org/plugins/gtranslate/)
+* Enhancement: removed unnecessary jQuery UI Javascript file
 
 = 3.25.3 July 17, 2023 =
 * Feature: in Pro Print PDFs, use [DocRaptor's Pipeline 10.1](https://docraptor.com/documentation/article/7898168-2022-07-27-pipeline-10-and-10-1-with-prince-15-and-15-1) which adds support for WebP and AVIF images and other features

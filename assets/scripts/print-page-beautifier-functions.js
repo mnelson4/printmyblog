@@ -491,20 +491,25 @@ function pmb_set_image_dimension_attributes(element, callback_when_done, callbac
  * 'uploaded' (meaning the actual original, fullsized file), '' (to not change at all), or some other string of form '?x?'
  * @param string domain eg "www.mysite.com", so we can identify external images which usually shouldn't be resized. An exception is wp.com JetPack images.
  */
-function pmb_change_image_quality(image_quality, domain){
+function pmb_change_image_quality(desired_image_quality, domain){
     // If it's '' (empty string), then treat it as the previous default behaviour, which was to leave the images alone
-    if(image_quality === '' || ! image_quality || image_quality === '150'){
+    if(desired_image_quality === '' || ! desired_image_quality || desired_image_quality === '150'){
         return;
     }
     jQuery('img[src*="' + domain + '"]:not(.pmb-dont-change-image-quality), img[src*=".wp.com"]:not(.pmb-dont-change-image-quality)').each(function(index, element){
         var src_to_use = null;
+
+        // Don't change image quality if any parent divs say not to.
+        if(jQuery(element).parents('.pmb-dont-change-image-quality').length){
+            return;
+        }
 
         // Before we start parsing the srcset attribute for the right size, make sure it's set.
         // If not, fallback to leaving the image alone
         if(! element.hasAttribute('srcset') || ! element.attributes['srcset'].value){
             return;
         }
-        switch(image_quality){
+        switch(desired_image_quality){
             case 'scaled':
                 // Find the biggest size listed on "srcset" and use that
                 var size_and_srcs = _pmb_parse_srcset(element.attributes['srcset'].value, false);
@@ -514,7 +519,7 @@ function pmb_change_image_quality(image_quality, domain){
                 // Find a thumbnail as big than the one requested (if we can't find it, use the next biggest that's available.)
                 var size_and_srcs = _pmb_parse_srcset(element.attributes['srcset'].value);
                 for(var i=0; i<size_and_srcs.length; i++){
-                    if(parseInt(image_quality, 10) > parseInt(size_and_srcs[i]['size'],10)){
+                    if(parseInt(desired_image_quality, 10) > parseInt(size_and_srcs[i]['size'],10)){
                         size_and_srcs.shift();
                         i--;
                     }

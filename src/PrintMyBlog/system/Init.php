@@ -156,7 +156,6 @@ class Init extends BaseInit
         } elseif (is_admin()) {
             $admin = $this->context->reuse('PrintMyBlog\controllers\Admin');
             $admin->setHooks();
-            $this->initDashboardNews();
         } else {
             $frontend = $this->context->reuse('PrintMyBlog\controllers\Frontend');
             $frontend->setHooks();
@@ -171,29 +170,6 @@ class Init extends BaseInit
 
         $common_controller = new Common();
         $common_controller->setHooks();
-    }
-
-    /**
-     * Initializes the dashboard news code to run on AJAX and the WP dashboard page.
-     */
-    protected function initDashboardNews()
-    {
-        if (is_admin()) {
-            new DashboardNews(
-                'https://printmy.blog/rss',
-                'https://printmy.blog',
-                [
-                    'product_title' => 'print my blog',
-                    'item_prefix' => esc_html__('Print My Blog', 'print-my-blog'),
-                    'item_description' => esc_html__('Print My Blog news', 'print-my-blog'),
-                    'dismiss_tooltip' => __('Dismiss all Print My Blog news', 'print-my-blog'),
-                    'dismiss_confirm' => __(
-                        'Are you sure you want to dismiss all Print My Blog news forever?',
-                        'print-my-blog'
-                    ),
-                ]
-            );
-        }
     }
 
 

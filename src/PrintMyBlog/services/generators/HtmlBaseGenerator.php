@@ -214,7 +214,7 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
             $fake_row->parent_id = 0;
             $fake_row->section_order = 1;
             $fake_row->template = '';
-            $fake_row->placement = 'main_matter';
+            $fake_row->placement = DesignTemplate::IMPLIED_DIVISION_MAIN_MATTER;
             $fake_row->height = 0;
             $fake_row->depth = 0;
             $sections = [
