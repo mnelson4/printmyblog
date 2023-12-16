@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.25.6
+Stable tag: 3.26.1
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -441,7 +441,10 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.25.6 November 13, 2023 =
+= 3.26.1 xxxx =
+* Bugfix: in Pro Print, fix QR codes being added onto videos
+
+= 3.26.0 November 21, 2023 =
 * Enhancement: remove Print My Blog dashboard news as I was just told this is in violation of WordPress.org plugin guidelines.
 * Bugfix: fix admin print buttons not including some HTML which could affect the design's layout
 * Bugfix: fix image quality adjusting so the CSS class `pmb-dont-change-image-quality` works as intended

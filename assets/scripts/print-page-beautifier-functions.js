@@ -104,11 +104,11 @@ function pmb_convert_youtube_videos_to_images(format, add_qr_codes) {
  * pmb_convert_youtube_videos_to_images().
  * @param string format "pretty" or "simple". Pretty works best where CSS assets/styles/pmb-print-page-common-pdf.css is loaded.
  *  If we can't be sure that's loaded, "simple" is better.
- *  @param boolean add_qr_codes whether to add QR codes or not
+ *  @param boolean|string add_qr_codes whether to add QR codes or not (accepts the string "1" as if it were `true`)
  */
 function PmbVideo(format, add_qr_codes){
     this._format = format || 'pretty';
-    this._add_qr_codes = add_qr_codes == true;
+    this._add_qr_codes = add_qr_codes == true || add_qr_codes == '1';
     /**
      * Number of open HTTP requests to get video data.
      * @type {number}
@@ -127,7 +127,7 @@ function PmbVideo(format, add_qr_codes){
         if(this._open_requests <= 0 && this._doneSearchForVideos && ! this._triggeredDoneProcessingVideos){
             console.log('trigger done processing videos');
             this._triggeredDoneProcessingVideos = true;
-            jQuery(document).trigger('pmb_done_processing_videos');
+            this._doneProcessingVideos();
         }
     }
 
@@ -158,16 +158,41 @@ function PmbVideo(format, add_qr_codes){
         this._convertYoutubeVideos();
         this._convertOtherVideos();
         this._doneSearchForVideos = true;
-        if(this._add_qr_codes){
-            jQuery(document).on('pmb_done_processing_videos',function(){
-                that._addQrCodes();
-            });
-        }
         this._checkDoneProcessingVideos();
     }
 
     /**
+     * If done processing videos, maybe add QR codes, then trigger "pmb_done_processing_videos"
+     * @private
+     */
+    this._doneProcessingVideos = function(){
+        if(this._add_qr_codes){
+            this._addQrCodes();
+            // give it a second to add QR codes
+            var that = this;
+            setTimeout(
+                function(){
+                    that._notifydoneProcessingVideos();
+                },
+                1000
+            )
+        } else {
+            this._notifydoneProcessingVideos();
+        }
+
+    }
+
+    /**
+     * Just triggers "pmb_done_processing_videos" when videos are totally done.
+     * @private
+     */
+    this._notifydoneProcessingVideos = function(){
+        jQuery(document).trigger('pmb_done_processing_videos');
+    }
+
+    /**
      * After videos are converted, adds a QR code next to them.
+     * Not sure how long this takes, but not terribly long as there's no HTTP request required.
      * @private
      */
     this._addQrCodes = function(){
