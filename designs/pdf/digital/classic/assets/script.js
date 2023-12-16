@@ -17,5 +17,5 @@ jQuery(document).on('pmb_doc_conversion_requested', function(){
         pmb_change_image_quality(pmb_design_options.image_quality, pmb_design_options.domain);
         jQuery(document).trigger('pmb_doc_conversion_ready');
     });
-    pmb_convert_youtube_videos_to_images('pretty');
+    pmb_convert_youtube_videos_to_images('pretty', pmb_design_options.video_qr_codes);
 });
