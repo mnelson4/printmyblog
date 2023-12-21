@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2023-06-20 23:36-0700\n"
-"PO-Revision-Date: 2023-06-20 23:42-0700\n"
+"POT-Creation-Date: 2023-12-20 21:17-0800\n"
+"PO-Revision-Date: 2023-12-20 21:17-0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja_JP\n"
@@ -229,7 +229,7 @@ msgstr[0] "%1$s 返信 &ldquo;%2$s&rdquo;"
 #: designs/pdf/digital/classic/templates/title_page.php:54
 #: designs/pdf/print/classic/templates/title_page.php:44
 #: designs/word/classic/templates/title_page.php:43
-#: templates/print_page.php:304
+#: templates/print_page.php:305
 #, php-format
 msgid "Printed on %1$s"
 msgstr "%1$sに印刷しました"
@@ -939,8 +939,7 @@ msgstr "\"%s\" は完全に %s に変換されます"
 #. Plugin Name of the plugin/theme
 #: src/PrintMyBlog/controllers/Admin.php:243
 #: src/PrintMyBlog/controllers/Admin.php:244
-#: src/PrintMyBlog/system/Init.php:187 templates/partials/breadcrumb.php:10
-#: templates/welcome.php:6
+#: templates/partials/breadcrumb.php:10 templates/welcome.php:6
 msgid "Print My Blog"
 msgstr "私のブログを印刷する"
 
@@ -2677,9 +2676,10 @@ msgstr "Word Document"
 
 #: src/PrintMyBlog/domain/DefaultFileFormats.php:78
 msgid ""
-"File editable in Microsoft Word, Google Docs, LibreOffice, etc. Useful for "
-"sharing persons and programs that require a \".doc\" file. Word Documents "
-"typically require manual formatting in your chosen Word Processor."
+"File editable in Microsoft Word, Google Docs, and LibreOffice (not Apple's "
+"Pages app, unfortunately). Useful for sharing persons and programs that "
+"require a \".doc\" file. Word Documents typically require manual formatting "
+"in your chosen Word Processor."
 msgstr ""
 "Microsoft Word、Google Docs、LibreOfficeなどで編集可能なファイル。「.doc」"
 "ファイルを必要とする人やプログラムを共有するのに便利です。Word文書は通常、選"
@@ -2913,7 +2913,7 @@ msgid "Important"
 msgstr "重要"
 
 #: src/PrintMyBlog/domain/FrontendPrintSettings.php:56
-#: templates/print_page.php:169
+#: templates/print_page.php:170
 msgid "Print"
 msgstr "印刷"
 
@@ -3378,18 +3378,6 @@ msgctxt ""
 msgid "Print Materials list"
 msgstr "印刷材料リスト"
 
-#: src/PrintMyBlog/system/Init.php:188
-msgid "Print My Blog news"
-msgstr "私のブログのニュースを印刷する"
-
-#: src/PrintMyBlog/system/Init.php:189
-msgid "Dismiss all Print My Blog news"
-msgstr "すべての印刷私のブログのニュースを閉じる"
-
-#: src/PrintMyBlog/system/Init.php:191
-msgid "Are you sure you want to dismiss all Print My Blog news forever?"
-msgstr "すべての Print My Blog ニュースを永久に却下してよろしいですか?"
-
 #: src/Twine/entities/FileSubmission.php:70
 #, php-format
 msgid ""
@@ -3527,7 +3515,7 @@ msgstr ""
 #. translators: 1: label text, 2: display text
 #. translators: 1 taxonomy name, 2: list of terms that apply to this post
 #: src/Twine/forms/strategies/display/RadioButtonDisplay.php:48
-#: templates/print_page.php:242
+#: templates/print_page.php:243
 #, php-format
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
@@ -4013,117 +4001,117 @@ msgstr "プラグインサポートフォーラム(新しいタブで開きま�
 msgid "Initializing"
 msgstr "初期化"
 
-#: templates/print_page.php:78
+#: templates/print_page.php:79
 msgid "You may now use dotEPUB to create the eBook."
 msgstr "dotEPUB を使用して電子ブックを作成できるようになりました"
 
-#: templates/print_page.php:79 templates/print_page.php:99
-#: templates/print_page.php:106 templates/print_page.php:119
+#: templates/print_page.php:80 templates/print_page.php:100
+#: templates/print_page.php:107 templates/print_page.php:120
 msgid "How?"
 msgstr "どのように？"
 
-#: templates/print_page.php:86
+#: templates/print_page.php:87
 msgid "Print to PDF"
 msgstr "PDFに印刷する"
 
-#: templates/print_page.php:89
+#: templates/print_page.php:90
 msgid "Use your browser to print to PDF."
 msgstr "ブラウザを使用してPDFに印刷します。"
 
-#: templates/print_page.php:97 templates/print_page.php:110
+#: templates/print_page.php:98 templates/print_page.php:111
 msgid "opens in new tab"
 msgstr "新しいタブで開く"
 
-#: templates/print_page.php:110
+#: templates/print_page.php:111
 msgid "Download Print to PDF Browser Extension"
 msgstr "PDFブラウザ拡張機能に印刷をダウンロード"
 
-#: templates/print_page.php:111
+#: templates/print_page.php:112
 msgid "Click the extension’s button."
 msgstr "拡張機能のボタンをクリックします。"
 
-#: templates/print_page.php:122
+#: templates/print_page.php:123
 msgid ""
 "After clicking \"Print to PDF\", set the \"Destination\" to \"Save as PDF.\""
 msgstr ""
 "「PDFに印刷」をクリックした後、「保存先」を「PDFとして保存」に設定します。"
 
-#: templates/print_page.php:130
+#: templates/print_page.php:131
 msgid "How on Safari on Desktop"
 msgstr "デスクトップ上のサファリの方法"
 
-#: templates/print_page.php:134
+#: templates/print_page.php:135
 msgid "Click \"Print to PDF\""
 msgstr "「PDFに印刷」をクリックします。"
 
-#: templates/print_page.php:135
+#: templates/print_page.php:136
 msgid "Choose to \"Save as PDF.\""
 msgstr "「PDFとして保存」を選択します。"
 
-#: templates/print_page.php:143
+#: templates/print_page.php:144
 msgid "How on Mobile Safari"
 msgstr "モバイルサファリの方法"
 
-#: templates/print_page.php:148
+#: templates/print_page.php:149
 msgid "Click the share button"
 msgstr "共有ボタンをクリックします"
 
-#: templates/print_page.php:151
+#: templates/print_page.php:152
 msgid "Click \"Options\" and choose PDF"
 msgstr "「オプション」をクリックしてPDFを選択します"
 
-#: templates/print_page.php:154
+#: templates/print_page.php:155
 msgid "Save to Files"
 msgstr "ファイルに保存"
 
-#: templates/print_page.php:162
+#: templates/print_page.php:163
 msgid ""
 "Note: Google Chrome and Microsoft Edge are recommended for producing PDFs."
 msgstr "注: PDF の作成には、Google Chrome と Microsoft Edge をお勧めします。"
 
-#: templates/print_page.php:165
+#: templates/print_page.php:166
 msgid "Copy to Clipboard"
 msgstr "クリップボードにコピー"
 
-#: templates/print_page.php:170
+#: templates/print_page.php:171
 msgid "Use your browser to print."
 msgstr "ブラウザを使用して印刷します。"
 
-#: templates/print_page.php:193
+#: templates/print_page.php:194
 msgid "Use your browser’s \"print preview\" for the best preview."
 msgstr "ブラウザの「印刷プレビュー」を使用して、最適なプレビューを作成します。"
 
 #. translators: 1: date string
-#: templates/print_page.php:222
+#: templates/print_page.php:223
 #, php-format
 msgid "published on %1$s and later,"
 msgstr "%1$s以降に公開され、"
 
 #. translators: 1: date string
-#: templates/print_page.php:228
+#: templates/print_page.php:229
 #, php-format
 msgid "published on %1$s and earlier,"
 msgstr "%1$s以前に公開され、"
 
 #. translators: $s, the categories and terms used to filter this print-out,
 #. eg "Category: WordPress, Blogging; Term: Computers, Headphones".
-#: templates/print_page.php:252
+#: templates/print_page.php:253
 #, php-format
 msgid "with %s,"
 msgstr "%sで、"
 
-#: templates/print_page.php:257
+#: templates/print_page.php:258
 #, php-format
 msgid "by %s"
 msgstr "%s"
 
 #. translators: 1 description of printout, 2: site URL
-#: templates/print_page.php:272
+#: templates/print_page.php:273
 #, php-format
 msgid "%1$s from %2$s."
 msgstr "%1$sから%2$s。"
 
-#: templates/print_page.php:283
+#: templates/print_page.php:284
 #, php-format
 msgctxt ""
 "Description of what's in the printout. Eg the post type, dante range, and "
@@ -4132,12 +4120,12 @@ msgid "%s."
 msgstr "%s."
 
 #. translators: 1: date, 2: opening link tag, 3: closing link tag
-#: templates/print_page.php:296
+#: templates/print_page.php:297
 #, php-format
 msgid "Printed on %1$s using %2$sPrint My Blog%3$s"
 msgstr "%1$sブログの印刷%2$sを使用して印刷%3$s"
 
-#: templates/print_page.php:309
+#: templates/print_page.php:310
 #, php-format
 msgid "Printed using %1$sPrint My Blog%2$s"
 msgstr "%1$sブログを印刷%2$sを使用して印刷"
@@ -4975,6 +4963,15 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "Michael Nelson"
 msgstr "マイケル・ネルソン"
+
+#~ msgid "Print My Blog news"
+#~ msgstr "私のブログのニュースを印刷する"
+
+#~ msgid "Dismiss all Print My Blog news"
+#~ msgstr "すべての印刷私のブログのニュースを閉じる"
+
+#~ msgid "Are you sure you want to dismiss all Print My Blog news forever?"
+#~ msgstr "すべての Print My Blog ニュースを永久に却下してよろしいですか?"
 
 #, php-format
 #~ msgid "Resize to %s"
