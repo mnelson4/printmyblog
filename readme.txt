@@ -443,6 +443,7 @@ https://youtu.be/uPQ3vqm7A2g
 
 = 3.26.2 xxxx =
 * Enhancement: updated logo
+* Bugfix: in Quick Print, fix rendering local videos with the source as a sub-element
 
 = 3.26.1 December 20, 2023 =
 * Bugfix: in Pro Print, fix QR codes being added onto videos

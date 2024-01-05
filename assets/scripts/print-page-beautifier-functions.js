@@ -266,7 +266,13 @@ function PmbVideo(format, add_qr_codes){
         videos.replaceWith(function(index){
            var video_element = this;
             // Elementor puts the video src on "data-src" and later lazy-loads it.
-           var src = video_element.src || video_element.attributes['data-src'].value;
+           var src = video_element.src || (video_element.hasAttribute('data-src') && video_element.attributes['data-src'].value);
+           if(! src){
+               var sub_source = jQuery(video_element).children('source');
+               if(sub_source.length && sub_source[0].src){
+                   src = sub_source[0].src;
+               }
+           }
            var screenshot = video_element.poster || '';
            return that._getHtml('', src, screenshot);
         });
