@@ -275,13 +275,12 @@
 
 .pmb-svg-icon{
     float: left;
-    width: 13px;
-    height: 13px;
-    margin: 5px .5em 0 0;
+    width: 20px;
+    height: 20px;
     text-align: center;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 13px auto;
+    background-size: 16px auto;
 }
 @media (max-width: 766px){
     .pmb-project-layout .pmb-actions-column{
