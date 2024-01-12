@@ -441,9 +441,10 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.26.2 xxxx =
+= 3.26.2 January 11, 2024 =
 * Enhancement: updated logo
 * Bugfix: in Quick Print, fix rendering local videos with the source as a sub-element
+* Bugfix: fix regression where some of 3.26.0 changes were lost in 3.26.1 (only released on Freemius)
 
 = 3.26.1 December 20, 2023 =
 * Bugfix: in Pro Print, fix QR codes being added onto videos
