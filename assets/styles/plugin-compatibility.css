@@ -267,3 +267,15 @@ Hide GTranslate dropdowns in content. See https://wordpress.org/plugins/gtransla
 .pmb-posts .gtranslate_wrapper{
     display:none;
 }
+/**
+Hide Molongui empty divs, see https://www.molongui.com
+ */
+[data-m-brand="Molongui"]{
+    display:none;
+}
+/**
+Hide WP Popups. See https://wordpress.org/plugins/wp-popups-lite/
+ */
+.wppopups-whole{
+    display:none;
+}

@@ -449,10 +449,14 @@ https://youtu.be/uPQ3vqm7A2g
 * Bugfix: in Pro Print, fix QR codes being added onto videos
 * Enhancement: mention that Pro Print's Word Documents don't work with Apple Pages
 
+
 = 3.26.0 November 21, 2023 =
 * Enhancement: remove Print My Blog dashboard news as I was just told this is in violation of WordPress.org plugin guidelines.
 * Bugfix: fix admin print buttons not including some HTML which could affect the design's layout
 * Bugfix: fix image quality adjusting so the CSS class `pmb-dont-change-image-quality` works as intended
+* Developer: simplify adding custom fonts to designs (introduces PrintMyBlog\domain\DefaultDesignTemplates::getPdfFontSettings() and adds custom font CSS if those settings are used)
+* Enhancement: avoid pagebreaks between images and their captions
+* Feature: in Pro Print, introduce CSS class "pmb-snap" to snap a block or image to nearest page edge
 
 = 3.25.5 August 31, 2023 =
 * Bugfix: in Pro Print, fix missing dates when posts were on the same date

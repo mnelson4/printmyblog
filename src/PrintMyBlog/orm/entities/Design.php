@@ -72,7 +72,7 @@ class Design extends PostWrapper
     }
 
     /**
-     * Gets the saved metadata and falls back to the default.
+     * Gets the saved metadata and falls back to the default. If the setting doesn't exist, returns null.
      * @param string $setting_name
      * @return mixed|null
      * @throws Exception
