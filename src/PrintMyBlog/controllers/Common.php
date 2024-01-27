@@ -90,7 +90,7 @@ class Common extends BaseController
         );
         wp_register_style(
             'pmb-select2',
-            PMB_ASSETS_URL . 'styles/libs/select2.css',
+            PMB_ASSETS_URL . 'styles/libs/select2.min.css',
             [],
             '4.0.6'
         );

@@ -160,7 +160,7 @@ Want more? [Tell us what matters to you on GitHub](https://github.com/mnelson4/p
 PMB strives to be compatible with all plugins. But here are some that are especially noteworthy:
 
 * [BasePress](https://printmy.blog/2021/06/14/making-a-user-manual-for-web-pdf-print-with-wordpress/) for creating a user manual on both the web and print
-* [MathJax-LaTeX](https://wordpress.org/plugins/mathjax-latex/) and [WP Quick LaTeX](https://wordpress.org/plugins/wp-quicklatex/) for mathematical formulas
+* [WP Quick LaTeX](https://wordpress.org/plugins/wp-quicklatex/) for mathematical formulas
 * [Translate WordPress with GTranslate](https://wordpress.org/plugins/gtranslate/) for quick and automatic translating of projects
 * [WPML](https://wpml.org) for more advanced translating of projects, and add print buttons different languages. [Read Translating Projects with WPML Plugin](https://printmy.blog/user-guide/design-layout/translating-projects-with-wpml-plugin/)
 * [TablePress](https://wordpress.org/plugins/tablepress/) makes tables look good in print too, even when they span multiple pages
@@ -440,6 +440,9 @@ https://youtu.be/uPQ3vqm7A2g
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+
+= 3.26.3 xxx =
+* Enhancement: update select2 Javascript library to 4.0.13 to improve compatibility with other plugins that also use it
 
 = 3.26.2 January 11, 2024 =
 * Enhancement: updated logo
