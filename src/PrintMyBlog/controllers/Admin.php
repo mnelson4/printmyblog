@@ -1773,6 +1773,9 @@ class Admin extends BaseController
      */
     protected function saveProjectChooseDesign()
     {
+        if (! check_admin_referer(PMB_ADMIN_PROJECTS_PAGE_SLUG)) {
+            wp_die('The request has expired. Please refresh the previous page and try again.');
+        }
         $this->updateProjectModifiedDate();
         $design = $this->design_manager->getById((int)Array2::setOr($_REQUEST, 'design', ''));
         $format = $this->file_format_registry->getFormat(Array2::setOr($_GET, 'format', ''));
@@ -1824,6 +1827,7 @@ class Admin extends BaseController
     {
         $this->updateProjectModifiedDate();
         $form = $this->project->getMetaForm();
+        // nonce verified by form
         $form->receiveFormSubmission($_REQUEST);
         if (! $form->isValid()) {
             $this->invalid_form = $form;
@@ -1861,6 +1865,9 @@ class Admin extends BaseController
      */
     protected function saveProjectGenerate()
     {
+        if (! check_admin_referer(PMB_ADMIN_PROJECTS_PAGE_SLUG)) {
+            wp_die('The request has expired. Please refresh the previous page and try again.');
+        }
         $this->updateProjectModifiedDate();
         $format = $this->file_format_registry->getFormat(Array2::setOr($_GET, 'format', ''));
         if (! $format instanceof FileFormat) {
@@ -2302,7 +2309,8 @@ class Admin extends BaseController
                             Frontend::PMB_QUERYARG_POST => $post_id
                         ],
                     site_url()
-                )
+                ),
+            Frontend::PMB_LOADING_PAGE_INDICATOR
         );
     }
 

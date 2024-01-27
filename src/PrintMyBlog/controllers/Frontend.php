@@ -216,6 +216,9 @@ class Frontend extends BaseController
      * @throws Exception
      */
     protected function loadingPage(){
+        if (! check_admin_referer(Frontend::PMB_LOADING_PAGE_INDICATOR)) {
+            wp_die('The request has expired. Please refresh the previous page and try again.');
+        }
         global $pmb_format;
         $pmb_format = Array2::setOr($_REQUEST, self::PMB_QUERYARG_FORMAT, DefaultFileFormats::DIGITAL_PDF);
         $post_id = Array2::setOr($_REQUEST, self::PMB_QUERYARG_POST, 0);
