@@ -427,6 +427,10 @@ options are the same as when printing out multiple posts simultaneously: you can
 
 https://youtu.be/uPQ3vqm7A2g
 
+= How can I report security bugs? =
+
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team helps validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/print-my-blog)
+
 
 == Screenshots ==
 
@@ -441,8 +445,9 @@ https://youtu.be/uPQ3vqm7A2g
 
 == Changelog ==
 
-= 3.26.3 xxx =
+= 3.26.3 January 29, 2024 =
 * Enhancement: update select2 Javascript library to 4.0.13 to improve compatibility with other plugins that also use it
+* Enhancement: add Patchstack Vulnerability Disclosure Program to readme to encourage responsible disclosure of security vulnerabilities
 
 = 3.26.2 January 11, 2024 =
 * Enhancement: updated logo
