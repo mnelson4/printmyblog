@@ -18,7 +18,7 @@
                     <?php
                     if (pmb_design_uses('id', false)) {
                         ?>
-                        <span><?php
+                        <span class="pmb-post-id"><?php
                             // translators: %s: ID
                             echo esc_html(sprintf(__('ID:%s', 'print-my-blog'), get_the_ID()));
                             ?></span>
@@ -26,7 +26,7 @@
                     }
                     if (pmb_design_uses('author', false)) {
                         ?>
-                        <span><?php
+                        <span class="pmb-post-author"><?php
                             // translators: %s: author name
                             echo sprintf(__('By %s', 'print-my-blog'), get_the_author());
                             ?></span>
@@ -34,18 +34,18 @@
                     }
                     if (pmb_design_uses('published_date', false)) {
                         ?>
-                        <span class="posted-on pmb-post-meta">
+                        <span class="posted-on pmb-post-meta pmb-post-date">
                         <?php echo get_the_date(); ?>
                     </span>
                         <?php
                     }
                     if (pmb_design_uses('categories', false)) {
-                        echo wp_strip_all_tags(get_the_category_list(','));
+                        echo '<span class="pmb-post-categories">' . wp_strip_all_tags(get_the_category_list(',')) . '</span>';
                     }
 
                     if (pmb_design_uses('url', false)) {
                         ?>
-                        <div><span class="pmb-url"><a class="pmb-leave-link" href="<?php echo esc_url(get_permalink()); ?>"><?php echo get_permalink(); ?></a></span>
+                        <div class="pmb-post-url-wrapper"><span class="pmb-url"><a class="pmb-leave-link" href="<?php echo esc_url(get_permalink()); ?>"><?php echo get_permalink(); ?></a></span>
                         </div>
                         <?php
                     } ?>

@@ -444,6 +444,8 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+= xxxx =
+* Enhancement: to facilitate styling articles and hiding certain elements, add CSS classes "pmb-post-id", "pmb-post-author", "pmb-post-author", "pmb-post-date", "pmb-post-categories", "pmb-post-url-wrapper"
 
 = 3.26.3 January 29, 2024 =
 * Enhancement: update select2 Javascript library to 4.0.13 to improve compatibility with other plugins that also use it
