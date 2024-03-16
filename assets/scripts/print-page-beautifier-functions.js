@@ -271,7 +271,7 @@ function PmbVideo(format, add_qr_codes){
            var src = null;
            if(video_element.src){
                src = video_element.src;
-           }else if (video_element.attributes['data-src'].value){
+           }else if ('data-src' in video_element.attributes && video_element.attributes['data-src'].value){
                src = video_element.attributes['data-src'].value;
            } else if (jQuery(video_element).children('source')){
                var source_selection = jQuery(video_element).children('source');

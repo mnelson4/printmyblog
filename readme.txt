@@ -427,6 +427,11 @@ options are the same as when printing out multiple posts simultaneously: you can
 
 https://youtu.be/uPQ3vqm7A2g
 
+= How can I help translate Print My Blog? =
+Here's a video showing how to use Poedit to submit a translation of Print My Blog
+
+https://youtu.be/HnbCKywA_xo
+
 = How can I report security bugs? =
 
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team helps validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/print-my-blog)
@@ -445,7 +450,8 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 = xxxx =
-* Enhancement: to facilitate styling articles and hiding certain elements, add CSS classes "pmb-post-id", "pmb-post-author", "pmb-post-author", "pmb-post-date", "pmb-post-categories", "pmb-post-url-wrapper"
+* Enhancement: to facilitate styling articles and hiding certain elements, add CSS classes "pmb-post-id", "pmb-post-author", "pmb-post-author", "pmb-post-date", "pmb-post-categories", "pmb-post-url-wrapper".
+* Bugfix: for Quick print, fix an error that prevented the "print" button from being enabled when there was an error processing certain videos.
 
 = 3.26.3 January 29, 2024 =
 * Enhancement: update select2 Javascript library to 4.0.13 to improve compatibility with other plugins that also use it
