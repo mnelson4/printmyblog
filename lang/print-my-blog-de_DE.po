@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
 "POT-Creation-Date: 2023-12-20 21:15-0800\n"
-"PO-Revision-Date: 2023-12-20 21:16-0800\n"
+"PO-Revision-Date: 2024-03-25 21:41-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -667,7 +667,7 @@ msgstr ""
 
 #: designs/pdf/print/haller/description.php:29
 msgid "Section Templates"
-msgstr "Abschnitts-Vorlagen"
+msgstr "Abschnittsvorlagen"
 
 #: designs/pdf/print/haller/description.php:30
 msgid "Choose different styles for articles included in your project:"
@@ -1301,7 +1301,7 @@ msgstr "Projektmetadaten aktualisiert."
 #: src/PrintMyBlog/controllers/Admin.php:1870
 #, php-format
 msgid "There is no file format with the slug \"%s\""
-msgstr "Es gibt kein Dateiformat mit der Schnecke \"%s\""
+msgstr "Es gibt kein Dateiformat mit dem Slug \"%s\""
 
 #: src/PrintMyBlog/controllers/Admin.php:1908
 msgid "Save"
@@ -1321,7 +1321,7 @@ msgstr "Zwischengespeicherte externe Ressourcen und Bilder wurden gelöscht."
 #: src/PrintMyBlog/controllers/Admin.php:2209
 #, php-format
 msgid "Go to the %1$s \"%2$s\" was copied from."
-msgstr "Gehen Sie zum %1$s \"%2$s\" kopiert wurde."
+msgstr "Zum Original %1$s wovon \"%2$s\" kopiert wurde."
 
 #. translators: %s: type label.
 #: src/PrintMyBlog/controllers/Admin.php:2211
@@ -1648,7 +1648,7 @@ msgstr ""
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:169
 #: src/PrintMyBlog/domain/DefaultDesigns.php:25
 msgid "Classic Digital PDF"
-msgstr "Klassischedigitale PDF"
+msgstr "Klassisch digitales PDF"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:207
 msgid "Buurma Digital PDF"
@@ -1679,7 +1679,7 @@ msgstr "Name der Organisation"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:243
 msgid "Shown in the title page. Eg \"Institute of Print My Blog\""
-msgstr "Auf der Titelseite angezeigt. Eg \"Institut für Druck mein Blog\""
+msgstr "Auf der Titelseite angezeigt. z.B. \"Institut für Druck mein Blog\""
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:250
 msgid "Background Embellishment"
@@ -2564,7 +2564,7 @@ msgstr "Hauptsache, zeigt Hyperlinks und große Bilder."
 
 #: src/PrintMyBlog/domain/DefaultDesigns.php:60
 msgid "Editorial Review"
-msgstr "Editorial Review"
+msgstr "Redaktionelle Rezension"
 
 #: src/PrintMyBlog/domain/DefaultDesigns.php:61
 msgid "Your writing in an easy-to-review format for editors."
@@ -2580,7 +2580,7 @@ msgstr "Hauptsache, zeigt kleinere Bilder und Text mit doppeltem Abstand."
 
 #: src/PrintMyBlog/domain/DefaultDesigns.php:110
 msgid "Classic Print PDF"
-msgstr "Klassische Druck PDF"
+msgstr "Klassisch PDF drucken"
 
 #: src/PrintMyBlog/domain/DefaultDesigns.php:111
 msgid ""
@@ -2606,7 +2606,7 @@ msgstr ""
 
 #: src/PrintMyBlog/domain/DefaultDesigns.php:145
 msgid "Economical Print PDF"
-msgstr "Wirtschaftlicher Druck PDF"
+msgstr "Sparsamer PDF-Druck"
 
 #: src/PrintMyBlog/domain/DefaultDesigns.php:146
 msgid "Compact design meant to save paper but still deliver all the content."
@@ -3172,13 +3172,13 @@ msgid ""
 "Note: PDFs generated in Firefox and Safari automatically remove hyperlinks. "
 "If you want your PDF to include hyperlinks, please use another browser."
 msgstr ""
-"Hinweis: IN Firefox und Safari generierte PDFs entfernen automatisch "
+"Hinweis: In Firefox und Safari generierte PDFs entfernen automatisch "
 "Hyperlinks. Wenn Sie möchten, dass Ihre PDF-Datei Hyperlinks enthält, "
 "verwenden Sie bitte einen anderen Browser."
 
 #: src/PrintMyBlog/domain/PrintOptions.php:183
 msgid "Post Rendering Wait-Time"
-msgstr "Warten nach dem Rendern"
+msgstr "Wartezeit nach dem Rendern"
 
 #: src/PrintMyBlog/domain/PrintOptions.php:187
 msgid "ms"
@@ -3221,11 +3221,11 @@ msgstr ""
 
 #: src/PrintMyBlog/entities/DesignTemplate.php:393
 msgid "article"
-msgstr "artikel"
+msgstr "Artikel"
 
 #: src/PrintMyBlog/entities/DesignTemplate.php:394
 msgid "part"
-msgstr "teil"
+msgstr "Teil"
 
 #: src/PrintMyBlog/entities/DesignTemplate.php:395
 msgid "volume"
@@ -3915,7 +3915,7 @@ msgstr "Lesen Sie %s Dokumentation online"
 #: templates/project_edit_content.php:286
 #: templates/project_edit_metadata.php:20
 msgid "Save & Proceed"
-msgstr "Einreichen & Weitergehen"
+msgstr "Speichern & Verarbeiten"
 
 #: templates/partials/debug_options.php:13
 msgid "Troubleshooting Options"
@@ -3941,7 +3941,7 @@ msgstr "Hilfe!"
 
 #: templates/partials/pro_print_page_epub_window.php:26
 msgid "ePub Generator"
-msgstr "Generieren ePub"
+msgstr "ePub generieren"
 
 #: templates/partials/pro_print_page_epub_window.php:27
 msgid "Unlimited ePubs with a current subscription"
@@ -4090,7 +4090,7 @@ msgstr "(keine Teile)"
 
 #: templates/partials/select_designs.php:121
 msgid "back matter"
-msgstr "Rückensache"
+msgstr "Rückenmaterial"
 
 #: templates/print_page.php:40
 msgid "Return"
@@ -4108,7 +4108,7 @@ msgstr "Lieben Sie es (zeigt Feedback-Optionen)"
 
 #: templates/print_page.php:52
 msgid "Don’t like something (shows feedback options)"
-msgstr "Sie mögen nichts (zeigt Feedback-Optionen)"
+msgstr "Mag nichts (zeigt Feedback-Optionen)"
 
 #. translators: 1: opening link tag, 2: closing link tag
 #: templates/print_page.php:58
@@ -4159,7 +4159,7 @@ msgstr "öffnet sich in einer neuen Registerkarte"
 
 #: templates/print_page.php:111
 msgid "Download Print to PDF Browser Extension"
-msgstr "Download Print to PDF Browser Extension"
+msgstr "Lade Print to PDF Browser-Erweiterung herunter"
 
 #: templates/print_page.php:112
 msgid "Click the extension’s button."
@@ -5140,11 +5140,9 @@ msgstr "Michael Nelson"
 #~ msgid "click to add an image"
 #~ msgstr "Klicken Sie hier, um ein Bild hinzuzufügen"
 
-#, php-format
 #~ msgid "Resize to %s"
 #~ msgstr "Größe ändern auf %s"
 
-#, php-format
 #~ msgid "Only the following HTML tags are allowed:%1$s%2$s"
 #~ msgstr "Nur die folgenden HTML Tags sind erlaubt:%1$s%2$s"
 
@@ -5170,7 +5168,6 @@ msgstr "Michael Nelson"
 #~ msgid "Generate Project"
 #~ msgstr "Generieren des Projekts"
 
-#, php-format
 #~ msgid ""
 #~ "Subsection \"%s\" is not an instanceof FormSectionBase on form \"%s\". It "
 #~ "is a \"%s\""
@@ -5178,7 +5175,6 @@ msgstr "Michael Nelson"
 #~ "Unterabschnitt \"%s\" ist keine Instanz von FormSectionBase im Formular "
 #~ "\"%s\". Es ist ein \"%s\""
 
-#, php-format
 #~ msgid ""
 #~ "Subsection '%s' is not an instanceof FormInputBase on form '%s'. It is a "
 #~ "'%s'"
@@ -5198,7 +5194,6 @@ msgstr "Michael Nelson"
 #~ "Sie können nicht überprüfen, ob ein Formular gültig ist, bevor Sie die "
 #~ "Formularübermittlung mit receive_form_submission"
 
-#, php-format
 #~ msgid ""
 #~ "Trying to add a %s as a subsection (it was named '%s') to the form "
 #~ "section '%s'. It was removed."
@@ -5206,7 +5201,6 @@ msgstr "Michael Nelson"
 #~ "Versuch, einen %s als Unterabschnitt (er wurde \"%s\" genannt) zum "
 #~ "Formularabschnitt \"%s\" hinzuzufügen. Er wurde entfernt."
 
-#, php-format
 #~ msgid "%s : %s"
 #~ msgstr "%s : %s"
 
@@ -5219,7 +5213,6 @@ msgstr "Michael Nelson"
 #~ "constructFinalize aufgerufen wurde (wenn wir den Namen festlegen). Es "
 #~ "wurde auf einem Formularabschnitt vom Typ 's'"
 
-#, php-format
 #~ msgid ""
 #~ "Cannot get display strategy for form input with name %s and id %s, "
 #~ "because it has not been set in the constructor"
@@ -5280,7 +5273,6 @@ msgstr "Michael Nelson"
 #~ msgid "Add \"Powered By\" when using Pro Print Service"
 #~ msgstr "Hinzufügen von \"Powered By\" bei Verwendung von Pro Print Service"
 
-#, php-format
 #~ msgid "To edit the project's title, %1$sgo back to the setup step.%2$s"
 #~ msgstr ""
 #~ "Um den Titel des Projekts zu bearbeiten, %1$sgehen Sie zurück zum "
@@ -5321,22 +5313,18 @@ msgstr "Michael Nelson"
 #~ msgid "Credit Print My Blog"
 #~ msgstr "Credit Print Mein Blog"
 
-#, php-format
 #~ msgid "The file generated %s is out-of-date."
 #~ msgstr "Die %s generierte Datei ist veraltet."
 
-#, php-format
 #~ msgid "This file was already generated %s"
 #~ msgstr "Diese Datei wurde bereits %s"
 
 #~ msgid "Regenerate Anyway"
 #~ msgstr "Regenerieren Sowieso"
 
-#, php-format
 #~ msgid "Remove \"%s\" from project"
 #~ msgstr "Entfernen von \"%s\" aus dem Projekt"
 
-#, php-format
 #~ msgid ""
 #~ "Don't forget to use promocode \"%s\" until June 18th for 50%% off any "
 #~ "lifetime license"
@@ -5347,7 +5335,6 @@ msgstr "Michael Nelson"
 #~ msgid "Search"
 #~ msgstr "Suche"
 
-#, php-format
 #~ msgid ""
 #~ "Use promocode \"%s\" for 50%% off any lifetime license until June 18th"
 #~ msgstr ""
@@ -5357,7 +5344,6 @@ msgstr "Michael Nelson"
 #~ msgid "Buy Now"
 #~ msgstr "Jetzt kaufen"
 
-#, php-format
 #~ msgid ""
 #~ "Use promocode \"%s\" until June 18th for 50%% off any lifetime license"
 #~ msgstr ""
