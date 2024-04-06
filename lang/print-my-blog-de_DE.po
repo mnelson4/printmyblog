@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
 "POT-Creation-Date: 2023-12-20 21:15-0800\n"
-"PO-Revision-Date: 2024-03-25 21:41-0700\n"
+"PO-Revision-Date: 2024-03-25 22:00-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -1446,7 +1446,7 @@ msgstr "Optimieren für Print"
 
 #: src/PrintMyBlog/controllers/LegacyPrintPage.php:367
 msgid "Print-Page Ready"
-msgstr "Print-Page Ready"
+msgstr "Druckseite fertig"
 
 #: src/PrintMyBlog/controllers/LegacyPrintPage.php:369
 msgid "There was an error fetching posts. It was: "
