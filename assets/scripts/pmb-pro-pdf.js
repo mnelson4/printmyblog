@@ -211,6 +211,7 @@ jQuery(document).on('ready', function(){
                     2000
                 );
             });
+            jQuery('.pmb-pro-only').remove();
             jQuery(document).trigger('pmb_doc_conversion_requested');
             // trigger document.pmb_wrap_up for legacy code.
             jQuery(document).trigger('pmb_wrap_up');

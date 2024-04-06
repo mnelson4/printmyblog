@@ -453,6 +453,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * Enhancement: to facilitate styling articles and hiding certain elements, add CSS classes "pmb-post-id", "pmb-post-author", "pmb-post-author", "pmb-post-date", "pmb-post-categories", "pmb-post-url-wrapper".
 * Bugfix: for Quick print, fix an error that prevented the "print" button from being enabled when there was an error processing certain videos.
 * Feature: significant German translations contributed by Torben Bertram of https://archiv-wintermoor.de/
+* Bugfix: for Pro Print Haller Design when printing from the browser, remove duplicate header; all elements with class "pmb-pro-only" get removed when printing using the browser
 
 = 3.26.3 January 29, 2024 =
 * Enhancement: update select2 Javascript library to 4.0.13 to improve compatibility with other plugins that also use it

@@ -33,7 +33,7 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
         <?php echo $pmb_design->getSetting('publication_subtitle'); ?>
     </div>
 </div>
-<div class="haller-repeat-header-wrap" id="haller-repeat-header-wrap-left">
+<div class="haller-repeat-header-wrap pmb-pro-only" id="haller-repeat-header-wrap-left">
     <div id="haller-repeat-header-left" class="haller-repeat-header">
         <div id="haller-repeat-header-issue-page">
             <span>
