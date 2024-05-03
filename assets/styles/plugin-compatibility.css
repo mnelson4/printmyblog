@@ -279,3 +279,24 @@ Hide WP Popups. See https://wordpress.org/plugins/wp-popups-lite/
 .wppopups-whole{
     display:none;
 }
+
+/* Events Manager */
+/* Hide the search options in print*/
+.search_events{
+    display:none !important;
+}
+/* For the calendar, don't use flexbox layout as it cuts images in half*/
+.wpem-event-listings.wpem-event-listing-box-view{
+    display:block !important;
+}
+.wpem-event-layout-wrapper{
+    break-inside:avoid !important;
+}
+.wpem-event-box-col{
+    width:100% !important;
+    max-width:100% !important;
+}
+/* For the calendar, make the titles just a bit smaller so they fit more snugly on a printed page. */
+.wpem-event-listings.wpem-event-listing-box-view .wpem-event-layout-wrapper .wpem-event-infomation .wpem-event-details .wpem-event-title .wpem-heading-text{
+    line-height:1 !important;
+}
