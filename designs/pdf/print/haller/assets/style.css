@@ -215,7 +215,7 @@ Ask PDF viewers to display pages side-by-side by default.
     }
 
     .haller-header-logo{
-        max-height:100px;
+        max-height:50px;
     }
     .haller-repeat-header-title {
         font-weight: bold;
@@ -225,7 +225,7 @@ Ask PDF viewers to display pages side-by-side by default.
     .haller-repeat-header div {
         display: flex;
         justify-content: center;
-        align-items: flex-end;
+        align-items: center;
     }
 
     .haller-repeat-header-subtitle {

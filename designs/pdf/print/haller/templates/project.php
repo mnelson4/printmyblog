@@ -15,10 +15,10 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
 <div class="pmb-posts pmb-project-content site">
 <div class="haller-repeat-header-wrap" id="haller-repeat-header-wrap-right">
     <div id="haller-repeat-header-right" class="haller-repeat-header">
-        <div id="haller-repeat-heder-date">
-            <span>
+        <div id="haller-repeat-header-date" class="haller-repeat-header-left">
+            <div>
                 <?php $pmb_project->echoSetting('date');?>
-            </span>
+            </div>
         </div>
         <div class="haller-repeat-header-title" >
             <?php
@@ -34,10 +34,10 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
             }
             ?>
         </div>
-        <div id="haller-repeat-header-issue-page">
-            <span>
+        <div id="haller-repeat-header-issue-page" class="haller-repeat-header-right">
+            <div>
                 <?php printf(__('Issue %s, Page %s', 'print-my-blog'), $pmb_project->getSetting('issue'), '<span class="pmb-page-number"></span>');?>
-            </span>
+            </div>
         </div>
     </div>
     <div class="haller-repeat-header-subtitle">
@@ -46,10 +46,10 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
 </div>
 <div class="haller-repeat-header-wrap pmb-pro-only" id="haller-repeat-header-wrap-left">
     <div id="haller-repeat-header-left" class="haller-repeat-header">
-        <div id="haller-repeat-header-issue-page">
-            <span>
+        <div id="haller-repeat-header-issue-page" class="haller-repeat-header-left">
+            <div>
                 <?php printf(__('Issue %s, Page %s', 'print-my-blog'), $pmb_project->getSetting('issue'), '<span class="pmb-page-number"></span>');?>
-            </span>
+            </div>
         </div>
         <div class="haller-repeat-header-title" >
             <?php
@@ -65,10 +65,10 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
             }
             ?>
         </div>
-        <div id="haller-repeat-heder-date">
-            <span>
+        <div id="haller-repeat-header-date" class="haller-repeat-header-left">
+            <div>
                 <?php $pmb_project->echoSetting('date');?>
-            </span>
+            </div>
         </div>
     </div>
     <div class="haller-repeat-header-subtitle">
