@@ -65,7 +65,7 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
             }
             ?>
         </div>
-        <div id="haller-repeat-header-date" class="haller-repeat-header-left">
+        <div id="haller-repeat-header-date" class="haller-repeat-header-right">
             <div class="haller-repeat-header-column-inner">
                 <?php $pmb_project->echoSetting('date');?>
             </div>
