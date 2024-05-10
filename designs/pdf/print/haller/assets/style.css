@@ -198,19 +198,17 @@ Ask PDF viewers to display pages side-by-side by default.
         flex-grow: 1;
     }
 
-    .haller-repeat-header div:first-child > span {
-        border-right: 1px solid black;
+    .haller-repeat-header div:first-child > .haller-repeat-header-column-inner {
         padding-right: 3em;
     }
 
-    .haller-repeat-header div:last-child > span {
-        border-left: 1px solid black;
+    .haller-repeat-header div:last-child > .haller-repeat-header-column-inner {
         padding-left: 3em;
     }
 
     .haller-repeat-header div:nth-child(2) {
-        /*border-left:2px solid black;*/
-        /*border-right:2px solid black;*/
+        border-left:2px solid black;
+        border-right:2px solid black;
         flex-grow: 1;
     }
 
@@ -229,8 +227,8 @@ Ask PDF viewers to display pages side-by-side by default.
     }
 
     .haller-repeat-header-subtitle {
-        text-align: center;
-        border-bottom: 2px solid black;
+        /*text-align: center;*/
+        /*border-bottom: 2px solid black;*/
     }
 
     /* Sidebar content */
