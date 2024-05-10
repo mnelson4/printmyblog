@@ -207,9 +207,14 @@ Ask PDF viewers to display pages side-by-side by default.
     }
 
     .haller-repeat-header div:nth-child(2) {
-        border-left:2px solid black;
-        border-right:2px solid black;
         flex-grow: 1;
+    }
+
+    .haller-repeat-header-left .haller-repeat-header-column-inner{
+        border-right:2px solid black;
+    }
+    .haller-repeat-header-right .haller-repeat-header-column-inner{
+        border-left:2px solid black;
     }
 
     .haller-header-logo{
