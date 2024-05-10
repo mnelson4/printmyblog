@@ -199,11 +199,11 @@ Ask PDF viewers to display pages side-by-side by default.
     }
 
     .haller-repeat-header div:first-child > .haller-repeat-header-column-inner {
-        padding-right: 3em;
+        margin-right: 3em;
     }
 
     .haller-repeat-header div:last-child > .haller-repeat-header-column-inner {
-        padding-left: 3em;
+        margin-left: 3em;
     }
 
     .haller-repeat-header div:nth-child(2) {
