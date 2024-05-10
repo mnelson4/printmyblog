@@ -25,7 +25,7 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
             $image_url = $pmb_design->getSetting('publication_logo');
             if( $image_url ){
                 ?>
-                <img class="haller-header-logo" src="<?php echo esc_url($image_url);?>">
+                <img class="haller-header-logo mayer-no-resize" src="<?php echo esc_url($image_url);?>">
                 <?php
             } else {
                 ?>
@@ -56,7 +56,7 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
             $image_url = $pmb_design->getSetting('publication_logo');
             if( $image_url ){
                 ?>
-                <img class="haller-header-logo" src="<?php echo esc_url($image_url);?>">
+                <img class="haller-header-logo mayer-no-resize" src="<?php echo esc_url($image_url);?>">
                 <?php
             } else {
                 ?>
