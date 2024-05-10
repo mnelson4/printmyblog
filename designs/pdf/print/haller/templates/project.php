@@ -21,7 +21,18 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
             </span>
         </div>
         <div class="haller-repeat-header-title" >
-            <?php echo $pmb_design->getSetting('publication_title'); ?>
+            <?php
+            $image_url = $pmb_design->getSetting('publication_logo');
+            if( $image_url ){
+                ?>
+                <img class="haller-header-logo" src="<?php echo esc_url($image_url);?>">
+                <?php
+            } else {
+                ?>
+                <?php echo $pmb_design->getSetting('publication_title'); ?>
+                <?php
+            }
+            ?>
         </div>
         <div id="haller-repeat-header-issue-page">
             <span>
@@ -41,7 +52,18 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
             </span>
         </div>
         <div class="haller-repeat-header-title" >
-            <?php echo $pmb_design->getSetting('publication_title'); ?>
+            <?php
+            $image_url = $pmb_design->getSetting('publication_logo');
+            if( $image_url ){
+                ?>
+                <img class="haller-header-logo" src="<?php echo esc_url($image_url);?>">
+                <?php
+            } else {
+                ?>
+                <?php echo $pmb_design->getSetting('publication_title'); ?>
+                <?php
+            }
+            ?>
         </div>
         <div id="haller-repeat-heder-date">
             <span>

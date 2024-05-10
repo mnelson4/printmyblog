@@ -675,9 +675,22 @@ class DefaultDesignTemplates
                     ],
                     'url' => plugins_url('designs/pdf/print/haller', PMB_MAIN_FILE),
                     'design_form_callback'  => function () {
+                        $custom_logo_info = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' );
+                        if($custom_logo_info){
+                            $custom_logo = $custom_logo_info[0];
+                        } else {
+                            $custom_logo = plugins_url('designs/pdf/digital/buurma/assets/logo.svg', PMB_MAIN_FILE);
+                        }
                         $design_form = (new FormSection(
                             [
                                 'subsections' => [
+                                    'publication_logo' => new AdminFileUploaderInput(
+                                        [
+                                            'html_label_text' => __('Publication Logo Image', 'print-my-blog'),
+                                            'default' => $custom_logo,
+                                            'html_help_text' => __('Logo image to show on the front page and in the header of subsequent pages. Leave blank to just use a "Title of Publication".', 'print-my-blog'),
+                                        ]
+                                    ),
                                     'publication_title' => new TextInput(
                                         [
                                             'html_label_text' => __('Title of Publication', 'print-my-blog'),

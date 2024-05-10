@@ -21,8 +21,24 @@
     }
     ?>
     <div class="pmb-haller-frontpage-main-title-area pmb-haller-frontpage-area">
-        <h1 class="pmb-haller-frontpage-main-title project-title"><?php echo $pmb_design->getSetting('publication_title'); ?></h1>
-        <h2 class="pmb-haller-frontpage-main-subtitle"><?php echo $pmb_design->getSetting('publication_subtitle');?></h2>
+        <?php
+            $image_url = $pmb_design->getSetting('publication_logo');
+            if( $image_url ){
+                ?>
+                <img src ="<?php echo esc_url($image_url);?>">
+                <?php
+            } else {
+            ?>
+                <h1 class="pmb-haller-frontpage-main-title project-title"><?php echo $pmb_design->getSetting('publication_title'); ?></h1>
+            <?php
+            }
+        if ($pmb_design->getSetting('publication_subtitle')){
+            ?>
+            <h2 class="pmb-haller-frontpage-main-subtitle"><?php echo $pmb_design->getSetting('publication_subtitle');?></h2>
+            <?php
+        }
+        ?>
+
     </div>
     <?php $right_side = $pmb_project->getSetting('frontpage_right_side');
     if($right_side){
