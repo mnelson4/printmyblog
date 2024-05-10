@@ -220,10 +220,13 @@ Ask PDF viewers to display pages side-by-side by default.
         font-size: 2em;
     }
 
-    .haller-repeat-header div {
+    .haller-repeat-header>div {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .haller-repeat-header-column-inner{
+        height:100%;
     }
 
     .haller-repeat-header-subtitle {
