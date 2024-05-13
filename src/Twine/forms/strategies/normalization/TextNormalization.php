@@ -23,7 +23,7 @@ class TextNormalization extends NormalizationBase
             return (string) array_shift($value_to_normalize);
         }
         // consider `"null"` values to be equivalent to null.
-        if ($value_to_normalize === '' || $value_to_normalize === null) {
+        if ($value_to_normalize === null) {
             return null;
         }
         return (string) $value_to_normalize;
