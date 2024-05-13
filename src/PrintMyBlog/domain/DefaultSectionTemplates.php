@@ -60,6 +60,19 @@ class DefaultSectionTemplates
             }
         );
         pmb_register_section_template(
+            'just_content_in_columns',
+            [
+                'mayer',
+                'haller',
+            ],
+            function () {
+                return [
+                    'title' => __('Full Column Content', 'print-my-blog'),
+                    'fallback' => 'just_content',
+                ];
+            }
+        );
+        pmb_register_section_template(
             'important_article',
             [
                 'haller',
