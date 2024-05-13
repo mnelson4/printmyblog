@@ -17,7 +17,7 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
     <div id="haller-repeat-header-right" class="haller-repeat-header">
         <div id="haller-repeat-header-date" class="haller-repeat-header-left">
             <div class="haller-repeat-header-column-inner">
-                <?php $pmb_project->echoSetting('date');?>
+                <span><?php $pmb_project->echoSetting('date');?></span>
             </div>
         </div>
         <div class="haller-repeat-header-title" >
@@ -36,7 +36,7 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
         </div>
         <div id="haller-repeat-header-issue-page" class="haller-repeat-header-right">
             <div class="haller-repeat-header-column-inner">
-                <?php printf(__('Issue %s, Page %s', 'print-my-blog'), $pmb_project->getSetting('issue'), '<span class="pmb-page-number"></span>');?>
+                <span><?php printf(__('Issue %s, Page %s', 'print-my-blog'), $pmb_project->getSetting('issue'), '<span class="pmb-page-number"></span>');?></span>
             </div>
         </div>
     </div>
@@ -48,7 +48,7 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
     <div id="haller-repeat-header-left" class="haller-repeat-header">
         <div id="haller-repeat-header-issue-page" class="haller-repeat-header-left">
             <div class="haller-repeat-header-column-inner">
-                <?php printf(__('Issue %s, Page %s', 'print-my-blog'), $pmb_project->getSetting('issue'), '<span class="pmb-page-number"></span>');?>
+                <span><?php printf(__('Issue %s, Page %s', 'print-my-blog'), $pmb_project->getSetting('issue'), '<span class="pmb-page-number"></span>');?></span>
             </div>
         </div>
         <div class="haller-repeat-header-title" >
@@ -67,7 +67,7 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
         </div>
         <div id="haller-repeat-header-date" class="haller-repeat-header-right">
             <div class="haller-repeat-header-column-inner">
-                <?php $pmb_project->echoSetting('date');?>
+                <span><?php $pmb_project->echoSetting('date');?></span>
             </div>
         </div>
     </div>
