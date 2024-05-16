@@ -679,7 +679,7 @@ class DefaultDesignTemplates
                         if($custom_logo_info){
                             $custom_logo = $custom_logo_info[0];
                         } else {
-                            $custom_logo = plugins_url('assets/images/icon-128x128.jpg', PMB_MAIN_FILE);
+                            $custom_logo = '';
                         }
                         $design_form = (new FormSection(
                             [
