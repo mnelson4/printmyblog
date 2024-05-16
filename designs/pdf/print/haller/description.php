@@ -30,8 +30,9 @@
 <p><?php esc_html_e('Choose different styles for articles included in your project:', 'print-my-blog'); ?></p>
 <ul class="pmb-list">
     <li><?php esc_html_e('Default Template: shows all content specified by the "Post Content" design setting (e.g. the article\'s title and featured image) in columns.', 'print-my-blog');?></li>
+    <li><?php esc_html_e('Single Column: like the default template, but in a single column.', 'print-my-blog');?></li>
     <li><?php esc_html_e('Fullpage Content: contains only the article\'s content (no title, featured image, etc.) all in a single, wide column.', 'print-my-blog');?></li>
-    <li><?php esc_html_e('Single Column: shows all content specified by the "Post Content" design setting in a single column.', 'print-my-blog');?></li>
+    <li><?php esc_html_e('Full Column Content: like "Fullpage Content", except content is still divided into multiple columns..', 'print-my-blog');?></li>
     <li><?php esc_html_e('Important: shows the article\'s featured image and title across all columns, but other content is shown in multiple columns.', 'print-my-blog');?></li>
 </ul>
 <p><?php esc_html_e('Parts start on a new page and include the part’s title, featured image, and content.', 'print-my-blog'); ?></p>

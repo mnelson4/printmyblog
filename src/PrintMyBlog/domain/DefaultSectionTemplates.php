@@ -14,6 +14,19 @@ class DefaultSectionTemplates
     public function registerDefaultSectionTemplates()
     {
         pmb_register_section_template(
+            'single_column',
+            [
+                'mayer',
+                'haller',
+            ],
+            function () {
+                return [
+                    'title' => __('Single Column', 'print-my-blog'),
+                    'fallback' => '',
+                ];
+            }
+        );
+        pmb_register_section_template(
             'just_content',
             [
                 'classic_digital',
@@ -46,19 +59,7 @@ class DefaultSectionTemplates
                 ];
             }
         );
-        pmb_register_section_template(
-            'single_column',
-            [
-                'mayer',
-                'haller',
-            ],
-            function () {
-                return [
-                    'title' => __('Single Column', 'print-my-blog'),
-                    'fallback' => '',
-                ];
-            }
-        );
+
         pmb_register_section_template(
             'just_content_in_columns',
             [
