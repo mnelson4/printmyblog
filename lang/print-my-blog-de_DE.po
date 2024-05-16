@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2024-05-13 11:00-0700\n"
-"PO-Revision-Date: 2024-05-13 11:00-0700\n"
+"POT-Creation-Date: 2024-05-16 14:58-0700\n"
+"PO-Revision-Date: 2024-05-16 14:59-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -487,7 +487,7 @@ msgstr ""
 "Seiten der Vorderseite sind mit römischen Ziffern nummeriert"
 
 #: designs/pdf/digital/mayer/description.php:43
-#: designs/pdf/print/haller/description.php:38
+#: designs/pdf/print/haller/description.php:39
 msgid "Special Instructions"
 msgstr "Spezielle Anweisungen"
 
@@ -685,6 +685,12 @@ msgstr ""
 "vorgestellte Bild) in Spalten an."
 
 #: designs/pdf/print/haller/description.php:33
+msgid "Single Column: like the default template, but in a single column."
+msgstr ""
+"Einspaltig: Zeigt alle Inhalte, die durch die Designeinstellung \"Inhalt "
+"posten\" angegeben wurden, in einer einzigen Spalte an."
+
+#: designs/pdf/print/haller/description.php:34
 msgid ""
 "Fullpage Content: contains only the article's content (no title, featured "
 "image, etc.) all in a single, wide column."
@@ -692,15 +698,15 @@ msgstr ""
 "Vollseiteninhalt: Enthält nur den Inhalt des Artikels (kein Titel, "
 "ausgewähltes Bild usw.) in einer einzigen, breiten Spalte."
 
-#: designs/pdf/print/haller/description.php:34
-msgid ""
-"Single Column: shows all content specified by the \"Post Content\" design "
-"setting in a single column."
-msgstr ""
-"Einspaltig: Zeigt alle Inhalte, die durch die Designeinstellung \"Inhalt "
-"posten\" angegeben wurden, in einer einzigen Spalte an."
-
 #: designs/pdf/print/haller/description.php:35
+msgid ""
+"Full Column Content: like \"Fullpage Content\", except content is still "
+"divided into multiple columns.."
+msgstr ""
+"Vollständiger Spalteninhalt: wie \"Ganzseitiger Inhalt\", außer dass der "
+"Inhalt immer noch in mehrere Spalten unterteilt ist."
+
+#: designs/pdf/print/haller/description.php:36
 msgid ""
 "Important: shows the article's featured image and title across all columns, "
 "but other content is shown in multiple columns."
@@ -708,7 +714,7 @@ msgstr ""
 "Wichtig: Zeigt das vorgestellte Bild und den Titel des Artikels in allen "
 "Spalten an, aber andere Inhalte werden in mehreren Spalten angezeigt."
 
-#: designs/pdf/print/haller/description.php:37
+#: designs/pdf/print/haller/description.php:38
 msgid ""
 "Parts start on a new page and include the part’s title, featured image, and "
 "content."
@@ -716,7 +722,7 @@ msgstr ""
 "Teile beginnen auf einer neuen Seite und enthalten den Titel, das "
 "vorgestellte Bild und den Inhalt des Teils."
 
-#: designs/pdf/print/haller/description.php:39
+#: designs/pdf/print/haller/description.php:40
 msgid ""
 "Note that in order to improve page layout, all images and figures snap to "
 "the nearest page edge."
@@ -724,25 +730,25 @@ msgstr ""
 "Bilder in voller Breite nehmen alle Spalten ein und werden am nächsten "
 "Seitenrand ausgerichtet."
 
-#: designs/pdf/print/haller/description.php:40
+#: designs/pdf/print/haller/description.php:41
 msgid ""
 "\"Full width\" images take up all columns and snap to the nearest page edge."
 msgstr ""
 "Bilder in voller Breite nehmen alle Spalten ein und werden am nächsten "
 "Seitenrand ausgerichtet."
 
-#: designs/pdf/print/haller/description.php:41
+#: designs/pdf/print/haller/description.php:42
 msgid ""
 "\"Wide width\" images take up 2 columns and snap to the nearest page edge."
 msgstr ""
 "\"Wide width\" Bilder nehmen 2 Spalten ein und werden am nächsten Seitenrand "
 "ausgerichtet."
 
-#: designs/pdf/print/haller/description.php:41
+#: designs/pdf/print/haller/description.php:42
 msgid "Only works with PMB’s Pro PDF Service."
 msgstr "Funktioniert nur mit dem Pro PDF Service von PMB."
 
-#: designs/pdf/print/haller/description.php:44
+#: designs/pdf/print/haller/description.php:45
 #, php-format
 msgid ""
 "%1$sAdd the CSS class \"%2$s\"%3$s to any images you don't want to snap like "
@@ -2009,8 +2015,6 @@ msgid "Haller Tabloid Print PDF"
 msgstr "Haller Tabloiddruck PDF"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:689
-#, fuzzy
-#| msgid "Publication Preamble"
 msgid "Publication Logo Image"
 msgstr "Präambel der Veröffentlichung"
 
@@ -3012,19 +3016,23 @@ msgstr "Titelseite"
 msgid "Table of Contents"
 msgstr "Inhaltsverzeichnis"
 
-#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:29
-msgid "Fullpage Content"
-msgstr "Vollständiger Inhalt"
-
-#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:44
-msgid "Centered Content"
-msgstr "Zentrierte Inhalte"
-
-#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:57
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:24
 msgid "Single Column"
 msgstr "Einzelspalte"
 
-#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:69
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:42
+msgid "Fullpage Content"
+msgstr "Vollständiger Inhalt"
+
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:57
+msgid "Centered Content"
+msgstr "Zentrierte Inhalte"
+
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:71
+msgid "Full Column Content"
+msgstr "Vollständiger Inhalt"
+
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:83
 msgid "Important"
 msgstr "Wichtig"
 

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2024-05-13 11:01-0700\n"
-"PO-Revision-Date: 2024-05-13 11:02-0700\n"
+"POT-Creation-Date: 2024-05-16 15:00-0700\n"
+"PO-Revision-Date: 2024-05-16 15:01-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja_JP\n"
@@ -472,7 +472,7 @@ msgstr ""
 "はローマ数字の番号が付けられています"
 
 #: designs/pdf/digital/mayer/description.php:43
-#: designs/pdf/print/haller/description.php:38
+#: designs/pdf/print/haller/description.php:39
 msgid "Special Instructions"
 msgstr "特別な指示"
 
@@ -657,6 +657,12 @@ msgstr ""
 "テンツ(記事のタイトルやアイキャッチ画像など)を列に表示します。"
 
 #: designs/pdf/print/haller/description.php:33
+msgid "Single Column: like the default template, but in a single column."
+msgstr ""
+"単一列:「コンテンツの投稿」デザイン設定で指定されたすべてのコンテンツを1列に"
+"表示します。"
+
+#: designs/pdf/print/haller/description.php:34
 msgid ""
 "Fullpage Content: contains only the article's content (no title, featured "
 "image, etc.) all in a single, wide column."
@@ -664,15 +670,15 @@ msgstr ""
 "フルページコンテンツ:記事のコンテンツ(タイトル、アイキャッチ画像などなし)のみ"
 "が1つの幅の広い列に含まれます。"
 
-#: designs/pdf/print/haller/description.php:34
-msgid ""
-"Single Column: shows all content specified by the \"Post Content\" design "
-"setting in a single column."
-msgstr ""
-"単一列:「コンテンツの投稿」デザイン設定で指定されたすべてのコンテンツを1列に"
-"表示します。"
-
 #: designs/pdf/print/haller/description.php:35
+msgid ""
+"Full Column Content: like \"Fullpage Content\", except content is still "
+"divided into multiple columns.."
+msgstr ""
+"フルコラムコンテンツ:「フルページコンテンツ」と似ていますが、コンテンツが複数"
+"のコラムに分かれている点が異なります。"
+
+#: designs/pdf/print/haller/description.php:36
 msgid ""
 "Important: shows the article's featured image and title across all columns, "
 "but other content is shown in multiple columns."
@@ -680,7 +686,7 @@ msgstr ""
 "重要: 記事のアイキャッチ画像とタイトルはすべての列に表示されますが、他のコン"
 "テンツは複数の列に表示されます。"
 
-#: designs/pdf/print/haller/description.php:37
+#: designs/pdf/print/haller/description.php:38
 msgid ""
 "Parts start on a new page and include the part’s title, featured image, and "
 "content."
@@ -688,7 +694,7 @@ msgstr ""
 "パーツは新しいページから始まり、パーツのタイトル、アイキャッチ画像、およびコ"
 "ンテンツが含まれます。"
 
-#: designs/pdf/print/haller/description.php:39
+#: designs/pdf/print/haller/description.php:40
 msgid ""
 "Note that in order to improve page layout, all images and figures snap to "
 "the nearest page edge."
@@ -696,21 +702,21 @@ msgstr ""
 "ページレイアウトを改善するために、すべての画像と図が最も近いページの端にス"
 "ナップすることに注意してください。"
 
-#: designs/pdf/print/haller/description.php:40
+#: designs/pdf/print/haller/description.php:41
 msgid ""
 "\"Full width\" images take up all columns and snap to the nearest page edge."
 msgstr "「全幅」の画像はすべての列を占め、最も近いページの端にスナップします。"
 
-#: designs/pdf/print/haller/description.php:41
+#: designs/pdf/print/haller/description.php:42
 msgid ""
 "\"Wide width\" images take up 2 columns and snap to the nearest page edge."
 msgstr "「ワイド幅」の画像は2列を占め、最も近いページの端にスナップします。"
 
-#: designs/pdf/print/haller/description.php:41
+#: designs/pdf/print/haller/description.php:42
 msgid "Only works with PMB’s Pro PDF Service."
 msgstr "%1$sPro PDFサービスでより良く動作%2$s"
 
-#: designs/pdf/print/haller/description.php:44
+#: designs/pdf/print/haller/description.php:45
 #, php-format
 msgid ""
 "%1$sAdd the CSS class \"%2$s\"%3$s to any images you don't want to snap like "
@@ -1939,8 +1945,6 @@ msgid "Haller Tabloid Print PDF"
 msgstr "クラシック印刷 PDF"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:689
-#, fuzzy
-#| msgid "Publication Preamble"
 msgid "Publication Logo Image"
 msgstr "出版前文"
 
@@ -2910,19 +2914,23 @@ msgstr "標題紙"
 msgid "Table of Contents"
 msgstr "目次"
 
-#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:29
-msgid "Fullpage Content"
-msgstr "フルページコンテンツ"
-
-#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:44
-msgid "Centered Content"
-msgstr "中央揃えのコンテンツ"
-
-#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:57
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:24
 msgid "Single Column"
 msgstr "シングルカラム"
 
-#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:69
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:42
+msgid "Fullpage Content"
+msgstr "フルページコンテンツ"
+
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:57
+msgid "Centered Content"
+msgstr "中央揃えのコンテンツ"
+
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:71
+msgid "Full Column Content"
+msgstr "フルページコンテンツ"
+
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:83
 msgid "Important"
 msgstr "重要"
 

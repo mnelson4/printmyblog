@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2024-05-13 11:01-0700\n"
-"PO-Revision-Date: 2024-05-13 11:01-0700\n"
+"POT-Creation-Date: 2024-05-16 14:59-0700\n"
+"PO-Revision-Date: 2024-05-16 15:00-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh\n"
@@ -431,7 +431,7 @@ msgid ""
 msgstr "页码在右下角，部分标题在左上角。封面的页面用罗马数字编号"
 
 #: designs/pdf/digital/mayer/description.php:43
-#: designs/pdf/print/haller/description.php:38
+#: designs/pdf/print/haller/description.php:39
 msgid "Special Instructions"
 msgstr "给店家留言"
 
@@ -605,52 +605,56 @@ msgstr ""
 "片）。"
 
 #: designs/pdf/print/haller/description.php:33
+msgid "Single Column: like the default template, but in a single column."
+msgstr "单列：在单列中显示“发布内容”设计设置指定的所有内容。"
+
+#: designs/pdf/print/haller/description.php:34
 msgid ""
 "Fullpage Content: contains only the article's content (no title, featured "
 "image, etc.) all in a single, wide column."
 msgstr ""
 "整页内容：仅包含文章的内容（无标题、特色图片等）全部包含在一个宽的列中。"
 
-#: designs/pdf/print/haller/description.php:34
-msgid ""
-"Single Column: shows all content specified by the \"Post Content\" design "
-"setting in a single column."
-msgstr "单列：在单列中显示“发布内容”设计设置指定的所有内容。"
-
 #: designs/pdf/print/haller/description.php:35
+msgid ""
+"Full Column Content: like \"Fullpage Content\", except content is still "
+"divided into multiple columns.."
+msgstr "全栏内容：与“整页内容”类似，除了内容仍分为多个列。"
+
+#: designs/pdf/print/haller/description.php:36
 msgid ""
 "Important: shows the article's featured image and title across all columns, "
 "but other content is shown in multiple columns."
 msgstr ""
 "重要提示：在所有列中显示文章的精选图片和标题，但其他内容会显示在多个列中。"
 
-#: designs/pdf/print/haller/description.php:37
+#: designs/pdf/print/haller/description.php:38
 msgid ""
 "Parts start on a new page and include the part’s title, featured image, and "
 "content."
 msgstr "部件从新页面开始，包括部件的标题、特色图像和内容。"
 
-#: designs/pdf/print/haller/description.php:39
+#: designs/pdf/print/haller/description.php:40
 msgid ""
 "Note that in order to improve page layout, all images and figures snap to "
 "the nearest page edge."
 msgstr "请注意，为了改进页面布局，所有图像和图形都与最近的页面边缘对齐。"
 
-#: designs/pdf/print/haller/description.php:40
+#: designs/pdf/print/haller/description.php:41
 msgid ""
 "\"Full width\" images take up all columns and snap to the nearest page edge."
 msgstr "“全宽”图像占据所有列并捕捉到最近的页面边缘。"
 
-#: designs/pdf/print/haller/description.php:41
+#: designs/pdf/print/haller/description.php:42
 msgid ""
 "\"Wide width\" images take up 2 columns and snap to the nearest page edge."
 msgstr "“宽宽”图像占据 2 列并捕捉到最近的页面边缘。"
 
-#: designs/pdf/print/haller/description.php:41
+#: designs/pdf/print/haller/description.php:42
 msgid "Only works with PMB’s Pro PDF Service."
 msgstr "仅适用于PMB的专业PDF服务。"
 
-#: designs/pdf/print/haller/description.php:44
+#: designs/pdf/print/haller/description.php:45
 #, php-format
 msgid ""
 "%1$sAdd the CSS class \"%2$s\"%3$s to any images you don't want to snap like "
@@ -2215,8 +2219,6 @@ msgid "Image and Block Placement"
 msgstr "图像和块放置"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1180
-#, fuzzy
-#| msgid "Image snapping and dynamic resizing only works using Pro Print."
 msgid ""
 "Image snapping and dynamic resizing only works using the Pro PDF Service."
 msgstr "图像捕捉和动态调整大小仅适用于专业打印。"
@@ -2741,19 +2743,23 @@ msgstr "标题页"
 msgid "Table of Contents"
 msgstr "内容目录"
 
-#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:29
-msgid "Fullpage Content"
-msgstr "整页内容"
-
-#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:44
-msgid "Centered Content"
-msgstr "中心内容"
-
-#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:57
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:24
 msgid "Single Column"
 msgstr "单列"
 
-#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:69
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:42
+msgid "Fullpage Content"
+msgstr "整页内容"
+
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:57
+msgid "Centered Content"
+msgstr "中心内容"
+
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:71
+msgid "Full Column Content"
+msgstr "整页内容"
+
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:83
 msgid "Important"
 msgstr "重要的"
 
@@ -4280,8 +4286,6 @@ msgid "Print My Blog - Settings"
 msgstr "打印我的博客 - 设置"
 
 #: templates/settings_page.php:15
-#, fuzzy
-#| msgid "Print Buttons"
 msgid "Front-End Print Buttons"
 msgstr "打印按钮"
 
@@ -4327,8 +4331,6 @@ msgid "Label"
 msgstr "标签"
 
 #: templates/settings_page.php:91
-#, fuzzy
-#| msgid "Print Buttons"
 msgid "Admin Print Buttons"
 msgstr "打印按钮"
 

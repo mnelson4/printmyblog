@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2024-05-13 11:02-0700\n"
-"PO-Revision-Date: 2024-05-13 11:02-0700\n"
+"POT-Creation-Date: 2024-05-16 15:02-0700\n"
+"PO-Revision-Date: 2024-05-16 15:02-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -495,7 +495,7 @@ msgstr ""
 "gauche. Les pages de Front-matter sont numérotées avec des chiffres romains"
 
 #: designs/pdf/digital/mayer/description.php:43
-#: designs/pdf/print/haller/description.php:38
+#: designs/pdf/print/haller/description.php:39
 msgid "Special Instructions"
 msgstr "Instructions Particulières"
 
@@ -698,6 +698,12 @@ msgstr ""
 "l’image en vedette) dans des colonnes."
 
 #: designs/pdf/print/haller/description.php:33
+msgid "Single Column: like the default template, but in a single column."
+msgstr ""
+"Colonne unique : affiche tout le contenu spécifié par le paramètre de "
+"conception « Publier du contenu » dans une seule colonne."
+
+#: designs/pdf/print/haller/description.php:34
 msgid ""
 "Fullpage Content: contains only the article's content (no title, featured "
 "image, etc.) all in a single, wide column."
@@ -705,15 +711,15 @@ msgstr ""
 "Contenu pleine page : contient uniquement le contenu de l’article (pas de "
 "titre, d’image en vedette, etc.) dans une seule colonne large."
 
-#: designs/pdf/print/haller/description.php:34
-msgid ""
-"Single Column: shows all content specified by the \"Post Content\" design "
-"setting in a single column."
-msgstr ""
-"Colonne unique : affiche tout le contenu spécifié par le paramètre de "
-"conception « Publier du contenu » dans une seule colonne."
-
 #: designs/pdf/print/haller/description.php:35
+msgid ""
+"Full Column Content: like \"Fullpage Content\", except content is still "
+"divided into multiple columns.."
+msgstr ""
+"Contenu de la colonne complète : comme « Contenu de la page complète », sauf "
+"que le contenu est toujours divisé en plusieurs colonnes."
+
+#: designs/pdf/print/haller/description.php:36
 msgid ""
 "Important: shows the article's featured image and title across all columns, "
 "but other content is shown in multiple columns."
@@ -721,7 +727,7 @@ msgstr ""
 "Important : affiche l’image et le titre de l’article dans toutes les "
 "colonnes, mais le reste du contenu est affiché dans plusieurs colonnes."
 
-#: designs/pdf/print/haller/description.php:37
+#: designs/pdf/print/haller/description.php:38
 msgid ""
 "Parts start on a new page and include the part’s title, featured image, and "
 "content."
@@ -729,7 +735,7 @@ msgstr ""
 "Les pièces commencent sur une nouvelle page et incluent le titre, l’image en "
 "vedette et le contenu de la pièce."
 
-#: designs/pdf/print/haller/description.php:39
+#: designs/pdf/print/haller/description.php:40
 msgid ""
 "Note that in order to improve page layout, all images and figures snap to "
 "the nearest page edge."
@@ -737,25 +743,25 @@ msgstr ""
 "Les images « pleine largeur » occupent toutes les colonnes et s’accrochent "
 "au bord de la page le plus proche."
 
-#: designs/pdf/print/haller/description.php:40
+#: designs/pdf/print/haller/description.php:41
 msgid ""
 "\"Full width\" images take up all columns and snap to the nearest page edge."
 msgstr ""
 "Les images « pleine largeur » occupent toutes les colonnes et s’accrochent "
 "au bord de la page le plus proche."
 
-#: designs/pdf/print/haller/description.php:41
+#: designs/pdf/print/haller/description.php:42
 msgid ""
 "\"Wide width\" images take up 2 columns and snap to the nearest page edge."
 msgstr ""
 "Les images « grande largeur » occupent 2 colonnes et s’accrochent au bord de "
 "la page le plus proche."
 
-#: designs/pdf/print/haller/description.php:41
+#: designs/pdf/print/haller/description.php:42
 msgid "Only works with PMB’s Pro PDF Service."
 msgstr "Fonctionne uniquement avec le service Pro PDF de PMB."
 
-#: designs/pdf/print/haller/description.php:44
+#: designs/pdf/print/haller/description.php:45
 #, php-format
 msgid ""
 "%1$sAdd the CSS class \"%2$s\"%3$s to any images you don't want to snap like "
@@ -3040,19 +3046,23 @@ msgstr "Titre de page"
 msgid "Table of Contents"
 msgstr "Table des matières"
 
-#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:29
-msgid "Fullpage Content"
-msgstr "Contenu fullpage"
-
-#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:44
-msgid "Centered Content"
-msgstr "Contenu centré"
-
-#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:57
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:24
 msgid "Single Column"
 msgstr "Colonne simple"
 
-#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:69
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:42
+msgid "Fullpage Content"
+msgstr "Contenu fullpage"
+
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:57
+msgid "Centered Content"
+msgstr "Contenu centré"
+
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:71
+msgid "Full Column Content"
+msgstr "Contenu fullpage"
+
+#: src/PrintMyBlog/domain/DefaultSectionTemplates.php:83
 msgid "Important"
 msgstr "Important"
 
