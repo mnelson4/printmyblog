@@ -51,7 +51,7 @@ class ProjectSectionManager
     /**
      * @param int $section_id
      *
-     * @return ProjectSection
+     * @return ProjectSection|null
      */
     public function getSection($section_id)
     {
@@ -66,6 +66,9 @@ class ProjectSectionManager
                 $section_id
             )
         );
+        if (! $row){
+            return null;
+        }
         return $this->createObjFromRow($row);
     }
 
@@ -88,7 +91,7 @@ class ProjectSectionManager
         $placement = null
     ) {
         return $this->createObjsFromRows(
-            $this->getFlatSectionRowsFor(
+            (array)$this->getFlatSectionRowsFor(
                 $project_id,
                 $limit,
                 $offset,
@@ -130,7 +133,7 @@ class ProjectSectionManager
         }
         // too dynamic for non-raw sql.
         //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-        return $wpdb->get_results(
+        $results = $wpdb->get_results(
             $wpdb->prepare(
                 // phpcs:disable WordPress.DB.PreparedSQL.NotPrepared -- all prepared earlier.
                 $select_sql . $this->defaultFrom()
@@ -142,6 +145,10 @@ class ProjectSectionManager
             )
         );
         // phpcs:enable WordPress.DB.PreparedSQL.NotPrepared -- all prepared earlier.
+        if($results){
+            return $results;
+        }
+        return array();
     }
 
     /**
@@ -177,8 +184,10 @@ class ProjectSectionManager
     public function createObjsFromRows($rows)
     {
         $objs = [];
-        foreach ($rows as $row) {
-            $objs[] = $this->createObjFromRow($row);
+        foreach ((array)$rows as $row) {
+            if( $row){
+                $objs[] = $this->createObjFromRow($row);
+            }
         }
         return $objs;
     }

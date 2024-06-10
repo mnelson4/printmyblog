@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.27.0
+Stable tag: 3.27.1
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -449,6 +449,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+= 3.27.1 xxx =
+* Bugfix: for Pro Print, fix warning when a project contains a deleted post
+
 = 3.27.0 May 16, 2024 =
 * Feature: significant German translations contributed by Torben Bertram of https://archiv-wintermoor.de/
 * Feature: for Pro Print Haller Design, allow using a featured image for the header

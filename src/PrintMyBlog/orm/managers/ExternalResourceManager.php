@@ -30,21 +30,25 @@ class ExternalResourceManager
      * Gets the local URL given the external URL.
      * Gets a row by the external URL
      * @param string $external_resource_url
-     * @return ExternalResource
+     * @return ExternalResource|null
      */
     public function getByExternalUrl($external_resource_url)
     {
         global $wpdb;
+        $row =  $wpdb->get_row(
+            $wpdb->prepare(
+            // phpcs:ignore -- just passing in constants
+                'SELECT * FROM ' . $wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE . ' WHERE external_url=%s LIMIT 1',
+                $external_resource_url
+            )
+        );
+        if (! $row){
+            return null;
+        }
         return $this->createObjFromRow(
         // todo: cache
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-            $wpdb->get_row(
-                $wpdb->prepare(
-                    // phpcs:ignore -- just passing in constants
-                    'SELECT * FROM ' . $wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE . ' WHERE external_url=%s LIMIT 1',
-                    $external_resource_url
-                )
-            )
+
         );
     }
 
@@ -58,7 +62,7 @@ class ExternalResourceManager
         return $this->createObjsFromRows(
             // todo: cache
             // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-            $wpdb->get_results(
+            (array)$wpdb->get_results(
                 // phpcs:ignore -- just passing in constants.
                 'SELECT * FROM ' . $wpdb->prefix . TableManager::EXTERNAL_RESOURCE_TABLE
             )
@@ -73,7 +77,9 @@ class ExternalResourceManager
     {
         $objs = [];
         foreach ($rows as $row) {
-            $objs[] = $this->createObjFromRow($row);
+            if($row){
+                $objs[] = $this->createObjFromRow($row);
+            }
         }
         return $objs;
     }
