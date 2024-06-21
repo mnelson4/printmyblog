@@ -615,7 +615,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 						if (typeof parsed_nodes[i].outerHTML === 'string') {
 							content_html += parsed_nodes[i].outerHTML;
 						} else if (typeof parsed_nodes[i].wholeText === 'string') {
-							content_html += parsed_nodes[i].wholeText;
+							content_html += this.escapeHTML(parsed_nodes[i].wholeText);
 						}
 					}
 				}
@@ -634,6 +634,19 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         }
         this.posts_div.append(html_to_add);
     };
+    /**
+     * jQuery parse un-escapes HTML entities for the text nodes, so we need to re-escape them before rendering.
+     * This can do that for anything.
+     * @param str
+     * @returns {string}
+     */
+    this.escapeHTML = function(str){
+        var p = document.createElement("p");
+        p.appendChild(document.createTextNode(str));
+        var escaped_html = p.innerHTML
+        p.remove();
+        return escaped_html;
+    }
 
     /**
      * Gets the post's title and removes "Protected:" and "Private:" from it.
