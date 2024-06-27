@@ -405,6 +405,16 @@ or
 The print button's color is determined by your theme. But if you can't change the button colors using your theme's settings, you can change it with some custom CSS.
 Eg, this here's how to change the button's text color to black and background color to white:
 
+**For Block-Based Themes**
+1. Go to wp-admin on your website
+2. On the left, under "Appreance", click "Editor"
+3. On the left, click "Styles"
+4. Click the pencil icon that appears ("Edit Styles")
+5. On the top-right, beside "Styles", click the three dots
+6. Select "Additional CSS"
+7. Add the following code:
+
+**For Legacy Themes:**
 1. Go to wp-admin on your website
 2. On the left, under "Appearance", click "Customize"
 3. On the left, under Additional CSS" add the the following code:
