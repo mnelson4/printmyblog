@@ -452,6 +452,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 = 3.27.2 July 19, 2024 =
 * Compatibility: for Pro Print with WPML, fix bug that prevented generating in a secondary language
+* Enhancement: for Pro Print, introduce constant PMB_DEBUG to control whether to display warnings when generating a project. Changed default to *not* show warnings.
 
 
 = 3.27.1 June 21, 2024 =
