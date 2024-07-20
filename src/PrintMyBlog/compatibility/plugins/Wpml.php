@@ -557,7 +557,7 @@ class Wpml extends CompatibilityBase
      */
     public function handleAjaxUpdateProjectLanguage()
     {
-        if (! check_ajax_referer('pmb-project-edit', '_nonce')) {
+        if (! check_ajax_referer('pmb-loading', '_nonce')) {
             wp_send_json_error('please refresh the page');
         }
         $project_id = (int)Array2::setOr($_REQUEST, 'project_id', null);
