@@ -323,8 +323,8 @@ class Frontend extends BaseController
             );
             return;
         }
-        // report errors please
-        if (defined('WP_DEBUG_DISPLAY') && WP_DEBUG_DISPLAY) {
+        // Only show errors if PMB_DEBUG is on.
+        if (defined('PMB_DEBUG') ? PMB_DEBUG : false) {
             // We want to see errors, so make sure they're set to display.
             // phpcs:disable WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting, WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_error_reporting, WordPress.PHP.IniSet.display_errors_Blacklisted
             error_reporting(E_ALL);
