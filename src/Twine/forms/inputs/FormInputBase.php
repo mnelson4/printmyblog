@@ -688,7 +688,7 @@ abstract class FormInputBase extends FormSectionValidatable
      */
     public function rawValue()
     {
-        return $this->raw_value;
+        return (string)$this->raw_value;
     }
 
 
@@ -701,7 +701,7 @@ abstract class FormInputBase extends FormSectionValidatable
      */
     public function rawValueInForm()
     {
-        return htmlentities($this->rawValue(), ENT_QUOTES, 'UTF-8');
+        return htmlentities((string)$this->rawValue(), ENT_QUOTES, 'UTF-8');
     }
 
 
