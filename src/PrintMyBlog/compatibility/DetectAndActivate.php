@@ -9,6 +9,7 @@ use PrintMyBlog\compatibility\plugins\ContactForm7;
 use PrintMyBlog\compatibility\plugins\EasyFootnotes;
 use PrintMyBlog\compatibility\plugins\GoogleLanguageTranslator;
 use PrintMyBlog\compatibility\plugins\GTranslate;
+use PrintMyBlog\compatibility\plugins\Hustle;
 use PrintMyBlog\compatibility\plugins\JetPack;
 use PrintMyBlog\compatibility\plugins\LazyLoadingFeaturePlugin;
 use PrintMyBlog\compatibility\plugins\PaidMembershipsPro;
@@ -48,6 +49,9 @@ class DetectAndActivate
             $compatiblity_mods_to_activate = [
                 new LazyLoadingFeaturePlugin(),
             ];
+            if(defined('HUSTLE_MIN_PHP_VERSION')){
+                $compatiblity_mods_to_activate[] = new Hustle();
+            }
             if (class_exists('easyFootnotes')) {
                 $compatiblity_mods_to_activate[] = new EasyFootnotes();
             }
