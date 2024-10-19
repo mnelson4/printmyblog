@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.27.3
+Stable tag: 3.27.4
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -194,7 +194,6 @@ If this doesn't meet your needs, there are good paid and free alternatives.
 [MPL - Publisher](https://wordpress.org/plugins/mpl-publisher/) is another free eBook creator / PDF converter plugin you can use to self-publish a book. To be honest probably the best alternative right now. There's both free and paid versions.
 [PressBooks](https://pressbooks.com/) is a good paid, hosted alternative. Begin creating or import content for free, and can pay to export to PDF and other formats.
 [Designrr](https://designrr.io/) is great for creating short documents, but is a fully paid option.
-[Aspose.Words](https://wordpress.org/plugins/aspose-doc-exporter/) for exporting Microsoft Word documents from selected posts.
 
 
 Best Wishes Publishing for Print with WordPress!
@@ -459,6 +458,8 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+= 3.27.4 October 19, 2024 =
+* Compatibility: for Pro Print, fix Javascript error sometimes occuring with Hustle plugin
 
 = 3.27.3 July 31, 2024 =
 * Bugfix, for Pro Print, also use PMB_DEBUG on "pmb_ajax" requests (which are what's actually used currently to create print pages)
