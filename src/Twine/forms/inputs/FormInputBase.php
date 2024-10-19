@@ -684,11 +684,18 @@ abstract class FormInputBase extends FormSectionValidatable
      * it may have malicious content, and we MIGHT want to store the form input in a transient or something...
      * in which case, we would have stored the malicious content to our database.
      *
-     * @return string
+     * @return string|array
      */
     public function rawValue()
     {
-        return (string)$this->raw_value;
+        return is_array($this->raw_value) ?
+            array_map(
+                function($value){
+                    return (string)$value;
+                },
+                $this->raw_value
+            ) :
+            (string)$this->raw_value;
     }
 
 

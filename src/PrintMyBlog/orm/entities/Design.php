@@ -74,15 +74,16 @@ class Design extends PostWrapper
     /**
      * Gets the saved metadata and falls back to the default. If the setting doesn't exist, returns null.
      * @param string $setting_name
+     * @param bool $treat_as_html if true, treat as HTML
      * @return mixed|null
      * @throws Exception
      */
-    public function getSetting($setting_name)
+    public function getSetting($setting_name, $treat_as_html = false)
     {
         // tries to get the setting from a postmeta
         $setting = $this->getPmbMeta($setting_name);
         if ($setting !== null) {
-            return $setting;
+            return $treat_as_html ? wpautop($setting) : $setting;
         }
         // otherwise falls back to using the default in the form
         if ($setting_name === 'design_template') {
@@ -96,7 +97,7 @@ class Design extends PostWrapper
         $form    = $this->getDesignForm();
         $section = $form->findSection($setting_name);
         if ($section instanceof FormInputBase) {
-            return $section->getDefault();
+            return $treat_as_html ? wpautop($section->getDefault()) : $section->getDefault();
         }
         return null;
     }
