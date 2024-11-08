@@ -22,6 +22,10 @@ Styles for the print window
     -prince-float-policy:in-order;
 }
 
+.pmb-wide{
+    column-span: all;
+}
+
 /**
  * Styles used internally
  */

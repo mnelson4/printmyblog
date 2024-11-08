@@ -47,4 +47,4 @@
         'print-my-blog'
     );
     ?></p>
-<p><?php esc_html_e('Main matter defaults to being divided into columns. To force something to use the full page width, add the CSS class "mayer-wide" inside the content.', 'print-my-blog'); ?></p>
+<p><?php esc_html_e('Main matter defaults to being divided into columns. To force something to use the full page width, add the CSS class "pmb-wide" inside the content.', 'print-my-blog'); ?></p>
