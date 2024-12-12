@@ -228,7 +228,7 @@ class ProjectSectionManager
         for (; $index < $num_sections; $index++) {
             if ($flat_sections[$index]->getParentId() === intval($current_parent_id)) {
                 $nested_sections[] = $flat_sections[$index];
-            } elseif (intval($flat_sections[$index - 1]->getId()) === intval($flat_sections[$index]->getParentId())) {
+            } elseif ($index > 0 && intval($flat_sections[$index - 1]->getId()) === intval($flat_sections[$index]->getParentId())) {
                 $subs = $this->nestSections(
                     $flat_sections,
                     $index,

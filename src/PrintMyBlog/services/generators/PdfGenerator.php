@@ -157,7 +157,7 @@ class PdfGenerator extends HtmlBaseGenerator
         ];
         $max_image_size = $this->design->getSetting('image_size');
         if (! $max_image_size) {
-            $max_image_size = 1200;
+            $max_image_size = 2000;
         }
         $prince_js_vars['max_image_size'] = $max_image_size;
         $prince_js_vars = apply_filters(
