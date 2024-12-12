@@ -47,7 +47,7 @@ class Common extends BaseController
             filemtime(PMB_SCRIPTS_DIR . 'pmb-general.js')
         );
         wp_register_style(
-            'jquery-ui',
+            'pmb-jquery-ui',
             PMB_ASSETS_URL . 'styles/libs/jquery-ui/jquery-ui.min.css',
             array(),
             '1.11.4'
@@ -143,7 +143,7 @@ class Common extends BaseController
         wp_register_style(
             'pmb-setup-page',
             PMB_ASSETS_URL . 'styles/setup-page.css',
-            ['pmb_common', 'pmb-select2', 'jquery-ui'],
+            ['pmb_common', 'pmb-select2', 'pmb-jquery-ui'],
             filemtime(PMB_ASSETS_DIR . 'styles/setup-page.css')
         );
         wp_localize_script(

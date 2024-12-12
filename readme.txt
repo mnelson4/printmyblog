@@ -463,6 +463,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * Feature: for Pro Print, introduce "pmb-wide" CSS class, which is just like "mayer-wide" but applies to other designs too.
 * Enhancement: for Pro Print, set a larger maximum size for images before resizing them
 * Bugfix: for Pro Print, avoid error on Edit Content step by checking for negative index
+* Compatibility: avoid overwriting jQuery UI styles
 
 = 3.27.4 October 19, 2024 =
 * Compatibility: for Pro Print, fix Javascript error sometimes occuring with Hustle plugin
