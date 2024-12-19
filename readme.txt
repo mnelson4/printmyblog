@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.27.4
+Stable tag: 3.27.5
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -459,7 +459,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
-= 3.27.5 xxxx =
+= 3.27.5 December 18, 2024 =
 * Feature: for Pro Print, introduce "pmb-wide" CSS class, which is just like "mayer-wide" but applies to other designs too.
 * Enhancement: for Pro Print, set a larger maximum size for images before resizing them
 * Bugfix: for Pro Print, avoid error on Edit Content step by checking for negative index
