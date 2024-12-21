@@ -6,19 +6,19 @@ Styles for the print window
  * Styles intended for use by content writers.
  */
 .pmb-float-top{
-    float:top;
+    float:top !important;
 }
 .pmb-float-bottom{
-    float:bottom;
+    float:bottom !important;
 }
 .pmb-float-top-page{
-    -prince-float:top page;
+    -prince-float:top page !important;
 }
 .pmb-float-bottom-page{
-    -prince-float:bottom page;
+    -prince-float:bottom page !important;
 }
 .pmb-snap{
-    -prince-float:snap;
+    -prince-float:snap !important;
     -prince-float-policy:in-order;
 }
 
