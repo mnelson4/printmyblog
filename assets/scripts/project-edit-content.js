@@ -96,6 +96,7 @@ jQuery(document).ready(function(){
 		jQuery('.pmb-filters-closed-flex').css('display','none');
 		jQuery('.pmb-filters-opened').css('display','block');
 		jQuery( ".pmb-date" ).datepicker({
+			yearRange: "-100:+5",
 			dateFormat: 'yy-mm-dd',
 			changeYear: true,
 			changeMonth: true,

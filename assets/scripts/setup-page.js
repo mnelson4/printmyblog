@@ -40,6 +40,7 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 
 		let post_type = jQuery(this.post_type_selector + ':checked').val();
 		jQuery( ".pmb-date" ).datepicker({
+			yearRange: "-100:+5",
 			dateFormat: 'yy-mm-dd',
 			changeYear: true,
 			changeMonth: true,
