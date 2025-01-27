@@ -459,8 +459,10 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
-= 3.27.6 xxxx =
+= 3.27.6 Jan 27, 2024 =
 * Bugfix: for all datepickers, allow choosing dates older than 10 years
+* Enhancement: update Freeimus SDK to 2.11.0
+* Bugfix: for Pro Print, fix error where DesignRegistry::updateDesign not usable by add-ons
 
 = 3.27.5 December 18, 2024 =
 * Feature: for Pro Print, introduce "pmb-wide" CSS class, which is just like "mayer-wide" but applies to other designs too.
