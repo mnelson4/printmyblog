@@ -134,7 +134,7 @@ class DesignRegistry
      * @param callable $callback
      * @throws Exception
      */
-    protected function updateDesign(Design $design, $design_template_slug, $callback)
+    public function updateDesign(Design $design, $design_template_slug, $callback)
     {
         list($design_template, $args) = $this->getTemplateAndArgs($design_template_slug, $callback);
         wp_update_post(
