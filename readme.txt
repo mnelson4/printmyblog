@@ -2,12 +2,12 @@
 Contributors: mnelson4, ryanvdk, szepeviktor
 Tags: print, PDF, backup, eBook, print button
 Requires at least: 4.6
-Tested up to: 6.5.3
+Tested up to: 6.8
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.27.6
+Stable tag: 3.27.7
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -459,7 +459,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
-= 3.27.7 xxxxx =
+= 3.27.7 April 24, 2025 =
 * Compatibility: hide related posts from Related Post by PickPlugins
 = 3.27.6 Jan 27, 2024 =
 * Bugfix: for all datepickers, allow choosing dates older than 10 years
