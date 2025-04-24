@@ -1,6 +1,6 @@
 /* Only added to print pages, mostly hides content from the following plugins...*/
-/* Yuzo Related Posts */
-.pmb-posts .yuzo_related_post{
+/* Yuzo Related Posts, Related Post by PickPlugins */
+.pmb-posts .yuzo_related_post, .related-post{
     display:none;
 }
 /* I Recommend This */

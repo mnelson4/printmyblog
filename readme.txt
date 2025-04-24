@@ -459,6 +459,8 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
+= 3.27.7 xxxxx =
+* Compatibility: hide related posts from Related Post by PickPlugins
 = 3.27.6 Jan 27, 2024 =
 * Bugfix: for all datepickers, allow choosing dates older than 10 years
 * Enhancement: update Freeimus SDK to 2.11.0
