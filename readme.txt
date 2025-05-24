@@ -459,6 +459,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
+= 3.27.8 xxxx =
+* Enhancement: for Pro Print, added a filter for the project's print page
+
 = 3.27.7 April 24, 2025 =
 * Compatibility: hide related posts from Related Post by PickPlugins
 
