@@ -448,9 +448,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Screenshots ==
 
-1. Print My Blog removes junk that doesn’t belong in a printout— like ink-guzzling logos, menus, search-bars, sidebars, footer widgets, etc.
+1. Print My Blog removes junk that doesn’t belong in a printout—like ink-guzzling logos, menus, search-bars, sidebars, footer widgets, etc.
 2. Quick Print Setup page. Start printing right away, or customize which posts to print and how to print them.
-3. Print Button settings page. Select whether to show on posts or pages and save. Or customize the buttons' and printout appearance.
+3. Print Button settings page. Select whether to show on posts or pages and save. Or customize the appearance of the buttons and printout.
 4. Print Buttons on a post. Notice how much clutter is removed from the printout!
 5. Pro Print project organizer. Search for content, drag-and-drop it into your project, organize in front matter, back matter, and parts.
 6. Pro Print print-ready PDF table of contents. Notice the page references and how the content is grouped into 3 parts.
