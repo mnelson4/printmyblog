@@ -168,7 +168,7 @@ class ProjectGeneration
     }
 
     /**
-     * Gets the URL of the intermediary file
+     * Gets the URL of the intermediary file ("Pro Print Page")
      * @return string
      */
     public function getGeneratedIntermediaryFileUrl()
@@ -179,8 +179,12 @@ class ProjectGeneration
         } else {
             $start = $upload_dir_info['baseurl'];
         }
-        return $start . '/pmb/generated/' . $this->project->code() . '/' . $this->format->slug()
-            . '/' . rawurlencode($this->getFileName()) . '.html?uniqueness=' . current_time('timestamp');
+        return apply_filters(
+            '\PrintMyBlog\entities\ProjectGeneration::getGeneratedIntermediaryFileUrl return',
+            $start . '/pmb/generated/' . $this->project->code() . '/' . $this->format->slug()
+            . '/' . rawurlencode($this->getFileName()) . '.html?uniqueness=' . current_time('timestamp'),
+            $this
+        );
     }
 
     /**
