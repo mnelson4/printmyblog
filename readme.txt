@@ -91,7 +91,7 @@ Example uses:
 
 * **white paper**. Share an in-depth analysis of a topic on your website and in print.
 * **printed version of entire website or blog**. Print it all, except ink guzzlers like site heading, sidebars, footers and pop-ups. Use your own printer or send to a printing service such as lulu.com.
-* **book from select content**. Add a title page, introduction, table of contents, and pick existing content from your site to make a book. Sell it on Amazon KDP. Just ike that, you're an author!
+* **book from select content**. Add a title page, introduction, table of contents, and pick existing content from your site to make a book. Sell it on Amazon KDP. Just like that, you're an author!
 * **new book from scratch**. Write new print-only materials that never appear on your website. Leverage WordPress' great editors and other plugins.
 * **lead magnets**. Compile content on a subject into a PDF and grant access after users signup for your email list.
 * **members-only content**. Combine with Restrict Content Pro or other plugins to only allow access to select downloadable PDFs of your content.
