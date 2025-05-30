@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2024-05-16 15:02-0700\n"
-"PO-Revision-Date: 2024-05-16 15:03-0700\n"
+"POT-Creation-Date: 2025-05-30 13:18-0700\n"
+"PO-Revision-Date: 2025-05-30 13:18-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -511,9 +511,14 @@ msgstr ""
 "\"mayer-columns\" dentro de su contenido."
 
 #: designs/pdf/digital/mayer/description.php:50
+#, fuzzy
+#| msgid ""
+#| "Main matter defaults to being divided into columns. To force something to "
+#| "use the full page width, add the CSS class \"mayer-wide\" inside the "
+#| "content."
 msgid ""
 "Main matter defaults to being divided into columns. To force something to "
-"use the full page width, add the CSS class \"mayer-wide\" inside the content."
+"use the full page width, add the CSS class \"pmb-wide\" inside the content."
 msgstr ""
 "El valor predeterminado de la materia principal se divide en columnas. Para "
 "forzar algo a usar el ancho completo de la página, agregue la clase CSS "
@@ -3283,12 +3288,12 @@ msgid "Customize %s Design"
 msgstr "Personalizar el diseño de %s"
 
 #: src/PrintMyBlog/entities/ProjectProgress.php:103
-#: templates/project_edit_generate.php:142
+#: templates/project_edit_generate.php:143
 msgid "Edit Content"
 msgstr "Editar Contenido"
 
 #: src/PrintMyBlog/entities/ProjectProgress.php:104
-#: templates/project_edit_generate.php:143
+#: templates/project_edit_generate.php:144
 msgid "Edit Metadata"
 msgstr "Editar metadatos"
 
@@ -4603,24 +4608,24 @@ msgstr "Cambia Diseño"
 msgid "Customize Design"
 msgstr "Personalizar el diseño de %s"
 
-#: templates/project_edit_generate.php:132
+#: templates/project_edit_generate.php:133
 #, php-format
 msgid "View %s Print Page"
 msgstr "Ver página de impresión de %s"
 
-#: templates/project_edit_generate.php:140
+#: templates/project_edit_generate.php:141
 msgid "Need to Change Something?"
 msgstr "¿Necesitas cambiar algo?"
 
-#: templates/project_edit_generate.php:141
+#: templates/project_edit_generate.php:142
 msgid "Change Title or Format"
 msgstr "Cambiar título o formato"
 
-#: templates/project_edit_generate.php:144
+#: templates/project_edit_generate.php:145
 msgid "Clear Cached Resources"
 msgstr "Borrar recursos almacenados en caché"
 
-#: templates/project_edit_generate.php:146
+#: templates/project_edit_generate.php:147
 msgid "Get Help"
 msgstr "Obtener ayuda"
 

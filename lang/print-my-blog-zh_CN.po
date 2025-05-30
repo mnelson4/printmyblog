@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2024-05-16 14:59-0700\n"
-"PO-Revision-Date: 2024-05-16 15:00-0700\n"
+"POT-Creation-Date: 2025-05-30 13:19-0700\n"
+"PO-Revision-Date: 2025-05-30 13:19-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh\n"
@@ -445,9 +445,14 @@ msgstr ""
 "columns”。"
 
 #: designs/pdf/digital/mayer/description.php:50
+#, fuzzy
+#| msgid ""
+#| "Main matter defaults to being divided into columns. To force something to "
+#| "use the full page width, add the CSS class \"mayer-wide\" inside the "
+#| "content."
 msgid ""
 "Main matter defaults to being divided into columns. To force something to "
-"use the full page width, add the CSS class \"mayer-wide\" inside the content."
+"use the full page width, add the CSS class \"pmb-wide\" inside the content."
 msgstr ""
 "主要内容默认分为列。要强制某些内容使用整个页面宽度，请在内容中添加 CSS "
 "类“mayer-wide”。"
@@ -2996,12 +3001,12 @@ msgid "Customize %s Design"
 msgstr "定制%s设计"
 
 #: src/PrintMyBlog/entities/ProjectProgress.php:103
-#: templates/project_edit_generate.php:142
+#: templates/project_edit_generate.php:143
 msgid "Edit Content"
 msgstr "编辑内容"
 
 #: src/PrintMyBlog/entities/ProjectProgress.php:104
-#: templates/project_edit_generate.php:143
+#: templates/project_edit_generate.php:144
 msgid "Edit Metadata"
 msgstr "编辑元数据"
 
@@ -4240,24 +4245,24 @@ msgstr "更改设计"
 msgid "Customize Design"
 msgstr "自定义设计"
 
-#: templates/project_edit_generate.php:132
+#: templates/project_edit_generate.php:133
 #, php-format
 msgid "View %s Print Page"
 msgstr "查看%s打印页面"
 
-#: templates/project_edit_generate.php:140
+#: templates/project_edit_generate.php:141
 msgid "Need to Change Something?"
 msgstr "需要改变一些东西吗？"
 
-#: templates/project_edit_generate.php:141
+#: templates/project_edit_generate.php:142
 msgid "Change Title or Format"
 msgstr "更改标题或格式"
 
-#: templates/project_edit_generate.php:144
+#: templates/project_edit_generate.php:145
 msgid "Clear Cached Resources"
 msgstr "清除缓存资源"
 
-#: templates/project_edit_generate.php:146
+#: templates/project_edit_generate.php:147
 msgid "Get Help"
 msgstr "获取帮助"
 

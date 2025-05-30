@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2024-05-16 15:00-0700\n"
-"PO-Revision-Date: 2024-05-16 15:01-0700\n"
+"POT-Creation-Date: 2025-05-30 13:19-0700\n"
+"PO-Revision-Date: 2025-05-30 13:19-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja_JP\n"
@@ -486,9 +486,14 @@ msgstr ""
 "するには、コンテンツ内にCSSクラス \"mayer-columns\"を追加します。"
 
 #: designs/pdf/digital/mayer/description.php:50
+#, fuzzy
+#| msgid ""
+#| "Main matter defaults to being divided into columns. To force something to "
+#| "use the full page width, add the CSS class \"mayer-wide\" inside the "
+#| "content."
 msgid ""
 "Main matter defaults to being divided into columns. To force something to "
-"use the full page width, add the CSS class \"mayer-wide\" inside the content."
+"use the full page width, add the CSS class \"pmb-wide\" inside the content."
 msgstr ""
 "メインマターのデフォルトは列に分割されます。ページ幅全体を使用するように強制"
 "するには、コンテンツ内に CSS クラス \"mayer-wide\" を追加します。"
@@ -3175,12 +3180,12 @@ msgid "Customize %s Design"
 msgstr "%sデザインのカスタマイズ"
 
 #: src/PrintMyBlog/entities/ProjectProgress.php:103
-#: templates/project_edit_generate.php:142
+#: templates/project_edit_generate.php:143
 msgid "Edit Content"
 msgstr "コンテンツを編集"
 
 #: src/PrintMyBlog/entities/ProjectProgress.php:104
-#: templates/project_edit_generate.php:143
+#: templates/project_edit_generate.php:144
 msgid "Edit Metadata"
 msgstr "メタデータの編集"
 
@@ -4466,24 +4471,24 @@ msgstr "デザインの変更"
 msgid "Customize Design"
 msgstr "デザインのカスタマイズ"
 
-#: templates/project_edit_generate.php:132
+#: templates/project_edit_generate.php:133
 #, php-format
 msgid "View %s Print Page"
 msgstr "印刷ページ%s表示"
 
-#: templates/project_edit_generate.php:140
+#: templates/project_edit_generate.php:141
 msgid "Need to Change Something?"
 msgstr "何かを変更する必要がありますか?"
 
-#: templates/project_edit_generate.php:141
+#: templates/project_edit_generate.php:142
 msgid "Change Title or Format"
 msgstr "タイトルまたはフォーマットの変更"
 
-#: templates/project_edit_generate.php:144
+#: templates/project_edit_generate.php:145
 msgid "Clear Cached Resources"
 msgstr "キャッシュされたリソースのクリア"
 
-#: templates/project_edit_generate.php:146
+#: templates/project_edit_generate.php:147
 msgid "Get Help"
 msgstr "ヘルプ"
 

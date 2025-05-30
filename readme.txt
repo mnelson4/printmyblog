@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.27.7
+Stable tag: 3.27.8
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -459,7 +459,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
-= 3.27.8 xxxx =
+= 3.27.8 May 30 2025 =
 * Enhancement: for Pro Print, added a filter for the project's print page
 
 = 3.27.7 April 24, 2025 =
