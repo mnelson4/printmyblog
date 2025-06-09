@@ -102,6 +102,7 @@ class FrontendPrintSettings
             'show_buttons' => false,
             'show_buttons_pages' => false,
             'place_above' => true,
+            'open_new_tab' => false
         ];
         foreach ($this->formats as $slug => $format) {
             $defaults[$slug] = array(
@@ -241,7 +242,7 @@ class FrontendPrintSettings
         return array_merge(
             $this->print_options->allPrintOptionDefaults($format),
             $frontend_deviations,
-            $this->settings[ $format ]['print_options']
+            $this->settings[$format]['print_options']
         );
     }
 
@@ -316,6 +317,26 @@ class FrontendPrintSettings
     }
 
     /**
+     * Sets whether buttons should appear above the content or below.
+     *
+     * @param bool $new_value
+     */
+    public function setOpenNewTab($new_value)
+    {
+        $this->settings['open_new_tab'] = (bool)$new_value;
+    }
+
+    /**
+     * Whether buttons should appear above the content, or below.
+     *
+     * @return bool
+     */
+    public function openNewTab()
+    {
+        return (bool)$this->settings['open_new_tab'];
+    }
+
+    /**
      * Verifies the format is valid, and that its initialized in the settings.
      * @param string $format
      * @throws Exception
@@ -325,9 +346,9 @@ class FrontendPrintSettings
         if (! isset($this->formats[$format])) {
             throw new Exception(
                 'The format "'
-                . $format
-                . '" is invalid. It should be one of '
-                . implode(', ', $this->formatSlugs())
+                    . $format
+                    . '" is invalid. It should be one of '
+                    . implode(', ', $this->formatSlugs())
             );
         }
         if (! isset($this->settings[$format])) {
