@@ -54,9 +54,11 @@ class PrintButtons
             if (! $this->print_settings->isActive($slug)) {
                 continue;
             }
+            $this->print_settings->openNewTab() ? $target = ' target="_blank"' : $target = "";
             $html .= sprintf(
-                ' <a href="%s" class="button button-secondary wp-block-button__link" rel="nofollow">%s</a>',
+                ' <a href="%s" class="button button-secondary wp-block-button__link" rel="nofollow"%s>%s</a>',
                 esc_url($url_generator->getUrl($slug)),
+                $target,
                 esc_html($this->print_settings->getFrontendLabel($slug))
             );
         }
