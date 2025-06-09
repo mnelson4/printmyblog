@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2024-05-16 14:59-0700\n"
-"PO-Revision-Date: 2024-05-16 15:00-0700\n"
+"POT-Creation-Date: 2025-06-09 11:23-0700\n"
+"PO-Revision-Date: 2025-06-09 11:26-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh\n"
@@ -10,14 +10,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: printmyblog.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
@@ -445,9 +444,14 @@ msgstr ""
 "columns”。"
 
 #: designs/pdf/digital/mayer/description.php:50
+#, fuzzy
+#| msgid ""
+#| "Main matter defaults to being divided into columns. To force something to "
+#| "use the full page width, add the CSS class \"mayer-wide\" inside the "
+#| "content."
 msgid ""
 "Main matter defaults to being divided into columns. To force something to "
-"use the full page width, add the CSS class \"mayer-wide\" inside the content."
+"use the full page width, add the CSS class \"pmb-wide\" inside the content."
 msgstr ""
 "主要内容默认分为列。要强制某些内容使用整个页面宽度，请在内容中添加 CSS "
 "类“mayer-wide”。"
@@ -922,40 +926,40 @@ msgstr "帮助"
 msgid "Keyboard Accessibility"
 msgstr "键盘辅助功能"
 
-#: src/PrintMyBlog/controllers/Admin.php:403
+#: src/PrintMyBlog/controllers/Admin.php:405
 msgid "Settings Saved!"
 msgstr "设置已保存！"
 
 #. translators: 1: opening anchor tag, 2: closing anchor tag
-#: src/PrintMyBlog/controllers/Admin.php:409
+#: src/PrintMyBlog/controllers/Admin.php:411
 #, php-format
 msgid "You should see the changes on your %1$slatest post%2$s."
 msgstr "您应该会在%1$s最新帖子%2$s上看到更改。"
 
-#: src/PrintMyBlog/controllers/Admin.php:436 templates/settings_page.php:23
+#: src/PrintMyBlog/controllers/Admin.php:439 templates/settings_page.php:24
 msgid "Show print buttons on:"
 msgstr "在以下位置显示打印按钮："
 
-#: src/PrintMyBlog/controllers/Admin.php:454
+#: src/PrintMyBlog/controllers/Admin.php:457
 #, php-format
 msgid ""
 "Note: you need to upgrade your license to access the following formats: %s"
 msgstr "注意：您需要升级许可证才能访问以下格式：%s"
 
-#: src/PrintMyBlog/controllers/Admin.php:459 templates/settings_page.php:60
+#: src/PrintMyBlog/controllers/Admin.php:462 templates/settings_page.php:73
 msgid "Print Formats"
 msgstr "打印格式"
 
-#: src/PrintMyBlog/controllers/Admin.php:486
+#: src/PrintMyBlog/controllers/Admin.php:489
 msgid "Email Print My Blog Support"
 msgstr "电子邮件打印我的博客支持"
 
-#: src/PrintMyBlog/controllers/Admin.php:546
+#: src/PrintMyBlog/controllers/Admin.php:549
 msgid "Email successfully sent. Expect a reply in the next 1-2 business days."
 msgstr "电子邮件已成功发送。预计在接下来的 1-2 个工作日内收到回复。"
 
 #. translators: 1: error message, 2: email address, 3: subject of email, 4: content of email.
-#: src/PrintMyBlog/controllers/Admin.php:554
+#: src/PrintMyBlog/controllers/Admin.php:557
 #, php-format
 msgid ""
 "There was an error sending an email from your website (it was \"%1$s\"). "
@@ -965,23 +969,23 @@ msgstr ""
 "从您的网站发送电子邮件时出错（为“%1$s”）。请手动向%2$s发送电子邮件，主题"
 "为“%3$s”，内容如下："
 
-#: src/PrintMyBlog/controllers/Admin.php:590
+#: src/PrintMyBlog/controllers/Admin.php:593
 msgid "Please explain what you did, what you expected, and what went wrong"
 msgstr "请解释你做了什么，你期望什么，以及出了什么问题"
 
-#: src/PrintMyBlog/controllers/Admin.php:592
+#: src/PrintMyBlog/controllers/Admin.php:595
 msgid "Including links to screenshots is appreciated"
 msgstr "包括屏幕截图的链接是值得赞赏的"
 
-#: src/PrintMyBlog/controllers/Admin.php:597
+#: src/PrintMyBlog/controllers/Admin.php:600
 msgid "Your Name"
 msgstr "你的名字"
 
-#: src/PrintMyBlog/controllers/Admin.php:605
+#: src/PrintMyBlog/controllers/Admin.php:608
 msgid "Are you ok with us viewing your most recent generated documents?"
 msgstr "您是否同意我们查看您最近生成的文档？"
 
-#: src/PrintMyBlog/controllers/Admin.php:607
+#: src/PrintMyBlog/controllers/Admin.php:610
 msgid ""
 "Viewing your most recent generated documents saves a lot of time figuring "
 "out what is going wrong. We won’t share your content with anyone else."
@@ -989,11 +993,11 @@ msgstr ""
 "查看最近生成的文档可以节省大量时间来确定出了什么问题。我们不会与其他任何人分"
 "享您的内容。"
 
-#: src/PrintMyBlog/controllers/Admin.php:612
+#: src/PrintMyBlog/controllers/Admin.php:615
 msgid "This debug info will also be sent."
 msgstr "还将发送此调试信息。"
 
-#: src/PrintMyBlog/controllers/Admin.php:615
+#: src/PrintMyBlog/controllers/Admin.php:618
 msgid ""
 "This is mostly system information, list of active plugins, active theme, and "
 "some Print My Blog Pro info like your most recent projects."
@@ -1001,18 +1005,18 @@ msgstr ""
 "这主要是系统信息，活动插件列表，活动主题和一些“打印我的博客专业版”信息，例如"
 "您最近的项目。"
 
-#: src/PrintMyBlog/controllers/Admin.php:634
+#: src/PrintMyBlog/controllers/Admin.php:637
 msgid "Support for your plan is offered on GitHub"
 msgstr "GitHub 上提供对您的计划的支持"
 
-#: src/PrintMyBlog/controllers/Admin.php:635
+#: src/PrintMyBlog/controllers/Admin.php:638
 msgid ""
 "GitHub is a public forum to share your issues with the developer and other "
 "users."
 msgstr "GitHub 是一个公共论坛，用于与开发人员和其他用户分享您的问题。"
 
 #. translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag.
-#: src/PrintMyBlog/controllers/Admin.php:638
+#: src/PrintMyBlog/controllers/Admin.php:641
 #, php-format
 msgid ""
 "You will need to first %1$screate a GitHub account%2$s. If you prefer to use "
@@ -1021,32 +1025,32 @@ msgstr ""
 "您需要首先%1$s创建一个 GitHub 帐户%2$s。如果您更喜欢使用电子邮件支持，请%3$s"
 "购买提供电子邮件支持的许可证。%2$s"
 
-#: src/PrintMyBlog/controllers/Admin.php:703
+#: src/PrintMyBlog/controllers/Admin.php:706
 msgid "Delete All Data"
 msgstr "删除所有数据"
 
-#: src/PrintMyBlog/controllers/Admin.php:791
+#: src/PrintMyBlog/controllers/Admin.php:794
 msgid "Please select items to add to the project"
 msgstr "请选择要添加到项目中的项目"
 
-#: src/PrintMyBlog/controllers/Admin.php:792
+#: src/PrintMyBlog/controllers/Admin.php:795
 msgid "Please select items to remove"
 msgstr "请选择要删除的项目"
 
-#: src/PrintMyBlog/controllers/Admin.php:793
+#: src/PrintMyBlog/controllers/Admin.php:796
 msgid "Please select items to move"
 msgstr "请选择要移动的项目"
 
-#: src/PrintMyBlog/controllers/Admin.php:794
+#: src/PrintMyBlog/controllers/Admin.php:797
 msgid "Error inserting. Please use the PMB help page to get help"
 msgstr "插入时出错。请使用 PMB 帮助页面获取帮助"
 
-#: src/PrintMyBlog/controllers/Admin.php:795
+#: src/PrintMyBlog/controllers/Admin.php:798
 msgid ""
 "Error creating new print material. Please use the PMB help page to get help."
 msgstr "创建新打印材料时出错。请使用 PMB 帮助页面获取帮助。"
 
-#: src/PrintMyBlog/controllers/Admin.php:796
+#: src/PrintMyBlog/controllers/Admin.php:799
 msgid ""
 "Your project's Body is empty. You may have forgetten to drag items from "
 "\"Available Content\" (on the left) into the \"Chosen Project Content\"'s "
@@ -1056,7 +1060,7 @@ msgstr ""
 "项目的主体为空。您可能忘记将项目从“可用内容”（左侧）拖到“所选项目内容”的正文"
 "（右侧）中。是否确实要将项目的“正文”留空？"
 
-#: src/PrintMyBlog/controllers/Admin.php:880
+#: src/PrintMyBlog/controllers/Admin.php:883
 #: src/PrintMyBlog/controllers/Frontend.php:302
 #: src/PrintMyBlog/services/generators/PdfGenerator.php:126
 msgid ""
@@ -1064,7 +1068,7 @@ msgid ""
 "Help page."
 msgstr "准备内容时出错。请访问打印我的博客帮助页面。"
 
-#: src/PrintMyBlog/controllers/Admin.php:881
+#: src/PrintMyBlog/controllers/Admin.php:884
 #: src/PrintMyBlog/controllers/Frontend.php:303
 #: src/PrintMyBlog/services/generators/PdfGenerator.php:127
 msgid ""
@@ -1074,152 +1078,152 @@ msgstr ""
 "无法访问您的项目以生成文件。也许您的网站不是公开的？请访问打印我的博客帮助页"
 "面。"
 
-#: src/PrintMyBlog/controllers/Admin.php:908
+#: src/PrintMyBlog/controllers/Admin.php:911
 msgid "Are you sure you want to duplicate this project?"
 msgstr "是否确实要复制此项目？"
 
 #. translators: %s error message.
 #. translators: 1: error message.
-#: src/PrintMyBlog/controllers/Admin.php:1202
-#: src/PrintMyBlog/controllers/Admin.php:2046
+#: src/PrintMyBlog/controllers/Admin.php:1205
+#: src/PrintMyBlog/controllers/Admin.php:2054
 #, php-format
 msgid "There was an error communicating with Print My Blog Central. It was %s"
 msgstr "与“打印我的博客中心”通信时出错。这是%s"
 
-#: src/PrintMyBlog/controllers/Admin.php:1282
+#: src/PrintMyBlog/controllers/Admin.php:1287
 #, php-format
 msgid "Design \"%s\" successfully saved."
 msgstr "设计“%s”成功保存。"
 
 #. translators: 1: design slug, 2: format slug
-#: src/PrintMyBlog/controllers/Admin.php:1300
-#: src/PrintMyBlog/controllers/Admin.php:1786
+#: src/PrintMyBlog/controllers/Admin.php:1306
+#: src/PrintMyBlog/controllers/Admin.php:1794
 #, php-format
 msgid "An invalid design (%1$s) or format provided(%2$s)"
 msgstr "提供的设计（%1$s）或格式无效（%2$s）"
 
-#: src/PrintMyBlog/controllers/Admin.php:1328
+#: src/PrintMyBlog/controllers/Admin.php:1334
 #, php-format
 msgid "%1$s is now the default design the %2$s on all new projects."
 msgstr "%1$s现在是所有新项目的默认设计%2$s。"
 
-#: src/PrintMyBlog/controllers/Admin.php:1516
+#: src/PrintMyBlog/controllers/Admin.php:1524
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:838
 #: src/PrintMyBlog/orm/entities/Project.php:523
 msgid "Project Title"
 msgstr "项目名称"
 
-#: src/PrintMyBlog/controllers/Admin.php:1527
+#: src/PrintMyBlog/controllers/Admin.php:1535
 #: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:112
 #: templates/setup_page.php:39
 msgid "Format"
 msgstr "格式"
 
 #. translators: %s project name.
-#: src/PrintMyBlog/controllers/Admin.php:1599
+#: src/PrintMyBlog/controllers/Admin.php:1607
 #, php-format
 msgid "Successfully setup the project \"%s\"."
 msgstr "成功设置项目“%s”。"
 
 #. translators: %s format name
-#: src/PrintMyBlog/controllers/Admin.php:1614
+#: src/PrintMyBlog/controllers/Admin.php:1622
 #, php-format
 msgid "You need to choose and customize the design for your %s."
 msgstr "您需要为您的%s选择和自定义设计。"
 
-#: src/PrintMyBlog/controllers/Admin.php:1660
+#: src/PrintMyBlog/controllers/Admin.php:1668
 msgid "The content in your project has changed"
 msgstr "项目中的内容已更改"
 
-#: src/PrintMyBlog/controllers/Admin.php:1688
+#: src/PrintMyBlog/controllers/Admin.php:1696
 msgid "Updated project content."
 msgstr "更新了项目内容。"
 
-#: src/PrintMyBlog/controllers/Admin.php:1749
+#: src/PrintMyBlog/controllers/Admin.php:1757
 msgid "You have customized this design"
 msgstr "您已自定义此设计"
 
 #. translators: %s: design name
-#: src/PrintMyBlog/controllers/Admin.php:1756
+#: src/PrintMyBlog/controllers/Admin.php:1764
 #, php-format
 msgid ""
 "The design \"%s\" has been customized, and its changes will be reflected in "
 "all projects that use it."
 msgstr "设计“%s”已定制，其更改将反映在所有使用它的项目中。"
 
-#: src/PrintMyBlog/controllers/Admin.php:1796
+#: src/PrintMyBlog/controllers/Admin.php:1804
 msgid "You changed the design"
 msgstr "您更改了设计"
 
 #. translators: 1: design name, 2: format name.
-#: src/PrintMyBlog/controllers/Admin.php:1802
+#: src/PrintMyBlog/controllers/Admin.php:1810
 #, php-format
 msgid "You chose the design \"%1$s\" for the %2$s of your project."
 msgstr "您为项目的%2$s选择了设计“%1$s”。"
 
-#: src/PrintMyBlog/controllers/Admin.php:1843
+#: src/PrintMyBlog/controllers/Admin.php:1851
 msgid "You changed projected metadata"
 msgstr "您更改了投影元数据"
 
-#: src/PrintMyBlog/controllers/Admin.php:1849
+#: src/PrintMyBlog/controllers/Admin.php:1857
 msgid "Project metadata updated."
 msgstr "项目元数据已更新。"
 
 #. translators: %s: format slug
-#: src/PrintMyBlog/controllers/Admin.php:1877
+#: src/PrintMyBlog/controllers/Admin.php:1885
 #, php-format
 msgid "There is no file format with the slug \"%s\""
 msgstr "没有带有 slug “%s”的文件格式"
 
-#: src/PrintMyBlog/controllers/Admin.php:1915
+#: src/PrintMyBlog/controllers/Admin.php:1923
 msgid "Save"
 msgstr "保存"
 
 #. translators: 1: the name of the new project.
-#: src/PrintMyBlog/controllers/Admin.php:1974
+#: src/PrintMyBlog/controllers/Admin.php:1982
 #, php-format
 msgid "Project successfully duplicated. It is titled \"%1$s\"."
 msgstr "项目已成功复制。它的标题是“%1$s”。"
 
-#: src/PrintMyBlog/controllers/Admin.php:2112
+#: src/PrintMyBlog/controllers/Admin.php:2120
 msgid "Cached external resources and images were cleared."
 msgstr "缓存的外部资源和映像已清除。"
 
 #. translators: 1 post type label, 2: post title
-#: src/PrintMyBlog/controllers/Admin.php:2216
+#: src/PrintMyBlog/controllers/Admin.php:2225
 #, php-format
 msgid "Go to the %1$s \"%2$s\" was copied from."
 msgstr "转到从中复制“%2$s”%1$s。"
 
 #. translators: %s: type label.
-#: src/PrintMyBlog/controllers/Admin.php:2218
+#: src/PrintMyBlog/controllers/Admin.php:2227
 #, php-format
 msgid "Go to Original %s"
 msgstr "转到原始%s"
 
 #. translators: 1: post title
-#: src/PrintMyBlog/controllers/Admin.php:2232
+#: src/PrintMyBlog/controllers/Admin.php:2240
 #, php-format
 msgid "Go to Print Material \"%s\" was created from."
 msgstr "转到打印材料“%s”是从中创建的。"
 
-#: src/PrintMyBlog/controllers/Admin.php:2233
+#: src/PrintMyBlog/controllers/Admin.php:2241
 msgid "Go to Print Material"
 msgstr "转到打印材料"
 
 #. translators: %s: post title
-#: src/PrintMyBlog/controllers/Admin.php:2239
+#: src/PrintMyBlog/controllers/Admin.php:2247
 #, php-format
 msgid "Copy \"%s\" to New Print Material for a Print My Blog project"
 msgstr "将“%s”复制到“打印我的博客”项目的新打印材料"
 
-#: src/PrintMyBlog/controllers/Admin.php:2240
+#: src/PrintMyBlog/controllers/Admin.php:2248
 msgid "Copy to Print Material"
 msgstr "复制到打印材料"
 
-#: src/PrintMyBlog/controllers/Admin.php:2254
-#: src/PrintMyBlog/controllers/Admin.php:2255
-#: src/PrintMyBlog/controllers/Admin.php:2300
+#: src/PrintMyBlog/controllers/Admin.php:2262
+#: src/PrintMyBlog/controllers/Admin.php:2263
+#: src/PrintMyBlog/controllers/Admin.php:2308
 #: templates/project_edit_generate.php:122
 #, php-format
 msgid "Generate %s"
@@ -2548,9 +2552,9 @@ msgid ""
 "require a \".doc\" file. Word Documents typically require manual formatting "
 "in your chosen Word Processor."
 msgstr ""
-"文件可在Microsoft Word，Google Docs，LibreOffice等中编辑。对于共享需要“."
-"doc”文件的人员和程序很有用。Word 文档通常需要在您选择的文字处理器中手动设置格"
-"式。"
+"文件可在Microsoft Word，Google Docs，LibreOffice等中编辑。对于共享需"
+"要“.doc”文件的人员和程序很有用。Word 文档通常需要在您选择的文字处理器中手动设"
+"置格式。"
 
 #: src/PrintMyBlog/domain/DefaultFileFormats.php:82
 msgid "Create unlimited Word Documents with a Pro Plan."
@@ -2569,8 +2573,8 @@ msgid ""
 "Print%2$s. It has free and paid options. %3$sSee full feature comparison.%2$s"
 msgstr ""
 "这是快速简便的选项，最适合为您自己的记录制作打印输出。如需更专业和功能齐全的"
-"内容，请使用 %1$sPro Print%2$s。它有免费和付费选项。%3$s查看完整功能比"
-"较。%2$s"
+"内容，请使用 %1$sPro Print%2$s。它有免费和付费选项。%3$s查看完整功能比较。"
+"%2$s"
 
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:44
 msgid "About Pro Print"
@@ -2789,7 +2793,7 @@ msgid "eBook 📱"
 msgstr "电子书 📱"
 
 #. translators: %s: format slug
-#: src/PrintMyBlog/domain/FrontendPrintSettings.php:136
+#: src/PrintMyBlog/domain/FrontendPrintSettings.php:137
 #, php-format
 msgid "Invalid format \"%s\"."
 msgstr "格式“%s”无效。"
@@ -3368,7 +3372,7 @@ msgid "(allowed tags: %1$s)"
 msgstr "（允许的标签：%1$s）"
 
 #: src/Twine/forms/strategies/layout/DetailsSummaryLayout.php:52
-#: templates/settings_page.php:75
+#: templates/settings_page.php:88
 msgid "Show Options"
 msgstr "显示选项"
 
@@ -3477,8 +3481,8 @@ msgid ""
 "You are using HTML that might be beyond your permission. Only the following "
 "HTML tags are allowed:%1$s%2$s, and the following attributes: %3$s. If you "
 "are using the style attribute, make sure you don’t end in a semicolon and "
-"remove whitespace between CSS properties (e.g. \"style='color:red;"
-"height:12px'\")"
+"remove whitespace between CSS properties (e.g. "
+"\"style='color:red;height:12px'\")"
 msgstr ""
 "您正在使用的 HTML 可能超出了您的权限。仅允许使用以下 HTML 标记：%1$s%2$s 和以"
 "下属性： %3$s. 如果您使用的是 style 属性，请确保不要以分号结尾并删除 CSS 属性"
@@ -4281,19 +4285,19 @@ msgstr "专业印刷 ― 项目"
 msgid "Add New Project"
 msgstr "添加新项目"
 
-#: templates/settings_page.php:13
+#: templates/settings_page.php:14
 msgid "Print My Blog - Settings"
 msgstr "打印我的博客 - 设置"
 
-#: templates/settings_page.php:15
+#: templates/settings_page.php:16
 msgid "Front-End Print Buttons"
 msgstr "打印按钮"
 
-#: templates/settings_page.php:16
+#: templates/settings_page.php:17
 msgid "Viewers will see these buttons when they visit your website."
 msgstr "观看者在访问您的网站时会看到这些按钮。"
 
-#: templates/settings_page.php:17
+#: templates/settings_page.php:18
 msgid ""
 "These are the legacy print buttons which use the \"Quick Print\" technology. "
 "We're currently working on new print buttons that will use \"Pro Print\" "
@@ -4302,59 +4306,73 @@ msgstr ""
 "这些是使用“快速打印”技术的传统打印按钮。我们目前正在开发使用“专业打印”技术的"
 "新打印按钮。"
 
-#: templates/settings_page.php:28 templates/setup_page.php:96
+#: templates/settings_page.php:29 templates/setup_page.php:96
 msgid "Posts"
 msgstr "文章"
 
-#: templates/settings_page.php:33 templates/setup_page.php:98
+#: templates/settings_page.php:34 templates/setup_page.php:98
 msgid "Pages"
 msgstr "页面"
 
-#: templates/settings_page.php:42
+#: templates/settings_page.php:43
 msgid "Customize Buttons"
 msgstr "自定义按钮"
 
-#: templates/settings_page.php:49
+#: templates/settings_page.php:50
 msgid "Place Buttons"
 msgstr "放置按钮"
 
-#: templates/settings_page.php:53
+#: templates/settings_page.php:54
 msgid "Above Content"
 msgstr "内容之前"
 
-#: templates/settings_page.php:54
+#: templates/settings_page.php:55
 msgid "Below Content"
 msgstr "内容之后"
 
-#: templates/settings_page.php:72
+#: templates/settings_page.php:61
+msgid "Preview Settings"
+msgstr "预览页面设置"
+
+#: templates/settings_page.php:67
+msgid "Open Quick Print preview page in a new tab. "
+msgstr "在新标签页中打开快速打印预览页面。"
+
+#: templates/settings_page.php:68
+msgid ""
+"Note: Leaving this setting unchecked will open the preview page in the "
+"active window."
+msgstr "注意：不选中此设置将在活动窗口中打开预览页面。"
+
+#: templates/settings_page.php:85
 msgid "Label"
 msgstr "标签"
 
-#: templates/settings_page.php:91
+#: templates/settings_page.php:104
 msgid "Admin Print Buttons"
 msgstr "打印按钮"
 
-#: templates/settings_page.php:92
+#: templates/settings_page.php:105
 msgid ""
 "Administrators and other privileged users will see these in the wp-admin "
 "(like when editing a post.)"
 msgstr "管理员和其他特权用户将在 wp-admin 中看到这些内容（例如在编辑帖子时）。"
 
-#: templates/settings_page.php:93
+#: templates/settings_page.php:106
 msgid ""
 "These print buttons use \"Pro Print\" technology (which has both free and "
 "paid options.)"
 msgstr "这些打印按钮使用“专业打印”技术（具有免费和付费选项）。"
 
-#: templates/settings_page.php:96
+#: templates/settings_page.php:109
 msgid "Save Settings"
 msgstr "保存设置"
 
-#: templates/settings_page.php:96
+#: templates/settings_page.php:109
 msgid "Are you sure you want to reset the settings back to defaults?"
 msgstr "是否确实要将设置重置回默认值？"
 
-#: templates/settings_page.php:96
+#: templates/settings_page.php:109
 msgid "Reset to Defaults"
 msgstr "重置为默认值"
 
