@@ -129,6 +129,7 @@ foreach($generations as $generation){
         <?php
         ?>
         <div class="pmb-after-generation" style="display:none">
+
             <button class="button button-primary" href="<?php echo esc_attr($generation->getGeneratedIntermediaryFileUrl());?>"><?php printf(__('View %s Print Page', 'print-my-blog'), $generation->getFormat()->title());?></button>
         </div>
     </div>

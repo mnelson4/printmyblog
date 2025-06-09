@@ -1,8 +1,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2025-06-09 11:26-0700\n"
 "PO-Revision-Date: 2025-06-09 11:29-0700\n"
+=======
+"POT-Creation-Date: 2025-05-30 13:19-0700\n"
+"PO-Revision-Date: 2025-05-30 13:19-0700\n"
+>>>>>>> e54fc7631a6a9b6a92386880c2ab9f5a2e5d7eb2
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja_JP\n"
@@ -3179,12 +3184,12 @@ msgid "Customize %s Design"
 msgstr "%sデザインのカスタマイズ"
 
 #: src/PrintMyBlog/entities/ProjectProgress.php:103
-#: templates/project_edit_generate.php:142
+#: templates/project_edit_generate.php:143
 msgid "Edit Content"
 msgstr "コンテンツを編集"
 
 #: src/PrintMyBlog/entities/ProjectProgress.php:104
-#: templates/project_edit_generate.php:143
+#: templates/project_edit_generate.php:144
 msgid "Edit Metadata"
 msgstr "メタデータの編集"
 
@@ -4470,24 +4475,24 @@ msgstr "デザインの変更"
 msgid "Customize Design"
 msgstr "デザインのカスタマイズ"
 
-#: templates/project_edit_generate.php:132
+#: templates/project_edit_generate.php:133
 #, php-format
 msgid "View %s Print Page"
 msgstr "印刷ページ%s表示"
 
-#: templates/project_edit_generate.php:140
+#: templates/project_edit_generate.php:141
 msgid "Need to Change Something?"
 msgstr "何かを変更する必要がありますか?"
 
-#: templates/project_edit_generate.php:141
+#: templates/project_edit_generate.php:142
 msgid "Change Title or Format"
 msgstr "タイトルまたはフォーマットの変更"
 
-#: templates/project_edit_generate.php:144
+#: templates/project_edit_generate.php:145
 msgid "Clear Cached Resources"
 msgstr "キャッシュされたリソースのクリア"
 
-#: templates/project_edit_generate.php:146
+#: templates/project_edit_generate.php:147
 msgid "Get Help"
 msgstr "ヘルプ"
 
