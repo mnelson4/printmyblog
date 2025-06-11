@@ -102,7 +102,7 @@ class FrontendPrintSettings
             'show_buttons' => false,
             'show_buttons_pages' => false,
             'place_above' => true,
-            'open_new_tab' => true
+            'open_new_tab' => false
         ];
         foreach ($this->formats as $slug => $format) {
             $defaults[$slug] = array(
