@@ -63,7 +63,7 @@ use PrintMyBlog\domain\FrontendPrintSettings;
                         <tr>
                             <td>
                                 <input type="checkbox" id="pmb-open-new-tab" name="pmb_open_new_tab" value="1" <?php echo $settings->openNewTab() ? 'checked="checked"' : '' ?>>
-                                <label for="pmb-open-new-tab"> <?php esc_html_e('Buttons Open Print Page in a new tab. ', 'print-my-blog'); ?></label>
+                                <label for="pmb-open-new-tab"> <?php esc_html_e('Open Print Page in New Tab', 'print-my-blog'); ?></label>
                             </td>
                         </tr>
                     </tbody>
