@@ -58,7 +58,6 @@ use PrintMyBlog\domain\FrontendPrintSettings;
                         </tr>
                     </tbody>
                 </table>
-                <h2><?php esc_html_e('Preview Settings', 'print-my-blog'); ?></h2>
                 <table class="form-table">
                     <tbody>
                         <tr>
