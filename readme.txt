@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.27.8
+Stable tag: 3.27.9
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -452,7 +452,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 2. Quick Print Setup page. Start printing right away, or customize which posts to print and how to print them.
 3. Print Button settings page. Select whether to show on posts or pages and save. Or customize the appearance of the buttons and printout.
 4. Print Buttons on a post. Notice how much clutter is removed from the printout!
-5. Pro Print project organizer. Search for content, drag-and-drop it into your project, organize in front matter, back matter, and parts.
+5. Pro Print project organizer. Search for content, drag-and-drop it into your project, organize it into front matter, back matter, and parts.
 6. Pro Print print-ready PDF table of contents. Notice the page references and how the content is grouped into 3 parts.
 7. Pro Print print-ready PDF page spread. Notice the running head of the article title (yellow), the graphs generated via a plugin using Javascript (green), the external hyperlinks converted to footnotes (blue), and the page numbers are on the outside of each page (pink).
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!

@@ -1,27 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2025-05-30 13:19-0700\n"
-"PO-Revision-Date: 2025-05-30 13:19-0700\n"
+"POT-Creation-Date: 2025-06-13 10:24-0700\n"
+"PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: it\n"
+"Language: my\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: printmyblog.php\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.min.js\n"
-"X-Poedit-SearchPathExcluded-1: vendor\n"
-"X-Poedit-SearchPathExcluded-2: node_modules\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.6\n"
 
 #: designs/epub/classic/description.php:1
 #: designs/pdf/digital/buurma/description.php:1
@@ -233,7 +222,6 @@ msgctxt "comments title"
 msgid "%1$s Reply to &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s Replies to &ldquo;%2$s&rdquo;"
 msgstr[0] "%1$s Risposta a &ldquo;%2$s&rdquo;"
-msgstr[1] "%1$s Risposte a &ldquo;%2$s&rdquo;"
 
 #. translators: 1: date
 #: designs/epub/classic/templates/title_page.php:44
@@ -514,18 +502,13 @@ msgstr ""
 "CSS \"mayer-columns\" all'interno del tuo contenuto."
 
 #: designs/pdf/digital/mayer/description.php:50
-#, fuzzy
-#| msgid ""
-#| "Main matter defaults to being divided into columns. To force something to "
-#| "use the full page width, add the CSS class \"mayer-wide\" inside the "
-#| "content."
 msgid ""
 "Main matter defaults to being divided into columns. To force something to "
 "use the full page width, add the CSS class \"pmb-wide\" inside the content."
 msgstr ""
-"La questione principale viene divisa in colonne. Per forzare qualcosa a "
-"utilizzare l'intera larghezza della pagina, aggiungi la classe CSS \"mayer-"
-"wide\" all'interno del contenuto."
+"Per impostazione predefinita, il contenuto principale è diviso in colonne. "
+"Per forzare l'utilizzo dell'intera larghezza della pagina, aggiungere la "
+"classe CSS “pmb-wide” all'interno del contenuto."
 
 #: designs/pdf/print/classic/descriptions/classic.php:2
 msgid ""
@@ -707,14 +690,8 @@ msgstr ""
 "l'immagine in evidenza) in colonne."
 
 #: designs/pdf/print/haller/description.php:33
-#, fuzzy
-#| msgid ""
-#| "Single Column: shows all content specified by the \"Post Content\" design "
-#| "setting in a single column."
 msgid "Single Column: like the default template, but in a single column."
-msgstr ""
-"Colonna singola: mostra tutti i contenuti specificati dall'impostazione di "
-"progettazione \"Post Content\" in un'unica colonna."
+msgstr "Colonna singola: come il modello predefinito, ma in una sola colonna."
 
 #: designs/pdf/print/haller/description.php:34
 msgid ""
@@ -1061,43 +1038,43 @@ msgstr "Aiuto"
 msgid "Keyboard Accessibility"
 msgstr "Accessibilità da tastiera"
 
-#: src/PrintMyBlog/controllers/Admin.php:403
+#: src/PrintMyBlog/controllers/Admin.php:405
 msgid "Settings Saved!"
 msgstr "Impostazioni Salvate!"
 
 #. translators: 1: opening anchor tag, 2: closing anchor tag
-#: src/PrintMyBlog/controllers/Admin.php:409
+#: src/PrintMyBlog/controllers/Admin.php:411
 #, php-format
 msgid "You should see the changes on your %1$slatest post%2$s."
 msgstr "Dovresti vedere le modifiche sul tuo post %1$sultimo%2$s."
 
-#: src/PrintMyBlog/controllers/Admin.php:436 templates/settings_page.php:23
+#: src/PrintMyBlog/controllers/Admin.php:439 templates/settings_page.php:24
 msgid "Show print buttons on:"
 msgstr "Mostra i pulsanti di stampa su:"
 
-#: src/PrintMyBlog/controllers/Admin.php:454
+#: src/PrintMyBlog/controllers/Admin.php:457
 #, php-format
 msgid ""
 "Note: you need to upgrade your license to access the following formats: %s"
 msgstr ""
 "Nota: è necessario aggiornare la licenza per accedere ai seguenti formati: %s"
 
-#: src/PrintMyBlog/controllers/Admin.php:459 templates/settings_page.php:60
+#: src/PrintMyBlog/controllers/Admin.php:462 templates/settings_page.php:73
 msgid "Print Formats"
 msgstr "Formati di stampa"
 
-#: src/PrintMyBlog/controllers/Admin.php:486
+#: src/PrintMyBlog/controllers/Admin.php:489
 msgid "Email Print My Blog Support"
 msgstr "Email Stampa il mio blog Supporto"
 
-#: src/PrintMyBlog/controllers/Admin.php:546
+#: src/PrintMyBlog/controllers/Admin.php:549
 msgid "Email successfully sent. Expect a reply in the next 1-2 business days."
 msgstr ""
 "Email inviata con successo. Aspettatevi una risposta nei prossimi 1-2 giorni "
 "lavorativi."
 
 #. translators: 1: error message, 2: email address, 3: subject of email, 4: content of email.
-#: src/PrintMyBlog/controllers/Admin.php:554
+#: src/PrintMyBlog/controllers/Admin.php:557
 #, php-format
 msgid ""
 "There was an error sending an email from your website (it was \"%1$s\"). "
@@ -1108,26 +1085,26 @@ msgstr ""
 "\"%1$s\"). Si prega di inviare manualmente un'e-mail a %2$s, con oggetto "
 "\"%3$s\", con il contenuto:"
 
-#: src/PrintMyBlog/controllers/Admin.php:590
+#: src/PrintMyBlog/controllers/Admin.php:593
 msgid "Please explain what you did, what you expected, and what went wrong"
 msgstr ""
 "Per favore, spiega cosa hai fatto, cosa ti aspettavi e cosa è andato storto"
 
-#: src/PrintMyBlog/controllers/Admin.php:592
+#: src/PrintMyBlog/controllers/Admin.php:595
 msgid "Including links to screenshots is appreciated"
 msgstr "Includere collegamenti a screenshot è apprezzato"
 
-#: src/PrintMyBlog/controllers/Admin.php:597
+#: src/PrintMyBlog/controllers/Admin.php:600
 msgid "Your Name"
 msgstr "Il tuo nome"
 
-#: src/PrintMyBlog/controllers/Admin.php:605
+#: src/PrintMyBlog/controllers/Admin.php:608
 msgid "Are you ok with us viewing your most recent generated documents?"
 msgstr ""
 "Sei d'accordo con noi che visualizziamo i tuoi documenti generati più "
 "recenti?"
 
-#: src/PrintMyBlog/controllers/Admin.php:607
+#: src/PrintMyBlog/controllers/Admin.php:610
 msgid ""
 "Viewing your most recent generated documents saves a lot of time figuring "
 "out what is going wrong. We won’t share your content with anyone else."
@@ -1136,11 +1113,11 @@ msgstr ""
 "risparmiare molto tempo per capire cosa sta andando storto. Non "
 "condivideremo i tuoi contenuti con nessun altro."
 
-#: src/PrintMyBlog/controllers/Admin.php:612
+#: src/PrintMyBlog/controllers/Admin.php:615
 msgid "This debug info will also be sent."
 msgstr "Verranno inviate anche queste informazioni di debug."
 
-#: src/PrintMyBlog/controllers/Admin.php:615
+#: src/PrintMyBlog/controllers/Admin.php:618
 msgid ""
 "This is mostly system information, list of active plugins, active theme, and "
 "some Print My Blog Pro info like your most recent projects."
@@ -1149,11 +1126,11 @@ msgstr ""
 "attivi, tema attivo e alcune informazioni su Print My Blog Pro come i tuoi "
 "progetti più recenti."
 
-#: src/PrintMyBlog/controllers/Admin.php:634
+#: src/PrintMyBlog/controllers/Admin.php:637
 msgid "Support for your plan is offered on GitHub"
 msgstr "Il supporto per il tuo piano è offerto su GitHub"
 
-#: src/PrintMyBlog/controllers/Admin.php:635
+#: src/PrintMyBlog/controllers/Admin.php:638
 msgid ""
 "GitHub is a public forum to share your issues with the developer and other "
 "users."
@@ -1162,7 +1139,7 @@ msgstr ""
 "sviluppatore e altri utenti."
 
 #. translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag.
-#: src/PrintMyBlog/controllers/Admin.php:638
+#: src/PrintMyBlog/controllers/Admin.php:641
 #, php-format
 msgid ""
 "You will need to first %1$screate a GitHub account%2$s. If you prefer to use "
@@ -1171,36 +1148,36 @@ msgstr ""
 "Dovrai prima %1$screare un account GitHub%2$s. Se preferisci utilizzare il "
 "supporto e-mail, %3$sacquista una licenza che offra supporto e-mail.%2$s"
 
-#: src/PrintMyBlog/controllers/Admin.php:703
+#: src/PrintMyBlog/controllers/Admin.php:706
 msgid "Delete All Data"
 msgstr "Cancella Tutti i Dati"
 
-#: src/PrintMyBlog/controllers/Admin.php:791
+#: src/PrintMyBlog/controllers/Admin.php:794
 msgid "Please select items to add to the project"
 msgstr "Seleziona gli elementi da aggiungere al progetto"
 
-#: src/PrintMyBlog/controllers/Admin.php:792
+#: src/PrintMyBlog/controllers/Admin.php:795
 msgid "Please select items to remove"
 msgstr "Seleziona gli elementi da rimuovere"
 
-#: src/PrintMyBlog/controllers/Admin.php:793
+#: src/PrintMyBlog/controllers/Admin.php:796
 msgid "Please select items to move"
 msgstr "Seleziona gli elementi da spostare"
 
-#: src/PrintMyBlog/controllers/Admin.php:794
+#: src/PrintMyBlog/controllers/Admin.php:797
 msgid "Error inserting. Please use the PMB help page to get help"
 msgstr ""
 "Errore di inserimento. Si prega di utilizzare la pagina di aiuto PMB per "
 "ottenere aiuto"
 
-#: src/PrintMyBlog/controllers/Admin.php:795
+#: src/PrintMyBlog/controllers/Admin.php:798
 msgid ""
 "Error creating new print material. Please use the PMB help page to get help."
 msgstr ""
 "Errore durante la creazione di nuovo materiale di stampa. Si prega di "
 "utilizzare la pagina di aiuto PMB per ottenere aiuto."
 
-#: src/PrintMyBlog/controllers/Admin.php:796
+#: src/PrintMyBlog/controllers/Admin.php:799
 msgid ""
 "Your project's Body is empty. You may have forgetten to drag items from "
 "\"Available Content\" (on the left) into the \"Chosen Project Content\"'s "
@@ -1212,7 +1189,7 @@ msgstr ""
 "\"Contenuto del progetto scelto\" (a destra). Sei sicuro di voler lasciare "
 "vuoto il corpo del tuo progetto?"
 
-#: src/PrintMyBlog/controllers/Admin.php:880
+#: src/PrintMyBlog/controllers/Admin.php:883
 #: src/PrintMyBlog/controllers/Frontend.php:302
 #: src/PrintMyBlog/services/generators/PdfGenerator.php:126
 msgid ""
@@ -1222,7 +1199,7 @@ msgstr ""
 "Si è verificato un errore durante la preparazione dei contenuti. Visita la "
 "pagina di aiuto stampa il mio blog."
 
-#: src/PrintMyBlog/controllers/Admin.php:881
+#: src/PrintMyBlog/controllers/Admin.php:884
 #: src/PrintMyBlog/controllers/Frontend.php:303
 #: src/PrintMyBlog/services/generators/PdfGenerator.php:127
 msgid ""
@@ -1232,77 +1209,77 @@ msgstr ""
 "Non è stato possibile accedere al progetto per generare il file. Forse il "
 "tuo sito web non è pubblico? Visita la pagina di aiuto stampa il mio blog."
 
-#: src/PrintMyBlog/controllers/Admin.php:908
+#: src/PrintMyBlog/controllers/Admin.php:911
 msgid "Are you sure you want to duplicate this project?"
 msgstr "Sei sicuro di voler duplicare questo progetto?"
 
 #. translators: %s error message.
 #. translators: 1: error message.
-#: src/PrintMyBlog/controllers/Admin.php:1202
-#: src/PrintMyBlog/controllers/Admin.php:2046
+#: src/PrintMyBlog/controllers/Admin.php:1205
+#: src/PrintMyBlog/controllers/Admin.php:2054
 #, php-format
 msgid "There was an error communicating with Print My Blog Central. It was %s"
 msgstr ""
 "Si è verificato un errore durante la comunicazione con Print My Blog "
 "Central. Era %s"
 
-#: src/PrintMyBlog/controllers/Admin.php:1282
+#: src/PrintMyBlog/controllers/Admin.php:1287
 #, php-format
 msgid "Design \"%s\" successfully saved."
 msgstr "Progetta \"%s\" salvato con successo."
 
 #. translators: 1: design slug, 2: format slug
-#: src/PrintMyBlog/controllers/Admin.php:1300
-#: src/PrintMyBlog/controllers/Admin.php:1786
+#: src/PrintMyBlog/controllers/Admin.php:1306
+#: src/PrintMyBlog/controllers/Admin.php:1794
 #, php-format
 msgid "An invalid design (%1$s) or format provided(%2$s)"
 msgstr "Un disegno o modello (%1$s) o un formato non valido fornito(%2$s)"
 
-#: src/PrintMyBlog/controllers/Admin.php:1328
+#: src/PrintMyBlog/controllers/Admin.php:1334
 #, php-format
 msgid "%1$s is now the default design the %2$s on all new projects."
 msgstr ""
 "%1$s è ora la progettazione predefinita che la %2$s su tutti i nuovi "
 "progetti."
 
-#: src/PrintMyBlog/controllers/Admin.php:1516
+#: src/PrintMyBlog/controllers/Admin.php:1524
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:838
 #: src/PrintMyBlog/orm/entities/Project.php:523
 msgid "Project Title"
 msgstr "Titolo Progetto"
 
-#: src/PrintMyBlog/controllers/Admin.php:1527
+#: src/PrintMyBlog/controllers/Admin.php:1535
 #: src/PrintMyBlog/controllers/helpers/ProjectsListTable.php:112
 #: templates/setup_page.php:39
 msgid "Format"
 msgstr "Formato"
 
 #. translators: %s project name.
-#: src/PrintMyBlog/controllers/Admin.php:1599
+#: src/PrintMyBlog/controllers/Admin.php:1607
 #, php-format
 msgid "Successfully setup the project \"%s\"."
 msgstr "Impostare correttamente il progetto \"%s\"."
 
 #. translators: %s format name
-#: src/PrintMyBlog/controllers/Admin.php:1614
+#: src/PrintMyBlog/controllers/Admin.php:1622
 #, php-format
 msgid "You need to choose and customize the design for your %s."
 msgstr "Devi scegliere e personalizzare il design per il tuo %s."
 
-#: src/PrintMyBlog/controllers/Admin.php:1660
+#: src/PrintMyBlog/controllers/Admin.php:1668
 msgid "The content in your project has changed"
 msgstr "Il contenuto del progetto è cambiato"
 
-#: src/PrintMyBlog/controllers/Admin.php:1688
+#: src/PrintMyBlog/controllers/Admin.php:1696
 msgid "Updated project content."
 msgstr "Contenuto del progetto aggiornato."
 
-#: src/PrintMyBlog/controllers/Admin.php:1749
+#: src/PrintMyBlog/controllers/Admin.php:1757
 msgid "You have customized this design"
 msgstr "Hai personalizzato questo design"
 
 #. translators: %s: design name
-#: src/PrintMyBlog/controllers/Admin.php:1756
+#: src/PrintMyBlog/controllers/Admin.php:1764
 #, php-format
 msgid ""
 "The design \"%s\" has been customized, and its changes will be reflected in "
@@ -1311,82 +1288,82 @@ msgstr ""
 "Il design \"%s\" è stato personalizzato e le sue modifiche si rifletteranno "
 "in tutti i progetti che lo utilizzano."
 
-#: src/PrintMyBlog/controllers/Admin.php:1796
+#: src/PrintMyBlog/controllers/Admin.php:1804
 msgid "You changed the design"
 msgstr "Hai cambiato il design"
 
 #. translators: 1: design name, 2: format name.
-#: src/PrintMyBlog/controllers/Admin.php:1802
+#: src/PrintMyBlog/controllers/Admin.php:1810
 #, php-format
 msgid "You chose the design \"%1$s\" for the %2$s of your project."
 msgstr "Hai scelto il design \"%1$s\" per la %2$s del tuo progetto."
 
-#: src/PrintMyBlog/controllers/Admin.php:1843
+#: src/PrintMyBlog/controllers/Admin.php:1851
 msgid "You changed projected metadata"
 msgstr "Sono stati modificati i metadati proiettati"
 
-#: src/PrintMyBlog/controllers/Admin.php:1849
+#: src/PrintMyBlog/controllers/Admin.php:1857
 msgid "Project metadata updated."
 msgstr "Metadati del progetto aggiornati."
 
 #. translators: %s: format slug
-#: src/PrintMyBlog/controllers/Admin.php:1877
+#: src/PrintMyBlog/controllers/Admin.php:1885
 #, php-format
 msgid "There is no file format with the slug \"%s\""
 msgstr "Non esiste un formato di file con la lumaca \"%s\""
 
-#: src/PrintMyBlog/controllers/Admin.php:1915
+#: src/PrintMyBlog/controllers/Admin.php:1923
 msgid "Save"
 msgstr "Salva"
 
 #. translators: 1: the name of the new project.
-#: src/PrintMyBlog/controllers/Admin.php:1974
+#: src/PrintMyBlog/controllers/Admin.php:1982
 #, php-format
 msgid "Project successfully duplicated. It is titled \"%1$s\"."
 msgstr "Progetto duplicato correttamente. Si intitola \"%1$s\"."
 
-#: src/PrintMyBlog/controllers/Admin.php:2112
+#: src/PrintMyBlog/controllers/Admin.php:2120
 msgid "Cached external resources and images were cleared."
 msgstr ""
 "Le risorse esterne e le immagini memorizzate nella cache sono state "
 "cancellate."
 
 #. translators: 1 post type label, 2: post title
-#: src/PrintMyBlog/controllers/Admin.php:2216
+#: src/PrintMyBlog/controllers/Admin.php:2225
 #, php-format
 msgid "Go to the %1$s \"%2$s\" was copied from."
 msgstr "Vai alla %1$s da cui è stato copiato \"%2$s\"."
 
 #. translators: %s: type label.
-#: src/PrintMyBlog/controllers/Admin.php:2218
+#: src/PrintMyBlog/controllers/Admin.php:2227
 #, php-format
 msgid "Go to Original %s"
 msgstr "Vai a Original %s"
 
 #. translators: 1: post title
-#: src/PrintMyBlog/controllers/Admin.php:2232
+#: src/PrintMyBlog/controllers/Admin.php:2240
 #, php-format
 msgid "Go to Print Material \"%s\" was created from."
 msgstr "Vai a Materiale di stampa da cui è stato creato \"%s\"."
 
-#: src/PrintMyBlog/controllers/Admin.php:2233
+#: src/PrintMyBlog/controllers/Admin.php:2241
 msgid "Go to Print Material"
 msgstr "Vai a Materiale di stampa"
 
 #. translators: %s: post title
-#: src/PrintMyBlog/controllers/Admin.php:2239
+#: src/PrintMyBlog/controllers/Admin.php:2247
 #, php-format
 msgid "Copy \"%s\" to New Print Material for a Print My Blog project"
 msgstr ""
 "Copia \"%s\" in nuovo materiale di stampa per un progetto Print My Blog"
 
-#: src/PrintMyBlog/controllers/Admin.php:2240
+#: src/PrintMyBlog/controllers/Admin.php:2248
 msgid "Copy to Print Material"
 msgstr "Copia nel materiale di stampa"
 
-#: src/PrintMyBlog/controllers/Admin.php:2254
-#: src/PrintMyBlog/controllers/Admin.php:2255
-#: src/PrintMyBlog/controllers/Admin.php:2300
+#: src/PrintMyBlog/controllers/Admin.php:2262
+#: src/PrintMyBlog/controllers/Admin.php:2263
+#: src/PrintMyBlog/controllers/Admin.php:2308
 #: templates/project_edit_generate.php:122
 #, php-format
 msgid "Generate %s"
@@ -2468,13 +2445,11 @@ msgid "Image and Block Placement"
 msgstr "Posizionamento di immagini e blocchi"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1180
-#, fuzzy
-#| msgid "Image snapping and dynamic resizing only works using Pro Print."
 msgid ""
 "Image snapping and dynamic resizing only works using the Pro PDF Service."
 msgstr ""
-"Lo snap delle immagini e il ridimensionamento dinamico funzionano solo "
-"utilizzando Pro Print."
+"Lo snapping delle immagini e il ridimensionamento dinamico funzionano solo "
+"con il servizio Pro PDF."
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1181
 msgid ""
@@ -3098,7 +3073,7 @@ msgid "eBook 📱"
 msgstr "eBook 📱"
 
 #. translators: %s: format slug
-#: src/PrintMyBlog/domain/FrontendPrintSettings.php:136
+#: src/PrintMyBlog/domain/FrontendPrintSettings.php:137
 #, php-format
 msgid "Invalid format \"%s\"."
 msgstr "Formato \"%s\" non valido."
@@ -3714,7 +3689,7 @@ msgid "(allowed tags: %1$s)"
 msgstr "(tag consentiti: %1$s)"
 
 #: src/Twine/forms/strategies/layout/DetailsSummaryLayout.php:52
-#: templates/settings_page.php:75
+#: templates/settings_page.php:88
 msgid "Show Options"
 msgstr "Mostra opzioni"
 
@@ -3837,8 +3812,8 @@ msgid ""
 "You are using HTML that might be beyond your permission. Only the following "
 "HTML tags are allowed:%1$s%2$s, and the following attributes: %3$s. If you "
 "are using the style attribute, make sure you don’t end in a semicolon and "
-"remove whitespace between CSS properties (e.g. \"style='color:red;"
-"height:12px'\")"
+"remove whitespace between CSS properties (e.g. "
+"\"style='color:red;height:12px'\")"
 msgstr ""
 "Stai utilizzando codice HTML che potrebbe non essere in grado di ottenere la "
 "tua autorizzazione. Sono consentiti solo i seguenti tag HTML:%1$s%2$s e i "
@@ -4129,7 +4104,6 @@ msgstr "materia frontale"
 msgid "%1$s layer of nesting"
 msgid_plural "%1$s layers of nesting"
 msgstr[0] "%1$s livello di nidificazione"
-msgstr[1] "%1$s livelli di nidificazione"
 
 #: templates/partials/select_designs.php:111
 #, php-format
@@ -4677,20 +4651,20 @@ msgstr "Pro Print ― Progetti"
 msgid "Add New Project"
 msgstr "Aggiungi nuovo progetto"
 
-#: templates/settings_page.php:13
+#: templates/settings_page.php:14
 msgid "Print My Blog - Settings"
 msgstr "Stampa il mio blog - Impostazioni"
 
-#: templates/settings_page.php:15
+#: templates/settings_page.php:16
 msgid "Front-End Print Buttons"
 msgstr "Pulsanti di stampa front-end"
 
-#: templates/settings_page.php:16
+#: templates/settings_page.php:17
 msgid "Viewers will see these buttons when they visit your website."
 msgstr ""
 "Gli spettatori vedranno questi pulsanti quando visiteranno il tuo sito web."
 
-#: templates/settings_page.php:17
+#: templates/settings_page.php:18
 msgid ""
 "These are the legacy print buttons which use the \"Quick Print\" technology. "
 "We're currently working on new print buttons that will use \"Pro Print\" "
@@ -4700,39 +4674,43 @@ msgstr ""
 "Print\". Attualmente stiamo lavorando su nuovi pulsanti di stampa che "
 "utilizzeranno la tecnologia \"Pro Print\"."
 
-#: templates/settings_page.php:28 templates/setup_page.php:96
+#: templates/settings_page.php:29 templates/setup_page.php:96
 msgid "Posts"
 msgstr "Articoli"
 
-#: templates/settings_page.php:33 templates/setup_page.php:98
+#: templates/settings_page.php:34 templates/setup_page.php:98
 msgid "Pages"
 msgstr "Pagine"
 
-#: templates/settings_page.php:42
+#: templates/settings_page.php:43
 msgid "Customize Buttons"
 msgstr "Personalizza pulsanti"
 
-#: templates/settings_page.php:49
+#: templates/settings_page.php:50
 msgid "Place Buttons"
 msgstr "Inserisci pulsanti"
 
-#: templates/settings_page.php:53
+#: templates/settings_page.php:54
 msgid "Above Content"
 msgstr "Contenuto superiore"
 
-#: templates/settings_page.php:54
+#: templates/settings_page.php:55
 msgid "Below Content"
 msgstr "Sotto il Contenuto"
 
-#: templates/settings_page.php:72
+#: templates/settings_page.php:65
+msgid "Open Print Page in New Tab"
+msgstr "Aprire la pagina di stampa in una nuova scheda"
+
+#: templates/settings_page.php:85
 msgid "Label"
 msgstr "Etichetta"
 
-#: templates/settings_page.php:91
+#: templates/settings_page.php:104
 msgid "Admin Print Buttons"
 msgstr "Pulsanti di stampa di amministrazione"
 
-#: templates/settings_page.php:92
+#: templates/settings_page.php:105
 msgid ""
 "Administrators and other privileged users will see these in the wp-admin "
 "(like when editing a post.)"
@@ -4740,7 +4718,7 @@ msgstr ""
 "Gli amministratori e gli altri utenti privilegiati li vedranno nel wp-admin "
 "(come quando si modifica un post)."
 
-#: templates/settings_page.php:93
+#: templates/settings_page.php:106
 msgid ""
 "These print buttons use \"Pro Print\" technology (which has both free and "
 "paid options.)"
@@ -4748,15 +4726,15 @@ msgstr ""
 "Questi pulsanti di stampa utilizzano la tecnologia \"Pro Print\" (che ha sia "
 "opzioni gratuite che a pagamento)."
 
-#: templates/settings_page.php:96
+#: templates/settings_page.php:109
 msgid "Save Settings"
 msgstr "Salva Impostazioni"
 
-#: templates/settings_page.php:96
+#: templates/settings_page.php:109
 msgid "Are you sure you want to reset the settings back to defaults?"
 msgstr "Sei sicuro di voler ripristinare le impostazioni predefinite?"
 
-#: templates/settings_page.php:96
+#: templates/settings_page.php:109
 msgid "Reset to Defaults"
 msgstr "Ripristina i valori Predefiniti"
 
@@ -5166,6 +5144,16 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "Michael Nelson"
 msgstr "Michael Nelson"
+
+#~ msgid "Preview Settings"
+#~ msgstr "Impostazioni della pagina di anteprima"
+
+#~ msgid ""
+#~ "Note: Leaving this setting unchecked will open the preview page in the "
+#~ "active window."
+#~ msgstr ""
+#~ "Nota: se si lascia questa impostazione non selezionata, la pagina di "
+#~ "anteprima verrà aperta nella finestra attiva."
 
 #~ msgid "Print My Blog news"
 #~ msgstr "Stampa le notizie del mio blog"
