@@ -1,31 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-<<<<<<< HEAD
-"POT-Creation-Date: 2025-06-09 11:34-0700\n"
-"PO-Revision-Date: 2025-06-09 11:35-0700\n"
-=======
-"POT-Creation-Date: 2025-05-30 13:20-0700\n"
-"PO-Revision-Date: 2025-05-30 13:20-0700\n"
->>>>>>> e54fc7631a6a9b6a92386880c2ab9f5a2e5d7eb2
+"POT-Creation-Date: 2025-06-13 10:24-0700\n"
+"PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: de_DE\n"
+"Language: my\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.6\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: printmyblog.php\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: "
-"__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.min.js\n"
-"X-Poedit-SearchPathExcluded-1: ../vendor\n"
-"X-Poedit-SearchPathExcluded-2: node_modules\n"
 
 #: designs/epub/classic/description.php:1
 #: designs/pdf/digital/buurma/description.php:1
@@ -235,7 +220,6 @@ msgctxt "comments title"
 msgid "%1$s Reply to &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s Replies to &ldquo;%2$s&rdquo;"
 msgstr[0] "%1$s Antwort auf &ldquo;%2$s&rdquo;"
-msgstr[1] "%1$s Antworten auf &ldquo;%2$s&rdquo;"
 
 #. translators: 1: date
 #: designs/epub/classic/templates/title_page.php:44
@@ -506,18 +490,13 @@ msgstr ""
 "\"mayer-columns\" in Ihrem Inhalt hinzu."
 
 #: designs/pdf/digital/mayer/description.php:50
-#, fuzzy
-#| msgid ""
-#| "Main matter defaults to being divided into columns. To force something to "
-#| "use the full page width, add the CSS class \"mayer-wide\" inside the "
-#| "content."
 msgid ""
 "Main matter defaults to being divided into columns. To force something to "
 "use the full page width, add the CSS class \"pmb-wide\" inside the content."
 msgstr ""
-"Hauptsache wird standardmäßig in Spalten unterteilt. Um zu erzwingen, dass "
-"etwas die gesamte Seitenbreite verwendet wird, fügen Sie die CSS-Klasse "
-"\"mayer-wide\" innerhalb des Inhalts hinzu."
+"El asunto principal se divide por defecto en columnas. Para forzar que algo "
+"utilice todo el ancho de la página, añada la clase CSS «pmb-wide» dentro del "
+"contenido."
 
 #: designs/pdf/print/classic/descriptions/classic.php:2
 msgid ""
@@ -4109,7 +4088,6 @@ msgstr "Frontsache"
 msgid "%1$s layer of nesting"
 msgid_plural "%1$s layers of nesting"
 msgstr[0] "%1$s Verschachtelungsschicht"
-msgstr[1] "%1$s Verschachtelungsschichten"
 
 #: templates/partials/select_designs.php:111
 #, php-format
@@ -4706,22 +4684,9 @@ msgstr "Oberhalb von Inhalt"
 msgid "Below Content"
 msgstr "Unterhalb von Inhalt"
 
-#: templates/settings_page.php:61
-msgid "Preview Settings"
-msgstr "Einstellungen der Vorschauseite"
-
-#: templates/settings_page.php:67
-msgid "Open Quick Print preview page in a new tab. "
-msgstr ""
-"Öffnen Sie die Quick Print-Vorschauseite in einer neuen Registerkarte. "
-
-#: templates/settings_page.php:68
-msgid ""
-"Note: Leaving this setting unchecked will open the preview page in the "
-"active window."
-msgstr ""
-"Hinweis: Wenn Sie diese Einstellung nicht markieren, wird die Vorschauseite "
-"im aktiven Fenster geöffnet."
+#: templates/settings_page.php:65
+msgid "Open Print Page in New Tab"
+msgstr "Abrir la página de impresión en una nueva pestaña"
 
 #: templates/settings_page.php:85
 msgid "Label"
@@ -5170,6 +5135,16 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "Michael Nelson"
 msgstr "Michael Nelson"
+
+#~ msgid "Preview Settings"
+#~ msgstr "Einstellungen der Vorschauseite"
+
+#~ msgid ""
+#~ "Note: Leaving this setting unchecked will open the preview page in the "
+#~ "active window."
+#~ msgstr ""
+#~ "Hinweis: Wenn Sie diese Einstellung nicht markieren, wird die "
+#~ "Vorschauseite im aktiven Fenster geöffnet."
 
 #~ msgid "Print My Blog news"
 #~ msgstr "Meine Blog-News drucken"

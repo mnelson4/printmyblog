@@ -1,31 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-<<<<<<< HEAD
-"POT-Creation-Date: 2025-06-09 11:29-0700\n"
-"PO-Revision-Date: 2025-06-09 11:30-0700\n"
-=======
-"POT-Creation-Date: 2025-05-30 13:19-0700\n"
-"PO-Revision-Date: 2025-05-30 13:19-0700\n"
->>>>>>> e54fc7631a6a9b6a92386880c2ab9f5a2e5d7eb2
+"POT-Creation-Date: 2025-06-13 10:24-0700\n"
+"PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: it\n"
+"Language: my\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.6\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: printmyblog.php\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: "
-"__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.min.js\n"
-"X-Poedit-SearchPathExcluded-1: vendor\n"
-"X-Poedit-SearchPathExcluded-2: node_modules\n"
 
 #: designs/epub/classic/description.php:1
 #: designs/pdf/digital/buurma/description.php:1
@@ -237,7 +222,6 @@ msgctxt "comments title"
 msgid "%1$s Reply to &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s Replies to &ldquo;%2$s&rdquo;"
 msgstr[0] "%1$s Risposta a &ldquo;%2$s&rdquo;"
-msgstr[1] "%1$s Risposte a &ldquo;%2$s&rdquo;"
 
 #. translators: 1: date
 #: designs/epub/classic/templates/title_page.php:44
@@ -518,18 +502,13 @@ msgstr ""
 "CSS \"mayer-columns\" all'interno del tuo contenuto."
 
 #: designs/pdf/digital/mayer/description.php:50
-#, fuzzy
-#| msgid ""
-#| "Main matter defaults to being divided into columns. To force something to "
-#| "use the full page width, add the CSS class \"mayer-wide\" inside the "
-#| "content."
 msgid ""
 "Main matter defaults to being divided into columns. To force something to "
 "use the full page width, add the CSS class \"pmb-wide\" inside the content."
 msgstr ""
-"La questione principale viene divisa in colonne. Per forzare qualcosa a "
-"utilizzare l'intera larghezza della pagina, aggiungi la classe CSS \"mayer-"
-"wide\" all'interno del contenuto."
+"Per impostazione predefinita, il contenuto principale è diviso in colonne. "
+"Per forzare l'utilizzo dell'intera larghezza della pagina, aggiungere la "
+"classe CSS “pmb-wide” all'interno del contenuto."
 
 #: designs/pdf/print/classic/descriptions/classic.php:2
 msgid ""
@@ -711,14 +690,8 @@ msgstr ""
 "l'immagine in evidenza) in colonne."
 
 #: designs/pdf/print/haller/description.php:33
-#, fuzzy
-#| msgid ""
-#| "Single Column: shows all content specified by the \"Post Content\" design "
-#| "setting in a single column."
 msgid "Single Column: like the default template, but in a single column."
-msgstr ""
-"Colonna singola: mostra tutti i contenuti specificati dall'impostazione di "
-"progettazione \"Post Content\" in un'unica colonna."
+msgstr "Colonna singola: come il modello predefinito, ma in una sola colonna."
 
 #: designs/pdf/print/haller/description.php:34
 msgid ""
@@ -2472,13 +2445,11 @@ msgid "Image and Block Placement"
 msgstr "Posizionamento di immagini e blocchi"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1180
-#, fuzzy
-#| msgid "Image snapping and dynamic resizing only works using Pro Print."
 msgid ""
 "Image snapping and dynamic resizing only works using the Pro PDF Service."
 msgstr ""
-"Lo snap delle immagini e il ridimensionamento dinamico funzionano solo "
-"utilizzando Pro Print."
+"Lo snapping delle immagini e il ridimensionamento dinamico funzionano solo "
+"con il servizio Pro PDF."
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1181
 msgid ""
@@ -4133,7 +4104,6 @@ msgstr "materia frontale"
 msgid "%1$s layer of nesting"
 msgid_plural "%1$s layers of nesting"
 msgstr[0] "%1$s livello di nidificazione"
-msgstr[1] "%1$s livelli di nidificazione"
 
 #: templates/partials/select_designs.php:111
 #, php-format
@@ -4728,22 +4698,9 @@ msgstr "Contenuto superiore"
 msgid "Below Content"
 msgstr "Sotto il Contenuto"
 
-#: templates/settings_page.php:61
-msgid "Preview Settings"
-msgstr "Impostazioni della pagina di anteprima"
-
-#: templates/settings_page.php:67
-msgid "Open Quick Print preview page in a new tab. "
-msgstr ""
-"Aprire la pagina di anteprima della stampa rapida in una nuova scheda. "
-
-#: templates/settings_page.php:68
-msgid ""
-"Note: Leaving this setting unchecked will open the preview page in the "
-"active window."
-msgstr ""
-"Nota: se si lascia questa impostazione non selezionata, la pagina di "
-"anteprima verrà aperta nella finestra attiva."
+#: templates/settings_page.php:65
+msgid "Open Print Page in New Tab"
+msgstr "Aprire la pagina di stampa in una nuova scheda"
 
 #: templates/settings_page.php:85
 msgid "Label"
@@ -5187,6 +5144,16 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "Michael Nelson"
 msgstr "Michael Nelson"
+
+#~ msgid "Preview Settings"
+#~ msgstr "Impostazioni della pagina di anteprima"
+
+#~ msgid ""
+#~ "Note: Leaving this setting unchecked will open the preview page in the "
+#~ "active window."
+#~ msgstr ""
+#~ "Nota: se si lascia questa impostazione non selezionata, la pagina di "
+#~ "anteprima verrà aperta nella finestra attiva."
 
 #~ msgid "Print My Blog news"
 #~ msgstr "Stampa le notizie del mio blog"

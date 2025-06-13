@@ -1,31 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-<<<<<<< HEAD
-"POT-Creation-Date: 2025-06-09 11:31-0700\n"
-"PO-Revision-Date: 2025-06-09 11:33-0700\n"
-=======
-"POT-Creation-Date: 2025-05-30 13:19-0700\n"
-"PO-Revision-Date: 2025-05-30 13:19-0700\n"
->>>>>>> e54fc7631a6a9b6a92386880c2ab9f5a2e5d7eb2
+"POT-Creation-Date: 2025-06-13 10:24-0700\n"
+"PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: fr_FR\n"
+"Language: my\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.6\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: printmyblog.php\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: "
-"__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.min.js\n"
-"X-Poedit-SearchPathExcluded-1: ../vendor\n"
-"X-Poedit-SearchPathExcluded-2: node_modules\n"
 
 #: designs/epub/classic/description.php:1
 #: designs/pdf/digital/buurma/description.php:1
@@ -234,7 +219,6 @@ msgctxt "comments title"
 msgid "%1$s Reply to &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s Replies to &ldquo;%2$s&rdquo;"
 msgstr[0] "%1$s réponse à  &ldquo;%2$s&rdquo;"
-msgstr[1] "%1$s réponses à  &ldquo;%2$s&rdquo;"
 
 #. translators: 1: date
 #: designs/epub/classic/templates/title_page.php:44
@@ -514,18 +498,13 @@ msgstr ""
 "mayer de classe CSS à l’intérieur de votre contenu."
 
 #: designs/pdf/digital/mayer/description.php:50
-#, fuzzy
-#| msgid ""
-#| "Main matter defaults to being divided into columns. To force something to "
-#| "use the full page width, add the CSS class \"mayer-wide\" inside the "
-#| "content."
 msgid ""
 "Main matter defaults to being divided into columns. To force something to "
 "use the full page width, add the CSS class \"pmb-wide\" inside the content."
 msgstr ""
-"La matière principale ne peut pas être divisée en colonnes. Pour forcer "
-"quelque chose à utiliser la largeur de la pleine page, ajoutez la classe CSS "
-"« mayer-wide » à l’intérieur du contenu."
+"Par défaut, le contenu principal est divisé en colonnes. Pour forcer un "
+"élément à utiliser toute la largeur de la page, ajoutez la classe CSS « pmb-"
+"wide » à l'intérieur du contenu."
 
 #: designs/pdf/print/classic/descriptions/classic.php:2
 msgid ""
@@ -2044,10 +2023,8 @@ msgid "Haller Tabloid Print PDF"
 msgstr "Tabloïd Haller Imprimer PDF"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:689
-#, fuzzy
-#| msgid "Publication Preamble"
 msgid "Publication Logo Image"
-msgstr "Préambule de publication"
+msgstr "Image du logo de la publication"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:691
 msgid ""
@@ -4140,7 +4117,6 @@ msgstr "matière avant"
 msgid "%1$s layer of nesting"
 msgid_plural "%1$s layers of nesting"
 msgstr[0] "%1$s couche de nidification"
-msgstr[1] "%1$s couches de nidification"
 
 #: templates/partials/select_designs.php:111
 #, php-format
@@ -4735,21 +4711,9 @@ msgstr "Au-dessus du contenu"
 msgid "Below Content"
 msgstr "Au-dessous du contenu"
 
-#: templates/settings_page.php:61
-msgid "Preview Settings"
-msgstr "Paramètres de la page de prévisualisation"
-
-#: templates/settings_page.php:67
-msgid "Open Quick Print preview page in a new tab. "
-msgstr "Ouvrir la page d'aperçu de l'impression rapide dans un nouvel onglet. "
-
-#: templates/settings_page.php:68
-msgid ""
-"Note: Leaving this setting unchecked will open the preview page in the "
-"active window."
-msgstr ""
-"Note : Si ce paramètre n'est pas coché, la page de prévisualisation "
-"s'ouvrira dans la fenêtre active."
+#: templates/settings_page.php:65
+msgid "Open Print Page in New Tab"
+msgstr "Ouvrir la page d'impression dans un nouvel onglet"
 
 #: templates/settings_page.php:85
 msgid "Label"
@@ -5201,6 +5165,16 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "Michael Nelson"
 msgstr "Michael Nelson"
+
+#~ msgid "Preview Settings"
+#~ msgstr "Paramètres de la page de prévisualisation"
+
+#~ msgid ""
+#~ "Note: Leaving this setting unchecked will open the preview page in the "
+#~ "active window."
+#~ msgstr ""
+#~ "Note : Si ce paramètre n'est pas coché, la page de prévisualisation "
+#~ "s'ouvrira dans la fenêtre active."
 
 #~ msgid "Print My Blog news"
 #~ msgstr "Imprimer les nouvelles de Mon blog"

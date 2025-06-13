@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2025-06-09 12:13-0700\n"
+"POT-Creation-Date: 2025-06-13 10:38-0700\n"
 "PO-Revision-Date: 2021-05-25 13:59-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4134,18 +4134,8 @@ msgstr ""
 msgid "Below Content"
 msgstr ""
 
-#: templates/settings_page.php:61
-msgid "Preview Settings"
-msgstr ""
-
-#: templates/settings_page.php:67
-msgid "Open Quick Print preview page in a new tab. "
-msgstr ""
-
-#: templates/settings_page.php:68
-msgid ""
-"Note: Leaving this setting unchecked will open the preview page in the "
-"active window."
+#: templates/settings_page.php:65
+msgid "Open Print Page in New Tab"
 msgstr ""
 
 #: templates/settings_page.php:85

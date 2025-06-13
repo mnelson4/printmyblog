@@ -1,31 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-<<<<<<< HEAD
-"POT-Creation-Date: 2025-06-09 11:23-0700\n"
-"PO-Revision-Date: 2025-06-09 11:26-0700\n"
-=======
-"POT-Creation-Date: 2025-05-30 13:19-0700\n"
-"PO-Revision-Date: 2025-05-30 13:19-0700\n"
->>>>>>> e54fc7631a6a9b6a92386880c2ab9f5a2e5d7eb2
+"POT-Creation-Date: 2025-06-13 10:24-0700\n"
+"PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: zh\n"
+"Language: my\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.6\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: printmyblog.php\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: "
-"__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.min.js\n"
-"X-Poedit-SearchPathExcluded-1: vendor\n"
-"X-Poedit-SearchPathExcluded-2: node_modules\n"
 
 #: designs/epub/classic/description.php:1
 #: designs/pdf/digital/buurma/description.php:1
@@ -449,17 +434,11 @@ msgstr ""
 "columns”。"
 
 #: designs/pdf/digital/mayer/description.php:50
-#, fuzzy
-#| msgid ""
-#| "Main matter defaults to being divided into columns. To force something to "
-#| "use the full page width, add the CSS class \"mayer-wide\" inside the "
-#| "content."
 msgid ""
 "Main matter defaults to being divided into columns. To force something to "
 "use the full page width, add the CSS class \"pmb-wide\" inside the content."
 msgstr ""
-"主要内容默认分为列。要强制某些内容使用整个页面宽度，请在内容中添加 CSS "
-"类“mayer-wide”。"
+"主要内容默认分为几列。要强制使用页面全宽，请在内容中添加 CSS 类 “pmb-wide”。"
 
 #: designs/pdf/print/classic/descriptions/classic.php:2
 msgid ""
@@ -1842,10 +1821,8 @@ msgid "Haller Tabloid Print PDF"
 msgstr "哈勒小报打印 PDF"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:689
-#, fuzzy
-#| msgid "Publication Preamble"
 msgid "Publication Logo Image"
-msgstr "出版序言"
+msgstr "出版物徽标图片"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:691
 msgid ""
@@ -4335,19 +4312,9 @@ msgstr "内容之前"
 msgid "Below Content"
 msgstr "内容之后"
 
-#: templates/settings_page.php:61
-msgid "Preview Settings"
-msgstr "预览页面设置"
-
-#: templates/settings_page.php:67
-msgid "Open Quick Print preview page in a new tab. "
-msgstr "在新标签页中打开快速打印预览页面。"
-
-#: templates/settings_page.php:68
-msgid ""
-"Note: Leaving this setting unchecked will open the preview page in the "
-"active window."
-msgstr "注意：不选中此设置将在活动窗口中打开预览页面。"
+#: templates/settings_page.php:65
+msgid "Open Print Page in New Tab"
+msgstr "在新标签页打开打印页面。"
 
 #: templates/settings_page.php:85
 msgid "Label"
@@ -4762,6 +4729,14 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "Michael Nelson"
 msgstr "迈克尔·纳尔逊"
+
+#~ msgid "Preview Settings"
+#~ msgstr "预览页面设置"
+
+#~ msgid ""
+#~ "Note: Leaving this setting unchecked will open the preview page in the "
+#~ "active window."
+#~ msgstr "注意：不选中此设置将在活动窗口中打开预览页面。"
 
 #~ msgid "Print My Blog news"
 #~ msgstr "打印我的博客新闻"
