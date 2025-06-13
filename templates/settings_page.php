@@ -65,7 +65,6 @@ use PrintMyBlog\domain\FrontendPrintSettings;
                             <td>
                                 <input type="checkbox" id="pmb-open-new-tab" name="pmb_open_new_tab" value="1" <?php echo $settings->openNewTab() ? 'checked="checked"' : '' ?>>
                                 <label for="pmb-open-new-tab"> <?php esc_html_e('Buttons Open Print Page in a new tab. ', 'print-my-blog'); ?></label>
-                                <p class="pmb-help"><?php _e('Note: Leaving this setting unchecked will open the preview page in the active window.', 'print-my-blog'); ?></p>
                             </td>
                         </tr>
                     </tbody>
