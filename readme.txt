@@ -458,6 +458,8 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+= 3.27.9 June 18, 2025 =
+* Feature: for Print Buttons, optionally open print page in new tab
 
 = 3.27.8 May 30 2025 =
 * Enhancement: for Pro Print, added a filter for the project's print page
