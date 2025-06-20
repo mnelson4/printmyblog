@@ -32,7 +32,7 @@ if (defined('PMB_VERSION')) {
      */
     function pmb_already_active()
     {
-?>
+        ?>
         <div class="error">
             <p>
                 <?php
@@ -43,7 +43,7 @@ if (defined('PMB_VERSION')) {
                 ?>
             </p>
         </div>
-    <?php
+        <?php
     }
 
     add_action('admin_notices', 'pmb_already_active', 1, 0);
@@ -57,12 +57,12 @@ if (defined('PMB_VERSION')) {
      */
     function pmb_minimum_php_version_error()
     {
-    ?>
+        ?>
         <div class="error">
             <p>
                 <?php
                 printf(
-                    // translators: 1: version number, 2: version number, 3: HTML line break, 4: website address
+                // translators: 1: version number, 2: version number, 3: HTML line break, 4: website address
                     esc_html__(
                         'We’re sorry, but Print My Blog requires PHP version %1$s or greater in order to operate. You are currently running version %2$s.%3$sIn order to update your version of PHP, you will need to contact your current hosting provider.%3$sFor information on stable PHP versions, please go to %4$s.',
                         'print-my-blog'
@@ -75,20 +75,20 @@ if (defined('PMB_VERSION')) {
                 ?>
             </p>
         </div>
-    <?php
+        <?php
     }
 
     add_action('admin_notices', 'pmb_minimum_php_version_error', 1, 0);
 } elseif (
-    version_compare(
-        // first account for wp_version being pre-release
-        // (like RC, beta etc) which are usually in the format like 4.7-RC3-39519
-        strpos($wp_version, '-') > 0 ?
-            substr($wp_version, 0, strpos($wp_version, '-')) :
-            $wp_version,
-        PMB_MIN_WP_VER_REQUIRED,
-        '<'
-    )
+version_compare(
+// first account for wp_version being pre-release
+// (like RC, beta etc) which are usually in the format like 4.7-RC3-39519
+    strpos($wp_version, '-') > 0 ?
+        substr($wp_version, 0, strpos($wp_version, '-')) :
+        $wp_version,
+    PMB_MIN_WP_VER_REQUIRED,
+    '<'
+)
 ) {
     /**
      * Function that expresses WP version isn't high enough to run PMB.
@@ -98,12 +98,12 @@ if (defined('PMB_VERSION')) {
     function pmb_minimum_wp_version_error()
     {
         global $wp_version;
-    ?>
+        ?>
         <div class="error">
             <p>
                 <?php
                 printf(
-                    // translators: 1: version number, 2: version number, 3: HTML line break, 4: URL
+                // translators: 1: version number, 2: version number, 3: HTML line break, 4: URL
                     esc_html__(
                         'We’re sorry, but Print My Blog requires WordPress %1$s. You are using %2$s.%3$sFor information on how to update, please see %4$s.',
                         'print-my-blog'
@@ -116,7 +116,7 @@ if (defined('PMB_VERSION')) {
                 ?>
             </p>
         </div>
-<?php
+        <?php
     }
 
     add_action('admin_notices', 'pmb_minimum_wp_version_error', 1, 0);
@@ -138,7 +138,7 @@ if (defined('PMB_VERSION')) {
     define('PMB_ADMIN_SETTINGS_PAGE_SLUG', 'print-my-blog-settings');
     define('PMB_ADMIN_SETTINGS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_SETTINGS_PAGE_SLUG);
     define('PMB_ADMIN_HELP_PAGE_SLUG', 'print-my-blog-help');
-    define('PMB_ADMIN_DESIGNS_PAGE_SLUG', 'print-my-blog-designs');
+    define('PMB_ADMIN_DESIGNS_PAGE_SLUG','print-my-blog-designs');
     define('PMB_ADMIN_DESIGNS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_DESIGNS_PAGE_SLUG);
     define('PMB_ADMIN_HELP_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_HELP_PAGE_SLUG);
     define('PMB_DESIGNS_DIR', PMB_DIR . 'designs/');
@@ -181,7 +181,7 @@ if (defined('PMB_VERSION')) {
                     require_once dirname(__FILE__) . '/freemius/start.php';
                     // don't ask to opt in if it's a tastewp site
                     $site_url = get_site_url();
-                    $is_demo_site = (bool)preg_match('~https:\/\/([^\.]*\.[^-]*-tastewp\.com|[^.]*.instawp.xyz)~', $site_url);
+                    $is_demo_site = (bool)preg_match('~https:\/\/([^\.]*\.[^-]*-tastewp\.com|[^.]*.instawp.xyz)~',$site_url);
                     $pmb_fs = fs_dynamic_init(
                         array(
                             'id' => '5396',
@@ -225,10 +225,9 @@ if (defined('PMB_VERSION')) {
             isset($_REQUEST[PrintMyBlog\controllers\Frontend::PMB_AJAX_INDICATOR])
         ) &&
         isset($_REQUEST['action'], $_REQUEST['format']) &&
-        $_REQUEST['action'] === PrintMyBlog\controllers\Frontend::PMB_PROJECT_STATUS_ACTION
-    ) {
+        $_REQUEST['action'] === PrintMyBlog\controllers\Frontend::PMB_PROJECT_STATUS_ACTION) {
         $use_theme = true;
-        if (isset($_REQUEST[PrintMyBlog\controllers\Frontend::PMB_USE_THEME]) && $_REQUEST[PrintMyBlog\controllers\Frontend::PMB_USE_THEME] === '0') {
+        if(isset($_REQUEST[PrintMyBlog\controllers\Frontend::PMB_USE_THEME]) && $_REQUEST[PrintMyBlog\controllers\Frontend::PMB_USE_THEME] === '0'){
             $use_theme = false;
         }
 
@@ -239,7 +238,7 @@ if (defined('PMB_VERSION')) {
         // unregister the theme once we have a moment to override it
         add_action(
             'template_redirect',
-            function () {
+            function(){
                 // We don't want the theme interfering. Kill it.
                 add_filter('wp_using_themes', '__return_false');
             },
