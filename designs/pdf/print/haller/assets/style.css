@@ -7,34 +7,29 @@ Ask PDF viewers to display pages side-by-side by default.
 }
 
 /* pagination */
-@media print,
-screen {
+@media print, screen {
     @page {
         margin-top: 4em;
         margin-right: 1.5em;
         margin-bottom: 1.5em;
         margin-left: 1.5em;
         counter-reset: footnote;
-
         @left {
             content: flow(left-sidebar);
         }
-
         @right {
             content: flow(right-sidebar);
         }
-
         @footnote {
             border-top: solid black thin;
             padding-top: 8pt;
         }
     }
 
-    @page: left {
+    @page:left {
         @top {
             content: flow(left-header);
         }
-
         /*@leftnote {*/
         /*    width: 20vw;*/
         /*    padding-right: 1em;*/
@@ -42,11 +37,10 @@ screen {
         /*margin-left:20vw;*/
     }
 
-    @page: right {
+    @page:right {
         @top {
             content: flow(right-header);
         }
-
         /*@rightnote {*/
         /*    width: 20vw;*/
         /*    padding-right: 1em;*/
@@ -63,9 +57,8 @@ screen {
         prince-footnote-policy: keep-with-line;
     }
 
-    @page: first {
+    @page:first {
         margin-top: 1em;
-
         @top {
             content: normal;
         }
@@ -106,9 +99,8 @@ screen {
         margin-bottom: 1em;
         width: 2in;
     }
-
-    .pmb-haller-frontpage-main-sidebar>:first-child {
-        margin-top: 0 !important;
+    .pmb-haller-frontpage-main-sidebar>:first-child{
+        margin-top:0 !important;
     }
 
     .pmb-haller-frontpage-main-sidebar.left {
@@ -156,7 +148,7 @@ screen {
         width: 100%;
         margin-left: auto;
         margin-right: auto;
-        font-size: 80%;
+        font-size:80%;
     }
 
     .pmb-toc-list li {
@@ -188,13 +180,11 @@ screen {
     }
 
     #haller-repeat-header-wrap-right {
-        -prince-flow: static(right-header, start);
-        /* see https://www.princexml.com/doc/paged/#generated-content-in-page-regions */
+        -prince-flow: static(right-header, start); /* see https://www.princexml.com/doc/paged/#generated-content-in-page-regions */
     }
 
     #haller-repeat-header-wrap-left {
-        -prince-flow: static(left-header, start);
-        /* see https://www.princexml.com/doc/paged/#generated-content-in-page-regions */
+        -prince-flow: static(left-header, start); /* see https://www.princexml.com/doc/paged/#generated-content-in-page-regions */
     }
 
     .haller-repeat-header {
@@ -208,11 +198,11 @@ screen {
         flex-grow: 1;
     }
 
-    .haller-repeat-header div:first-child>.haller-repeat-header-column-inner {
+    .haller-repeat-header div:first-child > .haller-repeat-header-column-inner {
         margin-right: 3em;
     }
 
-    .haller-repeat-header div:last-child>.haller-repeat-header-column-inner {
+    .haller-repeat-header div:last-child > .haller-repeat-header-column-inner {
         margin-left: 3em;
     }
 
@@ -220,18 +210,16 @@ screen {
         flex-grow: 1;
     }
 
-    .haller-repeat-header-left .haller-repeat-header-column-inner {
-        border-right: 2px solid black;
+    .haller-repeat-header-left .haller-repeat-header-column-inner{
+        border-right:2px solid black;
+    }
+    .haller-repeat-header-right .haller-repeat-header-column-inner{
+        border-left:2px solid black;
     }
 
-    .haller-repeat-header-right .haller-repeat-header-column-inner {
-        border-left: 2px solid black;
+    .haller-header-logo{
+        max-height:50px;
     }
-
-    .haller-header-logo {
-        max-height: 50px;
-    }
-
     .haller-repeat-header-title {
         font-weight: bold;
         font-size: 2em;
@@ -242,9 +230,8 @@ screen {
         justify-content: center;
         align-items: center;
     }
-
-    .haller-repeat-header-column-inner {
-        height: 100%;
+    .haller-repeat-header-column-inner{
+        height:100%;
     }
 
     .haller-repeat-header-subtitle {
@@ -283,7 +270,7 @@ screen {
 
     .pmb-front-matter {
         border-bottom: 2px solid black;
-        -prince-float: top;
+        -prince-float:top;
     }
 
     .pmb.back-matter {
@@ -291,8 +278,8 @@ screen {
     }
 
     /* Override video height, make them not so tall*/
-    .pmb-posts div.pmb-video-screenshot-placeholder {
-        height: 200px;
+    .pmb-posts div.pmb-video-screenshot-placeholder{
+        height:200px;
     }
 
     /* General */
@@ -308,16 +295,11 @@ screen {
         text-decoration: none;
     }
 
-    img,
-    figure {
+    img, figure {
         max-width: 100%;
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5 {
+    h1, h2, h3, h4, h5 {
         margin-bottom: 0;
     }
 
@@ -340,7 +322,7 @@ screen {
         margin-left: 0;
     }
 
-    .pmb-section:not(.pmb-single-column) .wp-block-columns>.wp-block-column {
+    .pmb-section:not(.pmb-single-column) .wp-block-columns > .wp-block-column {
         width: 100% !important;
     }
 
@@ -366,8 +348,7 @@ screen {
         text-align: justify;
     }
 
-    .pmb-print-page .pmb-single-column,
-    .pmb-print-page .pmb-just-content {
+    .pmb-print-page .pmb-single-column, .pmb-print-page .pmb-just-content {
         column-span: all;
     }
 
@@ -419,25 +400,23 @@ screen {
         column-span: all;
     }
 
-    figure:not(.post-thumbnail, .pmb-dont-snap, .pmb-dont-snap figure) {
-        -prince-float: column snap;
-        -prince-float-policy: in-order;
+    figure:not(.post-thumbnail, .pmb-dont-snap, .pmb-dont-snap figure){
+        -prince-float:column snap;
+        -prince-float-policy:in-order;
     }
 
     /* Because we're in columns, save a bit of space by decreasing the indent on lists.*/
-    ul,
-    ol {
+    ul, ol {
         padding-left: 1em;
     }
 }
-
 /*
     Make the preview appear about the same size as in the PDF. Besides making the preview better,
     Javascript code that's calculating element dimensions will be better too.
     Note these margins are different from the classic designs' margins.
 */
-@media not print {
-    .pmb-project-content {
+@media not print{
+    .pmb-project-content{
         width: calc(11in - 1.5em - 1.5em);
     }
 
