@@ -143,6 +143,19 @@ function pmb_generate_live_doc(jqelement) {
     );
 }
 
+function hide_pmb_pro_print_window_options() {
+    const window_options_container = jQuery('.pmb-pro-print-window-options');
+    const window_option = jQuery('<div class="pmb-print-option"></div>');
+    const message = jQuery('<p>Please refresh this page to generate your project in a different format.</p>')
+    const refresh_button = jQuery('<button class="pmb-pro-window-button">Refresh</button>').on('click', ()=>{
+        location.reload();
+    });
+    window_options_container.empty();
+    window_option.append(refresh_button);
+    window_option.append(message);
+    window_options_container.append(window_option);
+}
+
 /**
  * Callbacks that listen for document.pmb_doc_conversion_requested should set pmb_doc_conversion_request_handled to TRUE immediately, otherwise
  * we'll assume no callback was set and so we'll just proceed with converting the file.
@@ -156,6 +169,7 @@ var pmb_doc_conversion_request_handled = false;
  */
 var pmb_pro_page_rendered = false;
 jQuery(document).on('ready', function(){
+    console.log("Loading document");
     var download_test_button = jQuery('.pmb-download-test');
     setTimeout(function(){
             pmb_stop_doing_button(download_test_button);
@@ -198,6 +212,7 @@ jQuery(document).on('ready', function(){
         if(pmb_pro_page_rendered){
             window.print();
         } else {
+            hide_pmb_pro_print_window_options();
             var jqelement = jQuery(event.currentTarget);
             pmb_doing_button(jqelement);
             // wait for the design to call document.pmb_doc_conversion_ready (and to set pmb_doc_conversion_request_handled

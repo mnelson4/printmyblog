@@ -419,23 +419,9 @@ Ask PDF viewers to display pages side-by-side by default.
     .pmb-project-content{
         width: calc(11in - 1.5em - 1.5em);
     }
-}
 
-  /* Hidden by default */
-#haller-repeat-header-wrap-left {
-    display: none;
-}
-
-  /* Hidden in browser print */
-@media print {
     #haller-repeat-header-wrap-left {
-      display: none;
-    }
-
-    /* Prince-only override */
-    #haller-repeat-header-wrap-left {
-      -prince-display: always;
-      display: block;
+        display: none;
     }
 }
 
