@@ -32,7 +32,8 @@ $generate_url = add_query_arg(
 
         <div class="pmb-pro-print-window-content">
             <div class="pmb-pro-print-window-options">
-                <div class="pmb-print-option">
+
+                <div id="pmb-print-with-browser-option" class="pmb-print-option">
                     <h2><?php esc_html_e('Free', 'print-my-blog');?></h2>
                     <a id="pmb-print-with-browser" class="pmb-pro-window-button" tabindex="0">
                         <?php _e('Print with Browser', 'print-my-blog'); ?>
@@ -40,7 +41,13 @@ $generate_url = add_query_arg(
                     <p><?php esc_html_e('Limited to features supported by your browser.', 'print-my-blog');?></p>
                     <p><a target="_blank" href="https://printmy.blog/free-vs-pro/"><?php esc_html_e('Compare printing with your browser vs Pro PDF Service', 'print-my-blog');?></a></p>
                 </div>
-                <div class="pmb-print-option pmb-big-option pmb-highlight">
+                <div id="pmb-print-refresh-window-option" class="pmb-print-option" style="display: none">
+                    <h2><?php esc_html_e('Note', 'print-my-blog');?></h2>
+                    <button id="pmb-refresh-print-window-button" class="pmb-pro-window-button"><?php esc_html_e('Refresh', 'print-my-blog')?></button>
+                    <p id="pmb-refresh-for-browser" style="display: none"><?php esc_html_e('This page has been optimized for printing using our Pro PDF Print Service. Please push the refresh button if you want to print the page through your browser.', 'print-my-blog');?></p>
+                    <p id="pmb-refresh-for-pro-pdf" style="display: none"><?php esc_html_e('This page has been optimized for printing from your browser. Please push the refresh button if you want to print the page using our Pro PDF Service.', 'print-my-blog');?></p>
+                </div>
+                <div id="pmb-print-pro-pdf-option" class="pmb-print-option pmb-big-option pmb-highlight">
                     <h2><?php esc_html_e('Pro PDF Service', 'print-my-blog');?></h2>
                     <div style="display:none" class="pmb-warning" id="pmb-print-page-warnings"></div>
                     <button class="pmb-pro-window-button pmb-download-test pmb-disabled">

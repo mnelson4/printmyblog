@@ -142,18 +142,34 @@ function pmb_generate_live_doc(jqelement) {
         }
     );
 }
+/**
+ * Hide a targeted print option and replace it with a refresh button and message. The purpose of this function is to avoid rendering issues when two generation buttons are clicked consecutively. 
+ * @param {*} option_to_hide The jQuery element of the .pmb-print-option element to hide. Must be either "browser" or "propdf".
+ */
+function pmb_hide_print_option(option_to_hide) {
+    const refresh_window_option = jQuery('#pmb-print-refresh-window-option');
+    const print_with_browser_option = jQuery('#pmb-print-with-browser-option');
+    const print_with_pro_pdf_option = jQuery('#pmb-print-pro-pdf-option');
+    const refresh_window_option_button = jQuery('#pmb-refresh-print-window-button');
+    const refresh_for_browser_msg = jQuery('#pmb-refresh-for-browser');
+    const refresh_for_pro_pdf_msg = jQuery('#pmb-refresh-for-pro-pdf');
 
-function hide_pmb_pro_print_window_options() {
-    const window_options_container = jQuery('.pmb-pro-print-window-options');
-    const window_option = jQuery('<div class="pmb-print-option"></div>');
-    const message = jQuery('<p>Please refresh this page to generate your project in a different format.</p>')
-    const refresh_button = jQuery('<button class="pmb-pro-window-button">Refresh</button>').on('click', ()=>{
+    //Attach an event listener to the refresh button to refresh the page when it is clicked.
+    refresh_window_option_button.on('click', ()=>{
         location.reload();
     });
-    window_options_container.empty();
-    window_option.append(refresh_button);
-    window_option.append(message);
-    window_options_container.append(window_option);
+
+    if (option_to_hide === "browser") {
+        print_with_browser_option.hide();
+        refresh_for_browser_msg.show();
+    } else if (option_to_hide === "propdf") {
+        print_with_pro_pdf_option.hide();
+        refresh_for_pro_pdf_msg.show();
+    }    
+    
+    //Show a message and refresh button. 
+    refresh_window_option.show();
+
 }
 
 /**
@@ -187,6 +203,9 @@ jQuery(document).on('ready', function(){
         }
     });
     download_test_button.click(function(event){
+        //Hide the Print with Browser print option and replace it with a refresh button and message.
+        pmb_hide_print_option('browser');
+
         var jqelement = jQuery(event.currentTarget);
         pmb_doing_button(jqelement);
         if(pmb_pro_page_rendered){
@@ -212,7 +231,9 @@ jQuery(document).on('ready', function(){
         if(pmb_pro_page_rendered){
             window.print();
         } else {
-            hide_pmb_pro_print_window_options();
+            //Hide the Pro PDF Service print option and replace it with a refresh button and message.
+            pmb_hide_print_option('propdf');
+
             var jqelement = jQuery(event.currentTarget);
             pmb_doing_button(jqelement);
             // wait for the design to call document.pmb_doc_conversion_ready (and to set pmb_doc_conversion_request_handled
