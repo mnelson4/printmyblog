@@ -459,7 +459,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 = 3.27.10 June 20, 2025 =
-* Bugfix: hide Haller Tabloid double header from page preview
+* Enhancement: Updated Freemius to version 2.12.1.
+* Bugfix: Issue #395 - Hid Haller Tabloid double header from page preview
+* Bugfix: Issue #408 - Added a refresh button on Print Page to prevent rendering issue caused by selecting Print with Browser and Download PDF consecutively. 
 
 = 3.27.9 June 18, 2025 =
 * Feature: for Print Buttons, optionally open print page in new tab
