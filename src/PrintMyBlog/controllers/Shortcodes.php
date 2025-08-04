@@ -250,6 +250,9 @@ class Shortcodes extends BaseController
     {
         global $pmb_project, $pmb_format;
         $key = isset($atts['name']) ? (string)$atts['name'] : '';
+
+        $key = sanitize_key($key);
+
         if ($key) {
             if ($pmb_project instanceof Project) {
                 return $pmb_project->getSetting($key);

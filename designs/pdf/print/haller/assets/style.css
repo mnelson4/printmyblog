@@ -419,4 +419,12 @@ Ask PDF viewers to display pages side-by-side by default.
     .pmb-project-content{
         width: calc(11in - 1.5em - 1.5em);
     }
+
+    #haller-repeat-header-wrap-left {
+        display: none;
+    }
 }
+
+
+
+
