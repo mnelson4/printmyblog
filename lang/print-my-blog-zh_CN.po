@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2025-06-13 10:24-0700\n"
+"POT-Creation-Date: 2025-08-04 12:38-0700\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: designs/epub/classic/description.php:1
 #: designs/pdf/digital/buurma/description.php:1
@@ -712,6 +712,10 @@ msgid ""
 msgstr ""
 "所有图像都自动包含在 Word 文档文件中（而不仅仅是指向外部图像源）。这使得文件"
 "大小更大，但允许用户在与互联网断开连接时查看图像。"
+
+#: freemius/assets/js/pricing/freemius-pricing.js:2
+msgid "display"
+msgstr ""
 
 #: inc/design_functions.php:170
 msgid "Powered by Print My Blog Pro & WordPress"
@@ -2534,9 +2538,9 @@ msgid ""
 "require a \".doc\" file. Word Documents typically require manual formatting "
 "in your chosen Word Processor."
 msgstr ""
-"文件可在Microsoft Word，Google Docs，LibreOffice等中编辑。对于共享需"
-"要“.doc”文件的人员和程序很有用。Word 文档通常需要在您选择的文字处理器中手动设"
-"置格式。"
+"文件可在Microsoft Word，Google Docs，LibreOffice等中编辑。对于共享需要“."
+"doc”文件的人员和程序很有用。Word 文档通常需要在您选择的文字处理器中手动设置格"
+"式。"
 
 #: src/PrintMyBlog/domain/DefaultFileFormats.php:82
 msgid "Create unlimited Word Documents with a Pro Plan."
@@ -2555,8 +2559,8 @@ msgid ""
 "Print%2$s. It has free and paid options. %3$sSee full feature comparison.%2$s"
 msgstr ""
 "这是快速简便的选项，最适合为您自己的记录制作打印输出。如需更专业和功能齐全的"
-"内容，请使用 %1$sPro Print%2$s。它有免费和付费选项。%3$s查看完整功能比较。"
-"%2$s"
+"内容，请使用 %1$sPro Print%2$s。它有免费和付费选项。%3$s查看完整功能比"
+"较。%2$s"
 
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:44
 msgid "About Pro Print"
@@ -3463,8 +3467,8 @@ msgid ""
 "You are using HTML that might be beyond your permission. Only the following "
 "HTML tags are allowed:%1$s%2$s, and the following attributes: %3$s. If you "
 "are using the style attribute, make sure you don’t end in a semicolon and "
-"remove whitespace between CSS properties (e.g. "
-"\"style='color:red;height:12px'\")"
+"remove whitespace between CSS properties (e.g. \"style='color:red;"
+"height:12px'\")"
 msgstr ""
 "您正在使用的 HTML 可能超出了您的权限。仅允许使用以下 HTML 标记：%1$s%2$s 和以"
 "下属性： %3$s. 如果您使用的是 style 属性，请确保不要以分号结尾并删除 CSS 属性"
@@ -3630,47 +3634,68 @@ msgstr "下载电子发布"
 msgid "Please refer to our documentation if you have questions about styling "
 msgstr "如果您对样式有疑问，请参阅我们的文档"
 
-#: templates/partials/pro_print_page_window.php:36
+#: templates/partials/pro_print_page_window.php:37
 msgid "Free"
 msgstr "免费"
 
-#: templates/partials/pro_print_page_window.php:38
+#: templates/partials/pro_print_page_window.php:39
 msgid "Print with Browser"
 msgstr "使用浏览器打印"
 
-#: templates/partials/pro_print_page_window.php:40
+#: templates/partials/pro_print_page_window.php:41
 msgid "Limited to features supported by your browser."
 msgstr "仅限于您的浏览器支持的功能。"
 
-#: templates/partials/pro_print_page_window.php:41
+#: templates/partials/pro_print_page_window.php:42
 msgid "Compare printing with your browser vs Pro PDF Service"
 msgstr "比较使用浏览器与专业PDF服务的打印"
 
-#: templates/partials/pro_print_page_window.php:44
+#: templates/partials/pro_print_page_window.php:45
+msgid "Note"
+msgstr ""
+
+#: templates/partials/pro_print_page_window.php:46
+msgid "Refresh"
+msgstr ""
+
+#: templates/partials/pro_print_page_window.php:47
+msgid ""
+"This page has been optimized for printing using our Pro PDF Print Service. "
+"Please push the refresh button if you want to print the page through your "
+"browser."
+msgstr ""
+
+#: templates/partials/pro_print_page_window.php:48
+msgid ""
+"This page has been optimized for printing from your browser. Please push the "
+"refresh button if you want to print the page using our Pro PDF Service."
+msgstr ""
+
+#: templates/partials/pro_print_page_window.php:51
 msgid "Pro PDF Service"
 msgstr "专业版 PDF 服务"
 
-#: templates/partials/pro_print_page_window.php:47
+#: templates/partials/pro_print_page_window.php:54
 msgid "Download Test PDF"
 msgstr "下载测试文档"
 
-#: templates/partials/pro_print_page_window.php:53
+#: templates/partials/pro_print_page_window.php:60
 msgid "Purchase Subscription"
 msgstr "购买订阅"
 
-#: templates/partials/pro_print_page_window.php:55
+#: templates/partials/pro_print_page_window.php:62
 msgid "Feature Comparison List"
 msgstr "功能比较列表"
 
-#: templates/partials/pro_print_page_window.php:60
+#: templates/partials/pro_print_page_window.php:67
 msgid "Upgrade Subscription"
 msgstr "升级课程会员订阅计划"
 
-#: templates/partials/pro_print_page_window.php:62
+#: templates/partials/pro_print_page_window.php:69
 msgid "Sorry you have no more download credits for this month."
 msgstr "抱歉，您本月没有更多的下载积分。"
 
-#: templates/partials/pro_print_page_window.php:63
+#: templates/partials/pro_print_page_window.php:70
 msgid ""
 "Please upgrade your plan for more credits per month. If you have a yearlong "
 "subscription and this is the first time, feel free to contact us and ask for "
@@ -3679,27 +3704,27 @@ msgstr ""
 "请升级您的计划以获得每月更多积分。如果您有为期一年的订阅，并且这是第一次，请"
 "随时与我们联系并要求一次性增加您的积分。"
 
-#: templates/partials/pro_print_page_window.php:66
+#: templates/partials/pro_print_page_window.php:73
 msgid "Please download the Test PDF before the Paid PDF"
 msgstr "请在付费 PDF 之前下载测试 PDF"
 
-#: templates/partials/pro_print_page_window.php:67
+#: templates/partials/pro_print_page_window.php:74
 msgid "Download Paid PDF"
 msgstr "下载付费 PDF"
 
-#: templates/partials/pro_print_page_window.php:69
+#: templates/partials/pro_print_page_window.php:76
 msgid "Always download a free Test PDF before a Paid PDF."
 msgstr "始终先下载免费的测试 PDF，然后再下载付费 PDF。"
 
-#: templates/partials/pro_print_page_window.php:72
+#: templates/partials/pro_print_page_window.php:79
 msgid "One credit was used to generate the file."
 msgstr "一个配额用于生成文件。"
 
-#: templates/partials/pro_print_page_window.php:73
+#: templates/partials/pro_print_page_window.php:80
 msgid "Return to Generate Page"
 msgstr "返回生成页面"
 
-#: templates/partials/pro_print_page_window.php:78
+#: templates/partials/pro_print_page_window.php:85
 msgid "Read how your data is handled"
 msgstr "了解如何处理您的数据"
 

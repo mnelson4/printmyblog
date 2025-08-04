@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2025-06-13 10:24-0700\n"
+"POT-Creation-Date: 2025-08-04 12:38-0700\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: designs/epub/classic/description.php:1
 #: designs/pdf/digital/buurma/description.php:1
@@ -831,6 +831,10 @@ msgstr ""
 "Word (au lieu de simplement pointer vers la source d’image externe). Cela "
 "agrandit la taille du fichier, mais permet aux utilisateurs de visualiser "
 "des images lorsqu’ils sont déconnectés d’Internet."
+
+#: freemius/assets/js/pricing/freemius-pricing.js:2
+msgid "display"
+msgstr ""
 
 #: inc/design_functions.php:170
 msgid "Powered by Print My Blog Pro & WordPress"
@@ -1865,8 +1869,8 @@ msgstr ""
 "la pièce (toutes les tailles des autres en-têtes sont dérivées de la taille "
 "principale de la police). Utilisez n’importe quel mot clé reconnu %1$sCS de "
 "la taille d’une police%2$s (comme « grand », « moyen », « petit ») ou une "
-"%3$slengage dans toutes les unités%2$s (par exemple « 14pt », « 50 %% » ou "
-"« 10px »)."
+"%3$slengage dans toutes les unités%2$s (par exemple « 14pt », « 50 %% » ou « "
+"10px »)."
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:448
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1365
@@ -2307,8 +2311,8 @@ msgid ""
 "your browser."
 msgstr ""
 "Uniquement ajouté lors de l’utilisation du service d’impression Pro pour les "
-"utilisateurs gratuits et amateurs. Conformément aux directives "
-"WordPress.org, pas ajouté lors de l’impression à partir de votre navigateur."
+"utilisateurs gratuits et amateurs. Conformément aux directives WordPress."
+"org, pas ajouté lors de l’impression à partir de votre navigateur."
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1074
 msgid ""
@@ -2809,8 +2813,8 @@ msgid ""
 "in your chosen Word Processor."
 msgstr ""
 "Fichier modifiable dans Microsoft Word, Google Docs, LibreOffice, etc. Utile "
-"pour partager des personnes et des programmes qui nécessitent un fichier "
-"« .doc ». Les documents Word nécessitent généralement une mise en forme "
+"pour partager des personnes et des programmes qui nécessitent un fichier « ."
+"doc ». Les documents Word nécessitent généralement une mise en forme "
 "manuelle dans le traitement de texte de votre choix."
 
 #: src/PrintMyBlog/domain/DefaultFileFormats.php:82
@@ -3824,8 +3828,8 @@ msgid ""
 "You are using HTML that might be beyond your permission. Only the following "
 "HTML tags are allowed:%1$s%2$s, and the following attributes: %3$s. If you "
 "are using the style attribute, make sure you don’t end in a semicolon and "
-"remove whitespace between CSS properties (e.g. "
-"\"style='color:red;height:12px'\")"
+"remove whitespace between CSS properties (e.g. \"style='color:red;"
+"height:12px'\")"
 msgstr ""
 "Vous utilisez du code HTML qui pourrait être au-delà de votre autorisation. "
 "Seules les balises HTML suivantes sont autorisées :%1$s%2$s et les attributs "
@@ -3999,48 +4003,69 @@ msgstr ""
 "Veuillez vous référer à notre documentation si vous avez des questions sur "
 "le style "
 
-#: templates/partials/pro_print_page_window.php:36
+#: templates/partials/pro_print_page_window.php:37
 msgid "Free"
 msgstr "Gratuit"
 
-#: templates/partials/pro_print_page_window.php:38
+#: templates/partials/pro_print_page_window.php:39
 msgid "Print with Browser"
 msgstr "Imprimer avec navigateur"
 
-#: templates/partials/pro_print_page_window.php:40
+#: templates/partials/pro_print_page_window.php:41
 msgid "Limited to features supported by your browser."
 msgstr "Limité aux fonctionnalités prises en charge par votre navigateur."
 
-#: templates/partials/pro_print_page_window.php:41
+#: templates/partials/pro_print_page_window.php:42
 msgid "Compare printing with your browser vs Pro PDF Service"
 msgstr "Comparez l’impression avec votre navigateur vs Pro PDF Service"
 
-#: templates/partials/pro_print_page_window.php:44
+#: templates/partials/pro_print_page_window.php:45
+msgid "Note"
+msgstr ""
+
+#: templates/partials/pro_print_page_window.php:46
+msgid "Refresh"
+msgstr ""
+
+#: templates/partials/pro_print_page_window.php:47
+msgid ""
+"This page has been optimized for printing using our Pro PDF Print Service. "
+"Please push the refresh button if you want to print the page through your "
+"browser."
+msgstr ""
+
+#: templates/partials/pro_print_page_window.php:48
+msgid ""
+"This page has been optimized for printing from your browser. Please push the "
+"refresh button if you want to print the page using our Pro PDF Service."
+msgstr ""
+
+#: templates/partials/pro_print_page_window.php:51
 msgid "Pro PDF Service"
 msgstr "Service d’impression Pro"
 
-#: templates/partials/pro_print_page_window.php:47
+#: templates/partials/pro_print_page_window.php:54
 msgid "Download Test PDF"
 msgstr "Télécharger Test PDF"
 
-#: templates/partials/pro_print_page_window.php:53
+#: templates/partials/pro_print_page_window.php:60
 msgid "Purchase Subscription"
 msgstr "Acheter Abonnement"
 
-#: templates/partials/pro_print_page_window.php:55
+#: templates/partials/pro_print_page_window.php:62
 msgid "Feature Comparison List"
 msgstr "Liste de comparaison de fonctionnalités"
 
-#: templates/partials/pro_print_page_window.php:60
+#: templates/partials/pro_print_page_window.php:67
 msgid "Upgrade Subscription"
 msgstr "Mise à niveau de l'abonnement"
 
-#: templates/partials/pro_print_page_window.php:62
+#: templates/partials/pro_print_page_window.php:69
 msgid "Sorry you have no more download credits for this month."
 msgstr ""
 "Désolé que vous n’avez plus de crédits de téléchargement pour ce mois-ci."
 
-#: templates/partials/pro_print_page_window.php:63
+#: templates/partials/pro_print_page_window.php:70
 msgid ""
 "Please upgrade your plan for more credits per month. If you have a yearlong "
 "subscription and this is the first time, feel free to contact us and ask for "
@@ -4051,27 +4076,27 @@ msgstr ""
 "à nous contacter et demandez une augmentation non significative de vos "
 "crédits."
 
-#: templates/partials/pro_print_page_window.php:66
+#: templates/partials/pro_print_page_window.php:73
 msgid "Please download the Test PDF before the Paid PDF"
 msgstr "S’il vous plaît télécharger le TEST PDF avant le PDF payant"
 
-#: templates/partials/pro_print_page_window.php:67
+#: templates/partials/pro_print_page_window.php:74
 msgid "Download Paid PDF"
 msgstr "Télécharger Paid PDF"
 
-#: templates/partials/pro_print_page_window.php:69
+#: templates/partials/pro_print_page_window.php:76
 msgid "Always download a free Test PDF before a Paid PDF."
 msgstr "S’il vous plaît télécharger le TEST PDF avant le PDF payant"
 
-#: templates/partials/pro_print_page_window.php:72
+#: templates/partials/pro_print_page_window.php:79
 msgid "One credit was used to generate the file."
 msgstr "Un crédit a été utilisé pour générer le fichier."
 
-#: templates/partials/pro_print_page_window.php:73
+#: templates/partials/pro_print_page_window.php:80
 msgid "Return to Generate Page"
 msgstr "Retour à générer la page"
 
-#: templates/partials/pro_print_page_window.php:78
+#: templates/partials/pro_print_page_window.php:85
 msgid "Read how your data is handled"
 msgstr "Découvrez comment vos données ont été traitées"
 

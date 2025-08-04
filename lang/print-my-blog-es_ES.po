@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2025-06-13 10:24-0700\n"
+"POT-Creation-Date: 2025-08-04 12:38-0700\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: designs/epub/classic/description.php:1
 #: designs/pdf/digital/buurma/description.php:1
@@ -826,6 +826,10 @@ msgstr ""
 "Word (en lugar de simplemente apuntar a la fuente de imagen externa). Esto "
 "hace que el tamaño del archivo sea más grande, pero permite a los usuarios "
 "ver imágenes mientras están desconectados de Internet."
+
+#: freemius/assets/js/pricing/freemius-pricing.js:2
+msgid "display"
+msgstr ""
 
 #: inc/design_functions.php:170
 msgid "Powered by Print My Blog Pro & WordPress"
@@ -3511,8 +3515,8 @@ msgstr "NULL"
 #: src/Twine/forms/base/FormSection.php:858
 msgid "This is not a valid absolute URL. Eg, http://domain.com/monkey.jpg"
 msgstr ""
-"No se trata de una DIRECCIÓN URL absoluta válida. Por ejemplo, http://"
-"domain.com/monkey.jpg"
+"No se trata de una DIRECCIÓN URL absoluta válida. Por ejemplo, http://domain."
+"com/monkey.jpg"
 
 #: src/Twine/forms/base/FormSection.php:861
 msgid "Please check your input"
@@ -3791,8 +3795,8 @@ msgid ""
 "You are using HTML that might be beyond your permission. Only the following "
 "HTML tags are allowed:%1$s%2$s, and the following attributes: %3$s. If you "
 "are using the style attribute, make sure you don’t end in a semicolon and "
-"remove whitespace between CSS properties (e.g. "
-"\"style='color:red;height:12px'\")"
+"remove whitespace between CSS properties (e.g. \"style='color:red;"
+"height:12px'\")"
 msgstr ""
 "Está utilizando HTML que podría estar más allá de su permiso. Solo se "
 "permiten las siguientes etiquetas HTML:%1$s%2$s y los siguientes atributos: "
@@ -3964,47 +3968,68 @@ msgstr "Descargar ePub"
 msgid "Please refer to our documentation if you have questions about styling "
 msgstr "Consulte nuestra documentación si tiene preguntas sobre el estilo "
 
-#: templates/partials/pro_print_page_window.php:36
+#: templates/partials/pro_print_page_window.php:37
 msgid "Free"
 msgstr "Gratis"
 
-#: templates/partials/pro_print_page_window.php:38
+#: templates/partials/pro_print_page_window.php:39
 msgid "Print with Browser"
 msgstr "Imprimir con navegador"
 
-#: templates/partials/pro_print_page_window.php:40
+#: templates/partials/pro_print_page_window.php:41
 msgid "Limited to features supported by your browser."
 msgstr "Limitado a las características compatibles con su navegador."
 
-#: templates/partials/pro_print_page_window.php:41
+#: templates/partials/pro_print_page_window.php:42
 msgid "Compare printing with your browser vs Pro PDF Service"
 msgstr "Compare la impresión con su navegador vs Pro PDF Service"
 
-#: templates/partials/pro_print_page_window.php:44
+#: templates/partials/pro_print_page_window.php:45
+msgid "Note"
+msgstr ""
+
+#: templates/partials/pro_print_page_window.php:46
+msgid "Refresh"
+msgstr ""
+
+#: templates/partials/pro_print_page_window.php:47
+msgid ""
+"This page has been optimized for printing using our Pro PDF Print Service. "
+"Please push the refresh button if you want to print the page through your "
+"browser."
+msgstr ""
+
+#: templates/partials/pro_print_page_window.php:48
+msgid ""
+"This page has been optimized for printing from your browser. Please push the "
+"refresh button if you want to print the page using our Pro PDF Service."
+msgstr ""
+
+#: templates/partials/pro_print_page_window.php:51
 msgid "Pro PDF Service"
 msgstr "Servicio de impresión Pro"
 
-#: templates/partials/pro_print_page_window.php:47
+#: templates/partials/pro_print_page_window.php:54
 msgid "Download Test PDF"
 msgstr "Descargar prueba PDF"
 
-#: templates/partials/pro_print_page_window.php:53
+#: templates/partials/pro_print_page_window.php:60
 msgid "Purchase Subscription"
 msgstr "Suscripción de compra"
 
-#: templates/partials/pro_print_page_window.php:55
+#: templates/partials/pro_print_page_window.php:62
 msgid "Feature Comparison List"
 msgstr "Lista de comparación de características"
 
-#: templates/partials/pro_print_page_window.php:60
+#: templates/partials/pro_print_page_window.php:67
 msgid "Upgrade Subscription"
 msgstr "Actualizar Suscripción"
 
-#: templates/partials/pro_print_page_window.php:62
+#: templates/partials/pro_print_page_window.php:69
 msgid "Sorry you have no more download credits for this month."
 msgstr "Lo sentimos, no tiene más créditos de descarga para este mes."
 
-#: templates/partials/pro_print_page_window.php:63
+#: templates/partials/pro_print_page_window.php:70
 msgid ""
 "Please upgrade your plan for more credits per month. If you have a yearlong "
 "subscription and this is the first time, feel free to contact us and ask for "
@@ -4014,27 +4039,27 @@ msgstr ""
 "de un año y esta es la primera vez, no dude en ponerse en contacto con "
 "nosotros y solicitar un aumento único a sus créditos."
 
-#: templates/partials/pro_print_page_window.php:66
+#: templates/partials/pro_print_page_window.php:73
 msgid "Please download the Test PDF before the Paid PDF"
 msgstr "Descargue el PDF de prueba antes del PDF de pago"
 
-#: templates/partials/pro_print_page_window.php:67
+#: templates/partials/pro_print_page_window.php:74
 msgid "Download Paid PDF"
 msgstr "Descargar PDF de pago"
 
-#: templates/partials/pro_print_page_window.php:69
+#: templates/partials/pro_print_page_window.php:76
 msgid "Always download a free Test PDF before a Paid PDF."
 msgstr "Descargue el PDF de prueba antes del PDF de pago"
 
-#: templates/partials/pro_print_page_window.php:72
+#: templates/partials/pro_print_page_window.php:79
 msgid "One credit was used to generate the file."
 msgstr "Se utilizó un crédito para generar el archivo."
 
-#: templates/partials/pro_print_page_window.php:73
+#: templates/partials/pro_print_page_window.php:80
 msgid "Return to Generate Page"
 msgstr "Volver a generar página"
 
-#: templates/partials/pro_print_page_window.php:78
+#: templates/partials/pro_print_page_window.php:85
 msgid "Read how your data is handled"
 msgstr "Lea cómo se manejaron sus datos"
 
