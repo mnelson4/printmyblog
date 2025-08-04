@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.27.10-beta-2
+Stable tag: 3.27.10
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -458,10 +458,10 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
-= 3.27.10 June 20, 2025 =
+= 3.27.10 August 4, 2025 =
 * Enhancement: Updated Freemius to version 2.12.1.
-* Bugfix: Issue #395 - Hid Haller Tabloid double header from page preview
-* Bugfix: Issue #408 - Added a refresh button on Print Page to prevent rendering issue caused by selecting Print with Browser and Download PDF consecutively. 
+* Bugfix: [Hide Haller Tabloid double header from page preview](https://github.com/mnelson4/printmyblog/issues/395)
+* Bugfix: [Added a refresh button on Print Page to prevent rendering issue caused by selecting Print with Browser and Download PDF consecutively.](https://github.com/mnelson4/printmyblog/issues/408)
 
 = 3.27.9 June 18, 2025 =
 * Feature: for Print Buttons, optionally open print page in new tab
