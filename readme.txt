@@ -462,7 +462,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 = 3.27.11 August 4, 2025 =
-* Documentation: Added DB backup warning message to Installation Instructions & compatibility notes.
+* Documentation: Added DB backup warning message to Installation Instructions.
+* Documentation: Added compatibility note related to Divi Theme.
+* Enhancement: Changed Print Option help text wording.
 
 = 3.27.10 August 4, 2025 =
 * Enhancement: Updated Freemius to version 2.12.1.
