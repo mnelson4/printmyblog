@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.27.10
+Stable tag: 3.27.11
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -199,6 +199,8 @@ If this doesn't meet your needs, there are good paid and free alternatives.
 Best Wishes Publishing for Print with WordPress!
 
 == Installation ==
+
+> ⚠️IMPORTANT: Please make sure that you back up your database before running Print My Blog just in case there is an unexpected issue. 
 
 1. Upload the plugin files to the `/wp-content/plugins/print-my-blog` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress.
