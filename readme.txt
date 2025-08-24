@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.27.10
+Stable tag: 3.27.11
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -165,6 +165,7 @@ PMB strives to be compatible with all plugins. But here are some that are especi
 * [WPML](https://wpml.org) for more advanced translating of projects, and adding print buttons in different languages. [Read Translating Projects with WPML Plugin](https://printmy.blog/user-guide/design-layout/translating-projects-with-wpml-plugin/)
 * [TablePress](https://wordpress.org/plugins/tablepress/) makes tables look good in print too, even when they span multiple pages
 
+> ⚠️Incompability: Some users have reported incompability issues with the Divi theme. If you are using this theme, please use Print My Blog with caution and always back up your database before use. 
 
 If you are delighted how PMB worked with another plugin, or had trouble, please let us know!
 
@@ -199,6 +200,8 @@ If this doesn't meet your needs, there are good paid and free alternatives.
 Best Wishes Publishing for Print with WordPress!
 
 == Installation ==
+
+> ⚠️IMPORTANT: Please make sure that you back up your database before running Print My Blog just in case there is an unexpected issue. 
 
 1. Upload the plugin files to the `/wp-content/plugins/print-my-blog` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress.
@@ -458,6 +461,11 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+= 3.27.11 August 4, 2025 =
+* Documentation: Added DB backup warning message to Installation Instructions.
+* Documentation: Added compatibility note related to Divi Theme.
+* Enhancement: Changed Print Option help text wording.
+
 = 3.27.10 August 4, 2025 =
 * Enhancement: Updated Freemius to version 2.12.1.
 * Bugfix: [Hide Haller Tabloid double header from page preview](https://github.com/mnelson4/printmyblog/issues/395)
