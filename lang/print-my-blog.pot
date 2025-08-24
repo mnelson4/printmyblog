@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Print My Blog\n"
-"POT-Creation-Date: 2025-08-24 10:18-0700\n"
+"POT-Creation-Date: 2025-08-24 10:38-0700\n"
 "PO-Revision-Date: 2021-05-25 13:59-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2793,9 +2793,9 @@ msgstr ""
 
 #: src/PrintMyBlog/domain/PrintOptions.php:203
 msgid ""
-"If you left shortcodes from deactivated deactivated plugins or themes in "
-"your posts or have other content enclosed by square brackets, they are "
-"automatically removed from printouts. Check this to leave them."
+"If you left shortcodes from deactivated plugins or themes in your posts or "
+"have other content enclosed by square brackets, they are automatically "
+"removed from printouts. Check this to leave them."
 msgstr ""
 
 #: src/PrintMyBlog/entities/DesignTemplate.php:393

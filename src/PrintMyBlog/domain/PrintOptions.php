@@ -200,7 +200,7 @@ class PrintOptions
                 'label' => esc_html__('Include Unrendered Shortcodes', 'print-my-blog'),
                 'default' => false,
                 //phpcs:disable Generic.Files.LineLength.TooLong
-                'help' => esc_html__('If you left shortcodes from deactivated deactivated plugins or themes in your posts or have other content enclosed by square brackets, they are automatically removed from printouts. Check this to leave them.', 'print-my-blog'),
+                'help' => esc_html__('If you left shortcodes from deactivated plugins or themes in your posts or have other content enclosed by square brackets, they are automatically removed from printouts. Check this to leave them.', 'print-my-blog'),
                 //phpcs:enable
             ],
         ];
