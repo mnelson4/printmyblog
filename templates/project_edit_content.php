@@ -37,7 +37,7 @@ pmb_render_template(
                         <?php
                         echo pmb_hover_help(
                                 sprintf(
-                                __('Select content from your website, then move it into your project. %1$sRead more%2$s.'),
+                                __('Select content from your website, then move it into your project. %1$sRead more%2$s.', 'print-my-blog'),
                                 '<a href="https://printmy.blog/user-guide/getting-started/6-choose-project-content/" target="_blank">',
                                 '</a>'
                             )
@@ -202,7 +202,7 @@ pmb_render_template(
                             <h2><?php esc_html_e('Front Matter', 'print-my-blog');?> <?php
                                 echo pmb_hover_help(
                                     sprintf(
-                                        __('Preliminary content like a title page, copyright page and introduction. %1$sRead more%2$s', 'print_my_blog'),
+                                        __('Preliminary content like a title page, copyright page and introduction. %1$sRead more%2$s', 'print-my-blog'),
                                         '<a href="https://printmy.blog/user-guide/getting-started/6-choose-project-content/#front-matter" target="_blank">',
                                         '</a>'
                                     ),
@@ -257,7 +257,7 @@ pmb_render_template(
                             <?php
                                 echo pmb_hover_help(
                                     sprintf(
-                                            __('Supplemental content like "About the author", glossary, and "Further reading". %1$sRead more.%2$s'),
+                                            __('Supplemental content like "About the author", glossary, and "Further reading". %1$sRead more.%2$s', 'print-my-blog'),
                                         '<a href="https://printmy.blog/user-guide/getting-started/6-choose-project-content/#back-matter" target="_blank">',
                                         '</a>'
                                     )
