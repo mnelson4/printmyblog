@@ -117,7 +117,7 @@ class DefaultDesigns
                     'previews' => [
                         [
                             'url' => $design_template->getUrl() . 'assets/preview1.jpg',
-                            'desc' => __('Title page, showing removed hyperlinks.'),
+                            'desc' => __('Title page, showing removed hyperlinks.', 'print-my-blog'),
                         ],
                         [
                             'url' => $design_template->getUrl() . 'assets/preview2.jpg',
