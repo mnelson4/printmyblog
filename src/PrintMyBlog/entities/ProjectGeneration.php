@@ -182,7 +182,7 @@ class ProjectGeneration
         return apply_filters(
             '\PrintMyBlog\entities\ProjectGeneration::getGeneratedIntermediaryFileUrl return',
             $start . '/pmb/generated/' . $this->project->code() . '/' . $this->format->slug()
-            . '/' . rawurlencode($this->getFileName()) . '.html?uniqueness=' . current_time('timestamp'),
+                . '/' . rawurlencode($this->getFileName()) . '.html?uniqueness=' . current_time('timestamp'),
             $this
         );
     }
@@ -317,6 +317,12 @@ class ProjectGeneration
     public function addDirtyReason($key, $dirty_reason)
     {
         $existing_reasons = $this->getDirtyReasons();
+        # Check the type of $existing_reasons. 
+        if (is_string($existing_reasons)) {
+            $existing_reasons = [$existing_reasons];
+        } elseif (!is_array($existing_reasons)) {
+            $existing_reasons = [];
+        }
         $existing_reasons[$key] = $dirty_reason;
         return $this->setPostMetaForFormat(self::POSTMETA_DIRTY, $existing_reasons);
     }
