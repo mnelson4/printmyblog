@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.27.12
+Stable tag: 3.27.13-beta
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
