@@ -495,6 +495,15 @@ function pmb_set_image_dimension_attributes(element, callback_when_done, callbac
         }
         return;
     }
+
+    // If the element has no src or the src has no value treat it as an error.
+    if (!element.hasAttribute('src') || !element.attributes['src'].value) {
+        if(typeof(callback_on_error) === 'function'){
+            callback_on_error();
+        }
+        return;
+    }
+    
     // record the image's resolution as attributes on it
     var newImg = new Image();
 
