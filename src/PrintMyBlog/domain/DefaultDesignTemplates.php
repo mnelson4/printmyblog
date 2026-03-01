@@ -681,6 +681,7 @@ class DefaultDesignTemplates
                         } else {
                             $custom_logo = '';
                         }
+                        
                         $design_form = (new FormSection(
                             [
                                 'subsections' => [
@@ -689,6 +690,13 @@ class DefaultDesignTemplates
                                             'html_label_text' => __('Publication Logo Image', 'print-my-blog'),
                                             'default' => $custom_logo,
                                             'html_help_text' => __('Logo image to show on the front page and in the header of subsequent pages. Leave blank to just use a "Title of Publication".', 'print-my-blog'),
+                                        ]
+                                    ),
+                                    'publication_header_logo' => new AdminFileUploaderInput(
+                                        [
+                                            'html_label_text' => __('Running Header Logo Image (if different from Publication Logo)', 'print-my-blog'),
+                                            'default' => $custom_logo,
+                                            'html_help_text' => __('Logo used in the page header. If blank, falls back to using the Publication Logo or Title of Publication', 'print-my-blog'),
                                         ]
                                     ),
                                     'publication_title' => new TextInput(
