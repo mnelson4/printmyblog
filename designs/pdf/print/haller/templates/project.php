@@ -20,20 +20,7 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
                 <span><?php $pmb_project->echoSetting('date');?></span>
             </div>
         </div>
-        <div class="haller-repeat-header-title" >
-            <?php
-            $image_url = $pmb_design->getSetting('publication_logo');
-            if( $image_url ){
-                ?>
-                <img class="haller-header-logo mayer-no-resize" src="<?php echo esc_url($image_url);?>">
-                <?php
-            } else {
-                ?>
-                <?php echo $pmb_design->getSetting('publication_title'); ?>
-                <?php
-            }
-            ?>
-        </div>
+        <?php pmb_include_design_template('partials/header_logo_area');?>
         <div id="haller-repeat-header-issue-page" class="haller-repeat-header-right">
             <div class="haller-repeat-header-column-inner">
                 <span><?php printf(__('Issue %s, Page %s', 'print-my-blog'), $pmb_project->getSetting('issue'), '<span class="pmb-page-number"></span>');?></span>
@@ -51,20 +38,7 @@ echo str_replace('has-sidebar', '', implode(' ', get_body_class('pmb-print-page 
                 <span><?php printf(__('Issue %s, Page %s', 'print-my-blog'), $pmb_project->getSetting('issue'), '<span class="pmb-page-number"></span>');?></span>
             </div>
         </div>
-        <div class="haller-repeat-header-title" >
-            <?php
-            $image_url = $pmb_design->getSetting('publication_logo');
-            if( $image_url ){
-                ?>
-                <img class="haller-header-logo mayer-no-resize" src="<?php echo esc_url($image_url);?>">
-                <?php
-            } else {
-                ?>
-                <?php echo $pmb_design->getSetting('publication_title'); ?>
-                <?php
-            }
-            ?>
-        </div>
+        <?php pmb_include_design_template('partials/header_logo_area');?>
         <div id="haller-repeat-header-date" class="haller-repeat-header-right">
             <div class="haller-repeat-header-column-inner">
                 <span><?php $pmb_project->echoSetting('date');?></span>
