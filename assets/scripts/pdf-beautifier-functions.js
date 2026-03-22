@@ -127,6 +127,53 @@ function PmbToc(item_renderer_callback){
 }
 
 /**
+ * To be used as an optional item_renderer_callback for the Pmbtoc function.
+ *
+ * @example
+ * new Pmbtoc(render_toc_with_thumbnails);
+ *
+ * @param {string} title_text The title of the article.
+ * @param {string} id The id of the article. 
+ * @param {int} depth The depth of the item, 0 = h1 etc. 
+ * @param {int} height The data height of the article.
+ * @param {string} matter_class The class of the type of matter of the article
+ * @param {HTMLElement} selection The article. 
+ * @returns {string} The OuterHTML of the <li /> TOC list item. 
+ */
+function render_toc_with_thumbnails(title_text, id, depth, height, matter_class, selection) {
+      // Create the TOC list item.
+      const toc_list_item = $("<li />", {
+        class: `pmb-toc-item pmb-toc-depth-${depth} pmb-toc-height-${height} ${matter_class}`,
+      });
+
+      // Create the article link to display in the TOC.
+      const toc_link = $("<a />", {
+        href: `#${id}`,
+        class: "pmb-toc-link",
+        text: title_text,
+      });
+
+      // Get the Featured Image Source.
+      const featured_image_source = selection
+        .find(".pmb-featured-image")
+        .attr("src");
+
+      // Create the thumbnail for the TOC item.
+      const toc_thumbnail = $("<div />", {
+        class: "pmb-toc-thumb",
+      }).css({
+        "background-image": `url('${featured_image_source}')`, // image URL
+      });
+
+      // Attach the thumbnail and link to the list item.
+      toc_list_item.append(toc_thumbnail);
+      toc_list_item.append(toc_link);
+      
+      // Return the list item as an HTML string.
+      return toc_list_item.prop("outerHTML");
+    }
+
+/**
  * Whatever content we need to fix in a way that only applies to PDFs
  */
 function pmb_pdf_plugin_fixups(){
