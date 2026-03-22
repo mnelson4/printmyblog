@@ -158,15 +158,27 @@ function render_toc_with_thumbnails(title_text, id, depth, height, matter_class,
         .find(".pmb-featured-image")
         .attr("src");
 
-      // Create the thumbnail for the TOC item.
-      const toc_thumbnail = $("<div />", {
-        class: "pmb-toc-thumb",
-      }).css({
-        "background-image": `url('${featured_image_source}')`, // image URL
-      });
+      // Attach the featured image if it exists.
+      if (featured_image_source) {
+        // Create the thumbnail for the TOC item.
+        const toc_thumbnail = $("<div />", {
+          class: "pmb-toc-thumb",
+        }).css({
+          "background-image": `url('${featured_image_source}')`, // image URL
+        });
 
-      // Attach the thumbnail and link to the list item.
-      toc_list_item.append(toc_thumbnail);
+        // Attach the thumbnail and link to the list item.
+        toc_list_item.append(toc_thumbnail);
+      } else {
+        // Create a spacer so that the Article Title is horizontally in line with others. 
+        const toc_spacer = $("<div />", {
+          class: "pmb-toc-spacer",
+        });
+
+        // Attach the thumbnail and link to the list item.
+        toc_list_item.append(toc_spacer);
+      }
+      
       toc_list_item.append(toc_link);
       
       // Return the list item as an HTML string.
