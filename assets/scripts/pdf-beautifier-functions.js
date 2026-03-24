@@ -127,15 +127,21 @@ function PmbToc(item_renderer_callback){
 }
 
 /**
- * To be used as an optional item_renderer_callback for the Pmbtoc function.
+ * To be used by Design Developers as an optional item_renderer_callback for the Pmbtoc function.
  *
  * @example
+ * // Use render_toc_with_thumbnails like this:
  * new Pmbtoc(render_toc_with_thumbnails);
  *
+ * // The above will render the Pmbtoc item like this: 
+ * <li class="pmb-toc-item pmb-toc-depth-0 pmb-toc-height-0 pmb-toc-main">
+ *   <div class="pmb-toc-thumb" style="background-image: url('https://www.example.com/wp-content/uploads/2026/03/my_featured_image.jpg');"></div>
+ *   <a href="#my-post-title" class="pmb-toc-link">My Post Title</a>
+ * </li>
  * @param {string} title_text The title of the article.
  * @param {string} id The id of the article. 
- * @param {int} depth The depth of the item, 0 = h1 etc. 
- * @param {int} height The data height of the article.
+ * @param {number} depth The depth of the item, 0 = h1 etc. 
+ * @param {number} height The data height of the article.
  * @param {string} matter_class The class of the type of matter of the article
  * @param {HTMLElement} selection The article. 
  * @returns {string} The OuterHTML of the <li /> TOC list item. 
