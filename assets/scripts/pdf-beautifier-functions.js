@@ -127,6 +127,71 @@ function PmbToc(item_renderer_callback){
 }
 
 /**
+ * To be used by Design Developers as an optional item_renderer_callback for the Pmbtoc function.
+ *
+ * @example
+ * // Use render_toc_with_thumbnails like this:
+ * new Pmbtoc(render_toc_with_thumbnails);
+ *
+ * // The above will render the Pmbtoc item like this: 
+ * <li class="pmb-toc-item pmb-toc-depth-0 pmb-toc-height-0 pmb-toc-main">
+ *   <div class="pmb-toc-thumb" style="background-image: url('https://www.example.com/wp-content/uploads/2026/03/my_featured_image.jpg');"></div>
+ *   <a href="#my-post-title" class="pmb-toc-link">My Post Title</a>
+ * </li>
+ * @param {string} title_text The title of the article.
+ * @param {string} id The id of the article. 
+ * @param {number} depth The depth of the item, 0 = h1 etc. 
+ * @param {number} height The data height of the article.
+ * @param {string} matter_class The class of the type of matter of the article
+ * @param {HTMLElement} selection The article. 
+ * @returns {string} The OuterHTML of the <li /> TOC list item. 
+ */
+function render_toc_with_thumbnails(title_text, id, depth, height, matter_class, selection) {
+    // Create the TOC list item.
+    const toc_list_item = jQuery("<li />", {
+        class: `pmb-toc-item pmb-toc-depth-${depth} pmb-toc-height-${height} ${matter_class}`,
+    });
+
+    // Create the article link to display in the TOC.
+    const toc_link = jQuery("<a />", {
+        href: `#${id}`,
+        class: "pmb-toc-link",
+        text: title_text,
+    });
+
+    // Get the Featured Image Source.
+    const featured_image_source = selection
+        .find(".pmb-featured-image")
+        .attr("src");
+
+    // Attach the featured image if it exists.
+    if (featured_image_source) {
+        // Create the thumbnail for the TOC item.
+        const toc_thumbnail = jQuery("<div />", {
+            class: "pmb-toc-thumb",
+        }).css({
+            "background-image": `url('${featured_image_source}')`, // image URL
+        });
+
+        // Attach the thumbnail and link to the list item.
+        toc_list_item.append(toc_thumbnail);
+    } else {
+        // Create a spacer so that the Article Title is horizontally in line with others. 
+        const toc_spacer = jQuery("<div />", {
+            class: "pmb-toc-spacer",
+        });
+
+        // Attach the thumbnail and link to the list item.
+        toc_list_item.append(toc_spacer);
+    }
+
+    toc_list_item.append(toc_link);
+    
+    // Return the list item as an HTML string.
+    return toc_list_item.prop("outerHTML");
+}
+
+/**
  * Whatever content we need to fix in a way that only applies to PDFs
  */
 function pmb_pdf_plugin_fixups(){
