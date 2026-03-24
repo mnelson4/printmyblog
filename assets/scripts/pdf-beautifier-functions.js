@@ -147,49 +147,49 @@ function PmbToc(item_renderer_callback){
  * @returns {string} The OuterHTML of the <li /> TOC list item. 
  */
 function render_toc_with_thumbnails(title_text, id, depth, height, matter_class, selection) {
-      // Create the TOC list item.
-      const toc_list_item = jQuery("<li />", {
+    // Create the TOC list item.
+    const toc_list_item = jQuery("<li />", {
         class: `pmb-toc-item pmb-toc-depth-${depth} pmb-toc-height-${height} ${matter_class}`,
-      });
+    });
 
-      // Create the article link to display in the TOC.
-      const toc_link = jQuery("<a />", {
+    // Create the article link to display in the TOC.
+    const toc_link = jQuery("<a />", {
         href: `#${id}`,
         class: "pmb-toc-link",
         text: title_text,
-      });
+    });
 
-      // Get the Featured Image Source.
-      const featured_image_source = selection
+    // Get the Featured Image Source.
+    const featured_image_source = selection
         .find(".pmb-featured-image")
         .attr("src");
 
-      // Attach the featured image if it exists.
-      if (featured_image_source) {
+    // Attach the featured image if it exists.
+    if (featured_image_source) {
         // Create the thumbnail for the TOC item.
         const toc_thumbnail = jQuery("<div />", {
-          class: "pmb-toc-thumb",
+            class: "pmb-toc-thumb",
         }).css({
-          "background-image": `url('${featured_image_source}')`, // image URL
+            "background-image": `url('${featured_image_source}')`, // image URL
         });
 
         // Attach the thumbnail and link to the list item.
         toc_list_item.append(toc_thumbnail);
-      } else {
+    } else {
         // Create a spacer so that the Article Title is horizontally in line with others. 
         const toc_spacer = jQuery("<div />", {
-          class: "pmb-toc-spacer",
+            class: "pmb-toc-spacer",
         });
 
         // Attach the thumbnail and link to the list item.
         toc_list_item.append(toc_spacer);
-      }
-
-      toc_list_item.append(toc_link);
-      
-      // Return the list item as an HTML string.
-      return toc_list_item.prop("outerHTML");
     }
+
+    toc_list_item.append(toc_link);
+    
+    // Return the list item as an HTML string.
+    return toc_list_item.prop("outerHTML");
+}
 
 /**
  * Whatever content we need to fix in a way that only applies to PDFs
