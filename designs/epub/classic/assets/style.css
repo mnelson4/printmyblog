@@ -28,9 +28,20 @@ h4{
 h5{
     font-size:1.2em;
 }
-figure{
-    max-height:100vh;
+figure {
+  margin: 1em 0;
+  text-align: center;
+  max-height: none;
 }
+
+img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
 tr{
     border-top:1px solid lightgray;
 }
