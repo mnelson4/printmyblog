@@ -7,7 +7,7 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.27.15
+Stable tag: 3.27.16
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -461,6 +461,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+= 3.27.16 April 7, 2026 =
+* Bugfix: Add CSS rules to help prevent images from breaking across pages in the Classic ePud Design. 
+
 = 3.27.15 April 4, 2026 =
 * Bugfix: Improved CSS rules for rendering images in the ePub design. 
 * Enhancement: Added a Design Development helper function for adding featured image thumbnails to TOC.

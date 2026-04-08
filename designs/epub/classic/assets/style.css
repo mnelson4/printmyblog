@@ -29,16 +29,22 @@ h5{
     font-size:1.2em;
 }
 figure {
-  margin: 1em 0;
-  text-align: center;
-  max-height: none;
+    margin: 1em 0;
+    text-align: center;
+    max-height: none;
 }
 
 img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+figure, img {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    -webkit-column-break-inside: avoid;
 }
 
 tr{
