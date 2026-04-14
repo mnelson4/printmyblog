@@ -164,16 +164,28 @@ function render_toc_with_thumbnails(title_text, id, depth, height, matter_class,
         .find(".pmb-featured-image")
         .attr("src");
 
+    const first_image_source = selection.find("figure img").attr("src");
+
     // Attach the featured image if it exists.
     if (featured_image_source) {
-        // Create the thumbnail for the TOC item.
+        // Create the thumbnail for the TOC item using the featured image.
         const toc_thumbnail = jQuery("<div />", {
             class: "pmb-toc-thumb",
         }).css({
             "background-image": `url('${featured_image_source}')`, // image URL
         });
 
-        // Attach the thumbnail and link to the list item.
+        // Attach the thumbnail to the list item.
+        toc_list_item.append(toc_thumbnail);
+    } else if (first_image_source) {
+        // Create the thumbnail for the TOC item using the first image in the article.
+        const toc_thumbnail = jQuery("<div />", {
+            class: "pmb-toc-thumb",
+        }).css({
+            "background-image": `url('${first_image_source}')`, // image URL
+        });
+
+        // Attach the thumbnail to the list item.
         toc_list_item.append(toc_thumbnail);
     } else {
         // Create a spacer so that the Article Title is horizontally in line with others. 
@@ -181,7 +193,7 @@ function render_toc_with_thumbnails(title_text, id, depth, height, matter_class,
             class: "pmb-toc-spacer",
         });
 
-        // Attach the thumbnail and link to the list item.
+        // Attach the spacer to the list item.
         toc_list_item.append(toc_spacer);
     }
 
